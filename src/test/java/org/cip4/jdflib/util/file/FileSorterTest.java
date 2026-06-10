@@ -54,7 +54,6 @@ class FileSorterTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testSortLastModified() throws IOException
@@ -83,7 +82,6 @@ class FileSorterTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testSortLastModifiedAge() throws IOException

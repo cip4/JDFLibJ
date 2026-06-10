@@ -107,7 +107,7 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoInkZoneProfile(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoInkZoneProfile(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -119,7 +119,7 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoInkZoneProfile(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoInkZoneProfile(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -132,7 +132,7 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoInkZoneProfile(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoInkZoneProfile(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -143,7 +143,7 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -173,7 +173,7 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setZoneSettingsX(JDFNumberList value)
+	public void setZoneSettingsX(final JDFNumberList value)
 	{
 		setAttribute(AttributeName.ZONESETTINGSX, value, null);
 	}
@@ -186,8 +186,8 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
 	 */
 	public JDFNumberList getZoneSettingsX()
 	{
-		String strAttrName = getAttribute(AttributeName.ZONESETTINGSX, null, null);
-		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.ZONESETTINGSX, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -201,7 +201,7 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setZoneWidth(double value)
+	public void setZoneWidth(final double value)
 	{
 		setAttribute(AttributeName.ZONEWIDTH, value, null);
 	}
@@ -226,7 +226,7 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setZoneHeight(double value)
+	public void setZoneHeight(final double value)
 	{
 		setAttribute(AttributeName.ZONEHEIGHT, value, null);
 	}
@@ -251,7 +251,7 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setZoneSettingsY(JDFNumberList value)
+	public void setZoneSettingsY(final JDFNumberList value)
 	{
 		setAttribute(AttributeName.ZONESETTINGSY, value, null);
 	}
@@ -264,8 +264,8 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
 	 */
 	public JDFNumberList getZoneSettingsY()
 	{
-		String strAttrName = getAttribute(AttributeName.ZONESETTINGSY, null, null);
-		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.ZONESETTINGSY, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 

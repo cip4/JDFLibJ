@@ -57,7 +57,6 @@ import org.cip4.jdflib.util.FileUtil;
  * a very simple hotfolder watcher subdirectories are ignored
  *
  * @author rainer prosi
- *
  */
 public class ColdFolder extends HotFolder
 {
@@ -77,13 +76,15 @@ public class ColdFolder extends HotFolder
 	{
 		final HotFolderRunner r = HotFolderRunner.getTherunner();
 		if (r == null)
+		{
 			return null;
+		}
 
 		final File[] files = FileUtil.listFilesWithExtension(getDir(), getAllExtensions());
 		int found = 0;
 		if (files != null)
 		{
-			Set<File> running = hfRunning.get();
+			final Set<File> running = hfRunning.get();
 			for (int i = 0; i < files.length; i++)
 			{
 				if (running.contains(files[i]) || files[i].isDirectory())

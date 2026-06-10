@@ -127,7 +127,7 @@ public abstract class JDFAutoTool extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoTool(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -139,7 +139,7 @@ public abstract class JDFAutoTool extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoTool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -152,7 +152,7 @@ public abstract class JDFAutoTool extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoTool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoTool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -163,7 +163,7 @@ public abstract class JDFAutoTool extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Handling);
 		return bRet;
 	}
@@ -193,7 +193,7 @@ public abstract class JDFAutoTool extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setToolID(String value)
+	public void setToolID(final String value)
 	{
 		setAttribute(AttributeName.TOOLID, value, null);
 	}
@@ -218,7 +218,7 @@ public abstract class JDFAutoTool extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSerialNumber(String value)
+	public void setSerialNumber(final String value)
 	{
 		setAttribute(AttributeName.SERIALNUMBER, value, null);
 	}
@@ -243,7 +243,7 @@ public abstract class JDFAutoTool extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setToolAmount(int value)
+	public void setToolAmount(final int value)
 	{
 		setAttribute(AttributeName.TOOLAMOUNT, value, null);
 	}
@@ -268,7 +268,7 @@ public abstract class JDFAutoTool extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setToolType(String value)
+	public void setToolType(final String value)
 	{
 		setAttribute(AttributeName.TOOLTYPE, value, null);
 	}
@@ -317,7 +317,7 @@ public abstract class JDFAutoTool extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
-	public JDFContact getCreateContact(int iSkip)
+	public JDFContact getCreateContact(final int iSkip)
 	{
 		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -329,7 +329,7 @@ public abstract class JDFAutoTool extends JDFResource
 	 * @return JDFContact the element
 	 *         default is getContact(0)
 	 */
-	public JDFContact getContact(int iSkip)
+	public JDFContact getContact(final int iSkip)
 	{
 		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -360,7 +360,7 @@ public abstract class JDFAutoTool extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refContact(JDFContact refTarget)
+	public void refContact(final JDFContact refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -392,7 +392,7 @@ public abstract class JDFAutoTool extends JDFResource
 	 * @return JDFIdentificationField the element
 	 */
 	@Override
-	public JDFIdentificationField getCreateIdentificationField(int iSkip)
+	public JDFIdentificationField getCreateIdentificationField(final int iSkip)
 	{
 		return (JDFIdentificationField) getCreateElement_JDFElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
 	}
@@ -405,7 +405,7 @@ public abstract class JDFAutoTool extends JDFResource
 	 *         default is getIdentificationField(0)
 	 */
 	@Override
-	public JDFIdentificationField getIdentificationField(int iSkip)
+	public JDFIdentificationField getIdentificationField(final int iSkip)
 	{
 		return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
 	}
@@ -436,7 +436,7 @@ public abstract class JDFAutoTool extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refIdentificationField(JDFIdentificationField refTarget)
+	public void refIdentificationField(final JDFIdentificationField refTarget)
 	{
 		refElement(refTarget);
 	}

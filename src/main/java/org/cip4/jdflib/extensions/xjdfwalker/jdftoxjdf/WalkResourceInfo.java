@@ -148,7 +148,6 @@ public class WalkResourceInfo extends WalkJDFSubElement
 	}
 
 	/**
-	 *
 	 * @param ri
 	 * @param ap
 	 */
@@ -243,7 +242,9 @@ public class WalkResourceInfo extends WalkJDFSubElement
 		set.moveAttribute(AttributeName.UNIT, ri);
 		set.moveAttribute(AttributeName.USAGE, ri);
 		if (ri.hasNonEmpty(AttributeName.DESCRIPTIVENAME))
+		{
 			set.moveAttribute(AttributeName.DESCRIPTIVENAME, ri);
+		}
 		return set;
 	}
 

@@ -83,8 +83,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
- *
  * @author rainer prosi
  * @date before Sep 18, 2012
  */

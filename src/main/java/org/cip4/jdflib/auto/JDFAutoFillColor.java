@@ -106,7 +106,7 @@ public abstract class JDFAutoFillColor extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFillColor(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoFillColor(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoFillColor extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFillColor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoFillColor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoFillColor extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoFillColor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoFillColor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -152,7 +152,7 @@ public abstract class JDFAutoFillColor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setName(String value)
+	public void setName(final String value)
 	{
 		setAttribute(AttributeName.NAME, value, null);
 	}
@@ -177,7 +177,7 @@ public abstract class JDFAutoFillColor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTint(double value)
+	public void setTint(final double value)
 	{
 		setAttribute(AttributeName.TINT, value, null);
 	}
@@ -202,7 +202,7 @@ public abstract class JDFAutoFillColor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setKnockoutBleed(double value)
+	public void setKnockoutBleed(final double value)
 	{
 		setAttribute(AttributeName.KNOCKOUTBLEED, value, null);
 	}

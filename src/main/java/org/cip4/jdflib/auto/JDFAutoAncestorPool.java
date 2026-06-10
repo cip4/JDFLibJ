@@ -108,7 +108,7 @@ public abstract class JDFAutoAncestorPool extends JDFPool
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAncestorPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoAncestorPool(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -120,7 +120,7 @@ public abstract class JDFAutoAncestorPool extends JDFPool
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAncestorPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoAncestorPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoAncestorPool extends JDFPool
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoAncestorPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoAncestorPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -170,7 +170,7 @@ public abstract class JDFAutoAncestorPool extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFAncestor the element
 	 */
-	public JDFAncestor getCreateAncestor(int iSkip)
+	public JDFAncestor getCreateAncestor(final int iSkip)
 	{
 		return (JDFAncestor) getCreateElement_JDFElement(ElementName.ANCESTOR, null, iSkip);
 	}
@@ -182,7 +182,7 @@ public abstract class JDFAutoAncestorPool extends JDFPool
 	 * @return JDFAncestor the element
 	 *         default is getAncestor(0)
 	 */
-	public JDFAncestor getAncestor(int iSkip)
+	public JDFAncestor getAncestor(final int iSkip)
 	{
 		return (JDFAncestor) getElement(ElementName.ANCESTOR, null, iSkip);
 	}
@@ -233,7 +233,7 @@ public abstract class JDFAutoAncestorPool extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
-	public JDFPart getCreatePart(int iSkip)
+	public JDFPart getCreatePart(final int iSkip)
 	{
 		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
@@ -245,7 +245,7 @@ public abstract class JDFAutoAncestorPool extends JDFPool
 	 * @return JDFPart the element
 	 *         default is getPart(0)
 	 */
-	public JDFPart getPart(int iSkip)
+	public JDFPart getPart(final int iSkip)
 	{
 		return (JDFPart) getElement(ElementName.PART, null, iSkip);
 	}

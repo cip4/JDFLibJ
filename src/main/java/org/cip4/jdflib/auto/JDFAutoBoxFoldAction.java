@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -101,7 +97,8 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLDINDEX, 0x2222222111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ACTION, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumAction.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ACTION, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumAction.class, 0), null);
 	}
 
 	@Override
@@ -128,7 +125,7 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBoxFoldAction(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoBoxFoldAction(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -140,7 +137,7 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBoxFoldAction(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoBoxFoldAction(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -153,119 +150,28 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoBoxFoldAction(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoBoxFoldAction(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for Action
+	 * Enumeration strings for numAction
 	 */
 
-	public enum EAction
+	public enum EnumAction
 	{
 		LongFoldLeftToRight, LongFoldRightToLeft, LongPreFoldLeftToRight, LongPreFoldRightToLeft, FrontFoldComplete, FrontFoldDiagonal, FrontFoldCompleteDiagonal, BackFoldComplete, BackFoldDiagonal, BackFoldCompleteDiagonal, ReverseFold, Milling, Rotate90, Rotate180, Rotate270;
 
-		public static EAction getEnum(String val)
+		public static EnumAction getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EAction.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumAction.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Action
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumAction extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumAction(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumAction getEnum(String enumName)
-		{
-			return (EnumAction) getEnum(EnumAction.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumAction getEnum(int enumValue)
-		{
-			return (EnumAction) getEnum(EnumAction.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumAction.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAction.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAction.class);
-		}
-
-		/**  */
-		public static final EnumAction LongFoldLeftToRight = new EnumAction("LongFoldLeftToRight");
-		/**  */
-		public static final EnumAction LongFoldRightToLeft = new EnumAction("LongFoldRightToLeft");
-		/**  */
-		public static final EnumAction LongPreFoldLeftToRight = new EnumAction("LongPreFoldLeftToRight");
-		/**  */
-		public static final EnumAction LongPreFoldRightToLeft = new EnumAction("LongPreFoldRightToLeft");
-		/**  */
-		public static final EnumAction FrontFoldComplete = new EnumAction("FrontFoldComplete");
-		/**  */
-		public static final EnumAction FrontFoldDiagonal = new EnumAction("FrontFoldDiagonal");
-		/**  */
-		public static final EnumAction FrontFoldCompleteDiagonal = new EnumAction("FrontFoldCompleteDiagonal");
-		/**  */
-		public static final EnumAction BackFoldComplete = new EnumAction("BackFoldComplete");
-		/**  */
-		public static final EnumAction BackFoldDiagonal = new EnumAction("BackFoldDiagonal");
-		/**  */
-		public static final EnumAction BackFoldCompleteDiagonal = new EnumAction("BackFoldCompleteDiagonal");
-		/**  */
-		public static final EnumAction ReverseFold = new EnumAction("ReverseFold");
-		/**  */
-		public static final EnumAction Milling = new EnumAction("Milling");
-		/**  */
-		public static final EnumAction Rotate90 = new EnumAction("Rotate90");
-		/**  */
-		public static final EnumAction Rotate180 = new EnumAction("Rotate180");
-		/**  */
-		public static final EnumAction Rotate270 = new EnumAction("Rotate270");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -277,7 +183,7 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFoldIndex(JDFXYPair value)
+	public void setFoldIndex(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.FOLDINDEX, value, null);
 	}
@@ -290,8 +196,8 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 	 */
 	public JDFXYPair getFoldIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.FOLDINDEX, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.FOLDINDEX, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -305,9 +211,9 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setAction(EAction enumVar)
+	public void setAction(final EnumAction enumVar)
 	{
-		setAttribute(AttributeName.ACTION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ACTION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -315,35 +221,6 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EAction getEAction()
-	{
-		return EAction.getEnum(getAttribute(AttributeName.ACTION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Action
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Action
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetAction(EAction) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setAction(EnumAction enumVar)
-	{
-		setAttribute(AttributeName.ACTION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Action
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EAction GetEAction() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumAction getAction()
 	{
 		return EnumAction.getEnum(getAttribute(AttributeName.ACTION, null, null));
@@ -381,7 +258,7 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueLine the element
 	 */
-	public JDFGlueLine getCreateGlueLine(int iSkip)
+	public JDFGlueLine getCreateGlueLine(final int iSkip)
 	{
 		return (JDFGlueLine) getCreateElement_JDFElement(ElementName.GLUELINE, null, iSkip);
 	}
@@ -393,7 +270,7 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 	 * @return JDFGlueLine the element
 	 *         default is getGlueLine(0)
 	 */
-	public JDFGlueLine getGlueLine(int iSkip)
+	public JDFGlueLine getGlueLine(final int iSkip)
 	{
 		return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
 	}

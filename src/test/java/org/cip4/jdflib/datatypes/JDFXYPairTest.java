@@ -55,16 +55,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- *
- *
  * @author rainer prosi
  * @date Feb 23, 2011
  */
 class JDFXYPairTest extends JDFTestCaseBase
 {
 	/**
-	 *
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -99,8 +95,6 @@ class JDFXYPairTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -119,8 +113,6 @@ class JDFXYPairTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -133,8 +125,6 @@ class JDFXYPairTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -148,8 +138,6 @@ class JDFXYPairTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 *
 	 * @throws Exception
 	 */
 	@Test

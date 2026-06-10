@@ -133,7 +133,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoColorIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoColorIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -145,7 +145,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoColorIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoColorIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -158,7 +158,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoColorIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoColorIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -179,7 +179,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNumColors(int value)
+	public void setNumColors(final int value)
 	{
 		setAttribute(AttributeName.NUMCOLORS, value, null);
 	}
@@ -226,7 +226,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFCertification the element
 	 */
-	public JDFCertification getCreateCertification(int iSkip)
+	public JDFCertification getCreateCertification(final int iSkip)
 	{
 		return (JDFCertification) getCreateElement_JDFElement(ElementName.CERTIFICATION, null, iSkip);
 	}
@@ -238,7 +238,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	 * @return JDFCertification the element
 	 *         default is getCertification(0)
 	 */
-	public JDFCertification getCertification(int iSkip)
+	public JDFCertification getCertification(final int iSkip)
 	{
 		return (JDFCertification) getElement(ElementName.CERTIFICATION, null, iSkip);
 	}
@@ -454,7 +454,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refColorPool(JDFColorPool refTarget)
+	public void refColorPool(final JDFColorPool refTarget)
 	{
 		refElement(refTarget);
 	}

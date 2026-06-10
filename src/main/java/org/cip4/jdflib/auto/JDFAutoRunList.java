@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -113,10 +109,10 @@ public abstract class JDFAutoRunList extends JDFResource
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ISPAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.PAGECOPIES, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, "1");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.SETCOPIES, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, "1");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.AUTOMATION, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumAutomation.getEnum(0),
-				null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.AUTOMATION, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumAutomation.class, 0), null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.COMPONENTGRANULARITY, 0x4444443311l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumComponentGranularity.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumComponentGranularity.class, 0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.DIRECTORY, 0x3333333333l, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.DOCNAMES, 0x3333333333l, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.DOCS, 0x3333333333l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
@@ -127,7 +123,7 @@ public abstract class JDFAutoRunList extends JDFResource
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.FINISHEDPAGES, 0x3333111111l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[13] = new AtrInfoTable(AttributeName.FIRSTPAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[14] = new AtrInfoTable(AttributeName.IGNORECONTEXT, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumIgnoreContext.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumIgnoreContext.class, 0), null);
 		atrInfoTable[15] = new AtrInfoTable(AttributeName.LOGICALPAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[16] = new AtrInfoTable(AttributeName.NDOC, 0x4444444431l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[17] = new AtrInfoTable(AttributeName.NPAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
@@ -138,8 +134,8 @@ public abstract class JDFAutoRunList extends JDFResource
 		atrInfoTable[22] = new AtrInfoTable(AttributeName.RUNTAG, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[23] = new AtrInfoTable(AttributeName.SETNAMES, 0x3333333331l, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
 		atrInfoTable[24] = new AtrInfoTable(AttributeName.SETS, 0x3333333331l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[25] = new AtrInfoTable(AttributeName.SHEETSIDES, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetSides.getEnum(0),
-				null);
+		atrInfoTable[25] = new AtrInfoTable(AttributeName.SHEETSIDES, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumSheetSides.class, 0), null);
 		atrInfoTable[26] = new AtrInfoTable(AttributeName.SKIPPAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[27] = new AtrInfoTable(AttributeName.SORTED, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 	}
@@ -175,7 +171,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoRunList(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoRunList(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -187,7 +183,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoRunList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoRunList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -200,7 +196,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoRunList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoRunList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -211,7 +207,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -226,462 +222,64 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for Automation
+	 * Enumeration strings for numAutomation
 	 */
 
-	public enum EAutomation
+	public enum EnumAutomation
 	{
 		Static, Dynamic;
 
-		public static EAutomation getEnum(String val)
+		public static EnumAutomation getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EAutomation.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumAutomation.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for Automation
+	 * Enumeration strings for numComponentGranularity
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumAutomation extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumAutomation(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumAutomation getEnum(String enumName)
-		{
-			return (EnumAutomation) getEnum(EnumAutomation.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumAutomation getEnum(int enumValue)
-		{
-			return (EnumAutomation) getEnum(EnumAutomation.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumAutomation.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAutomation.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAutomation.class);
-		}
-
-		/**  */
-		public static final EnumAutomation Static = new EnumAutomation("Static");
-		/**  */
-		public static final EnumAutomation Dynamic = new EnumAutomation("Dynamic");
-	}
-
-	/**
-	 * Enumeration strings for ComponentGranularity
-	 */
-
-	public enum EComponentGranularity
+	public enum EnumComponentGranularity
 	{
 		Page, Document, Set, All, BundleItem;
 
-		public static EComponentGranularity getEnum(String val)
+		public static EnumComponentGranularity getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EComponentGranularity.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumComponentGranularity.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for ComponentGranularity
+	 * Enumeration strings for numIgnoreContext
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumComponentGranularity extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumComponentGranularity(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumComponentGranularity getEnum(String enumName)
-		{
-			return (EnumComponentGranularity) getEnum(EnumComponentGranularity.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumComponentGranularity getEnum(int enumValue)
-		{
-			return (EnumComponentGranularity) getEnum(EnumComponentGranularity.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumComponentGranularity.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumComponentGranularity.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumComponentGranularity.class);
-		}
-
-		/**  */
-		public static final EnumComponentGranularity Page = new EnumComponentGranularity("Page");
-		/**  */
-		public static final EnumComponentGranularity Document = new EnumComponentGranularity("Document");
-		/**  */
-		public static final EnumComponentGranularity Set = new EnumComponentGranularity("Set");
-		/**  */
-		public static final EnumComponentGranularity All = new EnumComponentGranularity("All");
-		/**  */
-		public static final EnumComponentGranularity BundleItem = new EnumComponentGranularity("BundleItem");
-	}
-
-	/**
-	 * Enumeration strings for IgnoreContext
-	 */
-
-	public enum EIgnoreContext
+	public enum EnumIgnoreContext
 	{
 		BinderySignatureName, BinderySignaturePaginationIndex, BlockName, BundleItemIndex, CellIndex, Condition, DeliveryUnit0, DeliveryUnit1, DeliveryUnit2, DeliveryUnit3, DeliveryUnit4, DeliveryUnit5, DeliveryUnit6, DeliveryUnit7, DeliveryUnit8, DeliveryUnit9, DocCopies, DocIndex, DocRunIndex, DocSheetIndex, DocTags, Edition, EditionVersion, FountainNumber, ItemNames, LayerIDs, Location, Metadata0, Metadata1, Metadata2, Metadata3, Metadata4, Metadata5, Metadata6, Metadata7, Metadata8, Metadata9, Option, PageNumber, PageTags, PlateLayout, PartVersion, PreflightRule, ProductPart, PreviewType, RibbonName, Run, RunIndex, RunPage, RunTags, RunSet, SectionIndex, Separation, SetCopies, SetDocIndex, SetIndex, SetRunIndex, SetSheetIndex, SetTags, SheetIndex, SheetName, Side, SignatureName, StationName, SubRun, TileID, WebName, WebProduct, WebSetup;
 
-		public static EIgnoreContext getEnum(String val)
+		public static EnumIgnoreContext getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EIgnoreContext.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumIgnoreContext.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for IgnoreContext
+	 * Enumeration strings for numSheetSides
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumIgnoreContext extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumIgnoreContext(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumIgnoreContext getEnum(String enumName)
-		{
-			return (EnumIgnoreContext) getEnum(EnumIgnoreContext.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumIgnoreContext getEnum(int enumValue)
-		{
-			return (EnumIgnoreContext) getEnum(EnumIgnoreContext.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumIgnoreContext.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumIgnoreContext.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumIgnoreContext.class);
-		}
-
-		/**  */
-		public static final EnumIgnoreContext BinderySignatureName = new EnumIgnoreContext("BinderySignatureName");
-		/**  */
-		public static final EnumIgnoreContext BinderySignaturePaginationIndex = new EnumIgnoreContext("BinderySignaturePaginationIndex");
-		/**  */
-		public static final EnumIgnoreContext BlockName = new EnumIgnoreContext("BlockName");
-		/**  */
-		public static final EnumIgnoreContext BundleItemIndex = new EnumIgnoreContext("BundleItemIndex");
-		/**  */
-		public static final EnumIgnoreContext CellIndex = new EnumIgnoreContext("CellIndex");
-		/**  */
-		public static final EnumIgnoreContext Condition = new EnumIgnoreContext("Condition");
-		/**  */
-		public static final EnumIgnoreContext DeliveryUnit0 = new EnumIgnoreContext("DeliveryUnit0");
-		/**  */
-		public static final EnumIgnoreContext DeliveryUnit1 = new EnumIgnoreContext("DeliveryUnit1");
-		/**  */
-		public static final EnumIgnoreContext DeliveryUnit2 = new EnumIgnoreContext("DeliveryUnit2");
-		/**  */
-		public static final EnumIgnoreContext DeliveryUnit3 = new EnumIgnoreContext("DeliveryUnit3");
-		/**  */
-		public static final EnumIgnoreContext DeliveryUnit4 = new EnumIgnoreContext("DeliveryUnit4");
-		/**  */
-		public static final EnumIgnoreContext DeliveryUnit5 = new EnumIgnoreContext("DeliveryUnit5");
-		/**  */
-		public static final EnumIgnoreContext DeliveryUnit6 = new EnumIgnoreContext("DeliveryUnit6");
-		/**  */
-		public static final EnumIgnoreContext DeliveryUnit7 = new EnumIgnoreContext("DeliveryUnit7");
-		/**  */
-		public static final EnumIgnoreContext DeliveryUnit8 = new EnumIgnoreContext("DeliveryUnit8");
-		/**  */
-		public static final EnumIgnoreContext DeliveryUnit9 = new EnumIgnoreContext("DeliveryUnit9");
-		/**  */
-		public static final EnumIgnoreContext DocCopies = new EnumIgnoreContext("DocCopies");
-		/**  */
-		public static final EnumIgnoreContext DocIndex = new EnumIgnoreContext("DocIndex");
-		/**  */
-		public static final EnumIgnoreContext DocRunIndex = new EnumIgnoreContext("DocRunIndex");
-		/**  */
-		public static final EnumIgnoreContext DocSheetIndex = new EnumIgnoreContext("DocSheetIndex");
-		/**  */
-		public static final EnumIgnoreContext DocTags = new EnumIgnoreContext("DocTags");
-		/**  */
-		public static final EnumIgnoreContext Edition = new EnumIgnoreContext("Edition");
-		/**  */
-		public static final EnumIgnoreContext EditionVersion = new EnumIgnoreContext("EditionVersion");
-		/**  */
-		public static final EnumIgnoreContext FountainNumber = new EnumIgnoreContext("FountainNumber");
-		/**  */
-		public static final EnumIgnoreContext ItemNames = new EnumIgnoreContext("ItemNames");
-		/**  */
-		public static final EnumIgnoreContext LayerIDs = new EnumIgnoreContext("LayerIDs");
-		/**  */
-		public static final EnumIgnoreContext Location = new EnumIgnoreContext("Location");
-		/**  */
-		public static final EnumIgnoreContext Metadata0 = new EnumIgnoreContext("Metadata0");
-		/**  */
-		public static final EnumIgnoreContext Metadata1 = new EnumIgnoreContext("Metadata1");
-		/**  */
-		public static final EnumIgnoreContext Metadata2 = new EnumIgnoreContext("Metadata2");
-		/**  */
-		public static final EnumIgnoreContext Metadata3 = new EnumIgnoreContext("Metadata3");
-		/**  */
-		public static final EnumIgnoreContext Metadata4 = new EnumIgnoreContext("Metadata4");
-		/**  */
-		public static final EnumIgnoreContext Metadata5 = new EnumIgnoreContext("Metadata5");
-		/**  */
-		public static final EnumIgnoreContext Metadata6 = new EnumIgnoreContext("Metadata6");
-		/**  */
-		public static final EnumIgnoreContext Metadata7 = new EnumIgnoreContext("Metadata7");
-		/**  */
-		public static final EnumIgnoreContext Metadata8 = new EnumIgnoreContext("Metadata8");
-		/**  */
-		public static final EnumIgnoreContext Metadata9 = new EnumIgnoreContext("Metadata9");
-		/**  */
-		public static final EnumIgnoreContext Option = new EnumIgnoreContext("Option");
-		/**  */
-		public static final EnumIgnoreContext PageNumber = new EnumIgnoreContext("PageNumber");
-		/**  */
-		public static final EnumIgnoreContext PageTags = new EnumIgnoreContext("PageTags");
-		/**  */
-		public static final EnumIgnoreContext PlateLayout = new EnumIgnoreContext("PlateLayout");
-		/**  */
-		public static final EnumIgnoreContext PartVersion = new EnumIgnoreContext("PartVersion");
-		/**  */
-		public static final EnumIgnoreContext PreflightRule = new EnumIgnoreContext("PreflightRule");
-		/**  */
-		public static final EnumIgnoreContext ProductPart = new EnumIgnoreContext("ProductPart");
-		/**  */
-		public static final EnumIgnoreContext PreviewType = new EnumIgnoreContext("PreviewType");
-		/**  */
-		public static final EnumIgnoreContext RibbonName = new EnumIgnoreContext("RibbonName");
-		/**  */
-		public static final EnumIgnoreContext Run = new EnumIgnoreContext("Run");
-		/**  */
-		public static final EnumIgnoreContext RunIndex = new EnumIgnoreContext("RunIndex");
-		/**  */
-		public static final EnumIgnoreContext RunPage = new EnumIgnoreContext("RunPage");
-		/**  */
-		public static final EnumIgnoreContext RunTags = new EnumIgnoreContext("RunTags");
-		/**  */
-		public static final EnumIgnoreContext RunSet = new EnumIgnoreContext("RunSet");
-		/**  */
-		public static final EnumIgnoreContext SectionIndex = new EnumIgnoreContext("SectionIndex");
-		/**  */
-		public static final EnumIgnoreContext Separation = new EnumIgnoreContext("Separation");
-		/**  */
-		public static final EnumIgnoreContext SetCopies = new EnumIgnoreContext("SetCopies");
-		/**  */
-		public static final EnumIgnoreContext SetDocIndex = new EnumIgnoreContext("SetDocIndex");
-		/**  */
-		public static final EnumIgnoreContext SetIndex = new EnumIgnoreContext("SetIndex");
-		/**  */
-		public static final EnumIgnoreContext SetRunIndex = new EnumIgnoreContext("SetRunIndex");
-		/**  */
-		public static final EnumIgnoreContext SetSheetIndex = new EnumIgnoreContext("SetSheetIndex");
-		/**  */
-		public static final EnumIgnoreContext SetTags = new EnumIgnoreContext("SetTags");
-		/**  */
-		public static final EnumIgnoreContext SheetIndex = new EnumIgnoreContext("SheetIndex");
-		/**  */
-		public static final EnumIgnoreContext SheetName = new EnumIgnoreContext("SheetName");
-		/**  */
-		public static final EnumIgnoreContext Side = new EnumIgnoreContext("Side");
-		/**  */
-		public static final EnumIgnoreContext SignatureName = new EnumIgnoreContext("SignatureName");
-		/**  */
-		public static final EnumIgnoreContext StationName = new EnumIgnoreContext("StationName");
-		/**  */
-		public static final EnumIgnoreContext SubRun = new EnumIgnoreContext("SubRun");
-		/**  */
-		public static final EnumIgnoreContext TileID = new EnumIgnoreContext("TileID");
-		/**  */
-		public static final EnumIgnoreContext WebName = new EnumIgnoreContext("WebName");
-		/**  */
-		public static final EnumIgnoreContext WebProduct = new EnumIgnoreContext("WebProduct");
-		/**  */
-		public static final EnumIgnoreContext WebSetup = new EnumIgnoreContext("WebSetup");
-	}
-
-	/**
-	 * Enumeration strings for SheetSides
-	 */
-
-	public enum ESheetSides
+	public enum EnumSheetSides
 	{
 		Front, Back, FrontBack, BackFront;
 
-		public static ESheetSides getEnum(String val)
+		public static EnumSheetSides getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ESheetSides.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSheetSides.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for SheetSides
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumSheetSides extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumSheetSides(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumSheetSides getEnum(String enumName)
-		{
-			return (EnumSheetSides) getEnum(EnumSheetSides.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumSheetSides getEnum(int enumValue)
-		{
-			return (EnumSheetSides) getEnum(EnumSheetSides.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSheetSides.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSheetSides.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSheetSides.class);
-		}
-
-		/**  */
-		public static final EnumSheetSides Front = new EnumSheetSides("Front");
-		/**  */
-		public static final EnumSheetSides Back = new EnumSheetSides("Back");
-		/**  */
-		public static final EnumSheetSides FrontBack = new EnumSheetSides("FrontBack");
-		/**  */
-		public static final EnumSheetSides BackFront = new EnumSheetSides("BackFront");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -693,7 +291,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIsPage(boolean value)
+	public void setIsPage(final boolean value)
 	{
 		setAttribute(AttributeName.ISPAGE, value, null);
 	}
@@ -718,7 +316,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPageCopies(int value)
+	public void setPageCopies(final int value)
 	{
 		setAttribute(AttributeName.PAGECOPIES, value, null);
 	}
@@ -743,7 +341,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSetCopies(int value)
+	public void setSetCopies(final int value)
 	{
 		setAttribute(AttributeName.SETCOPIES, value, null);
 	}
@@ -768,9 +366,9 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setAutomation(EAutomation enumVar)
+	public void setAutomation(final EnumAutomation enumVar)
 	{
-		setAttribute(AttributeName.AUTOMATION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.AUTOMATION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -778,35 +376,6 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EAutomation getEAutomation()
-	{
-		return EAutomation.getEnum(getAttribute(AttributeName.AUTOMATION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Automation
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Automation
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetAutomation(EAutomation) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setAutomation(EnumAutomation enumVar)
-	{
-		setAttribute(AttributeName.AUTOMATION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Automation
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EAutomation GetEAutomation() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumAutomation getAutomation()
 	{
 		return EnumAutomation.getEnum(getAttribute(AttributeName.AUTOMATION, null, null));
@@ -822,9 +391,9 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setComponentGranularity(EComponentGranularity enumVar)
+	public void setComponentGranularity(final EnumComponentGranularity enumVar)
 	{
-		setAttribute(AttributeName.COMPONENTGRANULARITY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.COMPONENTGRANULARITY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -832,35 +401,6 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EComponentGranularity getEComponentGranularity()
-	{
-		return EComponentGranularity.getEnum(getAttribute(AttributeName.COMPONENTGRANULARITY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ComponentGranularity
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ComponentGranularity
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetComponentGranularity(EComponentGranularity) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setComponentGranularity(EnumComponentGranularity enumVar)
-	{
-		setAttribute(AttributeName.COMPONENTGRANULARITY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ComponentGranularity
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EComponentGranularity GetEComponentGranularity() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumComponentGranularity getComponentGranularity()
 	{
 		return EnumComponentGranularity.getEnum(getAttribute(AttributeName.COMPONENTGRANULARITY, null, null));
@@ -876,7 +416,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDirectory(String value)
+	public void setDirectory(final String value)
 	{
 		setAttribute(AttributeName.DIRECTORY, value, null);
 	}
@@ -901,7 +441,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDocNames(JDFNameRangeList value)
+	public void setDocNames(final JDFNameRangeList value)
 	{
 		setAttribute(AttributeName.DOCNAMES, value, null);
 	}
@@ -914,8 +454,8 @@ public abstract class JDFAutoRunList extends JDFResource
 	 */
 	public JDFNameRangeList getDocNames()
 	{
-		String strAttrName = getAttribute(AttributeName.DOCNAMES, null, null);
-		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.DOCNAMES, null, null);
+		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -929,7 +469,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDocs(JDFIntegerRangeList value)
+	public void setDocs(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.DOCS, value, null);
 	}
@@ -942,8 +482,8 @@ public abstract class JDFAutoRunList extends JDFResource
 	 */
 	public JDFIntegerRangeList getDocs()
 	{
-		String strAttrName = getAttribute(AttributeName.DOCS, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.DOCS, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -957,7 +497,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDocPages(JDFIntegerList value)
+	public void setDocPages(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.DOCPAGES, value, null);
 	}
@@ -970,8 +510,8 @@ public abstract class JDFAutoRunList extends JDFResource
 	 */
 	public JDFIntegerList getDocPages()
 	{
-		String strAttrName = getAttribute(AttributeName.DOCPAGES, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.DOCPAGES, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -985,7 +525,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setEndOfBundleItem(boolean value)
+	public void setEndOfBundleItem(final boolean value)
 	{
 		setAttribute(AttributeName.ENDOFBUNDLEITEM, value, null);
 	}
@@ -1010,7 +550,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setEndOfDocument(boolean value)
+	public void setEndOfDocument(final boolean value)
 	{
 		setAttribute(AttributeName.ENDOFDOCUMENT, value, null);
 	}
@@ -1035,7 +575,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setEndOfSet(boolean value)
+	public void setEndOfSet(final boolean value)
 	{
 		setAttribute(AttributeName.ENDOFSET, value, null);
 	}
@@ -1060,7 +600,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFinishedPages(int value)
+	public void setFinishedPages(final int value)
 	{
 		setAttribute(AttributeName.FINISHEDPAGES, value, null);
 	}
@@ -1085,7 +625,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFirstPage(int value)
+	public void setFirstPage(final int value)
 	{
 		setAttribute(AttributeName.FIRSTPAGE, value, null);
 	}
@@ -1110,9 +650,9 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setIgnoreContext(EIgnoreContext enumVar)
+	public void setIgnoreContext(final EnumIgnoreContext enumVar)
 	{
-		setAttribute(AttributeName.IGNORECONTEXT, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.IGNORECONTEXT, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -1120,35 +660,6 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EIgnoreContext getEIgnoreContext()
-	{
-		return EIgnoreContext.getEnum(getAttribute(AttributeName.IGNORECONTEXT, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute IgnoreContext
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute IgnoreContext
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetIgnoreContext(EIgnoreContext) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setIgnoreContext(EnumIgnoreContext enumVar)
-	{
-		setAttribute(AttributeName.IGNORECONTEXT, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute IgnoreContext
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EIgnoreContext GetEIgnoreContext() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumIgnoreContext getIgnoreContext()
 	{
 		return EnumIgnoreContext.getEnum(getAttribute(AttributeName.IGNORECONTEXT, null, null));
@@ -1164,7 +675,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLogicalPage(int value)
+	public void setLogicalPage(final int value)
 	{
 		setAttribute(AttributeName.LOGICALPAGE, value, null);
 	}
@@ -1189,7 +700,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNDoc(int value)
+	public void setNDoc(final int value)
 	{
 		setAttribute(AttributeName.NDOC, value, null);
 	}
@@ -1214,7 +725,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNPage(int value)
+	public void setNPage(final int value)
 	{
 		setAttribute(AttributeName.NPAGE, value, null);
 	}
@@ -1239,7 +750,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNSet(int value)
+	public void setNSet(final int value)
 	{
 		setAttribute(AttributeName.NSET, value, null);
 	}
@@ -1264,7 +775,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPageListIndex(JDFIntegerRangeList value)
+	public void setPageListIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.PAGELISTINDEX, value, null);
 	}
@@ -1277,8 +788,8 @@ public abstract class JDFAutoRunList extends JDFResource
 	 */
 	public JDFIntegerRangeList getPageListIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.PAGELISTINDEX, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PAGELISTINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1292,7 +803,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPageNames(JDFNameRangeList value)
+	public void setPageNames(final JDFNameRangeList value)
 	{
 		setAttribute(AttributeName.PAGENAMES, value, null);
 	}
@@ -1305,8 +816,8 @@ public abstract class JDFAutoRunList extends JDFResource
 	 */
 	public JDFNameRangeList getPageNames()
 	{
-		String strAttrName = getAttribute(AttributeName.PAGENAMES, null, null);
-		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PAGENAMES, null, null);
+		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1320,7 +831,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPages(JDFIntegerRangeList value)
+	public void setPages(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.PAGES, value, null);
 	}
@@ -1333,8 +844,8 @@ public abstract class JDFAutoRunList extends JDFResource
 	 */
 	public JDFIntegerRangeList getPages()
 	{
-		String strAttrName = getAttribute(AttributeName.PAGES, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PAGES, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1348,7 +859,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRunTag(String value)
+	public void setRunTag(final String value)
 	{
 		setAttribute(AttributeName.RUNTAG, value, null);
 	}
@@ -1373,7 +884,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSetNames(JDFNameRangeList value)
+	public void setSetNames(final JDFNameRangeList value)
 	{
 		setAttribute(AttributeName.SETNAMES, value, null);
 	}
@@ -1386,8 +897,8 @@ public abstract class JDFAutoRunList extends JDFResource
 	 */
 	public JDFNameRangeList getSetNames()
 	{
-		String strAttrName = getAttribute(AttributeName.SETNAMES, null, null);
-		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SETNAMES, null, null);
+		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1401,7 +912,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSets(JDFIntegerRangeList value)
+	public void setSets(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.SETS, value, null);
 	}
@@ -1414,8 +925,8 @@ public abstract class JDFAutoRunList extends JDFResource
 	 */
 	public JDFIntegerRangeList getSets()
 	{
-		String strAttrName = getAttribute(AttributeName.SETS, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SETS, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1429,9 +940,9 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSheetSides(ESheetSides enumVar)
+	public void setSheetSides(final EnumSheetSides enumVar)
 	{
-		setAttribute(AttributeName.SHEETSIDES, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SHEETSIDES, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -1439,35 +950,6 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESheetSides getESheetSides()
-	{
-		return ESheetSides.getEnum(getAttribute(AttributeName.SHEETSIDES, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute SheetSides
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute SheetSides
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetSheetSides(ESheetSides) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSheetSides(EnumSheetSides enumVar)
-	{
-		setAttribute(AttributeName.SHEETSIDES, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute SheetSides
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ESheetSides GetESheetSides() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumSheetSides getSheetSides()
 	{
 		return EnumSheetSides.getEnum(getAttribute(AttributeName.SHEETSIDES, null, null));
@@ -1483,7 +965,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSkipPage(int value)
+	public void setSkipPage(final int value)
 	{
 		setAttribute(AttributeName.SKIPPAGE, value, null);
 	}
@@ -1508,7 +990,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSorted(boolean value)
+	public void setSorted(final boolean value)
 	{
 		setAttribute(AttributeName.SORTED, value, null);
 	}
@@ -1565,7 +1047,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refByteMap(JDFByteMap refTarget)
+	public void refByteMap(final JDFByteMap refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1596,7 +1078,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFDynamicInput the element
 	 */
-	public JDFDynamicInput getCreateDynamicInput(int iSkip)
+	public JDFDynamicInput getCreateDynamicInput(final int iSkip)
 	{
 		return (JDFDynamicInput) getCreateElement_JDFElement(ElementName.DYNAMICINPUT, null, iSkip);
 	}
@@ -1608,7 +1090,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * @return JDFDynamicInput the element
 	 *         default is getDynamicInput(0)
 	 */
-	public JDFDynamicInput getDynamicInput(int iSkip)
+	public JDFDynamicInput getDynamicInput(final int iSkip)
 	{
 		return (JDFDynamicInput) getElement(ElementName.DYNAMICINPUT, null, iSkip);
 	}
@@ -1659,7 +1141,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFMetadataMap the element
 	 */
-	public JDFMetadataMap getCreateMetadataMap(int iSkip)
+	public JDFMetadataMap getCreateMetadataMap(final int iSkip)
 	{
 		return (JDFMetadataMap) getCreateElement_JDFElement(ElementName.METADATAMAP, null, iSkip);
 	}
@@ -1671,7 +1153,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * @return JDFMetadataMap the element
 	 *         default is getMetadataMap(0)
 	 */
-	public JDFMetadataMap getMetadataMap(int iSkip)
+	public JDFMetadataMap getMetadataMap(final int iSkip)
 	{
 		return (JDFMetadataMap) getElement(ElementName.METADATAMAP, null, iSkip);
 	}
@@ -1722,7 +1204,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFInsertSheet the element
 	 */
-	public JDFInsertSheet getCreateInsertSheet(int iSkip)
+	public JDFInsertSheet getCreateInsertSheet(final int iSkip)
 	{
 		return (JDFInsertSheet) getCreateElement_JDFElement(ElementName.INSERTSHEET, null, iSkip);
 	}
@@ -1734,7 +1216,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * @return JDFInsertSheet the element
 	 *         default is getInsertSheet(0)
 	 */
-	public JDFInsertSheet getInsertSheet(int iSkip)
+	public JDFInsertSheet getInsertSheet(final int iSkip)
 	{
 		return (JDFInsertSheet) getElement(ElementName.INSERTSHEET, null, iSkip);
 	}
@@ -1764,7 +1246,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refInsertSheet(JDFInsertSheet refTarget)
+	public void refInsertSheet(final JDFInsertSheet refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1805,7 +1287,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refLayoutElement(JDFLayoutElement refTarget)
+	public void refLayoutElement(final JDFLayoutElement refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1846,7 +1328,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refInterpretedPDLData(JDFInterpretedPDLData refTarget)
+	public void refInterpretedPDLData(final JDFInterpretedPDLData refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1918,7 +1400,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refPageList(JDFPageList refTarget)
+	public void refPageList(final JDFPageList refTarget)
 	{
 		refElement(refTarget);
 	}

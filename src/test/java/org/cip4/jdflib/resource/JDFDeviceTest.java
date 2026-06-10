@@ -50,7 +50,7 @@ class JDFDeviceTest extends JDFTestCaseBase
 	@Test
 	void testSetRestAPI()
 	{
-		JDFDevice dev = (JDFDevice) JDFElement.createRoot(ElementName.DEVICE);
+		final JDFDevice dev = (JDFDevice) JDFElement.createRoot(ElementName.DEVICE);
 		assertEquals("", dev.getRestApiBaseURL());
 		dev.setRestApiBaseURL("foo");
 		assertEquals("foo", dev.getRestApiBaseURL());

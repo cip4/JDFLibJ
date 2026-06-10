@@ -83,6 +83,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoPipeParams : public JDFElement
@@ -100,10 +101,10 @@ public abstract class JDFAutoPipeParams extends JDFElement
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.PIPEID, 0x2222222222l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.PROJECTID, 0x3333311111l, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.STATUS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0),
-				"InProgress");
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.STATUS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumNodeStatus.class, 0), "InProgress");
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.UPDATEDSTATUS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				JDFResource.EnumResStatus.getEnum(0), null);
+				JavaEnumUtil.getEnum(JDFResource.EnumResStatus.class, 0), null);
 	}
 
 	@Override
@@ -131,7 +132,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPipeParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPipeParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -143,7 +144,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPipeParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPipeParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -156,7 +157,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPipeParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPipeParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -177,7 +178,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -202,7 +203,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobPartID(String value)
+	public void setJobPartID(final String value)
 	{
 		setAttribute(AttributeName.JOBPARTID, value, null);
 	}
@@ -227,7 +228,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPipeID(String value)
+	public void setPipeID(final String value)
 	{
 		setAttribute(AttributeName.PIPEID, value, null);
 	}
@@ -252,7 +253,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProjectID(String value)
+	public void setProjectID(final String value)
 	{
 		setAttribute(AttributeName.PROJECTID, value, null);
 	}
@@ -277,9 +278,9 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setUpdatedStatus(JDFResource.EResStatus enumVar)
+	public void setUpdatedStatus(final JDFResource.EnumResStatus enumVar)
 	{
-		setAttribute(AttributeName.UPDATEDSTATUS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.UPDATEDSTATUS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -287,35 +288,6 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public JDFResource.EResStatus getEUpdatedStatus()
-	{
-		return JDFResource.EResStatus.getEnum(getAttribute(AttributeName.UPDATEDSTATUS, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute UpdatedStatus
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute UpdatedStatus
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetUpdatedStatus(Eesource.EnumResStatus) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setUpdatedStatus(JDFResource.EnumResStatus enumVar)
-	{
-		setAttribute(AttributeName.UPDATEDSTATUS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute UpdatedStatus
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use Eesource.EnumResStatus GetEUpdatedStatus() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public JDFResource.EnumResStatus getUpdatedStatus()
 	{
 		return JDFResource.EnumResStatus.getEnum(getAttribute(AttributeName.UPDATEDSTATUS, null, null));
@@ -384,7 +356,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFResource the element
 	 */
-	public JDFResource getCreateResource(int iSkip)
+	public JDFResource getCreateResource(final int iSkip)
 	{
 		return (JDFResource) getCreateElement_JDFElement(ElementName.RESOURCE, null, iSkip);
 	}
@@ -396,7 +368,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	 * @return JDFResource the element
 	 *         default is getResource(0)
 	 */
-	public JDFResource getResource(int iSkip)
+	public JDFResource getResource(final int iSkip)
 	{
 		return (JDFResource) getElement(ElementName.RESOURCE, null, iSkip);
 	}

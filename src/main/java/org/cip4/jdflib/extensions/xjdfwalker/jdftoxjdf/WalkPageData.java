@@ -75,9 +75,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkPageData extends WalkResource
 {
@@ -97,7 +95,8 @@ public class WalkPageData extends WalkResource
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return !jdfToXJDF.isRetainAll() && (XJDFConstants.Content.equals(toCheck.getLocalName()) && "Page".equals(toCheck.getAttribute(AttributeName.CONTENTTYPE)));
+		return !jdfToXJDF.isRetainAll()
+				&& (XJDFConstants.Content.equals(toCheck.getLocalName()) && "Page".equals(toCheck.getAttribute(AttributeName.CONTENTTYPE)));
 	}
 
 	/**

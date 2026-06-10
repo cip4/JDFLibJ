@@ -84,14 +84,14 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.w3c.dom.DOMException;
 
 /**
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFStringSpan extends JDFSpanBase
 {
@@ -99,19 +99,19 @@ public class JDFStringSpan extends JDFSpanBase
 
 	/**
 	 * Constructor for JDFStringSpan
-	 * @param myOwnerDocument 
-	 * @param qualifiedName 
-	 * @throws DOMException 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
 	 */
-	public JDFStringSpan(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFStringSpan(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Gets the value of attribute DataType
-	 * 
+	 *
 	 * @return EnumDataType - the attribute DataType value
 	 */
 	@Override
@@ -122,27 +122,27 @@ public class JDFStringSpan extends JDFSpanBase
 
 	/**
 	 * Constructor for JDFStringSpan
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @throws DOMException 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
 	 */
-	public JDFStringSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFStringSpan(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFStringSpan
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @param myLocalName 
-	 * @throws DOMException 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 * @throws DOMException
 	 */
-	public JDFStringSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFStringSpan(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -177,7 +177,7 @@ public class JDFStringSpan extends JDFSpanBase
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -188,57 +188,57 @@ public class JDFStringSpan extends JDFSpanBase
 
 	/**
 	 * Set attribute Actual
-	 * 
+	 *
 	 * @param value - the value to set
 	 */
-	public void setActual(String value)
+	public void setActual(final String value)
 	{
 		setAttribute(AttributeName.ACTUAL, value);
 	}
 
 	/**
 	 * Get attribute Actual value
-	 * 
+	 *
 	 * @return String - the value of attribute Actual
 	 */
 	public String getActual()
 	{
-		return getAttribute(AttributeName.ACTUAL, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.ACTUAL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
 	 * Set attribute Preferred
-	 * 
+	 *
 	 * @param value - the value to set
 	 */
-	public void setPreferred(String value)
+	public void setPreferred(final String value)
 	{
 		setAttribute(AttributeName.PREFERRED, value);
 	}
 
 	/**
 	 * Get attribute Preferred value
-	 * 
+	 *
 	 * @return String - the value of attribute Preferred
 	 */
 	public String getPreferred()
 	{
-		return getAttribute(AttributeName.PREFERRED, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.PREFERRED, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
 	 * GetRange
-	 * @param elementName 
-	 * 
+	 *
+	 * @param elementName
 	 * @return Vector of strings in Range
 	 */
-	private VString getRangeOfferRange(String elementName)
+	private VString getRangeOfferRange(final String elementName)
 	{
-		VString vL = new VString();
-		VElement v = getChildrenByTagName(elementName, null, null, true, true, 0);
+		final VString vL = new VString();
+		final VElement v = getChildrenByTagName(elementName, null, null, true, true, 0);
 		for (int i = 0; i < v.size(); i++)
 		{
-			KElement e = v.elementAt(i);
+			final KElement e = v.elementAt(i);
 			vL.addElement(e.getText(0));
 		}
 		return vL;
@@ -246,7 +246,7 @@ public class JDFStringSpan extends JDFSpanBase
 
 	/**
 	 * GetRange
-	 * 
+	 *
 	 * @return Vector of strings in Range
 	 */
 	public VString getRange()
@@ -256,27 +256,27 @@ public class JDFStringSpan extends JDFSpanBase
 
 	/**
 	 * SetRange
-	 * 
+	 *
 	 * @param s - the vector of strings to set Range to
 	 */
-	public void setRange(VString s)
+	public void setRange(final VString s)
 	{
 		setRangeOfferRange(ElementName.RANGE, s);
 	}
 
 	/**
 	 * addRange
-	 * 
+	 *
 	 * @param s - string to append as a new text element
 	 */
-	public void addRange(String s)
+	public void addRange(final String s)
 	{
 		appendTextElement(ElementName.RANGE, s);
 	}
 
 	/**
 	 * GetRange
-	 * 
+	 *
 	 * @return Vector of strings in Range
 	 */
 	public VString getOfferRange()
@@ -286,10 +286,11 @@ public class JDFStringSpan extends JDFSpanBase
 
 	/**
 	 * SetRange
-	 * @param elementName 
-	 * @param s - the vector of strings to set Range to
+	 *
+	 * @param elementName
+	 * @param s           - the vector of strings to set Range to
 	 */
-	private void setRangeOfferRange(String elementName, VString s)
+	private void setRangeOfferRange(final String elementName, final VString s)
 	{
 		removeChildren(elementName, null, null);
 		final int size = s.size();
@@ -301,20 +302,20 @@ public class JDFStringSpan extends JDFSpanBase
 
 	/**
 	 * SetRange
-	 * 
+	 *
 	 * @param s - the vector of strings to set Range to
 	 */
-	public void setOfferRange(VString s)
+	public void setOfferRange(final VString s)
 	{
 		setRangeOfferRange(ElementName.OFFERRANGE, s);
 	}
 
 	/**
 	 * addRange
-	 * 
+	 *
 	 * @param s - string to append as a new text element
 	 */
-	public void addOfferRange(String s)
+	public void addOfferRange(final String s)
 	{
 		appendTextElement(ElementName.OFFERRANGE, s);
 	}
@@ -322,11 +323,11 @@ public class JDFStringSpan extends JDFSpanBase
 	/**
 	 * @see org.cip4.jdflib.core.KElement#init()
 	 * @return
-	*/
+	 */
 	@Override
 	public boolean init()
 	{
-		boolean b = super.init();
+		final boolean b = super.init();
 		setDataType(EnumDataType.StringSpan);
 		return b;
 	}

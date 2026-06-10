@@ -124,7 +124,9 @@ public class WalkProductList extends WalkXElement
 
 		KElement theReturn = xjdfToJDFImpl.currentJDFNode;
 		if (!ProductHelper.PRODUCT.equals(xjdfToJDFImpl.currentJDFNode.getType()))
+		{
 			theReturn = xjdfToJDFImpl.jdfDoc.getJDFRoot();
+		}
 		return xjdfToJDFImpl.createProduct && !bFirst ? theReturn : null;
 	}
 

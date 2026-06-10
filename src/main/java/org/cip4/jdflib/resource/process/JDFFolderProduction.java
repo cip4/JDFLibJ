@@ -19,39 +19,39 @@ public class JDFFolderProduction extends JDFAutoFolderProduction
 
 	/**
 	 * Constructor for JDFFolderProduction
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFFolderProduction(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFFolderProduction(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFFolderProduction
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFFolderProduction(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFFolderProduction(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFFolderProduction
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFFolderProduction(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFFolderProduction(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -60,7 +60,7 @@ public class JDFFolderProduction extends JDFAutoFolderProduction
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

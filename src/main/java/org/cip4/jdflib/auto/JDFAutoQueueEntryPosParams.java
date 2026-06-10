@@ -107,7 +107,7 @@ public abstract class JDFAutoQueueEntryPosParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoQueueEntryPosParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoQueueEntryPosParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -119,7 +119,7 @@ public abstract class JDFAutoQueueEntryPosParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoQueueEntryPosParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoQueueEntryPosParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -132,7 +132,7 @@ public abstract class JDFAutoQueueEntryPosParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoQueueEntryPosParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoQueueEntryPosParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -153,7 +153,7 @@ public abstract class JDFAutoQueueEntryPosParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNextQueueEntryID(String value)
+	public void setNextQueueEntryID(final String value)
 	{
 		setAttribute(AttributeName.NEXTQUEUEENTRYID, value, null);
 	}
@@ -178,7 +178,7 @@ public abstract class JDFAutoQueueEntryPosParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setQueueEntryID(String value)
+	public void setQueueEntryID(final String value)
 	{
 		setAttribute(AttributeName.QUEUEENTRYID, value, null);
 	}
@@ -203,7 +203,7 @@ public abstract class JDFAutoQueueEntryPosParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPrevQueueEntryID(String value)
+	public void setPrevQueueEntryID(final String value)
 	{
 		setAttribute(AttributeName.PREVQUEUEENTRYID, value, null);
 	}
@@ -228,7 +228,7 @@ public abstract class JDFAutoQueueEntryPosParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPosition(int value)
+	public void setPosition(final int value)
 	{
 		setAttribute(AttributeName.POSITION, value, null);
 	}

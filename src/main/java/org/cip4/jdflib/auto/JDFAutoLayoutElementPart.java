@@ -132,7 +132,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLayoutElementPart(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoLayoutElementPart(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -144,7 +144,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLayoutElementPart(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoLayoutElementPart(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -157,7 +157,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoLayoutElementPart(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoLayoutElementPart(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -179,7 +179,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	 * @param value the value to set the attribute to
 	 */
 	@Override
-	public void setID(String value)
+	public void setID(final String value)
 	{
 		setAttribute(AttributeName.ID, value, null);
 	}
@@ -258,7 +258,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorCorrectionParams the element
 	 */
-	public JDFColorCorrectionParams getCreateColorCorrectionParams(int iSkip)
+	public JDFColorCorrectionParams getCreateColorCorrectionParams(final int iSkip)
 	{
 		return (JDFColorCorrectionParams) getCreateElement_JDFElement(ElementName.COLORCORRECTIONPARAMS, null, iSkip);
 	}
@@ -270,7 +270,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	 * @return JDFColorCorrectionParams the element
 	 *         default is getColorCorrectionParams(0)
 	 */
-	public JDFColorCorrectionParams getColorCorrectionParams(int iSkip)
+	public JDFColorCorrectionParams getColorCorrectionParams(final int iSkip)
 	{
 		return (JDFColorCorrectionParams) getElement(ElementName.COLORCORRECTIONPARAMS, null, iSkip);
 	}
@@ -300,7 +300,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refColorCorrectionParams(JDFColorCorrectionParams refTarget)
+	public void refColorCorrectionParams(final JDFColorCorrectionParams refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -331,7 +331,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFImageCompressionParams the element
 	 */
-	public JDFImageCompressionParams getCreateImageCompressionParams(int iSkip)
+	public JDFImageCompressionParams getCreateImageCompressionParams(final int iSkip)
 	{
 		return (JDFImageCompressionParams) getCreateElement_JDFElement(ElementName.IMAGECOMPRESSIONPARAMS, null, iSkip);
 	}
@@ -343,7 +343,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	 * @return JDFImageCompressionParams the element
 	 *         default is getImageCompressionParams(0)
 	 */
-	public JDFImageCompressionParams getImageCompressionParams(int iSkip)
+	public JDFImageCompressionParams getImageCompressionParams(final int iSkip)
 	{
 		return (JDFImageCompressionParams) getElement(ElementName.IMAGECOMPRESSIONPARAMS, null, iSkip);
 	}
@@ -373,7 +373,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refImageCompressionParams(JDFImageCompressionParams refTarget)
+	public void refImageCompressionParams(final JDFImageCompressionParams refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -404,7 +404,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFImageEnhancementParams the element
 	 */
-	public JDFImageEnhancementParams getCreateImageEnhancementParams(int iSkip)
+	public JDFImageEnhancementParams getCreateImageEnhancementParams(final int iSkip)
 	{
 		return (JDFImageEnhancementParams) getCreateElement_JDFElement(ElementName.IMAGEENHANCEMENTPARAMS, null, iSkip);
 	}
@@ -416,7 +416,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	 * @return JDFImageEnhancementParams the element
 	 *         default is getImageEnhancementParams(0)
 	 */
-	public JDFImageEnhancementParams getImageEnhancementParams(int iSkip)
+	public JDFImageEnhancementParams getImageEnhancementParams(final int iSkip)
 	{
 		return (JDFImageEnhancementParams) getElement(ElementName.IMAGEENHANCEMENTPARAMS, null, iSkip);
 	}
@@ -446,7 +446,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refImageEnhancementParams(JDFImageEnhancementParams refTarget)
+	public void refImageEnhancementParams(final JDFImageEnhancementParams refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -487,7 +487,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refLayoutElement(JDFLayoutElement refTarget)
+	public void refLayoutElement(final JDFLayoutElement refTarget)
 	{
 		refElement(refTarget);
 	}

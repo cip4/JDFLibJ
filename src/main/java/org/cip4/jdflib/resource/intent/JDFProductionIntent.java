@@ -68,13 +68,13 @@
  */
 
 /**
- * ========================================================================== 
+ * ==========================================================================
  * class JDFProductionIntent extends JDFResource
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author  sabjon@topmail.de   using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * @Author  sabjon@topmail.de   using a code generator
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  * Revision history:   ...
  */
 
@@ -89,8 +89,7 @@ import org.w3c.dom.DOMException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * July 30, 2009
+ *         July 30, 2009
  */
 public class JDFProductionIntent extends JDFAutoProductionIntent
 {
@@ -98,7 +97,7 @@ public class JDFProductionIntent extends JDFAutoProductionIntent
 
 	/**
 	 * Constructor for JDFProductionIntent
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
@@ -110,10 +109,10 @@ public class JDFProductionIntent extends JDFAutoProductionIntent
 
 	/**
 	 * Constructor for JDFProductionIntent
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * 
 	 * @throws DOMException
 	 */
 	public JDFProductionIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
@@ -123,21 +122,22 @@ public class JDFProductionIntent extends JDFAutoProductionIntent
 
 	/**
 	 * Constructor for JDFProductionIntent
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
-	 * 
 	 * @throws DOMException
 	 */
-	public JDFProductionIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFProductionIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * unknown elements
-	 * 
+	 *
 	 * @param nMax maximum number of elements to return
 	 * @return
 	 */
@@ -149,13 +149,16 @@ public class JDFProductionIntent extends JDFAutoProductionIntent
 
 	/**
 	 * returns true if this is a digital print process
+	 *
 	 * @return
 	 */
 	public boolean isDigital()
 	{
 		String process = guessActual(this, ElementName.PRINTPROCESS);
 		if (process != null)
+		{
 			process = process.toLowerCase();
+		}
 		return "electrophotography".equals(process) || "inkjet".equals(process) || "digital".equals(process);
 	}
 
@@ -168,4 +171,4 @@ public class JDFProductionIntent extends JDFAutoProductionIntent
 		return "JDFProductionIntent[  --> " + super.toString() + " ]";
 	}
 } // class JDFIDPLayout
-// ==========================================================================
+	// ==========================================================================

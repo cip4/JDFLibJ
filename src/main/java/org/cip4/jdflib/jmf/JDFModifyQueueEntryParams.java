@@ -83,10 +83,7 @@ import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *****************************************************************************
- * class JDFModifyQueueEntryParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFModifyQueueEntryParams : public JDFElement
  */
 
 public class JDFModifyQueueEntryParams extends JDFElement
@@ -103,7 +100,9 @@ public class JDFModifyQueueEntryParams extends JDFElement
 			{
 				op = JavaEnumUtil.getEnumIgnoreCase(eOperation.class, StringUtil.leftStr(s, -10));
 				if (op == null && s != null && s.toLowerCase().startsWith("setqueueentryp"))
+				{
 					op = eOperation.Move;
+				}
 			}
 			return op;
 		}
@@ -294,7 +293,7 @@ public class JDFModifyQueueEntryParams extends JDFElement
 
 	/**
 	 * (25) getCreateQueueFilter
-	 * 
+	 *
 	 * @return JDFQueueFilter the element
 	 */
 	public JDFQueueFilter getCreateQueueFilter()

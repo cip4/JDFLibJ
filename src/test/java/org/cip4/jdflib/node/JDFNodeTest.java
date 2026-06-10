@@ -49,6 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Vector;
@@ -61,6 +62,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
@@ -115,6 +117,7 @@ import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.JDFSpawn;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StatusCounter;
 import org.junit.jupiter.api.Test;
 
@@ -428,8 +431,8 @@ class JDFNodeTest extends JDFTestCaseBase
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
-		assertTrue(n.setType(EnumType.ConventionalPrinting.getName(), true), "good Type");
-		assertEquals(n.getXSIType(), EnumType.ConventionalPrinting.getName(), "xsiType");
+		assertTrue(n.setType(EnumType.ConventionalPrinting.name(), true), "good Type");
+		assertEquals(n.getXSIType(), EnumType.ConventionalPrinting.name(), "xsiType");
 		try
 		{
 			n.setType("badTypeName", true);
@@ -457,8 +460,8 @@ class JDFNodeTest extends JDFTestCaseBase
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
-		assertTrue(n.setType(EnumType.ConventionalPrinting.getName(), true), "good Type");
-		assertEquals(n.getXSIType(), EnumType.ConventionalPrinting.getName(), "xsiType");
+		assertTrue(n.setType(EnumType.ConventionalPrinting.name(), true), "good Type");
+		assertEquals(n.getXSIType(), EnumType.ConventionalPrinting.name(), "xsiType");
 		try
 		{
 			n.setType("badTypeName", true);
@@ -741,22 +744,22 @@ class JDFNodeTest extends JDFTestCaseBase
 		assertEquals(rlfoPa.getCombinedProcessIndex().toString(), "0 3", "folding is 0 and 2");
 		assertEquals(rlCuPa.getCombinedProcessIndex().toString(), "1", "cutting is 1");
 		v = n.getTypes();
-		assertEquals(v.elementAt(4), EnumType.AdhesiveBinding.getName(), "appended one type");
+		assertEquals(v.elementAt(4), EnumType.AdhesiveBinding.name(), "appended one type");
 		assertEquals(v.size(), 5, "appended one type");
 
 		n.insertTypeInTypes(EnumType.Bundling, -2);
 		assertEquals(rlfoPa.getCombinedProcessIndex().toString(), "0 4", "folding is 0 and 3");
 		assertEquals(rlCuPa.getCombinedProcessIndex().toString(), "1", "cutting is 1");
 		v = n.getTypes();
-		assertEquals(v.elementAt(3), EnumType.Bundling.getName(), "appended one type");
+		assertEquals(v.elementAt(3), EnumType.Bundling.name(), "appended one type");
 		assertEquals(v.size(), 6, "appended one type");
 
 		n.insertTypeInTypes(EnumType.BoxPacking, 0);
 		assertEquals(rlfoPa.getCombinedProcessIndex().toString(), "1 5", "folding is 1 and 5");
 		assertEquals(rlCuPa.getCombinedProcessIndex().toString(), "2", "cutting is 2");
 		v = n.getTypes();
-		assertEquals(v.elementAt(0), EnumType.BoxPacking.getName(), "appended one type");
-		assertEquals(v.elementAt(1), EnumType.Folding.getName(), "appended one type");
+		assertEquals(v.elementAt(0), EnumType.BoxPacking.name(), "appended one type");
+		assertEquals(v.elementAt(1), EnumType.Folding.name(), "appended one type");
 		assertEquals(v.size(), 7, "appended one type");
 
 		final JDFResource comp = n.addResource(ElementName.COMPONENT, null, null, null, null, null, null);
@@ -982,7 +985,7 @@ class JDFNodeTest extends JDFTestCaseBase
 	@Test
 	void testEnumType()
 	{
-		assertNull(EnumType.getEnum(-1));
+		assertNull(JavaEnumUtil.getEnum(EnumType.class, -402));
 		assertNull(EnumType.getEnum("FOO"));
 		assertEquals(EnumType.ConventionalPrinting, EnumType.getEnum(JDFConstants.TYPE_CONVENTIONALPRINTING));
 	}
@@ -1013,7 +1016,7 @@ class JDFNodeTest extends JDFTestCaseBase
 		assertFalse(n.containsType("Combined"));
 		n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.AssetListCreation);
-		assertTrue(n.containsType(EnumType.AssetListCreation.getName()));
+		assertTrue(n.containsType(EnumType.AssetListCreation.name()));
 	}
 
 	/**
@@ -1301,7 +1304,7 @@ class JDFNodeTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = doc.getJDFRoot();
 		root.setVersion(JDFElement.EnumVersion.Version_1_3);
-		final JDFAttributeMap pm = new JDFAttributeMap(EnumPartIDKey.SheetName.getName(), "s1");
+		final JDFAttributeMap pm = new JDFAttributeMap(EnumPartIDKey.SheetName.name(), "s1");
 		root.setPartStatus(pm, EnumNodeStatus.Waiting, null);
 		JDFNodeInfo ni = (JDFNodeInfo) root.getNodeInfo().getPartition(pm, null);
 		assertNotNull(ni);
@@ -1329,13 +1332,13 @@ class JDFNodeTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = doc.getJDFRoot();
 		root.setVersion(JDFElement.EnumVersion.Version_1_3);
-		final JDFAttributeMap pm = new JDFAttributeMap(EnumPartIDKey.SheetName.getName(), "s1");
+		final JDFAttributeMap pm = new JDFAttributeMap(EnumPartIDKey.SheetName.name(), "s1");
 		root.setPartStatus(pm, EnumNodeStatus.Waiting, null);
 		final JDFNodeInfo ni = (JDFNodeInfo) root.getNodeInfo().getPartition(pm, null);
 		assertNotNull(ni);
 		final JDFResourceLink rl = root.getLink(ni, null);
 		rl.setPartMap(pm);
-		final JDFAttributeMap pm2 = new JDFAttributeMap(EnumPartIDKey.SheetName.getName(), "s2");
+		final JDFAttributeMap pm2 = new JDFAttributeMap(EnumPartIDKey.SheetName.name(), "s2");
 		root.setPartStatus(pm2, EnumNodeStatus.Completed, null);
 		assertEquals(root.getPartStatus(pm2, 0), EnumNodeStatus.Completed);
 	}
@@ -1350,7 +1353,7 @@ class JDFNodeTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = doc.getJDFRoot();
 		root.setVersion(JDFElement.EnumVersion.Version_1_6);
-		final JDFAttributeMap pm = new JDFAttributeMap(EnumPartIDKey.SheetName.getName(), "s1");
+		final JDFAttributeMap pm = new JDFAttributeMap(EnumPartIDKey.SheetName.name(), "s1");
 		pm.put(AttributeName.SIDE, "Front");
 		pm.put(AttributeName.PARTVERSION, "PV1");
 		final VJDFAttributeMap vp = new VJDFAttributeMap();
@@ -1477,7 +1480,7 @@ class JDFNodeTest extends JDFTestCaseBase
 		final JDFNodeInfo nodeInfo2 = root.getCreateNodeInfo();
 		assertTrue(nodeInfo == nodeInfo2);
 
-		root.setType(JDFNode.EnumType.Product.getName(), false);
+		root.setType(JDFNode.EnumType.Product.name(), false);
 
 		final JDFNode nodeVer3 = root.addJDFNode("Version 1.3");
 		final JDFNode nodeVer1 = root.addJDFNode("Version 1.1");
@@ -1541,7 +1544,7 @@ class JDFNodeTest extends JDFTestCaseBase
 
 		final JDFDoc jdfDoc = parser.parseFile(sm_dirTestData + strJDFName);
 
-		final JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("Qua0.P", JDFConstants.EMPTYSTRING);
+		final JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("Qua0.P", JDFCoreConstants.EMPTYSTRING);
 
 		final JDFResourceLinkPool linkPool = nodeProc.getResourceLinkPool();
 
@@ -1574,7 +1577,7 @@ class JDFNodeTest extends JDFTestCaseBase
 		final String strJDFName = "Normalizer.jdf";
 		final JDFParser parser = new JDFParser();
 		final JDFDoc jdfDoc = parser.parseFile(sm_dirTestData + strJDFName);
-		final JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("Qua0.N", JDFConstants.EMPTYSTRING);
+		final JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("Qua0.N", JDFCoreConstants.EMPTYSTRING);
 		final JDFResourceLinkPool linkPool = nodeProc.getResourceLinkPool();
 		final VElement vRunListLinks = linkPool.getPoolChildren("RunListLink", null, null);
 		final JDFResourceLink link = (JDFResourceLink) vRunListLinks.get(0);
@@ -1644,8 +1647,8 @@ class JDFNodeTest extends JDFTestCaseBase
 	@Test
 	void testNullPointerException()
 	{
-		final List<EnumCleanUpMerge> LcleanUpMerge = JDFNode.EnumCleanUpMerge.getEnumList();
-		final List<EnumAmountMerge> LamountMerge = JDFResource.EnumAmountMerge.getEnumList();
+		final List<EnumCleanUpMerge> LcleanUpMerge = Arrays.asList(JDFNode.EnumCleanUpMerge.values());
+		final List<EnumAmountMerge> LamountMerge = Arrays.asList(JDFResource.EnumAmountMerge.values());
 
 		for (int i = 0; i < LcleanUpMerge.size(); i++)
 		{
@@ -2758,7 +2761,7 @@ class JDFNodeTest extends JDFTestCaseBase
 		vsRWResourceIDs.add("Link84847227_000309");
 		vsRWResourceIDs.add("r85326439_027691");
 
-		final JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("IPD0.I", JDFConstants.EMPTYSTRING);
+		final JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("IPD0.I", JDFCoreConstants.EMPTYSTRING);
 
 		final Collection<JDFResource> vSpawned = nodeProc.checkSpawnedResources(vsRWResourceIDs, vamParts);
 		assertNull(vSpawned);
@@ -3134,7 +3137,7 @@ class JDFNodeTest extends JDFTestCaseBase
 
 		if (ppnode != null)
 		{
-			assertTrue(ppnode.getTypes().contains(EnumType.LayoutElementProduction.getName()));
+			assertTrue(ppnode.getTypes().contains(EnumType.LayoutElementProduction.name()));
 			JDFResource res = ppnode.getMatchingResource("RunList", JDFNode.EnumProcessUsage.AnyInput, null, 0);
 			assertEquals(res.getNodeName(), ElementName.RUNLIST);
 			res = ppnode.getMatchingResource("LayoutElementProductionParams", JDFNode.EnumProcessUsage.AnyInput, null, 0);

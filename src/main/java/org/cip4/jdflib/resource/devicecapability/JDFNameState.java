@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,22 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFNameState.java
@@ -88,7 +88,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 
@@ -127,36 +127,36 @@ public class JDFNameState extends JDFAbstractState
 
 	/**
 	 * constructor for JDFNameState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFNameState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFNameState(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFNameState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFNameState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFNameState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFNameState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFNameState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFNameState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -166,7 +166,7 @@ public class JDFNameState extends JDFAbstractState
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -179,12 +179,12 @@ public class JDFNameState extends JDFAbstractState
 	 * // Attribute getter/ setter
 	 */
 
-	public void setCurrentValue(String value)
+	public void setCurrentValue(final String value)
 	{
 		setAttribute(AttributeName.CURRENTVALUE, value);
 	}
 
-	public void setCurrentValue(VString value)
+	public void setCurrentValue(final VString value)
 	{
 		setAttribute(AttributeName.CURRENTVALUE, value, null);
 	}
@@ -195,12 +195,12 @@ public class JDFNameState extends JDFAbstractState
 		return attribute == null ? null : new VString(attribute, null);
 	}
 
-	public void setDefaultValue(String value)
+	public void setDefaultValue(final String value)
 	{
 		setAttribute(AttributeName.DEFAULTVALUE, value);
 	}
 
-	public void setDefaultValue(VString value)
+	public void setDefaultValue(final VString value)
 	{
 		setAttribute(AttributeName.DEFAULTVALUE, value, null);
 	}
@@ -217,7 +217,7 @@ public class JDFNameState extends JDFAbstractState
 		return attribute == null ? null : new VString(attribute, null);
 	}
 
-	public void setAllowedValueList(VString vs)
+	public void setAllowedValueList(final VString vs)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUELIST, vs, null);
 	}
@@ -231,12 +231,12 @@ public class JDFNameState extends JDFAbstractState
 		return getAllowedValueList();
 	}
 
-	public void setPresentValueList(VString vs)
+	public void setPresentValueList(final VString vs)
 	{
 		setAttribute(AttributeName.PRESENTVALUELIST, vs, null);
 	}
 
-	public void setAllowedRegExp(String value)
+	public void setAllowedRegExp(final String value)
 	{
 		setAttribute(AttributeName.ALLOWEDREGEXP, value);
 	}
@@ -244,10 +244,10 @@ public class JDFNameState extends JDFAbstractState
 	@Override
 	public String getAllowedRegExp()
 	{
-		return getAttribute(AttributeName.ALLOWEDREGEXP, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.ALLOWEDREGEXP, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	public void setPresentRegExp(String value)
+	public void setPresentRegExp(final String value)
 	{
 		setAttribute(AttributeName.PRESENTREGEXP, value);
 	}
@@ -268,22 +268,26 @@ public class JDFNameState extends JDFAbstractState
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java
 	 * .lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
 	 */
 	@Override
-	public void addValue(String value, EnumFitsValue testlists)
+	public void addValue(final String value, final EnumFitsValue testlists)
 	{
 		if (fitsValue(value, testlists))
+		{
 			return;
+		}
 
 		if (testlists == null || EnumFitsValue.Allowed.equals(testlists))
 		{
 			VString list = getAllowedValueList();
 			if (list == null)
+			{
 				list = new VString();
+			}
 			list.appendUnique(value);
 			setAllowedValueList(list);
 		}
@@ -291,7 +295,9 @@ public class JDFNameState extends JDFAbstractState
 		{
 			VString list = getPresentValueList();
 			if (list == null || !hasAttribute(AttributeName.PRESENTVALUELIST))
+			{
 				list = new VString();
+			}
 			list.appendUnique(value);
 			setPresentValueList(list);
 		}
@@ -300,38 +306,39 @@ public class JDFNameState extends JDFAbstractState
 	/**
 	 * fitsValue - checks whether <code>value</code> matches the testlists
 	 * specified for this State
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *                  value to test
 	 * @param testlists
-	 *            the test lists the value has to match. In this State the test
-	 *            lists are ValueList, RegExp.<br>
-	 *            Choose one of two values: FitsValue_Allowed or
-	 *            FitsValue_Present. (Defaults to Allowed)
-	 * 
+	 *                  the test lists the value has to match. In this State the test
+	 *                  lists are ValueList, RegExp.<br>
+	 *                  Choose one of two values: FitsValue_Allowed or
+	 *                  FitsValue_Present. (Defaults to Allowed)
 	 * @return boolean - true, if the <code>value</code> matches all test lists
 	 *         or if Allowed test lists are not specified
 	 */
 	@Override
-	public boolean fitsValue(String value, EnumFitsValue testlists)
+	public boolean fitsValue(final String value, final EnumFitsValue testlists)
 	{
 		if (fitsListType(value))
+		{
 			return (fitsValueList(value, testlists) && fitsRegExp(value, testlists));
+		}
 		return false;
 	}
 
 	/**
 	 * fitsValueList - checks whether <code>value</code> matches the
 	 * AllowedValueList/PresentValueList specified for this State
-	 * 
+	 *
 	 * @param value
-	 *            nmtokens to test
+	 *                  nmtokens to test
 	 * @param valuelist
-	 *            switches between AllowedValueList and PresentValueList.
+	 *                  switches between AllowedValueList and PresentValueList.
 	 * @return boolean - true, if <code>value</code> matches
 	 *         <code>valuelist</code> or if AllowedValueList is not specified
 	 */
-	private final boolean fitsValueList(String value, EnumFitsValue valuelist)
+	private final boolean fitsValueList(final String value, final EnumFitsValue valuelist)
 	{
 
 		VString list;
@@ -344,11 +351,13 @@ public class JDFNameState extends JDFAbstractState
 			list = getPresentValueList();
 		}
 		if (list == null)
+		{
 			return true;
+		}
 
-		VString vs = new VString(value, null);
+		final VString vs = new VString(value, null);
 
-		EnumListType listType = getListType();
+		final EnumListType listType = getListType();
 		if (listType.equals(EnumListType.CompleteList))
 		{
 			return fitsCompleteList(vs, list);
@@ -362,8 +371,8 @@ public class JDFNameState extends JDFAbstractState
 			return fitsContainedList(vs, list);
 		}
 
-		int v_size = vs.size();
-		int l_size = list.size();
+		final int v_size = vs.size();
+		final int l_size = list.size();
 
 		for (int i = 0; i < v_size; i++) // test every token, that 'value'
 											// consists of
@@ -371,8 +380,8 @@ public class JDFNameState extends JDFAbstractState
 			boolean bFound = false;
 			for (int j = 0; j < l_size; j++)
 			{
-				String ve = vs.elementAt(i);
-				String le = list.elementAt(j);
+				final String ve = vs.elementAt(i);
+				final String le = list.elementAt(j);
 				if (ve.compareTo(le) == 0)
 				{
 					bFound = true;
@@ -380,7 +389,9 @@ public class JDFNameState extends JDFAbstractState
 				}
 			}
 			if (!bFound)
+			{
 				return false; // no such value in the 'list'
+			}
 		}
 		return true;
 	}
@@ -389,25 +400,24 @@ public class JDFNameState extends JDFAbstractState
 	 * fitsCompleteList - tests whether <code>value</code> matches the
 	 * AllowedValueList/PresentValueList specified for this State
 	 * (ListType=CompleteList)
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @param list
-	 *            ValueList
+	 *              ValueList
 	 * @return boolean - true, if <code>value</code> matches the ValueList
 	 */
-	private final boolean fitsCompleteList(VString value, VString list)
+	private final boolean fitsCompleteList(final VString value, final VString list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
-		if (v_size != l_size)
+		if ((v_size != l_size) || !isUnique(value))
+		{
 			return false;
+		}
 
-		if (!isUnique(value))
-			return false;
-
-		VString valueList = new VString(value);
+		final VString valueList = new VString(value);
 
 		boolean bFound;
 		for (int i = l_size - 1; i >= 0; i--)
@@ -434,23 +444,22 @@ public class JDFNameState extends JDFAbstractState
 	 * fitsCompleteOrderedList - tests whether <code>value</code> matches the
 	 * AllowedValueList/PresentValueList specified for this State
 	 * (ListType=CompleteOrderedList)
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @param list
-	 *            testlist
+	 *              testlist
 	 * @return boolean - true, if <code>value</code> matches the testlist
 	 */
-	private final boolean fitsCompleteOrderedList(VString value, VString list)
+	private final boolean fitsCompleteOrderedList(final VString value, final VString list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
-		if (v_size != l_size)
+		if ((v_size != l_size) || !isUnique(value))
+		{
 			return false;
-
-		if (!isUnique(value))
-			return false;
+		}
 
 		for (int i = 0; i < l_size; i++)
 		{
@@ -466,17 +475,17 @@ public class JDFNameState extends JDFAbstractState
 	 * fitsContainedList - tests whether <code>value</code> matches the
 	 * AllowedValueList/PresentValueList specified for this State
 	 * (ListType=ContainedList)
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @param list
-	 *            testlist
+	 *              testlist
 	 * @return boolean - true, if <code>value</code> matches the testlist
 	 */
-	private final boolean fitsContainedList(VString value, VString list)
+	private final boolean fitsContainedList(final VString value, final VString list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
 		for (int i = 0; i < v_size; i++)
 		{
@@ -493,24 +502,26 @@ public class JDFNameState extends JDFAbstractState
 
 	/**
 	 * isUnique - tests whether <code>value</code> string has unique tokens only
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @return boolean - true, if <code>value</code> has unique tokens only
 	 */
-	private final boolean isUnique(VString v)
+	private final boolean isUnique(final VString v)
 	{
-		int size = v.size();
+		final int size = v.size();
 		for (int i = 0; i < size; i++)
 		{
 			for (int j = 0; j < size; j++)
 			{
 				if (j != i)
 				{
-					String si = v.elementAt(i);
-					String sj = v.elementAt(j);
+					final String si = v.elementAt(i);
+					final String sj = v.elementAt(j);
 					if (si.compareTo(sj) == 0)
+					{
 						return false;
+					}
 				}
 			}
 		}
@@ -518,14 +529,14 @@ public class JDFNameState extends JDFAbstractState
 	}
 
 	@Override
-	public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
+	public VString getInvalidAttributes(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
 	{
 		return getInvalidAttributesImpl(level, bIgnorePrivate, nMax);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
 	 */
 	@Override

@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -106,7 +102,7 @@ public abstract class JDFAutoDisjointing extends JDFElement
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.OFFSET, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.OFFSETAMOUNT, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFSETDIRECTION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumOffsetDirection.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumOffsetDirection.class, 0), null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.OFFSETUNITS, 0x3333311111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.OVERFOLD, 0x4444444443l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
@@ -136,7 +132,7 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDisjointing(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDisjointing(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -148,7 +144,7 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDisjointing(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDisjointing(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -161,101 +157,28 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDisjointing(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDisjointing(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for OffsetDirection
+	 * Enumeration strings for numOffsetDirection
 	 */
 
-	public enum EOffsetDirection
+	public enum EnumOffsetDirection
 	{
 		Alternate, Left, None, Right, Straight, SystemSpecified;
 
-		public static EOffsetDirection getEnum(String val)
+		public static EnumOffsetDirection getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EOffsetDirection.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumOffsetDirection.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for OffsetDirection
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumOffsetDirection extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumOffsetDirection(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumOffsetDirection getEnum(String enumName)
-		{
-			return (EnumOffsetDirection) getEnum(EnumOffsetDirection.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumOffsetDirection getEnum(int enumValue)
-		{
-			return (EnumOffsetDirection) getEnum(EnumOffsetDirection.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumOffsetDirection.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumOffsetDirection.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumOffsetDirection.class);
-		}
-
-		/**  */
-		public static final EnumOffsetDirection Alternate = new EnumOffsetDirection("Alternate");
-		/**  */
-		public static final EnumOffsetDirection Left = new EnumOffsetDirection("Left");
-		/**  */
-		public static final EnumOffsetDirection None = new EnumOffsetDirection("None");
-		/**  */
-		public static final EnumOffsetDirection Right = new EnumOffsetDirection("Right");
-		/**  */
-		public static final EnumOffsetDirection Straight = new EnumOffsetDirection("Straight");
-		/**  */
-		public static final EnumOffsetDirection SystemSpecified = new EnumOffsetDirection("SystemSpecified");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -267,7 +190,7 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNumber(int value)
+	public void setNumber(final int value)
 	{
 		setAttribute(AttributeName.NUMBER, value, null);
 	}
@@ -292,7 +215,7 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOffset(JDFXYPair value)
+	public void setOffset(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.OFFSET, value, null);
 	}
@@ -305,8 +228,8 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	 */
 	public JDFXYPair getOffset()
 	{
-		String strAttrName = getAttribute(AttributeName.OFFSET, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.OFFSET, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -320,7 +243,7 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOffsetAmount(int value)
+	public void setOffsetAmount(final int value)
 	{
 		setAttribute(AttributeName.OFFSETAMOUNT, value, null);
 	}
@@ -345,9 +268,9 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setOffsetDirection(EOffsetDirection enumVar)
+	public void setOffsetDirection(final EnumOffsetDirection enumVar)
 	{
-		setAttribute(AttributeName.OFFSETDIRECTION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.OFFSETDIRECTION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -355,35 +278,6 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EOffsetDirection getEOffsetDirection()
-	{
-		return EOffsetDirection.getEnum(getAttribute(AttributeName.OFFSETDIRECTION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute OffsetDirection
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute OffsetDirection
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetOffsetDirection(EOffsetDirection) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setOffsetDirection(EnumOffsetDirection enumVar)
-	{
-		setAttribute(AttributeName.OFFSETDIRECTION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute OffsetDirection
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EOffsetDirection GetEOffsetDirection() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumOffsetDirection getOffsetDirection()
 	{
 		return EnumOffsetDirection.getEnum(getAttribute(AttributeName.OFFSETDIRECTION, null, null));
@@ -399,7 +293,7 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOffsetUnits(String value)
+	public void setOffsetUnits(final String value)
 	{
 		setAttribute(AttributeName.OFFSETUNITS, value, null);
 	}
@@ -424,7 +318,7 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOverfold(double value)
+	public void setOverfold(final double value)
 	{
 		setAttribute(AttributeName.OVERFOLD, value, null);
 	}
@@ -471,7 +365,7 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFIdentificationField the element
 	 */
-	public JDFIdentificationField getCreateIdentificationField(int iSkip)
+	public JDFIdentificationField getCreateIdentificationField(final int iSkip)
 	{
 		return (JDFIdentificationField) getCreateElement_JDFElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
 	}
@@ -483,7 +377,7 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	 * @return JDFIdentificationField the element
 	 *         default is getIdentificationField(0)
 	 */
-	public JDFIdentificationField getIdentificationField(int iSkip)
+	public JDFIdentificationField getIdentificationField(final int iSkip)
 	{
 		return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
 	}
@@ -544,7 +438,7 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refInsertSheet(JDFInsertSheet refTarget)
+	public void refInsertSheet(final JDFInsertSheet refTarget)
 	{
 		refElement(refTarget);
 	}

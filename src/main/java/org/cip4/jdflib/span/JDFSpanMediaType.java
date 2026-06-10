@@ -78,7 +78,6 @@
  */
 package org.cip4.jdflib.span;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.w3c.dom.DOMException;
@@ -121,21 +120,10 @@ public class JDFSpanMediaType extends JDFEnumerationSpan
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanMediaType(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFSpanMediaType(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * Enumeration strings for EnumSpanMediaType
-	 */
-	public static class EnumSpanMediaType extends EnumMediaType
-	{
-		protected EnumSpanMediaType(final String name)
-		{
-			super(name);
-		}
-
 	}
 
 	// **************************************** Methods
@@ -147,9 +135,9 @@ public class JDFSpanMediaType extends JDFEnumerationSpan
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanMediaType.getEnum(0);
+		return EnumMediaType.class;
 	}
 
 	/**

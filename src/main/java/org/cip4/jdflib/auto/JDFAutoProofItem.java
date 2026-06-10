@@ -144,7 +144,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoProofItem(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoProofItem(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -156,7 +156,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoProofItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoProofItem(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -169,7 +169,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoProofItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoProofItem(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -190,7 +190,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setContract(boolean value)
+	public void setContract(final boolean value)
 	{
 		setAttribute(AttributeName.CONTRACT, value, null);
 	}
@@ -215,7 +215,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPageIndex(JDFIntegerRangeList value)
+	public void setPageIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.PAGEINDEX, value, null);
 	}
@@ -228,8 +228,8 @@ public abstract class JDFAutoProofItem extends JDFElement
 	 */
 	public JDFIntegerRangeList getPageIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.PAGEINDEX, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PAGEINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -243,7 +243,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProofName(String value)
+	public void setProofName(final String value)
 	{
 		setAttribute(AttributeName.PROOFNAME, value, null);
 	}
@@ -268,7 +268,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProofTarget(String value)
+	public void setProofTarget(final String value)
 	{
 		setAttribute(AttributeName.PROOFTARGET, value, null);
 	}
@@ -542,7 +542,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refApprovalParams(JDFApprovalParams refTarget)
+	public void refApprovalParams(final JDFApprovalParams refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -604,7 +604,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationSpec the element
 	 */
-	public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
+	public JDFSeparationSpec getCreateSeparationSpec(final int iSkip)
 	{
 		return (JDFSeparationSpec) getCreateElement_JDFElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}
@@ -616,7 +616,7 @@ public abstract class JDFAutoProofItem extends JDFElement
 	 * @return JDFSeparationSpec the element
 	 *         default is getSeparationSpec(0)
 	 */
-	public JDFSeparationSpec getSeparationSpec(int iSkip)
+	public JDFSeparationSpec getSeparationSpec(final int iSkip)
 	{
 		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}

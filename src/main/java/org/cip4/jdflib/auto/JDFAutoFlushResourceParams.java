@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -98,8 +93,8 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FLUSHPOLICY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumFlushPolicy.getEnum(0),
-				"QueueEntry");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FLUSHPOLICY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumFlushPolicy.class, 0), "QueueEntry");
 	}
 
 	@Override
@@ -126,7 +121,7 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFlushResourceParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoFlushResourceParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -138,7 +133,7 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFlushResourceParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoFlushResourceParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -151,95 +146,28 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoFlushResourceParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoFlushResourceParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for FlushPolicy
+	 * Enumeration strings for numFlushPolicy
 	 */
 
-	public enum EFlushPolicy
+	public enum EnumFlushPolicy
 	{
 		Complete, QueueEntry, Intermediate;
 
-		public static EFlushPolicy getEnum(String val)
+		public static EnumFlushPolicy getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EFlushPolicy.class, val, EFlushPolicy.QueueEntry);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumFlushPolicy.class, val, EnumFlushPolicy.QueueEntry);
 		}
-	}
-
-	/**
-	 * Enumeration strings for FlushPolicy
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumFlushPolicy extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumFlushPolicy(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumFlushPolicy getEnum(String enumName)
-		{
-			return (EnumFlushPolicy) getEnum(EnumFlushPolicy.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumFlushPolicy getEnum(int enumValue)
-		{
-			return (EnumFlushPolicy) getEnum(EnumFlushPolicy.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumFlushPolicy.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumFlushPolicy.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumFlushPolicy.class);
-		}
-
-		/**  */
-		public static final EnumFlushPolicy Complete = new EnumFlushPolicy("Complete");
-		/**  */
-		public static final EnumFlushPolicy QueueEntry = new EnumFlushPolicy("QueueEntry");
-		/**  */
-		public static final EnumFlushPolicy Intermediate = new EnumFlushPolicy("Intermediate");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -251,9 +179,9 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setFlushPolicy(EFlushPolicy enumVar)
+	public void setFlushPolicy(final EnumFlushPolicy enumVar)
 	{
-		setAttribute(AttributeName.FLUSHPOLICY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.FLUSHPOLICY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -261,35 +189,6 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EFlushPolicy getEFlushPolicy()
-	{
-		return EFlushPolicy.getEnum(getAttribute(AttributeName.FLUSHPOLICY, null, "QueueEntry"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute FlushPolicy
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute FlushPolicy
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetFlushPolicy(EFlushPolicy) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setFlushPolicy(EnumFlushPolicy enumVar)
-	{
-		setAttribute(AttributeName.FLUSHPOLICY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute FlushPolicy
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EFlushPolicy GetEFlushPolicy() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumFlushPolicy getFlushPolicy()
 	{
 		return EnumFlushPolicy.getEnum(getAttribute(AttributeName.FLUSHPOLICY, null, "QueueEntry"));

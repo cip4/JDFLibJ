@@ -57,12 +57,11 @@ import java.util.Locale;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VString;
 
 /**
  * @author GonnermannJ
- *
  *         converts a PDFpath description into a GeneralPath-Object (Shape)
  */
 public class JDFPath
@@ -78,7 +77,7 @@ public class JDFPath
 	@Override
 	public String toString()
 	{
-		String path = JDFConstants.EMPTYSTRING;
+		String path = JDFCoreConstants.EMPTYSTRING;
 		final AffineTransform at = new AffineTransform();
 		at.setToIdentity();
 		final PathIterator pi = getIterator(at);
@@ -92,14 +91,15 @@ public class JDFPath
 			path += ("\nseg[" + segNum + "]= [");
 			for (int j = 0; j < 5; j++)
 			{
-				path += (JDFConstants.BLANK + seg[j] + JDFConstants.COMMA);
+				path += (JDFCoreConstants.BLANK + seg[j] + JDFCoreConstants.COMMA);
 			}
 			path += (" type=[" + type + "] ]\n");
 			pi.next();
 			segNum++;
 		}
 
-		return "Path= [\n" + "\tbox=     " + m_GPI.getBounds() + "\n" + "\twinding= " + m_GPI.getWindingRule() + "\n" + "\tcurrent= " + m_GPI.getCurrentPoint() + "\n" + "segments:\n" + path + "]";
+		return "Path= [\n" + "\tbox=     " + m_GPI.getBounds() + "\n" + "\twinding= " + m_GPI.getWindingRule() + "\n" + "\tcurrent= " + m_GPI.getCurrentPoint()
+				+ "\n" + "segments:\n" + path + "]";
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class JDFPath
 		// fill m_GPI
 		final Vector s = new Vector(4);
 		double d = 0;
-		String nt = JDFConstants.EMPTYSTRING;
+		String nt = JDFCoreConstants.EMPTYSTRING;
 
 		while (st.hasMoreTokens())
 		{
@@ -156,9 +156,9 @@ public class JDFPath
 					nt = nt.substring(0, nt.length() - 1);
 
 				}
-				if (nt.equals(JDFConstants.EMPTYSTRING))
+				if (nt.equals(JDFCoreConstants.EMPTYSTRING))
 				{
-					s.add(JDFConstants.EMPTYSTRING); // empty param eg []
+					s.add(JDFCoreConstants.EMPTYSTRING); // empty param eg []
 					continue;
 				}
 
@@ -310,8 +310,8 @@ public class JDFPath
 			final Point2D currentPoint = m_GPI.getCurrentPoint();
 			if (currentPoint != null)
 			{
-				a[0] = Float.parseFloat(JDFConstants.EMPTYSTRING + currentPoint.getX());
-				a[1] = Float.parseFloat(JDFConstants.EMPTYSTRING + currentPoint.getY());
+				a[0] = Float.parseFloat(JDFCoreConstants.EMPTYSTRING + currentPoint.getX());
+				a[1] = Float.parseFloat(JDFCoreConstants.EMPTYSTRING + currentPoint.getY());
 			}
 		}
 		catch (final NumberFormatException e)
@@ -381,20 +381,20 @@ public class JDFPath
 	private void rectangle(final float x, final float y, final float w, final float h)
 	{
 		final VString v = new VString();
-		v.add(JDFConstants.EMPTYSTRING + x);
-		v.add(JDFConstants.EMPTYSTRING + y);
+		v.add(JDFCoreConstants.EMPTYSTRING + x);
+		v.add(JDFCoreConstants.EMPTYSTRING + y);
 		addValues("m", 2, v);
 		v.clear();
-		v.add(JDFConstants.EMPTYSTRING + (x + w));
-		v.add(JDFConstants.EMPTYSTRING + y);
+		v.add(JDFCoreConstants.EMPTYSTRING + (x + w));
+		v.add(JDFCoreConstants.EMPTYSTRING + y);
 		addValues("l", 2, v);
 		v.clear();
-		v.add(JDFConstants.EMPTYSTRING + (x + w));
-		v.add(JDFConstants.EMPTYSTRING + (y + h));
+		v.add(JDFCoreConstants.EMPTYSTRING + (x + w));
+		v.add(JDFCoreConstants.EMPTYSTRING + (y + h));
 		addValues("l", 2, v);
 		v.clear();
-		v.add(JDFConstants.EMPTYSTRING + (x));
-		v.add(JDFConstants.EMPTYSTRING + (y + h));
+		v.add(JDFCoreConstants.EMPTYSTRING + (x));
+		v.add(JDFCoreConstants.EMPTYSTRING + (y + h));
 		addValues("l", 2, v);
 		addValues("h", 0, v);
 	}
@@ -435,7 +435,6 @@ public class JDFPath
 	 * Calculates the JDF string path from the awt shape.
 	 *
 	 * @param shape The shape.
-	 *
 	 * @return The path as string.
 	 */
 	private String calcPath(final Shape shape)
@@ -503,10 +502,10 @@ public class JDFPath
 		for (int i = 0; i < nLength; i++)
 		{
 			buffer.append(formatter.format(seg[i]));
-			buffer.append(JDFConstants.BLANK);
+			buffer.append(JDFCoreConstants.BLANK);
 		}
 		buffer.append(strOrder);
-		buffer.append(JDFConstants.BLANK);
+		buffer.append(JDFCoreConstants.BLANK);
 	}
 
 	/**

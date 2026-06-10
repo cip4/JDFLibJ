@@ -63,7 +63,6 @@ import org.cip4.jdflib.resource.process.JDFContact;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
  * @date Oct 11, 2012
  */
@@ -179,7 +178,8 @@ class RemoveEmptyTest extends JDFTestCaseBase
 		final JDFNode n = d.getJDFRoot();
 		final JDFResource m = n.addResource(ElementName.MEDIA, EnumUsage.Input);
 		final JDFResource xm = n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
-		xm.addPartition(EnumPartIDKey.SignatureName, "s1").addPartition(EnumPartIDKey.SheetName, "s1").addPartition(EnumPartIDKey.Side, "Front").setProductID("p");
+		xm.addPartition(EnumPartIDKey.SignatureName, "s1").addPartition(EnumPartIDKey.SheetName, "s1").addPartition(EnumPartIDKey.Side, "Front")
+				.setProductID("p");
 		xm.refElement(m);
 		final RemoveEmpty emp = new RemoveEmpty();
 		emp.removEmpty(n);

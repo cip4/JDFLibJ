@@ -2,8 +2,8 @@
  * JDFShapeRangeListTest.java
  *
  * @author Elena Skobchenko
- * 
- * Copyright (c) 2001-2004 The International Cooperation for the Integration 
+ *
+ * Copyright (c) 2001-2004 The International Cooperation for the Integration
  * of Processes in  Prepress, Press and Postpress (CIP4).  All rights reserved.
  */
 package org.cip4.jdflib.datatypes;

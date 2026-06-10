@@ -89,39 +89,39 @@ public class JDFColorsUsed extends JDFSeparationList
 
 	/**
 	 * Constructor for JDFColorsUsed
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFColorsUsed(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFColorsUsed(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFColorsUsed
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFColorsUsed(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFColorsUsed(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFColorsUsed
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFColorsUsed(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFColorsUsed(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -130,7 +130,7 @@ public class JDFColorsUsed extends JDFSeparationList
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

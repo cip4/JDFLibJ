@@ -70,12 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -100,8 +96,8 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.FILE, 0x4444444433l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.HOTFOLDER, 0x4444443333l, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.HTTPGET, 0x4444444433l, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PACKAGING, 0x3333333311l, AttributeInfo.EnumAttributeType.enumerations, EnumPackaging.getEnum(0),
-				null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PACKAGING, 0x3333333311l, AttributeInfo.EnumAttributeType.enumerations,
+				JavaEnumUtil.getEnum(EnumPackaging.class, 0), null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.MIME, 0x4444444433l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.URLSCHEMES, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 	}
@@ -118,7 +114,7 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSubmissionMethods(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoSubmissionMethods(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -130,7 +126,7 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSubmissionMethods(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoSubmissionMethods(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -143,93 +139,28 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoSubmissionMethods(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoSubmissionMethods(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for Packaging
+	 * Enumeration strings for numPackaging
 	 */
 
-	public enum EPackaging
+	public enum EnumPackaging
 	{
 		MIME, None;
 
-		public static EPackaging getEnum(String val)
+		public static EnumPackaging getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPackaging.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPackaging.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Packaging
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumPackaging extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPackaging(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumPackaging getEnum(String enumName)
-		{
-			return (EnumPackaging) getEnum(EnumPackaging.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPackaging getEnum(int enumValue)
-		{
-			return (EnumPackaging) getEnum(EnumPackaging.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPackaging.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPackaging.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPackaging.class);
-		}
-
-		/**  */
-		public static final EnumPackaging MIME = new EnumPackaging("MIME");
-		/**  */
-		public static final EnumPackaging None = new EnumPackaging("None");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -241,7 +172,7 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFile(boolean value)
+	public void setFile(final boolean value)
 	{
 		setAttribute(AttributeName.FILE, value, null);
 	}
@@ -266,7 +197,7 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHotFolder(String value)
+	public void setHotFolder(final String value)
 	{
 		setAttribute(AttributeName.HOTFOLDER, value, null);
 	}
@@ -291,7 +222,7 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHttpGet(boolean value)
+	public void setHttpGet(final boolean value)
 	{
 		setAttribute(AttributeName.HTTPGET, value, null);
 	}
@@ -316,7 +247,7 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	 *
 	 * @param v List of the enumeration values
 	 */
-	public void setEPackaging(List<EPackaging> v)
+	public void setPackaging(final List<EnumPackaging> v)
 	{
 		setEnumsAttribute(AttributeName.PACKAGING, v, null);
 	}
@@ -326,38 +257,9 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public List<EPackaging> getEnumsPackaging()
+	public List<EnumPackaging> getPackaging()
 	{
-		return getEnumerationsAttribute(AttributeName.PACKAGING, null, EPackaging.class);
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Packaging
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5.2) set attribute Packaging
-	 *
-	 * @param v List of the enumeration values
-	 * @deprecated use SetEPackaging(List<EPackaging>) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPackaging(List<EnumPackaging> v)
-	{
-		setEnumerationsAttribute(AttributeName.PACKAGING, v, null);
-	}
-
-	/**
-	 * (9.2) get Packaging attribute Packaging
-	 *
-	 * @return Vector of the enumerations
-	 * @deprecated use List<EPackaging > GetEPackaging() based on java.lang.enum instead
-	 */
-	@Deprecated
-	public Vector<EnumPackaging> getPackaging()
-	{
-		return getEnumerationsAttribute(AttributeName.PACKAGING, null, EnumPackaging.getEnum(0), false);
+		return getEnumerationsAttribute(AttributeName.PACKAGING, null, EnumPackaging.class);
 	}
 
 	/*
@@ -370,7 +272,7 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMIME(boolean value)
+	public void setMIME(final boolean value)
 	{
 		setAttribute(AttributeName.MIME, value, null);
 	}
@@ -395,7 +297,7 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setURLSchemes(VString value)
+	public void setURLSchemes(final VString value)
 	{
 		setAttribute(AttributeName.URLSCHEMES, value, null);
 	}
@@ -407,8 +309,8 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	 */
 	public VString getURLSchemes()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.URLSCHEMES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.URLSCHEMES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}

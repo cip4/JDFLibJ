@@ -18,36 +18,36 @@ public class JDFLot extends JDFAutoLot
 
 	/**
 	 * Constructor for JDFLot
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFLot(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFLot(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFLot
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFLot(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFLot(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFLot
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFLot(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFLot(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -56,7 +56,7 @@ public class JDFLot extends JDFAutoLot
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

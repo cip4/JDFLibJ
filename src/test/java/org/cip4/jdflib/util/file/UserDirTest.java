@@ -77,20 +77,17 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class UserDirTest extends JDFTestCaseBase
 {
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testNotDot() throws Exception
 	{
-		UserDir d = new UserDir("myTool");
+		final UserDir d = new UserDir("myTool");
 		Assertions.assertNotSame(new File(d.getToolsPath()).getCanonicalPath(), new File(".").getCanonicalPath());
 	}
 }

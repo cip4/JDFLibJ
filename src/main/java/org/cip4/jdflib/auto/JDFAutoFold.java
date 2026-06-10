@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -94,9 +89,11 @@ public abstract class JDFAutoFold extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FROM, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumFrom.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FROM, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumFrom.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.RELATIVETRAVEL, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TO, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumTo.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TO, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, JavaEnumUtil.getEnum(EnumTo.class, 0),
+				null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.TRAVEL, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
@@ -112,7 +109,7 @@ public abstract class JDFAutoFold extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFold(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoFold(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -124,7 +121,7 @@ public abstract class JDFAutoFold extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFold(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoFold(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -137,170 +134,42 @@ public abstract class JDFAutoFold extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoFold(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoFold(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for From
+	 * Enumeration strings for numFrom
 	 */
 
-	public enum EFrom
+	public enum EnumFrom
 	{
 		Front, Left;
 
-		public static EFrom getEnum(String val)
+		public static EnumFrom getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EFrom.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumFrom.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for From
+	 * Enumeration strings for numTo
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumFrom extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumFrom(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumFrom getEnum(String enumName)
-		{
-			return (EnumFrom) getEnum(EnumFrom.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumFrom getEnum(int enumValue)
-		{
-			return (EnumFrom) getEnum(EnumFrom.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumFrom.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumFrom.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumFrom.class);
-		}
-
-		/**  */
-		public static final EnumFrom Front = new EnumFrom("Front");
-		/**  */
-		public static final EnumFrom Left = new EnumFrom("Left");
-	}
-
-	/**
-	 * Enumeration strings for To
-	 */
-
-	public enum ETo
+	public enum EnumTo
 	{
 		Up, Down;
 
-		public static ETo getEnum(String val)
+		public static EnumTo getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ETo.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumTo.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for To
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumTo extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumTo(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumTo getEnum(String enumName)
-		{
-			return (EnumTo) getEnum(EnumTo.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumTo getEnum(int enumValue)
-		{
-			return (EnumTo) getEnum(EnumTo.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumTo.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumTo.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumTo.class);
-		}
-
-		/**  */
-		public static final EnumTo Up = new EnumTo("Up");
-		/**  */
-		public static final EnumTo Down = new EnumTo("Down");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -312,9 +181,9 @@ public abstract class JDFAutoFold extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setFrom(EFrom enumVar)
+	public void setFrom(final EnumFrom enumVar)
 	{
-		setAttribute(AttributeName.FROM, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.FROM, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -322,35 +191,6 @@ public abstract class JDFAutoFold extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EFrom getEFrom()
-	{
-		return EFrom.getEnum(getAttribute(AttributeName.FROM, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute From
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute From
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetFrom(EFrom) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setFrom(EnumFrom enumVar)
-	{
-		setAttribute(AttributeName.FROM, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute From
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EFrom GetEFrom() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumFrom getFrom()
 	{
 		return EnumFrom.getEnum(getAttribute(AttributeName.FROM, null, null));
@@ -366,7 +206,7 @@ public abstract class JDFAutoFold extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRelativeTravel(double value)
+	public void setRelativeTravel(final double value)
 	{
 		setAttribute(AttributeName.RELATIVETRAVEL, value, null);
 	}
@@ -391,9 +231,9 @@ public abstract class JDFAutoFold extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setTo(ETo enumVar)
+	public void setTo(final EnumTo enumVar)
 	{
-		setAttribute(AttributeName.TO, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.TO, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -401,35 +241,6 @@ public abstract class JDFAutoFold extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ETo getETo()
-	{
-		return ETo.getEnum(getAttribute(AttributeName.TO, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute To
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute To
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetTo(ETo) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setTo(EnumTo enumVar)
-	{
-		setAttribute(AttributeName.TO, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute To
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ETo GetETo() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumTo getTo()
 	{
 		return EnumTo.getEnum(getAttribute(AttributeName.TO, null, null));
@@ -445,7 +256,7 @@ public abstract class JDFAutoFold extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTravel(double value)
+	public void setTravel(final double value)
 	{
 		setAttribute(AttributeName.TRAVEL, value, null);
 	}

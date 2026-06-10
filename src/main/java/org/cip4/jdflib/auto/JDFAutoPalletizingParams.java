@@ -129,7 +129,7 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPalletizingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPalletizingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -141,7 +141,7 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPalletizingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPalletizingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -154,7 +154,7 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPalletizingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPalletizingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -165,7 +165,7 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -195,7 +195,7 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLayerAmount(JDFIntegerList value)
+	public void setLayerAmount(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.LAYERAMOUNT, value, null);
 	}
@@ -208,8 +208,8 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	 */
 	public JDFIntegerList getLayerAmount()
 	{
-		String strAttrName = getAttribute(AttributeName.LAYERAMOUNT, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.LAYERAMOUNT, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -223,7 +223,7 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaxHeight(double value)
+	public void setMaxHeight(final double value)
 	{
 		setAttribute(AttributeName.MAXHEIGHT, value, null);
 	}
@@ -248,7 +248,7 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaxWeight(double value)
+	public void setMaxWeight(final double value)
 	{
 		setAttribute(AttributeName.MAXWEIGHT, value, null);
 	}
@@ -273,7 +273,7 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOverhang(JDFXYPair value)
+	public void setOverhang(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.OVERHANG, value, null);
 	}
@@ -286,8 +286,8 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	 */
 	public JDFXYPair getOverhang()
 	{
-		String strAttrName = getAttribute(AttributeName.OVERHANG, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.OVERHANG, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -301,7 +301,7 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOverhangOffset(JDFXYPair value)
+	public void setOverhangOffset(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.OVERHANGOFFSET, value, null);
 	}
@@ -314,8 +314,8 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	 */
 	public JDFXYPair getOverhangOffset()
 	{
-		String strAttrName = getAttribute(AttributeName.OVERHANGOFFSET, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.OVERHANGOFFSET, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -329,7 +329,7 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPattern(String value)
+	public void setPattern(final String value)
 	{
 		setAttribute(AttributeName.PATTERN, value, null);
 	}
@@ -376,7 +376,7 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFBundle the element
 	 */
-	public JDFBundle getCreateBundle(int iSkip)
+	public JDFBundle getCreateBundle(final int iSkip)
 	{
 		return (JDFBundle) getCreateElement_JDFElement(ElementName.BUNDLE, null, iSkip);
 	}
@@ -388,7 +388,7 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	 * @return JDFBundle the element
 	 *         default is getBundle(0)
 	 */
-	public JDFBundle getBundle(int iSkip)
+	public JDFBundle getBundle(final int iSkip)
 	{
 		return (JDFBundle) getElement(ElementName.BUNDLE, null, iSkip);
 	}
@@ -418,7 +418,7 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refBundle(JDFBundle refTarget)
+	public void refBundle(final JDFBundle refTarget)
 	{
 		refElement(refTarget);
 	}

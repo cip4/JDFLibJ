@@ -81,7 +81,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFDateTimeRange;
 import org.cip4.jdflib.util.JDFDate;
 
@@ -94,36 +94,36 @@ public class JDFTimeSpan extends JDFSpanBase
 
 	/**
 	 * Constructor for JDFTimeSpan
-	 * @param myOwnerDocument 
-	 * 
+	 *
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFTimeSpan(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFTimeSpan(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFTimeSpan
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFTimeSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFTimeSpan(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFTimeSpan
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @param myLocalName 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
 	 */
-	public JDFTimeSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFTimeSpan(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -145,7 +145,7 @@ public class JDFTimeSpan extends JDFSpanBase
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -155,13 +155,11 @@ public class JDFTimeSpan extends JDFSpanBase
 	}
 
 	/**
-	 * 
-	 * 
 	 * @param value
 	 */
-	public void setActual(JDFDate value)
+	public void setActual(final JDFDate value)
 	{
-		setAttribute(AttributeName.ACTUAL, value == null ? null : value.getDateTimeISO(), JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.ACTUAL, value == null ? null : value.getDateTimeISO(), JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -173,13 +171,11 @@ public class JDFTimeSpan extends JDFSpanBase
 	}
 
 	/**
-	 * 
-	 *  
 	 * @param value
 	 */
-	public void setPreferred(JDFDate value)
+	public void setPreferred(final JDFDate value)
 	{
-		setAttribute(AttributeName.PREFERRED, value == null ? null : value.getDateTimeISO(), JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.PREFERRED, value == null ? null : value.getDateTimeISO(), JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -191,11 +187,9 @@ public class JDFTimeSpan extends JDFSpanBase
 	}
 
 	/**
-	 * 
-	 *  
 	 * @param value
 	 */
-	public void setRange(JDFDateTimeRange value)
+	public void setRange(final JDFDateTimeRange value)
 	{
 		setAttribute(AttributeName.RANGE, value == null ? null : value.toString());
 	}
@@ -209,13 +203,12 @@ public class JDFTimeSpan extends JDFSpanBase
 	}
 
 	/**
-	 * 
 	 * @see org.cip4.jdflib.core.KElement#init()
 	 */
 	@Override
 	public boolean init()
 	{
-		boolean b = super.init();
+		final boolean b = super.init();
 		setDataType(EnumDataType.TimeSpan);
 		return b;
 	}

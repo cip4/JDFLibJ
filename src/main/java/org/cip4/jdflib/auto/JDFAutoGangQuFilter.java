@@ -105,7 +105,7 @@ public abstract class JDFAutoGangQuFilter extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGangQuFilter(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoGangQuFilter(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -117,7 +117,7 @@ public abstract class JDFAutoGangQuFilter extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGangQuFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoGangQuFilter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -130,7 +130,7 @@ public abstract class JDFAutoGangQuFilter extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoGangQuFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoGangQuFilter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -151,7 +151,7 @@ public abstract class JDFAutoGangQuFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGangNames(VString value)
+	public void setGangNames(final VString value)
 	{
 		setAttribute(AttributeName.GANGNAMES, value, null);
 	}
@@ -163,8 +163,8 @@ public abstract class JDFAutoGangQuFilter extends JDFElement
 	 */
 	public VString getGangNames()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.GANGNAMES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.GANGNAMES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}

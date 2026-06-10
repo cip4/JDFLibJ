@@ -45,11 +45,10 @@ import java.util.Vector;
 
 import org.cip4.jdflib.auto.JDFAutoColor.EnumColorType;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
-import org.cip4.jdflib.auto.JDFAutoMedia.EMediaType;
-import org.cip4.jdflib.auto.JDFAutoMedia.EMediaUnit;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumISOPaperSubstrate;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
-import org.cip4.jdflib.auto.JDFAutoPart.ESide;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaUnit;
+import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.auto.JDFAutoVarnishingParams.EnumVarnishArea;
 import org.cip4.jdflib.auto.JDFAutoVarnishingParams.EnumVarnishMethod;
 import org.cip4.jdflib.core.AttributeName;
@@ -66,6 +65,7 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
@@ -99,7 +99,7 @@ class XJDFConvPrintExampleTest extends ExampleTest
 		super.setUp();
 	}
 
-	private ResourceHelper ensureSheetName(SetHelper sh, String sheetname)
+	private ResourceHelper ensureSheetName(final SetHelper sh, final String sheetname)
 	{
 		return sh.getCreatePartition(AttributeName.SHEETNAME, sheetname, true);
 	}
@@ -114,7 +114,7 @@ class XJDFConvPrintExampleTest extends ExampleTest
 		final XJDFHelper xjdfHelper = new XJDFHelper("ConventionalPrintingExample", null, null);
 		xjdfHelper.addType(EnumType.ConventionalPrinting);
 		final SetHelper cpp = xjdfHelper.getCreateSet(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
-		cpp.getCreateResource(0, true).setResourceAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Perfecting.getName());
+		cpp.getCreateResource(0, true).setResourceAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Perfecting.name());
 
 		final SetHelper inComp = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Input);
 		final SetHelper outComp = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Output);
@@ -135,10 +135,10 @@ class XJDFConvPrintExampleTest extends ExampleTest
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("ConventionalPrintingExample", null, null);
 		xjdfHelper.addType(EnumType.ConventionalPrinting);
-		final ICSVersion ics = new ICSVersion("MIS-CP", 1, XJDFHelper.getDefaultVersion());
+		final ICSVersion ics = new ICSVersion("MIS-CP", 1, BaseXJDFHelper.getDefaultVersion());
 		xjdfHelper.setICSVersions(ics, ics.getBase("MIS", 1));
 		final SetHelper cpp = xjdfHelper.getCreateSet(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
-		cpp.getCreateResource(0, true).setResourceAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Perfecting.getName());
+		cpp.getCreateResource(0, true).setResourceAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Perfecting.name());
 
 		final SetHelper inCompSet = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Input);
 		final ResourceHelper inCompRes = ensureSheetName(inCompSet, "S1");
@@ -147,7 +147,7 @@ class XJDFConvPrintExampleTest extends ExampleTest
 		final SetHelper plateMediaSet = xjdfHelper.appendSet(ElementName.MEDIA, null);
 		final ResourceHelper plateMediaRes = plateMediaSet.getCreateResource();
 		final JDFMedia plateMedia = (JDFMedia) plateMediaRes.getResource();
-		plateMedia.setMediaType(EMediaType.Plate);
+		plateMedia.setMediaType(EnumMediaType.Plate);
 		plateMedia.setDimensionCM(102, 88);
 
 		final SetHelper ccSet = xjdfHelper.getCreateSet(ElementName.COLORANTCONTROL, EnumUsage.Input);
@@ -156,7 +156,7 @@ class XJDFConvPrintExampleTest extends ExampleTest
 		for (final String c : JDFColor.getCMYKSeparations())
 		{
 			map.put(AttributeName.SEPARATION, c);
-			for (final ESide s : ESide.values())
+			for (final EnumSide s : EnumSide.values())
 			{
 				map.put(AttributeName.SIDE, s);
 				final JDFExposedMedia xm = (JDFExposedMedia) plateSet.getCreateExactPartition(map, true).getResource();
@@ -175,7 +175,7 @@ class XJDFConvPrintExampleTest extends ExampleTest
 		mediaRes.setResourceEnum(AttributeName.MEDIATYPE, EnumMediaType.Paper);
 		final JDFMedia media = (JDFMedia) mediaRes.getResource();
 		media.setDimensionCM(100, 60);
-		media.setMediaUnit(EMediaUnit.Sheet);
+		media.setMediaUnit(EnumMediaUnit.Sheet);
 		xjdfHelper.cleanUp();
 
 		writeTest(xjdfHelper, "processes/ConventionalPrintingICS1.xjdf");
@@ -207,7 +207,7 @@ class XJDFConvPrintExampleTest extends ExampleTest
 		xjdfHelper.setTypes(new VString("ConventionalPrinting Varnishing"));
 
 		final SetHelper cp = xjdfHelper.getCreateSet(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
-		cp.getCreatePartition(null, true).getResource().setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Simplex.getName());
+		cp.getCreatePartition(null, true).getResource().setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Simplex.name());
 
 		final SetHelper pm = xjdfHelper.getCreateSet(ElementName.MEDIA, null);
 		final SetHelper pmPaper = xjdfHelper.appendSet(ElementName.MEDIA, null);
@@ -316,7 +316,7 @@ class XJDFConvPrintExampleTest extends ExampleTest
 		xjdfHelper.setTypes(new VString("ConventionalPrinting Varnishing"));
 
 		final SetHelper cp = xjdfHelper.getCreateSet(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
-		cp.getCreatePartition(null, true).getResource().setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Simplex.getName());
+		cp.getCreatePartition(null, true).getResource().setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Simplex.name());
 
 		final SetHelper pm = xjdfHelper.getCreateSet(ElementName.MEDIA, null);
 		final SetHelper pmPaper = xjdfHelper.appendSet(ElementName.MEDIA, null);

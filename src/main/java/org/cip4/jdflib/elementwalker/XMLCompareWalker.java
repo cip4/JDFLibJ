@@ -53,7 +53,6 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
  *         walker that removes generated attributes for better comparison
  */
 public class XMLCompareWalker extends BaseElementWalker
@@ -92,7 +91,7 @@ public class XMLCompareWalker extends BaseElementWalker
 
 	public static XMLCompareWalker getStandardWalker(final KElement e1, final KElement e2)
 	{
-		XMLCompareWalker xmlCompareWalker = new XMLCompareWalker(e1, e2);
+		final XMLCompareWalker xmlCompareWalker = new XMLCompareWalker(e1, e2);
 		xmlCompareWalker.setStandard();
 		return xmlCompareWalker;
 	}
@@ -124,7 +123,6 @@ public class XMLCompareWalker extends BaseElementWalker
 	 * the link and ref walker
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkAll extends BaseWalker
 	{
@@ -164,7 +162,8 @@ public class XMLCompareWalker extends BaseElementWalker
 		{
 			if (wantKey(key))
 			{
-				final boolean ok = wantValue(key) ? StringUtil.equals(attribute, attribute2, precision) : StringUtil.isEmpty(attribute) == StringUtil.isEmpty(attribute2);
+				final boolean ok = wantValue(key) ? StringUtil.equals(attribute, attribute2, precision)
+						: StringUtil.isEmpty(attribute) == StringUtil.isEmpty(attribute2);
 				if (!ok)
 				{
 					return first ? new MyPair<>(attribute, attribute2) : new MyPair<>(attribute2, attribute);
@@ -204,7 +203,6 @@ public class XMLCompareWalker extends BaseElementWalker
 	}
 
 	/**
-	 *
 	 * @param keys
 	 * @param valueOnly
 	 */
@@ -213,12 +211,13 @@ public class XMLCompareWalker extends BaseElementWalker
 		if (keys != null)
 		{
 			for (final String key : keys)
+			{
 				addIgnore(key, valueOnly);
+			}
 		}
 	}
 
 	/**
-	 *
 	 * @param key
 	 * @param valueOnly
 	 */
@@ -227,9 +226,13 @@ public class XMLCompareWalker extends BaseElementWalker
 		if (!StringUtil.isEmpty(key))
 		{
 			if (valueOnly)
+			{
 				ignoreValue.add(key);
+			}
 			else
+			{
 				ignore.add(key);
+			}
 		}
 	}
 

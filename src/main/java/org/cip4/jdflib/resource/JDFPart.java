@@ -63,7 +63,6 @@ import org.w3c.dom.Node;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         22.01.2009
  */
 public class JDFPart extends JDFAutoPart
@@ -137,7 +136,9 @@ public class JDFPart extends JDFAutoPart
 				final Node a = nm.item(i);
 				final String nodeName = a.getNodeName();
 				if (allparts.contains(nodeName))
+				{
 					m.put(nodeName, a.getNodeValue());
+				}
 			}
 		}
 		return m;
@@ -154,8 +155,8 @@ public class JDFPart extends JDFAutoPart
 		return guessPartIDKeys(map);
 	}
 
-	private final static String[] partSequence = new String[] { AttributeName.SIGNATURENAME, AttributeName.SHEETNAME, AttributeName.SIDE, AttributeName.SEPARATION,
-			AttributeName.RUNSET, AttributeName.RUN, AttributeName.RUNPAGE };
+	private final static String[] partSequence = new String[] { AttributeName.SIGNATURENAME, AttributeName.SHEETNAME, AttributeName.SIDE,
+			AttributeName.SEPARATION, AttributeName.RUNSET, AttributeName.RUN, AttributeName.RUNPAGE };
 
 	public static String[] getPartsequence()
 	{
@@ -201,9 +202,9 @@ public class JDFPart extends JDFAutoPart
 	/**
 	 * check whether the partition values match partversions match if either only one token is specified, and the large list contains that token or vice versa
 	 *
-	 * @param key the partition key
+	 * @param key           the partition key
 	 * @param resourceValue the value of key in the resource
-	 * @param linkValue the value of key in the part element or ref
+	 * @param linkValue     the value of key in the part element or ref
 	 * @return boolean: true if linkValue matches the value or list in resourceValue
 	 * @deprecated use 4 parameter version
 	 */
@@ -216,16 +217,18 @@ public class JDFPart extends JDFAutoPart
 	/**
 	 * check whether the partition values match partversions match if either only one token is specified, and the large list contains that token or vice versa
 	 *
-	 * @param key the partition key
-	 * @param resourceValue the value of key in the resource
-	 * @param linkValues the value of key in the part element or ref
+	 * @param key               the partition key
+	 * @param resourceValue     the value of key in the resource
+	 * @param linkValues        the value of key in the part element or ref
 	 * @param strictPartVersion if true, partversion strings MUST match exactly, else token matching applies
 	 * @return boolean: true if linkValue matches the value or list in resourceValue
 	 */
 	public static boolean matchesPart(final String key, final String resourceValue, final VString linkValues, final boolean strictPartVersion)
 	{
 		if (linkValues == null || linkValues.size() == 0)
+		{
 			return true;
+		}
 		for (final String linkValue : linkValues)
 		{
 			if (matchesPart(key, resourceValue, linkValue, strictPartVersion))
@@ -239,9 +242,9 @@ public class JDFPart extends JDFAutoPart
 	/**
 	 * check whether the partition values match partversions match if either only one token is specified, and the large list contains that token or vice versa
 	 *
-	 * @param key the partition key
-	 * @param resourceValue the value of key in the resource
-	 * @param linkValue the value of key in the part element or ref
+	 * @param key               the partition key
+	 * @param resourceValue     the value of key in the resource
+	 * @param linkValue         the value of key in the part element or ref
 	 * @param strictPartVersion if true, partversion strings MUST match exactly, else token matching applies
 	 * @return boolean: true if linkValue matches the value or list in resourceValue
 	 */
@@ -279,7 +282,9 @@ public class JDFPart extends JDFAutoPart
 	public static boolean matchesPartVersion(final String resourceValue, final String linkValue)
 	{
 		if (resourceValue == null || linkValue == null)
+		{
 			return false;
+		}
 
 		boolean b;
 		b = resourceValue.equals(linkValue) || KElement.isWildCard(resourceValue) || KElement.isWildCard(linkValue) || ALL.equalsIgnoreCase(linkValue)
@@ -305,7 +310,7 @@ public class JDFPart extends JDFAutoPart
 	 * similar to JDFAttribute.overlapMap, but uses matchesPart instead of equals for the comparison
 	 *
 	 * @param resourceMap the map to compare
-	 * @param linkMap the map to compare
+	 * @param linkMap     the map to compare
 	 * @return boolean: true if identical keys have the same values in both maps
 	 * @deprecated use 3 parameter version
 	 */
@@ -319,8 +324,8 @@ public class JDFPart extends JDFAutoPart
 	 * overlapMap - identical keys must have the same values in both maps<br>
 	 * similar to JDFAttribute.overlapMap, but uses matchesPart instead of equals for the comparison
 	 *
-	 * @param resourceMap the map to compare
-	 * @param linkMap the map to compare
+	 * @param resourceMap       the map to compare
+	 * @param linkMap           the map to compare
 	 * @param strictPartVersion if true, partversion strings MUST match exactly, else token matching applies
 	 * @return boolean: true if identical keys have the same values in both maps
 	 */
@@ -351,8 +356,8 @@ public class JDFPart extends JDFAutoPart
 	 * overlapMap - identical keys must have the same values in both maps<br>
 	 * similar to JDFAttribute.overlapMap, but uses matchesPart instead of equals for the comparison
 	 *
-	 * @param resourceMap the map to compare
-	 * @param linkMap the map to compare
+	 * @param resourceMap       the map to compare
+	 * @param linkMap           the map to compare
 	 * @param strictPartVersion if true, partversion strings MUST match exactly, else token matching applies
 	 * @return boolean: true if identical keys have the same values in both maps and all keys specified in linkMap exist in resourceMap
 	 */
@@ -367,7 +372,9 @@ public class JDFPart extends JDFAutoPart
 			return resourceMap.isEmpty();
 		}
 		if (resourceMap.size() < linkMap.size())
+		{
 			return false;
+		}
 		final Set<String> subMapKeys = linkMap.keySet();
 		for (final String key : subMapKeys)
 		{
@@ -392,8 +399,8 @@ public class JDFPart extends JDFAutoPart
 	 * overlapMap - identical keys must have the same values in both maps<br>
 	 * similar to JDFAttribute.overlapMap, but uses matchesPart instead of equals for the comparison
 	 *
-	 * @param resourceMap the map to compare
-	 * @param vLinkMap the vector of maps to compare
+	 * @param resourceMap       the map to compare
+	 * @param vLinkMap          the vector of maps to compare
 	 * @param strictPartVersion if true, partversion strings MUST match exactly, else token matching applies
 	 * @return boolean: true if identical keys have the same values in both maps
 	 */
@@ -422,7 +429,9 @@ public class JDFPart extends JDFAutoPart
 	{
 		AttributeInfo ai = AttributeInfo.fixedMap.get("JDFPart");
 		if (ai != null)
+		{
 			return ai;
+		}
 		ai = super.getTheAttributeInfo();
 		ai.updateReplace(atrInfoTable);
 		AttributeInfo.fixedMap.put("JDFPart", ai);
@@ -452,7 +461,9 @@ public class JDFPart extends JDFAutoPart
 	{
 		ElementInfo ai = ElementInfo.getFixedmap().get(ElementName.PART);
 		if (ai != null)
+		{
 			return ai;
+		}
 		ai = super.getTheElementInfo();
 		ElementInfo.getFixedmap().put(ElementName.PART, ai);
 		return ai;
@@ -461,11 +472,11 @@ public class JDFPart extends JDFAutoPart
 	static Set<String> fillFastParts()
 	{
 		final HashSet<String> hashSet = new HashSet<>();
-		for (final EnumPartIDKey e : EnumPartIDKey.getEnumList())
+		for (final EnumPartIDKey e : Arrays.asList(EnumPartIDKey.values()))
 		{
-			final String key = e.getName();
-			if (!(AttributeName.ITEMNAMES.equals(key) || key.endsWith("Tags") || AttributeName.PAGENUMBER.equals(key) || key.endsWith("Index") || AttributeName.LAYERIDS.equals(key)
-					|| AttributeName.DOCCOPIES.equals(key)))
+			final String key = e.name();
+			if (!(AttributeName.ITEMNAMES.equals(key) || key.endsWith("Tags") || AttributeName.PAGENUMBER.equals(key) || key.endsWith("Index")
+					|| AttributeName.LAYERIDS.equals(key) || AttributeName.DOCCOPIES.equals(key)))
 			{
 				hashSet.add(key);
 			}
@@ -477,9 +488,9 @@ public class JDFPart extends JDFAutoPart
 	static Set<String> fillAllParts()
 	{
 		final HashSet<String> hashSet = new HashSet<>();
-		for (final EnumPartIDKey e : EnumPartIDKey.getEnumList())
+		for (final EnumPartIDKey e : Arrays.asList(EnumPartIDKey.values()))
 		{
-			final String key = e.getName();
+			final String key = e.name();
 			hashSet.add(key);
 		}
 
@@ -489,13 +500,15 @@ public class JDFPart extends JDFAutoPart
 	/**
 	 * (36) set attribute Metadata0-9 convenience method
 	 *
-	 * @param value the value to set MetaData(i) to -
+	 * @param value     the value to set MetaData(i) to -
 	 * @param iMetaData int from 0 to 10 that defines which metadata partition key is wanted
 	 */
 	public void setMetadata(final int iMetaData, final String value)
 	{
 		if (iMetaData < 0 || iMetaData > 9)
+		{
 			throw new IllegalArgumentException("iMetaData mut be between 0 and 9");
+		}
 		setAttribute(AttributeName.METADATA + iMetaData, value, null);
 	}
 

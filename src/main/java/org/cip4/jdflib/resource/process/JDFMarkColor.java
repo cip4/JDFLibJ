@@ -41,7 +41,6 @@ import org.cip4.jdflib.auto.JDFAutoMarkColor;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         23.01.2009
  */
 public class JDFMarkColor extends JDFAutoMarkColor
@@ -61,10 +60,9 @@ public class JDFMarkColor extends JDFAutoMarkColor
 
 	/**
 	 * Constructor for JDFColor
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
-	 *
 	 * @param qualifiedName
 	 */
 	public JDFMarkColor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
@@ -74,7 +72,7 @@ public class JDFMarkColor extends JDFAutoMarkColor
 
 	/**
 	 * Constructor for JDFColor
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName

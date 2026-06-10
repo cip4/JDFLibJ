@@ -89,43 +89,43 @@ public class JDFEmployeeDef extends JDFAutoEmployeeDef
 
 	/**
 	 * Constructor for JDFEmployeeDef
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFEmployeeDef(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFEmployeeDef(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFEmployeeDef
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFEmployeeDef(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFEmployeeDef(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFEmployeeDef
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFEmployeeDef(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFEmployeeDef(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * toString()
-	 * 
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoEmployeeDef#toString()
 	 */
 	@Override

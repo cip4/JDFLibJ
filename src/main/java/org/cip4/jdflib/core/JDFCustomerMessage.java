@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,8 +82,7 @@ import org.cip4.jdflib.auto.JDFAutoCustomerMessage;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * before August 20, 2009
+ *         before August 20, 2009
  */
 public class JDFCustomerMessage extends JDFAutoCustomerMessage
 {
@@ -91,7 +90,7 @@ public class JDFCustomerMessage extends JDFAutoCustomerMessage
 
 	/**
 	 * Constructor for JDFCustomerMessage
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -102,7 +101,7 @@ public class JDFCustomerMessage extends JDFAutoCustomerMessage
 
 	/**
 	 * Constructor for JDFCustomerMessage
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -114,7 +113,7 @@ public class JDFCustomerMessage extends JDFAutoCustomerMessage
 
 	/**
 	 * Constructor for JDFCustomerMessage
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -127,7 +126,7 @@ public class JDFCustomerMessage extends JDFAutoCustomerMessage
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return StringJDFAutoCustomerMessage
 	 */
 	@Override

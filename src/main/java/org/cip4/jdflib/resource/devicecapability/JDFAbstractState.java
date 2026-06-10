@@ -80,13 +80,10 @@
 
 package org.cip4.jdflib.resource.devicecapability;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import java.util.zip.DataFormatException;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest;
 import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
 import org.cip4.jdflib.auto.JDFAutoDevCaps.EnumContext;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -96,6 +93,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
@@ -113,12 +111,12 @@ import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.span.JDFSpanBase;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.Node;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         befoer June 7, 2009
  */
 public abstract class JDFAbstractState extends JDFElement implements JDFBaseDataTypes, ICapabilityElement
@@ -128,15 +126,16 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[16];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AVAILABILITY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumAvailability.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AVAILABILITY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(JDFDeviceCap.EnumAvailability.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ACTIONREFS, 0x33333311, AttributeInfo.EnumAttributeType.IDREFS, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEPENDENTMACROREF, 0x33333311, AttributeInfo.EnumAttributeType.IDREF, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.DEVNS, 0x33333331, AttributeInfo.EnumAttributeType.URI, null, JDFConstants.JDFNAMESPACE);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.EDITABLE, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, JDFConstants.TRUE);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.HASDEFAULT, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, JDFConstants.TRUE);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.EDITABLE, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, JDFCoreConstants.TRUE);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.HASDEFAULT, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, JDFCoreConstants.TRUE);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.ID, 0x33333311, AttributeInfo.EnumAttributeType.ID, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.LISTTYPE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumListType.getEnum(0),
-				EnumListType.SingleValue.getName());
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.LISTTYPE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(JDFAutoBasicPreflightTest.EnumListType.class, 0), EnumListType.SingleValue.name());
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.MACROREFS, 0x33333311, AttributeInfo.EnumAttributeType.IDREFS, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.MAXOCCURS, 0x33333311, AttributeInfo.EnumAttributeType.unbounded, null, "1");
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.MINOCCURS, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "1");
@@ -144,8 +143,8 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.NAME, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[13] = new AtrInfoTable(AttributeName.REQUIRED, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[14] = new AtrInfoTable(AttributeName.SPAN, 0x44444431, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[15] = new AtrInfoTable(AttributeName.USERDISPLAY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumUserDisplay.getEnum(0),
-				EnumUserDisplay.Display.getName());
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.USERDISPLAY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(JDFAbstractState.EnumUserDisplay.class, 0), EnumUserDisplay.Display.name());
 	}
 
 	@Override
@@ -204,19 +203,11 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
-	 *
 	 *         June 7, 2009
 	 */
-	@SuppressWarnings("unchecked")
-	public static class EnumUserDisplay extends ValuedEnum
+	public enum EnumUserDisplay
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		private EnumUserDisplay(final String name)
-		{
-			super(name, m_startValue++);
-		}
+		Display, Hide, Dependent;
 
 		/**
 		 * @param enumName
@@ -224,7 +215,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 		 */
 		public static EnumUserDisplay getEnum(final String enumName)
 		{
-			return (EnumUserDisplay) getEnum(EnumUserDisplay.class, enumName);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumUserDisplay.class, enumName, null);
 		}
 
 		/**
@@ -233,53 +224,21 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 		 */
 		public static EnumUserDisplay getEnum(final int enumValue)
 		{
-			return (EnumUserDisplay) getEnum(EnumUserDisplay.class, enumValue);
+			final EnumUserDisplay[] values = values();
+			return enumValue >= 0 && enumValue < values.length ? values[enumValue] : null;
 		}
 
-		/**
-		 * @return
-		 */
-		public static Map getEnumMap()
+		public String getName()
 		{
-			return getEnumMap(EnumUserDisplay.class);
+			return name();
 		}
-
-		/**
-		 * @return
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumUserDisplay.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumUserDisplay.class);
-		}
-
-		/**
-		 *
-		 */
-		public static final EnumUserDisplay Display = new EnumUserDisplay("Display");
-		/**
-		 *
-		 */
-		public static final EnumUserDisplay Hide = new EnumUserDisplay("Hide");
-		/**
-		 *
-		 */
-		public static final EnumUserDisplay Dependent = new EnumUserDisplay("Dependent");
 
 	}
 
 	/**
-	 *
 	 * add a value to the list of values defined by testlists
 	 *
-	 * @param value value to test
+	 * @param value     value to test
 	 * @param testlists switches between Allowed test lists and Present test lists. Has two values: Allowed and Present.
 	 */
 	public abstract void addValue(String value, EnumFitsValue testlists);
@@ -287,7 +246,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	/**
 	 * Tests whether the defined value matches the Allowed test lists or the Present test lists specified for this state
 	 *
-	 * @param value value to test
+	 * @param value     value to test
 	 * @param testlists switches between Allowed test lists and Present test lists. Has two values: Allowed and Present.
 	 * @return boolean - true, if the value matches the test lists or if Allowed testlists are not specified
 	 */
@@ -356,7 +315,6 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 * default getNamePath(false)
 	 *
 	 * @param bRecurse if true returns " <code>DevCapsName/SubelemName1/SubelemName2/../@StateName</code> "
-	 *
 	 * @return String - NamePath of this State
 	 */
 	public final VString getNamePathVector(final boolean bRecurse)
@@ -449,7 +407,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 */
 	public JDFDevCap getParentDevCap()
 	{
-		Node parentNode = getParentNode();
+		final Node parentNode = getParentNode();
 		return (parentNode instanceof JDFDevCap) ? (JDFDevCap) parentNode : null;
 	}
 
@@ -535,7 +493,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 */
 	public int getMinOccurs()
 	{
-		return getIntAttribute(AttributeName.MINOCCURS, JDFConstants.EMPTYSTRING, 1);
+		return getIntAttribute(AttributeName.MINOCCURS, JDFCoreConstants.EMPTYSTRING, 1);
 	}
 
 	/**
@@ -557,7 +515,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 */
 	public String getName()
 	{
-		return getAttribute(AttributeName.NAME, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.NAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -577,7 +535,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 */
 	public boolean getRequired()
 	{
-		return getBoolAttribute(AttributeName.REQUIRED, JDFConstants.EMPTYSTRING, false);
+		return getBoolAttribute(AttributeName.REQUIRED, JDFCoreConstants.EMPTYSTRING, false);
 	}
 
 	/**
@@ -597,7 +555,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 */
 	public EnumListType getListType()
 	{
-		return EnumListType.getEnum(getAttribute(AttributeName.LISTTYPE, null, EnumListType.SingleValue.getName()));
+		return EnumListType.getEnum(getAttribute(AttributeName.LISTTYPE, null, EnumListType.SingleValue.name()));
 	}
 
 	/**
@@ -617,8 +575,8 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 */
 	public VString getActionRefs()
 	{
-		final String strActionRefs = getAttribute(AttributeName.ACTIONREFS, null, JDFConstants.EMPTYSTRING);
-		return StringUtil.tokenize(strActionRefs, JDFConstants.COMMA, false);
+		final String strActionRefs = getAttribute(AttributeName.ACTIONREFS, null, JDFCoreConstants.EMPTYSTRING);
+		return StringUtil.tokenize(strActionRefs, JDFCoreConstants.COMMA, false);
 	}
 
 	/**
@@ -638,7 +596,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 */
 	public boolean getEditable()
 	{
-		return getBoolAttribute(AttributeName.EDITABLE, JDFConstants.EMPTYSTRING, true);
+		return getBoolAttribute(AttributeName.EDITABLE, JDFCoreConstants.EMPTYSTRING, true);
 	}
 
 	/**
@@ -663,8 +621,8 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 */
 	public VString getMacroRefs()
 	{
-		final String strMacroRef = getAttribute(AttributeName.MACROREFS, null, JDFConstants.EMPTYSTRING);
-		return StringUtil.tokenize(strMacroRef, JDFConstants.COMMA, false);
+		final String strMacroRef = getAttribute(AttributeName.MACROREFS, null, JDFCoreConstants.EMPTYSTRING);
+		return StringUtil.tokenize(strMacroRef, JDFCoreConstants.COMMA, false);
 	}
 
 	/**
@@ -684,7 +642,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 */
 	public String getDependentMacroRef()
 	{
-		return getAttribute(AttributeName.DEPENDENTMACROREF, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.DEPENDENTMACROREF, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -694,7 +652,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 */
 	public void setUserDisplay(final EnumUserDisplay value)
 	{
-		setAttribute(AttributeName.USERDISPLAY, value, null);
+		setAttribute(AttributeName.USERDISPLAY, JavaEnumUtil.getName(value));
 	}
 
 	/**
@@ -704,7 +662,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 */
 	public EnumUserDisplay getUserDisplay()
 	{
-		return EnumUserDisplay.getEnum(getAttribute(AttributeName.USERDISPLAY, null, EnumUserDisplay.Display.getName()));
+		return EnumUserDisplay.getEnum(getAttribute(AttributeName.USERDISPLAY, null, EnumUserDisplay.Display.name()));
 	}
 
 	/*
@@ -721,7 +679,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 */
 	public JDFLoc getCreateLoc(final int iSkip)
 	{
-		return (JDFLoc) getCreateElement(ElementName.LOC, JDFConstants.EMPTYSTRING, iSkip);
+		return (JDFLoc) getCreateElement(ElementName.LOC, JDFCoreConstants.EMPTYSTRING, iSkip);
 	}
 
 	/**
@@ -734,7 +692,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 */
 	public JDFLoc getLoc(final int iSkip)
 	{
-		final JDFLoc e = (JDFLoc) getElement(ElementName.LOC, JDFConstants.EMPTYSTRING, iSkip);
+		final JDFLoc e = (JDFLoc) getElement(ElementName.LOC, JDFCoreConstants.EMPTYSTRING, iSkip);
 		return e;
 	}
 
@@ -807,7 +765,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	/**
 	 * fitsLength - tests, if the defined String <code>str</code> matches AllowedLength or the PresentLength, specified for this State
 	 *
-	 * @param str string to test
+	 * @param str    string to test
 	 * @param length switches between AllowedLength and PresentLength.
 	 * @return boolean - true, if 'str' matches Length or if AllowedLength is not specified
 	 */
@@ -878,7 +836,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 			// or
 			// range
 			{
-				final String lt = getListType().getName();
+				final String lt = getListType().name();
 				if (!lt.endsWith("List") && def.indexOf(" ") >= 0)
 				{
 					def = StringUtil.token(def, 0, " ");
@@ -969,7 +927,6 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 * fitsListType - tests, if the defined <code>value</code> matches value of ListType attribute, specified for this State
 	 *
 	 * @param value value to test
-	 *
 	 * @return boolean - true, if 'value' matches specified ListType
 	 */
 	protected final boolean fitsListType(final String value)
@@ -1129,7 +1086,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	/**
 	 * fitsRegExp - checks whether <code>str</code> matches the AllowedRegExp/PresentRegExp specified for this State
 	 *
-	 * @param str string to test
+	 * @param str    string to test
 	 * @param regexp switches between AllowedRegExp and PresentRegExp.
 	 * @return boolean - true, if <code>str</code> matches the RegExp or if AllowedRegExp is not specified
 	 */
@@ -1206,9 +1163,8 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * get the DEvCapPool that contains devcap elements referenced by this
-	 * 
-	 * @param poolName
 	 *
+	 * @param poolName
 	 * @return KElement the pool
 	 */
 	private KElement getParentPool(final String poolName)
@@ -1219,9 +1175,8 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * get the DEvCapPool that contains devcap elements referenced by this
-	 * 
-	 * @param poolName
 	 *
+	 * @param poolName
 	 * @return KElement the pool
 	 */
 	private KElement getCreateParentPool(final String poolName)
@@ -1231,7 +1186,6 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	private KElement getPoolParent()

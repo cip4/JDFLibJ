@@ -56,6 +56,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFNodeInfo;
@@ -71,13 +72,10 @@ import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
  * Description: This class represents an JDFAncestorPool
  *
  * @author Torsten Kaehlert
- *
  * @version 1.0 2002-01-28
- *
  */
 public class JDFAncestorPool extends JDFAutoAncestorPool
 {
@@ -122,9 +120,9 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 	/**
 	 * searches for the first attribute occurence in the ancestor elements
 	 *
-	 * @param attrib the attribute name
+	 * @param attrib       the attribute name
 	 * @param nameSpaceURI the XML-namespace
-	 * @param def the default if it does not exist
+	 * @param def          the default if it does not exist
 	 * @since 180502
 	 * @return value of attribute found, value of def if not available
 	 */
@@ -138,7 +136,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 			final JDFAncestor ancestor = (JDFAncestor) v.elementAt(i);
 			if (ancestor.hasAttribute(attrib, nameSpaceURI, false))
 			{
-				return ancestor.getAttribute(attrib, nameSpaceURI, JDFConstants.EMPTYSTRING);
+				return ancestor.getAttribute(attrib, nameSpaceURI, JDFCoreConstants.EMPTYSTRING);
 			}
 		}
 		// not found, return the default
@@ -147,7 +145,6 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 
 	/**
 	 * @deprecated
-	 *
 	 * @param element
 	 * @param nameSpaceURI
 	 * @return an element
@@ -161,9 +158,9 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 	/**
 	 * searches for the first element occurence in the ancestor elements
 	 *
-	 * @param element the element name
+	 * @param element      the element name
 	 * @param nameSpaceURI the XML-namespace of the element
-	 * @param xPath the xpath of a required attribute
+	 * @param xPath        the xpath of a required attribute
 	 * @since 290502
 	 * @return value of attribute found, empty string if not available
 	 */
@@ -177,7 +174,9 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 			final JDFAncestor ancestor = (JDFAncestor) v.elementAt(i);
 			final KElement e = ancestor.getElement(element, nameSpaceURI, 0);
 			if ((e != null) && (bWildCard || e.hasXPathNode(xPath)))
+			{
 				return e;
+			}
 		}
 		// not found, return an empty element
 		return null;
@@ -188,7 +187,6 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 	 *
 	 * @param idUsage
 	 * @param iPos
-	 *
 	 * @return String the attribute value
 	 */
 	@Override
@@ -201,7 +199,9 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 			final JDFAncestor ancestor = (JDFAncestor) v.elementAt(i);
 			final String s = ancestor.getGeneralID(idUsage, iPos);
 			if (!StringUtil.isEmpty(s))
+			{
 				return s;
+			}
 		}
 		// not found, return an empty element
 		return null;
@@ -210,7 +210,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 	/**
 	 * true id a non default occurence in the ancestor elements exists
 	 *
-	 * @param attrib the attribute name
+	 * @param attrib       the attribute name
 	 * @param nameSpaceURI the XML-namespace
 	 * @since 180502
 	 * @return value of attribute found, empty string if not available
@@ -223,11 +223,9 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 	/**
 	 * Get the linked resources matching some conditions
 	 *
-	 * @param mResAtt map of Resource attributes to search for
+	 * @param mResAtt     map of Resource attributes to search for
 	 * @param bFollowRefs true if internal references shall be followed
-	 *
 	 * @return vResource: vector with all elements matching the conditions
-	 *
 	 *         default: GetLinkedResources(new JDFAttributeMap(), false)
 	 */
 	public VElement getLinkedResources(final JDFAttributeMap mResAtt, final boolean bFollowRefs)
@@ -257,10 +255,10 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 	/**
 	 * Copy all data from parentNode into the ancestor elements of this
 	 *
-	 * @param parentNode the closest parent Node that contains the information to be copied
-	 * @param bCopyNodeInfo if true, also copy the NodeInfo into the ancestor
+	 * @param parentNode        the closest parent Node that contains the information to be copied
+	 * @param bCopyNodeInfo     if true, also copy the NodeInfo into the ancestor
 	 * @param bCopyCustomerInfo if true, also copy the CustomerInfo into the ancestor
-	 * @param bCopyComments if true, also copy the comments and generalID elements into the ancestor
+	 * @param bCopyComments     if true, also copy the comments and generalID elements into the ancestor
 	 * @default copyNodeData(parentNode, false, false, false);
 	 */
 	public void copyNodeData(final JDFNode parentNode, final boolean bCopyNodeInfo, final boolean bCopyCustomerInfo, final boolean bCopyComments)
@@ -389,7 +387,6 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 	 *
 	 * @param mAttrib the attribute to search for
 	 * @return VElement: a vector with all elements in the pool matching the conditions
-	 *
 	 *         default: GetPoolChildren(null)
 	 */
 	public VElement getPoolChildren(final JDFAttributeMap mAttrib)
@@ -400,15 +397,14 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 	/**
 	 * get a child from the pool matching the parameters
 	 *
-	 * @param i the index of the child or -1 to make a new one.
+	 * @param i       the index of the child or -1 to make a new one.
 	 * @param mAttrib an attribute to search for
 	 * @return JDFAncestor: the pool child matching the above conditions
-	 *
 	 *         default: GetPoolChild(i, null)
 	 */
 	public JDFAncestor getPoolChild(final int i, final JDFAttributeMap mAttrib)
 	{
-		return (JDFAncestor) getPoolChildGeneric(i, ElementName.ANCESTOR, mAttrib, JDFConstants.EMPTYSTRING);
+		return (JDFAncestor) getPoolChildGeneric(i, ElementName.ANCESTOR, mAttrib, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -481,7 +477,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 	/**
 	 * check whether a defined attribute exists in the ancestor elements
 	 *
-	 * @param attrib the attribute name to look for
+	 * @param attrib       the attribute name to look for
 	 * @param nameSpaceURI the XML-namespace to search in
 	 * @since 180502
 	 * @return value of attribute found, empty string if not available
@@ -495,10 +491,10 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 	 * searches for the first attribute occurence in the ancestor elements subelements<br>
 	 * e.g. the JobPriority in NodeInfo
 	 *
-	 * @param element node name to look in
-	 * @param attrib the attribute name
+	 * @param element      node name to look in
+	 * @param attrib       the attribute name
 	 * @param nameSpaceURI the XML-namespace
-	 * @param def the default if it does not exist
+	 * @param def          the default if it does not exist
 	 * @since 200503
 	 * @return value of attribute found, empty string if not available
 	 */
@@ -513,7 +509,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 			final KElement e = ancestor.getElement(element, nameSpaceURI, 0);
 			if ((e != null) && (e.hasAttribute(attrib, nameSpaceURI, false)))
 			{
-				return e.getAttribute(attrib, nameSpaceURI, JDFConstants.EMPTYSTRING);
+				return e.getAttribute(attrib, nameSpaceURI, JDFCoreConstants.EMPTYSTRING);
 			}
 		}
 		return def;

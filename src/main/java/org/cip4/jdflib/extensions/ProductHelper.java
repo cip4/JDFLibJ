@@ -44,6 +44,7 @@ import java.util.Vector;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
@@ -66,7 +67,7 @@ public class ProductHelper extends BaseXJDFHelper
 
 		public static eProductType getEnum(final String val)
 		{
-			final String val2 = StringUtil.replaceString(val, JDFConstants.BLANK, null);
+			final String val2 = StringUtil.replaceString(val, JDFCoreConstants.BLANK, null);
 			return EnumUtil.getJavaEnumIgnoreCase(eProductType.class, val2);
 		}
 	}

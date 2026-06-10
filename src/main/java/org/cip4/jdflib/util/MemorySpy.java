@@ -110,7 +110,6 @@ public class MemorySpy
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public Map<String, Long> getSizeMap()
@@ -130,7 +129,6 @@ public class MemorySpy
 	}
 
 	/**
-	 *
 	 * @param scope
 	 * @return
 	 */
@@ -141,7 +139,6 @@ public class MemorySpy
 	}
 
 	/**
-	 *
 	 * @param scope
 	 * @return
 	 */
@@ -152,7 +149,6 @@ public class MemorySpy
 	}
 
 	/**
-	 *
 	 * @param scope
 	 * @return
 	 */
@@ -172,7 +168,9 @@ public class MemorySpy
 		{
 			final MemoryPoolMXBean poolBean = it.next();
 			if (name.endsWith(poolBean.getName()))
+			{
 				return poolBean;
+			}
 		}
 		return null;
 	}
@@ -197,7 +195,6 @@ public class MemorySpy
 	}
 
 	/**
-	 *
 	 * @param name
 	 * @param scope
 	 * @return
@@ -206,14 +203,15 @@ public class MemorySpy
 	{
 		final MemoryPoolMXBean bean = getBeanFromPool(name);
 		if (bean == null)
+		{
 			return -1;
+		}
 		final boolean peak = MemScope.peak.equals(scope) || MemScope.peakCommit.equals(scope);
 		final MemoryUsage usage = peak ? bean.getPeakUsage() : bean.getUsage();
 		return getMem(usage, scope) / getFactor();
 	}
 
 	/**
-	 *
 	 * get a fast summary for debugging
 	 *
 	 * @return
@@ -225,12 +223,13 @@ public class MemorySpy
 		final List<String> keyList = ContainerUtil.getKeyList(map);
 		keyList.sort(null);
 		for (final String s : keyList)
+		{
 			b.append("Mem ").append(s).append(": ").append(map.get(s)).append(delim);
+		}
 		return b.toString();
 	}
 
 	/**
-	 *
 	 * get a fast summary for debugging
 	 *
 	 * @return
@@ -252,7 +251,6 @@ public class MemorySpy
 	}
 
 	/**
-	 *
 	 * get a fast summary for debugging
 	 *
 	 * @return
@@ -268,7 +266,6 @@ public class MemorySpy
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public long getTotalMemory()
@@ -277,7 +274,6 @@ public class MemorySpy
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public long getFreeMem()
@@ -292,7 +288,6 @@ public class MemorySpy
 	}
 
 	/**
-	 *
 	 * @see java.lang.Object#toString()
 	 * @return
 	 */
@@ -314,7 +309,6 @@ public class MemorySpy
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public boolean isWantMega()

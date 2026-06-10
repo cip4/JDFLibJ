@@ -170,7 +170,8 @@ class JDFIdenticalTest extends JDFTestCaseBase
 	{
 		final JDFNode n = JDFNode.createRoot();
 
-		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null,
+				null, null);
 		final JDFResource sig = dpp.addPartition(EnumPartIDKey.SignatureName, "s1");
 		final JDFResource sh = sig.addPartition(EnumPartIDKey.SheetName, "sh1");
 		final JDFResource f = sh.addPartition(EnumPartIDKey.Side, "Front");
@@ -190,7 +191,8 @@ class JDFIdenticalTest extends JDFTestCaseBase
 	{
 		final JDFNode n = JDFNode.createRoot();
 
-		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null,
+				null, null);
 		final JDFResource sig = dpp.addPartition(EnumPartIDKey.SignatureName, "s1");
 		final JDFResource sh = sig.addPartition(EnumPartIDKey.SheetName, "sh1");
 		final JDFResource f = sh.addPartition(EnumPartIDKey.Side, "Front");

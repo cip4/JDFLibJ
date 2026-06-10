@@ -21,39 +21,39 @@ public class JDFContactCopyParams extends JDFAutoContactCopyParams
 
 	/**
 	 * Constructor for JDFContactCopyParams
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFContactCopyParams(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFContactCopyParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFContactCopyParams
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFContactCopyParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFContactCopyParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFContactCopyParams
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFContactCopyParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFContactCopyParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

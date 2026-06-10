@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.resource.devicecapability;
 
@@ -82,11 +82,9 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
 /**
- * 
  * class to collect getters and setters for term intermediate nodes
- * 
+ *
  * @author prosirai
- * 
  */
 abstract public class JDFNodeTerm extends JDFTerm
 {
@@ -122,17 +120,17 @@ abstract public class JDFNodeTerm extends JDFTerm
 		return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
 	}
 
-	public JDFNodeTerm(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFNodeTerm(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
-	public JDFNodeTerm(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFNodeTerm(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
-	public JDFNodeTerm(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFNodeTerm(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -142,18 +140,18 @@ abstract public class JDFNodeTerm extends JDFTerm
 
 	/**
 	 * get the iSkip'th Term of type term, do not create it if it does not exist
-	 * 
+	 *
 	 * @param term
-	 *            type of term to append
+	 *              type of term to append
 	 * @param iSkip
-	 *            number of terms to skip, 0 is the first
+	 *              number of terms to skip, 0 is the first
 	 * @return JDFTerm - the requested term, <code>null</code> if none exists
 	 */
-	public JDFTerm getTerm(EnumTerm term, int iSkip)
+	public JDFTerm getTerm(final EnumTerm term, final int iSkip)
 	{
 		if (term != null)
 		{
-			return (JDFTerm) getElement(term.getName(), null, iSkip);
+			return (JDFTerm) getElement(term.name(), null, iSkip);
 		}
 		Node e = getFirstChild();
 		int n = 0;
@@ -162,7 +160,9 @@ abstract public class JDFNodeTerm extends JDFTerm
 			if (e instanceof JDFTerm)
 			{
 				if (++n > iSkip)
+				{
 					return (JDFTerm) e;
+				}
 			}
 			e = e.getNextSibling();
 		}
@@ -173,28 +173,28 @@ abstract public class JDFNodeTerm extends JDFTerm
 	/**
 	 * get the iSkip'th Term of type <code>term</code>, create it if it does not
 	 * exist
-	 * 
+	 *
 	 * @param term
-	 *            type of term to append
+	 *              type of term to append
 	 * @param iSkip
-	 *            number of terms to skip, 0 is the first
+	 *              number of terms to skip, 0 is the first
 	 * @return JDFTerm - the requested term
 	 */
-	public JDFTerm getCreateTerm(EnumTerm term, int iSkip)
+	public JDFTerm getCreateTerm(final EnumTerm term, final int iSkip)
 	{
-		return (JDFTerm) getCreateElement(term.getName(), null, iSkip);
+		return (JDFTerm) getCreateElement(term.name(), null, iSkip);
 	}
 
 	/**
 	 * append a Term as defined by <code>term</code>
-	 * 
+	 *
 	 * @param term
-	 *            type of term to append
+	 *             type of term to append
 	 * @return JDFTerm the appended term
 	 */
-	public JDFTerm appendTerm(EnumTerm term)
+	public JDFTerm appendTerm(final EnumTerm term)
 	{
-		return (JDFTerm) appendElement(term.getName(), null);
+		return (JDFTerm) appendElement(term.name(), null);
 	}
 
 	/**
@@ -202,30 +202,34 @@ abstract public class JDFNodeTerm extends JDFTerm
 	 * subelements make sense in the context of the tested element jdf
 	 */
 	@Override
-	public boolean fitsContext(KElement testElement)
+	public boolean fitsContext(final KElement testElement)
 	{
 		// we only want the leaves as of now
 		if (testElement instanceof JDFResource)
 		{
-			JDFResource r = (JDFResource) testElement;
+			final JDFResource r = (JDFResource) testElement;
 			if (!r.isLeaf())
+			{
 				return false;
+			}
 		}
-		VElement v = getTermVector(null);
-		int siz = v.size();
+		final VElement v = getTermVector(null);
+		final int siz = v.size();
 		for (int i = 0; i < siz; i++)
 		{
 			final JDFTerm t = (JDFTerm) v.elementAt(i);
 			if (!t.fitsContext(testElement)) // one bad context spoils the
-												// barrell
+			{
+				// barrell
 				return false;
+			}
 		}
 		return siz > 0; // if no subelements, then no context
 	}
 
 	/**
 	 * gets a vector of all terms
-	 * 
+	 *
 	 * @deprecated use getTermVector(null)
 	 * @return
 	 */
@@ -237,17 +241,17 @@ abstract public class JDFNodeTerm extends JDFTerm
 
 	/**
 	 * gets a vector of all terms
-	 * 
+	 *
 	 * @return VElement - vector of JDFTerm
 	 */
-	public VElement getTermVector(EnumTerm term)
+	public VElement getTermVector(final EnumTerm term)
 	{
 		if (term != null)
 		{
-			return getChildElementVector(term.getName(), null, null, true, 0, false);
+			return getChildElementVector(term.name(), null, null, true, 0, false);
 		}
 
-		VElement v = new VElement();
+		final VElement v = new VElement();
 		KElement e = getFirstChildElement();
 		while (e != null)
 		{
@@ -262,25 +266,25 @@ abstract public class JDFNodeTerm extends JDFTerm
 
 	/**
 	 * gets the iSkip'th term
-	 * 
+	 *
 	 * @param iSkip
-	 *            the number of terms tos skip
+	 *              the number of terms tos skip
 	 * @return JDFTerm - the iSkip'th Term
 	 * @deprecated
 	 */
 	@Deprecated
-	public JDFTerm getTerm(int iSkip)
+	public JDFTerm getTerm(final int iSkip)
 	{
 		return getTerm(null, iSkip);
 	}
 
 	// //////////////////////////////////////////////////
 
-	protected VString getInvalidTerms(int iMax)
+	protected VString getInvalidTerms(final int iMax)
 	{
-		VElement v = getTermVector(null);
+		final VElement v = getTermVector(null);
 		final int vSize = v.size();
-		VString v2 = new VString();
+		final VString v2 = new VString();
 		if (vSize > iMax) // no more than iMax
 		{
 			for (int i = 0; i < vSize; i++)
@@ -294,9 +298,9 @@ abstract public class JDFNodeTerm extends JDFTerm
 
 	// //////////////////////////////////////////////////
 
-	protected VString getMissingTerms(int iMin)
+	protected VString getMissingTerms(final int iMin)
 	{
-		VElement v = getTermVector(null);
+		final VElement v = getTermVector(null);
 		VString v2 = null;
 		if (v.size() < iMin)
 		{

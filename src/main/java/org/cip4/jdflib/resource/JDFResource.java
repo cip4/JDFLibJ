@@ -42,17 +42,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoPart.EnumPreviewType;
-import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
+import org.cip4.jdflib.auto.JDFAutoPart;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -61,6 +58,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
@@ -76,7 +74,6 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.LinkRefFinder;
-import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode;
@@ -286,15 +283,15 @@ public class JDFResource extends JDFElement
 		atrInfoTable_Abstract[8] = new AtrInfoTable(AttributeName.PIPEURL, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable_Abstract[9] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_Abstract[10] = new AtrInfoTable(AttributeName.RREFS, 0x44444433, AttributeInfo.EnumAttributeType.IDREFS, null, null);
-		atrInfoTable_Abstract[11] = new AtrInfoTable(AttributeName.SPAWNSTATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration,
-				EnumSpawnStatus.getEnum(0), EnumSpawnStatus.NotSpawned.getName());
+		atrInfoTable_Abstract[11] = new AtrInfoTable(AttributeName.SPAWNSTATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, null,
+				EnumSpawnStatus.NotSpawned.name());
 		atrInfoTable_Abstract[12] = new AtrInfoTable(AttributeName.SPAWNIDS, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable_Abstract[13] = new AtrInfoTable(AttributeName.SORTING, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable_Abstract[14] = new AtrInfoTable(AttributeName.SORTAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable_Abstract[15] = new AtrInfoTable(AttributeName.PARTIDKEYS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations,
-				EnumPartIDKey.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumPartIDKey.class, 0), null);
 		atrInfoTable_Abstract[16] = new AtrInfoTable(AttributeName.PIPEPARTIDKEYS, 0x33333311, AttributeInfo.EnumAttributeType.enumerations,
-				EnumPartIDKey.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumPartIDKey.class, 0), null);
 	}
 
 	private static AtrInfoTable[] atrInfoTable_Physical = new AtrInfoTable[11];
@@ -310,8 +307,7 @@ public class JDFResource extends JDFElement
 		atrInfoTable_Physical[7] = new AtrInfoTable(AttributeName.RESOURCEWEIGHT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable_Physical[8] = new AtrInfoTable(AttributeName.GROSSWEIGHT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable_Physical[9] = new AtrInfoTable(AttributeName.MANUFACTURER, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable_Physical[10] = new AtrInfoTable(AttributeName.LOTCONTROL, 0x33333111, AttributeInfo.EnumAttributeType.enumeration,
-				EnumLotControl.getEnum(0), null);
+		atrInfoTable_Physical[10] = new AtrInfoTable(AttributeName.LOTCONTROL, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, null, null);
 	}
 
 	private static AtrInfoTable[] atrInfoTable_Param = new AtrInfoTable[1];
@@ -324,10 +320,9 @@ public class JDFResource extends JDFElement
 	static
 	{
 		atrInfoTable_ID_Class_Required[0] = new AtrInfoTable(AttributeName.ID, 0x22222222, AttributeInfo.EnumAttributeType.ID, null, null);
-		atrInfoTable_ID_Class_Required[1] = new AtrInfoTable(AttributeName.CLASS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration,
-				EnumResourceClass.getEnum(0), null);
-		atrInfoTable_ID_Class_Required[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration,
-				EnumPartUsage.getEnum(0), EnumPartUsage.Explicit.getName());
+		atrInfoTable_ID_Class_Required[1] = new AtrInfoTable(AttributeName.CLASS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, null, null);
+		atrInfoTable_ID_Class_Required[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, null,
+				EnumPartUsage.Explicit.name());
 
 	}
 
@@ -335,31 +330,26 @@ public class JDFResource extends JDFElement
 	static
 	{
 		atrInfoTable_ID_Class_Optional[0] = new AtrInfoTable(AttributeName.ID, 0x44444433, AttributeInfo.EnumAttributeType.ID, null, null);
-		atrInfoTable_ID_Class_Optional[1] = new AtrInfoTable(AttributeName.CLASS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration,
-				EnumResourceClass.getEnum(0), null);
+		atrInfoTable_ID_Class_Optional[1] = new AtrInfoTable(AttributeName.CLASS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, null, null);
 	}
 	private static AtrInfoTable[] atrInfoTable_ID_Class_Root = new AtrInfoTable[3];
 	static
 	{
 		atrInfoTable_ID_Class_Root[0] = new AtrInfoTable(AttributeName.ID, 0x33333333, AttributeInfo.EnumAttributeType.ID, null, null);
-		atrInfoTable_ID_Class_Root[1] = new AtrInfoTable(AttributeName.CLASS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration,
-				EnumResourceClass.getEnum(0), null);
-		atrInfoTable_ID_Class_Root[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration,
-				EnumPartUsage.getEnum(0), null);
+		atrInfoTable_ID_Class_Root[1] = new AtrInfoTable(AttributeName.CLASS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, null, null);
+		atrInfoTable_ID_Class_Root[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, null, null);
 	}
 
 	private static AtrInfoTable[] atrInfoTable_Status_Required = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable_Status_Required[0] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration,
-				EnumResStatus.getEnum(0), null);
+		atrInfoTable_Status_Required[0] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, null, null);
 	}
 
 	private static AtrInfoTable[] atrInfoTable_Status_Optional = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable_Status_Optional[0] = new AtrInfoTable(AttributeName.STATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration,
-				EnumResStatus.getEnum(0), null);
+		atrInfoTable_Status_Optional[0] = new AtrInfoTable(AttributeName.STATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, null, null);
 	}
 
 	private static AtrInfoTable[] atrInfoTable_UpdateID_Optional = new AtrInfoTable[1];
@@ -394,8 +384,7 @@ public class JDFResource extends JDFElement
 		atrInfoTable_PartIDKeys[14] = new AtrInfoTable(AttributeName.PAGENUMBER, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable_PartIDKeys[15] = new AtrInfoTable(AttributeName.PARTVERSION, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable_PartIDKeys[16] = new AtrInfoTable(AttributeName.PREFLIGHTRULE, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable_PartIDKeys[17] = new AtrInfoTable(AttributeName.PREVIEWTYPE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration,
-				EnumPreviewType.getEnum(0), null);
+		atrInfoTable_PartIDKeys[17] = new AtrInfoTable(AttributeName.PREVIEWTYPE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, null, null);
 		atrInfoTable_PartIDKeys[18] = new AtrInfoTable(AttributeName.RIBBONNAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable_PartIDKeys[19] = new AtrInfoTable(AttributeName.RUN, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable_PartIDKeys[20] = new AtrInfoTable(AttributeName.RUNINDEX, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
@@ -409,7 +398,8 @@ public class JDFResource extends JDFElement
 		atrInfoTable_PartIDKeys[28] = new AtrInfoTable(AttributeName.SETSHEETINDEX, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable_PartIDKeys[29] = new AtrInfoTable(AttributeName.SHEETINDEX, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable_PartIDKeys[30] = new AtrInfoTable(AttributeName.SHEETNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable_PartIDKeys[31] = new AtrInfoTable(AttributeName.SIDE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSide.getEnum(0), null);
+		atrInfoTable_PartIDKeys[31] = new AtrInfoTable(AttributeName.SIDE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(JDFAutoPart.EnumSide.class, 0), null);
 		atrInfoTable_PartIDKeys[32] = new AtrInfoTable(AttributeName.SIGNATURENAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_PartIDKeys[33] = new AtrInfoTable(AttributeName.TILEID, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable_PartIDKeys[34] = new AtrInfoTable(AttributeName.WEBNAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
@@ -609,71 +599,19 @@ public class JDFResource extends JDFElement
 	 * The original Resource Amount is ignored</li>
 	 * <li><b>AmountMerge_UpdateLink - </b>calculates the Resource Amount based on the difference of previous and current resource link amounts</li>
 	 */
-	@SuppressWarnings("rawtypes")
-	public static final class EnumAmountMerge extends ValuedEnum
+	public enum EnumAmountMerge
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		None, LinkOnly, UpdateLink;
 
-		private EnumAmountMerge(final String name)
+		public static EnumAmountMerge getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumAmountMerge.class, val, null);
 		}
 
-		/**
-		 * @param enumName
-		 * @return
-		 */
-		public static EnumAmountMerge getEnum(final String enumName)
+		public String getName()
 		{
-			return (EnumAmountMerge) getEnum(EnumAmountMerge.class, enumName);
+			return name();
 		}
-
-		/**
-		 * @param enumValue
-		 * @return
-		 */
-		public static EnumAmountMerge getEnum(final int enumValue)
-		{
-			return (EnumAmountMerge) getEnum(EnumAmountMerge.class, enumValue);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumAmountMerge.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAmountMerge.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAmountMerge.class);
-		}
-
-		/**
-		 *
-		 */
-		public static final EnumAmountMerge None = new EnumAmountMerge("None");
-		/**
-		 *
-		 */
-		public static final EnumAmountMerge LinkOnly = new EnumAmountMerge("LinkOnly");
-		/**
-		 *
-		 */
-		public static final EnumAmountMerge UpdateLink = new EnumAmountMerge("UpdateLink");
 	}
 
 	public enum EResourceClass
@@ -689,203 +627,42 @@ public class JDFResource extends JDFElement
 	/**
 	 * Enumeration for attribute Class
 	 */
-	@SuppressWarnings("unchecked")
-	public static final class EnumResourceClass extends ValuedEnum
+	public enum EnumResourceClass
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Parameter, Handling, Consumable, Quantity, Implementation, PlaceHolder, Intent;
 
-		private EnumResourceClass(final String name)
+		public static EnumResourceClass getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumResourceClass.class, val, null);
 		}
 
-		/**
-		 * @param enumName
-		 * @return
-		 */
-		public static EnumResourceClass getEnum(final String enumName)
+		public String getName()
 		{
-			if ("Consumable".equals(enumName))
-			{
-				return EnumResourceClass.Consumable;
-			}
-			else if ("Parameter".equals(enumName))
-			{
-				return EnumResourceClass.Parameter;
-			}
-			else if ("Intent".equals(enumName))
-			{
-				return EnumResourceClass.Intent;
-			}
-			else if ("Implementation".equals(enumName))
-			{
-				return EnumResourceClass.Implementation;
-			}
-			else if ("Quantity".equals(enumName))
-			{
-				return EnumResourceClass.Quantity;
-			}
-			else if ("Handling".equals(enumName))
-			{
-				return EnumResourceClass.Handling;
-			}
-			else if ("PlaceHolder".equals(enumName))
-			{
-				return EnumResourceClass.PlaceHolder;
-			}
-			return null;
+			return name();
 		}
-
-		/**
-		 * @param enumValue
-		 * @return
-		 */
-		public static EnumResourceClass getEnum(final int enumValue)
-		{
-			return (EnumResourceClass) getEnum(EnumResourceClass.class, enumValue);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumResourceClass.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumResourceClass.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumResourceClass.class);
-		}
-
-		/**
-		 *
-		 */
-		public static final EnumResourceClass Parameter = new EnumResourceClass("Parameter");
-		/**
-		 *
-		 */
-		public static final EnumResourceClass Handling = new EnumResourceClass("Handling");
-		/**
-		 *
-		 */
-		public static final EnumResourceClass Consumable = new EnumResourceClass("Consumable");
-		/**
-		 *
-		 */
-		public static final EnumResourceClass Quantity = new EnumResourceClass("Quantity");
-		/**
-		 *
-		 */
-		public static final EnumResourceClass Implementation = new EnumResourceClass("Implementation");
-		/**
-		 *
-		 */
-		public static final EnumResourceClass PlaceHolder = new EnumResourceClass("PlaceHolder");
-		/**
-		 *
-		 */
-		public static final EnumResourceClass Intent = new EnumResourceClass("Intent");
 	}
 
 	/**
 	 * Enumeration for attribute Status
 	 */
-	@SuppressWarnings("unchecked")
-	public static final class EnumResStatus extends ValuedEnum
+	public enum EnumResStatus
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Incomplete, Rejected, Unavailable, InUse, Draft, Complete, Available;
 
-		private EnumResStatus(final String name)
+		public static EnumResStatus getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumResStatus.class, val, null);
 		}
 
-		/**
-		 * @param enumName
-		 * @return
-		 */
-		public static EnumResStatus getEnum(final String enumName)
+		public String getName()
 		{
-			return (EnumResStatus) getEnum(EnumResStatus.class, enumName);
+			return name();
 		}
 
-		/**
-		 * @param enumValue
-		 * @return
-		 */
-		public static EnumResStatus getEnum(final int enumValue)
+		public int getValue()
 		{
-			return (EnumResStatus) getEnum(EnumResStatus.class, enumValue);
+			return ordinal();
 		}
-
-		/**
-		 * @return
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumResStatus.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumResStatus.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumResStatus.class);
-		}
-
-		// EnumResStatus : enums accordng to JDF spec 3.7, Table 3-11 Status
-		/**
-		 *
-		 */
-		public static final EnumResStatus Incomplete = new EnumResStatus(JDFConstants.INCOMPLETE);
-		/**
-		 *
-		 */
-		public static final EnumResStatus Rejected = new EnumResStatus(JDFConstants.REJECTED);
-		/**
-		 *
-		 */
-		public static final EnumResStatus Unavailable = new EnumResStatus(JDFConstants.UNAVAILABLE);
-		/**
-		 *
-		 */
-		public static final EnumResStatus InUse = new EnumResStatus(JDFConstants.INUSE);
-		/**
-		 *
-		 */
-		public static final EnumResStatus Draft = new EnumResStatus(JDFConstants.DRAFT);
-		/**
-		 *
-		 */
-		public static final EnumResStatus Complete = new EnumResStatus(JDFConstants.COMPLETE);
-		/**
-		 *
-		 */
-		public static final EnumResStatus Available = new EnumResStatus(JDFConstants.AVAILABLE);
-
 	}
 
 	public enum EResStatus
@@ -901,67 +678,19 @@ public class JDFResource extends JDFElement
 	/**
 	 * Enumeration for attribute Status
 	 */
-	public static final class EnumLotControl extends ValuedEnum
+	public enum EnumLotControl
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Controlled, NotControlled;
 
-		private EnumLotControl(final String name)
+		public static EnumLotControl getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumLotControl.class, val, null);
 		}
 
-		/**
-		 * @param enumName
-		 * @return
-		 */
-		public static EnumLotControl getEnum(final String enumName)
+		public String getName()
 		{
-			return (EnumLotControl) getEnum(EnumLotControl.class, enumName);
+			return name();
 		}
-
-		/**
-		 * @param enumValue
-		 * @return
-		 */
-		public static EnumLotControl getEnum(final int enumValue)
-		{
-			return (EnumLotControl) getEnum(EnumLotControl.class, enumValue);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumLotControl.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumLotControl.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumLotControl.class);
-		}
-
-		// EnumLotControl : enums accordng to JDF spec 3.7, Table 3-11 Status
-		/**
-		 *
-		 */
-		public static final EnumLotControl Controlled = new EnumLotControl(JDFConstants.LOTCONTROL_CONTROLLED);
-		/**
-		 *
-		 */
-		public static final EnumLotControl NotControlled = new EnumLotControl(JDFConstants.LOTCONTROL_NOTCONTROLLED);
 	}
 
 	public enum ELotControl
@@ -987,72 +716,19 @@ public class JDFResource extends JDFElement
 	/**
 	 * Enumeration for attribute PartUsage
 	 */
-	public static final class EnumPartUsage extends ValuedEnum
+	public enum EnumPartUsage
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Explicit, Sparse, Implicit;
 
-		private EnumPartUsage(final String name)
+		public static EnumPartUsage getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPartUsage.class, val, null);
 		}
 
-		/**
-		 * @param enumName
-		 * @return
-		 */
-		public static EnumPartUsage getEnum(final String enumName)
+		public String getName()
 		{
-			return (EnumPartUsage) EnumUtil.getEnumIgnoreCase(EnumPartUsage.class, enumName);
+			return name();
 		}
-
-		/**
-		 * @param enumValue
-		 * @return
-		 */
-		public static EnumPartUsage getEnum(final int enumValue)
-		{
-			return (EnumPartUsage) getEnum(EnumPartUsage.class, enumValue);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPartUsage.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPartUsage.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPartUsage.class);
-		}
-
-		// public static final EnumPartUsage Unknown = new
-		// EnumPartUsage(JDFConstants.PARTUSAGE_UNKNOWN);
-		/**
-		 *
-		 */
-		public static final EnumPartUsage Explicit = new EnumPartUsage(JDFConstants.PARTUSAGE_EXPLICIT);
-		/**
-		 *
-		 */
-		public static final EnumPartUsage Sparse = new EnumPartUsage(JDFConstants.PARTUSAGE_SPARSE);
-		/**
-		 *
-		 */
-		public static final EnumPartUsage Implicit = new EnumPartUsage(JDFConstants.PARTUSAGE_IMPLICIT);
 	}
 
 	public enum EPartIDKey
@@ -1068,470 +744,53 @@ public class JDFResource extends JDFElement
 	/**
 	 * Enumeration for partition keys
 	 */
-	@SuppressWarnings("unchecked")
-	public static final class EnumPartIDKey extends ValuedEnum
+	public enum EnumPartIDKey
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		BinderySignatureName, BinderySignaturePaginationIndex, BlockName, BundleItemIndex, CellIndex, Condition, DocCopies, DocIndex, DocRunIndex, DocSheetIndex, FountainNumber, ItemNames, LayerIDs, Location, LotID, Option, PageNumber, PartVersion, PreflightRule, PreviewType, PrintCondition, ProductPart, QualityMeasurement, RibbonName, Run, RunIndex, RunTags, RunPage, RunPageRange, Separation, SectionIndex, SetCopies, SetDocIndex, SetSheetIndex, SetIndex, SetRunIndex, SheetIndex, SheetName, Side, SignatureName, TileID, TransferCurveName, WebName, DeliveryUnit0, DeliveryUnit1, DeliveryUnit2, DeliveryUnit3, DeliveryUnit4, DeliveryUnit5, DeliveryUnit6, DeliveryUnit7, DeliveryUnit8, DeliveryUnit9, Edition, EditionVersion, PageTags, PlateLayout, RunSet, DocTags, SetTags, SubRun, WebProduct, StationName, WebSetup, Metadata0, Metadata1, Metadata2, Metadata3, Metadata4, Metadata5, Metadata6, Metadata7, Metadata8, Metadata9, DropID, BinderySignatureID, ContactType, Metadata, Product;
 
-		private EnumPartIDKey(final String name)
+		public static EnumPartIDKey getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPartIDKey.class, val, null);
 		}
 
-		/**
-		 * @see java.lang.Object#toString()
-		 */
-		@Override
-		public String toString()
+		public String getName()
 		{
-			return getName();
+			return name();
 		}
 
-		/**
-		 * @param enumName
-		 * @return
-		 */
-		public static EnumPartIDKey getEnum(final String enumName)
+		public static Map<String, EnumPartIDKey> getEnumMap()
 		{
-			return (EnumPartIDKey) getEnum(EnumPartIDKey.class, enumName);
-		}
-
-		/**
-		 * @param enumValue
-		 * @return
-		 */
-		public static EnumPartIDKey getEnum(final int enumValue)
-		{
-			return (EnumPartIDKey) getEnum(EnumPartIDKey.class, enumValue);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPartIDKey.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static List<EnumPartIDKey> getEnumList()
-		{
-			return getEnumList(EnumPartIDKey.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Iterator<EnumPartIDKey> iterator()
-		{
-			return iterator(EnumPartIDKey.class);
+			final HashMap<String, EnumPartIDKey> map = new HashMap<>();
+			for (final EnumPartIDKey e : values())
+			{
+				map.put(e.name(), e);
+			}
+			return map;
 		}
 
 		public boolean isXJDF()
 		{
-			return this.equals(EnumPartIDKey.BinderySignatureID) || this.equals(EnumPartIDKey.ContactType) || this.equals(EnumPartIDKey.Metadata)
-					|| this.equals(EnumPartIDKey.Product) || this.equals(EnumPartIDKey.ProductPart);
+			return this == EnumPartIDKey.BinderySignatureID || this == EnumPartIDKey.ContactType || this == EnumPartIDKey.Metadata
+					|| this == EnumPartIDKey.Product || this == EnumPartIDKey.ProductPart;
 		}
-
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey BinderySignatureName = new EnumPartIDKey(JDFConstants.PARTIDKEY_BINDERYSIGNATURENAME);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey BinderySignaturePaginationIndex = new EnumPartIDKey("BinderySignaturePaginationIndex");
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey BlockName = new EnumPartIDKey(JDFConstants.PARTIDKEY_BLOCKNAME);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey BundleItemIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_BUNDLEITEMINDEX);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey CellIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_CELLINDEX);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey Condition = new EnumPartIDKey(JDFConstants.PARTIDKEY_CONDITION);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey DocCopies = new EnumPartIDKey(JDFConstants.PARTIDKEY_DOCCOPIES);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey DocIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_DOCINDEX);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey DocRunIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_DOCRUNINDEX);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey DocSheetIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_DOCSHEETINDEX);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey FountainNumber = new EnumPartIDKey(JDFConstants.PARTIDKEY_FOUNTAINNUMBER);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey ItemNames = new EnumPartIDKey(JDFConstants.PARTIDKEY_ITEMNAMES);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey LayerIDs = new EnumPartIDKey(JDFConstants.PARTIDKEY_LAYERIDS);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey Location = new EnumPartIDKey(JDFConstants.PARTIDKEY_LOCATION);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey LotID = new EnumPartIDKey(AttributeName.LOTID);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey Option = new EnumPartIDKey(JDFConstants.PARTIDKEY_OPTION);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey PageNumber = new EnumPartIDKey(JDFConstants.PARTIDKEY_PAGENUMBER);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey PartVersion = new EnumPartIDKey(JDFConstants.PARTIDKEY_PARTVERSION);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey PreflightRule = new EnumPartIDKey(JDFConstants.PARTIDKEY_PREFLIGHTRULE);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey PreviewType = new EnumPartIDKey(JDFConstants.PARTIDKEY_PREVIEWTYPE);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey PrintCondition = new EnumPartIDKey(ElementName.PRINTCONDITION);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey ProductPart = new EnumPartIDKey(AttributeName.PRODUCTPART);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey QualityMeasurement = new EnumPartIDKey(ElementName.QUALITYMEASUREMENT);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey RibbonName = new EnumPartIDKey(JDFConstants.PARTIDKEY_RIBBONNAME);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey Run = new EnumPartIDKey(JDFConstants.PARTIDKEY_RUN);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey RunIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_RUNINDEX);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey RunTags = new EnumPartIDKey(JDFConstants.PARTIDKEY_RUNTAGS);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey RunPage = new EnumPartIDKey(JDFConstants.PARTIDKEY_RUNPAGE);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey RunPageRange = new EnumPartIDKey(AttributeName.RUNPAGERANGE);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey Separation = new EnumPartIDKey(JDFConstants.PARTIDKEY_SEPARATION);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey SectionIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_SECTIONINDEX);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey SetCopies = new EnumPartIDKey(AttributeName.SETCOPIES);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey SetDocIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_SETDOCINDEX);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey SetSheetIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_SETSHEETINDEX);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey SetIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_SETINDEX);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey SetRunIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_SETRUNINDEX);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey SheetIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_SHEETINDEX);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey SheetName = new EnumPartIDKey(JDFConstants.PARTIDKEY_SHEETNAME);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey Side = new EnumPartIDKey(JDFConstants.PARTIDKEY_SIDE);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey SignatureName = new EnumPartIDKey(JDFConstants.PARTIDKEY_SIGNATURENAME);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey TileID = new EnumPartIDKey(JDFConstants.PARTIDKEY_TILEID);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey TransferCurveName = new EnumPartIDKey(XJDFConstants.TransferCurveName);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey WebName = new EnumPartIDKey(JDFConstants.PARTIDKEY_WEBNAME);
-		// new in JDF 1.3
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey DeliveryUnit0 = new EnumPartIDKey(AttributeName.DELIVERYUNIT0);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey DeliveryUnit1 = new EnumPartIDKey(AttributeName.DELIVERYUNIT1);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey DeliveryUnit2 = new EnumPartIDKey(AttributeName.DELIVERYUNIT2);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey DeliveryUnit3 = new EnumPartIDKey(AttributeName.DELIVERYUNIT3);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey DeliveryUnit4 = new EnumPartIDKey(AttributeName.DELIVERYUNIT4);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey DeliveryUnit5 = new EnumPartIDKey(AttributeName.DELIVERYUNIT5);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey DeliveryUnit6 = new EnumPartIDKey(AttributeName.DELIVERYUNIT6);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey DeliveryUnit7 = new EnumPartIDKey(AttributeName.DELIVERYUNIT7);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey DeliveryUnit8 = new EnumPartIDKey(AttributeName.DELIVERYUNIT8);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey DeliveryUnit9 = new EnumPartIDKey(AttributeName.DELIVERYUNIT9);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey Edition = new EnumPartIDKey(AttributeName.EDITION);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey EditionVersion = new EnumPartIDKey(AttributeName.EDITIONVERSION);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey PageTags = new EnumPartIDKey(AttributeName.PAGETAGS);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey PlateLayout = new EnumPartIDKey(AttributeName.PLATELAYOUT);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey RunSet = new EnumPartIDKey(AttributeName.RUNSET);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey DocTags = new EnumPartIDKey(AttributeName.DOCTAGS);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey SetTags = new EnumPartIDKey(AttributeName.SETTAGS);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey SubRun = new EnumPartIDKey(AttributeName.SUBRUN);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey WebProduct = new EnumPartIDKey(AttributeName.WEBPRODUCT);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey StationName = new EnumPartIDKey(AttributeName.STATIONNAME); // jdf1
-		// 1.3 errata addition
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey WebSetup = new EnumPartIDKey(AttributeName.WEBSETUP);
-		/**
-		 *
-		 */
-		// JDF 1.4
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey Metadata0 = new EnumPartIDKey(AttributeName.METADATA0);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey Metadata1 = new EnumPartIDKey(AttributeName.METADATA1);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey Metadata2 = new EnumPartIDKey(AttributeName.METADATA2);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey Metadata3 = new EnumPartIDKey(AttributeName.METADATA3);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey Metadata4 = new EnumPartIDKey(AttributeName.METADATA4);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey Metadata5 = new EnumPartIDKey(AttributeName.METADATA5);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey Metadata6 = new EnumPartIDKey(AttributeName.METADATA6);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey Metadata7 = new EnumPartIDKey(AttributeName.METADATA7);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey Metadata8 = new EnumPartIDKey(AttributeName.METADATA8);
-		/**
-		 *
-		 */
-		public static final EnumPartIDKey Metadata9 = new EnumPartIDKey(AttributeName.METADATA9);
-
-		/**
-		 * 1.7++
-		 */
-		public static final EnumPartIDKey DropID = new EnumPartIDKey(AttributeName.DROPID);
-
-		/**
-		 * 2.0
-		 */
-		public static final EnumPartIDKey BinderySignatureID = new EnumPartIDKey(XJDFConstants.BinderySignatureID);
-		public static final EnumPartIDKey ContactType = new EnumPartIDKey(XJDFConstants.ContactType);
-		public static final EnumPartIDKey Metadata = new EnumPartIDKey(XJDFConstants.Metadata);
-		public static final EnumPartIDKey Product = new EnumPartIDKey(XJDFConstants.Product);
-
 	}
 
 	/**
 	 * Enumeration for attribute SpawnStatus
 	 */
-	public static final class EnumSpawnStatus extends ValuedEnum
+	public enum EnumSpawnStatus
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		NotSpawned, SpawnedRO, SpawnedRW;
 
-		/**
-		 * @see java.lang.Object#toString()
-		 * @deprecated [BLD009] just for compiling PrintReady, to be removed afterwards
-		 */
-		@Deprecated
-		@Override
-		public String toString()
+		public static EnumSpawnStatus getEnum(final String val)
 		{
-			return getName();
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpawnStatus.class, val, null);
 		}
 
-		private EnumSpawnStatus(final String name)
+		public String getName()
 		{
-			super(name, m_startValue++);
+			return name();
 		}
-
-		/**
-		 * @param enumName
-		 * @return
-		 */
-		public static EnumSpawnStatus getEnum(final String enumName)
-		{
-			return (EnumSpawnStatus) getEnum(EnumSpawnStatus.class, enumName);
-		}
-
-		/**
-		 * @param enumValue
-		 * @return
-		 */
-		public static EnumSpawnStatus getEnum(final int enumValue)
-		{
-			return (EnumSpawnStatus) getEnum(EnumSpawnStatus.class, enumValue);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpawnStatus.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpawnStatus.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpawnStatus.class);
-		}
-
-		/**
-		 *
-		 */
-		public static final EnumSpawnStatus NotSpawned = new EnumSpawnStatus(JDFConstants.NOTSPAWNED);
-		/**
-		 *
-		 */
-		public static final EnumSpawnStatus SpawnedRO = new EnumSpawnStatus(JDFConstants.SPAWNEDRO);
-		/**
-		 *
-		 */
-		public static final EnumSpawnStatus SpawnedRW = new EnumSpawnStatus(JDFConstants.SPAWNEDRW);
 	}
 
 	/**
@@ -1747,7 +1006,7 @@ public class JDFResource extends JDFElement
 				setResStatus(EnumResStatus.Unavailable, false);
 			}
 			final EnumVersion v = getVersion(true);
-			if (v == null || v.getValue() >= EnumVersion.Version_1_2.getValue() && autoAgent)
+			if (v == null || (v.compareTo(EnumVersion.Version_1_2) >= 0 && autoAgent))
 			{
 				if (!hasAttribute(AttributeName.AGENTNAME))
 				{
@@ -1915,7 +1174,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setPartIDKeyList(final List<String> partIDKeys)
 	{
-		getResourceRoot().setAttribute(AttributeName.PARTIDKEYS, StringUtil.setvString(partIDKeys, JDFConstants.BLANK, null, null));
+		getResourceRoot().setAttribute(AttributeName.PARTIDKEYS, StringUtil.setvString(partIDKeys, JDFCoreConstants.BLANK, null, null));
 	}
 
 	/**
@@ -2211,7 +1470,7 @@ public class JDFResource extends JDFElement
 	public JDFResource getPartition(final EnumPartIDKey key, final String value, final boolean bIncomplete)
 	{
 		final JDFAttributeMap mp = new JDFAttributeMap();
-		mp.put(key.getName(), value);
+		mp.put(key.name(), value);
 
 		return getPartition(mp, bIncomplete);
 	}
@@ -2326,7 +1585,7 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFResource getCreatePartition(final EnumPartIDKey key, final String value, final VString vPartIDKeys)
 	{
-		final JDFAttributeMap mp = new JDFAttributeMap(key.getName(), value);
+		final JDFAttributeMap mp = new JDFAttributeMap(key.name(), value);
 		return getCreatePartition(mp, vPartIDKeys);
 	}
 
@@ -2350,7 +1609,7 @@ public class JDFResource extends JDFElement
 			return false;
 		}
 
-		final String keyName = key.getName();
+		final String keyName = key.name();
 		int nDepth = 0;
 		JDFResource r = this;
 		// the key exists but is not in PartIDKeys, oops
@@ -2379,11 +1638,7 @@ public class JDFResource extends JDFElement
 		// attributes required exist
 		for (int i = nDepth - 1; i >= -1; i--)
 		{
-			if ((i == index) && !e.hasAttribute_KElement(keyName, null, false))
-			{
-				return false;
-			}
-			if ((i != index) && e.hasAttribute_KElement(keyName, null, false))
+			if (((i == index) && !e.hasAttribute_KElement(keyName, null, false)) || ((i != index) && e.hasAttribute_KElement(keyName, null, false)))
 			{
 				return false;
 			}
@@ -2583,7 +1838,7 @@ public class JDFResource extends JDFElement
 
 		for (final JDFResource p : v)
 		{
-			final String s = p.getNonEmpty(partType.getName());
+			final String s = p.getNonEmpty(partType.name());
 			if (s != null)
 			{
 				boolean bOK = true;
@@ -2879,7 +2134,7 @@ public class JDFResource extends JDFElement
 		}
 
 		final VElement v = new VElement();
-		if (!hasAttribute(partType.getName(), null, false))
+		if (!hasAttribute(partType.name(), null, false))
 		{
 			final List<JDFResource> vLeaves = getLeafArray(false);
 
@@ -2903,9 +2158,9 @@ public class JDFResource extends JDFElement
 	 * @param enumPart its value
 	 * @return JDFResource - the newly created part
 	 */
-	public JDFResource addPartition(final EnumPartIDKey partType, final ValuedEnum enumPart)
+	public JDFResource addPartition(final EnumPartIDKey partType, final Enum<?> enumPart)
 	{
-		return addPartition(partType, enumPart.getName());
+		return addPartition(partType, JavaEnumUtil.getName(enumPart));
 	}
 
 	/**
@@ -3061,11 +2316,7 @@ public class JDFResource extends JDFElement
 	public String getLocalPartitionKey()
 	{
 		final JDFResource partRoot = getResourceRoot();
-		if (partRoot == null)
-		{
-			return null;
-		}
-		if (partRoot == this)
+		if ((partRoot == null) || (partRoot == this))
 		{
 			return null;
 		}
@@ -3146,7 +2397,7 @@ public class JDFResource extends JDFElement
 	{
 		if (super.hasAttribute(attrib, nameSpaceURI, false))
 		{
-			if ((nameSpaceURI == null) || JDFConstants.EMPTYSTRING.equals(nameSpaceURI))
+			if ((nameSpaceURI == null) || JDFCoreConstants.EMPTYSTRING.equals(nameSpaceURI))
 			{
 				removeAttribute(attrib);
 			}
@@ -3773,16 +3024,16 @@ public class JDFResource extends JDFElement
 				// reduce lower stuff
 				if (!bCollapseToNode && !parent.hasAttribute(att, null, false))
 				{
-					final String attVal = leaf.getAttribute_KElement(att, null, JDFConstants.EMPTYSTRING);
+					final String attVal = leaf.getAttribute_KElement(att, null, JDFCoreConstants.EMPTYSTRING);
 					if (!parent.getAttribute(att).equals(attVal) || !parent.hasAttribute(att))
 					{
 						// check all local children and grandchildren
 						boolean bAllSame = true;
 						for (int l = 0; l < localSize; l++)
 						{
-							final String attVal2 = localLeaves.elementAt(l).getAttribute(att, null, JDFConstants.EMPTYSTRING);
+							final String attVal2 = localLeaves.elementAt(l).getAttribute(att, null, JDFCoreConstants.EMPTYSTRING);
 							if (!attVal.equals(attVal2)
-									|| JDFConstants.EMPTYSTRING.equals(attVal2) && !attVal.equals(localLeaves.elementAt(l).getAttribute(att, null, null)))
+									|| JDFCoreConstants.EMPTYSTRING.equals(attVal2) && !attVal.equals(localLeaves.elementAt(l).getAttribute(att, null, null)))
 							{
 								bAllSame = false;
 								break;
@@ -3814,7 +3065,7 @@ public class JDFResource extends JDFElement
 		}
 
 		void collapseElements(final boolean bCollapseToNode, final JDFResource leaf, final JDFResource parent, final VElement localLeaves,
-				final Collection<String> keepFilter, Collection<String> skipFilter)
+				final Collection<String> keepFilter, final Collection<String> skipFilter)
 		{
 			final int localSize = localLeaves.size();
 			final List<KElement> vElm = leaf.getChildArray_KElement(null, null, null, true, 0);
@@ -4123,7 +3374,7 @@ public class JDFResource extends JDFElement
 	@Deprecated
 	public VElement getPartitionVector(final EnumPartIDKey key, final String value, final boolean bIncomplete)
 	{
-		final JDFAttributeMap mp = new JDFAttributeMap(key.getName(), value);
+		final JDFAttributeMap mp = new JDFAttributeMap(key.name(), value);
 		return getPartitionVector(mp, bIncomplete);
 	}
 
@@ -4329,9 +3580,9 @@ public class JDFResource extends JDFElement
 		}
 
 		final int siz = siblingIDs.size();
-		String buf = JDFConstants.EMPTYSTRING;
+		String buf = JDFCoreConstants.EMPTYSTRING;
 		boolean bTooManyIDs = true;
-		String newModifiedID = JDFConstants.EMPTYSTRING;
+		String newModifiedID = JDFCoreConstants.EMPTYSTRING;
 
 		for (int i = 1; i < 1000 && bTooManyIDs; i++)
 		{
@@ -4547,7 +3798,7 @@ public class JDFResource extends JDFElement
 				if (n != null)
 				{
 					final JDFNode.EnumType typ = EnumType.getEnum(n.getType());
-					final boolean bIsLeaf = !JDFNode.EnumType.ProcessGroup.equals(typ) && !JDFNode.EnumType.Product.equals(typ);
+					final boolean bIsLeaf = typ != JDFNode.EnumType.ProcessGroup && typ != JDFNode.EnumType.Product;
 					if (bIsLeaf)
 					{
 						double rlActualAmount = 0;
@@ -5454,7 +4705,7 @@ public class JDFResource extends JDFElement
 	 */
 	public String getBinderySignatureName()
 	{
-		return getAttribute(AttributeName.BINDERYSIGNATURENAME, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.BINDERYSIGNATURENAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -5481,7 +4732,7 @@ public class JDFResource extends JDFElement
 	 */
 	public String getBlockName()
 	{
-		return getAttribute(AttributeName.BLOCKNAME, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.BLOCKNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -5509,7 +4760,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setUnit(final eUnit unit)
 	{
-		setUnit(unit == null ? null : unit.name());
+		setUnit(JavaEnumUtil.getName(unit));
 	}
 
 	/**
@@ -5606,9 +4857,9 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFIntegerRangeList getCellIndex()
 	{
-		String strAttrName = JDFConstants.EMPTYSTRING;
+		String strAttrName = JDFCoreConstants.EMPTYSTRING;
 		JDFIntegerRangeList nPlaceHolder = null;
-		strAttrName = getAttribute(AttributeName.CELLINDEX, null, JDFConstants.EMPTYSTRING);
+		strAttrName = getAttribute(AttributeName.CELLINDEX, null, JDFCoreConstants.EMPTYSTRING);
 		try
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
@@ -5657,9 +4908,9 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFIntegerRangeList getDocCopies()
 	{
-		String strAttrName = JDFConstants.EMPTYSTRING;
+		String strAttrName = JDFCoreConstants.EMPTYSTRING;
 		JDFIntegerRangeList nPlaceHolder = null;
-		strAttrName = getAttribute(AttributeName.DOCCOPIES, null, JDFConstants.EMPTYSTRING);
+		strAttrName = getAttribute(AttributeName.DOCCOPIES, null, JDFCoreConstants.EMPTYSTRING);
 		try
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
@@ -5688,9 +4939,9 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFIntegerRangeList getDocIndex()
 	{
-		String strAttrName = JDFConstants.EMPTYSTRING;
+		String strAttrName = JDFCoreConstants.EMPTYSTRING;
 		JDFIntegerRangeList nPlaceHolder = null;
-		strAttrName = getAttribute(AttributeName.DOCINDEX, null, JDFConstants.EMPTYSTRING);
+		strAttrName = getAttribute(AttributeName.DOCINDEX, null, JDFCoreConstants.EMPTYSTRING);
 		try
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
@@ -5730,7 +4981,7 @@ public class JDFResource extends JDFElement
 		{
 			throw new JDFException("getDeliveryUnit: invalid iUnit: " + String.valueOf(iUnit));
 		}
-		return getAttribute(AttributeName.DELIVERYUNIT + String.valueOf(iUnit), null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.DELIVERYUNIT + String.valueOf(iUnit), null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -5750,9 +5001,9 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFIntegerRangeList getDocRunIndex()
 	{
-		String strAttrName = JDFConstants.EMPTYSTRING;
+		String strAttrName = JDFCoreConstants.EMPTYSTRING;
 		JDFIntegerRangeList nPlaceHolder = null;
-		strAttrName = getAttribute(AttributeName.DOCRUNINDEX, null, JDFConstants.EMPTYSTRING);
+		strAttrName = getAttribute(AttributeName.DOCRUNINDEX, null, JDFCoreConstants.EMPTYSTRING);
 		try
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
@@ -5781,9 +5032,9 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFIntegerRangeList getDocSheetIndex()
 	{
-		String strAttrName = JDFConstants.EMPTYSTRING;
+		String strAttrName = JDFCoreConstants.EMPTYSTRING;
 		JDFIntegerRangeList nPlaceHolder = null;
-		strAttrName = getAttribute(AttributeName.DOCSHEETINDEX, null, JDFConstants.EMPTYSTRING);
+		strAttrName = getAttribute(AttributeName.DOCSHEETINDEX, null, JDFCoreConstants.EMPTYSTRING);
 		try
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
@@ -5832,7 +5083,7 @@ public class JDFResource extends JDFElement
 	 */
 	public String getItemNames()
 	{
-		return getAttribute(AttributeName.ITEMNAMES, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.ITEMNAMES, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -5873,7 +5124,7 @@ public class JDFResource extends JDFElement
 	 */
 	public String getLocation()
 	{
-		return getAttribute(AttributeName.LOCATION, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.LOCATION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -5886,7 +5137,7 @@ public class JDFResource extends JDFElement
 		final String localLock = getAttribute_KElement(AttributeName.LOCKED, null, null);
 		if (localLock != null)
 		{
-			final boolean b = JDFConstants.TRUE.equalsIgnoreCase(localLock);
+			final boolean b = JDFCoreConstants.TRUE.equalsIgnoreCase(localLock);
 			if (b == value)
 			{
 				return; // don't reset to current value - NOP
@@ -5947,7 +5198,7 @@ public class JDFResource extends JDFElement
 	 */
 	public String getOption()
 	{
-		return getAttribute(AttributeName.OPTION, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.OPTION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -5967,9 +5218,9 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFIntegerRangeList getPageNumber()
 	{
-		String strAttrName = JDFConstants.EMPTYSTRING;
+		String strAttrName = JDFCoreConstants.EMPTYSTRING;
 		JDFIntegerRangeList nPlaceHolder = null;
-		strAttrName = getAttribute(AttributeName.PAGENUMBER, null, JDFConstants.EMPTYSTRING);
+		strAttrName = getAttribute(AttributeName.PAGENUMBER, null, JDFCoreConstants.EMPTYSTRING);
 		try
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
@@ -5989,7 +5240,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void addPartIDKey(final EnumPartIDKey partType)
 	{
-		final String s = partType.getName();
+		final String s = partType.name();
 		final JDFResource r = getResourceRoot();
 
 		final List<EnumPartIDKey> implicitPartitions = getImplicitPartitions();
@@ -5997,12 +5248,12 @@ public class JDFResource extends JDFElement
 		{
 			throw new JDFException("AddPartIDKey: attempting to add implicit partition: " + s);
 		}
-		r.appendAttribute(AttributeName.PARTIDKEYS, s, null, JDFConstants.BLANK, true);
+		r.appendAttribute(AttributeName.PARTIDKEYS, s, null, JDFCoreConstants.BLANK, true);
 	}
 
 	public void setPartIDKey(final EnumPartIDKey key, final String value)
 	{
-		final String keyName = key.getName();
+		final String keyName = key.name();
 		final String old = getNonEmpty_KElement(keyName);
 		if (old == null || !old.equals(value))
 		{
@@ -6050,7 +5301,7 @@ public class JDFResource extends JDFElement
 		if (partRoot != null)
 		{
 			final String idKeys = partRoot.getAttributeRaw(AttributeName.PARTIDKEYS);
-			return StringUtil.tokenize(idKeys, JDFConstants.BLANK, false);
+			return StringUtil.tokenize(idKeys, JDFCoreConstants.BLANK, false);
 		}
 		return null;
 	}
@@ -6078,7 +5329,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setPartUsage(final EnumPartUsage value)
 	{
-		setAttribute(AttributeName.PARTUSAGE, value, null);
+		setAttribute(AttributeName.PARTUSAGE, JavaEnumUtil.getName(value), null);
 	}
 
 	/**
@@ -6163,7 +5414,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setLotControl(final EnumLotControl value)
 	{
-		setAttribute(AttributeName.LOTCONTROL, value, null);
+		setAttribute(AttributeName.LOTCONTROL, JavaEnumUtil.getName(value), null);
 	}
 
 	/**
@@ -6193,7 +5444,7 @@ public class JDFResource extends JDFElement
 	 */
 	public String getPartVersion()
 	{
-		return getAttribute(AttributeName.PARTVERSION, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.PARTVERSION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -6225,7 +5476,7 @@ public class JDFResource extends JDFElement
 	 */
 	public boolean hasPipePartIDKey(final EnumPartIDKey key)
 	{
-		return hasAttribute(key.getName());
+		return hasAttribute(key.name());
 	}
 
 	/**
@@ -6236,7 +5487,7 @@ public class JDFResource extends JDFElement
 	 */
 	public boolean consistentPipePartIDKeys(final EnumPartIDKey key)
 	{
-		final String s = key.getName();
+		final String s = key.name();
 		if (!hasAttribute(s))
 		{
 			return true;
@@ -6244,7 +5495,7 @@ public class JDFResource extends JDFElement
 
 		// the key exists but is not in PipePartIDKeys, oops
 		final String strPipe = getResourceRoot().getAttribute(AttributeName.PIPEPARTIDKEYS);
-		if (!StringUtil.hasToken(strPipe, s, JDFConstants.BLANK, 0))
+		if (!StringUtil.hasToken(strPipe, s, JDFCoreConstants.BLANK, 0))
 		{
 			return false;
 		}
@@ -6268,7 +5519,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void addPipePartIDKey(final EnumPartIDKey partType)
 	{
-		getResourceRoot().appendAttribute(AttributeName.PIPEPARTIDKEYS, partType.getName(), null, JDFConstants.BLANK, true);
+		getResourceRoot().appendAttribute(AttributeName.PIPEPARTIDKEYS, partType.name(), null, JDFCoreConstants.BLANK, true);
 	}
 
 	/**
@@ -6279,7 +5530,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setPipePartIDKey(final EnumPartIDKey key, final String value)
 	{
-		setAttribute(key.getName(), value);
+		setAttribute(key.name(), value);
 		addPipePartIDKey(key);
 	}
 
@@ -6291,18 +5542,18 @@ public class JDFResource extends JDFElement
 	public Vector<EnumPartIDKey> getPipePartIDKeysEnum()
 	{
 		final VString vPartIDKeys = getPartIDKeys();
-		final Vector<EnumPartIDKey> v = getEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, null, EnumPartIDKey.getEnum(0), false);
+		final List<EnumPartIDKey> v = getEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, null, EnumPartIDKey.class);
 		if (v != null)
 		{
 			for (final EnumPartIDKey p : v)
 			{
-				if (!vPartIDKeys.contains(p.getName()))
+				if (!vPartIDKeys.contains(p.name()))
 				{
 					throw new JDFException("JDFResource.getPipePartIDKeys: key " + p + " is not subset of PartIDKey");
 				}
 			}
 		}
-		return v;
+		return v == null ? null : new Vector<>(v);
 	}
 
 	/**
@@ -6320,7 +5571,7 @@ public class JDFResource extends JDFElement
 		{
 			for (int i = 0; i < v.size(); i++)
 			{
-				vPipePartIDKeys.add((v.elementAt(i)).getName());
+				vPipePartIDKeys.add((v.elementAt(i)).name());
 			}
 		}
 
@@ -6384,7 +5635,7 @@ public class JDFResource extends JDFElement
 	 */
 	public String getPreflightRule()
 	{
-		return getAttribute(AttributeName.PREFLIGHTRULE, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.PREFLIGHTRULE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -6445,7 +5696,7 @@ public class JDFResource extends JDFElement
 			// only set class for the root
 			if (isResourceRootRoot() || (autoSubElementClass && isResourceElement()))
 			{
-				setAttribute(AttributeName.CLASS, value.getName(), null);
+				setAttribute(AttributeName.CLASS, value.name(), null);
 			}
 			else
 			// just in case, clean up
@@ -6499,11 +5750,7 @@ public class JDFResource extends JDFElement
 	final public boolean validClass()
 	{
 		final EnumResourceClass c = getValidClass();
-		if (c == null)
-		{
-			return true;
-		}
-		if (!hasAttribute_KElement(AttributeName.CLASS, null, false))
+		if ((c == null) || !hasAttribute_KElement(AttributeName.CLASS, null, false))
 		{
 			return true;
 		}
@@ -6577,7 +5824,7 @@ public class JDFResource extends JDFElement
 	 */
 	public String getManufacturer()
 	{
-		return getAttribute(AttributeName.MANUFACTURER, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.MANUFACTURER, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -6597,7 +5844,7 @@ public class JDFResource extends JDFElement
 	 */
 	public String getRibbonName()
 	{
-		return getAttribute(AttributeName.RIBBONNAME, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.RIBBONNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -6617,7 +5864,7 @@ public class JDFResource extends JDFElement
 	 */
 	public String getRunSet()
 	{
-		return getAttribute(AttributeName.RUNSET, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.RUNSET, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -6637,7 +5884,7 @@ public class JDFResource extends JDFElement
 	 */
 	public String getRun()
 	{
-		return getAttribute(AttributeName.RUN, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.RUN, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -6657,9 +5904,9 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFIntegerRangeList getRunIndex()
 	{
-		String strAttrName = JDFConstants.EMPTYSTRING;
+		String strAttrName = JDFCoreConstants.EMPTYSTRING;
 		JDFIntegerRangeList nPlaceHolder = null;
-		strAttrName = getAttribute(AttributeName.RUNINDEX, null, JDFConstants.EMPTYSTRING);
+		strAttrName = getAttribute(AttributeName.RUNINDEX, null, JDFCoreConstants.EMPTYSTRING);
 		try
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
@@ -6708,8 +5955,8 @@ public class JDFResource extends JDFElement
 	 */
 	public VString getRunTags()
 	{
-		final String s = getAttribute(AttributeName.RUNTAGS, null, JDFConstants.EMPTYSTRING);
-		final VString v = StringUtil.tokenize(s, JDFConstants.BLANK, false);
+		final String s = getAttribute(AttributeName.RUNTAGS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString v = StringUtil.tokenize(s, JDFCoreConstants.BLANK, false);
 		final VString vstr = new VString();
 		vstr.addAll(v);
 		return vstr;
@@ -6732,9 +5979,9 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFIntegerRangeList getSectionIndex()
 	{
-		String strAttrName = JDFConstants.EMPTYSTRING;
+		String strAttrName = JDFCoreConstants.EMPTYSTRING;
 		JDFIntegerRangeList nPlaceHolder = null;
-		strAttrName = getAttribute(AttributeName.SECTIONINDEX, null, JDFConstants.EMPTYSTRING);
+		strAttrName = getAttribute(AttributeName.SECTIONINDEX, null, JDFCoreConstants.EMPTYSTRING);
 		try
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
@@ -6763,7 +6010,7 @@ public class JDFResource extends JDFElement
 	 */
 	public String getSeparation()
 	{
-		return getAttribute(AttributeName.SEPARATION, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.SEPARATION, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -6783,9 +6030,9 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFIntegerRangeList getSetDocIndex()
 	{
-		String strAttrName = JDFConstants.EMPTYSTRING;
+		String strAttrName = JDFCoreConstants.EMPTYSTRING;
 		JDFIntegerRangeList nPlaceHolder = null;
-		strAttrName = getAttribute(AttributeName.SETDOCINDEX, null, JDFConstants.EMPTYSTRING);
+		strAttrName = getAttribute(AttributeName.SETDOCINDEX, null, JDFCoreConstants.EMPTYSTRING);
 		try
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
@@ -6814,9 +6061,9 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFIntegerRangeList getSetIndex()
 	{
-		String strAttrName = JDFConstants.EMPTYSTRING;
+		String strAttrName = JDFCoreConstants.EMPTYSTRING;
 		JDFIntegerRangeList nPlaceHolder = null;
-		strAttrName = getAttribute(AttributeName.SETINDEX, null, JDFConstants.EMPTYSTRING);
+		strAttrName = getAttribute(AttributeName.SETINDEX, null, JDFCoreConstants.EMPTYSTRING);
 		try
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
@@ -6845,9 +6092,9 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFIntegerRangeList getSetRunIndex()
 	{
-		String strAttrName = JDFConstants.EMPTYSTRING;
+		String strAttrName = JDFCoreConstants.EMPTYSTRING;
 		JDFIntegerRangeList nPlaceHolder = null;
-		strAttrName = getAttribute(AttributeName.SETRUNINDEX, null, JDFConstants.EMPTYSTRING);
+		strAttrName = getAttribute(AttributeName.SETRUNINDEX, null, JDFCoreConstants.EMPTYSTRING);
 		try
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
@@ -6876,9 +6123,9 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFIntegerRangeList getSetSheetIndex()
 	{
-		String strAttrName = JDFConstants.EMPTYSTRING;
+		String strAttrName = JDFCoreConstants.EMPTYSTRING;
 		JDFIntegerRangeList nPlaceHolder = null;
-		strAttrName = getAttribute(AttributeName.SETSHEETINDEX, null, JDFConstants.EMPTYSTRING);
+		strAttrName = getAttribute(AttributeName.SETSHEETINDEX, null, JDFCoreConstants.EMPTYSTRING);
 		try
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
@@ -6907,9 +6154,9 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFIntegerRangeList getSheetIndex()
 	{
-		String strAttrName = JDFConstants.EMPTYSTRING;
+		String strAttrName = JDFCoreConstants.EMPTYSTRING;
 		JDFIntegerRangeList nPlaceHolder = null;
-		strAttrName = getAttribute(AttributeName.SHEETINDEX, null, JDFConstants.EMPTYSTRING);
+		strAttrName = getAttribute(AttributeName.SHEETINDEX, null, JDFCoreConstants.EMPTYSTRING);
 		try
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
@@ -6938,7 +6185,7 @@ public class JDFResource extends JDFElement
 	 */
 	public String getSheetName()
 	{
-		return getAttribute(AttributeName.SHEETNAME, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.SHEETNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -6948,7 +6195,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setSide(final JDFPart.EnumSide value)
 	{
-		setPartIDKey(EnumPartIDKey.Side, value == null ? null : value.getName());
+		setPartIDKey(EnumPartIDKey.Side, JavaEnumUtil.getName(value));
 	}
 
 	/**
@@ -6978,7 +6225,7 @@ public class JDFResource extends JDFElement
 	 */
 	public String getSignatureName()
 	{
-		return getAttribute(AttributeName.SIGNATURENAME, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.SIGNATURENAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -6988,7 +6235,7 @@ public class JDFResource extends JDFElement
 	 */
 	public String getStationName()
 	{
-		return getAttribute(AttributeName.STATIONNAME, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.STATIONNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -7038,9 +6285,9 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFIntegerRangeList getSorting()
 	{
-		String strAttrName = JDFConstants.EMPTYSTRING;
+		String strAttrName = JDFCoreConstants.EMPTYSTRING;
 		JDFIntegerRangeList nPlaceHolder = null;
-		strAttrName = getAttribute(AttributeName.SORTING, null, JDFConstants.EMPTYSTRING);
+		strAttrName = getAttribute(AttributeName.SORTING, null, JDFCoreConstants.EMPTYSTRING);
 		try
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
@@ -7059,7 +6306,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void appendSpawnIDs(final String value)
 	{
-		appendAttribute(AttributeName.SPAWNIDS, value, null, JDFConstants.BLANK, true);
+		appendAttribute(AttributeName.SPAWNIDS, value, null, JDFCoreConstants.BLANK, true);
 	}
 
 	/**
@@ -7070,7 +6317,7 @@ public class JDFResource extends JDFElement
 	 */
 	public int removeFromSpawnIDs(final String value)
 	{
-		return removeFromAttribute(AttributeName.SPAWNIDS, value, null, JDFConstants.BLANK, -1);
+		return removeFromAttribute(AttributeName.SPAWNIDS, value, null, JDFCoreConstants.BLANK, -1);
 	}
 
 	/**
@@ -7087,7 +6334,7 @@ public class JDFResource extends JDFElement
 		{
 			return null;
 		}
-		return StringUtil.tokenize(attribute, JDFConstants.BLANK, false);
+		return StringUtil.tokenize(attribute, JDFCoreConstants.BLANK, false);
 	}
 
 	/**
@@ -7097,7 +6344,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setSpawnIDs(final VString vStr)
 	{
-		setAttribute(AttributeName.SPAWNIDS, StringUtil.setvString(vStr, JDFConstants.BLANK, null, null), null);
+		setAttribute(AttributeName.SPAWNIDS, StringUtil.setvString(vStr, JDFCoreConstants.BLANK, null, null), null);
 	}
 
 	/**
@@ -7117,7 +6364,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setSpawnStatus(final EnumSpawnStatus s)
 	{
-		setAttribute(AttributeName.SPAWNSTATUS, s == null ? null : s.getName(), null);
+		setAttribute(AttributeName.SPAWNSTATUS, JavaEnumUtil.getName(s), null);
 	}
 
 	/**
@@ -7127,7 +6374,7 @@ public class JDFResource extends JDFElement
 	 */
 	public EnumSpawnStatus getSpawnStatus()
 	{
-		return EnumSpawnStatus.getEnum(getAttribute(AttributeName.SPAWNSTATUS, null, EnumSpawnStatus.NotSpawned.getName()));
+		return EnumSpawnStatus.getEnum(getAttribute(AttributeName.SPAWNSTATUS, null, EnumSpawnStatus.NotSpawned.name()));
 	}
 
 	/**
@@ -7139,7 +6386,7 @@ public class JDFResource extends JDFElement
 	@Deprecated
 	public void setStatus(final EnumResStatus value)
 	{
-		setAttribute(AttributeName.STATUS, value, null);
+		setAttribute(AttributeName.STATUS, JavaEnumUtil.getName(value), null);
 	}
 
 	/**
@@ -7182,7 +6429,7 @@ public class JDFResource extends JDFElement
 		{
 			removeAttributeFromLeaves(AttributeName.STATUS, null);
 		}
-		setAttribute(AttributeName.STATUS, value, null);
+		setAttribute(AttributeName.STATUS, JavaEnumUtil.getName(value), null);
 	}
 
 	/**
@@ -7194,7 +6441,11 @@ public class JDFResource extends JDFElement
 	 */
 	public void setResStatus(final EnumResStatus value, final boolean bCleanLeaves)
 	{
-		setResStatus(EnumUtil.getJavaEnum(value), bCleanLeaves);
+		if (bCleanLeaves)
+		{
+			removeAttributeFromLeaves(AttributeName.STATUS, null);
+		}
+		setAttribute(AttributeName.STATUS, JavaEnumUtil.getName(value), null);
 	}
 
 	/**
@@ -7215,7 +6466,7 @@ public class JDFResource extends JDFElement
 			{
 				final JDFResource rs = (JDFResource) v.elementAt(i);
 				final EnumResStatus rss = rs.getResStatus(false);
-				if ((rss != null) && ((ret == null) || (rss.getValue() < ret.getValue())))
+				if ((rss != null) && ((ret == null) || (rss.ordinal() < ret.ordinal())))
 				{
 					ret = rss;
 				}
@@ -7254,7 +6505,11 @@ public class JDFResource extends JDFElement
 				}
 				else
 				{
-					minStatus = (EnumResStatus) EnumUtil.min(minStatus, r.getResStatus(false));
+					final EnumResStatus leafStatus = r.getResStatus(false);
+					if (leafStatus != null && leafStatus.ordinal() < minStatus.ordinal())
+					{
+						minStatus = leafStatus;
+					}
 				}
 			}
 		}
@@ -7281,9 +6536,9 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFXYPair getTileID()
 	{
-		String strAttrName = JDFConstants.EMPTYSTRING;
+		String strAttrName = JDFCoreConstants.EMPTYSTRING;
 		JDFXYPair nPlaceHolder = null;
-		strAttrName = getAttribute(AttributeName.TILEID, null, JDFConstants.EMPTYSTRING);
+		strAttrName = getAttribute(AttributeName.TILEID, null, JDFCoreConstants.EMPTYSTRING);
 		try
 		{
 			nPlaceHolder = new JDFXYPair(strAttrName);
@@ -7333,7 +6588,7 @@ public class JDFResource extends JDFElement
 	 */
 	public String getUpdateID()
 	{
-		return getAttribute(AttributeName.UPDATEID, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.UPDATEID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -7353,7 +6608,7 @@ public class JDFResource extends JDFElement
 	 */
 	public String getWebName()
 	{
-		return getAttribute(AttributeName.WEBNAME, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.WEBNAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -7373,7 +6628,7 @@ public class JDFResource extends JDFElement
 	 */
 	public String getWebProduct()
 	{
-		return getAttribute(AttributeName.WEBPRODUCT, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.WEBPRODUCT, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -7393,7 +6648,7 @@ public class JDFResource extends JDFElement
 	 */
 	public String getWebSetup()
 	{
-		return getAttribute(AttributeName.WEBSETUP, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.WEBSETUP, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -7485,12 +6740,7 @@ public class JDFResource extends JDFElement
 		if (!isResourceRootRoot())
 		{
 			// PartIDKeys is only valid in the root
-			if (hasAttribute_KElement(AttributeName.PARTIDKEYS, null, false))
-			{
-				return false;
-			}
-
-			if (!isResourceElement() && hasAttribute_KElement(AttributeName.CLASS, null, false))
+			if (hasAttribute_KElement(AttributeName.PARTIDKEYS, null, false) || (!isResourceElement() && hasAttribute_KElement(AttributeName.CLASS, null, false)))
 			{
 				return false;
 			}
@@ -7651,7 +6901,7 @@ public class JDFResource extends JDFElement
 		boolean ok = getLocalName().equals(namedResLink) || getNodeName().equals(namedResLink);
 		if (!ok)
 		{
-			final String pidCheck = StringUtil.token(namedResLink, 1, JDFConstants.COLON);
+			final String pidCheck = StringUtil.token(namedResLink, 1, JDFCoreConstants.COLON);
 			ok = !StringUtil.isEmpty(pidCheck) && pidCheck.equals(getProductID());
 		}
 		return ok;
@@ -7813,7 +7063,10 @@ public class JDFResource extends JDFElement
 	static final Set<String> setPartIDKeys = new HashSet<>();
 	static
 	{
-		setPartIDKeys.addAll(EnumPartIDKey.getEnumMap().keySet());
+		for (final EnumPartIDKey e : EnumPartIDKey.values())
+		{
+			setPartIDKeys.add(e.name());
+		}
 		setPartIDKeys.add(AttributeName.PARTIDKEYS);
 	}
 

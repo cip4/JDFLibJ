@@ -69,13 +69,13 @@
  *
  */
 /**
- * ========================================================================== 
+ * ==========================================================================
  * class JDFIDPrintingParams extends JDFResource
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author: sabjon@topmail.de    using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * @Author: sabjon@topmail.de    using a code generator
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  */
 package org.cip4.jdflib.resource.process.press;
 
@@ -84,8 +84,6 @@ import org.cip4.jdflib.auto.JDFAutoIDPrintingParams;
 import org.w3c.dom.DOMException;
 
 /**
- * 
- *  
  * @author rainer prosi
  * @date Apr 30, 2014
  */
@@ -95,45 +93,44 @@ public class JDFIDPrintingParams extends JDFAutoIDPrintingParams
 
 	/**
 	 * Constructor for JDFIDPrintingParams
-	 * @param myOwnerDocument 
-	 * @param qualifiedName 
-	 * @throws DOMException 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
 	 */
-	public JDFIDPrintingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFIDPrintingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFIDPrintingParams
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFIDPrintingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFIDPrintingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFIDPrintingParams
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @param myLocalName 
-	 * @throws DOMException 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 * @throws DOMException
 	 */
-	public JDFIDPrintingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFIDPrintingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoIDPrintingParams#toString()
 	 */
 	@Override

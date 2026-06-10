@@ -121,7 +121,7 @@ public abstract class JDFAutoPROccurrence extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPROccurrence(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPROccurrence(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoPROccurrence extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPROccurrence(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPROccurrence(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -146,7 +146,7 @@ public abstract class JDFAutoPROccurrence extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPROccurrence(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPROccurrence(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -167,7 +167,7 @@ public abstract class JDFAutoPROccurrence extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOccurrences(int value)
+	public void setOccurrences(final int value)
 	{
 		setAttribute(AttributeName.OCCURRENCES, value, null);
 	}
@@ -214,7 +214,7 @@ public abstract class JDFAutoPROccurrence extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPRGroup the element
 	 */
-	public JDFPRGroup getCreatePRGroup(int iSkip)
+	public JDFPRGroup getCreatePRGroup(final int iSkip)
 	{
 		return (JDFPRGroup) getCreateElement_JDFElement(ElementName.PRGROUP, null, iSkip);
 	}
@@ -226,7 +226,7 @@ public abstract class JDFAutoPROccurrence extends JDFElement
 	 * @return JDFPRGroup the element
 	 *         default is getPRGroup(0)
 	 */
-	public JDFPRGroup getPRGroup(int iSkip)
+	public JDFPRGroup getPRGroup(final int iSkip)
 	{
 		return (JDFPRGroup) getElement(ElementName.PRGROUP, null, iSkip);
 	}

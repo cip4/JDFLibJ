@@ -65,7 +65,6 @@ import org.xml.sax.SAXNotSupportedException;
 
 /**
  * Class JDFDocumentBuilder
- *
  */
 
 public class JDFDocumentBuilder extends DocumentBuilder
@@ -74,8 +73,6 @@ public class JDFDocumentBuilder extends DocumentBuilder
 
 	/**
 	 * Constructor JDFDocumentBuilder
-	 *
-	 *
 	 */
 
 	/**
@@ -111,7 +108,6 @@ public class JDFDocumentBuilder extends DocumentBuilder
 	 * Method isNamespaceAware
 	 *
 	 * @see javax.xml.parsers.DocumentBuilder#isNamespaceAware()
-	 *
 	 * @return
 	 */
 	@Override
@@ -124,7 +120,6 @@ public class JDFDocumentBuilder extends DocumentBuilder
 	 * Method isValidating
 	 *
 	 * @see javax.xml.parsers.DocumentBuilder#isValidating()
-	 *
 	 * @return
 	 */
 	@Override
@@ -154,7 +149,6 @@ public class JDFDocumentBuilder extends DocumentBuilder
 	 * Method getDOMImplementation
 	 *
 	 * @see javax.xml.parsers.DocumentBuilder#getDOMImplementation()
-	 *
 	 * @return
 	 */
 	@Override
@@ -167,7 +161,6 @@ public class JDFDocumentBuilder extends DocumentBuilder
 	 * Method newDocument
 	 *
 	 * @see javax.xml.parsers.DocumentBuilder#newDocument()
-	 *
 	 * @return
 	 */
 	@Override
@@ -182,7 +175,6 @@ public class JDFDocumentBuilder extends DocumentBuilder
 	 * Method setEntityResolver
 	 *
 	 * @see javax.xml.parsers.DocumentBuilder#setEntityResolver(org.xml.sax.EntityResolver)
-	 *
 	 * @param er
 	 */
 	@Override
@@ -195,7 +187,6 @@ public class JDFDocumentBuilder extends DocumentBuilder
 	 * Method setErrorHandler
 	 *
 	 * @see javax.xml.parsers.DocumentBuilder#setErrorHandler(org.xml.sax.ErrorHandler)
-	 *
 	 * @param eh
 	 */
 	@Override
@@ -208,9 +199,7 @@ public class JDFDocumentBuilder extends DocumentBuilder
 	 * Method parse
 	 *
 	 * @see javax.xml.parsers.DocumentBuilder#parse(org.xml.sax.InputSource)
-	 *
 	 * @param is
-	 *
 	 * @return
 	 */
 	@Override

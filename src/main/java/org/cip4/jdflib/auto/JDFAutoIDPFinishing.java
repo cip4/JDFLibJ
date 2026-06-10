@@ -128,7 +128,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIDPFinishing(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoIDPFinishing(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -140,7 +140,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIDPFinishing(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoIDPFinishing(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -153,7 +153,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoIDPFinishing(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoIDPFinishing(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -174,7 +174,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFinishings(JDFIntegerList value)
+	public void setFinishings(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.FINISHINGS, value, null);
 	}
@@ -187,8 +187,8 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	 */
 	public JDFIntegerList getFinishings()
 	{
-		String strAttrName = getAttribute(AttributeName.FINISHINGS, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.FINISHINGS, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -224,7 +224,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFIDPFolding the element
 	 */
-	public JDFIDPFolding getCreateIDPFolding(int iSkip)
+	public JDFIDPFolding getCreateIDPFolding(final int iSkip)
 	{
 		return (JDFIDPFolding) getCreateElement_JDFElement(ElementName.IDPFOLDING, null, iSkip);
 	}
@@ -236,7 +236,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	 * @return JDFIDPFolding the element
 	 *         default is getIDPFolding(0)
 	 */
-	public JDFIDPFolding getIDPFolding(int iSkip)
+	public JDFIDPFolding getIDPFolding(final int iSkip)
 	{
 		return (JDFIDPFolding) getElement(ElementName.IDPFOLDING, null, iSkip);
 	}
@@ -287,7 +287,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFIDPHoleMaking the element
 	 */
-	public JDFIDPHoleMaking getCreateIDPHoleMaking(int iSkip)
+	public JDFIDPHoleMaking getCreateIDPHoleMaking(final int iSkip)
 	{
 		return (JDFIDPHoleMaking) getCreateElement_JDFElement(ElementName.IDPHOLEMAKING, null, iSkip);
 	}
@@ -299,7 +299,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	 * @return JDFIDPHoleMaking the element
 	 *         default is getIDPHoleMaking(0)
 	 */
-	public JDFIDPHoleMaking getIDPHoleMaking(int iSkip)
+	public JDFIDPHoleMaking getIDPHoleMaking(final int iSkip)
 	{
 		return (JDFIDPHoleMaking) getElement(ElementName.IDPHOLEMAKING, null, iSkip);
 	}
@@ -350,7 +350,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFIDPStitching the element
 	 */
-	public JDFIDPStitching getCreateIDPStitching(int iSkip)
+	public JDFIDPStitching getCreateIDPStitching(final int iSkip)
 	{
 		return (JDFIDPStitching) getCreateElement_JDFElement(ElementName.IDPSTITCHING, null, iSkip);
 	}
@@ -362,7 +362,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	 * @return JDFIDPStitching the element
 	 *         default is getIDPStitching(0)
 	 */
-	public JDFIDPStitching getIDPStitching(int iSkip)
+	public JDFIDPStitching getIDPStitching(final int iSkip)
 	{
 		return (JDFIDPStitching) getElement(ElementName.IDPSTITCHING, null, iSkip);
 	}
@@ -413,7 +413,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFIDPTrimming the element
 	 */
-	public JDFIDPTrimming getCreateIDPTrimming(int iSkip)
+	public JDFIDPTrimming getCreateIDPTrimming(final int iSkip)
 	{
 		return (JDFIDPTrimming) getCreateElement_JDFElement(ElementName.IDPTRIMMING, null, iSkip);
 	}
@@ -425,7 +425,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	 * @return JDFIDPTrimming the element
 	 *         default is getIDPTrimming(0)
 	 */
-	public JDFIDPTrimming getIDPTrimming(int iSkip)
+	public JDFIDPTrimming getIDPTrimming(final int iSkip)
 	{
 		return (JDFIDPTrimming) getElement(ElementName.IDPTRIMMING, null, iSkip);
 	}

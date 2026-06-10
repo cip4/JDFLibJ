@@ -121,7 +121,7 @@ public abstract class JDFAutoQueueEntryPriParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoQueueEntryPriParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoQueueEntryPriParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoQueueEntryPriParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoQueueEntryPriParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoQueueEntryPriParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -146,7 +146,7 @@ public abstract class JDFAutoQueueEntryPriParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoQueueEntryPriParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoQueueEntryPriParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -167,7 +167,7 @@ public abstract class JDFAutoQueueEntryPriParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPriority(int value)
+	public void setPriority(final int value)
 	{
 		setAttribute(AttributeName.PRIORITY, value, null);
 	}
@@ -192,7 +192,7 @@ public abstract class JDFAutoQueueEntryPriParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setQueueEntryID(String value)
+	public void setQueueEntryID(final String value)
 	{
 		setAttribute(AttributeName.QUEUEENTRYID, value, null);
 	}

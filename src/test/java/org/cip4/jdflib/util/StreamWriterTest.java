@@ -16,7 +16,7 @@ class StreamWriterTest extends JDFTestCaseBase
 	@Test
 	void testToString() throws IOException
 	{
-		StreamWriter sw = new StreamWriter(null);
+		final StreamWriter sw = new StreamWriter(null);
 		assertNotNull(sw.toString());
 		sw.writeStream(new ByteArrayOutputStream());
 	}
@@ -24,9 +24,9 @@ class StreamWriterTest extends JDFTestCaseBase
 	@Test
 	void testCopy() throws IOException
 	{
-		StreamWriter sw = new StreamWriter(new ByteArrayInputStream("abc".getBytes()));
+		final StreamWriter sw = new StreamWriter(new ByteArrayInputStream("abc".getBytes()));
 		assertNotNull(sw.toString());
-		ByteArrayIOStream os = new ByteArrayIOStream();
+		final ByteArrayIOStream os = new ByteArrayIOStream();
 		sw.writeStream(os);
 		assertEquals('a', os.getInputStream().read());
 	}

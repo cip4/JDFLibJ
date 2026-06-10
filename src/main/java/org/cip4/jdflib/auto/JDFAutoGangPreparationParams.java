@@ -124,7 +124,7 @@ public abstract class JDFAutoGangPreparationParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGangPreparationParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoGangPreparationParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -136,7 +136,7 @@ public abstract class JDFAutoGangPreparationParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGangPreparationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoGangPreparationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -149,7 +149,7 @@ public abstract class JDFAutoGangPreparationParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoGangPreparationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoGangPreparationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -160,7 +160,7 @@ public abstract class JDFAutoGangPreparationParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -190,7 +190,7 @@ public abstract class JDFAutoGangPreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGangName(String value)
+	public void setGangName(final String value)
 	{
 		setAttribute(AttributeName.GANGNAME, value, null);
 	}
@@ -215,7 +215,7 @@ public abstract class JDFAutoGangPreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobIDs(VString value)
+	public void setJobIDs(final VString value)
 	{
 		setAttribute(AttributeName.JOBIDS, value, null);
 	}
@@ -227,8 +227,8 @@ public abstract class JDFAutoGangPreparationParams extends JDFResource
 	 */
 	public VString getJobIDs()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.JOBIDS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.JOBIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -265,7 +265,7 @@ public abstract class JDFAutoGangPreparationParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFDisjointing the element
 	 */
-	public JDFDisjointing getCreateDisjointing(int iSkip)
+	public JDFDisjointing getCreateDisjointing(final int iSkip)
 	{
 		return (JDFDisjointing) getCreateElement_JDFElement(ElementName.DISJOINTING, null, iSkip);
 	}
@@ -277,7 +277,7 @@ public abstract class JDFAutoGangPreparationParams extends JDFResource
 	 * @return JDFDisjointing the element
 	 *         default is getDisjointing(0)
 	 */
-	public JDFDisjointing getDisjointing(int iSkip)
+	public JDFDisjointing getDisjointing(final int iSkip)
 	{
 		return (JDFDisjointing) getElement(ElementName.DISJOINTING, null, iSkip);
 	}

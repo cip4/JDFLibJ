@@ -91,7 +91,7 @@ public class JDFAuthenticationResp extends JDFAutoAuthenticationResp
 
 	/**
 	 * Constructor for JDFKnownMsgQuParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -102,7 +102,7 @@ public class JDFAuthenticationResp extends JDFAutoAuthenticationResp
 
 	/**
 	 * Constructor for JDFKnownMsgQuParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -114,7 +114,7 @@ public class JDFAuthenticationResp extends JDFAutoAuthenticationResp
 
 	/**
 	 * Constructor for JDFKnownMsgQuParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName

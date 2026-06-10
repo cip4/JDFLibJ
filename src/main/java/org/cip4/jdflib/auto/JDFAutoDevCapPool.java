@@ -106,7 +106,7 @@ public abstract class JDFAutoDevCapPool extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDevCapPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDevCapPool(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoDevCapPool extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDevCapPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDevCapPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoDevCapPool extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDevCapPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDevCapPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoDevCapPool extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevCap the element
 	 */
-	public JDFDevCap getCreateDevCap(int iSkip)
+	public JDFDevCap getCreateDevCap(final int iSkip)
 	{
 		return (JDFDevCap) getCreateElement_JDFElement(ElementName.DEVCAP, null, iSkip);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoDevCapPool extends JDFElement
 	 * @return JDFDevCap the element
 	 *         default is getDevCap(0)
 	 */
-	public JDFDevCap getDevCap(int iSkip)
+	public JDFDevCap getDevCap(final int iSkip)
 	{
 		return (JDFDevCap) getElement(ElementName.DEVCAP, null, iSkip);
 	}

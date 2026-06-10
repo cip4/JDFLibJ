@@ -56,7 +56,6 @@ public class TimeSweeper implements Sweeper
 
 	/**
 	 * @param interval the time interval in seconds
-	 *
 	 */
 	protected TimeSweeper(final int interval)
 	{
@@ -70,8 +69,7 @@ public class TimeSweeper implements Sweeper
 
 	/**
 	 * @param interval the time interval in seconds
-	 * @param runner the runnable to run
-	 *
+	 * @param runner   the runnable to run
 	 */
 	public TimeSweeper(final int interval, final Runnable runner)
 	{
@@ -80,8 +78,6 @@ public class TimeSweeper implements Sweeper
 	}
 
 	/**
-	 *
-	 *
 	 * @param interval in seconds
 	 */
 	public void setInterval(final int interval)
@@ -90,8 +86,6 @@ public class TimeSweeper implements Sweeper
 	}
 
 	/**
-	 *
-	 *
 	 * @param interval in seconds
 	 */
 	public void setFirstInterval(final int interval)
@@ -100,7 +94,6 @@ public class TimeSweeper implements Sweeper
 	}
 
 	/**
-	 *
 	 * get the subclass or class of the runner
 	 *
 	 * @return
@@ -121,7 +114,9 @@ public class TimeSweeper implements Sweeper
 		final long t = System.currentTimeMillis();
 		final boolean needsweep = t > t0;
 		if (needsweep)
+		{
 			t0 = t + interval;
+		}
 		return needsweep;
 	}
 
@@ -151,7 +146,6 @@ public class TimeSweeper implements Sweeper
 	}
 
 	/**
-	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

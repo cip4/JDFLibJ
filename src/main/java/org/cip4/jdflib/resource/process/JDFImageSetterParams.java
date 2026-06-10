@@ -17,39 +17,39 @@ public class JDFImageSetterParams extends JDFAutoImageSetterParams
 
 	/**
 	 * Constructor for JDFImageSetterParams
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFImageSetterParams(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFImageSetterParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFImageSetterParams
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFImageSetterParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFImageSetterParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFImageSetterParams
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFImageSetterParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFImageSetterParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -58,7 +58,7 @@ public class JDFImageSetterParams extends JDFAutoImageSetterParams
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

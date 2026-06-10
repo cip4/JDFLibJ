@@ -130,7 +130,7 @@ public abstract class JDFAutoMerged extends JDFAudit
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMerged(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoMerged(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -142,7 +142,7 @@ public abstract class JDFAutoMerged extends JDFAudit
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMerged(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoMerged(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -155,7 +155,7 @@ public abstract class JDFAutoMerged extends JDFAudit
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoMerged(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoMerged(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -176,7 +176,7 @@ public abstract class JDFAutoMerged extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIndependent(boolean value)
+	public void setIndependent(final boolean value)
 	{
 		setAttribute(AttributeName.INDEPENDENT, value, null);
 	}
@@ -201,7 +201,7 @@ public abstract class JDFAutoMerged extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setjRef(String value)
+	public void setjRef(final String value)
 	{
 		setAttribute(AttributeName.JREF, value, null);
 	}
@@ -226,7 +226,7 @@ public abstract class JDFAutoMerged extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setjRefSource(String value)
+	public void setjRefSource(final String value)
 	{
 		setAttribute(AttributeName.JREFSOURCE, value, null);
 	}
@@ -251,7 +251,7 @@ public abstract class JDFAutoMerged extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMergeID(String value)
+	public void setMergeID(final String value)
 	{
 		setAttribute(AttributeName.MERGEID, value, null);
 	}
@@ -276,7 +276,7 @@ public abstract class JDFAutoMerged extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setrRefsOverwritten(VString value)
+	public void setrRefsOverwritten(final VString value)
 	{
 		setAttribute(AttributeName.RREFSOVERWRITTEN, value, null);
 	}
@@ -288,8 +288,8 @@ public abstract class JDFAutoMerged extends JDFAudit
 	 */
 	public VString getrRefsOverwritten()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.RREFSOVERWRITTEN, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.RREFSOVERWRITTEN, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -304,7 +304,7 @@ public abstract class JDFAutoMerged extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setURL(String value)
+	public void setURL(final String value)
 	{
 		setAttribute(AttributeName.URL, value, null);
 	}
@@ -352,7 +352,7 @@ public abstract class JDFAutoMerged extends JDFAudit
 	 * @return JDFEmployee the element
 	 */
 	@Override
-	public JDFEmployee getCreateEmployee(int iSkip)
+	public JDFEmployee getCreateEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -365,7 +365,7 @@ public abstract class JDFAutoMerged extends JDFAudit
 	 *         default is getEmployee(0)
 	 */
 	@Override
-	public JDFEmployee getEmployee(int iSkip)
+	public JDFEmployee getEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -418,7 +418,7 @@ public abstract class JDFAutoMerged extends JDFAudit
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
-	public JDFPart getCreatePart(int iSkip)
+	public JDFPart getCreatePart(final int iSkip)
 	{
 		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
@@ -430,7 +430,7 @@ public abstract class JDFAutoMerged extends JDFAudit
 	 * @return JDFPart the element
 	 *         default is getPart(0)
 	 */
-	public JDFPart getPart(int iSkip)
+	public JDFPart getPart(final int iSkip)
 	{
 		return (JDFPart) getElement(ElementName.PART, null, iSkip);
 	}

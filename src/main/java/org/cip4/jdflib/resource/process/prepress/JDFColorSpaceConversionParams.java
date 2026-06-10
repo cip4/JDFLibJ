@@ -72,9 +72,9 @@
  * class JDFColorSpaceConversionParams extends JDFResource
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author: sabjon@topmail.de    using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * @Author: sabjon@topmail.de    using a code generator
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  */
 
 package org.cip4.jdflib.resource.process.prepress;
@@ -92,7 +92,7 @@ public class JDFColorSpaceConversionParams extends JDFAutoColorSpaceConversionPa
 
 	/**
 	 * Constructor for JDFColorSpaceConversionParams
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
@@ -104,7 +104,7 @@ public class JDFColorSpaceConversionParams extends JDFAutoColorSpaceConversionPa
 
 	/**
 	 * Constructor for JDFColorSpaceConversionParams
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
@@ -117,15 +117,15 @@ public class JDFColorSpaceConversionParams extends JDFAutoColorSpaceConversionPa
 
 	/**
 	 * Constructor for JDFColorSpaceConversionParams
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFColorSpaceConversionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
-			throws DOMException
+	public JDFColorSpaceConversionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName,
+			final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -138,7 +138,7 @@ public class JDFColorSpaceConversionParams extends JDFAutoColorSpaceConversionPa
 
 	/**
 	 * Appends new FileSpec(FinalTargetDevice) element to the end of 'this'
-	 * 
+	 *
 	 * @return JDFFileSpec newly created child FileSpec(FinalTargetDevice) element
 	 */
 	public JDFFileSpec appendFinalTargetDevice()
@@ -150,7 +150,7 @@ public class JDFColorSpaceConversionParams extends JDFAutoColorSpaceConversionPa
 
 	/**
 	 * Gets of 'this' an existing child FileSpec(SourceProfile) element
-	 * 
+	 *
 	 * @return JDFFileSpec the matching SourceProfile element
 	 */
 	public JDFFileSpec getFinalTargetDevice()
@@ -160,7 +160,7 @@ public class JDFColorSpaceConversionParams extends JDFAutoColorSpaceConversionPa
 
 	/**
 	 * Gets of 'this' child FileSpec(AbstractProfile) element, optionally creates it, if it doesn't exist.
-	 * 
+	 *
 	 * @return JDFFileSpec the matching AbstractProfile element
 	 */
 	public JDFFileSpec getCreateAbstractProfile()

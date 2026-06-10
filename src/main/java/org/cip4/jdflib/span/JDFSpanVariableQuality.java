@@ -38,12 +38,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanVariableQuality extends JDFEnumerationSpan
@@ -84,7 +80,8 @@ public class JDFSpanVariableQuality extends JDFEnumerationSpan
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanVariableQuality(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFSpanVariableQuality(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -92,44 +89,14 @@ public class JDFSpanVariableQuality extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanCutType
 	 */
-	public static class EnumSpanVariableQuality extends ValuedEnum
+	public enum EnumSpanVariableQuality
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Simple, Imprint, Full;
 
-		private EnumSpanVariableQuality(final String name)
+		public static EnumSpanVariableQuality getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanVariableQuality.class, val, null);
 		}
-
-		public static EnumSpanVariableQuality getEnum(final String enumName)
-		{
-			return (EnumSpanVariableQuality) getEnum(EnumSpanVariableQuality.class, enumName);
-		}
-
-		public static EnumSpanVariableQuality getEnum(final int enumValue)
-		{
-			return (EnumSpanVariableQuality) getEnum(EnumSpanVariableQuality.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanVariableQuality.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanVariableQuality.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanVariableQuality.class);
-		}
-
-		public static final EnumSpanVariableQuality Simple = new EnumSpanVariableQuality("Simple");
-		public static final EnumSpanVariableQuality Imprint = new EnumSpanVariableQuality("Imprint");
-		public static final EnumSpanVariableQuality Full = new EnumSpanVariableQuality("Full");
 
 	}
 
@@ -139,9 +106,9 @@ public class JDFSpanVariableQuality extends JDFEnumerationSpan
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanVariableQuality.getEnum(0);
+		return EnumSpanVariableQuality.class;
 	}
 
 }

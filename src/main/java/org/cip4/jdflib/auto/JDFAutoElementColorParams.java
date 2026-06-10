@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -106,7 +102,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.COLORMANAGEMENTSYSTEM, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ICCOUTPUTPROFILEUSAGE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumICCOutputProfileUsage.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumICCOutputProfileUsage.class, 0), null);
 	}
 
 	@Override
@@ -137,7 +133,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoElementColorParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoElementColorParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -149,7 +145,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoElementColorParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoElementColorParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -162,7 +158,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoElementColorParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoElementColorParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -173,7 +169,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -188,89 +184,22 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for ICCOutputProfileUsage
+	 * Enumeration strings for numICCOutputProfileUsage
 	 */
 
-	public enum EICCOutputProfileUsage
+	public enum EnumICCOutputProfileUsage
 	{
 		PDLActual, PDLReference, IgnorePDL;
 
-		public static EICCOutputProfileUsage getEnum(String val)
+		public static EnumICCOutputProfileUsage getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EICCOutputProfileUsage.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumICCOutputProfileUsage.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for ICCOutputProfileUsage
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumICCOutputProfileUsage extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumICCOutputProfileUsage(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumICCOutputProfileUsage getEnum(String enumName)
-		{
-			return (EnumICCOutputProfileUsage) getEnum(EnumICCOutputProfileUsage.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumICCOutputProfileUsage getEnum(int enumValue)
-		{
-			return (EnumICCOutputProfileUsage) getEnum(EnumICCOutputProfileUsage.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumICCOutputProfileUsage.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumICCOutputProfileUsage.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumICCOutputProfileUsage.class);
-		}
-
-		/**  */
-		public static final EnumICCOutputProfileUsage PDLActual = new EnumICCOutputProfileUsage("PDLActual");
-		/**  */
-		public static final EnumICCOutputProfileUsage PDLReference = new EnumICCOutputProfileUsage("PDLReference");
-		/**  */
-		public static final EnumICCOutputProfileUsage IgnorePDL = new EnumICCOutputProfileUsage("IgnorePDL");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -282,7 +211,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setColorManagementSystem(String value)
+	public void setColorManagementSystem(final String value)
 	{
 		setAttribute(AttributeName.COLORMANAGEMENTSYSTEM, value, null);
 	}
@@ -307,9 +236,9 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setICCOutputProfileUsage(EICCOutputProfileUsage enumVar)
+	public void setICCOutputProfileUsage(final EnumICCOutputProfileUsage enumVar)
 	{
-		setAttribute(AttributeName.ICCOUTPUTPROFILEUSAGE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ICCOUTPUTPROFILEUSAGE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -317,35 +246,6 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EICCOutputProfileUsage getEICCOutputProfileUsage()
-	{
-		return EICCOutputProfileUsage.getEnum(getAttribute(AttributeName.ICCOUTPUTPROFILEUSAGE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ICCOutputProfileUsage
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ICCOutputProfileUsage
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetICCOutputProfileUsage(EICCOutputProfileUsage) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setICCOutputProfileUsage(EnumICCOutputProfileUsage enumVar)
-	{
-		setAttribute(AttributeName.ICCOUTPUTPROFILEUSAGE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ICCOutputProfileUsage
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EICCOutputProfileUsage GetEICCOutputProfileUsage() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumICCOutputProfileUsage getICCOutputProfileUsage()
 	{
 		return EnumICCOutputProfileUsage.getEnum(getAttribute(AttributeName.ICCOUTPUTPROFILEUSAGE, null, null));
@@ -414,7 +314,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorantAlias the element
 	 */
-	public JDFColorantAlias getCreateColorantAlias(int iSkip)
+	public JDFColorantAlias getCreateColorantAlias(final int iSkip)
 	{
 		return (JDFColorantAlias) getCreateElement_JDFElement(ElementName.COLORANTALIAS, null, iSkip);
 	}
@@ -426,7 +326,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 * @return JDFColorantAlias the element
 	 *         default is getColorantAlias(0)
 	 */
-	public JDFColorantAlias getColorantAlias(int iSkip)
+	public JDFColorantAlias getColorantAlias(final int iSkip)
 	{
 		return (JDFColorantAlias) getElement(ElementName.COLORANTALIAS, null, iSkip);
 	}
@@ -456,7 +356,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refColorantAlias(JDFColorantAlias refTarget)
+	public void refColorantAlias(final JDFColorantAlias refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -487,7 +387,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorCorrectionOp the element
 	 */
-	public JDFColorCorrectionOp getCreateColorCorrectionOp(int iSkip)
+	public JDFColorCorrectionOp getCreateColorCorrectionOp(final int iSkip)
 	{
 		return (JDFColorCorrectionOp) getCreateElement_JDFElement(ElementName.COLORCORRECTIONOP, null, iSkip);
 	}
@@ -499,7 +399,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 * @return JDFColorCorrectionOp the element
 	 *         default is getColorCorrectionOp(0)
 	 */
-	public JDFColorCorrectionOp getColorCorrectionOp(int iSkip)
+	public JDFColorCorrectionOp getColorCorrectionOp(final int iSkip)
 	{
 		return (JDFColorCorrectionOp) getElement(ElementName.COLORCORRECTIONOP, null, iSkip);
 	}
@@ -581,7 +481,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
-	public JDFFileSpec getCreateFileSpec(int iSkip)
+	public JDFFileSpec getCreateFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -593,7 +493,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 * @return JDFFileSpec the element
 	 *         default is getFileSpec(0)
 	 */
-	public JDFFileSpec getFileSpec(int iSkip)
+	public JDFFileSpec getFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -623,7 +523,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}

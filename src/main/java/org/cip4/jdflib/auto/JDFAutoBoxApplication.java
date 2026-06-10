@@ -124,7 +124,7 @@ public abstract class JDFAutoBoxApplication extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBoxApplication(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoBoxApplication(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -136,7 +136,7 @@ public abstract class JDFAutoBoxApplication extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBoxApplication(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoBoxApplication(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -149,7 +149,7 @@ public abstract class JDFAutoBoxApplication extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoBoxApplication(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoBoxApplication(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -170,7 +170,7 @@ public abstract class JDFAutoBoxApplication extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setApplicationArea(JDFRectangle value)
+	public void setApplicationArea(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.APPLICATIONAREA, value, null);
 	}
@@ -183,8 +183,8 @@ public abstract class JDFAutoBoxApplication extends JDFElement
 	 */
 	public JDFRectangle getApplicationArea()
 	{
-		String strAttrName = getAttribute(AttributeName.APPLICATIONAREA, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.APPLICATIONAREA, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -220,7 +220,7 @@ public abstract class JDFAutoBoxApplication extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFComponent the element
 	 */
-	public JDFComponent getCreateComponent(int iSkip)
+	public JDFComponent getCreateComponent(final int iSkip)
 	{
 		return (JDFComponent) getCreateElement_JDFElement(ElementName.COMPONENT, null, iSkip);
 	}
@@ -232,7 +232,7 @@ public abstract class JDFAutoBoxApplication extends JDFElement
 	 * @return JDFComponent the element
 	 *         default is getComponent(0)
 	 */
-	public JDFComponent getComponent(int iSkip)
+	public JDFComponent getComponent(final int iSkip)
 	{
 		return (JDFComponent) getElement(ElementName.COMPONENT, null, iSkip);
 	}
@@ -262,7 +262,7 @@ public abstract class JDFAutoBoxApplication extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refComponent(JDFComponent refTarget)
+	public void refComponent(final JDFComponent refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -293,7 +293,7 @@ public abstract class JDFAutoBoxApplication extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueLine the element
 	 */
-	public JDFGlueLine getCreateGlueLine(int iSkip)
+	public JDFGlueLine getCreateGlueLine(final int iSkip)
 	{
 		return (JDFGlueLine) getCreateElement_JDFElement(ElementName.GLUELINE, null, iSkip);
 	}
@@ -305,7 +305,7 @@ public abstract class JDFAutoBoxApplication extends JDFElement
 	 * @return JDFGlueLine the element
 	 *         default is getGlueLine(0)
 	 */
-	public JDFGlueLine getGlueLine(int iSkip)
+	public JDFGlueLine getGlueLine(final int iSkip)
 	{
 		return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
 	}

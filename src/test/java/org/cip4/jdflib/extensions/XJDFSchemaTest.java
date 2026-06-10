@@ -146,7 +146,9 @@ class XJDFSchemaTest extends JDFTestCaseBase
 			ds.getRoot().setXMLComment(" strict " + commentText, false);
 			final VElement vlax = ds.getRoot().getChildrenByTagName(null, null, new JDFAttributeMap("processContents", "lax"), false, false, 0);
 			for (final KElement e : vlax)
+			{
 				e.setAttribute("processContents", "strict");
+			}
 			ds.write2File(sm_dirTestDataTemp + "schema/xjdf.strict.2_" + minor + "." + date + ".xsd", 2, false);
 
 			final XMLDoc d = XMLDoc.parseFile(getXJDFSchema(2, minor));
@@ -190,7 +192,9 @@ class XJDFSchemaTest extends JDFTestCaseBase
 			final String path = parentPath + "/" + e.getAttribute("name") + e.getAttribute("ref");
 
 			if ("0".equals(getMinOccurs(e)) || ignore.contains(path) || ignore.contains(parentPath) || isMessage(parentPath))
+			{
 				return true;
+			}
 			return false;
 		}
 
@@ -202,10 +206,14 @@ class XJDFSchemaTest extends JDFTestCaseBase
 		protected String getMinOccurs(final KElement e)
 		{
 			if (e == null)
+			{
 				return "1";
+			}
 			final String nonEmpty = e.getNonEmpty("minOccurs");
 			if (nonEmpty == null)
+			{
 				return getMinOccurs(e.getParentNode_KElement());
+			}
 			return nonEmpty;
 		}
 
@@ -215,7 +223,9 @@ class XJDFSchemaTest extends JDFTestCaseBase
 			final String path = parentPath + "/@" + a.getAttribute("name");
 
 			if ("optional".equals(a.getNonEmpty("use")) || ignore.contains(path) || ignore.contains(parentPath))
+			{
 				return true;
+			}
 			return false;
 		}
 
@@ -224,9 +234,13 @@ class XJDFSchemaTest extends JDFTestCaseBase
 			final KElement p = a.getParentNode_KElement();
 			final String s = p.getAttribute("name") + p.getAttribute("ref");
 			if (s.isEmpty())
+			{
 				return getPath(p);
+			}
 			else
+			{
 				return s;
+			}
 		}
 	}
 
@@ -283,7 +297,9 @@ class XJDFSchemaTest extends JDFTestCaseBase
 		final KElement root = d.getRoot();
 		final VElement elems = root.getChildrenByTagName("xs:element", null, null, false, true, 0);
 		for (final KElement elem : elems)
+		{
 			elem.removeAttribute("substitutionGroup");
+		}
 		root.setXMLComment(" XJDF 2." + minor + " changeorder schema updated on " + date + " ", false);
 		d.write2File(sm_dirTestDataTemp + "schema/xjdf.cleanup.2_" + minor + "/xjdf.xsd", 2, false);
 	}
@@ -408,7 +424,6 @@ class XJDFSchemaTest extends JDFTestCaseBase
 	/**
 	 * @throws SAXNotSupportedException
 	 * @throws SAXNotRecognizedException
-	 *
 	 */
 	@Test
 	@Disabled
@@ -536,9 +551,8 @@ class XJDFSchemaTest extends JDFTestCaseBase
 	@Test
 	void testGeneralID()
 	{
-		for (final Object o : EnumDataType.getEnumList())
+		for (final EnumDataType dt : EnumDataType.values())
 		{
-			final EnumDataType dt = (EnumDataType) o;
 			final XJDFHelper h = new XJDFHelper("j1", "p", null);
 			h.addType(org.cip4.jdflib.node.JDFNode.EnumType.Product);
 			final JDFGeneralID gid = h.setGeneralID("foo", "bar");

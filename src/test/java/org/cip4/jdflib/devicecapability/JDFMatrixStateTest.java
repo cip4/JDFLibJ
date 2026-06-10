@@ -71,8 +71,8 @@
  * JDFStrinStateTest.java
  *
  * @author Rainer Prosi
- * 
- * Copyright (c) 2001-2004 The International Cooperation for the Integration 
+ *
+ * Copyright (c) 2001-2004 The International Cooperation for the Integration
  * of Processes in  Prepress, Press and Postpress (CIP4).  All rights reserved.
  */
 package org.cip4.jdflib.devicecapability;
@@ -85,6 +85,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFMatrixState;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 class JDFMatrixStateTest extends JDFTestCaseBase
 {
 
@@ -95,7 +96,7 @@ class JDFMatrixStateTest extends JDFTestCaseBase
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		JDFDoc doc = new JDFDoc("MatrixState");
+		final JDFDoc doc = new JDFDoc("MatrixState");
 		sState = (JDFMatrixState) doc.getRoot();
 
 	}
@@ -109,38 +110,26 @@ class JDFMatrixStateTest extends JDFTestCaseBase
 	{
 		sState.appendValue(new JDFMatrix("1 2 3 4 5 6"), null);
 		sState.addValue("6 5 4 3 2 1", EnumFitsValue.Allowed);
-		Assertions.assertEquals(sState.getValueAllowedValue(1), new JDFMatrix(
-				"6 5 4 3 2 1"));
+		Assertions.assertEquals(sState.getValueAllowedValue(1), new JDFMatrix("6 5 4 3 2 1"));
 	}
 
 	@Test
 	public final void testAppendValue() throws Exception
 	{
 		sState.appendValue(new JDFMatrix("10 2 3 4 5 6"), null);
-		Assertions.assertEquals(sState.getValueAllowedValue(0), new JDFMatrix(
-				"10 2 3 4 5 6"));
-		sState
-				.appendValue(new JDFMatrix("20 2 3 4 5 6"),
-						EnumFitsValue.Present);
-		Assertions.assertEquals(sState.getValueAllowedValue(1), new JDFMatrix(
-				"20 2 3 4 5 6"));
-		sState
-				.appendValue(new JDFMatrix("30 2 3 4 5 6"),
-						EnumFitsValue.Allowed);
-		Assertions.assertEquals(sState.getValueAllowedValue(2), new JDFMatrix(
-				"30 2 3 4 5 6"));
+		Assertions.assertEquals(sState.getValueAllowedValue(0), new JDFMatrix("10 2 3 4 5 6"));
+		sState.appendValue(new JDFMatrix("20 2 3 4 5 6"), EnumFitsValue.Present);
+		Assertions.assertEquals(sState.getValueAllowedValue(1), new JDFMatrix("20 2 3 4 5 6"));
+		sState.appendValue(new JDFMatrix("30 2 3 4 5 6"), EnumFitsValue.Allowed);
+		Assertions.assertEquals(sState.getValueAllowedValue(2), new JDFMatrix("30 2 3 4 5 6"));
 	}
 
 	@Test
 	public final void testFitsValue() throws Exception
 	{
 		sState.appendValue(new JDFMatrix("10 2 3 4 5 6"), null);
-		sState
-				.appendValue(new JDFMatrix("20 2 3 4 5 6"),
-						EnumFitsValue.Present);
-		sState
-				.appendValue(new JDFMatrix("30 2 3 4 5 6"),
-						EnumFitsValue.Allowed);
+		sState.appendValue(new JDFMatrix("20 2 3 4 5 6"), EnumFitsValue.Present);
+		sState.appendValue(new JDFMatrix("30 2 3 4 5 6"), EnumFitsValue.Allowed);
 		Assertions.assertTrue(sState.fitsValue("30 2 3 4 5 6", EnumFitsValue.Allowed));
 		Assertions.assertFalse(sState.fitsValue("30 2 3 4 5 6", EnumFitsValue.Present));
 		Assertions.assertFalse(sState.fitsValue("20 2 3 4 5 6", EnumFitsValue.Allowed));

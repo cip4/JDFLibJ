@@ -9,12 +9,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanStripMaterial extends JDFEnumerationSpan
@@ -23,39 +19,39 @@ public class JDFSpanStripMaterial extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanStripMaterial
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanStripMaterial(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanStripMaterial(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanStripMaterial
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanStripMaterial(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanStripMaterial(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanStripMaterial
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanStripMaterial(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanStripMaterial(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -63,48 +59,14 @@ public class JDFSpanStripMaterial extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanStripMaterial
 	 */
-	public static class EnumSpanStripMaterial extends ValuedEnum
+	public enum EnumSpanStripMaterial
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Calico, Cardboard, CrepePaper, Gauze, Paper, PaperlinedMules, Tape;
 
-		private EnumSpanStripMaterial(String name)
+		public static EnumSpanStripMaterial getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanStripMaterial.class, val, null);
 		}
-
-		public static EnumSpanStripMaterial getEnum(String enumName)
-		{
-			return (EnumSpanStripMaterial) getEnum(EnumSpanStripMaterial.class, enumName);
-		}
-
-		public static EnumSpanStripMaterial getEnum(int enumValue)
-		{
-			return (EnumSpanStripMaterial) getEnum(EnumSpanStripMaterial.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanStripMaterial.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanStripMaterial.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanStripMaterial.class);
-		}
-
-		public static final EnumSpanStripMaterial Calico = new EnumSpanStripMaterial("Calico");
-		public static final EnumSpanStripMaterial Cardboard = new EnumSpanStripMaterial("Cardboard");
-		public static final EnumSpanStripMaterial CrepePaper = new EnumSpanStripMaterial("CrepePaper");
-		public static final EnumSpanStripMaterial Gauze = new EnumSpanStripMaterial("Gauze");
-		public static final EnumSpanStripMaterial Paper = new EnumSpanStripMaterial("Paper");
-		public static final EnumSpanStripMaterial PaperlinedMules = new EnumSpanStripMaterial("PaperlinedMules");
-		public static final EnumSpanStripMaterial Tape = new EnumSpanStripMaterial("Tape");
 
 	}
 
@@ -113,18 +75,18 @@ public class JDFSpanStripMaterial extends JDFEnumerationSpan
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanStripMaterial.getEnum(0);
+		return EnumSpanStripMaterial.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

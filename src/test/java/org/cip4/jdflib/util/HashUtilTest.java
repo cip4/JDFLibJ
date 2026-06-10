@@ -79,14 +79,12 @@ import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.junit.jupiter.api.Test;
 
 /**
- * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class HashUtilTest
 {
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testEqualsAndHashCode()
@@ -113,7 +111,7 @@ class HashUtilTest
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void test0()
@@ -124,7 +122,7 @@ class HashUtilTest
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void test1()

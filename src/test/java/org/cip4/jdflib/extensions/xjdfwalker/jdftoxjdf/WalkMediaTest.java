@@ -113,7 +113,7 @@ class WalkMediaTest extends JDFTestCaseBase
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null);
-		m.setAttribute("HoleType", EnumHoleType.Explicit.getName());
+		m.setAttribute("HoleType", EnumHoleType.Explicit.name());
 		final KElement res = new JDFDoc("Resource").getRoot();
 		final WalkMedia walkMedia = new WalkMedia();
 		walkMedia.jdfToXJDF = new JDFToXJDF();
@@ -144,7 +144,7 @@ class WalkMediaTest extends JDFTestCaseBase
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null);
-		m.setAttribute("HoleType", EnumHoleType.R2_generic.getName());
+		m.setAttribute("HoleType", EnumHoleType.R2_generic.name());
 		final KElement res = new JDFDoc("Resource").getRoot();
 		final WalkMedia walkMedia = new WalkMedia();
 		walkMedia.jdfToXJDF = new JDFToXJDF();

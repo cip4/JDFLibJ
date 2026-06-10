@@ -85,7 +85,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 
 /**
- * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFLayoutElementProductionParams extends JDFAutoLayoutElementProductionParams
@@ -94,36 +93,36 @@ public class JDFLayoutElementProductionParams extends JDFAutoLayoutElementProduc
 
 	/**
 	 * Constructor for JDFLayoutElementProductionParams
-	 * @param myOwnerDocument 
-	 * @param qualifiedName 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param qualifiedName
 	 */
-	public JDFLayoutElementProductionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFLayoutElementProductionParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFLayoutElementProductionParams
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFLayoutElementProductionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFLayoutElementProductionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFLayoutElementProductionParams
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @param myLocalName 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
 	 */
-	public JDFLayoutElementProductionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFLayoutElementProductionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -132,7 +131,7 @@ public class JDFLayoutElementProductionParams extends JDFAutoLayoutElementProduc
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

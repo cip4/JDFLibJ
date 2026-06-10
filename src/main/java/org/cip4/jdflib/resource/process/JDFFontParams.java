@@ -1,11 +1,11 @@
 /**
- * ========================================================================== 
+ * ==========================================================================
  * class JDFFontParams extends JDFResource
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author: sabjon@topmail.de    using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * @Author: sabjon@topmail.de    using a code generator
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  */
 
 package org.cip4.jdflib.resource.process;
@@ -20,39 +20,39 @@ public class JDFFontParams extends JDFAutoFontParams
 
 	/**
 	 * Constructor for JDFFontParams
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFFontParams(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFFontParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFFontParams
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFFontParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFFontParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFFontParams
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFFontParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFFontParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -63,4 +63,4 @@ public class JDFFontParams extends JDFAutoFontParams
 		return "JDFFontParams[  --> " + super.toString() + " ]";
 	}
 } // class JDFIDPLayout
-// ==========================================================================
+	// ==========================================================================

@@ -105,7 +105,7 @@ public abstract class JDFAutoNetworkHeader extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNetworkHeader(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoNetworkHeader(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -117,7 +117,7 @@ public abstract class JDFAutoNetworkHeader extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNetworkHeader(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoNetworkHeader(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -130,7 +130,7 @@ public abstract class JDFAutoNetworkHeader extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoNetworkHeader(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoNetworkHeader(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -151,7 +151,7 @@ public abstract class JDFAutoNetworkHeader extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setName(String value)
+	public void setName(final String value)
 	{
 		setAttribute(AttributeName.NAME, value, null);
 	}
@@ -176,7 +176,7 @@ public abstract class JDFAutoNetworkHeader extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setValue(String value)
+	public void setValue(final String value)
 	{
 		setAttribute(AttributeName.VALUE, value, null);
 	}

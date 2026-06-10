@@ -71,14 +71,8 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoMedia.EGrainDirection;
-import org.cip4.jdflib.auto.JDFAutoMedia.EnumGrainDirection;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -113,10 +107,11 @@ public abstract class JDFAutoShapeDef extends JDFResource
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.DIMENSIONS, 0x3333331111l, AttributeInfo.EnumAttributeType.shape, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.FLATDIMENSIONS, 0x3333311111l, AttributeInfo.EnumAttributeType.shape, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.FLUTEDIRECTION, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumFluteDirection.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumFluteDirection.class, 0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.GRAINDIRECTION, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumGrainDirection.getEnum(0), null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.MEDIASIDE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumMediaSide.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumGrainDirection.class, 0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MEDIASIDE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumMediaSide.class, 0), null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.RESOURCEWEIGHT, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
@@ -149,7 +144,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoShapeDef(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoShapeDef(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -161,7 +156,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoShapeDef(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoShapeDef(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -174,7 +169,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoShapeDef(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoShapeDef(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -185,7 +180,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -200,176 +195,50 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for FluteDirection
+	 * Enumeration strings for numFluteDirection
 	 */
 
-	public enum EFluteDirection
+	public enum EnumFluteDirection
 	{
 		Any, Both, ShortEdge, LongEdge, SameDirection, XDirection, YDirection;
 
-		public static EFluteDirection getEnum(String val)
+		public static EnumFluteDirection getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EFluteDirection.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumFluteDirection.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for FluteDirection
+	 * Enumeration strings for numGrainDirection
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumFluteDirection extends ValuedEnum
+	public enum EnumGrainDirection
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Any, Both, ShortEdge, LongEdge, SameDirection, XDirection, YDirection;
 
-		protected EnumFluteDirection(String name)
+		public static EnumGrainDirection getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumGrainDirection.class, val, null);
 		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumFluteDirection getEnum(String enumName)
-		{
-			return (EnumFluteDirection) getEnum(EnumFluteDirection.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumFluteDirection getEnum(int enumValue)
-		{
-			return (EnumFluteDirection) getEnum(EnumFluteDirection.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumFluteDirection.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumFluteDirection.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumFluteDirection.class);
-		}
-
-		/**  */
-		public static final EnumFluteDirection Any = new EnumFluteDirection("Any");
-		/**  */
-		public static final EnumFluteDirection Both = new EnumFluteDirection("Both");
-		/**  */
-		public static final EnumFluteDirection ShortEdge = new EnumFluteDirection("ShortEdge");
-		/**  */
-		public static final EnumFluteDirection LongEdge = new EnumFluteDirection("LongEdge");
-		/**  */
-		public static final EnumFluteDirection SameDirection = new EnumFluteDirection("SameDirection");
-		/**  */
-		public static final EnumFluteDirection XDirection = new EnumFluteDirection("XDirection");
-		/**  */
-		public static final EnumFluteDirection YDirection = new EnumFluteDirection("YDirection");
 	}
 
 	/**
-	 * Enumeration strings for MediaSide
+	 * Enumeration strings for numMediaSide
 	 */
 
-	public enum EMediaSide
+	public enum EnumMediaSide
 	{
 		Front, Back, Both;
 
-		public static EMediaSide getEnum(String val)
+		public static EnumMediaSide getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EMediaSide.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumMediaSide.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for MediaSide
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumMediaSide extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumMediaSide(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumMediaSide getEnum(String enumName)
-		{
-			return (EnumMediaSide) getEnum(EnumMediaSide.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumMediaSide getEnum(int enumValue)
-		{
-			return (EnumMediaSide) getEnum(EnumMediaSide.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumMediaSide.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumMediaSide.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumMediaSide.class);
-		}
-
-		/**  */
-		public static final EnumMediaSide Front = new EnumMediaSide("Front");
-		/**  */
-		public static final EnumMediaSide Back = new EnumMediaSide("Back");
-		/**  */
-		public static final EnumMediaSide Both = new EnumMediaSide("Both");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -381,7 +250,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setArea(double value)
+	public void setArea(final double value)
 	{
 		setAttribute(AttributeName.AREA, value, null);
 	}
@@ -406,7 +275,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCutBox(JDFRectangle value)
+	public void setCutBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.CUTBOX, value, null);
 	}
@@ -419,8 +288,8 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 */
 	public JDFRectangle getCutBox()
 	{
-		String strAttrName = getAttribute(AttributeName.CUTBOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CUTBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -434,7 +303,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDimensions(JDFShape value)
+	public void setDimensions(final JDFShape value)
 	{
 		setAttribute(AttributeName.DIMENSIONS, value, null);
 	}
@@ -447,8 +316,8 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 */
 	public JDFShape getDimensions()
 	{
-		String strAttrName = getAttribute(AttributeName.DIMENSIONS, null, null);
-		JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.DIMENSIONS, null, null);
+		final JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -462,7 +331,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFlatDimensions(JDFShape value)
+	public void setFlatDimensions(final JDFShape value)
 	{
 		setAttribute(AttributeName.FLATDIMENSIONS, value, null);
 	}
@@ -475,8 +344,8 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 */
 	public JDFShape getFlatDimensions()
 	{
-		String strAttrName = getAttribute(AttributeName.FLATDIMENSIONS, null, null);
-		JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.FLATDIMENSIONS, null, null);
+		final JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -490,9 +359,9 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setFluteDirection(EFluteDirection enumVar)
+	public void setFluteDirection(final EnumFluteDirection enumVar)
 	{
-		setAttribute(AttributeName.FLUTEDIRECTION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.FLUTEDIRECTION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -500,35 +369,6 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EFluteDirection getEFluteDirection()
-	{
-		return EFluteDirection.getEnum(getAttribute(AttributeName.FLUTEDIRECTION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute FluteDirection
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute FluteDirection
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetFluteDirection(EFluteDirection) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setFluteDirection(EnumFluteDirection enumVar)
-	{
-		setAttribute(AttributeName.FLUTEDIRECTION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute FluteDirection
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EFluteDirection GetEFluteDirection() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumFluteDirection getFluteDirection()
 	{
 		return EnumFluteDirection.getEnum(getAttribute(AttributeName.FLUTEDIRECTION, null, null));
@@ -544,9 +384,9 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setGrainDirection(EGrainDirection enumVar)
+	public void setGrainDirection(final EnumGrainDirection enumVar)
 	{
-		setAttribute(AttributeName.GRAINDIRECTION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.GRAINDIRECTION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -554,35 +394,6 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EGrainDirection getEGrainDirection()
-	{
-		return EGrainDirection.getEnum(getAttribute(AttributeName.GRAINDIRECTION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute GrainDirection
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute GrainDirection
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetGrainDirection(EGrainDirection) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setGrainDirection(EnumGrainDirection enumVar)
-	{
-		setAttribute(AttributeName.GRAINDIRECTION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute GrainDirection
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EGrainDirection GetEGrainDirection() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumGrainDirection getGrainDirection()
 	{
 		return EnumGrainDirection.getEnum(getAttribute(AttributeName.GRAINDIRECTION, null, null));
@@ -598,9 +409,9 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMediaSide(EMediaSide enumVar)
+	public void setMediaSide(final EnumMediaSide enumVar)
 	{
-		setAttribute(AttributeName.MEDIASIDE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.MEDIASIDE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -608,35 +419,6 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EMediaSide getEMediaSide()
-	{
-		return EMediaSide.getEnum(getAttribute(AttributeName.MEDIASIDE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute MediaSide
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute MediaSide
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetMediaSide(EMediaSide) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setMediaSide(EnumMediaSide enumVar)
-	{
-		setAttribute(AttributeName.MEDIASIDE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute MediaSide
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EMediaSide GetEMediaSide() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumMediaSide getMediaSide()
 	{
 		return EnumMediaSide.getEnum(getAttribute(AttributeName.MEDIASIDE, null, null));
@@ -653,7 +435,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 * @param value the value to set the attribute to
 	 */
 	@Override
-	public void setResourceWeight(double value)
+	public void setResourceWeight(final double value)
 	{
 		setAttribute(AttributeName.RESOURCEWEIGHT, value, null);
 	}
@@ -711,7 +493,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refColorPool(JDFColorPool refTarget)
+	public void refColorPool(final JDFColorPool refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -773,7 +555,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
-	public JDFFileSpec getCreateFileSpec(int iSkip)
+	public JDFFileSpec getCreateFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -785,7 +567,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 * @return JDFFileSpec the element
 	 *         default is getFileSpec(0)
 	 */
-	public JDFFileSpec getFileSpec(int iSkip)
+	public JDFFileSpec getFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -815,7 +597,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -856,7 +638,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMedia(JDFMedia refTarget)
+	public void refMedia(final JDFMedia refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -887,7 +669,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFRuleLength the element
 	 */
-	public JDFRuleLength getCreateRuleLength(int iSkip)
+	public JDFRuleLength getCreateRuleLength(final int iSkip)
 	{
 		return (JDFRuleLength) getCreateElement_JDFElement(ElementName.RULELENGTH, null, iSkip);
 	}
@@ -899,7 +681,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 * @return JDFRuleLength the element
 	 *         default is getRuleLength(0)
 	 */
-	public JDFRuleLength getRuleLength(int iSkip)
+	public JDFRuleLength getRuleLength(final int iSkip)
 	{
 		return (JDFRuleLength) getElement(ElementName.RULELENGTH, null, iSkip);
 	}
@@ -960,7 +742,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refShape(JDFShapeElement refTarget)
+	public void refShape(final JDFShapeElement refTarget)
 	{
 		refElement(refTarget);
 	}

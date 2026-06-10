@@ -77,11 +77,10 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.process.JDFMedia;
-import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         June 7, 2009
  */
 public class WalkMedia extends WalkResource
@@ -121,7 +120,7 @@ public class WalkMedia extends WalkResource
 	boolean updateAttributes(final JDFAttributeMap m)
 	{
 		boolean ret = false;
-		if (EnumUtil.aLessEqualsThanB(EnumVersion.Version_1_6, fixVersion.version))
+		if (JavaEnumUtil.aLessEqualsThanB(EnumVersion.Version_1_6, fixVersion.version))
 		{
 			m.renameKey(AttributeName.USERMEDIATYPE, AttributeName.MEDIATYPEDETAILS);
 			ret = true;
@@ -144,7 +143,9 @@ public class WalkMedia extends WalkResource
 			final int grade = m.getBackGrade();
 			final EnumISOPaperSubstrate ips = JDFMedia.getIsoPaperFromGrade(grade, m.getBackCoating());
 			if (ips != null)
-				m.setBackISOPaperSubstrate(EnumBackISOPaperSubstrate.getEnum(ips.getName()));
+			{
+				m.setBackISOPaperSubstrate(EnumBackISOPaperSubstrate.getEnum(ips.name()));
+			}
 		}
 	}
 

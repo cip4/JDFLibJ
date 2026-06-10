@@ -36,8 +36,8 @@
  */
 package org.cip4.jdflib.extensions.examples;
 
-import org.cip4.jdflib.auto.JDFAutoColorSpaceConversionOp.EOperation;
-import org.cip4.jdflib.auto.JDFAutoMedia.EMediaType;
+import org.cip4.jdflib.auto.JDFAutoColorSpaceConversionOp.EnumOperation;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
@@ -92,7 +92,7 @@ class XJDFResourceExampleTest extends ExampleTest
 	final void testColorantAlias()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("RawName", null, null);
-		xjdfHelper.setTypes(EnumType.ColorSpaceConversion.getName());
+		xjdfHelper.setTypes(EnumType.ColorSpaceConversion.name());
 		final SetHelper cch = xjdfHelper.getCreateSet(ElementName.COLORANTCONTROL, EnumUsage.Input, null);
 		final ResourceHelper ccrh = cch.appendPartition(null, true);
 		final JDFColorantControl colControl = (JDFColorantControl) ccrh.getResource();
@@ -128,35 +128,35 @@ class XJDFResourceExampleTest extends ExampleTest
 		h.addType(EnumType.ColorSpaceConversion).addType(EnumType.Interpreting).addType(EnumType.Rendering).addType(EnumType.DigitalPrinting);
 
 		final SetHelper sint = h.getCreateSet(ElementName.PRINTCONDITION, EnumUsage.Input);
-		final ResourceHelper rint = sint.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
+		final ResourceHelper rint = sint.getCreatePartition(EnumPartIDKey.PrintCondition.name(), "7-Color-gloss", true);
 		final JDFPrintCondition intp = (JDFPrintCondition) rint.getResource();
-		// intp.setAttribute("PrintQuality", EnumPrintQuality.High.getName());
+		// intp.setAttribute("PrintQuality", EnumPrintQuality.High.name());
 		intp.setAttribute("Name", "7-Color");
 
 		final SetHelper smed = h.getCreateSet(ElementName.MEDIA, null);
-		final ResourceHelper rmed = smed.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
+		final ResourceHelper rmed = smed.getCreatePartition(EnumPartIDKey.PrintCondition.name(), "7-Color-gloss", true);
 		final JDFMedia med = (JDFMedia) rmed.getResource();
-		med.setMediaType(EMediaType.Paper);
+		med.setMediaType(EnumMediaType.Paper);
 
 		final SetHelper scomp = h.getCreateSet(ElementName.COMPONENT, EnumUsage.Input);
-		final ResourceHelper rcomp = scomp.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
+		final ResourceHelper rcomp = scomp.getCreatePartition(EnumPartIDKey.PrintCondition.name(), "7-Color-gloss", true);
 		final JDFComponent comp = (JDFComponent) rcomp.getResource();
 		comp.setAttribute("MediaRef", rmed.ensureID());
 
 		final SetHelper scol = h.getCreateSet(ElementName.COLOR, EnumUsage.Input);
 		for (final String sep : JDFSeparationList.SEPARATIONS_CMYK)
 		{
-			final ResourceHelper rcol = scol.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
+			final ResourceHelper rcol = scol.getCreatePartition(EnumPartIDKey.PrintCondition.name(), "7-Color-gloss", true);
 			rcol.ensurePart(AttributeName.SEPARATION, sep);
 			final JDFColor col = (JDFColor) rcol.getResource();
 			col.setAttribute(XJDFConstants.PrintStandard, "7-Color");
 		}
 
 		final SetHelper scsp = h.getCreateSet(ElementName.COLORSPACECONVERSIONPARAMS, EnumUsage.Input);
-		final ResourceHelper rcsp = scsp.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
+		final ResourceHelper rcsp = scsp.getCreatePartition(EnumPartIDKey.PrintCondition.name(), "7-Color-gloss", true);
 		final JDFColorSpaceConversionParams csp = (JDFColorSpaceConversionParams) rcsp.getResource();
 		final JDFColorSpaceConversionOp op = csp.appendColorSpaceConversionOp();
-		op.setOperation(EOperation.Convert);
+		op.setOperation(EnumOperation.Convert);
 		final JDFFileSpec filespec = csp.appendFileSpec();
 		filespec.setURL("file://7-color-gloss.icc");
 
@@ -176,12 +176,12 @@ class XJDFResourceExampleTest extends ExampleTest
 		h.addType(EnumType.ColorSpaceConversion).addType(EnumType.Interpreting).addType(EnumType.Rendering).addType(EnumType.DigitalPrinting);
 
 		final SetHelper smed = h.getCreateSet(ElementName.MEDIA, null);
-		final ResourceHelper rmed = smed.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
+		final ResourceHelper rmed = smed.getCreatePartition(EnumPartIDKey.PrintCondition.name(), "7-Color-gloss", true);
 		final JDFMedia med = (JDFMedia) rmed.getResource();
-		med.setMediaType(EMediaType.Paper);
+		med.setMediaType(EnumMediaType.Paper);
 
 		final SetHelper scomp = h.getCreateSet(ElementName.COMPONENT, EnumUsage.Input);
-		final ResourceHelper rcomp = scomp.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
+		final ResourceHelper rcomp = scomp.getCreatePartition(EnumPartIDKey.PrintCondition.name(), "7-Color-gloss", true);
 		final JDFComponent comp = (JDFComponent) rcomp.getResource();
 		comp.setAttribute("MediaRef", rmed.ensureID());
 
@@ -193,10 +193,10 @@ class XJDFResourceExampleTest extends ExampleTest
 		pc.setAttribute(AttributeName.PRINTQUALITY, "High");
 
 		final SetHelper scsp = h.getCreateSet(ElementName.COLORSPACECONVERSIONPARAMS, EnumUsage.Input);
-		final ResourceHelper rcsp = scsp.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
+		final ResourceHelper rcsp = scsp.getCreatePartition(EnumPartIDKey.PrintCondition.name(), "7-Color-gloss", true);
 		final JDFColorSpaceConversionParams csp = (JDFColorSpaceConversionParams) rcsp.getResource();
 		final JDFColorSpaceConversionOp op = csp.appendColorSpaceConversionOp();
-		op.setOperation(EOperation.Convert);
+		op.setOperation(EnumOperation.Convert);
 		final JDFFileSpec filespec = csp.appendFileSpec();
 		filespec.setURL("file://7-color-gloss.icc");
 
@@ -220,7 +220,7 @@ class XJDFResourceExampleTest extends ExampleTest
 		for (final String pc : pcs)
 		{
 			final SetHelper sint = h.getCreateSet(ElementName.PRINTCONDITION, EnumUsage.Input);
-			final ResourceHelper rint = sint.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), pc, true);
+			final ResourceHelper rint = sint.getCreatePartition(EnumPartIDKey.PrintCondition.name(), pc, true);
 			final JDFResource rpc = (JDFResource) rint.getResource();
 			if (pc.startsWith("7"))
 			{
@@ -239,14 +239,14 @@ class XJDFResourceExampleTest extends ExampleTest
 		final SetHelper scomp = h.getCreateSet(ElementName.COMPONENT, EnumUsage.Input);
 		for (final String pc : pcs)
 		{
-			final ResourceHelper rmed = smed.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), pc, true);
+			final ResourceHelper rmed = smed.getCreatePartition(EnumPartIDKey.PrintCondition.name(), pc, true);
 			final JDFMedia med = (JDFMedia) rmed.getResource();
-			med.setMediaType(EMediaType.Paper);
+			med.setMediaType(EnumMediaType.Paper);
 			final String coating = StringUtil.token(pc, -1, "-");
 			rmed.setExternalID("Media-" + coating);
 			med.setAttribute(XJDFConstants.Coating, coating);
 
-			final ResourceHelper rcomp = scomp.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), pc, true);
+			final ResourceHelper rcomp = scomp.getCreatePartition(EnumPartIDKey.PrintCondition.name(), pc, true);
 			final JDFComponent comp = (JDFComponent) rcomp.getResource();
 			comp.setAttribute("MediaRef", rmed.ensureID());
 
@@ -255,10 +255,10 @@ class XJDFResourceExampleTest extends ExampleTest
 		final SetHelper scsp = h.getCreateSet(ElementName.COLORSPACECONVERSIONPARAMS, EnumUsage.Input);
 		for (final String pc : pcs)
 		{
-			final ResourceHelper rcsp = scsp.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), pc, true);
+			final ResourceHelper rcsp = scsp.getCreatePartition(EnumPartIDKey.PrintCondition.name(), pc, true);
 			final JDFColorSpaceConversionParams csp = (JDFColorSpaceConversionParams) rcsp.getResource();
 			final JDFColorSpaceConversionOp op = csp.appendColorSpaceConversionOp();
-			op.setOperation(EOperation.Convert);
+			op.setOperation(EnumOperation.Convert);
 			final JDFFileSpec filespec = csp.appendFileSpec();
 			filespec.setURL("file://" + pc + ".icc");
 		}
@@ -276,7 +276,7 @@ class XJDFResourceExampleTest extends ExampleTest
 		for (int i = 0; i < 2; i++)
 		{
 			final XJDFHelper xjdfHelper = new XJDFHelper("Sparse", null, null);
-			xjdfHelper.setTypes(EnumType.ManualLabor.getName());
+			xjdfHelper.setTypes(EnumType.ManualLabor.name());
 			final SetHelper sh = xjdfHelper.appendResourceSet(ElementName.MANUALLABORPARAMS, EnumUsage.Input);
 			final JDFAttributeMap sheetMap = new JDFAttributeMap(AttributeName.SHEETNAME, i == 0 ? "SGood" : "SBad");
 			if (i == 0)

@@ -100,6 +100,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -112,7 +113,6 @@ import org.w3c.dom.Attr;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
  *         long before June 7, 2009
  */
 public class JDFResourcePool extends JDFPool
@@ -121,7 +121,7 @@ public class JDFResourcePool extends JDFPool
 
 	/**
 	 * Constructor for JDFResourcePool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -132,7 +132,7 @@ public class JDFResourcePool extends JDFPool
 
 	/**
 	 * Constructor for JDFResourcePool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -144,7 +144,7 @@ public class JDFResourcePool extends JDFPool
 
 	/**
 	 * Constructor for JDFResourcePool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -267,7 +267,7 @@ public class JDFResourcePool extends JDFPool
 	/**
 	 * gets the elemeinfotable for the resourcelinkpool based on this pool<br>
 	 * Note that the cardinality is not updated and that the pool should be used for version checks only
-	 * 
+	 *
 	 * @return ElemInfoTable[] the resourcelinkpools elemeninfotable
 	 */
 	public static ElemInfoTable[] getLinkInfoTable()
@@ -282,7 +282,7 @@ public class JDFResourcePool extends JDFPool
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -293,7 +293,7 @@ public class JDFResourcePool extends JDFPool
 
 	/**
 	 * GetResIds - returns a set of all IDs of the resources that are in this pool
-	 * 
+	 *
 	 * @return Vector - all IDs of the pool childs
 	 */
 	public VString getResIds()
@@ -305,8 +305,8 @@ public class JDFResourcePool extends JDFPool
 		final int l = nl.size();
 		for (int i = 0; i < l; i++)
 		{
-			final String s = ((JDFResource) nl.elementAt(i)).getAttribute(AttributeName.ID);
-			if (s.equals(JDFConstants.EMPTYSTRING))
+			final String s = nl.elementAt(i).getAttribute(AttributeName.ID);
+			if (s.equals(JDFCoreConstants.EMPTYSTRING))
 			{
 				continue;
 			}
@@ -319,11 +319,10 @@ public class JDFResourcePool extends JDFPool
 	 * Method GetResource.
 	 * <p>
 	 * default: GetResource(name, 0, JDFConstants.EMPTYSTRING)
-	 * 
-	 * @param strName name of the resource to look for
-	 * @param i the index of the child, or -1 to create a new one
+	 *
+	 * @param strName      name of the resource to look for
+	 * @param i            the index of the child, or -1 to create a new one
 	 * @param nameSpaceURI the namespace to search in
-	 * 
 	 * @return JDFResource: the resource you were looking for, <code>null</code> if not found
 	 */
 	public JDFResource getResource(final String strName, final int i, final String nameSpaceURI)
@@ -340,9 +339,8 @@ public class JDFResourcePool extends JDFPool
 
 	/**
 	 * append an existing resource by moving it here
-	 * 
+	 *
 	 * @param res name of the resource to append
-	 * 
 	 * @return JDFResource: the appended resource
 	 */
 	public JDFResource appendResource(final JDFResource res)
@@ -354,11 +352,10 @@ public class JDFResourcePool extends JDFPool
 	 * append a resource
 	 * <p>
 	 * default: AppendResource(name, resClass, null)
-	 * 
-	 * @param strName name of the resource to append
-	 * @param resClass class of the resource to append
+	 *
+	 * @param strName      name of the resource to append
+	 * @param resClass     class of the resource to append
 	 * @param nameSpaceURI the namespace for the resource
-	 * 
 	 * @return JDFResource: the appended resource
 	 */
 	public JDFResource appendResource(final String strName, final JDFResource.EnumResourceClass resClass, final String nameSpaceURI)
@@ -380,15 +377,13 @@ public class JDFResourcePool extends JDFPool
 	 * copies a resource recursively, optionally fixes status flags and locks in the source resource
 	 * <p>
 	 * default: copyResource(r, null, new VJDFAttributeMap(), null)
-	 * 
-	 * @param r the resource to copy into this
+	 *
+	 * @param r          the resource to copy into this
 	 * @param copyStatus rw or ro
-	 * @param vParts part map vector of the partitions to copy
-	 * @param spawnID the spawnID of the spawning that initiated the copy
+	 * @param vParts     part map vector of the partitions to copy
+	 * @param spawnID    the spawnID of the spawning that initiated the copy
 	 * @return VString: vector of resource names that have been copied
 	 * @deprecated use JDFNode.copySpawnedResources
-	 * 
-	 * 
 	 */
 	@SuppressWarnings("unchecked")
 	@Deprecated
@@ -455,13 +450,8 @@ public class JDFResourcePool extends JDFPool
 		{
 			final String id = vs.elementAt(i);
 			// the referenced resource is in this pool - continue
-			if (ss.contains(id))
-			{
-				continue;
-			}
-
 			// the referenced resource has already been merged in - continue
-			if (v.contains(id))
+			if (ss.contains(id) || v.contains(id))
 			{
 				continue;
 			}
@@ -483,12 +473,11 @@ public class JDFResourcePool extends JDFPool
 
 	/**
 	 * Method GetPoolChildren Gets all children with the attribute name,mAttrib, nameSpaceURI out of the pool
-	 * 
-	 * @param strName - name of the child
-	 * @param mAttrib - a attribute to search for
+	 *
+	 * @param strName      - name of the child
+	 * @param mAttrib      - a attribute to search for
 	 * @param nameSpaceURI
 	 * @return VElement - a vector with all elements in the pool matching the conditions
-	 * 
 	 *         default: GetPoolChildren(null, null, null)
 	 */
 	public VElement getPoolChildren(final String strName, final JDFAttributeMap mAttrib, final String nameSpaceURI)
@@ -499,9 +488,9 @@ public class JDFResourcePool extends JDFPool
 	/**
 	 * Method getPoolChildren_JDFResourcePool<br>
 	 * Gets all children with the attributes <code>name, mAttrib, nameSpaceURI</code> from the pool
-	 * 
-	 * @param strName name of the child
-	 * @param mAttrib attribute to search for
+	 *
+	 * @param strName      name of the child
+	 * @param mAttrib      attribute to search for
 	 * @param nameSpaceURI namespace to search in
 	 * @return VElement - a vector with all elements in the pool matching the conditions
 	 */
@@ -524,10 +513,10 @@ public class JDFResourcePool extends JDFPool
 	 * get a child resource from the pool matching the parameters
 	 * <p>
 	 * default: GetPoolChild(i, null, null, null)
-	 * 
-	 * @param i the index of the child or -1 to make a new one.
-	 * @param strName the name of the element
-	 * @param mAttrib the attribute of the element
+	 *
+	 * @param i            the index of the child or -1 to make a new one.
+	 * @param strName      the name of the element
+	 * @param mAttrib      the attribute of the element
 	 * @param nameSpaceURI the namespace to search in
 	 * @return JDFResource: the pool child matching the conditions above
 	 */
@@ -539,10 +528,10 @@ public class JDFResourcePool extends JDFPool
 	/**
 	 * Method getPoolChild_JDFResourcePool<br>
 	 * get a child resource from the pool matching the parameters
-	 * 
-	 * @param i the index of the child or -1 to make a new one.
-	 * @param strName the name of the element
-	 * @param mAttrib the attribute of the element
+	 *
+	 * @param i            the index of the child or -1 to make a new one.
+	 * @param strName      the name of the element
+	 * @param mAttrib      the attribute of the element
 	 * @param nameSpaceURI the namespace to search in
 	 * @return JDFResource: the pool child matching the above conditions
 	 */
@@ -572,9 +561,9 @@ public class JDFResourcePool extends JDFPool
 	 * return a vector of unknown element nodenames
 	 * <p>
 	 * default: GetUnknownElements(true, 99999999)
-	 * 
+	 *
 	 * @param bIgnorePrivate ignores private elements. !Must be here to provide correct validation
-	 * @param nMax - max entries in vector
+	 * @param nMax           - max entries in vector
 	 * @return Vector of unknown element nodenames
 	 */
 	@Override
@@ -586,7 +575,7 @@ public class JDFResourcePool extends JDFPool
 
 	/**
 	 * returns a the resource with ID=<code>id</code>, if it is in this pool
-	 * 
+	 *
 	 * @param id the ID of the requested resource
 	 * @return JDFResource: the resource, empty element if it does not exist
 	 */
@@ -628,9 +617,9 @@ public class JDFResourcePool extends JDFPool
 
 	/**
 	 * get refElements
-	 * 
+	 *
 	 * @param vDoneRefs used internally for recursion
-	 * @param bRecurse if true, also return recursively linked IDs
+	 * @param bRecurse  if true, also return recursively linked IDs
 	 * @return HashSet: the vector of referenced resource IDs
 	 */
 	@Override
@@ -652,7 +641,7 @@ public class JDFResourcePool extends JDFPool
 
 	/**
 	 * get all completely unlinked resources
-	 * 
+	 *
 	 * @return V the vector of unlinked resources.
 	 */
 	public VElement getUnlinkedResources()

@@ -88,7 +88,8 @@ public class JDFInkZoneProfile extends JDFAutoInkZoneProfile
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFInkZoneProfile(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFInkZoneProfile(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

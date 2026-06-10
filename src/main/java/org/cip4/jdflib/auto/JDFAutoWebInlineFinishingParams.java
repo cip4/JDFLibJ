@@ -106,7 +106,7 @@ public abstract class JDFAutoWebInlineFinishingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoWebInlineFinishingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoWebInlineFinishingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoWebInlineFinishingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoWebInlineFinishingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoWebInlineFinishingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoWebInlineFinishingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoWebInlineFinishingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoWebInlineFinishingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -142,7 +142,7 @@ public abstract class JDFAutoWebInlineFinishingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -188,7 +188,7 @@ public abstract class JDFAutoWebInlineFinishingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFFolderProduction the element
 	 */
-	public JDFFolderProduction getCreateFolderProduction(int iSkip)
+	public JDFFolderProduction getCreateFolderProduction(final int iSkip)
 	{
 		return (JDFFolderProduction) getCreateElement_JDFElement(ElementName.FOLDERPRODUCTION, null, iSkip);
 	}
@@ -200,7 +200,7 @@ public abstract class JDFAutoWebInlineFinishingParams extends JDFResource
 	 * @return JDFFolderProduction the element
 	 *         default is getFolderProduction(0)
 	 */
-	public JDFFolderProduction getFolderProduction(int iSkip)
+	public JDFFolderProduction getFolderProduction(final int iSkip)
 	{
 		return (JDFFolderProduction) getElement(ElementName.FOLDERPRODUCTION, null, iSkip);
 	}

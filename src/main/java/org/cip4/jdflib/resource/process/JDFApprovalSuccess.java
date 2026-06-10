@@ -84,8 +84,7 @@ import org.w3c.dom.DOMException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * before June 7, 2009
+ *         before June 7, 2009
  */
 public class JDFApprovalSuccess extends JDFAutoApprovalSuccess
 {
@@ -93,10 +92,10 @@ public class JDFApprovalSuccess extends JDFAutoApprovalSuccess
 
 	/**
 	 * Constructor for JDFApprovalSuccess
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
-	 * 
 	 */
 	public JDFApprovalSuccess(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
@@ -105,6 +104,7 @@ public class JDFApprovalSuccess extends JDFAutoApprovalSuccess
 
 	/**
 	 * Constructor for JDFApprovalSuccess
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -117,13 +117,15 @@ public class JDFApprovalSuccess extends JDFAutoApprovalSuccess
 
 	/**
 	 * Constructor for JDFApprovalSuccess
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFApprovalSuccess(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFApprovalSuccess(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -132,7 +134,7 @@ public class JDFApprovalSuccess extends JDFAutoApprovalSuccess
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

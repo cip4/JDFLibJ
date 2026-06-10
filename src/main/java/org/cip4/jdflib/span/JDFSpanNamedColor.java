@@ -77,7 +77,6 @@
  */
 package org.cip4.jdflib.span;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.w3c.dom.DOMException;
 
@@ -87,39 +86,39 @@ public class JDFSpanNamedColor extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanNamedColor
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanNamedColor(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanNamedColor(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanNamedColor
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanNamedColor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanNamedColor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanNamedColor
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanNamedColor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanNamedColor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -129,18 +128,18 @@ public class JDFSpanNamedColor extends JDFEnumerationSpan
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumNamedColor.getEnum(0);
+		return EnumNamedColor.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

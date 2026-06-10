@@ -140,7 +140,7 @@ public class JDFParser extends XMLParser
 	/**
 	 * parseFile - parse a file specified by strFile
 	 *
-	 * @param strFile link to the document to parse
+	 * @param strFile        link to the document to parse
 	 * @param schemaLocation link to the schema to use, null if no validation required
 	 * @return JDFDoc or null if File not found default: parseFile(strFile,null)
 	 * @deprecated set the parser members instead
@@ -180,19 +180,18 @@ public class JDFParser extends XMLParser
 	 * This is the sophisticated parse function, where validation, error handlers et al. can be set
 	 *
 	 * @param inSource
-	 * @param schemaLocation schema location, null if no validation required
+	 * @param schemaLocation    schema location, null if no validation required
 	 * @param documentClassName
 	 * @param errorHandler
-	 * @param bEraseEmpty if true empty nodes are erased after parsing
-	 * @param bDoNamespaces if false a second parse is done, where namespaces are ignored
-	 *
+	 * @param bEraseEmpty       if true empty nodes are erased after parsing
+	 * @param bDoNamespaces     if false a second parse is done, where namespaces are ignored
 	 * @return JDFDoc
-	 *
 	 *         default: parseInputSource(inSource, null, DocumentJDFImpl.class.getName(), null, true, true);
 	 * @deprecated set the parser members instead
 	 */
 	@Deprecated
-	public JDFDoc parseInputSource(final InputSource inSource, final String schemaLocation, final String documentClassName, final ErrorHandler errorHandler, final boolean bEraseEmpty, final boolean bDoNamespaces)
+	public JDFDoc parseInputSource(final InputSource inSource, final String schemaLocation, final String documentClassName, final ErrorHandler errorHandler,
+			final boolean bEraseEmpty, final boolean bDoNamespaces)
 	{
 		JDFDoc doc = null;
 		if (errorHandler instanceof XMLErrorHandler)
@@ -293,7 +292,8 @@ public class JDFParser extends XMLParser
 	 *      org.apache.xerces.xni.Augmentations)
 	 */
 	@Override
-	public void startDocument(final XMLLocator locator, final String encoding, final NamespaceContext namespaceContext, final Augmentations augs) throws XNIException
+	public void startDocument(final XMLLocator locator, final String encoding, final NamespaceContext namespaceContext, final Augmentations augs)
+			throws XNIException
 	{
 		super.startDocument(locator, encoding, namespaceContext, augs);
 		final DocumentJDFImpl memberDocument = (DocumentJDFImpl) getDocument();
@@ -308,7 +308,7 @@ public class JDFParser extends XMLParser
 		final boolean bJDFRoot = (root instanceof JDFNode) || (root instanceof JDFJMF);
 		if (bJDFRoot && !JDFConstants.JDFNAMESPACE.equals(namespaceURI) && !isXJDF)
 		{
-			root.setAttribute(JDFConstants.XMLNS, JDFConstants.JDFNAMESPACE);
+			root.setAttribute(JDFCoreConstants.XMLNS, JDFConstants.JDFNAMESPACE);
 		}
 	}
 

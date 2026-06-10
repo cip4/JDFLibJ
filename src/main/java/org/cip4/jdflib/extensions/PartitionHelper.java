@@ -73,8 +73,8 @@ import org.cip4.jdflib.core.KElement;
 /**
  * justr created as not to break anything...
  * 
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
-  * @deprecated use {@link ResourceHelper}
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @deprecated use {@link ResourceHelper}
  */
 @Deprecated
 public class PartitionHelper extends ResourceHelper
@@ -84,7 +84,7 @@ public class PartitionHelper extends ResourceHelper
 	 * @param audit
 	 */
 	@Deprecated
-	public PartitionHelper(KElement audit)
+	public PartitionHelper(final KElement audit)
 	{
 		super(audit);
 	}

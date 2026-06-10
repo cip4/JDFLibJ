@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -99,7 +94,7 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.GLUINGTECHNIQUE, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumGluingTechnique.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumGluingTechnique.class, 0), null);
 	}
 
 	@Override
@@ -126,7 +121,7 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGlueApplication(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoGlueApplication(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -138,7 +133,7 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGlueApplication(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoGlueApplication(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -151,7 +146,7 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoGlueApplication(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoGlueApplication(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -162,7 +157,7 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -177,89 +172,22 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for GluingTechnique
+	 * Enumeration strings for numGluingTechnique
 	 */
 
-	public enum EGluingTechnique
+	public enum EnumGluingTechnique
 	{
 		SpineGluing, SideGluingFront, SideGluingBack;
 
-		public static EGluingTechnique getEnum(String val)
+		public static EnumGluingTechnique getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EGluingTechnique.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumGluingTechnique.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for GluingTechnique
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumGluingTechnique extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumGluingTechnique(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumGluingTechnique getEnum(String enumName)
-		{
-			return (EnumGluingTechnique) getEnum(EnumGluingTechnique.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumGluingTechnique getEnum(int enumValue)
-		{
-			return (EnumGluingTechnique) getEnum(EnumGluingTechnique.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumGluingTechnique.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumGluingTechnique.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumGluingTechnique.class);
-		}
-
-		/**  */
-		public static final EnumGluingTechnique SpineGluing = new EnumGluingTechnique("SpineGluing");
-		/**  */
-		public static final EnumGluingTechnique SideGluingFront = new EnumGluingTechnique("SideGluingFront");
-		/**  */
-		public static final EnumGluingTechnique SideGluingBack = new EnumGluingTechnique("SideGluingBack");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -271,9 +199,9 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setGluingTechnique(EGluingTechnique enumVar)
+	public void setGluingTechnique(final EnumGluingTechnique enumVar)
 	{
-		setAttribute(AttributeName.GLUINGTECHNIQUE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.GLUINGTECHNIQUE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -281,35 +209,6 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EGluingTechnique getEGluingTechnique()
-	{
-		return EGluingTechnique.getEnum(getAttribute(AttributeName.GLUINGTECHNIQUE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute GluingTechnique
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute GluingTechnique
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetGluingTechnique(EGluingTechnique) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setGluingTechnique(EnumGluingTechnique enumVar)
-	{
-		setAttribute(AttributeName.GLUINGTECHNIQUE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute GluingTechnique
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EGluingTechnique GetEGluingTechnique() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumGluingTechnique getGluingTechnique()
 	{
 		return EnumGluingTechnique.getEnum(getAttribute(AttributeName.GLUINGTECHNIQUE, null, null));

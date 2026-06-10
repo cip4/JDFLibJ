@@ -84,7 +84,6 @@ import org.w3c.dom.DOMException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
  *         May 14, 2009
  */
 public class JDFRepeatDesc extends JDFAutoRepeatDesc
@@ -93,11 +92,10 @@ public class JDFRepeatDesc extends JDFAutoRepeatDesc
 
 	/**
 	 * Constructor for JDFRepeatDesc
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
-	 * 
 	 */
 	public JDFRepeatDesc(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
@@ -106,12 +104,11 @@ public class JDFRepeatDesc extends JDFAutoRepeatDesc
 
 	/**
 	 * Constructor for JDFRepeatDesc
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
-	 * 
 	 */
 	public JDFRepeatDesc(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
@@ -120,15 +117,15 @@ public class JDFRepeatDesc extends JDFAutoRepeatDesc
 
 	/**
 	 * Constructor for JDFRepeatDesc
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
-	 * 
 	 */
-	public JDFRepeatDesc(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFRepeatDesc(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -146,7 +143,7 @@ public class JDFRepeatDesc extends JDFAutoRepeatDesc
 	 */
 	/**
 	 * (36) set attribute UseBleed
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 * @deprecated use setUseBleed
 	 */
@@ -158,7 +155,7 @@ public class JDFRepeatDesc extends JDFAutoRepeatDesc
 
 	/**
 	 * (18) get boolean attribute UseBleed
-	 * 
+	 *
 	 * @return boolean the value of the attribute
 	 * @deprecated use getUseBleed
 	 */

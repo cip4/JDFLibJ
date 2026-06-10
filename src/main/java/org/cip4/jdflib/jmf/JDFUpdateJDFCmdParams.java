@@ -21,43 +21,43 @@ public class JDFUpdateJDFCmdParams extends JDFAutoUpdateJDFCmdParams
 
 	/**
 	 * Constructor for JDFUpdateJDFCmdParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFUpdateJDFCmdParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFUpdateJDFCmdParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFUpdateJDFCmdParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFUpdateJDFCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFUpdateJDFCmdParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFUpdateJDFCmdParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFUpdateJDFCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFUpdateJDFCmdParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * toString()
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

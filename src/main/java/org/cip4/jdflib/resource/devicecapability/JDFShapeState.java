@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,22 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFShapeState.java
@@ -141,36 +141,36 @@ public class JDFShapeState extends JDFAbstractState
 
 	/**
 	 * constructor for JDFShapeState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFShapeState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFShapeState(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFShapeState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFShapeState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFShapeState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFShapeState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFShapeState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFShapeState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -180,7 +180,7 @@ public class JDFShapeState extends JDFAbstractState
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -193,7 +193,7 @@ public class JDFShapeState extends JDFAbstractState
 	 * // Attribute getter/ setter
 	 */
 
-	public void setCurrentValue(JDFShape value)
+	public void setCurrentValue(final JDFShape value)
 	{
 		setAttribute(AttributeName.CURRENTVALUE, value.toString(), null);
 	}
@@ -204,13 +204,13 @@ public class JDFShapeState extends JDFAbstractState
 		{
 			return new JDFShape(getAttribute(AttributeName.CURRENTVALUE));
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFShapeState.getCurrentValue: Attribute CURRENTVALUE is not capable to create JDFShape");
 		}
 	}
 
-	public void setDefaultValue(JDFShape value)
+	public void setDefaultValue(final JDFShape value)
 	{
 		setAttribute(AttributeName.DEFAULTVALUE, value.toString(), null);
 	}
@@ -221,13 +221,13 @@ public class JDFShapeState extends JDFAbstractState
 		{
 			return new JDFShape(getAttribute(AttributeName.DEFAULTVALUE));
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFShapeState.getDefaultValue: Attribute DEFAULTVALUE is not capable to create JDFShape");
 		}
 	}
 
-	public void setAllowedValueList(JDFShapeRangeList value)
+	public void setAllowedValueList(final JDFShapeRangeList value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUELIST, value.toString());
 	}
@@ -239,13 +239,13 @@ public class JDFShapeState extends JDFAbstractState
 			final String attribute = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
 			return attribute == null ? null : new JDFShapeRangeList(attribute);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFShapeState.getAllowedValueList: Attribute ALLOWEDVALUELIST is not capable to create JDFShapeRangeList");
 		}
 	}
 
-	public void setPresentValueList(JDFShapeRangeList value)
+	public void setPresentValueList(final JDFShapeRangeList value)
 	{
 		setAttribute(AttributeName.PRESENTVALUELIST, value.toString(), null);
 	}
@@ -258,7 +258,7 @@ public class JDFShapeState extends JDFAbstractState
 			{
 				return new JDFShapeRangeList(getAttribute(AttributeName.PRESENTVALUELIST));
 			}
-			catch (DataFormatException e)
+			catch (final DataFormatException e)
 			{
 				throw new JDFException("JDFShapeState.getPresentValueList: Attribute PRESENTVALUELIST is not capable to create JDFShapeRangeList");
 			}
@@ -266,7 +266,7 @@ public class JDFShapeState extends JDFAbstractState
 		return getAllowedValueList();
 	}
 
-	public void setAllowedX(JDFNumberRangeList value)
+	public void setAllowedX(final JDFNumberRangeList value)
 	{
 		setAttribute(AttributeName.ALLOWEDX, value.toString(), null);
 	}
@@ -277,13 +277,13 @@ public class JDFShapeState extends JDFAbstractState
 		{
 			return new JDFNumberRangeList(getAttribute(AttributeName.ALLOWEDX));
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFShapeState.getAllowedX: Attribute ALLOWEDX is not capable to create JDFNumberRangeList");
 		}
 	}
 
-	public void setPresentX(JDFNumberRangeList value)
+	public void setPresentX(final JDFNumberRangeList value)
 	{
 		setAttribute(AttributeName.PRESENTX, value.toString(), null);
 	}
@@ -296,7 +296,7 @@ public class JDFShapeState extends JDFAbstractState
 			{
 				return new JDFNumberRangeList(getAttribute(AttributeName.PRESENTX));
 			}
-			catch (DataFormatException e)
+			catch (final DataFormatException e)
 			{
 				throw new JDFException("JDFShapeState.getPresentX: Attribute PRESENTX is not capable to create JDFNumberRangeList");
 			}
@@ -304,7 +304,7 @@ public class JDFShapeState extends JDFAbstractState
 		return getAllowedX();
 	}
 
-	public void setAllowedY(JDFNumberRangeList value)
+	public void setAllowedY(final JDFNumberRangeList value)
 	{
 		setAttribute(AttributeName.ALLOWEDY, value.toString(), null);
 	}
@@ -315,13 +315,13 @@ public class JDFShapeState extends JDFAbstractState
 		{
 			return new JDFNumberRangeList(getAttribute(AttributeName.ALLOWEDY));
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFShapeState.getAllowedY: Attribute ALLOWEDY is not capable to create JDFNumberRangeList");
 		}
 	}
 
-	public void setPresentY(JDFNumberRangeList value)
+	public void setPresentY(final JDFNumberRangeList value)
 	{
 		setAttribute(AttributeName.PRESENTY, value.toString(), null);
 	}
@@ -334,7 +334,7 @@ public class JDFShapeState extends JDFAbstractState
 			{
 				return new JDFNumberRangeList(getAttribute(AttributeName.PRESENTY));
 			}
-			catch (DataFormatException e)
+			catch (final DataFormatException e)
 			{
 				throw new JDFException("JDFShapeState.getPresentY: Attribute PRESENTY is not capable to create JDFNumberRangeList");
 			}
@@ -342,7 +342,7 @@ public class JDFShapeState extends JDFAbstractState
 		return getAllowedY();
 	}
 
-	public void setAllowedZ(JDFNumberRangeList value)
+	public void setAllowedZ(final JDFNumberRangeList value)
 	{
 		setAttribute(AttributeName.ALLOWEDZ, value.toString(), null);
 	}
@@ -353,13 +353,13 @@ public class JDFShapeState extends JDFAbstractState
 		{
 			return new JDFNumberRangeList(getAttribute(AttributeName.ALLOWEDZ));
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFShapeState.getAllowedZ: Attribute ALLOWEDZ is not capable to create JDFNumberRangeList");
 		}
 	}
 
-	public void setPresentZ(JDFNumberRangeList value)
+	public void setPresentZ(final JDFNumberRangeList value)
 	{
 		setAttribute(AttributeName.PRESENTZ, value.toString(), null);
 	}
@@ -372,7 +372,7 @@ public class JDFShapeState extends JDFAbstractState
 			{
 				return new JDFNumberRangeList(getAttribute(AttributeName.PRESENTZ));
 			}
-			catch (DataFormatException e)
+			catch (final DataFormatException e)
 			{
 				throw new JDFException("JDFShapeState.getPresentZ: Attribute PRESENTZ is not capable to create JDFNumberRangeList");
 			}
@@ -380,7 +380,7 @@ public class JDFShapeState extends JDFAbstractState
 		return getAllowedZ();
 	}
 
-	public void setAllowedValueMax(JDFShape value)
+	public void setAllowedValueMax(final JDFShape value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUEMAX, value.toString(), null);
 	}
@@ -391,13 +391,13 @@ public class JDFShapeState extends JDFAbstractState
 		{
 			return new JDFShape(getAttribute(AttributeName.ALLOWEDVALUEMAX));
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFShapeState.getAllowedValueMax: Attribute ALLOWEDVALUEMAX is not capable to create JDFShape");
 		}
 	}
 
-	public void setPresentValueMax(JDFShape value)
+	public void setPresentValueMax(final JDFShape value)
 	{
 		setAttribute(AttributeName.PRESENTVALUEMAX, value.toString(), null);
 	}
@@ -410,7 +410,7 @@ public class JDFShapeState extends JDFAbstractState
 			{
 				return new JDFShape(getAttribute(AttributeName.PRESENTVALUEMAX));
 			}
-			catch (DataFormatException e)
+			catch (final DataFormatException e)
 			{
 				throw new JDFException("JDFShapeState.getPresentValueMax: Attribute PRESENTVALUEMAX is not capable to create JDFShape");
 			}
@@ -419,7 +419,7 @@ public class JDFShapeState extends JDFAbstractState
 		return getAllowedValueMax();
 	}
 
-	public void setAllowedValueMin(JDFShape value)
+	public void setAllowedValueMin(final JDFShape value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUEMIN, value.toString(), null);
 	}
@@ -430,13 +430,13 @@ public class JDFShapeState extends JDFAbstractState
 		{
 			return new JDFShape(getAttribute(AttributeName.ALLOWEDVALUEMIN));
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFShapeState.setAllowedValueMin: Attribute ALLOWEDVALUEMIN is not capable to create JDFShape");
 		}
 	}
 
-	public void setPresentValueMin(JDFShape value)
+	public void setPresentValueMin(final JDFShape value)
 	{
 		setAttribute(AttributeName.PRESENTVALUEMIN, value.toString(), null);
 	}
@@ -449,7 +449,7 @@ public class JDFShapeState extends JDFAbstractState
 			{
 				return new JDFShape(getAttribute(AttributeName.PRESENTVALUEMIN));
 			}
-			catch (DataFormatException dfe)
+			catch (final DataFormatException dfe)
 			{
 				throw new JDFException("JDFShapeState.getPresentValueMin: Attribute PRESENTVALUEMIN is not capable to create JDFShape");
 			}
@@ -463,23 +463,25 @@ public class JDFShapeState extends JDFAbstractState
 	 */
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java
 	 * .lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
 	 */
 	@Override
-	public void addValue(String value, EnumFitsValue testlists)
+	public void addValue(final String value, final EnumFitsValue testlists)
 	{
 		if (fitsValue(value, testlists))
+		{
 			return;
+		}
 
 		JDFShape rect;
 		try
 		{
 			rect = new JDFShape(value);
 		}
-		catch (DataFormatException x)
+		catch (final DataFormatException x)
 		{
 			return; // nop for bad values
 		}
@@ -487,7 +489,9 @@ public class JDFShapeState extends JDFAbstractState
 		{
 			JDFShapeRangeList list = getAllowedValueList();
 			if (list == null)
+			{
 				list = new JDFShapeRangeList();
+			}
 			list.append(rect);
 			setAllowedValueList(list);
 		}
@@ -495,7 +499,9 @@ public class JDFShapeState extends JDFAbstractState
 		{
 			JDFShapeRangeList list = getPresentValueList();
 			if (list == null || !hasAttribute(AttributeName.PRESENTVALUELIST))
+			{
 				list = new JDFShapeRangeList();
+			}
 			list.append(rect);
 			setPresentValueList(list);
 		}
@@ -504,30 +510,31 @@ public class JDFShapeState extends JDFAbstractState
 	/**
 	 * fitsValue - checks whether <code>value</code> matches the Allowed/Present
 	 * test lists specified for this State
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *                  value to test
 	 * @param testlists
-	 *            the test lists the value has to match. In this State the test
-	 *            lists are ValueList AND ValueMod.<br>
-	 *            Choose one of two values: FitsValue_Allowed or
-	 *            FitsValue_Present. (Defaults to Allowed)
-	 * 
+	 *                  the test lists the value has to match. In this State the test
+	 *                  lists are ValueList AND ValueMod.<br>
+	 *                  Choose one of two values: FitsValue_Allowed or
+	 *                  FitsValue_Present. (Defaults to Allowed)
 	 * @return boolean - true, if <code>value</code> matches testlists or if
 	 *         AllowedValueList and AllowedValueMod are not specified
 	 */
 	@Override
-	public boolean fitsValue(String value, EnumFitsValue testlists)
+	public boolean fitsValue(final String value, final EnumFitsValue testlists)
 	{
 		if (!fitsListType(value))
+		{
 			return false;
+		}
 
 		JDFShapeRangeList rangelist = null;
 		try
 		{
 			rangelist = new JDFShapeRangeList(value);
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			return false;
 		}
@@ -539,16 +546,15 @@ public class JDFShapeState extends JDFAbstractState
 	/**
 	 * fitsValueList - checks whether <code>rangelist</code> matches the
 	 * AllowedValueList/PresentValueList specified for this State
-	 * 
+	 *
 	 * @param rangelist
-	 *            range list to test
+	 *                  range list to test
 	 * @param valuelist
-	 *            switches between AllowedValueList and PresentValueList.
-	 * 
+	 *                  switches between AllowedValueList and PresentValueList.
 	 * @return boolean - true, if <code>rangelist</code> matches the valuelist
 	 *         or if AllowedValueList is not specified
 	 */
-	private final boolean fitsValueList(JDFShapeRangeList rangelist, EnumFitsValue valuelist)
+	private final boolean fitsValueList(final JDFShapeRangeList rangelist, final EnumFitsValue valuelist)
 	{
 		JDFShapeRangeList list;
 		if (valuelist.equals(EnumFitsValue.Allowed))
@@ -560,9 +566,11 @@ public class JDFShapeState extends JDFAbstractState
 			list = getPresentValueList();
 		}
 		if (list == null)
+		{
 			return true;
+		}
 
-		EnumListType listType = getListType();
+		final EnumListType listType = getListType();
 		if (listType.equals(EnumListType.CompleteList))
 		{
 			return fitsCompleteList(rangelist, list);
@@ -576,13 +584,15 @@ public class JDFShapeState extends JDFAbstractState
 			return fitsContainedList(rangelist, list);
 		}
 
-		int siz = rangelist.size();
+		final int siz = rangelist.size();
 		for (int i = 0; i < siz; i++)
 		{
-			JDFShapeRange range = (JDFShapeRange) rangelist.at(i);
+			final JDFShapeRange range = (JDFShapeRange) rangelist.at(i);
 
 			if (!list.isPartOfRange(range))
+			{
 				return false;
+			}
 		}
 		return true;
 	}
@@ -591,38 +601,38 @@ public class JDFShapeState extends JDFAbstractState
 	 * fitsXYZ - checks whether <code>rangelist</code> matches the (AllowedX,
 	 * AllowedY, AllowedZ) or (PresentX, PresentY, PresentZ) values specified
 	 * for this State
-	 * 
+	 *
 	 * @param rangelist
-	 *            range list to test
+	 *                  range list to test
 	 * @param xyzlist
-	 *            switches between (AllowedX, AllowedY, AllowedZ) and (PresentX,
-	 *            PresentY, PresentZ).
+	 *                  switches between (AllowedX, AllowedY, AllowedZ) and (PresentX,
+	 *                  PresentY, PresentZ).
 	 * @return boolean - true, if the 'rangelist' matches xyzlist or if
 	 *         AllowedX, AllowedY, AllowedZ are not specified
 	 */
-	private boolean fitsXYZ(JDFShapeRangeList rangelist, EnumFitsValue xyzlist)
+	private boolean fitsXYZ(final JDFShapeRangeList rangelist, final EnumFitsValue xyzlist)
 	{
-		int siz = rangelist.size();
+		final int siz = rangelist.size();
 		for (int i = 0; i < siz; i++)
 		{
-			JDFShapeRange range = (JDFShapeRange) rangelist.at(i);
+			final JDFShapeRange range = (JDFShapeRange) rangelist.at(i);
 
 			JDFNumberRangeList x, y, z;
 
-			JDFShape left = range.getLeft();
-			JDFShape right = range.getRight();
+			final JDFShape left = range.getLeft();
+			final JDFShape right = range.getRight();
 
-			double leftX = left.getY();
-			double rightX = right.getY();
-			JDFNumberRange rangeX = new JDFNumberRange(leftX, rightX);
+			final double leftX = left.getY();
+			final double rightX = right.getY();
+			final JDFNumberRange rangeX = new JDFNumberRange(leftX, rightX);
 
-			double leftY = left.getX();
-			double rightY = right.getX();
-			JDFNumberRange rangeY = new JDFNumberRange(leftY, rightY);
+			final double leftY = left.getX();
+			final double rightY = right.getX();
+			final JDFNumberRange rangeY = new JDFNumberRange(leftY, rightY);
 
-			double leftZ = left.getZ();
-			double rightZ = right.getZ();
-			JDFNumberRange rangeZ = new JDFNumberRange(leftZ, rightZ);
+			final double leftZ = left.getZ();
+			final double rightZ = right.getZ();
+			final JDFNumberRange rangeZ = new JDFNumberRange(leftZ, rightZ);
 
 			if (xyzlist.equals(EnumFitsValue.Allowed))
 			{
@@ -643,21 +653,27 @@ public class JDFShapeState extends JDFAbstractState
 				bFit = x.isPartOfRange(rangeX);
 			}
 			if (!bFit)
+			{
 				return false;
+			}
 
 			if (y.size() != 0)
 			{
 				bFit = y.isPartOfRange(rangeY);
 			}
 			if (!bFit)
+			{
 				return false;
+			}
 
 			if (z.size() != 0)
 			{
 				bFit = z.isPartOfRange(rangeZ);
 			}
 			if (!bFit)
+			{
 				return false;
+			}
 		}
 
 		return true;
@@ -666,25 +682,23 @@ public class JDFShapeState extends JDFAbstractState
 	/**
 	 * fitsCompleteList - tests whether <code>value</code> matches the given
 	 * testlist (ListType=fitsCompleteList)
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @param list
-	 *            testlist, either AllowedValueList or PresentValueList.
-	 * 
+	 *              testlist, either AllowedValueList or PresentValueList.
 	 */
-	private final boolean fitsCompleteList(JDFShapeRangeList value, JDFShapeRangeList list)
+	private final boolean fitsCompleteList(final JDFShapeRangeList value, final JDFShapeRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
-		if (v_size != l_size)
+		if ((v_size != l_size) || !value.isUnique())
+		{
 			return false;
+		}
 
-		if (!value.isUnique())
-			return false;
-
-		JDFShapeRangeList valueList = new JDFShapeRangeList(value);
+		final JDFShapeRangeList valueList = new JDFShapeRangeList(value);
 
 		boolean bFound;
 		for (int i = l_size - 1; i >= 0; i--)
@@ -710,24 +724,22 @@ public class JDFShapeState extends JDFAbstractState
 	/**
 	 * fitsCompleteOrderedList - tests whether <code>value</code> matches the
 	 * given testlist (ListType=CompleteOrderedList)
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @param list
-	 *            testlist, either AllowedValueList or PresentValueList.
-	 * 
+	 *              testlist, either AllowedValueList or PresentValueList.
 	 * @return boolean - true, if <code>value</code> matches the testlist
 	 */
-	private final boolean fitsCompleteOrderedList(JDFShapeRangeList value, JDFShapeRangeList list)
+	private final boolean fitsCompleteOrderedList(final JDFShapeRangeList value, final JDFShapeRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
-		if (v_size != l_size)
+		if ((v_size != l_size) || !value.isUnique())
+		{
 			return false;
-
-		if (!value.isUnique())
-			return false;
+		}
 
 		for (int i = 0; i < l_size; i++)
 		{
@@ -742,18 +754,17 @@ public class JDFShapeState extends JDFAbstractState
 	/**
 	 * fitsContainedList - tests whether <code>value</code> matches the given
 	 * testlist (ListType=ContainedList)
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @param list
-	 *            testlist, either AllowedValueList or PresentValueList.
-	 * 
+	 *              testlist, either AllowedValueList or PresentValueList.
 	 * @return boolean - true, if <code>value</code> matches testlist
 	 */
-	private final boolean fitsContainedList(JDFShapeRangeList value, JDFShapeRangeList list)
+	private final boolean fitsContainedList(final JDFShapeRangeList value, final JDFShapeRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
 		for (int i = 0; i < v_size; i++)
 		{
@@ -770,7 +781,7 @@ public class JDFShapeState extends JDFAbstractState
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
 	 */
 	@Override

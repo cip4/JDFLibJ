@@ -78,7 +78,6 @@ import org.cip4.jdflib.jmf.JDFJMF;
  * a hotfolder that emulates JMF queue functionality by applying a specific queue submission or queue return message to any file that is dropped into it
  *
  * @author Rainer Prosi
- *
  */
 public class QueueHotFolder extends StorageHotFolder
 {
@@ -86,16 +85,15 @@ public class QueueHotFolder extends StorageHotFolder
 	private final QueueHotFolderListener theQueueListener;
 
 	/**
-	 *
 	 * constructor for a simple queue based hotfolder watcher that is automagically started in its own thread
 	 *
 	 * @param _hotFolderDir the hot folder directory to watch
-	 * @param _storageDir the storage directory where hot files are moved to
-	 * @param ext the file extensions that are moved - if null no filtering
-	 * @param hfListener callback that receives the generated JMF - the location of the stored file will be found in the standard command parameters
+	 * @param _storageDir   the storage directory where hot files are moved to
+	 * @param ext           the file extensions that are moved - if null no filtering
+	 * @param hfListener    callback that receives the generated JMF - the location of the stored file will be found in the standard command parameters
 	 * @param _queueCommand the jmf template that will be used to generate a new message, null creates an empty SubmitQueueEntry template
 	 */
-	public QueueHotFolder(final File _hotFolderDir, final File _storageDir, final String ext, final QueueHotFolderListener hfListener, JDFJMF _queueCommand)
+	public QueueHotFolder(final File _hotFolderDir, final File _storageDir, final String ext, final QueueHotFolderListener hfListener, final JDFJMF _queueCommand)
 	{
 		this(_hotFolderDir, _storageDir, ext, new QueueHotFolderListenerImpl(hfListener, _queueCommand));
 	}
@@ -103,9 +101,9 @@ public class QueueHotFolder extends StorageHotFolder
 	/**
 	 * new constructo that allows you to override QueueHotFolderListenerImpl
 	 *
-	 * @param _hotFolderDir the hot folder directory to watch
-	 * @param _storageDir the storage directory where hot files are moved to
-	 * @param ext the file extensions that are moved - if null no filtering
+	 * @param _hotFolderDir  the hot folder directory to watch
+	 * @param _storageDir    the storage directory where hot files are moved to
+	 * @param ext            the file extensions that are moved - if null no filtering
 	 * @param hfListenerImpl
 	 */
 	public QueueHotFolder(final File _hotFolderDir, final File _storageDir, final String ext, final QueueHotFolderListenerImpl hfListenerImpl)

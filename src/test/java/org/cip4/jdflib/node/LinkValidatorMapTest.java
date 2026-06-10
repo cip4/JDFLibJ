@@ -135,8 +135,9 @@ class LinkValidatorMapTest extends JDFTestCaseBase
 	@Test
 	void testGetLinkInfoMapPerformance()
 	{
-		final VString v = new VString(new String[] { JDFConstants.COLORSPACECONVERSION, JDFConstants.SCREENING, JDFConstants.INTERPRETING, JDFConstants.RENDERING, JDFConstants.IMPOSITION,
-				JDFConstants.IMAGESETTING, JDFConstants.CONVENTIONALPRINTING, JDFConstants.FOLDING, JDFConstants.CUTTING });
+		final VString v = new VString(
+				new String[] { JDFConstants.COLORSPACECONVERSION, JDFConstants.SCREENING, JDFConstants.INTERPRETING, JDFConstants.RENDERING,
+						JDFConstants.IMPOSITION, JDFConstants.IMAGESETTING, JDFConstants.CONVENTIONALPRINTING, JDFConstants.FOLDING, JDFConstants.CUTTING });
 		for (int i = 0; i < 1000; i++)
 		{
 			final HashMap<String, LinkInfo> linkInfo = LinkValidatorMap.getLinkValidatorMap().getLinkInfoMap(EnumType.Combined, v);

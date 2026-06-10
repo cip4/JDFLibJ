@@ -71,7 +71,7 @@
 /**
  *
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFNumberRange.java
@@ -81,7 +81,7 @@ package org.cip4.jdflib.datatypes;
 
 import java.util.zip.DataFormatException;
 
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.util.HashUtil;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -92,11 +92,11 @@ public class JDFNumberRange extends JDFRange
 {
 	/**
 	 * factory for JDFNumberRange that silently returns null in case of illegal strings
-	 * 
+	 *
 	 * @param s the string to parse
 	 * @return the JDFNumberRange, null if s is not compatible
 	 */
-	public static JDFNumberRange createNumberRange(String s)
+	public static JDFNumberRange createNumberRange(final String s)
 	{
 		if (s != null && s.length() > 0)
 		{
@@ -104,7 +104,7 @@ public class JDFNumberRange extends JDFRange
 			{
 				return new JDFNumberRange(s);
 			}
-			catch (DataFormatException x)
+			catch (final DataFormatException x)
 			{
 				return null;
 			}
@@ -132,7 +132,7 @@ public class JDFNumberRange extends JDFRange
 
 	/**
 	 * constructs a JDFNumberRange, both values are equal ("from x to x")
-	 * 
+	 *
 	 * @param x the given double
 	 */
 	public JDFNumberRange(final double x)
@@ -142,7 +142,7 @@ public class JDFNumberRange extends JDFRange
 
 	/**
 	 * constructor, creates a JDFNumberRange bounded by two double values ("from xmin to xmax")
-	 * 
+	 *
 	 * @param xmin the given min value
 	 * @param xmax the given max value
 	 */
@@ -153,7 +153,7 @@ public class JDFNumberRange extends JDFRange
 
 	/**
 	 * copy constructor, creates a JDFNumberRange with the given JDFNumberRange
-	 * 
+	 *
 	 * @param nr
 	 */
 	public JDFNumberRange(final JDFNumberRange nr)
@@ -164,7 +164,7 @@ public class JDFNumberRange extends JDFRange
 
 	/**
 	 * Initialization
-	 * 
+	 *
 	 * @param xmin left value
 	 * @param xmax right value
 	 */
@@ -176,9 +176,8 @@ public class JDFNumberRange extends JDFRange
 
 	/**
 	 * constructs a JDFNumberRange with the values of the given string
-	 * 
+	 *
 	 * @param s the given string
-	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFNumberRange(final String s) throws DataFormatException
@@ -223,9 +222,8 @@ public class JDFNumberRange extends JDFRange
 
 	/**
 	 * isValid - validate the given String
-	 * 
+	 *
 	 * @param s the given string to validate
-	 * 
 	 * @return boolean - false if the String has not a valid format
 	 */
 	public boolean isValid(final String s)
@@ -243,7 +241,7 @@ public class JDFNumberRange extends JDFRange
 
 	/**
 	 * equals - returns true if both JDFNumberRange are equal otherwise false, the difference must be smaller than EPSILON
-	 * 
+	 *
 	 * @param other the object to compare with <code>this</code>
 	 * @return boolean - true if equal otherwise false
 	 */
@@ -254,11 +252,7 @@ public class JDFNumberRange extends JDFRange
 		{
 			return true;
 		}
-		if (other == null)
-		{
-			return false;
-		}
-		if (!other.getClass().equals(getClass()))
+		if ((other == null) || !other.getClass().equals(getClass()))
 		{
 			return false;
 		}
@@ -270,7 +264,7 @@ public class JDFNumberRange extends JDFRange
 
 	/**
 	 * hashCode complements equals() to fulfill the equals/hashCode contract
-	 * 
+	 *
 	 * @return int - hash code of <code>this</this>
 	 */
 	@Override
@@ -281,7 +275,7 @@ public class JDFNumberRange extends JDFRange
 
 	/**
 	 * returns the string representation of the left value of the range
-	 * 
+	 *
 	 * @return the left value of the range
 	 */
 	public String getLeftString()
@@ -291,7 +285,7 @@ public class JDFNumberRange extends JDFRange
 
 	/**
 	 * getLeft - returns the left value of the range
-	 * 
+	 *
 	 * @return double - the left value of the range
 	 */
 	public double getLeft()
@@ -301,31 +295,31 @@ public class JDFNumberRange extends JDFRange
 
 	/**
 	 * returns the string representation of the left value of the range
-	 * 
+	 *
 	 * @param precision
 	 * @return
 	 */
 	@Override
-	public String getLeftString(int precision)
+	public String getLeftString(final int precision)
 	{
 		return StringUtil.formatDouble(getLeft(), precision);
 	}
 
 	/**
 	 * returns the string representation of the left value of the range
-	 * 
+	 *
 	 * @param precision
 	 * @return
 	 */
 	@Override
-	public String getRightString(int precision)
+	public String getRightString(final int precision)
 	{
 		return StringUtil.formatDouble(getRight(), precision);
 	}
 
 	/**
 	 * returns the string representation of the left value of the range
-	 * 
+	 *
 	 * @return the left value of the range
 	 */
 	public String getRightString()
@@ -335,7 +329,7 @@ public class JDFNumberRange extends JDFRange
 
 	/**
 	 * getRight - returns the right value of the range
-	 * 
+	 *
 	 * @return double - the right value of the range
 	 */
 	public double getRight()
@@ -345,7 +339,7 @@ public class JDFNumberRange extends JDFRange
 
 	/**
 	 * setLeft - sets the left double object
-	 * 
+	 *
 	 * @param x the left double object
 	 */
 	public void setLeft(final double x)
@@ -355,7 +349,7 @@ public class JDFNumberRange extends JDFRange
 
 	/**
 	 * setRight - sets the right double object
-	 * 
+	 *
 	 * @param x the right double object
 	 */
 	public void setRight(final double x)
@@ -365,7 +359,7 @@ public class JDFNumberRange extends JDFRange
 
 	/**
 	 * scale - scales both values
-	 * 
+	 *
 	 * @param f the scaling factor
 	 */
 	public void scale(final double f)
@@ -377,7 +371,7 @@ public class JDFNumberRange extends JDFRange
 	/**
 	 * getLowerValue - returns the lower value of the bounds<br>
 	 * for example 4.5~6.3 returns 4.5, 7.0~5.9 returns 5.9
-	 * 
+	 *
 	 * @return double - the lower value of the range
 	 */
 	public double getLowerValue()
@@ -388,7 +382,7 @@ public class JDFNumberRange extends JDFRange
 	/**
 	 * getUpperValue - return the upper value of the bounds<br>
 	 * for example 4.5~6.3 returns 6.3, 7.0~5.9 returns 7.0
-	 * 
+	 *
 	 * @return double - the upper value of the range
 	 */
 	public double getUpperValue()
@@ -398,9 +392,8 @@ public class JDFNumberRange extends JDFRange
 
 	/**
 	 * inRange - returns true if (lower value >= x <= upper value)
-	 * 
+	 *
 	 * @param x comparison value
-	 * 
 	 * @return boolean - true if x in range
 	 */
 	public boolean inRange(final double x)
@@ -410,9 +403,8 @@ public class JDFNumberRange extends JDFRange
 
 	/**
 	 * isPartOfRange - is range 'r' within this range?
-	 * 
+	 *
 	 * @param r the range to test
-	 * 
 	 * @return boolean - true if range 'r' is within this range, else false
 	 */
 	@Override
@@ -444,11 +436,11 @@ public class JDFNumberRange extends JDFRange
 	 * @see org.cip4.jdflib.datatypes.JDFRange#getString(int)
 	 */
 	@Override
-	public String getString(int precision)
+	public String getString(final int precision)
 	{
 		if (Math.abs(this.getLeft() - this.getRight()) < JDFBaseDataTypes.EPSILON)
 		{
-			return JDFConstants.EMPTYSTRING + getRightString(precision);
+			return JDFCoreConstants.EMPTYSTRING + getRightString(precision);
 		}
 		return getLeftString(precision) + " ~ " + getRightString(precision);
 

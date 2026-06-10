@@ -54,7 +54,6 @@ import jakarta.mail.Multipart;
  * class to create and write mime files
  *
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         July 24, 2009
  */
 public class MimeHelper

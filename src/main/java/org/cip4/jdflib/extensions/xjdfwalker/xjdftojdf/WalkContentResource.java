@@ -70,7 +70,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -85,7 +85,6 @@ import org.cip4.jdflib.resource.process.JDFPageData;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  *         walker for the colorSet - this gets translated back to a colorpool
  */
 public class WalkContentResource extends WalkXJDFResource
@@ -108,7 +107,6 @@ public class WalkContentResource extends WalkXJDFResource
 	}
 
 	/**
-	 *
 	 * @param e
 	 * @return
 	 */
@@ -119,7 +117,6 @@ public class WalkContentResource extends WalkXJDFResource
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXJDFResource#createPartition(org.cip4.jdflib.resource.JDFResource, org.cip4.jdflib.datatypes.JDFAttributeMap,
 	 *      org.cip4.jdflib.node.JDFNode)
 	 */
@@ -145,7 +142,7 @@ public class WalkContentResource extends WalkXJDFResource
 		{
 			rll.removeChildren(ElementName.PART, null, null);
 		}
-		pageList.removeFromAttribute(AttributeName.PARTIDKEYS, AttributeName.PAGENUMBER, null, JDFConstants.BLANK, -1);
+		pageList.removeFromAttribute(AttributeName.PARTIDKEYS, AttributeName.PAGENUMBER, null, JDFCoreConstants.BLANK, -1);
 		return rPageData;
 	}
 
@@ -161,7 +158,6 @@ public class WalkContentResource extends WalkXJDFResource
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXJDFResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override

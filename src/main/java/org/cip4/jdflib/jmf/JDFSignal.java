@@ -147,7 +147,7 @@ public class JDFSignal extends JDFAutoSignal
 	 * converts a response to a signal that can be sent individually
 	 *
 	 * @param response the response to convert - should not be null
-	 * @param q the query that should be merged into the signal - may be null
+	 * @param q        the query that should be merged into the signal - may be null
 	 * @return true if successful
 	 */
 	public boolean convertResponse(final JDFResponse response, final JDFQuery q)

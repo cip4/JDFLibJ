@@ -118,7 +118,8 @@ public class JDFCreditCard extends JDFAutoCreditCard
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFCreditCard(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFCreditCard(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

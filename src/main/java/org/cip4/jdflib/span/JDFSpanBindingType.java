@@ -78,12 +78,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanBindingType extends JDFEnumerationSpan
@@ -92,39 +88,39 @@ public class JDFSpanBindingType extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanBindingType
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanBindingType(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanBindingType(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanBindingType
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanBindingType(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanBindingType(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanBindingType
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanBindingType(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanBindingType(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -132,76 +128,30 @@ public class JDFSpanBindingType extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanBindingType
 	 */
-	public static class EnumSpanBindingType extends ValuedEnum
+	public enum EnumSpanBindingType
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Adhesive, ChannelBinding, CoilBinding, CornerStitch, EdgeGluing, HardCover, LooseBinding, None, PlasticComb, Ring, SaddleStitch, Sewn, SideSewn, SideStitch, SoftCover, StripBind, Tape, ThreadSealing, WireComb;
 
-		private EnumSpanBindingType(String name)
+		public static EnumSpanBindingType getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanBindingType.class, val, null);
 		}
-
-		public static EnumSpanBindingType getEnum(String enumName)
-		{
-			return (EnumSpanBindingType) getEnum(EnumSpanBindingType.class, enumName);
-		}
-
-		public static EnumSpanBindingType getEnum(int enumValue)
-		{
-			return (EnumSpanBindingType) getEnum(EnumSpanBindingType.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanBindingType.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanBindingType.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanBindingType.class);
-		}
-
-		public static final EnumSpanBindingType Adhesive = new EnumSpanBindingType("Adhesive");
-		public static final EnumSpanBindingType ChannelBinding = new EnumSpanBindingType("ChannelBinding");
-		public static final EnumSpanBindingType CoilBinding = new EnumSpanBindingType("CoilBinding");
-		public static final EnumSpanBindingType CornerStitch = new EnumSpanBindingType("CornerStitch");
-		public static final EnumSpanBindingType EdgeGluing = new EnumSpanBindingType("EdgeGluing");
-		public static final EnumSpanBindingType HardCover = new EnumSpanBindingType("HardCover");
-		public static final EnumSpanBindingType LooseBinding = new EnumSpanBindingType("LooseBinding");
-		public static final EnumSpanBindingType None = new EnumSpanBindingType("None");
-		public static final EnumSpanBindingType PlasticComb = new EnumSpanBindingType("PlasticComb");
-		public static final EnumSpanBindingType Ring = new EnumSpanBindingType("Ring");
-		public static final EnumSpanBindingType SaddleStitch = new EnumSpanBindingType("SaddleStitch");
-		public static final EnumSpanBindingType Sewn = new EnumSpanBindingType("Sewn");
-		public static final EnumSpanBindingType SideSewn = new EnumSpanBindingType("SideSewn");
-		public static final EnumSpanBindingType SideStitch = new EnumSpanBindingType("SideStitch");
-		public static final EnumSpanBindingType SoftCover = new EnumSpanBindingType("SoftCover");
-		public static final EnumSpanBindingType StripBind = new EnumSpanBindingType("StripBind");
-		public static final EnumSpanBindingType Tape = new EnumSpanBindingType("Tape");
-		public static final EnumSpanBindingType ThreadSealing = new EnumSpanBindingType("ThreadSealing");
-		public static final EnumSpanBindingType WireComb = new EnumSpanBindingType("WireComb");
 	}
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanBindingType.getEnum(0);
+		return EnumSpanBindingType.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

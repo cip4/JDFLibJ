@@ -124,7 +124,7 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPreflightInstance(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPreflightInstance(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -136,7 +136,7 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPreflightInstance(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPreflightInstance(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -149,7 +149,7 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPreflightInstance(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPreflightInstance(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -170,7 +170,7 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIdentifier(String value)
+	public void setIdentifier(final String value)
 	{
 		setAttribute(AttributeName.IDENTIFIER, value, null);
 	}
@@ -195,7 +195,7 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPageRefs(JDFIntegerRangeList value)
+	public void setPageRefs(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.PAGEREFS, value, null);
 	}
@@ -208,8 +208,8 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
 	 */
 	public JDFIntegerRangeList getPageRefs()
 	{
-		String strAttrName = getAttribute(AttributeName.PAGEREFS, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PAGEREFS, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -245,7 +245,7 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPreflightInstanceDetail the element
 	 */
-	public JDFPreflightInstanceDetail getCreatePreflightInstanceDetail(int iSkip)
+	public JDFPreflightInstanceDetail getCreatePreflightInstanceDetail(final int iSkip)
 	{
 		return (JDFPreflightInstanceDetail) getCreateElement_JDFElement(ElementName.PREFLIGHTINSTANCEDETAIL, null, iSkip);
 	}
@@ -257,7 +257,7 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
 	 * @return JDFPreflightInstanceDetail the element
 	 *         default is getPreflightInstanceDetail(0)
 	 */
-	public JDFPreflightInstanceDetail getPreflightInstanceDetail(int iSkip)
+	public JDFPreflightInstanceDetail getPreflightInstanceDetail(final int iSkip)
 	{
 		return (JDFPreflightInstanceDetail) getElement(ElementName.PREFLIGHTINSTANCEDETAIL, null, iSkip);
 	}

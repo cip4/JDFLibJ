@@ -106,7 +106,7 @@ public abstract class JDFAutoGangSource extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGangSource(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoGangSource(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoGangSource extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGangSource(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoGangSource(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoGangSource extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoGangSource(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoGangSource(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -152,7 +152,7 @@ public abstract class JDFAutoGangSource extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAssemblyID(String value)
+	public void setAssemblyID(final String value)
 	{
 		setAttribute(AttributeName.ASSEMBLYID, value, null);
 	}
@@ -177,7 +177,7 @@ public abstract class JDFAutoGangSource extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCopies(int value)
+	public void setCopies(final int value)
 	{
 		setAttribute(AttributeName.COPIES, value, null);
 	}
@@ -202,7 +202,7 @@ public abstract class JDFAutoGangSource extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}

@@ -31,9 +31,9 @@
  *
  * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
  * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- * 
+ *
  * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
- * 
+ *
  *
  */
 
@@ -50,12 +50,9 @@ package org.cip4.jdflib.resource.devicecapability;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDevCaps.EnumContext;
 import org.cip4.jdflib.auto.JDFAutoDeviceCap;
@@ -64,7 +61,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -85,13 +82,12 @@ import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.VectorMap;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         before Aug 10, 2009
  */
 public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
@@ -178,83 +174,13 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 		return "JDFDeviceCap[  --> " + super.toString() + " ]";
 	}
 
-	/**
-	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
-	 *
-	 *         Aug 10, 2009
-	 */
-	@SuppressWarnings("unchecked")
-	public static class EnumAvailability extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		private EnumAvailability(final String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName
-		 * @return
-		 */
-		public static EnumAvailability getEnum(final String enumName)
-		{
-			return (EnumAvailability) getEnum(EnumAvailability.class, enumName);
-		}
-
-		/**
-		 * @param enumValue
-		 * @return
-		 */
-		public static EnumAvailability getEnum(final int enumValue)
-		{
-			return (EnumAvailability) getEnum(EnumAvailability.class, enumValue);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumAvailability.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAvailability.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAvailability.class);
-		}
-
-		/** * */
-		public static final EnumAvailability NotInstalled = new EnumAvailability("NotInstalled");
-		/** * */
-		public static final EnumAvailability NotLicensed = new EnumAvailability("NotLicensed");
-		/** * */
-		public static final EnumAvailability Disabled = new EnumAvailability("Disabled");
-		/** * */
-		public static final EnumAvailability Installed = new EnumAvailability("Installed");
-		/** * */
-		public static final EnumAvailability Module = new EnumAvailability("Module");
-	}
-
-	public enum EAvailability
+	public enum EnumAvailability
 	{
 		NotInstalled, NotLicensed, Disabled, Installed, Module;
 
-		public static EAvailability getEnum(final String name)
+		public static EnumAvailability getEnum(final String name)
 		{
-			return EnumUtil.getJavaEnumIgnoreCase(EAvailability.class, name);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumAvailability.class, name);
 		}
 	}
 
@@ -281,7 +207,8 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	@Override
 	public Vector getCombinedMethod()
 	{
-		Vector<ValuedEnum> v = getEnumerationsAttribute(AttributeName.COMBINEDMETHOD, null, EnumCombinedMethod.None, false);
+		final List<EnumCombinedMethod> combinedMethods = getEnumerationsAttribute(AttributeName.COMBINEDMETHOD, null, EnumCombinedMethod.class);
+		Vector v = combinedMethods == null ? null : new Vector(combinedMethods);
 		if (v == null)
 		{
 			v = new Vector<>();
@@ -306,10 +233,10 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	/**
 	 * Gets of jdfRoot a vector of all executable nodes (jdf root or children nodes that this Device may execute)
 	 *
-	 * @param jdfRoot the node we test
+	 * @param jdfRoot   the node we test
 	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 *        Will be used in fitsValue method of the State class.
-	 * @param level validation level
+	 *                  Will be used in fitsValue method of the State class.
+	 * @param level     validation level
 	 * @return VElement - vector of executable JDFNodes, null if none found
 	 */
 	public final VElement getExecutableJDF(final JDFNode jdfRoot, final EnumFitsValue testlists, final EnumValidationLevel level)
@@ -362,10 +289,10 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 * Composes a BugReport in XML form for the given JDFNode 'jdfRoot'. Gives a list of error messages for 'jdfRoot' and every child rejected Node.<br>
 	 * Returns <code>null</code> if there are no errors.
 	 *
-	 * @param jdfRoot the node to test
+	 * @param jdfRoot   the node to test
 	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 *        Will be used in fitsValue method of the State class.
-	 * @param level validation level
+	 *                  Will be used in fitsValue method of the State class.
+	 * @param level     validation level
 	 * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is null there are no errors.
 	 */
 	public final XMLDoc getBadJDFInfo(final JDFNode jdfRoot, final EnumFitsValue testlists, final EnumValidationLevel level)
@@ -404,15 +331,16 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 * Composes a BugReport in XML form for the given JMF message 'jmfRoot'. Gives a list of error messages for 'jmfRoot' and every child rejected element.<br>
 	 * Returns <code>null</code> if there are no errors.
 	 *
-	 * @param jmfRoot the node to test
+	 * @param jmfRoot           the node to test
 	 * @param knownMessagesResp
-	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 *        Will be used in fitsValue method of the State class.
-	 * @param level validation level
+	 * @param testlists         testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
+	 *                          Will be used in fitsValue method of the State class.
+	 * @param level             validation level
 	 * @param ignoreExtensions
 	 * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is null there are no errors.
 	 */
-	static public XMLDoc getJMFInfo(final JDFJMF jmfRoot, final JDFResponse knownMessagesResp, final EnumFitsValue testlists, final EnumValidationLevel level, final boolean ignoreExtensions)
+	static public XMLDoc getJMFInfo(final JDFJMF jmfRoot, final JDFResponse knownMessagesResp, final EnumFitsValue testlists, final EnumValidationLevel level,
+			final boolean ignoreExtensions)
 	{
 		final XMLDoc bugReport = new XMLDoc("JMFReport", null);
 		final KElement parentRoot = bugReport.getRoot();
@@ -460,9 +388,8 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	}
 
 	/**
-	 * @param m the message to test
+	 * @param m                 the message to test
 	 * @param knownMessagesResp the Response that contains the relevant devcap fo the jmf
-	 *
 	 * @return the JMFMessageService element for this message based on family and type
 	 */
 	public static JDFMessageService getMessageServiceForJMFType(final JDFMessage m, final JDFResponse knownMessagesResp)
@@ -482,7 +409,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 			}
 			else
 			{
-				map.put(fam.getName(), "true");
+				map.put(fam.name(), "true");
 			}
 
 		}
@@ -497,14 +424,13 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 * This method composes a detailed report of the found errors in XML form, if jdfRoot is rejected.<br>
 	 * If XMLDoc is null, there are no errors and 'jdfRoot' is accepted
 	 *
-	 * @param jdfRoot the node to test
+	 * @param jdfRoot   the node to test
 	 * @param fitsValue testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 *        Will be used in fitsValue method of the State class.
-	 * @param level validation level
+	 *                  Will be used in fitsValue method of the State class.
+	 * @param level     validation level
 	 * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is <code>null</code> there are no errors, 'jdfRoot' is accepted
-	 *
 	 * @throws JDFException if DeviceCapabilities file is invalid: illegal value of Types(TypeExpression) attribute (if CombinedMethod is None and Types contains more than 1
-	 *         process)
+	 *                      process)
 	 * @throws JDFException if DeviceCapabilities file is invalid: illegal value of CombinedMethod attribute
 	 */
 	private final KElement report(final JDFNode jdfRoot, final EnumFitsValue fitsValue, final EnumValidationLevel level, final KElement parentRoot)
@@ -569,10 +495,8 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 * test whether a given node has the corect Types and Type Attribute
 	 *
 	 * @param testRoot the JDF or JMF to test
-	 * @param bLocal if true, only check the root of this, else check children as well
-	 *
+	 * @param bLocal   if true, only check the root of this, else check children as well
 	 * @return boolean - true if this DeviceCaps TypeExpression fits testRoot/@Type and testRoot/@Types
-	 *
 	 */
 	public boolean matchesType(final JDFNode testRoot, final boolean bLocal)
 	{
@@ -592,9 +516,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 * test whether a given node has the corect Types and Type Attribute
 	 *
 	 * @param testRoot the JDF or JMF to test
-	 *
 	 * @return VElement - the list of matching JDF nodes, null if none found
-	 *
 	 */
 	public VElement getMatchingTypeNodeVector(final JDFNode testRoot)
 	{
@@ -605,7 +527,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 		final VElement v = new VElement();
 		final String typeNode = testRoot.getType();
 
-		final Vector<ValuedEnum> vCombMethod = getCombinedMethod();
+		final Vector vCombMethod = getCombinedMethod();
 		final String typeExp = getTypeExpression();
 		for (int j = 0; j < vCombMethod.size(); j++)
 		{
@@ -620,7 +542,8 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 					v.add(testRoot);
 				}
 			}
-			else if (combMethod.equals(EnumCombinedMethod.Combined) || combMethod.equals(EnumCombinedMethod.CombinedProcessGroup) && typeNode.equals("Combined"))
+			else if (combMethod.equals(EnumCombinedMethod.Combined)
+					|| combMethod.equals(EnumCombinedMethod.CombinedProcessGroup) && typeNode.equals("Combined"))
 			{
 				if (fitsTypes(testRoot.getAllTypes(), false))
 				{
@@ -635,7 +558,8 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 					v.add(testRoot);
 				}
 			}
-			else if (combMethod.equals(EnumCombinedMethod.ProcessGroup) || combMethod.equals(EnumCombinedMethod.CombinedProcessGroup) && typeNode.equals("ProcessGroup"))
+			else if (combMethod.equals(EnumCombinedMethod.ProcessGroup)
+					|| combMethod.equals(EnumCombinedMethod.CombinedProcessGroup) && typeNode.equals("ProcessGroup"))
 			{
 				final VElement vNodes = testRoot.getvJDFNode(null, null, false);
 				final int size = vNodes.size();
@@ -685,7 +609,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 * matches DeviceCap/@Types or DeviceCap/@TypeExpression
 	 *
 	 * @param typesNode attribute Types of the tested JDFNode
-	 * @param bSubset if true, a match is sufficient if a subset is specified
+	 * @param bSubset   if true, a match is sufficient if a subset is specified
 	 * @return boolean - true if JDFNode/@Types fits DeviceCap/@Types or DeviceCap/@TypeExpression
 	 * @throws JDFException if DeviceCap is invalid: both @Types and @TypeExpression are missing
 	 */
@@ -700,7 +624,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 			if (hasAttribute(AttributeName.TYPEEXPRESSION))
 			{
 				final String typeExp = getTypeExpression();
-				final String typesNodeStr = StringUtil.setvString(typesNode, JDFConstants.BLANK, null, null);
+				final String typesNodeStr = StringUtil.setvString(typesNode, JDFCoreConstants.BLANK, null, null);
 				return StringUtil.matches(typesNodeStr, typeExp);
 			}
 			return typesNode.equals(getTypes());
@@ -723,11 +647,10 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 * elements and attributes - is tested iot check whether a device can accept it.<br>
 	 * Composes a detailed report of the found errors in XML form, if JDFNode is rejected.
 	 *
-	 * @param jdfRoot the node to test
+	 * @param jdfRoot   the node to test
 	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 *        Will be used in fitsValue method of the State class.
-	 * @param level validation level
-	 *
+	 *                  Will be used in fitsValue method of the State class.
+	 * @param level     validation level
 	 * @return XMLDoc - XMLDoc output of the error messages. <br>
 	 *         If XMLDoc is <code>null</code> there are no errors, 'jdfRoot' is accepted
 	 */
@@ -766,10 +689,10 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 * Composes a detailed report of the found errors in XML form.<br>
 	 * If XMLDoc is <code>null</code> there are no errors
 	 *
-	 * @param jdfRoot the node we test
+	 * @param jdfRoot   the node we test
 	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 *        Will be used in fitsValue method of the State class.
-	 * @param level validation level
+	 *                  Will be used in fitsValue method of the State class.
+	 * @param level     validation level
 	 * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is <code>null</code> there are no errors, 'jdfRoot' is accepted
 	 */
 	private final KElement devCapsReport(final JDFNode jdfRoot, final EnumFitsValue testlists, final EnumValidationLevel level, final KElement parentRoot)
@@ -800,12 +723,13 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 * invalidDevCaps - tests if there are any invalid or missing Resources or NodeInfo/CustomerInfo elements in the JDFNode.<br>
 	 * Composes a detailed report of the found errors in XML form. If XMLDoc is <code>null</code> there are no errors.
 	 *
-	 * @param parent the devcaps parent element
+	 * @param parent  the devcaps parent element
 	 * @param jdfRoot node or jmf message element we test
 	 * @return boolean - true if invalid devcaps were found
 	 * @throws JDFException if DeviceCap is invalid: has a wrong attribute Context value
 	 */
-	private static boolean invalidDevCaps(final KElement parent, final KElement jdfRoot, final EnumFitsValue testlists, final EnumValidationLevel level, final KElement parentReport, final boolean ignoreExtensions)
+	private static boolean invalidDevCaps(final KElement parent, final KElement jdfRoot, final EnumFitsValue testlists, final EnumValidationLevel level,
+			final KElement parentReport, final boolean ignoreExtensions)
 	{
 		final KElement mrp = parentReport.appendElement((jdfRoot instanceof JDFNode) ? "MissingResources" : "MissingElements");
 		final KElement irp = parentReport.appendElement((jdfRoot instanceof JDFNode) ? "InvalidResources" : "InvalidElements");
@@ -863,7 +787,8 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 				for (int k = 0; k < size && !bFound; k++)
 				{
 					final JDFDevCaps dc = (JDFDevCaps) vDevCaps.elementAt(k);
-					if ((!dc.hasAttribute(AttributeName.LINKUSAGE) || dc.getLinkUsage().getName().equals(link.getUsage().getName())) && (dc.getProcessUsage().equals(processUsage)))
+					if ((!dc.hasAttribute(AttributeName.LINKUSAGE) || dc.getLinkUsage().name().equals(link.getUsage().name()))
+							&& (dc.getProcessUsage().equals(processUsage)))
 					{
 						bFound = true;
 					}
@@ -874,9 +799,9 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 					final KElement r = root.appendElement("UnknownResource");
 					r.setAttribute("XPath", link.buildXPath(null, 1));
 					r.setAttribute("Name", resName);
-					if (link.hasAttribute(AttributeName.USAGE, null, false) && !link.getUsage().getName().equals("Unknown"))
+					if (link.hasAttribute(AttributeName.USAGE, null, false) && !link.getUsage().name().equals("Unknown"))
 					{
-						r.setAttribute("Usage", link.getUsage().getName());
+						r.setAttribute("Usage", link.getUsage().name());
 					}
 					r.setAttribute("Message", "Found no DevCaps description for this resource");
 				}
@@ -901,14 +826,14 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 * checkNodeInfoCustomerInfo - tests if there are JDFNode/NodeInfo or JDFNode/CustomerInfo elements that are not described by DevCaps. If missing DevCaps are found, jdfRoot has
 	 * elements unknown for this Device resources or elements
 	 *
-	 * @param jdfRoot node to test
-	 * @param root root of the XMLDoc output
+	 * @param jdfRoot     node to test
+	 * @param root        root of the XMLDoc output
 	 * @param elementName "NodeInfo" or "CustomerInfo" or "StatusPool"
 	 */
 	private final void checkNodeInfoCustomerInfo(final JDFNode jdfRoot, final KElement root, final String elementName)
 	{
 		final JDFAttributeMap map = new JDFAttributeMap();
-		map.put(AttributeName.CONTEXT, EnumContext.Element.getName());
+		map.put(AttributeName.CONTEXT, EnumContext.Element.name());
 		map.put(AttributeName.NAME, elementName);
 		final KElement devCaps = getChildByTagName(ElementName.DEVCAPS, null, 0, map, true, true);
 		if ((jdfRoot.getElement(elementName, null, 0) != null) && (devCaps == null))
@@ -962,18 +887,8 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 				{
 					final JDFAction action = (JDFAction) vActions.elementAt(j);
 					final JDFTest test = action.getTest();
-					if (test == null)
-					{
-						continue;
-						// TODO add report of snafu
-						// throw new JDFException(
-						// "JDFDeviceCap.actionPoolReport: Test with ID=" +
-						// action.getTestRef() +
-						// " was not found. Attempt to operate on a null element"
-						// );
-					}
 					// loop to check whether the test even applies
-					if (!test.fitsContext(e))
+					if ((test == null) || !test.fitsContext(e))
 					{
 						continue;
 					}
@@ -990,7 +905,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 						{
 							arl = root.appendElement("ActionReportList");
 							arl.setAttribute("ID", action.getID());
-							arl.setAttribute("Severity", action.getSeverity().getName());
+							arl.setAttribute("Severity", action.getSeverity().name());
 						}
 
 						arl.moveElement(ar, null);
@@ -1101,15 +1016,15 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	/**
 	 * set the defaults of node to the values defined in the child DevCap and State elements
 	 *
-	 * @param node the JDFNode in which to set defaults
+	 * @param node   the JDFNode in which to set defaults
 	 * @param bLocal if true, set only in the local node, else recurse children
-	 * @param bAll if false, only add if minOccurs>=1 and required=true or a default exists
+	 * @param bAll   if false, only add if minOccurs>=1 and required=true or a default exists
 	 */
 	public boolean setDefaultsFromCaps(final JDFNode node, final boolean bLocal, final boolean bAll)
 	{
 		boolean success = false;
 		final boolean bTestTypes = node.hasAttribute(AttributeName.TYPE);
-		if (bLocal == false)
+		if (!bLocal)
 		{
 			final VElement vNode = node.getvJDFNode(null, null, false);
 			for (int i = 0; i < vNode.size(); i++)
@@ -1126,7 +1041,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 		if (hasAttribute(AttributeName.TYPES))
 		{
 			node.setType(EnumType.ProcessGroup);
-			final Vector<ValuedEnum> cm = getCombinedMethod();
+			final Vector cm = getCombinedMethod();
 			if (cm != null && cm.contains(EnumCombinedMethod.Combined))
 			{
 				node.setType(EnumType.Combined);
@@ -1203,27 +1118,28 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	/**
 	 * get a DevCaps element by name and further restrictions. If an Enumerative restriction is null, the restriction is not checked.
 	 *
-	 * @param devCapsName the Name attribute of the DevCaps
-	 * @param context the Context attribute of the DevCaps
-	 * @param linkUsage the LinkUsage attribute of the DevCaps
+	 * @param devCapsName  the Name attribute of the DevCaps
+	 * @param context      the Context attribute of the DevCaps
+	 * @param linkUsage    the LinkUsage attribute of the DevCaps
 	 * @param processUsage the ProcessUsage attribute of the DevCaps
-	 * @param iSkip the iSkip'th matching DevCaps
+	 * @param iSkip        the iSkip'th matching DevCaps
 	 * @return JDFDevCaps the matching DevCaps, null if not there
 	 */
-	public JDFDevCaps getDevCapsByName(final String devCapsName, final EnumContext context, final EnumUsage linkUsage, final EnumProcessUsage processUsage, final int iSkip)
+	public JDFDevCaps getDevCapsByName(final String devCapsName, final EnumContext context, final EnumUsage linkUsage, final EnumProcessUsage processUsage,
+			final int iSkip)
 	{
 		final JDFAttributeMap map = new JDFAttributeMap(AttributeName.NAME, devCapsName);
 		if (context != null)
 		{
-			map.put(AttributeName.CONTEXT, context.getName());
+			map.put(AttributeName.CONTEXT, context.name());
 		}
 		if (linkUsage != null)
 		{
-			map.put(AttributeName.LINKUSAGE, linkUsage.getName());
+			map.put(AttributeName.LINKUSAGE, linkUsage.name());
 		}
 		if (processUsage != null)
 		{
-			map.put(AttributeName.PROCESSUSAGE, processUsage.getName());
+			map.put(AttributeName.PROCESSUSAGE, processUsage.name());
 		}
 		return (JDFDevCaps) getChildByTagName(ElementName.DEVCAPS, null, iSkip, map, true, true);
 	}
@@ -1235,7 +1151,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 */
 	public void setCombinedMethod(final EnumCombinedMethod method)
 	{
-		setAttribute(AttributeName.COMBINEDMETHOD, method == null ? null : method.getName(), null);
+		setAttribute(AttributeName.COMBINEDMETHOD, JavaEnumUtil.getName(method), null);
 	}
 
 	/**
@@ -1271,7 +1187,6 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.ifaces.IDeviceCapable#getTargetCap(java.lang.String)
 	 */
 	@Override

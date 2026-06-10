@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -104,7 +100,8 @@ public abstract class JDFAutoNotification extends JDFAudit
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumClass.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumClass.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.COMBINEDPROCESSINDEX, 0x3333331111l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBID, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
@@ -140,7 +137,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNotification(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoNotification(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -152,7 +149,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNotification(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoNotification(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -165,99 +162,28 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoNotification(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoNotification(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for Class
+	 * Enumeration strings for numClass
 	 */
 
-	public enum EClass
+	public enum EnumClass
 	{
 		Event, Information, Warning, Error, Fatal;
 
-		public static EClass getEnum(String val)
+		public static EnumClass getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EClass.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumClass.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Class
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumClass extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumClass(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumClass getEnum(String enumName)
-		{
-			return (EnumClass) getEnum(EnumClass.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumClass getEnum(int enumValue)
-		{
-			return (EnumClass) getEnum(EnumClass.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumClass.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumClass.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumClass.class);
-		}
-
-		/**  */
-		public static final EnumClass Event = new EnumClass("Event");
-		/**  */
-		public static final EnumClass Information = new EnumClass("Information");
-		/**  */
-		public static final EnumClass Warning = new EnumClass("Warning");
-		/**  */
-		public static final EnumClass Error = new EnumClass("Error");
-		/**  */
-		public static final EnumClass Fatal = new EnumClass("Fatal");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -269,36 +195,9 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setClass(EClass enumVar)
+	public void setClass(final EnumClass enumVar)
 	{
-		setAttribute(AttributeName.CLASS, enumVar == null ? null : enumVar.name(), null);
-	}
-
-	/**
-	 * (6) get EClass attribute Class
-	 *
-	 * @return EClass the value of the attribute
-	 */
-	public EClass getEClass()
-	{
-		return EClass.getEnum(getAttribute(AttributeName.CLASS, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Class
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Class
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetClass(EClass) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setClass(EnumClass enumVar)
-	{
-		setAttribute(AttributeName.CLASS, enumVar == null ? null : enumVar.getName(), null);
+		setAttribute(AttributeName.CLASS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -306,7 +205,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 *
 	 * @return EnumClass the value of the attribute
 	 */
-	public EnumClass getClassJDF()
+	public EnumClass getEClass()
 	{
 		return EnumClass.getEnum(getAttribute(AttributeName.CLASS, null, null));
 	}
@@ -321,7 +220,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCombinedProcessIndex(JDFIntegerList value)
+	public void setCombinedProcessIndex(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.COMBINEDPROCESSINDEX, value, null);
 	}
@@ -334,8 +233,8 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 */
 	public JDFIntegerList getCombinedProcessIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -349,7 +248,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -374,7 +273,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobPartID(String value)
+	public void setJobPartID(final String value)
 	{
 		setAttribute(AttributeName.JOBPARTID, value, null);
 	}
@@ -399,7 +298,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setModuleID(String value)
+	public void setModuleID(final String value)
 	{
 		setAttribute(AttributeName.MODULEID, value, null);
 	}
@@ -424,7 +323,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setModuleIndex(JDFIntegerRangeList value)
+	public void setModuleIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.MODULEINDEX, value, null);
 	}
@@ -437,8 +336,8 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 */
 	public JDFIntegerRangeList getModuleIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -452,7 +351,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setModuleType(String value)
+	public void setModuleType(final String value)
 	{
 		setAttribute(AttributeName.MODULETYPE, value, null);
 	}
@@ -477,7 +376,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setType(String value)
+	public void setType(final String value)
 	{
 		setAttribute(AttributeName.TYPE, value, null);
 	}
@@ -556,7 +455,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 * @return JDFEmployee the element
 	 */
 	@Override
-	public JDFEmployee getCreateEmployee(int iSkip)
+	public JDFEmployee getCreateEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -569,7 +468,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 *         default is getEmployee(0)
 	 */
 	@Override
-	public JDFEmployee getEmployee(int iSkip)
+	public JDFEmployee getEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -622,7 +521,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
-	public JDFPart getCreatePart(int iSkip)
+	public JDFPart getCreatePart(final int iSkip)
 	{
 		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
@@ -634,7 +533,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 * @return JDFPart the element
 	 *         default is getPart(0)
 	 */
-	public JDFPart getPart(int iSkip)
+	public JDFPart getPart(final int iSkip)
 	{
 		return (JDFPart) getElement(ElementName.PART, null, iSkip);
 	}

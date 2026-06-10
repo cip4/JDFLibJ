@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFEmployee;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoSpawned : public JDFAudit
@@ -103,7 +104,8 @@ public abstract class JDFAutoSpawned extends JDFAudit
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.NEWSPAWNID, 0x2222222221l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.RREFSROCOPIED, 0x3333333333l, AttributeInfo.EnumAttributeType.IDREFS, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.RREFSRWCOPIED, 0x3333333333l, AttributeInfo.EnumAttributeType.IDREFS, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.STATUS, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.STATUS, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumNodeStatus.class, 0), null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.URL, 0x3333333331l, AttributeInfo.EnumAttributeType.URL, null, null);
 	}
 
@@ -132,7 +134,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSpawned(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoSpawned(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -144,7 +146,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSpawned(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoSpawned(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -157,7 +159,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoSpawned(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoSpawned(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -178,7 +180,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIndependent(boolean value)
+	public void setIndependent(final boolean value)
 	{
 		setAttribute(AttributeName.INDEPENDENT, value, null);
 	}
@@ -203,7 +205,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setjRef(String value)
+	public void setjRef(final String value)
 	{
 		setAttribute(AttributeName.JREF, value, null);
 	}
@@ -228,7 +230,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setjRefDestination(String value)
+	public void setjRefDestination(final String value)
 	{
 		setAttribute(AttributeName.JREFDESTINATION, value, null);
 	}
@@ -253,7 +255,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNewSpawnID(String value)
+	public void setNewSpawnID(final String value)
 	{
 		setAttribute(AttributeName.NEWSPAWNID, value, null);
 	}
@@ -278,7 +280,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setrRefsROCopied(VString value)
+	public void setrRefsROCopied(final VString value)
 	{
 		setAttribute(AttributeName.RREFSROCOPIED, value, null);
 	}
@@ -290,8 +292,8 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	 */
 	public VString getrRefsROCopied()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.RREFSROCOPIED, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.RREFSROCOPIED, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -306,7 +308,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setrRefsRWCopied(VString value)
+	public void setrRefsRWCopied(final VString value)
 	{
 		setAttribute(AttributeName.RREFSRWCOPIED, value, null);
 	}
@@ -318,8 +320,8 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	 */
 	public VString getrRefsRWCopied()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.RREFSRWCOPIED, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.RREFSRWCOPIED, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -334,7 +336,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setURL(String value)
+	public void setURL(final String value)
 	{
 		setAttribute(AttributeName.URL, value, null);
 	}
@@ -382,7 +384,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	 * @return JDFEmployee the element
 	 */
 	@Override
-	public JDFEmployee getCreateEmployee(int iSkip)
+	public JDFEmployee getCreateEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -395,7 +397,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	 *         default is getEmployee(0)
 	 */
 	@Override
-	public JDFEmployee getEmployee(int iSkip)
+	public JDFEmployee getEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -448,7 +450,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
-	public JDFPart getCreatePart(int iSkip)
+	public JDFPart getCreatePart(final int iSkip)
 	{
 		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
@@ -460,7 +462,7 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	 * @return JDFPart the element
 	 *         default is getPart(0)
 	 */
-	public JDFPart getPart(int iSkip)
+	public JDFPart getPart(final int iSkip)
 	{
 		return (JDFPart) getElement(ElementName.PART, null, iSkip);
 	}

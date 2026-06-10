@@ -48,11 +48,9 @@
 package org.cip4.jdflib.core;
 
 /**
- *
  * list of xml element names for JDF
  *
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         July 23, 2009
  */
 public final class ElementName

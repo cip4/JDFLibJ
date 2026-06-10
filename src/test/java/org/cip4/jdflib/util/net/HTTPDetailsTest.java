@@ -106,7 +106,6 @@ class HTTPDetailsTest
 
 	/**
 	 * @throws MalformedURLException
-	 *
 	 */
 	@Test
 	void testBearer() throws MalformedURLException
@@ -120,7 +119,6 @@ class HTTPDetailsTest
 
 	/**
 	 * @throws MalformedURLException
-	 *
 	 */
 	@Test
 	void testAccept() throws MalformedURLException
@@ -134,7 +132,6 @@ class HTTPDetailsTest
 
 	/**
 	 * @throws MalformedURLException
-	 *
 	 */
 	@Test
 	void testSetHeader() throws MalformedURLException
@@ -148,7 +145,6 @@ class HTTPDetailsTest
 
 	/**
 	 * @throws MalformedURLException
-	 *
 	 */
 	@Test
 	void testGetHeaders() throws MalformedURLException
@@ -161,7 +157,6 @@ class HTTPDetailsTest
 
 	/**
 	 * @throws MalformedURLException
-	 *
 	 */
 	@Test
 	void testGetHeader() throws MalformedURLException

@@ -75,14 +75,12 @@ import org.cip4.jdflib.extensions.XJDFHelper;
 
 /**
  * interface to split XJDF into multiple workstep or device related XJDF
- * 
- * @author rainer prosi
  *
+ * @author rainer prosi
  */
 public interface IXJDFSplit
 {
 	/**
-	 * 
 	 * @param root the main or root XJDF to split
 	 * @return
 	 */

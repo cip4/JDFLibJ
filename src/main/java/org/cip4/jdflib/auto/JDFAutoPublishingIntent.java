@@ -129,7 +129,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPublishingIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPublishingIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -141,7 +141,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPublishingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPublishingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -154,7 +154,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPublishingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPublishingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -175,7 +175,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setContentDataRefs(VString value)
+	public void setContentDataRefs(final VString value)
 	{
 		setAttribute(AttributeName.CONTENTDATAREFS, value, null);
 	}
@@ -187,8 +187,8 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 	 */
 	public VString getContentDataRefs()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.CONTENTDATAREFS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.CONTENTDATAREFS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -359,7 +359,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refContentList(JDFContentList refTarget)
+	public void refContentList(final JDFContentList refTarget)
 	{
 		refElement(refTarget);
 	}

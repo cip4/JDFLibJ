@@ -106,7 +106,7 @@ public abstract class JDFAutoSheetCondition extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSheetCondition(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoSheetCondition(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoSheetCondition extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSheetCondition(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoSheetCondition(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoSheetCondition extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoSheetCondition(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoSheetCondition(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoSheetCondition extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFRunList the element
 	 */
-	public JDFRunList getCreateRunList(int iSkip)
+	public JDFRunList getCreateRunList(final int iSkip)
 	{
 		return (JDFRunList) getCreateElement_JDFElement(ElementName.RUNLIST, null, iSkip);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoSheetCondition extends JDFElement
 	 * @return JDFRunList the element
 	 *         default is getRunList(0)
 	 */
-	public JDFRunList getRunList(int iSkip)
+	public JDFRunList getRunList(final int iSkip)
 	{
 		return (JDFRunList) getElement(ElementName.RUNLIST, null, iSkip);
 	}
@@ -210,7 +210,7 @@ public abstract class JDFAutoSheetCondition extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refRunList(JDFRunList refTarget)
+	public void refRunList(final JDFRunList refTarget)
 	{
 		refElement(refTarget);
 	}

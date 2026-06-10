@@ -71,7 +71,7 @@ package org.cip4.jdflib.extensions.xjdfgoldenticket;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoPart.ESide;
+import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -116,7 +116,7 @@ class XJDFConvPrintICSGoldenTicketTest extends JDFTestCaseBase
 	{
 		final VJDFAttributeMap maps = new VJDFAttributeMap();
 		final JDFAttributeMap sepMap = new JDFAttributeMap(AttributeName.SHEETNAME, "Sheet1");
-		for (final ESide side : ESide.values())
+		for (final EnumSide side : EnumSide.values())
 		{
 			sepMap.put(AttributeName.SIDE, side);
 			for (final String sep : JDFColor.getKCMYSeparations())

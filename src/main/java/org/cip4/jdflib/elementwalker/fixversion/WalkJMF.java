@@ -75,12 +75,10 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.jmf.JDFJMF;
-import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
- *
  */
 public class WalkJMF extends WalkPool
 {
@@ -124,16 +122,20 @@ public class WalkJMF extends WalkPool
 		final JDFJMF jmf = (JDFJMF) e1;
 		if (fixVersion.version != null)
 		{
-			if (EnumUtil.aLessThanB(fixVersion.version, EnumVersion.Version_2_0))
+			if (JavaEnumUtil.aLessThanB(fixVersion.version, EnumVersion.Version_2_0))
 			{
 				jmf.setVersion(this.fixVersion.version);
 			}
-			if (EnumUtil.aLessThanB(EnumVersion.Version_1_3, fixVersion.version))
+			if (JavaEnumUtil.aLessThanB(EnumVersion.Version_1_3, fixVersion.version))
 			{
 				if (!jmf.hasAttribute(AttributeName.AGENTNAME))
+				{
 					jmf.setAgentName(JDFAudit.getStaticAgentName());
+				}
 				if (!jmf.hasAttribute(AttributeName.AGENTVERSION))
+				{
 					jmf.setAgentName(JDFAudit.getStaticAgentVersion());
+				}
 			}
 			else
 			{

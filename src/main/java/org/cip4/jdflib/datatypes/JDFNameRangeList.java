@@ -47,7 +47,7 @@ package org.cip4.jdflib.datatypes;
 import java.util.ArrayList;
 import java.util.zip.DataFormatException;
 
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -93,12 +93,11 @@ public class JDFNameRangeList extends JDFRangeList
 	 * constructs a JDFNameRangeList from a given string
 	 *
 	 * @param s the given string
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFNameRangeList(final String s) throws DataFormatException
 	{
-		if (s != null && !s.equals(JDFConstants.EMPTYSTRING))
+		if (s != null && !s.equals(JDFCoreConstants.EMPTYSTRING))
 		{
 			setString(s);
 		}
@@ -121,14 +120,15 @@ public class JDFNameRangeList extends JDFRangeList
 	 * setString - parse the string and separate all single ranges
 	 *
 	 * @param s the given string
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public void setString(final String s) throws DataFormatException
 	{
-		if (s.indexOf(JDFConstants.TILDE) == 0 || s.lastIndexOf(JDFConstants.TILDE) == (s.length() - 1))
+		if (s.indexOf(JDFCoreConstants.TILDE) == 0 || s.lastIndexOf(JDFCoreConstants.TILDE) == (s.length() - 1))
+		{
 			throw new DataFormatException("JDFNameRangeList::SetString: Illegal string " + s);
-		final String zappedWS = StringUtil.zappTokenWS(s, JDFConstants.TILDE);
+		}
+		final String zappedWS = StringUtil.zappTokenWS(s, JDFCoreConstants.TILDE);
 		final StringArray vs = StringArray.getVString(zappedWS, " \t");
 		rangeList.clear();
 		for (final String str : vs)
@@ -142,7 +142,6 @@ public class JDFNameRangeList extends JDFRangeList
 	 * inRange - returns true if the given string is in range with one of the ranges in the range list (<code
 	 *
 	 * @param x the given string
-	 *
 	 * @return boolean - true if in range, otherwise false
 	 */
 	public boolean inRange(final String x)

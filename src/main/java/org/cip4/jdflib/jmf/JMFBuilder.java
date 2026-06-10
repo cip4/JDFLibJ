@@ -62,6 +62,7 @@ import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.resource.JDFMilestone;
 import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -150,7 +151,7 @@ public class JMFBuilder implements Cloneable
 	public JDFJMF buildAbortQueueEntry(final String queueEntryId)
 	{
 		final JDFJMF jmf = buildQueueEntryCommand(queueEntryId, EnumType.AbortQueueEntry);
-		JDFAbortQueueEntryParams aqp = jmf.getCommand(0).getAbortQueueEntryParams();
+		final JDFAbortQueueEntryParams aqp = jmf.getCommand(0).getAbortQueueEntryParams();
 		aqp.setEndStatus(EnumNodeStatus.Aborted);
 		return lastSteps(jmf);
 	}
@@ -182,10 +183,10 @@ public class JMFBuilder implements Cloneable
 		}
 		final JDFJMF jmf = createJMF(EnumFamily.Command, typ);
 		final JDFCommand command = jmf.getCommand(0);
-		String params = typ.getName() + "Params";
-		KElement paramsEle = command.appendElement(params);
-		JDFQueueFilter qf = (JDFQueueFilter) paramsEle.appendElement(ElementName.QUEUEFILTER);
-		JDFQueueEntryDef qed = qf.appendQueueEntryDef(queueEntryId);
+		final String params = typ.name() + "Params";
+		final KElement paramsEle = command.appendElement(params);
+		final JDFQueueFilter qf = (JDFQueueFilter) paramsEle.appendElement(ElementName.QUEUEFILTER);
+		final JDFQueueEntryDef qed = qf.appendQueueEntryDef(queueEntryId);
 		return lastSteps(jmf);
 	}
 
@@ -257,7 +258,7 @@ public class JMFBuilder implements Cloneable
 	{
 		final JDFJMF jmf = createJMF(EnumFamily.Query, EnumType.Status);
 		final JDFStatusQuParams statusQuParams = jmf.getCreateQuery(0).getCreateStatusQuParams(0);
-		statusQuParams.setDeviceDetails(deviceDetails);
+		statusQuParams.setDeviceDetails(org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails.getEnum(JavaEnumUtil.getName(deviceDetails)));
 		statusQuParams.setJobDetails(jobDetails);
 		return lastSteps(jmf);
 	}
@@ -332,7 +333,7 @@ public class JMFBuilder implements Cloneable
 		final JDFQuery query = jmf.getQuery(0);
 		final JDFStatusQuParams statusQuParams = query.getCreateStatusQuParams(0);
 		statusQuParams.setJobDetails(EnumJobDetails.Brief);
-		statusQuParams.setDeviceDetails(EnumDeviceDetails.Brief);
+		statusQuParams.setDeviceDetails(org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails.getEnum(EnumDeviceDetails.Brief.name()));
 
 		if (queueEntryID != null)
 		{
@@ -390,7 +391,7 @@ public class JMFBuilder implements Cloneable
 		quParams.setResourceName(resType);
 		quParams.setExact(true);
 		quParams.setResourceDetails(EnumResourceDetails.Full);
-		quParams.setAttribute(AttributeName.SCOPE, EnumScope.Allowed.getName());
+		quParams.setAttribute(AttributeName.SCOPE, EnumScope.Allowed.name());
 		return query.getJMFRoot();
 	}
 
@@ -707,11 +708,11 @@ public class JMFBuilder implements Cloneable
 	{
 		final EnumType typ = EnumType.getEnum(type);
 		final JDFJMF jmfRoot;
-		if (EnumType.Status.getName().equals(type) && EnumFamily.Query.equals(family))
+		if (EnumType.Status.name().equals(type) && EnumFamily.Query.equals(family))
 		{
 			jmfRoot = buildStatus(EnumDeviceDetails.Brief, EnumJobDetails.Brief);
 		}
-		else if (EnumType.KnownDevices.getName().equals(type) && EnumFamily.Query.equals(family))
+		else if (EnumType.KnownDevices.name().equals(type) && EnumFamily.Query.equals(family))
 		{
 			jmfRoot = buildKnownDevicesQuery(JDFAutoDeviceFilter.EnumDeviceDetails.Full);
 		}

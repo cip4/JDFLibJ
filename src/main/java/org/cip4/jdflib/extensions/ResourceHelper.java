@@ -39,7 +39,6 @@ package org.cip4.jdflib.extensions;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
@@ -57,6 +56,7 @@ import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -586,9 +586,9 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	/**
 	 *
 	 */
-	public void setResourceEnum(final String attrib, final ValuedEnum value)
+	public void setResourceEnum(final String attrib, final Enum<?> value)
 	{
-		setResourceAttribute(attrib, value == null ? null : value.getName());
+		setResourceAttribute(attrib, JavaEnumUtil.getName(value));
 	}
 
 	/**
@@ -661,7 +661,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	{
 		if (EnumResStatus.Available.equals(status) || EnumResStatus.Unavailable.equals(status))
 		{
-			setAttribute(AttributeName.STATUS, status.getName());
+			setAttribute(AttributeName.STATUS, status.name());
 		}
 		else
 		{

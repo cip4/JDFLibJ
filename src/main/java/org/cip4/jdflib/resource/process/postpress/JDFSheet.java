@@ -82,7 +82,7 @@ package org.cip4.jdflib.resource.process.postpress;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
+import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -101,6 +101,7 @@ import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFSignature;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFSurface;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -115,8 +116,8 @@ public class JDFSheet extends JDFSignature
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX, 0x44444333, AttributeInfo.EnumAttributeType.rectangle, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOCKORIGINS, 0x44444333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.NAME, 0x44444333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.SOURCEWORKSTYLE, 0x44444333, AttributeInfo.EnumAttributeType.enumeration, EnumWorkStyle.getEnum(0),
-				null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SOURCEWORKSTYLE, 0x44444333, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(JDFAutoConventionalPrintingParams.EnumWorkStyle.class, 0), null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX, 0x44444333, AttributeInfo.EnumAttributeType.rectangle, null, null);
 	}
 

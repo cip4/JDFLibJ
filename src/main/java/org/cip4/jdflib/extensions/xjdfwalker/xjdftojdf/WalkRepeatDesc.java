@@ -100,7 +100,9 @@ public class WalkRepeatDesc extends WalkXElement
 	protected String getRefName(final String val)
 	{
 		if ("ShapeDefRef".equals(val))
+		{
 			return null;
+		}
 
 		return super.getRefName(val);
 	}

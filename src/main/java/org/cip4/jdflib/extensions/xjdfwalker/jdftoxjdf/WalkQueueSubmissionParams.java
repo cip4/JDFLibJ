@@ -77,9 +77,7 @@ import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.resource.process.JDFDisposition;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkQueueSubmissionParams extends WalkJDFElement
 {
@@ -123,7 +121,7 @@ public class WalkQueueSubmissionParams extends WalkJDFElement
 		map.remove(AttributeName.RETURNURL);
 		if (hold)
 		{
-			map.put(AttributeName.ACTIVATION, EnumActivation.Held.getName());
+			map.put(AttributeName.ACTIVATION, EnumActivation.Held.name());
 		}
 		super.updateAttributes(map);
 	}

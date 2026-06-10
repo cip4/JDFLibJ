@@ -40,13 +40,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoAudit;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -55,8 +51,8 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.ContainerUtil;
-import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -95,17 +91,25 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 		final Properties props = new Properties();
 		final String def;
 		if (LIB_NAME.equals(key))
+		{
 			def = m_libAgentName;
+		}
 		else if (LIB_VERSION.equals(key))
+		{
 			def = m_libAgentVersion;
+		}
 		else
+		{
 			def = "n. a.";
+		}
 
 		try
 		{
 			final InputStream s = JDFAudit.class.getResourceAsStream("/org/cip4/jdflib/build.properties");
 			if (s == null)
+			{
 				return def;
+			}
 			props.load(s);
 		}
 		catch (final IOException e)
@@ -162,178 +166,30 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 
 	/**
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
-	 *
 	 *         before June 3, 2009
 	 */
-	@SuppressWarnings("rawtypes")
-	public static class EnumAuditType extends ValuedEnum
+	public enum EnumAuditType
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Created, Modified, Deleted, Spawned, Merged, Notification, PhaseTime, ResourceAudit, ProcessRun;
 
-		protected EnumAuditType(final String name)
+		public static EnumAuditType getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumAuditType.class, val, null);
 		}
-
-		/**
-		 * @param enumName
-		 * @return
-		 */
-		public static EnumAuditType getEnum(final String enumName)
-		{
-			return (EnumAuditType) getEnum(EnumAuditType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue
-		 * @return
-		 */
-		public static EnumAuditType getEnum(final int enumValue)
-		{
-			return (EnumAuditType) getEnum(EnumAuditType.class, enumValue);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumAuditType.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAuditType.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAuditType.class);
-		}
-
-		/**
-		 *
-		 */
-		public static final EnumAuditType Created = new EnumAuditType("Created");
-		/**
-		 *
-		 */
-		public static final EnumAuditType Modified = new EnumAuditType("Modified");
-		/**
-		 *
-		 */
-		public static final EnumAuditType Deleted = new EnumAuditType("Deleted");
-		/**
-		 *
-		 */
-		public static final EnumAuditType Spawned = new EnumAuditType("Spawned");
-		/**
-		 *
-		 */
-		public static final EnumAuditType Merged = new EnumAuditType("Merged");
-		/**
-		 *
-		 */
-		public static final EnumAuditType Notification = new EnumAuditType("Notification");
-		/**
-		 *
-		 */
-		public static final EnumAuditType PhaseTime = new EnumAuditType("PhaseTime");
-		/**
-		 *
-		 */
-		public static final EnumAuditType ResourceAudit = new EnumAuditType("ResourceAudit");
-		/**
-		 *
-		 */
-		public static final EnumAuditType ProcessRun = new EnumAuditType("ProcessRun");
 	}
 
 	/**
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
-	 *
 	 *         July 20, 2009
 	 */
-	@SuppressWarnings("rawtypes")
-	public static final class EnumSeverity extends ValuedEnum
+	public enum EnumSeverity
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Event, Information, Warning, Error, Fatal;
 
-		private EnumSeverity(final String name)
+		public static EnumSeverity getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSeverity.class, val, null);
 		}
-
-		/**
-		 * @param enumName
-		 * @return
-		 */
-		public static EnumSeverity getEnum(final String enumName)
-		{
-			return (EnumSeverity) getEnum(EnumSeverity.class, enumName);
-		}
-
-		/**
-		 * @param enumValue
-		 * @return
-		 */
-		public static EnumSeverity getEnum(final int enumValue)
-		{
-			return (EnumSeverity) getEnum(EnumSeverity.class, enumValue);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSeverity.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSeverity.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSeverity.class);
-		}
-
-		/**
-		 *
-		 */
-		public static final EnumSeverity Event = new EnumSeverity("Event");
-		/**
-		 *
-		 */
-		public static final EnumSeverity Information = new EnumSeverity("Information");
-		/**
-		 *
-		 */
-		public static final EnumSeverity Warning = new EnumSeverity("Warning");
-		/**
-		 *
-		 */
-		public static final EnumSeverity Error = new EnumSeverity("Error");
-		/**
-		 *
-		 */
-		public static final EnumSeverity Fatal = new EnumSeverity("Fatal");
 	}
 
 	// **************************************** Methods
@@ -375,7 +231,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	@Deprecated
 	public void setSeverity(final EnumSeverity s)
 	{
-		setAttribute(JDFConstants.SEVERITY, s == null ? null : s.getName(), null);
+		setAttribute(JDFConstants.SEVERITY, JavaEnumUtil.getName(s), null);
 	}
 
 	/**
@@ -398,7 +254,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	@Override
 	public void setStatus(final JDFElement.EnumNodeStatus s)
 	{
-		setAttribute(AttributeName.STATUS, s == null ? null : s.getName(), null);
+		setAttribute(AttributeName.STATUS, JavaEnumUtil.getName(s), null);
 	}
 
 	/**
@@ -410,7 +266,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	@Deprecated
 	public void setEndStatus(final JDFElement.EnumNodeStatus s)
 	{
-		setAttribute(AttributeName.ENDSTATUS, s == null ? null : s.getName(), null);
+		setAttribute(AttributeName.ENDSTATUS, JavaEnumUtil.getName(s), null);
 	}
 
 	/**
@@ -508,16 +364,15 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	@Deprecated
 	public void setBy(final String by)
 	{
-		if (by == null || by.equals(JDFConstants.EMPTYSTRING))
+		if (by == null || by.equals(JDFCoreConstants.EMPTYSTRING))
 		{
 			return;
 		}
 
-		setAttribute(AttributeName.AUTHOR, by, JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.AUTHOR, by, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
-	 *
 	 * @param by
 	 */
 	public void updateAgent(final String by)
@@ -535,7 +390,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	 */
 	public static String software()
 	{
-		return m_strAgentName + JDFConstants.BLANK + m_strAgentVersion;
+		return m_strAgentName + JDFCoreConstants.BLANK + m_strAgentVersion;
 	}
 
 	/**
@@ -548,14 +403,14 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	{
 		final EnumVersion auditVersion = getVersion(true);
 		setAttributeNameTimeStamp(AttributeName.TIMESTAMP, null);
-		if (auditVersion == null || auditVersion.getValue() >= EnumVersion.Version_1_2.getValue())
+		if (auditVersion == null || auditVersion.compareTo(EnumVersion.Version_1_2) >= 0)
 		{
 			setAgentName(m_strAgentName);
 			setAgentVersion(m_strAgentVersion);
 		}
 		if (m_strAuthor != null)
 		{
-			if (EnumUtil.aLessThanB(getVersion(true), EnumVersion.Version_1_4))
+			if (auditVersion != null && auditVersion.compareTo(EnumVersion.Version_1_4) < 0)
 			{
 				setAuthor(m_strAuthor);
 			}
@@ -565,7 +420,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 			}
 		}
 
-		if ((auditVersion == null || auditVersion.getValue() >= EnumVersion.Version_1_3.getValue()) && !isXJDF())
+		if ((auditVersion == null || auditVersion.compareTo(EnumVersion.Version_1_3) >= 0) && !isXJDF())
 		{
 			appendAnchor(null);
 		}
@@ -661,7 +516,9 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	public static synchronized String getStaticAgentName()
 	{
 		if (m_strAgentName == null)
+		{
 			m_strAgentName = readBuildProperty(LIB_NAME);
+		}
 		return StringUtil.getNonEmpty(m_strAgentName);
 	}
 
@@ -672,7 +529,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	 */
 	public static synchronized void setStaticAgentName(final String agentName)
 	{
-		m_strAgentName = agentName == null ? JDFConstants.EMPTYSTRING : agentName;
+		m_strAgentName = agentName == null ? JDFCoreConstants.EMPTYSTRING : agentName;
 	}
 
 	/**
@@ -703,7 +560,9 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	public static synchronized String getStaticAgentVersion()
 	{
 		if (m_strAgentVersion == null)
+		{
 			m_strAgentVersion = readBuildProperty(LIB_VERSION);
+		}
 		return StringUtil.getNonEmpty(m_strAgentVersion);
 	}
 
@@ -714,7 +573,7 @@ public class JDFAudit extends JDFAutoAudit implements Comparator<JDFAudit>
 	 */
 	public static synchronized void setStaticAgentVersion(final String agentVersion)
 	{
-		m_strAgentVersion = agentVersion == null ? JDFConstants.EMPTYSTRING : agentVersion;
+		m_strAgentVersion = agentVersion == null ? JDFCoreConstants.EMPTYSTRING : agentVersion;
 	}
 
 	/**

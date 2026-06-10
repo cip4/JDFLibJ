@@ -38,7 +38,6 @@ package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumFrontCoatings;
-import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 public abstract class XJDFEnums
@@ -50,22 +49,26 @@ public abstract class XJDFEnums
 
 		public static eDeviceStatus getEnum(final String val)
 		{
-			final eDeviceStatus status = EnumUtil.getJavaEnumIgnoreCase(eDeviceStatus.class, val);
-			final EnumDeviceStatus ds = status == null ? (EnumDeviceStatus) EnumUtil.getEnumIgnoreCase(EnumDeviceStatus.class, val) : null;
+			final eDeviceStatus status = JavaEnumUtil.getEnumIgnoreCase(eDeviceStatus.class, val);
+			final EnumDeviceStatus ds = status == null ? JavaEnumUtil.getEnumIgnoreCase(EnumDeviceStatus.class, val) : null;
 			if (ds != null)
 			{
 
 				if (EnumDeviceStatus.Unknown.equals(ds) || EnumDeviceStatus.Down.equals(ds))
+				{
 					return Offline;
+				}
 				if (EnumDeviceStatus.Running.equals(ds))
+				{
 					return Production;
+				}
 			}
 			return status;
 		}
 
 		public String getJDFVal()
 		{
-			return Production == this ? EnumDeviceStatus.Running.getName() : (Offline == this ? EnumDeviceStatus.Unknown.getName() : name());
+			return Production == this ? EnumDeviceStatus.Running.name() : (Offline == this ? EnumDeviceStatus.Unknown.name() : name());
 		}
 	}
 
@@ -76,21 +79,25 @@ public abstract class XJDFEnums
 		public static eCoating getEnum(final String s)
 		{
 			final eCoating c = JavaEnumUtil.getEnumIgnoreCase(eCoating.class, s);
-			final EnumFrontCoatings fc = c == null ? (EnumFrontCoatings) EnumUtil.getEnumIgnoreCase(EnumFrontCoatings.class, s) : null;
+			final EnumFrontCoatings fc = c == null ? JavaEnumUtil.getEnumIgnoreCase(EnumFrontCoatings.class, s) : null;
 			if (fc != null)
 			{
 
 				if (EnumFrontCoatings.Glossy.equals(fc) || EnumFrontCoatings.HighGloss.equals(fc))
+				{
 					return Gloss;
+				}
 				if (EnumFrontCoatings.Semigloss.equals(fc))
+				{
 					return Satin;
+				}
 			}
 			return c;
 		}
 
 		public String getJDFVal()
 		{
-			return Gloss == this ? EnumFrontCoatings.Glossy.getName() : name();
+			return Gloss == this ? EnumFrontCoatings.Glossy.name() : name();
 		}
 	}
 

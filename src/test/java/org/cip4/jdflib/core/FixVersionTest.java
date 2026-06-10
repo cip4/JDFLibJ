@@ -54,6 +54,7 @@ import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.elementwalker.FixVersion;
+import org.cip4.jdflib.elementwalker.fixversion.FixVersionImpl;
 import org.cip4.jdflib.elementwalker.fixversion.WalkElement;
 import org.cip4.jdflib.goldenticket.IDPGoldenTicket;
 import org.cip4.jdflib.jmf.JDFCommand;
@@ -644,7 +645,7 @@ class FixVersionTest extends JDFTestCaseBase
 		final JDFColorSpaceConversionOp co = ((JDFColorSpaceConversionParams) n.getCreateResource(ElementName.COLORSPACECONVERSIONPARAMS, EnumUsage.Input, 0))
 				.appendColorSpaceConversionOp();
 
-		co.addSourceObject(EnumSourceObjects.All);
+		co.addSourceObject(org.cip4.jdflib.auto.JDFAutoColorSpaceConversionOp.EnumSourceObjects.getEnum(EnumSourceObjects.All.name()));
 		final boolean converted = new FixVersion(EnumVersion.Version_1_6).convert(co);
 		assertTrue(converted);
 		assertNull(co.getSourceObjects());
@@ -659,7 +660,7 @@ class FixVersionTest extends JDFTestCaseBase
 		final JDFColorSpaceConversionOp co = ((JDFColorSpaceConversionParams) n.getCreateResource(ElementName.COLORSPACECONVERSIONPARAMS, EnumUsage.Input, 0))
 				.appendColorSpaceConversionOp();
 
-		co.addSourceObject(EnumSourceObjects.ImagePhotographic);
+		co.addSourceObject(org.cip4.jdflib.auto.JDFAutoColorSpaceConversionOp.EnumSourceObjects.getEnum(EnumSourceObjects.ImagePhotographic.name()));
 		final boolean converted = new FixVersion(EnumVersion.Version_1_6).convert(co);
 		assertTrue(converted);
 		assertEquals(1, co.getSourceObjects().size());
@@ -674,8 +675,8 @@ class FixVersionTest extends JDFTestCaseBase
 		final JDFColorSpaceConversionOp co = ((JDFColorSpaceConversionParams) n.getCreateResource(ElementName.COLORSPACECONVERSIONPARAMS, EnumUsage.Input, 0))
 				.appendColorSpaceConversionOp();
 
-		co.addSourceObject(EnumSourceObjects.ImagePhotographic);
-		co.addSourceObject(EnumSourceObjects.All);
+		co.addSourceObject(org.cip4.jdflib.auto.JDFAutoColorSpaceConversionOp.EnumSourceObjects.getEnum(EnumSourceObjects.ImagePhotographic.name()));
+		co.addSourceObject(org.cip4.jdflib.auto.JDFAutoColorSpaceConversionOp.EnumSourceObjects.getEnum(EnumSourceObjects.All.name()));
 		final boolean converted = new FixVersion((EnumVersion) null).convert(co);
 		assertTrue(converted);
 		assertEquals(2, co.getSourceObjects().size());
@@ -746,8 +747,8 @@ class FixVersionTest extends JDFTestCaseBase
 	void testNodeInfoTime2()
 	{
 		final JDFNodeInfo ni = n.appendNodeInfo();
-		FixVersion.setDefaultFirstHour(-1);
-		FixVersion.setDefaultLastHour(-1);
+		FixVersionImpl.setDefaultFirstHour(-1);
+		FixVersionImpl.setDefaultLastHour(-1);
 		ni.setAttribute(AttributeName.START, new JDFDate().getDateISO());
 		ni.setAttribute(AttributeName.LASTEND, new JDFDate().getDateISO());
 		final JDFResource nip = ni.addPartition(EnumPartIDKey.Run, new JDFDate().getDateISO());
@@ -1218,8 +1219,8 @@ class FixVersionTest extends JDFTestCaseBase
 	@Override
 	public void tearDown() throws Exception
 	{
-		FixVersion.setDefaultFirstHour(6);
-		FixVersion.setDefaultLastHour(18);
+		FixVersionImpl.setDefaultFirstHour(6);
+		FixVersionImpl.setDefaultLastHour(18);
 		super.tearDown();
 	}
 

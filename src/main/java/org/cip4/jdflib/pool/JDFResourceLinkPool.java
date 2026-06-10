@@ -106,6 +106,7 @@ import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -152,7 +153,6 @@ public class JDFResourceLinkPool extends JDFPool
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Override
@@ -160,7 +160,9 @@ public class JDFResourceLinkPool extends JDFPool
 	{
 		AttributeInfo ai = AttributeInfo.fixedMap.get("JDFResourceLinkPool");
 		if (ai != null)
+		{
 			return ai;
+		}
 		ai = super.getTheAttributeInfo();
 		AttributeInfo.fixedMap.put("JDFResourceLinkPool", ai);
 		return ai;
@@ -189,7 +191,6 @@ public class JDFResourceLinkPool extends JDFPool
 	 * default: GetLinks(null)
 	 *
 	 * @param mLinkAtt the attributes to search for
-	 *
 	 * @return mLinkAtt vector all all elements matching the condition mLinkAtt
 	 * @deprecated use getPoolChildren()
 	 */
@@ -205,9 +206,8 @@ public class JDFResourceLinkPool extends JDFPool
 	 * <p>
 	 * default: GetLinks(null, null)
 	 *
-	 * @param elementName Name of the Linked resource
+	 * @param elementName  Name of the Linked resource
 	 * @param nameSpaceURI the namespace to search in
-	 *
 	 * @return VElement - vector all all elements matching the condition mLinkAtt
 	 * @deprecated use getPoolChildren()
 	 */
@@ -222,11 +222,10 @@ public class JDFResourceLinkPool extends JDFPool
 	 * <p>
 	 * default: GetLinkedResources(null, null, null, false)
 	 *
-	 * @param resName type(Name) of the resource to get
-	 * @param mLinkAtt the link attribute to search for
-	 * @param mResAtt attribute to search for
+	 * @param resName     type(Name) of the resource to get
+	 * @param mLinkAtt    the link attribute to search for
+	 * @param mResAtt     attribute to search for
 	 * @param bFollowRefs if true search all HRefs and add them to the list
-	 *
 	 * @return VElement - vector with all Resources matching the conditions
 	 * @deprecated - use namespace enabled version getLinkedResources(resName, mLinkAtt, mResAtt, bFollowRefs, null);
 	 */
@@ -241,15 +240,15 @@ public class JDFResourceLinkPool extends JDFPool
 	 * <p>
 	 * default: GetLinkedResources(null, null, null, false)
 	 *
-	 * @param resName type(Name) of the resource to get
-	 * @param mLinkAtt the link attribute to search for
-	 * @param mResAtt attribute to search for
-	 * @param bFollowRefs if true search all HRefs and add them to the list
+	 * @param resName      type(Name) of the resource to get
+	 * @param mLinkAtt     the link attribute to search for
+	 * @param mResAtt      attribute to search for
+	 * @param bFollowRefs  if true search all HRefs and add them to the list
 	 * @param nameSpaceURI
-	 *
 	 * @return VElement - vector with all Resources matching the conditions
 	 */
-	public VElement getLinkedResources(String resName, final JDFAttributeMap mLinkAtt, final JDFAttributeMap mResAtt, final boolean bFollowRefs, final String nameSpaceURI)
+	public VElement getLinkedResources(String resName, final JDFAttributeMap mLinkAtt, final JDFAttributeMap mResAtt, final boolean bFollowRefs,
+			final String nameSpaceURI)
 	{
 		final VElement vL = new VElement();
 		final VElement v = getPoolChildren(null, mLinkAtt, null);
@@ -277,7 +276,9 @@ public class JDFResourceLinkPool extends JDFPool
 						bNameMatches = bColon;
 					}
 					if (bNameMatches && !JDFElement.isInJDFNameSpaceStatic(nameSpaceURI))
+					{
 						bNameMatches = ContainerUtil.equals(nameSpaceURI, l.getNamespaceURI());
+					}
 					if (bNameMatches && linkRoot.includesAttributes(mResAtt, true))
 					{
 						vL.addElement(linkRoot);
@@ -298,9 +299,9 @@ public class JDFResourceLinkPool extends JDFPool
 	 * <p>
 	 * default: GetInOutLinks(bInOut, true, JDFConstants.WILDCARD, JDFConstants.WILDCARD)
 	 *
-	 * @param bInOut what kind of links you want to have (true for input)
-	 * @param bLink if true, return the resource links. if false return the resources
-	 * @param resName type of the resource to get ( * for all)
+	 * @param bInOut       what kind of links you want to have (true for input)
+	 * @param bLink        if true, return the resource links. if false return the resources
+	 * @param resName      type of the resource to get ( * for all)
 	 * @param resProcUsage process usage of the resource to get (* for all)
 	 * @deprecated use getInOutLinks with EnumUsage signature
 	 * @return VElement - Vector with the found resource links
@@ -316,16 +317,15 @@ public class JDFResourceLinkPool extends JDFPool
 	 * <p>
 	 * default: GetInOutLinks(null, true, null, null)
 	 *
-	 * @param usage what kind of links you want to have (input, output). If null all are selected.
-	 * @param bLink if true, return the resource links. if false return the resources
-	 * @param resName name of the resource to get ( * for all)
+	 * @param usage     what kind of links you want to have (input, output). If null all are selected.
+	 * @param bLink     if true, return the resource links. if false return the resources
+	 * @param resName   name of the resource to get ( * for all)
 	 * @param procUsage process usage of the resource to get
-	 *
 	 * @return VElement - Vector with the found resource links
 	 */
 	public VElement getInOutLinks(final EnumUsage usage, final boolean bLink, final String resName, final EnumProcessUsage procUsage)
 	{
-		return getInOutLinksExtended(usage, bLink, resName, procUsage == null ? null : procUsage.getName(), null, true);
+		return getInOutLinksExtended(usage, bLink, resName, JavaEnumUtil.getName(procUsage), null, true);
 	}
 
 	/**
@@ -333,20 +333,22 @@ public class JDFResourceLinkPool extends JDFPool
 	 * <p>
 	 * default: GetInOutLinks(null, true, null, null)
 	 *
-	 * @param usage what kind of links you want to have (input, output). If null all are selected.
-	 * @param bLink if true, return the resource links. if false return the resources
-	 * @param resName name of the resource to get ( * or null for all)
-	 * @param procUsage process usage of the resource to get
+	 * @param usage        what kind of links you want to have (input, output). If null all are selected.
+	 * @param bLink        if true, return the resource links. if false return the resources
+	 * @param resName      name of the resource to get ( * or null for all)
+	 * @param procUsage    process usage of the resource to get
 	 * @param namespaceURI
 	 * @param bAll
-	 *
 	 * @return VElement - Vector with the found resource links
 	 */
-	public VElement getInOutLinksExtended(final EnumUsage usage, final boolean bLink, final String resName, String procUsage, final String namespaceURI, final boolean bAll)
+	public VElement getInOutLinksExtended(final EnumUsage usage, final boolean bLink, final String resName, String procUsage, final String namespaceURI,
+			final boolean bAll)
 	{
-		final JDFAttributeMap mA = (usage != null) ? new JDFAttributeMap(AttributeName.USAGE, usage.getName()) : null;
+		final JDFAttributeMap mA = (usage != null) ? new JDFAttributeMap(AttributeName.USAGE, usage.name()) : null;
 		if (isWildCard(procUsage))
+		{
 			procUsage = null;
+		}
 
 		final int loop1 = procUsage == null ? (bAll ? 1 : 0) : 1;
 		VElement v0 = getPoolChildren(null, mA, null);
@@ -354,7 +356,9 @@ public class JDFResourceLinkPool extends JDFPool
 		{
 			final VElement v = new VElement();
 			if (v0 == null || v0.size() == 0)
+			{
 				return v0;
+			}
 
 			v.addAll(v0);
 
@@ -403,8 +407,7 @@ public class JDFResourceLinkPool extends JDFPool
 	 * ResourceVector - convert a link vector to a resource vector
 	 *
 	 * @param linkVector vector to convert
-	 * @param resType kind of resType to add ( <code>*</code> for all)
-	 *
+	 * @param resType    kind of resType to add ( <code>*</code> for all)
 	 * @return VElement - the converted vector
 	 */
 	public static VElement resourceVector(final VElement linkVector, final String resType)
@@ -437,14 +440,11 @@ public class JDFResourceLinkPool extends JDFPool
 	 * <p>
 	 * default: AppendResource(r, input, false)
 	 *
-	 * @param r the resource to append
-	 * @param input usage of the link (true = inout, false = output)
+	 * @param r      the resource to append
+	 * @param input  usage of the link (true = inout, false = output)
 	 * @param bForce if true create the link, even though it already exists - now ignored since it is useless
-	 *
 	 * @return JDFResourceLink - link to appended resource
-	 *
 	 * @throws JDFException if r is not in the same document as this
-	 *
 	 * @deprecated
 	 */
 	@Deprecated
@@ -463,10 +463,9 @@ public class JDFResourceLinkPool extends JDFPool
 	 * <p>
 	 * default: getLink(r, EnumUsage.Input, null)
 	 *
-	 * @param r the resource you are searching a link for
-	 * @param usage usage of the link (input/output)
+	 * @param r            the resource you are searching a link for
+	 * @param usage        usage of the link (input/output)
 	 * @param processUsage ProcessUsage of the link
-	 *
 	 * @return JDFResourceLink - the resource link you were searching for. If not found, a new empty JDFResourceLink is returned.
 	 */
 	public JDFResourceLink getLink(final JDFResource r, final EnumUsage usage, final EnumProcessUsage processUsage)
@@ -508,12 +507,10 @@ public class JDFResourceLinkPool extends JDFPool
 	 * <p>
 	 * default: linkResource(r, usage, null)
 	 *
-	 * @param r the resource to link
-	 * @param usage usage of the link
+	 * @param r            the resource to link
+	 * @param usage        usage of the link
 	 * @param processUsage processUsage of the link, null if none
-	 *
 	 * @return JDFResourceLink - new link resource, null if an error occurred
-	 *
 	 */
 	public JDFResourceLink linkResource(final JDFResource r, final JDFResourceLink.EnumUsage usage, final EnumProcessUsage processUsage)
 	{
@@ -550,7 +547,6 @@ public class JDFResourceLinkPool extends JDFPool
 	 * getPartMapVector - get the part map vector from the actual element
 	 *
 	 * @param bComplete if true, expand all parts defined in PartIDKeys
-	 *
 	 * @return VJDFAttributeMap - map of all parts linked by this resourcelinkpool
 	 */
 	public VJDFAttributeMap getPartMapVector(final boolean bComplete)
@@ -562,7 +558,7 @@ public class JDFResourceLinkPool extends JDFPool
 			final VString vKeys = getPartIDKeys();
 
 			final int keySize = vKeys.size();
-			final Vector<VString> vvValues = new Vector<VString>();
+			final Vector<VString> vvValues = new Vector<>();
 			final int pI[] = new int[keySize];
 			final int pISize[] = new int[keySize];
 
@@ -570,7 +566,7 @@ public class JDFResourceLinkPool extends JDFPool
 			{
 				if (EnumPartIDKey.getEnum(vKeys.elementAt(i)) != null)
 				{
-					vvValues.addElement(getPartValues(JDFResource.EnumPartIDKey.getEnum(i)));
+					vvValues.addElement(getPartValues(JDFResource.EnumPartIDKey.getEnum(vKeys.elementAt(i))));
 
 					pI[i] = 0;
 					pISize[i] = vvValues.elementAt(i).size();
@@ -701,7 +697,6 @@ public class JDFResourceLinkPool extends JDFPool
 	 * GetPartValues - get a list of the values for attribute partType within the leaves of all linked resources
 	 *
 	 * @param partType the attribute name you which to get the values
-	 *
 	 * @return Vector - vector with all values of the attribute partType
 	 */
 	public VString getPartValues(final JDFResource.EnumPartIDKey partType)
@@ -729,7 +724,6 @@ public class JDFResourceLinkPool extends JDFPool
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public Vector<JDFResourceLink> getLinks()
@@ -738,7 +732,6 @@ public class JDFResourceLinkPool extends JDFPool
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public List<JDFResourceLink> getLinkArray()
@@ -749,12 +742,10 @@ public class JDFResourceLinkPool extends JDFPool
 	/**
 	 * Gets all children with the attribute <code>name, mAttrib, nameSpaceURI</code> out of the pool
 	 *
-	 * @param strName name of the Child
-	 * @param mAttrib a attribute to search for
+	 * @param strName      name of the Child
+	 * @param mAttrib      a attribute to search for
 	 * @param nameSpaceURI the namespace uri
-	 *
 	 * @return VElement: a vector with all elements in the pool matching the conditions
-	 *
 	 *         default: getPoolChildren(null, null, null)
 	 */
 	public VElement getPoolChildren(final String strName, final JDFAttributeMap mAttrib, final String nameSpaceURI)
@@ -777,11 +768,10 @@ public class JDFResourceLinkPool extends JDFPool
 	/**
 	 * get a child resource from the pool matching the parameters
 	 *
-	 * @param i the index of the child, or -1 to make a new one.
-	 * @param strName the name of the element
-	 * @param mAttrib the attribute of the element
+	 * @param i            the index of the child, or -1 to make a new one.
+	 * @param strName      the name of the element
+	 * @param mAttrib      the attribute of the element
 	 * @param nameSpaceURI the namespace to search in
-	 *
 	 * @return JDFElement: the pool child matching the above conditions
 	 */
 	public JDFResourceLink getPoolChild(int i, final String strName, final JDFAttributeMap mAttrib, final String nameSpaceURI)
@@ -814,9 +804,8 @@ public class JDFResourceLinkPool extends JDFPool
 	 * default: GetInvalidElements(true, 999999)
 	 *
 	 * @param bIgnorePrivate used by JDFElement during the validation
-	 * @param nMax maximum size of the returned vector
+	 * @param nMax           maximum size of the returned vector
 	 * @return Vector - vector of unknown element nodenames
-	 *
 	 *         !!! Do not change the signature of this method
 	 */
 	@Override
@@ -829,7 +818,7 @@ public class JDFResourceLinkPool extends JDFPool
 	 * get inter-resource linked resource ids
 	 *
 	 * @param vDoneRefs (null, used for recursion)
-	 * @param bRecurse if true, also return recursively linked IDS
+	 * @param bRecurse  if true, also return recursively linked IDS
 	 * @return vElement: the vector of referenced resource ids
 	 */
 	@Override

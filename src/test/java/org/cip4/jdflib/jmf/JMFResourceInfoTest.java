@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.jmf;
 
@@ -80,9 +80,9 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 /**
  * @author Rainer Prosi
- * 
  *         Test of the ResourceInfo JMF element
  */
 class JMFResourceInfoTest extends JDFTestCaseBase
@@ -91,14 +91,14 @@ class JMFResourceInfoTest extends JDFTestCaseBase
 	private JDFResponse r;
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testGetResource()
 	{
 		Assertions.assertNull(ri.getResource(ElementName.MEDIA));
-		JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);
-		JDFMedia m2 = (JDFMedia) ri.getResource(ElementName.MEDIA);
+		final JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);
+		final JDFMedia m2 = (JDFMedia) ri.getResource(ElementName.MEDIA);
 		Assertions.assertEquals(m, m2);
 		Assertions.assertTrue(ri.isValid(EnumValidationLevel.Complete));
 	}
@@ -106,72 +106,70 @@ class JMFResourceInfoTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testGetResourceNull()
 	{
-		JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);
-		JDFMedia m2 = (JDFMedia) ri.getResource(null);
+		final JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);
+		final JDFMedia m2 = (JDFMedia) ri.getResource(null);
 		Assertions.assertEquals(m, m2);
 		Assertions.assertTrue(ri.isValid(EnumValidationLevel.Complete));
 	}
 
 	// ///////////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testGetResourceName()
 	{
 		// JDFMedia m=(JDFMedia)
 		ri.appendResource(ElementName.MEDIA);
-		String name = ri.getResourceName();
+		final String name = ri.getResourceName();
 		Assertions.assertEquals(name, ElementName.MEDIA);
 	}
 
 	// ///////////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testGetResourceID()
 	{
-		JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);
-		String name = ri.getResourceID();
+		final JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);
+		final String name = ri.getResourceID();
 		Assertions.assertEquals(name, m.getID());
 	}
 
 	// //////////////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testGetProductID()
 	{
-		JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);
+		final JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);
 		m.setProductID("p1");
-		String name = ri.getProductID();
+		final String name = ri.getProductID();
 		Assertions.assertEquals(name, m.getProductID());
 	}
 
 	// ///////////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testGetResStatus()
 	{
-		JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);
-		EnumResStatus name = ri.getResStatus();
+		final JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);
+		final EnumResStatus name = ri.getResStatus();
 		Assertions.assertEquals(name, m.getResStatus(false));
 	}
 
 	// ///////////////////////////////////////////////////////////////////
 
 	/**
-	 *  
-	 * 
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -179,8 +177,8 @@ class JMFResourceInfoTest extends JDFTestCaseBase
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		JDFDoc doc = new JDFDoc(ElementName.JMF);
-		JDFJMF jmf = doc.getJMFRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
 
 		r = jmf.appendResponse();
 		jmf.setSenderID("DeviceSenderID");
@@ -189,7 +187,6 @@ class JMFResourceInfoTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
 	 * test the matches algorithm for various data types
 	 */
 	@Test
@@ -202,7 +199,7 @@ class JMFResourceInfoTest extends JDFTestCaseBase
 		Assertions.assertTrue(ri.matches(ri.getResource("Media")));
 		Assertions.assertFalse(ri.matches("Ink"));
 
-		JDFResourceQuParams rqp = (JDFResourceQuParams) new JDFDoc(ElementName.RESOURCEQUPARAMS).getRoot();
+		final JDFResourceQuParams rqp = (JDFResourceQuParams) new JDFDoc(ElementName.RESOURCEQUPARAMS).getRoot();
 		Assertions.assertTrue(ri.matches(rqp));
 		rqp.setResourceName("Media");
 		Assertions.assertTrue(ri.matches(rqp));

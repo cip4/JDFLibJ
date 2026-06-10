@@ -79,8 +79,7 @@ import org.cip4.jdflib.resource.intent.JDFColorIntent;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
- * June 7, 2009
+ *         June 7, 2009
  */
 public class WalkColorIntent extends WalkResource
 {
@@ -114,8 +113,8 @@ public class WalkColorIntent extends WalkResource
 
 	/**
 	 * @see WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine
-	 * for JDF uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to
-	 * high versions but potentially fail when attempting to move from higher to lower versions
+	 *      for JDF uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to
+	 *      high versions but potentially fail when attempting to move from higher to lower versions
 	 */
 	@Override
 	public KElement walk(final KElement e1, final KElement trackElem)
@@ -125,7 +124,6 @@ public class WalkColorIntent extends WalkResource
 	}
 
 	/**
-	 *
 	 * @param e1
 	 */
 	private void processNumColors(final KElement e1)
@@ -142,7 +140,6 @@ public class WalkColorIntent extends WalkResource
 	}
 
 	/**
-	 *
 	 * @param ci
 	 */
 	private void extractNumColors(final JDFColorIntent ci)
@@ -165,7 +162,6 @@ public class WalkColorIntent extends WalkResource
 	}
 
 	/**
-	 *
 	 * @param ci
 	 */
 	private void removeNumColors(final JDFColorIntent ci)

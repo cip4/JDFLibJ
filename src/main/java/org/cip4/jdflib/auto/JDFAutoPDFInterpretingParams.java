@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -107,8 +103,8 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.EMITPDFUCR, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.HONORPDFOVERPRINT, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.ICCCOLORASDEVICECOLOR, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.OCGDEFAULT, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumOCGDefault.getEnum(0),
-				"FromPDF");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.OCGDEFAULT, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumOCGDefault.class, 0), "FromPDF");
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.OCGINTENT, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.OCGPROCESS, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.OCGZOOM, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, "1.0");
@@ -142,7 +138,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPDFInterpretingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPDFInterpretingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -154,7 +150,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPDFInterpretingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPDFInterpretingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -167,95 +163,28 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPDFInterpretingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPDFInterpretingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for OCGDefault
+	 * Enumeration strings for numOCGDefault
 	 */
 
-	public enum EOCGDefault
+	public enum EnumOCGDefault
 	{
 		Exclude, FromPDF, Include;
 
-		public static EOCGDefault getEnum(String val)
+		public static EnumOCGDefault getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EOCGDefault.class, val, EOCGDefault.FromPDF);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumOCGDefault.class, val, EnumOCGDefault.FromPDF);
 		}
-	}
-
-	/**
-	 * Enumeration strings for OCGDefault
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumOCGDefault extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumOCGDefault(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumOCGDefault getEnum(String enumName)
-		{
-			return (EnumOCGDefault) getEnum(EnumOCGDefault.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumOCGDefault getEnum(int enumValue)
-		{
-			return (EnumOCGDefault) getEnum(EnumOCGDefault.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumOCGDefault.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumOCGDefault.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumOCGDefault.class);
-		}
-
-		/**  */
-		public static final EnumOCGDefault Exclude = new EnumOCGDefault("Exclude");
-		/**  */
-		public static final EnumOCGDefault FromPDF = new EnumOCGDefault("FromPDF");
-		/**  */
-		public static final EnumOCGDefault Include = new EnumOCGDefault("Include");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -267,7 +196,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setEmitPDFBG(boolean value)
+	public void setEmitPDFBG(final boolean value)
 	{
 		setAttribute(AttributeName.EMITPDFBG, value, null);
 	}
@@ -292,7 +221,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setEmitPDFHalftones(boolean value)
+	public void setEmitPDFHalftones(final boolean value)
 	{
 		setAttribute(AttributeName.EMITPDFHALFTONES, value, null);
 	}
@@ -317,7 +246,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setEmitPDFTransfers(boolean value)
+	public void setEmitPDFTransfers(final boolean value)
 	{
 		setAttribute(AttributeName.EMITPDFTRANSFERS, value, null);
 	}
@@ -342,7 +271,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setEmitPDFUCR(boolean value)
+	public void setEmitPDFUCR(final boolean value)
 	{
 		setAttribute(AttributeName.EMITPDFUCR, value, null);
 	}
@@ -367,7 +296,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHonorPDFOverprint(boolean value)
+	public void setHonorPDFOverprint(final boolean value)
 	{
 		setAttribute(AttributeName.HONORPDFOVERPRINT, value, null);
 	}
@@ -392,7 +321,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setICCColorAsDeviceColor(boolean value)
+	public void setICCColorAsDeviceColor(final boolean value)
 	{
 		setAttribute(AttributeName.ICCCOLORASDEVICECOLOR, value, null);
 	}
@@ -417,9 +346,9 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setOCGDefault(EOCGDefault enumVar)
+	public void setOCGDefault(final EnumOCGDefault enumVar)
 	{
-		setAttribute(AttributeName.OCGDEFAULT, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.OCGDEFAULT, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -427,35 +356,6 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EOCGDefault getEOCGDefault()
-	{
-		return EOCGDefault.getEnum(getAttribute(AttributeName.OCGDEFAULT, null, "FromPDF"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute OCGDefault
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute OCGDefault
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetOCGDefault(EOCGDefault) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setOCGDefault(EnumOCGDefault enumVar)
-	{
-		setAttribute(AttributeName.OCGDEFAULT, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute OCGDefault
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EOCGDefault GetEOCGDefault() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumOCGDefault getOCGDefault()
 	{
 		return EnumOCGDefault.getEnum(getAttribute(AttributeName.OCGDEFAULT, null, "FromPDF"));
@@ -471,7 +371,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOCGIntent(String value)
+	public void setOCGIntent(final String value)
 	{
 		setAttribute(AttributeName.OCGINTENT, value, null);
 	}
@@ -496,7 +396,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOCGProcess(String value)
+	public void setOCGProcess(final String value)
 	{
 		setAttribute(AttributeName.OCGPROCESS, value, null);
 	}
@@ -521,7 +421,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOCGZoom(double value)
+	public void setOCGZoom(final double value)
 	{
 		setAttribute(AttributeName.OCGZOOM, value, null);
 	}
@@ -546,7 +446,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPrintPDFAnnotations(boolean value)
+	public void setPrintPDFAnnotations(final boolean value)
 	{
 		setAttribute(AttributeName.PRINTPDFANNOTATIONS, value, null);
 	}
@@ -571,7 +471,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPrintTrapAnnotations(boolean value)
+	public void setPrintTrapAnnotations(final boolean value)
 	{
 		setAttribute(AttributeName.PRINTTRAPANNOTATIONS, value, null);
 	}
@@ -596,7 +496,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTransparencyRenderingQuality(double value)
+	public void setTransparencyRenderingQuality(final double value)
 	{
 		setAttribute(AttributeName.TRANSPARENCYRENDERINGQUALITY, value, null);
 	}
@@ -643,7 +543,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFOCGControl the element
 	 */
-	public JDFOCGControl getCreateOCGControl(int iSkip)
+	public JDFOCGControl getCreateOCGControl(final int iSkip)
 	{
 		return (JDFOCGControl) getCreateElement_JDFElement(ElementName.OCGCONTROL, null, iSkip);
 	}
@@ -655,7 +555,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 * @return JDFOCGControl the element
 	 *         default is getOCGControl(0)
 	 */
-	public JDFOCGControl getOCGControl(int iSkip)
+	public JDFOCGControl getOCGControl(final int iSkip)
 	{
 		return (JDFOCGControl) getElement(ElementName.OCGCONTROL, null, iSkip);
 	}

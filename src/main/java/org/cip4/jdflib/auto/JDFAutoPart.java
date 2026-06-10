@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -145,8 +140,8 @@ public abstract class JDFAutoPart extends JDFElement
 		atrInfoTable[43] = new AtrInfoTable(AttributeName.PARTVERSION, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[44] = new AtrInfoTable(AttributeName.PLATELAYOUT, 0x3333333111l, AttributeInfo.EnumAttributeType.Any, null, null);
 		atrInfoTable[45] = new AtrInfoTable(AttributeName.PREFLIGHTRULE, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[46] = new AtrInfoTable(AttributeName.PREVIEWTYPE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewType.getEnum(0),
-				null);
+		atrInfoTable[46] = new AtrInfoTable(AttributeName.PREVIEWTYPE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumPreviewType.class, 0), null);
 		atrInfoTable[47] = new AtrInfoTable(AttributeName.PRINTCONDITION, 0x3333111111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[48] = new AtrInfoTable(AttributeName.PRODUCT, 0x3331111111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[49] = new AtrInfoTable(AttributeName.PRODUCTPART, 0x4443311111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
@@ -167,7 +162,8 @@ public abstract class JDFAutoPart extends JDFElement
 		atrInfoTable[64] = new AtrInfoTable(AttributeName.SETINDEX, 0x3333333331l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable[65] = new AtrInfoTable(AttributeName.SHEETINDEX, 0x3333333333l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable[66] = new AtrInfoTable(AttributeName.SHEETNAME, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[67] = new AtrInfoTable(AttributeName.SIDE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSide.getEnum(0), null);
+		atrInfoTable[67] = new AtrInfoTable(AttributeName.SIDE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumSide.class, 0), null);
 		atrInfoTable[68] = new AtrInfoTable(AttributeName.SIGNATURENAME, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[69] = new AtrInfoTable(AttributeName.STATIONNAME, 0x3333333333l, AttributeInfo.EnumAttributeType.Any, null, null);
 		atrInfoTable[70] = new AtrInfoTable(AttributeName.SUBRUN, 0x3333333111l, AttributeInfo.EnumAttributeType.Any, null, null);
@@ -189,7 +185,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPart(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPart(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -201,7 +197,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPart(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPart(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -214,182 +210,42 @@ public abstract class JDFAutoPart extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPart(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPart(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for PreviewType
+	 * Enumeration strings for numPreviewType
 	 */
 
-	public enum EPreviewType
+	public enum EnumPreviewType
 	{
 		Animation, Identification, Separation, SeparatedThumbNail, SeparationRaw, ThumbNail, Static3D, Viewable;
 
-		public static EPreviewType getEnum(String val)
+		public static EnumPreviewType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPreviewType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPreviewType.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for PreviewType
+	 * Enumeration strings for numSide
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumPreviewType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPreviewType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumPreviewType getEnum(String enumName)
-		{
-			return (EnumPreviewType) getEnum(EnumPreviewType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPreviewType getEnum(int enumValue)
-		{
-			return (EnumPreviewType) getEnum(EnumPreviewType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPreviewType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPreviewType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPreviewType.class);
-		}
-
-		/**  */
-		public static final EnumPreviewType Animation = new EnumPreviewType("Animation");
-		/**  */
-		public static final EnumPreviewType Identification = new EnumPreviewType("Identification");
-		/**  */
-		public static final EnumPreviewType Separation = new EnumPreviewType("Separation");
-		/**  */
-		public static final EnumPreviewType SeparatedThumbNail = new EnumPreviewType("SeparatedThumbNail");
-		/**  */
-		public static final EnumPreviewType SeparationRaw = new EnumPreviewType("SeparationRaw");
-		/**  */
-		public static final EnumPreviewType ThumbNail = new EnumPreviewType("ThumbNail");
-		/**  */
-		public static final EnumPreviewType Static3D = new EnumPreviewType("Static3D");
-		/**  */
-		public static final EnumPreviewType Viewable = new EnumPreviewType("Viewable");
-	}
-
-	/**
-	 * Enumeration strings for Side
-	 */
-
-	public enum ESide
+	public enum EnumSide
 	{
 		Front, Back;
 
-		public static ESide getEnum(String val)
+		public static EnumSide getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ESide.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSide.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Side
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumSide extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumSide(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumSide getEnum(String enumName)
-		{
-			return (EnumSide) getEnum(EnumSide.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumSide getEnum(int enumValue)
-		{
-			return (EnumSide) getEnum(EnumSide.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSide.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSide.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSide.class);
-		}
-
-		/**  */
-		public static final EnumSide Front = new EnumSide("Front");
-		/**  */
-		public static final EnumSide Back = new EnumSide("Back");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -401,7 +257,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSorting(JDFIntegerRangeList value)
+	public void setSorting(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.SORTING, value, null);
 	}
@@ -414,8 +270,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFIntegerRangeList getSorting()
 	{
-		String strAttrName = getAttribute(AttributeName.SORTING, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SORTING, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -429,7 +285,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSortAmount(String value)
+	public void setSortAmount(final String value)
 	{
 		setAttribute(AttributeName.SORTAMOUNT, value, null);
 	}
@@ -454,7 +310,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBinderySignatureName(String value)
+	public void setBinderySignatureName(final String value)
 	{
 		setAttribute(AttributeName.BINDERYSIGNATURENAME, value, null);
 	}
@@ -479,7 +335,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBinderySignaturePaginationIndex(String value)
+	public void setBinderySignaturePaginationIndex(final String value)
 	{
 		setAttribute(AttributeName.BINDERYSIGNATUREPAGINATIONINDEX, value, null);
 	}
@@ -504,7 +360,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBlockName(String value)
+	public void setBlockName(final String value)
 	{
 		setAttribute(AttributeName.BLOCKNAME, value, null);
 	}
@@ -529,7 +385,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBundleItemIndex(JDFIntegerRangeList value)
+	public void setBundleItemIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.BUNDLEITEMINDEX, value, null);
 	}
@@ -542,8 +398,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFIntegerRangeList getBundleItemIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.BUNDLEITEMINDEX, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.BUNDLEITEMINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -557,7 +413,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCellIndex(JDFIntegerRangeList value)
+	public void setCellIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.CELLINDEX, value, null);
 	}
@@ -570,8 +426,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFIntegerRangeList getCellIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.CELLINDEX, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CELLINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -585,7 +441,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCondition(String value)
+	public void setCondition(final String value)
 	{
 		setAttribute(AttributeName.CONDITION, value, null);
 	}
@@ -610,7 +466,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeliveryUnit0(String value)
+	public void setDeliveryUnit0(final String value)
 	{
 		setAttribute(AttributeName.DELIVERYUNIT0, value, null);
 	}
@@ -635,7 +491,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeliveryUnit1(String value)
+	public void setDeliveryUnit1(final String value)
 	{
 		setAttribute(AttributeName.DELIVERYUNIT1, value, null);
 	}
@@ -660,7 +516,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeliveryUnit2(String value)
+	public void setDeliveryUnit2(final String value)
 	{
 		setAttribute(AttributeName.DELIVERYUNIT2, value, null);
 	}
@@ -685,7 +541,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeliveryUnit3(String value)
+	public void setDeliveryUnit3(final String value)
 	{
 		setAttribute(AttributeName.DELIVERYUNIT3, value, null);
 	}
@@ -710,7 +566,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeliveryUnit4(String value)
+	public void setDeliveryUnit4(final String value)
 	{
 		setAttribute(AttributeName.DELIVERYUNIT4, value, null);
 	}
@@ -735,7 +591,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeliveryUnit5(String value)
+	public void setDeliveryUnit5(final String value)
 	{
 		setAttribute(AttributeName.DELIVERYUNIT5, value, null);
 	}
@@ -760,7 +616,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeliveryUnit6(String value)
+	public void setDeliveryUnit6(final String value)
 	{
 		setAttribute(AttributeName.DELIVERYUNIT6, value, null);
 	}
@@ -785,7 +641,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeliveryUnit7(String value)
+	public void setDeliveryUnit7(final String value)
 	{
 		setAttribute(AttributeName.DELIVERYUNIT7, value, null);
 	}
@@ -810,7 +666,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeliveryUnit8(String value)
+	public void setDeliveryUnit8(final String value)
 	{
 		setAttribute(AttributeName.DELIVERYUNIT8, value, null);
 	}
@@ -835,7 +691,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeliveryUnit9(String value)
+	public void setDeliveryUnit9(final String value)
 	{
 		setAttribute(AttributeName.DELIVERYUNIT9, value, null);
 	}
@@ -860,7 +716,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDocCopies(JDFIntegerRangeList value)
+	public void setDocCopies(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.DOCCOPIES, value, null);
 	}
@@ -873,8 +729,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFIntegerRangeList getDocCopies()
 	{
-		String strAttrName = getAttribute(AttributeName.DOCCOPIES, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.DOCCOPIES, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -888,7 +744,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDocIndex(JDFIntegerRangeList value)
+	public void setDocIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.DOCINDEX, value, null);
 	}
@@ -901,8 +757,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFIntegerRangeList getDocIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.DOCINDEX, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.DOCINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -916,7 +772,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDocRunIndex(JDFIntegerRangeList value)
+	public void setDocRunIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.DOCRUNINDEX, value, null);
 	}
@@ -929,8 +785,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFIntegerRangeList getDocRunIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.DOCRUNINDEX, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.DOCRUNINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -944,7 +800,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDocSheetIndex(JDFIntegerRangeList value)
+	public void setDocSheetIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.DOCSHEETINDEX, value, null);
 	}
@@ -957,8 +813,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFIntegerRangeList getDocSheetIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.DOCSHEETINDEX, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.DOCSHEETINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -972,7 +828,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDocTags(String value)
+	public void setDocTags(final String value)
 	{
 		setAttribute(AttributeName.DOCTAGS, value, null);
 	}
@@ -997,7 +853,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setEdition(String value)
+	public void setEdition(final String value)
 	{
 		setAttribute(AttributeName.EDITION, value, null);
 	}
@@ -1022,7 +878,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setEditionVersion(String value)
+	public void setEditionVersion(final String value)
 	{
 		setAttribute(AttributeName.EDITIONVERSION, value, null);
 	}
@@ -1047,7 +903,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFountainNumber(int value)
+	public void setFountainNumber(final int value)
 	{
 		setAttribute(AttributeName.FOUNTAINNUMBER, value, null);
 	}
@@ -1072,7 +928,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setItemNames(String value)
+	public void setItemNames(final String value)
 	{
 		setAttribute(AttributeName.ITEMNAMES, value, null);
 	}
@@ -1097,7 +953,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLayerIDs(JDFIntegerRangeList value)
+	public void setLayerIDs(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.LAYERIDS, value, null);
 	}
@@ -1110,8 +966,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFIntegerRangeList getLayerIDs()
 	{
-		String strAttrName = getAttribute(AttributeName.LAYERIDS, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.LAYERIDS, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1125,7 +981,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLocation(String value)
+	public void setLocation(final String value)
 	{
 		setAttribute(AttributeName.LOCATION, value, null);
 	}
@@ -1150,7 +1006,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLotID(String value)
+	public void setLotID(final String value)
 	{
 		setAttribute(AttributeName.LOTID, value, null);
 	}
@@ -1175,7 +1031,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMetadata0(JDFNameRangeList value)
+	public void setMetadata0(final JDFNameRangeList value)
 	{
 		setAttribute(AttributeName.METADATA0, value, null);
 	}
@@ -1188,8 +1044,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFNameRangeList getMetadata0()
 	{
-		String strAttrName = getAttribute(AttributeName.METADATA0, null, null);
-		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.METADATA0, null, null);
+		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1203,7 +1059,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMetadata1(JDFNameRangeList value)
+	public void setMetadata1(final JDFNameRangeList value)
 	{
 		setAttribute(AttributeName.METADATA1, value, null);
 	}
@@ -1216,8 +1072,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFNameRangeList getMetadata1()
 	{
-		String strAttrName = getAttribute(AttributeName.METADATA1, null, null);
-		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.METADATA1, null, null);
+		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1231,7 +1087,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMetadata2(JDFNameRangeList value)
+	public void setMetadata2(final JDFNameRangeList value)
 	{
 		setAttribute(AttributeName.METADATA2, value, null);
 	}
@@ -1244,8 +1100,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFNameRangeList getMetadata2()
 	{
-		String strAttrName = getAttribute(AttributeName.METADATA2, null, null);
-		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.METADATA2, null, null);
+		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1259,7 +1115,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMetadata3(JDFNameRangeList value)
+	public void setMetadata3(final JDFNameRangeList value)
 	{
 		setAttribute(AttributeName.METADATA3, value, null);
 	}
@@ -1272,8 +1128,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFNameRangeList getMetadata3()
 	{
-		String strAttrName = getAttribute(AttributeName.METADATA3, null, null);
-		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.METADATA3, null, null);
+		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1287,7 +1143,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMetadata4(JDFNameRangeList value)
+	public void setMetadata4(final JDFNameRangeList value)
 	{
 		setAttribute(AttributeName.METADATA4, value, null);
 	}
@@ -1300,8 +1156,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFNameRangeList getMetadata4()
 	{
-		String strAttrName = getAttribute(AttributeName.METADATA4, null, null);
-		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.METADATA4, null, null);
+		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1315,7 +1171,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMetadata5(JDFNameRangeList value)
+	public void setMetadata5(final JDFNameRangeList value)
 	{
 		setAttribute(AttributeName.METADATA5, value, null);
 	}
@@ -1328,8 +1184,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFNameRangeList getMetadata5()
 	{
-		String strAttrName = getAttribute(AttributeName.METADATA5, null, null);
-		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.METADATA5, null, null);
+		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1343,7 +1199,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMetadata6(JDFNameRangeList value)
+	public void setMetadata6(final JDFNameRangeList value)
 	{
 		setAttribute(AttributeName.METADATA6, value, null);
 	}
@@ -1356,8 +1212,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFNameRangeList getMetadata6()
 	{
-		String strAttrName = getAttribute(AttributeName.METADATA6, null, null);
-		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.METADATA6, null, null);
+		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1371,7 +1227,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMetadata7(JDFNameRangeList value)
+	public void setMetadata7(final JDFNameRangeList value)
 	{
 		setAttribute(AttributeName.METADATA7, value, null);
 	}
@@ -1384,8 +1240,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFNameRangeList getMetadata7()
 	{
-		String strAttrName = getAttribute(AttributeName.METADATA7, null, null);
-		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.METADATA7, null, null);
+		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1399,7 +1255,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMetadata8(JDFNameRangeList value)
+	public void setMetadata8(final JDFNameRangeList value)
 	{
 		setAttribute(AttributeName.METADATA8, value, null);
 	}
@@ -1412,8 +1268,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFNameRangeList getMetadata8()
 	{
-		String strAttrName = getAttribute(AttributeName.METADATA8, null, null);
-		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.METADATA8, null, null);
+		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1427,7 +1283,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMetadata9(JDFNameRangeList value)
+	public void setMetadata9(final JDFNameRangeList value)
 	{
 		setAttribute(AttributeName.METADATA9, value, null);
 	}
@@ -1440,8 +1296,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFNameRangeList getMetadata9()
 	{
-		String strAttrName = getAttribute(AttributeName.METADATA9, null, null);
-		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.METADATA9, null, null);
+		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1455,7 +1311,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOption(String value)
+	public void setOption(final String value)
 	{
 		setAttribute(AttributeName.OPTION, value, null);
 	}
@@ -1480,7 +1336,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPageNumber(JDFIntegerRangeList value)
+	public void setPageNumber(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.PAGENUMBER, value, null);
 	}
@@ -1493,8 +1349,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFIntegerRangeList getPageNumber()
 	{
-		String strAttrName = getAttribute(AttributeName.PAGENUMBER, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PAGENUMBER, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1508,7 +1364,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPageTags(String value)
+	public void setPageTags(final String value)
 	{
 		setAttribute(AttributeName.PAGETAGS, value, null);
 	}
@@ -1533,7 +1389,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPartVersion(VString value)
+	public void setPartVersion(final VString value)
 	{
 		setAttribute(AttributeName.PARTVERSION, value, null);
 	}
@@ -1545,8 +1401,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public VString getPartVersion()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.PARTVERSION, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.PARTVERSION, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -1561,7 +1417,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPlateLayout(String value)
+	public void setPlateLayout(final String value)
 	{
 		setAttribute(AttributeName.PLATELAYOUT, value, null);
 	}
@@ -1586,7 +1442,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPreflightRule(String value)
+	public void setPreflightRule(final String value)
 	{
 		setAttribute(AttributeName.PREFLIGHTRULE, value, null);
 	}
@@ -1611,9 +1467,9 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPreviewType(EPreviewType enumVar)
+	public void setPreviewType(final EnumPreviewType enumVar)
 	{
-		setAttribute(AttributeName.PREVIEWTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.PREVIEWTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -1621,35 +1477,6 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPreviewType getEPreviewType()
-	{
-		return EPreviewType.getEnum(getAttribute(AttributeName.PREVIEWTYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute PreviewType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute PreviewType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPreviewType(EPreviewType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPreviewType(EnumPreviewType enumVar)
-	{
-		setAttribute(AttributeName.PREVIEWTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute PreviewType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EPreviewType GetEPreviewType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumPreviewType getPreviewType()
 	{
 		return EnumPreviewType.getEnum(getAttribute(AttributeName.PREVIEWTYPE, null, null));
@@ -1665,7 +1492,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPrintCondition(String value)
+	public void setPrintCondition(final String value)
 	{
 		setAttribute(AttributeName.PRINTCONDITION, value, null);
 	}
@@ -1690,7 +1517,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProduct(String value)
+	public void setProduct(final String value)
 	{
 		setAttribute(AttributeName.PRODUCT, value, null);
 	}
@@ -1715,7 +1542,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProductPart(String value)
+	public void setProductPart(final String value)
 	{
 		setAttribute(AttributeName.PRODUCTPART, value, null);
 	}
@@ -1740,7 +1567,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRibbonName(String value)
+	public void setRibbonName(final String value)
 	{
 		setAttribute(AttributeName.RIBBONNAME, value, null);
 	}
@@ -1765,7 +1592,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRun(String value)
+	public void setRun(final String value)
 	{
 		setAttribute(AttributeName.RUN, value, null);
 	}
@@ -1790,7 +1617,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRunIndex(JDFIntegerRangeList value)
+	public void setRunIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.RUNINDEX, value, null);
 	}
@@ -1803,8 +1630,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFIntegerRangeList getRunIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.RUNINDEX, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.RUNINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1818,7 +1645,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRunPage(int value)
+	public void setRunPage(final int value)
 	{
 		setAttribute(AttributeName.RUNPAGE, value, null);
 	}
@@ -1843,7 +1670,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRunPageRange(String value)
+	public void setRunPageRange(final String value)
 	{
 		setAttribute(AttributeName.RUNPAGERANGE, value, null);
 	}
@@ -1868,7 +1695,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRunSet(String value)
+	public void setRunSet(final String value)
 	{
 		setAttribute(AttributeName.RUNSET, value, null);
 	}
@@ -1893,7 +1720,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRunTags(String value)
+	public void setRunTags(final String value)
 	{
 		setAttribute(AttributeName.RUNTAGS, value, null);
 	}
@@ -1918,7 +1745,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSectionIndex(JDFIntegerRangeList value)
+	public void setSectionIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.SECTIONINDEX, value, null);
 	}
@@ -1931,8 +1758,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFIntegerRangeList getSectionIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.SECTIONINDEX, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SECTIONINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1946,7 +1773,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSeparation(String value)
+	public void setSeparation(final String value)
 	{
 		setAttribute(AttributeName.SEPARATION, value, null);
 	}
@@ -1971,7 +1798,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSetCopies(JDFIntegerRangeList value)
+	public void setSetCopies(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.SETCOPIES, value, null);
 	}
@@ -1984,8 +1811,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFIntegerRangeList getSetCopies()
 	{
-		String strAttrName = getAttribute(AttributeName.SETCOPIES, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SETCOPIES, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1999,7 +1826,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSetDocIndex(JDFIntegerRangeList value)
+	public void setSetDocIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.SETDOCINDEX, value, null);
 	}
@@ -2012,8 +1839,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFIntegerRangeList getSetDocIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.SETDOCINDEX, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SETDOCINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -2027,7 +1854,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSetRunIndex(JDFIntegerRangeList value)
+	public void setSetRunIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.SETRUNINDEX, value, null);
 	}
@@ -2040,8 +1867,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFIntegerRangeList getSetRunIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.SETRUNINDEX, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SETRUNINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -2055,7 +1882,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSetSheetIndex(JDFIntegerRangeList value)
+	public void setSetSheetIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.SETSHEETINDEX, value, null);
 	}
@@ -2068,8 +1895,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFIntegerRangeList getSetSheetIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.SETSHEETINDEX, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SETSHEETINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -2083,7 +1910,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSetTags(String value)
+	public void setSetTags(final String value)
 	{
 		setAttribute(AttributeName.SETTAGS, value, null);
 	}
@@ -2108,7 +1935,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSetIndex(JDFIntegerRangeList value)
+	public void setSetIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.SETINDEX, value, null);
 	}
@@ -2121,8 +1948,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFIntegerRangeList getSetIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.SETINDEX, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SETINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -2136,7 +1963,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSheetIndex(JDFIntegerRangeList value)
+	public void setSheetIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.SHEETINDEX, value, null);
 	}
@@ -2149,8 +1976,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFIntegerRangeList getSheetIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.SHEETINDEX, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SHEETINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -2164,7 +1991,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSheetName(String value)
+	public void setSheetName(final String value)
 	{
 		setAttribute(AttributeName.SHEETNAME, value, null);
 	}
@@ -2189,9 +2016,9 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSide(ESide enumVar)
+	public void setSide(final EnumSide enumVar)
 	{
-		setAttribute(AttributeName.SIDE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SIDE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -2199,35 +2026,6 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESide getESide()
-	{
-		return ESide.getEnum(getAttribute(AttributeName.SIDE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Side
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Side
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetSide(ESide) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSide(EnumSide enumVar)
-	{
-		setAttribute(AttributeName.SIDE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Side
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ESide GetESide() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumSide getSide()
 	{
 		return EnumSide.getEnum(getAttribute(AttributeName.SIDE, null, null));
@@ -2243,7 +2041,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSignatureName(String value)
+	public void setSignatureName(final String value)
 	{
 		setAttribute(AttributeName.SIGNATURENAME, value, null);
 	}
@@ -2268,7 +2066,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStationName(String value)
+	public void setStationName(final String value)
 	{
 		setAttribute(AttributeName.STATIONNAME, value, null);
 	}
@@ -2293,7 +2091,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSubRun(String value)
+	public void setSubRun(final String value)
 	{
 		setAttribute(AttributeName.SUBRUN, value, null);
 	}
@@ -2318,7 +2116,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTileID(JDFXYPair value)
+	public void setTileID(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.TILEID, value, null);
 	}
@@ -2331,8 +2129,8 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public JDFXYPair getTileID()
 	{
-		String strAttrName = getAttribute(AttributeName.TILEID, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TILEID, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -2346,7 +2144,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWebName(String value)
+	public void setWebName(final String value)
 	{
 		setAttribute(AttributeName.WEBNAME, value, null);
 	}
@@ -2371,7 +2169,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWebProduct(String value)
+	public void setWebProduct(final String value)
 	{
 		setAttribute(AttributeName.WEBPRODUCT, value, null);
 	}
@@ -2396,7 +2194,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWebSetup(String value)
+	public void setWebSetup(final String value)
 	{
 		setAttribute(AttributeName.WEBSETUP, value, null);
 	}

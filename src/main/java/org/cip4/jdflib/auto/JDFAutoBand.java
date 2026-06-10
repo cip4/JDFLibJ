@@ -108,7 +108,7 @@ public abstract class JDFAutoBand extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBand(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoBand(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -120,7 +120,7 @@ public abstract class JDFAutoBand extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBand(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoBand(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoBand extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoBand(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoBand(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -154,7 +154,7 @@ public abstract class JDFAutoBand extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setData(String value)
+	public void setData(final String value)
 	{
 		setAttribute(AttributeName.DATA, value, null);
 	}
@@ -179,7 +179,7 @@ public abstract class JDFAutoBand extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHeight(int value)
+	public void setHeight(final int value)
 	{
 		setAttribute(AttributeName.HEIGHT, value, null);
 	}
@@ -204,7 +204,7 @@ public abstract class JDFAutoBand extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMask(String value)
+	public void setMask(final String value)
 	{
 		setAttribute(AttributeName.MASK, value, null);
 	}
@@ -229,7 +229,7 @@ public abstract class JDFAutoBand extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWasMarked(boolean value)
+	public void setWasMarked(final boolean value)
 	{
 		setAttribute(AttributeName.WASMARKED, value, null);
 	}
@@ -254,7 +254,7 @@ public abstract class JDFAutoBand extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWidth(int value)
+	public void setWidth(final int value)
 	{
 		setAttribute(AttributeName.WIDTH, value, null);
 	}

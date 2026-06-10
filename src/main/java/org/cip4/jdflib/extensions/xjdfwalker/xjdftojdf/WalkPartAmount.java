@@ -180,7 +180,6 @@ public class WalkPartAmount extends WalkXElement
 	}
 
 	/**
-	 *
 	 * @param xjdfPartAmount
 	 * @param bGood
 	 * @return

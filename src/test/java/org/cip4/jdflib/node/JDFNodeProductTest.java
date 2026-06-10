@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,7 +68,7 @@
  */
 /**
  * JDFNodeProductTest.java
- * 
+ *
  * @author Dietrich Mucha
  *
  * Copyright (C) 2002 Heidelberger Druckmaschinen AG. All Rights Reserved.
@@ -85,11 +85,11 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
-class JDFNodeProductTest {
+class JDFNodeProductTest
+{
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testBugBuild058()
@@ -98,7 +98,7 @@ class JDFNodeProductTest {
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 		final JDFNode productNode = jdfDoc.getJDFRoot();
 
-		productNode.setType(JDFNode.EnumType.Product.getName(), false);
+		productNode.setType(JDFNode.EnumType.Product.name(), false);
 
 		// Add an intent resource
 		final JDFLayoutIntent layoutIntent = (JDFLayoutIntent) productNode.appendMatchingResource("LayoutIntent", JDFNode.EnumProcessUsage.AnyInput, null);

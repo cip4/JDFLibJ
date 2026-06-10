@@ -94,39 +94,39 @@ public class JDFXYPairSpan extends JDFSpanBase
 
 	/**
 	 * Constructor for JDFXYPairSpan
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFXYPairSpan(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFXYPairSpan(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFXYPairSpan
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFXYPairSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFXYPairSpan(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFXYPairSpan
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFXYPairSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFXYPairSpan(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -150,7 +150,7 @@ public class JDFXYPairSpan extends JDFSpanBase
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -159,7 +159,7 @@ public class JDFXYPairSpan extends JDFSpanBase
 		return "JDFXYPairSpan[ --> " + super.toString() + " ]";
 	}
 
-	public void setActual(JDFXYPair value)
+	public void setActual(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.ACTUAL, value, null);
 	}
@@ -169,7 +169,7 @@ public class JDFXYPairSpan extends JDFSpanBase
 		return JDFXYPair.createXYPair(getAttribute(AttributeName.ACTUAL));
 	}
 
-	public void setPreferred(JDFXYPair value)
+	public void setPreferred(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.PREFERRED, value, null);
 	}
@@ -181,7 +181,7 @@ public class JDFXYPairSpan extends JDFSpanBase
 
 	/**
 	 * Gets the value of attribute DataType
-	 * 
+	 *
 	 * @return EnumDataType - the attribute DataType value
 	 */
 	@Override
@@ -190,7 +190,7 @@ public class JDFXYPairSpan extends JDFSpanBase
 		return EnumDataType.XYPairSpan;
 	}
 
-	public void setRange(JDFXYPairRangeList value)
+	public void setRange(final JDFXYPairRangeList value)
 	{
 		setAttribute(AttributeName.RANGE, value.toString());
 	}
@@ -203,67 +203,67 @@ public class JDFXYPairSpan extends JDFSpanBase
 	@Override
 	public boolean init()
 	{
-		boolean b = super.init();
+		final boolean b = super.init();
 		setDataType(JDFSpanBase.EnumDataType.XYPairSpan);
 		return b;
 	}
 
 	/**
 	 * SetPreferred
-	 * 
+	 *
 	 * @param double x
 	 * @param double y
 	 */
-	public void setPreferred(double x, double y)
+	public void setPreferred(final double x, final double y)
 	{
 		setPreferred(new JDFXYPair(x, y));
 	}
 
 	/**
 	 * add an element xy to the Range attribute
-	 * 
+	 *
 	 * @param double x - x value of the JDFXYPair value to add
 	 * @param double y - y value of the JDFXYPair value to add
 	 */
-	public void addRange(double x, double y)
+	public void addRange(final double x, final double y)
 	{
 		addRange(new JDFXYPair(x, y));
 	}
 
 	/**
 	 * add an element xy to the Range attribute
-	 * 
+	 *
 	 * @param double x1 - x value of the left JDFXYPairRange value to add
 	 * @param double y1 - y value of the left JDFXYPairRange value to add
 	 * @param double x2 - x value of the right JDFXYPairRange value to add
 	 * @param double y2 - y value of the right JDFXYPairRange value to add
 	 */
-	public void addRange(double x1, double y1, double x2, double y2)
+	public void addRange(final double x1, final double y1, final double x2, final double y2)
 	{
 		addRange(new JDFXYPair(x1, y1), new JDFXYPair(x2, y2));
 	}
 
 	/**
 	 * add an element xy to the Range attribute as a JDFRange
-	 * 
+	 *
 	 * @param JDFXYPair xy - the Range value to add
 	 */
-	public void addRange(JDFXYPair xy)
+	public void addRange(final JDFXYPair xy)
 	{
-		JDFXYPairRangeList rl = getRange();
+		final JDFXYPairRangeList rl = getRange();
 		rl.append(xy);
 		setRange(rl);
 	}
 
 	/**
 	 * add an element xy to the Range attribute as a JDFRange
-	 * 
+	 *
 	 * @param JDFXYPair xy1 - left JDFXYPairRange value to add
 	 * @param JDFXYPair xy2 - right JDFXYPairRange value to add
 	 */
-	public void addRange(JDFXYPair xy1, JDFXYPair xy2)
+	public void addRange(final JDFXYPair xy1, final JDFXYPair xy2)
 	{
-		JDFXYPairRangeList rl = getRange();
+		final JDFXYPairRangeList rl = getRange();
 		rl.append(xy1, xy2);
 		setRange(rl);
 	}

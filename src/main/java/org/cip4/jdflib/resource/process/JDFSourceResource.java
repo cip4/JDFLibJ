@@ -88,8 +88,6 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *
- *
  * @author rainer prosi
  * @date Jun 5, 2012
  */
@@ -99,10 +97,9 @@ public class JDFSourceResource extends JDFElement
 
 	/**
 	 * Constructor for JDFSourceResource
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
-	 *
-	 *
 	 */
 	public JDFSourceResource(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
@@ -111,10 +108,10 @@ public class JDFSourceResource extends JDFElement
 
 	/**
 	 * Constructor for JDFSourceResource
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 *
 	 */
 	public JDFSourceResource(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
@@ -123,11 +120,11 @@ public class JDFSourceResource extends JDFElement
 
 	/**
 	 * Constructor for JDFSourceResource
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
-	 *
 	 */
 	public JDFSourceResource(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
@@ -135,8 +132,8 @@ public class JDFSourceResource extends JDFElement
 	}
 
 	/**
-	 *
 	 * get the refelement
+	 *
 	 * @return
 	 */
 	public JDFRefElement getRefElement()
@@ -193,11 +190,10 @@ public class JDFSourceResource extends JDFElement
 	/**
 	 * return a vector of unknown element nodenames
 	 *
-	 * @param  bIgnorePrivate - used by JDFElement during the validation !!! Do not change the signature of this method
-	 * @param  nMax - maximum size of the returned vector
+	 * @param bIgnorePrivate - used by JDFElement during the validation !!! Do not change the signature of this method
+	 * @param nMax           - maximum size of the returned vector
 	 * @return Vector - vector of unknown element nodenames
-	 *
-	 * default: GetInvalidElements(true, 999999)
+	 *         default: GetInvalidElements(true, 999999)
 	 */
 	@Override
 	public VString getUnknownElements(final boolean bIgnorePrivate, final int nMax)
@@ -289,8 +285,8 @@ public class JDFSourceResource extends JDFElement
 	/**
 	 * delete this sourceResource and it's target
 	 *
-	 * @param  bCheckRefCount if true, check that no other element refers to the target before deleting<br>
-	 * if bCheckRefCount=false, the target is force deleted
+	 * @param bCheckRefCount if true, check that no other element refers to the target before deleting<br>
+	 *                       if bCheckRefCount=false, the target is force deleted
 	 * @return JDFElement the deleted target element
 	 * @since 290620
 	 */

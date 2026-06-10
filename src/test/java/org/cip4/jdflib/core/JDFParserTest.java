@@ -70,7 +70,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class JDFParserTest extends JDFTestCaseBase
 {
@@ -127,7 +126,6 @@ class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * check speed of the parser
-	 *
 	 */
 	@Test
 	void testSpeed()
@@ -142,7 +140,6 @@ class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * check speed of the parser
-	 *
 	 */
 	@Test
 	void testSpeed1()
@@ -155,14 +152,15 @@ class JDFParserTest extends JDFTestCaseBase
 		long currentMem = getCurrentMem();
 		log.info("mem new:   " + currentMem + " " + mem);
 		if (currentMem < mem)
+		{
 			currentMem = mem;
+		}
 		assertEquals(currentMem, mem, 4200000, "parese memory");
 		log.info("new:   " + (System.nanoTime() - l1) / 1000000);
 	}
 
 	/**
 	 * check speed of the parser
-	 *
 	 */
 	@Test
 	void testParseSpeed()
@@ -177,7 +175,6 @@ class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * check simple parsestring
-	 *
 	 */
 	@Test
 	void testParseString()
@@ -188,7 +185,6 @@ class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * check simple parsestring
-	 *
 	 */
 	@Test
 	void testParseStringNS()
@@ -200,7 +196,6 @@ class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * check simple parsestring
-	 *
 	 */
 	@Test
 	void testParseStringJDF()
@@ -217,7 +212,6 @@ class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * check simple parsestring
-	 *
 	 */
 	@Test
 	void testParseStringPrintTalk()
@@ -230,7 +224,6 @@ class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * check simple parsestring
-	 *
 	 */
 	@Test
 	void testParseStringPrintTalkDeep()
@@ -243,7 +236,6 @@ class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * check simple parsestring for invalid xml
-	 *
 	 */
 	@Test
 	void testParseStringJDFBad()
@@ -277,7 +269,6 @@ class JDFParserTest extends JDFTestCaseBase
 	 * check simple parseStream
 	 *
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testParseFileStream() throws IOException
@@ -301,7 +292,6 @@ class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * check speed of the parser
-	 *
 	 */
 	@Test
 	void testMyDocClass()
@@ -314,7 +304,6 @@ class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * check speed of the parser
-	 *
 	 */
 	@Test
 	void testBadNS()
@@ -325,7 +314,6 @@ class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * check speed of the parser
-	 *
 	 */
 	@Test
 	void testSpeed2()
@@ -343,12 +331,11 @@ class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * parse a string with guck up front
-	 *
 	 */
 	@Test
 	void testSkipParse()
 	{
-		JDFParser.m_searchStream = true;
+		XMLParser.m_searchStream = true;
 		final String s2 = "        ------ end of header ----!\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n <JMF ID=\"abc\"/>";
 		final JDFParser jdfParser = JDFParserFactory.getFactory().get();
 		for (int i = 0; i < 444; i++)
@@ -358,13 +345,12 @@ class JDFParserTest extends JDFTestCaseBase
 		}
 		log.info("mem new:   " + getCurrentMem() + " " + mem);
 		assertTrue(getCurrentMem() - mem < 4200000);
-		JDFParser.m_searchStream = false;
+		XMLParser.m_searchStream = false;
 		assertNull(new JDFParser().parseString(s2));
 	}
 
 	/**
 	 * parse a string with guck up front
-	 *
 	 */
 	@Test
 	void testInit()
@@ -403,7 +389,6 @@ class JDFParserTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -416,14 +401,14 @@ class JDFParserTest extends JDFTestCaseBase
 		final JDFResource rl = n.addResource("RunList", EnumUsage.Input);
 		rl.setDescriptiveName("Runlist für 10 € &&&"); // sum special characters
 		s = d.write2String(2);
-		bSearch = JDFParser.m_searchStream;
+		bSearch = XMLParser.m_searchStream;
 	}
 
 	@Override
 	public void tearDown() throws Exception
 	{
 		super.tearDown();
-		JDFParser.m_searchStream = bSearch;
+		XMLParser.m_searchStream = bSearch;
 	}
 
 }

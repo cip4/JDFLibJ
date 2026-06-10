@@ -38,7 +38,7 @@
 /**
  * ========================================================================== class JDFSignature extends JDFAutoSignature created 2001-09-06T10:02:57GMT+02:00
  * ==========================================================================
- * 
+ *
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
  * @Author sabjon@topmail.de using a code generator Warning! very preliminary test version. Interface subject to change without prior notice! Revision history: ...
  */
@@ -72,7 +72,6 @@ import org.cip4.jdflib.resource.process.postpress.JDFSheet;
  * class that maps both patitioned and non-partitoned layouts
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class JDFSignature extends JDFAutoLayout
 {
@@ -203,9 +202,8 @@ public class JDFSignature extends JDFAutoLayout
 
 	/**
 	 * gets a signature in both old and new Layouts if old: a <Signature> element if new: a SignatureName partition leaf
-	 * 
-	 * @param sheetName the SheetName partition key value(new) or Sheet/@Name(old)
 	 *
+	 * @param sheetName the SheetName partition key value(new) or Sheet/@Name(old)
 	 * @return the signature
 	 */
 	public JDFSheet getSheet(final String sheetName)
@@ -215,9 +213,8 @@ public class JDFSignature extends JDFAutoLayout
 
 	/**
 	 * gets a signature in both old and new Layouts if old: a <Signature>creates it if it does not exist element if new: a SignatureName partition leaf
-	 * 
-	 * @param sheetName the SheetName partition key value(new) or Sheet/@Name(old)
 	 *
+	 * @param sheetName the SheetName partition key value(new) or Sheet/@Name(old)
 	 * @return the signature
 	 * @throws JDFException
 	 */
@@ -242,7 +239,7 @@ public class JDFSignature extends JDFAutoLayout
 	 * (28) get vector of all direct child elements Sheet
 	 *
 	 * @param mAttrib the map of attributes to select
-	 * @param bAnd if true all attributes in the map are AND'ed, else they are OR'ed
+	 * @param bAnd    if true all attributes in the map are AND'ed, else they are OR'ed
 	 * @deprecated use getChildElementVector() instead
 	 */
 	@Deprecated
@@ -295,11 +292,10 @@ public class JDFSignature extends JDFAutoLayout
 
 	/**
 	 * appends a signature in both old and new Layouts if old: a <code>< Signature></code> element if new: a SignatureName partition leaf
-	 * 
+	 *
 	 * @param layout
 	 * @param elementName
 	 * @param partitionKeyName
-	 *
 	 * @return JDFLayout
 	 * @throws JDFException
 	 */
@@ -338,7 +334,7 @@ public class JDFSignature extends JDFAutoLayout
 	 * @param layout
 	 * @param elementName
 	 * @param partitionKeyName
-	 * @param iSkip the index of the element, negative values count backwards from the end
+	 * @param iSkip            the index of the element, negative values count backwards from the end
 	 * @return JDFLayout: the element
 	 */
 	protected static JDFLayout getLayoutElement(final JDFResource layout, final String elementName, final String partitionKeyName, int iSkip)
@@ -406,7 +402,8 @@ public class JDFSignature extends JDFAutoLayout
 	 * @return JDFLayout: the element
 	 * @throws JDFException if the location of a newly created element is not well defined
 	 */
-	protected static JDFLayout getCreateLayoutElement(final JDFResource layout, final String elementName, final String partitionKeyName, final String objectName)
+	protected static JDFLayout getCreateLayoutElement(final JDFResource layout, final String elementName, final String partitionKeyName,
+			final String objectName)
 	{
 		JDFLayout s = getLayoutElement(layout, elementName, partitionKeyName, objectName);
 		if (s != null)
@@ -521,7 +518,7 @@ public class JDFSignature extends JDFAutoLayout
 
 	/**
 	 * gets the corresponding media with a given mediatype
-	 * 
+	 *
 	 * @param mediaType the mediaType - must NOT be null
 	 * @return the media, null if none is there or mediaType==null;
 	 */
@@ -554,8 +551,8 @@ public class JDFSignature extends JDFAutoLayout
 	 */
 	/**
 	 * (36) set attribute SurfaceContentsBox
-	 * 
-	 * @param value the value to set the attribute to
+	 *
+	 * @param value     the value to set the attribute to
 	 * @param precision
 	 */
 	public void setSurfaceContentsBox(final JDFRectangle value, final int precision)

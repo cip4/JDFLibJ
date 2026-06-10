@@ -42,9 +42,7 @@ import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkPageListRef extends WalkRefElement
 {
@@ -85,7 +83,6 @@ public class WalkPageListRef extends WalkRefElement
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkRefElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override

@@ -78,7 +78,7 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFRunList;
-import org.cip4.jdflib.util.MimeUtil;
+import org.cip4.jdflib.util.UrlUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -111,7 +111,7 @@ class FilespecExampleTest extends JDFTestCaseBase
 	@Test
 	void test1()
 	{
-		fs.setMimeType(MimeUtil.APPLICATION_PDF);
+		fs.setMimeType(UrlUtil.APPLICATION_PDF);
 		fs.setURL("file://host/share/dir/a.pdf");
 		writeTest(n, "AP_FileSpec/AP_FileSpec_1.jdf", false, null);
 	}
@@ -122,9 +122,9 @@ class FilespecExampleTest extends JDFTestCaseBase
 	@Test
 	void test2()
 	{
-		fs.setMimeType(MimeUtil.APPLICATION_PDF);
+		fs.setMimeType(UrlUtil.APPLICATION_PDF);
 		fs.setURL("a.pdf");
-		fs.setContainer("file://host/share/dir/a.gz", MimeUtil.APPLICATION_ZIP);
+		fs.setContainer("file://host/share/dir/a.gz", UrlUtil.APPLICATION_ZIP);
 
 		writeTest(n, "AP_FileSpec/AP_FileSpec_2.jdf", false, null);
 	}
@@ -135,7 +135,7 @@ class FilespecExampleTest extends JDFTestCaseBase
 	@Test
 	void test3()
 	{
-		fs.setMimeType(MimeUtil.APPLICATION_PDF);
+		fs.setMimeType(UrlUtil.APPLICATION_PDF);
 		fs.setURL("file://host/share/dir/a.pdf");
 		fs.setCompression("Base64");
 		writeTest(n, "AP_FileSpec/AP_FileSpec_3.jdf", false, null);
@@ -147,10 +147,10 @@ class FilespecExampleTest extends JDFTestCaseBase
 	@Test
 	void test7()
 	{
-		fs.setMimeType(MimeUtil.APPLICATION_PDF);
+		fs.setMimeType(UrlUtil.APPLICATION_PDF);
 		fs.setURL("a.pdf");
-		final JDFFileSpec z1 = fs.setContainer("myNestedZip.zip", MimeUtil.APPLICATION_ZIP);
-		z1.setContainer("file://host/share/dir/c.zip", MimeUtil.APPLICATION_ZIP);
+		final JDFFileSpec z1 = fs.setContainer("myNestedZip.zip", UrlUtil.APPLICATION_ZIP);
+		z1.setContainer("file://host/share/dir/c.zip", UrlUtil.APPLICATION_ZIP);
 
 		writeTest(n, "AP_FileSpec/AP_FileSpec_7.jdf", false, null);
 	}
@@ -161,16 +161,16 @@ class FilespecExampleTest extends JDFTestCaseBase
 	@Test
 	void test9()
 	{
-		fs.setMimeType(MimeUtil.APPLICATION_PDF);
+		fs.setMimeType(UrlUtil.APPLICATION_PDF);
 		fs.setURL("a.pdf");
-		final JDFFileSpec c = fs.setContainer("file://host/share/dir/a.zip", MimeUtil.APPLICATION_ZIP);
+		final JDFFileSpec c = fs.setContainer("file://host/share/dir/a.zip", UrlUtil.APPLICATION_ZIP);
 		final JDFFileSpec c2 = (JDFFileSpec) c.makeRootResource("ID_Container", null, true);
 		setSnippet(c2, true);
 		c2.setResStatus(EnumResStatus.Available, true);
 		final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Output);
 		final JDFFileSpec fs2 = rl.appendLayoutElement().appendFileSpec();
 		fs2.appendContainer().refElement(c2);
-		fs2.setMimeType(MimeUtil.APPLICATION_PDF);
+		fs2.setMimeType(UrlUtil.APPLICATION_PDF);
 		fs2.setURL("b.pdf");
 		setSnippet(fs2, true);
 

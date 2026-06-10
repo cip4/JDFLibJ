@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoPreflightConstraint : public JDFElement
@@ -97,7 +98,8 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ATTEMPTFIXUPERRORS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ATTEMPTFIXUPWARNINGS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.CONSTRAINT, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.STATUS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.STATUS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumNodeStatus.class, 0), null);
 	}
 
 	@Override
@@ -124,7 +126,7 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPreflightConstraint(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPreflightConstraint(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -136,7 +138,7 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPreflightConstraint(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPreflightConstraint(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -149,7 +151,7 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPreflightConstraint(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPreflightConstraint(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -170,7 +172,7 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAttemptFixupErrors(boolean value)
+	public void setAttemptFixupErrors(final boolean value)
 	{
 		setAttribute(AttributeName.ATTEMPTFIXUPERRORS, value, null);
 	}
@@ -195,7 +197,7 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAttemptFixupWarnings(boolean value)
+	public void setAttemptFixupWarnings(final boolean value)
 	{
 		setAttribute(AttributeName.ATTEMPTFIXUPWARNINGS, value, null);
 	}
@@ -220,7 +222,7 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setConstraint(String value)
+	public void setConstraint(final String value)
 	{
 		setAttribute(AttributeName.CONSTRAINT, value, null);
 	}
@@ -267,7 +269,7 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFElement the element
 	 */
-	public JDFElement getCreateConstraintValue(int iSkip)
+	public JDFElement getCreateConstraintValue(final int iSkip)
 	{
 		return (JDFElement) getCreateElement_JDFElement(ElementName.CONSTRAINTVALUE, null, iSkip);
 	}
@@ -279,7 +281,7 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
 	 * @return JDFElement the element
 	 *         default is getConstraintValue(0)
 	 */
-	public JDFElement getConstraintValue(int iSkip)
+	public JDFElement getConstraintValue(final int iSkip)
 	{
 		return (JDFElement) getElement(ElementName.CONSTRAINTVALUE, null, iSkip);
 	}

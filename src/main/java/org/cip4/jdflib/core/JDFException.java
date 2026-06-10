@@ -80,21 +80,24 @@ package org.cip4.jdflib.core;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * Standard JDF runtime exception class
+ *         Standard JDF runtime exception class
  */
 public class JDFException extends RuntimeException
 {
 	/**
 	 * equals that includes the value of id
+	 *
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 * @param obj
 	 * @return true if obj is the same type of exception
 	 */
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals(final Object obj)
 	{
 		if (!(obj instanceof JDFException))
+		{
 			return false;
+		}
 		return id != 0 ? id == ((JDFException) obj).id : super.equals(obj);
 	}
 
@@ -115,21 +118,21 @@ public class JDFException extends RuntimeException
 	// ****************************************
 	/**
 	 * constructor the id is calculated as a hash code
-	 * 
+	 *
 	 * @param message the message to print out
 	 */
-	public JDFException(String message)
+	public JDFException(final String message)
 	{
 		super(message);
 	}
 
 	/**
 	 * constructor if a stack trace is needed use JDFException (String message, boolean bPrintStack)
-	 * 
+	 *
 	 * @param message
-	 * @param _id id of the exception - never use id=0, since this is the flag to use the has code as id
+	 * @param _id     id of the exception - never use id=0, since this is the flag to use the has code as id
 	 */
-	public JDFException(String message, int _id)
+	public JDFException(final String message, final int _id)
 	{
 		super(message);
 		id = _id;
@@ -137,17 +140,17 @@ public class JDFException extends RuntimeException
 
 	/**
 	 * constructor
-	 * 
+	 *
 	 * @param message
 	 * @param bPrintStack print Stacktrace if true
 	 * @deprecated print the stack trace in the application
 	 */
 	@Deprecated
-	public JDFException(String message, boolean bPrintStack)
+	public JDFException(final String message, final boolean bPrintStack)
 	{
 		super(message);
 		id = hashCode();
-		if (bPrintStack == true)
+		if (bPrintStack)
 		{
 			printStackTrace();
 		}
@@ -157,7 +160,7 @@ public class JDFException extends RuntimeException
 	// *********************************************
 	/**
 	 * toString - StringRepresentation of JDFNode
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -168,7 +171,7 @@ public class JDFException extends RuntimeException
 
 	/**
 	 * return a unique identifier of this exception if id was not explicitley set, a hash code is returned
-	 * 
+	 *
 	 * @return int the id
 	 */
 	public int getID()

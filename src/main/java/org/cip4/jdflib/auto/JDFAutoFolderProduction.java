@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -96,7 +91,7 @@ public abstract class JDFAutoFolderProduction extends JDFElement
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLDERMODULEINDEX, 0x2222222111l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.PRODUCTIONTYPE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumProductionType.getEnum(0), "NonCollect");
+				JavaEnumUtil.getEnum(EnumProductionType.class, 0), "NonCollect");
 	}
 
 	@Override
@@ -111,7 +106,7 @@ public abstract class JDFAutoFolderProduction extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFolderProduction(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoFolderProduction(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -123,7 +118,7 @@ public abstract class JDFAutoFolderProduction extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFolderProduction(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoFolderProduction(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -136,93 +131,28 @@ public abstract class JDFAutoFolderProduction extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoFolderProduction(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoFolderProduction(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for ProductionType
+	 * Enumeration strings for numProductionType
 	 */
 
-	public enum EProductionType
+	public enum EnumProductionType
 	{
 		Collect, NonCollect;
 
-		public static EProductionType getEnum(String val)
+		public static EnumProductionType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EProductionType.class, val, EProductionType.NonCollect);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumProductionType.class, val, EnumProductionType.NonCollect);
 		}
-	}
-
-	/**
-	 * Enumeration strings for ProductionType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumProductionType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumProductionType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumProductionType getEnum(String enumName)
-		{
-			return (EnumProductionType) getEnum(EnumProductionType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumProductionType getEnum(int enumValue)
-		{
-			return (EnumProductionType) getEnum(EnumProductionType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumProductionType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumProductionType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumProductionType.class);
-		}
-
-		/**  */
-		public static final EnumProductionType Collect = new EnumProductionType("Collect");
-		/**  */
-		public static final EnumProductionType NonCollect = new EnumProductionType("NonCollect");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -234,7 +164,7 @@ public abstract class JDFAutoFolderProduction extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFolderModuleIndex(int value)
+	public void setFolderModuleIndex(final int value)
 	{
 		setAttribute(AttributeName.FOLDERMODULEINDEX, value, null);
 	}
@@ -259,9 +189,9 @@ public abstract class JDFAutoFolderProduction extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setProductionType(EProductionType enumVar)
+	public void setProductionType(final EnumProductionType enumVar)
 	{
-		setAttribute(AttributeName.PRODUCTIONTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.PRODUCTIONTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -269,35 +199,6 @@ public abstract class JDFAutoFolderProduction extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EProductionType getEProductionType()
-	{
-		return EProductionType.getEnum(getAttribute(AttributeName.PRODUCTIONTYPE, null, "NonCollect"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ProductionType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ProductionType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetProductionType(EProductionType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setProductionType(EnumProductionType enumVar)
-	{
-		setAttribute(AttributeName.PRODUCTIONTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ProductionType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EProductionType GetEProductionType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumProductionType getProductionType()
 	{
 		return EnumProductionType.getEnum(getAttribute(AttributeName.PRODUCTIONTYPE, null, "NonCollect"));

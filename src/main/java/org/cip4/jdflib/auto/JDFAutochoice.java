@@ -108,7 +108,7 @@ public abstract class JDFAutochoice extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutochoice(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutochoice(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -120,7 +120,7 @@ public abstract class JDFAutochoice extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutochoice(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutochoice(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutochoice extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutochoice(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutochoice(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -170,7 +170,7 @@ public abstract class JDFAutochoice extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFwhen the element
 	 */
-	public JDFwhen getCreatewhen(int iSkip)
+	public JDFwhen getCreatewhen(final int iSkip)
 	{
 		return (JDFwhen) getCreateElement_JDFElement(ElementName.WHEN, null, iSkip);
 	}
@@ -182,7 +182,7 @@ public abstract class JDFAutochoice extends JDFElement
 	 * @return JDFwhen the element
 	 *         default is getwhen(0)
 	 */
-	public JDFwhen getwhen(int iSkip)
+	public JDFwhen getwhen(final int iSkip)
 	{
 		return (JDFwhen) getElement(ElementName.WHEN, null, iSkip);
 	}

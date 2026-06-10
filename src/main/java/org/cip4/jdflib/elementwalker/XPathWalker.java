@@ -87,7 +87,6 @@ public class XPathWalker extends BaseElementWalker
 		 * Gets the XPath full tree representation of 'this'
 		 *
 		 * @param relativeTo relative path to which to create an xpath
-		 *
 		 * @return String the XPath representation of 'this' e.g. <code>/root/parent/element</code><br>
 		 *         <code>null</code> if parent of this is null (e.g. called on rootnode)
 		 */
@@ -222,7 +221,6 @@ public class XPathWalker extends BaseElementWalker
 	 * the link and ref walker
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkAll extends BaseWalker
 	{
@@ -265,14 +263,18 @@ public class XPathWalker extends BaseElementWalker
 						writer.print(path);
 						final String attribute = e.getAttribute_KElement(key);
 						if (bAttributeValue)
+						{
 							writer.print(separator + attribute);
+						}
 						if (bDatatype && (e instanceof JDFElement))
 						{
 							writeDatatype((JDFElement) e, key);
 						}
 						writer.println();
 						if (pathsFound != null)
+						{
 							pathsFound.add(path);
+						}
 
 					}
 				}
@@ -289,7 +291,9 @@ public class XPathWalker extends BaseElementWalker
 			EnumAttributeType type = e.getAtrType(key);
 			writer.print(separator);
 			if (type != null)
-				writer.print(type.getName());
+			{
+				writer.print(type.name());
+			}
 			else if (e.knownElements().contains(key))
 			{
 				final Element createdElement = e.getOwnerDocument_KElement().createElement(key);
@@ -297,7 +301,9 @@ public class XPathWalker extends BaseElementWalker
 				{
 					type = ((JDFElement) createdElement).getAtrType(AttributeName.ACTUAL);
 					if (type != null)
-						writer.print(type.getName());
+					{
+						writer.print(type.name());
+					}
 				}
 			}
 		}

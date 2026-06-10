@@ -57,7 +57,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class VStringTest extends JDFTestCaseBase
 {
@@ -130,7 +129,6 @@ class VStringTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testRemove() throws Exception
@@ -545,7 +543,7 @@ class VStringTest extends JDFTestCaseBase
 	{
 		final VString v = new VString();
 		v.add(EnumType.AdhesiveBinding);
-		assertEquals(StringUtil.setvString(v, " ", null, null), EnumType.AdhesiveBinding.getName());
+		assertEquals(StringUtil.setvString(v, " ", null, null), EnumType.AdhesiveBinding.name());
 	}
 
 	/**

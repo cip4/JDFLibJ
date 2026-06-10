@@ -128,7 +128,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTrigger(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoTrigger(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -140,7 +140,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTrigger(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoTrigger(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -153,7 +153,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoTrigger(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoTrigger(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -164,7 +164,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -194,7 +194,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRepeatStep(int value)
+	public void setRepeatStep(final int value)
 	{
 		setAttribute(AttributeName.REPEATSTEP, value, null);
 	}
@@ -219,7 +219,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRepeatTime(double value)
+	public void setRepeatTime(final double value)
 	{
 		setAttribute(AttributeName.REPEATTIME, value, null);
 	}
@@ -266,7 +266,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFChangedAttribute the element
 	 */
-	public JDFChangedAttribute getCreateChangedAttribute(int iSkip)
+	public JDFChangedAttribute getCreateChangedAttribute(final int iSkip)
 	{
 		return (JDFChangedAttribute) getCreateElement_JDFElement(ElementName.CHANGEDATTRIBUTE, null, iSkip);
 	}
@@ -278,7 +278,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 	 * @return JDFChangedAttribute the element
 	 *         default is getChangedAttribute(0)
 	 */
-	public JDFChangedAttribute getChangedAttribute(int iSkip)
+	public JDFChangedAttribute getChangedAttribute(final int iSkip)
 	{
 		return (JDFChangedAttribute) getElement(ElementName.CHANGEDATTRIBUTE, null, iSkip);
 	}
@@ -360,7 +360,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFChangedPath the element
 	 */
-	public JDFChangedPath getCreateChangedPath(int iSkip)
+	public JDFChangedPath getCreateChangedPath(final int iSkip)
 	{
 		return (JDFChangedPath) getCreateElement_JDFElement(ElementName.CHANGEDPATH, null, iSkip);
 	}
@@ -372,7 +372,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 	 * @return JDFChangedPath the element
 	 *         default is getChangedPath(0)
 	 */
-	public JDFChangedPath getChangedPath(int iSkip)
+	public JDFChangedPath getChangedPath(final int iSkip)
 	{
 		return (JDFChangedPath) getElement(ElementName.CHANGEDPATH, null, iSkip);
 	}

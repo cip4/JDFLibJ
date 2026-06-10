@@ -63,6 +63,7 @@ public class VResource extends VElement
 	/**
 	 * constructor
 	 */
+	@Deprecated
 	public VResource()
 	{
 		super();
@@ -73,6 +74,7 @@ public class VResource extends VElement
 	 *
 	 * @param m
 	 */
+	@Deprecated
 	@SuppressWarnings("unchecked")
 	public VResource(final Vector m)
 	{
@@ -93,6 +95,7 @@ public class VResource extends VElement
 	 *
 	 * @return String
 	 */
+	@Deprecated
 	@Override
 	public synchronized String toString()
 	{

@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -99,7 +94,8 @@ public abstract class JDFAutoHole extends JDFElement
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x2222222222l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.EXTENT, 0x2222222222l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.REINFORCEMENT, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.SHAPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumShape.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SHAPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumShape.class, 0), null);
 	}
 
 	@Override
@@ -114,7 +110,7 @@ public abstract class JDFAutoHole extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoHole(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoHole(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -126,7 +122,7 @@ public abstract class JDFAutoHole extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoHole(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoHole(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -139,95 +135,28 @@ public abstract class JDFAutoHole extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoHole(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoHole(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for Shape
+	 * Enumeration strings for numShape
 	 */
 
-	public enum EShape
+	public enum EnumShape
 	{
 		Eliptical, Round, Rectangular;
 
-		public static EShape getEnum(String val)
+		public static EnumShape getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EShape.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumShape.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Shape
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumShape extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumShape(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumShape getEnum(String enumName)
-		{
-			return (EnumShape) getEnum(EnumShape.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumShape getEnum(int enumValue)
-		{
-			return (EnumShape) getEnum(EnumShape.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumShape.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumShape.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumShape.class);
-		}
-
-		/**  */
-		public static final EnumShape Eliptical = new EnumShape("Eliptical");
-		/**  */
-		public static final EnumShape Round = new EnumShape("Round");
-		/**  */
-		public static final EnumShape Rectangular = new EnumShape("Rectangular");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -239,7 +168,7 @@ public abstract class JDFAutoHole extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCenter(JDFXYPair value)
+	public void setCenter(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.CENTER, value, null);
 	}
@@ -252,8 +181,8 @@ public abstract class JDFAutoHole extends JDFElement
 	 */
 	public JDFXYPair getCenter()
 	{
-		String strAttrName = getAttribute(AttributeName.CENTER, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CENTER, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -267,7 +196,7 @@ public abstract class JDFAutoHole extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setExtent(JDFXYPair value)
+	public void setExtent(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.EXTENT, value, null);
 	}
@@ -280,8 +209,8 @@ public abstract class JDFAutoHole extends JDFElement
 	 */
 	public JDFXYPair getExtent()
 	{
-		String strAttrName = getAttribute(AttributeName.EXTENT, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.EXTENT, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -295,7 +224,7 @@ public abstract class JDFAutoHole extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setReinforcement(String value)
+	public void setReinforcement(final String value)
 	{
 		setAttribute(AttributeName.REINFORCEMENT, value, null);
 	}
@@ -320,9 +249,9 @@ public abstract class JDFAutoHole extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setShape(EShape enumVar)
+	public void setShape(final EnumShape enumVar)
 	{
-		setAttribute(AttributeName.SHAPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SHAPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -330,35 +259,6 @@ public abstract class JDFAutoHole extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EShape getEShape()
-	{
-		return EShape.getEnum(getAttribute(AttributeName.SHAPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Shape
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Shape
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetShape(EShape) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setShape(EnumShape enumVar)
-	{
-		setAttribute(AttributeName.SHAPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Shape
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EShape GetEShape() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumShape getShape()
 	{
 		return EnumShape.getEnum(getAttribute(AttributeName.SHAPE, null, null));

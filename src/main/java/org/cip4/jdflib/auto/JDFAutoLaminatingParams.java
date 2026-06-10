@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -102,7 +97,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.HARDENERTYPE, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.LAMINATINGBOX, 0x3333333331l, AttributeInfo.EnumAttributeType.rectangle, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.LAMINATINGMETHOD, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumLaminatingMethod.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumLaminatingMethod.class, 0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.NIPWIDTH, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.TEMPERATURE, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
@@ -120,7 +115,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLaminatingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoLaminatingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -132,7 +127,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLaminatingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoLaminatingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -145,7 +140,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoLaminatingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoLaminatingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -156,7 +151,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -171,91 +166,22 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for LaminatingMethod
+	 * Enumeration strings for numLaminatingMethod
 	 */
 
-	public enum ELaminatingMethod
+	public enum EnumLaminatingMethod
 	{
 		CompoundFoil, DispersionGlue, Fusing, Unknown;
 
-		public static ELaminatingMethod getEnum(String val)
+		public static EnumLaminatingMethod getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ELaminatingMethod.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumLaminatingMethod.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for LaminatingMethod
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumLaminatingMethod extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumLaminatingMethod(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumLaminatingMethod getEnum(String enumName)
-		{
-			return (EnumLaminatingMethod) getEnum(EnumLaminatingMethod.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumLaminatingMethod getEnum(int enumValue)
-		{
-			return (EnumLaminatingMethod) getEnum(EnumLaminatingMethod.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumLaminatingMethod.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumLaminatingMethod.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumLaminatingMethod.class);
-		}
-
-		/**  */
-		public static final EnumLaminatingMethod CompoundFoil = new EnumLaminatingMethod("CompoundFoil");
-		/**  */
-		public static final EnumLaminatingMethod DispersionGlue = new EnumLaminatingMethod("DispersionGlue");
-		/**  */
-		public static final EnumLaminatingMethod Fusing = new EnumLaminatingMethod("Fusing");
-		/**  */
-		public static final EnumLaminatingMethod Unknown = new EnumLaminatingMethod("Unknown");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -267,7 +193,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAdhesiveType(String value)
+	public void setAdhesiveType(final String value)
 	{
 		setAttribute(AttributeName.ADHESIVETYPE, value, null);
 	}
@@ -292,7 +218,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGapList(JDFNumberList value)
+	public void setGapList(final JDFNumberList value)
 	{
 		setAttribute(AttributeName.GAPLIST, value, null);
 	}
@@ -305,8 +231,8 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 	 */
 	public JDFNumberList getGapList()
 	{
-		String strAttrName = getAttribute(AttributeName.GAPLIST, null, null);
-		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.GAPLIST, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -320,7 +246,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHardenerType(String value)
+	public void setHardenerType(final String value)
 	{
 		setAttribute(AttributeName.HARDENERTYPE, value, null);
 	}
@@ -345,7 +271,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLaminatingBox(JDFRectangle value)
+	public void setLaminatingBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.LAMINATINGBOX, value, null);
 	}
@@ -358,8 +284,8 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 	 */
 	public JDFRectangle getLaminatingBox()
 	{
-		String strAttrName = getAttribute(AttributeName.LAMINATINGBOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.LAMINATINGBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -373,9 +299,9 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setLaminatingMethod(ELaminatingMethod enumVar)
+	public void setLaminatingMethod(final EnumLaminatingMethod enumVar)
 	{
-		setAttribute(AttributeName.LAMINATINGMETHOD, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.LAMINATINGMETHOD, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -383,35 +309,6 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ELaminatingMethod getELaminatingMethod()
-	{
-		return ELaminatingMethod.getEnum(getAttribute(AttributeName.LAMINATINGMETHOD, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute LaminatingMethod
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute LaminatingMethod
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetLaminatingMethod(ELaminatingMethod) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setLaminatingMethod(EnumLaminatingMethod enumVar)
-	{
-		setAttribute(AttributeName.LAMINATINGMETHOD, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute LaminatingMethod
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ELaminatingMethod GetELaminatingMethod() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumLaminatingMethod getLaminatingMethod()
 	{
 		return EnumLaminatingMethod.getEnum(getAttribute(AttributeName.LAMINATINGMETHOD, null, null));
@@ -427,7 +324,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNipWidth(double value)
+	public void setNipWidth(final double value)
 	{
 		setAttribute(AttributeName.NIPWIDTH, value, null);
 	}
@@ -452,7 +349,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setModuleIndex(int value)
+	public void setModuleIndex(final int value)
 	{
 		setAttribute(AttributeName.MODULEINDEX, value, null);
 	}
@@ -477,7 +374,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTemperature(double value)
+	public void setTemperature(final double value)
 	{
 		setAttribute(AttributeName.TEMPERATURE, value, null);
 	}

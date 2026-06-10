@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoPreflightDetail : public JDFElement
@@ -97,7 +98,8 @@ public abstract class JDFAutoPreflightDetail extends JDFElement
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.PAGEREFS, 0x3333333333l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.PROPERTY, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.STATUS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.STATUS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumNodeStatus.class, 0), null);
 	}
 
 	@Override
@@ -124,7 +126,7 @@ public abstract class JDFAutoPreflightDetail extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPreflightDetail(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPreflightDetail(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -136,7 +138,7 @@ public abstract class JDFAutoPreflightDetail extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPreflightDetail(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPreflightDetail(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -149,7 +151,7 @@ public abstract class JDFAutoPreflightDetail extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPreflightDetail(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPreflightDetail(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -170,7 +172,7 @@ public abstract class JDFAutoPreflightDetail extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPageRefs(JDFIntegerRangeList value)
+	public void setPageRefs(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.PAGEREFS, value, null);
 	}
@@ -183,8 +185,8 @@ public abstract class JDFAutoPreflightDetail extends JDFElement
 	 */
 	public JDFIntegerRangeList getPageRefs()
 	{
-		String strAttrName = getAttribute(AttributeName.PAGEREFS, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PAGEREFS, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -198,7 +200,7 @@ public abstract class JDFAutoPreflightDetail extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProperty(String value)
+	public void setProperty(final String value)
 	{
 		setAttribute(AttributeName.PROPERTY, value, null);
 	}
@@ -245,7 +247,7 @@ public abstract class JDFAutoPreflightDetail extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFElement the element
 	 */
-	public JDFElement getCreateValue(int iSkip)
+	public JDFElement getCreateValue(final int iSkip)
 	{
 		return (JDFElement) getCreateElement_JDFElement(ElementName.VALUE, null, iSkip);
 	}
@@ -257,7 +259,7 @@ public abstract class JDFAutoPreflightDetail extends JDFElement
 	 * @return JDFElement the element
 	 *         default is getValue(0)
 	 */
-	public JDFElement getValue(int iSkip)
+	public JDFElement getValue(final int iSkip)
 	{
 		return (JDFElement) getElement(ElementName.VALUE, null, iSkip);
 	}

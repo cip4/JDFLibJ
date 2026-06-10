@@ -110,7 +110,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoChannelBindingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoChannelBindingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -122,7 +122,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoChannelBindingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoChannelBindingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -135,7 +135,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoChannelBindingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoChannelBindingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -146,7 +146,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -176,7 +176,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setClampSystem(boolean value)
+	public void setClampSystem(final boolean value)
 	{
 		setAttribute(AttributeName.CLAMPSYSTEM, value, null);
 	}
@@ -202,7 +202,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 	 * @param value the value to set the attribute to
 	 */
 	@Override
-	public void setBrand(String value)
+	public void setBrand(final String value)
 	{
 		setAttribute(AttributeName.BRAND, value, null);
 	}
@@ -228,7 +228,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setClampColor(EnumNamedColor value)
+	public void setClampColor(final EnumNamedColor value)
 	{
 		setAttribute(AttributeName.CLAMPCOLOR, value == null ? null : value.getName(), null);
 	}
@@ -257,7 +257,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setClampColorDetails(String value)
+	public void setClampColorDetails(final String value)
 	{
 		setAttribute(AttributeName.CLAMPCOLORDETAILS, value, null);
 	}
@@ -282,7 +282,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setClampD(double value)
+	public void setClampD(final double value)
 	{
 		setAttribute(AttributeName.CLAMPD, value, null);
 	}
@@ -307,7 +307,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setClampSize(JDFShape value)
+	public void setClampSize(final JDFShape value)
 	{
 		setAttribute(AttributeName.CLAMPSIZE, value, null);
 	}
@@ -320,8 +320,8 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 	 */
 	public JDFShape getClampSize()
 	{
-		String strAttrName = getAttribute(AttributeName.CLAMPSIZE, null, null);
-		JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CLAMPSIZE, null, null);
+		final JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
 		return nPlaceHolder;
 	}
 

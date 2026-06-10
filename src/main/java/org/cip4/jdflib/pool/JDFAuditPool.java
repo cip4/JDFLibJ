@@ -94,6 +94,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
@@ -118,7 +119,6 @@ import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.util.ContainerUtil;
-import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -261,11 +261,11 @@ public class JDFAuditPool extends JDFPool
 	 */
 	public JDFAudit addAudit(final JDFAudit.EnumAuditType typ, final String by)
 	{
-		final JDFAudit l = (JDFAudit) appendElement(typ.getName(), null);
+		final JDFAudit l = (JDFAudit) appendElement(typ.name(), null);
 		if (by != null)
 		{
 			final EnumVersion version = getVersion(true);
-			if (version != null && (EnumUtil.aLessThanB(version, EnumVersion.Version_1_4) || EnumUtil.aLessEqualsThanB(EnumVersion.Version_2_0, version)))
+			if (version != null && (version.ordinal() < EnumVersion.Version_1_4.ordinal() || EnumVersion.Version_2_0.ordinal() <= version.ordinal()))
 			{
 				l.setAuthor(by);
 			}
@@ -588,7 +588,7 @@ public class JDFAuditPool extends JDFPool
 		String strAuditType = null;
 		if (typ != null)
 		{
-			strAuditType = typ.getName();
+			strAuditType = typ.name();
 		}
 
 		final VElement vElem = getPoolChildrenGeneric(strAuditType, mAttributes, null);
@@ -813,7 +813,7 @@ public class JDFAuditPool extends JDFPool
 	@Deprecated
 	public VElement getLinks(final JDFAttributeMap mLinkAtt)
 	{
-		return getPoolChildrenGeneric(JDFConstants.EMPTYSTRING, mLinkAtt, JDFConstants.EMPTYSTRING);
+		return getPoolChildrenGeneric(JDFCoreConstants.EMPTYSTRING, mLinkAtt, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -846,7 +846,7 @@ public class JDFAuditPool extends JDFPool
 	 */
 	public VElement getPoolChildren(final String strName, final JDFAttributeMap mAttrib)
 	{
-		return getPoolChildrenGeneric(strName, mAttrib, JDFConstants.EMPTYSTRING);
+		return getPoolChildrenGeneric(strName, mAttrib, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**

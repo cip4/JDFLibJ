@@ -106,7 +106,7 @@ public abstract class JDFAutoActionPool extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoActionPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoActionPool(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoActionPool extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoActionPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoActionPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoActionPool extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoActionPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoActionPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoActionPool extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFAction the element
 	 */
-	public JDFAction getCreateAction(int iSkip)
+	public JDFAction getCreateAction(final int iSkip)
 	{
 		return (JDFAction) getCreateElement_JDFElement(ElementName.ACTION, null, iSkip);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoActionPool extends JDFElement
 	 * @return JDFAction the element
 	 *         default is getAction(0)
 	 */
-	public JDFAction getAction(int iSkip)
+	public JDFAction getAction(final int iSkip)
 	{
 		return (JDFAction) getElement(ElementName.ACTION, null, iSkip);
 	}

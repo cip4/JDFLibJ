@@ -74,10 +74,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
-import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EDeviceCondition;
-import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceCondition;
-import org.cip4.jdflib.auto.JDFAutoMISDetails.EDeviceOperationMode;
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumDeviceOperationMode;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
@@ -98,11 +97,11 @@ class WalkDeviceInfoTest extends JDFTestCaseBase
 	void testStatus()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
-		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EDeviceStatus.Running);
-		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EDeviceStatus.Setup);
-		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EDeviceStatus.Cleanup);
-		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EDeviceStatus.Down);
-		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EDeviceStatus.Idle);
+		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EnumDeviceStatus.Running);
+		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EnumDeviceStatus.Setup);
+		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EnumDeviceStatus.Cleanup);
+		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EnumDeviceStatus.Down);
+		jmf.getSignal(0).appendDeviceInfo().setDeviceStatus(EnumDeviceStatus.Idle);
 		final KElement xjmf = new JDFToXJDF().convert(jmf);
 		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@Status", null), "Offline");
 		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo[2]/@Status", null), "Production");
@@ -120,11 +119,11 @@ class WalkDeviceInfoTest extends JDFTestCaseBase
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
 		final JDFDeviceInfo di = jmf.getSignal(0).getDeviceInfo(0);
-		di.setDeviceStatus(EDeviceStatus.Running);
-		di.setDeviceCondition(EDeviceCondition.Failure);
+		di.setDeviceStatus(EnumDeviceStatus.Running);
+		di.setDeviceCondition(EnumDeviceCondition.Failure);
 		final KElement xjmf = new JDFToXJDF().convert(jmf);
 		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@Status", null), "Offline");
-		assertEquals(EnumDeviceCondition.Failure.getName(), xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@DeviceCondition", null));
+		assertEquals(EnumDeviceCondition.Failure.name(), xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@DeviceCondition", null));
 
 	}
 
@@ -136,8 +135,8 @@ class WalkDeviceInfoTest extends JDFTestCaseBase
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
 		final JDFDeviceInfo di = jmf.getSignal(0).getDeviceInfo(0);
-		di.setDeviceStatus(EDeviceStatus.Running);
-		di.setDeviceOperationMode(EDeviceOperationMode.NonProductive);
+		di.setDeviceStatus(EnumDeviceStatus.Running);
+		di.setDeviceOperationMode(EnumDeviceOperationMode.NonProductive);
 		final KElement xjmf = new JDFToXJDF().convert(jmf);
 		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/@Status", null), eDeviceStatus.NonProductive.name());
 	}
@@ -150,8 +149,8 @@ class WalkDeviceInfoTest extends JDFTestCaseBase
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
 		final JDFDeviceInfo di = jmf.getSignal(0).getDeviceInfo(0);
-		di.setDeviceStatus(EDeviceStatus.Running);
-		di.setDeviceOperationMode(EDeviceOperationMode.NonProductive);
+		di.setDeviceStatus(EnumDeviceStatus.Running);
+		di.setDeviceOperationMode(EnumDeviceOperationMode.NonProductive);
 		di.appendJobPhase().appendCostCenter().setCostCenterID("csid");
 		final KElement xjmf = new JDFToXJDF().convert(jmf);
 		assertEquals("csid", xjmf.getXPathAttribute("SignalStatus/DeviceInfo/JobPhase/@CostCenterID", null));

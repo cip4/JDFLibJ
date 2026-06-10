@@ -126,7 +126,7 @@ class WebTest extends JDFTestCaseBase
 		final JDFResourcePool rp = n.getCreateResourcePool();
 		final JDFResource lo = n.addResource("Layout", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
 		final JDFLayout losh = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Sheet1");
-		final JDFLayout lofr = (JDFLayout) losh.addPartition(EnumPartIDKey.Side, EnumSide.Front.getName());
+		final JDFLayout lofr = (JDFLayout) losh.addPartition(EnumPartIDKey.Side, EnumSide.Front.name());
 
 		rp.appendXMLComment("LayoutShift SHOULD be partitioned: at least Side and Separation will make sense", null);
 
@@ -166,10 +166,10 @@ class WebTest extends JDFTestCaseBase
 				shiftObject.setAttribute("CTM", new JDFMatrix(1, 0, 0, 1, j + i / 4, j + i % 4).toString());
 			}
 		}
-		XMLDoc xjdfDoc = writeTest(doc.getRoot(), "resources/WebgrowthPartition.jdf", true, null);
-		XJDFHelper h = XJDFHelper.getHelper(xjdfDoc);
-		SetHelper sh = h.getSet(ElementName.LAYOUTSHIFT, 0);
-		//		setSnippet(sh, true);
+		final XMLDoc xjdfDoc = writeTest(doc.getRoot(), "resources/WebgrowthPartition.jdf", true, null);
+		final XJDFHelper h = XJDFHelper.getHelper(xjdfDoc);
+		final SetHelper sh = h.getSet(ElementName.LAYOUTSHIFT, 0);
+		// setSnippet(sh, true);
 		setSnippet(sh.getPartition(0), false);
 		setSnippet(sh.getPartition(1), false);
 		setSnippet(sh.getPartition(2), false);

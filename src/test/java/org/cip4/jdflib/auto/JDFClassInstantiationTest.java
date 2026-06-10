@@ -92,7 +92,7 @@ class JDFClassInstantiationTest extends JDFTestCaseBase
 {
 	File dir;
 
-	private void traverseNormalClassesAndInstantiate(File dir, DirectoryVisitor visitor)
+	private void traverseNormalClassesAndInstantiate(final File dir, final DirectoryVisitor visitor)
 	{
 		if (!dir.isDirectory())
 		{
@@ -103,7 +103,7 @@ class JDFClassInstantiationTest extends JDFTestCaseBase
 		final File[] entries = dir.listFiles(new FileFilter()
 		{
 			@Override
-			public boolean accept(File pathname)
+			public boolean accept(final File pathname)
 			{
 				boolean acceptFile = false;
 
@@ -112,7 +112,8 @@ class JDFClassInstantiationTest extends JDFTestCaseBase
 				if (pathname.isDirectory())
 				{
 					// ignore classes in directories "auto", "datatypes" and "util"
-					acceptFile = !name.equals("auto") && !name.equals("datatypes") && !name.equals("extensions") && !name.equals("util") && !name.equals("validate");
+					acceptFile = !name.equals("auto") && !name.equals("datatypes") && !name.equals("extensions") && !name.equals("util")
+							&& !name.equals("validate");
 				}
 				else
 				{
@@ -121,8 +122,9 @@ class JDFClassInstantiationTest extends JDFTestCaseBase
 					final VString ignoreList = new VString("JDFConstants.java JDFCoreConstants.java JDFDoc.java JDFDocumentBuilder.java "
 							+ "JDFException.java JDFParser.java JDFVersions.java JDFAbstractState.java "
 							+ "JDFEvaluation.java JDFNodeTerm.java JDFTerm.java JDFEnumerationSpan.java " + "JDFSpan.java JDFSpanBase.java "
-							+ "JDFDurationSpan.java JDFIntegerSpan.java JDFNameSpan.java JDFNumberSpan.java " + "JDFOptionSpan.java JDFShapeSpan.java JDFSpanNamedColor.java "
-							+ "JDFStringSpan.java JDFTimeSpan.java JDFXYPairSpan.java " + "JDFResourceLink.java " + "JDFPool.java " + "JDFCapsConverter.java", null);
+							+ "JDFDurationSpan.java JDFIntegerSpan.java JDFNameSpan.java JDFNumberSpan.java "
+							+ "JDFOptionSpan.java JDFShapeSpan.java JDFSpanNamedColor.java " + "JDFStringSpan.java JDFTimeSpan.java JDFXYPairSpan.java "
+							+ "JDFResourceLink.java " + "JDFPool.java " + "JDFCapsConverter.java", null);
 
 					acceptFile = !ignoreList.contains(name) && name.startsWith("JDF") && name.toLowerCase().endsWith(".java");
 				}
@@ -149,12 +151,9 @@ class JDFClassInstantiationTest extends JDFTestCaseBase
 	/**
 	 * get the fileName for every class JDFxxx below "./src/org/cip4/jdflib" which is not in ignoreList and extract from it elementName (=xxx) With elementName instantiate the
 	 * corresponding class (using jdfRoot.appendElement(elementName) and factory DocumentJDFImpl.java)
-	 *
 	 * Then createdClass+".java" should be equal to fileName, i.e. the factory DocumentJDFImpl creates a class at the correct point in the hierarchy
-	 *
 	 * result = fileName.equals(createdClass + ".java") || (fileName.startsWith("JDFAuto") && createdClass.equals(JDFConstants.JDFELEMENT)) || fileName.equals(JDFConstants.JDFNODE)
 	 * || !createdClass.equals(JDFConstants.JDFELEMENT);
-	 *
 	 */
 	@Test
 	void testDirectoryInstantiateVisitor()
@@ -171,7 +170,7 @@ class JDFClassInstantiationTest extends JDFTestCaseBase
 		}
 	}
 
-	private void traverseAutoClassesAndCheckForCorrespondingNormalClass(File dir, DirectoryVisitor visitor)
+	private void traverseAutoClassesAndCheckForCorrespondingNormalClass(final File dir, final DirectoryVisitor visitor)
 	{
 		if (!dir.isDirectory())
 		{
@@ -182,7 +181,7 @@ class JDFClassInstantiationTest extends JDFTestCaseBase
 		final File[] entries = dir.listFiles(new FileFilter()
 		{
 			@Override
-			public boolean accept(File pathname)
+			public boolean accept(final File pathname)
 			{
 				boolean acceptFile = false;
 

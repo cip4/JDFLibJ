@@ -106,7 +106,7 @@ public abstract class JDFAutoIsPresentEvaluation extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIsPresentEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoIsPresentEvaluation(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoIsPresentEvaluation extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIsPresentEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoIsPresentEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoIsPresentEvaluation extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoIsPresentEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoIsPresentEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -142,7 +142,7 @@ public abstract class JDFAutoIsPresentEvaluation extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -179,7 +179,7 @@ public abstract class JDFAutoIsPresentEvaluation extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFBasicPreflightTest the element
 	 */
-	public JDFBasicPreflightTest getCreateBasicPreflightTest(int iSkip)
+	public JDFBasicPreflightTest getCreateBasicPreflightTest(final int iSkip)
 	{
 		return (JDFBasicPreflightTest) getCreateElement_JDFElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
 	}
@@ -191,7 +191,7 @@ public abstract class JDFAutoIsPresentEvaluation extends JDFResource
 	 * @return JDFBasicPreflightTest the element
 	 *         default is getBasicPreflightTest(0)
 	 */
-	public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
+	public JDFBasicPreflightTest getBasicPreflightTest(final int iSkip)
 	{
 		return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
 	}

@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.resource.devicecapability;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -83,6 +84,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * TODO Please insert comment!
+ *
  * @author rainer prosi
  * @date Dec 10, 2010
  */
@@ -96,7 +98,7 @@ class JDFMatrixEvaluationTest extends JDFTestCaseBase
 	@Test
 	void testGetTransforms()
 	{
-		Vector<EnumOrientation> v = new Vector<EnumOrientation>();
+		final Vector<EnumOrientation> v = new Vector<>();
 		v.add(EnumOrientation.Rotate90);
 		m.setTransforms(v);
 		Assertions.assertEquals(v, m.getTransforms());
@@ -110,17 +112,17 @@ class JDFMatrixEvaluationTest extends JDFTestCaseBase
 	@Test
 	void testFitsTransforms()
 	{
-		Vector<EnumOrientation> v = new Vector<EnumOrientation>();
+		final Vector<EnumOrientation> v = new Vector<>();
 		v.add(EnumOrientation.Rotate90);
 		m.setTransforms(v);
-		JDFMatrix mat = JDFMatrix.getUnitMatrix();
+		final JDFMatrix mat = JDFMatrix.getUnitMatrix();
 		Assertions.assertFalse(m.fitsTransforms(mat));
 		mat.rotate(90);
 		Assertions.assertTrue(m.fitsTransforms(mat));
-		Iterator<EnumOrientation> it = EnumOrientation.iterator();
+		final Iterator<EnumOrientation> it = Arrays.asList(EnumOrientation.values()).iterator();
 		while (it.hasNext())
 		{
-			EnumOrientation next = it.next();
+			final EnumOrientation next = it.next();
 			v.set(0, next);
 			m.setTransforms(v);
 			for (int x = -100; x < 200; x += 100)

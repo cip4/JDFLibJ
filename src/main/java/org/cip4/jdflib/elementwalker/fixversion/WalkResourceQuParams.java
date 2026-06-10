@@ -79,7 +79,6 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         June 7, 2009
  */
 public class WalkResourceQuParams extends WalkElement
@@ -93,7 +92,8 @@ public class WalkResourceQuParams extends WalkElement
 	}
 
 	/**
-	 * @see WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine for JDF uses heuristics to modify this element and its children to be compatible with
+	 * @see WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine for JDF uses heuristics to modify this element and its children to be
+	 *      compatible with
 	 *      a given version in general, it will be able to move from low to high versions but potentially fail when attempting to move from higher to lower versions
 	 */
 	@Override

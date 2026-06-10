@@ -87,13 +87,13 @@ class WalkDigitalPrintingParamsTest
 	@Test
 	void testSides()
 	{
-		JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) new JDFDoc(ElementName.DIGITALPRINTINGPARAMS).getRoot();
-		dpp.setSides(EnumSides.TwoSidedFlipX);
-		WalkDigitalPrintingParams walker = new WalkDigitalPrintingParams();
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) new JDFDoc(ElementName.DIGITALPRINTINGPARAMS).getRoot();
+		dpp.setSides(JDFDigitalPrintingParams.EnumSides.TwoSidedFlipX);
+		final WalkDigitalPrintingParams walker = new WalkDigitalPrintingParams();
 		walker.setParent(new JDFToXJDF());
-		JDFAttributeMap map = dpp.getAttributeMap();
+		final JDFAttributeMap map = dpp.getAttributeMap();
 		walker.updateAttributes(map);
-		assertEquals(EnumSides.TwoSided.getName(), map.get(AttributeName.SIDES));
+		assertEquals(EnumSides.TwoSided.name(), map.get(AttributeName.SIDES));
 	}
 
 	/**
@@ -102,13 +102,13 @@ class WalkDigitalPrintingParamsTest
 	@Test
 	void testSidesBack()
 	{
-		JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) new JDFDoc(ElementName.DIGITALPRINTINGPARAMS).getRoot();
-		dpp.setSides(EnumSides.OneSidedBackFlipX);
-		WalkDigitalPrintingParams walker = new WalkDigitalPrintingParams();
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) new JDFDoc(ElementName.DIGITALPRINTINGPARAMS).getRoot();
+		dpp.setSides(JDFDigitalPrintingParams.EnumSides.OneSidedBackFlipX);
+		final WalkDigitalPrintingParams walker = new WalkDigitalPrintingParams();
 		walker.setParent(new JDFToXJDF());
-		JDFAttributeMap map = dpp.getAttributeMap();
+		final JDFAttributeMap map = dpp.getAttributeMap();
 		walker.updateAttributes(map);
-		assertEquals(EnumSides.OneSidedBack.getName(), map.get(AttributeName.SIDES));
+		assertEquals(EnumSides.OneSidedBack.name(), map.get(AttributeName.SIDES));
 	}
 
 }

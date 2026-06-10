@@ -9,12 +9,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanEdgeShape extends JDFEnumerationSpan
@@ -23,39 +19,39 @@ public class JDFSpanEdgeShape extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanEdgeShape
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanEdgeShape(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanEdgeShape(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanEdgeShape
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanEdgeShape(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanEdgeShape(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanEdgeShape
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanEdgeShape(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanEdgeShape(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -63,44 +59,14 @@ public class JDFSpanEdgeShape extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanEdgeShape
 	 */
-	public static class EnumSpanEdgeShape extends ValuedEnum
+	public enum EnumSpanEdgeShape
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Rounded, Beveled;
 
-		private EnumSpanEdgeShape(String name)
+		public static EnumSpanEdgeShape getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanEdgeShape.class, val, null);
 		}
-
-		public static EnumSpanEdgeShape getEnum(String enumName)
-		{
-			return (EnumSpanEdgeShape) getEnum(EnumSpanEdgeShape.class, enumName);
-		}
-
-		public static EnumSpanEdgeShape getEnum(int enumValue)
-		{
-			return (EnumSpanEdgeShape) getEnum(EnumSpanEdgeShape.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanEdgeShape.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanEdgeShape.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanEdgeShape.class);
-		}
-
-		public static final EnumSpanEdgeShape Rounded = new EnumSpanEdgeShape("Rounded");
-		public static final EnumSpanEdgeShape Beveled = new EnumSpanEdgeShape("Beveled");
-
 	}
 
 	// **************************************** Methods
@@ -108,18 +74,18 @@ public class JDFSpanEdgeShape extends JDFEnumerationSpan
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanEdgeShape.getEnum(0);
+		return EnumSpanEdgeShape.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

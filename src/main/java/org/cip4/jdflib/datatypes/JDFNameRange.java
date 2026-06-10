@@ -11,6 +11,7 @@ import java.util.StringTokenizer;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.HashUtil;
 
@@ -36,28 +37,27 @@ public class JDFNameRange extends JDFRange
 	 */
 	public JDFNameRange()
 	{
-		this(JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING);
+		this(JDFCoreConstants.EMPTYSTRING, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
 	 * constructs a JDFNameRange with the given string
-	 * 
+	 *
 	 * @param s the given string
-	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFNameRange(String s)
+	public JDFNameRange(final String s)
 	{
 		isValid(s);
 	}
 
 	/**
 	 * constructs a JDFNameRange with two given strings the left and the right name
-	 * 
-	 * @param p_left the given left string
+	 *
+	 * @param p_left  the given left string
 	 * @param p_right the given right string
 	 */
-	public JDFNameRange(String p_left, String p_right)
+	public JDFNameRange(final String p_left, final String p_right)
 	{
 		setLeft(p_left);
 		setRight(p_right);
@@ -65,10 +65,10 @@ public class JDFNameRange extends JDFRange
 
 	/**
 	 * constructs a JDFNameRange with a give JDFNameRange
-	 * 
+	 *
 	 * @param JDFNameRange nr
 	 */
-	public JDFNameRange(JDFNameRange nr)
+	public JDFNameRange(final JDFNameRange nr)
 	{
 		setLeft(nr.getLeft());
 		setRight(nr.getRight());
@@ -78,7 +78,7 @@ public class JDFNameRange extends JDFRange
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -93,33 +93,28 @@ public class JDFNameRange extends JDFRange
 
 	/**
 	 * inRange - returns true if (left string >= x <= right string), it is a lexicographical compare
-	 * 
+	 *
 	 * @param x comparison string
-	 * 
 	 * @return boolean - true if x in range otherwise false
 	 */
-	public boolean inRange(String x)
+	public boolean inRange(final String x)
 	{
 		return ((x.compareTo(getLeft()) >= 0) && (x.compareTo(getRight()) <= 0));
 	}
 
 	/**
 	 * equals - returns true if both JDFNameRange are equal otherwise false
-	 * 
+	 *
 	 * @return boolean - true if equal, otherwise false
 	 */
 	@Override
-	public boolean equals(Object other)
+	public boolean equals(final Object other)
 	{
 		if (this == other)
 		{
 			return true;
 		}
-		if (other == null)
-		{
-			return false;
-		}
-		if (!other.getClass().equals(getClass()))
+		if ((other == null) || !other.getClass().equals(getClass()))
 		{
 			return false;
 		}
@@ -138,7 +133,7 @@ public class JDFNameRange extends JDFRange
 
 	/**
 	 * getLowerValue - returns the lower value of the range
-	 * 
+	 *
 	 * @return String - the lower value of the range
 	 */
 	public String getLowerValue()
@@ -148,7 +143,7 @@ public class JDFNameRange extends JDFRange
 
 	/**
 	 * getUpperValue - return the upper value of the range
-	 * 
+	 *
 	 * @return String - the upper value of the range
 	 */
 	public String getUpperValue()
@@ -158,19 +153,18 @@ public class JDFNameRange extends JDFRange
 
 	/**
 	 * isValid - validates the given String
-	 * 
+	 *
 	 * @param s the given string
-	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	protected void isValid(String s)
+	protected void isValid(final String s)
 	{
-		VString vs = new VString();
-		StringTokenizer sToken = new StringTokenizer(s, "~");
+		final VString vs = new VString();
+		final StringTokenizer sToken = new StringTokenizer(s, "~");
 
 		while (sToken.hasMoreElements())
 		{
-			String str = (String) sToken.nextElement();
+			final String str = (String) sToken.nextElement();
 			vs.addElement(str.trim());
 		}
 
@@ -186,7 +180,7 @@ public class JDFNameRange extends JDFRange
 		}
 	}
 
-	private void setLeft(String left)
+	private void setLeft(final String left)
 	{
 		this.m_left = left;
 	}
@@ -196,7 +190,7 @@ public class JDFNameRange extends JDFRange
 		return m_left;
 	}
 
-	private void setRight(String right)
+	private void setRight(final String right)
 	{
 		this.m_right = right;
 	}
@@ -207,7 +201,7 @@ public class JDFNameRange extends JDFRange
 	}
 
 	@Override
-	public boolean isPartOfRange(JDFRange ra)
+	public boolean isPartOfRange(final JDFRange ra)
 	{
 		return this.equals(ra);
 	}
@@ -225,7 +219,7 @@ public class JDFNameRange extends JDFRange
 	}
 
 	@Override
-	protected boolean inObjectRange(Object other)
+	protected boolean inObjectRange(final Object other)
 	{
 		return inRange((String) other);
 	}

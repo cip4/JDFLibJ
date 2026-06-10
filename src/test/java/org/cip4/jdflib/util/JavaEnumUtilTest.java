@@ -88,14 +88,13 @@ import org.junit.jupiter.api.Test;
  * general utilities for containers and objects
  *
  * @author prosirai
- *
  */
 class JavaEnumUtilTest extends JDFTestCaseBase
 {
 	static enum E
 	{
 		a, b, BOTTOMLEFT
-	};
+	}
 
 	/**
 	 *

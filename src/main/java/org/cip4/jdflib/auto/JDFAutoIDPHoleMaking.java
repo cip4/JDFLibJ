@@ -106,7 +106,7 @@ public abstract class JDFAutoIDPHoleMaking extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIDPHoleMaking(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoIDPHoleMaking(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoIDPHoleMaking extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIDPHoleMaking(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoIDPHoleMaking(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoIDPHoleMaking extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoIDPHoleMaking(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoIDPHoleMaking(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoIDPHoleMaking extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFHoleMakingParams the element
 	 */
-	public JDFHoleMakingParams getCreateHoleMakingParams(int iSkip)
+	public JDFHoleMakingParams getCreateHoleMakingParams(final int iSkip)
 	{
 		return (JDFHoleMakingParams) getCreateElement_JDFElement(ElementName.HOLEMAKINGPARAMS, null, iSkip);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoIDPHoleMaking extends JDFElement
 	 * @return JDFHoleMakingParams the element
 	 *         default is getHoleMakingParams(0)
 	 */
-	public JDFHoleMakingParams getHoleMakingParams(int iSkip)
+	public JDFHoleMakingParams getHoleMakingParams(final int iSkip)
 	{
 		return (JDFHoleMakingParams) getElement(ElementName.HOLEMAKINGPARAMS, null, iSkip);
 	}
@@ -210,7 +210,7 @@ public abstract class JDFAutoIDPHoleMaking extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refHoleMakingParams(JDFHoleMakingParams refTarget)
+	public void refHoleMakingParams(final JDFHoleMakingParams refTarget)
 	{
 		refElement(refTarget);
 	}

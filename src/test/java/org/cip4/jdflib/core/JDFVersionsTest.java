@@ -95,9 +95,8 @@ class JDFVersionsTest extends JDFTestCaseBase
 	{
 		JDFVersions.setForceVersion(false);
 		EnumVersion vLast = null;
-		for (final Object o : EnumVersion.getEnumList())
+		for (final EnumVersion v : EnumVersion.values())
 		{
-			final EnumVersion v = (EnumVersion) o;
 			assertNotEquals(0, JDFVersions.getTheMask(v));
 			assertNotEquals(v, vLast);
 			vLast = v;

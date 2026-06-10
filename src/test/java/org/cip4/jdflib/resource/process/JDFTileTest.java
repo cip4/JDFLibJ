@@ -144,7 +144,7 @@ class JDFTileTest extends JDFTestCaseBase
 		final JDFNode root = new JDFDoc("JDF").getJDFRoot();
 		root.setVersion(EnumVersion.Version_1_5);
 		root.setType(EnumType.Tiling);
-		JDFTile tile = (JDFTile) root.appendMatchingResource(ElementName.TILE, EnumUsage.Input);
+		final JDFTile tile = (JDFTile) root.appendMatchingResource(ElementName.TILE, EnumUsage.Input);
 		tile.appendMedia();
 		tile.appendMarkObject().setCTM(JDFMatrix.getUnitMatrix());
 		tile.setClipBox(new JDFRectangle(11, 1, 1, 1));
@@ -152,7 +152,7 @@ class JDFTileTest extends JDFTestCaseBase
 		tile.setTrimBox(new JDFRectangle(11, 1, 1, 1));
 		for (int i = 0; i < 16; i++)
 		{
-			JDFTile partTile = (JDFTile) tile.addPartition(EnumPartIDKey.TileID, new JDFXYPair(i % 4, i / 4).getString(0));
+			final JDFTile partTile = (JDFTile) tile.addPartition(EnumPartIDKey.TileID, new JDFXYPair(i % 4, i / 4).getString(0));
 			Assertions.assertNotNull(partTile);
 			partTile.appendMarkObject().setCTM(JDFMatrix.getUnitMatrix());
 			partTile.appendMedia();
@@ -172,15 +172,15 @@ class JDFTileTest extends JDFTestCaseBase
 		final JDFNode root = new JDFDoc("JDF").getJDFRoot();
 		root.setVersion(EnumVersion.Version_1_4);
 		root.setType(EnumType.Tiling);
-		JDFTool tile = (JDFTool) root.appendMatchingResource(ElementName.TOOL, EnumUsage.Input);
+		final JDFTool tile = (JDFTool) root.appendMatchingResource(ElementName.TOOL, EnumUsage.Input);
 		for (int i = 0; i < 16; i++)
 		{
-			JDFTool partTile = (JDFTool) tile.addPartition(EnumPartIDKey.TileID, new JDFXYPair(i % 4, i / 4).getString(0));
+			final JDFTool partTile = (JDFTool) tile.addPartition(EnumPartIDKey.TileID, new JDFXYPair(i % 4, i / 4).getString(0));
 			Assertions.assertNotNull(partTile);
 		}
-		String string = root.getOwnerDocument_JDFElement().write2String(2);
-		JDFParser jdfParser = getSchemaParser();
-		JDFDoc d = jdfParser.parseString(string);
+		final String string = root.getOwnerDocument_JDFElement().write2String(2);
+		final JDFParser jdfParser = getSchemaParser();
+		final JDFDoc d = jdfParser.parseString(string);
 		Assertions.assertEquals(d.getValidationResult().getRoot().getAttribute("ValidationResult"), "Valid");
 	}
 }

@@ -91,7 +91,7 @@ class AuditHelperTest
 	void testCleanup()
 	{
 		final JMFBuilder jmfBuilder = JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF);
-		String an = jmfBuilder.getAgentName();
+		final String an = jmfBuilder.getAgentName();
 		jmfBuilder.setAgentName("foo");
 		final KElement audit = KElement.createRoot(ElementName.CREATED, null);
 		final MessageHelper ah = new MessageHelper(audit);

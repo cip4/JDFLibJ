@@ -60,9 +60,8 @@ import org.cip4.jdflib.util.zip.ZipReader;
 
 /**
  * class to unpack multi-xjdf zip files and convert the package to a single jdf and jmf file
- * 
- * @author rainer prosi
  *
+ * @author rainer prosi
  */
 public class XJDFZipReader implements IStreamWriter
 {
@@ -225,7 +224,8 @@ public class XJDFZipReader implements IStreamWriter
 				final JDFCommand command = jmf == null ? null : jmf.getCommand(0);
 				if (command != null)
 				{
-					final VString validParams = new VString(new String[] { ElementName.QUEUESUBMISSIONPARAMS, ElementName.RESUBMISSIONPARAMS, ElementName.RETURNQUEUEENTRYPARAMS });
+					final VString validParams = new VString(
+							new String[] { ElementName.QUEUESUBMISSIONPARAMS, ElementName.RESUBMISSIONPARAMS, ElementName.RETURNQUEUEENTRYPARAMS });
 					final IURLSetter params = (IURLSetter) command.getChildFromList(validParams, 0, null, true);
 					final String url = params.getURL();
 					if (UrlUtil.isRelativeURL(url))
@@ -254,7 +254,6 @@ public class XJDFZipReader implements IStreamWriter
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public JDFNode getJDFRoot()
@@ -263,7 +262,6 @@ public class XJDFZipReader implements IStreamWriter
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public JDFJMF getJMFRoot()
@@ -272,19 +270,19 @@ public class XJDFZipReader implements IStreamWriter
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public XJDFToJDFConverter getConverter()
 	{
 		if (converter == null)
+		{
 			converter = new XJDFToJDFConverter(null);
+		}
 		converter.reset(null);
 		return converter;
 	}
 
 	/**
-	 *
 	 * @param converter
 	 */
 	public void setConverter(final XJDFToJDFConverter converter)

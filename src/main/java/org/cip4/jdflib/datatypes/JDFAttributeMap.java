@@ -56,8 +56,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.lang.enums.ValuedEnum;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
@@ -102,10 +100,10 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * @param key   the key of the single value map
 	 * @param value the value of the single value map
 	 */
-	public JDFAttributeMap(final String key, final ValuedEnum value)
+	public JDFAttributeMap(final String key, final Enum<?> value)
 	{
 		super();
-		put(key, value == null ? null : value.getName());
+		put(key, JavaEnumUtil.getName(value));
 	}
 
 	/**
@@ -128,9 +126,9 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * @param partIDKey the enumerated partIDKey
 	 * @param value     the partition key value
 	 */
-	public JDFAttributeMap(final ValuedEnum partIDKey, final String value)
+	public JDFAttributeMap(final Enum<?> partIDKey, final String value)
 	{
-		this(partIDKey.getName(), value);
+		this(JavaEnumUtil.getName(partIDKey), value);
 	}
 
 	// **************************************** Methods
@@ -145,7 +143,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	{
 		if (sep == null)
 		{
-			sep = JDFConstants.EMPTYSTRING;
+			sep = JDFCoreConstants.EMPTYSTRING;
 		}
 		final StringBuilder sb = new StringBuilder();
 		final StringArray vsKeys = getKeyList();
@@ -154,7 +152,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 		for (final String strKey : vsKeys)
 		{
 			final String strValue = this.get(strKey);
-			sb.append(k == 0 ? JDFConstants.EMPTYSTRING : sep).append('(').append(strKey).append(" = ").append(strValue).append(')');
+			sb.append(k == 0 ? JDFCoreConstants.EMPTYSTRING : sep).append('(').append(strKey).append(" = ").append(strValue).append(')');
 			k++;
 		}
 		return sb.toString();
@@ -225,10 +223,6 @@ public class JDFAttributeMap extends HashMap<String, String>
 		{
 			k1 = (String) key;
 		}
-		else if (key instanceof ValuedEnum)
-		{
-			k1 = ((ValuedEnum) key).getName();
-		}
 		else if (key instanceof Enum<?>)
 		{
 			k1 = JavaEnumUtil.getName((Enum<?>) key);
@@ -238,10 +232,6 @@ public class JDFAttributeMap extends HashMap<String, String>
 		if (value instanceof String)
 		{
 			v1 = StringUtil.getNonEmpty((String) value);
-		}
-		else if (value instanceof ValuedEnum)
-		{
-			v1 = ((ValuedEnum) value).getName();
 		}
 		else if (value instanceof Enum<?>)
 		{
@@ -594,10 +584,9 @@ public class JDFAttributeMap extends HashMap<String, String>
 	@Override
 	public String remove(Object key)
 	{
-
-		if (key instanceof ValuedEnum)
+		if (key instanceof Enum<?>)
 		{
-			key = ((ValuedEnum) key).getName();
+			key = JavaEnumUtil.getName((Enum<?>) key);
 		}
 
 		return super.remove(key);
@@ -627,11 +616,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	@Override
 	public String get(Object key)
 	{
-		if (key instanceof ValuedEnum)
-		{
-			key = ((ValuedEnum) key).getName();
-		}
-		else if (key instanceof Enum<?>)
+		if (key instanceof Enum<?>)
 		{
 			key = JavaEnumUtil.getName((Enum<?>) key);
 		}
@@ -729,16 +714,6 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * @param value
 	 * @return
 	 */
-	public String put(final ValuedEnum key, final String value)
-	{
-		return put(key == null ? null : key.getName(), value);
-	}
-
-	/**
-	 * @param key
-	 * @param value
-	 * @return
-	 */
 	public String put(final Enum<?> key, final String value)
 	{
 		return put(JavaEnumUtil.getName(key), value);
@@ -752,16 +727,6 @@ public class JDFAttributeMap extends HashMap<String, String>
 	public String put(final String key, final int value)
 	{
 		return put(key, StringUtil.formatInteger(value));
-	}
-
-	/**
-	 * @param key
-	 * @param value
-	 * @return
-	 */
-	public String put(final ValuedEnum key, final int value)
-	{
-		return put(key == null ? null : key.getName(), value);
 	}
 
 	/**
@@ -784,16 +749,6 @@ public class JDFAttributeMap extends HashMap<String, String>
 		return put(key, StringUtil.formatDouble(value));
 	}
 
-	/**
-	 * @param key
-	 * @param value
-	 * @return
-	 */
-	public String put(final ValuedEnum key, final double value)
-	{
-		return put(key == null ? null : key.getName(), StringUtil.formatDouble(value));
-	}
-
 	public String put(final Enum<?> key, final double value)
 	{
 		return put(JavaEnumUtil.getName(key), value);
@@ -806,17 +761,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 */
 	public String put(final String key, final boolean value)
 	{
-		return put(key, value ? JDFConstants.TRUE : JDFConstants.FALSE);
-	}
-
-	/**
-	 * @param key
-	 * @param value
-	 * @return
-	 */
-	public String put(final ValuedEnum key, final boolean value)
-	{
-		return put(key == null ? null : key.getName(), value);
+		return put(key, value ? JDFCoreConstants.TRUE : JDFCoreConstants.FALSE);
 	}
 
 	public String put(final Enum<?> key, final boolean value)
@@ -829,29 +774,9 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * @param value
 	 * @return
 	 */
-	public String put(final String key, final ValuedEnum value)
-	{
-		return put(key, value == null ? null : value.getName());
-	}
-
-	/**
-	 * @param key
-	 * @param value
-	 * @return
-	 */
 	public String put(final String key, final Enum<?> value)
 	{
-		return put(key, value == null ? null : value.name());
-	}
-
-	/**
-	 * @param key
-	 * @param value
-	 * @return
-	 */
-	public String put(final ValuedEnum key, final ValuedEnum value)
-	{
-		return put(key == null ? null : key.getName(), value);
+		return put(key, JavaEnumUtil.getName(value));
 	}
 
 	public String put(final Enum<?> key, final Enum<?> value)

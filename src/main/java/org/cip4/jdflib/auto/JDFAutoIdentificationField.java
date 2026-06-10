@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -105,13 +101,16 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.BOUNDINGBOX, 0x3333333333l, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ENCODING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumEncoding.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ENCODING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumEncoding.class, 0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.ENCODINGDETAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.FORMAT, 0x3333333333l, AttributeInfo.EnumAttributeType.Any, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.ORIENTATION, 0x3333333333l, AttributeInfo.EnumAttributeType.matrix, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.PAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.POSITION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumPosition.getEnum(0), null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.PURPOSE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumPurpose.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.POSITION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumPosition.class, 0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.PURPOSE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumPurpose.class, 0), null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.PURPOSEDETAILS, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.VALUE, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.VALUEFORMAT, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
@@ -144,7 +143,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIdentificationField(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoIdentificationField(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -156,7 +155,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIdentificationField(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoIdentificationField(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -169,7 +168,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoIdentificationField(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoIdentificationField(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -180,7 +179,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -195,267 +194,50 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for Encoding
+	 * Enumeration strings for numEncoding
 	 */
 
-	public enum EEncoding
+	public enum EnumEncoding
 	{
 		ASCII, Barcode, BarCode1D, BarCode2D, Braille, RFID;
 
-		public static EEncoding getEnum(String val)
+		public static EnumEncoding getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EEncoding.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumEncoding.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for Encoding
+	 * Enumeration strings for numPosition
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumEncoding extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumEncoding(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumEncoding getEnum(String enumName)
-		{
-			return (EnumEncoding) getEnum(EnumEncoding.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumEncoding getEnum(int enumValue)
-		{
-			return (EnumEncoding) getEnum(EnumEncoding.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumEncoding.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumEncoding.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumEncoding.class);
-		}
-
-		/**  */
-		public static final EnumEncoding ASCII = new EnumEncoding("ASCII");
-		/**  */
-		public static final EnumEncoding Barcode = new EnumEncoding("Barcode");
-		/**  */
-		public static final EnumEncoding BarCode1D = new EnumEncoding("BarCode1D");
-		/**  */
-		public static final EnumEncoding BarCode2D = new EnumEncoding("BarCode2D");
-		/**  */
-		public static final EnumEncoding Braille = new EnumEncoding("Braille");
-		/**  */
-		public static final EnumEncoding RFID = new EnumEncoding("RFID");
-	}
-
-	/**
-	 * Enumeration strings for Position
-	 */
-
-	public enum EPosition
+	public enum EnumPosition
 	{
 		Header, Trailer, Page, Top, Bottom, Left, Right, Front, Back, Any;
 
-		public static EPosition getEnum(String val)
+		public static EnumPosition getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPosition.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPosition.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for Position
+	 * Enumeration strings for numPurpose
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumPosition extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPosition(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumPosition getEnum(String enumName)
-		{
-			return (EnumPosition) getEnum(EnumPosition.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPosition getEnum(int enumValue)
-		{
-			return (EnumPosition) getEnum(EnumPosition.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPosition.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPosition.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPosition.class);
-		}
-
-		/**  */
-		public static final EnumPosition Header = new EnumPosition("Header");
-		/**  */
-		public static final EnumPosition Trailer = new EnumPosition("Trailer");
-		/**  */
-		public static final EnumPosition Page = new EnumPosition("Page");
-		/**  */
-		public static final EnumPosition Top = new EnumPosition("Top");
-		/**  */
-		public static final EnumPosition Bottom = new EnumPosition("Bottom");
-		/**  */
-		public static final EnumPosition Left = new EnumPosition("Left");
-		/**  */
-		public static final EnumPosition Right = new EnumPosition("Right");
-		/**  */
-		public static final EnumPosition Front = new EnumPosition("Front");
-		/**  */
-		public static final EnumPosition Back = new EnumPosition("Back");
-		/**  */
-		public static final EnumPosition Any = new EnumPosition("Any");
-	}
-
-	/**
-	 * Enumeration strings for Purpose
-	 */
-
-	public enum EPurpose
+	public enum EnumPurpose
 	{
 		Verification, Separation, Label;
 
-		public static EPurpose getEnum(String val)
+		public static EnumPurpose getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPurpose.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPurpose.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Purpose
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumPurpose extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPurpose(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumPurpose getEnum(String enumName)
-		{
-			return (EnumPurpose) getEnum(EnumPurpose.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPurpose getEnum(int enumValue)
-		{
-			return (EnumPurpose) getEnum(EnumPurpose.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPurpose.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPurpose.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPurpose.class);
-		}
-
-		/**  */
-		public static final EnumPurpose Verification = new EnumPurpose("Verification");
-		/**  */
-		public static final EnumPurpose Separation = new EnumPurpose("Separation");
-		/**  */
-		public static final EnumPurpose Label = new EnumPurpose("Label");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -467,7 +249,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBoundingBox(JDFRectangle value)
+	public void setBoundingBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.BOUNDINGBOX, value, null);
 	}
@@ -480,8 +262,8 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 */
 	public JDFRectangle getBoundingBox()
 	{
-		String strAttrName = getAttribute(AttributeName.BOUNDINGBOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.BOUNDINGBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -495,9 +277,9 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setEncoding(EEncoding enumVar)
+	public void setEncoding(final EnumEncoding enumVar)
 	{
-		setAttribute(AttributeName.ENCODING, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ENCODING, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -505,35 +287,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EEncoding getEEncoding()
-	{
-		return EEncoding.getEnum(getAttribute(AttributeName.ENCODING, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Encoding
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Encoding
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetEncoding(EEncoding) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setEncoding(EnumEncoding enumVar)
-	{
-		setAttribute(AttributeName.ENCODING, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Encoding
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EEncoding GetEEncoding() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumEncoding getEncoding()
 	{
 		return EnumEncoding.getEnum(getAttribute(AttributeName.ENCODING, null, null));
@@ -549,7 +302,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setEncodingDetails(String value)
+	public void setEncodingDetails(final String value)
 	{
 		setAttribute(AttributeName.ENCODINGDETAILS, value, null);
 	}
@@ -574,7 +327,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFormat(String value)
+	public void setFormat(final String value)
 	{
 		setAttribute(AttributeName.FORMAT, value, null);
 	}
@@ -599,7 +352,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOrientation(JDFMatrix value)
+	public void setOrientation(final JDFMatrix value)
 	{
 		setAttribute(AttributeName.ORIENTATION, value, null);
 	}
@@ -612,8 +365,8 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 */
 	public JDFMatrix getOrientation()
 	{
-		String strAttrName = getAttribute(AttributeName.ORIENTATION, null, null);
-		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.ORIENTATION, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -627,7 +380,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPage(int value)
+	public void setPage(final int value)
 	{
 		setAttribute(AttributeName.PAGE, value, null);
 	}
@@ -652,9 +405,9 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPosition(EPosition enumVar)
+	public void setPosition(final EnumPosition enumVar)
 	{
-		setAttribute(AttributeName.POSITION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.POSITION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -662,35 +415,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPosition getEPosition()
-	{
-		return EPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Position
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Position
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPosition(EPosition) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPosition(EnumPosition enumVar)
-	{
-		setAttribute(AttributeName.POSITION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Position
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EPosition GetEPosition() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumPosition getPosition()
 	{
 		return EnumPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));
@@ -706,9 +430,9 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPurpose(EPurpose enumVar)
+	public void setPurpose(final EnumPurpose enumVar)
 	{
-		setAttribute(AttributeName.PURPOSE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.PURPOSE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -716,35 +440,6 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPurpose getEPurpose()
-	{
-		return EPurpose.getEnum(getAttribute(AttributeName.PURPOSE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Purpose
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Purpose
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPurpose(EPurpose) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPurpose(EnumPurpose enumVar)
-	{
-		setAttribute(AttributeName.PURPOSE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Purpose
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EPurpose GetEPurpose() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumPurpose getPurpose()
 	{
 		return EnumPurpose.getEnum(getAttribute(AttributeName.PURPOSE, null, null));
@@ -760,7 +455,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPurposeDetails(String value)
+	public void setPurposeDetails(final String value)
 	{
 		setAttribute(AttributeName.PURPOSEDETAILS, value, null);
 	}
@@ -785,7 +480,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setValue(String value)
+	public void setValue(final String value)
 	{
 		setAttribute(AttributeName.VALUE, value, null);
 	}
@@ -810,7 +505,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setValueFormat(String value)
+	public void setValueFormat(final String value)
 	{
 		setAttribute(AttributeName.VALUEFORMAT, value, null);
 	}
@@ -835,7 +530,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setValueTemplate(String value)
+	public void setValueTemplate(final String value)
 	{
 		setAttribute(AttributeName.VALUETEMPLATE, value, null);
 	}
@@ -944,7 +639,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFMetadataMap the element
 	 */
-	public JDFMetadataMap getCreateMetadataMap(int iSkip)
+	public JDFMetadataMap getCreateMetadataMap(final int iSkip)
 	{
 		return (JDFMetadataMap) getCreateElement_JDFElement(ElementName.METADATAMAP, null, iSkip);
 	}
@@ -956,7 +651,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 * @return JDFMetadataMap the element
 	 *         default is getMetadataMap(0)
 	 */
-	public JDFMetadataMap getMetadataMap(int iSkip)
+	public JDFMetadataMap getMetadataMap(final int iSkip)
 	{
 		return (JDFMetadataMap) getElement(ElementName.METADATAMAP, null, iSkip);
 	}

@@ -92,36 +92,36 @@ public class JDFFlushedResources extends JDFAutoFlushedResources
 
 	/**
 	 * Constructor for JDFFlushedResources
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFFlushedResources(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFFlushedResources(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFFlushedResources
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFFlushedResources(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFFlushedResources(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFFlushedResources
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFFlushedResources(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFFlushedResources(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -130,7 +130,7 @@ public class JDFFlushedResources extends JDFAutoFlushedResources
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoFlushedResources#toString()
 	 * @return String
 	 */

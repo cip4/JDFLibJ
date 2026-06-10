@@ -73,9 +73,6 @@ package org.cip4.jdflib.auto;
 import java.util.Collection;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoDefect.EFace;
-import org.cip4.jdflib.auto.JDFAutoDefect.EnumFace;
-import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumPosition;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -87,6 +84,7 @@ import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoLabelingParams : public JDFResource
@@ -103,7 +101,8 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.APPLICATION, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.CTM, 0x4444333331l, AttributeInfo.EnumAttributeType.matrix, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.OFFSET, 0x3333111111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.POSITION, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumPosition.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.POSITION, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumPosition.class, 0), null);
 	}
 
 	@Override
@@ -130,7 +129,7 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLabelingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoLabelingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -142,7 +141,7 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLabelingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoLabelingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -155,7 +154,7 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoLabelingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoLabelingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -166,7 +165,7 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -180,11 +179,23 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * Enumeration strings for numPosition
 	 */
+
+	public enum EnumPosition
+	{
+		Top, Bottom, Left, Right, Front, Back;
+
+		public static EnumPosition getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPosition.class, val, null);
+		}
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
+		 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -196,7 +207,7 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setApplication(String value)
+	public void setApplication(final String value)
 	{
 		setAttribute(AttributeName.APPLICATION, value, null);
 	}
@@ -221,7 +232,7 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCTM(JDFMatrix value)
+	public void setCTM(final JDFMatrix value)
 	{
 		setAttribute(AttributeName.CTM, value, null);
 	}
@@ -234,8 +245,8 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	 */
 	public JDFMatrix getCTM()
 	{
-		String strAttrName = getAttribute(AttributeName.CTM, null, null);
-		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CTM, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -249,7 +260,7 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOffset(JDFXYPair value)
+	public void setOffset(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.OFFSET, value, null);
 	}
@@ -262,8 +273,8 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	 */
 	public JDFXYPair getOffset()
 	{
-		String strAttrName = getAttribute(AttributeName.OFFSET, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.OFFSET, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -277,9 +288,9 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPosition(EFace enumVar)
+	public void setPosition(final EnumPosition enumVar)
 	{
-		setAttribute(AttributeName.POSITION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.POSITION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -287,38 +298,9 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EFace getEPosition()
+	public EnumPosition getPosition()
 	{
-		return EFace.getEnum(getAttribute(AttributeName.POSITION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Position
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Position
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPosition(EFace) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPosition(EnumFace enumVar)
-	{
-		setAttribute(AttributeName.POSITION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Position
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EFace GetEPosition() based on java.lang.enum instead
-	 */
-	@Deprecated
-	public EnumFace getPosition()
-	{
-		return EnumFace.getEnum(getAttribute(AttributeName.POSITION, null, null));
+		return EnumPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));
 	}
 
 	/*
@@ -353,7 +335,7 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
-	public JDFFileSpec getCreateFileSpec(int iSkip)
+	public JDFFileSpec getCreateFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -365,7 +347,7 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	 * @return JDFFileSpec the element
 	 *         default is getFileSpec(0)
 	 */
-	public JDFFileSpec getFileSpec(int iSkip)
+	public JDFFileSpec getFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
 	}

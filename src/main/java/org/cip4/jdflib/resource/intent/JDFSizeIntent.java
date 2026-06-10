@@ -1,11 +1,11 @@
 /**
- * ========================================================================== 
+ * ==========================================================================
  * class JDFSizeIntent extends JDFResource
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author: sabjon@topmail.de   using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * @Author: sabjon@topmail.de   using a code generator
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  * Revision history:   ...
  */
 
@@ -18,7 +18,6 @@ import org.w3c.dom.DOMException;
 /**
  * @deprecated - use LayoutIntent instead
  * @author prosirai
- * 
  */
 @Deprecated
 public class JDFSizeIntent extends JDFAutoSizeIntent
@@ -27,47 +26,51 @@ public class JDFSizeIntent extends JDFAutoSizeIntent
 
 	/**
 	 * Constructor for JDFSizeIntent
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSizeIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	@Deprecated
+	public JDFSizeIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSizeIntent
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSizeIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	@Deprecated
+	public JDFSizeIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSizeIntent
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSizeIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	@Deprecated
+	public JDFSizeIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Deprecated
 	@Override
 	public String toString()
 	{
 		return "JDFSizeIntent[  --> " + super.toString() + " ]";
 	}
 } // class JDFIDPLayout
-// ==========================================================================
+	// ==========================================================================

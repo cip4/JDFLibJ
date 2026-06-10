@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -109,7 +105,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.TOPCOLORDETAILS, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.TOPLENGTH, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.STRIPMATERIAL, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumStripMaterial.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumStripMaterial.class, 0), null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.WIDTH, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
@@ -137,7 +133,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoHeadBandApplicationParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoHeadBandApplicationParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -149,7 +145,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoHeadBandApplicationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoHeadBandApplicationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -162,7 +158,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoHeadBandApplicationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoHeadBandApplicationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -173,7 +169,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -188,97 +184,22 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for StripMaterial
+	 * Enumeration strings for numStripMaterial
 	 */
 
-	public enum EStripMaterial
+	public enum EnumStripMaterial
 	{
 		Calico, Cardboard, CrepePaper, Gauze, Paper, PaperlinedMules, Tape;
 
-		public static EStripMaterial getEnum(String val)
+		public static EnumStripMaterial getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EStripMaterial.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumStripMaterial.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for StripMaterial
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumStripMaterial extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumStripMaterial(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumStripMaterial getEnum(String enumName)
-		{
-			return (EnumStripMaterial) getEnum(EnumStripMaterial.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumStripMaterial getEnum(int enumValue)
-		{
-			return (EnumStripMaterial) getEnum(EnumStripMaterial.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumStripMaterial.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumStripMaterial.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumStripMaterial.class);
-		}
-
-		/**  */
-		public static final EnumStripMaterial Calico = new EnumStripMaterial("Calico");
-		/**  */
-		public static final EnumStripMaterial Cardboard = new EnumStripMaterial("Cardboard");
-		/**  */
-		public static final EnumStripMaterial CrepePaper = new EnumStripMaterial("CrepePaper");
-		/**  */
-		public static final EnumStripMaterial Gauze = new EnumStripMaterial("Gauze");
-		/**  */
-		public static final EnumStripMaterial Paper = new EnumStripMaterial("Paper");
-		/**  */
-		public static final EnumStripMaterial PaperlinedMules = new EnumStripMaterial("PaperlinedMules");
-		/**  */
-		public static final EnumStripMaterial Tape = new EnumStripMaterial("Tape");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -290,7 +211,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBottomBrand(String value)
+	public void setBottomBrand(final String value)
 	{
 		setAttribute(AttributeName.BOTTOMBRAND, value, null);
 	}
@@ -315,7 +236,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBottomColor(EnumNamedColor value)
+	public void setBottomColor(final EnumNamedColor value)
 	{
 		setAttribute(AttributeName.BOTTOMCOLOR, value == null ? null : value.getName(), null);
 	}
@@ -344,7 +265,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBottomColorDetails(String value)
+	public void setBottomColorDetails(final String value)
 	{
 		setAttribute(AttributeName.BOTTOMCOLORDETAILS, value, null);
 	}
@@ -369,7 +290,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBottomLength(double value)
+	public void setBottomLength(final double value)
 	{
 		setAttribute(AttributeName.BOTTOMLENGTH, value, null);
 	}
@@ -394,7 +315,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTopBrand(String value)
+	public void setTopBrand(final String value)
 	{
 		setAttribute(AttributeName.TOPBRAND, value, null);
 	}
@@ -419,7 +340,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTopColor(EnumNamedColor value)
+	public void setTopColor(final EnumNamedColor value)
 	{
 		setAttribute(AttributeName.TOPCOLOR, value == null ? null : value.getName(), null);
 	}
@@ -448,7 +369,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTopColorDetails(String value)
+	public void setTopColorDetails(final String value)
 	{
 		setAttribute(AttributeName.TOPCOLORDETAILS, value, null);
 	}
@@ -473,7 +394,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTopLength(double value)
+	public void setTopLength(final double value)
 	{
 		setAttribute(AttributeName.TOPLENGTH, value, null);
 	}
@@ -498,9 +419,9 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setStripMaterial(EStripMaterial enumVar)
+	public void setStripMaterial(final EnumStripMaterial enumVar)
 	{
-		setAttribute(AttributeName.STRIPMATERIAL, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.STRIPMATERIAL, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -508,35 +429,6 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EStripMaterial getEStripMaterial()
-	{
-		return EStripMaterial.getEnum(getAttribute(AttributeName.STRIPMATERIAL, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute StripMaterial
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute StripMaterial
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetStripMaterial(EStripMaterial) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setStripMaterial(EnumStripMaterial enumVar)
-	{
-		setAttribute(AttributeName.STRIPMATERIAL, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute StripMaterial
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EStripMaterial GetEStripMaterial() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumStripMaterial getStripMaterial()
 	{
 		return EnumStripMaterial.getEnum(getAttribute(AttributeName.STRIPMATERIAL, null, null));
@@ -552,7 +444,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWidth(double value)
+	public void setWidth(final double value)
 	{
 		setAttribute(AttributeName.WIDTH, value, null);
 	}
@@ -599,7 +491,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueLine the element
 	 */
-	public JDFGlueLine getCreateGlueLine(int iSkip)
+	public JDFGlueLine getCreateGlueLine(final int iSkip)
 	{
 		return (JDFGlueLine) getCreateElement_JDFElement(ElementName.GLUELINE, null, iSkip);
 	}
@@ -611,7 +503,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	 * @return JDFGlueLine the element
 	 *         default is getGlueLine(0)
 	 */
-	public JDFGlueLine getGlueLine(int iSkip)
+	public JDFGlueLine getGlueLine(final int iSkip)
 	{
 		return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
 	}

@@ -80,8 +80,8 @@ package org.cip4.jdflib.jmf;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoKnownMsgQuParams;
-import org.cip4.jdflib.auto.JDFAutoSignal.EChannelMode;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 //----------------------------------
 /**
@@ -132,9 +132,9 @@ public class JDFKnownMsgQuParams extends JDFAutoKnownMsgQuParams
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setChannelMode(EChannelMode enumVar)
+	public void setChannelMode(final EnumChannelMode enumVar)
 	{
-		setAttribute(AttributeName.CHANNELMODE, enumVar, null);
+		setAttribute(AttributeName.CHANNELMODE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 }

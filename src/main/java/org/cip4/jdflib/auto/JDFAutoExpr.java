@@ -106,7 +106,7 @@ public abstract class JDFAutoExpr extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoExpr(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoExpr(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoExpr extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoExpr(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoExpr(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoExpr extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoExpr(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoExpr(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -152,7 +152,7 @@ public abstract class JDFAutoExpr extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setName(String value)
+	public void setName(final String value)
 	{
 		setAttribute(AttributeName.NAME, value, null);
 	}
@@ -177,7 +177,7 @@ public abstract class JDFAutoExpr extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPath(String value)
+	public void setPath(final String value)
 	{
 		setAttribute(AttributeName.PATH, value, null);
 	}
@@ -202,7 +202,7 @@ public abstract class JDFAutoExpr extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setValue(String value)
+	public void setValue(final String value)
 	{
 		setAttribute(AttributeName.VALUE, value, null);
 	}

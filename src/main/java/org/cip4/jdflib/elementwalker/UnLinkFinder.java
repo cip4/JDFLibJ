@@ -91,7 +91,6 @@ import org.cip4.jdflib.util.ListMap;
 
 /**
  * @author Dr. Rainer Prosi
- *
  *         finds unlinked resources - example usage of the walker classes
  */
 public class UnLinkFinder extends BaseElementWalker
@@ -145,7 +144,9 @@ public class UnLinkFinder extends BaseElementWalker
 		walkTree(n, null);
 		final List<KElement> toValueVector = linkData.refMap.getAllValues();
 		if (toValueVector == null)
+		{
 			return null;
+		}
 		final VElement ret = new VElement();
 		ret.addAll(toValueVector);
 		return ret;
@@ -165,7 +166,9 @@ public class UnLinkFinder extends BaseElementWalker
 		final List<KElement> toValueVectorRef = linkData.refMap.getAllValues();
 		toValueVector = (List<KElement>) ContainerUtil.addAll(toValueVector, toValueVectorRef);
 		if (toValueVector == null)
+		{
 			return null;
+		}
 		final VElement ret = new VElement();
 		ret.addAll(toValueVector);
 		return ret;
@@ -204,7 +207,7 @@ public class UnLinkFinder extends BaseElementWalker
 	/**
 	 * erase all unlinked resources that are in n
 	 *
-	 * @param n the node to clean
+	 * @param n   the node to clean
 	 * @param ref
 	 * @param res
 	 */
@@ -239,16 +242,15 @@ public class UnLinkFinder extends BaseElementWalker
 	 * collection of maps
 	 *
 	 * @author prosirai
-	 *
 	 */
 	protected class LinkData
 	{
 		public LinkData()
 		{
 			super();
-			resMap = new HashMap<String, KElement>();
-			refMap = new ListMap<String, KElement>();
-			doneSet = new HashSet<String>();
+			resMap = new HashMap<>();
+			refMap = new ListMap<>();
+			doneSet = new HashSet<>();
 		}
 
 		HashMap<String, KElement> resMap;
@@ -267,7 +269,6 @@ public class UnLinkFinder extends BaseElementWalker
 	 * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super classes
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkRes extends BaseWalker
 	{
@@ -314,7 +315,9 @@ public class UnLinkFinder extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			if (ignoreForeign && !JDFElement.isInJDFNameSpaceStatic(toCheck))
+			{
 				return false;
+			}
 			return (toCheck.getParentNode() instanceof JDFResourcePool) && (toCheck instanceof JDFElement) && !(toCheck instanceof JDFComment)
 					&& !(toCheck instanceof JDFGeneralID);
 		}
@@ -324,7 +327,6 @@ public class UnLinkFinder extends BaseElementWalker
 	 * the link and ref walker
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkRef extends BaseWalker
 	{
@@ -346,11 +348,7 @@ public class UnLinkFinder extends BaseElementWalker
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
 			final String id = e.getAttribute(AttributeName.RREF, null, null);
-			if (id == null)
-			{
-				return e;
-			}
-			if (linkData.doneSet.contains(id))
+			if ((id == null) || linkData.doneSet.contains(id))
 			{
 				return e;
 			}
@@ -374,7 +372,9 @@ public class UnLinkFinder extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			if (ignoreForeign && !JDFElement.isInJDFNameSpaceStatic(toCheck))
+			{
 				return false;
+			}
 
 			return JDFResourceLink.isResourceLink(toCheck) || (toCheck instanceof JDFRefElement);
 		}

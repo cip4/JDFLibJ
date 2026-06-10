@@ -59,7 +59,7 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -270,7 +270,7 @@ public class JDFRunList extends JDFAutoRunList
 	{
 		final JDFRunList r = addRun(fileName, first, last);
 		final JDFFileSpec fs = r.getLayoutElement().getFileSpec();
-		fs.setMimeType(JDFConstants.MIME_PDF);
+		fs.setMimeType(JDFCoreConstants.MIME_PDF);
 		return r;
 	}
 
@@ -510,18 +510,18 @@ public class JDFRunList extends JDFAutoRunList
 
 			if (fileSpec.size() == sepNames.size())
 			{
-				rs.setAttribute("FirstPage", first, JDFConstants.EMPTYSTRING);
+				rs.setAttribute("FirstPage", first, JDFCoreConstants.EMPTYSTRING);
 			}
 			else
 			{
 				if (pageMajor)
 				{
-					rs.setAttribute("SkipPage", sepNames.size() - 1, JDFConstants.EMPTYSTRING);
-					rs.setAttribute("FirstPage", i + first, JDFConstants.EMPTYSTRING);
+					rs.setAttribute("SkipPage", sepNames.size() - 1, JDFCoreConstants.EMPTYSTRING);
+					rs.setAttribute("FirstPage", i + first, JDFCoreConstants.EMPTYSTRING);
 				}
 				else
 				{
-					rs.setAttribute("FirstPage", i * n + first, JDFConstants.EMPTYSTRING);
+					rs.setAttribute("FirstPage", i * n + first, JDFCoreConstants.EMPTYSTRING);
 				}
 			}
 		}
@@ -542,7 +542,7 @@ public class JDFRunList extends JDFAutoRunList
 	{
 		final VElement v = new VElement();
 		v.add(fileSpec);
-		return addSepRun(v, StringUtil.tokenize(sepNames, JDFConstants.COMMA, false), 0, 1, true);
+		return addSepRun(v, StringUtil.tokenize(sepNames, JDFCoreConstants.COMMA, false), 0, 1, true);
 	}
 
 	/**
@@ -559,7 +559,7 @@ public class JDFRunList extends JDFAutoRunList
 	{
 		final VElement v = new VElement();
 		v.add(fileSpec);
-		return addSepRun(v, StringUtil.tokenize(sepNames, JDFConstants.COMMA, false), first, 1, true);
+		return addSepRun(v, StringUtil.tokenize(sepNames, JDFCoreConstants.COMMA, false), first, 1, true);
 	}
 
 	/**
@@ -577,7 +577,7 @@ public class JDFRunList extends JDFAutoRunList
 	{
 		final VElement v = new VElement();
 		v.add(fileSpec);
-		return addSepRun(v, StringUtil.tokenize(sepNames, JDFConstants.COMMA, false), first, n, true);
+		return addSepRun(v, StringUtil.tokenize(sepNames, JDFCoreConstants.COMMA, false), first, n, true);
 	}
 
 	/**
@@ -595,7 +595,7 @@ public class JDFRunList extends JDFAutoRunList
 	{
 		final VElement v = new VElement();
 		v.add(fileSpec);
-		return addSepRun(v, StringUtil.tokenize(sepNames, JDFConstants.COMMA, false), first, 1, pageMajor);
+		return addSepRun(v, StringUtil.tokenize(sepNames, JDFCoreConstants.COMMA, false), first, 1, pageMajor);
 	}
 
 	/**
@@ -612,7 +612,7 @@ public class JDFRunList extends JDFAutoRunList
 	{
 		final VElement v = new VElement();
 		v.add(fileSpec);
-		return addSepRun(v, StringUtil.tokenize(sepNames, JDFConstants.COMMA, false), 0, 1, pageMajor);
+		return addSepRun(v, StringUtil.tokenize(sepNames, JDFCoreConstants.COMMA, false), 0, 1, pageMajor);
 	}
 
 	/**
@@ -737,7 +737,7 @@ public class JDFRunList extends JDFAutoRunList
 	@Deprecated
 	public JDFRunList addSepRun(final String fileNames, final String sepNames)
 	{
-		return addSepRun(fileNames, sepNames, 0, 1, true, JDFConstants.COMMA);
+		return addSepRun(fileNames, sepNames, 0, 1, true, JDFCoreConstants.COMMA);
 	}
 
 	/**
@@ -752,7 +752,7 @@ public class JDFRunList extends JDFAutoRunList
 	@Deprecated
 	public JDFRunList addSepRun(final String fileNames, final String sepNames, final int first)
 	{
-		return addSepRun(fileNames, sepNames, first, 1, true, JDFConstants.COMMA);
+		return addSepRun(fileNames, sepNames, first, 1, true, JDFCoreConstants.COMMA);
 	}
 
 	/**
@@ -768,7 +768,7 @@ public class JDFRunList extends JDFAutoRunList
 	@Deprecated
 	public JDFRunList addSepRun(final String fileNames, final String sepNames, final int first, final int n)
 	{
-		return addSepRun(fileNames, sepNames, first, n, true, JDFConstants.COMMA);
+		return addSepRun(fileNames, sepNames, first, n, true, JDFCoreConstants.COMMA);
 	}
 
 	/**
@@ -784,7 +784,7 @@ public class JDFRunList extends JDFAutoRunList
 	@Deprecated
 	public JDFRunList addSepRun(final String fileNames, final String sepNames, final int first, final boolean pageMajor)
 	{
-		return addSepRun(fileNames, sepNames, first, 1, pageMajor, JDFConstants.COMMA);
+		return addSepRun(fileNames, sepNames, first, 1, pageMajor, JDFCoreConstants.COMMA);
 	}
 
 	/**
@@ -799,7 +799,7 @@ public class JDFRunList extends JDFAutoRunList
 	@Deprecated
 	public JDFRunList addSepRun(final String fileNames, final String sepNames, final boolean pageMajor)
 	{
-		return addSepRun(fileNames, sepNames, 0, 1, pageMajor, JDFConstants.COMMA);
+		return addSepRun(fileNames, sepNames, 0, 1, pageMajor, JDFCoreConstants.COMMA);
 	}
 
 	/**
@@ -999,7 +999,7 @@ public class JDFRunList extends JDFAutoRunList
 	 *
 	 * @param value
 	 */
-	public void setPages(JDFXYPair value)
+	public void setPages(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.PAGES, JDFNumList.getString(value, 0));
 	}

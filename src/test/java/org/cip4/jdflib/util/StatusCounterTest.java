@@ -524,7 +524,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 			assertTrue(bChanged);
 
 			sc.setActiveNode(null, null, null);
-			bChanged = sc.setPhase(null, null, EnumDeviceStatus.Idle, EnumDeviceStatus.Idle.getName());
+			bChanged = sc.setPhase(null, null, EnumDeviceStatus.Idle, EnumDeviceStatus.Idle.name());
 			assertFalse(bChanged);
 			bChanged = sc.setPhase(null, null, EnumDeviceStatus.Idle, "very idle");
 			assertTrue(bChanged);

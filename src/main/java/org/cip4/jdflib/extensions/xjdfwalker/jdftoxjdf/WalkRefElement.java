@@ -118,7 +118,6 @@ public class WalkRefElement extends WalkJDFElement
 	}
 
 	/**
-	 *
 	 * @param refElem
 	 * @param xjdf
 	 */
@@ -130,7 +129,6 @@ public class WalkRefElement extends WalkJDFElement
 	}
 
 	/**
-	 *
 	 * @param refElem
 	 * @return
 	 */
@@ -191,7 +189,6 @@ public class WalkRefElement extends WalkJDFElement
 	}
 
 	/**
-	 *
 	 * @param re
 	 * @param xjdf
 	 */

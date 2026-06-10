@@ -130,7 +130,7 @@ public abstract class JDFAutoNameState extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNameState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoNameState(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -142,7 +142,7 @@ public abstract class JDFAutoNameState extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNameState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoNameState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -155,7 +155,7 @@ public abstract class JDFAutoNameState extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoNameState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoNameState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -166,7 +166,7 @@ public abstract class JDFAutoNameState extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -187,7 +187,7 @@ public abstract class JDFAutoNameState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDefaultValue(String value)
+	public void setDefaultValue(final String value)
 	{
 		setAttribute(AttributeName.DEFAULTVALUE, value, null);
 	}
@@ -212,7 +212,7 @@ public abstract class JDFAutoNameState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCurrentValue(String value)
+	public void setCurrentValue(final String value)
 	{
 		setAttribute(AttributeName.CURRENTVALUE, value, null);
 	}
@@ -237,7 +237,7 @@ public abstract class JDFAutoNameState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowedRegExp(String value)
+	public void setAllowedRegExp(final String value)
 	{
 		setAttribute(AttributeName.ALLOWEDREGEXP, value, null);
 	}
@@ -262,7 +262,7 @@ public abstract class JDFAutoNameState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowedValueList(VString value)
+	public void setAllowedValueList(final VString value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUELIST, value, null);
 	}
@@ -274,8 +274,8 @@ public abstract class JDFAutoNameState extends JDFResource
 	 */
 	public VString getAllowedValueList()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.ALLOWEDVALUELIST, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ALLOWEDVALUELIST, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -290,7 +290,7 @@ public abstract class JDFAutoNameState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentRegExp(String value)
+	public void setPresentRegExp(final String value)
 	{
 		setAttribute(AttributeName.PRESENTREGEXP, value, null);
 	}
@@ -315,7 +315,7 @@ public abstract class JDFAutoNameState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentValueList(VString value)
+	public void setPresentValueList(final VString value)
 	{
 		setAttribute(AttributeName.PRESENTVALUELIST, value, null);
 	}
@@ -327,8 +327,8 @@ public abstract class JDFAutoNameState extends JDFResource
 	 */
 	public VString getPresentValueList()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.PRESENTVALUELIST, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.PRESENTVALUELIST, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -365,7 +365,7 @@ public abstract class JDFAutoNameState extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc the element
 	 */
-	public JDFLoc getCreateLoc(int iSkip)
+	public JDFLoc getCreateLoc(final int iSkip)
 	{
 		return (JDFLoc) getCreateElement_JDFElement(ElementName.LOC, null, iSkip);
 	}
@@ -377,7 +377,7 @@ public abstract class JDFAutoNameState extends JDFResource
 	 * @return JDFLoc the element
 	 *         default is getLoc(0)
 	 */
-	public JDFLoc getLoc(int iSkip)
+	public JDFLoc getLoc(final int iSkip)
 	{
 		return (JDFLoc) getElement(ElementName.LOC, null, iSkip);
 	}
@@ -428,7 +428,7 @@ public abstract class JDFAutoNameState extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFValueLoc the element
 	 */
-	public JDFValueLoc getCreateValueLoc(int iSkip)
+	public JDFValueLoc getCreateValueLoc(final int iSkip)
 	{
 		return (JDFValueLoc) getCreateElement_JDFElement(ElementName.VALUELOC, null, iSkip);
 	}
@@ -440,7 +440,7 @@ public abstract class JDFAutoNameState extends JDFResource
 	 * @return JDFValueLoc the element
 	 *         default is getValueLoc(0)
 	 */
-	public JDFValueLoc getValueLoc(int iSkip)
+	public JDFValueLoc getValueLoc(final int iSkip)
 	{
 		return (JDFValueLoc) getElement(ElementName.VALUELOC, null, iSkip);
 	}

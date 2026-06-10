@@ -109,7 +109,7 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoReturnQueueEntryParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoReturnQueueEntryParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -121,7 +121,7 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoReturnQueueEntryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoReturnQueueEntryParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -134,7 +134,7 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoReturnQueueEntryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoReturnQueueEntryParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -155,7 +155,7 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAborted(VString value)
+	public void setAborted(final VString value)
 	{
 		setAttribute(AttributeName.ABORTED, value, null);
 	}
@@ -167,8 +167,8 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
 	 */
 	public VString getAborted()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.ABORTED, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ABORTED, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -183,7 +183,7 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCompleted(VString value)
+	public void setCompleted(final VString value)
 	{
 		setAttribute(AttributeName.COMPLETED, value, null);
 	}
@@ -195,8 +195,8 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
 	 */
 	public VString getCompleted()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.COMPLETED, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.COMPLETED, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -211,7 +211,7 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPriority(int value)
+	public void setPriority(final int value)
 	{
 		setAttribute(AttributeName.PRIORITY, value, null);
 	}
@@ -236,7 +236,7 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setQueueEntryID(String value)
+	public void setQueueEntryID(final String value)
 	{
 		setAttribute(AttributeName.QUEUEENTRYID, value, null);
 	}
@@ -261,7 +261,7 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setURL(String value)
+	public void setURL(final String value)
 	{
 		setAttribute(AttributeName.URL, value, null);
 	}

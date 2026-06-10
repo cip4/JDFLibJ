@@ -126,7 +126,6 @@ public class VElement extends Vector<KElement>
 	 * index - get the index of s in the vector using isEquals or ID rather than equals
 	 *
 	 * @param s KElement to search for
-	 *
 	 * @return int - the index of s in the vector
 	 */
 	public int index(final KElement s)
@@ -317,10 +316,9 @@ public class VElement extends Vector<KElement>
 	/**
 	 * set the values of attribute key to the values defined in vValue
 	 *
-	 * @param key key the attribute name
-	 * @param vValue vValue the vector of values
+	 * @param key          key the attribute name
+	 * @param vValue       vValue the vector of values
 	 * @param nameSpaceURI nameSpace of the attribute to set
-	 *
 	 * @default setAttributes(key, vValue, null)
 	 * @throws IllegalArgumentException if size mismatch of vValue anf this
 	 */
@@ -340,7 +338,6 @@ public class VElement extends Vector<KElement>
 
 	/**
 	 * sorts the vector in canonical order using SimpleNodeComparator
-	 *
 	 */
 	public void sort()
 	{
@@ -350,10 +347,9 @@ public class VElement extends Vector<KElement>
 	/**
 	 * SetAttribute in all elements of this
 	 *
-	 * @param key key the attribute name
-	 * @param value the value
+	 * @param key          key the attribute name
+	 * @param value        the value
 	 * @param nameSpaceURI nameSpace of the attribute to set
-	 *
 	 * @default SetAttributes(key, value, null)
 	 */
 	public void setAttribute(final String key, final String value, final String nameSpaceURI)
@@ -369,9 +365,8 @@ public class VElement extends Vector<KElement>
 	/**
 	 * Remove Attribute in all elements of this
 	 *
-	 * @param key key the attribute name
+	 * @param key          key the attribute name
 	 * @param nameSpaceURI nameSpace of the attribute to set
-	 *
 	 * @default removeAttributes(key, null)
 	 */
 	public void removeAttribute(final String key, final String nameSpaceURI)
@@ -407,10 +402,8 @@ public class VElement extends Vector<KElement>
 	 * RemoveElements
 	 *
 	 * @param testElem the element to remove
-	 * @param nMax maximum number of dulicate elements to remove
-	 *
+	 * @param nMax     maximum number of dulicate elements to remove
 	 * @default RemoveElements(e, 0)
-	 *
 	 */
 	public void removeElements(final KElement testElem, final int nMax)
 	{
@@ -472,9 +465,9 @@ public class VElement extends Vector<KElement>
 	 * ToVector - parse a node list for elements spezified through parameters note that the vector is static - i.e. the elements are NOT modified by operations to the nodeList.
 	 * This behavior is different than that of the actual nodelist!
 	 *
-	 * @param element name of the element typ you want
-	 * @param mAttrib a attribute typ you want
-	 * @param bAnd true, if you want to add the element if mAttrib was found in the element
+	 * @param element      name of the element typ you want
+	 * @param mAttrib      a attribute typ you want
+	 * @param bAnd         true, if you want to add the element if mAttrib was found in the element
 	 * @param nameSpaceURI the namespace to search in
 	 * @return VElement - vector of all elements matching the conditions above
 	 */

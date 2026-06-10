@@ -73,8 +73,6 @@ package org.cip4.jdflib.auto;
 import java.util.Collection;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoAssembly.EOrder;
-import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -85,6 +83,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFPageAssignedList;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoAssemblySection : public JDFElement
@@ -102,7 +101,8 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.COMMONFOLDS, 0x3331111111l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.ORDER, 0x4444433311l, AttributeInfo.EnumAttributeType.enumeration, EnumOrder.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ORDER, 0x4444433311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumOrder.class, 0), null);
 	}
 
 	@Override
@@ -129,7 +129,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAssemblySection(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoAssemblySection(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -141,7 +141,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAssemblySection(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoAssemblySection(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -154,16 +154,28 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoAssemblySection(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoAssemblySection(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * Enumeration strings for numOrder
 	 */
+
+	public enum EnumOrder
+	{
+		Collecting, Gathering;
+
+		public static EnumOrder getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumOrder.class, val, null);
+		}
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
+		 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -175,7 +187,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAssemblyID(String value)
+	public void setAssemblyID(final String value)
 	{
 		setAttribute(AttributeName.ASSEMBLYID, value, null);
 	}
@@ -200,7 +212,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAssemblyIDs(VString value)
+	public void setAssemblyIDs(final VString value)
 	{
 		setAttribute(AttributeName.ASSEMBLYIDS, value, null);
 	}
@@ -212,8 +224,8 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 */
 	public VString getAssemblyIDs()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -228,7 +240,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCommonFolds(int value)
+	public void setCommonFolds(final int value)
 	{
 		setAttribute(AttributeName.COMMONFOLDS, value, null);
 	}
@@ -253,7 +265,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -278,9 +290,9 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setOrder(EOrder enumVar)
+	public void setOrder(final EnumOrder enumVar)
 	{
-		setAttribute(AttributeName.ORDER, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ORDER, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -288,35 +300,6 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EOrder getEOrder()
-	{
-		return EOrder.getEnum(getAttribute(AttributeName.ORDER, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Order
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Order
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetOrder(EOrder) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setOrder(EnumOrder enumVar)
-	{
-		setAttribute(AttributeName.ORDER, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Order
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EOrder GetEOrder() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumOrder getOrder()
 	{
 		return EnumOrder.getEnum(getAttribute(AttributeName.ORDER, null, null));
@@ -354,7 +337,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPageAssignedList the element
 	 */
-	public JDFPageAssignedList getCreatePageAssignedList(int iSkip)
+	public JDFPageAssignedList getCreatePageAssignedList(final int iSkip)
 	{
 		return (JDFPageAssignedList) getCreateElement_JDFElement(ElementName.PAGEASSIGNEDLIST, null, iSkip);
 	}
@@ -366,7 +349,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 * @return JDFPageAssignedList the element
 	 *         default is getPageAssignedList(0)
 	 */
-	public JDFPageAssignedList getPageAssignedList(int iSkip)
+	public JDFPageAssignedList getPageAssignedList(final int iSkip)
 	{
 		return (JDFPageAssignedList) getElement(ElementName.PAGEASSIGNEDLIST, null, iSkip);
 	}

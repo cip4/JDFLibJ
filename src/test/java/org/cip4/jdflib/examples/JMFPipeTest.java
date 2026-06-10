@@ -51,7 +51,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * jmf pipe example file test
- * 
+ *
  * @author rainer prosi
  * @date Mar 3 2013
  */
@@ -66,7 +66,6 @@ class JMFPipeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override

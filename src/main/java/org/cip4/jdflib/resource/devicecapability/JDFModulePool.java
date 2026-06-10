@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,22 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFModulePool.java
@@ -98,43 +98,43 @@ public class JDFModulePool extends JDFAutoModulePool
 
 	/**
 	 * Constructor for JDFModulePool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFModulePool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFModulePool(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFModulePool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFModulePool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFModulePool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFModulePool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFModulePool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFModulePool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -145,30 +145,38 @@ public class JDFModulePool extends JDFAutoModulePool
 
 	/**
 	 * get the minimum availability
-	 * 
+	 *
 	 * @param vModuleRefs
-	 *            the list of module ids that are evaluated
+	 *                    the list of module ids that are evaluated
 	 * @return the minimum availability, null in case of an error, for instance
 	 *         if no modulerefs are specified
 	 */
-	public EnumAvailability getMinAvailability(VString vModuleRefs)
+	public EnumAvailability getMinAvailability(final VString vModuleRefs)
 	{
-		Map m = getModuleMap();
+		final Map m = getModuleMap();
 		if (vModuleRefs == null || m == null || vModuleRefs.size() == 0)
+		{
 			return null; // error exit
+		}
 		JDFDeviceCap.EnumAvailability minAvail = JDFDeviceCap.EnumAvailability.Installed;
 		for (int i = 0; i < vModuleRefs.size(); i++)
 		{
-			JDFModuleCap mc = (JDFModuleCap) m.get(vModuleRefs.get(i));
+			final JDFModuleCap mc = (JDFModuleCap) m.get(vModuleRefs.get(i));
 			if (mc == null)
+			{
 				return null;
-			EnumAvailability a = mc.getAvailability();
+			}
+			final EnumAvailability a = mc.getAvailability();
 			if (a == null || EnumAvailability.Module.equals(a)) // module is not
-																// valid
-																// recursively
+			{
+				// valid
+				// recursively
 				return null;
+			}
 			if (minAvail.compareTo(a) > 0)
+			{
 				minAvail = a;
+			}
 
 		}
 		return minAvail;
@@ -177,22 +185,22 @@ public class JDFModulePool extends JDFAutoModulePool
 	/**
 	 * get a hashmap that uses ModuleCap/@ID as a key and has the ModuleCap as a
 	 * value
-	 * 
+	 *
 	 * @return the hashmap, null if no modulecaps exist
 	 */
 	public Map getModuleMap()
 	{
 		HashMap hashMap = null;
 
-		VElement v = getChildElementVector(ElementName.MODULECAP, null, null, true, 0, true);
+		final VElement v = getChildElementVector(ElementName.MODULECAP, null, null, true, 0, true);
 		if (v != null)
 		{
-			int siz = v.size();
+			final int siz = v.size();
 			hashMap = new HashMap();
 			for (int i = 0; i < siz; i++)
 			{
-				JDFModuleCap mc = (JDFModuleCap) v.elementAt(i);
-				String id = mc.getID();
+				final JDFModuleCap mc = (JDFModuleCap) v.elementAt(i);
+				final String id = mc.getID();
 				if (!isWildCard(id))
 				{
 					hashMap.put(id, mc);
@@ -207,56 +215,59 @@ public class JDFModulePool extends JDFAutoModulePool
 
 	/**
 	 * get the module availability based on modulerefs and availability
-	 * 
+	 *
 	 * @param caps
-	 *            either A State, devcap or devcaps
+	 *             either A State, devcap or devcaps
 	 * @return
 	 */
-	public static EnumAvailability getModuleAvailability(ICapabilityElement caps)
+	public static EnumAvailability getModuleAvailability(final ICapabilityElement caps)
 	{
-		EnumAvailability a = caps.getAvailability();
+		final EnumAvailability a = caps.getAvailability();
 		if (!EnumAvailability.Module.equals(a))
+		{
 			return a;
-		JDFModulePool mp = caps.getModulePool();
+		}
+		final JDFModulePool mp = caps.getModulePool();
 		if (mp == null)
+		{
 			return null;
+		}
 		return mp.getMinAvailability(caps.getModuleRefs());
 	}
 
 	/**
 	 * @param caps
-	 *            the element to append the ref to
-	 * 
+	 *             the element to append the ref to
 	 * @return {@link JDFModuleCap} the Modulecap that id refers tp
 	 */
-	public static JDFModuleCap appendModuleRef(ICapabilityElement caps, String id)
+	public static JDFModuleCap appendModuleRef(final ICapabilityElement caps, final String id)
 	{
 		caps.setAvailability(EnumAvailability.Module);
-		JDFModulePool mp = caps.getCreateModulePool();
+		final JDFModulePool mp = caps.getCreateModulePool();
 		((KElement) caps).appendAttribute(AttributeName.MODULEREFS, id, null, null, true);
 		return mp.getCreateModuleCap(id);
 	}
 
 	/**
 	 * get a modulecap with a given id
-	 * 
+	 *
 	 * @param id
-	 *            the modulecap id
+	 *           the modulecap id
 	 * @return the modulecap
 	 */
-	public JDFModuleCap getModuleCap(String id)
+	public JDFModuleCap getModuleCap(final String id)
 	{
 		return (JDFModuleCap) getChildWithAttribute(ElementName.MODULECAP, AttributeName.ID, null, id, 0, true);
 	}
 
 	/**
 	 * get a modulecap with a given id, create it if it does not exist
-	 * 
+	 *
 	 * @param id
-	 *            the modulecap id
+	 *           the modulecap id
 	 * @return the modulecap
 	 */
-	public JDFModuleCap getCreateModuleCap(String id)
+	public JDFModuleCap getCreateModuleCap(final String id)
 	{
 		JDFModuleCap mc = getModuleCap(id);
 		if (mc == null)

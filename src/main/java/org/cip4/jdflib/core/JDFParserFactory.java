@@ -49,7 +49,6 @@ public class JDFParserFactory extends XMLParserFactory
 	private static JDFParserFactory theFactory = new JDFParserFactory();
 
 	/**
-	 *
 	 * @return
 	 */
 	public static JDFParserFactory getFactory()
@@ -66,7 +65,6 @@ public class JDFParserFactory extends XMLParserFactory
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Override
@@ -81,7 +79,6 @@ public class JDFParserFactory extends XMLParserFactory
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Override

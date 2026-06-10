@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.goldenticket;
 
@@ -131,8 +131,6 @@ public class ProductGoldenTicket extends MISGoldenTicket
 
 	/**
 	 * initializes this node to a given ICS version
-	 * 
-	 *  
 	 */
 	@Override
 	public void init()
@@ -150,7 +148,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 			theNode.setDescriptiveName("Product Golden Ticket Example Job - version: " + JDFAudit.software());
 		}
 		theNode.setType(EnumType.Product);
-		JDFComponent out = (JDFComponent) theNode.getCreateResource(ElementName.COMPONENT, EnumUsage.Output, 0);
+		final JDFComponent out = (JDFComponent) theNode.getCreateResource(ElementName.COMPONENT, EnumUsage.Output, 0);
 		if (theNode.isJDFRoot())
 		{
 			out.setComponentType(EnumComponentType.FinalProduct, null);
@@ -164,11 +162,10 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * @param childNode 
-	 * @param li 
-	 * @param productType 
-	 * @return 
-	 *  
+	 * @param childNode
+	 * @param li
+	 * @param productType
+	 * @return
 	 */
 	protected JDFComponent initOutputComponent(final JDFNode childNode, final JDFLayoutIntent li, final String productType)
 	{
@@ -198,9 +195,9 @@ public class ProductGoldenTicket extends MISGoldenTicket
 
 	/**
 	 * initialize deliveryintent and also output component
-	 * 
+	 *
 	 * @param amount
-	 * @return 
+	 * @return
 	 */
 	protected JDFDeliveryIntent initDeliveryIntent(final int amount)
 	{
@@ -235,17 +232,17 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * @param firstame 
-	 * @param lastame 
-	 * @param companyName 
-	 * @param jobName 
-	 * @return 
+	 * @param firstame
+	 * @param lastame
+	 * @param companyName
+	 * @param jobName
+	 * @return
 	 */
 	protected JDFCustomerInfo initCustomerInfo(final String firstame, final String lastame, final String companyName, final String jobName)
 	{
 		final JDFCustomerInfo ci = theNode.getCreateCustomerInfo();
 		ci.setCustomerJobName(jobName);
-		JDFContact c = ci.getContactWithContactType(EnumContactType.Customer.getName(), 0);
+		JDFContact c = ci.getContactWithContactType(EnumContactType.Customer.name(), 0);
 		if (c == null)
 		{
 			c = ci.appendContact(EnumContactType.Customer);
@@ -259,10 +256,9 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * @param node 
+	 * @param node
 	 * @param quality
-	 * @return 
-	 * 
+	 * @return
 	 */
 	protected JDFMediaIntent initMediaIntent(final JDFNode node, final String quality)
 	{
@@ -274,12 +270,11 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * @param node 
-	 * @param gsm 
-	 * @param coating 
-	 * @param brand 
-	 * @return 
-	 * 
+	 * @param node
+	 * @param gsm
+	 * @param coating
+	 * @param brand
+	 * @return
 	 */
 	protected JDFMediaIntent initMediaIntent(final JDFNode node, final double gsm, final EnumSpanCoatings coating, final String brand)
 	{
@@ -293,12 +288,11 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * @param node 
-	 * @param front 
-	 * @param back 
-	 * @param coatings 
-	 * @return 
-	 * 
+	 * @param node
+	 * @param front
+	 * @param back
+	 * @param coatings
+	 * @return
 	 */
 	protected JDFColorIntent initColorIntent(final JDFNode node, final int front, final int back, final String coatings)
 	{
@@ -333,30 +327,29 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * @param node 
-	 * @param xCM 
-	 * @param yCM 
-	 * @param pages 
-	 * @param sides 
-	 * @return 
-	 * 
+	 * @param node
+	 * @param xCM
+	 * @param yCM
+	 * @param pages
+	 * @param sides
+	 * @return
 	 */
 	protected JDFLayoutIntent initLayoutIntent(final JDFNode node, final double xCM, final double yCM, final int pages, final int sides)
 	{
 		final JDFLayoutIntent loi = (JDFLayoutIntent) node.addResource(ElementName.LAYOUTINTENT, EnumUsage.Input);
 		loi.getCreateFinishedDimensions().setPreferred(xCM * 72 / 2.54, yCM * 72 / 2.54, 0);
 		loi.getCreatePages().setPreferred(pages);
-		loi.setSides(sides == 2 ? EnumSides.TwoSidedHeadToHead : EnumSides.OneSided);
+		final EnumSides layoutSides = sides == 2 ? EnumSides.TwoSidedHeadToHead : EnumSides.OneSided;
+		loi.setSides(org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides.getEnum(layoutSides.name()));
 		loi.setResStatus(EnumResStatus.Available, false);
 		loi.preferredToActual();
 		return loi;
 	}
 
 	/**
-	 * @param node 
-	 * @param foldCatalog 
-	 * @return 
-	 * 
+	 * @param node
+	 * @param foldCatalog
+	 * @return
 	 */
 	protected JDFFoldingIntent initFoldingIntent(final JDFNode node, final String foldCatalog)
 	{
@@ -368,7 +361,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void createPostCards()
 	{
@@ -382,7 +375,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void createFlyer()
 	{
@@ -396,7 +389,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void createMultiLabels()
 	{
@@ -436,7 +429,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void createHarley()
 	{
@@ -452,7 +445,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	/**
 	 * @param cover
 	 * @param body
-	 * @param numStitches 
+	 * @param numStitches
 	 * @return
 	 */
 	protected JDFBindingIntent initBindingIntent(final JDFComponent cover, final JDFComponent body, final int numStitches)
@@ -472,7 +465,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void createAddressBook()
 	{
@@ -502,7 +495,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void createHDCity()
 	{
@@ -532,7 +525,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void createWatches()
 	{
@@ -550,7 +543,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 
 	/**
 	 * product intent for the drupa flower job
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void createDrupaFlower() throws Exception

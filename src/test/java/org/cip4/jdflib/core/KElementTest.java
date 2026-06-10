@@ -1787,7 +1787,7 @@ class KElementTest extends JDFTestCaseBase
 		root.addNameSpace(myPrefix, docNS);
 
 		// add an element with a (predefined) prefix and no namespace
-		final KElement kElem9 = root.appendElement(myPrefix + JDFConstants.COLON + "MyElementLevel_2", "");
+		final KElement kElem9 = root.appendElement(myPrefix + JDFCoreConstants.COLON + "MyElementLevel_2", "");
 		assertTrue(docNS.equals(kElem9.getNamespaceURI()));
 		assertTrue(myPrefix.equals(kElem9.getPrefix()));
 
@@ -1798,12 +1798,12 @@ class KElementTest extends JDFTestCaseBase
 		kElem1.setAttributeNS(docNS, "att1", "attval1");
 
 		// add an element in a namespace
-		final KElement kElem = root.appendElement(myPrefix + JDFConstants.COLON + "MyElement", docNS);
+		final KElement kElem = root.appendElement(myPrefix + JDFCoreConstants.COLON + "MyElement", docNS);
 		assertTrue(docNS.equals(kElem.getNamespaceURI()));
 		assertTrue(myPrefix.equals(kElem.getPrefix()));
 
 		// add an attribute and its value in a namespace
-		kElem.setAttributeNS(docNS, myPrefix + JDFConstants.COLON + "MyAttribute", "MyValue");
+		kElem.setAttributeNS(docNS, myPrefix + JDFCoreConstants.COLON + "MyAttribute", "MyValue");
 
 		// How to get the element, Version 1
 		final KElement kElem2 = root.getElement_KElement("MyElement", docNS, 0);
@@ -1812,25 +1812,25 @@ class KElementTest extends JDFTestCaseBase
 		assertTrue("MyValue".equals(attr));
 
 		// this is pretty invalid but the ns url takes precedence
-		attr = kElem2.getAttribute_KElement(myPrefix + JDFConstants.COLON + "MyAttribute", docNS, "MyDefault");
+		attr = kElem2.getAttribute_KElement(myPrefix + JDFCoreConstants.COLON + "MyAttribute", docNS, "MyDefault");
 		assertTrue("MyValue".equals(attr));
 
 		// this is even more invalid but the ns url takes precedence
-		attr = kElem2.getAttribute_KElement("fnarf" + JDFConstants.COLON + "MyAttribute", docNS, "MyDefault");
+		attr = kElem2.getAttribute_KElement("fnarf" + JDFCoreConstants.COLON + "MyAttribute", docNS, "MyDefault");
 		assertTrue("MyValue".equals(attr));
 
 		// How to get the element, Version 2
-		final KElement kElem3 = root.getElement_KElement(myPrefix + JDFConstants.COLON + "MyElement", docNS, 0);
+		final KElement kElem3 = root.getElement_KElement(myPrefix + JDFCoreConstants.COLON + "MyElement", docNS, 0);
 
 		attr = kElem3.getAttribute_KElement("MyAttribute", docNS, "MyDefault");
 		assertTrue("MyValue".equals(attr));
 
-		attr = kElem3.getAttribute_KElement(myPrefix + JDFConstants.COLON + "MyAttribute", docNS, "MyDefault");
+		attr = kElem3.getAttribute_KElement(myPrefix + JDFCoreConstants.COLON + "MyAttribute", docNS, "MyDefault");
 		assertTrue("MyValue".equals(attr));
 
 		final DocumentJDFImpl doc0 = (DocumentJDFImpl) root.getOwnerDocument();
 
-		final Element newChild = doc0.createElementNS(docNS, myPrefix + JDFConstants.COLON + ElementName.RESOURCELINKPOOL);
+		final Element newChild = doc0.createElementNS(docNS, myPrefix + JDFCoreConstants.COLON + ElementName.RESOURCELINKPOOL);
 		root.appendChild(newChild);
 
 		doc.write2File(sm_dirTestDataTemp + "NameSpace.jdf", 0, true);
@@ -1851,8 +1851,8 @@ class KElementTest extends JDFTestCaseBase
 
 		// adding cip4NameSpaceURI a second time as default namespace is ignored
 		// (using addNameSpace or setAttribute)
-		root.addNameSpace(JDFConstants.EMPTYSTRING, cip4NameSpaceURI);
-		root.setAttribute(JDFConstants.XMLNS, cip4NameSpaceURI);
+		root.addNameSpace(JDFCoreConstants.EMPTYSTRING, cip4NameSpaceURI);
+		root.setAttribute(JDFCoreConstants.XMLNS, cip4NameSpaceURI);
 
 		// adding cip4NameSpaceURI with different prefixes using addNameSpace is
 		// ignored
@@ -1865,9 +1865,9 @@ class KElementTest extends JDFTestCaseBase
 
 		// adding cip4NameSpaceURI with different prefixes using setAttribute is
 		// allowed
-		root.setAttribute(JDFConstants.XMLNS + JDFConstants.COLON + cip4Prefix1, cip4NameSpaceURI);
-		root.setAttribute(JDFConstants.XMLNS + JDFConstants.COLON + cip4Prefix2, cip4NameSpaceURI);
-		root.setAttribute(JDFConstants.XMLNS + JDFConstants.COLON + cip4Prefix3, cip4NameSpaceURI);
+		root.setAttribute(JDFCoreConstants.XMLNS + JDFCoreConstants.COLON + cip4Prefix1, cip4NameSpaceURI);
+		root.setAttribute(JDFCoreConstants.XMLNS + JDFCoreConstants.COLON + cip4Prefix2, cip4NameSpaceURI);
+		root.setAttribute(JDFCoreConstants.XMLNS + JDFCoreConstants.COLON + cip4Prefix3, cip4NameSpaceURI);
 
 		// append an element without prefix with null NameSpaceURI or
 		// cip4NameSpaceURI
@@ -1881,11 +1881,11 @@ class KElementTest extends JDFTestCaseBase
 
 		// append an element with prefix with null NameSpaceURI or
 		// cip4NameSpaceURI
-		final KElement kElement2 = root.appendElement(cip4Prefix1 + JDFConstants.COLON + "kElement2", null);
+		final KElement kElement2 = root.appendElement(cip4Prefix1 + JDFCoreConstants.COLON + "kElement2", null);
 		assertTrue(kElement2.getNamespaceURI().equals(cip4NameSpaceURI));
 		assertTrue(cip4Prefix1.equals(kElement2.getPrefix()));
 
-		final KElement kElement3 = root.appendElement(cip4Prefix1 + JDFConstants.COLON + "kElement3", cip4NameSpaceURI);
+		final KElement kElement3 = root.appendElement(cip4Prefix1 + JDFCoreConstants.COLON + "kElement3", cip4NameSpaceURI);
 		assertTrue(kElement3.getNamespaceURI().equals(cip4NameSpaceURI));
 		assertTrue(cip4Prefix1.equals(kElement3.getPrefix()));
 
@@ -1906,14 +1906,14 @@ class KElementTest extends JDFTestCaseBase
 		assertEquals(kElemGet1, kElemGet2);
 
 		// correct prefix is ok
-		final KElement kElemGet3 = root1.getElement(cip4Prefix1 + JDFConstants.COLON + "kElement1", null, 0);
-		final KElement kElemGet4 = root1.getElement(cip4Prefix1 + JDFConstants.COLON + "kElement1", cip4NameSpaceURI, 0);
+		final KElement kElemGet3 = root1.getElement(cip4Prefix1 + JDFCoreConstants.COLON + "kElement1", null, 0);
+		final KElement kElemGet4 = root1.getElement(cip4Prefix1 + JDFCoreConstants.COLON + "kElement1", cip4NameSpaceURI, 0);
 		assertEquals(kElemGet3, kElemGet4);
 		assertEquals(kElemGet2, kElemGet4);
 
 		// wrong prefix
-		final KElement kElemGet5 = root1.getElement(cip4Prefix2 + JDFConstants.COLON + "kElement1", null, 0);
-		final KElement kElemGet6 = root1.getElement(cip4Prefix2 + JDFConstants.COLON + "kElement1", cip4NameSpaceURI, 0);
+		final KElement kElemGet5 = root1.getElement(cip4Prefix2 + JDFCoreConstants.COLON + "kElement1", null, 0);
+		final KElement kElemGet6 = root1.getElement(cip4Prefix2 + JDFCoreConstants.COLON + "kElement1", cip4NameSpaceURI, 0);
 		assertNull(kElemGet5);
 		assertNull(kElemGet6);
 	}
@@ -1934,12 +1934,12 @@ class KElementTest extends JDFTestCaseBase
 		try
 		{
 			// add an element in a namespace
-			final KElement kElem1 = root.appendElement(myPrefix + JDFConstants.COLON + "Foo_1", docNS1);
+			final KElement kElem1 = root.appendElement(myPrefix + JDFCoreConstants.COLON + "Foo_1", docNS1);
 			assertTrue(docNS1.equals(kElem1.getNamespaceURI()));
 			assertTrue(myPrefix.equals(kElem1.getPrefix()));
 
-			kElem1.setAttribute(myPrefix + JDFConstants.COLON + "Foo_1", "attval1", docNS1);
-			kElem1.setAttribute(myPrefix + JDFConstants.COLON + "Foo_2", "attval2", docNS2);
+			kElem1.setAttribute(myPrefix + JDFCoreConstants.COLON + "Foo_1", "attval1", docNS1);
+			kElem1.setAttribute(myPrefix + JDFCoreConstants.COLON + "Foo_2", "attval2", docNS2);
 			fail("Called KElement.setAttribute with same prefix but different namespaces ?!");
 		}
 		catch (final JDFException expected)
@@ -2063,7 +2063,7 @@ class KElementTest extends JDFTestCaseBase
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = doc.getJDFRoot();
-		root.setType(JDFNode.EnumType.Imposition.getName(), false);
+		root.setType(JDFNode.EnumType.Imposition.name(), false);
 		final JDFRunList rl = (JDFRunList) root.appendMatchingResource(ElementName.RUNLIST, JDFNode.EnumProcessUsage.Document, null);
 		rl.appendLayoutElement();
 		final JDFRunList leaf = (JDFRunList) rl.getCreatePartition(JDFResource.EnumPartIDKey.Run, "Run1",
@@ -3033,15 +3033,15 @@ class KElementTest extends JDFTestCaseBase
 		final KElement e = jdfDoc.getRoot();
 		e.setAttribute("inf", Integer.MAX_VALUE, null);
 		e.setAttribute("minf", Integer.MIN_VALUE, null);
-		assertEquals(e.getAttribute("inf", null, null), JDFConstants.POSINF, "inf");
-		assertEquals(e.getAttribute("minf", null, null), JDFConstants.NEGINF, "minf");
+		assertEquals(e.getAttribute("inf", null, null), JDFCoreConstants.POSINF, "inf");
+		assertEquals(e.getAttribute("minf", null, null), JDFCoreConstants.NEGINF, "minf");
 		assertEquals(e.getIntAttribute("inf", null, 0), Integer.MAX_VALUE, "inf");
 		assertEquals(e.getIntAttribute("minf", null, 0), Integer.MIN_VALUE, "minf");
 		// now double
 		e.setAttribute("inf", Double.MAX_VALUE, null);
 		e.setAttribute("minf", -Double.MAX_VALUE, null);
-		assertEquals(e.getAttribute("inf", null, null), JDFConstants.POSINF, "inf");
-		assertEquals(e.getAttribute("minf", null, null), JDFConstants.NEGINF, "minf");
+		assertEquals(e.getAttribute("inf", null, null), JDFCoreConstants.POSINF, "inf");
+		assertEquals(e.getAttribute("minf", null, null), JDFCoreConstants.NEGINF, "minf");
 		assertEquals(e.getRealAttribute("inf", null, 0), Double.MAX_VALUE, 0.0, "inf");
 		assertEquals(e.getRealAttribute("minf", null, 0), -Double.MAX_VALUE, 0.0, "minf");
 	}
@@ -3622,7 +3622,7 @@ class KElementTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
 		final JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null, null, null, null, null, null);
-		final JDFResource rp = r.addPartition(EnumPartIDKey.Side, EnumSide.Front.getName());
+		final JDFResource rp = r.addPartition(EnumPartIDKey.Side, EnumSide.Front.name());
 		VElement v = r.getChildElementVector_KElement(ElementName.EXPOSEDMEDIA, null, null, true, 0);
 		assertEquals(v.elementAt(0), rp);
 		assertEquals(v.size(), 1);

@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -102,10 +97,11 @@ public abstract class JDFAutoDefect extends JDFElement
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.BOX, 0x3331111111l, AttributeInfo.EnumAttributeType.rectangle, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEFECTREASON, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFECTTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumDefectType.getEnum(0),
-				null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFECTTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumDefectType.class, 0), null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.DEFECTTYPEDETAILS, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.FACE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumFace.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.FACE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumFace.class, 0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.SEVERITY, 0x3331111111l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.SIZE, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
@@ -134,7 +130,7 @@ public abstract class JDFAutoDefect extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDefect(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDefect(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -146,7 +142,7 @@ public abstract class JDFAutoDefect extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDefect(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDefect(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -159,186 +155,42 @@ public abstract class JDFAutoDefect extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDefect(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDefect(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for DefectType
+	 * Enumeration strings for numDefectType
 	 */
 
-	public enum EDefectType
+	public enum EnumDefectType
 	{
 		FinishingDefect, ImageDefect, ImageFinishingDefect, Other, SheetDefect, SubstrateDefect;
 
-		public static EDefectType getEnum(String val)
+		public static EnumDefectType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EDefectType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumDefectType.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for DefectType
+	 * Enumeration strings for numFace
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumDefectType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumDefectType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumDefectType getEnum(String enumName)
-		{
-			return (EnumDefectType) getEnum(EnumDefectType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDefectType getEnum(int enumValue)
-		{
-			return (EnumDefectType) getEnum(EnumDefectType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDefectType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDefectType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDefectType.class);
-		}
-
-		/**  */
-		public static final EnumDefectType FinishingDefect = new EnumDefectType("FinishingDefect");
-		/**  */
-		public static final EnumDefectType ImageDefect = new EnumDefectType("ImageDefect");
-		/**  */
-		public static final EnumDefectType ImageFinishingDefect = new EnumDefectType("ImageFinishingDefect");
-		/**  */
-		public static final EnumDefectType Other = new EnumDefectType("Other");
-		/**  */
-		public static final EnumDefectType SheetDefect = new EnumDefectType("SheetDefect");
-		/**  */
-		public static final EnumDefectType SubstrateDefect = new EnumDefectType("SubstrateDefect");
-	}
-
-	/**
-	 * Enumeration strings for Face
-	 */
-
-	public enum EFace
+	public enum EnumFace
 	{
 		Top, Bottom, Left, Right, Front, Back;
 
-		public static EFace getEnum(String val)
+		public static EnumFace getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EFace.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumFace.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Face
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumFace extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumFace(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumFace getEnum(String enumName)
-		{
-			return (EnumFace) getEnum(EnumFace.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumFace getEnum(int enumValue)
-		{
-			return (EnumFace) getEnum(EnumFace.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumFace.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumFace.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumFace.class);
-		}
-
-		/**  */
-		public static final EnumFace Top = new EnumFace("Top");
-		/**  */
-		public static final EnumFace Bottom = new EnumFace("Bottom");
-		/**  */
-		public static final EnumFace Left = new EnumFace("Left");
-		/**  */
-		public static final EnumFace Right = new EnumFace("Right");
-		/**  */
-		public static final EnumFace Front = new EnumFace("Front");
-		/**  */
-		public static final EnumFace Back = new EnumFace("Back");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -350,7 +202,7 @@ public abstract class JDFAutoDefect extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBox(JDFRectangle value)
+	public void setBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.BOX, value, null);
 	}
@@ -363,8 +215,8 @@ public abstract class JDFAutoDefect extends JDFElement
 	 */
 	public JDFRectangle getBox()
 	{
-		String strAttrName = getAttribute(AttributeName.BOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.BOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -378,7 +230,7 @@ public abstract class JDFAutoDefect extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDefectReason(String value)
+	public void setDefectReason(final String value)
 	{
 		setAttribute(AttributeName.DEFECTREASON, value, null);
 	}
@@ -403,9 +255,9 @@ public abstract class JDFAutoDefect extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDefectType(EDefectType enumVar)
+	public void setDefectType(final EnumDefectType enumVar)
 	{
-		setAttribute(AttributeName.DEFECTTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DEFECTTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -413,35 +265,6 @@ public abstract class JDFAutoDefect extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EDefectType getEDefectType()
-	{
-		return EDefectType.getEnum(getAttribute(AttributeName.DEFECTTYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute DefectType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute DefectType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDefectType(EDefectType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDefectType(EnumDefectType enumVar)
-	{
-		setAttribute(AttributeName.DEFECTTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute DefectType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EDefectType GetEDefectType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumDefectType getDefectType()
 	{
 		return EnumDefectType.getEnum(getAttribute(AttributeName.DEFECTTYPE, null, null));
@@ -457,7 +280,7 @@ public abstract class JDFAutoDefect extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDefectTypeDetails(String value)
+	public void setDefectTypeDetails(final String value)
 	{
 		setAttribute(AttributeName.DEFECTTYPEDETAILS, value, null);
 	}
@@ -482,9 +305,9 @@ public abstract class JDFAutoDefect extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setFace(EFace enumVar)
+	public void setFace(final EnumFace enumVar)
 	{
-		setAttribute(AttributeName.FACE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.FACE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -492,35 +315,6 @@ public abstract class JDFAutoDefect extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EFace getEFace()
-	{
-		return EFace.getEnum(getAttribute(AttributeName.FACE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Face
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Face
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetFace(EFace) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setFace(EnumFace enumVar)
-	{
-		setAttribute(AttributeName.FACE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Face
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EFace GetEFace() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumFace getFace()
 	{
 		return EnumFace.getEnum(getAttribute(AttributeName.FACE, null, null));
@@ -536,7 +330,7 @@ public abstract class JDFAutoDefect extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSeverity(int value)
+	public void setSeverity(final int value)
 	{
 		setAttribute(AttributeName.SEVERITY, value, null);
 	}
@@ -561,7 +355,7 @@ public abstract class JDFAutoDefect extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSize(double value)
+	public void setSize(final double value)
 	{
 		setAttribute(AttributeName.SIZE, value, null);
 	}

@@ -43,9 +43,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkAssemblySection extends WalkJDFSubElement
 {

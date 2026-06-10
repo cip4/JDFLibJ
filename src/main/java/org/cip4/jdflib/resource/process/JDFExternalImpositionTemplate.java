@@ -88,7 +88,8 @@ public class JDFExternalImpositionTemplate extends JDFAutoExternalImpositionTemp
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFExternalImpositionTemplate(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFExternalImpositionTemplate(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName,
+			final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -107,7 +108,6 @@ public class JDFExternalImpositionTemplate extends JDFAutoExternalImpositionTemp
 	}
 
 	/**
-	 *
 	 * @param url
 	 * @return
 	 */

@@ -51,7 +51,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author MatternK
- *
  *         To change the template for this generated type comment go to Window - Preferences - Java - Code Generation - Code and Comments
  */
 class SScanfTest extends JDFTestCaseBase
@@ -142,7 +141,9 @@ class SScanfTest extends JDFTestCaseBase
 		ThreadUtil.sleep(123);
 		final long mem2 = new MemorySpy().getCurrentMem();
 		if (mem2 > mem)
+		{
 			Assertions.assertEquals(mem2, mem, 42000000);
+		}
 	}
 
 	/**

@@ -77,7 +77,6 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
  * common Interface for ContentObjects and MarkObjects
  *
  * @author prosirai
- *
  */
 public interface IPlacedObject
 {
@@ -132,7 +131,7 @@ public interface IPlacedObject
 	/**
 	 * (36) set attribute CTM
 	 *
-	 * @param value : the value to set the attribute to
+	 * @param value     : the value to set the attribute to
 	 * @param precision
 	 */
 	public void setCTM(JDFMatrix value, int precision);
@@ -212,7 +211,7 @@ public interface IPlacedObject
 	/**
 	 * (36) set attribute TrimCTM
 	 *
-	 * @param value : the value to set the attribute to
+	 * @param value     : the value to set the attribute to
 	 * @param precision
 	 */
 	public void setTrimCTM(JDFMatrix value, int precision);
@@ -285,7 +284,7 @@ public interface IPlacedObject
 	/**
 	 * (36) set attribute ClipPath
 	 *
-	 * @param value : the value to set the attribute to
+	 * @param value     : the value to set the attribute to
 	 * @param precision
 	 */
 	public void setClipPath(String value, int precision);
@@ -298,7 +297,7 @@ public interface IPlacedObject
 	public String getClipPath();
 
 	/**
-	 *  get the bounding box in absolute coordinates
+	 * get the bounding box in absolute coordinates
 	 *
 	 * @return the value of the attribute
 	 */

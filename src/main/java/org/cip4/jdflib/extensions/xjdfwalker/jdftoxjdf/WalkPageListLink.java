@@ -42,9 +42,7 @@ import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkPageListLink extends WalkResLink
 {

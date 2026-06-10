@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -99,7 +94,8 @@ public abstract class JDFAutoGlueLine extends JDFElement
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.AREAGLUE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.GLUEBRAND, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.GLUELINEWIDTH, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.GLUETYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumGlueType.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.GLUETYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumGlueType.class, 0), null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.GLUINGPATTERN, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.MELTINGTEMPERATURE, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.RELATIVESTARTPOSITION, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
@@ -120,7 +116,7 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGlueLine(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoGlueLine(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -132,7 +128,7 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGlueLine(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoGlueLine(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -145,95 +141,28 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoGlueLine(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoGlueLine(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for GlueType
+	 * Enumeration strings for numGlueType
 	 */
 
-	public enum EGlueType
+	public enum EnumGlueType
 	{
 		ColdGlue, Hotmelt, PUR;
 
-		public static EGlueType getEnum(String val)
+		public static EnumGlueType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EGlueType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumGlueType.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for GlueType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumGlueType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumGlueType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumGlueType getEnum(String enumName)
-		{
-			return (EnumGlueType) getEnum(EnumGlueType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumGlueType getEnum(int enumValue)
-		{
-			return (EnumGlueType) getEnum(EnumGlueType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumGlueType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumGlueType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumGlueType.class);
-		}
-
-		/**  */
-		public static final EnumGlueType ColdGlue = new EnumGlueType("ColdGlue");
-		/**  */
-		public static final EnumGlueType Hotmelt = new EnumGlueType("Hotmelt");
-		/**  */
-		public static final EnumGlueType PUR = new EnumGlueType("PUR");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -245,7 +174,7 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAreaGlue(boolean value)
+	public void setAreaGlue(final boolean value)
 	{
 		setAttribute(AttributeName.AREAGLUE, value, null);
 	}
@@ -270,7 +199,7 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGlueBrand(String value)
+	public void setGlueBrand(final String value)
 	{
 		setAttribute(AttributeName.GLUEBRAND, value, null);
 	}
@@ -295,7 +224,7 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGlueLineWidth(double value)
+	public void setGlueLineWidth(final double value)
 	{
 		setAttribute(AttributeName.GLUELINEWIDTH, value, null);
 	}
@@ -320,9 +249,9 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setGlueType(EGlueType enumVar)
+	public void setGlueType(final EnumGlueType enumVar)
 	{
-		setAttribute(AttributeName.GLUETYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.GLUETYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -330,35 +259,6 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EGlueType getEGlueType()
-	{
-		return EGlueType.getEnum(getAttribute(AttributeName.GLUETYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute GlueType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute GlueType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetGlueType(EGlueType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setGlueType(EnumGlueType enumVar)
-	{
-		setAttribute(AttributeName.GLUETYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute GlueType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EGlueType GetEGlueType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumGlueType getGlueType()
 	{
 		return EnumGlueType.getEnum(getAttribute(AttributeName.GLUETYPE, null, null));
@@ -374,7 +274,7 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGluingPattern(JDFXYPair value)
+	public void setGluingPattern(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.GLUINGPATTERN, value, null);
 	}
@@ -387,8 +287,8 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	 */
 	public JDFXYPair getGluingPattern()
 	{
-		String strAttrName = getAttribute(AttributeName.GLUINGPATTERN, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.GLUINGPATTERN, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -402,7 +302,7 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMeltingTemperature(int value)
+	public void setMeltingTemperature(final int value)
 	{
 		setAttribute(AttributeName.MELTINGTEMPERATURE, value, null);
 	}
@@ -427,7 +327,7 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRelativeStartPosition(JDFXYPair value)
+	public void setRelativeStartPosition(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.RELATIVESTARTPOSITION, value, null);
 	}
@@ -440,8 +340,8 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	 */
 	public JDFXYPair getRelativeStartPosition()
 	{
-		String strAttrName = getAttribute(AttributeName.RELATIVESTARTPOSITION, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.RELATIVESTARTPOSITION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -455,7 +355,7 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRelativeWorkingPath(JDFXYPair value)
+	public void setRelativeWorkingPath(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.RELATIVEWORKINGPATH, value, null);
 	}
@@ -468,8 +368,8 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	 */
 	public JDFXYPair getRelativeWorkingPath()
 	{
-		String strAttrName = getAttribute(AttributeName.RELATIVEWORKINGPATH, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.RELATIVEWORKINGPATH, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -483,7 +383,7 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStartPosition(JDFXYPair value)
+	public void setStartPosition(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.STARTPOSITION, value, null);
 	}
@@ -496,8 +396,8 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	 */
 	public JDFXYPair getStartPosition()
 	{
-		String strAttrName = getAttribute(AttributeName.STARTPOSITION, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.STARTPOSITION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -511,7 +411,7 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWorkingPath(JDFXYPair value)
+	public void setWorkingPath(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.WORKINGPATH, value, null);
 	}
@@ -524,8 +424,8 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	 */
 	public JDFXYPair getWorkingPath()
 	{
-		String strAttrName = getAttribute(AttributeName.WORKINGPATH, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.WORKINGPATH, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 

@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -104,8 +100,8 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ERRORCOUNT, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ERRORSTATE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumErrorState.getEnum(0),
-				null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ERRORSTATE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumErrorState.class, 0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.WARNINGCOUNT, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
@@ -137,7 +133,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPreflightReport(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPreflightReport(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -149,7 +145,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPreflightReport(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPreflightReport(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -162,7 +158,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPreflightReport(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPreflightReport(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -173,7 +169,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -188,87 +184,22 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for ErrorState
+	 * Enumeration strings for numErrorState
 	 */
 
-	public enum EErrorState
+	public enum EnumErrorState
 	{
 		TestNotSupported, TestWrongPDL;
 
-		public static EErrorState getEnum(String val)
+		public static EnumErrorState getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EErrorState.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumErrorState.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for ErrorState
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumErrorState extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumErrorState(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumErrorState getEnum(String enumName)
-		{
-			return (EnumErrorState) getEnum(EnumErrorState.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumErrorState getEnum(int enumValue)
-		{
-			return (EnumErrorState) getEnum(EnumErrorState.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumErrorState.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumErrorState.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumErrorState.class);
-		}
-
-		/**  */
-		public static final EnumErrorState TestNotSupported = new EnumErrorState("TestNotSupported");
-		/**  */
-		public static final EnumErrorState TestWrongPDL = new EnumErrorState("TestWrongPDL");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -280,7 +211,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setErrorCount(int value)
+	public void setErrorCount(final int value)
 	{
 		setAttribute(AttributeName.ERRORCOUNT, value, null);
 	}
@@ -305,9 +236,9 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setErrorState(EErrorState enumVar)
+	public void setErrorState(final EnumErrorState enumVar)
 	{
-		setAttribute(AttributeName.ERRORSTATE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ERRORSTATE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -315,35 +246,6 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EErrorState getEErrorState()
-	{
-		return EErrorState.getEnum(getAttribute(AttributeName.ERRORSTATE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ErrorState
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ErrorState
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetErrorState(EErrorState) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setErrorState(EnumErrorState enumVar)
-	{
-		setAttribute(AttributeName.ERRORSTATE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ErrorState
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EErrorState GetEErrorState() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumErrorState getErrorState()
 	{
 		return EnumErrorState.getEnum(getAttribute(AttributeName.ERRORSTATE, null, null));
@@ -359,7 +261,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWarningCount(int value)
+	public void setWarningCount(final int value)
 	{
 		setAttribute(AttributeName.WARNINGCOUNT, value, null);
 	}
@@ -416,7 +318,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -457,7 +359,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refPreflightParams(JDFPreflightParams refTarget)
+	public void refPreflightParams(final JDFPreflightParams refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -498,7 +400,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refPreflightReportRulePool(JDFPreflightReportRulePool refTarget)
+	public void refPreflightReportRulePool(final JDFPreflightReportRulePool refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -539,7 +441,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refRunList(JDFRunList refTarget)
+	public void refRunList(final JDFRunList refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -570,7 +472,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFPRItem the element
 	 */
-	public JDFPRItem getCreatePRItem(int iSkip)
+	public JDFPRItem getCreatePRItem(final int iSkip)
 	{
 		return (JDFPRItem) getCreateElement_JDFElement(ElementName.PRITEM, null, iSkip);
 	}
@@ -582,7 +484,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 * @return JDFPRItem the element
 	 *         default is getPRItem(0)
 	 */
-	public JDFPRItem getPRItem(int iSkip)
+	public JDFPRItem getPRItem(final int iSkip)
 	{
 		return (JDFPRItem) getElement(ElementName.PRITEM, null, iSkip);
 	}

@@ -71,14 +71,8 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoColor.EMappingSelection;
-import org.cip4.jdflib.auto.JDFAutoColor.EnumMappingSelection;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -108,9 +102,9 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.FORCESEPARATIONS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.INTERNALCOLORMODEL, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumInternalColorModel.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumInternalColorModel.class, 0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAPPINGSELECTION, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumMappingSelection.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumMappingSelection.class, 0), null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.PROCESSCOLORMODEL, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
@@ -145,7 +139,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoColorantControl(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoColorantControl(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -157,7 +151,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoColorantControl(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoColorantControl(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -170,7 +164,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoColorantControl(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoColorantControl(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -181,7 +175,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -196,89 +190,36 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for InternalColorModel
+	 * Enumeration strings for numInternalColorModel
 	 */
 
-	public enum EInternalColorModel
+	public enum EnumInternalColorModel
 	{
 		Basic, Enhanced, Explicit;
 
-		public static EInternalColorModel getEnum(String val)
+		public static EnumInternalColorModel getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EInternalColorModel.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumInternalColorModel.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for InternalColorModel
+	 * Enumeration strings for numMappingSelection
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumInternalColorModel extends ValuedEnum
+	public enum EnumMappingSelection
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		UsePDLValues, UseLocalPrinterValues, UseProcessColorValues;
 
-		protected EnumInternalColorModel(String name)
+		public static EnumMappingSelection getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumMappingSelection.class, val, null);
 		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumInternalColorModel getEnum(String enumName)
-		{
-			return (EnumInternalColorModel) getEnum(EnumInternalColorModel.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumInternalColorModel getEnum(int enumValue)
-		{
-			return (EnumInternalColorModel) getEnum(EnumInternalColorModel.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumInternalColorModel.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumInternalColorModel.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumInternalColorModel.class);
-		}
-
-		/**  */
-		public static final EnumInternalColorModel Basic = new EnumInternalColorModel("Basic");
-		/**  */
-		public static final EnumInternalColorModel Enhanced = new EnumInternalColorModel("Enhanced");
-		/**  */
-		public static final EnumInternalColorModel Explicit = new EnumInternalColorModel("Explicit");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -290,7 +231,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setForceSeparations(boolean value)
+	public void setForceSeparations(final boolean value)
 	{
 		setAttribute(AttributeName.FORCESEPARATIONS, value, null);
 	}
@@ -315,9 +256,9 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setInternalColorModel(EInternalColorModel enumVar)
+	public void setInternalColorModel(final EnumInternalColorModel enumVar)
 	{
-		setAttribute(AttributeName.INTERNALCOLORMODEL, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.INTERNALCOLORMODEL, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -325,35 +266,6 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EInternalColorModel getEInternalColorModel()
-	{
-		return EInternalColorModel.getEnum(getAttribute(AttributeName.INTERNALCOLORMODEL, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute InternalColorModel
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute InternalColorModel
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetInternalColorModel(EInternalColorModel) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setInternalColorModel(EnumInternalColorModel enumVar)
-	{
-		setAttribute(AttributeName.INTERNALCOLORMODEL, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute InternalColorModel
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EInternalColorModel GetEInternalColorModel() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumInternalColorModel getInternalColorModel()
 	{
 		return EnumInternalColorModel.getEnum(getAttribute(AttributeName.INTERNALCOLORMODEL, null, null));
@@ -369,9 +281,9 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMappingSelection(EMappingSelection enumVar)
+	public void setMappingSelection(final EnumMappingSelection enumVar)
 	{
-		setAttribute(AttributeName.MAPPINGSELECTION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.MAPPINGSELECTION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -379,35 +291,6 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EMappingSelection getEMappingSelection()
-	{
-		return EMappingSelection.getEnum(getAttribute(AttributeName.MAPPINGSELECTION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute MappingSelection
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute MappingSelection
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetMappingSelection(EMappingSelection) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setMappingSelection(EnumMappingSelection enumVar)
-	{
-		setAttribute(AttributeName.MAPPINGSELECTION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute MappingSelection
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EMappingSelection GetEMappingSelection() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumMappingSelection getMappingSelection()
 	{
 		return EnumMappingSelection.getEnum(getAttribute(AttributeName.MAPPINGSELECTION, null, null));
@@ -423,7 +306,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProcessColorModel(String value)
+	public void setProcessColorModel(final String value)
 	{
 		setAttribute(AttributeName.PROCESSCOLORMODEL, value, null);
 	}
@@ -470,7 +353,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorantAlias the element
 	 */
-	public JDFColorantAlias getCreateColorantAlias(int iSkip)
+	public JDFColorantAlias getCreateColorantAlias(final int iSkip)
 	{
 		return (JDFColorantAlias) getCreateElement_JDFElement(ElementName.COLORANTALIAS, null, iSkip);
 	}
@@ -482,7 +365,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 * @return JDFColorantAlias the element
 	 *         default is getColorantAlias(0)
 	 */
-	public JDFColorantAlias getColorantAlias(int iSkip)
+	public JDFColorantAlias getColorantAlias(final int iSkip)
 	{
 		return (JDFColorantAlias) getElement(ElementName.COLORANTALIAS, null, iSkip);
 	}
@@ -512,7 +395,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refColorantAlias(JDFColorantAlias refTarget)
+	public void refColorantAlias(final JDFColorantAlias refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -646,7 +529,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refColorPool(JDFColorPool refTarget)
+	public void refColorPool(final JDFColorPool refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -677,7 +560,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorSpaceSubstitute the element
 	 */
-	public JDFColorSpaceSubstitute getCreateColorSpaceSubstitute(int iSkip)
+	public JDFColorSpaceSubstitute getCreateColorSpaceSubstitute(final int iSkip)
 	{
 		return (JDFColorSpaceSubstitute) getCreateElement_JDFElement(ElementName.COLORSPACESUBSTITUTE, null, iSkip);
 	}
@@ -689,7 +572,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 * @return JDFColorSpaceSubstitute the element
 	 *         default is getColorSpaceSubstitute(0)
 	 */
-	public JDFColorSpaceSubstitute getColorSpaceSubstitute(int iSkip)
+	public JDFColorSpaceSubstitute getColorSpaceSubstitute(final int iSkip)
 	{
 		return (JDFColorSpaceSubstitute) getElement(ElementName.COLORSPACESUBSTITUTE, null, iSkip);
 	}
@@ -771,7 +654,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFDeviceNSpace the element
 	 */
-	public JDFDeviceNSpace getCreateDeviceNSpace(int iSkip)
+	public JDFDeviceNSpace getCreateDeviceNSpace(final int iSkip)
 	{
 		return (JDFDeviceNSpace) getCreateElement_JDFElement(ElementName.DEVICENSPACE, null, iSkip);
 	}
@@ -783,7 +666,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 * @return JDFDeviceNSpace the element
 	 *         default is getDeviceNSpace(0)
 	 */
-	public JDFDeviceNSpace getDeviceNSpace(int iSkip)
+	public JDFDeviceNSpace getDeviceNSpace(final int iSkip)
 	{
 		return (JDFDeviceNSpace) getElement(ElementName.DEVICENSPACE, null, iSkip);
 	}

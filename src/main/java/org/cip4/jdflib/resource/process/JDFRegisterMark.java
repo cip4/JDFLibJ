@@ -72,8 +72,8 @@
  * class JDFRegisterMark
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  */
 
 package org.cip4.jdflib.resource.process;
@@ -89,7 +89,6 @@ import org.w3c.dom.DOMException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
  *         <16.01.2009
  */
 public class JDFRegisterMark extends JDFAutoRegisterMark
@@ -98,7 +97,7 @@ public class JDFRegisterMark extends JDFAutoRegisterMark
 
 	/**
 	 * Constructor for JDFRegisterMark
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
@@ -110,7 +109,7 @@ public class JDFRegisterMark extends JDFAutoRegisterMark
 
 	/**
 	 * Constructor for JDFRegisterMark
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
@@ -123,14 +122,15 @@ public class JDFRegisterMark extends JDFAutoRegisterMark
 
 	/**
 	 * Constructor for JDFRegisterMark
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFRegisterMark(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFRegisterMark(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -143,7 +143,7 @@ public class JDFRegisterMark extends JDFAutoRegisterMark
 
 	/**
 	 * append a separationspec with a given name to this
-	 * 
+	 *
 	 * @param sep the separation name
 	 */
 	public void appendSeparation(final String sep)
@@ -153,7 +153,7 @@ public class JDFRegisterMark extends JDFAutoRegisterMark
 
 	/**
 	 * Get the n'th separation name in the SeparationSpec elements
-	 * 
+	 *
 	 * @param iSkip the index of the SeparationSpec
 	 * @return separation names, null if iSkip > nSeparations
 	 */
@@ -169,7 +169,7 @@ public class JDFRegisterMark extends JDFAutoRegisterMark
 
 	/**
 	 * Get a list of all separation names in the SeparationSpec elements
-	 * 
+	 *
 	 * @return the vector of separation names
 	 */
 	public VString getSeparations()
@@ -188,7 +188,7 @@ public class JDFRegisterMark extends JDFAutoRegisterMark
 
 	/**
 	 * remove a separationspec with a given name from this
-	 * 
+	 *
 	 * @param sep the separation name
 	 * @return int the index of the removed separation; -1 if none found
 	 */
@@ -205,7 +205,7 @@ public class JDFRegisterMark extends JDFAutoRegisterMark
 
 	/**
 	 * set all separation names in the SeparationSpec elements, remove any prior elements
-	 * 
+	 *
 	 * @param vSeps the vector of separation names to set
 	 */
 	public void setSeparations(final VString vSeps)
@@ -224,7 +224,7 @@ public class JDFRegisterMark extends JDFAutoRegisterMark
 
 	/**
 	 * legacy method to allow setting a single value as string
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
 	public void setMarkType(final String value)
@@ -232,7 +232,7 @@ public class JDFRegisterMark extends JDFAutoRegisterMark
 		setAttribute(AttributeName.MARKTYPE, value, null);
 	}
 
-	public void setCenter(double x, double y)
+	public void setCenter(final double x, final double y)
 	{
 		setCenter(new JDFXYPair(x, y));
 

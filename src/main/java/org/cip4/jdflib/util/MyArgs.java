@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,11 +78,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VString;
 
 /**
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class MyArgs
 {
@@ -91,16 +91,16 @@ public class MyArgs
 	private String m_switchParameterString;
 	private String m_argumentParameterString;
 	private String m_requiredParameterString;
-	private final HashSet<String> m_flags = new HashSet<String>();
-	private final HashMap<String, String> m_Parameters = new HashMap<String, String>();
+	private final HashSet<String> m_flags = new HashSet<>();
+	private final HashMap<String, String> m_Parameters = new HashMap<>();
 	private VString m_argV;
 
 	// cmd-line has or has not args and not only options( starting with "-" )
 
 	/**
-	 * @param argv 
-	 * @param switchParameterString 
-	 * @param argumentParameterString 
+	 * @param argv
+	 * @param switchParameterString
+	 * @param argumentParameterString
 	 * @deprecated
 	 */
 	@Deprecated
@@ -121,7 +121,6 @@ public class MyArgs
 	}
 
 	/**
-	 * 
 	 * @param argv
 	 * @param strSwitchParameter
 	 * @param strArgumentParameter
@@ -191,7 +190,7 @@ public class MyArgs
 	/**
 	 * @see java.lang.Object#toString()
 	 * @return
-	*/
+	 */
 	@Override
 	public String toString()
 	{
@@ -320,7 +319,7 @@ public class MyArgs
 	// ----
 	/**
 	 * convert character to interger
-	 * 
+	 *
 	 * @param c
 	 * @param defaultValue
 	 * @param radix
@@ -328,7 +327,7 @@ public class MyArgs
 	 */
 	public int intParameter(final char c, final int defaultValue, final int radix)
 	{
-		return intParameter(c + JDFConstants.EMPTYSTRING, defaultValue, radix);
+		return intParameter(c + JDFCoreConstants.EMPTYSTRING, defaultValue, radix);
 	}
 
 	/**
@@ -347,7 +346,8 @@ public class MyArgs
 		}
 		catch (final NumberFormatException e)
 		{
-			System.out.println("WARNING: Int-Parameter[" + s + "] has no Int-Argument" + " or does not exist (= [" + paramString + "] ) ==> use default value: " + defaultValue);
+			System.out.println("WARNING: Int-Parameter[" + s + "] has no Int-Argument" + " or does not exist (= [" + paramString + "] ) ==> use default value: "
+					+ defaultValue);
 			return defaultValue;
 		}
 	}
@@ -355,14 +355,14 @@ public class MyArgs
 	// ......................................................................
 	/**
 	 * convert character to double
-	 * 
+	 *
 	 * @param c
 	 * @param defaultValue
 	 * @return default: FloatParameter(JDFConstants.EMPTYSTRING + c, 0)
 	 */
 	public double floatParameter(final char c, final double defaultValue)
 	{
-		return floatParameter(JDFConstants.EMPTYSTRING + c, defaultValue);
+		return floatParameter(JDFCoreConstants.EMPTYSTRING + c, defaultValue);
 	}
 
 	/**
@@ -380,8 +380,8 @@ public class MyArgs
 		}
 		catch (final NumberFormatException e)
 		{
-			System.out.println("WARNING: Float-Parameter[" + s + "] has no Double-Argument" + " or does not exist (= [" + paramString + "] ) ==> use default value: "
-					+ defaultValue);
+			System.out.println("WARNING: Float-Parameter[" + s + "] has no Double-Argument" + " or does not exist (= [" + paramString
+					+ "] ) ==> use default value: " + defaultValue);
 			return defaultValue;
 		}
 	}
@@ -389,57 +389,63 @@ public class MyArgs
 	// ......................................................................
 	/**
 	 * convert character to boolean
-	 * 
+	 *
 	 * @param c
-	 * 
 	 * @return default: BoolParameter(c + JDFConstants.EMPTYSTRING, false)
 	 */
 	public boolean boolParameter(final char c)
 	{
-		return boolParameter(c + JDFConstants.EMPTYSTRING);
+		return boolParameter(c + JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
 	 * convert character to boolean
-	 * 
+	 *
 	 * @param c
-	 * @param defaultValue 
-	 * 
+	 * @param defaultValue
 	 * @return default: BoolParameter(c + JDFConstants.EMPTYSTRING, false)
 	 * @deprecated defaultValue==true is kind of stupid...
 	 */
 	@Deprecated
-	public boolean boolParameter(final char c, boolean defaultValue)
+	public boolean boolParameter(final char c, final boolean defaultValue)
 	{
-		return boolParameter(c + JDFConstants.EMPTYSTRING, defaultValue);
+		return boolParameter(c + JDFCoreConstants.EMPTYSTRING, defaultValue);
 	}
 
-	/** 
+	/**
 	 * set or remove a boolean flag
-	 *  
-	 * @param c the flag key
+	 * 
+	 * @param c   the flag key
 	 * @param val if true, set else remove
 	 */
-	public void setFlag(char c, boolean val)
+	public void setFlag(final char c, final boolean val)
 	{
 		if (val)
+		{
 			m_flags.add("" + c);
+		}
 		else
+		{
 			m_flags.remove("" + c);
+		}
 	}
 
-	/** 
+	/**
 	 * set or remove a boolean flag
-	 *  
-	 * @param c the flag key
+	 * 
+	 * @param c   the flag key
 	 * @param val the parameter value, if null remove
 	 */
-	public void setParam(char c, String val)
+	public void setParam(final char c, final String val)
 	{
 		if (val != null)
+		{
 			m_Parameters.put("" + c, val);
+		}
 		else
+		{
 			m_Parameters.remove("" + c);
+		}
 	}
 
 	/**
@@ -456,8 +462,7 @@ public class MyArgs
 
 	/**
 	 * @param s
-	 * 
-	 * @return 
+	 * @return
 	 */
 	public boolean boolParameter(final String s)
 	{
@@ -498,9 +503,9 @@ public class MyArgs
 
 	/**
 	 * return true if either a flag or parameter for c is set
-	 * 
+	 *
 	 * @param c
-	 *            the char to test for
+	 *          the char to test for
 	 * @return
 	 */
 	public boolean hasParameter(final char c)

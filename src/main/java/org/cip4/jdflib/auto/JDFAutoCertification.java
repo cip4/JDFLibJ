@@ -106,7 +106,7 @@ public abstract class JDFAutoCertification extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCertification(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoCertification(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoCertification extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCertification(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoCertification(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoCertification extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoCertification(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoCertification(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -152,7 +152,7 @@ public abstract class JDFAutoCertification extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setClaim(String value)
+	public void setClaim(final String value)
 	{
 		setAttribute(AttributeName.CLAIM, value, null);
 	}
@@ -177,7 +177,7 @@ public abstract class JDFAutoCertification extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIdentifier(String value)
+	public void setIdentifier(final String value)
 	{
 		setAttribute(AttributeName.IDENTIFIER, value, null);
 	}
@@ -202,7 +202,7 @@ public abstract class JDFAutoCertification extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOrganization(String value)
+	public void setOrganization(final String value)
 	{
 		setAttribute(AttributeName.ORGANIZATION, value, null);
 	}

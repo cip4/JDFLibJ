@@ -61,7 +61,8 @@ class XJDFSetCleanupComparator extends KElement.SimpleElementNameComparator
 		{
 			if (ResourceHelper.isAsset(o1) && ResourceHelper.isAsset(o2))
 			{
-				return ContainerUtil.size(new ResourceHelper(o2).getPartMapVector().getKeys()) - ContainerUtil.size(new ResourceHelper(o1).getPartMapVector().getKeys());
+				return ContainerUtil.size(new ResourceHelper(o2).getPartMapVector().getKeys())
+						- ContainerUtil.size(new ResourceHelper(o1).getPartMapVector().getKeys());
 			}
 		}
 		return super.compare(o1, o2);

@@ -106,7 +106,7 @@ public class JDFColorIntent extends JDFAutoColorIntent
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFColorIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFColorIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -119,7 +119,7 @@ public class JDFColorIntent extends JDFAutoColorIntent
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFColorIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFColorIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public class JDFColorIntent extends JDFAutoColorIntent
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFColorIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFColorIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -152,7 +152,7 @@ public class JDFColorIntent extends JDFAutoColorIntent
 	 * @param val
 	 * @return
 	 */
-	public KElement setSurfaceColor(boolean front, String key, String val)
+	public KElement setSurfaceColor(final boolean front, final String key, final String val)
 	{
 		KElement sc = getSurfaceColor(front);
 		if (sc == null)
@@ -168,7 +168,7 @@ public class JDFColorIntent extends JDFAutoColorIntent
 	 * @param front
 	 * @return
 	 */
-	public KElement getSurfaceColor(boolean front)
+	public KElement getSurfaceColor(final boolean front)
 	{
 		if (!isXJDF())
 		{
@@ -242,11 +242,7 @@ public class JDFColorIntent extends JDFAutoColorIntent
 		{
 			return false;
 		}
-		if (color.indexOf("varnish") >= 0)
-		{
-			return true;
-		}
-		if ("aqueous".equals(color) || "bronzing".equals(color))
+		if ((color.indexOf("varnish") >= 0) || "aqueous".equals(color) || "bronzing".equals(color))
 		{
 			return true;
 		}

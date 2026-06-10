@@ -60,9 +60,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class XJDFCombinerTest extends JDFTestCaseBase
 {
@@ -100,7 +98,9 @@ class XJDFCombinerTest extends JDFTestCaseBase
 			final int[] ct = c.combineTypes();
 			Assertions.assertEquals(3, ct.length);
 			for (int i = 0; i < ct.length; i++)
+			{
 				Assertions.assertEquals(i + 1, ct[i]);
+			}
 		}
 	}
 

@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -101,8 +97,8 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.BACKING, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ROUNDING, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TIGHTBACKING, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumTightBacking.getEnum(0),
-				null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TIGHTBACKING, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumTightBacking.class, 0), null);
 	}
 
 	@Override
@@ -129,7 +125,7 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBlockPreparationParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoBlockPreparationParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -141,7 +137,7 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBlockPreparationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoBlockPreparationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -154,7 +150,7 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoBlockPreparationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoBlockPreparationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -165,7 +161,7 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -180,91 +176,22 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for TightBacking
+	 * Enumeration strings for numTightBacking
 	 */
 
-	public enum ETightBacking
+	public enum EnumTightBacking
 	{
 		Flat, Round, FlatBacked, RoundBacked;
 
-		public static ETightBacking getEnum(String val)
+		public static EnumTightBacking getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ETightBacking.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumTightBacking.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for TightBacking
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumTightBacking extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumTightBacking(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumTightBacking getEnum(String enumName)
-		{
-			return (EnumTightBacking) getEnum(EnumTightBacking.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumTightBacking getEnum(int enumValue)
-		{
-			return (EnumTightBacking) getEnum(EnumTightBacking.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumTightBacking.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumTightBacking.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumTightBacking.class);
-		}
-
-		/**  */
-		public static final EnumTightBacking Flat = new EnumTightBacking("Flat");
-		/**  */
-		public static final EnumTightBacking Round = new EnumTightBacking("Round");
-		/**  */
-		public static final EnumTightBacking FlatBacked = new EnumTightBacking("FlatBacked");
-		/**  */
-		public static final EnumTightBacking RoundBacked = new EnumTightBacking("RoundBacked");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -276,7 +203,7 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBacking(double value)
+	public void setBacking(final double value)
 	{
 		setAttribute(AttributeName.BACKING, value, null);
 	}
@@ -301,7 +228,7 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRounding(double value)
+	public void setRounding(final double value)
 	{
 		setAttribute(AttributeName.ROUNDING, value, null);
 	}
@@ -326,9 +253,9 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setTightBacking(ETightBacking enumVar)
+	public void setTightBacking(final EnumTightBacking enumVar)
 	{
-		setAttribute(AttributeName.TIGHTBACKING, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.TIGHTBACKING, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -336,35 +263,6 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ETightBacking getETightBacking()
-	{
-		return ETightBacking.getEnum(getAttribute(AttributeName.TIGHTBACKING, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute TightBacking
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute TightBacking
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetTightBacking(ETightBacking) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setTightBacking(EnumTightBacking enumVar)
-	{
-		setAttribute(AttributeName.TIGHTBACKING, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute TightBacking
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ETightBacking GetETightBacking() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumTightBacking getTightBacking()
 	{
 		return EnumTightBacking.getEnum(getAttribute(AttributeName.TIGHTBACKING, null, null));
@@ -402,7 +300,7 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFRegisterRibbon the element
 	 */
-	public JDFRegisterRibbon getCreateRegisterRibbon(int iSkip)
+	public JDFRegisterRibbon getCreateRegisterRibbon(final int iSkip)
 	{
 		return (JDFRegisterRibbon) getCreateElement_JDFElement(ElementName.REGISTERRIBBON, null, iSkip);
 	}
@@ -414,7 +312,7 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	 * @return JDFRegisterRibbon the element
 	 *         default is getRegisterRibbon(0)
 	 */
-	public JDFRegisterRibbon getRegisterRibbon(int iSkip)
+	public JDFRegisterRibbon getRegisterRibbon(final int iSkip)
 	{
 		return (JDFRegisterRibbon) getElement(ElementName.REGISTERRIBBON, null, iSkip);
 	}
@@ -444,7 +342,7 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refRegisterRibbon(JDFRegisterRibbon refTarget)
+	public void refRegisterRibbon(final JDFRegisterRibbon refTarget)
 	{
 		refElement(refTarget);
 	}

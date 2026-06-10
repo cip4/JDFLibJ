@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -97,7 +92,7 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.BLINDSTITCH, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.THREADMATERIAL, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumThreadMaterial.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumThreadMaterial.class, 0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.THREADPOSITIONS, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.THREADLENGTH, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.THREADSTITCHWIDTH, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
@@ -116,7 +111,7 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoThreadSealingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoThreadSealingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -128,7 +123,7 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoThreadSealingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoThreadSealingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -141,7 +136,7 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoThreadSealingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoThreadSealingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -152,7 +147,7 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -167,89 +162,22 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for ThreadMaterial
+	 * Enumeration strings for numThreadMaterial
 	 */
 
-	public enum EThreadMaterial
+	public enum EnumThreadMaterial
 	{
 		Cotton, Nylon, Polyester;
 
-		public static EThreadMaterial getEnum(String val)
+		public static EnumThreadMaterial getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EThreadMaterial.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumThreadMaterial.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for ThreadMaterial
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumThreadMaterial extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumThreadMaterial(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumThreadMaterial getEnum(String enumName)
-		{
-			return (EnumThreadMaterial) getEnum(EnumThreadMaterial.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumThreadMaterial getEnum(int enumValue)
-		{
-			return (EnumThreadMaterial) getEnum(EnumThreadMaterial.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumThreadMaterial.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumThreadMaterial.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumThreadMaterial.class);
-		}
-
-		/**  */
-		public static final EnumThreadMaterial Cotton = new EnumThreadMaterial("Cotton");
-		/**  */
-		public static final EnumThreadMaterial Nylon = new EnumThreadMaterial("Nylon");
-		/**  */
-		public static final EnumThreadMaterial Polyester = new EnumThreadMaterial("Polyester");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -261,7 +189,7 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBlindStitch(boolean value)
+	public void setBlindStitch(final boolean value)
 	{
 		setAttribute(AttributeName.BLINDSTITCH, value, null);
 	}
@@ -286,9 +214,9 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setThreadMaterial(EThreadMaterial enumVar)
+	public void setThreadMaterial(final EnumThreadMaterial enumVar)
 	{
-		setAttribute(AttributeName.THREADMATERIAL, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.THREADMATERIAL, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -296,35 +224,6 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EThreadMaterial getEThreadMaterial()
-	{
-		return EThreadMaterial.getEnum(getAttribute(AttributeName.THREADMATERIAL, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ThreadMaterial
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ThreadMaterial
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetThreadMaterial(EThreadMaterial) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setThreadMaterial(EnumThreadMaterial enumVar)
-	{
-		setAttribute(AttributeName.THREADMATERIAL, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ThreadMaterial
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EThreadMaterial GetEThreadMaterial() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumThreadMaterial getThreadMaterial()
 	{
 		return EnumThreadMaterial.getEnum(getAttribute(AttributeName.THREADMATERIAL, null, null));
@@ -340,7 +239,7 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setThreadPositions(JDFNumberList value)
+	public void setThreadPositions(final JDFNumberList value)
 	{
 		setAttribute(AttributeName.THREADPOSITIONS, value, null);
 	}
@@ -353,8 +252,8 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 	 */
 	public JDFNumberList getThreadPositions()
 	{
-		String strAttrName = getAttribute(AttributeName.THREADPOSITIONS, null, null);
-		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.THREADPOSITIONS, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -368,7 +267,7 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setThreadLength(double value)
+	public void setThreadLength(final double value)
 	{
 		setAttribute(AttributeName.THREADLENGTH, value, null);
 	}
@@ -393,7 +292,7 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setThreadStitchWidth(double value)
+	public void setThreadStitchWidth(final double value)
 	{
 		setAttribute(AttributeName.THREADSTITCHWIDTH, value, null);
 	}
@@ -418,7 +317,7 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSealingTemperature(int value)
+	public void setSealingTemperature(final int value)
 	{
 		setAttribute(AttributeName.SEALINGTEMPERATURE, value, null);
 	}

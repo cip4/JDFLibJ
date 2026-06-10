@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -115,8 +111,8 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.IGNOREPDLIMPOSITION, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.CLIPPATH, 0x3333333333l, AttributeInfo.EnumAttributeType.PDFPath, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.CONTENTDATAREFS, 0x3333331111l, AttributeInfo.EnumAttributeType.IDREFS, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.ELEMENTTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumElementType.getEnum(0),
-				null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ELEMENTTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumElementType.class, 0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.HASBLEEDS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.ISBLANK, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.ISPRINTABLE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
@@ -162,7 +158,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLayoutElement(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoLayoutElement(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -174,7 +170,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLayoutElement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoLayoutElement(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -187,7 +183,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoLayoutElement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoLayoutElement(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -198,7 +194,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -213,113 +209,22 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for ElementType
+	 * Enumeration strings for numElementType
 	 */
 
-	public enum EElementType
+	public enum EnumElementType
 	{
 		Auxiliary, Barcode, Composed, Document, Graphic, IdentificationField, Image, MultiDocument, MultiSet, Page, Reservation, Surface, Text, Tile, Unknown;
 
-		public static EElementType getEnum(String val)
+		public static EnumElementType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EElementType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumElementType.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for ElementType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumElementType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumElementType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumElementType getEnum(String enumName)
-		{
-			return (EnumElementType) getEnum(EnumElementType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumElementType getEnum(int enumValue)
-		{
-			return (EnumElementType) getEnum(EnumElementType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumElementType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumElementType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumElementType.class);
-		}
-
-		/**  */
-		public static final EnumElementType Auxiliary = new EnumElementType("Auxiliary");
-		/**  */
-		public static final EnumElementType Barcode = new EnumElementType("Barcode");
-		/**  */
-		public static final EnumElementType Composed = new EnumElementType("Composed");
-		/**  */
-		public static final EnumElementType Document = new EnumElementType("Document");
-		/**  */
-		public static final EnumElementType Graphic = new EnumElementType("Graphic");
-		/**  */
-		public static final EnumElementType IdentificationField = new EnumElementType("IdentificationField");
-		/**  */
-		public static final EnumElementType Image = new EnumElementType("Image");
-		/**  */
-		public static final EnumElementType MultiDocument = new EnumElementType("MultiDocument");
-		/**  */
-		public static final EnumElementType MultiSet = new EnumElementType("MultiSet");
-		/**  */
-		public static final EnumElementType Page = new EnumElementType("Page");
-		/**  */
-		public static final EnumElementType Reservation = new EnumElementType("Reservation");
-		/**  */
-		public static final EnumElementType Surface = new EnumElementType("Surface");
-		/**  */
-		public static final EnumElementType Text = new EnumElementType("Text");
-		/**  */
-		public static final EnumElementType Tile = new EnumElementType("Tile");
-		/**  */
-		public static final EnumElementType Unknown = new EnumElementType("Unknown");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -331,7 +236,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIgnorePDLCopies(boolean value)
+	public void setIgnorePDLCopies(final boolean value)
 	{
 		setAttribute(AttributeName.IGNOREPDLCOPIES, value, null);
 	}
@@ -356,7 +261,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIgnorePDLImposition(boolean value)
+	public void setIgnorePDLImposition(final boolean value)
 	{
 		setAttribute(AttributeName.IGNOREPDLIMPOSITION, value, null);
 	}
@@ -381,7 +286,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setClipPath(String value)
+	public void setClipPath(final String value)
 	{
 		setAttribute(AttributeName.CLIPPATH, value, null);
 	}
@@ -406,7 +311,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setContentDataRefs(VString value)
+	public void setContentDataRefs(final VString value)
 	{
 		setAttribute(AttributeName.CONTENTDATAREFS, value, null);
 	}
@@ -418,8 +323,8 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 */
 	public VString getContentDataRefs()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.CONTENTDATAREFS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.CONTENTDATAREFS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -434,9 +339,9 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setElementType(EElementType enumVar)
+	public void setElementType(final EnumElementType enumVar)
 	{
-		setAttribute(AttributeName.ELEMENTTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ELEMENTTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -444,35 +349,6 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EElementType getEElementType()
-	{
-		return EElementType.getEnum(getAttribute(AttributeName.ELEMENTTYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ElementType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ElementType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetElementType(EElementType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setElementType(EnumElementType enumVar)
-	{
-		setAttribute(AttributeName.ELEMENTTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ElementType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EElementType GetEElementType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumElementType getElementType()
 	{
 		return EnumElementType.getEnum(getAttribute(AttributeName.ELEMENTTYPE, null, null));
@@ -488,7 +364,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHasBleeds(boolean value)
+	public void setHasBleeds(final boolean value)
 	{
 		setAttribute(AttributeName.HASBLEEDS, value, null);
 	}
@@ -513,7 +389,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIsBlank(boolean value)
+	public void setIsBlank(final boolean value)
 	{
 		setAttribute(AttributeName.ISBLANK, value, null);
 	}
@@ -538,7 +414,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIsPrintable(boolean value)
+	public void setIsPrintable(final boolean value)
 	{
 		setAttribute(AttributeName.ISPRINTABLE, value, null);
 	}
@@ -563,7 +439,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIsTrapped(boolean value)
+	public void setIsTrapped(final boolean value)
 	{
 		setAttribute(AttributeName.ISTRAPPED, value, null);
 	}
@@ -588,7 +464,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPageListIndex(JDFIntegerRangeList value)
+	public void setPageListIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.PAGELISTINDEX, value, null);
 	}
@@ -601,8 +477,8 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 */
 	public JDFIntegerRangeList getPageListIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.PAGELISTINDEX, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PAGELISTINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -616,7 +492,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSetLevel(String value)
+	public void setSetLevel(final String value)
 	{
 		setAttribute(AttributeName.SETLEVEL, value, null);
 	}
@@ -641,7 +517,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSourceBleedBox(JDFRectangle value)
+	public void setSourceBleedBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.SOURCEBLEEDBOX, value, null);
 	}
@@ -654,8 +530,8 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 */
 	public JDFRectangle getSourceBleedBox()
 	{
-		String strAttrName = getAttribute(AttributeName.SOURCEBLEEDBOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SOURCEBLEEDBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -669,7 +545,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSourceClipBox(JDFRectangle value)
+	public void setSourceClipBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.SOURCECLIPBOX, value, null);
 	}
@@ -682,8 +558,8 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 */
 	public JDFRectangle getSourceClipBox()
 	{
-		String strAttrName = getAttribute(AttributeName.SOURCECLIPBOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SOURCECLIPBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -697,7 +573,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSourceMediaBox(JDFRectangle value)
+	public void setSourceMediaBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.SOURCEMEDIABOX, value, null);
 	}
@@ -710,8 +586,8 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 */
 	public JDFRectangle getSourceMediaBox()
 	{
-		String strAttrName = getAttribute(AttributeName.SOURCEMEDIABOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SOURCEMEDIABOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -725,7 +601,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSourceTrimBox(JDFRectangle value)
+	public void setSourceTrimBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.SOURCETRIMBOX, value, null);
 	}
@@ -738,8 +614,8 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 */
 	public JDFRectangle getSourceTrimBox()
 	{
-		String strAttrName = getAttribute(AttributeName.SOURCETRIMBOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SOURCETRIMBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -753,7 +629,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTemplate(boolean value)
+	public void setTemplate(final boolean value)
 	{
 		setAttribute(AttributeName.TEMPLATE, value, null);
 	}
@@ -810,7 +686,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refColorPool(JDFColorPool refTarget)
+	public void refColorPool(final JDFColorPool refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -841,7 +717,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFContentList the element
 	 */
-	public JDFContentList getCreateContentList(int iSkip)
+	public JDFContentList getCreateContentList(final int iSkip)
 	{
 		return (JDFContentList) getCreateElement_JDFElement(ElementName.CONTENTLIST, null, iSkip);
 	}
@@ -853,7 +729,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 * @return JDFContentList the element
 	 *         default is getContentList(0)
 	 */
-	public JDFContentList getContentList(int iSkip)
+	public JDFContentList getContentList(final int iSkip)
 	{
 		return (JDFContentList) getElement(ElementName.CONTENTLIST, null, iSkip);
 	}
@@ -883,7 +759,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refContentList(JDFContentList refTarget)
+	public void refContentList(final JDFContentList refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -955,7 +831,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refElementColorParams(JDFElementColorParams refTarget)
+	public void refElementColorParams(final JDFElementColorParams refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -996,7 +872,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1037,7 +913,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refImageCompressionParams(JDFImageCompressionParams refTarget)
+	public void refImageCompressionParams(final JDFImageCompressionParams refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1078,7 +954,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refPageList(JDFPageList refTarget)
+	public void refPageList(final JDFPageList refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1119,7 +995,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refScreeningParams(JDFScreeningParams refTarget)
+	public void refScreeningParams(final JDFScreeningParams refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1150,7 +1026,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationSpec the element
 	 */
-	public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
+	public JDFSeparationSpec getCreateSeparationSpec(final int iSkip)
 	{
 		return (JDFSeparationSpec) getCreateElement_JDFElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}
@@ -1162,7 +1038,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 * @return JDFSeparationSpec the element
 	 *         default is getSeparationSpec(0)
 	 */
-	public JDFSeparationSpec getSeparationSpec(int iSkip)
+	public JDFSeparationSpec getSeparationSpec(final int iSkip)
 	{
 		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}

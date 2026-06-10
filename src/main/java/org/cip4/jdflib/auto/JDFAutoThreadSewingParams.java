@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -104,16 +100,16 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.BLINDSTITCH, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.CASTINGMATERIAL, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumCastingMaterial.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.COREMATERIAL, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumCoreMaterial.getEnum(0),
-				null);
+				JavaEnumUtil.getEnum(EnumCastingMaterial.class, 0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.COREMATERIAL, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumCoreMaterial.class, 0), null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.GLUELINEREFSHEETS, 0x3333333333l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.OFFSET, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.NEEDLEPOSITIONS, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.NUMBEROFNEEDLES, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.SEALING, 0x4444333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.SEWINGPATTERN, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumSewingPattern.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumSewingPattern.class, 0), null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.THREADTHICKNESS, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.THREADBRAND, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
@@ -142,7 +138,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoThreadSewingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoThreadSewingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -154,7 +150,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoThreadSewingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoThreadSewingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -167,7 +163,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoThreadSewingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoThreadSewingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -178,7 +174,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -193,249 +189,50 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for CastingMaterial
+	 * Enumeration strings for numCastingMaterial
 	 */
 
-	public enum ECastingMaterial
+	public enum EnumCastingMaterial
 	{
 		Cotton, Nylon, Polyester;
 
-		public static ECastingMaterial getEnum(String val)
+		public static EnumCastingMaterial getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ECastingMaterial.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumCastingMaterial.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for CastingMaterial
+	 * Enumeration strings for numCoreMaterial
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumCastingMaterial extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumCastingMaterial(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumCastingMaterial getEnum(String enumName)
-		{
-			return (EnumCastingMaterial) getEnum(EnumCastingMaterial.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumCastingMaterial getEnum(int enumValue)
-		{
-			return (EnumCastingMaterial) getEnum(EnumCastingMaterial.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumCastingMaterial.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumCastingMaterial.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumCastingMaterial.class);
-		}
-
-		/**  */
-		public static final EnumCastingMaterial Cotton = new EnumCastingMaterial("Cotton");
-		/**  */
-		public static final EnumCastingMaterial Nylon = new EnumCastingMaterial("Nylon");
-		/**  */
-		public static final EnumCastingMaterial Polyester = new EnumCastingMaterial("Polyester");
-	}
-
-	/**
-	 * Enumeration strings for CoreMaterial
-	 */
-
-	public enum ECoreMaterial
+	public enum EnumCoreMaterial
 	{
 		Cotton, Nylon, Polyester;
 
-		public static ECoreMaterial getEnum(String val)
+		public static EnumCoreMaterial getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ECoreMaterial.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumCoreMaterial.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for CoreMaterial
+	 * Enumeration strings for numSewingPattern
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumCoreMaterial extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumCoreMaterial(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumCoreMaterial getEnum(String enumName)
-		{
-			return (EnumCoreMaterial) getEnum(EnumCoreMaterial.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumCoreMaterial getEnum(int enumValue)
-		{
-			return (EnumCoreMaterial) getEnum(EnumCoreMaterial.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumCoreMaterial.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumCoreMaterial.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumCoreMaterial.class);
-		}
-
-		/**  */
-		public static final EnumCoreMaterial Cotton = new EnumCoreMaterial("Cotton");
-		/**  */
-		public static final EnumCoreMaterial Nylon = new EnumCoreMaterial("Nylon");
-		/**  */
-		public static final EnumCoreMaterial Polyester = new EnumCoreMaterial("Polyester");
-	}
-
-	/**
-	 * Enumeration strings for SewingPattern
-	 */
-
-	public enum ESewingPattern
+	public enum EnumSewingPattern
 	{
 		Normal, Staggered, CombinedStaggered, Side;
 
-		public static ESewingPattern getEnum(String val)
+		public static EnumSewingPattern getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ESewingPattern.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSewingPattern.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for SewingPattern
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumSewingPattern extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumSewingPattern(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumSewingPattern getEnum(String enumName)
-		{
-			return (EnumSewingPattern) getEnum(EnumSewingPattern.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumSewingPattern getEnum(int enumValue)
-		{
-			return (EnumSewingPattern) getEnum(EnumSewingPattern.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSewingPattern.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSewingPattern.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSewingPattern.class);
-		}
-
-		/**  */
-		public static final EnumSewingPattern Normal = new EnumSewingPattern("Normal");
-		/**  */
-		public static final EnumSewingPattern Staggered = new EnumSewingPattern("Staggered");
-		/**  */
-		public static final EnumSewingPattern CombinedStaggered = new EnumSewingPattern("CombinedStaggered");
-		/**  */
-		public static final EnumSewingPattern Side = new EnumSewingPattern("Side");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -447,7 +244,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBlindStitch(boolean value)
+	public void setBlindStitch(final boolean value)
 	{
 		setAttribute(AttributeName.BLINDSTITCH, value, null);
 	}
@@ -472,9 +269,9 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setCastingMaterial(ECastingMaterial enumVar)
+	public void setCastingMaterial(final EnumCastingMaterial enumVar)
 	{
-		setAttribute(AttributeName.CASTINGMATERIAL, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.CASTINGMATERIAL, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -482,35 +279,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ECastingMaterial getECastingMaterial()
-	{
-		return ECastingMaterial.getEnum(getAttribute(AttributeName.CASTINGMATERIAL, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute CastingMaterial
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute CastingMaterial
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetCastingMaterial(ECastingMaterial) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setCastingMaterial(EnumCastingMaterial enumVar)
-	{
-		setAttribute(AttributeName.CASTINGMATERIAL, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute CastingMaterial
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ECastingMaterial GetECastingMaterial() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumCastingMaterial getCastingMaterial()
 	{
 		return EnumCastingMaterial.getEnum(getAttribute(AttributeName.CASTINGMATERIAL, null, null));
@@ -526,9 +294,9 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setCoreMaterial(ECoreMaterial enumVar)
+	public void setCoreMaterial(final EnumCoreMaterial enumVar)
 	{
-		setAttribute(AttributeName.COREMATERIAL, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.COREMATERIAL, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -536,35 +304,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ECoreMaterial getECoreMaterial()
-	{
-		return ECoreMaterial.getEnum(getAttribute(AttributeName.COREMATERIAL, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute CoreMaterial
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute CoreMaterial
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetCoreMaterial(ECoreMaterial) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setCoreMaterial(EnumCoreMaterial enumVar)
-	{
-		setAttribute(AttributeName.COREMATERIAL, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute CoreMaterial
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ECoreMaterial GetECoreMaterial() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumCoreMaterial getCoreMaterial()
 	{
 		return EnumCoreMaterial.getEnum(getAttribute(AttributeName.COREMATERIAL, null, null));
@@ -580,7 +319,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGlueLineRefSheets(JDFIntegerList value)
+	public void setGlueLineRefSheets(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.GLUELINEREFSHEETS, value, null);
 	}
@@ -593,8 +332,8 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 */
 	public JDFIntegerList getGlueLineRefSheets()
 	{
-		String strAttrName = getAttribute(AttributeName.GLUELINEREFSHEETS, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.GLUELINEREFSHEETS, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -608,7 +347,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOffset(double value)
+	public void setOffset(final double value)
 	{
 		setAttribute(AttributeName.OFFSET, value, null);
 	}
@@ -633,7 +372,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNeedlePositions(JDFNumberList value)
+	public void setNeedlePositions(final JDFNumberList value)
 	{
 		setAttribute(AttributeName.NEEDLEPOSITIONS, value, null);
 	}
@@ -646,8 +385,8 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 */
 	public JDFNumberList getNeedlePositions()
 	{
-		String strAttrName = getAttribute(AttributeName.NEEDLEPOSITIONS, null, null);
-		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.NEEDLEPOSITIONS, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -661,7 +400,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNumberOfNeedles(int value)
+	public void setNumberOfNeedles(final int value)
 	{
 		setAttribute(AttributeName.NUMBEROFNEEDLES, value, null);
 	}
@@ -686,7 +425,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSealing(boolean value)
+	public void setSealing(final boolean value)
 	{
 		setAttribute(AttributeName.SEALING, value, null);
 	}
@@ -711,9 +450,9 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSewingPattern(ESewingPattern enumVar)
+	public void setSewingPattern(final EnumSewingPattern enumVar)
 	{
-		setAttribute(AttributeName.SEWINGPATTERN, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SEWINGPATTERN, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -721,35 +460,6 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESewingPattern getESewingPattern()
-	{
-		return ESewingPattern.getEnum(getAttribute(AttributeName.SEWINGPATTERN, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute SewingPattern
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute SewingPattern
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetSewingPattern(ESewingPattern) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSewingPattern(EnumSewingPattern enumVar)
-	{
-		setAttribute(AttributeName.SEWINGPATTERN, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute SewingPattern
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ESewingPattern GetESewingPattern() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumSewingPattern getSewingPattern()
 	{
 		return EnumSewingPattern.getEnum(getAttribute(AttributeName.SEWINGPATTERN, null, null));
@@ -765,7 +475,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setThreadThickness(double value)
+	public void setThreadThickness(final double value)
 	{
 		setAttribute(AttributeName.THREADTHICKNESS, value, null);
 	}
@@ -790,7 +500,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setThreadBrand(String value)
+	public void setThreadBrand(final String value)
 	{
 		setAttribute(AttributeName.THREADBRAND, value, null);
 	}
@@ -837,7 +547,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueLine the element
 	 */
-	public JDFGlueLine getCreateGlueLine(int iSkip)
+	public JDFGlueLine getCreateGlueLine(final int iSkip)
 	{
 		return (JDFGlueLine) getCreateElement_JDFElement(ElementName.GLUELINE, null, iSkip);
 	}
@@ -849,7 +559,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 * @return JDFGlueLine the element
 	 *         default is getGlueLine(0)
 	 */
-	public JDFGlueLine getGlueLine(int iSkip)
+	public JDFGlueLine getGlueLine(final int iSkip)
 	{
 		return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
 	}

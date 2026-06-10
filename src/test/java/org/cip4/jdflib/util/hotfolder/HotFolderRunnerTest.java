@@ -62,12 +62,16 @@ class HotFolderRunnerTest extends JDFTestCaseBase
 	{
 		final HotFolderRunner r = HotFolderRunner.getCreateTherunner();
 		r.setMaxConcurrent(1);
-		HotFolder hf = new HotFolder(new File(sm_dirTestDataTemp + "dummy"), null, null);
+		final HotFolder hf = new HotFolder(new File(sm_dirTestDataTemp + "dummy"), null, null);
 		for (int i = 0; i < 10; i++)
+		{
 			r.runFile(hf.new HotFileRunner(new File("nix")));
+		}
 		r.setMaxConcurrent(3);
 		for (int i = 0; i < 10; i++)
+		{
 			r.runFile(hf.new HotFileRunner(new File("nix")));
+		}
 	}
 
 	@Test

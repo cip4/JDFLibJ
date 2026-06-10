@@ -81,11 +81,8 @@ import org.cip4.jdflib.util.UrlUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         class to generate rolling backup files using a simple <FileName>.n naming algorithm.
- *
  *         The oldest file dies when the maximum number is reached
- *
  *         08.12.2008
  */
 public class RollingFile extends File
@@ -98,8 +95,8 @@ public class RollingFile extends File
 	/**
 	 * @param pathname the base filename
 	 * @param baseName the name of the base file, <br/>
-	 *        if a filename with double "." , e.g. xxx..txt is specified, the algorithm will generate names such as xxx.000001.txt, <br/>
-	 *        if a single "." e.g. xxx.txt is specified, the algorithm will generate names such as xxx000001.txt, <br/>
+	 *                 if a filename with double "." , e.g. xxx..txt is specified, the algorithm will generate names such as xxx.000001.txt, <br/>
+	 *                 if a single "." e.g. xxx.txt is specified, the algorithm will generate names such as xxx000001.txt, <br/>
 	 */
 	public RollingFile(final String pathname, final String baseName)
 	{
@@ -113,20 +110,23 @@ public class RollingFile extends File
 
 	/**
 	 * @return
-	 *
 	 */
 	protected int calcPos()
 	{
 		final File[] list = readAll();
 		int p = 0;
 		if (list == null)
+		{
 			return p;
+		}
 		for (final File f : list)
 		{
 			String name = f.getName();
 			name = UrlUtil.newExtension(name, null);
 			if (base != null)
+			{
 				name = name.substring(base.length());
+			}
 			final int n = StringUtil.parseInt(name, -1);
 			if (n > p)
 			{
@@ -146,7 +146,9 @@ public class RollingFile extends File
 		final String expression = getFileExpression();
 		final File[] list = FileUtil.listFilesWithExpression(this, expression);
 		if (list != null)
+		{
 			Arrays.sort(list);
+		}
 		return list;
 	}
 
@@ -157,9 +159,13 @@ public class RollingFile extends File
 	{
 		String expression = "(.)*";
 		if (base != null)
+		{
 			expression = base + expression;
+		}
 		if (ext != null)
+		{
 			expression = expression + "." + ext;
+		}
 		return expression;
 	}
 

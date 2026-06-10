@@ -25,36 +25,36 @@ public class JDFNodeInfoCmdParams extends JDFAutoNodeInfoCmdParams
 
 	/**
 	 * Constructor for JDFNodeInfoCmdParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFNodeInfoCmdParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFNodeInfoCmdParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFNodeInfoCmdParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFNodeInfoCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFNodeInfoCmdParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFNodeInfoCmdParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFNodeInfoCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFNodeInfoCmdParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -63,7 +63,7 @@ public class JDFNodeInfoCmdParams extends JDFAutoNodeInfoCmdParams
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -74,7 +74,7 @@ public class JDFNodeInfoCmdParams extends JDFAutoNodeInfoCmdParams
 
 	/**
 	 * get part map vector
-	 * 
+	 *
 	 * @return VJDFAttributeMap: vector of attribute maps, one for each part
 	 */
 	@Override
@@ -85,45 +85,45 @@ public class JDFNodeInfoCmdParams extends JDFAutoNodeInfoCmdParams
 
 	/**
 	 * set all parts to those defined in vParts
-	 * 
+	 *
 	 * @param vParts vector of attribute maps for the parts
 	 */
 	@Override
-	public void setPartMapVector(VJDFAttributeMap vParts)
+	public void setPartMapVector(final VJDFAttributeMap vParts)
 	{
 		super.setPartMapVector(vParts);
 	}
 
 	/**
 	 * set all parts to those defined in vParts
-	 * 
+	 *
 	 * @param mPart attribute map for the part to set
 	 */
 	@Override
-	public void setPartMap(JDFAttributeMap mPart)
+	public void setPartMap(final JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
 	}
 
 	/**
 	 * remove the part defined in mPart
-	 * 
+	 *
 	 * @param mPart attribute map for the part to remove
 	 */
 	@Override
-	public void removePartMap(JDFAttributeMap mPart)
+	public void removePartMap(final JDFAttributeMap mPart)
 	{
 		super.removePartMap(mPart);
 	}
 
 	/**
 	 * check whether the part defined in mPart is included
-	 * 
+	 *
 	 * @param mPart attribute map to check for
 	 * @return boolean - returns true if the part exists
 	 */
 	@Override
-	public boolean hasPartMap(JDFAttributeMap mPart)
+	public boolean hasPartMap(final JDFAttributeMap mPart)
 	{
 		return super.hasPartMap(mPart);
 	}

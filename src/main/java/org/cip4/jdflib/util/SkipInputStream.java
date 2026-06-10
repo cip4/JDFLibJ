@@ -80,7 +80,6 @@ import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
  * stream class that allows allows skipping until a certain tag is found
  *
  * @author rainer prosi
- *
  */
 public class SkipInputStream extends ByteArrayIOInputStream
 {
@@ -139,7 +138,6 @@ public class SkipInputStream extends ByteArrayIOInputStream
 	/**
 	 * @param maxPreRead
 	 * @throws IOException
-	 *
 	 */
 	private boolean readToTag() throws IOException
 	{
@@ -239,7 +237,6 @@ public class SkipInputStream extends ByteArrayIOInputStream
 	}
 
 	/**
-	 *
 	 * @see java.io.ByteArrayInputStream#reset()
 	 */
 	@Override
@@ -250,7 +247,6 @@ public class SkipInputStream extends ByteArrayIOInputStream
 	}
 
 	/**
-	 *
 	 * @see java.io.ByteArrayInputStream#mark(int)
 	 */
 	@Override

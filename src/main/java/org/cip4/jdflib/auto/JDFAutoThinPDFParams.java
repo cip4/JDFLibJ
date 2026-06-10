@@ -106,7 +106,7 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoThinPDFParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoThinPDFParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoThinPDFParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoThinPDFParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoThinPDFParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoThinPDFParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -152,7 +152,7 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFilePerPage(boolean value)
+	public void setFilePerPage(final boolean value)
 	{
 		setAttribute(AttributeName.FILEPERPAGE, value, null);
 	}
@@ -177,7 +177,7 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSidelineEPS(boolean value)
+	public void setSidelineEPS(final boolean value)
 	{
 		setAttribute(AttributeName.SIDELINEEPS, value, null);
 	}
@@ -202,7 +202,7 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSidelineFonts(boolean value)
+	public void setSidelineFonts(final boolean value)
 	{
 		setAttribute(AttributeName.SIDELINEFONTS, value, null);
 	}
@@ -227,7 +227,7 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSidelineImages(boolean value)
+	public void setSidelineImages(final boolean value)
 	{
 		setAttribute(AttributeName.SIDELINEIMAGES, value, null);
 	}

@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -98,7 +93,7 @@ public abstract class JDFAutoResourceParam extends JDFElement
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTID, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEFAULTJDF, 0x3333333331l, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFAULTPRIORITY, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumDefaultPriority.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumDefaultPriority.class, 0), null);
 	}
 
 	@Override
@@ -113,7 +108,7 @@ public abstract class JDFAutoResourceParam extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoResourceParam(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoResourceParam(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -125,7 +120,7 @@ public abstract class JDFAutoResourceParam extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoResourceParam(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoResourceParam(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -138,93 +133,28 @@ public abstract class JDFAutoResourceParam extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoResourceParam(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoResourceParam(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for DefaultPriority
+	 * Enumeration strings for numDefaultPriority
 	 */
 
-	public enum EDefaultPriority
+	public enum EnumDefaultPriority
 	{
 		Application, DefaultJDF;
 
-		public static EDefaultPriority getEnum(String val)
+		public static EnumDefaultPriority getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EDefaultPriority.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumDefaultPriority.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for DefaultPriority
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumDefaultPriority extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumDefaultPriority(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumDefaultPriority getEnum(String enumName)
-		{
-			return (EnumDefaultPriority) getEnum(EnumDefaultPriority.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDefaultPriority getEnum(int enumValue)
-		{
-			return (EnumDefaultPriority) getEnum(EnumDefaultPriority.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDefaultPriority.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDefaultPriority.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDefaultPriority.class);
-		}
-
-		/**  */
-		public static final EnumDefaultPriority Application = new EnumDefaultPriority("Application");
-		/**  */
-		public static final EnumDefaultPriority DefaultJDF = new EnumDefaultPriority("DefaultJDF");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -236,7 +166,7 @@ public abstract class JDFAutoResourceParam extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDefaultID(String value)
+	public void setDefaultID(final String value)
 	{
 		setAttribute(AttributeName.DEFAULTID, value, null);
 	}
@@ -261,7 +191,7 @@ public abstract class JDFAutoResourceParam extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDefaultJDF(String value)
+	public void setDefaultJDF(final String value)
 	{
 		setAttribute(AttributeName.DEFAULTJDF, value, null);
 	}
@@ -286,9 +216,9 @@ public abstract class JDFAutoResourceParam extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDefaultPriority(EDefaultPriority enumVar)
+	public void setDefaultPriority(final EnumDefaultPriority enumVar)
 	{
-		setAttribute(AttributeName.DEFAULTPRIORITY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DEFAULTPRIORITY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -296,35 +226,6 @@ public abstract class JDFAutoResourceParam extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EDefaultPriority getEDefaultPriority()
-	{
-		return EDefaultPriority.getEnum(getAttribute(AttributeName.DEFAULTPRIORITY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute DefaultPriority
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute DefaultPriority
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDefaultPriority(EDefaultPriority) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDefaultPriority(EnumDefaultPriority enumVar)
-	{
-		setAttribute(AttributeName.DEFAULTPRIORITY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute DefaultPriority
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EDefaultPriority GetEDefaultPriority() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumDefaultPriority getDefaultPriority()
 	{
 		return EnumDefaultPriority.getEnum(getAttribute(AttributeName.DEFAULTPRIORITY, null, null));

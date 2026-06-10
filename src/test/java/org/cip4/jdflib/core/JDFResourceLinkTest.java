@@ -81,7 +81,6 @@ import java.util.List;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
-import org.cip4.jdflib.core.JDFResourceLink.EUsage;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
@@ -1276,7 +1275,7 @@ class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFResourceLinkPool rlp = n.appendResourceLinkPool();
 		final JDFResourceLink rl = (JDFResourceLink) rlp.appendElement("FooLink");
 		assertNotNull(rl.shortString());
-		rl.setUsage(EUsage.Input);
+		rl.setUsage(EnumUsage.Input);
 		assertNotNull(rl.shortString());
 		rl.setProcessUsage("Bar");
 		assertNotNull(rl.shortString());

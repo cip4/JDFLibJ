@@ -116,7 +116,7 @@ public abstract class JDFAutoPerformance extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPerformance(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPerformance(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -128,7 +128,7 @@ public abstract class JDFAutoPerformance extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPerformance(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPerformance(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -141,7 +141,7 @@ public abstract class JDFAutoPerformance extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPerformance(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPerformance(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -162,7 +162,7 @@ public abstract class JDFAutoPerformance extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAverageAmount(double value)
+	public void setAverageAmount(final double value)
 	{
 		setAttribute(AttributeName.AVERAGEAMOUNT, value, null);
 	}
@@ -187,7 +187,7 @@ public abstract class JDFAutoPerformance extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAverageCleanup(JDFDuration value)
+	public void setAverageCleanup(final JDFDuration value)
 	{
 		setAttribute(AttributeName.AVERAGECLEANUP, value, null);
 	}
@@ -200,8 +200,8 @@ public abstract class JDFAutoPerformance extends JDFElement
 	 */
 	public JDFDuration getAverageCleanup()
 	{
-		String strAttrName = getAttribute(AttributeName.AVERAGECLEANUP, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.AVERAGECLEANUP, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -215,7 +215,7 @@ public abstract class JDFAutoPerformance extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAverageSetup(JDFDuration value)
+	public void setAverageSetup(final JDFDuration value)
 	{
 		setAttribute(AttributeName.AVERAGESETUP, value, null);
 	}
@@ -228,8 +228,8 @@ public abstract class JDFAutoPerformance extends JDFElement
 	 */
 	public JDFDuration getAverageSetup()
 	{
-		String strAttrName = getAttribute(AttributeName.AVERAGESETUP, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.AVERAGESETUP, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -243,7 +243,7 @@ public abstract class JDFAutoPerformance extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaxAmount(double value)
+	public void setMaxAmount(final double value)
 	{
 		setAttribute(AttributeName.MAXAMOUNT, value, null);
 	}
@@ -268,7 +268,7 @@ public abstract class JDFAutoPerformance extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaxCleanup(JDFDuration value)
+	public void setMaxCleanup(final JDFDuration value)
 	{
 		setAttribute(AttributeName.MAXCLEANUP, value, null);
 	}
@@ -281,8 +281,8 @@ public abstract class JDFAutoPerformance extends JDFElement
 	 */
 	public JDFDuration getMaxCleanup()
 	{
-		String strAttrName = getAttribute(AttributeName.MAXCLEANUP, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.MAXCLEANUP, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -296,7 +296,7 @@ public abstract class JDFAutoPerformance extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaxSetup(JDFDuration value)
+	public void setMaxSetup(final JDFDuration value)
 	{
 		setAttribute(AttributeName.MAXSETUP, value, null);
 	}
@@ -309,8 +309,8 @@ public abstract class JDFAutoPerformance extends JDFElement
 	 */
 	public JDFDuration getMaxSetup()
 	{
-		String strAttrName = getAttribute(AttributeName.MAXSETUP, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.MAXSETUP, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -324,7 +324,7 @@ public abstract class JDFAutoPerformance extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMinAmount(double value)
+	public void setMinAmount(final double value)
 	{
 		setAttribute(AttributeName.MINAMOUNT, value, null);
 	}
@@ -349,7 +349,7 @@ public abstract class JDFAutoPerformance extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMinCleanup(JDFDuration value)
+	public void setMinCleanup(final JDFDuration value)
 	{
 		setAttribute(AttributeName.MINCLEANUP, value, null);
 	}
@@ -362,8 +362,8 @@ public abstract class JDFAutoPerformance extends JDFElement
 	 */
 	public JDFDuration getMinCleanup()
 	{
-		String strAttrName = getAttribute(AttributeName.MINCLEANUP, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.MINCLEANUP, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -377,7 +377,7 @@ public abstract class JDFAutoPerformance extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMinSetup(JDFDuration value)
+	public void setMinSetup(final JDFDuration value)
 	{
 		setAttribute(AttributeName.MINSETUP, value, null);
 	}
@@ -390,8 +390,8 @@ public abstract class JDFAutoPerformance extends JDFElement
 	 */
 	public JDFDuration getMinSetup()
 	{
-		String strAttrName = getAttribute(AttributeName.MINSETUP, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.MINSETUP, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -405,7 +405,7 @@ public abstract class JDFAutoPerformance extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setName(String value)
+	public void setName(final String value)
 	{
 		setAttribute(AttributeName.NAME, value, null);
 	}
@@ -430,7 +430,7 @@ public abstract class JDFAutoPerformance extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDevCapsRef(String value)
+	public void setDevCapsRef(final String value)
 	{
 		setAttribute(AttributeName.DEVCAPSREF, value, null);
 	}
@@ -455,7 +455,7 @@ public abstract class JDFAutoPerformance extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setUnit(String value)
+	public void setUnit(final String value)
 	{
 		setAttribute(AttributeName.UNIT, value, null);
 	}

@@ -71,8 +71,6 @@
 package org.cip4.jdflib.auto;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoCut.EWorkingDirection;
-import org.cip4.jdflib.auto.JDFAutoCut.EnumWorkingDirection;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -82,6 +80,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoGlue : public JDFElement
@@ -96,7 +95,7 @@ public abstract class JDFAutoGlue extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.WORKINGDIRECTION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumWorkingDirection.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumWorkingDirection.class, 0), null);
 	}
 
 	@Override
@@ -124,7 +123,7 @@ public abstract class JDFAutoGlue extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGlue(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoGlue(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -136,7 +135,7 @@ public abstract class JDFAutoGlue extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGlue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoGlue(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -149,41 +148,28 @@ public abstract class JDFAutoGlue extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoGlue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoGlue(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * Enumeration strings for numWorkingDirection
 	 */
 
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute WorkingDirection
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute WorkingDirection
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 */
-	public void setWorkingDirection(EWorkingDirection enumVar)
+	public enum EnumWorkingDirection
 	{
-		setAttribute(AttributeName.WORKINGDIRECTION, enumVar == null ? null : enumVar.name(), null);
-	}
+		Top, Bottom;
 
-	/**
-	 * (9) get attribute WorkingDirection
-	 *
-	 * @return the value of the attribute
-	 */
-	public EWorkingDirection getEWorkingDirection()
-	{
-		return EWorkingDirection.getEnum(getAttribute(AttributeName.WORKINGDIRECTION, null, null));
-	}
+		public static EnumWorkingDirection getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumWorkingDirection.class, val, null);
+		}
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
+		 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -194,21 +180,17 @@ public abstract class JDFAutoGlue extends JDFElement
 	 * (5) set attribute WorkingDirection
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetWorkingDirection(EWorkingDirection) based on java.lang.enum instead
 	 */
-	@Deprecated
-	public void setWorkingDirection(EnumWorkingDirection enumVar)
+	public void setWorkingDirection(final EnumWorkingDirection enumVar)
 	{
-		setAttribute(AttributeName.WORKINGDIRECTION, enumVar == null ? null : enumVar.getName(), null);
+		setAttribute(AttributeName.WORKINGDIRECTION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
 	 * (9) get attribute WorkingDirection
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EWorkingDirection GetEWorkingDirection() based on java.lang.enum instead
 	 */
-	@Deprecated
 	public EnumWorkingDirection getWorkingDirection()
 	{
 		return EnumWorkingDirection.getEnum(getAttribute(AttributeName.WORKINGDIRECTION, null, null));
@@ -256,7 +238,7 @@ public abstract class JDFAutoGlue extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refGlueApplication(JDFGlueApplication refTarget)
+	public void refGlueApplication(final JDFGlueApplication refTarget)
 	{
 		refElement(refTarget);
 	}

@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -102,11 +97,12 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHEETTYPE, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetType.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHEETUSAGE, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetUsage.getEnum(0),
-				null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHEETTYPE, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumSheetType.class, 0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHEETUSAGE, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumSheetUsage.class, 0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.INCLUDEINBUNDLEITEM, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumIncludeInBundleItem.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumIncludeInBundleItem.class, 0), null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.ISWASTE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.MARKLIST, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.SHEETFORMAT, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
@@ -139,7 +135,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoInsertSheet(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoInsertSheet(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -151,7 +147,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoInsertSheet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoInsertSheet(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -164,7 +160,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoInsertSheet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoInsertSheet(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -175,7 +171,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -190,273 +186,50 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for SheetType
+	 * Enumeration strings for numSheetType
 	 */
 
-	public enum ESheetType
+	public enum EnumSheetType
 	{
 		AccountingSheet, ErrorSheet, FillSheet, InsertSheet, JobSheet, SeparatorSheet;
 
-		public static ESheetType getEnum(String val)
+		public static EnumSheetType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ESheetType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSheetType.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for SheetType
+	 * Enumeration strings for numSheetUsage
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumSheetType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumSheetType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumSheetType getEnum(String enumName)
-		{
-			return (EnumSheetType) getEnum(EnumSheetType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumSheetType getEnum(int enumValue)
-		{
-			return (EnumSheetType) getEnum(EnumSheetType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSheetType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSheetType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSheetType.class);
-		}
-
-		/**  */
-		public static final EnumSheetType AccountingSheet = new EnumSheetType("AccountingSheet");
-		/**  */
-		public static final EnumSheetType ErrorSheet = new EnumSheetType("ErrorSheet");
-		/**  */
-		public static final EnumSheetType FillSheet = new EnumSheetType("FillSheet");
-		/**  */
-		public static final EnumSheetType InsertSheet = new EnumSheetType("InsertSheet");
-		/**  */
-		public static final EnumSheetType JobSheet = new EnumSheetType("JobSheet");
-		/**  */
-		public static final EnumSheetType SeparatorSheet = new EnumSheetType("SeparatorSheet");
-	}
-
-	/**
-	 * Enumeration strings for SheetUsage
-	 */
-
-	public enum ESheetUsage
+	public enum EnumSheetUsage
 	{
 		FillForceBack, FillForceFront, FillSheet, FillSignature, FillSurface, Header, Interleaved, InterleavedBefore, OnError, Slip, SlipCopy, Trailer;
 
-		public static ESheetUsage getEnum(String val)
+		public static EnumSheetUsage getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ESheetUsage.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSheetUsage.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for SheetUsage
+	 * Enumeration strings for numIncludeInBundleItem
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumSheetUsage extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumSheetUsage(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumSheetUsage getEnum(String enumName)
-		{
-			return (EnumSheetUsage) getEnum(EnumSheetUsage.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumSheetUsage getEnum(int enumValue)
-		{
-			return (EnumSheetUsage) getEnum(EnumSheetUsage.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSheetUsage.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSheetUsage.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSheetUsage.class);
-		}
-
-		/**  */
-		public static final EnumSheetUsage FillForceBack = new EnumSheetUsage("FillForceBack");
-		/**  */
-		public static final EnumSheetUsage FillForceFront = new EnumSheetUsage("FillForceFront");
-		/**  */
-		public static final EnumSheetUsage FillSheet = new EnumSheetUsage("FillSheet");
-		/**  */
-		public static final EnumSheetUsage FillSignature = new EnumSheetUsage("FillSignature");
-		/**  */
-		public static final EnumSheetUsage FillSurface = new EnumSheetUsage("FillSurface");
-		/**  */
-		public static final EnumSheetUsage Header = new EnumSheetUsage("Header");
-		/**  */
-		public static final EnumSheetUsage Interleaved = new EnumSheetUsage("Interleaved");
-		/**  */
-		public static final EnumSheetUsage InterleavedBefore = new EnumSheetUsage("InterleavedBefore");
-		/**  */
-		public static final EnumSheetUsage OnError = new EnumSheetUsage("OnError");
-		/**  */
-		public static final EnumSheetUsage Slip = new EnumSheetUsage("Slip");
-		/**  */
-		public static final EnumSheetUsage SlipCopy = new EnumSheetUsage("SlipCopy");
-		/**  */
-		public static final EnumSheetUsage Trailer = new EnumSheetUsage("Trailer");
-	}
-
-	/**
-	 * Enumeration strings for IncludeInBundleItem
-	 */
-
-	public enum EIncludeInBundleItem
+	public enum EnumIncludeInBundleItem
 	{
 		After, Before, None, New;
 
-		public static EIncludeInBundleItem getEnum(String val)
+		public static EnumIncludeInBundleItem getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EIncludeInBundleItem.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumIncludeInBundleItem.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for IncludeInBundleItem
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumIncludeInBundleItem extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumIncludeInBundleItem(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumIncludeInBundleItem getEnum(String enumName)
-		{
-			return (EnumIncludeInBundleItem) getEnum(EnumIncludeInBundleItem.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumIncludeInBundleItem getEnum(int enumValue)
-		{
-			return (EnumIncludeInBundleItem) getEnum(EnumIncludeInBundleItem.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumIncludeInBundleItem.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumIncludeInBundleItem.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumIncludeInBundleItem.class);
-		}
-
-		/**  */
-		public static final EnumIncludeInBundleItem After = new EnumIncludeInBundleItem("After");
-		/**  */
-		public static final EnumIncludeInBundleItem Before = new EnumIncludeInBundleItem("Before");
-		/**  */
-		public static final EnumIncludeInBundleItem None = new EnumIncludeInBundleItem("None");
-		/**  */
-		public static final EnumIncludeInBundleItem New = new EnumIncludeInBundleItem("New");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -468,9 +241,9 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSheetType(ESheetType enumVar)
+	public void setSheetType(final EnumSheetType enumVar)
 	{
-		setAttribute(AttributeName.SHEETTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SHEETTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -478,35 +251,6 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESheetType getESheetType()
-	{
-		return ESheetType.getEnum(getAttribute(AttributeName.SHEETTYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute SheetType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute SheetType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetSheetType(ESheetType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSheetType(EnumSheetType enumVar)
-	{
-		setAttribute(AttributeName.SHEETTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute SheetType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ESheetType GetESheetType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumSheetType getSheetType()
 	{
 		return EnumSheetType.getEnum(getAttribute(AttributeName.SHEETTYPE, null, null));
@@ -522,9 +266,9 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSheetUsage(ESheetUsage enumVar)
+	public void setSheetUsage(final EnumSheetUsage enumVar)
 	{
-		setAttribute(AttributeName.SHEETUSAGE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SHEETUSAGE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -532,35 +276,6 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESheetUsage getESheetUsage()
-	{
-		return ESheetUsage.getEnum(getAttribute(AttributeName.SHEETUSAGE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute SheetUsage
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute SheetUsage
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetSheetUsage(ESheetUsage) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSheetUsage(EnumSheetUsage enumVar)
-	{
-		setAttribute(AttributeName.SHEETUSAGE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute SheetUsage
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ESheetUsage GetESheetUsage() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumSheetUsage getSheetUsage()
 	{
 		return EnumSheetUsage.getEnum(getAttribute(AttributeName.SHEETUSAGE, null, null));
@@ -576,9 +291,9 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setIncludeInBundleItem(EIncludeInBundleItem enumVar)
+	public void setIncludeInBundleItem(final EnumIncludeInBundleItem enumVar)
 	{
-		setAttribute(AttributeName.INCLUDEINBUNDLEITEM, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.INCLUDEINBUNDLEITEM, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -586,35 +301,6 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EIncludeInBundleItem getEIncludeInBundleItem()
-	{
-		return EIncludeInBundleItem.getEnum(getAttribute(AttributeName.INCLUDEINBUNDLEITEM, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute IncludeInBundleItem
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute IncludeInBundleItem
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetIncludeInBundleItem(EIncludeInBundleItem) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setIncludeInBundleItem(EnumIncludeInBundleItem enumVar)
-	{
-		setAttribute(AttributeName.INCLUDEINBUNDLEITEM, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute IncludeInBundleItem
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EIncludeInBundleItem GetEIncludeInBundleItem() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumIncludeInBundleItem getIncludeInBundleItem()
 	{
 		return EnumIncludeInBundleItem.getEnum(getAttribute(AttributeName.INCLUDEINBUNDLEITEM, null, null));
@@ -630,7 +316,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIsWaste(boolean value)
+	public void setIsWaste(final boolean value)
 	{
 		setAttribute(AttributeName.ISWASTE, value, null);
 	}
@@ -655,7 +341,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMarkList(VString value)
+	public void setMarkList(final VString value)
 	{
 		setAttribute(AttributeName.MARKLIST, value, null);
 	}
@@ -667,8 +353,8 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 */
 	public VString getMarkList()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.MARKLIST, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.MARKLIST, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -683,7 +369,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSheetFormat(String value)
+	public void setSheetFormat(final String value)
 	{
 		setAttribute(AttributeName.SHEETFORMAT, value, null);
 	}
@@ -708,9 +394,9 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setUsage(ESheetUsage enumVar)
+	public void setUsage(final EnumSheetUsage enumVar)
 	{
-		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.USAGE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -718,35 +404,6 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESheetUsage getEUsage()
-	{
-		return ESheetUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Usage
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Usage
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetUsage(ESheetUsage) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setUsage(EnumSheetUsage enumVar)
-	{
-		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Usage
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ESheetUsage GetEUsage() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumSheetUsage getUsage()
 	{
 		return EnumSheetUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
@@ -794,7 +451,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refRunList(JDFRunList refTarget)
+	public void refRunList(final JDFRunList refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -835,7 +492,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refLayout(JDFLayout refTarget)
+	public void refLayout(final JDFLayout refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -876,7 +533,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refSheet(JDFSheet refTarget)
+	public void refSheet(final JDFSheet refTarget)
 	{
 		refElement(refTarget);
 	}

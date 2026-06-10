@@ -89,7 +89,8 @@ public class JDFStrippingParams extends JDFAutoStrippingParams
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFStrippingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFStrippingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -106,7 +107,6 @@ public class JDFStrippingParams extends JDFAutoStrippingParams
 	}
 
 	/**
-	 *
 	 * @param bsID
 	 * @param bUnique
 	 */

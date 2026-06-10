@@ -77,6 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoModuleCap : public JDFElement
@@ -91,7 +92,7 @@ public abstract class JDFAutoModuleCap extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.AVAILABILITY, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
-				JDFDeviceCap.EnumAvailability.getEnum(0), null);
+				JavaEnumUtil.getEnum(JDFDeviceCap.EnumAvailability.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ID, 0x2222222111l, AttributeInfo.EnumAttributeType.ID, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x2222222111l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
@@ -108,7 +109,7 @@ public abstract class JDFAutoModuleCap extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoModuleCap(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoModuleCap(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -120,7 +121,7 @@ public abstract class JDFAutoModuleCap extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoModuleCap(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoModuleCap(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,7 +134,7 @@ public abstract class JDFAutoModuleCap extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoModuleCap(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoModuleCap(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -154,9 +155,9 @@ public abstract class JDFAutoModuleCap extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setAvailability(JDFDeviceCap.EAvailability enumVar)
+	public void setAvailability(final JDFDeviceCap.EnumAvailability enumVar)
 	{
-		setAttribute(AttributeName.AVAILABILITY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.AVAILABILITY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -164,35 +165,6 @@ public abstract class JDFAutoModuleCap extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public JDFDeviceCap.EAvailability getEAvailability()
-	{
-		return JDFDeviceCap.EAvailability.getEnum(getAttribute(AttributeName.AVAILABILITY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Availability
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Availability
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetAvailability(EeviceCap.EnumAvailability) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setAvailability(JDFDeviceCap.EnumAvailability enumVar)
-	{
-		setAttribute(AttributeName.AVAILABILITY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Availability
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EeviceCap.EnumAvailability GetEAvailability() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public JDFDeviceCap.EnumAvailability getAvailability()
 	{
 		return JDFDeviceCap.EnumAvailability.getEnum(getAttribute(AttributeName.AVAILABILITY, null, null));
@@ -209,7 +181,7 @@ public abstract class JDFAutoModuleCap extends JDFElement
 	 * @param value the value to set the attribute to
 	 */
 	@Override
-	public void setID(String value)
+	public void setID(final String value)
 	{
 		setAttribute(AttributeName.ID, value, null);
 	}
@@ -235,7 +207,7 @@ public abstract class JDFAutoModuleCap extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setModuleIndex(int value)
+	public void setModuleIndex(final int value)
 	{
 		setAttribute(AttributeName.MODULEINDEX, value, null);
 	}

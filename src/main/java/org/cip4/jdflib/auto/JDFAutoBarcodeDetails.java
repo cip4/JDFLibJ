@@ -107,7 +107,7 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBarcodeDetails(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoBarcodeDetails(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -119,7 +119,7 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBarcodeDetails(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoBarcodeDetails(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -132,7 +132,7 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoBarcodeDetails(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoBarcodeDetails(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -153,7 +153,7 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBarcodeVersion(String value)
+	public void setBarcodeVersion(final String value)
 	{
 		setAttribute(AttributeName.BARCODEVERSION, value, null);
 	}
@@ -178,7 +178,7 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setErrorCorrectionLevel(String value)
+	public void setErrorCorrectionLevel(final String value)
 	{
 		setAttribute(AttributeName.ERRORCORRECTIONLEVEL, value, null);
 	}
@@ -203,7 +203,7 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setXCells(int value)
+	public void setXCells(final int value)
 	{
 		setAttribute(AttributeName.XCELLS, value, null);
 	}
@@ -228,7 +228,7 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setYCells(int value)
+	public void setYCells(final int value)
 	{
 		setAttribute(AttributeName.YCELLS, value, null);
 	}

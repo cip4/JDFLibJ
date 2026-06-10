@@ -105,7 +105,7 @@ public abstract class JDFAutoGangInfo extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGangInfo(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoGangInfo(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -117,7 +117,7 @@ public abstract class JDFAutoGangInfo extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGangInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoGangInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -130,7 +130,7 @@ public abstract class JDFAutoGangInfo extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoGangInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoGangInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -151,7 +151,7 @@ public abstract class JDFAutoGangInfo extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAmount(double value)
+	public void setAmount(final double value)
 	{
 		setAttribute(AttributeName.AMOUNT, value, null);
 	}
@@ -176,7 +176,7 @@ public abstract class JDFAutoGangInfo extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGangName(String value)
+	public void setGangName(final String value)
 	{
 		setAttribute(AttributeName.GANGNAME, value, null);
 	}

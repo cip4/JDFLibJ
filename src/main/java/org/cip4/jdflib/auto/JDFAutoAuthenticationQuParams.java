@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -95,7 +90,7 @@ public abstract class JDFAutoAuthenticationQuParams extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTHENTICATIONTYPE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumAuthenticationType.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumAuthenticationType.class, 0), null);
 	}
 
 	@Override
@@ -110,7 +105,7 @@ public abstract class JDFAutoAuthenticationQuParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAuthenticationQuParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoAuthenticationQuParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -122,7 +117,7 @@ public abstract class JDFAutoAuthenticationQuParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAuthenticationQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoAuthenticationQuParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -135,93 +130,28 @@ public abstract class JDFAutoAuthenticationQuParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoAuthenticationQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoAuthenticationQuParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for AuthenticationType
+	 * Enumeration strings for numAuthenticationType
 	 */
 
-	public enum EAuthenticationType
+	public enum EnumAuthenticationType
 	{
 		AsClient, AsServer;
 
-		public static EAuthenticationType getEnum(String val)
+		public static EnumAuthenticationType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EAuthenticationType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumAuthenticationType.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for AuthenticationType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumAuthenticationType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumAuthenticationType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumAuthenticationType getEnum(String enumName)
-		{
-			return (EnumAuthenticationType) getEnum(EnumAuthenticationType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumAuthenticationType getEnum(int enumValue)
-		{
-			return (EnumAuthenticationType) getEnum(EnumAuthenticationType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumAuthenticationType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAuthenticationType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAuthenticationType.class);
-		}
-
-		/**  */
-		public static final EnumAuthenticationType AsClient = new EnumAuthenticationType("AsClient");
-		/**  */
-		public static final EnumAuthenticationType AsServer = new EnumAuthenticationType("AsServer");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -233,9 +163,9 @@ public abstract class JDFAutoAuthenticationQuParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setAuthenticationType(EAuthenticationType enumVar)
+	public void setAuthenticationType(final EnumAuthenticationType enumVar)
 	{
-		setAttribute(AttributeName.AUTHENTICATIONTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.AUTHENTICATIONTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -243,35 +173,6 @@ public abstract class JDFAutoAuthenticationQuParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EAuthenticationType getEAuthenticationType()
-	{
-		return EAuthenticationType.getEnum(getAttribute(AttributeName.AUTHENTICATIONTYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute AuthenticationType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute AuthenticationType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetAuthenticationType(EAuthenticationType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setAuthenticationType(EnumAuthenticationType enumVar)
-	{
-		setAttribute(AttributeName.AUTHENTICATIONTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute AuthenticationType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EAuthenticationType GetEAuthenticationType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumAuthenticationType getAuthenticationType()
 	{
 		return EnumAuthenticationType.getEnum(getAttribute(AttributeName.AUTHENTICATIONTYPE, null, null));

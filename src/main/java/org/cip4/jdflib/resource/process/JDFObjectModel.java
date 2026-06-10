@@ -18,36 +18,36 @@ public class JDFObjectModel extends JDFAutoObjectModel
 
 	/**
 	 * Constructor for JDFObjectModel
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFObjectModel(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFObjectModel(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFObjectModel
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFObjectModel(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFObjectModel(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFObjectModel
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFObjectModel(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFObjectModel(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -55,7 +55,7 @@ public class JDFObjectModel extends JDFAutoObjectModel
 	// **************************************** Methods
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

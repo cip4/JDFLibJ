@@ -51,7 +51,6 @@ import org.junit.jupiter.api.Test;
  * general utilities for containers and objects
  *
  * @author Rainer Prosi
- *
  */
 class DumpDirTest extends JDFTestCaseBase
 {
@@ -66,11 +65,15 @@ class DumpDirTest extends JDFTestCaseBase
 		final DumpDir dumpDir = new DumpDir(theDir);
 		final ByteArrayIOStream bis = new ByteArrayIOStream();
 		for (int i = 1; i < 100; i++)
+		{
 			bis.write("Fooooooooooooooooooooooooooooooooooooooooo".getBytes());
+		}
 		System.gc();
 		final Runtime rt = Runtime.getRuntime();
 		for (int i = 0; i < 1000; i++)
+		{
 			dumpDir.newFileFromStream("header", bis.getInputStream(), "a" + i);
+		}
 		assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 666, 111);
 		bis.close();
 		for (int i = 0; i < 10; i++)
@@ -80,7 +83,9 @@ class DumpDirTest extends JDFTestCaseBase
 		}
 		final long mem2 = rt.totalMemory() - rt.freeMemory();
 		if (mem2 > mem)
+		{
 			assertEquals(mem, mem2, 14200000);
+		}
 	}
 
 	/**
@@ -92,7 +97,9 @@ class DumpDirTest extends JDFTestCaseBase
 		final File theDir = new File(sm_dirTestDataTemp + File.separator + "TestDumpDir");
 		final DumpDir dumpDir = new DumpDir(theDir);
 		for (int i = 0; i < 1000; i++)
+		{
 			dumpDir.newFileFromStream("header", null, "a" + i);
+		}
 		assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 666, 111);
 
 	}
@@ -141,13 +148,17 @@ class DumpDirTest extends JDFTestCaseBase
 		final DumpDir dumpDir = new DumpDir(theDir);
 		final int j = dumpDir.increment();
 		for (int i = 0; i < 10; i++)
+		{
 			new TestThread(dumpDir).start();
+		}
 
 		for (int i = 0; i < 100; i++)
 		{
 			ThreadUtil.sleep(123);
 			if (j + 10 == dumpDir.get())
+			{
 				break;
+			}
 		}
 		assertEquals(j + 11, dumpDir.increment());
 	}
@@ -174,12 +185,16 @@ class DumpDirTest extends JDFTestCaseBase
 		final DumpDir dumpDir = new DumpDir(theDir);
 		final ByteArrayIOStream bis = new ByteArrayIOStream();
 		for (int i = 1; i < 10; i++)
+		{
 			bis.write("Fooooooooooooooooooooooooooooooooooooooooo".getBytes());
+		}
 
 		System.gc();
 		final Runtime rt = Runtime.getRuntime();
 		for (int i = 0; i < 1000; i++)
+		{
 			dumpDir.newFileFromStream("header", bis.getInputStream(), "a" + (i % 2 == 0 ? "x." : "y.") + i);
+		}
 		assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 666, 111);
 		bis.close();
 		for (int i = 0; i < 10; i++)
@@ -204,11 +219,15 @@ class DumpDirTest extends JDFTestCaseBase
 		final DumpDir dumpDir = new DumpDir(theDir);
 		final ByteArrayIOStream bis = new ByteArrayIOStream();
 		for (int i = 1; i < 3; i++)
+		{
 			bis.write("Fooooooooooooooooooooooooooooooooooooooooo".getBytes());
+		}
 
 		System.gc();
 		for (int i = 0; i < 1000; i++)
+		{
 			dumpDir.newFileFromStream("header", bis.getInputStream(), null);
+		}
 		assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 666, 111);
 		bis.close();
 	}

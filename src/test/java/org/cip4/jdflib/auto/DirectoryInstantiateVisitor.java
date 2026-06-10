@@ -132,8 +132,8 @@ class DirectoryInstantiateVisitor implements DirectoryVisitor
 
 		if (!result)
 		{
-			throw new DOMException(DOMException.NOT_FOUND_ERR,
-					"DirectoryInstantiateVisitor: Class JDF" + elementName + " could not be instantiated!" + " --> missing entry in DocumentJDFImpl.sm_PackageNames ???");
+			throw new DOMException(DOMException.NOT_FOUND_ERR, "DirectoryInstantiateVisitor: Class JDF" + elementName + " could not be instantiated!"
+					+ " --> missing entry in DocumentJDFImpl.sm_PackageNames ???");
 		}
 	}
 }

@@ -55,7 +55,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  * This class represents a JDF-ResourceLink/AmountPool/PartAmount element it inherits may methods fro ResourceLink, since PartAmount specifies ResourceLink properties of a partition
@@ -73,10 +73,10 @@ public class JDFPartAmount extends JDFResourceLink
 		atrInfoTable_ToRemove[2] = new AtrInfoTable(AttributeName.PIPEPROTOCOL, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable_ToRemove[3] = new AtrInfoTable(AttributeName.PROCESSUSAGE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_ToRemove[4] = new AtrInfoTable(AttributeName.RSUBREF, 0x44444433, AttributeInfo.EnumAttributeType.IDREF, null, null);
-		atrInfoTable_ToRemove[5] = new AtrInfoTable(AttributeName.PIPEPARTIDKEYS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations,
-				EnumPartIDKey.getEnum(0), null);
+		atrInfoTable_ToRemove[5] = new AtrInfoTable(AttributeName.PIPEPARTIDKEYS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, null, null);
 		atrInfoTable_ToRemove[6] = new AtrInfoTable(AttributeName.RREF, 0x22222222, AttributeInfo.EnumAttributeType.IDREF, null, null);
-		atrInfoTable_ToRemove[7] = new AtrInfoTable(AttributeName.USAGE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumUsage.getEnum(0), null);
+		atrInfoTable_ToRemove[7] = new AtrInfoTable(AttributeName.USAGE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumUsage.class, 0), null);
 	}
 	private static ElemInfoTable[] elemInfoTable_ToRemove = new ElemInfoTable[1];
 	static
@@ -238,7 +238,7 @@ public class JDFPartAmount extends JDFResourceLink
 
 	}
 
-	public void setWaste(double value)
+	public void setWaste(final double value)
 	{
 		if (!isXJDF())
 		{

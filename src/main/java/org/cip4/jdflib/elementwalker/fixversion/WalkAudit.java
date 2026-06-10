@@ -71,7 +71,7 @@ package org.cip4.jdflib.elementwalker.fixversion;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -79,7 +79,6 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         June 7, 2009
  */
 public class WalkAudit extends WalkElement
@@ -189,17 +188,17 @@ public class WalkAudit extends WalkElement
 		if (tokens.size() == 3)
 		{ // it was previously fixed
 			String tmp = tokens.get(0);
-			if (!tmp.equals(JDFConstants.EMPTYSTRING) && !tmp.equals(JDFConstants.BLANK))
+			if (!tmp.equals(JDFCoreConstants.EMPTYSTRING) && !tmp.equals(JDFCoreConstants.BLANK))
 			{
 				audit.setAuthor(tmp);
 			}
 			tmp = tokens.get(1);
-			if (!tmp.equals(JDFConstants.EMPTYSTRING) && !tmp.equals(JDFConstants.BLANK))
+			if (!tmp.equals(JDFCoreConstants.EMPTYSTRING) && !tmp.equals(JDFCoreConstants.BLANK))
 			{
 				audit.setAgentName(tmp);
 			}
 			tmp = tokens.get(2);
-			if (!tmp.equals(JDFConstants.EMPTYSTRING) && !tmp.equals(JDFConstants.BLANK))
+			if (!tmp.equals(JDFCoreConstants.EMPTYSTRING) && !tmp.equals(JDFCoreConstants.BLANK))
 			{
 				audit.setAgentVersion(tmp);
 			}

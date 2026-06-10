@@ -71,12 +71,8 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -117,18 +113,18 @@ public abstract class JDFAutoComponent extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMPONENTTYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumerations,
-				EnumComponentType.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumComponentType.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.AUTOMATION, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumAutomation.getEnum(0),
-				null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.AUTOMATION, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumAutomation.class, 0), null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.CARTONTOPFLAPS, 0x3333333111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.COLUMNS, 0x3333311111l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.DIMENSIONS, 0x3333333333l, AttributeInfo.EnumAttributeType.shape, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.ISWASTE, 0x4444443333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.MAXHEAT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.OVERFOLD, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.OVERFOLDSIDE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumOverfoldSide.getEnum(0),
-				null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.OVERFOLDSIDE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumOverfoldSide.class, 0), null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.PAGELISTINDEX, 0x3333333111l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.PRODUCTTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.PRODUCTTYPEDETAILS, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
@@ -176,7 +172,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoComponent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoComponent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -188,7 +184,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoComponent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoComponent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -201,7 +197,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoComponent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoComponent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -212,7 +208,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Quantity);
 		return bRet;
 	}
@@ -227,253 +223,50 @@ public abstract class JDFAutoComponent extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for ComponentType
+	 * Enumeration strings for numComponentType
 	 */
 
-	public enum EComponentType
+	public enum EnumComponentType
 	{
 		Block, Other, Ribbon, Sheet, Web, FinalProduct, PartialProduct, Proof;
 
-		public static EComponentType getEnum(String val)
+		public static EnumComponentType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EComponentType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumComponentType.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for ComponentType
+	 * Enumeration strings for numAutomation
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumComponentType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumComponentType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumComponentType getEnum(String enumName)
-		{
-			return (EnumComponentType) getEnum(EnumComponentType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumComponentType getEnum(int enumValue)
-		{
-			return (EnumComponentType) getEnum(EnumComponentType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumComponentType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumComponentType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumComponentType.class);
-		}
-
-		/**  */
-		public static final EnumComponentType Block = new EnumComponentType("Block");
-		/**  */
-		public static final EnumComponentType Other = new EnumComponentType("Other");
-		/**  */
-		public static final EnumComponentType Ribbon = new EnumComponentType("Ribbon");
-		/**  */
-		public static final EnumComponentType Sheet = new EnumComponentType("Sheet");
-		/**  */
-		public static final EnumComponentType Web = new EnumComponentType("Web");
-		/**  */
-		public static final EnumComponentType FinalProduct = new EnumComponentType("FinalProduct");
-		/**  */
-		public static final EnumComponentType PartialProduct = new EnumComponentType("PartialProduct");
-		/**  */
-		public static final EnumComponentType Proof = new EnumComponentType("Proof");
-	}
-
-	/**
-	 * Enumeration strings for Automation
-	 */
-
-	public enum EAutomation
+	public enum EnumAutomation
 	{
 		Static, Dynamic;
 
-		public static EAutomation getEnum(String val)
+		public static EnumAutomation getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EAutomation.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumAutomation.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for Automation
+	 * Enumeration strings for numOverfoldSide
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumAutomation extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumAutomation(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumAutomation getEnum(String enumName)
-		{
-			return (EnumAutomation) getEnum(EnumAutomation.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumAutomation getEnum(int enumValue)
-		{
-			return (EnumAutomation) getEnum(EnumAutomation.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumAutomation.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAutomation.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAutomation.class);
-		}
-
-		/**  */
-		public static final EnumAutomation Static = new EnumAutomation("Static");
-		/**  */
-		public static final EnumAutomation Dynamic = new EnumAutomation("Dynamic");
-	}
-
-	/**
-	 * Enumeration strings for OverfoldSide
-	 */
-
-	public enum EOverfoldSide
+	public enum EnumOverfoldSide
 	{
 		Front, Back;
 
-		public static EOverfoldSide getEnum(String val)
+		public static EnumOverfoldSide getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EOverfoldSide.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumOverfoldSide.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for OverfoldSide
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumOverfoldSide extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumOverfoldSide(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumOverfoldSide getEnum(String enumName)
-		{
-			return (EnumOverfoldSide) getEnum(EnumOverfoldSide.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumOverfoldSide getEnum(int enumValue)
-		{
-			return (EnumOverfoldSide) getEnum(EnumOverfoldSide.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumOverfoldSide.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumOverfoldSide.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumOverfoldSide.class);
-		}
-
-		/**  */
-		public static final EnumOverfoldSide Front = new EnumOverfoldSide("Front");
-		/**  */
-		public static final EnumOverfoldSide Back = new EnumOverfoldSide("Back");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -485,7 +278,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param v List of the enumeration values
 	 */
-	public void setEComponentType(List<EComponentType> v)
+	public void setComponentType(final List<EnumComponentType> v)
 	{
 		setEnumsAttribute(AttributeName.COMPONENTTYPE, v, null);
 	}
@@ -495,38 +288,9 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public List<EComponentType> getEnumsComponentType()
+	public List<EnumComponentType> getComponentType()
 	{
-		return getEnumerationsAttribute(AttributeName.COMPONENTTYPE, null, EComponentType.class);
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ComponentType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5.2) set attribute ComponentType
-	 *
-	 * @param v List of the enumeration values
-	 * @deprecated use SetEComponentType(List<EComponentType>) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setComponentType(List<EnumComponentType> v)
-	{
-		setEnumerationsAttribute(AttributeName.COMPONENTTYPE, v, null);
-	}
-
-	/**
-	 * (9.2) get ComponentType attribute ComponentType
-	 *
-	 * @return Vector of the enumerations
-	 * @deprecated use List<EComponentType > GetEComponentType() based on java.lang.enum instead
-	 */
-	@Deprecated
-	public Vector<EnumComponentType> getComponentType()
-	{
-		return getEnumerationsAttribute(AttributeName.COMPONENTTYPE, null, EnumComponentType.getEnum(0), false);
+		return getEnumerationsAttribute(AttributeName.COMPONENTTYPE, null, EnumComponentType.class);
 	}
 
 	/*
@@ -539,7 +303,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAssemblyIDs(VString value)
+	public void setAssemblyIDs(final VString value)
 	{
 		setAttribute(AttributeName.ASSEMBLYIDS, value, null);
 	}
@@ -551,8 +315,8 @@ public abstract class JDFAutoComponent extends JDFResource
 	 */
 	public VString getAssemblyIDs()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -567,9 +331,9 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setAutomation(EAutomation enumVar)
+	public void setAutomation(final EnumAutomation enumVar)
 	{
-		setAttribute(AttributeName.AUTOMATION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.AUTOMATION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -577,35 +341,6 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EAutomation getEAutomation()
-	{
-		return EAutomation.getEnum(getAttribute(AttributeName.AUTOMATION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Automation
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Automation
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetAutomation(EAutomation) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setAutomation(EnumAutomation enumVar)
-	{
-		setAttribute(AttributeName.AUTOMATION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Automation
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EAutomation GetEAutomation() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumAutomation getAutomation()
 	{
 		return EnumAutomation.getEnum(getAttribute(AttributeName.AUTOMATION, null, null));
@@ -621,7 +356,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCartonTopFlaps(JDFXYPair value)
+	public void setCartonTopFlaps(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.CARTONTOPFLAPS, value, null);
 	}
@@ -634,8 +369,8 @@ public abstract class JDFAutoComponent extends JDFResource
 	 */
 	public JDFXYPair getCartonTopFlaps()
 	{
-		String strAttrName = getAttribute(AttributeName.CARTONTOPFLAPS, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CARTONTOPFLAPS, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -649,7 +384,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setColumns(int value)
+	public void setColumns(final int value)
 	{
 		setAttribute(AttributeName.COLUMNS, value, null);
 	}
@@ -674,7 +409,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDimensions(JDFShape value)
+	public void setDimensions(final JDFShape value)
 	{
 		setAttribute(AttributeName.DIMENSIONS, value, null);
 	}
@@ -687,8 +422,8 @@ public abstract class JDFAutoComponent extends JDFResource
 	 */
 	public JDFShape getDimensions()
 	{
-		String strAttrName = getAttribute(AttributeName.DIMENSIONS, null, null);
-		JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.DIMENSIONS, null, null);
+		final JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -702,7 +437,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIsWaste(boolean value)
+	public void setIsWaste(final boolean value)
 	{
 		setAttribute(AttributeName.ISWASTE, value, null);
 	}
@@ -727,7 +462,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaxHeat(double value)
+	public void setMaxHeat(final double value)
 	{
 		setAttribute(AttributeName.MAXHEAT, value, null);
 	}
@@ -752,7 +487,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOverfold(double value)
+	public void setOverfold(final double value)
 	{
 		setAttribute(AttributeName.OVERFOLD, value, null);
 	}
@@ -777,9 +512,9 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setOverfoldSide(EOverfoldSide enumVar)
+	public void setOverfoldSide(final EnumOverfoldSide enumVar)
 	{
-		setAttribute(AttributeName.OVERFOLDSIDE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.OVERFOLDSIDE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -787,35 +522,6 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EOverfoldSide getEOverfoldSide()
-	{
-		return EOverfoldSide.getEnum(getAttribute(AttributeName.OVERFOLDSIDE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute OverfoldSide
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute OverfoldSide
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetOverfoldSide(EOverfoldSide) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setOverfoldSide(EnumOverfoldSide enumVar)
-	{
-		setAttribute(AttributeName.OVERFOLDSIDE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute OverfoldSide
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EOverfoldSide GetEOverfoldSide() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumOverfoldSide getOverfoldSide()
 	{
 		return EnumOverfoldSide.getEnum(getAttribute(AttributeName.OVERFOLDSIDE, null, null));
@@ -831,7 +537,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPageListIndex(JDFIntegerRangeList value)
+	public void setPageListIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.PAGELISTINDEX, value, null);
 	}
@@ -844,8 +550,8 @@ public abstract class JDFAutoComponent extends JDFResource
 	 */
 	public JDFIntegerRangeList getPageListIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.PAGELISTINDEX, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PAGELISTINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -859,7 +565,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProductType(String value)
+	public void setProductType(final String value)
 	{
 		setAttribute(AttributeName.PRODUCTTYPE, value, null);
 	}
@@ -884,7 +590,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProductTypeDetails(String value)
+	public void setProductTypeDetails(final String value)
 	{
 		setAttribute(AttributeName.PRODUCTTYPEDETAILS, value, null);
 	}
@@ -909,7 +615,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setReaderPageCount(int value)
+	public void setReaderPageCount(final int value)
 	{
 		setAttribute(AttributeName.READERPAGECOUNT, value, null);
 	}
@@ -934,7 +640,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSheetPart(JDFRectangle value)
+	public void setSheetPart(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.SHEETPART, value, null);
 	}
@@ -947,8 +653,8 @@ public abstract class JDFAutoComponent extends JDFResource
 	 */
 	public JDFRectangle getSheetPart()
 	{
-		String strAttrName = getAttribute(AttributeName.SHEETPART, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SHEETPART, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -962,7 +668,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSourceRibbon(String value)
+	public void setSourceRibbon(final String value)
 	{
 		setAttribute(AttributeName.SOURCERIBBON, value, null);
 	}
@@ -987,7 +693,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSourceSheet(String value)
+	public void setSourceSheet(final String value)
 	{
 		setAttribute(AttributeName.SOURCESHEET, value, null);
 	}
@@ -1012,7 +718,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSourceWeb(String value)
+	public void setSourceWeb(final String value)
 	{
 		setAttribute(AttributeName.SOURCEWEB, value, null);
 	}
@@ -1037,7 +743,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSpineThickness(double value)
+	public void setSpineThickness(final double value)
 	{
 		setAttribute(AttributeName.SPINETHICKNESS, value, null);
 	}
@@ -1062,7 +768,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSurfaceCount(int value)
+	public void setSurfaceCount(final int value)
 	{
 		setAttribute(AttributeName.SURFACECOUNT, value, null);
 	}
@@ -1087,7 +793,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTransformation(JDFMatrix value)
+	public void setTransformation(final JDFMatrix value)
 	{
 		setAttribute(AttributeName.TRANSFORMATION, value, null);
 	}
@@ -1100,8 +806,8 @@ public abstract class JDFAutoComponent extends JDFResource
 	 */
 	public JDFMatrix getTransformation()
 	{
-		String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, null);
-		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1115,7 +821,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWindingResult(int value)
+	public void setWindingResult(final int value)
 	{
 		setAttribute(AttributeName.WINDINGRESULT, value, null);
 	}
@@ -1172,7 +878,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refAssembly(JDFAssembly refTarget)
+	public void refAssembly(final JDFAssembly refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1213,7 +919,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refBundle(JDFBundle refTarget)
+	public void refBundle(final JDFBundle refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1285,7 +991,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refSheet(JDFSheet refTarget)
+	public void refSheet(final JDFSheet refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1326,7 +1032,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refLayout(JDFLayout refTarget)
+	public void refLayout(final JDFLayout refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1367,7 +1073,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMedia(JDFMedia refTarget)
+	public void refMedia(final JDFMedia refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1408,7 +1114,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refPageList(JDFPageList refTarget)
+	public void refPageList(final JDFPageList refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1439,7 +1145,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFSurfaceMark the element
 	 */
-	public JDFSurfaceMark getCreateSurfaceMark(int iSkip)
+	public JDFSurfaceMark getCreateSurfaceMark(final int iSkip)
 	{
 		return (JDFSurfaceMark) getCreateElement_JDFElement(ElementName.SURFACEMARK, null, iSkip);
 	}
@@ -1451,7 +1157,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 * @return JDFSurfaceMark the element
 	 *         default is getSurfaceMark(0)
 	 */
-	public JDFSurfaceMark getSurfaceMark(int iSkip)
+	public JDFSurfaceMark getSurfaceMark(final int iSkip)
 	{
 		return (JDFSurfaceMark) getElement(ElementName.SURFACEMARK, null, iSkip);
 	}
@@ -1504,7 +1210,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
-	public JDFContact getCreateContact(int iSkip)
+	public JDFContact getCreateContact(final int iSkip)
 	{
 		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -1516,7 +1222,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 * @return JDFContact the element
 	 *         default is getContact(0)
 	 */
-	public JDFContact getContact(int iSkip)
+	public JDFContact getContact(final int iSkip)
 	{
 		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -1547,7 +1253,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refContact(JDFContact refTarget)
+	public void refContact(final JDFContact refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1579,7 +1285,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 * @return JDFIdentificationField the element
 	 */
 	@Override
-	public JDFIdentificationField getCreateIdentificationField(int iSkip)
+	public JDFIdentificationField getCreateIdentificationField(final int iSkip)
 	{
 		return (JDFIdentificationField) getCreateElement_JDFElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
 	}
@@ -1592,7 +1298,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *         default is getIdentificationField(0)
 	 */
 	@Override
-	public JDFIdentificationField getIdentificationField(int iSkip)
+	public JDFIdentificationField getIdentificationField(final int iSkip)
 	{
 		return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
 	}
@@ -1623,7 +1329,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refIdentificationField(JDFIdentificationField refTarget)
+	public void refIdentificationField(final JDFIdentificationField refTarget)
 	{
 		refElement(refTarget);
 	}

@@ -82,7 +82,7 @@ class JDFResubmissionParamsTest extends JDFTestCaseBase
 	@Test
 	void testURLInput()
 	{
-		JDFResubmissionParams rsp = (JDFResubmissionParams) JDFElement.createRoot(ElementName.RESUBMISSIONPARAMS);
+		final JDFResubmissionParams rsp = (JDFResubmissionParams) JDFElement.createRoot(ElementName.RESUBMISSIONPARAMS);
 		assertNull(rsp.getURLInputStream());
 		assertNull(rsp.getURLDoc());
 	}

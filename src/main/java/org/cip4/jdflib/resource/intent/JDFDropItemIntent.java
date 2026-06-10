@@ -93,7 +93,8 @@ public class JDFDropItemIntent extends JDFAutoDropItemIntent
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFDropItemIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFDropItemIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -149,7 +150,6 @@ public class JDFDropItemIntent extends JDFAutoDropItemIntent
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoDropItemIntent#getAdditionalAmount()
 	 */
 	@Override
@@ -163,13 +163,14 @@ public class JDFDropItemIntent extends JDFAutoDropItemIntent
 	}
 
 	/**
-	 *
 	 * @param dropItem
 	 */
 	public void setFromDropItem(final JDFDropItem dropItem)
 	{
 		if (dropItem == null)
+		{
 			return;
+		}
 
 		copyAttribute(AttributeName.AMOUNT, dropItem);
 		KElement e = dropItem.getFirstChildElement();

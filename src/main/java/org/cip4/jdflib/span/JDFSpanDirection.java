@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  *
@@ -79,12 +79,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanDirection extends JDFEnumerationSpan
@@ -93,39 +89,39 @@ public class JDFSpanDirection extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanDirection
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanDirection(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanDirection(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanDirection
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanDirection(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanDirection(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanDirection
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanDirection(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanDirection(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -133,63 +129,14 @@ public class JDFSpanDirection extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanDirection
 	 */
-	public static class EnumSpanDirection extends ValuedEnum
+	public enum EnumSpanDirection
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Both, Depressed, Raised;
 
-		private EnumSpanDirection(String name)
+		public static EnumSpanDirection getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanDirection.class, val, null);
 		}
-
-		public static EnumSpanDirection getEnum(String enumName)
-		{
-			return (EnumSpanDirection) getEnum(EnumSpanDirection.class, enumName);
-		}
-
-		public static EnumSpanDirection getEnum(int enumValue)
-		{
-			return (EnumSpanDirection) getEnum(EnumSpanDirection.class, enumValue);
-		}
-
-		/**
-		 * 
-		 *  
-		 * @return
-		 */
-		@SuppressWarnings("rawtypes")
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanDirection.class);
-		}
-
-		/**
-		 * 
-		 *  
-		 * @return
-		 */
-		@SuppressWarnings("rawtypes")
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanDirection.class);
-		}
-
-		/**
-		 * 
-		 *  
-		 * @return
-		 */
-		@SuppressWarnings("rawtypes")
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanDirection.class);
-		}
-
-		public static final EnumSpanDirection Both = new EnumSpanDirection("Both");
-		public static final EnumSpanDirection Depressed = new EnumSpanDirection("Depressed");
-		public static final EnumSpanDirection Raised = new EnumSpanDirection("Raised");
-
 	}
 
 	// **************************************** Methods
@@ -197,18 +144,18 @@ public class JDFSpanDirection extends JDFEnumerationSpan
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanDirection.getEnum(0);
+		return EnumSpanDirection.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

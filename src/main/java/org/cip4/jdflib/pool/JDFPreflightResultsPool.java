@@ -2,8 +2,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -11,7 +11,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -19,17 +19,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -55,17 +55,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 //EndCopyRight
@@ -73,10 +73,10 @@
  *
  *
  * COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
- *      ALL RIGHTS RESERVED 
+ *      ALL RIGHTS RESERVED
  *
  *  Author: Kai Mattern
- * 
+ *
  * Warning! preliminary version. Interface subject to change without prior notice!
  * Revision history:
  * created 2001-12-17
@@ -89,12 +89,12 @@ package org.cip4.jdflib.pool;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.process.prepress.JDFPreflightDetail;
 import org.cip4.jdflib.resource.process.prepress.JDFPreflightInstance;
 
 /**
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFPreflightResultsPool extends JDFPool
 {
@@ -102,36 +102,36 @@ public class JDFPreflightResultsPool extends JDFPool
 
 	/**
 	 * Constructor for JDFPreflightResultsPool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFPreflightResultsPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFPreflightResultsPool(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFPreflightResultsPool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFPreflightResultsPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFPreflightResultsPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFPreflightResultsPool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFPreflightResultsPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFPreflightResultsPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -148,30 +148,30 @@ public class JDFPreflightResultsPool extends JDFPool
 	 * Get Element PreflightInstance
 	 * <p>
 	 * default: GetCreatePreflightInstance(0)
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFPreflightInstance: the element
 	 */
-	JDFPreflightInstance getCreatePreflightInstance(int iSkip)
+	JDFPreflightInstance getCreatePreflightInstance(final int iSkip)
 	{
-		return (JDFPreflightInstance) getCreateElement_KElement("PreflightInstance", JDFConstants.EMPTYSTRING, iSkip);
+		return (JDFPreflightInstance) getCreateElement_KElement("PreflightInstance", JDFCoreConstants.EMPTYSTRING, iSkip);
 	}
 
 	/**
 	 * Remove element PreflightInstance
 	 * <p>
 	 * default: RemovePreflightInstance(0)
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 */
-	public void removePreflightInstance(int iSkip)
+	public void removePreflightInstance(final int iSkip)
 	{
-		removeChild("PreflightInstance", JDFConstants.EMPTYSTRING, iSkip);
+		removeChild("PreflightInstance", JDFCoreConstants.EMPTYSTRING, iSkip);
 	}
 
 	/**
 	 * Append element PreflightInstance
-	 * 
+	 *
 	 * @return JDFPreflightInstance: the element
 	 */
 	JDFPreflightInstance appendPreflightInstance()
@@ -183,11 +183,11 @@ public class JDFPreflightResultsPool extends JDFPool
 	 * get element PreflightInstance
 	 * <p>
 	 * default: GetPreflightInstance(0)
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFPreflightInstance: the element. Null if not found.
 	 */
-	JDFPreflightInstance getPreflightInstance(int iSkip)
+	JDFPreflightInstance getPreflightInstance(final int iSkip)
 	{
 		return (JDFPreflightInstance) getElement(ElementName.PREFLIGHTINSTANCE, null, iSkip);
 	}
@@ -196,18 +196,18 @@ public class JDFPreflightResultsPool extends JDFPool
 	 * Get Element PreflightDetail
 	 * <p>
 	 * default: GetCreatePreflightDetail(0)
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFPreflightInstance: the element
 	 */
-	public JDFPreflightDetail getCreatePreflightDetail(int iSkip)
+	public JDFPreflightDetail getCreatePreflightDetail(final int iSkip)
 	{
 		return (JDFPreflightDetail) getCreateElement_KElement(ElementName.PREFLIGHTDETAIL, null, iSkip);
 	}
 
 	/**
 	 * Append element PreflightDetail
-	 * 
+	 *
 	 * @return JDFPreflightInstance: the element
 	 */
 	JDFPreflightDetail appendPreflightDetail()
@@ -219,11 +219,11 @@ public class JDFPreflightResultsPool extends JDFPool
 	 * get first element PreflightDetail
 	 * <p>
 	 * default: GetPreflightDetail(0)
-	 * @param iSkip 
-	 * 
+	 *
+	 * @param iSkip
 	 * @return JDFPreflightInstance: the element
 	 */
-	JDFPreflightDetail getPreflightDetail(int iSkip)
+	JDFPreflightDetail getPreflightDetail(final int iSkip)
 	{
 		return (JDFPreflightDetail) getElement(ElementName.PREFLIGHTDETAIL, null, iSkip);
 	}

@@ -120,7 +120,7 @@ public abstract class JDFAutoEndSheet extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoEndSheet(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoEndSheet(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -132,7 +132,7 @@ public abstract class JDFAutoEndSheet extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoEndSheet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoEndSheet(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -145,7 +145,7 @@ public abstract class JDFAutoEndSheet extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoEndSheet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoEndSheet(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -166,7 +166,7 @@ public abstract class JDFAutoEndSheet extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOffset(JDFXYPair value)
+	public void setOffset(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.OFFSET, value, null);
 	}
@@ -179,8 +179,8 @@ public abstract class JDFAutoEndSheet extends JDFElement
 	 */
 	public JDFXYPair getOffset()
 	{
-		String strAttrName = getAttribute(AttributeName.OFFSET, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.OFFSET, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 

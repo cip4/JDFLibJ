@@ -74,12 +74,10 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.jmf.JDFQueueEntryPriParams;
 import org.cip4.jdflib.jmf.JDFQueueFilter;
-import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
- *
  */
 public class WalkQueueEntryPriParams extends WalkElement
 {
@@ -93,7 +91,6 @@ public class WalkQueueEntryPriParams extends WalkElement
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.elementwalker.fixversion.WalkJMFCommandQueueFilter#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
@@ -102,7 +99,7 @@ public class WalkQueueEntryPriParams extends WalkElement
 		final JDFQueueEntryPriParams sqp = (JDFQueueEntryPriParams) e1;
 		if (fixVersion.version != null)
 		{
-			if (!EnumUtil.aLessThanB(fixVersion.version, EnumVersion.Version_1_5))
+			if (!JavaEnumUtil.aLessThanB(fixVersion.version, EnumVersion.Version_1_5))
 			{
 				((JDFQueueFilter) e1.getCreateElement(ElementName.QUEUEFILTER)).setQueueEntrieDef(sqp.getQueueEntryID());
 			}

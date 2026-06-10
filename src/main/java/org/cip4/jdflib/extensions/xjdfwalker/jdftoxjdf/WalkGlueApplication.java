@@ -73,11 +73,10 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 
 /**
-* any matching class will be ignored and all children will be moved into the respective parent element
-*
-* @author Rainer Prosi, Heidelberger Druckmaschinen
-*
-*/
+ * any matching class will be ignored and all children will be moved into the respective parent element
+ *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ */
 public class WalkGlueApplication extends WalkJDFSubElement
 {
 
@@ -113,7 +112,7 @@ public class WalkGlueApplication extends WalkJDFSubElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#getXJDFName(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected String getXJDFName(KElement jdf)
+	protected String getXJDFName(final KElement jdf)
 	{
 		return null;
 	}

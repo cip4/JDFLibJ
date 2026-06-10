@@ -107,7 +107,7 @@ public abstract class JDFAutoOCGControl extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoOCGControl(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoOCGControl(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -119,7 +119,7 @@ public abstract class JDFAutoOCGControl extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoOCGControl(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoOCGControl(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -132,7 +132,7 @@ public abstract class JDFAutoOCGControl extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoOCGControl(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoOCGControl(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -153,7 +153,7 @@ public abstract class JDFAutoOCGControl extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIncludeOCG(boolean value)
+	public void setIncludeOCG(final boolean value)
 	{
 		setAttribute(AttributeName.INCLUDEOCG, value, null);
 	}
@@ -178,7 +178,7 @@ public abstract class JDFAutoOCGControl extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOCGName(String value)
+	public void setOCGName(final String value)
 	{
 		setAttribute(AttributeName.OCGNAME, value, null);
 	}
@@ -203,7 +203,7 @@ public abstract class JDFAutoOCGControl extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProcStepsGroup(String value)
+	public void setProcStepsGroup(final String value)
 	{
 		setAttribute(AttributeName.PROCSTEPSGROUP, value, null);
 	}
@@ -228,7 +228,7 @@ public abstract class JDFAutoOCGControl extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProcStepsType(String value)
+	public void setProcStepsType(final String value)
 	{
 		setAttribute(AttributeName.PROCSTEPSTYPE, value, null);
 	}

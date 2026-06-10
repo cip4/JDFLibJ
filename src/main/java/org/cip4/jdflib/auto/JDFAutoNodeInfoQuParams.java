@@ -122,7 +122,7 @@ public abstract class JDFAutoNodeInfoQuParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNodeInfoQuParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoNodeInfoQuParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -134,7 +134,7 @@ public abstract class JDFAutoNodeInfoQuParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNodeInfoQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoNodeInfoQuParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -147,7 +147,7 @@ public abstract class JDFAutoNodeInfoQuParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoNodeInfoQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoNodeInfoQuParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoNodeInfoQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -193,7 +193,7 @@ public abstract class JDFAutoNodeInfoQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobPartID(String value)
+	public void setJobPartID(final String value)
 	{
 		setAttribute(AttributeName.JOBPARTID, value, null);
 	}
@@ -218,7 +218,7 @@ public abstract class JDFAutoNodeInfoQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setQueueEntryID(String value)
+	public void setQueueEntryID(final String value)
 	{
 		setAttribute(AttributeName.QUEUEENTRYID, value, null);
 	}

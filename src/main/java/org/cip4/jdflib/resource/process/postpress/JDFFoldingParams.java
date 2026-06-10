@@ -93,7 +93,6 @@ public class JDFFoldingParams extends JDFAutoFoldingParams
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
@@ -104,7 +103,6 @@ public class JDFFoldingParams extends JDFAutoFoldingParams
 	}
 
 	/**
-	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -116,14 +114,14 @@ public class JDFFoldingParams extends JDFAutoFoldingParams
 	}
 
 	/**
-	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFFoldingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFFoldingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -157,7 +155,9 @@ public class JDFFoldingParams extends JDFAutoFoldingParams
 	{
 		final JDFXYPair xyFold = getCatalogXY(foldCatalog);
 		if (xyFold == null)
+		{
 			return null;
+		}
 		final int p = (int) xyFold.getX();
 		final int i = (int) xyFold.getY();
 		if (i <= getMax(p))
@@ -197,7 +197,9 @@ public class JDFFoldingParams extends JDFAutoFoldingParams
 	static int getMax(final int p)
 	{
 		if (p < 2 || p % 2 != 0 || p > 64)
+		{
 			return 0;
+		}
 		switch (p)
 		{
 		case 2:
@@ -233,7 +235,7 @@ public class JDFFoldingParams extends JDFAutoFoldingParams
 
 	/**
 	 * the following lines are living proof that the fold catalog is a bit weird...
-	 * 
+	 *
 	 * @param p
 	 * @param i
 	 * @return
@@ -245,8 +247,8 @@ public class JDFFoldingParams extends JDFAutoFoldingParams
 
 	static boolean is2Y(final int p, final int i)
 	{
-		return (p == 8 && i >= 7) || (p == 12 && i >= 6 && i <= 11) || (p == 16 && i >= 6 && i <= 12) || p == 20 || (p == 24 && i <= 7) || p == 28 || (p == 32 && i >= 2 && i <= 3)
-				|| (p == 36 && i <= 1);
+		return (p == 8 && i >= 7) || (p == 12 && i >= 6 && i <= 11) || (p == 16 && i >= 6 && i <= 12) || p == 20 || (p == 24 && i <= 7) || p == 28
+				|| (p == 32 && i >= 2 && i <= 3) || (p == 36 && i <= 1);
 	}
 
 	static boolean is3Y(final int p, final int i)
@@ -297,7 +299,9 @@ public class JDFFoldingParams extends JDFAutoFoldingParams
 		{
 			final String fc = getFoldCatalog();
 			if (!StringUtil.isEmpty(fc) && getNumUpFromCatalog(fc) == null)
+			{
 				invalidAttributes.appendUnique(AttributeName.FOLDCATALOG);
+			}
 		}
 		return invalidAttributes;
 	}

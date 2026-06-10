@@ -102,7 +102,7 @@ class JDFLayerListTest extends JDFTestCaseBase
 
 	/**
 	 * test layer runlist
-	 * 
+	 *
 	 * @return
 	 */
 	@Test
@@ -140,7 +140,7 @@ class JDFLayerListTest extends JDFTestCaseBase
 
 	/**
 	 * test layer runlist
-	 * 
+	 *
 	 * @return
 	 */
 	@Test
@@ -166,7 +166,7 @@ class JDFLayerListTest extends JDFTestCaseBase
 
 	/**
 	 * test layer runlist
-	 * 
+	 *
 	 * @return
 	 */
 	@Test
@@ -200,7 +200,7 @@ class JDFLayerListTest extends JDFTestCaseBase
 
 	/**
 	 * test layer runlist
-	 * 
+	 *
 	 * @return
 	 */
 	@Test
@@ -227,7 +227,7 @@ class JDFLayerListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void setUpRunList(final int type)
 	{
@@ -284,7 +284,7 @@ class JDFLayerListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void setUpDoc()
 	{
@@ -309,7 +309,9 @@ class JDFLayerListTest extends JDFTestCaseBase
 
 		final VString layers = new VString(layerNames, " ");
 		if (complex)
+		{
 			layers.add("Currency");
+		}
 
 		for (int i = 0; i < layers.size(); i++)
 		{

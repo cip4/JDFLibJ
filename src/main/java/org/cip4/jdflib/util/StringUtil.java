@@ -61,7 +61,6 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.regex.PatternSyntaxException;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.commons.lang3.StringUtils;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFCoreConstants;
@@ -319,7 +318,7 @@ public class StringUtil
 	 * format a string using C++ sprintf functionality
 	 *
 	 * @param format  the format to print, see C++ spec for details
-	 * @param objects the array of objects, either String, Double, Integer or ValuedEnum, if objects is longer than the number of '%' tokens in format, the remainder of objects is
+	 * @param objects the array of objects, either String, Double, Integer or Enum, if objects is longer than the number of '%' tokens in format, the remainder of objects is
 	 *                ignored The method works fairly loosely typed, thus doubles are printed as integers, Strings are converted to numbers, if possible etc.
 	 * @return String the formatted string
 	 * @throws IllegalArgumentException in case format and o do not match, i.e. not eough objects are passed to fill format
@@ -406,9 +405,9 @@ public class StringUtil
 				buf.append((String) elementAt);
 				next = true;
 			}
-			else if (elementAt instanceof ValuedEnum)
+			else if (elementAt instanceof Enum<?>)
 			{
-				buf.append(((ValuedEnum) elementAt).getName());
+				buf.append(((Enum<?>) elementAt).name());
 				next = true;
 			}
 			else if (elementAt != null)
@@ -546,7 +545,7 @@ public class StringUtil
 	{
 		if (delim2token)
 		{
-			delim = delim == null ? JDFConstants.BLANK : delim;
+			delim = delim == null ? JDFCoreConstants.BLANK : delim;
 			final VString v = new VString();
 			final StringTokenizer st = new StringTokenizer(strWork, delim, delim2token);
 			boolean lastToken = false;
@@ -587,7 +586,7 @@ public class StringUtil
 	{
 		if (!StringUtil.isEmpty(strIn))
 		{
-			String keep = JDFConstants.EMPTYSTRING;
+			String keep = JDFCoreConstants.EMPTYSTRING;
 			if (isEmpty(strSep))
 			{
 				for (final int s : JDFCoreConstants.WHITESPACE.getBytes())
@@ -601,7 +600,7 @@ public class StringUtil
 			}
 			else if (strSep.length() == 1 && strIn.indexOf(strSep.charAt(0)) < 0)
 			{
-				strSep = JDFConstants.EMPTYSTRING;
+				strSep = JDFCoreConstants.EMPTYSTRING;
 			}
 			if (strSep.isEmpty())
 			{
@@ -797,7 +796,7 @@ public class StringUtil
 		{
 			newToken = rightStr(newToken, -delim.length());
 		}
-		return ((strWork == null) ? JDFConstants.EMPTYSTRING : strWork) + delim + newToken;
+		return ((strWork == null) ? JDFCoreConstants.EMPTYSTRING : strWork) + delim + newToken;
 	}
 
 	/**
@@ -877,7 +876,7 @@ public class StringUtil
 	{
 		if (delim == null)
 		{
-			delim = JDFConstants.BLANK;
+			delim = JDFCoreConstants.BLANK;
 		}
 		final VString v = tokenize(strWork, delim, false);
 		if (index < 0)
@@ -943,7 +942,7 @@ public class StringUtil
 
 		if (delim == null)
 		{
-			delim = JDFConstants.BLANK;
+			delim = JDFCoreConstants.BLANK;
 		}
 
 		final int pos = delim.length() == 1 ? strWork.indexOf(delim) : 0;
@@ -1200,7 +1199,7 @@ public class StringUtil
 	 */
 	public static String normalize(final String strWork, final boolean toLower)
 	{
-		return normalize(strWork, toLower, JDFConstants.BLANK);
+		return normalize(strWork, toLower, JDFCoreConstants.BLANK);
 	}
 
 	/**
@@ -1211,7 +1210,7 @@ public class StringUtil
 	 */
 	public static String normalize(final String strWork)
 	{
-		return normalize(strWork, false, JDFConstants.BLANK);
+		return normalize(strWork, false, JDFCoreConstants.BLANK);
 	}
 
 	/**
@@ -1235,7 +1234,7 @@ public class StringUtil
 		}
 		if (replace == null)
 		{
-			replace = JDFConstants.EMPTYSTRING;
+			replace = JDFCoreConstants.EMPTYSTRING;
 		}
 		strWork = strWork.replaceAll("\\s+", replace);
 		if (toLower)
@@ -1321,11 +1320,11 @@ public class StringUtil
 	{
 		if (s1 == null)
 		{
-			s1 = JDFConstants.EMPTYSTRING;
+			s1 = JDFCoreConstants.EMPTYSTRING;
 		}
 		if (s2 == null)
 		{
-			s2 = JDFConstants.EMPTYSTRING;
+			s2 = JDFCoreConstants.EMPTYSTRING;
 		}
 
 		if (ignoreCase)
@@ -1339,14 +1338,14 @@ public class StringUtil
 			s2 = normalize(s2, false);
 			if (s1 == null)
 			{
-				s1 = JDFConstants.EMPTYSTRING;
+				s1 = JDFCoreConstants.EMPTYSTRING;
 			}
 			if (s2 == null)
 			{
-				s2 = JDFConstants.EMPTYSTRING;
+				s2 = JDFCoreConstants.EMPTYSTRING;
 			}
 		}
-		if (s1.equals(s2) || ignoreEmpty && (JDFConstants.EMPTYSTRING.equals(s1) || JDFConstants.EMPTYSTRING.equals(s2)))
+		if (s1.equals(s2) || ignoreEmpty && (JDFCoreConstants.EMPTYSTRING.equals(s1) || JDFCoreConstants.EMPTYSTRING.equals(s2)))
 		{
 			return 0;
 		}
@@ -1383,7 +1382,7 @@ public class StringUtil
 	 */
 	public static boolean isEmpty(final String s)
 	{
-		return s == null || JDFConstants.EMPTYSTRING.equals(s);
+		return s == null || JDFCoreConstants.EMPTYSTRING.equals(s);
 	}
 
 	/**
@@ -1405,7 +1404,7 @@ public class StringUtil
 	 */
 	public static boolean hasContent(final String s)
 	{
-		return s != null && !JDFConstants.EMPTYSTRING.equals(s) && normalize(s, false) != null;
+		return s != null && !JDFCoreConstants.EMPTYSTRING.equals(s) && normalize(s, false) != null;
 	}
 
 	/**
@@ -1456,11 +1455,7 @@ public class StringUtil
 	 */
 	public static boolean isNMTOKEN(final String strWork)
 	{
-		if (strWork == null)
-		{
-			return false;
-		}
-		if (strWork.length() >= 64)
+		if ((strWork == null) || (strWork.length() >= 64))
 		{
 			return false;
 		}
@@ -1482,11 +1477,7 @@ public class StringUtil
 	 */
 	public static boolean isID(final String strWork)
 	{
-		if (isEmpty(strWork))
-		{
-			return false;
-		}
-		if (StringUtils.isNumeric(strWork.substring(0, 1)))
+		if (isEmpty(strWork) || StringUtils.isNumeric(strWork.substring(0, 1)))
 		{
 			return false;
 		}
@@ -1520,11 +1511,7 @@ public class StringUtil
 		}
 		if (delta > 0)
 		{
-			if (Math.abs(d1 - d2) <= delta)
-			{
-				return true;
-			}
-			if (delta < 0.42 && d1 != 0 && Math.abs((d2 / d1) - 1.0) < delta)
+			if ((Math.abs(d1 - d2) <= delta) || (delta < 0.42 && d1 != 0 && Math.abs((d2 / d1) - 1.0) < delta))
 			{
 				return true;
 			}
@@ -1710,7 +1697,7 @@ public class StringUtil
 		final int first = dStr.charAt(0);
 		if (first == '+' || first == '-' || (first >= '0' && first <= '9') || first == 'I' || first == '.')
 		{
-			if (dStr.indexOf(JDFConstants.BLANK) >= 0)
+			if (dStr.indexOf(JDFCoreConstants.BLANK) >= 0)
 			{
 				return false;
 			}
@@ -1886,7 +1873,7 @@ public class StringUtil
 	{
 		if (delim == null)
 		{
-			delim = JDFConstants.BLANK;
+			delim = JDFCoreConstants.BLANK;
 		}
 		if (strWork != null)
 		{
@@ -2200,11 +2187,11 @@ public class StringUtil
 
 		if (i == Integer.MAX_VALUE)
 		{
-			s = JDFConstants.POSINF;
+			s = JDFCoreConstants.POSINF;
 		}
 		else if (i == Integer.MIN_VALUE)
 		{
-			s = JDFConstants.NEGINF;
+			s = JDFCoreConstants.NEGINF;
 		}
 		else
 		{
@@ -2225,11 +2212,11 @@ public class StringUtil
 
 		if (i == Long.MAX_VALUE)
 		{
-			s = JDFConstants.POSINF;
+			s = JDFCoreConstants.POSINF;
 		}
 		else if (i == Long.MIN_VALUE)
 		{
-			s = JDFConstants.NEGINF;
+			s = JDFCoreConstants.NEGINF;
 		}
 		else
 		{
@@ -2264,12 +2251,8 @@ public class StringUtil
 				intStr = str.trim();
 			}
 
-			if (JDFConstants.POSINF.equals(intStr) || JDFConstants.NEGINF.equals(intStr))
-			{
-				return true;
-			}
 			// hack for xml schema conformance, which uses unbounded to define + infinity
-			if ("unbounded".equals(intStr))
+			if (JDFCoreConstants.POSINF.equals(intStr) || JDFCoreConstants.NEGINF.equals(intStr) || "unbounded".equals(intStr))
 			{
 				return true;
 			}
@@ -2308,18 +2291,9 @@ public class StringUtil
 		if (first == '+' || first == '-' || (first >= '0' && first <= '9') || first == 'I' || first == 'u' || first == '.')
 		{
 
-			if (JDFConstants.POSINF.equals(intStr))
-			{
-				return true;
-			}
-
-			if (JDFConstants.NEGINF.equals(intStr))
-			{
-				return true;
-			}
 			// hack for xml schema conformance, which uses unbounded to define +
 			// infinity
-			if ("unbounded".equals(intStr))
+			if (JDFCoreConstants.POSINF.equals(intStr) || JDFCoreConstants.NEGINF.equals(intStr) || "unbounded".equals(intStr))
 			{
 				return true;
 			}
@@ -2565,8 +2539,8 @@ public class StringUtil
 				final String strIsEscaped = new String(escapeSeq); // get the escaped str 'd6'
 				try
 				{
-					final Integer integer = Integer.valueOf(strIsEscaped, iRadix);// and get the int value
-					byteEscape[n++] = (byte) integer.intValue();
+					final int integer = Integer.parseInt(strIsEscaped, iRadix);// and get the int value
+					byteEscape[n++] = (byte) integer;
 				}
 				catch (final NumberFormatException ex)
 				{
@@ -2631,12 +2605,12 @@ public class StringUtil
 		if (first == '+' || first == '-' || (first >= '0' && first <= '9') || first == 'I' || first == 'u' || first == '.')
 		{
 
-			if (JDFConstants.POSINF.equalsIgnoreCase(s) || JDFConstants.UNBOUNDED.equalsIgnoreCase(s))
+			if (JDFCoreConstants.POSINF.equalsIgnoreCase(s) || JDFConstants.UNBOUNDED.equalsIgnoreCase(s))
 			{
 				return Double.MAX_VALUE;
 			}
 
-			if (JDFConstants.NEGINF.equalsIgnoreCase(s))
+			if (JDFCoreConstants.NEGINF.equalsIgnoreCase(s))
 			{
 				return -Double.MAX_VALUE;
 			}
@@ -2736,12 +2710,12 @@ public class StringUtil
 				}
 			}
 
-			if (JDFConstants.POSINF.equalsIgnoreCase(s) || JDFConstants.UNBOUNDED.equalsIgnoreCase(s))
+			if (JDFCoreConstants.POSINF.equalsIgnoreCase(s) || JDFConstants.UNBOUNDED.equalsIgnoreCase(s))
 			{
 				return Integer.MAX_VALUE;
 			}
 
-			if (JDFConstants.NEGINF.equalsIgnoreCase(s))
+			if (JDFCoreConstants.NEGINF.equalsIgnoreCase(s))
 			{
 				return Integer.MIN_VALUE;
 			}
@@ -2812,12 +2786,12 @@ public class StringUtil
 					return def;
 				}
 			}
-			if (JDFConstants.POSINF.equalsIgnoreCase(s) || JDFConstants.UNBOUNDED.equalsIgnoreCase(s))
+			if (JDFCoreConstants.POSINF.equalsIgnoreCase(s) || JDFConstants.UNBOUNDED.equalsIgnoreCase(s))
 			{
 				return Long.MAX_VALUE;
 			}
 
-			if (JDFConstants.NEGINF.equalsIgnoreCase(s))
+			if (JDFCoreConstants.NEGINF.equalsIgnoreCase(s))
 			{
 				return Long.MIN_VALUE;
 			}
@@ -2880,7 +2854,7 @@ public class StringUtil
 
 	public static String underToCamel(final String toConvert)
 	{
-		final StringArray v = StringArray.getVString(toConvert, JDFConstants.UNDERSCORE);
+		final StringArray v = StringArray.getVString(toConvert, JDFCoreConstants.UNDERSCORE);
 		if (StringArray.isEmpty(v))
 		{
 			return null;
@@ -2960,7 +2934,7 @@ public class StringUtil
 			return simpleRegExp;
 		}
 
-		simpleRegExp = StringUtil.escape(simpleRegExp, ".\\{}|[]()", JDFConstants.BACK_SLASH, 0, 0, 0, Integer.MAX_VALUE);
+		simpleRegExp = StringUtil.escape(simpleRegExp, ".\\{}|[]()", JDFCoreConstants.BACK_SLASH, 0, 0, 0, Integer.MAX_VALUE);
 		// attention note sequence, otherwise we get unwanted side effects
 		final String[] in = new String[] { "*", "+", "?", "$" };
 		final String[] out = new String[] { "(.*)", "(.+)", "(.)", "(\\$)" };
@@ -3270,9 +3244,9 @@ public class StringUtil
 	 * @deprecated use @see EnumUtil.getNamesVector
 	 */
 	@Deprecated
-	public static VString getNamesVector(final Class<? extends ValuedEnum> e)
+	public static <T extends Enum<T>> VString getNamesVector(final Class<T> e)
 	{
-		return EnumUtil.getNamesVector(e);
+		return VString.getVString(JavaEnumUtil.getNamesList(e));
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
@@ -3286,9 +3260,18 @@ public class StringUtil
 	 * @deprecated use @se EnumUtil.getEnumsVector
 	 */
 	@Deprecated
-	public static Vector<ValuedEnum> getEnumsVector(final Class<? extends ValuedEnum> e)
+	public static <T extends Enum<T>> Vector<T> getEnumsVector(final Class<T> e)
 	{
-		return EnumUtil.getEnumsVector(e);
+		final Vector<T> ret = new Vector<>();
+		final T[] enumConstants = e == null ? null : e.getEnumConstants();
+		if (enumConstants != null)
+		{
+			for (final T enumConstant : enumConstants)
+			{
+				ret.add(enumConstant);
+			}
+		}
+		return ret;
 	}
 
 	/**
@@ -3449,9 +3432,9 @@ public class StringUtil
 	 */
 	public static String normalizeASCII(final String urlString)
 	{
-		String normalized = StringUtil.normalize(UrlUtil.urlToFileName(urlString), false, JDFConstants.UNDERSCORE);
+		String normalized = StringUtil.normalize(UrlUtil.urlToFileName(urlString), false, JDFCoreConstants.UNDERSCORE);
 		normalized = StringUtil.escape(normalized, UrlUtil.m_URIEscape, "_", -1, 0, 0x20, 0x7f);
-		return StringUtil.replaceString(normalized, "__", JDFConstants.UNDERSCORE);
+		return StringUtil.replaceString(normalized, "__", JDFCoreConstants.UNDERSCORE);
 	}
 
 	public static String intern(final String value)

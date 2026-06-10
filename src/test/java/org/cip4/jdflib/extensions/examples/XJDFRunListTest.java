@@ -72,7 +72,7 @@ class XJDFRunListTest extends JDFTestCaseBase
 	void testFilterRunIndex()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.RUNLIST, "Impo", null);
-		xjdfHelper.setTypes(EnumType.Product.getName());
+		xjdfHelper.setTypes(EnumType.Product.name());
 		final SetHelper shRL = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Input);
 		final JDFRunList rl1 = (JDFRunList) shRL.appendPartition(new JDFAttributeMap(AttributeName.RUN, "r1"), true).getResource();
 		rl1.setNPage(2);
@@ -100,7 +100,7 @@ class XJDFRunListTest extends JDFTestCaseBase
 	void testFileTemplate()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.RUNLIST, "Format", null);
-		xjdfHelper.setTypes(EnumType.Product.getName());
+		xjdfHelper.setTypes(EnumType.Product.name());
 		final SetHelper shRL = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Input);
 		final KElement ruli = shRL.appendPartition(null, true).getResource();
 		final JDFFileSpec fs = (JDFFileSpec) ruli.appendElement(ElementName.FILESPEC);
@@ -119,7 +119,7 @@ class XJDFRunListTest extends JDFTestCaseBase
 	void testMetaDataMap()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.RUNLIST, "Metadata", null);
-		xjdfHelper.setTypes(EnumType.DigitalPrinting.getName());
+		xjdfHelper.setTypes(EnumType.DigitalPrinting.name());
 		final SetHelper shRL = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.RUNLIST, EnumUsage.Input);
 		final JDFRunList runList = (JDFRunList) shRL.appendPartition(null, true).getResource();
 		final JDFFileSpec fs = (JDFFileSpec) runList.appendElement(ElementName.FILESPEC);
@@ -157,7 +157,7 @@ class XJDFRunListTest extends JDFTestCaseBase
 	public final void testSingleRunList()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("RunList", null, null);
-		xjdfHelper.setTypes(EnumType.Imposition.getName());
+		xjdfHelper.setTypes(EnumType.Imposition.name());
 		final SetHelper rlh = xjdfHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, null);
 		final ResourceHelper runh = rlh.appendPartition(null, null, true);
 		final JDFRunList rl = (JDFRunList) runh.getResource();
@@ -175,7 +175,7 @@ class XJDFRunListTest extends JDFTestCaseBase
 	public final void testRepeatPageRunList()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("RunList", null, null);
-		xjdfHelper.setTypes(EnumType.Imposition.getName());
+		xjdfHelper.setTypes(EnumType.Imposition.name());
 		final SetHelper rlh = xjdfHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, null);
 
 		ResourceHelper runh = rlh.appendPartition(null, null, true);
@@ -207,7 +207,7 @@ class XJDFRunListTest extends JDFTestCaseBase
 	public final void testContentList()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("RunList", null, null);
-		xjdfHelper.setTypes(EnumType.Imposition.getName());
+		xjdfHelper.setTypes(EnumType.Imposition.name());
 
 		final SetHelper csh = xjdfHelper.getCreateSet(XJDFConstants.Content, (EnumUsage) null, null);
 		final ResourceHelper ch1 = csh.appendPartition(AttributeName.PAGENUMBER, "0 0", true);
@@ -243,7 +243,7 @@ class XJDFRunListTest extends JDFTestCaseBase
 	public final void testMultiRunList()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("RunList", null, null);
-		xjdfHelper.setTypes(EnumType.Imposition.getName());
+		xjdfHelper.setTypes(EnumType.Imposition.name());
 		final SetHelper rlh = xjdfHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, null);
 		ResourceHelper runh = rlh.appendPartition(AttributeName.RUN, "R1", true);
 		JDFRunList rl = (JDFRunList) runh.getResource();
@@ -267,7 +267,7 @@ class XJDFRunListTest extends JDFTestCaseBase
 	public final void testMultiSet()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.RUNLIST, null, null);
-		xjdfHelper.setTypes(EnumType.DigitalPrinting.getName());
+		xjdfHelper.setTypes(EnumType.DigitalPrinting.name());
 		xjdfHelper.setVersion(XJDFHelper.defaultVersion());
 		final SetHelper rlh = xjdfHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, null);
 		final ResourceHelper runh = rlh.appendPartition(null, true);

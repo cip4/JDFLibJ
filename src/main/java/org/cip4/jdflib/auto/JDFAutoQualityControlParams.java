@@ -73,9 +73,6 @@ package org.cip4.jdflib.auto;
 import java.util.Collection;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoDefect.EFace;
-import org.cip4.jdflib.auto.JDFAutoDefect.EnumFace;
-import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumPosition;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -90,6 +87,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFBindingQualityParams;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.util.JDFDuration;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoQualityControlParams : public JDFResource
@@ -104,7 +102,8 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.BOX, 0x3331111111l, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x3331111111l, AttributeInfo.EnumAttributeType.enumeration, EnumPosition.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x3331111111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumPosition.class, 0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.SAMPLEINTERVAL, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.SEVERITY, 0x3331111111l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.SOURCEDEVICEID, 0x3331111111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
@@ -138,7 +137,7 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoQualityControlParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoQualityControlParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -150,7 +149,7 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoQualityControlParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoQualityControlParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -163,7 +162,7 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoQualityControlParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoQualityControlParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -174,7 +173,7 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -188,11 +187,23 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * Enumeration strings for numPosition
 	 */
+
+	public enum EnumPosition
+	{
+		Top, Bottom, Left, Right, Front, Back;
+
+		public static EnumPosition getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPosition.class, val, null);
+		}
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
+		 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -204,7 +215,7 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBox(JDFRectangle value)
+	public void setBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.BOX, value, null);
 	}
@@ -217,8 +228,8 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
 	 */
 	public JDFRectangle getBox()
 	{
-		String strAttrName = getAttribute(AttributeName.BOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.BOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -232,9 +243,9 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPosition(EFace enumVar)
+	public void setPosition(final EnumPosition enumVar)
 	{
-		setAttribute(AttributeName.POSITION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.POSITION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -242,38 +253,9 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EFace getEPosition()
+	public EnumPosition getPosition()
 	{
-		return EFace.getEnum(getAttribute(AttributeName.POSITION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Position
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Position
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPosition(EFace) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPosition(EnumFace enumVar)
-	{
-		setAttribute(AttributeName.POSITION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Position
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EFace GetEPosition() based on java.lang.enum instead
-	 */
-	@Deprecated
-	public EnumFace getPosition()
-	{
-		return EnumFace.getEnum(getAttribute(AttributeName.POSITION, null, null));
+		return EnumPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));
 	}
 
 	/*
@@ -286,7 +268,7 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSampleInterval(int value)
+	public void setSampleInterval(final int value)
 	{
 		setAttribute(AttributeName.SAMPLEINTERVAL, value, null);
 	}
@@ -311,7 +293,7 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSeverity(int value)
+	public void setSeverity(final int value)
 	{
 		setAttribute(AttributeName.SEVERITY, value, null);
 	}
@@ -336,7 +318,7 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSourceDeviceID(String value)
+	public void setSourceDeviceID(final String value)
 	{
 		setAttribute(AttributeName.SOURCEDEVICEID, value, null);
 	}
@@ -361,7 +343,7 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTimeInterval(JDFDuration value)
+	public void setTimeInterval(final JDFDuration value)
 	{
 		setAttribute(AttributeName.TIMEINTERVAL, value, null);
 	}
@@ -374,8 +356,8 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
 	 */
 	public JDFDuration getTimeInterval()
 	{
-		String strAttrName = getAttribute(AttributeName.TIMEINTERVAL, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TIMEINTERVAL, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -442,7 +424,7 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorMeasurement the element
 	 */
-	public JDFColorMeasurement getCreateColorMeasurement(int iSkip)
+	public JDFColorMeasurement getCreateColorMeasurement(final int iSkip)
 	{
 		return (JDFColorMeasurement) getCreateElement_JDFElement(ElementName.COLORMEASUREMENT, null, iSkip);
 	}
@@ -454,7 +436,7 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
 	 * @return JDFColorMeasurement the element
 	 *         default is getColorMeasurement(0)
 	 */
-	public JDFColorMeasurement getColorMeasurement(int iSkip)
+	public JDFColorMeasurement getColorMeasurement(final int iSkip)
 	{
 		return (JDFColorMeasurement) getElement(ElementName.COLORMEASUREMENT, null, iSkip);
 	}
@@ -505,7 +487,7 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
-	public JDFFileSpec getCreateFileSpec(int iSkip)
+	public JDFFileSpec getCreateFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -517,7 +499,7 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
 	 * @return JDFFileSpec the element
 	 *         default is getFileSpec(0)
 	 */
-	public JDFFileSpec getFileSpec(int iSkip)
+	public JDFFileSpec getFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -547,7 +529,7 @@ public abstract class JDFAutoQualityControlParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}

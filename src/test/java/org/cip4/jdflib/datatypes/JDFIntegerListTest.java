@@ -53,7 +53,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         prior to May 7, 2009
  */
 class JDFIntegerListTest extends JDFTestCaseBase
@@ -144,7 +143,6 @@ class JDFIntegerListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testSubtract() throws DataFormatException

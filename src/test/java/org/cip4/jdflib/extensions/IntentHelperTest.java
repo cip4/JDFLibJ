@@ -78,9 +78,7 @@ import org.cip4.jdflib.core.KElement;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class IntentHelperTest
 {

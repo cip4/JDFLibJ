@@ -86,6 +86,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoModulePhase : public JDFElement
@@ -102,7 +103,7 @@ public abstract class JDFAutoModulePhase extends JDFElement
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMBINEDPROCESSINDEX, 0x3333333111l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICEID, 0x2222222222l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVICESTATUS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				JDFDeviceInfo.EnumDeviceStatus.getEnum(0), null);
+				JavaEnumUtil.getEnum(JDFDeviceInfo.EnumDeviceStatus.class, 0), null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.END, 0x4444443333l, AttributeInfo.EnumAttributeType.dateTime, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.MODULEID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x3333333333l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
@@ -135,7 +136,7 @@ public abstract class JDFAutoModulePhase extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoModulePhase(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoModulePhase(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -147,7 +148,7 @@ public abstract class JDFAutoModulePhase extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoModulePhase(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoModulePhase(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -160,7 +161,7 @@ public abstract class JDFAutoModulePhase extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoModulePhase(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoModulePhase(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -181,7 +182,7 @@ public abstract class JDFAutoModulePhase extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCombinedProcessIndex(JDFIntegerList value)
+	public void setCombinedProcessIndex(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.COMBINEDPROCESSINDEX, value, null);
 	}
@@ -194,8 +195,8 @@ public abstract class JDFAutoModulePhase extends JDFElement
 	 */
 	public JDFIntegerList getCombinedProcessIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -209,7 +210,7 @@ public abstract class JDFAutoModulePhase extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeviceID(String value)
+	public void setDeviceID(final String value)
 	{
 		setAttribute(AttributeName.DEVICEID, value, null);
 	}
@@ -234,9 +235,9 @@ public abstract class JDFAutoModulePhase extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDeviceStatus(JDFDeviceInfo.EDeviceStatus enumVar)
+	public void setDeviceStatus(final JDFDeviceInfo.EnumDeviceStatus enumVar)
 	{
-		setAttribute(AttributeName.DEVICESTATUS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DEVICESTATUS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -244,35 +245,6 @@ public abstract class JDFAutoModulePhase extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public JDFDeviceInfo.EDeviceStatus getEDeviceStatus()
-	{
-		return JDFDeviceInfo.EDeviceStatus.getEnum(getAttribute(AttributeName.DEVICESTATUS, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute DeviceStatus
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute DeviceStatus
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDeviceStatus(EeviceInfo.EnumDeviceStatus) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDeviceStatus(JDFDeviceInfo.EnumDeviceStatus enumVar)
-	{
-		setAttribute(AttributeName.DEVICESTATUS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute DeviceStatus
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EeviceInfo.EnumDeviceStatus GetEDeviceStatus() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public JDFDeviceInfo.EnumDeviceStatus getDeviceStatus()
 	{
 		return JDFDeviceInfo.EnumDeviceStatus.getEnum(getAttribute(AttributeName.DEVICESTATUS, null, null));
@@ -288,7 +260,7 @@ public abstract class JDFAutoModulePhase extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setEnd(JDFDate value)
+	public void setEnd(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -305,8 +277,8 @@ public abstract class JDFAutoModulePhase extends JDFElement
 	 */
 	public JDFDate getEnd()
 	{
-		String str = getAttribute(AttributeName.END, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.END, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -320,7 +292,7 @@ public abstract class JDFAutoModulePhase extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setModuleID(String value)
+	public void setModuleID(final String value)
 	{
 		setAttribute(AttributeName.MODULEID, value, null);
 	}
@@ -345,7 +317,7 @@ public abstract class JDFAutoModulePhase extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setModuleIndex(JDFIntegerRangeList value)
+	public void setModuleIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.MODULEINDEX, value, null);
 	}
@@ -358,8 +330,8 @@ public abstract class JDFAutoModulePhase extends JDFElement
 	 */
 	public JDFIntegerRangeList getModuleIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -373,7 +345,7 @@ public abstract class JDFAutoModulePhase extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setModuleType(String value)
+	public void setModuleType(final String value)
 	{
 		setAttribute(AttributeName.MODULETYPE, value, null);
 	}
@@ -398,7 +370,7 @@ public abstract class JDFAutoModulePhase extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setStart(JDFDate value)
+	public void setStart(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -415,8 +387,8 @@ public abstract class JDFAutoModulePhase extends JDFElement
 	 */
 	public JDFDate getStart()
 	{
-		String str = getAttribute(AttributeName.START, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.START, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -430,7 +402,7 @@ public abstract class JDFAutoModulePhase extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStatusDetails(String value)
+	public void setStatusDetails(final String value)
 	{
 		setAttribute(AttributeName.STATUSDETAILS, value, null);
 	}
@@ -477,7 +449,7 @@ public abstract class JDFAutoModulePhase extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
-	public JDFEmployee getCreateEmployee(int iSkip)
+	public JDFEmployee getCreateEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -489,7 +461,7 @@ public abstract class JDFAutoModulePhase extends JDFElement
 	 * @return JDFEmployee the element
 	 *         default is getEmployee(0)
 	 */
-	public JDFEmployee getEmployee(int iSkip)
+	public JDFEmployee getEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -519,7 +491,7 @@ public abstract class JDFAutoModulePhase extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refEmployee(JDFEmployee refTarget)
+	public void refEmployee(final JDFEmployee refTarget)
 	{
 		refElement(refTarget);
 	}

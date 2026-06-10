@@ -112,7 +112,7 @@ public class JDFIDInfo extends JDFAutoIDInfo implements INodeIdentifiable
 
 	/**
 	 * Constructor for JDFIDInfo
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -123,7 +123,7 @@ public class JDFIDInfo extends JDFAutoIDInfo implements INodeIdentifiable
 
 	/**
 	 * Constructor for JDFIDInfo
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -135,7 +135,7 @@ public class JDFIDInfo extends JDFAutoIDInfo implements INodeIdentifiable
 
 	/**
 	 * Constructor for JDFIDInfo
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -150,7 +150,7 @@ public class JDFIDInfo extends JDFAutoIDInfo implements INodeIdentifiable
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -161,8 +161,8 @@ public class JDFIDInfo extends JDFAutoIDInfo implements INodeIdentifiable
 
 	/**
 	 * creates a matching IDInfo for a node. Note: Does NOT copy the jdf element
-	 * 
-	 * @param n the jdf node to copy data from
+	 *
+	 * @param n       the jdf node to copy data from
 	 * @param message message to place the new idinfo: if null a root idinfo is created
 	 * @return the idinfo
 	 */
@@ -171,7 +171,8 @@ public class JDFIDInfo extends JDFAutoIDInfo implements INodeIdentifiable
 		final JDFIDInfo newInfo = message == null ? (JDFIDInfo) new JDFDoc(ElementName.IDINFO).getRoot() : message.appendIDInfo();
 		if (n != null)
 		{
-			final String[] directCopy = { AttributeName.TYPE, AttributeName.TYPES, AttributeName.DESCRIPTIVENAME, AttributeName.JOBPARTID, AttributeName.CATEGORY };
+			final String[] directCopy = { AttributeName.TYPE, AttributeName.TYPES, AttributeName.DESCRIPTIVENAME, AttributeName.JOBPARTID,
+					AttributeName.CATEGORY };
 			for (int i = 0; i < directCopy.length; i++)
 			{
 				newInfo.copyAttribute(directCopy[i], n);
@@ -189,7 +190,7 @@ public class JDFIDInfo extends JDFAutoIDInfo implements INodeIdentifiable
 
 	/**
 	 * returns the parentjobid which defaults to jobID
-	 * 
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoIDInfo#getParentJobID()
 	 */
 	@Override

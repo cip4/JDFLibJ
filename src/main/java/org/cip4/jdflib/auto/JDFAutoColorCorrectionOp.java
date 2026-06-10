@@ -72,11 +72,8 @@ package org.cip4.jdflib.auto;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoObjectResolution.ESourceObjects;
-import org.cip4.jdflib.auto.JDFAutoObjectResolution.EnumSourceObjects;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -87,6 +84,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoColorCorrectionOp : public JDFElement
@@ -109,7 +107,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.ADJUSTYELLOWBLUE, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x3333331111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations,
-				EnumSourceObjects.getEnum(0), "All");
+				JavaEnumUtil.getEnum(EnumSourceObjects.class, 0), "All");
 	}
 
 	@Override
@@ -136,7 +134,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoColorCorrectionOp(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoColorCorrectionOp(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -148,7 +146,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoColorCorrectionOp(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoColorCorrectionOp(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -161,16 +159,28 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoColorCorrectionOp(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoColorCorrectionOp(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * Enumeration strings for numSourceObjects
 	 */
+
+	public enum EnumSourceObjects
+	{
+		All, ImagePhotographic, ImageScreenShot, LineArt, SmoothShades, Text;
+
+		public static EnumSourceObjects getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSourceObjects.class, val, EnumSourceObjects.All);
+		}
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
+		 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -182,7 +192,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAdjustContrast(double value)
+	public void setAdjustContrast(final double value)
 	{
 		setAttribute(AttributeName.ADJUSTCONTRAST, value, null);
 	}
@@ -207,7 +217,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAdjustCyanRed(double value)
+	public void setAdjustCyanRed(final double value)
 	{
 		setAttribute(AttributeName.ADJUSTCYANRED, value, null);
 	}
@@ -232,7 +242,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAdjustHue(double value)
+	public void setAdjustHue(final double value)
 	{
 		setAttribute(AttributeName.ADJUSTHUE, value, null);
 	}
@@ -257,7 +267,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAdjustLightness(double value)
+	public void setAdjustLightness(final double value)
 	{
 		setAttribute(AttributeName.ADJUSTLIGHTNESS, value, null);
 	}
@@ -282,7 +292,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAdjustMagentaGreen(double value)
+	public void setAdjustMagentaGreen(final double value)
 	{
 		setAttribute(AttributeName.ADJUSTMAGENTAGREEN, value, null);
 	}
@@ -307,7 +317,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAdjustSaturation(double value)
+	public void setAdjustSaturation(final double value)
 	{
 		setAttribute(AttributeName.ADJUSTSATURATION, value, null);
 	}
@@ -332,7 +342,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAdjustYellowBlue(double value)
+	public void setAdjustYellowBlue(final double value)
 	{
 		setAttribute(AttributeName.ADJUSTYELLOWBLUE, value, null);
 	}
@@ -357,7 +367,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setObjectTags(VString value)
+	public void setObjectTags(final VString value)
 	{
 		setAttribute(AttributeName.OBJECTTAGS, value, null);
 	}
@@ -369,8 +379,8 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	 */
 	public VString getObjectTags()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.OBJECTTAGS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.OBJECTTAGS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -385,7 +395,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	 *
 	 * @param v List of the enumeration values
 	 */
-	public void setESourceObjects(List<ESourceObjects> v)
+	public void setSourceObjects(final List<EnumSourceObjects> v)
 	{
 		setEnumsAttribute(AttributeName.SOURCEOBJECTS, v, null);
 	}
@@ -395,38 +405,9 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public List<ESourceObjects> getEnumsSourceObjects()
+	public List<EnumSourceObjects> getSourceObjects()
 	{
-		return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, ESourceObjects.class);
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute SourceObjects
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5.2) set attribute SourceObjects
-	 *
-	 * @param v List of the enumeration values
-	 * @deprecated use SetESourceObjects(List<ESourceObjects>) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSourceObjects(List<EnumSourceObjects> v)
-	{
-		setEnumerationsAttribute(AttributeName.SOURCEOBJECTS, v, null);
-	}
-
-	/**
-	 * (9.2) get SourceObjects attribute SourceObjects
-	 *
-	 * @return Vector of the enumerations
-	 * @deprecated use List<ESourceObjects > GetESourceObjects() based on java.lang.enum instead
-	 */
-	@Deprecated
-	public Vector<EnumSourceObjects> getSourceObjects()
-	{
-		return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.All, false);
+		return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.class);
 	}
 
 	/*
@@ -461,7 +442,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
-	public JDFFileSpec getCreateFileSpec(int iSkip)
+	public JDFFileSpec getCreateFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -473,7 +454,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	 * @return JDFFileSpec the element
 	 *         default is getFileSpec(0)
 	 */
-	public JDFFileSpec getFileSpec(int iSkip)
+	public JDFFileSpec getFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -503,7 +484,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}

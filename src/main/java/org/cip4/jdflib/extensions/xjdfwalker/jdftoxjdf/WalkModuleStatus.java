@@ -39,7 +39,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
@@ -52,7 +52,7 @@ import org.cip4.jdflib.extensions.XJDFEnums.eDeviceStatus;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJobPhase;
 import org.cip4.jdflib.resource.JDFModuleStatus;
-import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -160,7 +160,7 @@ public class WalkModuleStatus extends WalkJDFSubElement
 					final int size = il.size();
 					for (int i = 0; i < size; i++)
 					{
-						xjdf.appendAttribute(XJDFConstants.ModuleIDs, JDFConstants.EMPTYSTRING + il.getInt(i), null, null, true);
+						xjdf.appendAttribute(XJDFConstants.ModuleIDs, JDFCoreConstants.EMPTYSTRING + il.getInt(i), null, null, true);
 					}
 				}
 			}
@@ -172,7 +172,7 @@ public class WalkModuleStatus extends WalkJDFSubElement
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		final EnumVersion v = jdfToXJDF.getNewVersion();
-		if (EnumUtil.aLessThanB(v, EnumVersion.Version_2_3))
+		if (JavaEnumUtil.aLessThanB(v, EnumVersion.Version_2_3))
 		{
 			return walkOld(jdf, xjdf);
 		}

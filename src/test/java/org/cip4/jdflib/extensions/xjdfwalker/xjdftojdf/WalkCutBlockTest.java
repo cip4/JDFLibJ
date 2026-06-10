@@ -80,9 +80,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class WalkCutBlockTest extends JDFTestCaseBase
 {
@@ -92,16 +90,16 @@ class WalkCutBlockTest extends JDFTestCaseBase
 	@Test
 	void testWalk()
 	{
-		JDFCutBlock cb = (JDFCutBlock) new JDFDoc(ElementName.CUTBLOCK).getRoot();
-		JDFRectangle box = new JDFRectangle(10, 20, 210, 420);
+		final JDFCutBlock cb = (JDFCutBlock) new JDFDoc(ElementName.CUTBLOCK).getRoot();
+		final JDFRectangle box = new JDFRectangle(10, 20, 210, 420);
 		cb.setAttribute(AttributeName.BOX, box, null);
-		WalkCutBlock walkCutBlock = new WalkCutBlock();
+		final WalkCutBlock walkCutBlock = new WalkCutBlock();
 		walkCutBlock.setParent(new XJDFToJDFImpl(null));
 		walkCutBlock.walk(cb, new JDFDoc(ElementName.RESOURCEPOOL).getRoot());
 		Assertions.assertNull(cb.getNonEmpty(AttributeName.BOX));
-		JDFMatrix m = JDFMatrix.getUnitMatrix();
+		final JDFMatrix m = JDFMatrix.getUnitMatrix();
 		m.shift(box.getLL());
-		JDFXYPair size = box.getSize();
+		final JDFXYPair size = box.getSize();
 		Assertions.assertEquals(cb.getBlockTrf(), m);
 		Assertions.assertEquals(cb.getBlockSize(), size);
 		Assertions.assertNull(cb.getNonEmpty(AttributeName.BOX));

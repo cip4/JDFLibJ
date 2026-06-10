@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -102,10 +98,10 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTENTSMODIFIED, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.NODESTATUS, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0),
-				null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.REASON, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumReason.getEnum(0),
-				"ProcessResult");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.NODESTATUS, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumNodeStatus.class, 0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.REASON, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumReason.class, 0), "ProcessResult");
 	}
 
 	@Override
@@ -134,7 +130,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoResourceAudit(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoResourceAudit(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -146,7 +142,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoResourceAudit(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoResourceAudit(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -159,95 +155,28 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoResourceAudit(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoResourceAudit(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for Reason
+	 * Enumeration strings for numReason
 	 */
 
-	public enum EReason
+	public enum EnumReason
 	{
 		OperatorInput, PlanChange, ProcessResult;
 
-		public static EReason getEnum(String val)
+		public static EnumReason getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EReason.class, val, EReason.ProcessResult);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumReason.class, val, EnumReason.ProcessResult);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Reason
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumReason extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumReason(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumReason getEnum(String enumName)
-		{
-			return (EnumReason) getEnum(EnumReason.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumReason getEnum(int enumValue)
-		{
-			return (EnumReason) getEnum(EnumReason.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumReason.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumReason.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumReason.class);
-		}
-
-		/**  */
-		public static final EnumReason OperatorInput = new EnumReason("OperatorInput");
-		/**  */
-		public static final EnumReason PlanChange = new EnumReason("PlanChange");
-		/**  */
-		public static final EnumReason ProcessResult = new EnumReason("ProcessResult");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -259,7 +188,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setContentsModified(boolean value)
+	public void setContentsModified(final boolean value)
 	{
 		setAttribute(AttributeName.CONTENTSMODIFIED, value, null);
 	}
@@ -284,9 +213,9 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setNodeStatus(ENodeStatus enumVar)
+	public void setNodeStatus(final EnumNodeStatus enumVar)
 	{
-		setAttribute(AttributeName.NODESTATUS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.NODESTATUS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -294,35 +223,6 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	 *
 	 * @return the value of the attribute
 	 */
-	public ENodeStatus getENodeStatus()
-	{
-		return ENodeStatus.getEnum(getAttribute(AttributeName.NODESTATUS, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute NodeStatus
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute NodeStatus
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetNodeStatus(ENodeStatus) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setNodeStatus(EnumNodeStatus enumVar)
-	{
-		setAttribute(AttributeName.NODESTATUS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute NodeStatus
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ENodeStatus GetENodeStatus() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumNodeStatus getNodeStatus()
 	{
 		return EnumNodeStatus.getEnum(getAttribute(AttributeName.NODESTATUS, null, null));
@@ -338,9 +238,9 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setReason(EReason enumVar)
+	public void setReason(final EnumReason enumVar)
 	{
-		setAttribute(AttributeName.REASON, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.REASON, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -348,35 +248,6 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	 *
 	 * @return the value of the attribute
 	 */
-	public EReason getEReason()
-	{
-		return EReason.getEnum(getAttribute(AttributeName.REASON, null, "ProcessResult"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Reason
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Reason
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetReason(EReason) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setReason(EnumReason enumVar)
-	{
-		setAttribute(AttributeName.REASON, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Reason
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EReason GetEReason() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumReason getReason()
 	{
 		return EnumReason.getEnum(getAttribute(AttributeName.REASON, null, "ProcessResult"));
@@ -415,7 +286,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	 * @return JDFEmployee the element
 	 */
 	@Override
-	public JDFEmployee getCreateEmployee(int iSkip)
+	public JDFEmployee getCreateEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -428,7 +299,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	 *         default is getEmployee(0)
 	 */
 	@Override
-	public JDFEmployee getEmployee(int iSkip)
+	public JDFEmployee getEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -512,7 +383,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
-	public JDFPart getCreatePart(int iSkip)
+	public JDFPart getCreatePart(final int iSkip)
 	{
 		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
@@ -524,7 +395,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	 * @return JDFPart the element
 	 *         default is getPart(0)
 	 */
-	public JDFPart getPart(int iSkip)
+	public JDFPart getPart(final int iSkip)
 	{
 		return (JDFPart) getElement(ElementName.PART, null, iSkip);
 	}

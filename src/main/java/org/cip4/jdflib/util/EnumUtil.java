@@ -260,7 +260,7 @@ public class EnumUtil
 	 */
 	public static ValuedEnum getEnumIgnoreCase(final Class<? extends ValuedEnum> clazz, final Enum<?> e)
 	{
-		final String s = e == null ? null : e.name();
+		final String s = JavaEnumUtil.getName(e);
 		return getEnumIgnoreCase(clazz, s);
 	}
 
@@ -319,7 +319,7 @@ public class EnumUtil
 	 */
 	public static <T extends Enum<T>> T getJavaEnum(final ValuedEnum val)
 	{
-		Class<T> c = getJavaEnumClass(val);
+		final Class<T> c = getJavaEnumClass(val);
 		return c == null ? null : JavaEnumUtil.getEnumIgnoreCase(c, getName(val));
 	}
 
@@ -336,16 +336,16 @@ public class EnumUtil
 		{
 			return null;
 		}
-		String name = val.getClass().getName();
-		String simple = StringUtil.token(name, -1, ".$");
-		String newsimple = "E" + StringUtil.rightStr(simple, -4);
+		final String name = val.getClass().getName();
+		final String simple = StringUtil.token(name, -1, ".$");
+		final String newsimple = "E" + StringUtil.rightStr(simple, -4);
 
-		String newname = StringUtil.replaceToken(name, -1, ".$", newsimple);
+		final String newname = StringUtil.replaceToken(name, -1, ".$", newsimple);
 		try
 		{
 			return (Class<J>) Class.forName(newname);
 		}
-		catch (ClassNotFoundException e)
+		catch (final ClassNotFoundException e)
 		{
 			return null;
 		}
@@ -360,7 +360,7 @@ public class EnumUtil
 	 */
 	public static <T extends ValuedEnum, E extends Enum<E>> T getOldEnum(final E val)
 	{
-		Class<T> c = getOldEnumClass(val);
+		final Class<T> c = getOldEnumClass(val);
 		return c == null ? null : (T) getEnumIgnoreCase(c, JavaEnumUtil.getName(val));
 	}
 
@@ -378,16 +378,16 @@ public class EnumUtil
 		{
 			return null;
 		}
-		String name = oldEnum.getClass().getName();
-		String simpleClass = StringUtil.token(name, -1, ".$");
-		String newsimple = "Enum" + StringUtil.rightStr(simpleClass, -1);
+		final String name = oldEnum.getClass().getName();
+		final String simpleClass = StringUtil.token(name, -1, ".$");
+		final String newsimple = "Enum" + StringUtil.rightStr(simpleClass, -1);
 
-		String newname = StringUtil.replaceToken(name, -1, ".$", newsimple);
+		final String newname = StringUtil.replaceToken(name, -1, ".$", newsimple);
 		try
 		{
 			return (Class<O>) Class.forName(newname);
 		}
-		catch (ClassNotFoundException x)
+		catch (final ClassNotFoundException x)
 		{
 			return null;
 		}

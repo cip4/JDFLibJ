@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -114,7 +109,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.OUTPUTBIN, 0x3331111111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.PRESTACKAMOUNT, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.PRESTACKMETHOD, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumPreStackMethod.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumPreStackMethod.class, 0), null);
 		atrInfoTable[13] = new AtrInfoTable(AttributeName.STACKAMOUNT, 0x3331111111l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[14] = new AtrInfoTable(AttributeName.STACKCOMPRESSION, 0x3333331111l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[15] = new AtrInfoTable(AttributeName.UNDERLAYS, 0x3333333111l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
@@ -145,7 +140,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoStackingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoStackingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -157,7 +152,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoStackingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoStackingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -170,7 +165,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoStackingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoStackingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -181,7 +176,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -196,89 +191,22 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for PreStackMethod
+	 * Enumeration strings for numPreStackMethod
 	 */
 
-	public enum EPreStackMethod
+	public enum EnumPreStackMethod
 	{
 		All, First, None;
 
-		public static EPreStackMethod getEnum(String val)
+		public static EnumPreStackMethod getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPreStackMethod.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPreStackMethod.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for PreStackMethod
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumPreStackMethod extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPreStackMethod(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumPreStackMethod getEnum(String enumName)
-		{
-			return (EnumPreStackMethod) getEnum(EnumPreStackMethod.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPreStackMethod getEnum(int enumValue)
-		{
-			return (EnumPreStackMethod) getEnum(EnumPreStackMethod.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPreStackMethod.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPreStackMethod.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPreStackMethod.class);
-		}
-
-		/**  */
-		public static final EnumPreStackMethod All = new EnumPreStackMethod("All");
-		/**  */
-		public static final EnumPreStackMethod First = new EnumPreStackMethod("First");
-		/**  */
-		public static final EnumPreStackMethod None = new EnumPreStackMethod("None");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -290,7 +218,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBundleDepth(int value)
+	public void setBundleDepth(final int value)
 	{
 		setAttribute(AttributeName.BUNDLEDEPTH, value, null);
 	}
@@ -315,7 +243,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCompensate(boolean value)
+	public void setCompensate(final boolean value)
 	{
 		setAttribute(AttributeName.COMPENSATE, value, null);
 	}
@@ -340,7 +268,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLayerAmount(JDFIntegerList value)
+	public void setLayerAmount(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.LAYERAMOUNT, value, null);
 	}
@@ -353,8 +281,8 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 */
 	public JDFIntegerList getLayerAmount()
 	{
-		String strAttrName = getAttribute(AttributeName.LAYERAMOUNT, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.LAYERAMOUNT, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -368,7 +296,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLayerLift(boolean value)
+	public void setLayerLift(final boolean value)
 	{
 		setAttribute(AttributeName.LAYERLIFT, value, null);
 	}
@@ -393,7 +321,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLayerCompression(boolean value)
+	public void setLayerCompression(final boolean value)
 	{
 		setAttribute(AttributeName.LAYERCOMPRESSION, value, null);
 	}
@@ -418,7 +346,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaxAmount(int value)
+	public void setMaxAmount(final int value)
 	{
 		setAttribute(AttributeName.MAXAMOUNT, value, null);
 	}
@@ -443,7 +371,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaxHeight(int value)
+	public void setMaxHeight(final int value)
 	{
 		setAttribute(AttributeName.MAXHEIGHT, value, null);
 	}
@@ -468,7 +396,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMinAmount(int value)
+	public void setMinAmount(final int value)
 	{
 		setAttribute(AttributeName.MINAMOUNT, value, null);
 	}
@@ -493,7 +421,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaxWeight(double value)
+	public void setMaxWeight(final double value)
 	{
 		setAttribute(AttributeName.MAXWEIGHT, value, null);
 	}
@@ -518,7 +446,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOffset(boolean value)
+	public void setOffset(final boolean value)
 	{
 		setAttribute(AttributeName.OFFSET, value, null);
 	}
@@ -543,7 +471,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOutputBin(VString value)
+	public void setOutputBin(final VString value)
 	{
 		setAttribute(AttributeName.OUTPUTBIN, value, null);
 	}
@@ -555,8 +483,8 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 */
 	public VString getOutputBin()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.OUTPUTBIN, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.OUTPUTBIN, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -571,7 +499,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPreStackAmount(int value)
+	public void setPreStackAmount(final int value)
 	{
 		setAttribute(AttributeName.PRESTACKAMOUNT, value, null);
 	}
@@ -596,9 +524,9 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPreStackMethod(EPreStackMethod enumVar)
+	public void setPreStackMethod(final EnumPreStackMethod enumVar)
 	{
-		setAttribute(AttributeName.PRESTACKMETHOD, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.PRESTACKMETHOD, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -606,35 +534,6 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPreStackMethod getEPreStackMethod()
-	{
-		return EPreStackMethod.getEnum(getAttribute(AttributeName.PRESTACKMETHOD, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute PreStackMethod
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute PreStackMethod
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPreStackMethod(EPreStackMethod) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPreStackMethod(EnumPreStackMethod enumVar)
-	{
-		setAttribute(AttributeName.PRESTACKMETHOD, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute PreStackMethod
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EPreStackMethod GetEPreStackMethod() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumPreStackMethod getPreStackMethod()
 	{
 		return EnumPreStackMethod.getEnum(getAttribute(AttributeName.PRESTACKMETHOD, null, null));
@@ -650,7 +549,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStackAmount(int value)
+	public void setStackAmount(final int value)
 	{
 		setAttribute(AttributeName.STACKAMOUNT, value, null);
 	}
@@ -675,7 +574,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStackCompression(boolean value)
+	public void setStackCompression(final boolean value)
 	{
 		setAttribute(AttributeName.STACKCOMPRESSION, value, null);
 	}
@@ -700,7 +599,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setUnderLays(JDFIntegerList value)
+	public void setUnderLays(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.UNDERLAYS, value, null);
 	}
@@ -713,8 +612,8 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 */
 	public JDFIntegerList getUnderLays()
 	{
-		String strAttrName = getAttribute(AttributeName.UNDERLAYS, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.UNDERLAYS, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -728,7 +627,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStandardAmount(int value)
+	public void setStandardAmount(final int value)
 	{
 		setAttribute(AttributeName.STANDARDAMOUNT, value, null);
 	}

@@ -82,7 +82,7 @@ import java.util.Collection;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoAddress;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
@@ -128,7 +128,8 @@ public class JDFAddress extends JDFAutoAddress implements IMatches
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFAddress(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFAddress(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -147,7 +148,6 @@ public class JDFAddress extends JDFAutoAddress implements IMatches
 	}
 
 	/**
-	 *
 	 * @return the extended address text
 	 */
 	public String getExtendedAddressText()
@@ -156,7 +156,7 @@ public class JDFAddress extends JDFAutoAddress implements IMatches
 		{
 			return getExtendedAddress().getText();
 		}
-		return JDFConstants.EMPTYSTRING;
+		return JDFCoreConstants.EMPTYSTRING;
 	}
 
 	public void setExtendedAddressText(final String extendedAddress)
@@ -199,7 +199,9 @@ public class JDFAddress extends JDFAutoAddress implements IMatches
 		final Collection<KElement> c = getChildArray(ElementName.ADDRESSLINE, null);
 		final Collection<JDFElement> cc = new ArrayList<>();
 		for (final KElement l : c)
+		{
 			cc.add((JDFElement) l);
+		}
 		return cc;
 	}
 
@@ -213,20 +215,22 @@ public class JDFAddress extends JDFAutoAddress implements IMatches
 	public boolean matches(final Object subset)
 	{
 		if (!(subset instanceof JDFAddress))
+		{
 			return false;
+		}
 		final JDFAddress other = (JDFAddress) subset;
-		if (StringUtil.getDistance(getCity(), other.getCity(), true, true, true) > 2)
+		if ((StringUtil.getDistance(getCity(), other.getCity(), true, true, true) > 2) || (StringUtil.getDistance(getCountry(), other.getCountry(), true, true, true) > 2) || (StringUtil.getDistance(getCountryCode(), other.getCountryCode(), true, true, true) > 0) || (StringUtil.getDistance(getPostalCode(), other.getPostalCode(), true, true, true) > 0))
+		{
 			return false;
-		if (StringUtil.getDistance(getCountry(), other.getCountry(), true, true, true) > 2)
-			return false;
-		if (StringUtil.getDistance(getCountryCode(), other.getCountryCode(), true, true, true) > 0)
-			return false;
-		if (StringUtil.getDistance(getPostalCode(), other.getPostalCode(), true, true, true) > 0)
-			return false;
+		}
 		if (StringUtil.getDistance(getRegion(), other.getRegion(), true, true, true) > 2)
+		{
 			return false;
+		}
 		if (StringUtil.getDistance(getStreet(), other.getStreet(), true, true, true) > 2)
+		{
 			return false;
+		}
 
 		return true;
 	}

@@ -263,7 +263,7 @@ public class JDFModuleInfo extends JDFElement
 	}
 
 	@Override
-	public void setPartMapArray(JDFAttributeMapArray partArray)
+	public void setPartMapArray(final JDFAttributeMapArray partArray)
 	{
 		super.setPartMapArray(partArray);
 	}

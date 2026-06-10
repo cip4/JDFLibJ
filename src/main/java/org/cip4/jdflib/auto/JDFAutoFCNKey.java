@@ -103,7 +103,7 @@ public abstract class JDFAutoFCNKey extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFCNKey(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoFCNKey(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -115,7 +115,7 @@ public abstract class JDFAutoFCNKey extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFCNKey(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoFCNKey(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -128,7 +128,7 @@ public abstract class JDFAutoFCNKey extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoFCNKey(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoFCNKey(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -149,7 +149,7 @@ public abstract class JDFAutoFCNKey extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setKey(int value)
+	public void setKey(final int value)
 	{
 		setAttribute(AttributeName.KEY, value, null);
 	}

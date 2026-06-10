@@ -71,12 +71,11 @@
 package org.cip4.jdflib.auto;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoContactCopyParams.EDiffusion;
-import org.cip4.jdflib.auto.JDFAutoContactCopyParams.EnumDiffusion;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoPlateCopyParams : public JDFResource
@@ -91,7 +90,8 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.CYCLE, 0x4444444443l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DIFFUSION, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumDiffusion.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DIFFUSION, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumDiffusion.class, 0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.VACUUM, 0x4444444443l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
@@ -107,7 +107,7 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPlateCopyParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPlateCopyParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -119,7 +119,7 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPlateCopyParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPlateCopyParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -132,7 +132,7 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPlateCopyParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPlateCopyParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -143,7 +143,7 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -157,11 +157,23 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * Enumeration strings for numDiffusion
 	 */
+
+	public enum EnumDiffusion
+	{
+		On, Off;
+
+		public static EnumDiffusion getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumDiffusion.class, val, null);
+		}
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
+		 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -173,7 +185,7 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCycle(int value)
+	public void setCycle(final int value)
 	{
 		setAttribute(AttributeName.CYCLE, value, null);
 	}
@@ -198,9 +210,9 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDiffusion(EDiffusion enumVar)
+	public void setDiffusion(final EnumDiffusion enumVar)
 	{
-		setAttribute(AttributeName.DIFFUSION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DIFFUSION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -208,35 +220,6 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EDiffusion getEDiffusion()
-	{
-		return EDiffusion.getEnum(getAttribute(AttributeName.DIFFUSION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Diffusion
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Diffusion
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDiffusion(EDiffusion) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDiffusion(EnumDiffusion enumVar)
-	{
-		setAttribute(AttributeName.DIFFUSION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Diffusion
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EDiffusion GetEDiffusion() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumDiffusion getDiffusion()
 	{
 		return EnumDiffusion.getEnum(getAttribute(AttributeName.DIFFUSION, null, null));
@@ -252,7 +235,7 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setVacuum(double value)
+	public void setVacuum(final double value)
 	{
 		setAttribute(AttributeName.VACUUM, value, null);
 	}

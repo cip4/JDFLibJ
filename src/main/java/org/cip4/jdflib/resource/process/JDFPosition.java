@@ -55,8 +55,6 @@ import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.w3c.dom.DOMException;
 
 /**
- *
- * 
  * @author rainer prosi
  * @date before Jan 8, 2013
  */
@@ -65,9 +63,8 @@ public class JDFPosition extends JDFAutoPosition
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 *
 	 * create a new postion element in parent
-	 * 
+	 *
 	 * @param parent
 	 * @param x
 	 * @param y
@@ -79,21 +76,22 @@ public class JDFPosition extends JDFAutoPosition
 	public static JDFPosition createPosition(final KElement parent, final int x, final int y, final int nX, final int nY) throws IllegalArgumentException
 	{
 		if (x < 0 || x >= nX || y < 0 || y >= nY)
+		{
 			throw new IllegalArgumentException("bad x or y: x=" + x + " nX=" + nX + " y=" + y + " nY=" + nY);
+		}
 		final JDFPosition p = (JDFPosition) (parent == null ? new JDFDoc(ElementName.POSITION).getRoot() : parent.appendElement(ElementName.POSITION));
-		final JDFRectangle r = new JDFRectangle((double) x / (double) nX, (double) y / (double) nY, (double) (x + 1) / (double) nX, (double) (y + 1) / (double) nY);
+		final JDFRectangle r = new JDFRectangle((double) x / (double) nX, (double) y / (double) nY, (double) (x + 1) / (double) nX,
+				(double) (y + 1) / (double) nY);
 		p.setRelativeBox(r);
 		return p;
 	}
 
 	/**
 	 * Constructor for JDFPosition
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
-	 *
-	 *
 	 */
 	public JDFPosition(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
@@ -102,10 +100,9 @@ public class JDFPosition extends JDFAutoPosition
 
 	/**
 	 * Constructor for JDFPosition
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
-	 *
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
@@ -116,15 +113,15 @@ public class JDFPosition extends JDFAutoPosition
 
 	/**
 	 * Constructor for JDFPosition
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
-	 *
 	 */
-	public JDFPosition(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFPosition(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

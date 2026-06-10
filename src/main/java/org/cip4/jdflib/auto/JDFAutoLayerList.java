@@ -106,7 +106,7 @@ public abstract class JDFAutoLayerList extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLayerList(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoLayerList(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoLayerList extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLayerList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoLayerList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoLayerList extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoLayerList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoLayerList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoLayerList extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFLayerDetails the element
 	 */
-	public JDFLayerDetails getCreateLayerDetails(int iSkip)
+	public JDFLayerDetails getCreateLayerDetails(final int iSkip)
 	{
 		return (JDFLayerDetails) getCreateElement_JDFElement(ElementName.LAYERDETAILS, null, iSkip);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoLayerList extends JDFElement
 	 * @return JDFLayerDetails the element
 	 *         default is getLayerDetails(0)
 	 */
-	public JDFLayerDetails getLayerDetails(int iSkip)
+	public JDFLayerDetails getLayerDetails(final int iSkip)
 	{
 		return (JDFLayerDetails) getElement(ElementName.LAYERDETAILS, null, iSkip);
 	}

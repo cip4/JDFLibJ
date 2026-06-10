@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -94,8 +89,8 @@ public abstract class JDFAutoWrappingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.WRAPPINGKIND, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumWrappingKind.getEnum(0),
-				null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.WRAPPINGKIND, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumWrappingKind.class, 0), null);
 	}
 
 	@Override
@@ -110,7 +105,7 @@ public abstract class JDFAutoWrappingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoWrappingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoWrappingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -122,7 +117,7 @@ public abstract class JDFAutoWrappingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoWrappingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoWrappingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -135,7 +130,7 @@ public abstract class JDFAutoWrappingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoWrappingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoWrappingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -146,7 +141,7 @@ public abstract class JDFAutoWrappingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -161,89 +156,22 @@ public abstract class JDFAutoWrappingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for WrappingKind
+	 * Enumeration strings for numWrappingKind
 	 */
 
-	public enum EWrappingKind
+	public enum EnumWrappingKind
 	{
 		Band, LooseWrap, ShrinkWrap;
 
-		public static EWrappingKind getEnum(String val)
+		public static EnumWrappingKind getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EWrappingKind.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumWrappingKind.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for WrappingKind
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumWrappingKind extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumWrappingKind(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumWrappingKind getEnum(String enumName)
-		{
-			return (EnumWrappingKind) getEnum(EnumWrappingKind.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumWrappingKind getEnum(int enumValue)
-		{
-			return (EnumWrappingKind) getEnum(EnumWrappingKind.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumWrappingKind.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumWrappingKind.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumWrappingKind.class);
-		}
-
-		/**  */
-		public static final EnumWrappingKind Band = new EnumWrappingKind("Band");
-		/**  */
-		public static final EnumWrappingKind LooseWrap = new EnumWrappingKind("LooseWrap");
-		/**  */
-		public static final EnumWrappingKind ShrinkWrap = new EnumWrappingKind("ShrinkWrap");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -255,9 +183,9 @@ public abstract class JDFAutoWrappingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setWrappingKind(EWrappingKind enumVar)
+	public void setWrappingKind(final EnumWrappingKind enumVar)
 	{
-		setAttribute(AttributeName.WRAPPINGKIND, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.WRAPPINGKIND, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -265,35 +193,6 @@ public abstract class JDFAutoWrappingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EWrappingKind getEWrappingKind()
-	{
-		return EWrappingKind.getEnum(getAttribute(AttributeName.WRAPPINGKIND, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute WrappingKind
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute WrappingKind
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetWrappingKind(EWrappingKind) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setWrappingKind(EnumWrappingKind enumVar)
-	{
-		setAttribute(AttributeName.WRAPPINGKIND, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute WrappingKind
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EWrappingKind GetEWrappingKind() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumWrappingKind getWrappingKind()
 	{
 		return EnumWrappingKind.getEnum(getAttribute(AttributeName.WRAPPINGKIND, null, null));

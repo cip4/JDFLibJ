@@ -83,7 +83,6 @@ import java.util.Set;
  * @author Rainer Prosi
  * @param <a> any datatype for the key
  * @param <b> any datatype for the value
- *
  */
 public class BiHashMap<a, b> implements Map<a, b>
 {
@@ -97,13 +96,14 @@ public class BiHashMap<a, b> implements Map<a, b>
 	 */
 	public BiHashMap()
 	{
-		mapKey = new HashMap<a, b>();
-		mapVal = new HashMap<b, a>();
+		mapKey = new HashMap<>();
+		mapVal = new HashMap<>();
 		unique = true;
 	}
 
 	/**
 	 * get the value for key
+	 *
 	 * @param key the key
 	 * @return the corresponding value
 	 */
@@ -122,6 +122,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 
 	/**
 	 * get the value for key
+	 *
 	 * @param val the value
 	 * @return the corresponding key
 	 */
@@ -132,6 +133,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 
 	/**
 	 * remove key and its associated value
+	 *
 	 * @param key the key
 	 * @return
 	 */
@@ -142,7 +144,9 @@ public class BiHashMap<a, b> implements Map<a, b>
 		{
 			final b val = mapKey.get(key);
 			if (val != null)
+			{
 				mapVal.remove(val);
+			}
 			mapKey.remove(key);
 			return val;
 		}
@@ -154,6 +158,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 
 	/**
 	 * remove value and its associated key
+	 *
 	 * @param value the value
 	 * @return
 	 */
@@ -178,6 +183,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	/**
 	 * put the value for key<br/>
 	 * both key and value must be non-null
+	 *
 	 * @param key the key
 	 * @param val the value
 	 * @return
@@ -253,7 +259,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	 * @see java.util.Map#containsKey(java.lang.Object)
 	 * @param arg0
 	 * @return
-	*/
+	 */
 	@Override
 	public boolean containsKey(final Object arg0)
 	{
@@ -264,7 +270,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	 * @see java.util.Map#containsValue(java.lang.Object)
 	 * @param arg0
 	 * @return
-	*/
+	 */
 	@Override
 	public boolean containsValue(final Object arg0)
 	{
@@ -274,7 +280,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	/**
 	 * @see java.util.Map#entrySet()
 	 * @return
-	*/
+	 */
 	@Override
 	public Set<java.util.Map.Entry<a, b>> entrySet()
 	{
@@ -285,7 +291,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	 * @see java.util.Map#get(java.lang.Object)
 	 * @param arg0
 	 * @return
-	*/
+	 */
 	@Override
 	public b get(final Object arg0)
 	{
@@ -295,7 +301,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	/**
 	 * @see java.util.Map#isEmpty()
 	 * @return
-	*/
+	 */
 	@Override
 	public boolean isEmpty()
 	{
@@ -305,7 +311,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	/**
 	 * @see java.util.Map#keySet()
 	 * @return
-	*/
+	 */
 	@Override
 	public Set<a> keySet()
 	{
@@ -315,12 +321,14 @@ public class BiHashMap<a, b> implements Map<a, b>
 	/**
 	 * @see java.util.Map#putAll(java.util.Map)
 	 * @param arg0
-	*/
+	 */
 	@Override
 	public void putAll(final Map<? extends a, ? extends b> arg0)
 	{
 		if (arg0 == null)
+		{
 			return;
+		}
 		for (final a key : arg0.keySet())
 		{
 			put(key, arg0.get(key));
@@ -330,7 +338,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	/**
 	 * @see java.util.Map#size()
 	 * @return
-	*/
+	 */
 	@Override
 	public int size()
 	{
@@ -340,7 +348,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	/**
 	 * @see java.util.Map#values()
 	 * @return
-	*/
+	 */
 	@Override
 	public Collection<b> values()
 	{
@@ -349,6 +357,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 
 	/**
 	 * TODO Please insert comment!
+	 *
 	 * @param b
 	 */
 	public void setUnique(final boolean b)

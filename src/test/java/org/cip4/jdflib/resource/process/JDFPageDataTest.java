@@ -84,8 +84,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
- *
  * @author rainer prosi
  * @date Jan 9, 2012
  */
@@ -119,7 +117,9 @@ class JDFPageDataTest extends JDFTestCaseBase
 	void testRefContentData()
 	{
 		for (int i = 0; i < 10; i++)
+		{
 			assertEquals(cl.appendContentData().getIndex(), i);
+		}
 		final JDFContentData cd = cl.appendContentData();
 		final JDFPageData pd = pl.appendPageData();
 		pd.refContentData(cd);
@@ -239,7 +239,6 @@ class JDFPageDataTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -254,7 +253,6 @@ class JDFPageDataTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test

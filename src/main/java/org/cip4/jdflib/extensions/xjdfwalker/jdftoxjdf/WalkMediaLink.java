@@ -51,9 +51,7 @@ import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFMedia;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkMediaLink extends WalkResLink
 {
@@ -93,7 +91,6 @@ public class WalkMediaLink extends WalkResLink
 	}
 
 	/**
-	 *
 	 * @param r
 	 * @return
 	 */
@@ -101,13 +98,14 @@ public class WalkMediaLink extends WalkResLink
 	{
 		JDFMedia media = (JDFMedia) r;
 		if (media == null)
+		{
 			return false;
+		}
 		media = (JDFMedia) media.getLeaves(false).get(0);
 		return media.isComponentMedia();
 	}
 
 	/**
-	 *
 	 * @param xjdf
 	 * @param id
 	 * @param rl

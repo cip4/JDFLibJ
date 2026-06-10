@@ -36,7 +36,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.cip4.jdflib.core.AttributeName;
@@ -60,9 +59,7 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkXElement extends BaseWalker
 {
@@ -128,20 +125,22 @@ public class WalkXElement extends BaseWalker
 	}
 
 	/**
-	 *
 	 * @param e
 	 * @return
 	 */
 	String getJDFName(final KElement e)
 	{
 		if (JDFElement.isInXJDFNameSpaceStatic(e))
+		{
 			return e.getLocalName();
+		}
 		else
+		{
 			return e.getNodeName();
+		}
 	}
 
 	/**
-	 *
 	 * @param elem
 	 */
 	protected void updateAttributes(final KElement elem)
@@ -154,20 +153,20 @@ public class WalkXElement extends BaseWalker
 	protected String updateColor(final String xjdfcolor)
 	{
 		if (StringUtil.isEmpty(xjdfcolor))
-			return null;
-		@SuppressWarnings("unchecked")
-		final Collection<String> values = EnumNamedColor.getEnumMap().keySet();
-		final String lower = xjdfcolor.toLowerCase();
-		for (final String value : values)
 		{
-			if (value.toLowerCase().equals(lower))
-				return value;
+			return null;
+		}
+		for (final EnumNamedColor value : EnumNamedColor.values())
+		{
+			if (value.name().equalsIgnoreCase(xjdfcolor))
+			{
+				return value.name();
+			}
 		}
 		return null;
 	}
 
 	/**
-	 *
 	 * @param parent
 	 * @param sender
 	 */
@@ -181,7 +180,6 @@ public class WalkXElement extends BaseWalker
 	}
 
 	/**
-	 *
 	 * @param elem
 	 */
 	void moveCostCenterID(final KElement elem)
@@ -223,7 +221,7 @@ public class WalkXElement extends BaseWalker
 	 * make a separationlist from an attribute
 	 *
 	 * @param rPart
-	 * @param elem the separation list attribute / element
+	 * @param elem  the separation list attribute / element
 	 * @return
 	 */
 	protected JDFSeparationList createSeparationList(final KElement rPart, final String elem)
@@ -240,7 +238,6 @@ public class WalkXElement extends BaseWalker
 	}
 
 	/**
-	 *
 	 * @param xjdfRes
 	 * @param jdfNode
 	 * @return
@@ -354,7 +351,6 @@ public class WalkXElement extends BaseWalker
 	}
 
 	/**
-	 *
 	 * @param e
 	 */
 	protected void fixAuthor(final KElement e)
@@ -376,7 +372,6 @@ public class WalkXElement extends BaseWalker
 	}
 
 	/**
-	 *
 	 * @param coating
 	 * @return
 	 */

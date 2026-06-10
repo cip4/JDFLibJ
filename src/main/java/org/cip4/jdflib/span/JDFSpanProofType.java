@@ -9,12 +9,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanProofType extends JDFEnumerationSpan
@@ -23,39 +19,39 @@ public class JDFSpanProofType extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanProofType
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanProofType(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanProofType(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanProofType
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanProofType(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanProofType(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanProofType
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanProofType(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanProofType(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -63,44 +59,14 @@ public class JDFSpanProofType extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanProofType
 	 */
-	public static class EnumSpanProofType extends ValuedEnum
+	public enum EnumSpanProofType
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Page, Imposition, None;
 
-		private EnumSpanProofType(String name)
+		public static EnumSpanProofType getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanProofType.class, val, null);
 		}
-
-		public static EnumSpanProofType getEnum(String enumName)
-		{
-			return (EnumSpanProofType) getEnum(EnumSpanProofType.class, enumName);
-		}
-
-		public static EnumSpanProofType getEnum(int enumValue)
-		{
-			return (EnumSpanProofType) getEnum(EnumSpanProofType.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanProofType.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanProofType.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanProofType.class);
-		}
-
-		public static final EnumSpanProofType Page = new EnumSpanProofType("Page");
-		public static final EnumSpanProofType Imposition = new EnumSpanProofType("Imposition");
-		public static final EnumSpanProofType None = new EnumSpanProofType("None");
 	}
 
 	// **************************************** Methods
@@ -108,18 +74,18 @@ public class JDFSpanProofType extends JDFEnumerationSpan
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanProofType.getEnum(0);
+		return EnumSpanProofType.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

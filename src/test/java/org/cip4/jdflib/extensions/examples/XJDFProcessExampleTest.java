@@ -68,8 +68,8 @@
  */
 package org.cip4.jdflib.extensions.examples;
 
-import org.cip4.jdflib.auto.JDFAutoCutMark.EMarkType;
-import org.cip4.jdflib.auto.JDFAutoDefect.EFace;
+import org.cip4.jdflib.auto.JDFAutoCutMark.EnumMarkType;
+import org.cip4.jdflib.auto.JDFAutoSurfaceMark.EnumFace;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
@@ -111,9 +111,9 @@ class XJDFProcessExampleTest extends ExampleTest
 	final void testCombined()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("CombinedExample", null, null);
-		xjdfHelper.addType(EnumType.Interpreting.getName(), 0);
-		xjdfHelper.addType(EnumType.Rendering.getName(), -1);
-		xjdfHelper.addType(EnumType.DigitalPrinting.getName(), -1);
+		xjdfHelper.addType(EnumType.Interpreting.name(), 0);
+		xjdfHelper.addType(EnumType.Rendering.name(), -1);
+		xjdfHelper.addType(EnumType.DigitalPrinting.name(), -1);
 
 		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "processes/CombinedExample.xjdf");
@@ -161,38 +161,38 @@ class XJDFProcessExampleTest extends ExampleTest
 		final ResourceHelper ch = cs.appendPartition(null, true);
 		final JDFComponent c = (JDFComponent) ch.getResource();
 		c.setDimensions((JDFXYPair) new JDFXYPair(70, 67).scaleFromCM(2));
-		final JDFSurfaceMark sm = c.appendSurfaceMark(EFace.Front);
-		sm.appendCutMark(EMarkType.TopVerticalCutMark, (JDFXYPair) new JDFXYPair(15.1, 52).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.TopVerticalCutMark, (JDFXYPair) new JDFXYPair(29.4, 52).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.TopVerticalCutMark, (JDFXYPair) new JDFXYPair(33.6, 52).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.TopVerticalCutMark, (JDFXYPair) new JDFXYPair(47.9, 52).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.TopVerticalCutMark, (JDFXYPair) new JDFXYPair(52.1, 52).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.TopVerticalCutMark, (JDFXYPair) new JDFXYPair(66.4, 52).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.LeftHorizontalCutMark, (JDFXYPair) new JDFXYPair(15.1, 52).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.RightHorizontalCutMark, (JDFXYPair) new JDFXYPair(66.4, 52).scaleFromCM(2));
+		final JDFSurfaceMark sm = c.appendSurfaceMark(EnumFace.Front);
+		sm.appendCutMark(EnumMarkType.TopVerticalCutMark, (JDFXYPair) new JDFXYPair(15.1, 52).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.TopVerticalCutMark, (JDFXYPair) new JDFXYPair(29.4, 52).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.TopVerticalCutMark, (JDFXYPair) new JDFXYPair(33.6, 52).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.TopVerticalCutMark, (JDFXYPair) new JDFXYPair(47.9, 52).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.TopVerticalCutMark, (JDFXYPair) new JDFXYPair(52.1, 52).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.TopVerticalCutMark, (JDFXYPair) new JDFXYPair(66.4, 52).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.LeftHorizontalCutMark, (JDFXYPair) new JDFXYPair(15.1, 52).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.RightHorizontalCutMark, (JDFXYPair) new JDFXYPair(66.4, 52).scaleFromCM(2));
 
-		sm.appendCutMark(EMarkType.LeftHorizontalCutMark, (JDFXYPair) new JDFXYPair(15.1, 31).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.RightHorizontalCutMark, (JDFXYPair) new JDFXYPair(66.4, 31).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.BottomVerticalCutMark, (JDFXYPair) new JDFXYPair(15.1, 31).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.BottomVerticalCutMark, (JDFXYPair) new JDFXYPair(29.4, 31).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.BottomVerticalCutMark, (JDFXYPair) new JDFXYPair(33.6, 31).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.BottomVerticalCutMark, (JDFXYPair) new JDFXYPair(47.9, 31).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.BottomVerticalCutMark, (JDFXYPair) new JDFXYPair(52.1, 31).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.BottomVerticalCutMark, (JDFXYPair) new JDFXYPair(66.4, 31).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.LeftHorizontalCutMark, (JDFXYPair) new JDFXYPair(15.1, 31).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.RightHorizontalCutMark, (JDFXYPair) new JDFXYPair(66.4, 31).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.BottomVerticalCutMark, (JDFXYPair) new JDFXYPair(15.1, 31).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.BottomVerticalCutMark, (JDFXYPair) new JDFXYPair(29.4, 31).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.BottomVerticalCutMark, (JDFXYPair) new JDFXYPair(33.6, 31).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.BottomVerticalCutMark, (JDFXYPair) new JDFXYPair(47.9, 31).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.BottomVerticalCutMark, (JDFXYPair) new JDFXYPair(52.1, 31).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.BottomVerticalCutMark, (JDFXYPair) new JDFXYPair(66.4, 31).scaleFromCM(2));
 
-		sm.appendCutMark(EMarkType.UpperLeftCutMark, (JDFXYPair) new JDFXYPair(15.1, 26).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(29.4, 26).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(33.6, 26).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(47.9, 26).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(52.1, 26).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.UpperRightCutMark, (JDFXYPair) new JDFXYPair(66.4, 26).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.UpperLeftCutMark, (JDFXYPair) new JDFXYPair(15.1, 26).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(29.4, 26).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(33.6, 26).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(47.9, 26).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(52.1, 26).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.UpperRightCutMark, (JDFXYPair) new JDFXYPair(66.4, 26).scaleFromCM(2));
 
-		sm.appendCutMark(EMarkType.LowerLeftCutMark, (JDFXYPair) new JDFXYPair(15.1, 5).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(29.4, 5).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(33.6, 5).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(47.9, 5).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(52.1, 5).scaleFromCM(2));
-		sm.appendCutMark(EMarkType.LowerRightCutMark, (JDFXYPair) new JDFXYPair(66.4, 5).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.LowerLeftCutMark, (JDFXYPair) new JDFXYPair(15.1, 5).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(29.4, 5).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(33.6, 5).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(47.9, 5).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(52.1, 5).scaleFromCM(2));
+		sm.appendCutMark(EnumMarkType.LowerRightCutMark, (JDFXYPair) new JDFXYPair(66.4, 5).scaleFromCM(2));
 
 		writeTest(xjdfHelper, "resources/CutMark.xjdf");
 	}
@@ -219,7 +219,7 @@ class XJDFProcessExampleTest extends ExampleTest
 			final JDFDropItem dropItem = (JDFDropItem) rhdp.getResource().appendElement(ElementName.DROPITEM);
 			dropItem.setAttribute(AttributeName.AMOUNT, "" + (i * 10));
 			dropItem.setItemRef(product.ensureID());
-			map.put(XJDFConstants.ContactType, EnumContactType.Delivery.getName());
+			map.put(XJDFConstants.ContactType, EnumContactType.Delivery.name());
 			final ResourceHelper rhc = shc.getCreatePartition(map, true);
 			rhc.getResource().appendElement(ElementName.ADDRESS).setAttribute(AttributeName.CITY, "city" + i);
 			rhc.getResource().appendElement(ElementName.PERSON).setAttribute(AttributeName.FIRSTNAME, "Name" + i);
@@ -237,8 +237,8 @@ class XJDFProcessExampleTest extends ExampleTest
 	final void testQualityControl()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("QualityControlExample", null, null);
-		xjdfHelper.addType(EnumType.ConventionalPrinting.getName(), 0);
-		xjdfHelper.addType(EnumType.QualityControl.getName(), -1);
+		xjdfHelper.addType(EnumType.ConventionalPrinting.name(), 0);
+		xjdfHelper.addType(EnumType.QualityControl.name(), -1);
 
 		xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Output);
 		final SetHelper qqp = xjdfHelper.getCreateSet(ElementName.QUALITYCONTROLPARAMS, EnumUsage.Input);
@@ -258,7 +258,7 @@ class XJDFProcessExampleTest extends ExampleTest
 	final void testDieLayoutProd()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("Die1", null, null);
-		xjdfHelper.addType(EnumType.DieLayoutProduction.getName(), 0);
+		xjdfHelper.addType(EnumType.DieLayoutProduction.name(), 0);
 
 		final ResourceHelper sd0 = xjdfHelper.getCreateSet(ElementName.SHAPEDEF, null).getCreatePartition(0, true);
 		final JDFShapeDef sd = (JDFShapeDef) sd0.getResource();

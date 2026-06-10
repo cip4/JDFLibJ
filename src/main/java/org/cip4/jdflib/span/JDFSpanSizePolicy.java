@@ -7,12 +7,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanSizePolicy extends JDFEnumerationSpan
@@ -21,39 +17,39 @@ public class JDFSpanSizePolicy extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanSizePolicy
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanSizePolicy(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanSizePolicy(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanSizePolicy
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanSizePolicy(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanSizePolicy(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanSizePolicy
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanSizePolicy(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanSizePolicy(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -61,45 +57,14 @@ public class JDFSpanSizePolicy extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanSizePolicy
 	 */
-	public static class EnumSpanSizePolicy extends ValuedEnum
+	public enum EnumSpanSizePolicy
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		ClipToMaxPage, FitToPage, ReduceToFit, Tile;
 
-		private EnumSpanSizePolicy(String name)
+		public static EnumSpanSizePolicy getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanSizePolicy.class, val, null);
 		}
-
-		public static EnumSpanSizePolicy getEnum(String enumName)
-		{
-			return (EnumSpanSizePolicy) getEnum(EnumSpanSizePolicy.class, enumName);
-		}
-
-		public static EnumSpanSizePolicy getEnum(int enumValue)
-		{
-			return (EnumSpanSizePolicy) getEnum(EnumSpanSizePolicy.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanSizePolicy.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanSizePolicy.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanSizePolicy.class);
-		}
-
-		public static final EnumSpanSizePolicy ClipToMaxPage = new EnumSpanSizePolicy("ClipToMaxPage");
-		public static final EnumSpanSizePolicy FitToPage = new EnumSpanSizePolicy("FitToPage");
-		public static final EnumSpanSizePolicy ReduceToFit = new EnumSpanSizePolicy("ReduceToFit");
-		public static final EnumSpanSizePolicy Tile = new EnumSpanSizePolicy("Tile");
 
 	}
 
@@ -108,18 +73,18 @@ public class JDFSpanSizePolicy extends JDFEnumerationSpan
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanSizePolicy.getEnum(0);
+		return EnumSpanSizePolicy.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

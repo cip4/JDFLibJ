@@ -123,7 +123,8 @@ public class JDFTransferCurvePool extends JDFAutoTransferCurvePool
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFTransferCurvePool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFTransferCurvePool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -135,7 +136,6 @@ public class JDFTransferCurvePool extends JDFAutoTransferCurvePool
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoTransferCurvePool#getCreateTransferCurveSet(int)
 	 */
 	public JDFTransferCurveSet getCreateTransferCurveSet(final String name)
@@ -150,7 +150,6 @@ public class JDFTransferCurvePool extends JDFAutoTransferCurvePool
 	}
 
 	/**
-	 *
 	 * @param name
 	 * @return
 	 */
@@ -160,7 +159,9 @@ public class JDFTransferCurvePool extends JDFAutoTransferCurvePool
 		{
 			final JDFTransferCurveSet set = getTransferCurveSet(i);
 			if (set == null)
+			{
 				break;
+			}
 			if (KElement.isWildCard(name) || name.equals(set.getName()))
 			{
 				return set;

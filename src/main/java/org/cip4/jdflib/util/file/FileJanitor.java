@@ -88,7 +88,6 @@ public class FileJanitor
 		private final FileFilter baseFilter;
 
 		/**
-		 *
 		 * @param f
 		 */
 		KillFilter(final FileFilter f)
@@ -119,11 +118,15 @@ public class FileJanitor
 					if (logSingle)
 					{
 						if (file.isDirectory())
+						{
 							log.info("removing empty directory: " + file.getAbsolutePath() + " last touched: "
 									+ new JDFDate(file.lastModified()).getFormattedDateTime(JDFDate.DATETIMEREADABLE));
+						}
 						else
+						{
 							log.info("removing old file: " + file.getAbsolutePath() + " last touched: "
 									+ new JDFDate(file.lastModified()).getFormattedDateTime(JDFDate.DATETIMEREADABLE) + " size=" + file.length());
+						}
 
 					}
 					file.delete();
@@ -145,7 +148,6 @@ public class FileJanitor
 		private final FileFilter baseFilter;
 
 		/**
-		 *
 		 * @param f
 		 */
 		ListFilter(final FileFilter f)
@@ -199,7 +201,6 @@ public class FileJanitor
 	}
 
 	/**
-	 *
 	 * if true, we log each deletion
 	 *
 	 * @param logSingle
@@ -210,7 +211,6 @@ public class FileJanitor
 	}
 
 	/**
-	 *
 	 * if true, we delete empty directories
 	 *
 	 * @param delEmpty
@@ -221,18 +221,19 @@ public class FileJanitor
 	}
 
 	/**
-	 *
 	 * @param baseDir
-	 * @param filter the file filter that
+	 * @param filter  the file filter that
 	 */
 	public FileJanitor(final File baseDir, final FileFilter filter)
 	{
 		if (filter != null)
+		{
 			this.filter = new KillFilter(filter);
+		}
 		this.baseDir = baseDir;
 		logSingle = false;
 		delEmpty = false;
-		keep = new ArrayList<FileTime>();
+		keep = new ArrayList<>();
 		minKeep = 0;
 		recurseDirs = true;
 	}
@@ -248,9 +249,8 @@ public class FileJanitor
 	}
 
 	/**
-	 *
 	 * @param baseDir
-	 * @param age the minimum zapp file age in seconds
+	 * @param age     the minimum zapp file age in seconds
 	 */
 	public FileJanitor(final File baseDir, final long age)
 	{
@@ -259,7 +259,6 @@ public class FileJanitor
 	}
 
 	/**
-	 *
 	 * process all accepted files and empty directories that have been accepted<br/>
 	 * note that the filter may actually do something
 	 *
@@ -287,7 +286,7 @@ public class FileJanitor
 	Vector<File> cleanupFlat()
 	{
 		final File[] files = baseDir.listFiles(filter);
-		final Vector<File> ret = new Vector<File>();
+		final Vector<File> ret = new Vector<>();
 		ContainerUtil.addAll(ret, files);
 		return ret;
 	}
@@ -295,9 +294,13 @@ public class FileJanitor
 	Vector<File> cleanupKeepMin()
 	{
 		if (recurseDirs)
+		{
 			FileUtil.listFilesInTree(baseDir, new ListFilter(filter.baseFilter));
+		}
 		else
+		{
 			baseDir.listFiles(new ListFilter(filter.baseFilter));
+		}
 		final int size = keep.size();
 		final Vector<File> processed = new Vector<>();
 		if (size > minKeep)
@@ -317,7 +320,7 @@ public class FileJanitor
 	@Override
 	public String toString()
 	{
-		return "FileJanitor [baseDir=" + baseDir + ", filter=" + filter + ", logSingle=" + logSingle + ", delEmpty=" + delEmpty + ", recurseDirs=" + recurseDirs + ", keep=" + keep
-				+ ", minKeep=" + minKeep + "]";
+		return "FileJanitor [baseDir=" + baseDir + ", filter=" + filter + ", logSingle=" + logSingle + ", delEmpty=" + delEmpty + ", recurseDirs=" + recurseDirs
+				+ ", keep=" + keep + ", minKeep=" + minKeep + "]";
 	}
 }

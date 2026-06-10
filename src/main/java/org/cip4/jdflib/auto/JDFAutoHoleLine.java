@@ -121,7 +121,7 @@ public abstract class JDFAutoHoleLine extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoHoleLine(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoHoleLine(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoHoleLine extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoHoleLine(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoHoleLine(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -146,7 +146,7 @@ public abstract class JDFAutoHoleLine extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoHoleLine(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoHoleLine(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -167,7 +167,7 @@ public abstract class JDFAutoHoleLine extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPitch(double value)
+	public void setPitch(final double value)
 	{
 		setAttribute(AttributeName.PITCH, value, null);
 	}
@@ -214,7 +214,7 @@ public abstract class JDFAutoHoleLine extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFHole the element
 	 */
-	public JDFHole getCreateHole(int iSkip)
+	public JDFHole getCreateHole(final int iSkip)
 	{
 		return (JDFHole) getCreateElement_JDFElement(ElementName.HOLE, null, iSkip);
 	}
@@ -226,7 +226,7 @@ public abstract class JDFAutoHoleLine extends JDFElement
 	 * @return JDFHole the element
 	 *         default is getHole(0)
 	 */
-	public JDFHole getHole(int iSkip)
+	public JDFHole getHole(final int iSkip)
 	{
 		return (JDFHole) getElement(ElementName.HOLE, null, iSkip);
 	}

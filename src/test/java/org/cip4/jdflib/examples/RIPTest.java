@@ -1,6 +1,6 @@
 /*
  * JDFExampleDocTest.java
- * 
+ *
  * @author muchadie
  */
 package org.cip4.jdflib.examples;
@@ -36,6 +36,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.StatusCounter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 class RIPTest extends JDFTestCaseBase
 {
 	private JDFNode n;
@@ -55,8 +56,8 @@ class RIPTest extends JDFTestCaseBase
 	{
 		testAuditsImageSetting();
 		statCounter.setActiveNode(null, null, null);
-		String sheet = vsSheet.get(1);
-		VJDFAttributeMap vmP = new VJDFAttributeMap();
+		final String sheet = vsSheet.get(1);
+		final VJDFAttributeMap vmP = new VJDFAttributeMap();
 		final JDFAttributeMap attributeMap = new JDFAttributeMap(EnumPartIDKey.SheetName, sheet);
 		attributeMap.put("SignatureName", "Sig1");
 		attributeMap.put("Separation", vsCMYK.get(3));
@@ -64,8 +65,8 @@ class RIPTest extends JDFTestCaseBase
 
 		vmP.add(attributeMap);
 		statCounter.setActiveNode(n, vmP, vRL);
-		String refXM = rlXMOut.getrRef();
-		String refMedia = rlMediaIn.getrRef();
+		final String refXM = rlXMOut.getrRef();
+		final String refMedia = rlMediaIn.getrRef();
 
 		statCounter.setTrackWaste(refXM, true);
 		statCounter.setTrackWaste(refMedia, false);
@@ -76,17 +77,19 @@ class RIPTest extends JDFTestCaseBase
 		statCounter.addPhase(refMedia, 1, 0, true);
 		statCounter.addPhase(refXM, 1, 0, true);
 		statCounter.setPhase(EnumNodeStatus.InProgress, "Imaging", EnumDeviceStatus.Running, null);
-		JDFDoc d2 = statCounter.getDocJMFResource();
+		final JDFDoc d2 = statCounter.getDocJMFResource();
 		JDFJMF jmf = d2.getJMFRoot();
 		jmf.convertResponses(null);
-		VElement vSigs = jmf.getMessageVector(JDFMessage.EnumFamily.Signal, JDFMessage.EnumType.Resource);
+		final VElement vSigs = jmf.getMessageVector(JDFMessage.EnumFamily.Signal, JDFMessage.EnumType.Resource);
 
 		d2.write2File(sm_dirTestDataTemp + File.separator + "ImageSetResourceReprint_.jmf", 2, false);
-		JDFDoc dStatusJMF = statCounter.getDocJMFPhaseTime();
+		final JDFDoc dStatusJMF = statCounter.getDocJMFPhaseTime();
 		jmf = dStatusJMF.getJMFRoot();
 		jmf.convertResponses(null);
 		for (int i = 0; i < vSigs.size(); i++)
+		{
 			jmf.copyElement(vSigs.item(i), null);
+		}
 		dStatusJMF.write2File(sm_dirTestDataTemp + File.separator + "ImageSetReprint_.jmf", 2, false);
 
 		// JDFResourceAudit ra=
@@ -128,13 +131,13 @@ class RIPTest extends JDFTestCaseBase
 		vRL.add(rlMediaIn);
 		vRL.add(rlXMOut);
 
-		JDFExposedMedia xmPart = (JDFExposedMedia) outXM.addPartition(EnumPartIDKey.SignatureName, "Sig1");
+		final JDFExposedMedia xmPart = (JDFExposedMedia) outXM.addPartition(EnumPartIDKey.SignatureName, "Sig1");
 		vsSheet = new VString("Cover Sheet1 Sheet2", " ");
 		vsCMYK = new VString("Cyan Magenta Yellow Black Spot1", " ");
-		VElement v = xmPart.addPartitions(EnumPartIDKey.SheetName, vsSheet);
+		final VElement v = xmPart.addPartitions(EnumPartIDKey.SheetName, vsSheet);
 		for (int i = 0; i < v.size(); i++)
 		{
-			JDFResource xmPart2 = (JDFResource) v.elementAt(i);
+			final JDFResource xmPart2 = (JDFResource) v.elementAt(i);
 			xmPart2.getCreatePartition(EnumPartIDKey.Side, "Front", null).addPartitions(EnumPartIDKey.Separation, vsCMYK);
 			// xmPart2.getCreatePartition(EnumPartIDKey.Side,"Back",null).
 			// addPartitions(EnumPartIDKey.Separation, vsCMYK);
@@ -151,15 +154,15 @@ class RIPTest extends JDFTestCaseBase
 
 		for (int i = 0; i < vsSheet.size(); i++)
 		{
-			String sheet = vsSheet.get(i);
-			VJDFAttributeMap vmP = new VJDFAttributeMap();
+			final String sheet = vsSheet.get(i);
+			final VJDFAttributeMap vmP = new VJDFAttributeMap();
 			final JDFAttributeMap attributeMap = new JDFAttributeMap(EnumPartIDKey.SheetName, sheet);
 			attributeMap.put("SignatureName", "Sig1");
 
 			vmP.add(attributeMap);
 			statCounter.setActiveNode(n, vmP, vRL);
-			String refXM = rlXMOut.getrRef();
-			String refMedia = rlMediaIn.getrRef();
+			final String refXM = rlXMOut.getrRef();
+			final String refMedia = rlMediaIn.getrRef();
 
 			statCounter.setTrackWaste(refXM, true);
 			statCounter.setTrackWaste(refMedia, false);
@@ -174,19 +177,19 @@ class RIPTest extends JDFTestCaseBase
 			// JDFResourceAudit ra=
 			statCounter.setResourceAudit(refMedia, EnumReason.ProcessResult);
 
-			JDFProcessRun pr = statCounter.setProcessResult(EnumNodeStatus.Completed);
+			final JDFProcessRun pr = statCounter.setProcessResult(EnumNodeStatus.Completed);
 			pr.setDescriptiveName("we even have the utterly useless ProcessRun");
 		}
 		d.write2File(sm_dirTestDataTemp + File.separator + "ImageSetAmount_.jdf", 2, false);
-		JDFDoc d2 = statCounter.getDocJMFResource();
+		final JDFDoc d2 = statCounter.getDocJMFResource();
 		JDFJMF jmf = d2.getJMFRoot();
 		jmf.convertResponses(null);
-		JDFSignal sig = jmf.appendSignal(JDFMessage.EnumType.Notification);
-		JDFNotification not = sig.appendNotification();
+		final JDFSignal sig = jmf.appendSignal(JDFMessage.EnumType.Notification);
+		final JDFNotification not = sig.appendNotification();
 		not.setXPathAttribute("MileStone/@MileStoneType", "PrepressCompleted");
 		not.setXPathAttribute("MileStone/@Amount", "5");
 		d2.write2File(sm_dirTestDataTemp + File.separator + "ImageSetAmount_.jmf", 2, false);
-		JDFDoc dStatusJMF = statCounter.getDocJMFPhaseTime();
+		final JDFDoc dStatusJMF = statCounter.getDocJMFPhaseTime();
 		jmf = dStatusJMF.getJMFRoot();
 		jmf.convertResponses(null);
 		dStatusJMF.write2File(sm_dirTestDataTemp + File.separator + "ImageSetPhaseTime_.jmf", 2, false);
@@ -194,7 +197,7 @@ class RIPTest extends JDFTestCaseBase
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override

@@ -88,7 +88,6 @@ import java.io.InputStream;
  * stream class that allows allows prefixing of a stream without requiring a copy
  *
  * @author Rainer Prosi
- *
  */
 public class PrefixInputStream extends FilterInputStream
 {
@@ -120,7 +119,6 @@ public class PrefixInputStream extends FilterInputStream
 	}
 
 	/**
-	 *
 	 * @see java.io.FilterInputStream#read()
 	 */
 	@Override
@@ -130,7 +128,9 @@ public class PrefixInputStream extends FilterInputStream
 		{
 			final int read = streamPre.read();
 			if (read != -1)
+			{
 				return read;
+			}
 			bDone = true;
 		}
 
@@ -138,7 +138,6 @@ public class PrefixInputStream extends FilterInputStream
 	}
 
 	/**
-	 *
 	 * @see java.io.FilterInputStream#read(byte[], int, int)
 	 */
 	@Override
@@ -148,14 +147,15 @@ public class PrefixInputStream extends FilterInputStream
 		{
 			final int read = streamPre.read(b, off, len);
 			if (read != -1)
+			{
 				return read;
+			}
 			bDone = true;
 		}
 		return super.read(b, off, len);
 	}
 
 	/**
-	*
 	 * @see java.io.FilterInputStream#read(byte[])
 	 */
 	@Override
@@ -165,7 +165,9 @@ public class PrefixInputStream extends FilterInputStream
 		{
 			final int read = streamPre.read(b);
 			if (read != -1)
+			{
 				return read;
+			}
 			bDone = true;
 		}
 		return super.read(b);
@@ -179,7 +181,9 @@ public class PrefixInputStream extends FilterInputStream
 	{
 		markDone = bDone;
 		if (!bDone)
+		{
 			streamPre.mark(readlimit);
+		}
 		super.mark(readlimit);
 
 	}
@@ -192,7 +196,9 @@ public class PrefixInputStream extends FilterInputStream
 	{
 		bDone = markDone;
 		if (!bDone)
+		{
 			streamPre.reset();
+		}
 		super.reset();
 	}
 

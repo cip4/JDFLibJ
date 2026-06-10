@@ -106,7 +106,7 @@ public abstract class JDFAutoQueueEntryDefList extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoQueueEntryDefList(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoQueueEntryDefList(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoQueueEntryDefList extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoQueueEntryDefList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoQueueEntryDefList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoQueueEntryDefList extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoQueueEntryDefList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoQueueEntryDefList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoQueueEntryDefList extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFQueueEntryDef the element
 	 */
-	public JDFQueueEntryDef getCreateQueueEntryDef(int iSkip)
+	public JDFQueueEntryDef getCreateQueueEntryDef(final int iSkip)
 	{
 		return (JDFQueueEntryDef) getCreateElement_JDFElement(ElementName.QUEUEENTRYDEF, null, iSkip);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoQueueEntryDefList extends JDFElement
 	 * @return JDFQueueEntryDef the element
 	 *         default is getQueueEntryDef(0)
 	 */
-	public JDFQueueEntryDef getQueueEntryDef(int iSkip)
+	public JDFQueueEntryDef getQueueEntryDef(final int iSkip)
 	{
 		return (JDFQueueEntryDef) getElement(ElementName.QUEUEENTRYDEF, null, iSkip);
 	}

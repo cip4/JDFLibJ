@@ -121,7 +121,7 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPDLResourceAlias(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPDLResourceAlias(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPDLResourceAlias(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPDLResourceAlias(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -146,7 +146,7 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPDLResourceAlias(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPDLResourceAlias(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -157,7 +157,7 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -187,7 +187,7 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setResourceType(String value)
+	public void setResourceType(final String value)
 	{
 		setAttribute(AttributeName.RESOURCETYPE, value, null);
 	}
@@ -212,7 +212,7 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSourceName(String value)
+	public void setSourceName(final String value)
 	{
 		setAttribute(AttributeName.SOURCENAME, value, null);
 	}
@@ -269,7 +269,7 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}

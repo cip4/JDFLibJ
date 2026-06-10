@@ -108,7 +108,7 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoInsertingIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoInsertingIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -120,7 +120,7 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoInsertingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoInsertingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoInsertingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoInsertingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

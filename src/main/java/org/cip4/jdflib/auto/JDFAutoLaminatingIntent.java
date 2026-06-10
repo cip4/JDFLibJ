@@ -112,7 +112,7 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLaminatingIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoLaminatingIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -124,7 +124,7 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLaminatingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoLaminatingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -137,7 +137,7 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoLaminatingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoLaminatingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

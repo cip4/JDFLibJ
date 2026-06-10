@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -123,8 +119,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BINDINGORDER, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumBindingOrder.getEnum(0),
-				"Gathering");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BINDINGORDER, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumBindingOrder.class, 0), "Gathering");
 	}
 
 	@Override
@@ -179,7 +175,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBindingIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoBindingIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -191,7 +187,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBindingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoBindingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -204,97 +200,28 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoBindingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoBindingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for BindingOrder
+	 * Enumeration strings for numBindingOrder
 	 */
 
-	public enum EBindingOrder
+	public enum EnumBindingOrder
 	{
 		Collecting, Gathering, List, None;
 
-		public static EBindingOrder getEnum(String val)
+		public static EnumBindingOrder getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EBindingOrder.class, val, EBindingOrder.Gathering);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumBindingOrder.class, val, EnumBindingOrder.Gathering);
 		}
-	}
-
-	/**
-	 * Enumeration strings for BindingOrder
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumBindingOrder extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumBindingOrder(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumBindingOrder getEnum(String enumName)
-		{
-			return (EnumBindingOrder) getEnum(EnumBindingOrder.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumBindingOrder getEnum(int enumValue)
-		{
-			return (EnumBindingOrder) getEnum(EnumBindingOrder.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumBindingOrder.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumBindingOrder.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumBindingOrder.class);
-		}
-
-		/**  */
-		public static final EnumBindingOrder Collecting = new EnumBindingOrder("Collecting");
-		/**  */
-		public static final EnumBindingOrder Gathering = new EnumBindingOrder("Gathering");
-		/**  */
-		public static final EnumBindingOrder List = new EnumBindingOrder("List");
-		/**  */
-		public static final EnumBindingOrder None = new EnumBindingOrder("None");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -306,9 +233,9 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setBindingOrder(EBindingOrder enumVar)
+	public void setBindingOrder(final EnumBindingOrder enumVar)
 	{
-		setAttribute(AttributeName.BINDINGORDER, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.BINDINGORDER, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -316,35 +243,6 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EBindingOrder getEBindingOrder()
-	{
-		return EBindingOrder.getEnum(getAttribute(AttributeName.BINDINGORDER, null, "Gathering"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute BindingOrder
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute BindingOrder
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetBindingOrder(EBindingOrder) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setBindingOrder(EnumBindingOrder enumVar)
-	{
-		setAttribute(AttributeName.BINDINGORDER, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute BindingOrder
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EBindingOrder GetEBindingOrder() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumBindingOrder getBindingOrder()
 	{
 		return EnumBindingOrder.getEnum(getAttribute(AttributeName.BINDINGORDER, null, "Gathering"));
@@ -413,7 +311,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element
 	 */
-	public JDFStringSpan getCreateBackCoverColorDetails(int iSkip)
+	public JDFStringSpan getCreateBackCoverColorDetails(final int iSkip)
 	{
 		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.BACKCOVERCOLORDETAILS, null, iSkip);
 	}
@@ -425,7 +323,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 * @return JDFStringSpan the element
 	 *         default is getBackCoverColorDetails(0)
 	 */
-	public JDFStringSpan getBackCoverColorDetails(int iSkip)
+	public JDFStringSpan getBackCoverColorDetails(final int iSkip)
 	{
 		return (JDFStringSpan) getElement(ElementName.BACKCOVERCOLORDETAILS, null, iSkip);
 	}
@@ -538,7 +436,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element
 	 */
-	public JDFStringSpan getCreateBindingColorDetails(int iSkip)
+	public JDFStringSpan getCreateBindingColorDetails(final int iSkip)
 	{
 		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.BINDINGCOLORDETAILS, null, iSkip);
 	}
@@ -550,7 +448,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 * @return JDFStringSpan the element
 	 *         default is getBindingColorDetails(0)
 	 */
-	public JDFStringSpan getBindingColorDetails(int iSkip)
+	public JDFStringSpan getBindingColorDetails(final int iSkip)
 	{
 		return (JDFStringSpan) getElement(ElementName.BINDINGCOLORDETAILS, null, iSkip);
 	}
@@ -694,7 +592,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element
 	 */
-	public JDFStringSpan getCreateCoverColorDetails(int iSkip)
+	public JDFStringSpan getCreateCoverColorDetails(final int iSkip)
 	{
 		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.COVERCOLORDETAILS, null, iSkip);
 	}
@@ -706,7 +604,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 * @return JDFStringSpan the element
 	 *         default is getCoverColorDetails(0)
 	 */
-	public JDFStringSpan getCoverColorDetails(int iSkip)
+	public JDFStringSpan getCoverColorDetails(final int iSkip)
 	{
 		return (JDFStringSpan) getElement(ElementName.COVERCOLORDETAILS, null, iSkip);
 	}

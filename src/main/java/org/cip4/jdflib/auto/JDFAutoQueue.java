@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -101,7 +97,8 @@ public abstract class JDFAutoQueue extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.STATUS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumQueueStatus.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.STATUS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumQueueStatus.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICEID, 0x2222222222l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAXQUEUESIZE, 0x3333111111l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.QUEUESIZE, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
@@ -132,7 +129,7 @@ public abstract class JDFAutoQueue extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoQueue(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoQueue(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -144,7 +141,7 @@ public abstract class JDFAutoQueue extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoQueue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoQueue(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -157,101 +154,28 @@ public abstract class JDFAutoQueue extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoQueue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoQueue(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for QueueStatus
+	 * Enumeration strings for numQueueStatus
 	 */
 
-	public enum EQueueStatus
+	public enum EnumQueueStatus
 	{
 		Blocked, Closed, Full, Running, Waiting, Held;
 
-		public static EQueueStatus getEnum(String val)
+		public static EnumQueueStatus getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EQueueStatus.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumQueueStatus.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for QueueStatus
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumQueueStatus extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumQueueStatus(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumQueueStatus getEnum(String enumName)
-		{
-			return (EnumQueueStatus) getEnum(EnumQueueStatus.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumQueueStatus getEnum(int enumValue)
-		{
-			return (EnumQueueStatus) getEnum(EnumQueueStatus.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumQueueStatus.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumQueueStatus.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumQueueStatus.class);
-		}
-
-		/**  */
-		public static final EnumQueueStatus Blocked = new EnumQueueStatus("Blocked");
-		/**  */
-		public static final EnumQueueStatus Closed = new EnumQueueStatus("Closed");
-		/**  */
-		public static final EnumQueueStatus Full = new EnumQueueStatus("Full");
-		/**  */
-		public static final EnumQueueStatus Running = new EnumQueueStatus("Running");
-		/**  */
-		public static final EnumQueueStatus Waiting = new EnumQueueStatus("Waiting");
-		/**  */
-		public static final EnumQueueStatus Held = new EnumQueueStatus("Held");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -263,9 +187,9 @@ public abstract class JDFAutoQueue extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setQueueStatus(EQueueStatus enumVar)
+	public void setQueueStatus(final EnumQueueStatus enumVar)
 	{
-		setAttribute(AttributeName.STATUS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.STATUS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -273,35 +197,6 @@ public abstract class JDFAutoQueue extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EQueueStatus getEQueueStatus()
-	{
-		return EQueueStatus.getEnum(getAttribute(AttributeName.STATUS, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Status
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Status
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetQueueStatus(EQueueStatus) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setQueueStatus(EnumQueueStatus enumVar)
-	{
-		setAttribute(AttributeName.STATUS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Status
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EQueueStatus GetEQueueStatus() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumQueueStatus getQueueStatus()
 	{
 		return EnumQueueStatus.getEnum(getAttribute(AttributeName.STATUS, null, null));
@@ -317,7 +212,7 @@ public abstract class JDFAutoQueue extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeviceID(String value)
+	public void setDeviceID(final String value)
 	{
 		setAttribute(AttributeName.DEVICEID, value, null);
 	}
@@ -342,7 +237,7 @@ public abstract class JDFAutoQueue extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaxQueueSize(int value)
+	public void setMaxQueueSize(final int value)
 	{
 		setAttribute(AttributeName.MAXQUEUESIZE, value, null);
 	}
@@ -367,7 +262,7 @@ public abstract class JDFAutoQueue extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setQueueSize(int value)
+	public void setQueueSize(final int value)
 	{
 		setAttribute(AttributeName.QUEUESIZE, value, null);
 	}
@@ -414,7 +309,7 @@ public abstract class JDFAutoQueue extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevice the element
 	 */
-	public JDFDevice getCreateDevice(int iSkip)
+	public JDFDevice getCreateDevice(final int iSkip)
 	{
 		return (JDFDevice) getCreateElement_JDFElement(ElementName.DEVICE, null, iSkip);
 	}
@@ -426,7 +321,7 @@ public abstract class JDFAutoQueue extends JDFElement
 	 * @return JDFDevice the element
 	 *         default is getDevice(0)
 	 */
-	public JDFDevice getDevice(int iSkip)
+	public JDFDevice getDevice(final int iSkip)
 	{
 		return (JDFDevice) getElement(ElementName.DEVICE, null, iSkip);
 	}
@@ -477,7 +372,7 @@ public abstract class JDFAutoQueue extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFQueueEntry the element
 	 */
-	public JDFQueueEntry getCreateQueueEntry(int iSkip)
+	public JDFQueueEntry getCreateQueueEntry(final int iSkip)
 	{
 		return (JDFQueueEntry) getCreateElement_JDFElement(ElementName.QUEUEENTRY, null, iSkip);
 	}
@@ -489,7 +384,7 @@ public abstract class JDFAutoQueue extends JDFElement
 	 * @return JDFQueueEntry the element
 	 *         default is getQueueEntry(0)
 	 */
-	public JDFQueueEntry getQueueEntry(int iSkip)
+	public JDFQueueEntry getQueueEntry(final int iSkip)
 	{
 		return (JDFQueueEntry) getElement(ElementName.QUEUEENTRY, null, iSkip);
 	}

@@ -48,9 +48,7 @@ import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkColorPoolRef extends WalkRefElement
 {

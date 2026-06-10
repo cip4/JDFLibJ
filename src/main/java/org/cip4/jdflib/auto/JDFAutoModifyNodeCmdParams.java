@@ -82,8 +82,8 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.jmf.JDFNewComment;
-import org.cip4.jdflib.node.JDFNode.EActivation;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoModifyNodeCmdParams : public JDFElement
@@ -97,8 +97,8 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0),
-				null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumActivation.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBID, 0x2222222111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBPARTID, 0x2222222111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
@@ -127,7 +127,7 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoModifyNodeCmdParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoModifyNodeCmdParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -139,7 +139,7 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoModifyNodeCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoModifyNodeCmdParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -152,7 +152,7 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoModifyNodeCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoModifyNodeCmdParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -173,9 +173,9 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setActivation(EActivation enumVar)
+	public void setActivation(final EnumActivation enumVar)
 	{
-		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ACTIVATION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -183,35 +183,6 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EActivation getEActivation()
-	{
-		return EActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Activation
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Activation
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetActivation(EActivation) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setActivation(EnumActivation enumVar)
-	{
-		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Activation
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EActivation GetEActivation() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumActivation getActivation()
 	{
 		return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
@@ -227,7 +198,7 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -252,7 +223,7 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobPartID(String value)
+	public void setJobPartID(final String value)
 	{
 		setAttribute(AttributeName.JOBPARTID, value, null);
 	}
@@ -299,7 +270,7 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFNewComment the element
 	 */
-	public JDFNewComment getCreateNewComment(int iSkip)
+	public JDFNewComment getCreateNewComment(final int iSkip)
 	{
 		return (JDFNewComment) getCreateElement_JDFElement(ElementName.NEWCOMMENT, null, iSkip);
 	}
@@ -311,7 +282,7 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 	 * @return JDFNewComment the element
 	 *         default is getNewComment(0)
 	 */
-	public JDFNewComment getNewComment(int iSkip)
+	public JDFNewComment getNewComment(final int iSkip)
 	{
 		return (JDFNewComment) getElement(ElementName.NEWCOMMENT, null, iSkip);
 	}

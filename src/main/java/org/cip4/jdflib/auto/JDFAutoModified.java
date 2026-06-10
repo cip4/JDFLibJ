@@ -123,7 +123,7 @@ public abstract class JDFAutoModified extends JDFAudit
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoModified(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoModified(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -135,7 +135,7 @@ public abstract class JDFAutoModified extends JDFAudit
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoModified(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoModified(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -148,7 +148,7 @@ public abstract class JDFAutoModified extends JDFAudit
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoModified(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoModified(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -169,7 +169,7 @@ public abstract class JDFAutoModified extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setjRef(String value)
+	public void setjRef(final String value)
 	{
 		setAttribute(AttributeName.JREF, value, null);
 	}
@@ -194,7 +194,7 @@ public abstract class JDFAutoModified extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setXPath(String value)
+	public void setXPath(final String value)
 	{
 		setAttribute(AttributeName.XPATH, value, null);
 	}
@@ -242,7 +242,7 @@ public abstract class JDFAutoModified extends JDFAudit
 	 * @return JDFEmployee the element
 	 */
 	@Override
-	public JDFEmployee getCreateEmployee(int iSkip)
+	public JDFEmployee getCreateEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -255,7 +255,7 @@ public abstract class JDFAutoModified extends JDFAudit
 	 *         default is getEmployee(0)
 	 */
 	@Override
-	public JDFEmployee getEmployee(int iSkip)
+	public JDFEmployee getEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
 	}

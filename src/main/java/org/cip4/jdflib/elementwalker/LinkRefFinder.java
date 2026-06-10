@@ -58,7 +58,6 @@ public class LinkRefFinder extends BaseElementWalker
 	/**
 	 * @param ref
 	 * @param link
-	 *
 	 */
 	public LinkRefFinder(final boolean ref, final boolean link)
 	{
@@ -86,7 +85,6 @@ public class LinkRefFinder extends BaseElementWalker
 	 * the link and ref walker
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkRef extends BaseWalker
 	{

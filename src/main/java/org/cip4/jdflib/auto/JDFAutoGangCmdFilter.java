@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -97,7 +92,8 @@ public abstract class JDFAutoGangCmdFilter extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.GANGNAMES, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.POLICY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumPolicy.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.POLICY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumPolicy.class, 0), null);
 	}
 
 	@Override
@@ -112,7 +108,7 @@ public abstract class JDFAutoGangCmdFilter extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGangCmdFilter(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoGangCmdFilter(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -124,7 +120,7 @@ public abstract class JDFAutoGangCmdFilter extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGangCmdFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoGangCmdFilter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -137,93 +133,28 @@ public abstract class JDFAutoGangCmdFilter extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoGangCmdFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoGangCmdFilter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for Policy
+	 * Enumeration strings for numPolicy
 	 */
 
-	public enum EPolicy
+	public enum EnumPolicy
 	{
 		All, Optimized;
 
-		public static EPolicy getEnum(String val)
+		public static EnumPolicy getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPolicy.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPolicy.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Policy
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumPolicy extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPolicy(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumPolicy getEnum(String enumName)
-		{
-			return (EnumPolicy) getEnum(EnumPolicy.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPolicy getEnum(int enumValue)
-		{
-			return (EnumPolicy) getEnum(EnumPolicy.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPolicy.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPolicy.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPolicy.class);
-		}
-
-		/**  */
-		public static final EnumPolicy All = new EnumPolicy("All");
-		/**  */
-		public static final EnumPolicy Optimized = new EnumPolicy("Optimized");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -235,7 +166,7 @@ public abstract class JDFAutoGangCmdFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGangNames(VString value)
+	public void setGangNames(final VString value)
 	{
 		setAttribute(AttributeName.GANGNAMES, value, null);
 	}
@@ -247,8 +178,8 @@ public abstract class JDFAutoGangCmdFilter extends JDFElement
 	 */
 	public VString getGangNames()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.GANGNAMES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.GANGNAMES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -263,9 +194,9 @@ public abstract class JDFAutoGangCmdFilter extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPolicy(EPolicy enumVar)
+	public void setPolicy(final EnumPolicy enumVar)
 	{
-		setAttribute(AttributeName.POLICY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.POLICY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -273,35 +204,6 @@ public abstract class JDFAutoGangCmdFilter extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPolicy getEPolicy()
-	{
-		return EPolicy.getEnum(getAttribute(AttributeName.POLICY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Policy
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Policy
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPolicy(EPolicy) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPolicy(EnumPolicy enumVar)
-	{
-		setAttribute(AttributeName.POLICY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Policy
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EPolicy GetEPolicy() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumPolicy getPolicy()
 	{
 		return EnumPolicy.getEnum(getAttribute(AttributeName.POLICY, null, null));

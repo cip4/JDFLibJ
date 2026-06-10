@@ -52,7 +52,6 @@ import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFColorPool extends JDFAutoColorPool
@@ -65,7 +64,6 @@ public class JDFColorPool extends JDFAutoColorPool
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
-	 *
 	 */
 	public JDFColorPool(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
@@ -79,7 +77,6 @@ public class JDFColorPool extends JDFAutoColorPool
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
-	 *
 	 */
 	public JDFColorPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
@@ -93,10 +90,10 @@ public class JDFColorPool extends JDFAutoColorPool
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
-	 *
 	 * @throws DOMException
 	 */
-	public JDFColorPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFColorPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -115,7 +112,6 @@ public class JDFColorPool extends JDFAutoColorPool
 	}
 
 	/**
-	 *
 	 * @param strColorName
 	 */
 	public void removeColor(final String strColorName)
@@ -158,7 +154,6 @@ public class JDFColorPool extends JDFAutoColorPool
 	 * does this ColorPool have Color elements with identical Name or RawName eattributes return false if no Color elements with identical Name or RawName tags exist
 	 *
 	 * @return
-	 *
 	 * @deprecated use getDuplicateColors()==null
 	 */
 	@Deprecated
@@ -202,7 +197,6 @@ public class JDFColorPool extends JDFAutoColorPool
 	 * Get the Color Element with Name=name
 	 *
 	 * @param colorName the name of the color
-	 *
 	 * @return JDFColor the color with the matching name, or null if no matching element exists
 	 */
 	public JDFColor getColorWithName(final String colorName)
@@ -242,7 +236,6 @@ public class JDFColorPool extends JDFAutoColorPool
 	 * Get the Color Element with RawName=rawName or Name=rawName in the momentary encoding
 	 *
 	 * @param rawName the 8 bit representation of the rawName of the color
-	 *
 	 * @return JDFColor the color with the matching name, null if no matching element exists
 	 */
 	public JDFColor getColorWith8BitName(final String rawName)
@@ -266,7 +259,6 @@ public class JDFColorPool extends JDFAutoColorPool
 	 * Get the Color Element with RawName=rawName
 	 *
 	 * @param rawName the 8 bit representation of the rawName of the color
-	 *
 	 * @return JDFColor the color with the matching name or null if no matching element exists
 	 */
 	public JDFColor getColorWithRawName(final String rawName)
@@ -287,8 +279,7 @@ public class JDFColorPool extends JDFAutoColorPool
 	 * Append a Color Element with RawName=rawName and Name = Name
 	 *
 	 * @param colorName the name of the color
-	 * @param rawName he 8 bit representation of the rawName of the color
-	 *
+	 * @param rawName   he 8 bit representation of the rawName of the color
 	 * @return JDFColor the color with the matching name, or null f no matching element exists
 	 */
 	public JDFColor appendColorWithName(final String colorName, final String rawName)
@@ -320,8 +311,7 @@ public class JDFColorPool extends JDFAutoColorPool
 	 * Get an existing or append a Color Element with RawName=rawName and Name = Name
 	 *
 	 * @param colorName the name of the color
-	 * @param rawName he 8 bit representation of the rawName of the color
-	 *
+	 * @param rawName   he 8 bit representation of the rawName of the color
 	 * @return JDFColor the color with the matching name or null JDFColor if no matching element exists
 	 */
 	public JDFColor getCreateColorWithName(final String colorName, final String rawName)

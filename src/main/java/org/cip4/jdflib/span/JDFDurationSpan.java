@@ -79,7 +79,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFDurationRange;
 import org.cip4.jdflib.util.JDFDuration;
 
@@ -89,36 +89,36 @@ public class JDFDurationSpan extends JDFSpanBase
 
 	/**
 	 * Constructor for JDFDurationSpan
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFDurationSpan(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFDurationSpan(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFDurationSpan
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFDurationSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFDurationSpan(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFDurationSpan
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFDurationSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFDurationSpan(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -142,7 +142,7 @@ public class JDFDurationSpan extends JDFSpanBase
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -151,9 +151,9 @@ public class JDFDurationSpan extends JDFSpanBase
 		return "JDFDurationSpan[ --> " + super.toString() + " ]";
 	}
 
-	public void setActual(JDFDuration value)
+	public void setActual(final JDFDuration value)
 	{
-		setAttribute(AttributeName.ACTUAL, value == null ? null : value.getDurationISO(), JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.ACTUAL, value == null ? null : value.getDurationISO(), JDFCoreConstants.EMPTYSTRING);
 	}
 
 	public JDFDuration getActual()
@@ -161,7 +161,7 @@ public class JDFDurationSpan extends JDFSpanBase
 		return JDFDuration.createDuration(getAttribute(AttributeName.ACTUAL));
 	}
 
-	public void setPreferred(JDFDuration value)
+	public void setPreferred(final JDFDuration value)
 	{
 		setAttribute(AttributeName.PREFERRED, value, null);
 	}
@@ -171,7 +171,7 @@ public class JDFDurationSpan extends JDFSpanBase
 		return JDFDuration.createDuration(getAttribute(AttributeName.PREFERRED));
 	}
 
-	public void setRange(JDFDurationRange value)
+	public void setRange(final JDFDurationRange value)
 	{
 		setAttribute(AttributeName.RANGE, value, null);
 	}
@@ -181,7 +181,7 @@ public class JDFDurationSpan extends JDFSpanBase
 		return JDFDurationRange.createDurationRange(getAttribute(AttributeName.PREFERRED));
 	}
 
-	public void setOfferRange(JDFDurationRange value)
+	public void setOfferRange(final JDFDurationRange value)
 	{
 		setAttribute(AttributeName.OFFERRANGE, value == null ? null : value.toString());
 	}
@@ -194,7 +194,7 @@ public class JDFDurationSpan extends JDFSpanBase
 	@Override
 	public boolean init()
 	{
-		boolean b = super.init();
+		final boolean b = super.init();
 		setDataType(EnumDataType.DurationSpan);
 		return b;
 	}
@@ -202,7 +202,7 @@ public class JDFDurationSpan extends JDFSpanBase
 	// /////////////////////////////////////////////////////////////
 	/**
 	 * Gets the value of attribute DataType
-	 * 
+	 *
 	 * @return EnumDataType - the attribute DataType value
 	 */
 	@Override

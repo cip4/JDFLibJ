@@ -42,7 +42,7 @@ package org.cip4.jdflib;
 import java.util.Collection;
 
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -60,14 +60,12 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         < July 9, 2009
  */
 class TestJDF extends JDFTestCaseBase
 {
 
 	/**
-	 *
 	 * TODO Please insert comment!
 	 *
 	 * @throws Throwable
@@ -92,14 +90,13 @@ class TestJDF extends JDFTestCaseBase
 	 */
 
 	/**
-	 *
 	 * @throws Throwable
 	 */
 	void _testSpawnf() throws Throwable
 	{
 		final JDFDoc jdfDoc = JDFDoc.parseFile("/data/JDF/FrankB.jdf");
 
-		final JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("PP153.D", JDFConstants.EMPTYSTRING);
+		final JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("PP153.D", JDFCoreConstants.EMPTYSTRING);
 		final VJDFAttributeMap vamParts = new VJDFAttributeMap();
 		final JDFAttributeMap amParts0 = new JDFAttributeMap();
 
@@ -141,7 +138,7 @@ class TestJDF extends JDFTestCaseBase
 		amSpawn.put("Run", "Run_190305_131018209_000353");
 		vamSpawn.add(amSpawn);
 
-		final JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("Prp0.C", JDFConstants.EMPTYSTRING);
+		final JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("Prp0.C", JDFCoreConstants.EMPTYSTRING);
 
 		final Collection<JDFResource> col = nodeProc.checkSpawnedResources(vsRWResourceIDs, vamSpawn);
 
@@ -165,7 +162,7 @@ class TestJDF extends JDFTestCaseBase
 		amSpawn.put("Run", "Run_190305_131018209_000353");
 		vamSpawn.add(amSpawn);
 
-		final JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("Prp0.C", JDFConstants.EMPTYSTRING);
+		final JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("Prp0.C", JDFCoreConstants.EMPTYSTRING);
 		final JDFResource pd = nodeProc.getResource("HDM:PageDocs", EnumUsage.Input, 0).getResourceRoot();
 		pd.removeAttribute(AttributeName.SPAWNSTATUS);
 		pd.removeAttribute(AttributeName.SPAWNIDS);
@@ -174,7 +171,9 @@ class TestJDF extends JDFTestCaseBase
 		for (final KElement e : v)
 		{
 			if (!e.getNodeName().startsWith("HDM:"))
+			{
 				e.deleteNode();
+			}
 		}
 
 		final JDFSpawn sp = new JDFSpawn(nodeProc);

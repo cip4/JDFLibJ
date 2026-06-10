@@ -51,7 +51,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.zip.DataFormatException;
 
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.junit.jupiter.api.Test;
@@ -302,11 +302,11 @@ class JDFDurationTest
 	{
 		final JDFDuration duration = new JDFDuration();
 		duration.setDuration(Double.MAX_VALUE);
-		assertEquals(duration.getDurationISO(), JDFConstants.POSINF);
+		assertEquals(duration.getDurationISO(), JDFCoreConstants.POSINF);
 		duration.setDuration(Long.MAX_VALUE);
-		assertEquals(duration.getDurationISO(), JDFConstants.POSINF);
+		assertEquals(duration.getDurationISO(), JDFCoreConstants.POSINF);
 		duration.setDuration(Integer.MAX_VALUE);
-		assertEquals(duration.getDurationISO(), JDFConstants.POSINF);
+		assertEquals(duration.getDurationISO(), JDFCoreConstants.POSINF);
 	}
 
 	@Test

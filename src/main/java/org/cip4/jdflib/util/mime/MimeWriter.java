@@ -91,7 +91,6 @@ import jakarta.mail.util.ByteArrayDataSource;
  * class to create and write mime files
  *
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         July 24, 2009
  */
 public class MimeWriter extends MimeHelper implements IStreamWriter
@@ -271,7 +270,6 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 
 	/**
 	 * @param mp
-	 *
 	 */
 	public MimeWriter(final Multipart mp)
 	{
@@ -495,9 +493,9 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	/**
 	 * build a MIME package that contains all references in all FileSpecs of a given JDFDoc the doc is modified so that all URLs are cids
 	 *
-	 * @param docJMF the JDFDoc representation of the JMF that references the jdf to package, if null only the jdf is packaged note that the URL of docJDF must already be specified
-	 *        as a CID
-	 * @param docJDF the JDFDoc representation of the JDF to package
+	 * @param docJMF           the JDFDoc representation of the JMF that references the jdf to package, if null only the jdf is packaged note that the URL of docJDF must already be specified
+	 *                         as a CID
+	 * @param docJDF           the JDFDoc representation of the JDF to package
 	 * @param extendReferenced if true, also package any further reeferenced files
 	 */
 	public void buildMimePackage(final JDFDoc docJMF, final XMLDoc docJDF, final boolean extendReferenced)
@@ -548,7 +546,7 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	 *
 	 * @param docJDF the JDF document
 	 * @param cid
-	 * @param cid the CID the JDF document should have in the multipart
+	 * @param cid    the CID the JDF document should have in the multipart
 	 * @return the number of files added to the multipart
 	 */
 	int extendMultipart(final XMLDoc docJDF, final String cid)
@@ -656,9 +654,9 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	/**
 	 * submit a multipart file to a queue
 	 *
-	 * @param docJMF the jmf document containing the submitqueueentry or resubmitqueueentry
-	 * @param docJDF the jdf to submit
-	 * @param strUrl the url to submit to
+	 * @param docJMF    the jmf document containing the submitqueueentry or resubmitqueueentry
+	 * @param docJDF    the jdf to submit
+	 * @param strUrl    the url to submit to
 	 * @param extendRef TODO
 	 * @return
 	 * @throws IOException

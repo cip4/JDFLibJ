@@ -104,7 +104,8 @@ public class JDFStackingParams extends JDFAutoStackingParams
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFStackingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFStackingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

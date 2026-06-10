@@ -58,9 +58,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -1154,9 +1154,9 @@ class StringUtilTest extends JDFTestCaseBase
 	@Test
 	void testZappTokenWS()
 	{
-		assertEquals("1 2 3~4", StringUtil.zappTokenWS(" 1 2 3~    4 ", JDFConstants.TILDE), "new string");
-		assertEquals("1 2 3~4", StringUtil.zappTokenWS(" 1 2 3~    4", JDFConstants.TILDE), "new string");
-		assertEquals("1 2 3~4", StringUtil.zappTokenWS(" 1 2 3~    4~", JDFConstants.TILDE), "new string");
+		assertEquals("1 2 3~4", StringUtil.zappTokenWS(" 1 2 3~    4 ", JDFCoreConstants.TILDE), "new string");
+		assertEquals("1 2 3~4", StringUtil.zappTokenWS(" 1 2 3~    4", JDFCoreConstants.TILDE), "new string");
+		assertEquals("1 2 3~4", StringUtil.zappTokenWS(" 1 2 3~    4~", JDFCoreConstants.TILDE), "new string");
 		assertEquals(StringUtil.zappTokenWS(" n2 ", null), "n2");
 	}
 
@@ -1753,9 +1753,9 @@ class StringUtilTest extends JDFTestCaseBase
 	@Test
 	void testGetNamesVector()
 	{
-		VString v = EnumUtil.getNamesVector(EnumType.AbortQueueEntry.getClass());
+		VString v = StringUtil.getNamesVector(EnumType.class);
 		assertTrue(v.contains("Resource"));
-		v = EnumUtil.getNamesVector(EnumOrientation.Flip0.getClass());
+		v = StringUtil.getNamesVector(EnumOrientation.class);
 		assertTrue(v.contains("Rotate90"));
 	}
 
@@ -1767,7 +1767,7 @@ class StringUtilTest extends JDFTestCaseBase
 	@Test
 	void testGetEnumsVector()
 	{
-		final Vector<ValuedEnum> v = EnumUtil.getEnumsVector(EnumOrientation.Flip180.getClass());
+		final Vector<EnumOrientation> v = StringUtil.getEnumsVector(EnumOrientation.class);
 		assertTrue(v.contains(EnumOrientation.Rotate180));
 	}
 

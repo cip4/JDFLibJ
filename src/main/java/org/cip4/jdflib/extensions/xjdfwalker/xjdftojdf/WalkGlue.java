@@ -112,7 +112,7 @@ public class WalkGlue extends WalkXElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getJDFName(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	String getJDFName(KElement e)
+	String getJDFName(final KElement e)
 	{
 		return ElementName.GLUELINE;
 	}
@@ -121,13 +121,13 @@ public class WalkGlue extends WalkXElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public KElement walk(KElement xjdf, KElement jdf)
+	public KElement walk(final KElement xjdf, final KElement jdf)
 	{
-		KElement newParent = getNewParent(xjdf, jdf);
+		final KElement newParent = getNewParent(xjdf, jdf);
 		return super.walk(xjdf, newParent);
 	}
 
-	private JDFElement getNewParent(KElement xjdf, KElement jdf)
+	private JDFElement getNewParent(final KElement xjdf, final KElement jdf)
 	{
 		KElement newParent = jdf;
 		if (jdf instanceof JDFGluingParams)
@@ -136,7 +136,7 @@ public class WalkGlue extends WalkXElement
 			newParent.moveAttribute(AttributeName.WORKINGDIRECTION, xjdf);
 		}
 
-		String tech = xjdf.getNonEmpty(AttributeName.GLUINGTECHNIQUE);
+		final String tech = xjdf.getNonEmpty(AttributeName.GLUINGTECHNIQUE);
 		if (tech != null)
 		{
 			newParent = newParent.appendElement(ElementName.GLUEAPPLICATION);

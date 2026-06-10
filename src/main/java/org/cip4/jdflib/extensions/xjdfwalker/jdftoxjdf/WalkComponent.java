@@ -76,9 +76,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkComponent extends WalkResource
 {
@@ -91,7 +89,6 @@ public class WalkComponent extends WalkResource
 	}
 
 	/**
-	 *
 	 * @param k
 	 */
 	void updateComponentType(final JDFAttributeMap k)
@@ -100,7 +97,9 @@ public class WalkComponent extends WalkResource
 		comptype = StringUtil.replaceString(comptype, "FinalProduct", null);
 		comptype = StringUtil.replaceString(comptype, "PartialProduct", null);
 		if (comptype != null)
+		{
 			k.put(AttributeName.COMPONENTTYPE, StringUtil.trim(comptype, null));
+		}
 	}
 
 	/**
@@ -143,7 +142,9 @@ public class WalkComponent extends WalkResource
 	{
 		final String prodType = map.get(AttributeName.PRODUCTTYPE);
 		if ("Unknown".equals(prodType))
+		{
 			map.remove(AttributeName.PRODUCTTYPE);
+		}
 		updateComponentType(map);
 		map.remove(AttributeName.ASSEMBLYIDS);
 		map.remove(AttributeName.COMPONENTTYPE);

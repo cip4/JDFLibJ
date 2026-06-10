@@ -49,8 +49,6 @@ import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *
- *
  * @author rainer prosi
  * @date Feb 26, 2013
  */
@@ -66,7 +64,6 @@ public class WalkColorIntentResLink extends WalkResLink
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResLink#setResource(org.cip4.jdflib.core.JDFResourceLink, org.cip4.jdflib.resource.JDFResource, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
@@ -79,13 +76,16 @@ public class WalkColorIntentResLink extends WalkResLink
 			final JDFPart part = (JDFPart) e1.getElement(ElementName.PART);
 			final KElement colorIntent = e1.getElement(ElementName.COLORINTENT);
 			if (thecolorIntent == null)
+			{
 				thecolorIntent = colorIntent;
+			}
 
 			final EnumSide side = part == null ? EnumSide.Front : part.getSide();
 			final boolean both = part == null;
 			if (thecolorIntent != null)
 			{
-				final KElement surfaceColor = thecolorIntent.getCreateChildWithAttribute(XJDFConstants.SurfaceColor, XJDFConstants.Surface, null, side.getName(), 0);
+				final KElement surfaceColor = thecolorIntent.getCreateChildWithAttribute(XJDFConstants.SurfaceColor, XJDFConstants.Surface, null, side.name(),
+						0);
 				fixNumColors(surfaceColor, colorIntent);
 				if (part != null)
 				{
@@ -96,7 +96,7 @@ public class WalkColorIntentResLink extends WalkResLink
 				surfaceColor.moveArray(colorIntent.getChildList(null, null), null);
 				if (both)
 				{
-					thecolorIntent.copyElement(surfaceColor, null).setAttribute(XJDFConstants.Surface, EnumSide.Back.getName());
+					thecolorIntent.copyElement(surfaceColor, null).setAttribute(XJDFConstants.Surface, EnumSide.Back.name());
 				}
 			}
 		}
@@ -136,7 +136,6 @@ public class WalkColorIntentResLink extends WalkResLink
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResLink#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
@@ -147,7 +146,6 @@ public class WalkColorIntentResLink extends WalkResLink
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResLink#matches(org.cip4.jdflib.core.KElement)
 	 */
 	@Override

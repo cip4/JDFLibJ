@@ -2,7 +2,7 @@ package org.cip4.jdflib.util.hotfolder;
 
 import java.io.File;
 
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
 
@@ -48,7 +48,6 @@ import org.cip4.jdflib.util.JDFDate;
  * simple container class that retains the last known mod date of a file
  *
  * @author prosirai
- *
  */
 class FileTime
 {
@@ -64,7 +63,9 @@ class FileTime
 		length = -1;
 		this.readOnly = readOnly;
 		if (readOnly)
+		{
 			updateModified();
+		}
 	}
 
 	protected long updateModified()
@@ -89,11 +90,17 @@ class FileTime
 	protected long lastModified()
 	{
 		if (f == null || readOnly && !f.canWrite())
+		{
 			return 0;
+		}
 		else if (FileUtil.isLocked(f))
+		{
 			return System.currentTimeMillis();
+		}
 		else
+		{
 			return f.lastModified();
+		}
 	}
 
 	protected long lastLength()
@@ -104,7 +111,7 @@ class FileTime
 	@Override
 	public String toString()
 	{
-		return f + JDFConstants.BLANK + (modified > 0 ? new JDFDate(modified).getDateTimeISO() : "never") + " l=" + length;
+		return f + JDFCoreConstants.BLANK + (modified > 0 ? new JDFDate(modified).getDateTimeISO() : "never") + " l=" + length;
 	}
 
 	/**
@@ -126,19 +133,25 @@ class FileTime
 	public boolean equals(final Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
-		if (obj == null)
+		}
+		if ((obj == null) || (getClass() != obj.getClass()))
+		{
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		}
 		final FileTime other = (FileTime) obj;
 		if (f == null)
 		{
 			if (other.f != null)
+			{
 				return false;
+			}
 		}
 		else if (!f.equals(other.f))
+		{
 			return false;
+		}
 		return true;
 	}
 }

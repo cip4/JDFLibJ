@@ -108,7 +108,7 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPreflightArgument(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPreflightArgument(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -120,7 +120,7 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPreflightArgument(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPreflightArgument(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPreflightArgument(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPreflightArgument(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -170,7 +170,7 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFBoxArgument the element
 	 */
-	public JDFBoxArgument getCreateBoxArgument(int iSkip)
+	public JDFBoxArgument getCreateBoxArgument(final int iSkip)
 	{
 		return (JDFBoxArgument) getCreateElement_JDFElement(ElementName.BOXARGUMENT, null, iSkip);
 	}
@@ -182,7 +182,7 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
 	 * @return JDFBoxArgument the element
 	 *         default is getBoxArgument(0)
 	 */
-	public JDFBoxArgument getBoxArgument(int iSkip)
+	public JDFBoxArgument getBoxArgument(final int iSkip)
 	{
 		return (JDFBoxArgument) getElement(ElementName.BOXARGUMENT, null, iSkip);
 	}
@@ -233,7 +233,7 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFBoxToBoxDifference the element
 	 */
-	public JDFBoxToBoxDifference getCreateBoxToBoxDifference(int iSkip)
+	public JDFBoxToBoxDifference getCreateBoxToBoxDifference(final int iSkip)
 	{
 		return (JDFBoxToBoxDifference) getCreateElement_JDFElement(ElementName.BOXTOBOXDIFFERENCE, null, iSkip);
 	}
@@ -245,7 +245,7 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
 	 * @return JDFBoxToBoxDifference the element
 	 *         default is getBoxToBoxDifference(0)
 	 */
-	public JDFBoxToBoxDifference getBoxToBoxDifference(int iSkip)
+	public JDFBoxToBoxDifference getBoxToBoxDifference(final int iSkip)
 	{
 		return (JDFBoxToBoxDifference) getElement(ElementName.BOXTOBOXDIFFERENCE, null, iSkip);
 	}

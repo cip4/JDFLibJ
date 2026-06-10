@@ -50,15 +50,14 @@ import org.cip4.jdflib.ifaces.IStreamWriter;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         August 10, 2009
  */
 public class StreamWriter implements IStreamWriter
 {
-	private InputStream is;
+	private final InputStream is;
 
-	/** 
-	 * 
+	/**
+	 *
 	 */
 	public StreamWriter(final InputStream is)
 	{
@@ -66,10 +65,12 @@ public class StreamWriter implements IStreamWriter
 	}
 
 	@Override
-	public void writeStream(OutputStream os) throws IOException
+	public void writeStream(final OutputStream os) throws IOException
 	{
 		if (is != null)
+		{
 			IOUtils.copy(is, os);
+		}
 	}
 
 	@Override

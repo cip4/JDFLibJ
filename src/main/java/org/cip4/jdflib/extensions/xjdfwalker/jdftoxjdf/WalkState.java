@@ -74,8 +74,8 @@ import org.cip4.jdflib.resource.devicecapability.JDFAbstractState;
 
 /**
  * any matching class will be removed with extreme prejudice...
- * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
  */
 public class WalkState extends WalkIgnore
 {

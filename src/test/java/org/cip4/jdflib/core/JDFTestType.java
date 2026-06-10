@@ -10,6 +10,7 @@
 package org.cip4.jdflib.core;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
+
 class JDFTestType extends JDFElement
 {
 	private static final long serialVersionUID = 1L;
@@ -21,7 +22,7 @@ class JDFTestType extends JDFElement
 
 	/**
 	 * Constructor for JDFTestType
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
@@ -32,7 +33,7 @@ class JDFTestType extends JDFElement
 
 	/**
 	 * Constructor for JDFTestType
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
@@ -50,7 +51,7 @@ class JDFTestType extends JDFElement
 
 	/**
 	 * Constructor for JDFTestType
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
@@ -65,7 +66,7 @@ class JDFTestType extends JDFElement
 	// *********************************************
 	/**
 	 * toString - StringRepresentation of JDFNode
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

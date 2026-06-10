@@ -99,7 +99,7 @@ import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.ContainerUtil;
-import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 // ----------------------------------
@@ -140,12 +140,12 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 
 		public static eXjdfDeviceCondition getEnum(final String name)
 		{
-			return EnumUtil.getJavaEnumIgnoreCase(eXjdfDeviceCondition.class, name);
+			return JavaEnumUtil.getEnumIgnoreCase(eXjdfDeviceCondition.class, name);
 		}
 
 		public static eXjdfDeviceCondition getEnum(final EnumDeviceCondition condition)
 		{
-			return EnumUtil.getJavaEnumIgnoreCase(eXjdfDeviceCondition.class, EnumUtil.getName(condition));
+			return JavaEnumUtil.getEnumIgnoreCase(eXjdfDeviceCondition.class, JavaEnumUtil.getName(condition));
 		}
 	}
 
@@ -169,7 +169,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	 */
 	public void setCounterUnit(final eUnit unit)
 	{
-		setCounterUnit(unit == null ? null : unit.name());
+		setCounterUnit(JavaEnumUtil.getName(unit));
 	}
 
 	/**
@@ -329,19 +329,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	 */
 	public boolean isSamePhase(final JDFDeviceInfo lastInfo, final boolean bExact)
 	{
-		if (lastInfo == null)
-		{
-			return false;
-		}
-		if (!ContainerUtil.equals(getDeviceID(), lastInfo.getDeviceID()))
-		{
-			return false;
-		}
-		if (!ContainerUtil.equals(getDeviceOperationMode(), lastInfo.getDeviceOperationMode()))
-		{
-			return false;
-		}
-		if (!ContainerUtil.equals(getDeviceStatus(), lastInfo.getDeviceStatus()))
+		if ((lastInfo == null) || !ContainerUtil.equals(getDeviceID(), lastInfo.getDeviceID()) || !ContainerUtil.equals(getDeviceOperationMode(), lastInfo.getDeviceOperationMode()) || !ContainerUtil.equals(getDeviceStatus(), lastInfo.getDeviceStatus()))
 		{
 			return false;
 		}
@@ -487,7 +475,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 
 	public void setXJMFStatus(final eDeviceStatus s)
 	{
-		setAttribute(AttributeName.STATUS, s == null ? null : s.name());
+		setAttribute(AttributeName.STATUS, JavaEnumUtil.getName(s));
 	}
 
 	/**
@@ -560,6 +548,6 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	@Override
 	public EnumDeviceCondition getDeviceCondition()
 	{
-		return (EnumDeviceCondition) EnumUtil.getEnumIgnoreCase(EnumDeviceCondition.class, getAttribute(AttributeName.DEVICECONDITION));
+		return JavaEnumUtil.getEnumIgnoreCase(EnumDeviceCondition.class, getAttribute(AttributeName.DEVICECONDITION));
 	}
 }

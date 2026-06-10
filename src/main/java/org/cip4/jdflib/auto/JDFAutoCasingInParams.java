@@ -125,7 +125,7 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCasingInParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoCasingInParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -137,7 +137,7 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCasingInParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoCasingInParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -150,7 +150,7 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoCasingInParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoCasingInParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -161,7 +161,7 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -191,7 +191,7 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCaseRadius(double value)
+	public void setCaseRadius(final double value)
 	{
 		setAttribute(AttributeName.CASERADIUS, value, null);
 	}
@@ -216,7 +216,7 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCoverBoardWidth(double value)
+	public void setCoverBoardWidth(final double value)
 	{
 		setAttribute(AttributeName.COVERBOARDWIDTH, value, null);
 	}
@@ -241,7 +241,7 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSpineBoardWidth(double value)
+	public void setSpineBoardWidth(final double value)
 	{
 		setAttribute(AttributeName.SPINEBOARDWIDTH, value, null);
 	}
@@ -288,7 +288,7 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueApplication the element
 	 */
-	public JDFGlueApplication getCreateGlueApplication(int iSkip)
+	public JDFGlueApplication getCreateGlueApplication(final int iSkip)
 	{
 		return (JDFGlueApplication) getCreateElement_JDFElement(ElementName.GLUEAPPLICATION, null, iSkip);
 	}
@@ -300,7 +300,7 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 	 * @return JDFGlueApplication the element
 	 *         default is getGlueApplication(0)
 	 */
-	public JDFGlueApplication getGlueApplication(int iSkip)
+	public JDFGlueApplication getGlueApplication(final int iSkip)
 	{
 		return (JDFGlueApplication) getElement(ElementName.GLUEAPPLICATION, null, iSkip);
 	}
@@ -330,7 +330,7 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refGlueApplication(JDFGlueApplication refTarget)
+	public void refGlueApplication(final JDFGlueApplication refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -361,7 +361,7 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueLine the element
 	 */
-	public JDFGlueLine getCreateGlueLine(int iSkip)
+	public JDFGlueLine getCreateGlueLine(final int iSkip)
 	{
 		return (JDFGlueLine) getCreateElement_JDFElement(ElementName.GLUELINE, null, iSkip);
 	}
@@ -373,7 +373,7 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 	 * @return JDFGlueLine the element
 	 *         default is getGlueLine(0)
 	 */
-	public JDFGlueLine getGlueLine(int iSkip)
+	public JDFGlueLine getGlueLine(final int iSkip)
 	{
 		return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
 	}

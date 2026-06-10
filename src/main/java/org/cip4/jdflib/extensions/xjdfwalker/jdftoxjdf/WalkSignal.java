@@ -74,7 +74,7 @@ import org.cip4.jdflib.jmf.JDFSignal;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen <br/>
- * walker for JMF mesaages
+ *         walker for JMF mesaages
  */
 public class WalkSignal extends WalkMessage
 {
@@ -90,7 +90,7 @@ public class WalkSignal extends WalkMessage
 	 * @see org.cip4.jdflib.extensions.XJDF20.WalkMessage#matches(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public boolean matches(KElement toCheck)
+	public boolean matches(final KElement toCheck)
 	{
 		return !jdfToXJDF.isRetainAll() && (toCheck instanceof JDFSignal);
 	}
@@ -99,7 +99,7 @@ public class WalkSignal extends WalkMessage
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void removeUnusedElements(KElement jdf)
+	protected void removeUnusedElements(final KElement jdf)
 	{
 		super.removeUnusedElements(jdf);
 		jdf.removeChild(ElementName.STATUSQUPARAMS, null, 0);

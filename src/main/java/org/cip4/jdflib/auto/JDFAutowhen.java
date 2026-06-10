@@ -106,7 +106,7 @@ public abstract class JDFAutowhen extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutowhen(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutowhen(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutowhen extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutowhen(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutowhen(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutowhen extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutowhen(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutowhen(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutowhen extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFset the element
 	 */
-	public JDFset getCreateset(int iSkip)
+	public JDFset getCreateset(final int iSkip)
 	{
 		return (JDFset) getCreateElement_JDFElement(ElementName.SET, null, iSkip);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutowhen extends JDFElement
 	 * @return JDFset the element
 	 *         default is getset(0)
 	 */
-	public JDFset getset(int iSkip)
+	public JDFset getset(final int iSkip)
 	{
 		return (JDFset) getElement(ElementName.SET, null, iSkip);
 	}

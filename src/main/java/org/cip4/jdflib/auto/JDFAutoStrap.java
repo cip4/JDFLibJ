@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -101,7 +97,8 @@ public abstract class JDFAutoStrap extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.MATERIAL, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration, EnumMaterial.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MATERIAL, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumMaterial.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.STRAPCOLOR, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
@@ -130,7 +127,7 @@ public abstract class JDFAutoStrap extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoStrap(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoStrap(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -142,7 +139,7 @@ public abstract class JDFAutoStrap extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoStrap(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoStrap(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -155,7 +152,7 @@ public abstract class JDFAutoStrap extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoStrap(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoStrap(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -166,7 +163,7 @@ public abstract class JDFAutoStrap extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Consumable);
 		return bRet;
 	}
@@ -181,89 +178,22 @@ public abstract class JDFAutoStrap extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for Material
+	 * Enumeration strings for numMaterial
 	 */
 
-	public enum EMaterial
+	public enum EnumMaterial
 	{
 		AdhesiveTape, Strap, String;
 
-		public static EMaterial getEnum(String val)
+		public static EnumMaterial getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EMaterial.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumMaterial.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Material
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumMaterial extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumMaterial(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumMaterial getEnum(String enumName)
-		{
-			return (EnumMaterial) getEnum(EnumMaterial.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumMaterial getEnum(int enumValue)
-		{
-			return (EnumMaterial) getEnum(EnumMaterial.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumMaterial.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumMaterial.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumMaterial.class);
-		}
-
-		/**  */
-		public static final EnumMaterial AdhesiveTape = new EnumMaterial("AdhesiveTape");
-		/**  */
-		public static final EnumMaterial Strap = new EnumMaterial("Strap");
-		/**  */
-		public static final EnumMaterial String = new EnumMaterial("String");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -275,9 +205,9 @@ public abstract class JDFAutoStrap extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMaterial(EMaterial enumVar)
+	public void setMaterial(final EnumMaterial enumVar)
 	{
-		setAttribute(AttributeName.MATERIAL, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.MATERIAL, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -285,35 +215,6 @@ public abstract class JDFAutoStrap extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EMaterial getEMaterial()
-	{
-		return EMaterial.getEnum(getAttribute(AttributeName.MATERIAL, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Material
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Material
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetMaterial(EMaterial) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setMaterial(EnumMaterial enumVar)
-	{
-		setAttribute(AttributeName.MATERIAL, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Material
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EMaterial GetEMaterial() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumMaterial getMaterial()
 	{
 		return EnumMaterial.getEnum(getAttribute(AttributeName.MATERIAL, null, null));
@@ -329,7 +230,7 @@ public abstract class JDFAutoStrap extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStrapColor(EnumNamedColor value)
+	public void setStrapColor(final EnumNamedColor value)
 	{
 		setAttribute(AttributeName.STRAPCOLOR, value == null ? null : value.getName(), null);
 	}
@@ -382,7 +283,7 @@ public abstract class JDFAutoStrap extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
-	public JDFContact getCreateContact(int iSkip)
+	public JDFContact getCreateContact(final int iSkip)
 	{
 		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -394,7 +295,7 @@ public abstract class JDFAutoStrap extends JDFResource
 	 * @return JDFContact the element
 	 *         default is getContact(0)
 	 */
-	public JDFContact getContact(int iSkip)
+	public JDFContact getContact(final int iSkip)
 	{
 		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -425,7 +326,7 @@ public abstract class JDFAutoStrap extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refContact(JDFContact refTarget)
+	public void refContact(final JDFContact refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -457,7 +358,7 @@ public abstract class JDFAutoStrap extends JDFResource
 	 * @return JDFIdentificationField the element
 	 */
 	@Override
-	public JDFIdentificationField getCreateIdentificationField(int iSkip)
+	public JDFIdentificationField getCreateIdentificationField(final int iSkip)
 	{
 		return (JDFIdentificationField) getCreateElement_JDFElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
 	}
@@ -470,7 +371,7 @@ public abstract class JDFAutoStrap extends JDFResource
 	 *         default is getIdentificationField(0)
 	 */
 	@Override
-	public JDFIdentificationField getIdentificationField(int iSkip)
+	public JDFIdentificationField getIdentificationField(final int iSkip)
 	{
 		return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
 	}
@@ -501,7 +402,7 @@ public abstract class JDFAutoStrap extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refIdentificationField(JDFIdentificationField refTarget)
+	public void refIdentificationField(final JDFIdentificationField refTarget)
 	{
 		refElement(refTarget);
 	}

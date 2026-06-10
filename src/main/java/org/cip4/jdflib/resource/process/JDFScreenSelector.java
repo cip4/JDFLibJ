@@ -68,13 +68,13 @@
  *
  */
 /**
- * ========================================================================== 
+ * ==========================================================================
  * class JDFScreenSelector extends JDFResource
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author: sabjon@topmail.de    using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * @Author: sabjon@topmail.de    using a code generator
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  */
 
 package org.cip4.jdflib.resource.process;
@@ -89,7 +89,7 @@ public class JDFScreenSelector extends JDFAutoScreenSelector
 
 	/**
 	 * Constructor for JDFScreenSelector
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
@@ -101,7 +101,7 @@ public class JDFScreenSelector extends JDFAutoScreenSelector
 
 	/**
 	 * Constructor for JDFScreenSelector
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
@@ -114,14 +114,15 @@ public class JDFScreenSelector extends JDFAutoScreenSelector
 
 	/**
 	 * Constructor for JDFScreenSelector
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFScreenSelector(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFScreenSelector(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

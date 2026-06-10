@@ -83,7 +83,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
  * @date May 10, 2014
  */
@@ -133,7 +132,6 @@ class PackageElementWalkerTest extends JDFTestCaseBase
 
 	/**
 	 * test that the package classes are actually implemented
-	 *
 	 */
 	@Test
 	void testFoo()
@@ -146,7 +144,6 @@ class PackageElementWalkerTest extends JDFTestCaseBase
 
 	/**
 	 * test that the package classes are actually implemented
-	 *
 	 */
 	@Test
 	void testFoo2()

@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -100,8 +96,8 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.LISTPOLICY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumListPolicy.getEnum(0),
-				"All");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.LISTPOLICY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumListPolicy.class, 0), "All");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ASSETTYPES, 0x3333333311l, AttributeInfo.EnumAttributeType.Any, null, null);
 	}
 
@@ -129,7 +125,7 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAssetListCreationParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoAssetListCreationParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -141,7 +137,7 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAssetListCreationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoAssetListCreationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -154,7 +150,7 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoAssetListCreationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoAssetListCreationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -165,7 +161,7 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -180,87 +176,22 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for ListPolicy
+	 * Enumeration strings for numListPolicy
 	 */
 
-	public enum EListPolicy
+	public enum EnumListPolicy
 	{
 		All, Available;
 
-		public static EListPolicy getEnum(String val)
+		public static EnumListPolicy getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EListPolicy.class, val, EListPolicy.All);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumListPolicy.class, val, EnumListPolicy.All);
 		}
-	}
-
-	/**
-	 * Enumeration strings for ListPolicy
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumListPolicy extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumListPolicy(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumListPolicy getEnum(String enumName)
-		{
-			return (EnumListPolicy) getEnum(EnumListPolicy.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumListPolicy getEnum(int enumValue)
-		{
-			return (EnumListPolicy) getEnum(EnumListPolicy.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumListPolicy.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumListPolicy.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumListPolicy.class);
-		}
-
-		/**  */
-		public static final EnumListPolicy All = new EnumListPolicy("All");
-		/**  */
-		public static final EnumListPolicy Available = new EnumListPolicy("Available");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -272,9 +203,9 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setListPolicy(EListPolicy enumVar)
+	public void setListPolicy(final EnumListPolicy enumVar)
 	{
-		setAttribute(AttributeName.LISTPOLICY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.LISTPOLICY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -282,35 +213,6 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EListPolicy getEListPolicy()
-	{
-		return EListPolicy.getEnum(getAttribute(AttributeName.LISTPOLICY, null, "All"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ListPolicy
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ListPolicy
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetListPolicy(EListPolicy) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setListPolicy(EnumListPolicy enumVar)
-	{
-		setAttribute(AttributeName.LISTPOLICY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ListPolicy
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EListPolicy GetEListPolicy() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumListPolicy getListPolicy()
 	{
 		return EnumListPolicy.getEnum(getAttribute(AttributeName.LISTPOLICY, null, "All"));
@@ -326,7 +228,7 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAssetTypes(String value)
+	public void setAssetTypes(final String value)
 	{
 		setAttribute(AttributeName.ASSETTYPES, value, null);
 	}
@@ -373,7 +275,7 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
-	public JDFFileSpec getCreateFileSpec(int iSkip)
+	public JDFFileSpec getCreateFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -385,7 +287,7 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	 * @return JDFFileSpec the element
 	 *         default is getFileSpec(0)
 	 */
-	public JDFFileSpec getFileSpec(int iSkip)
+	public JDFFileSpec getFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -415,7 +317,7 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}

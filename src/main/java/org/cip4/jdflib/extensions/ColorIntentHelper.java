@@ -45,9 +45,7 @@ import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.resource.process.JDFColor;
 
 /**
- *
  * @author prosirai
- *
  */
 public class ColorIntentHelper extends IntentHelper
 {
@@ -57,7 +55,6 @@ public class ColorIntentHelper extends IntentHelper
 	}
 
 	/**
-	 *
 	 * @param intent
 	 */
 	public ColorIntentHelper(final KElement intent)
@@ -66,7 +63,6 @@ public class ColorIntentHelper extends IntentHelper
 	}
 
 	/**
-	 *
 	 * @param front
 	 * @param back
 	 */
@@ -89,19 +85,17 @@ public class ColorIntentHelper extends IntentHelper
 	}
 
 	/**
-	 * 
 	 * @param theside
 	 * @param attNamethe attribute
 	 * @return the attribute value
 	 */
 	public String getSurfaceAttribute(final EnumSurface front, final String attName)
 	{
-		KElement s = getSurfaceColor(front);
+		final KElement s = getSurfaceColor(front);
 		return s == null ? null : s.getNonEmpty(attName);
 	}
 
 	/**
-	 * 
 	 * @param theside
 	 * @param attNamethe attribute
 	 * @return the attribute value as a list
@@ -122,13 +116,17 @@ public class ColorIntentHelper extends IntentHelper
 	public List<String> getSurfaceColors(final int n)
 	{
 		if (n <= 0)
+		{
 			return null;
+		}
 		final StringArray r = new StringArray();
 		int p = 0;
 		for (final String sep : JDFColor.getKCMYSeparations())
 		{
 			if (p++ == n)
+			{
 				break;
+			}
 			r.add(sep);
 		}
 		for (int s = 1; s <= n - 4; s++)

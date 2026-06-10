@@ -98,7 +98,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         Jul 16, 2010
  */
 class JDFValidatorTest extends JDFTestCaseBase
@@ -157,10 +156,10 @@ class JDFValidatorTest extends JDFTestCaseBase
 	@Test
 	void testExamples()
 	{
-		for (final Object l : EnumValidationLevel.getEnumList())
+		for (final EnumValidationLevel l : EnumValidationLevel.values())
 		{
 			final JDFValidator validator = getValidator();
-			validator.level = (EnumValidationLevel) l;
+			validator.level = l;
 			for (final File f : FileUtil.listFilesInTree(new File(sm_dirTestData), "*.jdf"))
 			{
 				final JDFDoc d = JDFDoc.parseFile(f);
@@ -180,10 +179,10 @@ class JDFValidatorTest extends JDFTestCaseBase
 	@Test
 	void testJMFExamples()
 	{
-		for (final Object l : EnumValidationLevel.getEnumList())
+		for (final EnumValidationLevel l : EnumValidationLevel.values())
 		{
 			final JDFValidator validator = getValidator();
-			validator.level = (EnumValidationLevel) l;
+			validator.level = l;
 			for (final File f : FileUtil.listFilesInTree(new File(sm_dirTestData), "*.jmf"))
 			{
 				final JDFDoc d = JDFDoc.parseFile(f);

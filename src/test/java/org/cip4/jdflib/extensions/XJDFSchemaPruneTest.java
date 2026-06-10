@@ -55,6 +55,7 @@ import org.cip4.jdflib.core.XMLParser;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.IntentHelper.EIntentType;
 import org.cip4.jdflib.extensions.ProductHelper.eProductType;
+import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFJobPhase;
@@ -82,7 +83,7 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 		final String out = sm_dirTestDataTemp + "prune1.xsd";
 		ret.write2File(out);
 		final XMLParser p = new XMLParser();
-		p.setSchemaLocation(XJDF20.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
+		p.setSchemaLocation(JDFToXJDF.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
 		final XMLDoc d = p.parseString(h.getRoot().toDisplayXML(2));
 		assertTrue(d.isSchemaValid());
 	}
@@ -156,7 +157,7 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 		final String out = sm_dirTestDataTemp + "prune.intent.xsd";
 		ret.write2File(out);
 		final XMLParser p = new XMLParser();
-		p.setSchemaLocation(XJDF20.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
+		p.setSchemaLocation(JDFToXJDF.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
 
 		final XJDFHelper h2 = new XJDFHelper("j1", "p1");
 
@@ -180,7 +181,7 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 		final String out = sm_dirTestDataTemp + "pruneForeign.xsd";
 		ret.write2File(out);
 		final XMLParser p = new XMLParser();
-		p.setSchemaLocation(XJDF20.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
+		p.setSchemaLocation(JDFToXJDF.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
 		h.getRoot().setAttribute("foo:bar", "val", "www.foo.com");
 		h.getSet(ElementName.NODEINFO, null).getCreatePartition(0, false).getRoot().appendElement("foo:blub", "www.foo.com");
 		final XMLDoc d = p.parseString(h.getRoot().toDisplayXML(2));
@@ -202,7 +203,7 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 		final String out = sm_dirTestDataTemp + "pruneForeign.xsd";
 		ret.write2File(out);
 		final XMLParser p = new XMLParser();
-		p.setSchemaLocation(XJDF20.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
+		p.setSchemaLocation(JDFToXJDF.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
 		final XMLDoc d = p.parseString(h.getRoot().toDisplayXML(2));
 		assertTrue(d.isSchemaValid());
 	}
@@ -220,7 +221,7 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 		final String out = sm_dirTestDataTemp + "pruneMiss.xsd";
 		ret.write2File(out);
 		final XMLParser p = new XMLParser();
-		p.setSchemaLocation(XJDF20.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
+		p.setSchemaLocation(JDFToXJDF.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
 		final XMLDoc d = p.parseString(h.getRoot().toDisplayXML(2));
 		assertFalse(d.isSchemaValid());
 	}
@@ -239,7 +240,7 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 		final String out = sm_dirTestDataTemp + "prune2.xsd";
 		ret.write2File(out);
 		final XMLParser p = new XMLParser();
-		p.setSchemaLocation(XJDF20.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
+		p.setSchemaLocation(JDFToXJDF.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
 		final XMLDoc d = p.parseString(h.getRoot().toDisplayXML(2));
 		assertTrue(d.isSchemaValid());
 	}
@@ -281,7 +282,7 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 			final File out = new File(sm_dirTestDataTemp, FileUtil.newExtension(xjdf, "xsd").getName());
 			ret.write2File(out);
 			final XMLParser p = new XMLParser();
-			p.setSchemaLocation(XJDF20.getSchemaURL(), UrlUtil.fileToUrl(out, true));
+			p.setSchemaLocation(JDFToXJDF.getSchemaURL(), UrlUtil.fileToUrl(out, true));
 			final XMLDoc d = p.parseString(h.getRoot().toDisplayXML(2));
 			assertTrue(d.isSchemaValid());
 		}
@@ -299,7 +300,7 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 		final String out = sm_dirTestDataTemp + "knownmessages.xsd";
 		ret.write2File(out);
 		final XMLParser p = new XMLParser();
-		p.setSchemaLocation(XJDF20.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
+		p.setSchemaLocation(JDFToXJDF.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
 		final XMLDoc d = p.parseString(h.getRoot().toDisplayXML(2));
 		assertTrue(d.isSchemaValid());
 	}
@@ -317,7 +318,7 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 		final String out = sm_dirTestDataTemp + "knownmessages2.xsd";
 		ret.write2File(out);
 		final XMLParser p = new XMLParser();
-		p.setSchemaLocation(XJDF20.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
+		p.setSchemaLocation(JDFToXJDF.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
 		final XMLDoc d = p.parseString(h.getRoot().toDisplayXML(2));
 		assertTrue(d.isSchemaValid());
 	}
@@ -350,7 +351,7 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 		final String out = sm_dirTestDataTemp + "knownmessages3.xsd";
 		ret.write2File(out);
 		final XMLParser p = new XMLParser();
-		p.setSchemaLocation(XJDF20.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
+		p.setSchemaLocation(JDFToXJDF.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
 		final XMLDoc d = p.parseString(h.getRoot().toDisplayXML(2));
 		assertTrue(d.isSchemaValid());
 		final XMLDoc d2 = p.parseString(h2.getRoot().toDisplayXML(2));
@@ -390,7 +391,7 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 		final String out = sm_dirTestDataTemp + "status.xsd";
 		ret.write2File(out);
 		final XMLParser p = new XMLParser();
-		p.setSchemaLocation(XJDF20.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
+		p.setSchemaLocation(JDFToXJDF.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
 		final XMLDoc d = p.parseString(xjmfHelper.getRoot().toDisplayXML(2));
 		assertTrue(d.isSchemaValid());
 

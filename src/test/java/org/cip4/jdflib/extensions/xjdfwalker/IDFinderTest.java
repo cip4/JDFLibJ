@@ -57,7 +57,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class IDFinderTest extends JDFTestCaseBase
 {
@@ -107,13 +106,15 @@ class IDFinderTest extends JDFTestCaseBase
 	@Test
 	void testContactType()
 	{
-		JDFPart part = (JDFPart) new JDFDoc("Part").getRoot();
-		for (EnumPartIDKey e : EnumPartIDKey.getEnumList())
+		final JDFPart part = (JDFPart) new JDFDoc("Part").getRoot();
+		for (final EnumPartIDKey e : EnumPartIDKey.values())
 		{
-			JDFPart p2 = (JDFPart) part.cloneNewDoc();
-			p2.setAttribute(e.getName(), e.getName());
+			final JDFPart p2 = (JDFPart) part.cloneNewDoc();
+			p2.setAttribute(e.name(), e.name());
 			if (e.isXJDF())
-				assertNull(IDFinder.getPartMap(p2).get(e.getName()), e.getName());
+			{
+				assertNull(IDFinder.getPartMap(p2).get(e.name()), e.name());
+			}
 
 		}
 	}

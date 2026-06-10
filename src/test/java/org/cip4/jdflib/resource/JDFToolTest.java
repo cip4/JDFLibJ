@@ -81,7 +81,7 @@ class JDFToolTest
 	@Test
 	void testGetToolID()
 	{
-		JDFTool t = (JDFTool) JDFElement.createRoot(ElementName.TOOL);
+		final JDFTool t = (JDFTool) JDFElement.createRoot(ElementName.TOOL);
 		assertEquals("", t.getToolID());
 		t.setProductID("t1");
 		assertEquals("t1", t.getToolID());

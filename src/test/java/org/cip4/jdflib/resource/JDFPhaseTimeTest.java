@@ -86,7 +86,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 class JDFPhaseTimeTest extends JDFTestCaseBase
 {
@@ -115,7 +115,7 @@ class JDFPhaseTimeTest extends JDFTestCaseBase
 	/**
 	 * @see junit.framework.TestCase#setUp()
 	 * @throws Exception
-	*/
+	 */
 	@Override
 	@BeforeEach
 	public void setUp() throws Exception
@@ -140,8 +140,8 @@ class JDFPhaseTimeTest extends JDFTestCaseBase
 	@Test
 	void testSetPhase()
 	{
-		JDFJMF jmf = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Details, EnumJobDetails.Full);
-		JDFJobPhase jobPhase = jmf.getSignal(0).getDeviceInfo(0).getJobPhase(0);
+		final JDFJMF jmf = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Details, EnumJobDetails.Full);
+		final JDFJobPhase jobPhase = jmf.getSignal(0).getDeviceInfo(0).getJobPhase(0);
 		jobPhase.setAmount(42);
 		jobPhase.setStatus(EnumNodeStatus.InProgress);
 		pt.setPhase(jobPhase);

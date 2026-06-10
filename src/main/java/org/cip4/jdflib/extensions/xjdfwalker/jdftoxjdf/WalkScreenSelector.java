@@ -77,9 +77,7 @@ import org.cip4.jdflib.datatypes.JDFNumberRange;
 import org.cip4.jdflib.extensions.XJDFConstants;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkScreenSelector extends WalkJDFElement
 {

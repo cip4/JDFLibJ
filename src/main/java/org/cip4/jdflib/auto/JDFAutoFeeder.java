@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -105,10 +100,11 @@ public abstract class JDFAutoFeeder extends JDFElement
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALTERNATEPOSITIONS, 0x3333333311l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.FEEDERSYNCHRONIZATION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumFeederSynchronization.getEnum(0), "Primary");
+				JavaEnumUtil.getEnum(EnumFeederSynchronization.class, 0), "Primary");
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.FEEDERTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.LOADING, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.OPENING, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumOpening.getEnum(0), "None");
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.OPENING, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumOpening.class, 0), "None");
 	}
 
 	@Override
@@ -137,7 +133,7 @@ public abstract class JDFAutoFeeder extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFeeder(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoFeeder(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -149,7 +145,7 @@ public abstract class JDFAutoFeeder extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFeeder(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoFeeder(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -162,178 +158,42 @@ public abstract class JDFAutoFeeder extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoFeeder(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoFeeder(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for FeederSynchronization
+	 * Enumeration strings for numFeederSynchronization
 	 */
 
-	public enum EFeederSynchronization
+	public enum EnumFeederSynchronization
 	{
 		Alternate, Backup, Chain, Primary;
 
-		public static EFeederSynchronization getEnum(String val)
+		public static EnumFeederSynchronization getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EFeederSynchronization.class, val, EFeederSynchronization.Primary);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumFeederSynchronization.class, val, EnumFeederSynchronization.Primary);
 		}
 	}
 
 	/**
-	 * Enumeration strings for FeederSynchronization
+	 * Enumeration strings for numOpening
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumFeederSynchronization extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumFeederSynchronization(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumFeederSynchronization getEnum(String enumName)
-		{
-			return (EnumFeederSynchronization) getEnum(EnumFeederSynchronization.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumFeederSynchronization getEnum(int enumValue)
-		{
-			return (EnumFeederSynchronization) getEnum(EnumFeederSynchronization.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumFeederSynchronization.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumFeederSynchronization.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumFeederSynchronization.class);
-		}
-
-		/**  */
-		public static final EnumFeederSynchronization Alternate = new EnumFeederSynchronization("Alternate");
-		/**  */
-		public static final EnumFeederSynchronization Backup = new EnumFeederSynchronization("Backup");
-		/**  */
-		public static final EnumFeederSynchronization Chain = new EnumFeederSynchronization("Chain");
-		/**  */
-		public static final EnumFeederSynchronization Primary = new EnumFeederSynchronization("Primary");
-	}
-
-	/**
-	 * Enumeration strings for Opening
-	 */
-
-	public enum EOpening
+	public enum EnumOpening
 	{
 		Back, Front, None, Sucker;
 
-		public static EOpening getEnum(String val)
+		public static EnumOpening getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EOpening.class, val, EOpening.None);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumOpening.class, val, EnumOpening.None);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Opening
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumOpening extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumOpening(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumOpening getEnum(String enumName)
-		{
-			return (EnumOpening) getEnum(EnumOpening.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumOpening getEnum(int enumValue)
-		{
-			return (EnumOpening) getEnum(EnumOpening.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumOpening.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumOpening.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumOpening.class);
-		}
-
-		/**  */
-		public static final EnumOpening Back = new EnumOpening("Back");
-		/**  */
-		public static final EnumOpening Front = new EnumOpening("Front");
-		/**  */
-		public static final EnumOpening None = new EnumOpening("None");
-		/**  */
-		public static final EnumOpening Sucker = new EnumOpening("Sucker");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -345,7 +205,7 @@ public abstract class JDFAutoFeeder extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAlternatePositions(JDFIntegerList value)
+	public void setAlternatePositions(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.ALTERNATEPOSITIONS, value, null);
 	}
@@ -358,8 +218,8 @@ public abstract class JDFAutoFeeder extends JDFElement
 	 */
 	public JDFIntegerList getAlternatePositions()
 	{
-		String strAttrName = getAttribute(AttributeName.ALTERNATEPOSITIONS, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.ALTERNATEPOSITIONS, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -373,7 +233,7 @@ public abstract class JDFAutoFeeder extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPosition(int value)
+	public void setPosition(final int value)
 	{
 		setAttribute(AttributeName.POSITION, value, null);
 	}
@@ -398,9 +258,9 @@ public abstract class JDFAutoFeeder extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setFeederSynchronization(EFeederSynchronization enumVar)
+	public void setFeederSynchronization(final EnumFeederSynchronization enumVar)
 	{
-		setAttribute(AttributeName.FEEDERSYNCHRONIZATION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.FEEDERSYNCHRONIZATION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -408,35 +268,6 @@ public abstract class JDFAutoFeeder extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EFeederSynchronization getEFeederSynchronization()
-	{
-		return EFeederSynchronization.getEnum(getAttribute(AttributeName.FEEDERSYNCHRONIZATION, null, "Primary"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute FeederSynchronization
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute FeederSynchronization
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetFeederSynchronization(EFeederSynchronization) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setFeederSynchronization(EnumFeederSynchronization enumVar)
-	{
-		setAttribute(AttributeName.FEEDERSYNCHRONIZATION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute FeederSynchronization
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EFeederSynchronization GetEFeederSynchronization() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumFeederSynchronization getFeederSynchronization()
 	{
 		return EnumFeederSynchronization.getEnum(getAttribute(AttributeName.FEEDERSYNCHRONIZATION, null, "Primary"));
@@ -452,7 +283,7 @@ public abstract class JDFAutoFeeder extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFeederType(String value)
+	public void setFeederType(final String value)
 	{
 		setAttribute(AttributeName.FEEDERTYPE, value, null);
 	}
@@ -477,7 +308,7 @@ public abstract class JDFAutoFeeder extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLoading(String value)
+	public void setLoading(final String value)
 	{
 		setAttribute(AttributeName.LOADING, value, null);
 	}
@@ -502,9 +333,9 @@ public abstract class JDFAutoFeeder extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setOpening(EOpening enumVar)
+	public void setOpening(final EnumOpening enumVar)
 	{
-		setAttribute(AttributeName.OPENING, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.OPENING, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -512,35 +343,6 @@ public abstract class JDFAutoFeeder extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EOpening getEOpening()
-	{
-		return EOpening.getEnum(getAttribute(AttributeName.OPENING, null, "None"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Opening
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Opening
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetOpening(EOpening) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setOpening(EnumOpening enumVar)
-	{
-		setAttribute(AttributeName.OPENING, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Opening
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EOpening GetEOpening() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumOpening getOpening()
 	{
 		return EnumOpening.getEnum(getAttribute(AttributeName.OPENING, null, "None"));
@@ -588,7 +390,7 @@ public abstract class JDFAutoFeeder extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refComponent(JDFComponent refTarget)
+	public void refComponent(final JDFComponent refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -660,7 +462,7 @@ public abstract class JDFAutoFeeder extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMedia(JDFMedia refTarget)
+	public void refMedia(final JDFMedia refTarget)
 	{
 		refElement(refTarget);
 	}

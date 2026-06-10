@@ -57,23 +57,19 @@ import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
-import org.cip4.jdflib.auto.JDFAutoCut.EnumWorkingDirection;
-import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumPageDelivery;
 import org.cip4.jdflib.auto.JDFAutoExposedMedia.EnumPlateType;
 import org.cip4.jdflib.auto.JDFAutoGlueApplication.EnumGluingTechnique;
 import org.cip4.jdflib.auto.JDFAutoInsertingParams.EnumMethod;
-import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EPrintQuality;
 import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPrintQuality;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumCostType;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumDeviceOperationMode;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumFluteDirection;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumGrainDirection;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
-import org.cip4.jdflib.auto.JDFAutoMedia.EnumPolarity;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
-import org.cip4.jdflib.auto.JDFAutoUsageCounter.EScope;
+import org.cip4.jdflib.auto.JDFAutoUsageCounter.EnumScope;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
@@ -81,10 +77,8 @@ import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFElement.ESides;
 import org.cip4.jdflib.core.JDFElement.EnumNamedColor;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
-import org.cip4.jdflib.core.JDFElement.EnumSides;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFNodeInfo;
@@ -1776,7 +1770,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
 		final JDFDeviceInfo di = jmf.getCreateSignal(0).appendDeviceInfo();
 		di.appendDevice().setDeviceID("id");
-		di.setDeviceStatus(EDeviceStatus.Running);
+		di.setDeviceStatus(EnumDeviceStatus.Running);
 		di.appendEmployee().setPersonalID("e1");
 		di.appendEmployee().setPersonalID("e2");
 		final JDFToXJDF conv = new JDFToXJDF();
@@ -1795,10 +1789,10 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		jmf.setVersion(EnumVersion.Version_1_9);
 		final JDFDeviceInfo di = jmf.getCreateSignal(0).appendDeviceInfo();
 		di.appendDevice().setDeviceID("id");
-		di.setDeviceStatus(EDeviceStatus.Running);
+		di.setDeviceStatus(EnumDeviceStatus.Running);
 		final JDFModuleStatus moduleStatus = di.appendModuleStatus();
 		moduleStatus.setModuleIndex(new JDFIntegerRangeList(new int[] { 0 }));
-		moduleStatus.setDeviceStatus(EDeviceStatus.Running);
+		moduleStatus.setDeviceStatus(EnumDeviceStatus.Running);
 		final JDFToXJDF conv = new JDFToXJDF();
 		conv.setNewVersion(EnumVersion.Version_2_3);
 		final KElement xjmf = conv.makeNewJMF(jmf);
@@ -1816,10 +1810,10 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		jmf.setVersion(EnumVersion.Version_1_9);
 		final JDFDeviceInfo di = jmf.getCreateSignal(0).appendDeviceInfo();
 		di.appendDevice().setDeviceID("id");
-		di.setDeviceStatus(EDeviceStatus.Running);
+		di.setDeviceStatus(EnumDeviceStatus.Running);
 		final JDFModuleStatus moduleStatus = di.appendModuleStatus();
 		moduleStatus.setModuleIndex(new JDFIntegerRangeList(new int[] { 0 }));
-		moduleStatus.setDeviceStatus(EDeviceStatus.Running);
+		moduleStatus.setDeviceStatus(EnumDeviceStatus.Running);
 		moduleStatus.appendPart().setAttribute(AttributeName.SEPARATION, "Black");
 		final JDFToXJDF conv = new JDFToXJDF();
 		conv.setNewVersion(EnumVersion.Version_2_3);
@@ -1839,10 +1833,10 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		jmf.setVersion(EnumVersion.Version_1_9);
 		final JDFDeviceInfo di = jmf.getCreateSignal(0).appendDeviceInfo();
 		di.appendDevice().setDeviceID("id");
-		di.setDeviceStatus(EDeviceStatus.Running);
+		di.setDeviceStatus(EnumDeviceStatus.Running);
 		final JDFModuleStatus moduleStatus = di.appendModuleStatus();
 		moduleStatus.setModuleIndex(new JDFIntegerRangeList(new int[] { 0 }));
-		moduleStatus.setDeviceStatus(EDeviceStatus.Running);
+		moduleStatus.setDeviceStatus(EnumDeviceStatus.Running);
 		moduleStatus.setModuleType("typ");
 		final JDFToXJDF conv = new JDFToXJDF();
 		conv.setNewVersion(EnumVersion.Version_2_3);
@@ -1859,7 +1853,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
 		final JDFDeviceInfo di = jmf.getCreateSignal(0).appendDeviceInfo();
 		di.appendDevice().setDeviceID("id");
-		di.setDeviceStatus(EDeviceStatus.Running);
+		di.setDeviceStatus(EnumDeviceStatus.Running);
 		di.appendModuleStatus().setModuleIndex(new JDFIntegerRangeList(new int[] { 0 }));
 		di.appendModuleStatus().setModuleIndex(new JDFIntegerRangeList(new int[] { 4, 6 }));
 		final JDFToXJDF conv = new JDFToXJDF();
@@ -3570,7 +3564,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		n.setType(EnumType.DigitalPrinting);
 		final JDFUsageCounter uc = (JDFUsageCounter) n.addResource(ElementName.USAGECOUNTER, EnumUsage.Input);
 		uc.setCounterID("cid");
-		uc.setScope(EScope.Job);
+		uc.setScope(EnumScope.Job);
 		final JDFToXJDF conv = new JDFToXJDF();
 		final XJDFHelper xjdfc = conv.convertToXJDF(n);
 		assertEquals("cid", xjdfc.getSet(ElementName.USAGECOUNTER, 0).getResource(0).getExternalID());
@@ -3674,7 +3668,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		m1.setMediaType(EnumMediaType.Paper);
 		m1.setWeight(42);
 		final JDFResourceLink ml = n.getLink(med, null);
-		final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.Location.getName(), "loc1");
+		final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.Location.name(), "loc1");
 		ml.setPartMap(map);
 
 		map.put(EnumPartIDKey.Separation, "Cyan");
@@ -3697,10 +3691,10 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFNode product = new JDFDoc(ElementName.JDF).getJDFRoot();
 		product.setType(EnumType.Product);
 		final JDFLayoutIntent loi = (JDFLayoutIntent) product.addResource(ElementName.LAYOUTINTENT, EnumUsage.Input);
-		loi.setSides(ESides.OneSidedFront);
+		loi.setSides(org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides.OneSided);
 		final JDFNode plateset = product.addCombined(new VString("Imposition Interpreting Rendering ImageSetting", " "));
 		final JDFInterpretingParams ip = (JDFInterpretingParams) plateset.addResource(ElementName.INTERPRETINGPARAMS, EnumUsage.Input);
-		ip.setPrintQuality(EPrintQuality.Normal);
+		ip.setPrintQuality(EnumPrintQuality.Normal);
 		final JDFRunList ruli = (JDFRunList) plateset.addResource(ElementName.RUNLIST, EnumUsage.Input);
 		ruli.setFileURL("file:///foo.pdf");
 		plateset.addResource(ElementName.MEDIA, EnumUsage.Input);
@@ -3892,7 +3886,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		c2.setComponentType(EnumComponentType.PartialProduct, null);
 		c2.setDimensions(new JDFXYPair(3, 5));
 		final JDFGlue glue = (JDFGlue) node.addResource(ElementName.GLUINGPARAMS, EnumUsage.Input).appendElement(ElementName.GLUE);
-		glue.setWorkingDirection(EnumWorkingDirection.Bottom);
+		glue.setWorkingDirection(org.cip4.jdflib.auto.JDFAutoGlue.EnumWorkingDirection.Bottom);
 		final JDFGlueLine gl = (JDFGlueLine) glue.appendElement(ElementName.GLUELINE);
 		gl.setGlueBrand("gb1");
 		gl.setAreaGlue(true);
@@ -4093,7 +4087,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		node.setType(EnumType.Buffer);
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(node);
-		assertEquals(EnumType.ManualLabor.getName(), xjdf.getAttribute(AttributeName.TYPES));
+		assertEquals(EnumType.ManualLabor.name(), xjdf.getAttribute(AttributeName.TYPES));
 	}
 
 	/**
@@ -4134,7 +4128,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		product.setType(EnumType.Product);
 		product.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		final JDFLayoutIntent loi = (JDFLayoutIntent) product.addResource(ElementName.LAYOUTINTENT, EnumUsage.Input);
-		loi.setSides(EnumSides.OneSidedFront);
+		loi.setSides(org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides.OneSided);
 		final JDFNode product2 = product.addProduct();
 		product2.addResource(ElementName.COMPONENT, EnumUsage.Output).setDescriptiveName("Cover");
 		product.linkOutputs(product2);
@@ -4144,7 +4138,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFNode plateset = product.addCombined(new VString("Impositioning Interpreting Rendering ImageSetting", " "));
 		final JDFInterpretingParams ip = (JDFInterpretingParams) plateset.addResource(ElementName.INTERPRETINGPARAMS, EnumUsage.Input);
-		ip.setPolarity(EnumPolarity.Negative);
+		ip.setPolarity(org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPolarity.Negative);
 		final JDFRunList ruli = (JDFRunList) plateset.addResource(ElementName.RUNLIST, EnumUsage.Input);
 		ruli.setFileURL("file:///foo.pdf");
 		final JDFMedia plate = (JDFMedia) plateset.addResource(ElementName.MEDIA, EnumUsage.Input);

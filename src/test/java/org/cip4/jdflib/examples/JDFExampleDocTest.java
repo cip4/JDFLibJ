@@ -73,10 +73,9 @@ import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaUnit;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFComment;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFElement.ESides;
 import org.cip4.jdflib.core.JDFElement.EnumSides;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -207,7 +206,7 @@ class JDFExampleDocTest extends ExampleTest
 
 		// get action, input and output settings from the command line
 		String action = args.parameter('a');
-		if (action == null || action.equals(JDFConstants.EMPTYSTRING))
+		if (action == null || action.equals(JDFCoreConstants.EMPTYSTRING))
 		{
 			action = "DoAll";
 		}
@@ -231,7 +230,7 @@ class JDFExampleDocTest extends ExampleTest
 	{
 		JDFElement root = null;
 		// parse the input, if it exists
-		if (inFile != null && !inFile.equals(JDFConstants.EMPTYSTRING))
+		if (inFile != null && !inFile.equals(JDFCoreConstants.EMPTYSTRING))
 		{
 			m_doc = JDFDoc.parseFile(sm_dirTestDataTemp + inFile);
 			root = (JDFElement) m_doc.getRoot();
@@ -360,7 +359,7 @@ class JDFExampleDocTest extends ExampleTest
 	{
 		// get the JDF document root element
 		final JDFNode productNode = (JDFNode) m_doc.getRoot();
-		productNode.setType(JDFNode.EnumType.Product.getName(), false);
+		productNode.setType(JDFNode.EnumType.Product.name(), false);
 
 		// Add an intent resource
 		final JDFLayoutIntent layoutIntent = (JDFLayoutIntent) productNode.appendMatchingResource(ElementName.LAYOUTINTENT, JDFNode.EnumProcessUsage.AnyInput,
@@ -393,12 +392,12 @@ class JDFExampleDocTest extends ExampleTest
 		// set up the root process
 		final JDFNode root = (JDFNode) m_doc.getRoot();
 		final JDFNode productNode = root;
-		productNode.setType(JDFNode.EnumType.Product.getName(), false);
+		productNode.setType(JDFNode.EnumType.Product.name(), false);
 
 		productNode.setJobPartID("Part1");
 		// define the complete output component (false -> Usage=output
 		final JDFComponent compBrochure = (JDFComponent) productNode.appendMatchingResource(ElementName.COMPONENT, JDFNode.EnumProcessUsage.AnyOutput, null);
-		Vector<EnumComponentType> vComType = new Vector<EnumComponentType>();
+		Vector<EnumComponentType> vComType = new Vector<>();
 		vComType.add(JDFComponent.EnumComponentType.FinalProduct);
 		compBrochure.setComponentType(vComType);
 		compBrochure.setDescriptiveName("complete 16-page Brochure");
@@ -419,7 +418,7 @@ class JDFExampleDocTest extends ExampleTest
 
 		compCover.setDescriptiveName("Cover Component");
 
-		vComType = new Vector<EnumComponentType>();
+		vComType = new Vector<>();
 		vComType.add(JDFComponent.EnumComponentType.PartialProduct);
 		compCover.setComponentType(vComType);
 
@@ -442,7 +441,7 @@ class JDFExampleDocTest extends ExampleTest
 				null);
 
 		layoutIntent.setNumberUp(new JDFXYPair(1, 1));
-		layoutIntent.setSides(EnumSides.OneSidedFront);
+		layoutIntent.setSides(org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides.getEnum(EnumSides.OneSidedFront.name()));
 
 		prodCover.appendMatchingResource(ElementName.COLORINTENT, JDFNode.EnumProcessUsage.AnyInput, null);
 
@@ -458,7 +457,7 @@ class JDFExampleDocTest extends ExampleTest
 
 		compInsert.setDescriptiveName("Insert Component");
 
-		vComType = new Vector<EnumComponentType>();
+		vComType = new Vector<>();
 		vComType.add(JDFComponent.EnumComponentType.PartialProduct);
 		compInsert.setComponentType(vComType);
 		productNode.linkMatchingResource(compInsert, JDFNode.EnumProcessUsage.AnyInput, new JDFAttributeMap());
@@ -468,7 +467,7 @@ class JDFExampleDocTest extends ExampleTest
 				JDFNode.EnumProcessUsage.AnyInput, null);
 
 		insertLayoutIntent.setNumberUp(new JDFXYPair(1, 1));
-		insertLayoutIntent.setSides(ESides.TwoSidedFlipY);
+		insertLayoutIntent.setSides(org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides.getEnum(EnumSides.TwoSidedFlipY.name()));
 		prodInsert.appendMatchingResource(ElementName.COLORINTENT, JDFNode.EnumProcessUsage.AnyInput, null);
 
 		// Add an ArtDeliveryIntent to define the input files for the inser
@@ -523,7 +522,7 @@ class JDFExampleDocTest extends ExampleTest
 	{
 		// set up the root process node, which is an imposition node
 		final JDFNode impositionNode = (JDFNode) m_doc.getRoot();
-		impositionNode.setType(JDFNode.EnumType.Imposition.getName(), false);
+		impositionNode.setType(JDFNode.EnumType.Imposition.name(), false);
 
 		// add the runlist
 		final JDFRunList runList = (JDFRunList) impositionNode.appendMatchingResource(ElementName.RUNLIST, JDFNode.EnumProcessUsage.Document, null);
@@ -676,7 +675,7 @@ class JDFExampleDocTest extends ExampleTest
 	{
 		// set up the root process node, which is an imposition node
 		final JDFNode impositionNode = (JDFNode) m_doc.getRoot();
-		impositionNode.setType(JDFNode.EnumType.Imposition.getName(), false);
+		impositionNode.setType(JDFNode.EnumType.Imposition.name(), false);
 
 		// add the appropriate resources
 		final JDFLayout layout = (JDFLayout) impositionNode.appendMatchingResource(ElementName.LAYOUT, JDFNode.EnumProcessUsage.AnyInput, null);
@@ -986,7 +985,7 @@ class JDFExampleDocTest extends ExampleTest
 	{
 		// set up the root process node, which is an imposition node
 		final JDFNode printNode = (JDFNode) m_doc.getRoot();
-		printNode.setType(JDFNode.EnumType.DigitalPrinting.getName(), false);
+		printNode.setType(JDFNode.EnumType.DigitalPrinting.name(), false);
 
 		// add the appropriate resources
 		final JDFMedia media = (JDFMedia) printNode.appendMatchingResource(ElementName.MEDIA, JDFNode.EnumProcessUsage.AnyInput, null);
@@ -1044,7 +1043,7 @@ class JDFExampleDocTest extends ExampleTest
 	{
 		// set up the root process node, which is an imposition node
 		final JDFNode printNode = (JDFNode) m_doc.getRoot();
-		printNode.setType(JDFNode.EnumType.Combined.getName(), false);
+		printNode.setType(JDFNode.EnumType.Combined.name(), false);
 		final VString types = new VString();
 		types.add("ConventionalPrinting");
 		types.add("ConventionalPrinting");

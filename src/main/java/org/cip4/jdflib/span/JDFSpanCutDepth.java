@@ -38,12 +38,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanCutDepth extends JDFEnumerationSpan
@@ -84,7 +80,8 @@ public class JDFSpanCutDepth extends JDFEnumerationSpan
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanCutDepth(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFSpanCutDepth(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -92,43 +89,14 @@ public class JDFSpanCutDepth extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanCutType
 	 */
-	public static class EnumSpanCutDepth extends ValuedEnum
+	public enum EnumSpanCutDepth
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Full, Partial;
 
-		private EnumSpanCutDepth(final String name)
+		public static EnumSpanCutDepth getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanCutDepth.class, val, null);
 		}
-
-		public static EnumSpanCutDepth getEnum(final String enumName)
-		{
-			return (EnumSpanCutDepth) getEnum(EnumSpanCutDepth.class, enumName);
-		}
-
-		public static EnumSpanCutDepth getEnum(final int enumValue)
-		{
-			return (EnumSpanCutDepth) getEnum(EnumSpanCutDepth.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanCutDepth.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanCutDepth.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanCutDepth.class);
-		}
-
-		public static final EnumSpanCutDepth Full = new EnumSpanCutDepth("Full");
-		public static final EnumSpanCutDepth Partial = new EnumSpanCutDepth("Partial");
 
 	}
 
@@ -138,9 +106,9 @@ public class JDFSpanCutDepth extends JDFEnumerationSpan
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanCutDepth.getEnum(0);
+		return EnumSpanCutDepth.class;
 	}
 
 }

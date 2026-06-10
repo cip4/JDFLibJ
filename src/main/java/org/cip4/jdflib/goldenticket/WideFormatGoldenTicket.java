@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.goldenticket;
 
@@ -120,7 +120,7 @@ public class WideFormatGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	protected void fillCatMaps()
@@ -132,6 +132,7 @@ public class WideFormatGoldenTicket extends MISGoldenTicket
 
 	/**
 	 * create a BaseGoldenTicket
+	 *
 	 * @param parent
 	 */
 	public WideFormatGoldenTicket(final MISGoldenTicket parent)
@@ -143,6 +144,7 @@ public class WideFormatGoldenTicket extends MISGoldenTicket
 
 	/**
 	 * create a BaseGoldenTicket
+	 *
 	 * @param _icsLevel the level to init to (1,2 or 3)
 	 */
 	public WideFormatGoldenTicket(final int _icsLevel)
@@ -152,10 +154,11 @@ public class WideFormatGoldenTicket extends MISGoldenTicket
 
 	/**
 	 * create a BaseGoldenTicket
+	 *
 	 * @param _icsLevel the level to init to (1,2 or 3)
 	 * @param version
 	 */
-	public WideFormatGoldenTicket(final int _icsLevel, EnumVersion version)
+	public WideFormatGoldenTicket(final int _icsLevel, final EnumVersion version)
 	{
 		super(1, version, 2);
 		grayBox = false;
@@ -191,16 +194,16 @@ public class WideFormatGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	protected void initInk()
 	{
-		JDFInk ink = (JDFInk) theNode.getCreateResource(ElementName.INK, EnumUsage.Input, 0);
+		final JDFInk ink = (JDFInk) theNode.getCreateResource(ElementName.INK, EnumUsage.Input, 0);
 		ink.setUnit("l");
 		ink.setFamily("InkJet");
-		for (String col : cols)
+		for (final String col : cols)
 		{
-			JDFInk sep = (JDFInk) ink.addPartition(EnumPartIDKey.Separation, col);
+			final JDFInk sep = (JDFInk) ink.addPartition(EnumPartIDKey.Separation, col);
 			sep.setInkName("Inkjet " + col);
 		}
 
@@ -208,50 +211,50 @@ public class WideFormatGoldenTicket extends MISGoldenTicket
 
 	private void initColorspaceConversion()
 	{
-		JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) theNode.getCreateResource(ElementName.COLORSPACECONVERSIONPARAMS, EnumUsage.Input, 0);
+		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) theNode.getCreateResource(ElementName.COLORSPACECONVERSIONPARAMS, EnumUsage.Input,
+				0);
 
 	}
 
 	private JDFTile initTile()
 	{
-		JDFTile tile = (JDFTile) theNode.getCreateResource(ElementName.TILE, EnumUsage.Input, 0);
+		final JDFTile tile = (JDFTile) theNode.getCreateResource(ElementName.TILE, EnumUsage.Input, 0);
 		tile.setCTM(JDFMatrix.getUnitMatrix());
 		tile.setClipBox(new JDFRectangle(0, 0, 444, 666));
 		return tile;
 	}
 
 	/**
-	 * @return 
-	 * 
+	 * @return
 	 */
 	private JDFInterpretingParams initInterpretingParams()
 	{
-		JDFInterpretingParams interpretingParams = (JDFInterpretingParams) theNode.getCreateResource(ElementName.INTERPRETINGPARAMS, EnumUsage.Input, 0);
+		final JDFInterpretingParams interpretingParams = (JDFInterpretingParams) theNode.getCreateResource(ElementName.INTERPRETINGPARAMS, EnumUsage.Input, 0);
 		return interpretingParams;
 	}
 
 	/**
-	 * @return 
-	 * 
+	 * @return
 	 */
 	private JDFRenderingParams initRenderingParams()
 	{
-		JDFRenderingParams renderingParams = (JDFRenderingParams) theNode.getCreateResource(ElementName.RENDERINGPARAMS, EnumUsage.Input, 0);
+		final JDFRenderingParams renderingParams = (JDFRenderingParams) theNode.getCreateResource(ElementName.RENDERINGPARAMS, EnumUsage.Input, 0);
 		return renderingParams;
 	}
 
 	/**
-	 * @param m 
-	 * @return 
-	 * 
+	 * @param m
+	 * @return
 	 */
-	private JDFDigitalPrintingParams initDigitalPrintingParams(JDFMedia m)
+	private JDFDigitalPrintingParams initDigitalPrintingParams(final JDFMedia m)
 	{
-		JDFDigitalPrintingParams digiParams = (JDFDigitalPrintingParams) theNode.getCreateResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input, 0);
-		digiParams.setSides(EnumSides.OneSidedFront);
+		final JDFDigitalPrintingParams digiParams = (JDFDigitalPrintingParams) theNode.getCreateResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input, 0);
+		digiParams.setSides(org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumSides.getEnum(EnumSides.OneSidedFront.name()));
 		digiParams.setPageDelivery(JDFAutoDigitalPrintingParams.EnumPageDelivery.SameOrderFaceUp);
 		if (m != null)
+		{
 			digiParams.refElement(m);
+		}
 		return digiParams;
 	}
 
@@ -266,8 +269,6 @@ public class WideFormatGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 *  
-	 * 
 	 * @see org.cip4.jdflib.goldenticket.BaseGoldenTicket#initDocumentRunList()
 	 */
 	@Override
@@ -280,7 +281,6 @@ public class WideFormatGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * 
 	 * @see org.cip4.jdflib.goldenticket.BaseGoldenTicket#initPaperMedia()
 	 */
 	@Override
@@ -299,7 +299,6 @@ public class WideFormatGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * 
 	 * @see org.cip4.jdflib.goldenticket.MISGoldenTicket#initJDF()
 	 */
 	@Override
@@ -312,13 +311,12 @@ public class WideFormatGoldenTicket extends MISGoldenTicket
 	@Override
 	protected JDFComponent initOutputComponent()
 	{
-		JDFComponent comp = super.initOutputComponent();
+		final JDFComponent comp = super.initOutputComponent();
 		comp.setDescriptiveName("The wide format ouput component");
 		return comp;
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
 	@Override

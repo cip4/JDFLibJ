@@ -79,9 +79,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class JDFRenderingParamsTest extends JDFTestCaseBase
 {
@@ -92,8 +90,8 @@ class JDFRenderingParamsTest extends JDFTestCaseBase
 	@Test
 	void testGetObjectResolution()
 	{
-		JDFRenderingParams rp = (JDFRenderingParams) new JDFDoc(ElementName.RENDERINGPARAMS).getRoot();
-		JDFObjectResolution or0 = rp.appendObjectResolution();
+		final JDFRenderingParams rp = (JDFRenderingParams) new JDFDoc(ElementName.RENDERINGPARAMS).getRoot();
+		final JDFObjectResolution or0 = rp.appendObjectResolution();
 		JDFObjectResolution or = rp.getObjectResolution(null, null);
 		Assertions.assertEquals(or, or0);
 		or0.addObjectTag("foo");
@@ -111,8 +109,8 @@ class JDFRenderingParamsTest extends JDFTestCaseBase
 	@Test
 	void testGetObjectResolutionAll()
 	{
-		JDFRenderingParams rp = (JDFRenderingParams) new JDFDoc(ElementName.RENDERINGPARAMS).getRoot();
-		JDFObjectResolution or0 = rp.appendObjectResolution();
+		final JDFRenderingParams rp = (JDFRenderingParams) new JDFDoc(ElementName.RENDERINGPARAMS).getRoot();
+		final JDFObjectResolution or0 = rp.appendObjectResolution();
 		JDFObjectResolution or = rp.getObjectResolution(null, null);
 		Assertions.assertEquals(or, or0);
 		or0.addSourceObject(EnumSourceObjects.All);

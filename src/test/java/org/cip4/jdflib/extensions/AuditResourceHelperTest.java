@@ -71,7 +71,7 @@ package org.cip4.jdflib.extensions;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.junit.jupiter.api.Assertions;
@@ -86,11 +86,12 @@ class AuditResourceHelperTest extends JDFTestCaseBase
 	@Test
 	void testCleanup()
 	{
-		XJDFHelper h = new XJDFHelper("j", "p", null);
-		SetHelper sh = h.getCreateSet(ElementName.MEDIA, EnumUsage.Input, null);
+		final XJDFHelper h = new XJDFHelper("j", "p", null);
+		final SetHelper sh = h.getCreateSet(ElementName.MEDIA, EnumUsage.Input, null);
 		sh.appendPartition(null, true);
-		MessageResourceHelper a = h.getCreateAuditPool().getCreateMessageResourceHelper(sh);
-		Assertions.assertEquals(1, a.getRoot().getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.ID, JDFConstants.STAR), false, false, 0).size());
+		final MessageResourceHelper a = h.getCreateAuditPool().getCreateMessageResourceHelper(sh);
+		Assertions.assertEquals(1,
+				a.getRoot().getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.ID, JDFCoreConstants.STAR), false, false, 0).size());
 	}
 
 }

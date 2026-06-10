@@ -52,7 +52,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -120,12 +120,11 @@ public class JDFXYPairRangeList extends JDFRangeList
 	 * constructs a JDFXYPairRangeList with values from a given string
 	 *
 	 * @param s the given string
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFXYPairRangeList(final String s) throws DataFormatException
 	{
-		if (s != null && !s.equals(JDFConstants.EMPTYSTRING))
+		if (s != null && !s.equals(JDFCoreConstants.EMPTYSTRING))
 		{
 			setString(s);
 		}
@@ -138,7 +137,6 @@ public class JDFXYPairRangeList extends JDFRangeList
 	 * inRange - returns true if the given JDFXYPair value is in one of the ranges of this range list
 	 *
 	 * @param x the given double value to compare
-	 *
 	 * @return boolean - true if in range otherwise false
 	 */
 	public boolean inRange(final JDFXYPair x)
@@ -159,7 +157,8 @@ public class JDFXYPairRangeList extends JDFRangeList
 	/**
 	 * setString<br>
 	 * Parse the string and set the single ranges or pairs and put them into a vector.<br>
-	 * The first and the last positions in the vector are special, because they contain only a half range: the first can start with a pair and the last can end with a pair. The elements in the middle
+	 * The first and the last positions in the vector are special, because they contain only a half range: the first can start with a pair and the last can end with a pair. The elements in the
+	 * middle
 	 * (position 2 - (n-1)) start and end with a half range, but can have pairs in the middle.
 	 * <p>
 	 * For example, if the string looks like this: * "1 2 ~ 4 5 6 7 ~ 8 9 10 11 ~ 1 1" <br>
@@ -167,26 +166,29 @@ public class JDFXYPairRangeList extends JDFRangeList
 	 * range 1: "1 2 ~ 4 5", range 2: "6 7 ~ 8 9" and range 3: "10 11 ~ 1 1"
 	 *
 	 * @param s the given string to cut in seperate xy pair ranges
-	 *
 	 * @throws DataFormatException
 	 */
 	public void setString(final String s) throws DataFormatException
 	{
-		if (s.indexOf(JDFConstants.TILDE) == 0 || s.lastIndexOf(JDFConstants.TILDE) == (s.length() - 1))
+		if (s.indexOf(JDFCoreConstants.TILDE) == 0 || s.lastIndexOf(JDFCoreConstants.TILDE) == (s.length() - 1))
+		{
 			throw new DataFormatException("JDFXYPairRangeList::SetString: Illegal string " + s);
-		final String zappedWS = StringUtil.zappTokenWS(s, JDFConstants.TILDE);
-		final VString vs = new VString(zappedWS, JDFConstants.BLANK);
+		}
+		final String zappedWS = StringUtil.zappTokenWS(s, JDFCoreConstants.TILDE);
+		final VString vs = new VString(zappedWS, JDFCoreConstants.BLANK);
 		rangeList.clear();
 		for (int i = 0, size = vs.size(); i < size; i++)
 		{
 			if (size - i < MAX_XY_DIMENSION) // the last xypair is incomplete
+			{
 				throw new DataFormatException("JDFXYPairRangeList::SetString: Illegal string " + s);
+			}
 			final String tok1 = vs.elementAt(i);
 			final String tok2 = vs.elementAt(++i);
-			String str = tok1 + JDFConstants.BLANK + tok2;
-			if (tok2.indexOf(JDFConstants.TILDE) != -1)
+			String str = tok1 + JDFCoreConstants.BLANK + tok2;
+			if (tok2.indexOf(JDFCoreConstants.TILDE) != -1)
 			{
-				str = tok1 + JDFConstants.BLANK + tok2 + JDFConstants.BLANK + vs.elementAt(++i);
+				str = tok1 + JDFCoreConstants.BLANK + tok2 + JDFCoreConstants.BLANK + vs.elementAt(++i);
 			}
 			try
 			{
@@ -201,15 +203,13 @@ public class JDFXYPairRangeList extends JDFRangeList
 	}
 
 	/**
-	 * setString Parse the string and set the single ranges or pairs and put them into a vector. The first and the last positions in the vector are special because they contain only a half range, the
+	 * setString Parse the string and set the single ranges or pairs and put them into a vector. The first and the last positions in the vector are special because they contain only a half
+	 * range, the
 	 * first can start with a pair and the last can end with a pair, the elements in the middle (Position 2 - (n-1)) starts and ends with a half range but can have pairs in the middle.
-	 *
 	 * For example, if the string looks like
-	 *
 	 * "1 2 ~ 4 5 6 7 ~ 8 9 10 11 ~ 1 1" it is the representation of 3 ranges range 1: "1 2 ~ 4 5" range 2: "6 7 ~ 8 9" and range 3: "10 11 ~ 1 1"
 	 *
 	 * @param String s - the given string to cut in seperate xy pair ranges
-	 *
 	 * @return boolean - true if the string is has the right format otherwise false
 	 */
 	// public boolean setString(String s)
@@ -459,7 +459,6 @@ public class JDFXYPairRangeList extends JDFRangeList
 	 * isValid - validate the given String
 	 *
 	 * @param s the given string
-	 *
 	 * @return boolean - false if the String has not a valid format
 	 */
 	public boolean isValid(final String s)
@@ -516,7 +515,9 @@ public class JDFXYPairRangeList extends JDFRangeList
 	{
 		final int siz = rangeList.size();
 		if (siz == 0)
+		{
 			return false; // attempt to operate on a null element
+		}
 
 		final Vector<JDFXYPair> v = new Vector<>(); // vector of ranges
 		for (int i = 0; i < siz; i++)
@@ -531,7 +532,9 @@ public class JDFXYPairRangeList extends JDFRangeList
 
 		final int n = v.size() - 1;
 		if (n == 0)
+		{
 			return true; // single value
+		}
 
 		final JDFXYPair first = (v.elementAt(0));
 		final JDFXYPair last = (v.elementAt(n));
@@ -541,8 +544,10 @@ public class JDFXYPairRangeList extends JDFRangeList
 			final JDFXYPair value = (v.elementAt(j));
 			final JDFXYPair nextvalue = (v.elementAt(j + 1));
 
-			if (((first.equals(last) && value.equals(nextvalue)) || (first.isLess(last) && value.isLessOrEqual(nextvalue)) || (first.isGreater(last) && value.isGreaterOrEqual(nextvalue))) == false)
+			if (((!first.equals(last) || !value.equals(nextvalue)) && (!first.isLess(last) || !value.isLessOrEqual(nextvalue)) && (!first.isGreater(last) || !value.isGreaterOrEqual(nextvalue))))
+			{
 				return false;
+			}
 		}
 		return true;
 	}
@@ -590,8 +595,10 @@ public class JDFXYPairRangeList extends JDFRangeList
 			final JDFXYPair value = v.get(j);
 			final JDFXYPair nextvalue = v.get(j + 1);
 
-			if (((first.isLess(last) && value.isLess(nextvalue)) || (first.isGreater(last) && value.isGreater(nextvalue))) == false)
+			if (((!first.isLess(last) || !value.isLess(nextvalue)) && (!first.isGreater(last) || !value.isGreater(nextvalue))))
+			{
 				return false;
+			}
 		}
 		return true;
 	}

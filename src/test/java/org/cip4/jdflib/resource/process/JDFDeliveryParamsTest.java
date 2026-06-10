@@ -67,7 +67,7 @@
  *
  */
 /**
- * 
+ *
  */
 package org.cip4.jdflib.resource.process;
 
@@ -86,7 +86,7 @@ class JDFDeliveryParamsTest extends JDFTestCaseBase
 {
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testSetFromArtDelivery()
@@ -100,7 +100,7 @@ class JDFDeliveryParamsTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testSetGetDropItem()

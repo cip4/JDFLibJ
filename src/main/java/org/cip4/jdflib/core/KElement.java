@@ -95,7 +95,6 @@ import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.xerces.dom.AttrNSImpl;
@@ -152,7 +151,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		return wantXsiType;
 	}
 
-	public static void setWantXsiType(boolean wantXsiType)
+	public static void setWantXsiType(final boolean wantXsiType)
 	{
 		KElement.wantXsiType = wantXsiType;
 	}
@@ -409,7 +408,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	public String getNonEmpty(final String strLocalName)
 	{
 		final String val = getAttribute(strLocalName, null, null);
-		return val == null || JDFConstants.EMPTYSTRING.equals(val) ? null : val;
+		return val == null || JDFCoreConstants.EMPTYSTRING.equals(val) ? null : val;
 	}
 
 	/**
@@ -422,7 +421,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	public String getNonEmpty_KElement(final String strLocalName)
 	{
 		final String val = getAttribute_KElement(strLocalName, null, null);
-		return val == null || JDFConstants.EMPTYSTRING.equals(val) ? null : val;
+		return val == null || JDFCoreConstants.EMPTYSTRING.equals(val) ? null : val;
 	}
 
 	/**
@@ -892,7 +891,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 */
 	public void setAttribute(final String key, final Enum<?> value, final String ns)
 	{
-		setAttribute(key, value == null ? null : value.name(), ns);
+		setAttribute(key, JavaEnumUtil.getName(value), ns);
 	}
 
 	/**
@@ -955,19 +954,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	public void setAttribute(final String key, final int value, final String nameSpaceURI)
 	{
 		setAttribute(key, StringUtil.formatInteger(value), nameSpaceURI);
-	}
-
-	/**
-	 * Sets an element attribute
-	 *
-	 * @param key          the name of the attribute to set
-	 * @param value        the value for the attribute
-	 * @param nameSpaceURI the namespace the element is in
-	 * @default SetAttribute(key, value, null)
-	 */
-	public void setAttribute(final String key, final ValuedEnum value, final String nameSpaceURI)
-	{
-		setAttribute(key, value == null ? null : value.getName(), nameSpaceURI);
 	}
 
 	/**
@@ -1448,7 +1434,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		final DocumentXMLImpl documentXMLImpl = (DocumentXMLImpl) getOwnerDocument();
 		if (prefix == null)
 		{
-			documentXMLImpl.setNamespaceURIFromPrefix(JDFConstants.COLON, "");
+			documentXMLImpl.setNamespaceURIFromPrefix(JDFCoreConstants.COLON, "");
 		}
 		return null;
 	}
@@ -1462,7 +1448,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	public String getNamespaceURI()
 	{
 		String s = super.getNamespaceURI();
-		if (s != null && !JDFConstants.EMPTYSTRING.equals(s) || ((DocumentXMLImpl) getOwnerDocument()).isIgnoreNSDefault())
+		if (s != null && !JDFCoreConstants.EMPTYSTRING.equals(s) || ((DocumentXMLImpl) getOwnerDocument()).isIgnoreNSDefault())
 		{
 			return s;
 		}
@@ -3037,21 +3023,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		{
 			return true;
 		}
-		if (numChildNodes(0, false) != kElem.numChildNodes(0, false))
-		{
-			return false;
-		}
+		
 		// performance: count attributes and compare
-		if (numChildNodes(ATTRIBUTE_NODE, false) != kElem.numChildNodes(ATTRIBUTE_NODE, false))
-		{
-			return false;
-		}
-		if (!getNodeName().equals(kElem.getNodeName()))
-		{
-			return false;
-		}
-
-		if (getNodeType() != kElem.getNodeType())
+		if ((numChildNodes(0, false) != kElem.numChildNodes(0, false)) || (numChildNodes(ATTRIBUTE_NODE, false) != kElem.numChildNodes(ATTRIBUTE_NODE, false)) || !getNodeName().equals(kElem.getNodeName()) || (getNodeType() != kElem.getNodeType()))
 		{
 			return false;
 		}
@@ -5294,7 +5268,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		boolean bRet = false;
 		Node node = getFirstChild();
 
-		while (node != null && bRet == false)
+		while (node != null && !bRet)
 		{
 			if (node.getNodeType() == nodeType)
 			{
@@ -6185,7 +6159,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * @param attName
 	 * @param ns
 	 */
-	public void removeAttributeFromChildren(final String attName, String ns)
+	public void removeAttributeFromChildren(final String attName, final String ns)
 	{
 		final VElement kids = getChildrenByTagName(null);
 		for (final KElement any : kids)
@@ -6416,11 +6390,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 
 	protected boolean matchesPathName(final String pathAt)
 	{
-		if (pathAt == null || JDFCoreConstants.STAR.equals(pathAt))
-		{
-			return true;
-		}
-		if (localName.equals(pathAt))
+		if (pathAt == null || JDFCoreConstants.STAR.equals(pathAt) || localName.equals(pathAt))
 		{
 			return true;
 		}
@@ -6699,13 +6669,13 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			}
 			m_lStoreID.set(id % 1000000);
 		}
-		String s = JDFConstants.UNDERSCORE + StringUtil.rightStr("000000" + m_lStoreID.getAndIncrement(), 6);
+		String s = JDFCoreConstants.UNDERSCORE + StringUtil.rightStr("000000" + m_lStoreID.getAndIncrement(), 6);
 		// time + 6 digits (ID)
 		if (bDate)
 		{
 			synchronized (dateFormatter)
 			{
-				final String date = JDFConstants.UNDERSCORE + dateFormatter.format(new Date());
+				final String date = JDFCoreConstants.UNDERSCORE + dateFormatter.format(new Date());
 				s = date + s;
 			}
 		}
@@ -6877,7 +6847,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		doc.nsMap.clear();
 	}
 
-	public void fixNS(KElement src)
+	public void fixNS(final KElement src)
 	{
 		if (src != null)
 		{
@@ -6918,7 +6888,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		}
 	}
 
-	public JDFAttributeMap fillNSMap(KElement src)
+	public JDFAttributeMap fillNSMap(final KElement src)
 	{
 		final JDFAttributeMap nsMap = new JDFAttributeMap();
 		final VElement v = src.getChildrenByTagName(null);

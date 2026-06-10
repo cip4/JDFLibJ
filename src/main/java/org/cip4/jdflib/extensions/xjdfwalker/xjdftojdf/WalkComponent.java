@@ -70,7 +70,6 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
@@ -108,7 +107,7 @@ public class WalkComponent extends WalkResource
 	protected void updateAttributes(final KElement elem)
 	{
 		final JDFComponent comp = (JDFComponent) elem;
-		final Vector<? extends ValuedEnum> componentType = comp.getComponentType();
+		final Vector<EnumComponentType> componentType = comp.getComponentType() == null ? null : new Vector<>(comp.getComponentType());
 		if (componentType == null || componentType.isEmpty())
 		{
 			((JDFComponent) comp.getResourceRoot()).setComponentType(EnumComponentType.PartialProduct, null);

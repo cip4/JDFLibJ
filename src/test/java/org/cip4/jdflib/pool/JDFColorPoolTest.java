@@ -50,10 +50,10 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author MuchaD
- *
  *         This implements the first fixture with unit tests for class JDFElement.
  */
-class JDFColorPoolTest {
+class JDFColorPoolTest
+{
 	JDFColorPool cp;
 
 	/**
@@ -80,8 +80,6 @@ class JDFColorPoolTest {
 
 	/**
 	 * Method testIncludesAttribute.
-	 *
-	 *
 	 */
 	@Test
 	void testGetColorWithName()
@@ -101,8 +99,6 @@ class JDFColorPoolTest {
 
 	/**
 	 * Method testIncludesAttribute.
-	 *
-	 *
 	 */
 	@Test
 	void testGetCreateColorWithName()
@@ -112,8 +108,6 @@ class JDFColorPoolTest {
 
 	/**
 	 * Method testIncludesAttribute.
-	 *
-	 *
 	 */
 	@Test
 	void testAppendColorWithName()

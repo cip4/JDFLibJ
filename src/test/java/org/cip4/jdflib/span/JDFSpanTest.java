@@ -96,15 +96,15 @@ class JDFSpanTest extends JDFTestCaseBase
 
 	/**
 	 * make sure that corrupt files always return a null document
-	 * @throws DataFormatException
 	 *
+	 * @throws DataFormatException
 	 */
 	@Test
 	void testBindTypeNone()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.BINDINGINTENT);
-		JDFBindingIntent e = (JDFBindingIntent) doc.getRoot();
-		JDFSpanBindingType bindingType = e.appendBindingType();
+		final JDFDoc doc = new JDFDoc(ElementName.BINDINGINTENT);
+		final JDFBindingIntent e = (JDFBindingIntent) doc.getRoot();
+		final JDFSpanBindingType bindingType = e.appendBindingType();
 		bindingType.setActual(EnumSpanBindingType.None);
 		Assertions.assertEquals(bindingType.getActual(), EnumSpanBindingType.None);
 	}
@@ -112,9 +112,9 @@ class JDFSpanTest extends JDFTestCaseBase
 	@Test
 	void testTimeNull()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.DELIVERYINTENT);
-		JDFDeliveryIntent e = (JDFDeliveryIntent) doc.getRoot();
-		JDFTimeSpan ts = e.appendRequired();
+		final JDFDoc doc = new JDFDoc(ElementName.DELIVERYINTENT);
+		final JDFDeliveryIntent e = (JDFDeliveryIntent) doc.getRoot();
+		final JDFTimeSpan ts = e.appendRequired();
 		ts.setPreferred(null);
 		Assertions.assertNull(ts.getPreferred());
 	}

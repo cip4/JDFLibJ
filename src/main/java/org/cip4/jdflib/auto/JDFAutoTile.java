@@ -129,7 +129,7 @@ public abstract class JDFAutoTile extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTile(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoTile(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -141,7 +141,7 @@ public abstract class JDFAutoTile extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTile(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoTile(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -154,7 +154,7 @@ public abstract class JDFAutoTile extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoTile(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoTile(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -165,7 +165,7 @@ public abstract class JDFAutoTile extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -195,7 +195,7 @@ public abstract class JDFAutoTile extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setClipBox(JDFRectangle value)
+	public void setClipBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.CLIPBOX, value, null);
 	}
@@ -208,8 +208,8 @@ public abstract class JDFAutoTile extends JDFResource
 	 */
 	public JDFRectangle getClipBox()
 	{
-		String strAttrName = getAttribute(AttributeName.CLIPBOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CLIPBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -223,7 +223,7 @@ public abstract class JDFAutoTile extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCTM(JDFMatrix value)
+	public void setCTM(final JDFMatrix value)
 	{
 		setAttribute(AttributeName.CTM, value, null);
 	}
@@ -236,8 +236,8 @@ public abstract class JDFAutoTile extends JDFResource
 	 */
 	public JDFMatrix getCTM()
 	{
-		String strAttrName = getAttribute(AttributeName.CTM, null, null);
-		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CTM, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -251,7 +251,7 @@ public abstract class JDFAutoTile extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTrimBox(JDFRectangle value)
+	public void setTrimBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.TRIMBOX, value, null);
 	}
@@ -264,8 +264,8 @@ public abstract class JDFAutoTile extends JDFResource
 	 */
 	public JDFRectangle getTrimBox()
 	{
-		String strAttrName = getAttribute(AttributeName.TRIMBOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TRIMBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -301,7 +301,7 @@ public abstract class JDFAutoTile extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFMarkObject the element
 	 */
-	public JDFMarkObject getCreateMarkObject(int iSkip)
+	public JDFMarkObject getCreateMarkObject(final int iSkip)
 	{
 		return (JDFMarkObject) getCreateElement_JDFElement(ElementName.MARKOBJECT, null, iSkip);
 	}
@@ -313,7 +313,7 @@ public abstract class JDFAutoTile extends JDFResource
 	 * @return JDFMarkObject the element
 	 *         default is getMarkObject(0)
 	 */
-	public JDFMarkObject getMarkObject(int iSkip)
+	public JDFMarkObject getMarkObject(final int iSkip)
 	{
 		return (JDFMarkObject) getElement(ElementName.MARKOBJECT, null, iSkip);
 	}
@@ -374,7 +374,7 @@ public abstract class JDFAutoTile extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMedia(JDFMedia refTarget)
+	public void refMedia(final JDFMedia refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -415,7 +415,7 @@ public abstract class JDFAutoTile extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMediaSource(JDFMediaSource refTarget)
+	public void refMediaSource(final JDFMediaSource refTarget)
 	{
 		refElement(refTarget);
 	}

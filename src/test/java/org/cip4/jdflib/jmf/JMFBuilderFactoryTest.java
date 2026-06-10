@@ -75,7 +75,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
  * @date Sep 21, 2011
  */
@@ -99,9 +98,9 @@ class JMFBuilderFactoryTest extends JDFTestCaseBase
 	@Test
 	void testAgentName()
 	{
-		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
+		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		b.setAgentName("a1");
-		JMFBuilder b2 = JMFBuilderFactory.getJMFBuilder("aname");
+		final JMFBuilder b2 = JMFBuilderFactory.getJMFBuilder("aname");
 		Assertions.assertEquals(b2.getAgentName(), "a1");
 		Assertions.assertEquals(b2.createJMF(EnumFamily.Acknowledge, EnumType.AbortQueueEntry).getAgentName(), "a1");
 	}
@@ -113,9 +112,9 @@ class JMFBuilderFactoryTest extends JDFTestCaseBase
 	@Test
 	void testAgentVersion()
 	{
-		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
+		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		b.setAgentVersion("a1");
-		JMFBuilder b2 = JMFBuilderFactory.getJMFBuilder("av");
+		final JMFBuilder b2 = JMFBuilderFactory.getJMFBuilder("av");
 		Assertions.assertEquals(b2.getAgentVersion(), "a1");
 		Assertions.assertEquals(b2.createJMF(EnumFamily.Acknowledge, EnumType.AbortQueueEntry).getAgentVersion(), "a1");
 	}

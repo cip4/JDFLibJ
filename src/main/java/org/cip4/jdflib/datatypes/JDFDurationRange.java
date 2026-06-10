@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,22 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFDurationRange.java
@@ -112,7 +112,7 @@ public class JDFDurationRange extends JDFRange
 	/**
 	 * Constructor - creates a Duration range defined by x
 	 */
-	public JDFDurationRange(JDFDuration x)
+	public JDFDurationRange(final JDFDuration x)
 	{
 		init(x, x);
 	}
@@ -120,7 +120,7 @@ public class JDFDurationRange extends JDFRange
 	/**
 	 * Constructor - creates a Duration range defined by xmin to xmax
 	 */
-	public JDFDurationRange(JDFDuration xmin, JDFDuration xmax)
+	public JDFDurationRange(final JDFDuration xmin, final JDFDuration xmax)
 	{
 		init(xmin, xmax);
 	}
@@ -128,7 +128,7 @@ public class JDFDurationRange extends JDFRange
 	/**
 	 * copy constructor
 	 */
-	public JDFDurationRange(JDFDurationRange r)
+	public JDFDurationRange(final JDFDurationRange r)
 	{
 		init(r.getLeft(), r.getRight());
 	}
@@ -136,7 +136,7 @@ public class JDFDurationRange extends JDFRange
 	/**
 	 * Initialization
 	 */
-	protected void init(JDFDuration xmin, JDFDuration xmax)
+	protected void init(final JDFDuration xmin, final JDFDuration xmax)
 	{
 		setLeft(xmin);
 		setRight(xmax);
@@ -144,12 +144,12 @@ public class JDFDurationRange extends JDFRange
 
 	/**
 	 * Construct a JDFDurationRange from a string
-	 * 
+	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFDurationRange(String s) throws DataFormatException
+	public JDFDurationRange(final String s) throws DataFormatException
 	{
-		String[] strArray = s.split("~");
+		final String[] strArray = s.split("~");
 		if (strArray.length <= 0 || strArray.length > 2)
 		{
 			throw new DataFormatException("JDFDurationRange illegal string: " + s);
@@ -169,7 +169,7 @@ public class JDFDurationRange extends JDFRange
 				m_right = new JDFDuration(strArray[1].trim());
 			}
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new DataFormatException("JDFDurationRange illegal string: " + s);
 		}
@@ -180,18 +180,17 @@ public class JDFDurationRange extends JDFRange
 
 	/**
 	 * isValid - validate the given String
-	 * 
+	 *
 	 * @param s the given string
-	 * 
 	 * @return boolean - false if the String has not a valid format
 	 */
-	public boolean isValid(String s)
+	public boolean isValid(final String s)
 	{
 		try
 		{
 			new JDFDurationRange(s);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			return false;
 		}
@@ -200,38 +199,37 @@ public class JDFDurationRange extends JDFRange
 
 	/**
 	 * inRange - returns true if 'x' is within the range defined by 'this'
-	 * 
+	 *
 	 * @param x JDFDuration that is to be compared with 'this'
 	 * @return boolean - true if 'x' is within the range defined by 'this'
 	 */
-	public boolean inRange(JDFDuration x)
+	public boolean inRange(final JDFDuration x)
 	{
-		JDFDuration min = this.getLowerValue();
-		JDFDuration max = this.getUpperValue();
+		final JDFDuration min = this.getLowerValue();
+		final JDFDuration max = this.getUpperValue();
 		return ((x.isLonger(min) || x.equals(min)) && (x.isShorter(max) || x.equals(max)));
 	}
 
 	/**
 	 * isPartOfRange - is range 'r' within this range?
-	 * 
+	 *
 	 * @param r the range to test
-	 * 
 	 * @return boolean - true if range 'r' is within this range, else false
 	 */
 	@Override
-	public boolean isPartOfRange(JDFRange ra)
+	public boolean isPartOfRange(final JDFRange ra)
 	{
-		JDFDurationRange r = (JDFDurationRange) ra;
-		JDFDuration min = this.getLowerValue();
-		JDFDuration r_min = r.getLowerValue();
-		JDFDuration max = this.getUpperValue();
-		JDFDuration r_max = r.getUpperValue();
+		final JDFDurationRange r = (JDFDurationRange) ra;
+		final JDFDuration min = this.getLowerValue();
+		final JDFDuration r_min = r.getLowerValue();
+		final JDFDuration max = this.getUpperValue();
+		final JDFDuration r_max = r.getUpperValue();
 		return ((r_min.isLonger(min) || r_min.equals(min)) && (r_max.isShorter(max) || r_max.equals(max)));
 	}
 
 	/**
 	 * getLeft - get the left of the two range deliminators xmin ~ xmax
-	 * 
+	 *
 	 * @return JDFDuration - the left value
 	 */
 	public JDFDuration getLeft()
@@ -241,7 +239,7 @@ public class JDFDurationRange extends JDFRange
 
 	/**
 	 * getRight - get the right of the two range deliminators xmin ~ xmax
-	 * 
+	 *
 	 * @return JDFDuration - the right value
 	 */
 	public JDFDuration getRight()
@@ -251,27 +249,27 @@ public class JDFDurationRange extends JDFRange
 
 	/**
 	 * setLeft - sets the left JDFDuration object of the range
-	 * 
+	 *
 	 * @param x the left JDFDuration object of the range
 	 */
-	public void setLeft(JDFDuration x)
+	public void setLeft(final JDFDuration x)
 	{
 		m_left = x;
 	}
 
 	/**
 	 * setRight - sets the right JDFDuration object of the range
-	 * 
+	 *
 	 * @param x the right JDFDuration object of the range
 	 */
-	public void setRight(JDFDuration x)
+	public void setRight(final JDFDuration x)
 	{
 		m_right = x;
 	}
 
 	/**
 	 * getUpperValue - returns the upper value of the bounds
-	 * 
+	 *
 	 * @return JDFDuration - the upper value of the range
 	 */
 	public JDFDuration getUpperValue()
@@ -281,7 +279,7 @@ public class JDFDurationRange extends JDFRange
 
 	/**
 	 * getLowerValue - returns the lower value of the bounds
-	 * 
+	 *
 	 * @return JDFDuration - the lower value of the range
 	 */
 	public JDFDuration getLowerValue()
@@ -302,19 +300,19 @@ public class JDFDurationRange extends JDFRange
 	}
 
 	@Override
-	protected boolean inObjectRange(Object other)
+	protected boolean inObjectRange(final Object other)
 	{
 		return inRange((JDFDuration) other);
 	}
 
 	@Override
-	public String getRightString(int precision)
+	public String getRightString(final int precision)
 	{
 		return m_right.getDurationISO();
 	}
 
 	@Override
-	public String getLeftString(int precision)
+	public String getLeftString(final int precision)
 	{
 		return m_left.getDurationISO();
 	}
@@ -323,13 +321,15 @@ public class JDFDurationRange extends JDFRange
 	{
 		duration = StringUtil.normalize(duration, false, null);
 		if (duration == null)
+		{
 			return null;
+		}
 
 		try
 		{
 			return new JDFDurationRange(duration);
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			return null;
 		}

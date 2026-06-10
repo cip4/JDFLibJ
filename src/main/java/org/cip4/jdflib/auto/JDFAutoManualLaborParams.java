@@ -104,7 +104,7 @@ public abstract class JDFAutoManualLaborParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoManualLaborParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoManualLaborParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -116,7 +116,7 @@ public abstract class JDFAutoManualLaborParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoManualLaborParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoManualLaborParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -129,7 +129,7 @@ public abstract class JDFAutoManualLaborParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoManualLaborParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoManualLaborParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -140,7 +140,7 @@ public abstract class JDFAutoManualLaborParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -170,7 +170,7 @@ public abstract class JDFAutoManualLaborParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLaborType(String value)
+	public void setLaborType(final String value)
 	{
 		setAttribute(AttributeName.LABORTYPE, value, null);
 	}

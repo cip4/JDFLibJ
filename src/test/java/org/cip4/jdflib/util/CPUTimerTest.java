@@ -54,7 +54,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         June 11, 2009
  */
 class CPUTimerTest extends JDFTestCaseBase
@@ -91,7 +90,9 @@ class CPUTimerTest extends JDFTestCaseBase
 		{
 			t.toXML();
 			if (i > 3 && (t.getTotalCPUTime() > 0))
+			{
 				break;
+			}
 		}
 		t.stop();
 		assertTrue(t.getTotalCPUTime() > 0);
@@ -99,7 +100,6 @@ class CPUTimerTest extends JDFTestCaseBase
 
 	/**
 	 * @throws InterruptedException
-	 *
 	 */
 	@Test
 	void testGetSummary() throws InterruptedException
@@ -130,7 +130,9 @@ class CPUTimerTest extends JDFTestCaseBase
 			}
 			t.stop();
 			if (i > 2 && t.getTotalCPUTime() > 0)
+			{
 				break;
+			}
 		}
 		assertTrue(t.getTotalCPUTime() > 0);
 		assertEquals(t.getTotalCPUTime() / i, t.getAverageCPUTime());
@@ -186,7 +188,9 @@ class CPUTimerTest extends JDFTestCaseBase
 			lCPU += t1.getTotalCPUTime();
 			t1.stop();
 			if (ii > 2 && (t.getTotalCPUTime() > 0))
+			{
 				break;
+			}
 		}
 		assertTrue(t.getTotalCPUTime() > 0);
 		assertEquals(t.getNumStarts(), ii);
@@ -216,7 +220,9 @@ class CPUTimerTest extends JDFTestCaseBase
 				Math.sin(ii);
 			}
 			if (i > 2 && t.getTotalCPUTime() > 0)
+			{
 				break;
+			}
 		}
 		assertTrue(t.getTotalCPUTime() > 0);
 		assertEquals(t.getTotalCPUTime(), t.getAverageCPUTime(), t.getAverageCPUTime() / i);

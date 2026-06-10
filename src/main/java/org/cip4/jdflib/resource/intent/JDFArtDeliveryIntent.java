@@ -93,55 +93,56 @@ public class JDFArtDeliveryIntent extends JDFAutoArtDeliveryIntent
 
 	/**
 	 * Constructor for JDFArtDeliveryIntent
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFArtDeliveryIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFArtDeliveryIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFArtDeliveryIntent
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFArtDeliveryIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFArtDeliveryIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFArtDeliveryIntent
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFArtDeliveryIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFArtDeliveryIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * 
 	 * @param delParams
 	 */
-	public boolean setFromDeliveryParams(JDFDeliveryParams delParams)
+	public boolean setFromDeliveryParams(final JDFDeliveryParams delParams)
 	{
 		if (delParams == null)
+		{
 			return false;
+		}
 
 		boolean done = false;
-		List<JDFDrop> v = delParams.getChildArrayByClass(JDFDrop.class, false, 0);
-		for (JDFDrop d : v)
+		final List<JDFDrop> v = delParams.getChildArrayByClass(JDFDrop.class, false, 0);
+		for (final JDFDrop d : v)
 		{
 			if (d.isArtDeliveryIntent())
 			{
@@ -153,17 +154,16 @@ public class JDFArtDeliveryIntent extends JDFAutoArtDeliveryIntent
 	}
 
 	/**
-	 * 
 	 * @param drop
 	 */
-	public void setFromDrop(JDFDrop drop)
+	public void setFromDrop(final JDFDrop drop)
 	{
 		if (drop != null)
 		{
-			List<JDFDropItem> vdi = drop.getChildArrayByClass(JDFDropItem.class, false, 0);
-			for (JDFDropItem dropItem : vdi)
+			final List<JDFDropItem> vdi = drop.getChildArrayByClass(JDFDropItem.class, false, 0);
+			for (final JDFDropItem dropItem : vdi)
 			{
-				JDFArtDelivery artDel = appendArtDelivery();
+				final JDFArtDelivery artDel = appendArtDelivery();
 				artDel.setFromDropItem(dropItem);
 			}
 		}
@@ -171,7 +171,7 @@ public class JDFArtDeliveryIntent extends JDFAutoArtDeliveryIntent
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

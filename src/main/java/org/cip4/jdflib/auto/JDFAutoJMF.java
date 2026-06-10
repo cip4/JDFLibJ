@@ -90,6 +90,7 @@ import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.pool.JDFPool;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoJMF : public JDFPool
@@ -107,8 +108,8 @@ public abstract class JDFAutoJMF extends JDFPool
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.AGENTVERSION, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVICEID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.ICSVERSIONS, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXVERSION, 0x3333333111l, AttributeInfo.EnumAttributeType.JDFJMFVersion, EnumVersion.getEnum(0),
-				null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXVERSION, 0x3333333111l, AttributeInfo.EnumAttributeType.JDFJMFVersion,
+				JavaEnumUtil.getEnum(EnumVersion.class, 0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.RESPONSEURL, 0x4444433311l, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.SENDERID, 0x2222222222l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.TIMESTAMP, 0x2222222222l, AttributeInfo.EnumAttributeType.dateTime, null, null);
@@ -145,7 +146,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoJMF(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoJMF(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -157,7 +158,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoJMF(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoJMF(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -170,7 +171,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoJMF(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoJMF(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -191,7 +192,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAgentName(String value)
+	public void setAgentName(final String value)
 	{
 		setAttribute(AttributeName.AGENTNAME, value, null);
 	}
@@ -216,7 +217,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAgentVersion(String value)
+	public void setAgentVersion(final String value)
 	{
 		setAttribute(AttributeName.AGENTVERSION, value, null);
 	}
@@ -241,7 +242,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeviceID(String value)
+	public void setDeviceID(final String value)
 	{
 		setAttribute(AttributeName.DEVICEID, value, null);
 	}
@@ -266,7 +267,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setICSVersions(VString value)
+	public void setICSVersions(final VString value)
 	{
 		setAttribute(AttributeName.ICSVERSIONS, value, null);
 	}
@@ -278,8 +279,8 @@ public abstract class JDFAutoJMF extends JDFPool
 	 */
 	public VString getICSVersions()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.ICSVERSIONS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ICSVERSIONS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -294,9 +295,9 @@ public abstract class JDFAutoJMF extends JDFPool
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMaxVersion(EVersion enumVar)
+	public void setMaxVersion(final EnumVersion enumVar)
 	{
-		setAttribute(AttributeName.MAXVERSION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.MAXVERSION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -304,35 +305,6 @@ public abstract class JDFAutoJMF extends JDFPool
 	 *
 	 * @return the value of the attribute
 	 */
-	public EVersion getEMaxVersion()
-	{
-		return EVersion.getEnum(getAttribute(AttributeName.MAXVERSION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute MaxVersion
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute MaxVersion
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetMaxVersion(EVersion) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setMaxVersion(EnumVersion enumVar)
-	{
-		setAttribute(AttributeName.MAXVERSION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute MaxVersion
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EVersion GetEMaxVersion() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumVersion getMaxVersion()
 	{
 		return EnumVersion.getEnum(getAttribute(AttributeName.MAXVERSION, null, null));
@@ -348,7 +320,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setResponseURL(String value)
+	public void setResponseURL(final String value)
 	{
 		setAttribute(AttributeName.RESPONSEURL, value, null);
 	}
@@ -373,7 +345,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSenderID(String value)
+	public void setSenderID(final String value)
 	{
 		setAttribute(AttributeName.SENDERID, value, null);
 	}
@@ -398,7 +370,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setTimeStamp(JDFDate value)
+	public void setTimeStamp(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -415,8 +387,8 @@ public abstract class JDFAutoJMF extends JDFPool
 	 */
 	public JDFDate getTimeStamp()
 	{
-		String str = getAttribute(AttributeName.TIMESTAMP, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.TIMESTAMP, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -452,7 +424,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
-	public JDFEmployee getCreateEmployee(int iSkip)
+	public JDFEmployee getCreateEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -464,7 +436,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @return JDFEmployee the element
 	 *         default is getEmployee(0)
 	 */
-	public JDFEmployee getEmployee(int iSkip)
+	public JDFEmployee getEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -515,7 +487,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFCommand the element
 	 */
-	public JDFCommand getCreateCommand(int iSkip)
+	public JDFCommand getCreateCommand(final int iSkip)
 	{
 		return (JDFCommand) getCreateElement_JDFElement(ElementName.COMMAND, null, iSkip);
 	}
@@ -527,7 +499,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @return JDFCommand the element
 	 *         default is getCommand(0)
 	 */
-	public JDFCommand getCommand(int iSkip)
+	public JDFCommand getCommand(final int iSkip)
 	{
 		return (JDFCommand) getElement(ElementName.COMMAND, null, iSkip);
 	}
@@ -578,7 +550,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFAcknowledge the element
 	 */
-	public JDFAcknowledge getCreateAcknowledge(int iSkip)
+	public JDFAcknowledge getCreateAcknowledge(final int iSkip)
 	{
 		return (JDFAcknowledge) getCreateElement_JDFElement(ElementName.ACKNOWLEDGE, null, iSkip);
 	}
@@ -590,7 +562,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @return JDFAcknowledge the element
 	 *         default is getAcknowledge(0)
 	 */
-	public JDFAcknowledge getAcknowledge(int iSkip)
+	public JDFAcknowledge getAcknowledge(final int iSkip)
 	{
 		return (JDFAcknowledge) getElement(ElementName.ACKNOWLEDGE, null, iSkip);
 	}
@@ -641,7 +613,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFResponse the element
 	 */
-	public JDFResponse getCreateResponse(int iSkip)
+	public JDFResponse getCreateResponse(final int iSkip)
 	{
 		return (JDFResponse) getCreateElement_JDFElement(ElementName.RESPONSE, null, iSkip);
 	}
@@ -653,7 +625,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @return JDFResponse the element
 	 *         default is getResponse(0)
 	 */
-	public JDFResponse getResponse(int iSkip)
+	public JDFResponse getResponse(final int iSkip)
 	{
 		return (JDFResponse) getElement(ElementName.RESPONSE, null, iSkip);
 	}
@@ -704,7 +676,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFSignal the element
 	 */
-	public JDFSignal getCreateSignal(int iSkip)
+	public JDFSignal getCreateSignal(final int iSkip)
 	{
 		return (JDFSignal) getCreateElement_JDFElement(ElementName.SIGNAL, null, iSkip);
 	}
@@ -716,7 +688,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @return JDFSignal the element
 	 *         default is getSignal(0)
 	 */
-	public JDFSignal getSignal(int iSkip)
+	public JDFSignal getSignal(final int iSkip)
 	{
 		return (JDFSignal) getElement(ElementName.SIGNAL, null, iSkip);
 	}
@@ -767,7 +739,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFQuery the element
 	 */
-	public JDFQuery getCreateQuery(int iSkip)
+	public JDFQuery getCreateQuery(final int iSkip)
 	{
 		return (JDFQuery) getCreateElement_JDFElement(ElementName.QUERY, null, iSkip);
 	}
@@ -779,7 +751,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @return JDFQuery the element
 	 *         default is getQuery(0)
 	 */
-	public JDFQuery getQuery(int iSkip)
+	public JDFQuery getQuery(final int iSkip)
 	{
 		return (JDFQuery) getElement(ElementName.QUERY, null, iSkip);
 	}
@@ -830,7 +802,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFRegistration the element
 	 */
-	public JDFRegistration getCreateRegistration(int iSkip)
+	public JDFRegistration getCreateRegistration(final int iSkip)
 	{
 		return (JDFRegistration) getCreateElement_JDFElement(ElementName.REGISTRATION, null, iSkip);
 	}
@@ -842,7 +814,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * @return JDFRegistration the element
 	 *         default is getRegistration(0)
 	 */
-	public JDFRegistration getRegistration(int iSkip)
+	public JDFRegistration getRegistration(final int iSkip)
 	{
 		return (JDFRegistration) getElement(ElementName.REGISTRATION, null, iSkip);
 	}

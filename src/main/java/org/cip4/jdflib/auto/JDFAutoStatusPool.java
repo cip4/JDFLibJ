@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFPartStatus;
 import org.cip4.jdflib.pool.JDFPool;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoStatusPool : public JDFPool
@@ -95,7 +96,8 @@ public abstract class JDFAutoStatusPool extends JDFPool
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.STATUS, 0x4444444333l, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.STATUS, 0x4444444333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumNodeStatus.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x4444444311l, AttributeInfo.EnumAttributeType.shortString, null, null);
 	}
 
@@ -123,7 +125,7 @@ public abstract class JDFAutoStatusPool extends JDFPool
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoStatusPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoStatusPool(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -135,7 +137,7 @@ public abstract class JDFAutoStatusPool extends JDFPool
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoStatusPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoStatusPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -148,7 +150,7 @@ public abstract class JDFAutoStatusPool extends JDFPool
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoStatusPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoStatusPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -169,7 +171,7 @@ public abstract class JDFAutoStatusPool extends JDFPool
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStatusDetails(String value)
+	public void setStatusDetails(final String value)
 	{
 		setAttribute(AttributeName.STATUSDETAILS, value, null);
 	}
@@ -216,7 +218,7 @@ public abstract class JDFAutoStatusPool extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFPartStatus the element
 	 */
-	public JDFPartStatus getCreatePartStatus(int iSkip)
+	public JDFPartStatus getCreatePartStatus(final int iSkip)
 	{
 		return (JDFPartStatus) getCreateElement_JDFElement(ElementName.PARTSTATUS, null, iSkip);
 	}
@@ -228,7 +230,7 @@ public abstract class JDFAutoStatusPool extends JDFPool
 	 * @return JDFPartStatus the element
 	 *         default is getPartStatus(0)
 	 */
-	public JDFPartStatus getPartStatus(int iSkip)
+	public JDFPartStatus getPartStatus(final int iSkip)
 	{
 		return (JDFPartStatus) getElement(ElementName.PARTSTATUS, null, iSkip);
 	}

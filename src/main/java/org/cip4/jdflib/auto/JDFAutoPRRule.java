@@ -123,7 +123,7 @@ public abstract class JDFAutoPRRule extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPRRule(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPRRule(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -135,7 +135,7 @@ public abstract class JDFAutoPRRule extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPRRule(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPRRule(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -148,7 +148,7 @@ public abstract class JDFAutoPRRule extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPRRule(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPRRule(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -169,7 +169,7 @@ public abstract class JDFAutoPRRule extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setActionRefs(VString value)
+	public void setActionRefs(final VString value)
 	{
 		setAttribute(AttributeName.ACTIONREFS, value, null);
 	}
@@ -181,8 +181,8 @@ public abstract class JDFAutoPRRule extends JDFElement
 	 */
 	public VString getActionRefs()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.ACTIONREFS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ACTIONREFS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -219,7 +219,7 @@ public abstract class JDFAutoPRRule extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPRRuleAttr the element
 	 */
-	public JDFPRRuleAttr getCreatePRRuleAttr(int iSkip)
+	public JDFPRRuleAttr getCreatePRRuleAttr(final int iSkip)
 	{
 		return (JDFPRRuleAttr) getCreateElement_JDFElement(ElementName.PRRULEATTR, null, iSkip);
 	}
@@ -231,7 +231,7 @@ public abstract class JDFAutoPRRule extends JDFElement
 	 * @return JDFPRRuleAttr the element
 	 *         default is getPRRuleAttr(0)
 	 */
-	public JDFPRRuleAttr getPRRuleAttr(int iSkip)
+	public JDFPRRuleAttr getPRRuleAttr(final int iSkip)
 	{
 		return (JDFPRRuleAttr) getElement(ElementName.PRRULEATTR, null, iSkip);
 	}

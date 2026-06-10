@@ -66,7 +66,7 @@
  * <http://www.cip4.org/>.
  *
  *
- * 
+ *
  */
 
 package org.cip4.jdflib.util.event;
@@ -76,12 +76,14 @@ import java.util.EventObject;
 
 /**
  * trivial generic event listener class
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public interface IEventListener extends EventListener
 {
 	/**
 	 * called when an event is fired
+	 *
 	 * @param event
 	 */
 	public void eventFired(EventObject event);

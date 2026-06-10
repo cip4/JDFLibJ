@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2004 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2004 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,22 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFShapeEvaluation.java
@@ -118,39 +118,39 @@ public class JDFShapeEvaluation extends JDFEvaluation
 
 	/**
 	 * constructor for JDFShapeEvaluation
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFShapeEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFShapeEvaluation(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFShapeEvaluation
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFShapeEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFShapeEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFShapeEvaluation
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFShapeEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFShapeEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -160,7 +160,7 @@ public class JDFShapeEvaluation extends JDFEvaluation
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -173,7 +173,7 @@ public class JDFShapeEvaluation extends JDFEvaluation
 	 * // Attribute getter/ setter
 	 */
 
-	public void setValueList(JDFShapeRangeList value)
+	public void setValueList(final JDFShapeRangeList value)
 	{
 		setAttribute(AttributeName.VALUELIST, value.toString());
 	}
@@ -182,16 +182,16 @@ public class JDFShapeEvaluation extends JDFEvaluation
 	{
 		try
 		{
-			JDFShapeRangeList srl = new JDFShapeRangeList(getAttribute(AttributeName.VALUELIST));
+			final JDFShapeRangeList srl = new JDFShapeRangeList(getAttribute(AttributeName.VALUELIST));
 			return srl;
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFShapeEvaluation.getValueList: Attribute VALUELIST is not capable to create JDFShapeRangeList");
 		}
 	}
 
-	public void setX(JDFNumberRangeList value)
+	public void setX(final JDFNumberRangeList value)
 	{
 		setAttribute(AttributeName.X, value.toString(), null);
 	}
@@ -200,16 +200,16 @@ public class JDFShapeEvaluation extends JDFEvaluation
 	{
 		try
 		{
-			JDFNumberRangeList nrl = new JDFNumberRangeList(getAttribute(AttributeName.X));
+			final JDFNumberRangeList nrl = new JDFNumberRangeList(getAttribute(AttributeName.X));
 			return nrl;
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFShapeEvaluation.getX: Attribute X is not capable to create JDFNumberRangeList");
 		}
 	}
 
-	public void setY(JDFNumberRangeList value)
+	public void setY(final JDFNumberRangeList value)
 	{
 		setAttribute(AttributeName.Y, value.toString(), null);
 	}
@@ -218,16 +218,16 @@ public class JDFShapeEvaluation extends JDFEvaluation
 	{
 		try
 		{
-			JDFNumberRangeList nrl = new JDFNumberRangeList(getAttribute(AttributeName.Y));
+			final JDFNumberRangeList nrl = new JDFNumberRangeList(getAttribute(AttributeName.Y));
 			return nrl;
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFShapeEvaluation.getY: Attribute Y is not capable to create JDFNumberRangeList");
 		}
 	}
 
-	public void setZ(JDFNumberRangeList value)
+	public void setZ(final JDFNumberRangeList value)
 	{
 		setAttribute(AttributeName.Z, value.toString(), null);
 	}
@@ -236,16 +236,16 @@ public class JDFShapeEvaluation extends JDFEvaluation
 	{
 		try
 		{
-			JDFNumberRangeList nrl = new JDFNumberRangeList(getAttribute(AttributeName.Z));
+			final JDFNumberRangeList nrl = new JDFNumberRangeList(getAttribute(AttributeName.Z));
 			return nrl;
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFShapeEvaluation.getZ: Attribute Z is not capable to create JDFNumberRangeList");
 		}
 	}
 
-	public void setTolerance(JDFXYPair value)
+	public void setTolerance(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.TOLERANCE, value.toString(), null);
 	}
@@ -263,14 +263,14 @@ public class JDFShapeEvaluation extends JDFEvaluation
 	/**
 	 * fitsValue - checks whether <code>value</code> matches the testlists
 	 * specified for this Evaluation
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @return boolean - true, if <code>value</code> matches the testlists or if
 	 *         testlists are not specified
 	 */
 	@Override
-	public boolean fitsValue(String value)
+	public boolean fitsValue(final String value)
 	{
 		if (!fitsListType(value))
 		{
@@ -282,18 +282,20 @@ public class JDFShapeEvaluation extends JDFEvaluation
 		{
 			rrl = new JDFShapeRangeList(value);
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			return false;
 		}
 
-		int siz = rrl.size();
+		final int siz = rrl.size();
 		for (int i = 0; i < siz; i++)
 		{
-			JDFShapeRange range = (JDFShapeRange) rrl.at(i);
+			final JDFShapeRange range = (JDFShapeRange) rrl.at(i);
 
-			if ((fitsValueList(range) && fitsXYZ(range)) == false)
+			if ((!fitsValueList(range) || !fitsXYZ(range)))
+			{
 				return false;
+			}
 		}
 		return true;
 
@@ -302,41 +304,41 @@ public class JDFShapeEvaluation extends JDFEvaluation
 	/**
 	 * fitsListType - checks whether <code>value</code> matches the value of the
 	 * ListType attribute specified for this Evaluation
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @return boolean - true, if <code>value</code> matches the specified value
 	 *         of ListType
 	 */
-	private final boolean fitsListType(String value)
+	private final boolean fitsListType(final String value)
 	{
-		EnumListType listType = getListType();
+		final EnumListType listType = getListType();
 
 		JDFShapeRangeList rangelist;
 		try
 		{
 			rangelist = new JDFShapeRangeList(value);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			return false;
 		}
-		catch (JDFException e)
+		catch (final JDFException e)
 		{
 			return false;
 		}
 
-		if (listType.equals(EnumListType.SingleValue) || listType.equals(EnumListType.getEnum(0)))
+		if (listType.equals(EnumListType.SingleValue))
 		{// default ListType = SingleValue
 			try
 			{
 				new JDFShape(value);
 			}
-			catch (JDFException e)
+			catch (final JDFException e)
 			{
 				return false;
 			}
-			catch (DataFormatException e)
+			catch (final DataFormatException e)
 			{
 				return false;
 			}
@@ -384,21 +386,25 @@ public class JDFShapeEvaluation extends JDFEvaluation
 	/**
 	 * fitsValueList - checks whether <code>rangelist</code> matches the
 	 * AllowedValueList or the PresentValueList specified for this Evaluation
-	 * 
+	 *
 	 * @param rangelist
-	 *            nmtokens to test
+	 *                  nmtokens to test
 	 * @return boolean - true, if <code>value</code> matches
 	 *         <code>valuelist</code> or if AllowedValueList is not specified
 	 */
-	private final boolean fitsValueList(JDFShapeRange range)
+	private final boolean fitsValueList(final JDFShapeRange range)
 	{
 		if (!hasAttribute(AttributeName.VALUELIST))
+		{
 			return true;
+		}
 
-		JDFShapeRangeList rangelist = getValueList();
+		final JDFShapeRangeList rangelist = getValueList();
 
 		if (hasAttribute(AttributeName.TOLERANCE))
+		{
 			return (fitsTolerance(rangelist).isPartOfRange(range));
+		}
 		return rangelist.isPartOfRange(range);
 	}
 
@@ -406,43 +412,45 @@ public class JDFShapeEvaluation extends JDFEvaluation
 	 * fitsTolerance - checks whether this Evaluation has a specified Tolerance
 	 * that it is not equal to "0 0", and expands the original rangelist to the
 	 * rangelist that fits Tolerance.
-	 * 
+	 *
 	 * @param origRangeList
-	 *            original rangelist
+	 *                      original rangelist
 	 * @return NumberRangeList - expanded rangelist, returns original range if
 	 *         Tolerance=="0 0"
 	 */
-	private JDFShapeRangeList fitsTolerance(JDFShapeRangeList origRangeList)
+	private JDFShapeRangeList fitsTolerance(final JDFShapeRangeList origRangeList)
 	{
-		double nt = getTolerance().getX(); // negative tolerance
-		double pt = getTolerance().getY(); // positive tolerance
+		final double nt = getTolerance().getX(); // negative tolerance
+		final double pt = getTolerance().getY(); // positive tolerance
 
 		if ((nt == 0) && (pt == 0))
+		{
 			return origRangeList;
+		}
 
 		// expand our original range into the range +/- Tolerance
 
-		JDFShapeRangeList rangeList = new JDFShapeRangeList(origRangeList);
+		final JDFShapeRangeList rangeList = new JDFShapeRangeList(origRangeList);
 
-		JDFShapeRangeList tolRangeList = new JDFShapeRangeList();
+		final JDFShapeRangeList tolRangeList = new JDFShapeRangeList();
 
-		int size = rangeList.size();
+		final int size = rangeList.size();
 		for (int i = 0; i < size; i++)
 		{
-			JDFShapeRange range = (JDFShapeRange) rangeList.at(i);
+			final JDFShapeRange range = (JDFShapeRange) rangeList.at(i);
 
-			JDFShape left = range.getLeft();
-			double leftX = left.getY();
-			double leftY = left.getX();
-			double leftZ = left.getZ();
+			final JDFShape left = range.getLeft();
+			final double leftX = left.getY();
+			final double leftY = left.getX();
+			final double leftZ = left.getZ();
 			left.setY(leftX - nt);
 			left.setX(leftY - nt);
 			left.setZ(leftZ - nt);
 
-			JDFShape right = range.getRight();
-			double rightX = right.getY();
-			double rightY = right.getX();
-			double rightZ = right.getZ();
+			final JDFShape right = range.getRight();
+			final double rightX = right.getY();
+			final double rightY = right.getX();
+			final double rightZ = right.getZ();
 			right.setY(rightX + pt);
 			right.setX(rightY + pt);
 			right.setZ(rightZ + pt);
@@ -459,30 +467,30 @@ public class JDFShapeEvaluation extends JDFEvaluation
 	/**
 	 * fitsXYZ - checks wheterh <code>range</code> matches the test lists X, Y,
 	 * Z, specified for this Evaluation
-	 * 
+	 *
 	 * @param range
-	 *            range to test
+	 *              range to test
 	 * @return boolean - true, if <code>range</code> matches test lists X, Y, Z
 	 *         or if X, Y, Z are not specified
 	 */
-	private boolean fitsXYZ(JDFShapeRange range)
+	private boolean fitsXYZ(final JDFShapeRange range)
 	{
 		JDFNumberRangeList x, y, z;
 
-		JDFShape left = range.getLeft();
-		JDFShape right = range.getRight();
+		final JDFShape left = range.getLeft();
+		final JDFShape right = range.getRight();
 
-		double leftX = left.getY();
-		double rightX = right.getY();
-		JDFNumberRange rangeX = new JDFNumberRange(leftX, rightX);
+		final double leftX = left.getY();
+		final double rightX = right.getY();
+		final JDFNumberRange rangeX = new JDFNumberRange(leftX, rightX);
 
-		double leftY = left.getX();
-		double rightY = right.getX();
-		JDFNumberRange rangeY = new JDFNumberRange(leftY, rightY);
+		final double leftY = left.getX();
+		final double rightY = right.getX();
+		final JDFNumberRange rangeY = new JDFNumberRange(leftY, rightY);
 
-		double leftZ = left.getZ();
-		double rightZ = right.getZ();
-		JDFNumberRange rangeZ = new JDFNumberRange(leftZ, rightZ);
+		final double leftZ = left.getZ();
+		final double rightZ = right.getZ();
+		final JDFNumberRange rangeZ = new JDFNumberRange(leftZ, rightZ);
 
 		x = getX();
 		y = getY();
@@ -501,14 +509,18 @@ public class JDFShapeEvaluation extends JDFEvaluation
 			bFit = x.isPartOfRange(rangeX);
 		}
 		if (!bFit)
+		{
 			return false;
+		}
 
 		if (y.size() != 0)
 		{
 			bFit = y.isPartOfRange(rangeY);
 		}
 		if (!bFit)
+		{
 			return false;
+		}
 
 		if (z.size() != 0)
 		{
@@ -522,31 +534,33 @@ public class JDFShapeEvaluation extends JDFEvaluation
 	 * fitsXYZTolerance - checks whether this Evaluation has a specified
 	 * Tolerance that it is not equal "0 0", and expands the original rangelist
 	 * to the rangelist that fits the Tolerance.
-	 * 
+	 *
 	 * @param rangeList
-	 *            original rangelist
+	 *                  original rangelist
 	 * @return JDFNumberRangeList - expanded rangelist, returns original range
 	 *         if Tolerance=="0 0"
 	 */
-	public JDFNumberRangeList fitsXYZTolerance(JDFNumberRangeList origRangeList)
+	public JDFNumberRangeList fitsXYZTolerance(final JDFNumberRangeList origRangeList)
 	{
-		double nt = getTolerance().getX(); // negative tolerance
-		double pt = getTolerance().getY(); // positive tolerance
+		final double nt = getTolerance().getX(); // negative tolerance
+		final double pt = getTolerance().getY(); // positive tolerance
 
 		if ((nt == 0) && (pt == 0))
+		{
 			return origRangeList;
+		}
 
 		// expand our original range into the range +/- Tolerance
 
-		JDFNumberRangeList rangeList = new JDFNumberRangeList(origRangeList);
+		final JDFNumberRangeList rangeList = new JDFNumberRangeList(origRangeList);
 
-		JDFNumberRangeList tolRangeList = new JDFNumberRangeList();
+		final JDFNumberRangeList tolRangeList = new JDFNumberRangeList();
 
-		int size = rangeList.size();
+		final int size = rangeList.size();
 		for (int i = 0; i < size; i++)
 		{
-			JDFNumberRange range = (JDFNumberRange) rangeList.at(i);
-			JDFNumberRange r = new JDFNumberRange();
+			final JDFNumberRange range = (JDFNumberRange) rangeList.at(i);
+			final JDFNumberRange r = new JDFNumberRange();
 			r.setLeft(range.getLeft() - nt);
 			r.setRight(range.getRight() + pt);
 

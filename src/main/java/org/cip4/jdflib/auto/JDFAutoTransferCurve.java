@@ -106,7 +106,7 @@ public abstract class JDFAutoTransferCurve extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTransferCurve(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoTransferCurve(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoTransferCurve extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTransferCurve(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoTransferCurve(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoTransferCurve extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoTransferCurve(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoTransferCurve(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -142,7 +142,7 @@ public abstract class JDFAutoTransferCurve extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -172,7 +172,7 @@ public abstract class JDFAutoTransferCurve extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCurve(JDFTransferFunction value)
+	public void setCurve(final JDFTransferFunction value)
 	{
 		setAttribute(AttributeName.CURVE, value, null);
 	}
@@ -185,8 +185,8 @@ public abstract class JDFAutoTransferCurve extends JDFResource
 	 */
 	public JDFTransferFunction getCurve()
 	{
-		String strAttrName = getAttribute(AttributeName.CURVE, null, null);
-		JDFTransferFunction nPlaceHolder = JDFTransferFunction.createTransferFunction(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CURVE, null, null);
+		final JDFTransferFunction nPlaceHolder = JDFTransferFunction.createTransferFunction(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -201,7 +201,7 @@ public abstract class JDFAutoTransferCurve extends JDFResource
 	 * @param value the value to set the attribute to
 	 */
 	@Override
-	public void setSeparation(String value)
+	public void setSeparation(final String value)
 	{
 		setAttribute(AttributeName.SEPARATION, value, null);
 	}

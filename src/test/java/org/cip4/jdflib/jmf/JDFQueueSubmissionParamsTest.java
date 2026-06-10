@@ -100,7 +100,6 @@ import jakarta.mail.Multipart;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 {
@@ -215,8 +214,8 @@ class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 		doc.setOriginalFileName("JDF.jdf");
 		final JDFNode n = doc.getJDFRoot();
 		n.setType(JDFNode.EnumType.ColorSpaceConversion);
-		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null,
-				null);
+		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input,
+				null, null, null, null);
 		final JDFFileSpec fs0 = cscp.appendFinalTargetDevice();
 		fs0.setURL(StringUtil.uncToUrl(sm_dirTestData + File.separator + "test.icc", true));
 		final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null);

@@ -338,7 +338,9 @@ class JDFAuditTest extends ExampleTest
 	void testSetStaticAgentVersion()
 	{
 		if (!PlatformUtil.isWindows())
+		{
 			return;
+		}
 		final boolean bAutoAgent = JDFResource.getAutoAgent();
 
 		JDFDoc d = new JDFDoc(ElementName.JDF);

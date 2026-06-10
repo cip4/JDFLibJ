@@ -97,7 +97,7 @@ public class XJDFBaseGoldenTicket
 	/**
 	 * @return
 	 */
-	public VString getICSVersions(int icsVersion)
+	public VString getICSVersions(final int icsVersion)
 	{
 		return new VString("MIS_L" + icsVersion + "-" + theVersion.getJDFVersionName());
 	}
@@ -115,7 +115,7 @@ public class XJDFBaseGoldenTicket
 	 * @param jdfVersion
 	 * @param vParts       TODO
 	 */
-	public XJDFBaseGoldenTicket(int baseICSLevel, EnumVersion jdfVersion, VJDFAttributeMap vParts)
+	public XJDFBaseGoldenTicket(final int baseICSLevel, final EnumVersion jdfVersion, final VJDFAttributeMap vParts)
 	{
 		this.theVersion = jdfVersion;
 		this.icsLevel = baseICSLevel;
@@ -173,7 +173,7 @@ public class XJDFBaseGoldenTicket
 	 * @return
 	 * @see org.cip4.jdflib.extensions.XJDFHelper#writeToFile(java.lang.String)
 	 */
-	public boolean writeToFile(String file)
+	public boolean writeToFile(final String file)
 	{
 		return helper.writeToFile(file);
 	}

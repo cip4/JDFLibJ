@@ -66,7 +66,7 @@
  * <http://www.cip4.org/>.
  *
  *
- * 
+ *
  */
 
 package org.cip4.jdflib.util.event;
@@ -75,12 +75,14 @@ import java.util.EventListener;
 
 /**
  * trivial generic event queue interface
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public interface IEventQueue extends EventListener
 {
 	/**
 	 * called to add an event to this
+	 *
 	 * @param listener
 	 */
 	public void addListener(IEventListener listener);

@@ -75,9 +75,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkRepeatDesc extends WalkJDFSubElement
 {
@@ -118,7 +116,7 @@ public class WalkRepeatDesc extends WalkJDFSubElement
 		final String shapedefref = map.getNonEmpty("ShapeDefRef");
 		if (shapedefref == null)
 		{
-			JDFNode oldRoot = jdfToXJDF.oldRoot;
+			final JDFNode oldRoot = jdfToXJDF.oldRoot;
 			final KElement e = oldRoot == null ? null : oldRoot.getChildByTagName(ElementName.SHAPEDEF, null, 0, null, false, true);
 			if (e != null)
 			{

@@ -81,12 +81,6 @@
  */
 package org.cip4.jdflib.core;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoNodeInfo;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -95,8 +89,8 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFQuery;
 import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.Node;
 
 /**
@@ -116,7 +110,8 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLEANUPDURATION, 0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DUELEVEL, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumDueLevel.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DUELEVEL, 0x33333333, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(JDFAutoNodeInfo.EnumDueLevel.class, 0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.END, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.FIRSTEND, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.FIRSTSTART, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
@@ -132,7 +127,8 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 		atrInfoTable[14] = new AtrInfoTable(AttributeName.START, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
 		atrInfoTable[15] = new AtrInfoTable(AttributeName.TARGETROUTE, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable[16] = new AtrInfoTable(AttributeName.TOTALDURATION, 0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
-		atrInfoTable[17] = new AtrInfoTable(AttributeName.NODESTATUS, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
+		atrInfoTable[17] = new AtrInfoTable(AttributeName.NODESTATUS, 0x33333111, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(JDFElement.EnumNodeStatus.class, 0), null);
 		atrInfoTable[18] = new AtrInfoTable(AttributeName.NODESTATUSDETAILS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[19] = new AtrInfoTable(AttributeName.WORKSTEPID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null); // added as valid for 1.3
 	}
@@ -219,109 +215,18 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	/**
 	 * inner class EnumBusinessObject - printtalk based business objects
 	 */
-	@SuppressWarnings("unchecked")
-	public static final class EnumBusinessObject extends ValuedEnum
+	public enum EnumBusinessObject
 	{
-		private static final long serialVersionUID = 1L;
-
-		private static int m_startValue = 0;
-
-		private EnumBusinessObject(final String status)
-		{
-			super(status, m_startValue++);
-		}
+		BusinessObject_Unknown, BusinessObject_RFQ, BusinessObject_Quote, BusinessObject_RFRequote, BusinessObject_Requote, BusinessObject_PO, BusinessObject_Confirmation, BusinessObject_CO_RFQ, BusinessObject_CO_Quote, BusinessObject_CO_PO, BusinessObject_CO_Confirmation, BusinessObject_Invoice, BusinessObject_None;
 
 		/**
-		 * @param status
+		 * @param val
 		 * @return
 		 */
-		public static EnumBusinessObject getEnum(final String status)
+		public static EnumBusinessObject getEnum(final String val)
 		{
-			return (EnumBusinessObject) getEnum(EnumBusinessObject.class, status);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumBusinessObject.class, val, null);
 		}
-
-		/**
-		 * @param value
-		 * @return
-		 */
-		public static EnumBusinessObject getEnum(final int value)
-		{
-			return (EnumBusinessObject) getEnum(EnumBusinessObject.class, value);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumBusinessObject.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumBusinessObject.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumBusinessObject.class);
-		}
-
-		/**
-		 * Retrieve all allowed value names of this Enum in a vector
-		 *
-		 * @return the <code>String Vector of</code> names
-		 * @deprecated
-		 */
-		@Deprecated
-		public static Vector getNamesVector()
-		{
-			final Vector namesVector = new Vector();
-			final Iterator it = iterator(EnumBusinessObject.class);
-			while (it.hasNext())
-			{
-				namesVector.addElement(((ValuedEnum) it.next()).getName());
-			}
-
-			return namesVector;
-		}
-
-		/**
-		 * constants EnumBusinessObject
-		 */
-		/** * */
-		public static final EnumBusinessObject BusinessObject_Unknown = new EnumBusinessObject("BusinessObject_Unknown");
-		/** * */
-		public static final EnumBusinessObject BusinessObject_RFQ = new EnumBusinessObject("BusinessObject_RFQ");
-		/** * */
-		public static final EnumBusinessObject BusinessObject_Quote = new EnumBusinessObject("BusinessObject_Quote");
-		/** * */
-		public static final EnumBusinessObject BusinessObject_RFRequote = new EnumBusinessObject("BusinessObject_RFRequote");
-		/** * */
-		public static final EnumBusinessObject BusinessObject_Requote = new EnumBusinessObject("BusinessObject_Requote");
-		/** * */
-		public static final EnumBusinessObject BusinessObject_PO = new EnumBusinessObject("BusinessObject_PO");
-		/** * */
-		public static final EnumBusinessObject BusinessObject_Confirmation = new EnumBusinessObject("BusinessObject_Confirmation");
-		/** * */
-		public static final EnumBusinessObject BusinessObject_CO_RFQ = new EnumBusinessObject("BusinessObject_CO_RFQ");
-		/** * */
-		public static final EnumBusinessObject BusinessObject_CO_Quote = new EnumBusinessObject("BusinessObject_CO_Quote");
-		/** * */
-		public static final EnumBusinessObject BusinessObject_CO_PO = new EnumBusinessObject("BusinessObject_CO_PO");
-		/** * */
-		public static final EnumBusinessObject BusinessObject_CO_Confirmation = new EnumBusinessObject("BusinessObject_CO_Confirmation");
-		/** * */
-		public static final EnumBusinessObject BusinessObject_Invoice = new EnumBusinessObject("BusinessObject_Invoice");
-		/** * */
-		public static final EnumBusinessObject BusinessObject_None = new EnumBusinessObject("BusinessObject_None");
-
 	}
 
 	// **************************************** Methods
@@ -384,18 +289,18 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	 */
 	public boolean updateBusiness(final EnumBusinessObject businessObject, final String newID)
 	{
-		final KElement bo = getElement(ElementName.BUSINESSINFO, JDFConstants.EMPTYSTRING, 0);
+		final KElement bo = getElement(ElementName.BUSINESSINFO, JDFCoreConstants.EMPTYSTRING, 0);
 
-		final VString vBos = EnumUtil.getNamesVector(EnumBusinessObject.class);
+		final VString vBos = new VString(JavaEnumUtil.getNamesList(EnumBusinessObject.class));
 		final KElement boe = bo.getChildFromList(vBos, 0, null, true);
 		final String bos = boe.getNodeName();
 
 		final int oldType = vBos.indexOf(bos);
 
-		// System.out.println("JDFNodeInfo:: " + businessObject.getValue() + " Boe:: " + boe);
-		boe.renameElement(vBos.elementAt(businessObject.getValue()), null);
+		// System.out.println("JDFNodeInfo:: " + businessObject.ordinal() + " Boe:: " + boe);
+		boe.renameElement(vBos.elementAt(businessObject.ordinal()), null);
 
-		if (businessObject.getValue() > oldType)
+		if (businessObject.ordinal() > oldType)
 		{
 			boe.setAttribute(JDFConstants.BUSINESSREFID, boe.getAttribute(JDFConstants.BUSINESSID));
 

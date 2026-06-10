@@ -75,12 +75,11 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.process.JDFContentMetadata;
-import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
- * June 7, 2009
+ *         June 7, 2009
  */
 public class WalkContentMetaData extends WalkElement
 {
@@ -118,7 +117,7 @@ public class WalkContentMetaData extends WalkElement
 	@Override
 	boolean updateAttributes(final JDFAttributeMap m)
 	{
-		if (EnumUtil.aLessEqualsThanB(EnumVersion.Version_1_6, fixVersion.version))
+		if (JavaEnumUtil.aLessEqualsThanB(EnumVersion.Version_1_6, fixVersion.version))
 		{
 			m.renameKey(AttributeName.ISBN13, AttributeName.ISBN);
 			m.renameKey(AttributeName.ISBN10, AttributeName.ISBN);

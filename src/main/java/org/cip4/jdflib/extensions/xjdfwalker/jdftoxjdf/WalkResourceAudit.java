@@ -81,12 +81,9 @@ import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
- * at this point only a dummy since we have a specific WalkResourceAudit child
- *
- * TODO how should resource consumption be tracked?
+ *         at this point only a dummy since we have a specific WalkResourceAudit child
+ *         TODO how should resource consumption be tracked?
  */
 public class WalkResourceAudit extends WalkAudit
 {
@@ -107,22 +104,22 @@ public class WalkResourceAudit extends WalkAudit
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		final KElement raNew = super.walk(jdf, xjdf);
-		JDFResourceLink newLink = updateLink((JDFResourceAudit) jdf);
+		final JDFResourceLink newLink = updateLink((JDFResourceAudit) jdf);
 		copyLinkValues(raNew, newLink);
 		return raNew;
 	}
 
 	private JDFResourceLink updateLink(final JDFResourceAudit ra)
 	{
-		JDFResourceLink newLink = ra.getNewLink();
+		final JDFResourceLink newLink = ra.getNewLink();
 		if (newLink != null && newLink.getPart(0) == null)
 		{
-			VJDFAttributeMap partMapVector = ra.getPartMapVector();
+			final VJDFAttributeMap partMapVector = ra.getPartMapVector();
 			if (partMapVector != null)
 			{
-				JDFAmountPool amountPool = newLink.getAmountPool();
-				VJDFAttributeMap apMaps = amountPool == null ? null : amountPool.getPartMapVector();
-				VString keys = apMaps == null ? null : apMaps.getKeys();
+				final JDFAmountPool amountPool = newLink.getAmountPool();
+				final VJDFAttributeMap apMaps = amountPool == null ? null : amountPool.getPartMapVector();
+				final VString keys = apMaps == null ? null : apMaps.getKeys();
 				partMapVector.removeKeys(keys);
 				newLink.setPartMapVector(partMapVector);
 			}
@@ -135,7 +132,7 @@ public class WalkResourceAudit extends WalkAudit
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#getXJDFName(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected String getXJDFName(KElement jdf)
+	protected String getXJDFName(final KElement jdf)
 	{
 		return XJDFConstants.AuditResource;
 	}
@@ -147,8 +144,10 @@ public class WalkResourceAudit extends WalkAudit
 	protected void copyLinkValues(final KElement raNew, final JDFResourceLink rl)
 	{
 		if (rl == null)
+		{
 			return;
-		JDFResourceInfo ri = (JDFResourceInfo) rl.appendElement(ElementName.RESOURCEINFO);
+		}
+		final JDFResourceInfo ri = (JDFResourceInfo) rl.appendElement(ElementName.RESOURCEINFO);
 		ri.setLink(rl, false);
 		jdfToXJDF.walkTree(ri, raNew);
 		rl.deleteNode(); // don't walk the links!
@@ -178,7 +177,7 @@ public class WalkResourceAudit extends WalkAudit
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkAudit#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		map.remove(AttributeName.REASON);
 		map.remove(AttributeName.CONTENTSMODIFIED);

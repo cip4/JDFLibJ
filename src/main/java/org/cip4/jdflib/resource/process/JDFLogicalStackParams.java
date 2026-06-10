@@ -75,8 +75,8 @@ import org.cip4.jdflib.auto.JDFAutoLogicalStackParams;
 import org.w3c.dom.DOMException;
 
 /**
- * 
  * TODO Please insert comment!
+ *
  * @author rainer prosi
  * @date Feb 8, 2011
  */
@@ -86,39 +86,39 @@ public class JDFLogicalStackParams extends JDFAutoLogicalStackParams
 
 	/**
 	 * Constructor for JDFLayoutElement
-	 * @param myOwnerDocument 
-	 * 
+	 *
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFLogicalStackParams(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFLogicalStackParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFLayoutElement
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFLogicalStackParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFLogicalStackParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFLayoutElement
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @param myLocalName 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFLogicalStackParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFLogicalStackParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -128,7 +128,7 @@ public class JDFLogicalStackParams extends JDFAutoLogicalStackParams
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

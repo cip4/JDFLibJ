@@ -74,7 +74,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoSignal.EnumChannelMode;
+import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
@@ -89,9 +89,7 @@ import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class WalkMessageServiceTest extends JDFTestCaseBase
 {
@@ -102,16 +100,16 @@ class WalkMessageServiceTest extends JDFTestCaseBase
 	@Test
 	void testRespModesquery()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Response, "KnownMessages");
-		JDFMessageService ms = jmf.getResponse(0).appendMessageService();
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Response, "KnownMessages");
+		final JDFMessageService ms = jmf.getResponse(0).appendMessageService();
 		ms.setType(EnumType.Status);
-		Vector<EnumFamily> fams = new Vector<EnumFamily>();
+		final Vector<EnumFamily> fams = new Vector<>();
 		fams.add(EnumFamily.Query);
 		ms.setFamilies(fams);
 
-		KElement e = new JDFToXJDF().convert(jmf);
-		JDFMessageService msNew = (JDFMessageService) e.getElement("ResponseKnownMessages").getElement(ElementName.MESSAGESERVICE);
-		String rm = msNew.getAttribute(XJDFConstants.ResponseModes);
+		final KElement e = new JDFToXJDF().convert(jmf);
+		final JDFMessageService msNew = (JDFMessageService) e.getElement("ResponseKnownMessages").getElement(ElementName.MESSAGESERVICE);
+		final String rm = msNew.getAttribute(XJDFConstants.ResponseModes);
 		assertEquals("Response", rm);
 
 	}
@@ -122,16 +120,16 @@ class WalkMessageServiceTest extends JDFTestCaseBase
 	@Test
 	void testRespModesSignal()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Response, "KnownMessages");
-		JDFMessageService ms = jmf.getResponse(0).appendMessageService();
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Response, "KnownMessages");
+		final JDFMessageService ms = jmf.getResponse(0).appendMessageService();
 		ms.setType(EnumType.Status);
-		Vector<EnumFamily> fams = new Vector<EnumFamily>();
+		final Vector<EnumFamily> fams = new Vector<>();
 		fams.add(EnumFamily.Query);
 		ms.setFamilies(fams);
 		ms.setPersistent(true);
-		KElement e = new JDFToXJDF().convert(jmf);
-		JDFMessageService msNew = (JDFMessageService) e.getElement("ResponseKnownMessages").getElement(ElementName.MESSAGESERVICE);
-		String rm = msNew.getAttribute(XJDFConstants.ResponseModes);
+		final KElement e = new JDFToXJDF().convert(jmf);
+		final JDFMessageService msNew = (JDFMessageService) e.getElement("ResponseKnownMessages").getElement(ElementName.MESSAGESERVICE);
+		final String rm = msNew.getAttribute(XJDFConstants.ResponseModes);
 		assertTrue(new StringArray(rm).contains("FireAndForget"));
 		assertTrue(new StringArray(rm).contains("Response"));
 
@@ -143,17 +141,17 @@ class WalkMessageServiceTest extends JDFTestCaseBase
 	@Test
 	void testRespModesCM()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Response, "KnownMessages");
-		JDFMessageService ms = jmf.getResponse(0).appendMessageService();
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).newJMF(JDFMessage.EnumFamily.Response, "KnownMessages");
+		final JDFMessageService ms = jmf.getResponse(0).appendMessageService();
 		ms.setType(EnumType.Status);
-		Vector<EnumFamily> fams = new Vector<EnumFamily>();
+		final Vector<EnumFamily> fams = new Vector<>();
 		fams.add(EnumFamily.Query);
 		ms.setFamilies(fams);
 		ms.setPersistent(true);
 		ms.setChannelMode(EnumChannelMode.Reliable);
-		KElement e = new JDFToXJDF().convert(jmf);
-		JDFMessageService msNew = (JDFMessageService) e.getElement("ResponseKnownMessages").getElement(ElementName.MESSAGESERVICE);
-		String rm = msNew.getAttribute(XJDFConstants.ResponseModes);
+		final KElement e = new JDFToXJDF().convert(jmf);
+		final JDFMessageService msNew = (JDFMessageService) e.getElement("ResponseKnownMessages").getElement(ElementName.MESSAGESERVICE);
+		final String rm = msNew.getAttribute(XJDFConstants.ResponseModes);
 		assertTrue(new StringArray(rm).contains("Reliable"));
 		assertTrue(new StringArray(rm).contains("FireAndForget"));
 		assertTrue(new StringArray(rm).contains("Response"));

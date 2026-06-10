@@ -87,13 +87,11 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author MuchaD
- * 
  *         This implements the first fixture with unit tests for class JDFElement.
  */
 class JDFRefElementTest extends JDFTestCaseBase
 {
 	/**
-	 * 
 	 * tests refelements pointing to non resources
 	 */
 	@Test
@@ -111,8 +109,6 @@ class JDFRefElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetTarget
-	 * 
-	 * 
 	 */
 	@Test
 	void testGetTarget()
@@ -141,8 +137,6 @@ class JDFRefElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetTargetRoot
-	 * 
-	 * 
 	 */
 	@Test
 	void testGetTargetRoot()
@@ -159,8 +153,6 @@ class JDFRefElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetTargetRoot
-	 * 
-	 * 
 	 */
 	@Test
 	void testGetRefName()
@@ -174,8 +166,6 @@ class JDFRefElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testInlineRefelement
-	 * 
-	 * 
 	 */
 	@Test
 	void testInlineRefelement()

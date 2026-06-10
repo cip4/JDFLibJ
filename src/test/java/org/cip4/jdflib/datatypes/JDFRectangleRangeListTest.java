@@ -40,8 +40,8 @@
  * JDFRectangleRangeListTest.java
  *
  * @author Elena Skobchenko
- * 
- * Copyright (c) 2001-2004 The International Cooperation for the Integration 
+ *
+ * Copyright (c) 2001-2004 The International Cooperation for the Integration
  * of Processes in  Prepress, Press and Postpress (CIP4).  All rights reserved.
  */
 package org.cip4.jdflib.datatypes;
@@ -93,13 +93,15 @@ class JDFRectangleRangeListTest
 			rangelist.append(new JDFRectangle("0 0 6 6"));
 			rangelist.append(new JDFRectangle("0 0 7 7"));
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			System.out.println(dfe.toString());
 		}
 
 		if (rangelist != null)
+		{
 			assertTrue(rangelist.isList(), "Bad isList");
+		}
 	}
 
 	@Test
@@ -114,13 +116,15 @@ class JDFRectangleRangeListTest
 			// rangelist.append(new JDFRectangle("0 0 5.5 5.5"));
 			rangelist.append(new JDFRectangle("0 0 7 7"));
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			System.out.println(dfe.toString());
 		}
 
 		if (rangelist != null)
+		{
 			assertTrue(rangelist.isUnique(), "Bad isUnique");
+		}
 	}
 
 	@Test
@@ -135,13 +139,15 @@ class JDFRectangleRangeListTest
 			rangelist.append(new JDFRectangle("0 0 5 5"));
 			rangelist.append(new JDFRectangle("0 0 7 7"));
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			System.out.println(dfe.toString());
 		}
 
 		if (rangelist != null)
+		{
 			assertFalse(rangelist.isOrdered(), "Bad isOrdered");
+		}
 	}
 
 	@Test
@@ -155,13 +161,15 @@ class JDFRectangleRangeListTest
 			rangelist.append(new JDFRectangleRange("0 0 4 4 ~ 0 0 2 2"));
 			rangelist.append(new JDFRectangle(0, 0, 5, 5));
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			System.out.println(dfe.toString());
 		}
 
 		if (rangelist != null)
+		{
 			assertFalse(rangelist.isOrdered(), "Bad isOrdered");
+		}
 	}
 
 	@Test
@@ -175,13 +183,15 @@ class JDFRectangleRangeListTest
 			rangelist.append(new JDFRectangleRange("0 0 4 4 ~ 0 0 2 2"));
 			rangelist.append(new JDFRectangle("0 0 5 5"));
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			System.out.println(dfe.toString());
 		}
 
 		if (rangelist != null)
+		{
 			assertFalse(rangelist.isUniqueOrdered(), "Bad isUniqueOrdered");
+		}
 	}
 
 	@Test
@@ -196,13 +206,15 @@ class JDFRectangleRangeListTest
 			// rangelist.append(new JDFRectangle("0 0 5 5"));
 			rangelist.append(new JDFRectangle("0 0 7 7"));
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			System.out.println(dfe.toString());
 		}
 
 		if (rangelist != null)
+		{
 			assertTrue(rangelist.isUniqueOrdered(), "Bad isUniqueOrdered");
+		}
 	}
 
 }

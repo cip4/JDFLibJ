@@ -130,7 +130,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNumberItem(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoNumberItem(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -142,7 +142,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNumberItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoNumberItem(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -155,7 +155,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoNumberItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoNumberItem(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -176,7 +176,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStartValue(String value)
+	public void setStartValue(final String value)
 	{
 		setAttribute(AttributeName.STARTVALUE, value, null);
 	}
@@ -201,7 +201,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStep(int value)
+	public void setStep(final int value)
 	{
 		setAttribute(AttributeName.STEP, value, null);
 	}
@@ -279,7 +279,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element
 	 */
-	public JDFStringSpan getCreateColorNameDetails(int iSkip)
+	public JDFStringSpan getCreateColorNameDetails(final int iSkip)
 	{
 		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.COLORNAMEDETAILS, null, iSkip);
 	}
@@ -291,7 +291,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	 * @return JDFStringSpan the element
 	 *         default is getColorNameDetails(0)
 	 */
-	public JDFStringSpan getColorNameDetails(int iSkip)
+	public JDFStringSpan getColorNameDetails(final int iSkip)
 	{
 		return (JDFStringSpan) getElement(ElementName.COLORNAMEDETAILS, null, iSkip);
 	}

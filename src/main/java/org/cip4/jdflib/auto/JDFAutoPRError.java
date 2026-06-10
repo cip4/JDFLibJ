@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -95,7 +90,8 @@ public abstract class JDFAutoPRError extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ERRORTYPE, 0x2222222211l, AttributeInfo.EnumAttributeType.enumeration, EnumErrorType.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ERRORTYPE, 0x2222222211l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumErrorType.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUE, 0x2222222211l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
@@ -111,7 +107,7 @@ public abstract class JDFAutoPRError extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPRError(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPRError(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -123,7 +119,7 @@ public abstract class JDFAutoPRError extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPRError(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPRError(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -136,93 +132,28 @@ public abstract class JDFAutoPRError extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPRError(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPRError(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for ErrorType
+	 * Enumeration strings for numErrorType
 	 */
 
-	public enum EErrorType
+	public enum EnumErrorType
 	{
 		TestNotSupported, TestWrongPDL;
 
-		public static EErrorType getEnum(String val)
+		public static EnumErrorType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EErrorType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumErrorType.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for ErrorType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumErrorType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumErrorType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumErrorType getEnum(String enumName)
-		{
-			return (EnumErrorType) getEnum(EnumErrorType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumErrorType getEnum(int enumValue)
-		{
-			return (EnumErrorType) getEnum(EnumErrorType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumErrorType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumErrorType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumErrorType.class);
-		}
-
-		/**  */
-		public static final EnumErrorType TestNotSupported = new EnumErrorType("TestNotSupported");
-		/**  */
-		public static final EnumErrorType TestWrongPDL = new EnumErrorType("TestWrongPDL");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -234,9 +165,9 @@ public abstract class JDFAutoPRError extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setErrorType(EErrorType enumVar)
+	public void setErrorType(final EnumErrorType enumVar)
 	{
-		setAttribute(AttributeName.ERRORTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ERRORTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -244,35 +175,6 @@ public abstract class JDFAutoPRError extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EErrorType getEErrorType()
-	{
-		return EErrorType.getEnum(getAttribute(AttributeName.ERRORTYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ErrorType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ErrorType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetErrorType(EErrorType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setErrorType(EnumErrorType enumVar)
-	{
-		setAttribute(AttributeName.ERRORTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ErrorType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EErrorType GetEErrorType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumErrorType getErrorType()
 	{
 		return EnumErrorType.getEnum(getAttribute(AttributeName.ERRORTYPE, null, null));
@@ -288,7 +190,7 @@ public abstract class JDFAutoPRError extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setValue(String value)
+	public void setValue(final String value)
 	{
 		setAttribute(AttributeName.VALUE, value, null);
 	}

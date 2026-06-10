@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -105,11 +101,13 @@ public abstract class JDFAutoShapeElement extends JDFResource
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.CUTBOX, 0x3333333333l, AttributeInfo.EnumAttributeType.rectangle, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.CUTOUT, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.CUTPATH, 0x3333333333l, AttributeInfo.EnumAttributeType.PDFPath, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.CUTTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumCutType.getEnum(0), "Cut");
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.CUTTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumCutType.class, 0), "Cut");
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.DDESCUTTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, "101");
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.MATERIAL, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.SHAPEDEPTH, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.SHAPETYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumShapeType.getEnum(0), null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.SHAPETYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumShapeType.class, 0), null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.TEETHPERDIMENSION, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
@@ -137,7 +135,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoShapeElement(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoShapeElement(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -149,7 +147,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoShapeElement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoShapeElement(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -162,7 +160,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoShapeElement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoShapeElement(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -173,7 +171,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -188,168 +186,36 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for CutType
+	 * Enumeration strings for numCutType
 	 */
 
-	public enum ECutType
+	public enum EnumCutType
 	{
 		Cut, Perforate;
 
-		public static ECutType getEnum(String val)
+		public static EnumCutType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ECutType.class, val, ECutType.Cut);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumCutType.class, val, EnumCutType.Cut);
 		}
 	}
 
 	/**
-	 * Enumeration strings for CutType
+	 * Enumeration strings for numShapeType
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumCutType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumCutType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumCutType getEnum(String enumName)
-		{
-			return (EnumCutType) getEnum(EnumCutType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumCutType getEnum(int enumValue)
-		{
-			return (EnumCutType) getEnum(EnumCutType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumCutType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumCutType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumCutType.class);
-		}
-
-		/**  */
-		public static final EnumCutType Cut = new EnumCutType("Cut");
-		/**  */
-		public static final EnumCutType Perforate = new EnumCutType("Perforate");
-	}
-
-	/**
-	 * Enumeration strings for ShapeType
-	 */
-
-	public enum EShapeType
+	public enum EnumShapeType
 	{
 		Rectangular, Round, Path, RoundedRectangle;
 
-		public static EShapeType getEnum(String val)
+		public static EnumShapeType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EShapeType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumShapeType.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for ShapeType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumShapeType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumShapeType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumShapeType getEnum(String enumName)
-		{
-			return (EnumShapeType) getEnum(EnumShapeType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumShapeType getEnum(int enumValue)
-		{
-			return (EnumShapeType) getEnum(EnumShapeType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumShapeType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumShapeType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumShapeType.class);
-		}
-
-		/**  */
-		public static final EnumShapeType Rectangular = new EnumShapeType("Rectangular");
-		/**  */
-		public static final EnumShapeType Round = new EnumShapeType("Round");
-		/**  */
-		public static final EnumShapeType Path = new EnumShapeType("Path");
-		/**  */
-		public static final EnumShapeType RoundedRectangle = new EnumShapeType("RoundedRectangle");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -361,7 +227,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLockOrigins(boolean value)
+	public void setLockOrigins(final boolean value)
 	{
 		setAttribute(AttributeName.LOCKORIGINS, value, null);
 	}
@@ -386,7 +252,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCutBox(JDFRectangle value)
+	public void setCutBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.CUTBOX, value, null);
 	}
@@ -399,8 +265,8 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 */
 	public JDFRectangle getCutBox()
 	{
-		String strAttrName = getAttribute(AttributeName.CUTBOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CUTBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -414,7 +280,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCutOut(boolean value)
+	public void setCutOut(final boolean value)
 	{
 		setAttribute(AttributeName.CUTOUT, value, null);
 	}
@@ -439,7 +305,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCutPath(String value)
+	public void setCutPath(final String value)
 	{
 		setAttribute(AttributeName.CUTPATH, value, null);
 	}
@@ -464,9 +330,9 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setCutType(ECutType enumVar)
+	public void setCutType(final EnumCutType enumVar)
 	{
-		setAttribute(AttributeName.CUTTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.CUTTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -474,35 +340,6 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ECutType getECutType()
-	{
-		return ECutType.getEnum(getAttribute(AttributeName.CUTTYPE, null, "Cut"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute CutType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute CutType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetCutType(ECutType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setCutType(EnumCutType enumVar)
-	{
-		setAttribute(AttributeName.CUTTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute CutType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ECutType GetECutType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumCutType getCutType()
 	{
 		return EnumCutType.getEnum(getAttribute(AttributeName.CUTTYPE, null, "Cut"));
@@ -518,7 +355,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDDESCutType(int value)
+	public void setDDESCutType(final int value)
 	{
 		setAttribute(AttributeName.DDESCUTTYPE, value, null);
 	}
@@ -543,7 +380,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaterial(String value)
+	public void setMaterial(final String value)
 	{
 		setAttribute(AttributeName.MATERIAL, value, null);
 	}
@@ -568,7 +405,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setShapeDepth(double value)
+	public void setShapeDepth(final double value)
 	{
 		setAttribute(AttributeName.SHAPEDEPTH, value, null);
 	}
@@ -593,9 +430,9 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setShapeType(EShapeType enumVar)
+	public void setShapeType(final EnumShapeType enumVar)
 	{
-		setAttribute(AttributeName.SHAPETYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SHAPETYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -603,35 +440,6 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EShapeType getEShapeType()
-	{
-		return EShapeType.getEnum(getAttribute(AttributeName.SHAPETYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ShapeType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ShapeType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetShapeType(EShapeType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setShapeType(EnumShapeType enumVar)
-	{
-		setAttribute(AttributeName.SHAPETYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ShapeType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EShapeType GetEShapeType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumShapeType getShapeType()
 	{
 		return EnumShapeType.getEnum(getAttribute(AttributeName.SHAPETYPE, null, null));
@@ -647,7 +455,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTeethPerDimension(double value)
+	public void setTeethPerDimension(final double value)
 	{
 		setAttribute(AttributeName.TEETHPERDIMENSION, value, null);
 	}
@@ -694,7 +502,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFShapeElement the element
 	 */
-	public JDFShapeElement getCreateShape(int iSkip)
+	public JDFShapeElement getCreateShape(final int iSkip)
 	{
 		return (JDFShapeElement) getCreateElement_JDFElement(ElementName.SHAPE, null, iSkip);
 	}
@@ -706,7 +514,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 * @return JDFShapeElement the element
 	 *         default is getShape(0)
 	 */
-	public JDFShapeElement getShape(int iSkip)
+	public JDFShapeElement getShape(final int iSkip)
 	{
 		return (JDFShapeElement) getElement(ElementName.SHAPE, null, iSkip);
 	}

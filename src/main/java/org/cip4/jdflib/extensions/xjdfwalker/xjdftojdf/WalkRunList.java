@@ -103,7 +103,6 @@ public class WalkRunList extends WalkResource
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
@@ -115,7 +114,7 @@ public class WalkRunList extends WalkResource
 
 	/**
 	 * split a RunList into a RunList and a RunList/LayoutElement
-	 * 
+	 *
 	 * @param xjdf
 	 */
 	void splitLayoutElem(final KElement xjdf, final KElement trackJDF)

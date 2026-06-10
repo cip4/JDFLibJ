@@ -111,8 +111,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
- *
  * @author rainer prosi
  * @date Mar 17, 2013
  */
@@ -126,7 +124,6 @@ class JDFEvaluationTest extends JDFTestCaseBase
 	private JDFEnumerationState compState;
 
 	/**
-	 *
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -136,19 +133,19 @@ class JDFEvaluationTest extends JDFTestCaseBase
 		super.setUp();
 		KElement.setLongID(false);
 
-		JDFDoc doc = new JDFDoc("Device");
+		final JDFDoc doc = new JDFDoc("Device");
 		device = (JDFDevice) doc.getRoot();
 
 		devicecap = device.appendDeviceCap();
 		devicecap.setCombinedMethod(EnumCombinedMethod.None);
 		devicecap.setTypeExpression("(fnarf)|(blub)");
 		devicecap.setTypes(new VString("fnarf blub", null));
-		JDFDevCapPool dcp = devicecap.appendDevCapPool();
-		JDFDevCaps dcs = devicecap.appendDevCaps();
+		final JDFDevCapPool dcp = devicecap.appendDevCapPool();
+		final JDFDevCaps dcs = devicecap.appendDevCaps();
 		dcs.setContext(EnumContext.Resource);
 		dcs.setName("Component");
 		dcs.setRequired(true);
-		JDFDevCap dc = dcp.appendDevCap();
+		final JDFDevCap dc = dcp.appendDevCap();
 		dc.setID("dc_Component");
 		dcs.setDevCapRef(dc);
 		compState = dc.appendEnumerationState("ComponentType");
@@ -157,15 +154,13 @@ class JDFEvaluationTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 *
 	 * @throws Exception
 	 */
 	@Test
 	void testIntegerEvaluation() throws Exception
 	{
-		JDFDoc d = new JDFDoc(ElementName.INTEGEREVALUATION);
-		JDFIntegerEvaluation ie = (JDFIntegerEvaluation) d.getRoot();
+		final JDFDoc d = new JDFDoc(ElementName.INTEGEREVALUATION);
+		final JDFIntegerEvaluation ie = (JDFIntegerEvaluation) d.getRoot();
 		ie.appendValueList(1);
 		Assertions.assertEquals(ie.getAttribute(AttributeName.VALUELIST), "1");
 		ie.appendValueList(3);
@@ -186,8 +181,8 @@ class JDFEvaluationTest extends JDFTestCaseBase
 	@Test
 	void testEnumerationEvaluation()
 	{
-		JDFDoc d = new JDFDoc(ElementName.ENUMERATIONEVALUATION);
-		JDFEnumerationEvaluation ee = (JDFEnumerationEvaluation) d.getRoot();
+		final JDFDoc d = new JDFDoc(ElementName.ENUMERATIONEVALUATION);
+		final JDFEnumerationEvaluation ee = (JDFEnumerationEvaluation) d.getRoot();
 		ee.setRegExp("a( b)?");
 		Assertions.assertTrue(ee.fitsValue("a"));
 		Assertions.assertTrue(ee.fitsValue("a b"));
@@ -202,8 +197,8 @@ class JDFEvaluationTest extends JDFTestCaseBase
 	@Test
 	void testSetTolerance()
 	{
-		JDFDoc d = new JDFDoc(ElementName.XYPAIREVALUATION);
-		JDFXYPairEvaluation ie = (JDFXYPairEvaluation) d.getRoot();
+		final JDFDoc d = new JDFDoc(ElementName.XYPAIREVALUATION);
+		final JDFXYPairEvaluation ie = (JDFXYPairEvaluation) d.getRoot();
 		ie.setTolerance(new JDFXYPair(1, 1));
 		Assertions.assertEquals(ie.getTolerance().toString(), "1 1");
 		ie.setValueList(new JDFXYPair(1.5, 1.5));
@@ -218,8 +213,8 @@ class JDFEvaluationTest extends JDFTestCaseBase
 	@Test
 	void testSetPath()
 	{
-		JDFDoc d = new JDFDoc(ElementName.XYPAIREVALUATION);
-		JDFXYPairEvaluation ie = (JDFXYPairEvaluation) d.getRoot();
+		final JDFDoc d = new JDFDoc(ElementName.XYPAIREVALUATION);
+		final JDFXYPairEvaluation ie = (JDFXYPairEvaluation) d.getRoot();
 		ie.setPath("abc");
 		Assertions.assertEquals(ie.getPath(), "abc");
 	}
@@ -231,21 +226,21 @@ class JDFEvaluationTest extends JDFTestCaseBase
 	@Test
 	void testIsPresentPartition()
 	{
-		JDFAction act = devicecap.appendActionPool().appendActionTest(EnumTerm.IsPresentEvaluation, true);
-		JDFTest tst = act.getTest();
+		final JDFAction act = devicecap.appendActionPool().appendActionTest(EnumTerm.IsPresentEvaluation, true);
+		final JDFTest tst = act.getTest();
 		tst.setContext("//Component");
-		JDFIsPresentEvaluation ipe = (JDFIsPresentEvaluation) tst.getTerm();
+		final JDFIsPresentEvaluation ipe = (JDFIsPresentEvaluation) tst.getTerm();
 		ipe.setRefTarget(ptState);
 		Assertions.assertEquals(ipe.getrRef(), ptState.getID());
 
-		JDFDoc doc = new JDFDoc("JDF");
-		JDFNode node = doc.getJDFRoot();
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode node = doc.getJDFRoot();
 		node.setType("fnarf", false);
 		JDFComponent comp = (JDFComponent) node.addResource("Component", null, EnumUsage.Input, null, null, null, null);
 		comp.setProductType("Cover");
 
-		XMLDoc rep = new XMLDoc("root", null);
-		KElement eRep = rep.getRoot();
+		final XMLDoc rep = new XMLDoc("root", null);
+		final KElement eRep = rep.getRoot();
 		boolean fitsJDF = tst.fitsJDF(comp, eRep);
 		Assertions.assertTrue(fitsJDF);
 		comp = (JDFComponent) comp.addPartition(EnumPartIDKey.SheetName, "s1");
@@ -261,25 +256,25 @@ class JDFEvaluationTest extends JDFTestCaseBase
 	@Test
 	void testAction()
 	{
-		JDFAction act = devicecap.appendActionPool().appendActionTest(EnumTerm.or, false);
-		JDFTest tst = act.getTest();
+		final JDFAction act = devicecap.appendActionPool().appendActionTest(EnumTerm.or, false);
+		final JDFTest tst = act.getTest();
 		tst.setContext("/JDF/ResourcePool/Component");
-		JDFor or = (JDFor) ((JDFnot) tst.getTerm()).getTerm(EnumTerm.or, 0);
-		JDFIsPresentEvaluation ipe = (JDFIsPresentEvaluation) or.appendTerm(EnumTerm.IsPresentEvaluation);
+		final JDFor or = (JDFor) ((JDFnot) tst.getTerm()).getTerm(EnumTerm.or, 0);
+		final JDFIsPresentEvaluation ipe = (JDFIsPresentEvaluation) or.appendTerm(EnumTerm.IsPresentEvaluation);
 		ipe.setRefTarget(ptState);
 		Assertions.assertEquals(ipe.getrRef(), ptState.getID());
 
-		JDFEnumerationEvaluation enev = (JDFEnumerationEvaluation) or.appendTerm(EnumTerm.EnumerationEvaluation);
+		final JDFEnumerationEvaluation enev = (JDFEnumerationEvaluation) or.appendTerm(EnumTerm.EnumerationEvaluation);
 		enev.setRefTarget(compState);
 		enev.setRegExp("(.+ )*FinalProduct( .+)*");
 
-		JDFDoc doc = new JDFDoc("JDF");
-		JDFNode node = doc.getJDFRoot();
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode node = doc.getJDFRoot();
 		node.setType("fnarf", false);
-		JDFComponent comp = (JDFComponent) node.addResource("Component", null, EnumUsage.Input, null, null, null, null);
+		final JDFComponent comp = (JDFComponent) node.addResource("Component", null, EnumUsage.Input, null, null, null, null);
 
-		XMLDoc rep = new XMLDoc("root", null);
-		KElement eRep = rep.getRoot();
+		final XMLDoc rep = new XMLDoc("root", null);
+		final KElement eRep = rep.getRoot();
 		boolean fitsJDF = tst.fitsJDF(comp, eRep);
 		Assertions.assertTrue(fitsJDF);
 
@@ -287,7 +282,7 @@ class JDFEvaluationTest extends JDFTestCaseBase
 		fitsJDF = tst.fitsJDF(comp, eRep);
 		Assertions.assertFalse(fitsJDF, "have pt");
 
-		Vector<EnumComponentType> v = new Vector<EnumComponentType>();
+		Vector<EnumComponentType> v = new Vector<>();
 		v.add(EnumComponentType.FinalProduct);
 		comp.setComponentType(v);
 		fitsJDF = tst.fitsJDF(comp, eRep);
@@ -297,7 +292,7 @@ class JDFEvaluationTest extends JDFTestCaseBase
 		fitsJDF = tst.fitsJDF(comp, eRep);
 		Assertions.assertFalse(fitsJDF, "have final");
 
-		v = new Vector<EnumComponentType>();
+		v = new Vector<>();
 		v.add(EnumComponentType.PartialProduct);
 		comp.setComponentType(v);
 		fitsJDF = tst.fitsJDF(comp, eRep);
@@ -305,7 +300,6 @@ class JDFEvaluationTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @see JDFTestCaseBase#toString()
 	 */
 	@Override

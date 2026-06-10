@@ -78,12 +78,10 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFDeviceList;
-import org.cip4.jdflib.util.EnumUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * < July 6, 2009
+ *         < July 6, 2009
  */
 public class JDFDeviceFilter extends JDFAutoDeviceFilter
 {
@@ -91,7 +89,7 @@ public class JDFDeviceFilter extends JDFAutoDeviceFilter
 
 	/**
 	 * Constructor for JDFDeviceFilter
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -102,7 +100,7 @@ public class JDFDeviceFilter extends JDFAutoDeviceFilter
 
 	/**
 	 * Constructor for JDFDeviceFilter
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -114,7 +112,7 @@ public class JDFDeviceFilter extends JDFAutoDeviceFilter
 
 	/**
 	 * Constructor for JDFDeviceFilter
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -127,7 +125,7 @@ public class JDFDeviceFilter extends JDFAutoDeviceFilter
 
 	/**
 	 * toString()
-	 * 
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoDeviceFilter#toString()
 	 */
 	@Override
@@ -138,6 +136,7 @@ public class JDFDeviceFilter extends JDFAutoDeviceFilter
 
 	/**
 	 * apply this filter to a devicelist
+	 *
 	 * @param deviceList
 	 */
 	public void applyTo(final JDFDeviceList deviceList)
@@ -151,9 +150,9 @@ public class JDFDeviceFilter extends JDFAutoDeviceFilter
 		{
 			return;
 		}
-		for (JDFDeviceInfo di : v)
+		for (final JDFDeviceInfo di : v)
 		{
-			JDFDeviceInfo di2 = applyTo(di);
+			final JDFDeviceInfo di2 = applyTo(di);
 			if (di2 == null)
 			{
 				deviceList.removeChild(di);
@@ -163,6 +162,7 @@ public class JDFDeviceFilter extends JDFAutoDeviceFilter
 
 	/**
 	 * apply this filter to a device element, potentially deleting it
+	 *
 	 * @param deviceInfo
 	 */
 	private JDFDeviceInfo applyTo(final JDFDeviceInfo deviceInfo)
@@ -170,23 +170,23 @@ public class JDFDeviceFilter extends JDFAutoDeviceFilter
 		if (deviceInfo != null)
 		{
 			final EnumDeviceDetails det = getDeviceDetails();
-			if (EnumUtil.aLessThanB(det, EnumDeviceDetails.Capability))
+			if (det != null && det.ordinal() < EnumDeviceDetails.Capability.ordinal())
 			{
-				JDFDevice dev = deviceInfo.getDevice();
+				final JDFDevice dev = deviceInfo.getDevice();
 				if (dev != null)
 				{
 					dev.removeChildren(ElementName.DEVICECAP, null, null);
 				}
 			}
-			if (EnumUtil.aLessEqualsThanB(det, EnumDeviceDetails.Brief))
+			if (det != null && det.ordinal() <= EnumDeviceDetails.Brief.ordinal())
 			{
 				deviceInfo.removeChildren(ElementName.MODULESTATUS, null, null);
 			}
-			if (EnumUtil.aLessEqualsThanB(det, EnumDeviceDetails.Brief))
+			if (det != null && det.ordinal() <= EnumDeviceDetails.Brief.ordinal())
 			{
 				deviceInfo.removeChildren(ElementName.DEVICE, null, null);
 			}
-			if (EnumUtil.aLessEqualsThanB(det, EnumDeviceDetails.None))
+			if (det != null && det.ordinal() <= EnumDeviceDetails.None.ordinal())
 			{
 				final JDFAttributeMap map = new JDFAttributeMap();
 				map.putNotNull(AttributeName.DEVICEID, deviceInfo.getDeviceID());

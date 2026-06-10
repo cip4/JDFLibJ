@@ -61,9 +61,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class XJDFAdditionalExampleTest extends ExampleTest
 {
@@ -75,10 +73,10 @@ class XJDFAdditionalExampleTest extends ExampleTest
 	public final void testSeparationSplit()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("SepSplit", null, null);
-		xjdfHelper.addType(EnumType.ConventionalPrinting.getName(), 0);
+		xjdfHelper.addType(EnumType.ConventionalPrinting.name(), 0);
 
 		final SetHelper cp = xjdfHelper.getCreateSet(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
-		cp.getCreatePartition(null, true).getResource().setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Simplex.getName());
+		cp.getCreatePartition(null, true).getResource().setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Simplex.name());
 
 		final SetHelper pm = xjdfHelper.getCreateSet(ElementName.MEDIA, null);
 		final SetHelper dev = xjdfHelper.getCreateSet(ElementName.DEVICE, EnumUsage.Input);

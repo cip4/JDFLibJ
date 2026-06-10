@@ -71,14 +71,8 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoGeneralID.EDataType;
-import org.cip4.jdflib.auto.JDFAutoGeneralID.EnumDataType;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -102,9 +96,10 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTEXT, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumContext.getEnum(0),
-				"PagePool");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DATATYPE, 0x2222221111l, AttributeInfo.EnumAttributeType.enumeration, EnumDataType.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTEXT, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumContext.class, 0), "PagePool");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DATATYPE, 0x2222221111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumDataType.class, 0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.NAME, 0x2222221111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.VALUEFORMAT, 0x2222221111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.VALUETEMPLATE, 0x2222221111l, AttributeInfo.EnumAttributeType.string, null, null);
@@ -134,7 +129,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMetadataMap(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoMetadataMap(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -146,7 +141,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMetadataMap(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoMetadataMap(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -159,119 +154,42 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoMetadataMap(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoMetadataMap(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for Context
+	 * Enumeration strings for numContext
 	 */
 
-	public enum EContext
+	public enum EnumContext
 	{
 		Set, Document, SubDoc0, SubDoc1, SubDoc2, SubDoc3, SubDoc4, SubDoc5, SubDoc6, SubDoc7, SubDoc8, SubDoc9, PagePool, Page, Object;
 
-		public static EContext getEnum(String val)
+		public static EnumContext getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EContext.class, val, EContext.PagePool);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumContext.class, val, EnumContext.PagePool);
 		}
 	}
 
 	/**
-	 * Enumeration strings for Context
+	 * Enumeration strings for numDataType
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumContext extends ValuedEnum
+	public enum EnumDataType
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		string, integer, double_, NMTOKEN, boolean_, dateTime, duration, PartIDKeys;
 
-		protected EnumContext(String name)
+		public static EnumDataType getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumDataType.class, val, null);
 		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumContext getEnum(String enumName)
-		{
-			return (EnumContext) getEnum(EnumContext.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumContext getEnum(int enumValue)
-		{
-			return (EnumContext) getEnum(EnumContext.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumContext.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumContext.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumContext.class);
-		}
-
-		/**  */
-		public static final EnumContext Set = new EnumContext("Set");
-		/**  */
-		public static final EnumContext Document = new EnumContext("Document");
-		/**  */
-		public static final EnumContext SubDoc0 = new EnumContext("SubDoc0");
-		/**  */
-		public static final EnumContext SubDoc1 = new EnumContext("SubDoc1");
-		/**  */
-		public static final EnumContext SubDoc2 = new EnumContext("SubDoc2");
-		/**  */
-		public static final EnumContext SubDoc3 = new EnumContext("SubDoc3");
-		/**  */
-		public static final EnumContext SubDoc4 = new EnumContext("SubDoc4");
-		/**  */
-		public static final EnumContext SubDoc5 = new EnumContext("SubDoc5");
-		/**  */
-		public static final EnumContext SubDoc6 = new EnumContext("SubDoc6");
-		/**  */
-		public static final EnumContext SubDoc7 = new EnumContext("SubDoc7");
-		/**  */
-		public static final EnumContext SubDoc8 = new EnumContext("SubDoc8");
-		/**  */
-		public static final EnumContext SubDoc9 = new EnumContext("SubDoc9");
-		/**  */
-		public static final EnumContext PagePool = new EnumContext("PagePool");
-		/**  */
-		public static final EnumContext Page = new EnumContext("Page");
-		/**  */
-		public static final EnumContext Object = new EnumContext("Object");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -283,9 +201,9 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setContext(EContext enumVar)
+	public void setContext(final EnumContext enumVar)
 	{
-		setAttribute(AttributeName.CONTEXT, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.CONTEXT, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -293,35 +211,6 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EContext getEContext()
-	{
-		return EContext.getEnum(getAttribute(AttributeName.CONTEXT, null, "PagePool"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Context
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Context
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetContext(EContext) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setContext(EnumContext enumVar)
-	{
-		setAttribute(AttributeName.CONTEXT, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Context
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EContext GetEContext() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumContext getContext()
 	{
 		return EnumContext.getEnum(getAttribute(AttributeName.CONTEXT, null, "PagePool"));
@@ -337,9 +226,9 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDataType(EDataType enumVar)
+	public void setDataType(final EnumDataType enumVar)
 	{
-		setAttribute(AttributeName.DATATYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DATATYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -347,35 +236,6 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EDataType getEDataType()
-	{
-		return EDataType.getEnum(getAttribute(AttributeName.DATATYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute DataType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute DataType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDataType(EDataType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDataType(EnumDataType enumVar)
-	{
-		setAttribute(AttributeName.DATATYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute DataType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EDataType GetEDataType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumDataType getDataType()
 	{
 		return EnumDataType.getEnum(getAttribute(AttributeName.DATATYPE, null, null));
@@ -391,7 +251,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setName(String value)
+	public void setName(final String value)
 	{
 		setAttribute(AttributeName.NAME, value, null);
 	}
@@ -416,7 +276,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setValueFormat(String value)
+	public void setValueFormat(final String value)
 	{
 		setAttribute(AttributeName.VALUEFORMAT, value, null);
 	}
@@ -441,7 +301,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setValueTemplate(String value)
+	public void setValueTemplate(final String value)
 	{
 		setAttribute(AttributeName.VALUETEMPLATE, value, null);
 	}
@@ -474,7 +334,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 
 	/**
 	 * (25) getCreateExpr
-	 *
+	 * 
 	 * @return JDFExpr the element
 	 */
 	public JDFExpr getCreateExpr()
@@ -484,11 +344,11 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 
 	/**
 	 * (26) getCreateExpr
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFExpr the element
 	 */
-	public JDFExpr getCreateExpr(int iSkip)
+	public JDFExpr getCreateExpr(final int iSkip)
 	{
 		return (JDFExpr) getCreateElement_JDFElement(ElementName.EXPR, null, iSkip);
 	}
@@ -500,14 +360,14 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	 * @return JDFExpr the element
 	 *         default is getExpr(0)
 	 */
-	public JDFExpr getExpr(int iSkip)
+	public JDFExpr getExpr(final int iSkip)
 	{
 		return (JDFExpr) getElement(ElementName.EXPR, null, iSkip);
 	}
 
 	/**
 	 * Get all Expr from the current element
-	 *
+	 * 
 	 * @return Collection<JDFExpr>, null if none are available
 	 */
 	public Collection<JDFExpr> getAllExpr()

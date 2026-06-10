@@ -106,7 +106,7 @@ public abstract class JDFAutoTestPool extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTestPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoTestPool(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoTestPool extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTestPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoTestPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoTestPool extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoTestPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoTestPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoTestPool extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFTest the element
 	 */
-	public JDFTest getCreateTest(int iSkip)
+	public JDFTest getCreateTest(final int iSkip)
 	{
 		return (JDFTest) getCreateElement_JDFElement(ElementName.TEST, null, iSkip);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoTestPool extends JDFElement
 	 * @return JDFTest the element
 	 *         default is getTest(0)
 	 */
-	public JDFTest getTest(int iSkip)
+	public JDFTest getTest(final int iSkip)
 	{
 		return (JDFTest) getElement(ElementName.TEST, null, iSkip);
 	}

@@ -38,7 +38,7 @@ package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFComment;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.resource.JDFPart;
@@ -76,7 +76,7 @@ public class IntentHelper extends BaseXJDFHelper
 	{
 		AssemblingIntent, BindingIntent, ColorIntent, ContentCheckIntent, EmbossingIntent, FoldingIntent, HoleMakingIntent, LaminatingIntent, LayoutIntent, MediaIntent, ProductionIntent, ShapeCuttingIntent, VariableIntent;
 
-		public static EIntentType getEnum(String val)
+		public static EIntentType getEnum(final String val)
 		{
 			return JavaEnumUtil.getEnumIgnoreCase(EIntentType.class, KElement.xmlnsLocalName(val), null);
 		}
@@ -221,7 +221,7 @@ public class IntentHelper extends BaseXJDFHelper
 		{
 			return null;
 		}
-		final String elem = StringUtil.removeToken(spanPath, -1, JDFConstants.SLASH);
+		final String elem = StringUtil.removeToken(spanPath, -1, JDFCoreConstants.SLASH);
 		if (elem != null)
 		{
 			resource = resource.getXPathElement(elem);
@@ -230,7 +230,7 @@ public class IntentHelper extends BaseXJDFHelper
 		{
 			return null;
 		}
-		final String spanName = StringUtil.token(spanPath, -1, JDFConstants.SLASH);
+		final String spanName = StringUtil.token(spanPath, -1, JDFCoreConstants.SLASH);
 		String s = resource.getAttribute(spanName, null, null);
 		if (s == null)
 		{
@@ -258,7 +258,7 @@ public class IntentHelper extends BaseXJDFHelper
 	 */
 	public void setSpan(KElement resource, final String spanPath, final String val, String dataType)
 	{
-		final String elem = StringUtil.removeToken(spanPath, -1, JDFConstants.SLASH);
+		final String elem = StringUtil.removeToken(spanPath, -1, JDFCoreConstants.SLASH);
 		if (elem != null)
 		{
 			resource = resource.getCreateXPathElement(elem);
@@ -267,7 +267,7 @@ public class IntentHelper extends BaseXJDFHelper
 		{
 			return;
 		}
-		final String spanName = StringUtil.token(spanPath, -1, JDFConstants.SLASH);
+		final String spanName = StringUtil.token(spanPath, -1, JDFCoreConstants.SLASH);
 		if (bSpanAsAttribute || dataType == null)
 		{
 			resource.setAttribute(spanName, val);

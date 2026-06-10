@@ -73,9 +73,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkDropIntent extends WalkJDFSubElement
 {
@@ -108,7 +106,6 @@ public class WalkDropIntent extends WalkJDFSubElement
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#getXJDFName(org.cip4.jdflib.core.KElement)
 	 */
 	@Override

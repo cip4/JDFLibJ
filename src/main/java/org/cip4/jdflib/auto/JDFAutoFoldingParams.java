@@ -71,14 +71,8 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.ESheetLay;
-import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumSheetLay;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -103,9 +97,10 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHEETLAY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), "Left");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHEETLAY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumSheetLay.class, 0), "Left");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.DESCRIPTIONTYPE, 0x4444444433l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumDescriptionType.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumDescriptionType.class, 0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.FOLDCATALOG, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.FOLDINGDETAILS, 0x3333111111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.FOLDSHEETIN, 0x4444444443l, AttributeInfo.EnumAttributeType.XYPair, null, null);
@@ -135,7 +130,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFoldingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoFoldingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -147,7 +142,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFoldingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoFoldingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -160,7 +155,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoFoldingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoFoldingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -171,7 +166,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -186,87 +181,36 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for DescriptionType
+	 * Enumeration strings for numSheetLay
 	 */
 
-	public enum EDescriptionType
+	public enum EnumSheetLay
+	{
+		Left, Right;
+
+		public static EnumSheetLay getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSheetLay.class, val, EnumSheetLay.Left);
+		}
+	}
+
+	/**
+	 * Enumeration strings for numDescriptionType
+	 */
+
+	public enum EnumDescriptionType
 	{
 		FoldProc, FoldCatalog;
 
-		public static EDescriptionType getEnum(String val)
+		public static EnumDescriptionType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EDescriptionType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumDescriptionType.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for DescriptionType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumDescriptionType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumDescriptionType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumDescriptionType getEnum(String enumName)
-		{
-			return (EnumDescriptionType) getEnum(EnumDescriptionType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDescriptionType getEnum(int enumValue)
-		{
-			return (EnumDescriptionType) getEnum(EnumDescriptionType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDescriptionType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDescriptionType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDescriptionType.class);
-		}
-
-		/**  */
-		public static final EnumDescriptionType FoldProc = new EnumDescriptionType("FoldProc");
-		/**  */
-		public static final EnumDescriptionType FoldCatalog = new EnumDescriptionType("FoldCatalog");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -278,9 +222,9 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSheetLay(ESheetLay enumVar)
+	public void setSheetLay(final EnumSheetLay enumVar)
 	{
-		setAttribute(AttributeName.SHEETLAY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SHEETLAY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -288,35 +232,6 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESheetLay getESheetLay()
-	{
-		return ESheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, "Left"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute SheetLay
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute SheetLay
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetSheetLay(ESheetLay) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSheetLay(EnumSheetLay enumVar)
-	{
-		setAttribute(AttributeName.SHEETLAY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute SheetLay
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ESheetLay GetESheetLay() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumSheetLay getSheetLay()
 	{
 		return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, "Left"));
@@ -332,9 +247,9 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDescriptionType(EDescriptionType enumVar)
+	public void setDescriptionType(final EnumDescriptionType enumVar)
 	{
-		setAttribute(AttributeName.DESCRIPTIONTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DESCRIPTIONTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -342,35 +257,6 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EDescriptionType getEDescriptionType()
-	{
-		return EDescriptionType.getEnum(getAttribute(AttributeName.DESCRIPTIONTYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute DescriptionType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute DescriptionType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDescriptionType(EDescriptionType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDescriptionType(EnumDescriptionType enumVar)
-	{
-		setAttribute(AttributeName.DESCRIPTIONTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute DescriptionType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EDescriptionType GetEDescriptionType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumDescriptionType getDescriptionType()
 	{
 		return EnumDescriptionType.getEnum(getAttribute(AttributeName.DESCRIPTIONTYPE, null, null));
@@ -386,7 +272,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFoldCatalog(String value)
+	public void setFoldCatalog(final String value)
 	{
 		setAttribute(AttributeName.FOLDCATALOG, value, null);
 	}
@@ -411,7 +297,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFoldingDetails(String value)
+	public void setFoldingDetails(final String value)
 	{
 		setAttribute(AttributeName.FOLDINGDETAILS, value, null);
 	}
@@ -436,7 +322,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFoldSheetIn(JDFXYPair value)
+	public void setFoldSheetIn(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.FOLDSHEETIN, value, null);
 	}
@@ -449,8 +335,8 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	 */
 	public JDFXYPair getFoldSheetIn()
 	{
-		String strAttrName = getAttribute(AttributeName.FOLDSHEETIN, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.FOLDSHEETIN, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -486,7 +372,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFFold the element
 	 */
-	public JDFFold getCreateFold(int iSkip)
+	public JDFFold getCreateFold(final int iSkip)
 	{
 		return (JDFFold) getCreateElement_JDFElement(ElementName.FOLD, null, iSkip);
 	}
@@ -498,7 +384,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	 * @return JDFFold the element
 	 *         default is getFold(0)
 	 */
-	public JDFFold getFold(int iSkip)
+	public JDFFold getFold(final int iSkip)
 	{
 		return (JDFFold) getElement(ElementName.FOLD, null, iSkip);
 	}

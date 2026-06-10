@@ -122,7 +122,7 @@ public abstract class JDFAutoGluingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGluingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoGluingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -134,7 +134,7 @@ public abstract class JDFAutoGluingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGluingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoGluingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -147,7 +147,7 @@ public abstract class JDFAutoGluingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoGluingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoGluingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -158,7 +158,7 @@ public abstract class JDFAutoGluingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -188,7 +188,7 @@ public abstract class JDFAutoGluingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGluingProductionID(String value)
+	public void setGluingProductionID(final String value)
 	{
 		setAttribute(AttributeName.GLUINGPRODUCTIONID, value, null);
 	}
@@ -235,7 +235,7 @@ public abstract class JDFAutoGluingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlue the element
 	 */
-	public JDFGlue getCreateGlue(int iSkip)
+	public JDFGlue getCreateGlue(final int iSkip)
 	{
 		return (JDFGlue) getCreateElement_JDFElement(ElementName.GLUE, null, iSkip);
 	}
@@ -247,7 +247,7 @@ public abstract class JDFAutoGluingParams extends JDFResource
 	 * @return JDFGlue the element
 	 *         default is getGlue(0)
 	 */
-	public JDFGlue getGlue(int iSkip)
+	public JDFGlue getGlue(final int iSkip)
 	{
 		return (JDFGlue) getElement(ElementName.GLUE, null, iSkip);
 	}

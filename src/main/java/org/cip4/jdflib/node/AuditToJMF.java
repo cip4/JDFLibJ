@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,8 +88,8 @@ public class AuditToJMF
 	private final boolean bInlineUpdates;
 
 	/**
-	 * @param _theNode the jdf node to parse
-	 * @param vParts the job part to search for, if null don't filter
+	 * @param _theNode      the jdf node to parse
+	 * @param vParts        the job part to search for, if null don't filter
 	 * @param inlineUpdates replace all updated audits with the updated version
 	 */
 	public AuditToJMF(final JDFNode _theNode, final VJDFAttributeMap vParts, final boolean inlineUpdates)
@@ -118,7 +118,7 @@ public class AuditToJMF
 		}
 
 		// we need a type safe list for sort
-		final Vector<JDFAudit> va = new Vector<JDFAudit>();
+		final Vector<JDFAudit> va = new Vector<>();
 		for (int i = 0; i < audits.size(); i++)
 		{
 			va.add((JDFAudit) audits.get(i));
@@ -139,6 +139,7 @@ public class AuditToJMF
 
 	/**
 	 * remove all updated audits from the todo vector
+	 *
 	 * @param audits
 	 */
 	private void inlineUpdates(final VElement audits)

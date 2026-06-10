@@ -81,7 +81,6 @@ import jakarta.mail.Multipart;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         26.11.2008
  */
 class JDFFilespecTest extends JDFTestCaseBase
@@ -202,7 +201,8 @@ class JDFFilespecTest extends JDFTestCaseBase
 	@Test
 	void testGetURLCidStream() throws Exception
 	{
-		new MimeUtilTest().testBuildMimePackageDocJMF(tempDir);
+		new MimeUtilTest();
+		MimeUtilTest.testBuildMimePackageDocJMF(tempDir);
 		final Path sourceFile = tempDir.resolve("testMimePackageDoc0.mjm");
 		assertTrue(Files.isReadable(sourceFile));
 		final Multipart mp;
@@ -251,12 +251,12 @@ class JDFFilespecTest extends JDFTestCaseBase
 	/**
 	 * @throws IOException
 	 * @throws MessagingException
-	 *
 	 */
 	@Test
 	void testMoveToDir() throws MessagingException, IOException
 	{
-		new MimeUtilTest().testBuildMimePackageDocJMF(tempDir);
+		new MimeUtilTest();
+		MimeUtilTest.testBuildMimePackageDocJMF(tempDir);
 		final Multipart mp;
 		try (InputStream fileStream = Files.newInputStream(tempDir.resolve("testMimePackageDoc0.mjm")))
 		{
@@ -286,7 +286,6 @@ class JDFFilespecTest extends JDFTestCaseBase
 	/**
 	 * @throws IOException
 	 * @throws MessagingException
-	 *
 	 */
 	@Test
 	void testMoveToDirUserFileName()

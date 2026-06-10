@@ -113,7 +113,7 @@ public abstract class JDFAutoMessage extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMessage(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoMessage(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -125,7 +125,7 @@ public abstract class JDFAutoMessage extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMessage(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoMessage(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -138,7 +138,7 @@ public abstract class JDFAutoMessage extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoMessage(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoMessage(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -159,7 +159,7 @@ public abstract class JDFAutoMessage extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAgentName(String value)
+	public void setAgentName(final String value)
 	{
 		setAttribute(AttributeName.AGENTNAME, value, null);
 	}
@@ -184,7 +184,7 @@ public abstract class JDFAutoMessage extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAgentVersion(String value)
+	public void setAgentVersion(final String value)
 	{
 		setAttribute(AttributeName.AGENTVERSION, value, null);
 	}
@@ -209,7 +209,7 @@ public abstract class JDFAutoMessage extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setICSVersions(VString value)
+	public void setICSVersions(final VString value)
 	{
 		setAttribute(AttributeName.ICSVERSIONS, value, null);
 	}
@@ -221,8 +221,8 @@ public abstract class JDFAutoMessage extends JDFElement
 	 */
 	public VString getICSVersions()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.ICSVERSIONS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ICSVERSIONS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -238,7 +238,7 @@ public abstract class JDFAutoMessage extends JDFElement
 	 * @param value the value to set the attribute to
 	 */
 	@Override
-	public void setID(String value)
+	public void setID(final String value)
 	{
 		setAttribute(AttributeName.ID, value, null);
 	}
@@ -264,7 +264,7 @@ public abstract class JDFAutoMessage extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSenderID(String value)
+	public void setSenderID(final String value)
 	{
 		setAttribute(AttributeName.SENDERID, value, null);
 	}
@@ -289,7 +289,7 @@ public abstract class JDFAutoMessage extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setTime(JDFDate value)
+	public void setTime(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -306,8 +306,8 @@ public abstract class JDFAutoMessage extends JDFElement
 	 */
 	public JDFDate getTime()
 	{
-		String str = getAttribute(AttributeName.TIME, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.TIME, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -321,7 +321,7 @@ public abstract class JDFAutoMessage extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setType(String value)
+	public void setType(final String value)
 	{
 		setAttribute(AttributeName.TYPE, value, null);
 	}

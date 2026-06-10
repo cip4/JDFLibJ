@@ -149,7 +149,9 @@ class MultiJobTaskQueueTest extends JDFTestCaseBase
 		assertEquals(0, q.getAvQueue());
 		assertEquals(0, q.getAvRun());
 		for (int i = 0; i < 10; i++)
+		{
 			q.queue(new WaitRunner(i, 10), "" + (i % 3));
+		}
 
 		assertEquals(q.getAvQueue(), 0);
 		for (int i = 0; i < 342; i++)
@@ -195,7 +197,9 @@ class MultiJobTaskQueueTest extends JDFTestCaseBase
 		final MultiJobTaskQueue q = MultiJobTaskQueue.getCreateJobQueue("testUniqueMulti", 3);
 		q.setUnique(true);
 		for (int i = 0; i < 10; i++)
+		{
 			q.queue(new WaitRunner(i, 100), "" + (i % 4));
+		}
 
 		assertEquals(2, q.waiting(), 2);
 		for (int i = 0; i < 342; i++)
@@ -210,7 +214,9 @@ class MultiJobTaskQueueTest extends JDFTestCaseBase
 		assertEquals(q.size(), 0, 1);
 
 		for (int i = 0; i < 4; i++)
+		{
 			assertTrue(q.queue(new WaitRunner(i, 100), "" + (i % 4)));
+		}
 		for (int i = 0; i < 44; i++)
 		{
 			q.queue(new WaitRunner(i, 100), "" + (i % 4));

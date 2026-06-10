@@ -78,12 +78,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanISOPaperSubstrate extends JDFEnumerationSpan
@@ -91,90 +87,50 @@ public class JDFSpanISOPaperSubstrate extends JDFEnumerationSpan
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanISOPaperSubstrate(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanISOPaperSubstrate(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
-	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanISOPaperSubstrate(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanISOPaperSubstrate(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
-	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFSpanISOPaperSubstrate(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanISOPaperSubstrate(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * 
-	 *  
 	 * @author rainerprosi
 	 * @date May 8, 2014
 	 */
-	public static class EnumSpanISOPaperSubstrate extends ValuedEnum
+	public enum EnumSpanISOPaperSubstrate
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		PS1, PS2, PS3, PS4, PS5, PS6, PS7, PS8;
 
-		private EnumSpanISOPaperSubstrate(String name)
+		public static EnumSpanISOPaperSubstrate getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanISOPaperSubstrate.class, val, null);
 		}
-
-		public static EnumSpanISOPaperSubstrate getEnum(String enumName)
-		{
-			return (EnumSpanISOPaperSubstrate) getEnum(EnumSpanISOPaperSubstrate.class, enumName);
-		}
-
-		public static EnumSpanISOPaperSubstrate getEnum(int enumValue)
-		{
-			return (EnumSpanISOPaperSubstrate) getEnum(EnumSpanISOPaperSubstrate.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanISOPaperSubstrate.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanISOPaperSubstrate.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanISOPaperSubstrate.class);
-		}
-
-		public static final EnumSpanISOPaperSubstrate PS1 = new EnumSpanISOPaperSubstrate("PS1");
-		public static final EnumSpanISOPaperSubstrate PS2 = new EnumSpanISOPaperSubstrate("PS2");
-		public static final EnumSpanISOPaperSubstrate PS3 = new EnumSpanISOPaperSubstrate("PS3");
-		public static final EnumSpanISOPaperSubstrate PS4 = new EnumSpanISOPaperSubstrate("PS4");
-		public static final EnumSpanISOPaperSubstrate PS5 = new EnumSpanISOPaperSubstrate("PS5");
-		public static final EnumSpanISOPaperSubstrate PS6 = new EnumSpanISOPaperSubstrate("PS6");
-		public static final EnumSpanISOPaperSubstrate PS7 = new EnumSpanISOPaperSubstrate("PS7");
-		public static final EnumSpanISOPaperSubstrate PS8 = new EnumSpanISOPaperSubstrate("PS8");
 
 	}
 
@@ -183,18 +139,18 @@ public class JDFSpanISOPaperSubstrate extends JDFEnumerationSpan
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanISOPaperSubstrate.getEnum(0);
+		return EnumSpanISOPaperSubstrate.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

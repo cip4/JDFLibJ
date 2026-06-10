@@ -51,12 +51,11 @@ package org.cip4.jdflib.datatypes;
 import java.util.ArrayList;
 import java.util.zip.DataFormatException;
 
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFRectangleRangeList extends JDFRangeList
@@ -109,12 +108,11 @@ public class JDFRectangleRangeList extends JDFRangeList
 	 * constructs a JDFRectangleRangeList from a given string
 	 *
 	 * @param s the given string
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFRectangleRangeList(final String s) throws DataFormatException
 	{
-		if (s != null && !s.equals(JDFConstants.EMPTYSTRING))
+		if (s != null && !s.equals(JDFCoreConstants.EMPTYSTRING))
 		{
 			setString(s);
 		}
@@ -146,39 +144,46 @@ public class JDFRectangleRangeList extends JDFRangeList
 	 * setString - deserialize a string Reads the string, which represents JDFRectangleRangeList, and converts it into real JDFRectangleRangeList
 	 *
 	 * @param s string to read
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public void setString(final String s) throws DataFormatException
 	{
-		if (s.indexOf(JDFConstants.TILDE) == 0 || s.lastIndexOf(JDFConstants.TILDE) == (s.length() - 1))
+		if (s.indexOf(JDFCoreConstants.TILDE) == 0 || s.lastIndexOf(JDFCoreConstants.TILDE) == (s.length() - 1))
+		{
 			throw new DataFormatException("JDFRectangleRangeList.setString: Illegal string " + s);
-		final String zappedWS = StringUtil.zappTokenWS(s, JDFConstants.TILDE); // converts
+		}
+		final String zappedWS = StringUtil.zappTokenWS(s, JDFCoreConstants.TILDE); // converts
 		// "0 0 1 1 ~ 0 0 4 4"
 		// to
 		// "0 0 1 1~0 0 4 4"
-		final VString vs = new VString(zappedWS, JDFConstants.BLANK);
+		final VString vs = new VString(zappedWS, JDFCoreConstants.BLANK);
 		rangeList.clear();
 		for (int i = 0, size = vs.size(); i < size; i++)
 		{
 			if (size - i < MAX_RECTANGLE_DIMENSION) // the last Rectangle is
+			{
 				// incomplete
 				throw new DataFormatException("JDFRectangleRangeList.setString: Illegal string " + s);
+			}
 
 			final StringBuffer str = new StringBuffer(100);
-			str.append(vs.elementAt(i)).append(JDFConstants.BLANK).append(vs.elementAt(++i)).append(JDFConstants.BLANK).append(vs.elementAt(++i)).append(JDFConstants.BLANK);
+			str.append(vs.elementAt(i)).append(JDFCoreConstants.BLANK).append(vs.elementAt(++i)).append(JDFCoreConstants.BLANK).append(vs.elementAt(++i))
+					.append(JDFCoreConstants.BLANK);
 			// the 4-th token 'tildeToken' can be with or without "~"
 			final String tildeToken = vs.elementAt(++i);
 			str.append(tildeToken);
-			if (tildeToken.indexOf(JDFConstants.TILDE) != -1) // str -
+			if (tildeToken.indexOf(JDFCoreConstants.TILDE) != -1) // str -
 			// JDFRectangleRange
 			{
 				if (size - i < MAX_RECTANGLE_DIMENSION) // the last
+				{
 					// RectangleRange is
 					// incomplete
 					throw new DataFormatException("JDFRectangleRangeList.setString: Illegal string " + s);
+				}
 
-				str.append(JDFConstants.BLANK).append(vs.elementAt(++i)).append(JDFConstants.BLANK).append(vs.elementAt(++i)).append(JDFConstants.BLANK).append(vs.elementAt(++i));
+				str.append(JDFCoreConstants.BLANK).append(vs.elementAt(++i)).append(JDFCoreConstants.BLANK).append(vs.elementAt(++i))
+						.append(JDFCoreConstants.BLANK).append(vs.elementAt(++i));
 			}
 			try
 			{
@@ -196,7 +201,6 @@ public class JDFRectangleRangeList extends JDFRangeList
 	 * isValid - validate the given String
 	 *
 	 * @param s the given string
-	 *
 	 * @return boolean - false if the String has not a valid format
 	 */
 	public boolean isValid(final String s)
@@ -255,7 +259,9 @@ public class JDFRectangleRangeList extends JDFRangeList
 
 		final int n = v == null ? 0 : v.size() - 1;
 		if (n == 0)
+		{
 			return true; // single value
+		}
 
 		final JDFRectangle first = (v.get(0));
 		final JDFRectangle last = (v.get(n));
@@ -265,8 +271,10 @@ public class JDFRectangleRangeList extends JDFRangeList
 			final JDFRectangle value = (v.get(j));
 			final JDFRectangle nextvalue = (v.get(j + 1));
 
-			if (((first.equals(last) && value.equals(nextvalue)) || (first.isLess(last) && value.isLessOrEqual(nextvalue)) || (first.isGreater(last) && value.isGreaterOrEqual(nextvalue))) == false)
+			if (((!first.equals(last) || !value.equals(nextvalue)) && (!first.isLess(last) || !value.isLessOrEqual(nextvalue)) && (!first.isGreater(last) || !value.isGreaterOrEqual(nextvalue))))
+			{
 				return false;
+			}
 		}
 		return true;
 	}
@@ -275,7 +283,9 @@ public class JDFRectangleRangeList extends JDFRangeList
 	{
 		final int siz = rangeList.size();
 		if (siz == 0)
+		{
 			return null; // attempt to operate on a null element
+		}
 
 		final ArrayList<JDFRectangle> v = new ArrayList<>(); // vector of ranges
 		for (int i = 0; i < siz; i++)
@@ -317,8 +327,10 @@ public class JDFRectangleRangeList extends JDFRangeList
 			final JDFRectangle value = v.get(j);
 			final JDFRectangle nextvalue = v.get(j + 1);
 
-			if (((first.isLess(last) && value.isLess(nextvalue)) || (first.isGreater(last) && value.isGreater(nextvalue))) == false)
+			if (((!first.isLess(last) || !value.isLess(nextvalue)) && (!first.isGreater(last) || !value.isGreater(nextvalue))))
+			{
 				return false;
+			}
 		}
 		return true;
 	}

@@ -9,12 +9,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 /**
@@ -26,39 +22,39 @@ public class JDFSpanFrequencySelection extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanFrequencySelection
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanFrequencySelection(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanFrequencySelection(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanFrequencySelection
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanFrequencySelection(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanFrequencySelection(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanFrequencySelection
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanFrequencySelection(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanFrequencySelection(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -66,45 +62,14 @@ public class JDFSpanFrequencySelection extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanFrequencySelection
 	 */
-	public static class EnumSpanFrequencySelection extends ValuedEnum
+	public enum EnumSpanFrequencySelection
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		LowestFrequency, MiddleFrequency, HighestFrequency;
 
-		private EnumSpanFrequencySelection(String name)
+		public static EnumSpanFrequencySelection getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanFrequencySelection.class, val, null);
 		}
-
-		public static EnumSpanFrequencySelection getEnum(String enumName)
-		{
-			return (EnumSpanFrequencySelection) getEnum(EnumSpanFrequencySelection.class, enumName);
-		}
-
-		public static EnumSpanFrequencySelection getEnum(int enumValue)
-		{
-			return (EnumSpanFrequencySelection) getEnum(EnumSpanFrequencySelection.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanFrequencySelection.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanFrequencySelection.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanFrequencySelection.class);
-		}
-
-		public static final EnumSpanFrequencySelection LowestFrequency = new EnumSpanFrequencySelection("LowestFrequency");
-		public static final EnumSpanFrequencySelection MiddleFrequency = new EnumSpanFrequencySelection("MiddleFrequency");
-		public static final EnumSpanFrequencySelection HighestFrequency = new EnumSpanFrequencySelection("HighestFrequency");
-
 	}
 
 	// **************************************** Methods
@@ -112,18 +77,18 @@ public class JDFSpanFrequencySelection extends JDFEnumerationSpan
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanFrequencySelection.getEnum(0);
+		return EnumSpanFrequencySelection.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -135,7 +100,7 @@ public class JDFSpanFrequencySelection extends JDFEnumerationSpan
 	@Override
 	public boolean init()
 	{
-		boolean b = super.init();
+		final boolean b = super.init();
 		setDataType(EnumDataType.EnumerationSpan);
 		return b;
 	}

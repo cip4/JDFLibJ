@@ -68,10 +68,10 @@
  */
 package org.cip4.jdflib.extensions.xjdfgoldenticket;
 
-import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.ESheetLay;
-import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EWorkStyle;
+import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumSheetLay;
+import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
-import org.cip4.jdflib.auto.JDFAutoPart.ESide;
+import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -110,7 +110,7 @@ public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 		return amount;
 	}
 
-	void setAmount(int amount)
+	void setAmount(final int amount)
 	{
 		this.amount = amount;
 	}
@@ -120,7 +120,7 @@ public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 		return waste;
 	}
 
-	void setWaste(int waste)
+	void setWaste(final int waste)
 	{
 		this.waste = waste;
 	}
@@ -130,7 +130,7 @@ public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 		return perfecting;
 	}
 
-	public void setPerfecting(boolean perfecting)
+	public void setPerfecting(final boolean perfecting)
 	{
 		this.perfecting = perfecting;
 	}
@@ -140,7 +140,7 @@ public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 	 * @param jdfVersion
 	 * @param parts
 	 */
-	public XJDFConvPrintICSGoldenTicket(int pIcsLevel, EnumVersion jdfVersion, VJDFAttributeMap parts)
+	public XJDFConvPrintICSGoldenTicket(final int pIcsLevel, final EnumVersion jdfVersion, final VJDFAttributeMap parts)
 	{
 		super(pIcsLevel, jdfVersion, parts);
 		setPerfecting(true);
@@ -149,7 +149,7 @@ public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 	@Override
 	public VString getTypes()
 	{
-		return new VString(EnumType.ConventionalPrinting.getName());
+		return new VString(EnumType.ConventionalPrinting.name());
 	}
 
 	@Override
@@ -168,7 +168,7 @@ public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 	 * @return
 	 */
 	@Override
-	public VString getICSVersions(int icsVersion)
+	public VString getICSVersions(final int icsVersion)
 	{
 		final VString v = super.getICSVersions(icsVersion);
 		v.add("MIS-CP_L" + icsVersion + "-" + getVersion().getJDFVersionName());
@@ -191,7 +191,7 @@ public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 		final SetHelper cso = createComponent(EnumUsage.Output);
 	}
 
-	public SetHelper createComponent(EnumUsage usage)
+	public SetHelper createComponent(final EnumUsage usage)
 	{
 		final SetHelper createSet = helper.getCreateSet(ElementName.COMPONENT, usage);
 		final VJDFAttributeMap workstepKeys = super.getWorkstepParts();
@@ -263,9 +263,9 @@ public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 	SetHelper createColorantControl()
 	{
 		final SetHelper createSet = helper.getCreateSet(ElementName.COLORANTCONTROL, EnumUsage.Input);
-		final VString partsf = getParts().getOverlapMaps(new JDFAttributeMap(AttributeName.SIDE, ESide.Front.name())).getPartValues(AttributeName.SEPARATION,
+		final VString partsf = getParts().getOverlapMaps(new JDFAttributeMap(AttributeName.SIDE, EnumSide.Front.name())).getPartValues(AttributeName.SEPARATION,
 				true);
-		final VString partsb = getParts().getOverlapMaps(new JDFAttributeMap(AttributeName.SIDE, ESide.Back.name())).getPartValues(AttributeName.SEPARATION,
+		final VString partsb = getParts().getOverlapMaps(new JDFAttributeMap(AttributeName.SIDE, EnumSide.Back.name())).getPartValues(AttributeName.SEPARATION,
 				true);
 		final VJDFAttributeMap wsmaps = getWorkstepParts();
 		if (ContainerUtil.equals(partsf, partsb))
@@ -284,7 +284,7 @@ public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 		{
 			final ResourceHelper resh = createSet.getCreatePartition(wsMap, true);
 			final JDFColorantControl cc = (JDFColorantControl) resh.getResource();
-			final VString parts = ESide.Back.name().equals(wsMap.get(AttributeName.SIDE)) ? partsb : partsf;
+			final VString parts = EnumSide.Back.name().equals(wsMap.get(AttributeName.SIDE)) ? partsb : partsf;
 			cc.setColorantParamSeparations(parts);
 		}
 
@@ -300,10 +300,10 @@ public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 			final JDFConventionalPrintingParams cpp = (JDFConventionalPrintingParams) cppSet.getCreateResource(part, true).getResource();
 			if (icsLevel >= 2)
 			{
-				cpp.setSheetLay(ESheetLay.Left);
+				cpp.setSheetLay(EnumSheetLay.Left);
 			}
-			cpp.setWorkStyle(perfecting ? EWorkStyle.Perfecting
-					: (workstepParts.getPartValues(AttributeName.SIDE, true).size() == 1 ? EWorkStyle.Simplex : EWorkStyle.WorkAndBack));
+			cpp.setWorkStyle(perfecting ? EnumWorkStyle.Perfecting
+					: (workstepParts.getPartValues(AttributeName.SIDE, true).size() == 1 ? EnumWorkStyle.Simplex : EnumWorkStyle.WorkAndBack));
 
 		}
 		return cppSet;

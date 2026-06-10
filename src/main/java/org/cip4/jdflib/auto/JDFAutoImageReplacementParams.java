@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -103,12 +99,12 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.IMAGEREPLACEMENTSTRATEGY, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumImageReplacementStrategy.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumImageReplacementStrategy.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.IMAGEPRESCANSTRATEGY, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAXRESOLUTION, 0x4444444443l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.MINRESOLUTION, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.RESOLUTIONREDUCTIONSTRATEGY, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumResolutionReductionStrategy.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumResolutionReductionStrategy.class, 0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.IGNOREEXTENSIONS, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.MAXSEARCHRECURSION, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
@@ -138,7 +134,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoImageReplacementParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoImageReplacementParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -150,7 +146,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoImageReplacementParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoImageReplacementParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -163,7 +159,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoImageReplacementParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoImageReplacementParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -174,7 +170,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -189,170 +185,36 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for ImageReplacementStrategy
+	 * Enumeration strings for numImageReplacementStrategy
 	 */
 
-	public enum EImageReplacementStrategy
+	public enum EnumImageReplacementStrategy
 	{
 		Omit, Proxy, Replace, AttemptReplacement;
 
-		public static EImageReplacementStrategy getEnum(String val)
+		public static EnumImageReplacementStrategy getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EImageReplacementStrategy.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumImageReplacementStrategy.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for ImageReplacementStrategy
+	 * Enumeration strings for numResolutionReductionStrategy
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumImageReplacementStrategy extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumImageReplacementStrategy(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumImageReplacementStrategy getEnum(String enumName)
-		{
-			return (EnumImageReplacementStrategy) getEnum(EnumImageReplacementStrategy.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumImageReplacementStrategy getEnum(int enumValue)
-		{
-			return (EnumImageReplacementStrategy) getEnum(EnumImageReplacementStrategy.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumImageReplacementStrategy.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumImageReplacementStrategy.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumImageReplacementStrategy.class);
-		}
-
-		/**  */
-		public static final EnumImageReplacementStrategy Omit = new EnumImageReplacementStrategy("Omit");
-		/**  */
-		public static final EnumImageReplacementStrategy Proxy = new EnumImageReplacementStrategy("Proxy");
-		/**  */
-		public static final EnumImageReplacementStrategy Replace = new EnumImageReplacementStrategy("Replace");
-		/**  */
-		public static final EnumImageReplacementStrategy AttemptReplacement = new EnumImageReplacementStrategy("AttemptReplacement");
-	}
-
-	/**
-	 * Enumeration strings for ResolutionReductionStrategy
-	 */
-
-	public enum EResolutionReductionStrategy
+	public enum EnumResolutionReductionStrategy
 	{
 		Downsample, Subsample, Bicubic;
 
-		public static EResolutionReductionStrategy getEnum(String val)
+		public static EnumResolutionReductionStrategy getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EResolutionReductionStrategy.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumResolutionReductionStrategy.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for ResolutionReductionStrategy
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumResolutionReductionStrategy extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumResolutionReductionStrategy(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumResolutionReductionStrategy getEnum(String enumName)
-		{
-			return (EnumResolutionReductionStrategy) getEnum(EnumResolutionReductionStrategy.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumResolutionReductionStrategy getEnum(int enumValue)
-		{
-			return (EnumResolutionReductionStrategy) getEnum(EnumResolutionReductionStrategy.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumResolutionReductionStrategy.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumResolutionReductionStrategy.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumResolutionReductionStrategy.class);
-		}
-
-		/**  */
-		public static final EnumResolutionReductionStrategy Downsample = new EnumResolutionReductionStrategy("Downsample");
-		/**  */
-		public static final EnumResolutionReductionStrategy Subsample = new EnumResolutionReductionStrategy("Subsample");
-		/**  */
-		public static final EnumResolutionReductionStrategy Bicubic = new EnumResolutionReductionStrategy("Bicubic");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -364,9 +226,9 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setImageReplacementStrategy(EImageReplacementStrategy enumVar)
+	public void setImageReplacementStrategy(final EnumImageReplacementStrategy enumVar)
 	{
-		setAttribute(AttributeName.IMAGEREPLACEMENTSTRATEGY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.IMAGEREPLACEMENTSTRATEGY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -374,35 +236,6 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EImageReplacementStrategy getEImageReplacementStrategy()
-	{
-		return EImageReplacementStrategy.getEnum(getAttribute(AttributeName.IMAGEREPLACEMENTSTRATEGY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ImageReplacementStrategy
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ImageReplacementStrategy
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetImageReplacementStrategy(EImageReplacementStrategy) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setImageReplacementStrategy(EnumImageReplacementStrategy enumVar)
-	{
-		setAttribute(AttributeName.IMAGEREPLACEMENTSTRATEGY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ImageReplacementStrategy
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EImageReplacementStrategy GetEImageReplacementStrategy() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumImageReplacementStrategy getImageReplacementStrategy()
 	{
 		return EnumImageReplacementStrategy.getEnum(getAttribute(AttributeName.IMAGEREPLACEMENTSTRATEGY, null, null));
@@ -418,7 +251,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setImagePreScanStrategy(String value)
+	public void setImagePreScanStrategy(final String value)
 	{
 		setAttribute(AttributeName.IMAGEPRESCANSTRATEGY, value, null);
 	}
@@ -443,7 +276,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaxResolution(double value)
+	public void setMaxResolution(final double value)
 	{
 		setAttribute(AttributeName.MAXRESOLUTION, value, null);
 	}
@@ -468,7 +301,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMinResolution(double value)
+	public void setMinResolution(final double value)
 	{
 		setAttribute(AttributeName.MINRESOLUTION, value, null);
 	}
@@ -493,9 +326,9 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setResolutionReductionStrategy(EResolutionReductionStrategy enumVar)
+	public void setResolutionReductionStrategy(final EnumResolutionReductionStrategy enumVar)
 	{
-		setAttribute(AttributeName.RESOLUTIONREDUCTIONSTRATEGY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.RESOLUTIONREDUCTIONSTRATEGY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -503,35 +336,6 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EResolutionReductionStrategy getEResolutionReductionStrategy()
-	{
-		return EResolutionReductionStrategy.getEnum(getAttribute(AttributeName.RESOLUTIONREDUCTIONSTRATEGY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ResolutionReductionStrategy
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ResolutionReductionStrategy
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetResolutionReductionStrategy(EResolutionReductionStrategy) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setResolutionReductionStrategy(EnumResolutionReductionStrategy enumVar)
-	{
-		setAttribute(AttributeName.RESOLUTIONREDUCTIONSTRATEGY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ResolutionReductionStrategy
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EResolutionReductionStrategy GetEResolutionReductionStrategy() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumResolutionReductionStrategy getResolutionReductionStrategy()
 	{
 		return EnumResolutionReductionStrategy.getEnum(getAttribute(AttributeName.RESOLUTIONREDUCTIONSTRATEGY, null, null));
@@ -547,7 +351,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIgnoreExtensions(VString value)
+	public void setIgnoreExtensions(final VString value)
 	{
 		setAttribute(AttributeName.IGNOREEXTENSIONS, value, null);
 	}
@@ -559,8 +363,8 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 */
 	public VString getIgnoreExtensions()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.IGNOREEXTENSIONS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.IGNOREEXTENSIONS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -575,7 +379,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaxSearchRecursion(int value)
+	public void setMaxSearchRecursion(final int value)
 	{
 		setAttribute(AttributeName.MAXSEARCHRECURSION, value, null);
 	}
@@ -622,7 +426,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
-	public JDFFileSpec getCreateFileSpec(int iSkip)
+	public JDFFileSpec getCreateFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -634,7 +438,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 * @return JDFFileSpec the element
 	 *         default is getFileSpec(0)
 	 */
-	public JDFFileSpec getFileSpec(int iSkip)
+	public JDFFileSpec getFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -664,7 +468,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -695,7 +499,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFElement the element
 	 */
-	public JDFElement getCreateSearchPath(int iSkip)
+	public JDFElement getCreateSearchPath(final int iSkip)
 	{
 		return (JDFElement) getCreateElement_JDFElement(ElementName.SEARCHPATH, null, iSkip);
 	}
@@ -707,7 +511,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 * @return JDFElement the element
 	 *         default is getSearchPath(0)
 	 */
-	public JDFElement getSearchPath(int iSkip)
+	public JDFElement getSearchPath(final int iSkip)
 	{
 		return (JDFElement) getElement(ElementName.SEARCHPATH, null, iSkip);
 	}

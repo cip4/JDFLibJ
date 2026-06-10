@@ -74,13 +74,12 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFDevice;
-import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
- * June 7, 2009
+ *         June 7, 2009
  */
 public class WalkDevice extends WalkResource
 {
@@ -114,8 +113,8 @@ public class WalkDevice extends WalkResource
 
 	/**
 	 * @see WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine
-	 * for JDF uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to
-	 * high versions but potentially fail when attempting to move from higher to lower versions
+	 *      for JDF uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to
+	 *      high versions but potentially fail when attempting to move from higher to lower versions
 	 */
 	@Override
 	public KElement walk(final KElement e1, final KElement trackElem)
@@ -125,7 +124,7 @@ public class WalkDevice extends WalkResource
 		{
 			d.setDescriptiveName(StringUtil.getNonEmpty(d.getFriendlyName()));
 		}
-		if (fixVersion.isZappDeprecated() && EnumUtil.aLessThanB(EnumVersion.Version_1_3, fixVersion.version))
+		if (fixVersion.isZappDeprecated() && JavaEnumUtil.aLessThanB(EnumVersion.Version_1_3, fixVersion.version))
 		{
 			d.removeAttribute(AttributeName.FRIENDLYNAME);
 		}

@@ -9,12 +9,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanLevel extends JDFEnumerationSpan
@@ -23,39 +19,39 @@ public class JDFSpanLevel extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanLevel
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanLevel(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanLevel(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanLevel
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanLevel(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanLevel(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanLevel
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanLevel(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanLevel(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -63,44 +59,14 @@ public class JDFSpanLevel extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanLevel
 	 */
-	public static class EnumSpanLevel extends ValuedEnum
+	public enum EnumSpanLevel
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		SingleLevel, MultiLevel, Sculpted;
 
-		private EnumSpanLevel(String name)
+		public static EnumSpanLevel getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanLevel.class, val, null);
 		}
-
-		public static EnumSpanLevel getEnum(String enumName)
-		{
-			return (EnumSpanLevel) getEnum(EnumSpanLevel.class, enumName);
-		}
-
-		public static EnumSpanLevel getEnum(int enumValue)
-		{
-			return (EnumSpanLevel) getEnum(EnumSpanLevel.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanLevel.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanLevel.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanLevel.class);
-		}
-
-		public static final EnumSpanLevel SingleLevel = new EnumSpanLevel("SingleLevel");
-		public static final EnumSpanLevel MultiLevel = new EnumSpanLevel("MultiLevel");
-		public static final EnumSpanLevel Sculpted = new EnumSpanLevel("Sculpted");
 
 	}
 
@@ -109,18 +75,18 @@ public class JDFSpanLevel extends JDFEnumerationSpan
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanLevel.getEnum(0);
+		return EnumSpanLevel.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

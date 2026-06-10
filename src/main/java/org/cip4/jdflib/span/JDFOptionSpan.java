@@ -81,7 +81,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 
 public class JDFOptionSpan extends JDFSpanBase
 {
@@ -89,36 +89,36 @@ public class JDFOptionSpan extends JDFSpanBase
 
 	/**
 	 * Constructor for JDFOptionSpan
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFOptionSpan(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFOptionSpan(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFOptionSpan
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFOptionSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFOptionSpan(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFOptionSpan
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFOptionSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFOptionSpan(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -145,7 +145,7 @@ public class JDFOptionSpan extends JDFSpanBase
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -156,17 +156,17 @@ public class JDFOptionSpan extends JDFSpanBase
 
 	/**
 	 * Set attribute Actual
-	 * 
+	 *
 	 * @param boolean value - the value to set
 	 */
-	public void setActual(boolean value)
+	public void setActual(final boolean value)
 	{
 		setAttribute(AttributeName.ACTUAL, value, null);
 	}
 
 	/**
 	 * Get attribute Actual value
-	 * 
+	 *
 	 * @return boolean - the value of attribute Actual
 	 */
 	public boolean getActual()
@@ -176,17 +176,17 @@ public class JDFOptionSpan extends JDFSpanBase
 
 	/**
 	 * Set attribute Preferred
-	 * 
+	 *
 	 * @param boolean value - the value to set
 	 */
-	public void setPreferred(boolean value)
+	public void setPreferred(final boolean value)
 	{
 		setAttribute(AttributeName.PREFERRED, value, null);
 	}
 
 	/**
 	 * Get attribute Preferred value
-	 * 
+	 *
 	 * @return boolean - the value of attribute Preferred
 	 */
 	public boolean getPreferred()
@@ -196,27 +196,27 @@ public class JDFOptionSpan extends JDFSpanBase
 
 	/**
 	 * Set attribute Range as a String
-	 * 
+	 *
 	 * @param String value - the value to set
 	 */
-	public void setRange(String value)
+	public void setRange(final String value)
 	{
 		setAttribute(AttributeName.RANGE, value, null);
 	}
 
 	/**
 	 * Get attribute Range value
-	 * 
+	 *
 	 * @return String - the value of attribute Range
 	 */
 	public String getRange()
 	{
-		return getAttribute(AttributeName.RANGE, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.RANGE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
 	 * Gets the value of attribute DataType
-	 * 
+	 *
 	 * @return EnumDataType - the attribute DataType value
 	 */
 	@Override
@@ -228,7 +228,7 @@ public class JDFOptionSpan extends JDFSpanBase
 	@Override
 	public boolean init()
 	{
-		boolean b = super.init();
+		final boolean b = super.init();
 		setDataType(EnumDataType.OptionSpan);
 		return b;
 	}

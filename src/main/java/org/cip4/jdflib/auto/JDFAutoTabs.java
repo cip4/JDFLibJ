@@ -132,7 +132,7 @@ public abstract class JDFAutoTabs extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTabs(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoTabs(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -144,7 +144,7 @@ public abstract class JDFAutoTabs extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTabs(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoTabs(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -157,7 +157,7 @@ public abstract class JDFAutoTabs extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoTabs(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoTabs(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -178,7 +178,7 @@ public abstract class JDFAutoTabs extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTabBanks(int value)
+	public void setTabBanks(final int value)
 	{
 		setAttribute(AttributeName.TABBANKS, value, null);
 	}
@@ -203,7 +203,7 @@ public abstract class JDFAutoTabs extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTabCount(int value)
+	public void setTabCount(final int value)
 	{
 		setAttribute(AttributeName.TABCOUNT, value, null);
 	}
@@ -228,7 +228,7 @@ public abstract class JDFAutoTabs extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTabsPerBank(int value)
+	public void setTabsPerBank(final int value)
 	{
 		setAttribute(AttributeName.TABSPERBANK, value, null);
 	}
@@ -461,7 +461,7 @@ public abstract class JDFAutoTabs extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element
 	 */
-	public JDFStringSpan getCreateTabMylarColorDetails(int iSkip)
+	public JDFStringSpan getCreateTabMylarColorDetails(final int iSkip)
 	{
 		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.TABMYLARCOLORDETAILS, null, iSkip);
 	}
@@ -473,7 +473,7 @@ public abstract class JDFAutoTabs extends JDFElement
 	 * @return JDFStringSpan the element
 	 *         default is getTabMylarColorDetails(0)
 	 */
-	public JDFStringSpan getTabMylarColorDetails(int iSkip)
+	public JDFStringSpan getTabMylarColorDetails(final int iSkip)
 	{
 		return (JDFStringSpan) getElement(ElementName.TABMYLARCOLORDETAILS, null, iSkip);
 	}

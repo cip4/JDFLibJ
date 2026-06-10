@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
@@ -89,36 +89,36 @@ public class JDFnot extends JDFNodeTerm
 
 	/**
 	 * Constructor for JDFnot
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFnot(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFnot(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFnot
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFnot(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFnot(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFnot
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFnot(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFnot(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -137,41 +137,45 @@ public class JDFnot extends JDFNodeTerm
 	 * Evaluation/BasicPreflightTest/@Name. If 'm' has such key, it checks
 	 * whether its value fits the testlists specified for matching the
 	 * Evaluation (uses FitsValue(value))
-	 * 
+	 *
 	 * @param m
-	 *            key-value pair attribute map
+	 *          key-value pair attribute map
 	 * @return boolean - true, if boolean "not" expression evaluates to "true"
 	 */
 	@Override
-	public boolean fitsMap(JDFAttributeMap m)
+	public boolean fitsMap(final JDFAttributeMap m)
 	{
-		JDFTerm t = getTerm(null, 0);
+		final JDFTerm t = getTerm(null, 0);
 		if (t == null)
+		{
 			return false;
+		}
 		return !t.fitsMap(m);
 	}
 
 	/**
 	 * Inverts the boolean state of a Term child element (and, or, xor, not,
 	 * Evaluation, TestRef)
-	 * 
+	 *
 	 * @param jdf
-	 *            JDFNode we test to know if the Device can accept it
+	 *                   JDFNode we test to know if the Device can accept it
 	 * @param reportRoot
-	 *            the report to generate. Set to <code>null</code> if no report
-	 *            is requested.
+	 *                   the report to generate. Set to <code>null</code> if no report
+	 *                   is requested.
 	 * @return boolean - true, if boolean "not" expression evaluates to "true"
 	 */
 	@Override
-	public boolean fitsJDF(KElement jdf, KElement reportRoot)
+	public boolean fitsJDF(final KElement jdf, final KElement reportRoot)
 	{
 		KElement reportRootLocal = reportRoot;
 
-		VElement v = getTermVector(null);
-		int siz = v.size();
+		final VElement v = getTermVector(null);
+		final int siz = v.size();
 		boolean b = false;
 		if (reportRootLocal != null)
+		{
 			reportRootLocal = reportRootLocal.appendElement("not");
+		}
 
 		int count = 0;
 		for (int i = 0; i < siz; i++)
@@ -180,11 +184,15 @@ public class JDFnot extends JDFNodeTerm
 			b = !t.fitsJDF(jdf, reportRootLocal);
 			count++;
 			if (reportRootLocal != null)
+			{
 				reportRootLocal.setAttribute("Value", b, null);
+			}
 		}
 
 		if (reportRootLocal != null && count != 1)
+		{
 			reportRootLocal.setAttribute("SyntaxWarning", "Warning: not element with more than one term, count=" + String.valueOf(count));
+		}
 
 		return b;
 	}
@@ -192,16 +200,20 @@ public class JDFnot extends JDFNodeTerm
 	// //////////////////////////////////////////////////
 
 	@Override
-	public VString getInvalidElements(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
+	public VString getInvalidElements(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
 	{
 		boolean bIgnorePrivateLocal = bIgnorePrivate;
 
 		if (bIgnorePrivateLocal)
+		{
 			bIgnorePrivateLocal = false; // dummy to fool compiler
+		}
 
-		VString v = super.getInvalidElements(level, bIgnorePrivateLocal, nMax);
+		final VString v = super.getInvalidElements(level, bIgnorePrivateLocal, nMax);
 		if (v.size() >= nMax)
+		{
 			return v;
+		}
 
 		v.appendUnique(getInvalidTerms(1));
 
@@ -211,11 +223,13 @@ public class JDFnot extends JDFNodeTerm
 	// ///////////////////////////////////////////////////////
 
 	@Override
-	public VString getMissingElements(int nMax)
+	public VString getMissingElements(final int nMax)
 	{
-		VString v = super.getMissingElements(nMax);
+		final VString v = super.getMissingElements(nMax);
 		if (v.size() >= nMax)
+		{
 			return v;
+		}
 
 		v.appendUnique(getMissingTerms(1));
 		return v;

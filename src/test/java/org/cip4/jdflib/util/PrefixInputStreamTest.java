@@ -78,16 +78,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class PrefixInputStreamTest extends JDFTestCaseBase
 {
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testRead() throws Exception
@@ -104,7 +101,6 @@ class PrefixInputStreamTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testMark1() throws Exception
@@ -126,7 +122,6 @@ class PrefixInputStreamTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testMark2() throws Exception
@@ -154,7 +149,6 @@ class PrefixInputStreamTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testReadBytes() throws Exception
@@ -170,7 +164,6 @@ class PrefixInputStreamTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testReadByteslen() throws Exception

@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -95,8 +90,10 @@ public abstract class JDFAutoImageShift extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.POSITIONX, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumPositionX.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITIONY, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumPositionY.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.POSITIONX, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumPositionX.class, 0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITIONY, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumPositionY.class, 0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHIFTBACK, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.SHIFTFRONT, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
 	}
@@ -113,7 +110,7 @@ public abstract class JDFAutoImageShift extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoImageShift(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoImageShift(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -125,7 +122,7 @@ public abstract class JDFAutoImageShift extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoImageShift(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoImageShift(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -138,182 +135,42 @@ public abstract class JDFAutoImageShift extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoImageShift(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoImageShift(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for PositionX
+	 * Enumeration strings for numPositionX
 	 */
 
-	public enum EPositionX
+	public enum EnumPositionX
 	{
 		Left, Right, Center, Spine, None;
 
-		public static EPositionX getEnum(String val)
+		public static EnumPositionX getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPositionX.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPositionX.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for PositionX
+	 * Enumeration strings for numPositionY
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumPositionX extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPositionX(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumPositionX getEnum(String enumName)
-		{
-			return (EnumPositionX) getEnum(EnumPositionX.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPositionX getEnum(int enumValue)
-		{
-			return (EnumPositionX) getEnum(EnumPositionX.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPositionX.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPositionX.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPositionX.class);
-		}
-
-		/**  */
-		public static final EnumPositionX Left = new EnumPositionX("Left");
-		/**  */
-		public static final EnumPositionX Right = new EnumPositionX("Right");
-		/**  */
-		public static final EnumPositionX Center = new EnumPositionX("Center");
-		/**  */
-		public static final EnumPositionX Spine = new EnumPositionX("Spine");
-		/**  */
-		public static final EnumPositionX None = new EnumPositionX("None");
-	}
-
-	/**
-	 * Enumeration strings for PositionY
-	 */
-
-	public enum EPositionY
+	public enum EnumPositionY
 	{
 		Bottom, Top, Center, Spine, None;
 
-		public static EPositionY getEnum(String val)
+		public static EnumPositionY getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPositionY.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPositionY.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for PositionY
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumPositionY extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPositionY(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumPositionY getEnum(String enumName)
-		{
-			return (EnumPositionY) getEnum(EnumPositionY.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPositionY getEnum(int enumValue)
-		{
-			return (EnumPositionY) getEnum(EnumPositionY.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPositionY.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPositionY.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPositionY.class);
-		}
-
-		/**  */
-		public static final EnumPositionY Bottom = new EnumPositionY("Bottom");
-		/**  */
-		public static final EnumPositionY Top = new EnumPositionY("Top");
-		/**  */
-		public static final EnumPositionY Center = new EnumPositionY("Center");
-		/**  */
-		public static final EnumPositionY Spine = new EnumPositionY("Spine");
-		/**  */
-		public static final EnumPositionY None = new EnumPositionY("None");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -325,9 +182,9 @@ public abstract class JDFAutoImageShift extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPositionX(EPositionX enumVar)
+	public void setPositionX(final EnumPositionX enumVar)
 	{
-		setAttribute(AttributeName.POSITIONX, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.POSITIONX, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -335,35 +192,6 @@ public abstract class JDFAutoImageShift extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPositionX getEPositionX()
-	{
-		return EPositionX.getEnum(getAttribute(AttributeName.POSITIONX, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute PositionX
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute PositionX
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPositionX(EPositionX) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPositionX(EnumPositionX enumVar)
-	{
-		setAttribute(AttributeName.POSITIONX, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute PositionX
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EPositionX GetEPositionX() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumPositionX getPositionX()
 	{
 		return EnumPositionX.getEnum(getAttribute(AttributeName.POSITIONX, null, null));
@@ -379,9 +207,9 @@ public abstract class JDFAutoImageShift extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPositionY(EPositionY enumVar)
+	public void setPositionY(final EnumPositionY enumVar)
 	{
-		setAttribute(AttributeName.POSITIONY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.POSITIONY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -389,35 +217,6 @@ public abstract class JDFAutoImageShift extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPositionY getEPositionY()
-	{
-		return EPositionY.getEnum(getAttribute(AttributeName.POSITIONY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute PositionY
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute PositionY
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPositionY(EPositionY) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPositionY(EnumPositionY enumVar)
-	{
-		setAttribute(AttributeName.POSITIONY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute PositionY
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EPositionY GetEPositionY() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumPositionY getPositionY()
 	{
 		return EnumPositionY.getEnum(getAttribute(AttributeName.POSITIONY, null, null));
@@ -433,7 +232,7 @@ public abstract class JDFAutoImageShift extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setShiftBack(JDFXYPair value)
+	public void setShiftBack(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.SHIFTBACK, value, null);
 	}
@@ -446,8 +245,8 @@ public abstract class JDFAutoImageShift extends JDFElement
 	 */
 	public JDFXYPair getShiftBack()
 	{
-		String strAttrName = getAttribute(AttributeName.SHIFTBACK, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SHIFTBACK, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -461,7 +260,7 @@ public abstract class JDFAutoImageShift extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setShiftFront(JDFXYPair value)
+	public void setShiftFront(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.SHIFTFRONT, value, null);
 	}
@@ -474,8 +273,8 @@ public abstract class JDFAutoImageShift extends JDFElement
 	 */
 	public JDFXYPair getShiftFront()
 	{
-		String strAttrName = getAttribute(AttributeName.SHIFTFRONT, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SHIFTFRONT, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 

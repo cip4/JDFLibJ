@@ -88,13 +88,10 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- * 
  * Description: This class represents an JDFAncestor
- * 
+ *
  * @author Torsten Kaehlert
- * 
  * @version 1.0 2002-01-28
- * 
  */
 public class JDFAncestor extends JDFAutoAncestor
 {
@@ -102,7 +99,7 @@ public class JDFAncestor extends JDFAutoAncestor
 
 	/**
 	 * Constructor for JDFAncestor
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -113,7 +110,7 @@ public class JDFAncestor extends JDFAutoAncestor
 
 	/**
 	 * Constructor for JDFAncestor
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -125,7 +122,7 @@ public class JDFAncestor extends JDFAutoAncestor
 
 	/**
 	 * Constructor for JDFAncestor
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -139,6 +136,7 @@ public class JDFAncestor extends JDFAutoAncestor
 	/**
 	 * @param value
 	 */
+	@Override
 	public void setCategory(final String value)
 	{
 		setAttribute(AttributeName.CATEGORY, value);
@@ -147,6 +145,7 @@ public class JDFAncestor extends JDFAutoAncestor
 	/**
 	 * @return
 	 */
+	@Override
 	public String getCategory()
 	{
 		return getAttribute(AttributeName.CATEGORY);
@@ -154,8 +153,8 @@ public class JDFAncestor extends JDFAutoAncestor
 
 	/**
 	 * Get the linked resources matching some conditions
-	 * 
-	 * @param mResAtt map of Resource attributes to search for
+	 *
+	 * @param mResAtt     map of Resource attributes to search for
 	 * @param bFollowRefs true if internal references shall be followed
 	 * @return vector with all elements matching the conditions default: GetLinkedResources(new JDFAttributeMap(), false)
 	 */

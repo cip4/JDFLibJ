@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.goldenticket;
 
@@ -95,7 +95,7 @@ public class ODPGoldenTicket extends BaseGoldenTicket
 {
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	protected void fillCatMaps()
@@ -107,10 +107,11 @@ public class ODPGoldenTicket extends BaseGoldenTicket
 
 	/**
 	 * create a BaseGoldenTicket
+	 *
 	 * @param _icsLevel the level to init to (1,2 or 3)
 	 * @param version
 	 */
-	public ODPGoldenTicket(final int _icsLevel, EnumVersion version)
+	public ODPGoldenTicket(final int _icsLevel, final EnumVersion version)
 	{
 		super(0, version);
 		icsLevel = _icsLevel;
@@ -137,54 +138,53 @@ public class ODPGoldenTicket extends BaseGoldenTicket
 		initOutputComponent();
 		initInterpretingParams();
 		initRenderingParams();
-		JDFMedia m = initPaperMedia();
+		final JDFMedia m = initPaperMedia();
 		initDigitalPrintingParams(m);
 		initLayoutPrep();
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	private JDFLayoutPreparationParams initLayoutPrep()
 	{
-		JDFLayoutPreparationParams layPP = (JDFLayoutPreparationParams) theNode.getCreateResource(ElementName.LAYOUTPREPARATIONPARAMS, EnumUsage.Input, 0);
+		final JDFLayoutPreparationParams layPP = (JDFLayoutPreparationParams) theNode.getCreateResource(ElementName.LAYOUTPREPARATIONPARAMS, EnumUsage.Input, 0);
 		layPP.setSides(JDFLayoutPreparationParams.EnumSides.TwoSidedFlipY);
 		return layPP;
 	}
 
 	/**
-	 * @return 
-	 * 
+	 * @return
 	 */
 	private JDFInterpretingParams initInterpretingParams()
 	{
-		JDFInterpretingParams intParams = (JDFInterpretingParams) theNode.getCreateResource(ElementName.INTERPRETINGPARAMS, EnumUsage.Input, 0);
+		final JDFInterpretingParams intParams = (JDFInterpretingParams) theNode.getCreateResource(ElementName.INTERPRETINGPARAMS, EnumUsage.Input, 0);
 		intParams.setPrintQuality(EnumPrintQuality.Normal);
 		return intParams;
 	}
 
 	/**
-	 * @return 
-	 * 
+	 * @return
 	 */
 	private JDFRenderingParams initRenderingParams()
 	{
-		JDFRenderingParams rendParams = (JDFRenderingParams) theNode.getCreateResource(ElementName.RENDERINGPARAMS, EnumUsage.Input, 0);
+		final JDFRenderingParams rendParams = (JDFRenderingParams) theNode.getCreateResource(ElementName.RENDERINGPARAMS, EnumUsage.Input, 0);
 		rendParams.appendObjectResolution().setResolution(new JDFXYPair(600, 600));
 		return rendParams;
 	}
 
 	/**
-	 * @param m 
-	 * @return 
-	 * 
+	 * @param m
+	 * @return
 	 */
-	private JDFDigitalPrintingParams initDigitalPrintingParams(JDFMedia m)
+	private JDFDigitalPrintingParams initDigitalPrintingParams(final JDFMedia m)
 	{
-		JDFDigitalPrintingParams digiParams = (JDFDigitalPrintingParams) theNode.getCreateResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input, 0);
-		digiParams.setSides(EnumSides.TwoSided);
+		final JDFDigitalPrintingParams digiParams = (JDFDigitalPrintingParams) theNode.getCreateResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input, 0);
+		digiParams.setSides(org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumSides.getEnum(EnumSides.TwoSided.name()));
 		if (m != null)
+		{
 			digiParams.refElement(m);
+		}
 		return digiParams;
 	}
 
@@ -192,7 +192,7 @@ public class ODPGoldenTicket extends BaseGoldenTicket
 	 * simulate execution of this node the internal node will be modified to reflect the execution
 	 */
 	@Override
-	public void execute(VJDFAttributeMap parts, final boolean outputAvailable, final boolean bFirst)
+	public void execute(final VJDFAttributeMap parts, final boolean outputAvailable, final boolean bFirst)
 	{
 		setActivePart(null, bFirst);
 		super.execute(null, outputAvailable, bFirst);
@@ -200,7 +200,7 @@ public class ODPGoldenTicket extends BaseGoldenTicket
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.cip4.jdflib.goldenticket.BaseGoldenTicket#initDocumentRunList()
 	 */
 	@Override

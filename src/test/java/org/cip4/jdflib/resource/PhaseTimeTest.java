@@ -70,7 +70,7 @@
 /*
  * MediaColorTest.java
  * @author Dietrich Mucha
- * 
+ *
  * Copyright (C) 2004 Heidelberger Druckmaschinen AG. All Rights Reserved.
  */
 package org.cip4.jdflib.resource;
@@ -89,22 +89,21 @@ import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.util.JDFDate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 class PhaseTimeTest extends JDFTestCaseBase
 {
 	@Test
 	void testGetLink()
 	{
-		JDFDoc doc = new JDFDoc("JDF");
-		JDFNode n = doc.getJDFRoot();
-		JDFResource r = n.addResource("www.foo", EnumResourceClass.Parameter,
-				EnumUsage.Input, null, null, "www.www.com", null);
-		JDFResourceLink rl = n.getLink(r, null);
-		VElement vRL = new VElement();
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode n = doc.getJDFRoot();
+		final JDFResource r = n.addResource("www.foo", EnumResourceClass.Parameter, EnumUsage.Input, null, null, "www.www.com", null);
+		final JDFResourceLink rl = n.getLink(r, null);
+		final VElement vRL = new VElement();
 		vRL.add(rl);
 
-		JDFAuditPool ap = n.getCreateAuditPool();
-		JDFPhaseTime pt = ap
-				.addPhaseTime(EnumNodeStatus.InProgress, null, null);
+		final JDFAuditPool ap = n.getCreateAuditPool();
+		final JDFPhaseTime pt = ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);
 		pt.appendComment().setText("foo");
 		pt.setLinks(vRL);
 		pt.setStart(new JDFDate());
@@ -114,13 +113,12 @@ class PhaseTimeTest extends JDFTestCaseBase
 	@Test
 	void testGetDuration()
 	{
-		JDFDoc doc = new JDFDoc("JDF");
-		JDFNode n = doc.getJDFRoot();
-		JDFAuditPool ap = n.getCreateAuditPool();
-		JDFPhaseTime pt = ap
-				.addPhaseTime(EnumNodeStatus.InProgress, null, null);
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode n = doc.getJDFRoot();
+		final JDFAuditPool ap = n.getCreateAuditPool();
+		final JDFPhaseTime pt = ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);
 		pt.setStart(new JDFDate());
-		JDFDate end = new JDFDate();
+		final JDFDate end = new JDFDate();
 		end.setTimeInMillis(end.getTimeInMillis() + 100 * 1000);
 		pt.setEnd(end);
 		Assertions.assertEquals(pt.getDuration().getDuration(), 100., 1., "");
@@ -130,11 +128,10 @@ class PhaseTimeTest extends JDFTestCaseBase
 	@Test
 	void testModuleIDs()
 	{
-		JDFDoc doc = new JDFDoc("JDF");
-		JDFNode n = doc.getJDFRoot();
-		JDFAuditPool ap = n.getCreateAuditPool();
-		JDFPhaseTime pt = ap
-				.addPhaseTime(EnumNodeStatus.InProgress, null, null);
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode n = doc.getJDFRoot();
+		final JDFAuditPool ap = n.getCreateAuditPool();
+		final JDFPhaseTime pt = ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);
 		pt.setModules(new VString("m1 m2", " "), new VString("RIP Press", " "));
 		Assertions.assertEquals(pt.numChildElements(ElementName.MODULEPHASE, null), 2);
 		Assertions.assertEquals(pt.getModulePhase(0).getModuleID(), "m1");

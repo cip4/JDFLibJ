@@ -437,7 +437,7 @@ class ContainerUtilTest extends JDFTestCaseBase
 		private final Map<String, Integer> m;
 		private final int i;
 
-		public IgnoreGetter(Map<String, Integer> m, int i)
+		public IgnoreGetter(final Map<String, Integer> m, final int i)
 		{
 			this.m = m;
 			this.i = i;

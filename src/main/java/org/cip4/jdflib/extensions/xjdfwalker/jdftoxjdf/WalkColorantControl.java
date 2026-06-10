@@ -44,9 +44,7 @@ import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.util.ContainerUtil;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkColorantControl extends WalkResource
 {

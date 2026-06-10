@@ -58,6 +58,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
@@ -349,7 +350,7 @@ public class JDFSpawn
 			{
 				vBad.appendUnique(check.getID());
 			}
-			strIDs += StringUtil.setvString(vBad, JDFConstants.BLANK, null, null);
+			strIDs += StringUtil.setvString(vBad, JDFCoreConstants.BLANK, null, null);
 			log.error(strIDs);
 			throw new JDFException(strIDs, exMultiSpawnRW);
 		}
@@ -509,7 +510,7 @@ public class JDFSpawn
 	{
 		final VString vs = parent.getAncestorIDs();
 		JDFAncestorPool ancestorPool = parent.getJDFRoot().getAncestorPool();
-		String lastAncestorID = JDFConstants.EMPTYSTRING;
+		String lastAncestorID = JDFCoreConstants.EMPTYSTRING;
 
 		if (!(parent.equals(node))) // only do this if we are not spawning parallel
 		{
@@ -542,7 +543,7 @@ public class JDFSpawn
 			ancestor.setNodeID(vs.elementAt(i));
 			if (i == 0)
 			{ // first in list is the parent
-				if (parentURL != null && !parentURL.equals(JDFConstants.EMPTYSTRING))
+				if (parentURL != null && !parentURL.equals(JDFCoreConstants.EMPTYSTRING))
 				{
 					ancestor.setFileName(parentURL);
 				}
@@ -563,7 +564,7 @@ public class JDFSpawn
 		final JDFSpawned spawnAudit = p.addSpawned(rootOut, null, null, null, null);
 
 		// 210302 RP added if statement
-		if (spawnURL != null && !spawnURL.equals(JDFConstants.EMPTYSTRING))
+		if (spawnURL != null && !spawnURL.equals(JDFCoreConstants.EMPTYSTRING))
 		{
 			if (spawnURL.indexOf("://") == -1)
 			{
@@ -1509,11 +1510,7 @@ public class JDFSpawn
 	 */
 	private boolean overlapsPartMap(final JDFAttributeMap testMap)
 	{
-		if (vSpawnParts == null || testMap == null)
-		{
-			return true;
-		}
-		if (setSpawnParts.contains(testMap))
+		if (vSpawnParts == null || testMap == null || setSpawnParts.contains(testMap))
 		{
 			return true;
 		}
@@ -1652,7 +1649,7 @@ public class JDFSpawn
 		// 200602 RP added fix
 		if (!bResRW)
 		{
-			bResRW = vRWResources.contains(JDFConstants.STAR);
+			bResRW = vRWResources.contains(JDFCoreConstants.STAR);
 		}
 
 		// 230802 RP added check for ID in vRWResources

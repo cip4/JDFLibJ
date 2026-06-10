@@ -90,7 +90,6 @@ public class WalkDropItem extends WalkXElement
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
 	 */
 	@Override

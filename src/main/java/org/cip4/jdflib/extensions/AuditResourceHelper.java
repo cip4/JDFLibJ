@@ -45,7 +45,6 @@ public class AuditResourceHelper extends MessageResourceHelper
 {
 
 	/**
-	 *
 	 * @param audit
 	 */
 	public AuditResourceHelper(final KElement audit)
@@ -54,7 +53,6 @@ public class AuditResourceHelper extends MessageResourceHelper
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public XJMFHelper makeXJMFSignal()

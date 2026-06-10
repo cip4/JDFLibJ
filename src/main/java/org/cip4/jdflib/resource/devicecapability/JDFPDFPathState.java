@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,22 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFPDFPathState.java
@@ -88,11 +88,12 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.resource.JDFValue;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 public class JDFPDFPathState extends JDFAbstractState
 {
@@ -127,36 +128,36 @@ public class JDFPDFPathState extends JDFAbstractState
 
 	/**
 	 * constructor for JDFPDFPathState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFPDFPathState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFPDFPathState(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFPDFPathState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFPDFPathState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFPDFPathState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFPDFPathState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFPDFPathState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFPDFPathState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -166,7 +167,7 @@ public class JDFPDFPathState extends JDFAbstractState
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -179,29 +180,29 @@ public class JDFPDFPathState extends JDFAbstractState
 	 * // Attribute getter / setter
 	 */
 
-	public void setCurrentValue(String value)
+	public void setCurrentValue(final String value)
 	{
 		setAttribute(AttributeName.CURRENTVALUE, value);
 	}
 
 	public String getCurrentValue()
 	{
-		return getAttribute(AttributeName.CURRENTVALUE, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.CURRENTVALUE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	public void setDefaultValue(String value)
+	public void setDefaultValue(final String value)
 	{
 		setAttribute(AttributeName.DEFAULTVALUE, value);
 	}
 
 	public String getDefaultValue()
 	{
-		return getAttribute(AttributeName.DEFAULTVALUE, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.DEFAULTVALUE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
-	public JDFValue getValue(int iSkip)
+	public JDFValue getValue(final int iSkip)
 	{
-		JDFValue e = (JDFValue) getElement(ElementName.VALUE, JDFConstants.EMPTYSTRING, iSkip);
+		final JDFValue e = (JDFValue) getElement(ElementName.VALUE, JDFCoreConstants.EMPTYSTRING, iSkip);
 		return e;
 	}
 
@@ -217,124 +218,135 @@ public class JDFPDFPathState extends JDFAbstractState
 	/**
 	 * Gets the jSkip'th element <code>Loc</code> of the iSkip'th element
 	 * <code>Value</code>
-	 * 
+	 *
 	 * @param iSkip
-	 *            : number of <code>Value</code> elements to skip (iSkip=0 ->
-	 *            first <code>Value</code> element)
-	 * @param int jSkip: number of <code>Loc</code> subelements of the iSkip'th
-	 *        <code>Value</code> element to skip, (jSkip=0 -> first
-	 *        <code>Loc</code> element)
+	 *              : number of <code>Value</code> elements to skip (iSkip=0 ->
+	 *              first <code>Value</code> element)
+	 * @param int   jSkip: number of <code>Loc</code> subelements of the iSkip'th
+	 *              <code>Value</code> element to skip, (jSkip=0 -> first
+	 *              <code>Loc</code> element)
 	 * @return JDFLoc: the matching <code>Loc</code> element
 	 */
-	public final JDFLoc getValueLoc(int iSkip, int jSkip)
+	public final JDFLoc getValueLoc(final int iSkip, final int jSkip)
 	{
-		JDFValue val = getValue(iSkip);
+		final JDFValue val = getValue(iSkip);
 		if (val == null)
+		{
 			return null;
+		}
 		return val.getLoc(jSkip);
 	}
 
 	/**
 	 * Appends element <code>Loc</code> to the end of the iSkip'th subelement
 	 * <code>Value</code>
-	 * 
+	 *
 	 * @param iSkip
-	 *            number of <code>Value</code> elements to skip (iSkip=0 ->
-	 *            first Value element)
+	 *              number of <code>Value</code> elements to skip (iSkip=0 ->
+	 *              first Value element)
 	 * @return JDFLoc: newly created <code>Loc</code> element
 	 */
 	@Override
-	public JDFLoc appendValueLocLoc(int iSkip)
+	public JDFLoc appendValueLocLoc(final int iSkip)
 	{
-		JDFValue val = getValue(iSkip);
+		final JDFValue val = getValue(iSkip);
 		if (val == null)
+		{
 			return null;
+		}
 		return val.appendLoc();
 	}
 
 	/**
 	 * Sets the AllowedValue attribute of the i-th subelement <code>Value</code>
-	 * 
+	 *
 	 * @param iSkip
-	 *            the number of <code>Value</code> elements to skip
+	 *              the number of <code>Value</code> elements to skip
 	 * @param value
-	 *            value to set the attribute to
+	 *              value to set the attribute to
 	 */
-	public void setValueAllowedValue(int iSkip, String value)
+	public void setValueAllowedValue(final int iSkip, final String value)
 	{
-		JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
+		final JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
 		e.setAllowedValue(value);
 	}
 
 	/**
 	 * Gets the AllowedValue attribute of the iSkip'th subelement
 	 * <code>Value</code>
-	 * 
+	 *
 	 * @param iSkip
-	 *            the number of <code>Value</code> elements to skip
+	 *              the number of <code>Value</code> elements to skip
 	 * @return String: the attribute value
 	 */
-	public final String getValueAllowedValue(int iSkip)
+	public final String getValueAllowedValue(final int iSkip)
 	{
-		JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
+		final JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
 		return e.getAllowedValue();
 	}
 
 	/**
 	 * Sets the ValueUsage attribute of the iSkip'th subelement
 	 * <code>Value</code>
-	 * 
+	 *
 	 * @param iSkip
-	 *            the number of <code>Value</code> elements to skip
+	 *              the number of <code>Value</code> elements to skip
 	 * @param value
-	 *            value to set the attribute to
+	 *              value to set the attribute to
 	 */
-	public void setValueValueUsage(int iSkip, EnumFitsValue value)
+	public void setValueValueUsage(final int iSkip, final EnumFitsValue value)
 	{
-		JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
-		e.setValueUsage(EnumValueUsage.getEnum(value.getName()));
+		final JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
+		e.setValueUsage(EnumValueUsage.getEnum(JavaEnumUtil.getName(value)));
 	}
 
 	/**
 	 * Gets the value of attribute ValueUsage of the iSkip'th subelement
 	 * <code>Value</code>
-	 * 
+	 *
 	 * @param iSkip
-	 *            the number of <code>Value</code> elements to skip
+	 *              the number of <code>Value</code> elements to skip
 	 * @return EnumFitsValue: the attribute value
 	 */
-	public final EnumFitsValue getValueValueUsage(int iSkip)
+	public final EnumFitsValue getValueValueUsage(final int iSkip)
 	{
-		JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
-		return EnumFitsValue.getEnum(e.getValueUsage().getName());
+		final JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
+		final EnumValueUsage valueUsage = e.getValueUsage();
+		return EnumFitsValue.getEnum(JavaEnumUtil.getName(valueUsage));
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java
 	 * .lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
 	 */
 	@Override
-	public void addValue(String value, EnumFitsValue testlists)
+	public void addValue(final String value, final EnumFitsValue testlists)
 	{
 		if (fitsValue(value, testlists))
+		{
 			return;
+		}
 
 		if (testlists == null || EnumFitsValue.Allowed.equals(testlists))
 		{
-			JDFValue v = appendValue();
+			final JDFValue v = appendValue();
 			v.setAllowedValue(value);
 			if (testlists != null)
+			{
 				v.setValueUsage(EnumValueUsage.Allowed);
+			}
 		}
 		if (EnumFitsValue.Present.equals(testlists))
 		{
-			JDFValue v = appendValue();
+			final JDFValue v = appendValue();
 			v.setAllowedValue(value);
 			if (testlists != null)
+			{
 				v.setValueUsage(EnumValueUsage.Present);
+			}
 		}
 	}
 
@@ -345,20 +357,19 @@ public class JDFPDFPathState extends JDFAbstractState
 	/**
 	 * fitsValue - checks whether <code>value</code> matches the Allowed/Present
 	 * test lists specified for this State
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *                  value to test
 	 * @param testlists
-	 *            the test lists the value has to match. In this State the test
-	 *            lists are ValueList AND ValueMod.<br>
-	 *            Choose one of two values: FitsValue_Allowed or
-	 *            FitsValue_Present. (Defaults to Allowed)
-	 * 
+	 *                  the test lists the value has to match. In this State the test
+	 *                  lists are ValueList AND ValueMod.<br>
+	 *                  Choose one of two values: FitsValue_Allowed or
+	 *                  FitsValue_Present. (Defaults to Allowed)
 	 * @return boolean - true, if <code>value</code> matches testlists or if
 	 *         AllowedValueList and AllowedValueMod are not specified
 	 */
 	@Override
-	public final boolean fitsValue(String value, EnumFitsValue testlists)
+	public final boolean fitsValue(final String value, final EnumFitsValue testlists)
 	{
 		return (fitsLength(value, testlists) && fitsValueElem(value, testlists));
 	}
@@ -366,48 +377,51 @@ public class JDFPDFPathState extends JDFAbstractState
 	/**
 	 * fitsValueElem - checks whether <code>pdfPath</code> matches the
 	 * subelement <code>Value</code> specified for this State
-	 * 
+	 *
 	 * @param pdfPath
-	 *            PDFPath to test
+	 *                   PDFPath to test
 	 * @param valueusage
-	 *            switches between Allowed and Present configuration in
-	 *            subelement <code>Value</code>.
-	 * 
+	 *                   switches between Allowed and Present configuration in
+	 *                   subelement <code>Value</code>.
 	 * @return boolean - true, if <code>pdfPath</code> matches subelement
 	 *         <code>Value</code>
 	 */
-	private final boolean fitsValueElem(String pdfPath, EnumFitsValue valuelist)
+	private final boolean fitsValueElem(final String pdfPath, final EnumFitsValue valuelist)
 	{
-		VElement v = getChildElementVector(ElementName.VALUE, null, null, true, 0, false);
-		int siz = v.size();
+		final VElement v = getChildElementVector(ElementName.VALUE, null, null, true, 0, false);
+		final int siz = v.size();
 		boolean hasValue = false;
 		for (int i = 0; i < siz; i++)
 		{
-			JDFValue elm = (JDFValue) v.elementAt(i);
+			final JDFValue elm = (JDFValue) v.elementAt(i);
 			if (elm.hasAttribute(AttributeName.VALUEUSAGE))
 			{
-				EnumFitsValue valueUsage = getValueValueUsage(i);
+				final EnumFitsValue valueUsage = getValueValueUsage(i);
 				if (valuelist.equals(valueUsage))
 				{
 					hasValue = true;
-					String value = getValueAllowedValue(i);
+					final String value = getValueAllowedValue(i);
 					if (value.compareTo(pdfPath) == 0)
+					{
 						return true; // we have found it
+					}
 				}
 			}
 			else
 			{
 				hasValue = true;
-				String value = getValueAllowedValue(i);
+				final String value = getValueAllowedValue(i);
 				if (value.compareTo(pdfPath) == 0)
+				{
 					return true; // we have found it
+				}
 			}
 		}
 		return !hasValue;
 	}
 
 	@Override
-	public void setAllowedLength(JDFIntegerRange value)
+	public void setAllowedLength(final JDFIntegerRange value)
 	{
 		super.setPresentLength(value);
 	}
@@ -419,7 +433,7 @@ public class JDFPDFPathState extends JDFAbstractState
 	}
 
 	@Override
-	public void setPresentLength(JDFIntegerRange value)
+	public void setPresentLength(final JDFIntegerRange value)
 	{
 		super.setAllowedLength(value);
 	}
@@ -432,7 +446,7 @@ public class JDFPDFPathState extends JDFAbstractState
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
 	 */
 	@Override

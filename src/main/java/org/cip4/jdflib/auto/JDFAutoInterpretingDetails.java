@@ -103,7 +103,7 @@ public abstract class JDFAutoInterpretingDetails extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoInterpretingDetails(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoInterpretingDetails(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -115,7 +115,7 @@ public abstract class JDFAutoInterpretingDetails extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoInterpretingDetails(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoInterpretingDetails(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -128,7 +128,7 @@ public abstract class JDFAutoInterpretingDetails extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoInterpretingDetails(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoInterpretingDetails(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -149,7 +149,7 @@ public abstract class JDFAutoInterpretingDetails extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMinLineWidth(double value)
+	public void setMinLineWidth(final double value)
 	{
 		setAttribute(AttributeName.MINLINEWIDTH, value, null);
 	}

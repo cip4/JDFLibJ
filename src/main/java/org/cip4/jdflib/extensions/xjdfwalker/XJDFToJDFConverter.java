@@ -59,7 +59,6 @@ import org.cip4.jdflib.resource.process.JDFColor;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class XJDFToJDFConverter extends XJDFToJDFImpl
 {
@@ -73,8 +72,8 @@ public class XJDFToJDFConverter extends XJDFToJDFImpl
 	{
 		if (resLinkAttribs == null)
 		{
-			resLinkAttribs = new StringArray(new String[] { AttributeName.PROCESSUSAGE, AttributeName.AMOUNT, AttributeName.ACTUALAMOUNT, AttributeName.MAXAMOUNT,
-					AttributeName.MINAMOUNT, AttributeName.COMBINEDPROCESSINDEX });
+			resLinkAttribs = new StringArray(new String[] { AttributeName.PROCESSUSAGE, AttributeName.AMOUNT, AttributeName.ACTUALAMOUNT,
+					AttributeName.MAXAMOUNT, AttributeName.MINAMOUNT, AttributeName.COMBINEDPROCESSINDEX });
 
 		}
 		return resLinkAttribs;
@@ -82,7 +81,6 @@ public class XJDFToJDFConverter extends XJDFToJDFImpl
 
 	/**
 	 * @param template the jdfdoc to fill this into
-	 *
 	 */
 	public XJDFToJDFConverter(final JDFDoc template)
 	{
@@ -190,7 +188,6 @@ public class XJDFToJDFConverter extends XJDFToJDFImpl
 	}
 
 	/**
-	 *
 	 * @param xjdf
 	 * @return
 	 */
@@ -200,7 +197,6 @@ public class XJDFToJDFConverter extends XJDFToJDFImpl
 	}
 
 	/**
-	 *
 	 * @param splitter
 	 */
 	public void setSplitter(final IXJDFSplit splitter)

@@ -70,14 +70,7 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoColor.EColorType;
-import org.cip4.jdflib.auto.JDFAutoColor.EnumColorType;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -107,10 +100,11 @@ public abstract class JDFAutoProofingParams extends JDFResource
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.IMAGEVIEWINGSTRATEGY, 0x4444444433l, AttributeInfo.EnumAttributeType.string, null, "NoImages");
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.MANUALFEED, 0x4444444431l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.PROOFRENDERINGINTENT, 0x4444444431l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumProofRenderingIntent.getEnum(0), "Perceptual");
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.PROOFTYPE, 0x4444444433l, AttributeInfo.EnumAttributeType.enumeration, EnumProofType.getEnum(0),
-				"None");
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.COLORTYPE, 0x4444444433l, AttributeInfo.EnumAttributeType.enumeration, EnumColorType.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumProofRenderingIntent.class, 0), "Perceptual");
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PROOFTYPE, 0x4444444433l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumProofType.class, 0), "None");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.COLORTYPE, 0x4444444433l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumColorType.class, 0), null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.RESOLUTION, 0x4444444433l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
@@ -139,7 +133,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoProofingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoProofingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -151,7 +145,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoProofingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoProofingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -164,7 +158,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoProofingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoProofingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -175,7 +169,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -190,170 +184,50 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for ProofRenderingIntent
+	 * Enumeration strings for numProofRenderingIntent
 	 */
 
-	public enum EProofRenderingIntent
+	public enum EnumProofRenderingIntent
 	{
 		Saturation, Perceptual, RelativeColorimetric, AbsoluteColorimetric;
 
-		public static EProofRenderingIntent getEnum(String val)
+		public static EnumProofRenderingIntent getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EProofRenderingIntent.class, val, EProofRenderingIntent.Perceptual);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumProofRenderingIntent.class, val, EnumProofRenderingIntent.Perceptual);
 		}
 	}
 
 	/**
-	 * Enumeration strings for ProofRenderingIntent
+	 * Enumeration strings for numProofType
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumProofRenderingIntent extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumProofRenderingIntent(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumProofRenderingIntent getEnum(String enumName)
-		{
-			return (EnumProofRenderingIntent) getEnum(EnumProofRenderingIntent.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumProofRenderingIntent getEnum(int enumValue)
-		{
-			return (EnumProofRenderingIntent) getEnum(EnumProofRenderingIntent.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumProofRenderingIntent.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumProofRenderingIntent.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumProofRenderingIntent.class);
-		}
-
-		/**  */
-		public static final EnumProofRenderingIntent Saturation = new EnumProofRenderingIntent("Saturation");
-		/**  */
-		public static final EnumProofRenderingIntent Perceptual = new EnumProofRenderingIntent("Perceptual");
-		/**  */
-		public static final EnumProofRenderingIntent RelativeColorimetric = new EnumProofRenderingIntent("RelativeColorimetric");
-		/**  */
-		public static final EnumProofRenderingIntent AbsoluteColorimetric = new EnumProofRenderingIntent("AbsoluteColorimetric");
-	}
-
-	/**
-	 * Enumeration strings for ProofType
-	 */
-
-	public enum EProofType
+	public enum EnumProofType
 	{
 		None, Page, Imposition;
 
-		public static EProofType getEnum(String val)
+		public static EnumProofType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EProofType.class, val, EProofType.None);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumProofType.class, val, EnumProofType.None);
 		}
 	}
 
 	/**
-	 * Enumeration strings for ProofType
+	 * Enumeration strings for numColorType
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumProofType extends ValuedEnum
+	public enum EnumColorType
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Monochrome, BasicColor, MatchedColor;
 
-		protected EnumProofType(String name)
+		public static EnumColorType getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumColorType.class, val, null);
 		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumProofType getEnum(String enumName)
-		{
-			return (EnumProofType) getEnum(EnumProofType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumProofType getEnum(int enumValue)
-		{
-			return (EnumProofType) getEnum(EnumProofType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumProofType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumProofType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumProofType.class);
-		}
-
-		/**  */
-		public static final EnumProofType None = new EnumProofType("None");
-		/**  */
-		public static final EnumProofType Page = new EnumProofType("Page");
-		/**  */
-		public static final EnumProofType Imposition = new EnumProofType("Imposition");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -365,7 +239,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDisplayTraps(boolean value)
+	public void setDisplayTraps(final boolean value)
 	{
 		setAttribute(AttributeName.DISPLAYTRAPS, value, null);
 	}
@@ -390,7 +264,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHalfTone(boolean value)
+	public void setHalfTone(final boolean value)
 	{
 		setAttribute(AttributeName.HALFTONE, value, null);
 	}
@@ -415,7 +289,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setImageViewingStrategy(String value)
+	public void setImageViewingStrategy(final String value)
 	{
 		setAttribute(AttributeName.IMAGEVIEWINGSTRATEGY, value, null);
 	}
@@ -440,7 +314,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setManualFeed(boolean value)
+	public void setManualFeed(final boolean value)
 	{
 		setAttribute(AttributeName.MANUALFEED, value, null);
 	}
@@ -465,9 +339,9 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setProofRenderingIntent(EProofRenderingIntent enumVar)
+	public void setProofRenderingIntent(final EnumProofRenderingIntent enumVar)
 	{
-		setAttribute(AttributeName.PROOFRENDERINGINTENT, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.PROOFRENDERINGINTENT, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -475,35 +349,6 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EProofRenderingIntent getEProofRenderingIntent()
-	{
-		return EProofRenderingIntent.getEnum(getAttribute(AttributeName.PROOFRENDERINGINTENT, null, "Perceptual"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ProofRenderingIntent
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ProofRenderingIntent
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetProofRenderingIntent(EProofRenderingIntent) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setProofRenderingIntent(EnumProofRenderingIntent enumVar)
-	{
-		setAttribute(AttributeName.PROOFRENDERINGINTENT, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ProofRenderingIntent
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EProofRenderingIntent GetEProofRenderingIntent() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumProofRenderingIntent getProofRenderingIntent()
 	{
 		return EnumProofRenderingIntent.getEnum(getAttribute(AttributeName.PROOFRENDERINGINTENT, null, "Perceptual"));
@@ -519,9 +364,9 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setProofType(EProofType enumVar)
+	public void setProofType(final EnumProofType enumVar)
 	{
-		setAttribute(AttributeName.PROOFTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.PROOFTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -529,35 +374,6 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EProofType getEProofType()
-	{
-		return EProofType.getEnum(getAttribute(AttributeName.PROOFTYPE, null, "None"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ProofType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ProofType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetProofType(EProofType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setProofType(EnumProofType enumVar)
-	{
-		setAttribute(AttributeName.PROOFTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ProofType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EProofType GetEProofType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumProofType getProofType()
 	{
 		return EnumProofType.getEnum(getAttribute(AttributeName.PROOFTYPE, null, "None"));
@@ -573,9 +389,9 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setColorType(EColorType enumVar)
+	public void setColorType(final EnumColorType enumVar)
 	{
-		setAttribute(AttributeName.COLORTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.COLORTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -583,35 +399,6 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EColorType getEColorType()
-	{
-		return EColorType.getEnum(getAttribute(AttributeName.COLORTYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ColorType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ColorType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetColorType(EColorType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setColorType(EnumColorType enumVar)
-	{
-		setAttribute(AttributeName.COLORTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ColorType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EColorType GetEColorType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumColorType getColorType()
 	{
 		return EnumColorType.getEnum(getAttribute(AttributeName.COLORTYPE, null, null));
@@ -627,7 +414,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setResolution(JDFXYPair value)
+	public void setResolution(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.RESOLUTION, value, null);
 	}
@@ -640,8 +427,8 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 */
 	public JDFXYPair getResolution()
 	{
-		String strAttrName = getAttribute(AttributeName.RESOLUTION, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.RESOLUTION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -687,7 +474,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -728,7 +515,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMedia(JDFMedia refTarget)
+	public void refMedia(final JDFMedia refTarget)
 	{
 		refElement(refTarget);
 	}

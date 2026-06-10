@@ -48,7 +48,6 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
  * @date Apr 4, 2014
  */
@@ -114,7 +113,7 @@ class JDFQueueTest extends JDFTestCaseBase
 		for (int i = 0; i < 42; i++)
 		{
 			final JDFQueueEntry qe = q.appendQueueEntry();
-			qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum(i % 8));
+			qe.setQueueEntryStatus(EnumQueueEntryStatus.values()[i % 8]);
 			qe.setQueueEntryID("q" + i);
 		}
 		q.setStatusFromEntries();

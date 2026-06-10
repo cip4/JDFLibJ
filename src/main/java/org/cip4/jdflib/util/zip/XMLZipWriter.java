@@ -95,16 +95,19 @@ public class XMLZipWriter implements IStreamWriter
 		if (UrlUtil.isZip(entryName))
 		{
 			if (UrlUtil.extension(UrlUtil.prefix(entryName)) != null)
+			{
 				entryName = UrlUtil.prefix(entryName);
+			}
 			else
+			{
 				entryName += ".xml";
+			}
 		}
 		entryName = UrlUtil.getFileName(entryName, null);
 
 	}
 
 	/**
-	 *
 	 * @param zos
 	 * @param h
 	 * @param i

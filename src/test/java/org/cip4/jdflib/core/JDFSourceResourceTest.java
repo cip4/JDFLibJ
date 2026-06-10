@@ -82,6 +82,7 @@ import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFSourceResource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 class JDFSourceResourceTest extends JDFTestCaseBase
 {
 
@@ -91,15 +92,15 @@ class JDFSourceResourceTest extends JDFTestCaseBase
 	@Test
 	void testSourceResource()
 	{
-		JDFDoc doc = JDFTestCaseBase.creatXMDoc();
-		JDFNode n = doc.getJDFRoot();
-		JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
-		JDFNodeInfo ni = (JDFNodeInfo) n.getMatchingResource("NodeInfo", JDFNode.EnumProcessUsage.AnyInput, null, 0);
+		final JDFDoc doc = JDFTestCaseBase.creatXMDoc();
+		final JDFNode n = doc.getJDFRoot();
+		final JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
+		final JDFNodeInfo ni = (JDFNodeInfo) n.getMatchingResource("NodeInfo", JDFNode.EnumProcessUsage.AnyInput, null, 0);
 		xm.createSourceResource(ni);
 		Assertions.assertEquals(ni, xm.getSourceResource(0).getLinkRoot(), "");
 		Assertions.assertEquals(ni, xm.getSourceResource(0).getTarget(), "");
 		Assertions.assertEquals(ni.getNodeName(), xm.getSourceResource(0).getSourcefNodeName());
-		JDFSourceResource sr = xm.appendSourceResource();
+		final JDFSourceResource sr = xm.appendSourceResource();
 		Assertions.assertNull(sr.getLinkRoot());
 		Assertions.assertNull(sr.getTarget());
 		Assertions.assertNull(sr.getSourceLocalName());

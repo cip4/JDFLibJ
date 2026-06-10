@@ -82,8 +82,6 @@ import org.cip4.jdflib.util.ContainerUtil;
 import org.w3c.dom.DOMException;
 
 /**
- * 
- * 
  * @author rainer prosi
  * @date Dec 12, 2011
  */
@@ -93,48 +91,48 @@ public class JDFCostCenter extends JDFAutoCostCenter implements IMatches
 
 	/**
 	 * Constructor for JDFCostCenter
-	 * @param myOwnerDocument 
-	 * @param qualifiedName 
-	 * @throws DOMException 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
 	 */
-	public JDFCostCenter(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFCostCenter(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFCostCenter
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFCostCenter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFCostCenter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFCostCenter
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @param myLocalName 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFCostCenter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFCostCenter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	* toString
-	* 
-	* @return String
-	*/
+	 * toString
+	 * 
+	 * @return String
+	 */
 	@Override
 	public String toString()
 	{
@@ -142,11 +140,11 @@ public class JDFCostCenter extends JDFAutoCostCenter implements IMatches
 	}
 
 	/**
-	 * returns true if the input object is equivalent to this or null</br> valid object types are:<br/>
+	 * returns true if the input object is equivalent to this or null</br>
+	 * valid object types are:<br/>
 	 * CostCenter<br/>
-	 *
 	 * String - must match @CostCenterlID <br/>
-	 * 
+	 *
 	 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
 	 */
 	@Override

@@ -52,11 +52,11 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.HashUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -464,7 +464,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 * @return JDFAttributeMap - the selected element
 	 */
 	@Override
-	public JDFAttributeMap get(int i)
+	public JDFAttributeMap get(final int i)
 	{
 		final int index = ContainerUtil.index(this, i);
 		return index >= 0 ? super.get(index) : null;
@@ -947,11 +947,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 		{
 			return true;
 		}
-		if (other == null)
-		{
-			return false;
-		}
-		if (!(other instanceof VJDFAttributeMap))
+		if ((other == null) || !(other instanceof VJDFAttributeMap))
 		{
 			return false;
 		}
@@ -1002,9 +998,9 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 		{
 			s1 = (String) key;
 		}
-		else if (key instanceof ValuedEnum)
+		else if (key instanceof Enum<?>)
 		{
-			s1 = ((ValuedEnum) key).getName();
+			s1 = JavaEnumUtil.getName((Enum<?>) key);
 		}
 
 		String s2 = null;
@@ -1012,9 +1008,9 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 		{
 			s2 = (String) value;
 		}
-		else if (value instanceof ValuedEnum)
+		else if (value instanceof Enum<?>)
 		{
-			s2 = ((ValuedEnum) value).getName();
+			s2 = JavaEnumUtil.getName((Enum<?>) value);
 		}
 
 		if (s1 != null && s2 != null)

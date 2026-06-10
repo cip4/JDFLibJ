@@ -135,7 +135,7 @@ public class JDFCMYKColor extends JDFNumList
 	 * @param s the string to parse - alxo checks for explicit cyan, magents etc
 	 * @return the JDFCMYKColor, null if s is not compatible
 	 */
-	public static JDFCMYKColor createCMYKColor(String s)
+	public static JDFCMYKColor createCMYKColor(final String s)
 	{
 		if (s != null)
 		{
@@ -187,7 +187,7 @@ public class JDFCMYKColor extends JDFNumList
 	/**
 	 * @param cmykArray 4 doubles from 0 to 1 c,m,y,k
 	 */
-	public JDFCMYKColor(double[] cmykArray)
+	public JDFCMYKColor(final double[] cmykArray)
 	{
 		this(cmykArray[0], cmykArray[1], cmykArray[2], cmykArray[3]);
 	}
@@ -314,7 +314,7 @@ public class JDFCMYKColor extends JDFNumList
 	 * @return the rgb color that roughly represents this
 	 * @See {@link JDFRGBColor#getCMYK()} for the inverse
 	 */
-	public static double[] getRGBArray(double c, double m, double y, double k)
+	public static double[] getRGBArray(final double c, final double m, final double y, final double k)
 	{
 		final double[] rgb = new double[3];
 		final double colors = 1.0 - k;

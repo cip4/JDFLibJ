@@ -74,7 +74,6 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDevice;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -289,7 +288,7 @@ public class JDFDevice extends JDFAutoDevice
 		for (int i = 0; i < vnSize; i++)
 		{
 			final KElement e = vn.elementAt(i);
-			if (JDFConstants.TRUE.equals(e.getAttribute(JDFDeviceCap.FITS_TYPE)))
+			if (JDFCoreConstants.TRUE.equals(e.getAttribute(JDFDeviceCap.FITS_TYPE)))
 			{
 				bFit = true;
 			}
@@ -299,7 +298,7 @@ public class JDFDevice extends JDFAutoDevice
 			for (int i = 0; i < vnSize; i++)
 			{
 				final KElement e = vn.elementAt(i);
-				if (JDFConstants.FALSE.equals(e.getAttribute(JDFDeviceCap.FITS_TYPE)))
+				if (JDFCoreConstants.FALSE.equals(e.getAttribute(JDFDeviceCap.FITS_TYPE)))
 				{
 					vn.set(i, null);
 				}
@@ -346,7 +345,7 @@ public class JDFDevice extends JDFAutoDevice
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeviceClass(String value)
+	public void setDeviceClass(final String value)
 	{
 		setAttribute(AttributeName.DEVICECLASS, value, null);
 	}

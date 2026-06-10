@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -103,7 +98,7 @@ public abstract class JDFAutoCut extends JDFElement
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.STARTPOSITION, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.UPPERRIBBONNAME, 0x3333311111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.WORKINGDIRECTION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumWorkingDirection.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumWorkingDirection.class, 0), null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.WORKINGPATH, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
@@ -119,7 +114,7 @@ public abstract class JDFAutoCut extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCut(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoCut(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -131,7 +126,7 @@ public abstract class JDFAutoCut extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCut(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoCut(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -144,93 +139,28 @@ public abstract class JDFAutoCut extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoCut(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoCut(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for WorkingDirection
+	 * Enumeration strings for numWorkingDirection
 	 */
 
-	public enum EWorkingDirection
+	public enum EnumWorkingDirection
 	{
 		Top, Bottom;
 
-		public static EWorkingDirection getEnum(String val)
+		public static EnumWorkingDirection getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EWorkingDirection.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumWorkingDirection.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for WorkingDirection
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumWorkingDirection extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumWorkingDirection(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumWorkingDirection getEnum(String enumName)
-		{
-			return (EnumWorkingDirection) getEnum(EnumWorkingDirection.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumWorkingDirection getEnum(int enumValue)
-		{
-			return (EnumWorkingDirection) getEnum(EnumWorkingDirection.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumWorkingDirection.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumWorkingDirection.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumWorkingDirection.class);
-		}
-
-		/**  */
-		public static final EnumWorkingDirection Top = new EnumWorkingDirection("Top");
-		/**  */
-		public static final EnumWorkingDirection Bottom = new EnumWorkingDirection("Bottom");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -242,7 +172,7 @@ public abstract class JDFAutoCut extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCutWidth(double value)
+	public void setCutWidth(final double value)
 	{
 		setAttribute(AttributeName.CUTWIDTH, value, null);
 	}
@@ -267,7 +197,7 @@ public abstract class JDFAutoCut extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLowerRibbonName(String value)
+	public void setLowerRibbonName(final String value)
 	{
 		setAttribute(AttributeName.LOWERRIBBONNAME, value, null);
 	}
@@ -292,7 +222,7 @@ public abstract class JDFAutoCut extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRelativeStartPosition(JDFXYPair value)
+	public void setRelativeStartPosition(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.RELATIVESTARTPOSITION, value, null);
 	}
@@ -305,8 +235,8 @@ public abstract class JDFAutoCut extends JDFElement
 	 */
 	public JDFXYPair getRelativeStartPosition()
 	{
-		String strAttrName = getAttribute(AttributeName.RELATIVESTARTPOSITION, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.RELATIVESTARTPOSITION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -320,7 +250,7 @@ public abstract class JDFAutoCut extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRelativeWorkingPath(JDFXYPair value)
+	public void setRelativeWorkingPath(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.RELATIVEWORKINGPATH, value, null);
 	}
@@ -333,8 +263,8 @@ public abstract class JDFAutoCut extends JDFElement
 	 */
 	public JDFXYPair getRelativeWorkingPath()
 	{
-		String strAttrName = getAttribute(AttributeName.RELATIVEWORKINGPATH, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.RELATIVEWORKINGPATH, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -348,7 +278,7 @@ public abstract class JDFAutoCut extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStartPosition(JDFXYPair value)
+	public void setStartPosition(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.STARTPOSITION, value, null);
 	}
@@ -361,8 +291,8 @@ public abstract class JDFAutoCut extends JDFElement
 	 */
 	public JDFXYPair getStartPosition()
 	{
-		String strAttrName = getAttribute(AttributeName.STARTPOSITION, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.STARTPOSITION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -376,7 +306,7 @@ public abstract class JDFAutoCut extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setUpperRibbonName(String value)
+	public void setUpperRibbonName(final String value)
 	{
 		setAttribute(AttributeName.UPPERRIBBONNAME, value, null);
 	}
@@ -401,9 +331,9 @@ public abstract class JDFAutoCut extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setWorkingDirection(EWorkingDirection enumVar)
+	public void setWorkingDirection(final EnumWorkingDirection enumVar)
 	{
-		setAttribute(AttributeName.WORKINGDIRECTION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.WORKINGDIRECTION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -411,35 +341,6 @@ public abstract class JDFAutoCut extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EWorkingDirection getEWorkingDirection()
-	{
-		return EWorkingDirection.getEnum(getAttribute(AttributeName.WORKINGDIRECTION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute WorkingDirection
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute WorkingDirection
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetWorkingDirection(EWorkingDirection) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setWorkingDirection(EnumWorkingDirection enumVar)
-	{
-		setAttribute(AttributeName.WORKINGDIRECTION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute WorkingDirection
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EWorkingDirection GetEWorkingDirection() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumWorkingDirection getWorkingDirection()
 	{
 		return EnumWorkingDirection.getEnum(getAttribute(AttributeName.WORKINGDIRECTION, null, null));
@@ -455,7 +356,7 @@ public abstract class JDFAutoCut extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWorkingPath(JDFXYPair value)
+	public void setWorkingPath(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.WORKINGPATH, value, null);
 	}
@@ -468,8 +369,8 @@ public abstract class JDFAutoCut extends JDFElement
 	 */
 	public JDFXYPair getWorkingPath()
 	{
-		String strAttrName = getAttribute(AttributeName.WORKINGPATH, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.WORKINGPATH, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 

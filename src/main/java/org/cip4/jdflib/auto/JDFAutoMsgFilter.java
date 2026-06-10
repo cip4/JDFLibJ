@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -105,7 +101,8 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.BEFORE, 0x3333333333l, AttributeInfo.EnumAttributeType.dateTime, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.COUNT, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.DEVICEID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.FAMILY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumFamily.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.FAMILY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumFamily.class, 0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.JOBID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.MESSAGEREFID, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
@@ -139,7 +136,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMsgFilter(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoMsgFilter(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -151,7 +148,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMsgFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoMsgFilter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -164,97 +161,28 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoMsgFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoMsgFilter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for Family
+	 * Enumeration strings for numFamily
 	 */
 
-	public enum EFamily
+	public enum EnumFamily
 	{
 		Acknowledge, Response, Signal, All;
 
-		public static EFamily getEnum(String val)
+		public static EnumFamily getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EFamily.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumFamily.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Family
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumFamily extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumFamily(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumFamily getEnum(String enumName)
-		{
-			return (EnumFamily) getEnum(EnumFamily.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumFamily getEnum(int enumValue)
-		{
-			return (EnumFamily) getEnum(EnumFamily.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumFamily.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumFamily.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumFamily.class);
-		}
-
-		/**  */
-		public static final EnumFamily Acknowledge = new EnumFamily("Acknowledge");
-		/**  */
-		public static final EnumFamily Response = new EnumFamily("Response");
-		/**  */
-		public static final EnumFamily Signal = new EnumFamily("Signal");
-		/**  */
-		public static final EnumFamily All = new EnumFamily("All");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -266,7 +194,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setAfter(JDFDate value)
+	public void setAfter(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -283,8 +211,8 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 */
 	public JDFDate getAfter()
 	{
-		String str = getAttribute(AttributeName.AFTER, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.AFTER, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -298,7 +226,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setBefore(JDFDate value)
+	public void setBefore(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -315,8 +243,8 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 */
 	public JDFDate getBefore()
 	{
-		String str = getAttribute(AttributeName.BEFORE, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.BEFORE, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -330,7 +258,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCount(int value)
+	public void setCount(final int value)
 	{
 		setAttribute(AttributeName.COUNT, value, null);
 	}
@@ -355,7 +283,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeviceID(String value)
+	public void setDeviceID(final String value)
 	{
 		setAttribute(AttributeName.DEVICEID, value, null);
 	}
@@ -380,9 +308,9 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setFamily(EFamily enumVar)
+	public void setFamily(final EnumFamily enumVar)
 	{
-		setAttribute(AttributeName.FAMILY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.FAMILY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -390,35 +318,6 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EFamily getEFamily()
-	{
-		return EFamily.getEnum(getAttribute(AttributeName.FAMILY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Family
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Family
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetFamily(EFamily) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setFamily(EnumFamily enumVar)
-	{
-		setAttribute(AttributeName.FAMILY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Family
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EFamily GetEFamily() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumFamily getFamily()
 	{
 		return EnumFamily.getEnum(getAttribute(AttributeName.FAMILY, null, null));
@@ -434,7 +333,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -459,7 +358,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobPartID(String value)
+	public void setJobPartID(final String value)
 	{
 		setAttribute(AttributeName.JOBPARTID, value, null);
 	}
@@ -484,7 +383,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMessageRefID(String value)
+	public void setMessageRefID(final String value)
 	{
 		setAttribute(AttributeName.MESSAGEREFID, value, null);
 	}
@@ -509,7 +408,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMessageID(String value)
+	public void setMessageID(final String value)
 	{
 		setAttribute(AttributeName.MESSAGEID, value, null);
 	}
@@ -534,7 +433,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMessageType(String value)
+	public void setMessageType(final String value)
 	{
 		setAttribute(AttributeName.MESSAGETYPE, value, null);
 	}
@@ -559,7 +458,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setQueueEntryID(String value)
+	public void setQueueEntryID(final String value)
 	{
 		setAttribute(AttributeName.QUEUEENTRYID, value, null);
 	}
@@ -584,7 +483,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setReceiverURL(String value)
+	public void setReceiverURL(final String value)
 	{
 		setAttribute(AttributeName.RECEIVERURL, value, null);
 	}
@@ -631,7 +530,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
-	public JDFPart getCreatePart(int iSkip)
+	public JDFPart getCreatePart(final int iSkip)
 	{
 		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
@@ -643,7 +542,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 * @return JDFPart the element
 	 *         default is getPart(0)
 	 */
-	public JDFPart getPart(int iSkip)
+	public JDFPart getPart(final int iSkip)
 	{
 		return (JDFPart) getElement(ElementName.PART, null, iSkip);
 	}

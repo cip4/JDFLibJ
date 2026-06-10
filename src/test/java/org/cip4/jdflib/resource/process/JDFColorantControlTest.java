@@ -48,11 +48,12 @@ import java.io.IOException;
 import java.util.Collection;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoColor.EnumMappingSelection;
 import org.cip4.jdflib.auto.JDFAutoColorantControl.EnumInternalColorModel;
+import org.cip4.jdflib.auto.JDFAutoColorantControl.EnumMappingSelection;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -480,7 +481,7 @@ class JDFColorantControlTest extends JDFTestCaseBase
 	@Test
 	void testGetDeviceColorantOrderSeparationsXJDF()
 	{
-		final JDFColorantControl cc = (JDFColorantControl) JDFElementColorParams.createRoot(ElementName.COLORANTCONTROL);
+		final JDFColorantControl cc = (JDFColorantControl) JDFElement.createRoot(ElementName.COLORANTCONTROL);
 		cc.setAttribute(ElementName.COLORANTPARAMS, "a b c");
 		cc.setProcessColorModel("DeviceCMYK");
 		assertEquals(new VString("a b c"), cc.getDeviceColorantOrderSeparations());

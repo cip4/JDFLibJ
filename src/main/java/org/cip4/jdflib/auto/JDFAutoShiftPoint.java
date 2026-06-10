@@ -106,7 +106,7 @@ public abstract class JDFAutoShiftPoint extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoShiftPoint(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoShiftPoint(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoShiftPoint extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoShiftPoint(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoShiftPoint(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoShiftPoint extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoShiftPoint(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoShiftPoint(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -152,7 +152,7 @@ public abstract class JDFAutoShiftPoint extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCTM(JDFMatrix value)
+	public void setCTM(final JDFMatrix value)
 	{
 		setAttribute(AttributeName.CTM, value, null);
 	}
@@ -165,8 +165,8 @@ public abstract class JDFAutoShiftPoint extends JDFElement
 	 */
 	public JDFMatrix getCTM()
 	{
-		String strAttrName = getAttribute(AttributeName.CTM, null, null);
-		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CTM, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -180,7 +180,7 @@ public abstract class JDFAutoShiftPoint extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPosition(JDFXYPair value)
+	public void setPosition(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.POSITION, value, null);
 	}
@@ -193,8 +193,8 @@ public abstract class JDFAutoShiftPoint extends JDFElement
 	 */
 	public JDFXYPair getPosition()
 	{
-		String strAttrName = getAttribute(AttributeName.POSITION, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.POSITION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 

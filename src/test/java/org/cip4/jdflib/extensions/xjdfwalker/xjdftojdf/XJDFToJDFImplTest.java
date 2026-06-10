@@ -30,7 +30,7 @@ class XJDFToJDFImplTest extends JDFTestCaseBase
 		final SetHelper csh = h.getCreateSet(ElementName.CONTACT, EnumUsage.Input);
 		for (int i = 0; i < 2; i++)
 		{
-			final JDFAttributeMap partmap = new JDFAttributeMap(XJDFConstants.ContactType, EnumContactType.Delivery.getName());
+			final JDFAttributeMap partmap = new JDFAttributeMap(XJDFConstants.ContactType, EnumContactType.Delivery.name());
 			partmap.put(AttributeName.DROPID, "DROP_" + i);
 			final ResourceHelper ch = csh.appendPartition(partmap, true);
 			final JDFContact co = (JDFContact) ch.getResource();

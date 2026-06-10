@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2004 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2004 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,22 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFNumberEvaluation.java
@@ -87,7 +87,7 @@ import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFNumberRange;
 import org.cip4.jdflib.datatypes.JDFNumberRangeList;
@@ -114,36 +114,36 @@ public class JDFNumberEvaluation extends JDFEvaluation
 
 	/**
 	 * constructor for JDFNumberEvaluation
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFNumberEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFNumberEvaluation(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFNumberEvaluation
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFNumberEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFNumberEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFNumberEvaluation
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFNumberEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFNumberEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -153,7 +153,7 @@ public class JDFNumberEvaluation extends JDFEvaluation
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -166,7 +166,7 @@ public class JDFNumberEvaluation extends JDFEvaluation
 	 * // Attribute getter/ setter
 	 */
 
-	public void setValueList(JDFNumberRangeList value)
+	public void setValueList(final JDFNumberRangeList value)
 	{
 		setAttribute(AttributeName.VALUELIST, value.toString(), null);
 	}
@@ -175,17 +175,17 @@ public class JDFNumberEvaluation extends JDFEvaluation
 	{
 		try
 		{
-			return new JDFNumberRangeList(getAttribute(AttributeName.VALUELIST, JDFConstants.EMPTYSTRING, null));
+			return new JDFNumberRangeList(getAttribute(AttributeName.VALUELIST, JDFCoreConstants.EMPTYSTRING, null));
 
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFNumberEvaluation.setValueList: Attribute VALUELIST not applicable to create a JDFNumberRangeList");
 		}
 
 	}
 
-	public void setTolerance(JDFXYPair value)
+	public void setTolerance(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.TOLERANCE, value.toString(), null);
 	}
@@ -196,7 +196,7 @@ public class JDFNumberEvaluation extends JDFEvaluation
 		return super.getTolerance();
 	}
 
-	public void setValueMod(JDFXYPair value)
+	public void setValueMod(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.VALUEMOD, value.toString(), null);
 	}
@@ -207,7 +207,7 @@ public class JDFNumberEvaluation extends JDFEvaluation
 		{
 			return new JDFXYPair(getAttribute(AttributeName.VALUEMOD));
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFNumberEvaluation.setValueMod: Attribute AllowedValueMod is not applicable to create JDFXYPair");
 		}
@@ -220,33 +220,37 @@ public class JDFNumberEvaluation extends JDFEvaluation
 	/**
 	 * fitsValue - checks whether <code>value</code> matches the testlists
 	 * specified for this Evaluation
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @return boolean - true, if <code>value</code> matches the testlists or if
 	 *         testlists are not specified
 	 */
 	@Override
-	public boolean fitsValue(String value)
+	public boolean fitsValue(final String value)
 	{
 		if (!fitsListType(value))
+		{
 			return false;
+		}
 
 		JDFNumberRangeList rangelist = null;
 		try
 		{
 			rangelist = new JDFNumberRangeList(value);
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			return false;
 		}
 
-		int siz = rangelist.size();
+		final int siz = rangelist.size();
 		for (int i = 0; i < siz; i++)
 		{
 			if (!fitsValueMod((JDFNumberRange) rangelist.at(i)))
+			{
 				return false;
+			}
 		}
 		return (fitsValueList(rangelist));
 
@@ -255,31 +259,31 @@ public class JDFNumberEvaluation extends JDFEvaluation
 	/**
 	 * fitsListType - checks whether <code>value</code> matches the value of the
 	 * ListType attribute specified for this Evaluation
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @return boolean - true, if <code>value</code> matches the specified value
 	 *         of ListType
 	 */
-	private final boolean fitsListType(String value)
+	private final boolean fitsListType(final String value)
 	{
-		EnumListType listType = getListType();
+		final EnumListType listType = getListType();
 
 		JDFNumberRangeList rangelist;
 		try
 		{
 			rangelist = new JDFNumberRangeList(value);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			return false;
 		}
-		catch (JDFException e)
+		catch (final JDFException e)
 		{
 			return false;
 		}
 
-		if (listType.equals(EnumListType.SingleValue) || listType.equals(EnumListType.getEnum(0)))
+		if (listType.equals(EnumListType.SingleValue))
 		{// default ListType = SingleValue
 			return (StringUtil.isNumber(value));
 		}
@@ -332,20 +336,22 @@ public class JDFNumberEvaluation extends JDFEvaluation
 	/**
 	 * fitsValueList - checks whether <code>rangelist</code> matches the
 	 * AllowedValueList or the PresentValueList specified for this Evaluation
-	 * 
+	 *
 	 * @param rangelist
-	 *            nmtokens to test
+	 *                  nmtokens to test
 	 * @return boolean - true, if <code>value</code> matches
 	 *         <code>valuelist</code> or if AllowedValueList is not specified
 	 */
-	private final boolean fitsValueList(JDFNumberRangeList rangelist)
+	private final boolean fitsValueList(final JDFNumberRangeList rangelist)
 	{
 		if (!hasAttribute(AttributeName.VALUELIST))
+		{
 			return true;
+		}
 
 		JDFNumberRangeList valuelist = getValueList();
 
-		EnumListType listType = getListType();
+		final EnumListType listType = getListType();
 
 		if (listType.equals(EnumListType.CompleteList))
 		{
@@ -373,31 +379,37 @@ public class JDFNumberEvaluation extends JDFEvaluation
 	 * <code>ValueMod</code> specified for this Evaluation. If ValueMod is
 	 * specified, only a single value can be tested, otherwise
 	 * <code>false</code> is returned.
-	 * 
+	 *
 	 * @param range
-	 *            range to test
+	 *              range to test
 	 * @return boolean - true, if <code>range</code> matches the ValueMod or if
 	 *         ValueMod is not specified
 	 */
-	private final boolean fitsValueMod(JDFNumberRange range)
+	private final boolean fitsValueMod(final JDFNumberRange range)
 	{
 		if (!hasAttribute(AttributeName.VALUEMOD))
+		{
 			return true;
+		}
 
-		JDFXYPair mod = getValueMod();
+		final JDFXYPair mod = getValueMod();
 
-		double left = range.getLeft();
-		double right = range.getRight();
+		final double left = range.getLeft();
+		final double right = range.getRight();
 		if (left != right) // if we have a range return false, check only single
-							// value
+		{
+			// value
 			return false;
+		}
 
-		double elem = left; // single value
-		double divi = mod.getX(); // X - the Modulo
-		double shift = mod.getY(); // Y - offset of the allowed/present value
+		final double elem = left; // single value
+		final double divi = mod.getX(); // X - the Modulo
+		final double shift = mod.getY(); // Y - offset of the allowed/present value
 
 		if (divi == 0)
+		{
 			return false;
+		}
 
 		double nt; // negative tolerance
 		double pt; // positive tolerance
@@ -412,7 +424,7 @@ public class JDFNumberEvaluation extends JDFEvaluation
 			nt = pt = EPSILON;
 		}
 
-		double n = ((elem - divi * (int) (elem / divi)) - shift); // n = ( elem
+		final double n = ((elem - divi * (int) (elem / divi)) - shift); // n = ( elem
 																	// % divi -
 																	// shift )
 		if (java.lang.Math.abs(n) < pt || java.lang.Math.abs(n) > (divi - nt))
@@ -420,7 +432,7 @@ public class JDFNumberEvaluation extends JDFEvaluation
 			return true;
 		}
 
-		double m = (n - divi * (int) (n / divi)); // m = ( elem % divi - shift )
+		final double m = (n - divi * (int) (n / divi)); // m = ( elem % divi - shift )
 													// % divi
 		if (java.lang.Math.abs(m) < pt || java.lang.Math.abs(m) > (divi - nt))
 		{
@@ -433,31 +445,33 @@ public class JDFNumberEvaluation extends JDFEvaluation
 	 * fitsTolerance - checks whether this Evaluation has a specified Tolerance
 	 * that it is not equal to "0 0", and expands original the rangelist to the
 	 * rangelist that fits Tolerance.
-	 * 
+	 *
 	 * @param origRangeList
-	 *            original rangelist
+	 *                      original rangelist
 	 * @return NumberRangeList - expanded rangelist, returns original range if
 	 *         Tolerance=="0 0"
 	 */
-	public final JDFNumberRangeList fitsTolerance(JDFNumberRangeList origRangeList)
+	public final JDFNumberRangeList fitsTolerance(final JDFNumberRangeList origRangeList)
 	{
-		double nt = getTolerance().getX(); // negative tolerance
-		double pt = getTolerance().getY(); // positive tolerance
+		final double nt = getTolerance().getX(); // negative tolerance
+		final double pt = getTolerance().getY(); // positive tolerance
 
 		if ((nt == 0) && (pt == 0))
+		{
 			return origRangeList;
+		}
 
 		// expand our original range into the range +/- Tolerance
 
-		JDFNumberRangeList rangeList = new JDFNumberRangeList(origRangeList);
+		final JDFNumberRangeList rangeList = new JDFNumberRangeList(origRangeList);
 
-		JDFNumberRangeList tolRangeList = new JDFNumberRangeList();
+		final JDFNumberRangeList tolRangeList = new JDFNumberRangeList();
 
-		int size = rangeList.size();
+		final int size = rangeList.size();
 		for (int i = 0; i < size; i++)
 		{
-			JDFNumberRange range = (JDFNumberRange) rangeList.at(i);
-			JDFNumberRange r = new JDFNumberRange();
+			final JDFNumberRange range = (JDFNumberRange) rangeList.at(i);
+			final JDFNumberRange r = new JDFNumberRange();
 			r.setLeft(range.getLeft() - nt);
 			r.setRight(range.getRight() + pt);
 			tolRangeList.append(r);
@@ -468,25 +482,24 @@ public class JDFNumberEvaluation extends JDFEvaluation
 	/**
 	 * fitsCompleteList - tests whether <code>value</code> matches the given
 	 * ValueList (ListType=fitsCompleteList)
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @param list
-	 *            ValueList
+	 *              ValueList
 	 * @return boolean - true, if <code>value</code> matches the ValueList
 	 */
-	private final boolean fitsCompleteList(JDFNumberRangeList value, JDFNumberRangeList list)
+	private final boolean fitsCompleteList(final JDFNumberRangeList value, final JDFNumberRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
-		if (v_size != l_size)
+		if ((v_size != l_size) || !value.isUnique())
+		{
 			return false;
+		}
 
-		if (!value.isUnique())
-			return false;
-
-		JDFNumberRangeList valueList = new JDFNumberRangeList(value);
+		final JDFNumberRangeList valueList = new JDFNumberRangeList(value);
 
 		boolean bFound;
 		for (int i = l_size - 1; i >= 0; i--)
@@ -512,23 +525,22 @@ public class JDFNumberEvaluation extends JDFEvaluation
 	/**
 	 * fitsCompleteOrderedList - tests whether <code>value</code> matches the
 	 * given ValueList (ListType=CompleteOrderedList)
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @param list
-	 *            ValueList
+	 *              ValueList
 	 * @return boolean - true, if <code>value</code> matches the ValueList
 	 */
-	private final boolean fitsCompleteOrderedList(JDFNumberRangeList value, JDFNumberRangeList list)
+	private final boolean fitsCompleteOrderedList(final JDFNumberRangeList value, final JDFNumberRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
-		if (v_size != l_size)
+		if ((v_size != l_size) || !value.isUnique())
+		{
 			return false;
-
-		if (!value.isUnique())
-			return false;
+		}
 
 		for (int i = 0; i < l_size; i++)
 		{
@@ -543,17 +555,17 @@ public class JDFNumberEvaluation extends JDFEvaluation
 	/**
 	 * fitsContainedList - tests whether <code>value</code> matches the given
 	 * ValueList (ListType=ContainedList)
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @param list
-	 *            ValueList
+	 *              ValueList
 	 * @return boolean - true, if <code>value</code> matches the ValueList
 	 */
-	private final boolean fitsContainedList(JDFNumberRangeList value, JDFNumberRangeList list)
+	private final boolean fitsContainedList(final JDFNumberRangeList value, final JDFNumberRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
 		for (int i = 0; i < v_size; i++)
 		{

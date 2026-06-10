@@ -70,16 +70,7 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoFitPolicy.ESizePolicy;
-import org.cip4.jdflib.auto.JDFAutoFitPolicy.EnumSizePolicy;
-import org.cip4.jdflib.auto.JDFAutoRefAnchor.EAnchor;
-import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchor;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -105,17 +96,18 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ANCHOR, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ANCHOR, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumAnchor.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.CTM, 0x3333331111l, AttributeInfo.EnumAttributeType.matrix, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.PAGERANGE, 0x3333331111l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.POSITIONPOLICY, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumPositionPolicy.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumPositionPolicy.class, 0), null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.RELATIVESIZE, 0x3333331111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.ROTATIONPOLICY, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumRotationPolicy.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumRotationPolicy.class, 0), null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.SIZE, 0x3333331111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.SIZEPOLICY, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumSizePolicy.getEnum(0),
-				null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.SIZEPOLICY, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumSizePolicy.class, 0), null);
 	}
 
 	@Override
@@ -142,7 +134,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPositionObj(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPositionObj(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -154,7 +146,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPositionObj(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPositionObj(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -167,170 +159,70 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPositionObj(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPositionObj(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for PositionPolicy
+	 * Enumeration strings for numAnchor
 	 */
 
-	public enum EPositionPolicy
+	public enum EnumAnchor
+	{
+		TopLeft, TopCenter, TopRight, CenterLeft, Center, CenterRight, BottomLeft, BottomCenter, BottomRight;
+
+		public static EnumAnchor getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumAnchor.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for numPositionPolicy
+	 */
+
+	public enum EnumPositionPolicy
 	{
 		Exact, Free;
 
-		public static EPositionPolicy getEnum(String val)
+		public static EnumPositionPolicy getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPositionPolicy.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPositionPolicy.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for PositionPolicy
+	 * Enumeration strings for numRotationPolicy
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumPositionPolicy extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPositionPolicy(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumPositionPolicy getEnum(String enumName)
-		{
-			return (EnumPositionPolicy) getEnum(EnumPositionPolicy.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPositionPolicy getEnum(int enumValue)
-		{
-			return (EnumPositionPolicy) getEnum(EnumPositionPolicy.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPositionPolicy.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPositionPolicy.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPositionPolicy.class);
-		}
-
-		/**  */
-		public static final EnumPositionPolicy Exact = new EnumPositionPolicy("Exact");
-		/**  */
-		public static final EnumPositionPolicy Free = new EnumPositionPolicy("Free");
-	}
-
-	/**
-	 * Enumeration strings for RotationPolicy
-	 */
-
-	public enum ERotationPolicy
+	public enum EnumRotationPolicy
 	{
 		Exact, Free;
 
-		public static ERotationPolicy getEnum(String val)
+		public static EnumRotationPolicy getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ERotationPolicy.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumRotationPolicy.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for RotationPolicy
+	 * Enumeration strings for numSizePolicy
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumRotationPolicy extends ValuedEnum
+	public enum EnumSizePolicy
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Exact, Free;
 
-		protected EnumRotationPolicy(String name)
+		public static EnumSizePolicy getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSizePolicy.class, val, null);
 		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumRotationPolicy getEnum(String enumName)
-		{
-			return (EnumRotationPolicy) getEnum(EnumRotationPolicy.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumRotationPolicy getEnum(int enumValue)
-		{
-			return (EnumRotationPolicy) getEnum(EnumRotationPolicy.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumRotationPolicy.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumRotationPolicy.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumRotationPolicy.class);
-		}
-
-		/**  */
-		public static final EnumRotationPolicy Exact = new EnumRotationPolicy("Exact");
-		/**  */
-		public static final EnumRotationPolicy Free = new EnumRotationPolicy("Free");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -342,9 +234,9 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setAnchor(EAnchor enumVar)
+	public void setAnchor(final EnumAnchor enumVar)
 	{
-		setAttribute(AttributeName.ANCHOR, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ANCHOR, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -352,35 +244,6 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EAnchor getEAnchor()
-	{
-		return EAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Anchor
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Anchor
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetAnchor(EAnchor) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setAnchor(EnumAnchor enumVar)
-	{
-		setAttribute(AttributeName.ANCHOR, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Anchor
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EAnchor GetEAnchor() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumAnchor getAnchor()
 	{
 		return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
@@ -396,7 +259,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCTM(JDFMatrix value)
+	public void setCTM(final JDFMatrix value)
 	{
 		setAttribute(AttributeName.CTM, value, null);
 	}
@@ -409,8 +272,8 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 */
 	public JDFMatrix getCTM()
 	{
-		String strAttrName = getAttribute(AttributeName.CTM, null, null);
-		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CTM, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -424,7 +287,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPageRange(JDFIntegerRangeList value)
+	public void setPageRange(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.PAGERANGE, value, null);
 	}
@@ -437,8 +300,8 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 */
 	public JDFIntegerRangeList getPageRange()
 	{
-		String strAttrName = getAttribute(AttributeName.PAGERANGE, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PAGERANGE, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -452,9 +315,9 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPositionPolicy(EPositionPolicy enumVar)
+	public void setPositionPolicy(final EnumPositionPolicy enumVar)
 	{
-		setAttribute(AttributeName.POSITIONPOLICY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.POSITIONPOLICY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -462,35 +325,6 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPositionPolicy getEPositionPolicy()
-	{
-		return EPositionPolicy.getEnum(getAttribute(AttributeName.POSITIONPOLICY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute PositionPolicy
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute PositionPolicy
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPositionPolicy(EPositionPolicy) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPositionPolicy(EnumPositionPolicy enumVar)
-	{
-		setAttribute(AttributeName.POSITIONPOLICY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute PositionPolicy
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EPositionPolicy GetEPositionPolicy() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumPositionPolicy getPositionPolicy()
 	{
 		return EnumPositionPolicy.getEnum(getAttribute(AttributeName.POSITIONPOLICY, null, null));
@@ -506,7 +340,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRelativeSize(JDFXYPair value)
+	public void setRelativeSize(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.RELATIVESIZE, value, null);
 	}
@@ -519,8 +353,8 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 */
 	public JDFXYPair getRelativeSize()
 	{
-		String strAttrName = getAttribute(AttributeName.RELATIVESIZE, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.RELATIVESIZE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -534,9 +368,9 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setRotationPolicy(ERotationPolicy enumVar)
+	public void setRotationPolicy(final EnumRotationPolicy enumVar)
 	{
-		setAttribute(AttributeName.ROTATIONPOLICY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ROTATIONPOLICY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -544,35 +378,6 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ERotationPolicy getERotationPolicy()
-	{
-		return ERotationPolicy.getEnum(getAttribute(AttributeName.ROTATIONPOLICY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute RotationPolicy
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute RotationPolicy
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetRotationPolicy(ERotationPolicy) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setRotationPolicy(EnumRotationPolicy enumVar)
-	{
-		setAttribute(AttributeName.ROTATIONPOLICY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute RotationPolicy
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ERotationPolicy GetERotationPolicy() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumRotationPolicy getRotationPolicy()
 	{
 		return EnumRotationPolicy.getEnum(getAttribute(AttributeName.ROTATIONPOLICY, null, null));
@@ -588,7 +393,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSize(JDFXYPair value)
+	public void setSize(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.SIZE, value, null);
 	}
@@ -601,8 +406,8 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 */
 	public JDFXYPair getSize()
 	{
-		String strAttrName = getAttribute(AttributeName.SIZE, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SIZE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -616,9 +421,9 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSizePolicy(ESizePolicy enumVar)
+	public void setSizePolicy(final EnumSizePolicy enumVar)
 	{
-		setAttribute(AttributeName.SIZEPOLICY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SIZEPOLICY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -626,35 +431,6 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESizePolicy getESizePolicy()
-	{
-		return ESizePolicy.getEnum(getAttribute(AttributeName.SIZEPOLICY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute SizePolicy
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute SizePolicy
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetSizePolicy(ESizePolicy) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSizePolicy(EnumSizePolicy enumVar)
-	{
-		setAttribute(AttributeName.SIZEPOLICY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute SizePolicy
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ESizePolicy GetESizePolicy() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumSizePolicy getSizePolicy()
 	{
 		return EnumSizePolicy.getEnum(getAttribute(AttributeName.SIZEPOLICY, null, null));

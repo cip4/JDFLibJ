@@ -74,7 +74,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
@@ -91,7 +90,6 @@ import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFNodeInfo;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -115,8 +113,8 @@ import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 import org.cip4.jdflib.span.JDFSpanBase;
 import org.cip4.jdflib.util.ContainerUtil;
-import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -135,7 +133,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	 * if true, spans are made to a simple attribute rather than retained as span
 	 */
 	public boolean bSpanAsAttribute = true;
-	protected final HashMap<String, ValuedEnum> enumMap;
+	protected final HashMap<String, Enum<?>> enumMap;
 
 	/**
 	 * any matching class will be removed with extreme prejudice...
@@ -235,7 +233,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			 * @param required
 			 * @param valuedEnum
 			 */
-			public AttributeDescriptor(final String name, final EnumAttributeType typ, final boolean required, final ValuedEnum valuedEnum)
+			public AttributeDescriptor(final String name, final EnumAttributeType typ, final boolean required, final Enum<?> valuedEnum)
 			{
 				super();
 				this.name = name;
@@ -258,7 +256,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			String name;
 			EnumAttributeType typ;
 			boolean required;
-			ValuedEnum valuedEnum;
+			Enum<?> valuedEnum;
 
 			/**
 			 * @return the name
@@ -311,7 +309,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			/**
 			 * @return the valuedEnum
 			 */
-			public ValuedEnum getValuedEnum()
+			public Enum<?> getValuedEnum()
 			{
 				return valuedEnum;
 			}
@@ -319,7 +317,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			/**
 			 * @param valuedEnum the valuedEnum to set
 			 */
-			public void setValuedEnum(final ValuedEnum valuedEnum)
+			public void setValuedEnum(final Enum<?> valuedEnum)
 			{
 				this.valuedEnum = valuedEnum;
 			}
@@ -458,7 +456,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		 */
 		protected KElement setXSAttribute(final AttributeDescriptor ad)
 		{
-			ValuedEnum valuedEnum = ad.getValuedEnum();
+			Enum<?> valuedEnum = ad.getValuedEnum();
 			String typ = getTypeName(ad.getTyp());
 			final String name = ad.getName();
 			final String enumName = getEnumName(valuedEnum);
@@ -493,13 +491,13 @@ public class XJDFSchemaCreator extends BaseElementWalker
 				{
 					continue;
 				}
-				else if (ai.getLastVersion(attName).getValue() <= EnumVersion.Version_1_4.getValue())
+				else if (ai.getLastVersion(attName).ordinal() <= EnumVersion.Version_1_4.ordinal())
 				{
 					continue;
 				}
 
 				final AttributeDescriptor desc = new AttributeDescriptor(getNewName(attName));
-				final ValuedEnum ve = ai.getAttributeEnum(attName);
+				final Enum<?> ve = ai.getAttributeEnum(attName);
 				final EnumAttributeType typ = ai.getAttributeType(attName);
 				desc.setValuedEnum(ve);
 				desc.setTyp(typ);
@@ -578,7 +576,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 				{
 					continue;
 				}
-				else if (je.getLastVersion(elmName, true).getValue() < EnumVersion.Version_1_4.getValue())
+				else if (je.getLastVersion(elmName, true).ordinal() < EnumVersion.Version_1_4.ordinal())
 				{
 					continue;
 				}
@@ -602,7 +600,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			baseElms.add(ElementName.QUALITYCONTROLRESULT);
 			baseElms.add(ElementName.JMF);
 
-			refElms = new HashSet<String>();
+			refElms = new HashSet<>();
 			refElms.add(ElementName.EXPOSEDMEDIA);
 			refElms.add(ElementName.RUNLIST);
 			refElms.add(ElementName.MEDIA);
@@ -625,7 +623,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			refElms.add(ElementName.DEVICE);
 			refElms.add(ElementName.EXTERNALIMPOSITIONTEMPLATE);
 
-			refsElms = new HashSet<String>();
+			refsElms = new HashSet<>();
 			refsElms.add(ElementName.SOURCERESOURCE);
 
 		}
@@ -687,7 +685,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			}
 			att.setAttribute("use", required ? "required" : "optional");
 			att.setAttribute("name", attName);
-			final String typName = typ.getName();
+			final String typName = getTypeName(typ);
 			att.setAttribute("type", typName);
 		}
 
@@ -699,7 +697,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		 * @param ve       a valued enum to generate values
 		 * @return
 		 */
-		protected KElement setXSAttribute(final KElement root, final String attName, String typName, final boolean required, final ValuedEnum ve)
+		protected KElement setXSAttribute(final KElement root, final String attName, String typName, final boolean required, final Enum<?> ve)
 		{
 			final KElement att = root.appendElement("xs:attribute");
 			att.setAttribute("use", required ? "required" : "optional");
@@ -835,15 +833,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		 */
 		protected String getTypeForName(final String elmName)
 		{
-			if (ElementName.FOLDERSUPERSTRUCTUREWEBPATH.equals(elmName))
-			{
-				return "ProductionSubPath";
-			}
-			if (ElementName.POSTPRESSCOMPONENTPATH.equals(elmName))
-			{
-				return "ProductionSubPath";
-			}
-			if (ElementName.PRINTINGUNITWEBPATH.equals(elmName))
+			if (ElementName.FOLDERSUPERSTRUCTUREWEBPATH.equals(elmName) || ElementName.POSTPRESSCOMPONENTPATH.equals(elmName) || ElementName.PRINTINGUNITWEBPATH.equals(elmName))
 			{
 				return "ProductionSubPath";
 			}
@@ -1207,7 +1197,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			setXSElement(complexType, "Dependent");
 			setGeneric(complexType, true);
 			setXSAttribute(complexType, "Name", EnumAttributeType.NMTOKEN, true);
-			setXSAttribute(complexType, "Usage", null, false, EnumUsage.getEnum(0));
+			setXSAttribute(complexType, "Usage", null, false, null);
 			setXSAttribute(complexType, "ProcessUsage", EnumAttributeType.NMTOKEN, false);
 			return null;
 		}
@@ -1421,7 +1411,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		 */
 		protected KElement setSimpleType(final KElement out, final String name)
 		{
-			final ValuedEnum ve = enumMap.get(name);
+			final Enum<?> ve = enumMap.get(name);
 			final KElement typ = appendSimpleType(out, name, "xs:string", getEnumVector(ve));
 			return typ;
 		}
@@ -1879,7 +1869,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		d1.setInitOnCreate(false);
 		jdfRoot = d1.getJDFRoot();
 		createIgnoreNames();
-		enumMap = new HashMap<String, ValuedEnum>();
+		enumMap = new HashMap<>();
 	}
 
 	/**
@@ -1941,15 +1931,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			final File file = files.get(i);
 			final File parent = file.getParentFile();
 			final String parentName = parent.getName();
-			if (parentName.equals("auto"))
-			{
-				continue;
-			}
-			if (parentName.equals("ifaces"))
-			{
-				continue;
-			}
-			if (parentName.equals("goldenticket"))
+			if (parentName.equals("auto") || parentName.equals("ifaces") || parentName.equals("goldenticket"))
 			{
 				continue;
 			}
@@ -1969,18 +1951,18 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	 */
 	private void addSimpleTypes(final KElement treeRoot)
 	{
-		putPair(EnumAnchor.getEnum(0), treeRoot);
-		putPair(EnumNamedColor.getEnum(0), treeRoot);
-		putPair(EnumNodeStatus.getEnum(0), treeRoot);
-		putPair(EnumResStatus.getEnum(0), treeRoot);
-		putPair(EnumOrientation.getEnum(0), treeRoot);
-		putPair(EnumWorkStyle.getEnum(0), treeRoot);
-		putPair(EnumFrontCoatings.getEnum(0), treeRoot);
+		putPair(EnumAnchor.values()[0], treeRoot);
+		putPair(EnumNamedColor.values()[0], treeRoot);
+		putPair(EnumNodeStatus.values()[0], treeRoot);
+		putPair(EnumResStatus.values()[0], treeRoot);
+		putPair(EnumOrientation.values()[0], treeRoot);
+		putPair(EnumWorkStyle.values()[0], treeRoot);
+		putPair(EnumFrontCoatings.values()[0], treeRoot);
 		// TODO combine stati
-		putPair(EnumDeviceStatus.getEnum(0), treeRoot);
-		putPair(EnumListType.getEnum(0), treeRoot);
-		putPair(EnumAvailability.getEnum(0), treeRoot);
-		putPair(EnumUserDisplay.getEnum(0), treeRoot);
+		putPair(EnumDeviceStatus.values()[0], treeRoot);
+		putPair(EnumListType.values()[0], treeRoot);
+		putPair(EnumAvailability.values()[0], treeRoot);
+		putPair(EnumUserDisplay.values()[0], treeRoot);
 	}
 
 	/**
@@ -2007,7 +1989,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	 * @param en
 	 * @param treeRoot
 	 */
-	private void putPair(final ValuedEnum en, final KElement treeRoot)
+	private void putPair(final Enum<?> en, final KElement treeRoot)
 	{
 		final String name = getEnumName(en);
 		enumMap.put(name, en);
@@ -2018,13 +2000,17 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	 * @param valuedEnum
 	 * @return
 	 */
-	protected String getEnumName(final ValuedEnum valuedEnum)
+	protected String getEnumName(final Enum<?> valuedEnum)
 	{
 		if (valuedEnum == null)
 		{
 			return null;
 		}
-		String s = EnumUtil.getEnumName(valuedEnum).substring(4);
+		String s = valuedEnum.getDeclaringClass().getSimpleName();
+		if (s.startsWith("Enum"))
+		{
+			s = s.substring(4);
+		}
 		if (AttributeName.SOURCEWORKSTYLE.equals(s))
 		{
 			s = AttributeName.WORKSTYLE;
@@ -2042,7 +2028,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	 */
 	protected String getTypeName(final EnumAttributeType typ)
 	{
-		return typ.getName();
+		return JavaEnumUtil.getName(typ);
 	}
 
 	/**
@@ -2073,10 +2059,14 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	 * @param ve
 	 * @return
 	 */
-	protected VString getEnumVector(final ValuedEnum ve)
+	protected VString getEnumVector(final Enum<?> ve)
 	{
-		final Class<? extends ValuedEnum> class1 = ve.getClass();
-		final VString v = EnumUtil.getNamesVector(class1);
+		final Class<? extends Enum<?>> class1 = ve.getDeclaringClass();
+		final VString v = new VString();
+		for (final Enum<?> e : class1.getEnumConstants())
+		{
+			v.add(e.name());
+		}
 		String className = class1.getName();
 		final int pos = className.indexOf("$Enum");
 		if (pos > 0)
@@ -2085,12 +2075,12 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		}
 		if (AttributeName.STATUS.equals(className) || AttributeName.NODESTATUS.equals(className) || AttributeName.ENDSTATUS.equals(className))
 		{
-			v.remove(EnumNodeStatus.FailedTestRun.getName());
-			v.remove(EnumNodeStatus.Ready.getName());
-			v.remove(EnumNodeStatus.TestRunInProgress.getName());
-			v.remove(EnumNodeStatus.Spawned.getName());
-			v.remove(EnumNodeStatus.Part.getName());
-			v.remove(EnumNodeStatus.Pool.getName());
+			v.remove(EnumNodeStatus.FailedTestRun.name());
+			v.remove(EnumNodeStatus.Ready.name());
+			v.remove(EnumNodeStatus.TestRunInProgress.name());
+			v.remove(EnumNodeStatus.Spawned.name());
+			v.remove(EnumNodeStatus.Part.name());
+			v.remove(EnumNodeStatus.Pool.name());
 		}
 		else if (AttributeName.VERSION.equals(className))
 		{

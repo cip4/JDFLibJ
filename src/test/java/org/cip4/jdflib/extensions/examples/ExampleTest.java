@@ -42,9 +42,7 @@ import org.cip4.jdflib.core.XMLFormatter;
 import org.junit.jupiter.api.BeforeEach;
 
 /**
- *
  * @author rainer prosi
- *
  */
 public class ExampleTest extends JDFTestCaseBase
 {

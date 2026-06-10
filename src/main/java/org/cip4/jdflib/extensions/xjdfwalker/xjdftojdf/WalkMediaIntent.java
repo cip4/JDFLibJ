@@ -76,7 +76,7 @@ import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 
 /**
  * TODO discuss and implement varying numcolors for front and back, e.g. 4/1
- * 
+ *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class WalkMediaIntent extends WalkIntentResource

@@ -79,7 +79,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class JDFRunListTest extends JDFTestCaseBase
 {
@@ -172,7 +171,6 @@ class JDFRunListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	public final void testCollapseNPageNoNPageLeaf() throws DataFormatException
@@ -285,7 +283,9 @@ class JDFRunListTest extends JDFTestCaseBase
 			assertTrue(rl2.hasAttribute_KElement(AttributeName.NPAGE, null, false));
 			assertEquals(rl.getNPage(), 4 * i);
 			if (i % 50 == 0)
+			{
 				System.out.println(i + " " + ct.toString());
+			}
 		}
 	}
 
@@ -335,7 +335,6 @@ class JDFRunListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	public final void testSetPages() throws DataFormatException
@@ -811,8 +810,10 @@ class JDFRunListTest extends JDFTestCaseBase
 		lo.setXMLComment("Layout for versioned product", true);
 
 		final KElement metaMap = rl.appendElement(METADATA_MAP);
-		metaMap.setXMLComment("The MetadataMap element maps arbitrary tags in the document to a structural RunTag partition key\n" + "Note that any partition key may be mapped.\n"
-				+ "Note also that although an XPath syntax is used, this may be mapped to any hierarchical structure including but not limited to XML.\n", true);
+		metaMap.setXMLComment("The MetadataMap element maps arbitrary tags in the document to a structural RunTag partition key\n"
+				+ "Note that any partition key may be mapped.\n"
+				+ "Note also that although an XPath syntax is used, this may be mapped to any hierarchical structure including but not limited to XML.\n",
+				true);
 
 		metaMap.setAttribute("Name", "RunTags");
 		metaMap.setAttribute(AttributeName.DATATYPE, "PartIDKey");
@@ -820,8 +821,8 @@ class JDFRunListTest extends JDFTestCaseBase
 		metaMap.setAttribute(AttributeName.VALUETEMPLATE, "sex,section");
 
 		KElement expr = metaMap.appendElement(EXPR);
-		expr.setXMLComment("This expression maps the value of /Dokument/Rezipient/@Sex to a variable \"sex\"\n" + "The Mapping is unconditional, therefore no Term is required",
-				true);
+		expr.setXMLComment("This expression maps the value of /Dokument/Rezipient/@Sex to a variable \"sex\"\n"
+				+ "The Mapping is unconditional, therefore no Term is required", true);
 		expr.setAttribute("Name", "sex");
 		expr.setAttribute("Path", "/Dokument/Rezipient/@Sex");
 
@@ -886,8 +887,6 @@ class JDFRunListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 *
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@Override

@@ -152,7 +152,6 @@ public class XMLErrorHandler implements ErrorHandler
 	}
 
 	/**
-	 *
 	 * @param exception
 	 * @return
 	 */
@@ -202,13 +201,21 @@ public class XMLErrorHandler implements ErrorHandler
 		{
 			root.setAttribute("SchemaLocation", schemaLocation);
 			if (root.hasChildElement(FATAL_ERROR, null))
+			{
 				root.setAttribute(VALIDATION_RESULT, FATAL_ERROR);
+			}
 			else if (root.hasChildElement(ERROR, null))
+			{
 				root.setAttribute(VALIDATION_RESULT, ERROR);
+			}
 			else if (root.hasChildElement(WARNING, null))
+			{
 				root.setAttribute(VALIDATION_RESULT, WARNING);
+			}
 			else
+			{
 				root.setAttribute(VALIDATION_RESULT, VALID);
+			}
 		}
 	}
 
@@ -232,7 +239,6 @@ public class XMLErrorHandler implements ErrorHandler
 	}
 
 	/**
-	 *
 	 * @param inSource
 	 */
 	public void setInputSource(final InputSource inSource)

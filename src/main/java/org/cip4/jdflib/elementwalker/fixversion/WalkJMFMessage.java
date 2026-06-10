@@ -74,8 +74,6 @@ import org.cip4.jdflib.jmf.JDFMessage;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
- *
  */
 public class WalkJMFMessage extends WalkElement
 {
@@ -115,7 +113,6 @@ public class WalkJMFMessage extends WalkElement
 	}
 
 	/**
-	 *
 	 * this is one of the message types where queue or queuefilter should be zapped in JDF1.5 and above
 	 *
 	 * @param toCheck
@@ -125,7 +122,9 @@ public class WalkJMFMessage extends WalkElement
 	{
 		final JDFMessage.EnumType type = ((JDFMessage) toCheck).getEnumType();
 		if (type == null)
+		{
 			return false;
+		}
 		boolean b = false;
 		b = b || JDFMessage.EnumType.AbortQueueEntry.equals(type);
 		b = b || JDFMessage.EnumType.RemoveQueueEntry.equals(type);

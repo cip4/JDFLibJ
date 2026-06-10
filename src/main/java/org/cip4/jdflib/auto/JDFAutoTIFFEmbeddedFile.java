@@ -120,7 +120,7 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTIFFEmbeddedFile(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoTIFFEmbeddedFile(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -132,7 +132,7 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTIFFEmbeddedFile(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoTIFFEmbeddedFile(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -145,7 +145,7 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoTIFFEmbeddedFile(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoTIFFEmbeddedFile(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -166,7 +166,7 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTagNumber(int value)
+	public void setTagNumber(final int value)
 	{
 		setAttribute(AttributeName.TAGNUMBER, value, null);
 	}
@@ -191,7 +191,7 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTagType(int value)
+	public void setTagType(final int value)
 	{
 		setAttribute(AttributeName.TAGTYPE, value, null);
 	}
@@ -248,7 +248,7 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}

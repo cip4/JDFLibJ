@@ -52,11 +52,9 @@ import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
  * XJDF splitter that splits based on the types list
  *
  * @author rainer prosi
- *
  */
 public class ProcessXJDFSplit extends AbstractXJDFSplit
 {
@@ -72,7 +70,8 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	public void setICSGroups()
 	{
 		groups.clear();
-		final VString mis_cp = new VString(new String[] { EnumType.InkZoneCalculation.getName(), EnumType.ConventionalPrinting.getName(), EnumType.Varnishing.getName() });
+		final VString mis_cp = new VString(
+				new String[] { EnumType.InkZoneCalculation.name(), EnumType.ConventionalPrinting.name(), EnumType.Varnishing.name() });
 		groups.add(mis_cp);
 	}
 
@@ -94,7 +93,6 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.AbstractXJDFSplit#splitXJDF(org.cip4.jdflib.extensions.XJDFHelper)
 	 */
 	@Override
@@ -140,7 +138,6 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	}
 
 	/**
-	 *
 	 * @param h
 	 * @param types
 	 * @param allTypes
@@ -155,7 +152,6 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	}
 
 	/**
-	 *
 	 * @param h
 	 * @param types
 	 * @param allTypes
@@ -172,14 +168,14 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	{
 		String jobPartID = xjdf.getJobPartID();
 		if (jobPartID == null)
+		{
 			jobPartID = "Part_";
+		}
 		return jobPartID + StringUtil.setvString(types, "_", ".", null);
 	}
 
 	/**
-	 *
 	 * @param root
-	 *
 	 * @return the list of types to split into, null is a flag for no split
 	 */
 	protected Vector<VString> splitTypes(final XJDFHelper root)
@@ -238,7 +234,9 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 					}
 				}
 				for (int i = 0; i < il.length; i++)
+				{
 					types.remove(0);
+				}
 				return found;
 			}
 		}
@@ -247,7 +245,6 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	}
 
 	/**
-	 *
 	 * @param types
 	 * @return
 	 */
@@ -292,7 +289,9 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 		}
 		VString types = root.getTypes();
 		if (types == null)
+		{
 			types = new VString(XJDFConstants.Product, null);
+		}
 		return types;
 	}
 
@@ -310,7 +309,6 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	}
 
 	/**
-	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

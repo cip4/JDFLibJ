@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -104,10 +100,12 @@ public abstract class JDFAutoAssembly extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.JOGSIDE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumJogSide.getEnum(0), "Top");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ORDER, 0x4444443311l, AttributeInfo.EnumAttributeType.enumeration, EnumOrder.getEnum(0), "Gathering");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.BINDINGSIDE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumBindingSide.getEnum(0),
-				"Left");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.JOGSIDE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumJogSide.class, 0), "Top");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ORDER, 0x4444443311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumOrder.class, 0), "Gathering");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.BINDINGSIDE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumBindingSide.class, 0), "Left");
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.ASSEMBLYID, 0x4444444311l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.JOBID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
@@ -140,7 +138,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAssembly(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoAssembly(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -152,7 +150,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAssembly(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoAssembly(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -165,7 +163,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoAssembly(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoAssembly(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -176,7 +174,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -191,255 +189,50 @@ public abstract class JDFAutoAssembly extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for JogSide
+	 * Enumeration strings for numJogSide
 	 */
 
-	public enum EJogSide
+	public enum EnumJogSide
 	{
 		Left, Right, Top, Bottom, None;
 
-		public static EJogSide getEnum(String val)
+		public static EnumJogSide getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EJogSide.class, val, EJogSide.Top);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumJogSide.class, val, EnumJogSide.Top);
 		}
 	}
 
 	/**
-	 * Enumeration strings for JogSide
+	 * Enumeration strings for numOrder
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumJogSide extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumJogSide(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumJogSide getEnum(String enumName)
-		{
-			return (EnumJogSide) getEnum(EnumJogSide.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumJogSide getEnum(int enumValue)
-		{
-			return (EnumJogSide) getEnum(EnumJogSide.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumJogSide.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumJogSide.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumJogSide.class);
-		}
-
-		/**  */
-		public static final EnumJogSide Left = new EnumJogSide("Left");
-		/**  */
-		public static final EnumJogSide Right = new EnumJogSide("Right");
-		/**  */
-		public static final EnumJogSide Top = new EnumJogSide("Top");
-		/**  */
-		public static final EnumJogSide Bottom = new EnumJogSide("Bottom");
-		/**  */
-		public static final EnumJogSide None = new EnumJogSide("None");
-	}
-
-	/**
-	 * Enumeration strings for Order
-	 */
-
-	public enum EOrder
+	public enum EnumOrder
 	{
 		Collecting, Gathering, None, List;
 
-		public static EOrder getEnum(String val)
+		public static EnumOrder getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EOrder.class, val, EOrder.Gathering);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumOrder.class, val, EnumOrder.Gathering);
 		}
 	}
 
 	/**
-	 * Enumeration strings for Order
+	 * Enumeration strings for numBindingSide
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumOrder extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumOrder(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumOrder getEnum(String enumName)
-		{
-			return (EnumOrder) getEnum(EnumOrder.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumOrder getEnum(int enumValue)
-		{
-			return (EnumOrder) getEnum(EnumOrder.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumOrder.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumOrder.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumOrder.class);
-		}
-
-		/**  */
-		public static final EnumOrder Collecting = new EnumOrder("Collecting");
-		/**  */
-		public static final EnumOrder Gathering = new EnumOrder("Gathering");
-		/**  */
-		public static final EnumOrder None = new EnumOrder("None");
-		/**  */
-		public static final EnumOrder List = new EnumOrder("List");
-	}
-
-	/**
-	 * Enumeration strings for BindingSide
-	 */
-
-	public enum EBindingSide
+	public enum EnumBindingSide
 	{
 		Left, Right, Top, Bottom;
 
-		public static EBindingSide getEnum(String val)
+		public static EnumBindingSide getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EBindingSide.class, val, EBindingSide.Left);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumBindingSide.class, val, EnumBindingSide.Left);
 		}
-	}
-
-	/**
-	 * Enumeration strings for BindingSide
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumBindingSide extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumBindingSide(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumBindingSide getEnum(String enumName)
-		{
-			return (EnumBindingSide) getEnum(EnumBindingSide.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumBindingSide getEnum(int enumValue)
-		{
-			return (EnumBindingSide) getEnum(EnumBindingSide.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumBindingSide.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumBindingSide.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumBindingSide.class);
-		}
-
-		/**  */
-		public static final EnumBindingSide Left = new EnumBindingSide("Left");
-		/**  */
-		public static final EnumBindingSide Right = new EnumBindingSide("Right");
-		/**  */
-		public static final EnumBindingSide Top = new EnumBindingSide("Top");
-		/**  */
-		public static final EnumBindingSide Bottom = new EnumBindingSide("Bottom");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -451,9 +244,9 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setJogSide(EJogSide enumVar)
+	public void setJogSide(final EnumJogSide enumVar)
 	{
-		setAttribute(AttributeName.JOGSIDE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.JOGSIDE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -461,35 +254,6 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EJogSide getEJogSide()
-	{
-		return EJogSide.getEnum(getAttribute(AttributeName.JOGSIDE, null, "Top"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute JogSide
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute JogSide
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetJogSide(EJogSide) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setJogSide(EnumJogSide enumVar)
-	{
-		setAttribute(AttributeName.JOGSIDE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute JogSide
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EJogSide GetEJogSide() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumJogSide getJogSide()
 	{
 		return EnumJogSide.getEnum(getAttribute(AttributeName.JOGSIDE, null, "Top"));
@@ -505,9 +269,9 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setOrder(EOrder enumVar)
+	public void setOrder(final EnumOrder enumVar)
 	{
-		setAttribute(AttributeName.ORDER, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ORDER, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -515,35 +279,6 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EOrder getEOrder()
-	{
-		return EOrder.getEnum(getAttribute(AttributeName.ORDER, null, "Gathering"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Order
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Order
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetOrder(EOrder) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setOrder(EnumOrder enumVar)
-	{
-		setAttribute(AttributeName.ORDER, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Order
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EOrder GetEOrder() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumOrder getOrder()
 	{
 		return EnumOrder.getEnum(getAttribute(AttributeName.ORDER, null, "Gathering"));
@@ -559,9 +294,9 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setBindingSide(EBindingSide enumVar)
+	public void setBindingSide(final EnumBindingSide enumVar)
 	{
-		setAttribute(AttributeName.BINDINGSIDE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.BINDINGSIDE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -569,35 +304,6 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EBindingSide getEBindingSide()
-	{
-		return EBindingSide.getEnum(getAttribute(AttributeName.BINDINGSIDE, null, "Left"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute BindingSide
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute BindingSide
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetBindingSide(EBindingSide) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setBindingSide(EnumBindingSide enumVar)
-	{
-		setAttribute(AttributeName.BINDINGSIDE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute BindingSide
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EBindingSide GetEBindingSide() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumBindingSide getBindingSide()
 	{
 		return EnumBindingSide.getEnum(getAttribute(AttributeName.BINDINGSIDE, null, "Left"));
@@ -613,7 +319,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAssemblyID(String value)
+	public void setAssemblyID(final String value)
 	{
 		setAttribute(AttributeName.ASSEMBLYID, value, null);
 	}
@@ -638,7 +344,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAssemblyIDs(VString value)
+	public void setAssemblyIDs(final VString value)
 	{
 		setAttribute(AttributeName.ASSEMBLYIDS, value, null);
 	}
@@ -650,8 +356,8 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 */
 	public VString getAssemblyIDs()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -666,7 +372,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -691,7 +397,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPhysicalSection(JDFIntegerList value)
+	public void setPhysicalSection(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.PHYSICALSECTION, value, null);
 	}
@@ -704,8 +410,8 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 */
 	public JDFIntegerList getPhysicalSection()
 	{
-		String strAttrName = getAttribute(AttributeName.PHYSICALSECTION, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PHYSICALSECTION, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -741,7 +447,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFAssemblySection the element
 	 */
-	public JDFAssemblySection getCreateAssemblySection(int iSkip)
+	public JDFAssemblySection getCreateAssemblySection(final int iSkip)
 	{
 		return (JDFAssemblySection) getCreateElement_JDFElement(ElementName.ASSEMBLYSECTION, null, iSkip);
 	}
@@ -753,7 +459,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 * @return JDFAssemblySection the element
 	 *         default is getAssemblySection(0)
 	 */
-	public JDFAssemblySection getAssemblySection(int iSkip)
+	public JDFAssemblySection getAssemblySection(final int iSkip)
 	{
 		return (JDFAssemblySection) getElement(ElementName.ASSEMBLYSECTION, null, iSkip);
 	}
@@ -814,7 +520,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refPageList(JDFPageList refTarget)
+	public void refPageList(final JDFPageList refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -845,7 +551,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFPageAssignedList the element
 	 */
-	public JDFPageAssignedList getCreatePageAssignedList(int iSkip)
+	public JDFPageAssignedList getCreatePageAssignedList(final int iSkip)
 	{
 		return (JDFPageAssignedList) getCreateElement_JDFElement(ElementName.PAGEASSIGNEDLIST, null, iSkip);
 	}
@@ -857,7 +563,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 * @return JDFPageAssignedList the element
 	 *         default is getPageAssignedList(0)
 	 */
-	public JDFPageAssignedList getPageAssignedList(int iSkip)
+	public JDFPageAssignedList getPageAssignedList(final int iSkip)
 	{
 		return (JDFPageAssignedList) getElement(ElementName.PAGEASSIGNEDLIST, null, iSkip);
 	}

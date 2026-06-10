@@ -40,7 +40,7 @@ package org.cip4.jdflib.extensions;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
@@ -159,7 +159,7 @@ public class MessageHelper extends BaseXJDFHelper
 		ensureHeader(theElement);
 	}
 
-	static String getMessageName(EFamily family, EType typ)
+	static String getMessageName(final EFamily family, final EType typ)
 	{
 		if (family == null)
 		{
@@ -195,7 +195,7 @@ public class MessageHelper extends BaseXJDFHelper
 			}
 			if (StringUtil.getNonEmpty(senderID) == null)
 			{
-				senderID = StringUtil.replaceString(JDFAudit.getStaticAgentName(), JDFConstants.BLANK, JDFConstants.UNDERSCORE);
+				senderID = StringUtil.replaceString(JDFAudit.getStaticAgentName(), JDFCoreConstants.BLANK, JDFCoreConstants.UNDERSCORE);
 			}
 			header.setAttribute(AttributeName.DEVICEID, senderID);
 		}

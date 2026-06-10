@@ -87,7 +87,8 @@ public class JDFTransferCurveSet extends JDFAutoTransferCurveSet
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFTransferCurveSet(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFTransferCurveSet(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -99,7 +100,6 @@ public class JDFTransferCurveSet extends JDFAutoTransferCurveSet
 	}
 
 	/**
-	 *
 	 * @param sepName
 	 * @return
 	 */
@@ -115,7 +115,6 @@ public class JDFTransferCurveSet extends JDFAutoTransferCurveSet
 	}
 
 	/**
-	 *
 	 * @param sepName
 	 * @return
 	 */
@@ -126,13 +125,17 @@ public class JDFTransferCurveSet extends JDFAutoTransferCurveSet
 		{
 			final JDFTransferCurve tc = getTransferCurve(i);
 			if (tc == null)
+			{
 				break;
+			}
 			if (isWildCard(sepName) || sepName.equals(tc.getSeparation()))
 			{
 				return tc;
 			}
 			if (isWildCard(tc.getSeparation()))
+			{
 				wildcard = tc;
+			}
 		}
 		return wildcard;
 	}

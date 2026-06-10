@@ -42,7 +42,7 @@ package org.cip4.jdflib.elementwalker;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -53,7 +53,6 @@ import org.cip4.jdflib.resource.process.JDFGeneralID;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG<br/>
  *         removes any private extensions, including prefixed keys in GeneralID elements
- *
  */
 public class RemovePrivate extends BaseElementWalker
 {
@@ -81,7 +80,9 @@ public class RemovePrivate extends BaseElementWalker
 	public void addPrefix(final String prefix)
 	{
 		if (prefixes == null)
+		{
 			prefixes = new HashSet<>();
+		}
 		prefixes.add(prefix);
 	}
 
@@ -89,7 +90,6 @@ public class RemovePrivate extends BaseElementWalker
 	 * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super classes
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkElement extends BaseWalker
 	{
@@ -104,7 +104,7 @@ public class RemovePrivate extends BaseElementWalker
 
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param e1 - the element to track
+		 * @param e1        - the element to track
 		 * @param trackElem - always null
 		 * @return the element to continue walking
 		 */
@@ -112,7 +112,9 @@ public class RemovePrivate extends BaseElementWalker
 		public KElement walk(final KElement e1, final KElement trackElem)
 		{
 			if (!zappAttributes)
+			{
 				return e1;
+			}
 
 			VString unknown = new VString();
 			if (prefixes == null)
@@ -134,17 +136,23 @@ public class RemovePrivate extends BaseElementWalker
 				if (prefixes != null)
 				{
 					if (prefix == null)
+					{
 						continue;
-					if (JDFConstants.XMLNS.equals(prefix))
+					}
+					if (JDFCoreConstants.XMLNS.equals(prefix))
 					{
 						if (!prefixes.contains(KElement.xmlnsLocalName(attName)))
+						{
 							continue;
+						}
 					}
 					// not in list - move on
 					else if (!prefixes.contains(prefix))
+					{
 						continue;
+					}
 				}
-				else if (JDFConstants.XMLNS.equals(prefix))
+				else if (JDFCoreConstants.XMLNS.equals(prefix))
 				{
 					continue;
 				}
@@ -194,14 +202,13 @@ public class RemovePrivate extends BaseElementWalker
 	 * zapp me
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkPrivate extends WalkElement
 	{
 
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param e - the element to track
+		 * @param e         - the element to track
 		 * @param trackElem - always null
 		 * @return the element to continue walking
 		 */
@@ -235,7 +242,9 @@ public class RemovePrivate extends BaseElementWalker
 				final String prefix = toCheck.getPrefix();
 				// not in list - we don't match
 				if (prefix == null || !prefixes.contains(prefix))
+				{
 					b = false;
+				}
 			}
 			else
 			{
@@ -249,14 +258,13 @@ public class RemovePrivate extends BaseElementWalker
 	 * zapp me
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkGeneralID extends WalkElement
 	{
 
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param e - the element to track
+		 * @param e         - the element to track
 		 * @param trackElem - always null
 		 * @return the element to continue walking
 		 */
@@ -289,7 +297,6 @@ public class RemovePrivate extends BaseElementWalker
 	}
 
 	/**
-	 *
 	 * if set to true, generalID elements with proprietary namespace prefixes are zapped, else kept
 	 *
 	 * @param zappGeneralID if true, zapp 'em (the default) else keep 'em
@@ -300,7 +307,6 @@ public class RemovePrivate extends BaseElementWalker
 	}
 
 	/**
-	 *
 	 * if set to true, attributes with proprietary namespace prefixes are zapped, else kept
 	 *
 	 * @param zappAttributes if true, zapp 'em (the default) else keep 'em
@@ -311,7 +317,6 @@ public class RemovePrivate extends BaseElementWalker
 	}
 
 	/**
-	 *
 	 * if set to true, attributes with proprietary namespace prefixes are zapped, else kept
 	 *
 	 * @param zappElements if true, zapp 'em (the default) else keep 'em

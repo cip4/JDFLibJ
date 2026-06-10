@@ -135,7 +135,7 @@ class PostConverterTest extends JDFTestCaseBase
 		final JDFStrippingParams sp = (JDFStrippingParams) root.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0).getLeaf(0);
 		assertNotNull(sp.getBinderySignature());
 		final PostConverter pc = new PostConverter(null, null);
-		LinkAmountCleaner lac = pc.new LinkAmountCleaner();
+		final LinkAmountCleaner lac = pc.new LinkAmountCleaner();
 		bs = (JDFResource) root.getResourcePool().getElement(ElementName.BINDERYSIGNATURE);
 		lac.findLeaf((JDFBinderySignature) bs, sp);
 	}
@@ -157,7 +157,7 @@ class PostConverterTest extends JDFTestCaseBase
 		final JDFStrippingParams sp = (JDFStrippingParams) root.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0).getLeaf(0);
 		sp.removeChild("BinderySignatureRef", null, 0);
 		final PostConverter pc = new PostConverter(null, null);
-		LinkAmountCleaner lac = pc.new LinkAmountCleaner();
+		final LinkAmountCleaner lac = pc.new LinkAmountCleaner();
 		bs = (JDFResource) root.getResourcePool().getElement(ElementName.BINDERYSIGNATURE);
 		lac.cleanSingleStripping(bs, sp);
 	}

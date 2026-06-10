@@ -108,7 +108,7 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAutomatedOverPrintParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoAutomatedOverPrintParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -120,7 +120,7 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAutomatedOverPrintParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoAutomatedOverPrintParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoAutomatedOverPrintParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoAutomatedOverPrintParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -154,7 +154,7 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setKnockOutCMYKWhite(boolean value)
+	public void setKnockOutCMYKWhite(final boolean value)
 	{
 		setAttribute(AttributeName.KNOCKOUTCMYKWHITE, value, null);
 	}
@@ -179,7 +179,7 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLineArtBlackLevel(double value)
+	public void setLineArtBlackLevel(final double value)
 	{
 		setAttribute(AttributeName.LINEARTBLACKLEVEL, value, null);
 	}
@@ -204,7 +204,7 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOverPrintBlackLineArt(boolean value)
+	public void setOverPrintBlackLineArt(final boolean value)
 	{
 		setAttribute(AttributeName.OVERPRINTBLACKLINEART, value, null);
 	}
@@ -229,7 +229,7 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOverPrintBlackText(boolean value)
+	public void setOverPrintBlackText(final boolean value)
 	{
 		setAttribute(AttributeName.OVERPRINTBLACKTEXT, value, null);
 	}
@@ -254,7 +254,7 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTextBlackLevel(double value)
+	public void setTextBlackLevel(final double value)
 	{
 		setAttribute(AttributeName.TEXTBLACKLEVEL, value, null);
 	}
@@ -279,7 +279,7 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTextSizeThreshold(int value)
+	public void setTextSizeThreshold(final int value)
 	{
 		setAttribute(AttributeName.TEXTSIZETHRESHOLD, value, null);
 	}

@@ -202,7 +202,9 @@ class JDFTransferFunctionTest extends JDFTestCaseBase
 		{
 			assertEquals(0, tf.getValue(0), 0);
 			for (int i = 0; i < 100; i++)
+			{
 				assertEquals(0.01 * i, tf.getValue(i), 0.000001);
+			}
 		}
 		log.info(" t=" + (System.currentTimeMillis() - t0));
 	}
@@ -217,7 +219,9 @@ class JDFTransferFunctionTest extends JDFTestCaseBase
 		{
 			assertEquals(0, tf.getFastValue(0), 0);
 			for (int i = 0; i < 460; i++)
+			{
 				assertEquals(0.005 * i, tf.getFastValue(i), 0.000001);
+			}
 		}
 		log.info(" t=" + (System.currentTimeMillis() - t0));
 	}
@@ -235,7 +239,9 @@ class JDFTransferFunctionTest extends JDFTestCaseBase
 			assertEquals(1, tf.getFastValue(1), 0);
 			assertEquals(1, tf.getFastValue(3), 0);
 			for (int i = 0; i < 100; i++)
+			{
 				assertEquals(0.01 * i, tf.getFastValue(i * 0.01), 0.000001);
+			}
 		}
 		log.info(" t=" + (System.currentTimeMillis() - t0));
 	}
@@ -248,7 +254,9 @@ class JDFTransferFunctionTest extends JDFTestCaseBase
 		for (int j = 0; j < 1000; j++)
 		{
 			for (int i = 0; i < 100; i++)
+			{
 				assertTrue(tf.isUnit());
+			}
 		}
 		log.info(" t=" + (System.currentTimeMillis() - t0));
 	}
@@ -259,7 +267,9 @@ class JDFTransferFunctionTest extends JDFTestCaseBase
 		final JDFTransferFunction tf = new JDFTransferFunction("0 1.0 100 0");
 		assertEquals(1, tf.getValue(0), 0);
 		for (int i = 0; i < 100; i++)
+		{
 			assertEquals(1 - 0.01 * i, tf.getValue(i), 0.000001);
+		}
 	}
 
 	@Test

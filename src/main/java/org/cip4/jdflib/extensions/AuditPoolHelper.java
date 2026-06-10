@@ -63,15 +63,20 @@ public class AuditPoolHelper extends MessagePoolHelper
 	public static AuditPoolHelper getHelper(final KElement root)
 	{
 		if (root == null)
+		{
 			return null;
+		}
 		if (root.getLocalName().equals(ElementName.AUDITPOOL))
+		{
 			return new AuditPoolHelper(root);
+		}
 		else
+		{
 			return null;
+		}
 	}
 
 	/**
-	 *
 	 * @param auditType
 	 * @return
 	 * @deprecated use the enum
@@ -87,7 +92,6 @@ public class AuditPoolHelper extends MessagePoolHelper
 	}
 
 	/**
-	 *
 	 * @param auditType
 	 * @return
 	 */
@@ -98,12 +102,11 @@ public class AuditPoolHelper extends MessagePoolHelper
 	}
 
 	/**
-	 *
 	 * @param auditType
 	 * @param skip
 	 * @return
 	 */
-	public AuditHelper getCreateAudit(final eAudit auditType, int skip)
+	public AuditHelper getCreateAudit(final eAudit auditType, final int skip)
 	{
 		final MessageHelper m = getCreateMessage(auditType == null ? null : auditType.getAuditName(), skip);
 		return m == null ? null : new AuditHelper(m.theElement);

@@ -53,12 +53,9 @@ package org.cip4.jdflib.core;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoResourceLink;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -76,13 +73,13 @@ import org.cip4.jdflib.pool.JDFPool;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.PartitionGetter;
 import org.cip4.jdflib.resource.process.JDFLot;
 import org.cip4.jdflib.util.ContainerUtil;
-import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -92,6 +89,16 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolContainer
 {
+	public enum EUsage
+	{
+		Input, Output;
+
+		public static EUsage getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EUsage.class, val, null);
+		}
+	}
+
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
@@ -128,73 +135,18 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		return v;
 	}
 
-	public enum EUsage
+	public enum EnumUsage
 	{
 		Input, Output;
 
-		public static EUsage getEnum(final String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EUsage.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for Usage
-	 */
-	public static class EnumUsage extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumUsage(final String name)
-		{
-			super(name, m_startValue++);
-		}
-
 		/**
-		 * @param enumName the string to convert
+		 * @param val the string to convert
 		 * @return the enum
 		 */
-		public static EnumUsage getEnum(final String enumName)
+		public static EnumUsage getEnum(final String val)
 		{
-			return (EnumUsage) getEnum(EnumUsage.class, enumName);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumUsage.class, val, null);
 		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumUsage getEnum(final int enumValue)
-		{
-			return (EnumUsage) getEnum(EnumUsage.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumUsage.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumUsage.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumUsage.class);
-		}
-
-		public static final EnumUsage Input = new EnumUsage("Input");
-		public static final EnumUsage Output = new EnumUsage("Output");
 
 		/**
 		 * @return the opposite usage for this
@@ -319,9 +271,10 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		return "JDFResourceLink[ --> " + super.toString() + " ]";
 	}
 
+	@Override
 	public String shortString()
 	{
-		String ret = getNodeName() + " " + getEUsage();
+		String ret = getNodeName() + " " + getUsage();
 		final String pu = getProcessUsage();
 		if (!StringUtil.isEmpty(pu))
 		{
@@ -502,7 +455,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	{
 		final JDFResource linkRoot = getLinkRoot();
 		final EnumResStatus resStatus = linkRoot == null ? null : linkRoot.getResStatus(false);
-		return resStatus == null ? null : JDFResource.EnumResStatus.getEnum(resStatus.getName());
+		return resStatus;
 	}
 
 	/**
@@ -522,7 +475,10 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		for (final KElement e : v)
 		{
 			final EnumResStatus s2 = ((JDFResource) e).getStatusFromLeaves(false);
-			status = (EnumResStatus) EnumUtil.min(s2, status);
+			if (s2 != null && s2.compareTo(status) < 0)
+			{
+				status = s2;
+			}
 		}
 		return status;
 	}
@@ -548,7 +504,8 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	 */
 	public void setStatus(final JDFResource.EnumResStatus s)
 	{
-		setStatus(EnumUtil.getJavaEnum(s));
+		final JDFResource.EResStatus eStatus = s == null ? null : JDFResource.EResStatus.getEnum(s.toString());
+		setStatus(eStatus);
 	}
 
 	/**
@@ -634,7 +591,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		}
 
 		final JDFPart part = getCreatePart(0);
-		part.setAttribute(key.getName(), value, null);
+		part.setAttribute(key.name(), value, null);
 	}
 
 	/**
@@ -709,7 +666,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 				return false;
 			}
 
-			bExec = status != null && getMinStatus().getValue() <= status.getValue();
+			bExec = status != null && getMinStatus().ordinal() <= status.ordinal();
 			// any leaf not executable --> the whole thing is not executable
 			if (!bExec)
 			{
@@ -947,14 +904,9 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 					for (int i = 0; i < siz; i++)
 					{
 						final JDFAttributeMap part = vPart.elementAt(i);
-						if (part == null || part.size() == 0)
-						{
-							return true;
-						}
-
 						// RP 050120 swap of vPart[i] and partmap
 						// RP 070511 swap back of vPart[i] and partmap
-						if (part.subMap(partMap))
+						if (part == null || part.size() == 0 || part.subMap(partMap))
 						{
 							return true;
 						}
@@ -1174,11 +1126,11 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		{
 			// 200602 RP need the string type - don't cycle to and from enum
 			// type...
-			s = getAttribute(AttributeName.USAGE, null, JDFConstants.EMPTYSTRING);
+			s = getAttribute(AttributeName.USAGE, null, JDFCoreConstants.EMPTYSTRING);
 
 		}
 
-		return getLinkedResourceName() + JDFConstants.COLON + s;
+		return getLinkedResourceName() + JDFCoreConstants.COLON + s;
 	}
 
 	/**
@@ -1213,13 +1165,8 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 			return false;
 		}
 
-		if (this instanceof JDFPartAmount)
-		{
-			return true;
-		}
-
-		if ((levelLocal != EnumValidationLevel.Complete) && (levelLocal != EnumValidationLevel.Incomplete)
-				&& (levelLocal != EnumValidationLevel.RecursiveIncomplete))
+		if ((this instanceof JDFPartAmount) || ((levelLocal != EnumValidationLevel.Complete) && (levelLocal != EnumValidationLevel.Incomplete)
+				&& (levelLocal != EnumValidationLevel.RecursiveIncomplete)))
 		{
 			return true;
 		}
@@ -1252,7 +1199,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 				return false;
 			}
 
-			if (levelLocal.getValue() >= EnumValidationLevel.RecursiveIncomplete.getValue())
+			if (levelLocal.ordinal() >= EnumValidationLevel.RecursiveIncomplete.ordinal())
 			{
 				final EnumValidationLevel valDown = (levelLocal == EnumValidationLevel.RecursiveIncomplete) ? EnumValidationLevel.Incomplete
 						: EnumValidationLevel.Complete;
@@ -1677,7 +1624,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	 */
 	public void setProcessUsage(final EnumProcessUsage processUsage)
 	{
-		setAttribute(AttributeName.PROCESSUSAGE, processUsage == null ? null : processUsage.getName(), null);
+		setAttribute(AttributeName.PROCESSUSAGE, JavaEnumUtil.getName(processUsage), null);
 	}
 
 	/**
@@ -1695,7 +1642,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		}
 		else
 		{
-			if (getEUsage() == EUsage.Output)
+			if (getUsage() == EnumUsage.Output)
 			{
 				returnEnum = JDFResource.EnumResStatus.Unavailable;
 			}
@@ -1764,7 +1711,15 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		final VString vPartIDKeys = res.getPartIDKeys();
 		if (hasAttribute(AttributeName.PIPEPARTIDKEYS))
 		{
-			v = getEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, null, EnumPartIDKey.getEnum(0), false);
+			final List<EPartIDKey> pipePartIDKeys = getEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, null, EPartIDKey.class);
+			if (pipePartIDKeys != null)
+			{
+				v = new Vector<>();
+				for (final EPartIDKey pipePartIDKey : pipePartIDKeys)
+				{
+					v.add(EnumPartIDKey.getEnum(pipePartIDKey.name()));
+				}
+			}
 		}
 		else
 		{
@@ -1772,7 +1727,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		}
 		for (int i = 0; i < v.size(); i++)
 		{
-			if (!vPartIDKeys.contains((v.elementAt(i)).getName()))
+			if (!vPartIDKeys.contains((v.elementAt(i)).name()))
 			{
 				throw new JDFException("JDFResourceLink.getPipePartIDKeys: key " + v.elementAt(i) + " is not subset of PartIDKey");
 			}
@@ -1861,18 +1816,18 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	public void setDraftOK(final boolean value)
 	{
 		final EnumVersion eVer = getVersion(true);
-		if (eVer.getValue() < EnumVersion.Version_1_3.getValue())
+		if (eVer.ordinal() < EnumVersion.Version_1_3.ordinal())
 		{
 			setAttribute(AttributeName.DRAFTOK, value, null);
 		}
-		else if (value == true)
+		else if (value)
 		{
-			setMinStatus(JDFResource.EResStatus.Draft);
+			setMinStatus(JDFResource.EnumResStatus.Draft);
 		}
 		else
 		// 1.3 DraftOK=false
 		{
-			setMinStatus(EUsage.Output.equals(getEUsage()) ? JDFResource.EResStatus.Unavailable : JDFResource.EResStatus.Available);
+			setMinStatus(EnumUsage.Output.equals(getUsage()) ? JDFResource.EnumResStatus.Unavailable : JDFResource.EnumResStatus.Available);
 		}
 	}
 
@@ -1895,7 +1850,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 			return false;
 		}
 
-		return getEMinStatus().ordinal() <= JDFResource.EResStatus.Draft.ordinal();
+		return getMinStatus().ordinal() <= JDFResource.EnumResStatus.Draft.ordinal();
 	}
 
 	/**
@@ -1906,7 +1861,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	@Override
 	public String getPipeProtocol()
 	{
-		String str = JDFConstants.EMPTYSTRING;
+		String str = JDFCoreConstants.EMPTYSTRING;
 		if (!hasAttribute(AttributeName.PIPEPROTOCOL))
 		{
 			final JDFResource res = getTarget();
@@ -1930,7 +1885,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	@Override
 	public String getPipeURL()
 	{
-		String str = JDFConstants.EMPTYSTRING;
+		String str = JDFCoreConstants.EMPTYSTRING;
 		if (!hasAttribute(AttributeName.PIPEURL))
 		{
 			final JDFResource res = getTarget();
@@ -2037,13 +1992,13 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		bMatch = bMatch || namedResLink.equals(getNodeName());
 		bMatch = bMatch || namedResLink.equals(getrRef());
 		bMatch = bMatch || namedResLink.equals(getAttribute(AttributeName.USAGE));
-		bMatch = bMatch || (getLinkedResourceName() + JDFConstants.COLON + getAttribute(AttributeName.USAGE)).equals(namedResLink);
+		bMatch = bMatch || (getLinkedResourceName() + JDFCoreConstants.COLON + getAttribute(AttributeName.USAGE)).equals(namedResLink);
 
 		if (bMatch)
 		{
 			return new VJDFAttributeMap(new JDFAttributeMap());
 		}
-		if (!bMatch && StringUtil.token(namedResLink, 0, JDFConstants.COLON).equals(getLinkedResourceName()))
+		if (!bMatch && StringUtil.token(namedResLink, 0, JDFCoreConstants.COLON).equals(getLinkedResourceName()))
 		{
 			final VElement v = getTargetVector(0);
 			if (v != null)

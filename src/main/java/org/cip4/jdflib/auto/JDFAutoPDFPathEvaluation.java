@@ -124,7 +124,7 @@ public abstract class JDFAutoPDFPathEvaluation extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPDFPathEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPDFPathEvaluation(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -136,7 +136,7 @@ public abstract class JDFAutoPDFPathEvaluation extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPDFPathEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPDFPathEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -149,7 +149,7 @@ public abstract class JDFAutoPDFPathEvaluation extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPDFPathEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPDFPathEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -160,7 +160,7 @@ public abstract class JDFAutoPDFPathEvaluation extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -181,7 +181,7 @@ public abstract class JDFAutoPDFPathEvaluation extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLengthJDF(JDFIntegerRange value)
+	public void setLengthJDF(final JDFIntegerRange value)
 	{
 		setAttribute(AttributeName.LENGTHJDF, value, null);
 	}
@@ -194,8 +194,8 @@ public abstract class JDFAutoPDFPathEvaluation extends JDFResource
 	 */
 	public JDFIntegerRange getLengthJDF()
 	{
-		String strAttrName = getAttribute(AttributeName.LENGTHJDF, null, null);
-		JDFIntegerRange nPlaceHolder = JDFIntegerRange.createIntegerRange(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.LENGTHJDF, null, null);
+		final JDFIntegerRange nPlaceHolder = JDFIntegerRange.createIntegerRange(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -231,7 +231,7 @@ public abstract class JDFAutoPDFPathEvaluation extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFBasicPreflightTest the element
 	 */
-	public JDFBasicPreflightTest getCreateBasicPreflightTest(int iSkip)
+	public JDFBasicPreflightTest getCreateBasicPreflightTest(final int iSkip)
 	{
 		return (JDFBasicPreflightTest) getCreateElement_JDFElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
 	}
@@ -243,7 +243,7 @@ public abstract class JDFAutoPDFPathEvaluation extends JDFResource
 	 * @return JDFBasicPreflightTest the element
 	 *         default is getBasicPreflightTest(0)
 	 */
-	public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
+	public JDFBasicPreflightTest getBasicPreflightTest(final int iSkip)
 	{
 		return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
 	}
@@ -294,7 +294,7 @@ public abstract class JDFAutoPDFPathEvaluation extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFValue the element
 	 */
-	public JDFValue getCreateValue(int iSkip)
+	public JDFValue getCreateValue(final int iSkip)
 	{
 		return (JDFValue) getCreateElement_JDFElement(ElementName.VALUE, null, iSkip);
 	}
@@ -306,7 +306,7 @@ public abstract class JDFAutoPDFPathEvaluation extends JDFResource
 	 * @return JDFValue the element
 	 *         default is getValue(0)
 	 */
-	public JDFValue getValue(int iSkip)
+	public JDFValue getValue(final int iSkip)
 	{
 		return (JDFValue) getElement(ElementName.VALUE, null, iSkip);
 	}

@@ -47,6 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Vector;
@@ -61,8 +62,10 @@ import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFAudit.EnumSeverity;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -495,7 +498,7 @@ class JDFSpawnTest extends JDFTestCaseBase
 			final JDFMerge m = new JDFMerge(nRoot);
 			m.mergeJDF(n3);
 		}
-		assertEquals(n2.numChildNodes(KElement.COMMENT_NODE, true), 0);
+		assertEquals(n2.numChildNodes(Node.COMMENT_NODE, true), 0);
 		dRoot.write2File(sm_dirTestDataTemp + "spawn10.jdf", 2, false);
 	}
 
@@ -526,7 +529,7 @@ class JDFSpawnTest extends JDFTestCaseBase
 			final JDFMerge m = new JDFMerge(nRoot);
 			m.mergeJDF(n3);
 		}
-		assertEquals(n2.numChildNodes(KElement.COMMENT_NODE, true), 0);
+		assertEquals(n2.numChildNodes(Node.COMMENT_NODE, true), 0);
 		dRoot.write2File(sm_dirTestDataTemp + "spawn10Part.jdf", 2, false);
 	}
 
@@ -781,7 +784,7 @@ class JDFSpawnTest extends JDFTestCaseBase
 
 				System.out.println("Merge" + j);
 				final JDFNode nodeJ = nodes[j];
-				final EnumCleanUpMerge enumCleanUpMerge = EnumCleanUpMerge.getEnum(i);
+				final EnumCleanUpMerge enumCleanUpMerge = EnumCleanUpMerge.values()[i];
 				// JDFNode overwritten=
 				new JDFMerge(nRoot).mergeJDF(nodeJ, null, enumCleanUpMerge, EnumAmountMerge.UpdateLink);
 
@@ -855,7 +858,8 @@ class JDFSpawnTest extends JDFTestCaseBase
 
 						// this one spawns the component rw
 						vRWRes.clear();
-						final JDFExposedMedia xmSpawn = (JDFExposedMedia) spawnedNodeXMRW.getMatchingResource(ElementName.EXPOSEDMEDIA, EnumProcessUsage.AnyInput, null, 0);
+						final JDFExposedMedia xmSpawn = (JDFExposedMedia) spawnedNodeXMRW.getMatchingResource(ElementName.EXPOSEDMEDIA,
+								EnumProcessUsage.AnyInput, null, 0);
 						assertNotNull(xmSpawn);
 						assertEquals(xmPart.getSpawnStatus(), j < 2 ? EnumSpawnStatus.SpawnedRW : EnumSpawnStatus.NotSpawned, i + " " + j);
 						if (j >= 2)
@@ -994,7 +998,7 @@ class JDFSpawnTest extends JDFTestCaseBase
 				final JDFNode si = spawn.spawn();
 				assertNotNull(si.getResourcePool().getElement("Media"));
 				assertEquals(nodeToSpawn.getPartStatus(null, 0), EnumNodeStatus.Spawned);
-				assertEquals(((JDFSpawned) nodeToSpawn.getParentJDF().getAuditPool().getAudit(0, EnumAuditType.Spawned, null, null)).getStatus(), EnumNodeStatus.Waiting);
+				assertEquals(nodeToSpawn.getParentJDF().getAuditPool().getAudit(0, EnumAuditType.Spawned, null, null).getStatus(), EnumNodeStatus.Waiting);
 			}
 		}
 	}
@@ -1595,7 +1599,8 @@ class JDFSpawnTest extends JDFTestCaseBase
 		n.setType(EnumType.ProcessGroup);
 		final JDFNode n2 = n.addJDFNode(EnumType.ConventionalPrinting);
 		JDFLayout lo = (JDFLayout) n2.addResource("Layout", null, EnumUsage.Input, null, n, null, null);
-		JDFConventionalPrintingParams cpp = (JDFConventionalPrintingParams) n2.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, EnumUsage.Input, null, n, null, null);
+		JDFConventionalPrintingParams cpp = (JDFConventionalPrintingParams) n2.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, EnumUsage.Input, null,
+				n, null, null);
 		JDFComponent comp = (JDFComponent) n2.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, n, null, null);
 		JDFNodeInfo ni = (JDFNodeInfo) n2.addResource(ElementName.NODEINFO, null, EnumUsage.Input, null, null, null, null);
 
@@ -2155,7 +2160,8 @@ class JDFSpawnTest extends JDFTestCaseBase
 					final VElement poolChildren = mergedNode.getResourceLinkPool().getPoolChildren("NodeInfoLink", null, null);
 					assertNotNull(poolChildren, "poolChildren");
 					assertEquals(poolChildren.size(), 1, "no spurious ni added");
-					assertEquals(mergedNode.getChildElementVector(ElementName.COMMENT, null, null, true, 99, false).size(), 3, "Comment size" + i + " " + j + " " + k);
+					assertEquals(mergedNode.getChildElementVector(ElementName.COMMENT, null, null, true, 99, false).size(), 3,
+							"Comment size" + i + " " + j + " " + k);
 					assertEquals(xmRL.getAmount(map), 40.0, 0., "merged amount ok");
 					assertEquals(xmRL.getAttribute("foo:bar", "www.foobar.com", null), "a", "did not overwrite rl attribute");
 					assertTrue(xmRL.hasAttribute(AttributeName.RREF));
@@ -2259,8 +2265,9 @@ class JDFSpawnTest extends JDFTestCaseBase
 			}
 			assertNotNull(auditPoolMerged.getAudit(3, EnumAuditType.Notification, null, null));
 			assertNull(auditPoolMerged.getAudit(4, EnumAuditType.Notification, null, null));
-			assertEquals(auditPoolMerged.getAudit(-1, EnumAuditType.Notification, null, null).getComment(0).getText(), "fooBar", "comment text correctly merged");
-			assertEquals(((JDFComponent) jobPart.getResource(ElementName.COMPONENT, EnumUsage.Output, 0)).getAmountProduced(), 42., 0.);
+			assertEquals(auditPoolMerged.getAudit(-1, EnumAuditType.Notification, null, null).getComment(0).getText(), "fooBar",
+					"comment text correctly merged");
+			assertEquals(jobPart.getResource(ElementName.COMPONENT, EnumUsage.Output, 0).getAmountProduced(), 42., 0.);
 		}
 
 	}
@@ -2381,7 +2388,8 @@ class JDFSpawnTest extends JDFTestCaseBase
 			assertFalse(xm.getPartIDKeys().contains("PartVersion"), "PartVersion was added in spawned node");
 			assertFalse(ni2.getPartIDKeys().contains("PartVersion"), "PartVersion was added in spawned node");
 			assertNotNull(xm);
-			final JDFApprovalSuccess as2 = (JDFApprovalSuccess) spawnedNode.getMatchingResource(ElementName.APPROVALSUCCESS, EnumProcessUsage.AnyInput, null, 0);
+			final JDFApprovalSuccess as2 = (JDFApprovalSuccess) spawnedNode.getMatchingResource(ElementName.APPROVALSUCCESS, EnumProcessUsage.AnyInput, null,
+					0);
 			assertNotNull(as2);
 			as2.addPartition(EnumPartIDKey.PartVersion, "En");
 			assertTrue(as2.getPartIDKeys().contains(EnumPartIDKey.PartVersion.getName()));
@@ -2513,7 +2521,7 @@ class JDFSpawnTest extends JDFTestCaseBase
 		for (int i = 0; i < v2.size(); i++)
 		{
 			final JDFNode nodeToMerge = (JDFNode) v2.elementAt(i);
-			new JDFMerge(root).mergeJDF(nodeToMerge, JDFConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None);
+			new JDFMerge(root).mergeJDF(nodeToMerge, JDFCoreConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None);
 		}
 		assertEquals(nEvent, root.getChildrenByTagName("Notification", "", new JDFAttributeMap(), false, false, 0).size());
 
@@ -3081,8 +3089,8 @@ class JDFSpawnTest extends JDFTestCaseBase
 				assertTrue(nodeRoot.toString().indexOf(spawnID) < 0);
 				final long t2 = System.currentTimeMillis();
 				tMerge += (t2 - t11);
-				log.info("j= " + j + " i= " + i + " of " + (vNodes.size() - 1) + " : " + jobPartID + " time Spawn: " + (t1 - t0) + " time Write: " + (t11 - t1) + " time Merge: "
-						+ (t2 - t11) + " / " + tMerge + " total " + (t2 - t00));
+				log.info("j= " + j + " i= " + i + " of " + (vNodes.size() - 1) + " : " + jobPartID + " time Spawn: " + (t1 - t0) + " time Write: " + (t11 - t1)
+						+ " time Merge: " + (t2 - t11) + " / " + tMerge + " total " + (t2 - t00));
 				t0 = t2;
 			}
 			jdfDoc.write2File(sm_dirTestDataTemp + "bigMainMany.jdf", 2, true);
@@ -3201,7 +3209,8 @@ class JDFSpawnTest extends JDFTestCaseBase
 				final JDFDoc d2 = parser.parseFile(sm_dirTestDataTemp + "manySubInf" + i + "." + j + ".jdf");
 				assertNotNull(d2, "The subjdf could be parsed!");
 				final long t2 = System.currentTimeMillis();
-				System.out.println("j= " + j + " i= " + i + " of " + (vmap.size() - 1) + " : " + map + " time: " + (t2 - t1) + "/" + (t1 - t0) + " total " + (t2 - t00));
+				System.out.println(
+						"j= " + j + " i= " + i + " of " + (vmap.size() - 1) + " : " + map + " time: " + (t2 - t1) + "/" + (t1 - t0) + " total " + (t2 - t00));
 				t0 = t1;
 			}
 		}
@@ -3437,9 +3446,10 @@ class JDFSpawnTest extends JDFTestCaseBase
 	 * @param vSpawnParts
 	 * @return
 	 */
-	private String spawn(final String strXMLFile, final String strSpawnedFile, final String strElementID, final VString vRWResources, final VJDFAttributeMap vSpawnParts)
+	private String spawn(final String strXMLFile, final String strSpawnedFile, final String strElementID, final VString vRWResources,
+			final VJDFAttributeMap vSpawnParts)
 	{
-		String strSpawnID = JDFConstants.EMPTYSTRING;
+		String strSpawnID = JDFCoreConstants.EMPTYSTRING;
 
 		// parse input file
 		final JDFParser p = new JDFParser();
@@ -4049,7 +4059,8 @@ class JDFSpawnTest extends JDFTestCaseBase
 		spawnParts.add(new JDFAttributeMap("SheetName", "S1")); // want more granular
 		final JDFNode spNode = sp.spawn(null, null, new VString(ElementName.TRANSFERCURVEPOOL, null), spawnParts, false, false, false, false);
 
-		final JDFTransferCurvePool tcps = (JDFTransferCurvePool) spNode.getResource(ElementName.TRANSFERCURVEPOOL, EnumUsage.Output, 0).getCreatePartition(partMap, null);
+		final JDFTransferCurvePool tcps = (JDFTransferCurvePool) spNode.getResource(ElementName.TRANSFERCURVEPOOL, EnumUsage.Output, 0)
+				.getCreatePartition(partMap, null);
 		final JDFTransferCurvePool tcpsf = (JDFTransferCurvePool) tcps.addPartition(EnumPartIDKey.SectionIndex, "Front");
 		final JDFTransferCurvePool tcpsb = (JDFTransferCurvePool) tcps.addPartition(EnumPartIDKey.SectionIndex, "Back");
 		for (int i = 0; i < 4; i++)
@@ -4252,7 +4263,7 @@ class JDFSpawnTest extends JDFTestCaseBase
 		merge.setAmountPolicy(EnumAmountMerge.LinkOnly);
 		n = merge.mergeJDF(n2s);
 
-		assertEquals(((JDFComponent) n.getResource("Component", null, 0)).getAmountProduced(), 222, 0);
+		assertEquals(n.getResource("Component", null, 0).getAmountProduced(), 222, 0);
 		n = n.getParentJDF();
 		final JDFSpawn sp3 = new JDFSpawn(n3);
 		sp3.vRWResources_in = new VString("Component", null);
@@ -4264,7 +4275,7 @@ class JDFSpawnTest extends JDFTestCaseBase
 		merge.setAmountPolicy(EnumAmountMerge.LinkOnly);
 		n = merge.mergeJDF(n3s);
 		n = n.getParentJDF();
-		assertEquals(((JDFComponent) n.getResource("Component", null, 0)).getAmountProduced(), 777, 0);
+		assertEquals(n.getResource("Component", null, 0).getAmountProduced(), 777, 0);
 	}
 
 	/**
@@ -4284,8 +4295,8 @@ class JDFSpawnTest extends JDFTestCaseBase
 		final JDFParser p = new JDFParser();
 		m_jdfDoc = p.parseFile(sm_dirTestDataTemp + m_xmlFile1);
 
-		assertNotNull(m_jdfDoc, sm_dirTestDataTemp + m_xmlFile1 + ": Parse Error\n" + "MergeJDF: JDF merger simulation;\n" + "Arguments: 1=parent input JDF, 2=child input JDF;\n"
-				+ "-o: output JDF;\n" + "-d: delete completed tasks from the output JDF\n");
+		assertNotNull(m_jdfDoc, sm_dirTestDataTemp + m_xmlFile1 + ": Parse Error\n" + "MergeJDF: JDF merger simulation;\n"
+				+ "Arguments: 1=parent input JDF, 2=child input JDF;\n" + "-o: output JDF;\n" + "-d: delete completed tasks from the output JDF\n");
 
 		final JDFParser p2 = new JDFParser();
 		m_jdfDoc2 = p2.parseFile(sm_dirTestDataTemp + m_xmlFile2);
@@ -4321,7 +4332,7 @@ class JDFSpawnTest extends JDFTestCaseBase
 	@Test
 	void testCleanupMerge()
 	{
-		final List<EnumCleanUpMerge> l = EnumCleanUpMerge.getEnumList();
+		final List<EnumCleanUpMerge> l = Arrays.asList(EnumCleanUpMerge.values());
 		for (final EnumCleanUpMerge cm : l)
 		{
 			final JDFDoc doc = new JDFDoc("JDF");
@@ -4377,7 +4388,7 @@ class JDFSpawnTest extends JDFTestCaseBase
 		myMap.put("Type", "Imposition");
 		myMap.put("Status", "Waiting");
 
-		final VElement elemVec = root.getChildrenByTagName("JDF", JDFConstants.EMPTYSTRING, myMap, false, true, 0);
+		final VElement elemVec = root.getChildrenByTagName("JDF", JDFCoreConstants.EMPTYSTRING, myMap, false, true, 0);
 		JDFNode spawnnode = (JDFNode) elemVec.elementAt(0);
 
 		rwResources.add("Output");
@@ -4386,10 +4397,10 @@ class JDFSpawnTest extends JDFTestCaseBase
 		spawnnode = spawn.spawn(sm_dirTestData + "testMergeJDF2.jdf", sm_dirTestDataTemp + "myTest_spawned.jdf", rwResources, null, false, false, false, false);
 
 		assertTrue(mydoc.write2File(sm_dirTestDataTemp + "testMergeJDF2_spawned.jdf", 0, true));
-		new JDFMerge(root).mergeJDF(spawnnode, JDFConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None);
+		new JDFMerge(root).mergeJDF(spawnnode, JDFCoreConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None);
 
 		final JDFResource myres = (JDFResource) root.getTarget("Res_Impos_Out_Run_1_3011", AttributeName.ID);
-		assertTrue(myres.getAttribute("SpawnIDs", null, JDFConstants.EMPTYSTRING).equals(JDFConstants.EMPTYSTRING), "Merged Resource contains SpawnID");
+		assertTrue(myres.getAttribute("SpawnIDs", null, JDFCoreConstants.EMPTYSTRING).equals(JDFCoreConstants.EMPTYSTRING), "Merged Resource contains SpawnID");
 
 		assertTrue(mydoc.write2File(sm_dirTestDataTemp + "testMergeJDF2_merged.jdf", 0, true));
 	}
@@ -4410,8 +4421,9 @@ class JDFSpawnTest extends JDFTestCaseBase
 
 		spawnnode = spawn.spawn(sm_dirTestData + "testMergeJDF2.jdf", sm_dirTestDataTemp + "myTest_spawned.jdf", rwResources, null, false, false, false, false);
 		spawnnode.appendElement("dummy:foobar", "www.dummy.com");
-		final JDFNode newRoot = new JDFMerge(root).mergeJDF(spawnnode, JDFConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None);
-		assertNotNull(JDFNode.parseString(root.toXML()));
+		final JDFNode newRoot = new JDFMerge(root).mergeJDF(spawnnode, JDFCoreConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None,
+				JDFResource.EnumAmountMerge.None);
+		assertNotNull(JDFElement.parseString(root.toXML()));
 	}
 
 	/**
@@ -4431,8 +4443,9 @@ class JDFSpawnTest extends JDFTestCaseBase
 		spawnnode = spawn.spawn(sm_dirTestData + "testMergeJDF2.jdf", sm_dirTestDataTemp + "myTest_spawned.jdf", rwResources, null, false, false, false, false);
 		spawnnode.addNameSpace("dummy", "www.dummy.com");
 		spawnnode.appendElement("dummy:foobar");
-		final JDFNode newRoot = new JDFMerge(root).mergeJDF(spawnnode, JDFConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None);
-		assertNotNull(JDFNode.parseString(root.toXML()));
+		final JDFNode newRoot = new JDFMerge(root).mergeJDF(spawnnode, JDFCoreConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None,
+				JDFResource.EnumAmountMerge.None);
+		assertNotNull(JDFElement.parseString(root.toXML()));
 	}
 
 	/**
@@ -4456,8 +4469,9 @@ class JDFSpawnTest extends JDFTestCaseBase
 				new VJDFAttributeMap(new JDFAttributeMap("Option", "o1")), false, false, false, false);
 		spawnnode.addNameSpace("dummy", "www.dummy.com");
 		spawnnode.appendElement("dummy:foobar");
-		final JDFNode newRoot = new JDFMerge(root).mergeJDF(spawnnode, JDFConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None);
-		assertNotNull(JDFNode.parseString(root.toXML()));
+		final JDFNode newRoot = new JDFMerge(root).mergeJDF(spawnnode, JDFCoreConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None,
+				JDFResource.EnumAmountMerge.None);
+		assertNotNull(JDFElement.parseString(root.toXML()));
 	}
 
 	/**
@@ -4480,8 +4494,9 @@ class JDFSpawnTest extends JDFTestCaseBase
 		spawnnode = spawn.spawn(sm_dirTestData + "testMergeJDF2.jdf", sm_dirTestDataTemp + "myTest_spawned.jdf", rwResources,
 				new VJDFAttributeMap(new JDFAttributeMap("Option", "o1")), false, false, false, false);
 		spawnnode.appendElement("dummy:foobar", "www.dummy.com");
-		final JDFNode newRoot = new JDFMerge(root).mergeJDF(spawnnode, JDFConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None);
-		assertNotNull(JDFNode.parseString(root.toXML()));
+		final JDFNode newRoot = new JDFMerge(root).mergeJDF(spawnnode, JDFCoreConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None,
+				JDFResource.EnumAmountMerge.None);
+		assertNotNull(JDFElement.parseString(root.toXML()));
 	}
 
 	/**
@@ -4508,8 +4523,9 @@ class JDFSpawnTest extends JDFTestCaseBase
 		spawnnode.addNameSpace("dummy", "www.dummy.com");
 		spawnnode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0).setAttribute("dummy:bad", "nasty");
 
-		final JDFNode newRoot = new JDFMerge(root).mergeJDF(spawnnode, JDFConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None);
-		assertNotNull(JDFNode.parseString(root.toXML()));
+		final JDFNode newRoot = new JDFMerge(root).mergeJDF(spawnnode, JDFCoreConstants.EMPTYSTRING, JDFNode.EnumCleanUpMerge.None,
+				JDFResource.EnumAmountMerge.None);
+		assertNotNull(JDFElement.parseString(root.toXML()));
 	}
 
 	/**

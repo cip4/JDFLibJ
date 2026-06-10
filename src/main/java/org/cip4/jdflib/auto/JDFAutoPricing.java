@@ -128,7 +128,7 @@ public abstract class JDFAutoPricing extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPricing(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPricing(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -140,7 +140,7 @@ public abstract class JDFAutoPricing extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPricing(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPricing(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -153,7 +153,7 @@ public abstract class JDFAutoPricing extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPricing(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPricing(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -174,7 +174,7 @@ public abstract class JDFAutoPricing extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAdditionalPrice(double value)
+	public void setAdditionalPrice(final double value)
 	{
 		setAttribute(AttributeName.ADDITIONALPRICE, value, null);
 	}
@@ -199,7 +199,7 @@ public abstract class JDFAutoPricing extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCurrency(String value)
+	public void setCurrency(final String value)
 	{
 		setAttribute(AttributeName.CURRENCY, value, null);
 	}
@@ -224,7 +224,7 @@ public abstract class JDFAutoPricing extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHasPrice(boolean value)
+	public void setHasPrice(final boolean value)
 	{
 		setAttribute(AttributeName.HASPRICE, value, null);
 	}
@@ -249,7 +249,7 @@ public abstract class JDFAutoPricing extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setItem(String value)
+	public void setItem(final String value)
 	{
 		setAttribute(AttributeName.ITEM, value, null);
 	}
@@ -274,7 +274,7 @@ public abstract class JDFAutoPricing extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPrice(double value)
+	public void setPrice(final double value)
 	{
 		setAttribute(AttributeName.PRICE, value, null);
 	}
@@ -321,7 +321,7 @@ public abstract class JDFAutoPricing extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPayment the element
 	 */
-	public JDFPayment getCreatePayment(int iSkip)
+	public JDFPayment getCreatePayment(final int iSkip)
 	{
 		return (JDFPayment) getCreateElement_JDFElement(ElementName.PAYMENT, null, iSkip);
 	}
@@ -333,7 +333,7 @@ public abstract class JDFAutoPricing extends JDFElement
 	 * @return JDFPayment the element
 	 *         default is getPayment(0)
 	 */
-	public JDFPayment getPayment(int iSkip)
+	public JDFPayment getPayment(final int iSkip)
 	{
 		return (JDFPayment) getElement(ElementName.PAYMENT, null, iSkip);
 	}
@@ -384,7 +384,7 @@ public abstract class JDFAutoPricing extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPricing the element
 	 */
-	public JDFPricing getCreatePricing(int iSkip)
+	public JDFPricing getCreatePricing(final int iSkip)
 	{
 		return (JDFPricing) getCreateElement_JDFElement(ElementName.PRICING, null, iSkip);
 	}
@@ -396,7 +396,7 @@ public abstract class JDFAutoPricing extends JDFElement
 	 * @return JDFPricing the element
 	 *         default is getPricing(0)
 	 */
-	public JDFPricing getPricing(int iSkip)
+	public JDFPricing getPricing(final int iSkip)
 	{
 		return (JDFPricing) getElement(ElementName.PRICING, null, iSkip);
 	}

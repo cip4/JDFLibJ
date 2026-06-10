@@ -65,7 +65,7 @@ public class WalkEmployee extends WalkResource
 	}
 
 	@Override
-	protected void updateAttributes(KElement elem)
+	protected void updateAttributes(final KElement elem)
 	{
 		elem.renameAttribute(XJDFConstants.Role, AttributeName.ROLES);
 		super.updateAttributes(elem);

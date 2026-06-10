@@ -80,10 +80,10 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class JDFCutBlockTest {
+class JDFCutBlockTest
+{
 	/**
 	 * tests the CutBlock class
-	 *
 	 */
 	@Test
 	public final void testBlockName()
@@ -103,7 +103,6 @@ class JDFCutBlockTest {
 
 	/**
 	 * tests the CutBlock class
-	 *
 	 */
 	@Test
 	public final void testImplicitParts()

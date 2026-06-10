@@ -106,7 +106,7 @@ public abstract class JDFAutoDeviceList extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDeviceList(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDeviceList(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoDeviceList extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDeviceList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDeviceList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoDeviceList extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDeviceList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDeviceList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoDeviceList extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFDeviceInfo the element
 	 */
-	public JDFDeviceInfo getCreateDeviceInfo(int iSkip)
+	public JDFDeviceInfo getCreateDeviceInfo(final int iSkip)
 	{
 		return (JDFDeviceInfo) getCreateElement_JDFElement(ElementName.DEVICEINFO, null, iSkip);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoDeviceList extends JDFElement
 	 * @return JDFDeviceInfo the element
 	 *         default is getDeviceInfo(0)
 	 */
-	public JDFDeviceInfo getDeviceInfo(int iSkip)
+	public JDFDeviceInfo getDeviceInfo(final int iSkip)
 	{
 		return (JDFDeviceInfo) getElement(ElementName.DEVICEINFO, null, iSkip);
 	}

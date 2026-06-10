@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -87,7 +83,6 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.node.JDFNode.EActivation;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
@@ -106,8 +101,8 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[14];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0),
-				"Active");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumActivation.class, 0), "Active");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.EXACT, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
@@ -118,12 +113,12 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.RESOURCENAME, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.RESOURCEID, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.STATUS, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
-				JDFResource.EnumResStatus.getEnum(0), null);
+				JavaEnumUtil.getEnum(JDFResource.EnumResStatus.class, 0), null);
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.UPDATEIDS, 0x4444444331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.UPDATEMETHOD, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumUpdateMethod.getEnum(0),
-				"Complete");
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.UPDATEMETHOD, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumUpdateMethod.class, 0), "Complete");
 		atrInfoTable[13] = new AtrInfoTable(AttributeName.USAGE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
-				JDFResourceLink.EnumUsage.getEnum(0), null);
+				JavaEnumUtil.getEnum(JDFResourceLink.EnumUsage.class, 0), null);
 	}
 
 	@Override
@@ -152,7 +147,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoResourceCmdParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoResourceCmdParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -164,7 +159,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoResourceCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoResourceCmdParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -177,95 +172,28 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoResourceCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoResourceCmdParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for UpdateMethod
+	 * Enumeration strings for numUpdateMethod
 	 */
 
-	public enum EUpdateMethod
+	public enum EnumUpdateMethod
 	{
 		Complete, Incremental, Remove;
 
-		public static EUpdateMethod getEnum(String val)
+		public static EnumUpdateMethod getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EUpdateMethod.class, val, EUpdateMethod.Complete);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumUpdateMethod.class, val, EnumUpdateMethod.Complete);
 		}
-	}
-
-	/**
-	 * Enumeration strings for UpdateMethod
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumUpdateMethod extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumUpdateMethod(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumUpdateMethod getEnum(String enumName)
-		{
-			return (EnumUpdateMethod) getEnum(EnumUpdateMethod.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumUpdateMethod getEnum(int enumValue)
-		{
-			return (EnumUpdateMethod) getEnum(EnumUpdateMethod.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumUpdateMethod.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumUpdateMethod.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumUpdateMethod.class);
-		}
-
-		/**  */
-		public static final EnumUpdateMethod Complete = new EnumUpdateMethod("Complete");
-		/**  */
-		public static final EnumUpdateMethod Incremental = new EnumUpdateMethod("Incremental");
-		/**  */
-		public static final EnumUpdateMethod Remove = new EnumUpdateMethod("Remove");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -277,9 +205,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setActivation(EActivation enumVar)
+	public void setActivation(final EnumActivation enumVar)
 	{
-		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ACTIVATION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -287,35 +215,6 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EActivation getEActivation()
-	{
-		return EActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, "Active"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Activation
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Activation
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetActivation(EActivation) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setActivation(EnumActivation enumVar)
-	{
-		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Activation
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EActivation GetEActivation() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumActivation getActivation()
 	{
 		return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, "Active"));
@@ -331,7 +230,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setExact(boolean value)
+	public void setExact(final boolean value)
 	{
 		setAttribute(AttributeName.EXACT, value, null);
 	}
@@ -356,7 +255,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -381,7 +280,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobPartID(String value)
+	public void setJobPartID(final String value)
 	{
 		setAttribute(AttributeName.JOBPARTID, value, null);
 	}
@@ -406,7 +305,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProcessUsage(String value)
+	public void setProcessUsage(final String value)
 	{
 		setAttribute(AttributeName.PROCESSUSAGE, value, null);
 	}
@@ -431,7 +330,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProductID(String value)
+	public void setProductID(final String value)
 	{
 		setAttribute(AttributeName.PRODUCTID, value, null);
 	}
@@ -456,7 +355,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProductionAmount(double value)
+	public void setProductionAmount(final double value)
 	{
 		setAttribute(AttributeName.PRODUCTIONAMOUNT, value, null);
 	}
@@ -481,7 +380,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setQueueEntryID(String value)
+	public void setQueueEntryID(final String value)
 	{
 		setAttribute(AttributeName.QUEUEENTRYID, value, null);
 	}
@@ -506,7 +405,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setResourceName(String value)
+	public void setResourceName(final String value)
 	{
 		setAttribute(AttributeName.RESOURCENAME, value, null);
 	}
@@ -531,7 +430,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setResourceID(String value)
+	public void setResourceID(final String value)
 	{
 		setAttribute(AttributeName.RESOURCEID, value, null);
 	}
@@ -556,9 +455,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setResStatus(JDFResource.EResStatus enumVar)
+	public void setResStatus(final JDFResource.EnumResStatus enumVar)
 	{
-		setAttribute(AttributeName.STATUS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.STATUS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -566,35 +465,6 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public JDFResource.EResStatus getEResStatus()
-	{
-		return JDFResource.EResStatus.getEnum(getAttribute(AttributeName.STATUS, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Status
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Status
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetResStatus(Eesource.EnumResStatus) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setResStatus(JDFResource.EnumResStatus enumVar)
-	{
-		setAttribute(AttributeName.STATUS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Status
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use Eesource.EnumResStatus GetEResStatus() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public JDFResource.EnumResStatus getResStatus()
 	{
 		return JDFResource.EnumResStatus.getEnum(getAttribute(AttributeName.STATUS, null, null));
@@ -610,7 +480,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setUpdateIDs(VString value)
+	public void setUpdateIDs(final VString value)
 	{
 		setAttribute(AttributeName.UPDATEIDS, value, null);
 	}
@@ -622,8 +492,8 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 */
 	public VString getUpdateIDs()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.UPDATEIDS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.UPDATEIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -638,9 +508,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setUpdateMethod(EUpdateMethod enumVar)
+	public void setUpdateMethod(final EnumUpdateMethod enumVar)
 	{
-		setAttribute(AttributeName.UPDATEMETHOD, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.UPDATEMETHOD, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -648,35 +518,6 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EUpdateMethod getEUpdateMethod()
-	{
-		return EUpdateMethod.getEnum(getAttribute(AttributeName.UPDATEMETHOD, null, "Complete"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute UpdateMethod
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute UpdateMethod
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetUpdateMethod(EUpdateMethod) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setUpdateMethod(EnumUpdateMethod enumVar)
-	{
-		setAttribute(AttributeName.UPDATEMETHOD, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute UpdateMethod
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EUpdateMethod GetEUpdateMethod() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumUpdateMethod getUpdateMethod()
 	{
 		return EnumUpdateMethod.getEnum(getAttribute(AttributeName.UPDATEMETHOD, null, "Complete"));
@@ -692,9 +533,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setUsage(JDFResourceLink.EUsage enumVar)
+	public void setUsage(final JDFResourceLink.EnumUsage enumVar)
 	{
-		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.USAGE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -702,35 +543,6 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public JDFResourceLink.EUsage getEUsage()
-	{
-		return JDFResourceLink.EUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Usage
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Usage
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetUsage(EesourceLink.EnumUsage) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setUsage(JDFResourceLink.EnumUsage enumVar)
-	{
-		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Usage
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EesourceLink.EnumUsage GetEUsage() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public JDFResourceLink.EnumUsage getUsage()
 	{
 		return JDFResourceLink.EnumUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
@@ -768,7 +580,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
-	public JDFPart getCreatePart(int iSkip)
+	public JDFPart getCreatePart(final int iSkip)
 	{
 		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
@@ -780,7 +592,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 * @return JDFPart the element
 	 *         default is getPart(0)
 	 */
-	public JDFPart getPart(int iSkip)
+	public JDFPart getPart(final int iSkip)
 	{
 		return (JDFPart) getElement(ElementName.PART, null, iSkip);
 	}
@@ -862,7 +674,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFResource the element
 	 */
-	public JDFResource getCreateResource(int iSkip)
+	public JDFResource getCreateResource(final int iSkip)
 	{
 		return (JDFResource) getCreateElement_JDFElement(ElementName.RESOURCE, null, iSkip);
 	}
@@ -874,7 +686,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 * @return JDFResource the element
 	 *         default is getResource(0)
 	 */
-	public JDFResource getResource(int iSkip)
+	public JDFResource getResource(final int iSkip)
 	{
 		return (JDFResource) getElement(ElementName.RESOURCE, null, iSkip);
 	}

@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -98,7 +93,7 @@ public abstract class JDFAutoFontParams extends JDFResource
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.EMBEDALLFONTS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.CANNOTEMBEDFONTPOLICY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumCannotEmbedFontPolicy.getEnum(0), "Warning");
+				JavaEnumUtil.getEnum(EnumCannotEmbedFontPolicy.class, 0), "Warning");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALWAYSEMBED, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.MAXSUBSETPCT, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.NEVEREMBED, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
@@ -117,7 +112,7 @@ public abstract class JDFAutoFontParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFontParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoFontParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -129,7 +124,7 @@ public abstract class JDFAutoFontParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFontParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoFontParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -142,7 +137,7 @@ public abstract class JDFAutoFontParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoFontParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoFontParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -153,7 +148,7 @@ public abstract class JDFAutoFontParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -168,89 +163,22 @@ public abstract class JDFAutoFontParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for CannotEmbedFontPolicy
+	 * Enumeration strings for numCannotEmbedFontPolicy
 	 */
 
-	public enum ECannotEmbedFontPolicy
+	public enum EnumCannotEmbedFontPolicy
 	{
 		Warning, Error, OK;
 
-		public static ECannotEmbedFontPolicy getEnum(String val)
+		public static EnumCannotEmbedFontPolicy getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ECannotEmbedFontPolicy.class, val, ECannotEmbedFontPolicy.Warning);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumCannotEmbedFontPolicy.class, val, EnumCannotEmbedFontPolicy.Warning);
 		}
-	}
-
-	/**
-	 * Enumeration strings for CannotEmbedFontPolicy
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumCannotEmbedFontPolicy extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumCannotEmbedFontPolicy(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumCannotEmbedFontPolicy getEnum(String enumName)
-		{
-			return (EnumCannotEmbedFontPolicy) getEnum(EnumCannotEmbedFontPolicy.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumCannotEmbedFontPolicy getEnum(int enumValue)
-		{
-			return (EnumCannotEmbedFontPolicy) getEnum(EnumCannotEmbedFontPolicy.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumCannotEmbedFontPolicy.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumCannotEmbedFontPolicy.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumCannotEmbedFontPolicy.class);
-		}
-
-		/**  */
-		public static final EnumCannotEmbedFontPolicy Warning = new EnumCannotEmbedFontPolicy("Warning");
-		/**  */
-		public static final EnumCannotEmbedFontPolicy Error = new EnumCannotEmbedFontPolicy("Error");
-		/**  */
-		public static final EnumCannotEmbedFontPolicy OK = new EnumCannotEmbedFontPolicy("OK");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -262,7 +190,7 @@ public abstract class JDFAutoFontParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setEmbedAllFonts(boolean value)
+	public void setEmbedAllFonts(final boolean value)
 	{
 		setAttribute(AttributeName.EMBEDALLFONTS, value, null);
 	}
@@ -287,9 +215,9 @@ public abstract class JDFAutoFontParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setCannotEmbedFontPolicy(ECannotEmbedFontPolicy enumVar)
+	public void setCannotEmbedFontPolicy(final EnumCannotEmbedFontPolicy enumVar)
 	{
-		setAttribute(AttributeName.CANNOTEMBEDFONTPOLICY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.CANNOTEMBEDFONTPOLICY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -297,35 +225,6 @@ public abstract class JDFAutoFontParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ECannotEmbedFontPolicy getECannotEmbedFontPolicy()
-	{
-		return ECannotEmbedFontPolicy.getEnum(getAttribute(AttributeName.CANNOTEMBEDFONTPOLICY, null, "Warning"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute CannotEmbedFontPolicy
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute CannotEmbedFontPolicy
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetCannotEmbedFontPolicy(ECannotEmbedFontPolicy) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setCannotEmbedFontPolicy(EnumCannotEmbedFontPolicy enumVar)
-	{
-		setAttribute(AttributeName.CANNOTEMBEDFONTPOLICY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute CannotEmbedFontPolicy
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ECannotEmbedFontPolicy GetECannotEmbedFontPolicy() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumCannotEmbedFontPolicy getCannotEmbedFontPolicy()
 	{
 		return EnumCannotEmbedFontPolicy.getEnum(getAttribute(AttributeName.CANNOTEMBEDFONTPOLICY, null, "Warning"));
@@ -341,7 +240,7 @@ public abstract class JDFAutoFontParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAlwaysEmbed(VString value)
+	public void setAlwaysEmbed(final VString value)
 	{
 		setAttribute(AttributeName.ALWAYSEMBED, value, null);
 	}
@@ -353,8 +252,8 @@ public abstract class JDFAutoFontParams extends JDFResource
 	 */
 	public VString getAlwaysEmbed()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.ALWAYSEMBED, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ALWAYSEMBED, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -369,7 +268,7 @@ public abstract class JDFAutoFontParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaxSubsetPct(int value)
+	public void setMaxSubsetPct(final int value)
 	{
 		setAttribute(AttributeName.MAXSUBSETPCT, value, null);
 	}
@@ -394,7 +293,7 @@ public abstract class JDFAutoFontParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNeverEmbed(VString value)
+	public void setNeverEmbed(final VString value)
 	{
 		setAttribute(AttributeName.NEVEREMBED, value, null);
 	}
@@ -406,8 +305,8 @@ public abstract class JDFAutoFontParams extends JDFResource
 	 */
 	public VString getNeverEmbed()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.NEVEREMBED, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.NEVEREMBED, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -422,7 +321,7 @@ public abstract class JDFAutoFontParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSubsetFonts(boolean value)
+	public void setSubsetFonts(final boolean value)
 	{
 		setAttribute(AttributeName.SUBSETFONTS, value, null);
 	}

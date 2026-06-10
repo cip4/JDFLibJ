@@ -55,7 +55,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.FileUtil;
@@ -64,7 +64,6 @@ import org.cip4.jdflib.util.FileUtil;
  * a very simple hotfolder watcher subdirectories are ignored
  *
  * @author rainer prosi
- *
  */
 public class HotFolder
 {
@@ -98,7 +97,6 @@ public class HotFolder
 	}
 
 	/**
-	 *
 	 * @param i
 	 * @return
 	 */
@@ -108,7 +106,6 @@ public class HotFolder
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public int getMaxConcurrent()
@@ -184,7 +181,9 @@ public class HotFolder
 	String getAllExtensions()
 	{
 		if (allExtensions != null)
+		{
 			return allExtensions;
+		}
 
 		if (hfl == null)
 		{
@@ -207,7 +206,7 @@ public class HotFolder
 				}
 			}
 			allextensions.unify();
-			allExtensions = allextensions.getString(JDFConstants.COMMA, null, null);
+			allExtensions = allextensions.getString(JDFCoreConstants.COMMA, null, null);
 			return allExtensions;
 		}
 		catch (final Exception x)
@@ -270,7 +269,7 @@ public class HotFolder
 	 * constructor for a simple hotfolder watcher that is automagically started in its own thread
 	 *
 	 * @param _dir the Directory to watch
-	 * @param ext the extension filter - case is ignored and lists of extensions may be specified as a comma separated list e.g. ".txt,.xml"
+	 * @param ext  the extension filter - case is ignored and lists of extensions may be specified as a comma separated list e.g. ".txt,.xml"
 	 * @param _hfl the listener callback
 	 */
 	public HotFolder(final File _dir, final String ext, final HotFolderListener _hfl)
@@ -317,7 +316,6 @@ public class HotFolder
 
 	/**
 	 * stop this thread;
-	 *
 	 */
 	public synchronized void stop()
 	{
@@ -330,14 +328,15 @@ public class HotFolder
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	File[] getHotFiles()
 	{
 		final HotFolderRunner r = HotFolderRunner.getTherunner();
 		if (r == null)
+		{
 			return null;
+		}
 
 		final File[] files = FileUtil.listFilesWithExtension(dir, getAllExtensions(), maxCheck);
 		int n = 0;
@@ -370,7 +369,7 @@ public class HotFolder
 
 	/**
 	 * return false processed or removed
-	 * 
+	 *
 	 * @param lftAt
 	 * @return
 	 */
@@ -396,9 +395,7 @@ public class HotFolder
 	}
 
 	/**
-	 *
 	 * @author rainer prosi
-	 *
 	 */
 	class HotFileRunner implements Runnable
 	{
@@ -412,7 +409,6 @@ public class HotFolder
 		}
 
 		/**
-		 *
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
@@ -517,9 +513,13 @@ public class HotFolder
 	public boolean equals(final Object obj)
 	{
 		if (dir == null)
+		{
 			return obj == null;
+		}
 		if (!(obj instanceof HotFolder))
+		{
 			return false;
+		}
 		return dir.equals(((HotFolder) obj).dir);
 	}
 

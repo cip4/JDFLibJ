@@ -128,7 +128,7 @@ public abstract class JDFAutoPDFPathState extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPDFPathState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPDFPathState(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -140,7 +140,7 @@ public abstract class JDFAutoPDFPathState extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPDFPathState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPDFPathState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -153,7 +153,7 @@ public abstract class JDFAutoPDFPathState extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPDFPathState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPDFPathState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -164,7 +164,7 @@ public abstract class JDFAutoPDFPathState extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -185,7 +185,7 @@ public abstract class JDFAutoPDFPathState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDefaultValue(String value)
+	public void setDefaultValue(final String value)
 	{
 		setAttribute(AttributeName.DEFAULTVALUE, value, null);
 	}
@@ -210,7 +210,7 @@ public abstract class JDFAutoPDFPathState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCurrentValue(String value)
+	public void setCurrentValue(final String value)
 	{
 		setAttribute(AttributeName.CURRENTVALUE, value, null);
 	}
@@ -235,7 +235,7 @@ public abstract class JDFAutoPDFPathState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowedLength(JDFIntegerRange value)
+	public void setAllowedLength(final JDFIntegerRange value)
 	{
 		setAttribute(AttributeName.ALLOWEDLENGTH, value, null);
 	}
@@ -248,8 +248,8 @@ public abstract class JDFAutoPDFPathState extends JDFResource
 	 */
 	public JDFIntegerRange getAllowedLength()
 	{
-		String strAttrName = getAttribute(AttributeName.ALLOWEDLENGTH, null, null);
-		JDFIntegerRange nPlaceHolder = JDFIntegerRange.createIntegerRange(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.ALLOWEDLENGTH, null, null);
+		final JDFIntegerRange nPlaceHolder = JDFIntegerRange.createIntegerRange(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -263,7 +263,7 @@ public abstract class JDFAutoPDFPathState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentLength(JDFIntegerRange value)
+	public void setPresentLength(final JDFIntegerRange value)
 	{
 		setAttribute(AttributeName.PRESENTLENGTH, value, null);
 	}
@@ -276,8 +276,8 @@ public abstract class JDFAutoPDFPathState extends JDFResource
 	 */
 	public JDFIntegerRange getPresentLength()
 	{
-		String strAttrName = getAttribute(AttributeName.PRESENTLENGTH, null, null);
-		JDFIntegerRange nPlaceHolder = JDFIntegerRange.createIntegerRange(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PRESENTLENGTH, null, null);
+		final JDFIntegerRange nPlaceHolder = JDFIntegerRange.createIntegerRange(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -313,7 +313,7 @@ public abstract class JDFAutoPDFPathState extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc the element
 	 */
-	public JDFLoc getCreateLoc(int iSkip)
+	public JDFLoc getCreateLoc(final int iSkip)
 	{
 		return (JDFLoc) getCreateElement_JDFElement(ElementName.LOC, null, iSkip);
 	}
@@ -325,7 +325,7 @@ public abstract class JDFAutoPDFPathState extends JDFResource
 	 * @return JDFLoc the element
 	 *         default is getLoc(0)
 	 */
-	public JDFLoc getLoc(int iSkip)
+	public JDFLoc getLoc(final int iSkip)
 	{
 		return (JDFLoc) getElement(ElementName.LOC, null, iSkip);
 	}
@@ -376,7 +376,7 @@ public abstract class JDFAutoPDFPathState extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFValue the element
 	 */
-	public JDFValue getCreateValue(int iSkip)
+	public JDFValue getCreateValue(final int iSkip)
 	{
 		return (JDFValue) getCreateElement_JDFElement(ElementName.VALUE, null, iSkip);
 	}
@@ -388,7 +388,7 @@ public abstract class JDFAutoPDFPathState extends JDFResource
 	 * @return JDFValue the element
 	 *         default is getValue(0)
 	 */
-	public JDFValue getValue(int iSkip)
+	public JDFValue getValue(final int iSkip)
 	{
 		return (JDFValue) getElement(ElementName.VALUE, null, iSkip);
 	}

@@ -105,7 +105,7 @@ public abstract class JDFAutoLongSlit extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLongSlit(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoLongSlit(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -117,7 +117,7 @@ public abstract class JDFAutoLongSlit extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLongSlit(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoLongSlit(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -130,7 +130,7 @@ public abstract class JDFAutoLongSlit extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoLongSlit(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoLongSlit(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -151,7 +151,7 @@ public abstract class JDFAutoLongSlit extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWorkingList(JDFNumberList value)
+	public void setWorkingList(final JDFNumberList value)
 	{
 		setAttribute(AttributeName.WORKINGLIST, value, null);
 	}
@@ -164,8 +164,8 @@ public abstract class JDFAutoLongSlit extends JDFElement
 	 */
 	public JDFNumberList getWorkingList()
 	{
-		String strAttrName = getAttribute(AttributeName.WORKINGLIST, null, null);
-		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.WORKINGLIST, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -179,7 +179,7 @@ public abstract class JDFAutoLongSlit extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setXOffset(double value)
+	public void setXOffset(final double value)
 	{
 		setAttribute(AttributeName.XOFFSET, value, null);
 	}

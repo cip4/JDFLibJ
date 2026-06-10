@@ -227,7 +227,7 @@ class MessageHelperTest extends JDFTestCaseBase
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.Status);
-		assertEquals(EnumType.Status.getName(), mh.getType());
+		assertEquals(EnumType.Status.name(), mh.getType());
 	}
 
 	/**

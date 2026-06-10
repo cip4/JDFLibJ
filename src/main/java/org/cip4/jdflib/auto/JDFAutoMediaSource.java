@@ -71,8 +71,6 @@
 package org.cip4.jdflib.auto;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.ESheetLay;
-import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumSheetLay;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -83,6 +81,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoMediaSource : public JDFResource
@@ -99,7 +98,8 @@ public abstract class JDFAutoMediaSource extends JDFResource
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.MANUALFEED, 0x4444444443l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.LEADINGEDGE, 0x4444444443l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.MEDIALOCATION, 0x4444444443l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.SHEETLAY, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SHEETLAY, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumSheetLay.class, 0), null);
 	}
 
 	@Override
@@ -127,7 +127,7 @@ public abstract class JDFAutoMediaSource extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMediaSource(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoMediaSource(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -139,7 +139,7 @@ public abstract class JDFAutoMediaSource extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMediaSource(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoMediaSource(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -152,7 +152,7 @@ public abstract class JDFAutoMediaSource extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoMediaSource(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoMediaSource(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -163,7 +163,7 @@ public abstract class JDFAutoMediaSource extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -177,11 +177,23 @@ public abstract class JDFAutoMediaSource extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * Enumeration strings for numSheetLay
 	 */
+
+	public enum EnumSheetLay
+	{
+		Left, Right, Center;
+
+		public static EnumSheetLay getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSheetLay.class, val, null);
+		}
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
+		 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -193,7 +205,7 @@ public abstract class JDFAutoMediaSource extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setManualFeed(boolean value)
+	public void setManualFeed(final boolean value)
 	{
 		setAttribute(AttributeName.MANUALFEED, value, null);
 	}
@@ -218,7 +230,7 @@ public abstract class JDFAutoMediaSource extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLeadingEdge(double value)
+	public void setLeadingEdge(final double value)
 	{
 		setAttribute(AttributeName.LEADINGEDGE, value, null);
 	}
@@ -243,7 +255,7 @@ public abstract class JDFAutoMediaSource extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMediaLocation(String value)
+	public void setMediaLocation(final String value)
 	{
 		setAttribute(AttributeName.MEDIALOCATION, value, null);
 	}
@@ -268,9 +280,9 @@ public abstract class JDFAutoMediaSource extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSheetLay(ESheetLay enumVar)
+	public void setSheetLay(final EnumSheetLay enumVar)
 	{
-		setAttribute(AttributeName.SHEETLAY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SHEETLAY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -278,35 +290,6 @@ public abstract class JDFAutoMediaSource extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESheetLay getESheetLay()
-	{
-		return ESheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute SheetLay
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute SheetLay
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetSheetLay(ESheetLay) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSheetLay(EnumSheetLay enumVar)
-	{
-		setAttribute(AttributeName.SHEETLAY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute SheetLay
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ESheetLay GetESheetLay() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumSheetLay getSheetLay()
 	{
 		return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
@@ -354,7 +337,7 @@ public abstract class JDFAutoMediaSource extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMedia(JDFMedia refTarget)
+	public void refMedia(final JDFMedia refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -395,7 +378,7 @@ public abstract class JDFAutoMediaSource extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refComponent(JDFComponent refTarget)
+	public void refComponent(final JDFComponent refTarget)
 	{
 		refElement(refTarget);
 	}

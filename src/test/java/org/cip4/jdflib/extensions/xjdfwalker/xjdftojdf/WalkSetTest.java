@@ -151,7 +151,7 @@ class WalkSetTest extends WalkSet
 				map.put("Separation", "sep" + j);
 				for (int k = 0; k < 2; k++)
 				{
-					map.put("Side", (EnumSide) EnumSide.getEnumList().get(k));
+					map.put("Side", EnumSide.values()[k]);
 					v.add(map.clone());
 				}
 			}

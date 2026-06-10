@@ -148,7 +148,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDropIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDropIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -160,7 +160,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDropIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDropIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -173,7 +173,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDropIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDropIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -194,7 +194,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAdditionalAmount(int value)
+	public void setAdditionalAmount(final int value)
 	{
 		setAttribute(AttributeName.ADDITIONALAMOUNT, value, null);
 	}
@@ -219,7 +219,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBuyerAccount(String value)
+	public void setBuyerAccount(final String value)
 	{
 		setAttribute(AttributeName.BUYERACCOUNT, value, null);
 	}
@@ -244,7 +244,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDropID(String value)
+	public void setDropID(final String value)
 	{
 		setAttribute(AttributeName.DROPID, value, null);
 	}
@@ -269,7 +269,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPickup(boolean value)
+	public void setPickup(final boolean value)
 	{
 		setAttribute(AttributeName.PICKUP, value, null);
 	}
@@ -605,7 +605,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refCompany(JDFCompany refTarget)
+	public void refCompany(final JDFCompany refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -636,7 +636,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
-	public JDFContact getCreateContact(int iSkip)
+	public JDFContact getCreateContact(final int iSkip)
 	{
 		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -648,7 +648,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 * @return JDFContact the element
 	 *         default is getContact(0)
 	 */
-	public JDFContact getContact(int iSkip)
+	public JDFContact getContact(final int iSkip)
 	{
 		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -678,7 +678,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refContact(JDFContact refTarget)
+	public void refContact(final JDFContact refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -719,7 +719,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -750,7 +750,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFDropItemIntent the element
 	 */
-	public JDFDropItemIntent getCreateDropItemIntent(int iSkip)
+	public JDFDropItemIntent getCreateDropItemIntent(final int iSkip)
 	{
 		return (JDFDropItemIntent) getCreateElement_JDFElement(ElementName.DROPITEMINTENT, null, iSkip);
 	}
@@ -762,7 +762,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 * @return JDFDropItemIntent the element
 	 *         default is getDropItemIntent(0)
 	 */
-	public JDFDropItemIntent getDropItemIntent(int iSkip)
+	public JDFDropItemIntent getDropItemIntent(final int iSkip)
 	{
 		return (JDFDropItemIntent) getElement(ElementName.DROPITEMINTENT, null, iSkip);
 	}

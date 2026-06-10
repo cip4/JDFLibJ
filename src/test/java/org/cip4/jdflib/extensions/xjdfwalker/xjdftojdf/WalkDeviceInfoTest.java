@@ -79,9 +79,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class WalkDeviceInfoTest extends JDFTestCaseBase
 {
@@ -91,15 +89,15 @@ class WalkDeviceInfoTest extends JDFTestCaseBase
 	@Test
 	void testDeviceStatus()
 	{
-		JDFDeviceInfo di = (JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO).getRoot();
+		final JDFDeviceInfo di = (JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO).getRoot();
 		di.setAttribute(AttributeName.STATUS, "Production");
-		WalkDeviceInfo wdi = new WalkDeviceInfo();
+		final WalkDeviceInfo wdi = new WalkDeviceInfo();
 		wdi.setParent(new XJDFToJDFImpl(null));
-		KElement rp = new JDFDoc(ElementName.RESOURCEPOOL).getRoot();
+		final KElement rp = new JDFDoc(ElementName.RESOURCEPOOL).getRoot();
 		wdi.walk(di, rp);
-		JDFDeviceInfo di2 = (JDFDeviceInfo) rp.getElement(ElementName.DEVICEINFO);
-		String status = di2.getNonEmpty(AttributeName.DEVICESTATUS);
+		final JDFDeviceInfo di2 = (JDFDeviceInfo) rp.getElement(ElementName.DEVICEINFO);
+		final String status = di2.getNonEmpty(AttributeName.DEVICESTATUS);
 		Assertions.assertNull(di2.getNonEmpty(AttributeName.STATUS));
-		Assertions.assertEquals(status, EnumDeviceStatus.Running.getName());
+		Assertions.assertEquals(status, EnumDeviceStatus.Running.name());
 	}
 }

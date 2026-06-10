@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,20 +78,15 @@
  */
 package org.cip4.jdflib.jmf;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.auto.JDFAutoResponse;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.resource.JDFNotification;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
  */
 public class JDFResponse extends JDFAutoResponse
 {
@@ -99,7 +94,7 @@ public class JDFResponse extends JDFAutoResponse
 
 	/**
 	 * Constructor for JDFResponse
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -110,7 +105,7 @@ public class JDFResponse extends JDFAutoResponse
 
 	/**
 	 * Constructor for JDFResponse
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -122,7 +117,7 @@ public class JDFResponse extends JDFAutoResponse
 
 	/**
 	 * Constructor for JDFResponse
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -134,77 +129,23 @@ public class JDFResponse extends JDFAutoResponse
 	}
 
 	/**
-	 * inner class EnumClass
+	 * Enumeration strings for Error
 	 */
-	@SuppressWarnings("rawtypes")
-	public static final class EnumError extends ValuedEnum
+	public enum EnumError
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		ErrorUnknown, ErrorUnknownQuery;
 
-		private EnumError(final String status)
+		public static EnumError getEnum(final String val)
 		{
-			super(status, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumError.class, val, null);
 		}
-
-		/**
-		 * @param status
-		 * @return
-		 */
-		public static EnumError getEnum(final String status)
-		{
-			return (EnumError) getEnum(EnumError.class, status);
-		}
-
-		/**
-		 * @param value
-		 * @return
-		 */
-		public static EnumError getEnum(final int value)
-		{
-			return (EnumError) getEnum(EnumError.class, value);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumError.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumError.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumError.class);
-		}
-
-		/**
-		 * constants EnumError
-		 */
-		public static final EnumError ErrorUnknown = new EnumError("ErrorUnknown");
-		/**
-		 * 
-		 */
-		public static final EnumError ErrorUnknownQuery = new EnumError("ErrorUnknownQuery");
-
 	}
 
 	// **************************************** Methods
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -215,7 +156,7 @@ public class JDFResponse extends JDFAutoResponse
 
 	/**
 	 * Set ErrorText, (Notification/Comment/#text) also sets Notification/@Type=Error and Notification/@Class=Error doesn't create a notification if ErroerText=null
-	 * 
+	 *
 	 * @param errorText new error text
 	 * @return JDFNotification the newly created Notification element
 	 * @deprecated use public JDFNotification setErrorText(String errorText, EnumClass errorClass)
@@ -228,8 +169,8 @@ public class JDFResponse extends JDFAutoResponse
 
 	/**
 	 * Set ErrorText, (Notification/Comment/#text) also sets Notification/@Type=Error and Notification/@Class=Error doesn't create a notification if ErroerText=null
-	 * 
-	 * @param errorText new error text
+	 *
+	 * @param errorText  new error text
 	 * @param errorClass the error class
 	 * @return JDFNotification the newly created Notification element
 	 */
@@ -272,7 +213,7 @@ public class JDFResponse extends JDFAutoResponse
 
 	/**
 	 * create an acknowledge JMF and set this to a pure acknowledge response
-	 * 
+	 *
 	 * @return an Acknowledge element that corresponds to this
 	 */
 	public JDFAcknowledge splitAcknowledge()

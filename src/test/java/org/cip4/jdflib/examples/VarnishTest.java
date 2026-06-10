@@ -93,8 +93,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
- * 28.11.2008
+ *         28.11.2008
  */
 class VarnishTest extends JDFTestCaseBase
 {
@@ -113,7 +112,8 @@ class VarnishTest extends JDFTestCaseBase
 		final VString vSeparations = new VString("Cyan Magenta Yellow Black Varnish", " ");
 		n.setCombined(vCombiNodes);
 
-		final JDFConventionalPrintingParams cpp = (JDFConventionalPrintingParams) n.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFConventionalPrintingParams cpp = (JDFConventionalPrintingParams) n.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, EnumUsage.Input,
+				null, null, null, null);
 		cpp.setWorkStyle(EnumWorkStyle.Simplex);
 		cpp.setXMLComment("Module 0 and 7 are varnishing modules, 1-4 are process colors and 6 is the ink module used to varnish", true);
 		final JDFComponent c = (JDFComponent) n.appendMatchingResource("Component", JDFNode.EnumProcessUsage.AnyOutput, null);
@@ -147,7 +147,8 @@ class VarnishTest extends JDFTestCaseBase
 			}
 			if (sep.equals("Varnish2"))
 			{
-				vp.appendXMLComment("full varnishing in a varnishing module with or wihtout a sleeve. Full varnishing means to cover the complete media surface.", null);
+				vp.appendXMLComment(
+						"full varnishing in a varnishing module with or wihtout a sleeve. Full varnishing means to cover the complete media surface.", null);
 				xmVarnish.addPartition(EnumPartIDKey.Separation, sep);
 				final JDFResource varnishPart = vp.addPartition(EnumPartIDKey.Separation, sep);
 				varnishPart.setAttribute("ModuleIndex", "7");
@@ -156,7 +157,9 @@ class VarnishTest extends JDFTestCaseBase
 			}
 			else if (sep.equals("Varnish"))
 			{
-				vp.appendXMLComment("varnishing in a printing module only  with a mandatory plate. The plate may be exposed or not, for example,  for full varnihing. ", null);
+				vp.appendXMLComment(
+						"varnishing in a printing module only  with a mandatory plate. The plate may be exposed or not, for example,  for full varnihing. ",
+						null);
 				// xmVarnish.addPartition(EnumPartIDKey.Separation, sep);
 				final JDFResource varnishPart = vp.addPartition(EnumPartIDKey.Separation, sep);
 				varnishPart.setAttribute("ModuleIndex", "6");

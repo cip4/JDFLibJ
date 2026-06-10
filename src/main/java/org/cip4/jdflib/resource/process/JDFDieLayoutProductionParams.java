@@ -67,14 +67,14 @@
  *
  *
  *//**
-*
-* Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
-*
-* JDFDieLayout.java
-*
-* Last changes
-*
-*/
+	*
+	* Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
+	*
+	* JDFDieLayout.java
+	*
+	* Last changes
+	*
+	*/
 package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -87,7 +87,7 @@ public class JDFDieLayoutProductionParams extends JDFAutoDieLayoutProductionPara
 
 	/**
 	 * Constructor for JDFDieLayout
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
@@ -99,7 +99,7 @@ public class JDFDieLayoutProductionParams extends JDFAutoDieLayoutProductionPara
 
 	/**
 	 * Constructor for JDFDieLayout
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
@@ -112,14 +112,15 @@ public class JDFDieLayoutProductionParams extends JDFAutoDieLayoutProductionPara
 
 	/**
 	 * Constructor for JDFDieLayout
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFDieLayoutProductionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFDieLayoutProductionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName,
+			final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

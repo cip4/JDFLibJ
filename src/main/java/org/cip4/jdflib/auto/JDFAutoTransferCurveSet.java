@@ -124,7 +124,7 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTransferCurveSet(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoTransferCurveSet(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -136,7 +136,7 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTransferCurveSet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoTransferCurveSet(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -149,7 +149,7 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoTransferCurveSet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoTransferCurveSet(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -170,7 +170,7 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCTM(JDFMatrix value)
+	public void setCTM(final JDFMatrix value)
 	{
 		setAttribute(AttributeName.CTM, value, null);
 	}
@@ -183,8 +183,8 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
 	 */
 	public JDFMatrix getCTM()
 	{
-		String strAttrName = getAttribute(AttributeName.CTM, null, null);
-		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CTM, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -198,7 +198,7 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setName(String value)
+	public void setName(final String value)
 	{
 		setAttribute(AttributeName.NAME, value, null);
 	}
@@ -245,7 +245,7 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFTransferCurve the element
 	 */
-	public JDFTransferCurve getCreateTransferCurve(int iSkip)
+	public JDFTransferCurve getCreateTransferCurve(final int iSkip)
 	{
 		return (JDFTransferCurve) getCreateElement_JDFElement(ElementName.TRANSFERCURVE, null, iSkip);
 	}
@@ -257,7 +257,7 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
 	 * @return JDFTransferCurve the element
 	 *         default is getTransferCurve(0)
 	 */
-	public JDFTransferCurve getTransferCurve(int iSkip)
+	public JDFTransferCurve getTransferCurve(final int iSkip)
 	{
 		return (JDFTransferCurve) getElement(ElementName.TRANSFERCURVE, null, iSkip);
 	}
@@ -287,7 +287,7 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refTransferCurve(JDFTransferCurve refTarget)
+	public void refTransferCurve(final JDFTransferCurve refTarget)
 	{
 		refElement(refTarget);
 	}

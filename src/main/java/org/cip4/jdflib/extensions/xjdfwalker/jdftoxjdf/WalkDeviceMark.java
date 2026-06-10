@@ -112,19 +112,19 @@ public class WalkDeviceMark extends WalkJDFSubElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		super.updateAttributes(map);
 	}
 
 	@Override
-	protected String getXJDFName(KElement jdf)
+	protected String getXJDFName(final KElement jdf)
 	{
 		return ElementName.STRIPMARK;
 	}
 
 	@Override
-	public KElement walk(KElement jdf, KElement xjdf)
+	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		// TODO Auto-generated method stub
 		return super.walk(jdf, xjdf);

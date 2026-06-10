@@ -91,46 +91,46 @@ public class JDFTestPool extends JDFAutoTestPool
 
 	/**
 	 * Constructor for JDFTestPool
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFTestPool(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFTestPool(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFTestPool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFTestPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFTestPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFTestPool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFTestPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFTestPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -141,28 +141,26 @@ public class JDFTestPool extends JDFAutoTestPool
 
 	/**
 	 * get element <code>Test</code> with ID idTest
-	 * 
+	 *
 	 * @param idTest
-	 *            ID attribute of the test element
+	 *               ID attribute of the test element
 	 * @return JDFTest - the element
-	 * 
 	 */
-	public JDFTest getTest(String idTest)
+	public JDFTest getTest(final String idTest)
 	{
 		return (JDFTest) getChildWithAttribute(ElementName.TEST, AttributeName.ID, null, idTest, 0, true);
 	}
 
 	/**
 	 * append element <code>Test</code>
-	 * 
+	 *
 	 * @param term
-	 *            type of term to append to this test
+	 *             type of term to append to this test
 	 * @return JDFTest - the appended element
-	 * 
 	 */
-	public JDFTest appendTestTerm(EnumTerm term)
+	public JDFTest appendTestTerm(final EnumTerm term)
 	{
-		JDFTest test = appendTest();
+		final JDFTest test = appendTest();
 		test.appendTerm(term);
 		return test;
 	}

@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -104,7 +100,8 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x2222222222l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.MARKTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MARKUSAGE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumMarkUsage.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MARKUSAGE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumMarkUsage.class, 0), null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATION, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
@@ -132,7 +129,7 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoRegisterMark(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoRegisterMark(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -144,7 +141,7 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoRegisterMark(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoRegisterMark(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -157,7 +154,7 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoRegisterMark(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoRegisterMark(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +165,7 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -183,89 +180,22 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for MarkUsage
+	 * Enumeration strings for numMarkUsage
 	 */
 
-	public enum EMarkUsage
+	public enum EnumMarkUsage
 	{
 		Color, PaperPath, Tile;
 
-		public static EMarkUsage getEnum(String val)
+		public static EnumMarkUsage getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EMarkUsage.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumMarkUsage.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for MarkUsage
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumMarkUsage extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumMarkUsage(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumMarkUsage getEnum(String enumName)
-		{
-			return (EnumMarkUsage) getEnum(EnumMarkUsage.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumMarkUsage getEnum(int enumValue)
-		{
-			return (EnumMarkUsage) getEnum(EnumMarkUsage.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumMarkUsage.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumMarkUsage.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumMarkUsage.class);
-		}
-
-		/**  */
-		public static final EnumMarkUsage Color = new EnumMarkUsage("Color");
-		/**  */
-		public static final EnumMarkUsage PaperPath = new EnumMarkUsage("PaperPath");
-		/**  */
-		public static final EnumMarkUsage Tile = new EnumMarkUsage("Tile");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -277,7 +207,7 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCenter(JDFXYPair value)
+	public void setCenter(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.CENTER, value, null);
 	}
@@ -290,8 +220,8 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	 */
 	public JDFXYPair getCenter()
 	{
-		String strAttrName = getAttribute(AttributeName.CENTER, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CENTER, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -305,7 +235,7 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMarkType(VString value)
+	public void setMarkType(final VString value)
 	{
 		setAttribute(AttributeName.MARKTYPE, value, null);
 	}
@@ -317,8 +247,8 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	 */
 	public VString getMarkType()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.MARKTYPE, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.MARKTYPE, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -333,9 +263,9 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMarkUsage(EMarkUsage enumVar)
+	public void setMarkUsage(final EnumMarkUsage enumVar)
 	{
-		setAttribute(AttributeName.MARKUSAGE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.MARKUSAGE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -343,35 +273,6 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EMarkUsage getEMarkUsage()
-	{
-		return EMarkUsage.getEnum(getAttribute(AttributeName.MARKUSAGE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute MarkUsage
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute MarkUsage
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetMarkUsage(EMarkUsage) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setMarkUsage(EnumMarkUsage enumVar)
-	{
-		setAttribute(AttributeName.MARKUSAGE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute MarkUsage
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EMarkUsage GetEMarkUsage() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumMarkUsage getMarkUsage()
 	{
 		return EnumMarkUsage.getEnum(getAttribute(AttributeName.MARKUSAGE, null, null));
@@ -387,7 +288,7 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRotation(double value)
+	public void setRotation(final double value)
 	{
 		setAttribute(AttributeName.ROTATION, value, null);
 	}
@@ -434,7 +335,7 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationSpec the element
 	 */
-	public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
+	public JDFSeparationSpec getCreateSeparationSpec(final int iSkip)
 	{
 		return (JDFSeparationSpec) getCreateElement_JDFElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}
@@ -446,7 +347,7 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	 * @return JDFSeparationSpec the element
 	 *         default is getSeparationSpec(0)
 	 */
-	public JDFSeparationSpec getSeparationSpec(int iSkip)
+	public JDFSeparationSpec getSeparationSpec(final int iSkip)
 	{
 		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}

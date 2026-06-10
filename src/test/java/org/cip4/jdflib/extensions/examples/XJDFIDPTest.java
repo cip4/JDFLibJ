@@ -39,15 +39,15 @@ package org.cip4.jdflib.extensions.examples;
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoAssembly.EOrder;
+import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
+import org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumSides;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
-import org.cip4.jdflib.auto.JDFAutoStitchingParams.EStitchType;
+import org.cip4.jdflib.auto.JDFAutoStitchingParams.EnumStitchType;
 import org.cip4.jdflib.auto.JDFAutoUsageCounter.EnumScope;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFElement.ESides;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -93,7 +93,7 @@ class XJDFIDPTest extends JDFTestCaseBase
 		xjdfHelper.addType(EnumType.DigitalPrinting);
 
 		final JDFLayout lo = (JDFLayout) xjdfHelper.getCreateResource(ElementName.LAYOUT, EnumUsage.Input, null);
-		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Simplex.getName());
+		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Simplex.name());
 		lo.setAutomated(true);
 		lo.appendElement(ElementName.POSITION);
 
@@ -101,7 +101,7 @@ class XJDFIDPTest extends JDFTestCaseBase
 		ruLi.setFileSpecURL("http://test.pdf");
 
 		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) xjdfHelper.getCreateResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input, null);
-		dpp.setSides(ESides.OneSidedFront);
+		dpp.setSides(EnumSides.OneSidedFront);
 
 		final SetHelper ucs = xjdfHelper.getCreateSet(ElementName.USAGECOUNTER, EnumUsage.Input);
 		for (int c = 1; c <= 2; c++)
@@ -147,7 +147,7 @@ class XJDFIDPTest extends JDFTestCaseBase
 		xjdfHelper.addType(EnumType.Stitching);
 
 		final JDFLayout lo = (JDFLayout) xjdfHelper.getCreateResource(ElementName.LAYOUT, EnumUsage.Input, null);
-		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Perfecting.getName());
+		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Perfecting.name());
 		lo.setAutomated(true);
 		lo.appendElement(ElementName.POSITION);
 
@@ -157,13 +157,13 @@ class XJDFIDPTest extends JDFTestCaseBase
 		final SetHelper shAss = xjdfHelper.getCreateSet(ElementName.ASSEMBLY, EnumUsage.Input);
 		final ResourceHelper rhAss = shAss.appendPartition(null, true);
 		final JDFAssembly ass = (JDFAssembly) rhAss.getResource();
-		ass.setOrder(EOrder.Collecting);
+		ass.setOrder(EnumOrder.Collecting);
 
 		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) xjdfHelper.getCreateResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input, null);
-		dpp.setSides(ESides.TwoSided);
+		dpp.setSides(EnumSides.TwoSided);
 
 		final JDFStitchingParams stp = (JDFStitchingParams) xjdfHelper.getCreateResource(ElementName.STITCHINGPARAMS, EnumUsage.Input, null);
-		stp.setStitchType(EStitchType.Saddle);
+		stp.setStitchType(EnumStitchType.Saddle);
 		stp.setNumberOfStitches(3);
 
 		final JDFComponent comp = (JDFComponent) xjdfHelper.getCreateResource(ElementName.COMPONENT, EnumUsage.Output, null);

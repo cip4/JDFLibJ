@@ -42,7 +42,7 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StringUtil;
@@ -51,7 +51,6 @@ import org.cip4.jdflib.util.StringUtil;
  * simple listenerner class that processes files by extension
  *
  * @author prosirai
- *
  */
 class ExtensionListener
 {
@@ -65,7 +64,7 @@ class ExtensionListener
 		if (ext != null)
 		{
 			extension = new HashSet<>();
-			final StringArray vs = StringArray.getVString(ext, JDFConstants.COMMA);
+			final StringArray vs = StringArray.getVString(ext, JDFCoreConstants.COMMA);
 			for (String s : vs)
 			{
 				if (s.startsWith("."))
@@ -117,8 +116,6 @@ class ExtensionListener
 	}
 
 	/**
-	 *
-	 *
 	 * @return
 	 */
 	public HotFolderListener getListener()

@@ -49,7 +49,7 @@ import java.util.zip.ZipInputStream;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.util.ByteArrayIOFileStream;
@@ -110,7 +110,6 @@ public class ZipReader
 	boolean caseSensitive;
 
 	/**
-	 *
 	 * return true if all checks are cese sensitive (the default)
 	 *
 	 * @return
@@ -121,7 +120,6 @@ public class ZipReader
 	}
 
 	/**
-	 *
 	 * set the case sensitivity for matching strings and regexp
 	 *
 	 * @param caseSensitive
@@ -132,7 +130,6 @@ public class ZipReader
 	}
 
 	/**
-	 *
 	 * @param inStream
 	 * @param maxBuffer
 	 */
@@ -142,7 +139,6 @@ public class ZipReader
 	}
 
 	/**
-	 *
 	 * @param inStream
 	 * @param maxBuffer
 	 */
@@ -156,7 +152,6 @@ public class ZipReader
 	}
 
 	/**
-	 *
 	 * @param file the file to read
 	 */
 	public ZipReader(final File file)
@@ -165,7 +160,6 @@ public class ZipReader
 	}
 
 	/**
-	 *
 	 * @param file the file to read
 	 */
 	public ZipReader(final File file, final int maxBuffer)
@@ -184,7 +178,6 @@ public class ZipReader
 	}
 
 	/**
-	 *
 	 * @param fileName
 	 */
 	public ZipReader(final String fileName)
@@ -193,7 +186,6 @@ public class ZipReader
 	}
 
 	/**
-	 *
 	 * get the vector of zip entries
 	 *
 	 * @return
@@ -218,7 +210,9 @@ public class ZipReader
 	public ZipEntry ensureEntry()
 	{
 		if (currentEntry == null)
+		{
 			getNextEntry();
+		}
 		return currentEntry;
 	}
 
@@ -251,17 +245,23 @@ public class ZipReader
 	public int unPack(final File dir)
 	{
 		if (dir == null)
+		{
 			return 0;
+		}
 		dir.mkdirs();
 		if (!dir.isDirectory())
+		{
 			return 0;
+		}
 		int n = 0;
 		ZipEntry ze = getNextEntry();
 		while (ze != null)
 		{
 			final boolean b = unPack(dir, ze);
 			if (b)
+			{
 				n++;
+			}
 			ze = getNextEntry();
 		}
 		return n;
@@ -277,7 +277,9 @@ public class ZipReader
 	public boolean unPack(final File dir, final ZipEntry ze)
 	{
 		if (dir == null || ze == null)
+		{
 			return false;
+		}
 		if (currentEntry != ze)
 		{
 			log.warn("snafu with entries");
@@ -297,7 +299,9 @@ public class ZipReader
 			{
 				final File parent = newFile.getParentFile();
 				if (parent != null)
+				{
 					parent.mkdirs();
+				}
 				boolean ok = FileUtil.createNewFile(newFile);
 				if (ok)
 				{
@@ -339,7 +343,7 @@ public class ZipReader
 	public static String getEntryName(final ZipEntry ze)
 	{
 		String fileName = ze == null ? null : ze.getName();
-		fileName = StringUtil.replaceString(fileName, JDFConstants.BACK_SLASH, JDFConstants.SLASH);
+		fileName = StringUtil.replaceString(fileName, JDFCoreConstants.BACK_SLASH, JDFCoreConstants.SLASH);
 		return UrlUtil.getSecurePath(fileName, false);
 	}
 
@@ -393,7 +397,9 @@ public class ZipReader
 	public static Vector<ZipReader> getZipReaders(final InputStream is, final int max)
 	{
 		if (is == null)
+		{
 			return null;
+		}
 		final ByteArrayIOInputStream bios = ByteArrayIOStream.getBufferedInputStream(is);
 		final SkipInputStream sis = new SkipInputStream("PK\03\04", bios, false);
 		boolean nextAvailable = true;
@@ -455,7 +461,9 @@ public class ZipReader
 		ZipEntry ze = getNextEntry();
 		String urlUnEscaped = UrlUtil.unEscape(urlString);
 		if (urlString.equals(urlUnEscaped))
+		{
 			urlUnEscaped = null;
+		}
 
 		while (ze != null)
 		{
@@ -491,7 +499,9 @@ public class ZipReader
 			}
 
 			if (matches)
+			{
 				return ze;
+			}
 
 			ze = getNextEntry();
 		}
@@ -518,7 +528,9 @@ public class ZipReader
 		while (ze != null)
 		{
 			if (setName.equals(ze.getName()))
+			{
 				return true;
+			}
 			ze = getNextEntry();
 		}
 		return false;
@@ -527,7 +539,7 @@ public class ZipReader
 	/**
 	 * get an entry by name - note that we need to buffer the entire file for this random access method
 	 *
-	 * @param expr the regexp of the path (including directories) to match - simplified regexp is accepted
+	 * @param expr  the regexp of the path (including directories) to match - simplified regexp is accepted
 	 * @param iSkip how many to skip - default= 0
 	 * @return
 	 */
@@ -540,9 +552,13 @@ public class ZipReader
 		while (ze != null)
 		{
 			if (n >= iSkip)
+			{
 				return ze;
+			}
 			else
+			{
 				n++;
+			}
 			ze = getNextMatchingEntry(expr);
 		}
 		return null;
@@ -552,7 +568,6 @@ public class ZipReader
 	 * get entries by name - note that we need to buffer the entire file for this random access method
 	 *
 	 * @param expr the regexp of the path (including directories) to match - simplified regexp is accepted
-	 *
 	 * @return
 	 */
 	public Vector<ZipEntry> getMatchingEntries(final String expr, final boolean sortName)
@@ -577,7 +592,6 @@ public class ZipReader
 	{
 
 		/**
-		 *
 		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 		 */
 		@Override
@@ -601,7 +615,9 @@ public class ZipReader
 		ZipEntry ze = getNextEntry();
 		String exprUnEscaped = UrlUtil.unEscape(expr);
 		if (expr.equals(exprUnEscaped))
+		{
 			exprUnEscaped = null;
+		}
 
 		while (ze != null)
 		{
@@ -623,7 +639,7 @@ public class ZipReader
 					}
 				}
 			}
-			if (!matches && !name.equals(StringUtil.token(name, -1, JDFConstants.SLASH)))
+			if (!matches && !name.equals(StringUtil.token(name, -1, JDFCoreConstants.SLASH)))
 			{
 				name = StringUtil.token(name, -1, "/");
 				if (name != null && name.length() > 0)
@@ -647,7 +663,6 @@ public class ZipReader
 	}
 
 	/**
-	 *
 	 * get the stream to read this from; note that we must close manually
 	 *
 	 * @return
@@ -659,7 +674,6 @@ public class ZipReader
 	}
 
 	/**
-	 *
 	 * get the xmlDoc of the current entry - note not threadsafe!
 	 *
 	 * @return
@@ -669,12 +683,13 @@ public class ZipReader
 		ensureEntry();
 		final XMLDoc doc = XMLDoc.parseStream(zis);
 		if (doc != null)
+		{
 			doc.setZipReader(this);
+		}
 		return doc;
 	}
 
 	/**
-	 *
 	 * get the xmlDoc of the current entry - note not threadsafe!
 	 *
 	 * @return
@@ -684,7 +699,9 @@ public class ZipReader
 		ensureEntry();
 		final JDFDoc doc = JDFDoc.parseStream(zis);
 		if (doc != null)
+		{
 			doc.setZipReader(this);
+		}
 		return doc;
 	}
 
@@ -703,7 +720,9 @@ public class ZipReader
 	public void close()
 	{
 		if (bios != null)
+		{
 			bios.close();
+		}
 		if (zis != null)
 		{
 			try
@@ -738,7 +757,6 @@ public class ZipReader
 	}
 
 	/**
-	 *
 	 * @param jarFile
 	 * @return
 	 */
@@ -748,7 +766,6 @@ public class ZipReader
 	}
 
 	/**
-	 *
 	 * @param jarFile
 	 * @return
 	 */

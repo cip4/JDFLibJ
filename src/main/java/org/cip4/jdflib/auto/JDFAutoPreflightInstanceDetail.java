@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoPreflightInstanceDetail : public JDFElement
@@ -94,7 +95,8 @@ public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.STATUS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.STATUS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumNodeStatus.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.PROPERTY, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
@@ -122,7 +124,7 @@ public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPreflightInstanceDetail(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPreflightInstanceDetail(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -134,7 +136,7 @@ public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPreflightInstanceDetail(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPreflightInstanceDetail(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -147,7 +149,7 @@ public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPreflightInstanceDetail(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPreflightInstanceDetail(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +170,7 @@ public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProperty(String value)
+	public void setProperty(final String value)
 	{
 		setAttribute(AttributeName.PROPERTY, value, null);
 	}
@@ -215,7 +217,7 @@ public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFElement the element
 	 */
-	public JDFElement getCreateValue(int iSkip)
+	public JDFElement getCreateValue(final int iSkip)
 	{
 		return (JDFElement) getCreateElement_JDFElement(ElementName.VALUE, null, iSkip);
 	}
@@ -227,7 +229,7 @@ public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
 	 * @return JDFElement the element
 	 *         default is getValue(0)
 	 */
-	public JDFElement getValue(int iSkip)
+	public JDFElement getValue(final int iSkip)
 	{
 		return (JDFElement) getElement(ElementName.VALUE, null, iSkip);
 	}

@@ -63,9 +63,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class XJDFLayoutElementProductionTest extends ExampleTest
 {

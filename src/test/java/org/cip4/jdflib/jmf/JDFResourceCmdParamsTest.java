@@ -72,7 +72,7 @@ package org.cip4.jdflib.jmf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import org.cip4.jdflib.auto.JDFAutoResourceCmdParams.EUpdateMethod;
+import org.cip4.jdflib.auto.JDFAutoResourceCmdParams.EnumUpdateMethod;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
@@ -101,7 +101,7 @@ class JDFResourceCmdParamsTest
 		rcp.setIdentifier(n.getIdentifier());
 		rcp.setResourceName(ElementName.NODEINFO);
 		rcp.setResourceID(ni.getID());
-		rcp.setUpdateMethod(EUpdateMethod.Incremental);
+		rcp.setUpdateMethod(EnumUpdateMethod.Incremental);
 		final JDFNodeInfo ni2 = (JDFNodeInfo) rcp.getCreateResource();
 		final JDFDate offset = new JDFDate().addOffset(0, 0, 0, 42);
 		ni2.setEnd(offset);
@@ -127,7 +127,7 @@ class JDFResourceCmdParamsTest
 		rcp.setResourceName(ElementName.NODEINFO);
 		rcp.setResourceID(ni.getID());
 		rcp.setPartMap(ni.getPartMap());
-		rcp.setUpdateMethod(EUpdateMethod.Incremental);
+		rcp.setUpdateMethod(EnumUpdateMethod.Incremental);
 		final JDFNodeInfo ni2 = (JDFNodeInfo) rcp.getCreateResource();
 		final JDFDate offset = new JDFDate().addOffset(0, 0, 0, 42);
 		ni2.setEnd(offset);
@@ -150,7 +150,7 @@ class JDFResourceCmdParamsTest
 		final JDFResourceCmdParams rcp = jmf.getCreateCommand().getCreateResourceCmdParams(0);
 		rcp.setIdentifier(n.getIdentifier());
 		rcp.setResourceName(ElementName.NODEINFO);
-		rcp.setUpdateMethod(EUpdateMethod.Incremental);
+		rcp.setUpdateMethod(EnumUpdateMethod.Incremental);
 		final JDFNodeInfo ni2 = (JDFNodeInfo) rcp.getCreateResource();
 		final JDFDate offset = new JDFDate().addOffset(0, 0, 0, 42);
 		ni2.setEnd(offset);
@@ -177,7 +177,7 @@ class JDFResourceCmdParamsTest
 		rcp.setJobID("j1");
 		rcp.setResourceName(ElementName.NODEINFO);
 		rcp.setResourceID(ni2.getID());
-		rcp.setUpdateMethod(EUpdateMethod.Incremental);
+		rcp.setUpdateMethod(EnumUpdateMethod.Incremental);
 		final JDFNodeInfo nic = (JDFNodeInfo) rcp.getCreateResource();
 		final JDFDate offset = new JDFDate(end).addOffset(0, 0, 0, 42);
 		nic.setEnd(offset);
@@ -208,7 +208,7 @@ class JDFResourceCmdParamsTest
 		rcp.setJobID("j1");
 		rcp.setResourceName(ElementName.NODEINFO);
 		rcp.setResourceID("foo");
-		rcp.setUpdateMethod(EUpdateMethod.Incremental);
+		rcp.setUpdateMethod(EnumUpdateMethod.Incremental);
 		final JDFNodeInfo nic = (JDFNodeInfo) rcp.getCreateResource();
 		final JDFDate offset = new JDFDate(end).addOffset(0, 0, 0, 42);
 		nic.setEnd(offset);

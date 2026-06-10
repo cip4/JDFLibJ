@@ -50,9 +50,9 @@ class CxFReaderTest extends JDFTestCaseBase
 	void testGet()
 	{
 		Assertions.assertNull(CxFReader.getReader(null));
-		Assertions.assertNotNull(CxFReader.getReader(new XMLDoc(CxFReader.CXF, CxFReader.CXF_NS).getRoot()));
-		Assertions.assertNotNull(CxFReader.getReader(new XMLDoc("cc:" + CxFReader.CXF, CxFReader.CXF_NS).getRoot()));
-		Assertions.assertNull(CxFReader.getReader(new XMLDoc("cc", CxFReader.CXF_NS).getRoot()));
+		Assertions.assertNotNull(CxFReader.getReader(new XMLDoc(CxFBase.CXF, CxFBase.CXF_NS).getRoot()));
+		Assertions.assertNotNull(CxFReader.getReader(new XMLDoc("cc:" + CxFBase.CXF, CxFBase.CXF_NS).getRoot()));
+		Assertions.assertNull(CxFReader.getReader(new XMLDoc("cc", CxFBase.CXF_NS).getRoot()));
 	}
 
 	/**
@@ -92,7 +92,7 @@ class CxFReaderTest extends JDFTestCaseBase
 	@Test
 	void testToString()
 	{
-		final CxFReader cxf = CxFReader.getReader(new XMLDoc(CxFReader.CXF, CxFReader.CXF_NS).getRoot());
+		final CxFReader cxf = CxFReader.getReader(new XMLDoc(CxFBase.CXF, CxFBase.CXF_NS).getRoot());
 		Assertions.assertEquals("CxFReader", cxf.toString().substring(0, 9));
 	}
 

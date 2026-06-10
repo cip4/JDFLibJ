@@ -71,14 +71,8 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoRefAnchor.EAnchor;
-import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchor;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -103,20 +97,21 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ANCHOR, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ANCHOR, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumAnchor.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.FONT, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.FONTSIZE, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.HORIZONTALFITPOLICY, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumHorizontalFitPolicy.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumHorizontalFitPolicy.class, 0), null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.MARKJUSTIFICATION, 0x4444443331l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumMarkJustification.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumMarkJustification.class, 0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.MARKOFFSET, 0x4444443331l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.MARKORIENTATION, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumMarkOrientation.getEnum(0), null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.MARKPOSITION, 0x4444443331l, AttributeInfo.EnumAttributeType.enumeration, EnumMarkPosition.getEnum(0),
-				null);
+				JavaEnumUtil.getEnum(EnumMarkOrientation.class, 0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.MARKPOSITION, 0x4444443331l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumMarkPosition.class, 0), null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.VERTICALFITPOLICY, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumVerticalFitPolicy.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumVerticalFitPolicy.class, 0), null);
 	}
 
 	@Override
@@ -143,7 +138,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDeviceMark(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDeviceMark(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -155,7 +150,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDeviceMark(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDeviceMark(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -168,419 +163,98 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDeviceMark(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDeviceMark(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for HorizontalFitPolicy
+	 * Enumeration strings for numAnchor
 	 */
 
-	public enum EHorizontalFitPolicy
+	public enum EnumAnchor
+	{
+		TopLeft, TopCenter, TopRight, CenterLeft, Center, CenterRight, BottomLeft, BottomCenter, BottomRight;
+
+		public static EnumAnchor getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumAnchor.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for numHorizontalFitPolicy
+	 */
+
+	public enum EnumHorizontalFitPolicy
 	{
 		NoRepeat, StretchToFit, UndistortedScaleToFit, RepeatToFill, RepeatUnclipped;
 
-		public static EHorizontalFitPolicy getEnum(String val)
+		public static EnumHorizontalFitPolicy getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EHorizontalFitPolicy.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumHorizontalFitPolicy.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for HorizontalFitPolicy
+	 * Enumeration strings for numMarkJustification
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumHorizontalFitPolicy extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumHorizontalFitPolicy(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumHorizontalFitPolicy getEnum(String enumName)
-		{
-			return (EnumHorizontalFitPolicy) getEnum(EnumHorizontalFitPolicy.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumHorizontalFitPolicy getEnum(int enumValue)
-		{
-			return (EnumHorizontalFitPolicy) getEnum(EnumHorizontalFitPolicy.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumHorizontalFitPolicy.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumHorizontalFitPolicy.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumHorizontalFitPolicy.class);
-		}
-
-		/**  */
-		public static final EnumHorizontalFitPolicy NoRepeat = new EnumHorizontalFitPolicy("NoRepeat");
-		/**  */
-		public static final EnumHorizontalFitPolicy StretchToFit = new EnumHorizontalFitPolicy("StretchToFit");
-		/**  */
-		public static final EnumHorizontalFitPolicy UndistortedScaleToFit = new EnumHorizontalFitPolicy("UndistortedScaleToFit");
-		/**  */
-		public static final EnumHorizontalFitPolicy RepeatToFill = new EnumHorizontalFitPolicy("RepeatToFill");
-		/**  */
-		public static final EnumHorizontalFitPolicy RepeatUnclipped = new EnumHorizontalFitPolicy("RepeatUnclipped");
-	}
-
-	/**
-	 * Enumeration strings for MarkJustification
-	 */
-
-	public enum EMarkJustification
+	public enum EnumMarkJustification
 	{
 		Left, Right, Center;
 
-		public static EMarkJustification getEnum(String val)
+		public static EnumMarkJustification getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EMarkJustification.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumMarkJustification.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for MarkJustification
+	 * Enumeration strings for numMarkOrientation
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumMarkJustification extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumMarkJustification(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumMarkJustification getEnum(String enumName)
-		{
-			return (EnumMarkJustification) getEnum(EnumMarkJustification.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumMarkJustification getEnum(int enumValue)
-		{
-			return (EnumMarkJustification) getEnum(EnumMarkJustification.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumMarkJustification.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumMarkJustification.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumMarkJustification.class);
-		}
-
-		/**  */
-		public static final EnumMarkJustification Left = new EnumMarkJustification("Left");
-		/**  */
-		public static final EnumMarkJustification Right = new EnumMarkJustification("Right");
-		/**  */
-		public static final EnumMarkJustification Center = new EnumMarkJustification("Center");
-	}
-
-	/**
-	 * Enumeration strings for MarkOrientation
-	 */
-
-	public enum EMarkOrientation
+	public enum EnumMarkOrientation
 	{
 		Vertical, Horizontal;
 
-		public static EMarkOrientation getEnum(String val)
+		public static EnumMarkOrientation getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EMarkOrientation.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumMarkOrientation.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for MarkOrientation
+	 * Enumeration strings for numMarkPosition
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumMarkOrientation extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumMarkOrientation(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumMarkOrientation getEnum(String enumName)
-		{
-			return (EnumMarkOrientation) getEnum(EnumMarkOrientation.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumMarkOrientation getEnum(int enumValue)
-		{
-			return (EnumMarkOrientation) getEnum(EnumMarkOrientation.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumMarkOrientation.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumMarkOrientation.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumMarkOrientation.class);
-		}
-
-		/**  */
-		public static final EnumMarkOrientation Vertical = new EnumMarkOrientation("Vertical");
-		/**  */
-		public static final EnumMarkOrientation Horizontal = new EnumMarkOrientation("Horizontal");
-	}
-
-	/**
-	 * Enumeration strings for MarkPosition
-	 */
-
-	public enum EMarkPosition
+	public enum EnumMarkPosition
 	{
 		Top, Bottom, Left, Right;
 
-		public static EMarkPosition getEnum(String val)
+		public static EnumMarkPosition getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EMarkPosition.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumMarkPosition.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for MarkPosition
+	 * Enumeration strings for numVerticalFitPolicy
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumMarkPosition extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumMarkPosition(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumMarkPosition getEnum(String enumName)
-		{
-			return (EnumMarkPosition) getEnum(EnumMarkPosition.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumMarkPosition getEnum(int enumValue)
-		{
-			return (EnumMarkPosition) getEnum(EnumMarkPosition.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumMarkPosition.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumMarkPosition.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumMarkPosition.class);
-		}
-
-		/**  */
-		public static final EnumMarkPosition Top = new EnumMarkPosition("Top");
-		/**  */
-		public static final EnumMarkPosition Bottom = new EnumMarkPosition("Bottom");
-		/**  */
-		public static final EnumMarkPosition Left = new EnumMarkPosition("Left");
-		/**  */
-		public static final EnumMarkPosition Right = new EnumMarkPosition("Right");
-	}
-
-	/**
-	 * Enumeration strings for VerticalFitPolicy
-	 */
-
-	public enum EVerticalFitPolicy
+	public enum EnumVerticalFitPolicy
 	{
 		NoRepeat, StretchToFit, UndistortedScaleToFit, RepeatToFill, RepeatUnclipped;
 
-		public static EVerticalFitPolicy getEnum(String val)
+		public static EnumVerticalFitPolicy getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EVerticalFitPolicy.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumVerticalFitPolicy.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for VerticalFitPolicy
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumVerticalFitPolicy extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumVerticalFitPolicy(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumVerticalFitPolicy getEnum(String enumName)
-		{
-			return (EnumVerticalFitPolicy) getEnum(EnumVerticalFitPolicy.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumVerticalFitPolicy getEnum(int enumValue)
-		{
-			return (EnumVerticalFitPolicy) getEnum(EnumVerticalFitPolicy.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumVerticalFitPolicy.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumVerticalFitPolicy.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumVerticalFitPolicy.class);
-		}
-
-		/**  */
-		public static final EnumVerticalFitPolicy NoRepeat = new EnumVerticalFitPolicy("NoRepeat");
-		/**  */
-		public static final EnumVerticalFitPolicy StretchToFit = new EnumVerticalFitPolicy("StretchToFit");
-		/**  */
-		public static final EnumVerticalFitPolicy UndistortedScaleToFit = new EnumVerticalFitPolicy("UndistortedScaleToFit");
-		/**  */
-		public static final EnumVerticalFitPolicy RepeatToFill = new EnumVerticalFitPolicy("RepeatToFill");
-		/**  */
-		public static final EnumVerticalFitPolicy RepeatUnclipped = new EnumVerticalFitPolicy("RepeatUnclipped");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -592,9 +266,9 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setAnchor(EAnchor enumVar)
+	public void setAnchor(final EnumAnchor enumVar)
 	{
-		setAttribute(AttributeName.ANCHOR, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ANCHOR, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -602,35 +276,6 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EAnchor getEAnchor()
-	{
-		return EAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Anchor
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Anchor
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetAnchor(EAnchor) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setAnchor(EnumAnchor enumVar)
-	{
-		setAttribute(AttributeName.ANCHOR, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Anchor
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EAnchor GetEAnchor() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumAnchor getAnchor()
 	{
 		return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
@@ -646,7 +291,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFont(String value)
+	public void setFont(final String value)
 	{
 		setAttribute(AttributeName.FONT, value, null);
 	}
@@ -671,7 +316,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFontSize(double value)
+	public void setFontSize(final double value)
 	{
 		setAttribute(AttributeName.FONTSIZE, value, null);
 	}
@@ -696,9 +341,9 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setHorizontalFitPolicy(EHorizontalFitPolicy enumVar)
+	public void setHorizontalFitPolicy(final EnumHorizontalFitPolicy enumVar)
 	{
-		setAttribute(AttributeName.HORIZONTALFITPOLICY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.HORIZONTALFITPOLICY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -706,35 +351,6 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EHorizontalFitPolicy getEHorizontalFitPolicy()
-	{
-		return EHorizontalFitPolicy.getEnum(getAttribute(AttributeName.HORIZONTALFITPOLICY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute HorizontalFitPolicy
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute HorizontalFitPolicy
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetHorizontalFitPolicy(EHorizontalFitPolicy) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setHorizontalFitPolicy(EnumHorizontalFitPolicy enumVar)
-	{
-		setAttribute(AttributeName.HORIZONTALFITPOLICY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute HorizontalFitPolicy
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EHorizontalFitPolicy GetEHorizontalFitPolicy() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumHorizontalFitPolicy getHorizontalFitPolicy()
 	{
 		return EnumHorizontalFitPolicy.getEnum(getAttribute(AttributeName.HORIZONTALFITPOLICY, null, null));
@@ -750,9 +366,9 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMarkJustification(EMarkJustification enumVar)
+	public void setMarkJustification(final EnumMarkJustification enumVar)
 	{
-		setAttribute(AttributeName.MARKJUSTIFICATION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.MARKJUSTIFICATION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -760,35 +376,6 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EMarkJustification getEMarkJustification()
-	{
-		return EMarkJustification.getEnum(getAttribute(AttributeName.MARKJUSTIFICATION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute MarkJustification
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute MarkJustification
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetMarkJustification(EMarkJustification) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setMarkJustification(EnumMarkJustification enumVar)
-	{
-		setAttribute(AttributeName.MARKJUSTIFICATION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute MarkJustification
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EMarkJustification GetEMarkJustification() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumMarkJustification getMarkJustification()
 	{
 		return EnumMarkJustification.getEnum(getAttribute(AttributeName.MARKJUSTIFICATION, null, null));
@@ -804,7 +391,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMarkOffset(JDFXYPair value)
+	public void setMarkOffset(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.MARKOFFSET, value, null);
 	}
@@ -817,8 +404,8 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 */
 	public JDFXYPair getMarkOffset()
 	{
-		String strAttrName = getAttribute(AttributeName.MARKOFFSET, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.MARKOFFSET, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -832,9 +419,9 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMarkOrientation(EMarkOrientation enumVar)
+	public void setMarkOrientation(final EnumMarkOrientation enumVar)
 	{
-		setAttribute(AttributeName.MARKORIENTATION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.MARKORIENTATION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -842,35 +429,6 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EMarkOrientation getEMarkOrientation()
-	{
-		return EMarkOrientation.getEnum(getAttribute(AttributeName.MARKORIENTATION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute MarkOrientation
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute MarkOrientation
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetMarkOrientation(EMarkOrientation) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setMarkOrientation(EnumMarkOrientation enumVar)
-	{
-		setAttribute(AttributeName.MARKORIENTATION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute MarkOrientation
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EMarkOrientation GetEMarkOrientation() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumMarkOrientation getMarkOrientation()
 	{
 		return EnumMarkOrientation.getEnum(getAttribute(AttributeName.MARKORIENTATION, null, null));
@@ -886,9 +444,9 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMarkPosition(EMarkPosition enumVar)
+	public void setMarkPosition(final EnumMarkPosition enumVar)
 	{
-		setAttribute(AttributeName.MARKPOSITION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.MARKPOSITION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -896,35 +454,6 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EMarkPosition getEMarkPosition()
-	{
-		return EMarkPosition.getEnum(getAttribute(AttributeName.MARKPOSITION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute MarkPosition
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute MarkPosition
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetMarkPosition(EMarkPosition) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setMarkPosition(EnumMarkPosition enumVar)
-	{
-		setAttribute(AttributeName.MARKPOSITION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute MarkPosition
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EMarkPosition GetEMarkPosition() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumMarkPosition getMarkPosition()
 	{
 		return EnumMarkPosition.getEnum(getAttribute(AttributeName.MARKPOSITION, null, null));
@@ -940,9 +469,9 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setVerticalFitPolicy(EVerticalFitPolicy enumVar)
+	public void setVerticalFitPolicy(final EnumVerticalFitPolicy enumVar)
 	{
-		setAttribute(AttributeName.VERTICALFITPOLICY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.VERTICALFITPOLICY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -950,35 +479,6 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EVerticalFitPolicy getEVerticalFitPolicy()
-	{
-		return EVerticalFitPolicy.getEnum(getAttribute(AttributeName.VERTICALFITPOLICY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute VerticalFitPolicy
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute VerticalFitPolicy
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetVerticalFitPolicy(EVerticalFitPolicy) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setVerticalFitPolicy(EnumVerticalFitPolicy enumVar)
-	{
-		setAttribute(AttributeName.VERTICALFITPOLICY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute VerticalFitPolicy
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EVerticalFitPolicy GetEVerticalFitPolicy() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumVerticalFitPolicy getVerticalFitPolicy()
 	{
 		return EnumVerticalFitPolicy.getEnum(getAttribute(AttributeName.VERTICALFITPOLICY, null, null));
@@ -1016,7 +516,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFBarcodeReproParams the element
 	 */
-	public JDFBarcodeReproParams getCreateBarcodeReproParams(int iSkip)
+	public JDFBarcodeReproParams getCreateBarcodeReproParams(final int iSkip)
 	{
 		return (JDFBarcodeReproParams) getCreateElement_JDFElement(ElementName.BARCODEREPROPARAMS, null, iSkip);
 	}
@@ -1028,7 +528,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * @return JDFBarcodeReproParams the element
 	 *         default is getBarcodeReproParams(0)
 	 */
-	public JDFBarcodeReproParams getBarcodeReproParams(int iSkip)
+	public JDFBarcodeReproParams getBarcodeReproParams(final int iSkip)
 	{
 		return (JDFBarcodeReproParams) getElement(ElementName.BARCODEREPROPARAMS, null, iSkip);
 	}

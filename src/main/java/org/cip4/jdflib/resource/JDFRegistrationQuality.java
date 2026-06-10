@@ -118,7 +118,8 @@ public class JDFRegistrationQuality extends JDFAutoRegistrationQuality
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFRegistrationQuality(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFRegistrationQuality(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

@@ -71,14 +71,8 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.ESheetLay;
-import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumSheetLay;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -102,10 +96,11 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DELIVERYMODE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumDeliveryMode.getEnum(0),
-				null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DELIVERYMODE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumDeliveryMode.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHEETLAY, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHEETLAY, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumSheetLay.class, 0), null);
 	}
 
 	@Override
@@ -133,7 +128,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoShapeCuttingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoShapeCuttingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -145,7 +140,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoShapeCuttingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoShapeCuttingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -158,7 +153,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoShapeCuttingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoShapeCuttingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -169,7 +164,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -184,89 +179,36 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for DeliveryMode
+	 * Enumeration strings for numDeliveryMode
 	 */
 
-	public enum EDeliveryMode
+	public enum EnumDeliveryMode
 	{
 		FullSheet, RemoveGripperMargin, SeparateBlanks;
 
-		public static EDeliveryMode getEnum(String val)
+		public static EnumDeliveryMode getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EDeliveryMode.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumDeliveryMode.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for DeliveryMode
+	 * Enumeration strings for numSheetLay
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumDeliveryMode extends ValuedEnum
+	public enum EnumSheetLay
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Left, Right, Center;
 
-		protected EnumDeliveryMode(String name)
+		public static EnumSheetLay getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSheetLay.class, val, null);
 		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumDeliveryMode getEnum(String enumName)
-		{
-			return (EnumDeliveryMode) getEnum(EnumDeliveryMode.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDeliveryMode getEnum(int enumValue)
-		{
-			return (EnumDeliveryMode) getEnum(EnumDeliveryMode.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDeliveryMode.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDeliveryMode.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDeliveryMode.class);
-		}
-
-		/**  */
-		public static final EnumDeliveryMode FullSheet = new EnumDeliveryMode("FullSheet");
-		/**  */
-		public static final EnumDeliveryMode RemoveGripperMargin = new EnumDeliveryMode("RemoveGripperMargin");
-		/**  */
-		public static final EnumDeliveryMode SeparateBlanks = new EnumDeliveryMode("SeparateBlanks");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -278,9 +220,9 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDeliveryMode(EDeliveryMode enumVar)
+	public void setDeliveryMode(final EnumDeliveryMode enumVar)
 	{
-		setAttribute(AttributeName.DELIVERYMODE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DELIVERYMODE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -288,35 +230,6 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EDeliveryMode getEDeliveryMode()
-	{
-		return EDeliveryMode.getEnum(getAttribute(AttributeName.DELIVERYMODE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute DeliveryMode
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute DeliveryMode
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDeliveryMode(EDeliveryMode) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDeliveryMode(EnumDeliveryMode enumVar)
-	{
-		setAttribute(AttributeName.DELIVERYMODE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute DeliveryMode
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EDeliveryMode GetEDeliveryMode() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumDeliveryMode getDeliveryMode()
 	{
 		return EnumDeliveryMode.getEnum(getAttribute(AttributeName.DELIVERYMODE, null, null));
@@ -332,7 +245,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setModuleIndex(int value)
+	public void setModuleIndex(final int value)
 	{
 		setAttribute(AttributeName.MODULEINDEX, value, null);
 	}
@@ -357,9 +270,9 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSheetLay(ESheetLay enumVar)
+	public void setSheetLay(final EnumSheetLay enumVar)
 	{
-		setAttribute(AttributeName.SHEETLAY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SHEETLAY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -367,35 +280,6 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESheetLay getESheetLay()
-	{
-		return ESheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute SheetLay
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute SheetLay
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetSheetLay(ESheetLay) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSheetLay(EnumSheetLay enumVar)
-	{
-		setAttribute(AttributeName.SHEETLAY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute SheetLay
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ESheetLay GetESheetLay() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumSheetLay getSheetLay()
 	{
 		return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
@@ -443,7 +327,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refDieLayout(JDFDieLayout refTarget)
+	public void refDieLayout(final JDFDieLayout refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -474,7 +358,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFShapeElement the element
 	 */
-	public JDFShapeElement getCreateShape(int iSkip)
+	public JDFShapeElement getCreateShape(final int iSkip)
 	{
 		return (JDFShapeElement) getCreateElement_JDFElement(ElementName.SHAPE, null, iSkip);
 	}
@@ -486,7 +370,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	 * @return JDFShapeElement the element
 	 *         default is getShape(0)
 	 */
-	public JDFShapeElement getShape(int iSkip)
+	public JDFShapeElement getShape(final int iSkip)
 	{
 		return (JDFShapeElement) getElement(ElementName.SHAPE, null, iSkip);
 	}

@@ -66,7 +66,6 @@ public class OrderedTaskQueue extends Thread
 		Thread myThread;
 
 		/**
-		 *
 		 * @param r
 		 */
 		TaskRunner(final Runnable r)
@@ -185,7 +184,6 @@ public class OrderedTaskQueue extends Thread
 	}
 
 	/**
-	 *
 	 * grab the queue
 	 *
 	 * @param name - must not be null
@@ -210,7 +208,6 @@ public class OrderedTaskQueue extends Thread
 	}
 
 	/**
-	 *
 	 * grab the queue
 	 *
 	 * @param name - must not be null
@@ -233,7 +230,6 @@ public class OrderedTaskQueue extends Thread
 
 	/**
 	 * @param name
-	 *
 	 */
 	OrderedTaskQueue(final String name)
 	{
@@ -272,7 +268,9 @@ public class OrderedTaskQueue extends Thread
 					{
 						final OrderedTaskQueue q = map.get(key);
 						if (q != null)
+						{
 							q.shutDown();
+						}
 					}
 					catch (final Exception x)
 					{
@@ -303,20 +301,23 @@ public class OrderedTaskQueue extends Thread
 	/**
 	 * @param minAge minimum age to interrupt
 	 * @return true if we successfully interrupted or no entry was running; false if unsuccessful or current is younger than minAge
-	 *
 	 */
 	public boolean interruptCurrent(final int minAge)
 	{
 		final TaskRunner cr = currentRunning;
 		if (cr != null && cr.getRunTime() < minAge)
+		{
 			return false;
+		}
 
 		int n = 0;
 		while (cr != null && cr == currentRunning)
 		{
 			interrupt();
 			if (!ThreadUtil.sleep(++n) || n > 10)
+			{
 				break;
+			}
 		}
 		return cr == null || cr != currentRunning;
 	}
@@ -357,7 +358,6 @@ public class OrderedTaskQueue extends Thread
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public boolean isLive()
@@ -366,7 +366,6 @@ public class OrderedTaskQueue extends Thread
 	}
 
 	/**
-	 *
 	 * @param task the thing to send off
 	 * @return true if successfully queued
 	 */
@@ -443,8 +442,6 @@ public class OrderedTaskQueue extends Thread
 	}
 
 	/**
-	 *
-	 *
 	 * @param r
 	 */
 	void runTask(final TaskRunner r)
@@ -454,8 +451,6 @@ public class OrderedTaskQueue extends Thread
 	}
 
 	/**
-	 *
-	 *
 	 * @return
 	 */
 	TaskRunner getFirstTask()

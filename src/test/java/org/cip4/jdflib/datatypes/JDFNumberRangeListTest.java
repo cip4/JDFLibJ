@@ -76,16 +76,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * 
- *  
  * @author rainerprosi
  * @date Sep 12, 2012
  */
-class JDFNumberRangeListTest {
+class JDFNumberRangeListTest
+{
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public final void testSetString()
@@ -95,7 +94,7 @@ class JDFNumberRangeListTest {
 		{
 			rangeList = new JDFNumberRangeList("0.4 1.6 ~ 2.7 3.6 ~ 6");
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			System.out.println(dfe.toString());
 		}
@@ -105,8 +104,8 @@ class JDFNumberRangeListTest {
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public final void testInRange()
@@ -116,7 +115,7 @@ class JDFNumberRangeListTest {
 		{
 			rangeList = new JDFNumberRangeList("0.4 1.6 ~ 2.7 3.6 ~ 6 77.5 ~ INF");
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			Assertions.fail("DataFormatException");
 		}
@@ -127,7 +126,6 @@ class JDFNumberRangeListTest {
 
 	/**
 	 * test getstring with precision
-	 *  
 	 */
 	@Test
 	public final void testGetString()
@@ -137,7 +135,7 @@ class JDFNumberRangeListTest {
 		{
 			rangeList = new JDFNumberRangeList("0.44444444 1.666666 ~ 2.77777777 3.66666666 ~ 6 77.555555 ~ INF");
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			Assertions.fail("DataFormatException");
 		}
@@ -146,20 +144,18 @@ class JDFNumberRangeListTest {
 	}
 
 	/**
-	 * @throws Exception 
-	 * 
-	 *  
+	 * @throws Exception
 	 */
 	@Test
 	public final void testInitRange() throws Exception
 	{
-		JDFNumberRange range = new JDFNumberRange("0.0");
+		final JDFNumberRange range = new JDFNumberRange("0.0");
 		Assertions.assertEquals(range.getLeft(), 0.0, 0.0);
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public final void testIsPartOfRange()
@@ -169,7 +165,7 @@ class JDFNumberRangeListTest {
 		{
 			rangeList = new JDFNumberRangeList("0.4 1.6 ~ 2.7 3.6 ~ 6");
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			System.out.println(dfe.toString());
 		}
@@ -178,8 +174,8 @@ class JDFNumberRangeListTest {
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public final void testJDFNumberRangeList_CopyConstructor()
@@ -195,15 +191,15 @@ class JDFNumberRangeListTest {
 			Assertions.assertEquals(rangeList.toString(), "0 4", "original rangeList wrong:");
 			Assertions.assertEquals(copyRangeList.toString(), "0 4 8 ~ 9", "changed copy of rangeList wrong:");
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			System.out.println(dfe.toString());
 		}
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public final void testAppend()
@@ -219,7 +215,7 @@ class JDFNumberRangeListTest {
 			rangeList.append(new JDFNumberRange("8~9"));
 			copyRangeList = new JDFNumberRangeList("0 4~5 5.7 6~6.5 6.6~7.7 8~9");
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			System.out.println(dfe.toString());
 		}
@@ -231,8 +227,8 @@ class JDFNumberRangeListTest {
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public final void testIsList()
@@ -247,21 +243,25 @@ class JDFNumberRangeListTest {
 			badRangeList = new JDFNumberRangeList(rangeList);
 			badRangeList.append(new JDFNumberRange("8~9"));
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			System.out.println(dfe.toString());
 		}
 
 		if (rangeList != null)
+		{
 			Assertions.assertTrue(rangeList.isList(), "Bad isList");
+		}
 		if (badRangeList != null)
+		{
 			Assertions.assertFalse(badRangeList.isList(), "Bad isList");
+		}
 
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public final void testIsUnique()
@@ -272,18 +272,20 @@ class JDFNumberRangeListTest {
 			rangelist = new JDFNumberRangeList("0 3~4 ");
 			rangelist.append(3.5);
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			System.out.println(dfe.toString());
 		}
 
 		if (rangelist != null)
+		{
 			Assertions.assertFalse(rangelist.isUnique(), "Bad isUnique");
+		}
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public final void testIsOrdered_False()
@@ -296,18 +298,20 @@ class JDFNumberRangeListTest {
 			rangelist.append(new JDFNumberRange("5.9~6.9"));
 			rangelist.append(7);
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			System.out.println(dfe.toString());
 		}
 
 		if (rangelist != null)
+		{
 			Assertions.assertFalse(rangelist.isOrdered(), "Bad isOrdered");
+		}
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public final void testIsOrdered_Reverse_True()
@@ -320,18 +324,20 @@ class JDFNumberRangeListTest {
 			rangelist.append(new JDFNumberRange("4~3"));
 			rangelist.append(2);
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			System.out.println(dfe.toString());
 		}
 
 		if (rangelist != null)
+		{
 			Assertions.assertTrue(rangelist.isOrdered(), "Bad isOrdered");
+		}
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public final void testIsUniqueOrdered_Reverse_False()
@@ -343,18 +349,20 @@ class JDFNumberRangeListTest {
 			rangelist.append(10);
 			rangelist.append(3.5, 2.5);
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			System.out.println(dfe.toString());
 		}
 
 		if (rangelist != null)
+		{
 			Assertions.assertFalse(rangelist.isUniqueOrdered(), "Bad isUniqueOrdered");
+		}
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public final void testIsUniqueOrdered_False()
@@ -367,18 +375,20 @@ class JDFNumberRangeListTest {
 			rangelist.append(new JDFNumberRange("6~7.8"));
 			rangelist.append(9);
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			System.out.println(dfe.toString());
 		}
 
 		if (rangelist != null)
+		{
 			Assertions.assertFalse(rangelist.isUniqueOrdered(), "Bad isUniqueOrdered");
+		}
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	public final void testIsUniqueOrdered_True()
@@ -390,13 +400,15 @@ class JDFNumberRangeListTest {
 			rangelist.append(6, 7.8);
 			rangelist.append(9);
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			System.out.println(dfe.toString());
 		}
 
 		if (rangelist != null)
+		{
 			Assertions.assertTrue(rangelist.isUniqueOrdered(), "Bad isUniqueOrdered" + rangelist.toString());
+		}
 	}
 
 }

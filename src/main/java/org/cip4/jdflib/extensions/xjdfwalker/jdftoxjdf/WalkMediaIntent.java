@@ -80,9 +80,7 @@ import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkMediaIntent extends WalkIntentResource
 {

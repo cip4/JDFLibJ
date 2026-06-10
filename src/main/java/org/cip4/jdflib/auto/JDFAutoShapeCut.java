@@ -135,7 +135,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoShapeCut(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoShapeCut(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -147,7 +147,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoShapeCut(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoShapeCut(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -160,7 +160,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoShapeCut(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoShapeCut(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -181,7 +181,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCutBox(JDFRectangle value)
+	public void setCutBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.CUTBOX, value, null);
 	}
@@ -194,8 +194,8 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	 */
 	public JDFRectangle getCutBox()
 	{
-		String strAttrName = getAttribute(AttributeName.CUTBOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CUTBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -209,7 +209,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCutOut(boolean value)
+	public void setCutOut(final boolean value)
 	{
 		setAttribute(AttributeName.CUTOUT, value, null);
 	}
@@ -234,7 +234,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCutPath(String value)
+	public void setCutPath(final String value)
 	{
 		setAttribute(AttributeName.CUTPATH, value, null);
 	}
@@ -259,7 +259,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPages(JDFIntegerRangeList value)
+	public void setPages(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.PAGES, value, null);
 	}
@@ -272,8 +272,8 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	 */
 	public JDFIntegerRangeList getPages()
 	{
-		String strAttrName = getAttribute(AttributeName.PAGES, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PAGES, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -287,7 +287,7 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setShapeTypeDetails(String value)
+	public void setShapeTypeDetails(final String value)
 	{
 		setAttribute(AttributeName.SHAPETYPEDETAILS, value, null);
 	}

@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,21 +56,21 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  * NamespaceTest.java
- * 
+ *
  * @author Dietrich Mucha
  *
  * Copyright (C) 2002 Heidelberger Druckmaschinen AG. All Rights Reserved.
@@ -86,23 +86,26 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-class EmptyNamespace extends JDFTestCaseBase {
+class EmptyNamespace extends JDFTestCaseBase
+{
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
-	void testDefaultNamespace() {
-		JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
+	void testDefaultNamespace()
+	{
+		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 
-		String defaultFile = "default.jdf";
+		final String defaultFile = "default.jdf";
 		jdfDoc.write2File(sm_dirTestDataTemp + defaultFile, 0, true);
 
-		JDFParser p = new JDFParser();
-		JDFDoc jdfDocResult = p.parseFile(sm_dirTestDataTemp + defaultFile);
+		final JDFParser p = new JDFParser();
+		final JDFDoc jdfDocResult = p.parseFile(sm_dirTestDataTemp + defaultFile);
 
 		jdfDocResult.getRoot();
 
@@ -113,44 +116,58 @@ class EmptyNamespace extends JDFTestCaseBase {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
-	void testEmptyNamespace() {
-		JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
+	void testEmptyNamespace()
+	{
+		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 
 		jdfDoc.write2File(sm_dirTestDataTemp + "test.jdf", 0, true);
 
 		FileReader reader = null;
-		try {
+		try
+		{
 			reader = new FileReader(sm_dirTestDataTemp + "test.jdf");
 
-			char[] cbuf = new char[500];
-			int readChars = reader.read(cbuf);
+			final char[] cbuf = new char[500];
+			final int readChars = reader.read(cbuf);
 
-			if (readChars >= 0) {
-				String xml = new String(cbuf);
-				int startPoint = xml.indexOf("<AuditPool>");
-				boolean namespaceOk = startPoint >= 0;
+			if (readChars >= 0)
+			{
+				final String xml = new String(cbuf);
+				final int startPoint = xml.indexOf("<AuditPool>");
+				final boolean namespaceOk = startPoint >= 0;
 
 				// Xerces 2.0.1 test.jdf contains <AuditPool xmlns="">
 				// Xerces 2.2.1 test.jdf contains <AuditPool>, which is correct
 
-				if (!namespaceOk) {
-					String help = xml.substring(xml.indexOf("<AuditPool"));
+				if (!namespaceOk)
+				{
+					final String help = xml.substring(xml.indexOf("<AuditPool"));
 					Assertions.assertTrue(namespaceOk, "This version of Apache Xerces has a namespace problem : " + help);
 				}
 			}
-		} catch (FileNotFoundException e) {
+		}
+		catch (final FileNotFoundException e)
+		{
 			e.printStackTrace();
-		} catch (IOException e) {
+		}
+		catch (final IOException e)
+		{
 			e.printStackTrace();
-		} finally {
-			try {
-				if (reader != null) {
+		}
+		finally
+		{
+			try
+			{
+				if (reader != null)
+				{
 					reader.close();
 				}
-			} catch (IOException e1) {
+			}
+			catch (final IOException e1)
+			{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}

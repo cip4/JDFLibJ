@@ -94,8 +94,8 @@ import jakarta.mail.BodyPart;
 
 /**
  * implementation of the JDFLib class factory
- * @author prosirai
  *
+ * @author prosirai
  */
 public class DocumentXMLImpl extends DocumentImpl
 {
@@ -208,7 +208,9 @@ public class DocumentXMLImpl extends DocumentImpl
 	void setNSMap(final DocumentXMLImpl documentJDFImpl)
 	{
 		if (documentJDFImpl == null)
+		{
 			return;
+		}
 
 		nsMap.putAll(documentJDFImpl.nsMap);
 		final Element e = getDocumentElement();
@@ -234,7 +236,7 @@ public class DocumentXMLImpl extends DocumentImpl
 
 		final Runtime rt = Runtime.getRuntime();
 		initialMem = rt.totalMemory() - rt.freeMemory();
-		nsMap = new HashMap<String, String>();
+		nsMap = new HashMap<>();
 		ignoreNSDefault = false;
 		strictNSCheck = bStaticStrictNSCheck;
 	}
@@ -243,7 +245,6 @@ public class DocumentXMLImpl extends DocumentImpl
 	 * Factory method; creates an <code>Element</code> having this <code>Document</code> as its OwnerDoc.
 	 *
 	 * @param qualifiedName The name of the element type to instantiate. For XML, this is case-sensitive.
-	 *
 	 */
 	@Override
 	public Element createElement(final String qualifiedName)
@@ -340,9 +341,13 @@ public class DocumentXMLImpl extends DocumentImpl
 	public String getNamespaceURIFromPrefix(String prefix)
 	{
 		if (ignoreNSDefault)
+		{
 			return null;
+		}
 		if (prefix == null)
+		{
 			prefix = JDFCoreConstants.COLON;
+		}
 		return nsMap.get(prefix);
 	}
 
@@ -353,7 +358,9 @@ public class DocumentXMLImpl extends DocumentImpl
 	public void setNamespaceURIFromPrefix(String prefix, final String strNamespaceURI)
 	{
 		if (StringUtil.getNonEmpty(prefix) == null)
+		{
 			prefix = JDFCoreConstants.COLON;
+		}
 		final String old = nsMap.get(prefix);
 		if (old == null)
 		{
@@ -370,7 +377,9 @@ public class DocumentXMLImpl extends DocumentImpl
 	{
 		String qualifiedName = "xmlns";
 		if (!JDFCoreConstants.COLON.equals(prefix))
+		{
 			qualifiedName += JDFCoreConstants.COLON + prefix;
+		}
 		final KElement element = (KElement) getDocumentElement();
 		if (element != null)
 		{

@@ -63,13 +63,13 @@ import org.cip4.jdflib.jmf.JDFQueueEntry.QueueEntryComparator;
 import org.cip4.jdflib.jmf.JDFQueueFilter.QueueEntryMatcher;
 import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
  * The JDF Queue
  *
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         01.12.2008
  */
 public class JDFQueue extends JDFAutoQueue
@@ -99,7 +99,6 @@ public class JDFQueue extends JDFAutoQueue
 	 * callback class definition for cleaning up in cleanup called once for every qe that is removed
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public abstract static class CleanupCallback
 	{
@@ -115,7 +114,6 @@ public class JDFQueue extends JDFAutoQueue
 	 * callback class definition for specifying whether a QE may execute
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public abstract static class ExecuteCallback
 	{
@@ -265,7 +263,6 @@ public class JDFQueue extends JDFAutoQueue
 	 *
 	 * @param attMap
 	 * @param parts
-	 *
 	 * @return VElement: the vector of queue entries
 	 */
 	public synchronized VElement getQueueEntryVector(final JDFAttributeMap attMap, final VJDFAttributeMap parts)
@@ -316,7 +313,6 @@ public class JDFQueue extends JDFAutoQueue
 	 * Get a vector of queueentry elements that matches a given nodeidentifier
 	 *
 	 * @param nid
-	 *
 	 * @return VElement: the vector of queue entries
 	 */
 	public synchronized VElement getQueueEntryVector(final NodeIdentifier nid)
@@ -420,12 +416,11 @@ public class JDFQueue extends JDFAutoQueue
 	 * <p>
 	 * default: findQueueEntries(jobID, jobPartID, new VJDFAttributeMap(), null)
 	 *
-	 * @param strJobID Job ID.
+	 * @param strJobID     Job ID.
 	 * @param strJobPartID Job part ID.
-	 * @param vamParts Partition to execute, may not be null
-	 * @param status Queue Entry Status, null means any status.
+	 * @param vamParts     Partition to execute, may not be null
+	 * @param status       Queue Entry Status, null means any status.
 	 * @deprecated use getQueueEntryVector(map, partmapvector)
-	 *
 	 * @return VString: vector of QueueEntry IDs
 	 */
 	@Deprecated
@@ -459,7 +454,6 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * Find a queueEntry by QueueEntryID<br>
-	 *
 	 * note that you may want to use the generic getChildByTagName with the appropriate attribute map, if you have more information available
 	 *
 	 * @param strQEntryID the QueueEntryID of the requeste QueueEntry
@@ -474,12 +468,10 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * Find a queueEntry by QueueEntryID<br>
-	 *
 	 * note that you may want to use the generic getChildByTagName with the appropriate attribute map, if you have more information available
 	 *
 	 * @param strQEntryID the QueueEntryID of the requeste QueueEntry
 	 * @return the QueueEntry with QueueEntryID=strQEntryID, null if strQEntryID is null or empty string or the queueentry does not exist
-	 *
 	 */
 	public JDFQueueEntry getQueueEntry(final String strQEntryID)
 	{
@@ -491,7 +483,9 @@ public class JDFQueue extends JDFAutoQueue
 		while (qe != null)
 		{
 			if (strQEntryID.equals(qe.getQueueEntryID()))
+			{
 				return qe;
+			}
 			qe = qe.getNextSiblingElement(JDFQueueEntry.class);
 		}
 		return null;
@@ -499,13 +493,11 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * Find a queueEntry by NodeIdentifier (jobid, jobpartid, part)<br>
-	 *
 	 * note that you may want to use the generic getChildByTagName with the appropriate attribute map, if you have more information available
 	 *
 	 * @param nodeID the identifier - jobID, jobPartID, parts - of the qe
-	 * @param nSkip the number of nodes to skip, cout backwards if<0
+	 * @param nSkip  the number of nodes to skip, cout backwards if<0
 	 * @return the QueueEntry with matching jobID, jobPartID, parts, null if nodeID is null or empty string or the queueentry does not exist
-	 *
 	 */
 	public JDFQueueEntry getQueueEntry(final NodeIdentifier nodeID, final int nSkip)
 	{
@@ -589,11 +581,9 @@ public class JDFQueue extends JDFAutoQueue
 	/**
 	 * Get the next QueueEntry to be processed the first entry with highest priority gets selected if deviceID is specified, the entries with an explicit non matching deviceID are
 	 * ignored the status of the QueueEntry MUST be waiting
-	 *
 	 * proxy and represents previously submitted jobs as waiting
 	 *
 	 * @param cb
-	 *
 	 * @return the executable queueEntry, null if none is available
 	 */
 	public synchronized JDFQueueEntry getNextExecutableQueueEntry(ExecuteCallback cb)
@@ -643,19 +633,7 @@ public class JDFQueue extends JDFAutoQueue
 	public boolean canExecute()
 	{
 		final EnumQueueStatus status = getQueueStatus();
-		if (EnumQueueStatus.Blocked.equals(status))
-		{
-			return false;
-		}
-		if (EnumQueueStatus.Held.equals(status))
-		{
-			return false;
-		}
-		if (EnumQueueStatus.Full.equals(status))
-		{
-			return false;
-		}
-		if (EnumQueueStatus.Running.equals(status))
+		if (EnumQueueStatus.Blocked.equals(status) || EnumQueueStatus.Held.equals(status) || EnumQueueStatus.Full.equals(status) || EnumQueueStatus.Running.equals(status))
 		{
 			return false;
 		}
@@ -674,15 +652,7 @@ public class JDFQueue extends JDFAutoQueue
 	public boolean canAccept()
 	{
 		final EnumQueueStatus status = getQueueStatus();
-		if (EnumQueueStatus.Blocked.equals(status))
-		{
-			return false;
-		}
-		if (EnumQueueStatus.Closed.equals(status))
-		{
-			return false;
-		}
-		if (EnumQueueStatus.Full.equals(status))
+		if (EnumQueueStatus.Blocked.equals(status) || EnumQueueStatus.Closed.equals(status) || EnumQueueStatus.Full.equals(status))
 		{
 			return false;
 		}
@@ -696,7 +666,6 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * remove all entries with Status=Removed and any entries over maxCompleted that are either aborted or completed @see {@link JDFQueueEntry} .isCompleted()
-	 *
 	 */
 
 	@Override
@@ -749,7 +718,7 @@ public class JDFQueue extends JDFAutoQueue
 	/**
 	 * copies this to the JDF Response resp, applying the filters defined in filter
 	 *
-	 * @param resp the JDFResponse to copy this to
+	 * @param resp   the JDFResponse to copy this to
 	 * @param filter the QueueFilter that sets the queue size
 	 * @return the copied queue
 	 * @deprecated use 3 parameter method
@@ -764,8 +733,8 @@ public class JDFQueue extends JDFAutoQueue
 	/**
 	 * copies this to the JDF Response resp, applying the filters defined in filter
 	 *
-	 * @param resp the JDFResponse to copy this to
-	 * @param filter the QueueFilter that sets the queue size
+	 * @param resp       the JDFResponse to copy this to
+	 * @param filter     the QueueFilter that sets the queue size
 	 * @param priorQueue the prior que to apply thr filter to incase updategranularity is incremental
 	 * @return the copied queue
 	 */
@@ -806,7 +775,7 @@ public class JDFQueue extends JDFAutoQueue
 	{
 		int n = 0;
 		JDFQueueEntry qe = getFirstChildElement(JDFQueueEntry.class);
-		final String stat = qeStatus == null ? null : qeStatus.getName();
+		final String stat = JavaEnumUtil.getName(qeStatus);
 		while (qe != null)
 		{
 			if (stat == null || stat.equals(qe.getAttribute(AttributeName.STATUS)))
@@ -838,21 +807,23 @@ public class JDFQueue extends JDFAutoQueue
 	 * return true if the queue has less than entries elements
 	 *
 	 * @param qeStatus the status of the JDFQueueEntry to count
-	 * @param entries the number of entries after which we stop counting
+	 * @param entries  the number of entries after which we stop counting
 	 * @return true if the queue has < entries entries with a given QE Status
 	 */
 	public boolean hasFewerEntries(final EnumQueueEntryStatus qeStatus, final int entries)
 	{
 		int n = 0;
 		JDFQueueEntry qe = getFirstChildElement(JDFQueueEntry.class);
-		final String stat = qeStatus == null ? null : qeStatus.getName();
+		final String stat = JavaEnumUtil.getName(qeStatus);
 		while (qe != null)
 		{
 			if (stat == null || stat.equals(qe.getAttribute(AttributeName.STATUS)))
 			{
 				n++;
 				if (n >= entries)
+				{
 					return true;
+				}
 			}
 			qe = qe.getNextSiblingElement(JDFQueueEntry.class);
 		}
@@ -874,7 +845,7 @@ public class JDFQueue extends JDFAutoQueue
 	 *
 	 * @param _automated automate if true
 	 */
-	public void setAutomated(final boolean _automated, boolean recalc)
+	public void setAutomated(final boolean _automated, final boolean recalc)
 	{
 		automated = _automated;
 		if (automated && recalc)
@@ -975,13 +946,14 @@ public class JDFQueue extends JDFAutoQueue
 	// /////////////////////////////////////////////////////////////////////
 	/**
 	 * sorts all child elements by alphabet
-	 *
 	 */
 	@Override
 	public void sortChildren()
 	{
 		if (queueSorter == null)
+		{
 			queueSorter = new QueueEntryComparator();
+		}
 
 		sortChildren(queueSorter);
 	}
@@ -1071,7 +1043,9 @@ public class JDFQueue extends JDFAutoQueue
 	public void sortChild(final JDFQueueEntry qe)
 	{
 		if (queueSorter == null)
+		{
 			queueSorter = new QueueEntryComparator();
+		}
 		sortChild(qe, queueSorter);
 	}
 }

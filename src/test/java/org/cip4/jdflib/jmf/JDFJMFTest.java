@@ -44,11 +44,12 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Arrays;
 import java.util.Iterator;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
@@ -67,7 +68,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class JDFJMFTest extends JDFTestCaseBase
 {
@@ -196,7 +196,6 @@ class JDFJMFTest extends JDFTestCaseBase
 
 	/**
 	 * @throws CloneNotSupportedException
-	 *
 	 */
 	@Test
 	void testCloneNewDocInit() throws CloneNotSupportedException
@@ -206,7 +205,9 @@ class JDFJMFTest extends JDFTestCaseBase
 		jmf.appendCommand(EnumType.AbortQueueEntry);
 		JDFJMF jmf2 = (JDFJMF) jmf.cloneNewDoc();
 		for (int i = 0; i < 10; i++)
+		{
 			jmf2 = (JDFJMF) jmf2.cloneNewDoc();
+		}
 		assertTrue(StringUtil.numSubstrings(jmf2.toXML(), "<--") < 2);
 
 	}
@@ -562,7 +563,7 @@ class JDFJMFTest extends JDFTestCaseBase
 		final JDFJMF jmf = doc.getJMFRoot();
 		jmf.setSenderID("Pippi Langstrumpf");
 
-		final Iterator<JDFMessage.EnumFamily> it = JDFMessage.EnumFamily.iterator();
+		final Iterator<JDFMessage.EnumFamily> it = Arrays.asList(JDFMessage.EnumFamily.values()).iterator();
 		while (it.hasNext())
 		{
 			final JDFMessage.EnumFamily f = it.next();
@@ -587,7 +588,7 @@ class JDFJMFTest extends JDFTestCaseBase
 
 			assertTrue(jmf.getMessageVector(f, null).size() == 1, " added messages");
 			assertTrue(jmf.getMessageElement(f, null, 0).hasAttribute(AttributeName.XSITYPE), "xsi type");
-			assertEquals(jmf.getMessageElement(f, null, 0).getAttribute(AttributeName.XSITYPE), f.getName() + "KnownMessages", "xsi type");
+			assertEquals(jmf.getMessageElement(f, null, 0).getAttribute(AttributeName.XSITYPE), f.name() + "KnownMessages", "xsi type");
 
 		}
 

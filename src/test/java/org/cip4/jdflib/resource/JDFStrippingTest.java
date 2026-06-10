@@ -61,7 +61,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * all kinds of fun tests around Stripping also some tests for automated layout
- *
  */
 class JDFStrippingTest extends JDFTestCaseBase
 {
@@ -137,7 +136,9 @@ class JDFStrippingTest extends JDFTestCaseBase
 		for (int i = 0; i < 3; i++)
 		{
 			if (i == 1)
+			{
 				continue; // rejected by wg
+			}
 			setUp();
 			n.setXMLComment("Stripping Foldout example corresponding to spec example n.6.5 - verion: "
 					+ ((i == 0) ? "multi-Cell" : ((i == 1) ? "new attribute FoldOutTrimSize" : "new attribute FaceCells (Accepted for 1.4)")), true);
@@ -178,11 +179,15 @@ class JDFStrippingTest extends JDFTestCaseBase
 			JDFStripCellParams scp = sp1.appendStripCellParams();
 			scp.setTrimSize(new JDFXYPair(200 + (i % 2) * 300, 400));
 			if (i != 1)
+			{
 				scp.setXMLComment("stripcell for the folded out foldout(front page=4)", true);
+			}
 			else
+			{
 				scp.setXMLComment(
 						"stripcell for the entire foldout(front page=4, foldout page =5)\nthe TrimSize applies to the entire foldout spread (page 4 and 5)\n note the new FoldoutTrimSize attribute",
 						true);
+			}
 
 			if (i != 1)
 			{

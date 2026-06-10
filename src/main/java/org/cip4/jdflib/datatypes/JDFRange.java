@@ -45,7 +45,7 @@
  */
 package org.cip4.jdflib.datatypes;
 
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.HashUtil;
 
@@ -61,7 +61,6 @@ public abstract class JDFRange implements JDFBaseDataTypes
 	 * isPartOfRange - is range 'ra' within this range?
 	 *
 	 * @param ra the range to test
-	 *
 	 * @return boolean - true if range 'r' is within this range, else false
 	 */
 	public abstract boolean isPartOfRange(JDFRange ra);
@@ -81,16 +80,13 @@ public abstract class JDFRange implements JDFBaseDataTypes
 		{
 			return true;
 		}
-		if (other == null)
-		{
-			return false;
-		}
-		if (!other.getClass().equals(getClass()))
+		if ((other == null) || !other.getClass().equals(getClass()))
 		{
 			return false;
 		}
 
-		return ContainerUtil.equals(getLeftObject(), ((JDFRange) other).getLeftObject()) && ContainerUtil.equals(getRightObject(), ((JDFRange) other).getRightObject());
+		return ContainerUtil.equals(getLeftObject(), ((JDFRange) other).getLeftObject())
+				&& ContainerUtil.equals(getRightObject(), ((JDFRange) other).getRightObject());
 	}
 
 	/**
@@ -115,7 +111,6 @@ public abstract class JDFRange implements JDFBaseDataTypes
 	}
 
 	/**
-	 *
 	 * get a string with precision digits after each decimal
 	 *
 	 * @param precision
@@ -131,7 +126,6 @@ public abstract class JDFRange implements JDFBaseDataTypes
 	}
 
 	/**
-	 *
 	 * get a string with precision digits after each decimal
 	 *
 	 * @param precision
@@ -139,17 +133,17 @@ public abstract class JDFRange implements JDFBaseDataTypes
 	 */
 	public String getXJDFString(final int precision)
 	{
-		return getLeftString(precision) + JDFConstants.BLANK + getRightString(precision);
+		return getLeftString(precision) + JDFCoreConstants.BLANK + getRightString(precision);
 	}
 
-	public String getRightString(int precision)
+	public String getRightString(final int precision)
 	{
-		return JDFConstants.EMPTYSTRING + getRightObject();
+		return JDFCoreConstants.EMPTYSTRING + getRightObject();
 	}
 
-	public String getLeftString(int precision)
+	public String getLeftString(final int precision)
 	{
-		return JDFConstants.EMPTYSTRING + getLeftObject();
+		return JDFCoreConstants.EMPTYSTRING + getLeftObject();
 	}
 
 	@Override

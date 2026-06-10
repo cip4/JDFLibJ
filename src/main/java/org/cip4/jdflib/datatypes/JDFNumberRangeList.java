@@ -50,7 +50,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -96,12 +96,11 @@ public class JDFNumberRangeList extends JDFRangeList
 	 * constructs a JDFNumberRangeList from a given string
 	 *
 	 * @param s the given string
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFNumberRangeList(final String s) throws DataFormatException
 	{
-		if (s != null && !s.equals(JDFConstants.EMPTYSTRING))
+		if (s != null && !s.equals(JDFCoreConstants.EMPTYSTRING))
 		{
 			setString(s);
 		}
@@ -135,7 +134,6 @@ public class JDFNumberRangeList extends JDFRangeList
 	 * inRange - returns true if the given double value is in one of the ranges of the range list
 	 *
 	 * @param x the given double value to compare
-	 *
 	 * @return boolean - true if in range otherwise false
 	 */
 	public boolean inRange(final double x)
@@ -157,14 +155,15 @@ public class JDFNumberRangeList extends JDFRangeList
 	 * setString - parse the given string and set the Number ranges
 	 *
 	 * @param s the given string
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public void setString(final String s) throws DataFormatException
 	{
-		if (s.indexOf(JDFConstants.TILDE) == 0 || s.lastIndexOf(JDFConstants.TILDE) == (s.length() - 1))
+		if (s.indexOf(JDFCoreConstants.TILDE) == 0 || s.lastIndexOf(JDFCoreConstants.TILDE) == (s.length() - 1))
+		{
 			throw new DataFormatException("JDFNumberRangeList::SetString: Illegal string " + s);
-		final String zappedWS = StringUtil.zappTokenWS(s, JDFConstants.TILDE);
+		}
+		final String zappedWS = StringUtil.zappTokenWS(s, JDFCoreConstants.TILDE);
 		final StringArray vs = StringArray.getVString(zappedWS, " \t");
 		rangeList.clear();
 		for (final String str : vs)
@@ -185,7 +184,6 @@ public class JDFNumberRangeList extends JDFRangeList
 	 * isValid - validate the given String
 	 *
 	 * @param s the given string
-	 *
 	 * @return boolean - false if the String has not a valid format
 	 */
 	public boolean isValid(final String s)
@@ -242,13 +240,17 @@ public class JDFNumberRangeList extends JDFRangeList
 	{
 		final int siz = rangeList.size();
 		if (siz == 0)
+		{
 			return false; // attempt to operate on a null element
+		}
 
 		final Vector<Double> v = getRightVector(siz);
 
 		final int n = v.size() - 1;
 		if (n == 0)
+		{
 			return true; // single value
+		}
 
 		final double first = (v.elementAt(0)).doubleValue();
 		final double last = (v.elementAt(n)).doubleValue();
@@ -258,8 +260,10 @@ public class JDFNumberRangeList extends JDFRangeList
 			final double value = (v.elementAt(j)).doubleValue();
 			final double nextvalue = (v.elementAt(j + 1)).doubleValue();
 
-			if (((first == last && value == nextvalue) || (first < last && value <= nextvalue) || (first > last && value >= nextvalue)) == false)
+			if ((((first != last) || (value != nextvalue)) && ((first >= last) || (value > nextvalue)) && ((first <= last) || (value < nextvalue))))
+			{
 				return false;
+			}
 		}
 		return true;
 	}
@@ -313,8 +317,10 @@ public class JDFNumberRangeList extends JDFRangeList
 			final double value = (v.elementAt(j)).doubleValue();
 			final double nextvalue = (v.elementAt(j + 1)).doubleValue();
 
-			if (((first < last) && (value < nextvalue) || (first > last) && (value < nextvalue)) == false)
+			if ((((first >= last) || (value >= nextvalue)) && ((first <= last) || (value >= nextvalue))))
+			{
 				return false;
+			}
 		}
 		return true;
 	}

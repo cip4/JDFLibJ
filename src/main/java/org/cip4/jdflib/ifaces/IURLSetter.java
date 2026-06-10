@@ -73,25 +73,22 @@ import java.io.InputStream;
 
 /**
  * Interface for elements that can set or get a URL - used when unpacking or forwarding the respective url target
- * 
+ *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public interface IURLSetter
 {
 	/**
-	 * 
 	 * @param url the URL to set
 	 */
 	public void setURL(String url);
 
 	/**
-	 * 
 	 * @return the URL of this
 	 */
 	public String getURL();
 
 	/**
-	 * 
 	 * @return the filename of this; null if not implemented
 	 */
 	public String getUserFileName();

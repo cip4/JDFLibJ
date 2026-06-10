@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,22 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFShapeRangeList.java
@@ -87,13 +87,13 @@ import org.cip4.jdflib.util.HashUtil;
 public class JDFShapeRange extends JDFRange
 {
 	@Override
-	public String getRightString(int precision)
+	public String getRightString(final int precision)
 	{
 		return getRight().getString(precision);
 	}
 
 	@Override
-	public String getLeftString(int precision)
+	public String getLeftString(final int precision)
 	{
 		return getLeft().getString(precision);
 	}
@@ -115,21 +115,21 @@ public class JDFShapeRange extends JDFRange
 
 	/**
 	 * constructs a JDFShapeRange, both values are equal ("from x to x")
-	 * 
+	 *
 	 * @param x the given JDFShape
 	 */
-	public JDFShapeRange(JDFShape x)
+	public JDFShapeRange(final JDFShape x)
 	{
 		init(x, x);
 	}
 
 	/**
 	 * constructor a JDFShapeRange with two JDFShape values ("from xmin to xmax")
-	 * 
+	 *
 	 * @param xmin the given min value
 	 * @param xmax the given max value
 	 */
-	public JDFShapeRange(JDFShape xmin, JDFShape xmax)
+	public JDFShapeRange(final JDFShape xmin, final JDFShape xmax)
 	{
 		init(xmin, xmax);
 	}
@@ -137,21 +137,21 @@ public class JDFShapeRange extends JDFRange
 	/**
 	 * copy constructor<br>
 	 * constructs a JDFShapeRange with the given JDFShapeRange
-	 * 
+	 *
 	 * @param r
 	 */
-	public JDFShapeRange(JDFShapeRange r)
+	public JDFShapeRange(final JDFShapeRange r)
 	{
 		init(r.getLeft(), r.getRight());
 	}
 
 	/**
 	 * Initialization
-	 * 
+	 *
 	 * @param x left boundary
 	 * @param y right boundary
 	 */
-	protected void init(JDFShape x, JDFShape y)
+	protected void init(final JDFShape x, final JDFShape y)
 	{
 		m_left = x;
 		m_right = y;
@@ -159,14 +159,13 @@ public class JDFShapeRange extends JDFRange
 
 	/**
 	 * constructs a JDFShapeRange with the values of the given String
-	 * 
+	 *
 	 * @param s the given string representation of the range
-	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFShapeRange(String s) throws DataFormatException
+	public JDFShapeRange(final String s) throws DataFormatException
 	{
-		String[] strArray = s.split("~");
+		final String[] strArray = s.split("~");
 		if ((strArray.length <= 0) || (strArray.length > 2))
 		{
 			throw new DataFormatException("JDFShapeRange illegal string: " + s);
@@ -186,7 +185,7 @@ public class JDFShapeRange extends JDFRange
 				m_right = new JDFShape(strArray[1].trim());
 			}
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new DataFormatException("JDFShapeRange illegal string: " + s);
 		}
@@ -194,18 +193,17 @@ public class JDFShapeRange extends JDFRange
 
 	/**
 	 * isValid - validate the given String
-	 * 
+	 *
 	 * @param s the given string
-	 * 
 	 * @return boolean - false if the String has not a valid format
 	 */
-	public boolean isValid(String s)
+	public boolean isValid(final String s)
 	{
 		try
 		{
 			new JDFShapeRange(s);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			return false;
 		}
@@ -214,33 +212,29 @@ public class JDFShapeRange extends JDFRange
 
 	/**
 	 * equals - returns true if both JDFShapeRanges are equal otherwise false
-	 * 
+	 *
 	 * @return boolean - true if equal otherwise false
 	 */
 	@Override
-	public boolean equals(Object other)
+	public boolean equals(final Object other)
 	{
 		if (this == other)
 		{
 			return true;
 		}
-		if (other == null)
-		{
-			return false;
-		}
-		if (!other.getClass().equals(getClass()))
+		if ((other == null) || !other.getClass().equals(getClass()))
 		{
 			return false;
 		}
 
-		JDFShapeRange range = (JDFShapeRange) other;
+		final JDFShapeRange range = (JDFShapeRange) other;
 
 		return this.getLeft().equals(range.getLeft()) && this.getRight().equals(range.getRight());
 	}
 
 	/**
 	 * hashCode complements equals() to fulfill the equals/hashCode contract
-	 * 
+	 *
 	 * @return int
 	 */
 	@Override
@@ -251,39 +245,37 @@ public class JDFShapeRange extends JDFRange
 
 	/**
 	 * inRange - tests if the given x inside of this range
-	 * 
+	 *
 	 * @param x comparison value
-	 * 
 	 * @return boolean - true if x in range
 	 */
-	public boolean inRange(JDFShape x)
+	public boolean inRange(final JDFShape x)
 	{
-		JDFShape min = this.getLowerValue();
-		JDFShape max = this.getUpperValue();
+		final JDFShape min = this.getLowerValue();
+		final JDFShape max = this.getUpperValue();
 		return x.isGreaterOrEqual(min) && x.isLessOrEqual(max);
 	}
 
 	/**
 	 * isPartOfRange - is range 'r' within this range?
-	 * 
+	 *
 	 * @param r the range to test
-	 * 
 	 * @return boolean - true if range 'r' is within this range, else false
 	 */
 	@Override
-	public boolean isPartOfRange(JDFRange ra)
+	public boolean isPartOfRange(final JDFRange ra)
 	{
-		JDFShapeRange r = (JDFShapeRange) ra;
-		JDFShape min = this.getLowerValue();
-		JDFShape r_min = r.getLowerValue();
-		JDFShape max = this.getUpperValue();
-		JDFShape r_max = r.getUpperValue();
+		final JDFShapeRange r = (JDFShapeRange) ra;
+		final JDFShape min = this.getLowerValue();
+		final JDFShape r_min = r.getLowerValue();
+		final JDFShape max = this.getUpperValue();
+		final JDFShape r_max = r.getUpperValue();
 		return r_min.isGreaterOrEqual(min) && r_max.isLessOrEqual(max);
 	}
 
 	/**
 	 * getLeft - gets the left JDFShape object of the range
-	 * 
+	 *
 	 * @return JDFShape x - the left JDFShape object of the range
 	 */
 	public JDFShape getLeft()
@@ -293,7 +285,7 @@ public class JDFShapeRange extends JDFRange
 
 	/**
 	 * getRight - gets the right JDFShape object of the range
-	 * 
+	 *
 	 * @return JDFShape x - the right JDFShape object of the range
 	 */
 	public JDFShape getRight()
@@ -303,27 +295,27 @@ public class JDFShapeRange extends JDFRange
 
 	/**
 	 * sets the left JDFShape object of the range
-	 * 
+	 *
 	 * @param x the left JDFShape object of the range
 	 */
-	public void setLeft(JDFShape x)
+	public void setLeft(final JDFShape x)
 	{
 		m_left = x;
 	}
 
 	/**
 	 * sets the right JDFShape object of the range
-	 * 
+	 *
 	 * @param x the right JDFShape object of the range
 	 */
-	public void setRight(JDFShape x)
+	public void setRight(final JDFShape x)
 	{
 		m_right = x;
 	}
 
 	/**
 	 * getUpperValue - returns the upper value of the bounds
-	 * 
+	 *
 	 * @return JDFShape - the upper value of the range
 	 */
 	public JDFShape getUpperValue()
@@ -333,7 +325,7 @@ public class JDFShapeRange extends JDFRange
 
 	/**
 	 * getLowerValue - returns the lower value of the bounds
-	 * 
+	 *
 	 * @return JDFShape - the lower value of the range
 	 */
 	public JDFShape getLowerValue()
@@ -354,7 +346,7 @@ public class JDFShapeRange extends JDFRange
 	}
 
 	@Override
-	protected boolean inObjectRange(Object other)
+	protected boolean inObjectRange(final Object other)
 	{
 		return inRange((JDFShape) other);
 	}

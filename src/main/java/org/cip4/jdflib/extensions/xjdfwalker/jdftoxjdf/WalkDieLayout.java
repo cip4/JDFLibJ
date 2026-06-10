@@ -42,9 +42,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFDieLayout;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkDieLayout extends WalkResource
 {
@@ -83,7 +81,9 @@ public class WalkDieLayout extends WalkResource
 	protected boolean mustInline(final String refLocalName)
 	{
 		if (ElementName.MEDIA.equals(refLocalName))
+		{
 			return true;
+		}
 
 		return super.mustInline(refLocalName);
 	}

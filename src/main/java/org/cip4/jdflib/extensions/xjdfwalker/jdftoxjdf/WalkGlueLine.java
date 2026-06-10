@@ -76,9 +76,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkGlueLine extends WalkJDFElement
 {
@@ -114,7 +112,7 @@ public class WalkGlueLine extends WalkJDFElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#getXJDFName(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected String getXJDFName(KElement jdf)
+	protected String getXJDFName(final KElement jdf)
 	{
 		return ElementName.GLUE;
 	}
@@ -123,7 +121,7 @@ public class WalkGlueLine extends WalkJDFElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		map.remove(AttributeName.RELATIVESTARTPOSITION);
 		map.remove(AttributeName.RELATIVETRAVEL);
@@ -136,7 +134,7 @@ public class WalkGlueLine extends WalkJDFElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#setAttributes(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void setAttributes(KElement jdf, KElement eNew)
+	protected void setAttributes(final KElement jdf, final KElement eNew)
 	{
 		super.setAttributes(jdf, eNew);
 		eNew.moveAttribute(AttributeName.GLUINGTECHNIQUE, eNew.getParentNode_KElement());

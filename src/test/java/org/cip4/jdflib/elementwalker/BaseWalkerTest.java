@@ -81,7 +81,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author prosirai
- *
  */
 class BaseWalkerTest extends JDFTestCaseBase
 {
@@ -93,13 +92,13 @@ class BaseWalkerTest extends JDFTestCaseBase
 		/**
 		 * @param factory this call adds the testwalker to the factory
 		 */
-		public TestWalker(BaseWalkerFactory factory)
+		public TestWalker(final BaseWalkerFactory factory)
 		{
 			super(factory);
 			this.name = null;
 		}
 
-		void setNames(String name)
+		void setNames(final String name)
 		{
 			this.name = name;
 		}
@@ -110,7 +109,7 @@ class BaseWalkerTest extends JDFTestCaseBase
 		@Override
 		public VString getElementNames()
 		{
-			VString strings = StringUtil.tokenize(name, null, false);
+			final VString strings = StringUtil.tokenize(name, null, false);
 			return strings == null || strings.size() == 0 ? null : strings;
 		}
 
@@ -118,7 +117,7 @@ class BaseWalkerTest extends JDFTestCaseBase
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
 		 */
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return name == null || StringUtil.equals(e.getLocalName(), name);
 		}
@@ -131,8 +130,8 @@ class BaseWalkerTest extends JDFTestCaseBase
 	@Test
 	void testDepth()
 	{
-		BaseWalkerFactory bf = new BaseWalkerFactory();
-		BaseWalker b = new TestWalker(bf);
+		final BaseWalkerFactory bf = new BaseWalkerFactory();
+		final BaseWalker b = new TestWalker(bf);
 		Assertions.assertEquals(b.getDepth(), 1);
 	}
 
@@ -142,14 +141,16 @@ class BaseWalkerTest extends JDFTestCaseBase
 	@Test
 	void testDepthWalk()
 	{
-		BaseWalkerFactory bf = new BaseWalkerFactory();
+		final BaseWalkerFactory bf = new BaseWalkerFactory();
 		new TestWalker(bf);
-		XMLDoc d = new XMLDoc("a", null);
-		ElementWalker ew = new ElementWalker(bf);
-		KElement root = d.getRoot();
+		final XMLDoc d = new XMLDoc("a", null);
+		final ElementWalker ew = new ElementWalker(bf);
+		final KElement root = d.getRoot();
 		Assertions.assertEquals(ew.walkTree(root, null), 1);
 		for (int i = 1; i <= 10; i++)
+		{
 			root.getCreateXPathElement("b/c/d[" + i + "]");
+		}
 		Assertions.assertEquals(ew.walkTree(root, null), 13, "a,b,c+10*d=13");
 	}
 
@@ -159,9 +160,9 @@ class BaseWalkerTest extends JDFTestCaseBase
 	@Test
 	void testElementName()
 	{
-		BaseWalkerFactory bf = new BaseWalkerFactory();
-		TestWalker tw = new TestWalker(bf);
-		KElement a = new XMLDoc("a", null).getRoot();
+		final BaseWalkerFactory bf = new BaseWalkerFactory();
+		final TestWalker tw = new TestWalker(bf);
+		final KElement a = new XMLDoc("a", null).getRoot();
 		Assertions.assertEquals(bf.getWalker(a), tw);
 		tw.setNames("b");
 		bf.addWalker(tw);

@@ -85,7 +85,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink;
-import org.cip4.jdflib.core.JDFResourceLink.EUsage;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
@@ -96,7 +96,6 @@ import org.cip4.jdflib.resource.JDFResource;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
  *         before June 11, 2009
  */
 public class JDFPipeParams extends JDFAutoPipeParams
@@ -105,7 +104,7 @@ public class JDFPipeParams extends JDFAutoPipeParams
 
 	/**
 	 * Constructor for JDFPipeParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -116,7 +115,7 @@ public class JDFPipeParams extends JDFAutoPipeParams
 
 	/**
 	 * Constructor for JDFPipeParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -128,7 +127,7 @@ public class JDFPipeParams extends JDFAutoPipeParams
 
 	/**
 	 * Constructor for JDFPipeParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -150,9 +149,9 @@ public class JDFPipeParams extends JDFAutoPipeParams
 
 	/**
 	 * Gets all ResourceLink children with the attribute name, mAttrib, nameSpaceURI from the pool
-	 * 
-	 * @param nam name of the Child
-	 * @param mAttrib a attribute to search for
+	 *
+	 * @param nam          name of the Child
+	 * @param mAttrib      a attribute to search for
 	 * @param nameSpaceURI
 	 * @return VElement: a vector with all resource links in the pool matching the conditions
 	 * @deprecated use getResourceLink()
@@ -175,7 +174,7 @@ public class JDFPipeParams extends JDFAutoPipeParams
 
 	/**
 	 * Gets the ResourceLink from the PipeParams element
-	 * 
+	 *
 	 * @return VElement: a vector with all resource links in the pool matching the conditions
 	 */
 	final public JDFResourceLink getResourceLink()
@@ -196,9 +195,9 @@ public class JDFPipeParams extends JDFAutoPipeParams
 	 * get the vector of unknown element nodenames
 	 * <p>
 	 * default: GetUnknownElements(true, 999999)
-	 * 
+	 *
 	 * @param bIgnorePrivate used by JDFElement during the validation !!! Do not change the signature of this method
-	 * @param nMax maximum size of the returned vector
+	 * @param nMax           maximum size of the returned vector
 	 * @return Vector - vector of unknown element nodenames
 	 */
 
@@ -216,7 +215,7 @@ public class JDFPipeParams extends JDFAutoPipeParams
 
 	/**
 	 * get resource defined by <code>resName</code>, create if it doesn't exist
-	 * 
+	 *
 	 * @param resName name of the resource to get/create
 	 * @return JDFResource: the element
 	 */
@@ -237,7 +236,7 @@ public class JDFPipeParams extends JDFAutoPipeParams
 
 	/**
 	 * get resource defined by <code>resName</code>
-	 * 
+	 *
 	 * @param resName name of the resource to get; if null get the resource that is linked by the reslink
 	 * @return JDFResource: the element
 	 */
@@ -281,7 +280,7 @@ public class JDFPipeParams extends JDFAutoPipeParams
 
 	/**
 	 * append Resource
-	 * 
+	 *
 	 * @param resName name of the resource to append
 	 * @return
 	 */
@@ -297,9 +296,9 @@ public class JDFPipeParams extends JDFAutoPipeParams
 
 	/**
 	 * append ResourceLink
-	 * 
+	 *
 	 * @param linkName name of the ResourceLink to append a link for
-	 * @param bInput if true, the link is an input link
+	 * @param bInput   if true, the link is an input link
 	 * @return JDFResourceLink: the appended element
 	 */
 	public JDFResourceLink appendResourceLink(final String linkName, final boolean bInput)
@@ -321,7 +320,7 @@ public class JDFPipeParams extends JDFAutoPipeParams
 		if (JDFResourceLink.isResourceLink(e))
 		{
 			rl = (JDFResourceLink) e;
-			rl.setUsage(bInput ? EUsage.Input : EUsage.Output);
+			rl.setUsage(bInput ? EnumUsage.Input : EnumUsage.Output);
 		}
 		else
 		{
@@ -333,7 +332,7 @@ public class JDFPipeParams extends JDFAutoPipeParams
 
 	/**
 	 * apply the parameters in this to all appropriate resources in parentNode or one of parentNode's children
-	 * 
+	 *
 	 * @param parentNode the node to search in TODO implement resource handling
 	 */
 	public void applyPipeToNode(final JDFNode parentNode)
@@ -386,11 +385,7 @@ public class JDFPipeParams extends JDFAutoPipeParams
 	 */
 	private boolean matchesNode(final JDFNode node)
 	{
-		if (node == null)
-		{
-			return false;
-		}
-		if (hasAttribute(AttributeName.JOBID) && !getJobID().equals(node.getJobID(true)))
+		if ((node == null) || (hasAttribute(AttributeName.JOBID) && !getJobID().equals(node.getJobID(true))))
 		{
 			return false;
 		}

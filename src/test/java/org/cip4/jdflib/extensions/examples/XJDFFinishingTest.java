@@ -63,9 +63,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class XJDFFinishingTest extends JDFTestCaseBase
 {
@@ -76,7 +74,7 @@ class XJDFFinishingTest extends JDFTestCaseBase
 	void testBundlePallet()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("Bundle", null, null);
-		xjdfHelper.setTypes(EnumType.Palletizing.getName());
+		xjdfHelper.setTypes(EnumType.Palletizing.name());
 		xjdfHelper.setVersion(EnumVersion.Version_2_1);
 		final ProductHelper book = xjdfHelper.getCreateRootProduct(0);
 		book.setID("BookProductID");
@@ -188,7 +186,7 @@ class XJDFFinishingTest extends JDFTestCaseBase
 	void testMetaDataMapBarcode()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("Barcode", "Metadata", null);
-		xjdfHelper.setTypes(EnumType.Verification.getName());
+		xjdfHelper.setTypes(EnumType.Verification.name());
 
 		final SetHelper shComp = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.COMPONENT, EnumUsage.Input);
 		final ResourceHelper rh = shComp.getCreatePartition(0, true);

@@ -124,7 +124,7 @@ public abstract class JDFAutoColorantAlias extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoColorantAlias(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoColorantAlias(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -136,7 +136,7 @@ public abstract class JDFAutoColorantAlias extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoColorantAlias(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoColorantAlias(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -149,7 +149,7 @@ public abstract class JDFAutoColorantAlias extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoColorantAlias(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoColorantAlias(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -160,7 +160,7 @@ public abstract class JDFAutoColorantAlias extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -190,7 +190,7 @@ public abstract class JDFAutoColorantAlias extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setReplacementColorantName(String value)
+	public void setReplacementColorantName(final String value)
 	{
 		setAttribute(AttributeName.REPLACEMENTCOLORANTNAME, value, null);
 	}
@@ -215,7 +215,7 @@ public abstract class JDFAutoColorantAlias extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRawNames(VString value)
+	public void setRawNames(final VString value)
 	{
 		setAttribute(AttributeName.RAWNAMES, value, null);
 	}
@@ -227,8 +227,8 @@ public abstract class JDFAutoColorantAlias extends JDFResource
 	 */
 	public VString getRawNames()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.RAWNAMES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.RAWNAMES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -265,7 +265,7 @@ public abstract class JDFAutoColorantAlias extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationSpec the element
 	 */
-	public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
+	public JDFSeparationSpec getCreateSeparationSpec(final int iSkip)
 	{
 		return (JDFSeparationSpec) getCreateElement_JDFElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}
@@ -277,7 +277,7 @@ public abstract class JDFAutoColorantAlias extends JDFResource
 	 * @return JDFSeparationSpec the element
 	 *         default is getSeparationSpec(0)
 	 */
-	public JDFSeparationSpec getSeparationSpec(int iSkip)
+	public JDFSeparationSpec getSeparationSpec(final int iSkip)
 	{
 		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}

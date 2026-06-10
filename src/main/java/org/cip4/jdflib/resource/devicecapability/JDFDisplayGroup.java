@@ -33,7 +33,7 @@ public class JDFDisplayGroup extends JDFAutoDisplayGroup
 
 	/**
 	 * Constructor for JDFDisplayGroup
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
@@ -45,7 +45,7 @@ public class JDFDisplayGroup extends JDFAutoDisplayGroup
 
 	/**
 	 * Constructor for JDFDisplayGroup
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
@@ -58,21 +58,22 @@ public class JDFDisplayGroup extends JDFAutoDisplayGroup
 
 	/**
 	 * Constructor for JDFDisplayGroup
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFDisplayGroup(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFDisplayGroup(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

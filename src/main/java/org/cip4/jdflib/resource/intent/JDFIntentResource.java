@@ -41,7 +41,7 @@ package org.cip4.jdflib.resource.intent;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFComment;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
@@ -64,7 +64,6 @@ import org.cip4.jdflib.span.JDFXYPairSpan;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFIntentResource extends JDFResource
@@ -72,7 +71,6 @@ public class JDFIntentResource extends JDFResource
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -87,7 +85,6 @@ public class JDFIntentResource extends JDFResource
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 *
 	 */
 	public JDFIntentResource(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
@@ -101,7 +98,6 @@ public class JDFIntentResource extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
-	 *
 	 */
 	public JDFIntentResource(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
@@ -111,14 +107,16 @@ public class JDFIntentResource extends JDFResource
 	/**
 	 * get the best match actual value from any element that may contain spans
 	 *
-	 * @param root the parent element
+	 * @param root     the parent element
 	 * @param spanName the span element name
 	 * @return
 	 */
 	public static String guessActual(final JDFElement root, final String spanName)
 	{
 		if (root == null)
+		{
 			return null;
+		}
 		final KElement span = root.getElement(spanName);
 		if (span instanceof JDFSpanBase)
 		{
@@ -130,25 +128,32 @@ public class JDFIntentResource extends JDFResource
 	/**
 	 * get the best match actual value from any element that may contain spans
 	 *
-	 * @param intentRoot the parent intent element
+	 * @param intentRoot  the parent intent element
 	 * @param processRoot the parent process element
-	 * @param spanName the span element name
-	 * @param attName the target attribute element name, if null identical to spanName
-	 *
+	 * @param spanName    the span element name
+	 * @param attName     the target attribute element name, if null identical to spanName
 	 */
 	public static void copyActualToProcess(final JDFElement intentRoot, final JDFElement processRoot, String spanName, String attName)
 	{
 		if (intentRoot == null || processRoot == null)
+		{
 			return;
+		}
 
 		if (StringUtil.getNonEmpty(attName) == null)
+		{
 			attName = spanName;
+		}
 		else if (StringUtil.getNonEmpty(spanName) == null)
+		{
 			spanName = attName;
+		}
 
 		final String val = guessActual(intentRoot, spanName);
 		if (val == null)
+		{
 			return;
+		}
 		processRoot.setAttribute(attName, val);
 
 	}
@@ -157,22 +162,29 @@ public class JDFIntentResource extends JDFResource
 	 * get the best match actual value from any element that may contain spans
 	 *
 	 * @param processRoot the parent process element
-	 * @param intentRoot the parent intent element
-	 * @param attName the target attribute element name, if null identical to spanName
-	 * @param spanName the span element name
-	 *
+	 * @param intentRoot  the parent intent element
+	 * @param attName     the target attribute element name, if null identical to spanName
+	 * @param spanName    the span element name
 	 */
 	public static void copyProcessToActual(final JDFElement processRoot, final JDFElement intentRoot, String attName, String spanName)
 	{
 		if (intentRoot == null || processRoot == null)
+		{
 			return;
+		}
 		if (StringUtil.getNonEmpty(attName) == null)
+		{
 			attName = spanName;
+		}
 		else if (StringUtil.getNonEmpty(spanName) == null)
+		{
 			spanName = attName;
+		}
 		final String val = StringUtil.getNonEmpty(processRoot.getAttribute(attName));
 		if (val == null)
+		{
 			return;
+		}
 		intentRoot.appendElement(spanName).setAttribute(AttributeName.ACTUAL, val);
 
 	}
@@ -609,13 +621,13 @@ public class JDFIntentResource extends JDFResource
 	 * get a span, create it if it does not exist
 	 *
 	 * @param strName name of the span element
-	 * @param nType datatype of the new span
+	 * @param nType   datatype of the new span
 	 * @return JDFSpanBase the JDFSpanBase
 	 */
 	JDFSpanBase getCreateSpan(final String strName, final JDFSpanBase.EnumDataType nType)
 	{
 		// / note that this is the inherited version from JDFResource!
-		final JDFSpanBase e = (JDFSpanBase) this.getCreateElement_JDFResource(strName, JDFConstants.EMPTYSTRING, 0);
+		final JDFSpanBase e = (JDFSpanBase) this.getCreateElement_JDFResource(strName, JDFCoreConstants.EMPTYSTRING, 0);
 		e.setDataType(nType);
 		return e;
 	}
@@ -624,13 +636,13 @@ public class JDFIntentResource extends JDFResource
 	 * get a span
 	 *
 	 * @param strName name of the span element
-	 * @param nType datatype of the new span
+	 * @param nType   datatype of the new span
 	 * @return JDFSpanBase the JDFSpanBase
 	 */
 	public JDFSpanBase getSpan(final String strName, final JDFSpanBase.EnumDataType nType)
 	{
 		// / note that this is the inherited version from JDFResource!
-		final JDFSpanBase e = (JDFSpanBase) getElement(strName, JDFConstants.EMPTYSTRING, 0);
+		final JDFSpanBase e = (JDFSpanBase) getElement(strName, JDFCoreConstants.EMPTYSTRING, 0);
 		if (e != null && nType != null)
 		{
 			final JDFSpanBase.EnumDataType dataType = e.getDataType();
@@ -646,15 +658,17 @@ public class JDFIntentResource extends JDFResource
 	 * Append a span if it does not yet exist, else return the existing element
 	 *
 	 * @param strName name of the span element
-	 * @param nType datatype of the new span
+	 * @param nType   datatype of the new span
 	 * @return JDFSpanBase the JDFSpanBase
 	 */
 	public JDFSpanBase appendSpan(final String strName, final JDFSpanBase.EnumDataType nType)
 	{
 		// / note that this is the inherited version from JDFResource!
-		final JDFSpanBase e = (JDFSpanBase) appendElement(strName, JDFConstants.EMPTYSTRING);
+		final JDFSpanBase e = (JDFSpanBase) appendElement(strName, JDFCoreConstants.EMPTYSTRING);
 		if (nType != null)
+		{
 			e.setDataType(nType);
+		}
 		return e;
 	}
 } // class JDFIntentResource

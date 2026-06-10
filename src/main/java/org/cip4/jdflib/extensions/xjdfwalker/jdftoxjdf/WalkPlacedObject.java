@@ -81,7 +81,7 @@ public class WalkPlacedObject extends WalkJDFSubElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFSubElement#matches(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public boolean matches(KElement toCheck)
+	public boolean matches(final KElement toCheck)
 	{
 		// we are abstract
 		return false;
@@ -99,7 +99,7 @@ public class WalkPlacedObject extends WalkJDFSubElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		map.remove(AttributeName.ORDID);
 		map.remove(AttributeName.LAYERID);

@@ -107,7 +107,7 @@ public abstract class JDFAutoLoc extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLoc(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoLoc(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -119,7 +119,7 @@ public abstract class JDFAutoLoc extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLoc(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoLoc(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -132,7 +132,7 @@ public abstract class JDFAutoLoc extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoLoc(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoLoc(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -153,7 +153,7 @@ public abstract class JDFAutoLoc extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHelpText(String value)
+	public void setHelpText(final String value)
 	{
 		setAttribute(AttributeName.HELPTEXT, value, null);
 	}
@@ -178,7 +178,7 @@ public abstract class JDFAutoLoc extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLang(String value)
+	public void setLang(final String value)
 	{
 		setAttribute(AttributeName.LANG, value, null);
 	}
@@ -203,7 +203,7 @@ public abstract class JDFAutoLoc extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setShortValue(String value)
+	public void setShortValue(final String value)
 	{
 		setAttribute(AttributeName.SHORTVALUE, value, null);
 	}
@@ -228,7 +228,7 @@ public abstract class JDFAutoLoc extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setValue(String value)
+	public void setValue(final String value)
 	{
 		setAttribute(AttributeName.VALUE, value, null);
 	}

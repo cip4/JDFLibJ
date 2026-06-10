@@ -107,7 +107,7 @@ public class WalkMarkObject extends WalkPlacedObject
 	}
 
 	@Override
-	public KElement walk(KElement jdf, KElement xjdf)
+	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		// TODO Auto-generated method stub
 		return super.walk(jdf, xjdf);

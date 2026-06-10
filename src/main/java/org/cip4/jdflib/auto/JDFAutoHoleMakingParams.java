@@ -71,12 +71,8 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumHoleType;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -107,14 +103,16 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTERREFERENCE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumCenterReference.getEnum(0), "TrailingEdge");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.HOLETYPE, 0x2222222221l, AttributeInfo.EnumAttributeType.enumerations, EnumHoleType.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumCenterReference.class, 0), "TrailingEdge");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.HOLETYPE, 0x2222222221l, AttributeInfo.EnumAttributeType.enumerations,
+				JavaEnumUtil.getEnum(EnumHoleType.class, 0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.CENTER, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.EXTENT, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.HOLECOUNT, 0x3333333311l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.HOLEREFERENCEEDGE, 0x4444444431l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumHoleReferenceEdge.getEnum(0), null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.SHAPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumShape.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumHoleReferenceEdge.class, 0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.SHAPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumShape.class, 0), null);
 	}
 
 	@Override
@@ -143,7 +141,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoHoleMakingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoHoleMakingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -155,7 +153,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoHoleMakingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoHoleMakingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -168,7 +166,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoHoleMakingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoHoleMakingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -179,7 +177,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -194,249 +192,50 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for CenterReference
+	 * Enumeration strings for numCenterReference
 	 */
 
-	public enum ECenterReference
+	public enum EnumCenterReference
 	{
 		TrailingEdge, RegistrationMark;
 
-		public static ECenterReference getEnum(String val)
+		public static EnumCenterReference getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ECenterReference.class, val, ECenterReference.TrailingEdge);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumCenterReference.class, val, EnumCenterReference.TrailingEdge);
 		}
 	}
 
 	/**
-	 * Enumeration strings for CenterReference
+	 * Enumeration strings for numHoleReferenceEdge
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumCenterReference extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumCenterReference(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumCenterReference getEnum(String enumName)
-		{
-			return (EnumCenterReference) getEnum(EnumCenterReference.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumCenterReference getEnum(int enumValue)
-		{
-			return (EnumCenterReference) getEnum(EnumCenterReference.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumCenterReference.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumCenterReference.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumCenterReference.class);
-		}
-
-		/**  */
-		public static final EnumCenterReference TrailingEdge = new EnumCenterReference("TrailingEdge");
-		/**  */
-		public static final EnumCenterReference RegistrationMark = new EnumCenterReference("RegistrationMark");
-	}
-
-	/**
-	 * Enumeration strings for HoleReferenceEdge
-	 */
-
-	public enum EHoleReferenceEdge
+	public enum EnumHoleReferenceEdge
 	{
 		Left, Right, Top, Bottom, Pattern;
 
-		public static EHoleReferenceEdge getEnum(String val)
+		public static EnumHoleReferenceEdge getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EHoleReferenceEdge.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumHoleReferenceEdge.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for HoleReferenceEdge
+	 * Enumeration strings for numShape
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumHoleReferenceEdge extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumHoleReferenceEdge(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumHoleReferenceEdge getEnum(String enumName)
-		{
-			return (EnumHoleReferenceEdge) getEnum(EnumHoleReferenceEdge.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumHoleReferenceEdge getEnum(int enumValue)
-		{
-			return (EnumHoleReferenceEdge) getEnum(EnumHoleReferenceEdge.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumHoleReferenceEdge.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumHoleReferenceEdge.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumHoleReferenceEdge.class);
-		}
-
-		/**  */
-		public static final EnumHoleReferenceEdge Left = new EnumHoleReferenceEdge("Left");
-		/**  */
-		public static final EnumHoleReferenceEdge Right = new EnumHoleReferenceEdge("Right");
-		/**  */
-		public static final EnumHoleReferenceEdge Top = new EnumHoleReferenceEdge("Top");
-		/**  */
-		public static final EnumHoleReferenceEdge Bottom = new EnumHoleReferenceEdge("Bottom");
-		/**  */
-		public static final EnumHoleReferenceEdge Pattern = new EnumHoleReferenceEdge("Pattern");
-	}
-
-	/**
-	 * Enumeration strings for Shape
-	 */
-
-	public enum EShape
+	public enum EnumShape
 	{
 		Eliptical, Round, Rectangular;
 
-		public static EShape getEnum(String val)
+		public static EnumShape getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EShape.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumShape.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Shape
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumShape extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumShape(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumShape getEnum(String enumName)
-		{
-			return (EnumShape) getEnum(EnumShape.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumShape getEnum(int enumValue)
-		{
-			return (EnumShape) getEnum(EnumShape.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumShape.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumShape.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumShape.class);
-		}
-
-		/**  */
-		public static final EnumShape Eliptical = new EnumShape("Eliptical");
-		/**  */
-		public static final EnumShape Round = new EnumShape("Round");
-		/**  */
-		public static final EnumShape Rectangular = new EnumShape("Rectangular");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -448,9 +247,9 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setCenterReference(ECenterReference enumVar)
+	public void setCenterReference(final EnumCenterReference enumVar)
 	{
-		setAttribute(AttributeName.CENTERREFERENCE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.CENTERREFERENCE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -458,35 +257,6 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ECenterReference getECenterReference()
-	{
-		return ECenterReference.getEnum(getAttribute(AttributeName.CENTERREFERENCE, null, "TrailingEdge"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute CenterReference
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute CenterReference
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetCenterReference(ECenterReference) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setCenterReference(EnumCenterReference enumVar)
-	{
-		setAttribute(AttributeName.CENTERREFERENCE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute CenterReference
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ECenterReference GetECenterReference() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumCenterReference getCenterReference()
 	{
 		return EnumCenterReference.getEnum(getAttribute(AttributeName.CENTERREFERENCE, null, "TrailingEdge"));
@@ -502,7 +272,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 *
 	 * @param v List of the enumeration values
 	 */
-	public void setEHoleType(List<JDFMedia.EHoleType> v)
+	public void setHoleType(final List<JDFMedia.EnumHoleType> v)
 	{
 		setEnumsAttribute(AttributeName.HOLETYPE, v, null);
 	}
@@ -512,38 +282,9 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public List<JDFMedia.EHoleType> getEnumsHoleType()
+	public List<JDFMedia.EnumHoleType> getHoleType()
 	{
-		return getEnumerationsAttribute(AttributeName.HOLETYPE, null, JDFMedia.EHoleType.class);
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute HoleType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5.2) set attribute HoleType
-	 *
-	 * @param v List of the enumeration values
-	 * @deprecated use SetEHoleType(List<Eedia.EnumHoleType>) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setHoleType(List<JDFMedia.EnumHoleType> v)
-	{
-		setEnumerationsAttribute(AttributeName.HOLETYPE, v, null);
-	}
-
-	/**
-	 * (9.2) get HoleType attribute HoleType
-	 *
-	 * @return Vector of the enumerations
-	 * @deprecated use List<Eedia.EnumHoleType > GetEHoleType() based on java.lang.enum instead
-	 */
-	@Deprecated
-	public Vector<JDFMedia.EnumHoleType> getHoleType()
-	{
-		return getEnumerationsAttribute(AttributeName.HOLETYPE, null, JDFMedia.EnumHoleType.getEnum(0), false);
+		return getEnumerationsAttribute(AttributeName.HOLETYPE, null, JDFMedia.EnumHoleType.class);
 	}
 
 	/*
@@ -556,7 +297,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCenter(JDFXYPair value)
+	public void setCenter(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.CENTER, value, null);
 	}
@@ -569,8 +310,8 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 */
 	public JDFXYPair getCenter()
 	{
-		String strAttrName = getAttribute(AttributeName.CENTER, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CENTER, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -584,7 +325,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setExtent(JDFXYPair value)
+	public void setExtent(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.EXTENT, value, null);
 	}
@@ -597,8 +338,8 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 */
 	public JDFXYPair getExtent()
 	{
-		String strAttrName = getAttribute(AttributeName.EXTENT, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.EXTENT, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -612,7 +353,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHoleCount(JDFIntegerList value)
+	public void setHoleCount(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.HOLECOUNT, value, null);
 	}
@@ -625,8 +366,8 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 */
 	public JDFIntegerList getHoleCount()
 	{
-		String strAttrName = getAttribute(AttributeName.HOLECOUNT, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.HOLECOUNT, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -640,9 +381,9 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setHoleReferenceEdge(EHoleReferenceEdge enumVar)
+	public void setHoleReferenceEdge(final EnumHoleReferenceEdge enumVar)
 	{
-		setAttribute(AttributeName.HOLEREFERENCEEDGE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.HOLEREFERENCEEDGE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -650,35 +391,6 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EHoleReferenceEdge getEHoleReferenceEdge()
-	{
-		return EHoleReferenceEdge.getEnum(getAttribute(AttributeName.HOLEREFERENCEEDGE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute HoleReferenceEdge
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute HoleReferenceEdge
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetHoleReferenceEdge(EHoleReferenceEdge) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setHoleReferenceEdge(EnumHoleReferenceEdge enumVar)
-	{
-		setAttribute(AttributeName.HOLEREFERENCEEDGE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute HoleReferenceEdge
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EHoleReferenceEdge GetEHoleReferenceEdge() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumHoleReferenceEdge getHoleReferenceEdge()
 	{
 		return EnumHoleReferenceEdge.getEnum(getAttribute(AttributeName.HOLEREFERENCEEDGE, null, null));
@@ -694,9 +406,9 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setShape(EShape enumVar)
+	public void setShape(final EnumShape enumVar)
 	{
-		setAttribute(AttributeName.SHAPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SHAPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -704,35 +416,6 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EShape getEShape()
-	{
-		return EShape.getEnum(getAttribute(AttributeName.SHAPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Shape
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Shape
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetShape(EShape) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setShape(EnumShape enumVar)
-	{
-		setAttribute(AttributeName.SHAPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Shape
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EShape GetEShape() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumShape getShape()
 	{
 		return EnumShape.getEnum(getAttribute(AttributeName.SHAPE, null, null));
@@ -770,7 +453,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFHole the element
 	 */
-	public JDFHole getCreateHole(int iSkip)
+	public JDFHole getCreateHole(final int iSkip)
 	{
 		return (JDFHole) getCreateElement_JDFElement(ElementName.HOLE, null, iSkip);
 	}
@@ -782,7 +465,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 * @return JDFHole the element
 	 *         default is getHole(0)
 	 */
-	public JDFHole getHole(int iSkip)
+	public JDFHole getHole(final int iSkip)
 	{
 		return (JDFHole) getElement(ElementName.HOLE, null, iSkip);
 	}
@@ -833,7 +516,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFHoleLine the element
 	 */
-	public JDFHoleLine getCreateHoleLine(int iSkip)
+	public JDFHoleLine getCreateHoleLine(final int iSkip)
 	{
 		return (JDFHoleLine) getCreateElement_JDFElement(ElementName.HOLELINE, null, iSkip);
 	}
@@ -845,7 +528,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 * @return JDFHoleLine the element
 	 *         default is getHoleLine(0)
 	 */
-	public JDFHoleLine getHoleLine(int iSkip)
+	public JDFHoleLine getHoleLine(final int iSkip)
 	{
 		return (JDFHoleLine) getElement(ElementName.HOLELINE, null, iSkip);
 	}
@@ -906,7 +589,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refRegisterMark(JDFRegisterMark refTarget)
+	public void refRegisterMark(final JDFRegisterMark refTarget)
 	{
 		refElement(refTarget);
 	}

@@ -127,7 +127,7 @@ public abstract class JDFAutoJobField extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoJobField(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoJobField(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -139,7 +139,7 @@ public abstract class JDFAutoJobField extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoJobField(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoJobField(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -152,7 +152,7 @@ public abstract class JDFAutoJobField extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoJobField(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoJobField(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -173,7 +173,7 @@ public abstract class JDFAutoJobField extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobFormat(String value)
+	public void setJobFormat(final String value)
 	{
 		setAttribute(AttributeName.JOBFORMAT, value, null);
 	}
@@ -198,7 +198,7 @@ public abstract class JDFAutoJobField extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobTemplate(String value)
+	public void setJobTemplate(final String value)
 	{
 		setAttribute(AttributeName.JOBTEMPLATE, value, null);
 	}
@@ -223,7 +223,7 @@ public abstract class JDFAutoJobField extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOperatorText(String value)
+	public void setOperatorText(final String value)
 	{
 		setAttribute(AttributeName.OPERATORTEXT, value, null);
 	}
@@ -248,7 +248,7 @@ public abstract class JDFAutoJobField extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setShowList(VString value)
+	public void setShowList(final VString value)
 	{
 		setAttribute(AttributeName.SHOWLIST, value, null);
 	}
@@ -260,8 +260,8 @@ public abstract class JDFAutoJobField extends JDFElement
 	 */
 	public VString getShowList()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.SHOWLIST, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.SHOWLIST, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -276,7 +276,7 @@ public abstract class JDFAutoJobField extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setUserText(String value)
+	public void setUserText(final String value)
 	{
 		setAttribute(AttributeName.USERTEXT, value, null);
 	}
@@ -323,7 +323,7 @@ public abstract class JDFAutoJobField extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFDeviceMark the element
 	 */
-	public JDFDeviceMark getCreateDeviceMark(int iSkip)
+	public JDFDeviceMark getCreateDeviceMark(final int iSkip)
 	{
 		return (JDFDeviceMark) getCreateElement_JDFElement(ElementName.DEVICEMARK, null, iSkip);
 	}
@@ -335,7 +335,7 @@ public abstract class JDFAutoJobField extends JDFElement
 	 * @return JDFDeviceMark the element
 	 *         default is getDeviceMark(0)
 	 */
-	public JDFDeviceMark getDeviceMark(int iSkip)
+	public JDFDeviceMark getDeviceMark(final int iSkip)
 	{
 		return (JDFDeviceMark) getElement(ElementName.DEVICEMARK, null, iSkip);
 	}

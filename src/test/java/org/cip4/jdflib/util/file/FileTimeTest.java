@@ -66,7 +66,7 @@
  * <http://www.cip4.org/>.
  *
  *
- * 
+ *
  */
 package org.cip4.jdflib.util.file;
 

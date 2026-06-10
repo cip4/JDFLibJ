@@ -146,12 +146,9 @@
  */
 package org.cip4.jdflib.core;
 
-import org.apache.commons.lang.enums.ValuedEnum;
-
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * Aug 10, 2009
+ *         Aug 10, 2009
  */
 public class AtrInfoTable
 {
@@ -166,7 +163,7 @@ public class AtrInfoTable
 	 * @param def
 	 */
 
-	public AtrInfoTable(final String n, final long s, final AttributeInfo.EnumAttributeType t, final ValuedEnum e, final String def)
+	public AtrInfoTable(final String n, final long s, final AttributeInfo.EnumAttributeType t, final Enum<?> e, final String def)
 	{
 		attributeName = n;
 		info = new AtrInfo(s, t, e, def);

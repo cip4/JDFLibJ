@@ -104,7 +104,7 @@ public abstract class JDFAutoBindingQualityMeasurement extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBindingQualityMeasurement(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoBindingQualityMeasurement(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -116,7 +116,7 @@ public abstract class JDFAutoBindingQualityMeasurement extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBindingQualityMeasurement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoBindingQualityMeasurement(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -129,7 +129,7 @@ public abstract class JDFAutoBindingQualityMeasurement extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoBindingQualityMeasurement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoBindingQualityMeasurement(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -150,7 +150,7 @@ public abstract class JDFAutoBindingQualityMeasurement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFlexValue(double value)
+	public void setFlexValue(final double value)
 	{
 		setAttribute(AttributeName.FLEXVALUE, value, null);
 	}
@@ -175,7 +175,7 @@ public abstract class JDFAutoBindingQualityMeasurement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPullOutValue(double value)
+	public void setPullOutValue(final double value)
 	{
 		setAttribute(AttributeName.PULLOUTVALUE, value, null);
 	}

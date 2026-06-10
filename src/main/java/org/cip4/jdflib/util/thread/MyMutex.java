@@ -43,23 +43,22 @@ import org.cip4.jdflib.util.ThreadUtil;
 
 /**
  * placeholder for future use
- * 
+ *
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
  *         11.12.2008
  */
 public class MyMutex
 {
 
 	/**
-	 * 
+	 *
 	 */
 	public MyMutex()
 	{
 		super();
 		iMutex = nMutex.incrementAndGet();
 		ownerThread = Thread.currentThread().getName();
-		ref = new AtomicReference<MyMutex>(this);
+		ref = new AtomicReference<>(this);
 	}
 
 	final private int iMutex;
@@ -68,7 +67,6 @@ public class MyMutex
 	private final AtomicReference<MyMutex> ref;
 
 	/**
-	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -82,7 +80,7 @@ public class MyMutex
 		ThreadUtil.notifyAll(ref.get());
 	}
 
-	public boolean waitForMe(int t)
+	public boolean waitForMe(final int t)
 	{
 		return ThreadUtil.wait(ref.get(), t);
 	}

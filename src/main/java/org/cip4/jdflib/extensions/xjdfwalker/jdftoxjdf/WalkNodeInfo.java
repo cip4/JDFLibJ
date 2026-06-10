@@ -45,9 +45,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkNodeInfo extends WalkResource
 {
@@ -91,9 +89,13 @@ public class WalkNodeInfo extends WalkResource
 		map.renameKey(AttributeName.WORKSTEPID, AttributeName.PRODUCTID);
 		final String status = map.get(AttributeName.NODESTATUS);
 		if (EnumNodeStatus.Ready.getName().equals(status) || EnumNodeStatus.TestRunInProgress.getName().equals(status))
+		{
 			map.put(AttributeName.NODESTATUS, EnumNodeStatus.Waiting.getName());
+		}
 		else if (EnumNodeStatus.FailedTestRun.getName().equals(status))
+		{
 			map.put(AttributeName.NODESTATUS, EnumNodeStatus.Aborted.getName());
+		}
 		super.updateAttributes(map);
 	}
 
@@ -125,7 +127,9 @@ public class WalkNodeInfo extends WalkResource
 	protected boolean mustInline(final String refLocalName)
 	{
 		if (ElementName.EMPLOYEE.equals(refLocalName))
+		{
 			return false;
+		}
 
 		return super.mustInline(refLocalName);
 	}

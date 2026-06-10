@@ -93,10 +93,9 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test for JDFPath.
- * 
+ *
  * @author <a href="mailto:Michael.Kohn@heidelberg.com">Michael Kohn</a>,
  *         Heidelberger Druckmaschinen AG, Tel. 3538
- * 
  */
 class JDFPathTest extends JDFTestCaseBase
 {
@@ -114,11 +113,11 @@ class JDFPathTest extends JDFTestCaseBase
 	{
 		super.setUp();
 
-		JDFParser p = new JDFParser();
-		JDFDoc jdfDoc = p.parseFile(sm_dirTestData + PACKAGEDATA);
+		final JDFParser p = new JDFParser();
+		final JDFDoc jdfDoc = p.parseFile(sm_dirTestData + PACKAGEDATA);
 
-		JDFNode root = (JDFNode) jdfDoc.getRoot();
-		JDFContentObject contObj = (JDFContentObject) root.getChildByTagName("ContentObject", "", 0, null, false, true);
+		final JDFNode root = (JDFNode) jdfDoc.getRoot();
+		final JDFContentObject contObj = (JDFContentObject) root.getChildByTagName("ContentObject", "", 0, null, false, true);
 
 		m_strPath = contObj.getSourceClipPath();
 	}
@@ -126,7 +125,7 @@ class JDFPathTest extends JDFTestCaseBase
 	@Test
 	public final void testTransform()
 	{
-		JDFPath path = new JDFPath(m_strPath);
+		final JDFPath path = new JDFPath(m_strPath);
 
 		path.transform(new AffineTransform());
 

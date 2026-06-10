@@ -153,7 +153,7 @@ class XJMFExampleTest extends ExampleTest
 	void testCommandSubmitQE()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
-		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.SubmitQueueEntry.getName());
+		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.SubmitQueueEntry.name());
 		command.setXPathValue(ElementName.QUEUESUBMISSIONPARAMS + "/@" + AttributeName.URL, "http://jobserver.xjdf.org?job1");
 		command.getHeader().setAttribute(AttributeName.ID, "C1");
 		xjmfHelper.cleanUp();
@@ -168,10 +168,10 @@ class XJMFExampleTest extends ExampleTest
 	void testCommandResubmitQE()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
-		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.ResubmitQueueEntry.getName());
+		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.ResubmitQueueEntry.name());
 		command.setXPathValue(ElementName.RESUBMISSIONPARAMS + "/@" + AttributeName.URL, "http://jobserver.xjdf.org?job1");
 		command.setXPathValue(ElementName.RESUBMISSIONPARAMS + "/@" + AttributeName.QUEUEENTRYID, "qe1");
-		command.setXPathValue(ElementName.RESUBMISSIONPARAMS + "/@" + AttributeName.UPDATEMETHOD, EnumUpdateMethod.Incremental.getName());
+		command.setXPathValue(ElementName.RESUBMISSIONPARAMS + "/@" + AttributeName.UPDATEMETHOD, EnumUpdateMethod.Incremental.name());
 		command.getHeader().setAttribute(AttributeName.ID, "C1");
 		xjmfHelper.cleanUp();
 		setSnippet(xjmfHelper, true);
@@ -185,7 +185,7 @@ class XJMFExampleTest extends ExampleTest
 	void testCommandReturnQE()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
-		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.ReturnQueueEntry.getName());
+		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.ReturnQueueEntry.name());
 		command.setXPathValue(ElementName.RETURNQUEUEENTRYPARAMS + "/@" + AttributeName.URL, "http://device.xjdf.org?job1");
 		command.setXPathValue(ElementName.RETURNQUEUEENTRYPARAMS + "/@" + AttributeName.QUEUEENTRYID, "qe1");
 		command.getHeader().setAttribute(AttributeName.ID, "C1");
@@ -201,10 +201,10 @@ class XJMFExampleTest extends ExampleTest
 	void testCommandResubmitQERemove()
 	{
 		final XJMFHelper xjmfHelper = new XJMFHelper();
-		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.ResubmitQueueEntry.getName());
+		final MessageHelper command = xjmfHelper.appendMessage(EnumFamily.Command, EnumType.ResubmitQueueEntry.name());
 		command.setXPathValue(ElementName.RESUBMISSIONPARAMS + "/@" + AttributeName.URL, "http://jobserver.xjdf.org?job1");
 		command.setXPathValue(ElementName.RESUBMISSIONPARAMS + "/@" + AttributeName.QUEUEENTRYID, "qe1");
-		command.setXPathValue(ElementName.RESUBMISSIONPARAMS + "/@" + AttributeName.UPDATEMETHOD, EnumUpdateMethod.Remove.getName());
+		command.setXPathValue(ElementName.RESUBMISSIONPARAMS + "/@" + AttributeName.UPDATEMETHOD, EnumUpdateMethod.Remove.name());
 		command.getHeader().setAttribute(AttributeName.ID, "C1");
 		xjmfHelper.cleanUp();
 		setSnippet(xjmfHelper, true);
@@ -383,7 +383,7 @@ class XJMFExampleTest extends ExampleTest
 				pc.setAttribute(AttributeName.NAME, name);
 				pc.setAttribute(ElementName.COLORANTORDER, colors[n]);
 				final EnumPrintQuality pq = n < 1 ? EnumPrintQuality.Draft : n > 2 ? EnumPrintQuality.High : EnumPrintQuality.Normal;
-				pc.setAttribute(AttributeName.PRINTQUALITY, pq.getName());
+				pc.setAttribute(AttributeName.PRINTQUALITY, pq.name());
 			}
 		}
 		xjmfHelper.cleanUp();
@@ -429,7 +429,7 @@ class XJMFExampleTest extends ExampleTest
 		writeTest(xjmfHelper, "jmf/statusSignal.xjmf");
 	}
 
-	JDFJobPhase addJobPhase(JDFDeviceInfo di, String jobID, String sheetName)
+	JDFJobPhase addJobPhase(final JDFDeviceInfo di, final String jobID, final String sheetName)
 	{
 		final JDFJobPhase p = di.appendJobPhase();
 		p.setJobID(jobID);
@@ -574,7 +574,7 @@ class XJMFExampleTest extends ExampleTest
 		rh.setAttribute(AttributeName.DESCRIPTIVENAME, "Good Gloss Paper");
 		((JDFMedia) rh.getResource()).setDimensionCM(new JDFXYPair(21, 29));
 		((JDFMedia) rh.getResource()).setWeight(100);
-		((JDFMedia) rh.getResource()).setAttribute(XJDFConstants.Coating, "Gloss");
+		rh.getResource().setAttribute(XJDFConstants.Coating, "Gloss");
 		((JDFMedia) rh.getResource()).setMediaType(EnumMediaType.Paper);
 
 		rh = sh.appendPartition(new JDFAttributeMap(ElementName.PRINTCONDITION, "4-color-gloss"), true);
@@ -582,7 +582,7 @@ class XJMFExampleTest extends ExampleTest
 		rh.setAttribute(AttributeName.DESCRIPTIVENAME, "Cheap Gloss Paper not for 7 color");
 		((JDFMedia) rh.getResource()).setDimensionCM(new JDFXYPair(21, 29));
 		((JDFMedia) rh.getResource()).setWeight(100);
-		((JDFMedia) rh.getResource()).setAttribute(XJDFConstants.Coating, "Gloss");
+		rh.getResource().setAttribute(XJDFConstants.Coating, "Gloss");
 		((JDFMedia) rh.getResource()).setMediaType(EnumMediaType.Paper);
 
 		rh = sh.appendPartition(new JDFAttributeMap(AttributeName.PRINTCONDITION, "7-color-matte"), true);
@@ -591,7 +591,7 @@ class XJMFExampleTest extends ExampleTest
 		rh.setAttribute(AttributeName.DESCRIPTIVENAME, "Good Matte Paper");
 		((JDFMedia) rh.getResource()).setDimensionCM(new JDFXYPair(21, 29));
 		((JDFMedia) rh.getResource()).setWeight(100);
-		((JDFMedia) rh.getResource()).setAttribute(XJDFConstants.Coating, "Matte");
+		rh.getResource().setAttribute(XJDFConstants.Coating, "Matte");
 		((JDFMedia) rh.getResource()).setMediaType(EnumMediaType.Paper);
 
 		rh = sh.appendPartition(new JDFAttributeMap(ElementName.PRINTCONDITION, "4-color-matte"), true);
@@ -599,7 +599,7 @@ class XJMFExampleTest extends ExampleTest
 		rh.setAttribute(AttributeName.DESCRIPTIVENAME, "Cheap Matte Paper not for 7 color");
 		((JDFMedia) rh.getResource()).setDimensionCM(new JDFXYPair(21, 29));
 		((JDFMedia) rh.getResource()).setWeight(100);
-		((JDFMedia) rh.getResource()).setAttribute(XJDFConstants.Coating, "Matte");
+		rh.getResource().setAttribute(XJDFConstants.Coating, "Matte");
 		((JDFMedia) rh.getResource()).setMediaType(EnumMediaType.Paper);
 
 		xjmfHelper.cleanUp();
@@ -653,8 +653,8 @@ class XJMFExampleTest extends ExampleTest
 		ms.setAttribute(XJDFConstants.ResponseModes, ElementName.RESPONSE);
 		ms = (JDFMessageService) response.appendElement(ElementName.MESSAGESERVICE);
 		ms.setType("QueryStatus");
-		ms.setAttribute(XJDFConstants.ResponseModes, EnumChannelMode.FireAndForget.getName());
-		ms.appendAttribute(XJDFConstants.ResponseModes, EnumChannelMode.Reliable.getName(), null, null, false);
+		ms.setAttribute(XJDFConstants.ResponseModes, EnumChannelMode.FireAndForget.name());
+		ms.appendAttribute(XJDFConstants.ResponseModes, EnumChannelMode.Reliable.name(), null, null, false);
 		ms = (JDFMessageService) response.appendElement(ElementName.MESSAGESERVICE);
 		ms.setType("CommandSubmitQueueEntry");
 		ms = (JDFMessageService) response.appendElement(ElementName.MESSAGESERVICE);

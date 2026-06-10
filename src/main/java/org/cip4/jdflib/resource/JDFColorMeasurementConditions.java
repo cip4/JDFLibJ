@@ -120,7 +120,8 @@ public class JDFColorMeasurementConditions extends JDFAutoColorMeasurementCondit
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFColorMeasurementConditions(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+	public JDFColorMeasurementConditions(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName,
+			final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

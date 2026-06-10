@@ -50,7 +50,7 @@
 package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
+import org.cip4.jdflib.auto.JDFAutoPart;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -61,6 +61,7 @@ import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.ifaces.IPlacedObject;
 import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.process.postpress.JDFSheet;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.Node;
 
 public class JDFSurface extends JDFSheet
@@ -106,7 +107,8 @@ public class JDFSurface extends JDFSheet
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SIDE, 0x44444333, AttributeInfo.EnumAttributeType.enumeration, EnumSide.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SIDE, 0x44444333, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(JDFAutoPart.EnumSide.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX, 0x44444333, AttributeInfo.EnumAttributeType.rectangle, null, null);
 	}
 
@@ -115,7 +117,9 @@ public class JDFSurface extends JDFSheet
 	{
 		final AttributeInfo ai = super.getTheAttributeInfo();
 		if (getLocalName().equals(ElementName.SURFACE))
+		{
 			ai.updateReplace(atrInfoTable);
+		}
 		return ai;
 	}
 
@@ -144,11 +148,15 @@ public class JDFSurface extends JDFSheet
 		{
 			final VElement v = getPlacedObjectVector();
 			if (v == null)
+			{
 				return null;
+			}
 
 			nSkipLocal = nSkipLocal + v.size();
 			if (nSkipLocal < 0)
+			{
 				return null;
+			}
 
 			return (IPlacedObject) v.elementAt(nSkipLocal);
 		}
@@ -160,7 +168,9 @@ public class JDFSurface extends JDFSheet
 			if (n instanceof IPlacedObject)
 			{
 				if (nFound >= nSkipLocal)
+				{
 					return (IPlacedObject) n;
+				}
 
 				nFound++;
 			}

@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -95,8 +90,8 @@ public abstract class JDFAutoPreflightAction extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SETSPLITBY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSetSplitBy.getEnum(0),
-				"RunList");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SETSPLITBY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumSetSplitBy.class, 0), "RunList");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.SETREF, 0x3333333333l, AttributeInfo.EnumAttributeType.IDREF, null, null);
 	}
 
@@ -112,7 +107,7 @@ public abstract class JDFAutoPreflightAction extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPreflightAction(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPreflightAction(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -124,7 +119,7 @@ public abstract class JDFAutoPreflightAction extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPreflightAction(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPreflightAction(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -137,95 +132,28 @@ public abstract class JDFAutoPreflightAction extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPreflightAction(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPreflightAction(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for SetSplitBy
+	 * Enumeration strings for numSetSplitBy
 	 */
 
-	public enum ESetSplitBy
+	public enum EnumSetSplitBy
 	{
 		Page, Document, RunList;
 
-		public static ESetSplitBy getEnum(String val)
+		public static EnumSetSplitBy getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ESetSplitBy.class, val, ESetSplitBy.RunList);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSetSplitBy.class, val, EnumSetSplitBy.RunList);
 		}
-	}
-
-	/**
-	 * Enumeration strings for SetSplitBy
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumSetSplitBy extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumSetSplitBy(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumSetSplitBy getEnum(String enumName)
-		{
-			return (EnumSetSplitBy) getEnum(EnumSetSplitBy.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumSetSplitBy getEnum(int enumValue)
-		{
-			return (EnumSetSplitBy) getEnum(EnumSetSplitBy.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSetSplitBy.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSetSplitBy.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSetSplitBy.class);
-		}
-
-		/**  */
-		public static final EnumSetSplitBy Page = new EnumSetSplitBy("Page");
-		/**  */
-		public static final EnumSetSplitBy Document = new EnumSetSplitBy("Document");
-		/**  */
-		public static final EnumSetSplitBy RunList = new EnumSetSplitBy("RunList");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -237,9 +165,9 @@ public abstract class JDFAutoPreflightAction extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSetSplitBy(ESetSplitBy enumVar)
+	public void setSetSplitBy(final EnumSetSplitBy enumVar)
 	{
-		setAttribute(AttributeName.SETSPLITBY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SETSPLITBY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -247,35 +175,6 @@ public abstract class JDFAutoPreflightAction extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESetSplitBy getESetSplitBy()
-	{
-		return ESetSplitBy.getEnum(getAttribute(AttributeName.SETSPLITBY, null, "RunList"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute SetSplitBy
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute SetSplitBy
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetSetSplitBy(ESetSplitBy) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSetSplitBy(EnumSetSplitBy enumVar)
-	{
-		setAttribute(AttributeName.SETSPLITBY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute SetSplitBy
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ESetSplitBy GetESetSplitBy() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumSetSplitBy getSetSplitBy()
 	{
 		return EnumSetSplitBy.getEnum(getAttribute(AttributeName.SETSPLITBY, null, "RunList"));
@@ -291,7 +190,7 @@ public abstract class JDFAutoPreflightAction extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSetRef(String value)
+	public void setSetRef(final String value)
 	{
 		setAttribute(AttributeName.SETREF, value, null);
 	}

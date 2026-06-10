@@ -43,7 +43,6 @@ import org.cip4.jdflib.core.KElement;
 import org.junit.jupiter.api.BeforeEach;
 
 /**
- *
  * class that tests/demonstrates creation of XJDF either from scratch or by conversion from golden tickets
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *

@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -103,17 +99,18 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.DIRECTPROOF, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DRYING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumDrying.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.FEEDSHEETLAY, 0x3111111111l, AttributeInfo.EnumAttributeType.enumeration, EnumFeedSheetLay.getEnum(0),
-				null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.FIRSTSURFACE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumFirstSurface.getEnum(0),
-				null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DRYING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumDrying.class, 0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.FEEDSHEETLAY, 0x3111111111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumFeedSheetLay.class, 0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.FIRSTSURFACE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumFirstSurface.class, 0), null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.FOUNTAINSOLUTION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumFountainSolution.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumFountainSolution.class, 0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.MEDIALOCATION, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.MODULEAVAILABLEINDEX, 0x4444443331l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.MODULEDRYING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumModuleDrying.getEnum(0),
-				null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.MODULEDRYING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumModuleDrying.class, 0), null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x4444443333l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.NONPRINTABLEMARGINBOTTOM, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.NONPRINTABLEMARGINLEFT, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
@@ -121,14 +118,15 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.NONPRINTABLEMARGINTOP, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[13] = new AtrInfoTable(AttributeName.PERFECTINGMODULE, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[14] = new AtrInfoTable(AttributeName.POWDER, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[15] = new AtrInfoTable(AttributeName.PRINTINGTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumPrintingType.getEnum(0),
-				null);
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.PRINTINGTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumPrintingType.class, 0), null);
 		atrInfoTable[16] = new AtrInfoTable(AttributeName.PRINTINGTECHNOLOGY, 0x4444431111l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumPrintingTechnology.getEnum(0), null);
-		atrInfoTable[17] = new AtrInfoTable(AttributeName.SHEETLAY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumPrintingTechnology.class, 0), null);
+		atrInfoTable[17] = new AtrInfoTable(AttributeName.SHEETLAY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumSheetLay.class, 0), null);
 		atrInfoTable[18] = new AtrInfoTable(AttributeName.SPEED, 0x4443333333l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[19] = new AtrInfoTable(AttributeName.WORKSTYLE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumWorkStyle.getEnum(0),
-				null);
+		atrInfoTable[19] = new AtrInfoTable(AttributeName.WORKSTYLE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumWorkStyle.class, 0), null);
 	}
 
 	@Override
@@ -156,7 +154,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoConventionalPrintingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoConventionalPrintingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -168,7 +166,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoConventionalPrintingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoConventionalPrintingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -181,7 +179,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoConventionalPrintingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoConventionalPrintingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -192,7 +190,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -207,737 +205,134 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for Drying
+	 * Enumeration strings for numDrying
 	 */
 
-	public enum EDrying
+	public enum EnumDrying
 	{
 		UV, Heatset, IR, On, Off;
 
-		public static EDrying getEnum(String val)
+		public static EnumDrying getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EDrying.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumDrying.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for Drying
+	 * Enumeration strings for numFeedSheetLay
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumDrying extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumDrying(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumDrying getEnum(String enumName)
-		{
-			return (EnumDrying) getEnum(EnumDrying.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDrying getEnum(int enumValue)
-		{
-			return (EnumDrying) getEnum(EnumDrying.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDrying.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDrying.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDrying.class);
-		}
-
-		/**  */
-		public static final EnumDrying UV = new EnumDrying("UV");
-		/**  */
-		public static final EnumDrying Heatset = new EnumDrying("Heatset");
-		/**  */
-		public static final EnumDrying IR = new EnumDrying("IR");
-		/**  */
-		public static final EnumDrying On = new EnumDrying("On");
-		/**  */
-		public static final EnumDrying Off = new EnumDrying("Off");
-	}
-
-	/**
-	 * Enumeration strings for FeedSheetLay
-	 */
-
-	public enum EFeedSheetLay
+	public enum EnumFeedSheetLay
 	{
 		Leading, Trailing;
 
-		public static EFeedSheetLay getEnum(String val)
+		public static EnumFeedSheetLay getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EFeedSheetLay.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumFeedSheetLay.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for FeedSheetLay
+	 * Enumeration strings for numFirstSurface
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumFeedSheetLay extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumFeedSheetLay(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumFeedSheetLay getEnum(String enumName)
-		{
-			return (EnumFeedSheetLay) getEnum(EnumFeedSheetLay.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumFeedSheetLay getEnum(int enumValue)
-		{
-			return (EnumFeedSheetLay) getEnum(EnumFeedSheetLay.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumFeedSheetLay.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumFeedSheetLay.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumFeedSheetLay.class);
-		}
-
-		/**  */
-		public static final EnumFeedSheetLay Leading = new EnumFeedSheetLay("Leading");
-		/**  */
-		public static final EnumFeedSheetLay Trailing = new EnumFeedSheetLay("Trailing");
-	}
-
-	/**
-	 * Enumeration strings for FirstSurface
-	 */
-
-	public enum EFirstSurface
+	public enum EnumFirstSurface
 	{
 		Either, Front, Back;
 
-		public static EFirstSurface getEnum(String val)
+		public static EnumFirstSurface getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EFirstSurface.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumFirstSurface.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for FirstSurface
+	 * Enumeration strings for numFountainSolution
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumFirstSurface extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumFirstSurface(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumFirstSurface getEnum(String enumName)
-		{
-			return (EnumFirstSurface) getEnum(EnumFirstSurface.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumFirstSurface getEnum(int enumValue)
-		{
-			return (EnumFirstSurface) getEnum(EnumFirstSurface.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumFirstSurface.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumFirstSurface.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumFirstSurface.class);
-		}
-
-		/**  */
-		public static final EnumFirstSurface Either = new EnumFirstSurface("Either");
-		/**  */
-		public static final EnumFirstSurface Front = new EnumFirstSurface("Front");
-		/**  */
-		public static final EnumFirstSurface Back = new EnumFirstSurface("Back");
-	}
-
-	/**
-	 * Enumeration strings for FountainSolution
-	 */
-
-	public enum EFountainSolution
+	public enum EnumFountainSolution
 	{
 		On, Off;
 
-		public static EFountainSolution getEnum(String val)
+		public static EnumFountainSolution getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EFountainSolution.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumFountainSolution.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for FountainSolution
+	 * Enumeration strings for numModuleDrying
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumFountainSolution extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumFountainSolution(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumFountainSolution getEnum(String enumName)
-		{
-			return (EnumFountainSolution) getEnum(EnumFountainSolution.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumFountainSolution getEnum(int enumValue)
-		{
-			return (EnumFountainSolution) getEnum(EnumFountainSolution.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumFountainSolution.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumFountainSolution.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumFountainSolution.class);
-		}
-
-		/**  */
-		public static final EnumFountainSolution On = new EnumFountainSolution("On");
-		/**  */
-		public static final EnumFountainSolution Off = new EnumFountainSolution("Off");
-	}
-
-	/**
-	 * Enumeration strings for ModuleDrying
-	 */
-
-	public enum EModuleDrying
+	public enum EnumModuleDrying
 	{
 		UV, Heatset, IR, On, Off;
 
-		public static EModuleDrying getEnum(String val)
+		public static EnumModuleDrying getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EModuleDrying.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumModuleDrying.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for ModuleDrying
+	 * Enumeration strings for numPrintingType
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumModuleDrying extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumModuleDrying(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumModuleDrying getEnum(String enumName)
-		{
-			return (EnumModuleDrying) getEnum(EnumModuleDrying.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumModuleDrying getEnum(int enumValue)
-		{
-			return (EnumModuleDrying) getEnum(EnumModuleDrying.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumModuleDrying.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumModuleDrying.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumModuleDrying.class);
-		}
-
-		/**  */
-		public static final EnumModuleDrying UV = new EnumModuleDrying("UV");
-		/**  */
-		public static final EnumModuleDrying Heatset = new EnumModuleDrying("Heatset");
-		/**  */
-		public static final EnumModuleDrying IR = new EnumModuleDrying("IR");
-		/**  */
-		public static final EnumModuleDrying On = new EnumModuleDrying("On");
-		/**  */
-		public static final EnumModuleDrying Off = new EnumModuleDrying("Off");
-	}
-
-	/**
-	 * Enumeration strings for PrintingType
-	 */
-
-	public enum EPrintingType
+	public enum EnumPrintingType
 	{
 		ContinuousFed, SheetFed, WebFed, WebMultiple, WebSingle;
 
-		public static EPrintingType getEnum(String val)
+		public static EnumPrintingType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPrintingType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPrintingType.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for PrintingType
+	 * Enumeration strings for numPrintingTechnology
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumPrintingType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPrintingType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumPrintingType getEnum(String enumName)
-		{
-			return (EnumPrintingType) getEnum(EnumPrintingType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPrintingType getEnum(int enumValue)
-		{
-			return (EnumPrintingType) getEnum(EnumPrintingType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPrintingType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPrintingType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPrintingType.class);
-		}
-
-		/**  */
-		public static final EnumPrintingType ContinuousFed = new EnumPrintingType("ContinuousFed");
-		/**  */
-		public static final EnumPrintingType SheetFed = new EnumPrintingType("SheetFed");
-		/**  */
-		public static final EnumPrintingType WebFed = new EnumPrintingType("WebFed");
-		/**  */
-		public static final EnumPrintingType WebMultiple = new EnumPrintingType("WebMultiple");
-		/**  */
-		public static final EnumPrintingType WebSingle = new EnumPrintingType("WebSingle");
-	}
-
-	/**
-	 * Enumeration strings for PrintingTechnology
-	 */
-
-	public enum EPrintingTechnology
+	public enum EnumPrintingTechnology
 	{
 		Flexo, Gravure, Offset, Screen;
 
-		public static EPrintingTechnology getEnum(String val)
+		public static EnumPrintingTechnology getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPrintingTechnology.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPrintingTechnology.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for PrintingTechnology
+	 * Enumeration strings for numSheetLay
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumPrintingTechnology extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPrintingTechnology(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumPrintingTechnology getEnum(String enumName)
-		{
-			return (EnumPrintingTechnology) getEnum(EnumPrintingTechnology.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPrintingTechnology getEnum(int enumValue)
-		{
-			return (EnumPrintingTechnology) getEnum(EnumPrintingTechnology.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPrintingTechnology.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPrintingTechnology.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPrintingTechnology.class);
-		}
-
-		/**  */
-		public static final EnumPrintingTechnology Flexo = new EnumPrintingTechnology("Flexo");
-		/**  */
-		public static final EnumPrintingTechnology Gravure = new EnumPrintingTechnology("Gravure");
-		/**  */
-		public static final EnumPrintingTechnology Offset = new EnumPrintingTechnology("Offset");
-		/**  */
-		public static final EnumPrintingTechnology Screen = new EnumPrintingTechnology("Screen");
-	}
-
-	/**
-	 * Enumeration strings for SheetLay
-	 */
-
-	public enum ESheetLay
+	public enum EnumSheetLay
 	{
 		Left, Right, Center;
 
-		public static ESheetLay getEnum(String val)
+		public static EnumSheetLay getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ESheetLay.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSheetLay.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for SheetLay
+	 * Enumeration strings for numWorkStyle
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumSheetLay extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumSheetLay(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumSheetLay getEnum(String enumName)
-		{
-			return (EnumSheetLay) getEnum(EnumSheetLay.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumSheetLay getEnum(int enumValue)
-		{
-			return (EnumSheetLay) getEnum(EnumSheetLay.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSheetLay.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSheetLay.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSheetLay.class);
-		}
-
-		/**  */
-		public static final EnumSheetLay Left = new EnumSheetLay("Left");
-		/**  */
-		public static final EnumSheetLay Right = new EnumSheetLay("Right");
-		/**  */
-		public static final EnumSheetLay Center = new EnumSheetLay("Center");
-	}
-
-	/**
-	 * Enumeration strings for WorkStyle
-	 */
-
-	public enum EWorkStyle
+	public enum EnumWorkStyle
 	{
 		Simplex, Perfecting, WorkAndBack, WorkAndTurn, WorkAndTumble, WorkAndTwist;
 
-		public static EWorkStyle getEnum(String val)
+		public static EnumWorkStyle getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EWorkStyle.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumWorkStyle.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for WorkStyle
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumWorkStyle extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumWorkStyle(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumWorkStyle getEnum(String enumName)
-		{
-			return (EnumWorkStyle) getEnum(EnumWorkStyle.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumWorkStyle getEnum(int enumValue)
-		{
-			return (EnumWorkStyle) getEnum(EnumWorkStyle.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumWorkStyle.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumWorkStyle.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumWorkStyle.class);
-		}
-
-		/**  */
-		public static final EnumWorkStyle Simplex = new EnumWorkStyle("Simplex");
-		/**  */
-		public static final EnumWorkStyle Perfecting = new EnumWorkStyle("Perfecting");
-		/**  */
-		public static final EnumWorkStyle WorkAndBack = new EnumWorkStyle("WorkAndBack");
-		/**  */
-		public static final EnumWorkStyle WorkAndTurn = new EnumWorkStyle("WorkAndTurn");
-		/**  */
-		public static final EnumWorkStyle WorkAndTumble = new EnumWorkStyle("WorkAndTumble");
-		/**  */
-		public static final EnumWorkStyle WorkAndTwist = new EnumWorkStyle("WorkAndTwist");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -949,7 +344,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDirectProof(boolean value)
+	public void setDirectProof(final boolean value)
 	{
 		setAttribute(AttributeName.DIRECTPROOF, value, null);
 	}
@@ -974,9 +369,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDrying(EDrying enumVar)
+	public void setDrying(final EnumDrying enumVar)
 	{
-		setAttribute(AttributeName.DRYING, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DRYING, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -984,35 +379,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EDrying getEDrying()
-	{
-		return EDrying.getEnum(getAttribute(AttributeName.DRYING, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Drying
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Drying
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDrying(EDrying) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDrying(EnumDrying enumVar)
-	{
-		setAttribute(AttributeName.DRYING, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Drying
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EDrying GetEDrying() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumDrying getDrying()
 	{
 		return EnumDrying.getEnum(getAttribute(AttributeName.DRYING, null, null));
@@ -1028,9 +394,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setFeedSheetLay(EFeedSheetLay enumVar)
+	public void setFeedSheetLay(final EnumFeedSheetLay enumVar)
 	{
-		setAttribute(AttributeName.FEEDSHEETLAY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.FEEDSHEETLAY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -1038,35 +404,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EFeedSheetLay getEFeedSheetLay()
-	{
-		return EFeedSheetLay.getEnum(getAttribute(AttributeName.FEEDSHEETLAY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute FeedSheetLay
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute FeedSheetLay
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetFeedSheetLay(EFeedSheetLay) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setFeedSheetLay(EnumFeedSheetLay enumVar)
-	{
-		setAttribute(AttributeName.FEEDSHEETLAY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute FeedSheetLay
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EFeedSheetLay GetEFeedSheetLay() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumFeedSheetLay getFeedSheetLay()
 	{
 		return EnumFeedSheetLay.getEnum(getAttribute(AttributeName.FEEDSHEETLAY, null, null));
@@ -1082,9 +419,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setFirstSurface(EFirstSurface enumVar)
+	public void setFirstSurface(final EnumFirstSurface enumVar)
 	{
-		setAttribute(AttributeName.FIRSTSURFACE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.FIRSTSURFACE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -1092,35 +429,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EFirstSurface getEFirstSurface()
-	{
-		return EFirstSurface.getEnum(getAttribute(AttributeName.FIRSTSURFACE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute FirstSurface
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute FirstSurface
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetFirstSurface(EFirstSurface) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setFirstSurface(EnumFirstSurface enumVar)
-	{
-		setAttribute(AttributeName.FIRSTSURFACE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute FirstSurface
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EFirstSurface GetEFirstSurface() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumFirstSurface getFirstSurface()
 	{
 		return EnumFirstSurface.getEnum(getAttribute(AttributeName.FIRSTSURFACE, null, null));
@@ -1136,9 +444,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setFountainSolution(EFountainSolution enumVar)
+	public void setFountainSolution(final EnumFountainSolution enumVar)
 	{
-		setAttribute(AttributeName.FOUNTAINSOLUTION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.FOUNTAINSOLUTION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -1146,35 +454,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EFountainSolution getEFountainSolution()
-	{
-		return EFountainSolution.getEnum(getAttribute(AttributeName.FOUNTAINSOLUTION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute FountainSolution
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute FountainSolution
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetFountainSolution(EFountainSolution) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setFountainSolution(EnumFountainSolution enumVar)
-	{
-		setAttribute(AttributeName.FOUNTAINSOLUTION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute FountainSolution
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EFountainSolution GetEFountainSolution() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumFountainSolution getFountainSolution()
 	{
 		return EnumFountainSolution.getEnum(getAttribute(AttributeName.FOUNTAINSOLUTION, null, null));
@@ -1190,7 +469,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMediaLocation(String value)
+	public void setMediaLocation(final String value)
 	{
 		setAttribute(AttributeName.MEDIALOCATION, value, null);
 	}
@@ -1215,7 +494,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setModuleAvailableIndex(JDFIntegerRangeList value)
+	public void setModuleAvailableIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.MODULEAVAILABLEINDEX, value, null);
 	}
@@ -1228,8 +507,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 */
 	public JDFIntegerRangeList getModuleAvailableIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.MODULEAVAILABLEINDEX, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.MODULEAVAILABLEINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1243,9 +522,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setModuleDrying(EModuleDrying enumVar)
+	public void setModuleDrying(final EnumModuleDrying enumVar)
 	{
-		setAttribute(AttributeName.MODULEDRYING, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.MODULEDRYING, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -1253,35 +532,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EModuleDrying getEModuleDrying()
-	{
-		return EModuleDrying.getEnum(getAttribute(AttributeName.MODULEDRYING, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ModuleDrying
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ModuleDrying
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetModuleDrying(EModuleDrying) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setModuleDrying(EnumModuleDrying enumVar)
-	{
-		setAttribute(AttributeName.MODULEDRYING, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ModuleDrying
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EModuleDrying GetEModuleDrying() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumModuleDrying getModuleDrying()
 	{
 		return EnumModuleDrying.getEnum(getAttribute(AttributeName.MODULEDRYING, null, null));
@@ -1297,7 +547,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setModuleIndex(JDFIntegerRangeList value)
+	public void setModuleIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.MODULEINDEX, value, null);
 	}
@@ -1310,8 +560,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 */
 	public JDFIntegerRangeList getModuleIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1325,7 +575,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNonPrintableMarginBottom(double value)
+	public void setNonPrintableMarginBottom(final double value)
 	{
 		setAttribute(AttributeName.NONPRINTABLEMARGINBOTTOM, value, null);
 	}
@@ -1350,7 +600,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNonPrintableMarginLeft(double value)
+	public void setNonPrintableMarginLeft(final double value)
 	{
 		setAttribute(AttributeName.NONPRINTABLEMARGINLEFT, value, null);
 	}
@@ -1375,7 +625,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNonPrintableMarginRight(double value)
+	public void setNonPrintableMarginRight(final double value)
 	{
 		setAttribute(AttributeName.NONPRINTABLEMARGINRIGHT, value, null);
 	}
@@ -1400,7 +650,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNonPrintableMarginTop(double value)
+	public void setNonPrintableMarginTop(final double value)
 	{
 		setAttribute(AttributeName.NONPRINTABLEMARGINTOP, value, null);
 	}
@@ -1425,7 +675,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPerfectingModule(int value)
+	public void setPerfectingModule(final int value)
 	{
 		setAttribute(AttributeName.PERFECTINGMODULE, value, null);
 	}
@@ -1450,7 +700,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPowder(double value)
+	public void setPowder(final double value)
 	{
 		setAttribute(AttributeName.POWDER, value, null);
 	}
@@ -1475,9 +725,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPrintingType(EPrintingType enumVar)
+	public void setPrintingType(final EnumPrintingType enumVar)
 	{
-		setAttribute(AttributeName.PRINTINGTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.PRINTINGTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -1485,35 +735,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPrintingType getEPrintingType()
-	{
-		return EPrintingType.getEnum(getAttribute(AttributeName.PRINTINGTYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute PrintingType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute PrintingType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPrintingType(EPrintingType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPrintingType(EnumPrintingType enumVar)
-	{
-		setAttribute(AttributeName.PRINTINGTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute PrintingType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EPrintingType GetEPrintingType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumPrintingType getPrintingType()
 	{
 		return EnumPrintingType.getEnum(getAttribute(AttributeName.PRINTINGTYPE, null, null));
@@ -1529,9 +750,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPrintingTechnology(EPrintingTechnology enumVar)
+	public void setPrintingTechnology(final EnumPrintingTechnology enumVar)
 	{
-		setAttribute(AttributeName.PRINTINGTECHNOLOGY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.PRINTINGTECHNOLOGY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -1539,35 +760,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPrintingTechnology getEPrintingTechnology()
-	{
-		return EPrintingTechnology.getEnum(getAttribute(AttributeName.PRINTINGTECHNOLOGY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute PrintingTechnology
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute PrintingTechnology
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPrintingTechnology(EPrintingTechnology) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPrintingTechnology(EnumPrintingTechnology enumVar)
-	{
-		setAttribute(AttributeName.PRINTINGTECHNOLOGY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute PrintingTechnology
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EPrintingTechnology GetEPrintingTechnology() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumPrintingTechnology getPrintingTechnology()
 	{
 		return EnumPrintingTechnology.getEnum(getAttribute(AttributeName.PRINTINGTECHNOLOGY, null, null));
@@ -1583,9 +775,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSheetLay(ESheetLay enumVar)
+	public void setSheetLay(final EnumSheetLay enumVar)
 	{
-		setAttribute(AttributeName.SHEETLAY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SHEETLAY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -1593,35 +785,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESheetLay getESheetLay()
-	{
-		return ESheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute SheetLay
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute SheetLay
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetSheetLay(ESheetLay) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSheetLay(EnumSheetLay enumVar)
-	{
-		setAttribute(AttributeName.SHEETLAY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute SheetLay
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ESheetLay GetESheetLay() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumSheetLay getSheetLay()
 	{
 		return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
@@ -1637,7 +800,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSpeed(double value)
+	public void setSpeed(final double value)
 	{
 		setAttribute(AttributeName.SPEED, value, null);
 	}
@@ -1662,9 +825,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setWorkStyle(EWorkStyle enumVar)
+	public void setWorkStyle(final EnumWorkStyle enumVar)
 	{
-		setAttribute(AttributeName.WORKSTYLE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.WORKSTYLE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -1672,35 +835,6 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EWorkStyle getEWorkStyle()
-	{
-		return EWorkStyle.getEnum(getAttribute(AttributeName.WORKSTYLE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute WorkStyle
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute WorkStyle
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetWorkStyle(EWorkStyle) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setWorkStyle(EnumWorkStyle enumVar)
-	{
-		setAttribute(AttributeName.WORKSTYLE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute WorkStyle
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EWorkStyle GetEWorkStyle() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumWorkStyle getWorkStyle()
 	{
 		return EnumWorkStyle.getEnum(getAttribute(AttributeName.WORKSTYLE, null, null));
@@ -1738,7 +872,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFInk the element
 	 */
-	public JDFInk getCreateInk(int iSkip)
+	public JDFInk getCreateInk(final int iSkip)
 	{
 		return (JDFInk) getCreateElement_JDFElement(ElementName.INK, null, iSkip);
 	}
@@ -1750,7 +884,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * @return JDFInk the element
 	 *         default is getInk(0)
 	 */
-	public JDFInk getInk(int iSkip)
+	public JDFInk getInk(final int iSkip)
 	{
 		return (JDFInk) getElement(ElementName.INK, null, iSkip);
 	}
@@ -1780,7 +914,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refInk(JDFInk refTarget)
+	public void refInk(final JDFInk refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1821,7 +955,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refApprovalParams(JDFApprovalParams refTarget)
+	public void refApprovalParams(final JDFApprovalParams refTarget)
 	{
 		refElement(refTarget);
 	}

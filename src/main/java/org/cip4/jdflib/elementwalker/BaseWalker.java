@@ -75,7 +75,6 @@ import org.cip4.jdflib.core.VString;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
  */
 public class BaseWalker implements IWalker, Comparable<BaseWalker>
 {
@@ -85,7 +84,7 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 
 	/**
 	 * the mother routine for walking....
-	 * 
+	 *
 	 * @see org.cip4.jdflib.elementwalker.IWalker#walk(KElement, KElement)
 	 */
 	@Override
@@ -96,8 +95,9 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 
 	/**
 	 * hook for guaranteed prewalk initialization
-	 * @param e 
-	 * @param trackElem 
+	 *
+	 * @param e
+	 * @param trackElem
 	 */
 	@Override
 	public void prepareWalk(final KElement e, final KElement trackElem)
@@ -107,8 +107,9 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 
 	/**
 	 * hook for guaranteed postwalk finalization
-	 * @param e 
-	 * @param trackElem 
+	 *
+	 * @param e
+	 * @param trackElem
 	 */
 	@Override
 	public void finalizeWalk(final KElement e, final KElement trackElem)
@@ -117,7 +118,6 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 	}
 
 	/**
-	 * 
 	 * @param factory
 	 */
 	public BaseWalker()
@@ -128,7 +128,6 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 	}
 
 	/**
-	 * 
 	 * @param factory
 	 */
 	public BaseWalker(final BaseWalkerFactory factory)
@@ -139,7 +138,7 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 
 	/**
 	 * this is the check whether or not to use this walker for a given element should be overwritten
-	 * 
+	 *
 	 * @param e the element to check
 	 * @return true if matches - must be true for base
 	 */
@@ -150,6 +149,7 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 
 	/**
 	 * adds an element to a factory automagically
+	 *
 	 * @param factory
 	 */
 	void addToFactory(final BaseWalkerFactory factory)
@@ -175,6 +175,7 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 
 	/**
 	 * retur the list of elements that will always be procesed by this walker
+	 *
 	 * @return
 	 */
 	public VString getElementNames()
@@ -183,10 +184,10 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 	}
 
 	/**
-	 * note the reverse order - high depth means up in list so that abstract classes get checked later 
+	 * note the reverse order - high depth means up in list so that abstract classes get checked later
+	 *
 	 * @param arg0 the other Basewalker
 	 * @return int
-	 * 
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	@Override

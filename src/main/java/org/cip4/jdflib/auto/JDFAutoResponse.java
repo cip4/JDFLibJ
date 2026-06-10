@@ -129,7 +129,7 @@ public abstract class JDFAutoResponse extends JDFMessage
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoResponse(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoResponse(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -141,7 +141,7 @@ public abstract class JDFAutoResponse extends JDFMessage
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoResponse(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoResponse(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -154,7 +154,7 @@ public abstract class JDFAutoResponse extends JDFMessage
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoResponse(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoResponse(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -175,7 +175,7 @@ public abstract class JDFAutoResponse extends JDFMessage
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAcknowledged(boolean value)
+	public void setAcknowledged(final boolean value)
 	{
 		setAttribute(AttributeName.ACKNOWLEDGED, value, null);
 	}
@@ -200,7 +200,7 @@ public abstract class JDFAutoResponse extends JDFMessage
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLanguages(VString value)
+	public void setLanguages(final VString value)
 	{
 		setAttribute(AttributeName.LANGUAGES, value, null);
 	}
@@ -212,8 +212,8 @@ public abstract class JDFAutoResponse extends JDFMessage
 	 */
 	public VString getLanguages()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -229,7 +229,7 @@ public abstract class JDFAutoResponse extends JDFMessage
 	 * @param value the value to set the attribute to
 	 */
 	@Override
-	public void setrefID(String value)
+	public void setrefID(final String value)
 	{
 		setAttribute(AttributeName.REFID, value, null);
 	}
@@ -255,7 +255,7 @@ public abstract class JDFAutoResponse extends JDFMessage
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setReturnCode(int value)
+	public void setReturnCode(final int value)
 	{
 		setAttribute(AttributeName.RETURNCODE, value, null);
 	}
@@ -281,7 +281,7 @@ public abstract class JDFAutoResponse extends JDFMessage
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSubscribed(boolean value)
+	public void setSubscribed(final boolean value)
 	{
 		setAttribute(AttributeName.SUBSCRIBED, value, null);
 	}
@@ -328,7 +328,7 @@ public abstract class JDFAutoResponse extends JDFMessage
 	 * @param iSkip number of elements to skip
 	 * @return JDFNotification the element
 	 */
-	public JDFNotification getCreateNotification(int iSkip)
+	public JDFNotification getCreateNotification(final int iSkip)
 	{
 		return (JDFNotification) getCreateElement_JDFElement(ElementName.NOTIFICATION, null, iSkip);
 	}
@@ -340,7 +340,7 @@ public abstract class JDFAutoResponse extends JDFMessage
 	 * @return JDFNotification the element
 	 *         default is getNotification(0)
 	 */
-	public JDFNotification getNotification(int iSkip)
+	public JDFNotification getNotification(final int iSkip)
 	{
 		return (JDFNotification) getElement(ElementName.NOTIFICATION, null, iSkip);
 	}
@@ -391,7 +391,7 @@ public abstract class JDFAutoResponse extends JDFMessage
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
-	public JDFEmployee getCreateEmployee(int iSkip)
+	public JDFEmployee getCreateEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -403,7 +403,7 @@ public abstract class JDFAutoResponse extends JDFMessage
 	 * @return JDFEmployee the element
 	 *         default is getEmployee(0)
 	 */
-	public JDFEmployee getEmployee(int iSkip)
+	public JDFEmployee getEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
 	}

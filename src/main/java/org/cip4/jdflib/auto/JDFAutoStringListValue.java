@@ -122,7 +122,7 @@ public abstract class JDFAutoStringListValue extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoStringListValue(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoStringListValue(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -134,7 +134,7 @@ public abstract class JDFAutoStringListValue extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoStringListValue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoStringListValue(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -147,7 +147,7 @@ public abstract class JDFAutoStringListValue extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoStringListValue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoStringListValue(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoStringListValue extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setName(String value)
+	public void setName(final String value)
 	{
 		setAttribute(AttributeName.NAME, value, null);
 	}
@@ -215,7 +215,7 @@ public abstract class JDFAutoStringListValue extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFValue the element
 	 */
-	public JDFValue getCreateValue(int iSkip)
+	public JDFValue getCreateValue(final int iSkip)
 	{
 		return (JDFValue) getCreateElement_JDFElement(ElementName.VALUE, null, iSkip);
 	}
@@ -227,7 +227,7 @@ public abstract class JDFAutoStringListValue extends JDFElement
 	 * @return JDFValue the element
 	 *         default is getValue(0)
 	 */
-	public JDFValue getValue(int iSkip)
+	public JDFValue getValue(final int iSkip)
 	{
 		return (JDFValue) getElement(ElementName.VALUE, null, iSkip);
 	}

@@ -106,7 +106,7 @@ public abstract class JDFAutoLayoutShift extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLayoutShift(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoLayoutShift(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoLayoutShift extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLayoutShift(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoLayoutShift(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoLayoutShift extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoLayoutShift(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoLayoutShift(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -142,7 +142,7 @@ public abstract class JDFAutoLayoutShift extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -188,7 +188,7 @@ public abstract class JDFAutoLayoutShift extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFShiftPoint the element
 	 */
-	public JDFShiftPoint getCreateShiftPoint(int iSkip)
+	public JDFShiftPoint getCreateShiftPoint(final int iSkip)
 	{
 		return (JDFShiftPoint) getCreateElement_JDFElement(ElementName.SHIFTPOINT, null, iSkip);
 	}
@@ -200,7 +200,7 @@ public abstract class JDFAutoLayoutShift extends JDFResource
 	 * @return JDFShiftPoint the element
 	 *         default is getShiftPoint(0)
 	 */
-	public JDFShiftPoint getShiftPoint(int iSkip)
+	public JDFShiftPoint getShiftPoint(final int iSkip)
 	{
 		return (JDFShiftPoint) getElement(ElementName.SHIFTPOINT, null, iSkip);
 	}

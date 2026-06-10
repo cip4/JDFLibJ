@@ -70,12 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -102,8 +98,8 @@ public abstract class JDFAutoIcon extends JDFElement
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.SIZE, 0x2222222221l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.BITDEPTH, 0x2222222221l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ICONUSAGE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumerations, EnumIconUsage.getEnum(0),
-				null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ICONUSAGE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumerations,
+				JavaEnumUtil.getEnum(EnumIconUsage.class, 0), null);
 	}
 
 	@Override
@@ -130,7 +126,7 @@ public abstract class JDFAutoIcon extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIcon(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoIcon(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -142,7 +138,7 @@ public abstract class JDFAutoIcon extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIcon(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoIcon(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -155,103 +151,28 @@ public abstract class JDFAutoIcon extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoIcon(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoIcon(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for IconUsage
+	 * Enumeration strings for numIconUsage
 	 */
 
-	public enum EIconUsage
+	public enum EnumIconUsage
 	{
 		Unknown, Idle, Down, Setup, Running, Cleanup, Stopped;
 
-		public static EIconUsage getEnum(String val)
+		public static EnumIconUsage getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EIconUsage.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumIconUsage.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for IconUsage
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumIconUsage extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumIconUsage(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumIconUsage getEnum(String enumName)
-		{
-			return (EnumIconUsage) getEnum(EnumIconUsage.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumIconUsage getEnum(int enumValue)
-		{
-			return (EnumIconUsage) getEnum(EnumIconUsage.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumIconUsage.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumIconUsage.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumIconUsage.class);
-		}
-
-		/**  */
-		public static final EnumIconUsage Unknown = new EnumIconUsage("Unknown");
-		/**  */
-		public static final EnumIconUsage Idle = new EnumIconUsage("Idle");
-		/**  */
-		public static final EnumIconUsage Down = new EnumIconUsage("Down");
-		/**  */
-		public static final EnumIconUsage Setup = new EnumIconUsage("Setup");
-		/**  */
-		public static final EnumIconUsage Running = new EnumIconUsage("Running");
-		/**  */
-		public static final EnumIconUsage Cleanup = new EnumIconUsage("Cleanup");
-		/**  */
-		public static final EnumIconUsage Stopped = new EnumIconUsage("Stopped");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -263,7 +184,7 @@ public abstract class JDFAutoIcon extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSize(JDFXYPair value)
+	public void setSize(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.SIZE, value, null);
 	}
@@ -276,8 +197,8 @@ public abstract class JDFAutoIcon extends JDFElement
 	 */
 	public JDFXYPair getSize()
 	{
-		String strAttrName = getAttribute(AttributeName.SIZE, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SIZE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -291,7 +212,7 @@ public abstract class JDFAutoIcon extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBitDepth(int value)
+	public void setBitDepth(final int value)
 	{
 		setAttribute(AttributeName.BITDEPTH, value, null);
 	}
@@ -316,7 +237,7 @@ public abstract class JDFAutoIcon extends JDFElement
 	 *
 	 * @param v List of the enumeration values
 	 */
-	public void setEIconUsage(List<EIconUsage> v)
+	public void setIconUsage(final List<EnumIconUsage> v)
 	{
 		setEnumsAttribute(AttributeName.ICONUSAGE, v, null);
 	}
@@ -326,38 +247,9 @@ public abstract class JDFAutoIcon extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public List<EIconUsage> getEnumsIconUsage()
+	public List<EnumIconUsage> getIconUsage()
 	{
-		return getEnumerationsAttribute(AttributeName.ICONUSAGE, null, EIconUsage.class);
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute IconUsage
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5.2) set attribute IconUsage
-	 *
-	 * @param v List of the enumeration values
-	 * @deprecated use SetEIconUsage(List<EIconUsage>) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setIconUsage(List<EnumIconUsage> v)
-	{
-		setEnumerationsAttribute(AttributeName.ICONUSAGE, v, null);
-	}
-
-	/**
-	 * (9.2) get IconUsage attribute IconUsage
-	 *
-	 * @return Vector of the enumerations
-	 * @deprecated use List<EIconUsage > GetEIconUsage() based on java.lang.enum instead
-	 */
-	@Deprecated
-	public Vector<EnumIconUsage> getIconUsage()
-	{
-		return getEnumerationsAttribute(AttributeName.ICONUSAGE, null, EnumIconUsage.getEnum(0), false);
+		return getEnumerationsAttribute(AttributeName.ICONUSAGE, null, EnumIconUsage.class);
 	}
 
 	/*

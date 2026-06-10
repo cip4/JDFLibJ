@@ -108,8 +108,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author MuchaD
- *
- * This implements the first fixture with unit tests for class JDFElement.
+ *         This implements the first fixture with unit tests for class JDFElement.
  */
 class JDFAuditPoolTest extends JDFTestCaseBase
 {
@@ -119,7 +118,7 @@ class JDFAuditPoolTest extends JDFTestCaseBase
 
 	/**
 	 * Method testIncludesAttribute.
-	 * */
+	 */
 	@Test
 	void testGetResourceVector()
 	{
@@ -172,14 +171,13 @@ class JDFAuditPoolTest extends JDFTestCaseBase
 	void testAddModified()
 	{
 		JDFAudit.setStaticAuthor("foo");
-		JDFNode node = JDFNode.createRoot();
-		JDFModified mod = node.getCreateAuditPool().addModified("me", null);
+		final JDFNode node = JDFNode.createRoot();
+		final JDFModified mod = node.getCreateAuditPool().addModified("me", null);
 		Assertions.assertEquals(1, mod.numChildElements(ElementName.EMPLOYEE, null));
 		JDFAudit.setStaticAuthor(null);
 	}
 
 	/**
-	 *
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -281,9 +279,9 @@ class JDFAuditPoolTest extends JDFTestCaseBase
 	@Test
 	void testSetPhaseNull()
 	{
-		JDFPhaseTime p1 = myAuditPool.setPhase(EnumNodeStatus.Setup, "foobar", null, null);
+		final JDFPhaseTime p1 = myAuditPool.setPhase(EnumNodeStatus.Setup, "foobar", null, null);
 		Assertions.assertNotNull(p1);
-		JDFPhaseTime p2 = myAuditPool.setPhase(null, null, null, null);
+		final JDFPhaseTime p2 = myAuditPool.setPhase(null, null, null, null);
 		Assertions.assertEquals(p1, p2);
 	}
 
@@ -442,8 +440,8 @@ class JDFAuditPoolTest extends JDFTestCaseBase
 	void testGetAuditPartitioned()
 	{
 		final JDFPhaseTime a3 = (JDFPhaseTime) myAuditPool.addAudit(EnumAuditType.PhaseTime, null);
-		VJDFAttributeMap vParts = new VJDFAttributeMap();
-		JDFAttributeMap map = new JDFAttributeMap("Run", "R1");
+		final VJDFAttributeMap vParts = new VJDFAttributeMap();
+		final JDFAttributeMap map = new JDFAttributeMap("Run", "R1");
 		map.put("PageNumber", "3");
 		vParts.add(map);
 		a3.setPartMapVector(vParts);

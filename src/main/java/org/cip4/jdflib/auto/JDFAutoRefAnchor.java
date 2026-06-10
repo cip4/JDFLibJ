@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -95,9 +90,10 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ANCHOR, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ANCHORTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumAnchorType.getEnum(0),
-				null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ANCHOR, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumAnchor.class, 0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ANCHORTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumAnchorType.class, 0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.RREF, 0x3333333333l, AttributeInfo.EnumAttributeType.IDREF, null, null);
 	}
 
@@ -113,7 +109,7 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoRefAnchor(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoRefAnchor(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -125,7 +121,7 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoRefAnchor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoRefAnchor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -138,184 +134,42 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoRefAnchor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoRefAnchor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for Anchor
+	 * Enumeration strings for numAnchor
 	 */
 
-	public enum EAnchor
+	public enum EnumAnchor
 	{
 		TopLeft, TopCenter, TopRight, CenterLeft, Center, CenterRight, BottomLeft, BottomCenter, BottomRight;
 
-		public static EAnchor getEnum(String val)
+		public static EnumAnchor getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EAnchor.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumAnchor.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for Anchor
+	 * Enumeration strings for numAnchorType
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumAnchor extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumAnchor(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumAnchor getEnum(String enumName)
-		{
-			return (EnumAnchor) getEnum(EnumAnchor.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumAnchor getEnum(int enumValue)
-		{
-			return (EnumAnchor) getEnum(EnumAnchor.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumAnchor.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAnchor.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAnchor.class);
-		}
-
-		/**  */
-		public static final EnumAnchor TopLeft = new EnumAnchor("TopLeft");
-		/**  */
-		public static final EnumAnchor TopCenter = new EnumAnchor("TopCenter");
-		/**  */
-		public static final EnumAnchor TopRight = new EnumAnchor("TopRight");
-		/**  */
-		public static final EnumAnchor CenterLeft = new EnumAnchor("CenterLeft");
-		/**  */
-		public static final EnumAnchor Center = new EnumAnchor("Center");
-		/**  */
-		public static final EnumAnchor CenterRight = new EnumAnchor("CenterRight");
-		/**  */
-		public static final EnumAnchor BottomLeft = new EnumAnchor("BottomLeft");
-		/**  */
-		public static final EnumAnchor BottomCenter = new EnumAnchor("BottomCenter");
-		/**  */
-		public static final EnumAnchor BottomRight = new EnumAnchor("BottomRight");
-	}
-
-	/**
-	 * Enumeration strings for AnchorType
-	 */
-
-	public enum EAnchorType
+	public enum EnumAnchorType
 	{
 		Parent, Sibling;
 
-		public static EAnchorType getEnum(String val)
+		public static EnumAnchorType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EAnchorType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumAnchorType.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for AnchorType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumAnchorType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumAnchorType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumAnchorType getEnum(String enumName)
-		{
-			return (EnumAnchorType) getEnum(EnumAnchorType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumAnchorType getEnum(int enumValue)
-		{
-			return (EnumAnchorType) getEnum(EnumAnchorType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumAnchorType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAnchorType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAnchorType.class);
-		}
-
-		/**  */
-		public static final EnumAnchorType Parent = new EnumAnchorType("Parent");
-		/**  */
-		public static final EnumAnchorType Sibling = new EnumAnchorType("Sibling");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -327,9 +181,9 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setAnchor(EAnchor enumVar)
+	public void setAnchor(final EnumAnchor enumVar)
 	{
-		setAttribute(AttributeName.ANCHOR, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ANCHOR, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -337,35 +191,6 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EAnchor getEAnchor()
-	{
-		return EAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Anchor
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Anchor
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetAnchor(EAnchor) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setAnchor(EnumAnchor enumVar)
-	{
-		setAttribute(AttributeName.ANCHOR, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Anchor
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EAnchor GetEAnchor() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumAnchor getAnchor()
 	{
 		return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
@@ -381,9 +206,9 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setAnchorType(EAnchorType enumVar)
+	public void setAnchorType(final EnumAnchorType enumVar)
 	{
-		setAttribute(AttributeName.ANCHORTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ANCHORTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -391,35 +216,6 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EAnchorType getEAnchorType()
-	{
-		return EAnchorType.getEnum(getAttribute(AttributeName.ANCHORTYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute AnchorType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute AnchorType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetAnchorType(EAnchorType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setAnchorType(EnumAnchorType enumVar)
-	{
-		setAttribute(AttributeName.ANCHORTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute AnchorType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EAnchorType GetEAnchorType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumAnchorType getAnchorType()
 	{
 		return EnumAnchorType.getEnum(getAttribute(AttributeName.ANCHORTYPE, null, null));
@@ -435,7 +231,7 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setrRef(String value)
+	public void setrRef(final String value)
 	{
 		setAttribute(AttributeName.RREF, value, null);
 	}

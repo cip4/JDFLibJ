@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
@@ -85,8 +85,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 
 /**
- * 
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFor extends JDFNodeTerm
 {
@@ -94,42 +93,41 @@ public class JDFor extends JDFNodeTerm
 
 	/**
 	 * Constructor for JDFor
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFor(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFor(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFor
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFor
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * 
 	 * @see org.cip4.jdflib.core.JDFElement#toString()
 	 * @return
 	 */
@@ -143,28 +141,29 @@ public class JDFor extends JDFNodeTerm
 	 * Evaluates two or more Term elements (and, or, xor, not, Evaluation,
 	 * TestRef) to determine if, as a set, they evaluate to "true" when combined
 	 * in a boolean "or" function.
-	 * 
 	 * Looks for Evaluations, that "or" consists of, and tests the status of
 	 * every Evaluation, until the result of a whole boolean expression is
 	 * determinated. Then tests if attribute map 'm' has a key specified by
 	 * Evaluation/BasicPreflightTest/@Name. If 'm' has such key, it checks
 	 * whether its value fits the testlists specified for matching Evaluation
 	 * (uses FitsValue(value))
-	 * 
+	 *
 	 * @param m
-	 *            key-value pair attribute map
+	 *          key-value pair attribute map
 	 * @return boolean - true, if boolean "or" expression evaluates to "true"
 	 */
 	@Override
-	public boolean fitsMap(JDFAttributeMap m)
+	public boolean fitsMap(final JDFAttributeMap m)
 	{
-		VElement v = getChildElementVector(null, null, null, true, 0, false);
-		int siz = v.size();
+		final VElement v = getChildElementVector(null, null, null, true, 0, false);
+		final int siz = v.size();
 		for (int i = 0; i < siz; i++)
 		{
-			JDFTerm t = (JDFTerm) v.elementAt(i);
+			final JDFTerm t = (JDFTerm) v.elementAt(i);
 			if (t.fitsMap(m))
+			{
 				return true;
+			}
 		}
 		return false;
 
@@ -176,34 +175,40 @@ public class JDFor extends JDFNodeTerm
 	 * Evaluates two or more Term elements (and, or, xor, not, Evaluation,
 	 * TestRef) to determine if, as a set, they evaluate to "true" when combined
 	 * in a boolean "or" function.
-	 * 
+	 *
 	 * @param jdf
 	 *            JDFNode we test if know if the Device can accept it
 	 * @return boolean - true, if boolean "or" expression evaluates to "true"
 	 */
 	@Override
-	public boolean fitsJDF(KElement jdf, KElement reportRoot)
+	public boolean fitsJDF(final KElement jdf, final KElement reportRoot)
 	{
 		KElement reportRootLocal = reportRoot;
 
-		VElement v = getTermVector(null);
-		int siz = v.size();
+		final VElement v = getTermVector(null);
+		final int siz = v.size();
 		if (reportRootLocal != null)
+		{
 			reportRootLocal = reportRootLocal.appendElement("or");
+		}
 
 		boolean b = false;
 		for (int i = 0; i < siz; i++)
 		{
 			final JDFTerm t = (JDFTerm) v.elementAt(i);
-			boolean b2 = t.fitsJDF(jdf, reportRootLocal);
+			final boolean b2 = t.fitsJDF(jdf, reportRootLocal);
 			if (b2 && reportRootLocal == null)
+			{
 				return true; // don't need complete report and it is true; ciao
+			}
 
 			b = b || b2;
 		}
 
 		if (reportRootLocal != null)
+		{
 			reportRootLocal.setAttribute("Value", b, null);
+		}
 
 		return b;
 	}
@@ -211,14 +216,16 @@ public class JDFor extends JDFNodeTerm
 	// ///////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
-	public VString getMissingElements(int nMax)
+	public VString getMissingElements(final int nMax)
 	{
-		VString v = super.getMissingElements(nMax);
+		final VString v = super.getMissingElements(nMax);
 		if (v.size() >= nMax)
+		{
 			return v;
+		}
 
 		v.appendUnique(getMissingTerms(2));
 		return v;

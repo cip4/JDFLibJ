@@ -129,7 +129,7 @@ public class WalkMessageService extends WalkJDFSubElement
 		final StringArray cm = new StringArray(map.remove(AttributeName.CHANNELMODE));
 		if (StringUtil.parseBoolean(pers, false))
 		{
-			cm.appendUnique(EnumChannelMode.FireAndForget.getName());
+			cm.appendUnique(EnumChannelMode.FireAndForget.name());
 		}
 		if (StringUtil.parseBoolean(query, false))
 		{

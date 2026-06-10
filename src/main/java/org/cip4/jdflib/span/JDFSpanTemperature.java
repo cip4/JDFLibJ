@@ -9,12 +9,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanTemperature extends JDFEnumerationSpan
@@ -23,39 +19,39 @@ public class JDFSpanTemperature extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanTemperature
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanTemperature(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanTemperature(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanTemperature
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanTemperature(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanTemperature(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanTemperature
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanTemperature(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanTemperature(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -63,43 +59,14 @@ public class JDFSpanTemperature extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanTemperature
 	 */
-	public static class EnumSpanTemperature extends ValuedEnum
+	public enum EnumSpanTemperature
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Hot, Cold;
 
-		private EnumSpanTemperature(String name)
+		public static EnumSpanTemperature getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanTemperature.class, val, null);
 		}
-
-		public static EnumSpanTemperature getEnum(String enumName)
-		{
-			return (EnumSpanTemperature) getEnum(EnumSpanTemperature.class, enumName);
-		}
-
-		public static EnumSpanTemperature getEnum(int enumValue)
-		{
-			return (EnumSpanTemperature) getEnum(EnumSpanTemperature.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanTemperature.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanTemperature.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanTemperature.class);
-		}
-
-		public static final EnumSpanTemperature Hot = new EnumSpanTemperature("Hot");
-		public static final EnumSpanTemperature Cold = new EnumSpanTemperature("Cold");
 
 	}
 
@@ -108,18 +75,18 @@ public class JDFSpanTemperature extends JDFEnumerationSpan
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanTemperature.getEnum(0);
+		return EnumSpanTemperature.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

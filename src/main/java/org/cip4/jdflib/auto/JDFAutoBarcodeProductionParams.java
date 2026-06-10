@@ -106,7 +106,7 @@ public abstract class JDFAutoBarcodeProductionParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBarcodeProductionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoBarcodeProductionParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoBarcodeProductionParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBarcodeProductionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoBarcodeProductionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoBarcodeProductionParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoBarcodeProductionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoBarcodeProductionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -209,7 +209,7 @@ public abstract class JDFAutoBarcodeProductionParams extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refIdentificationField(JDFIdentificationField refTarget)
+	public void refIdentificationField(final JDFIdentificationField refTarget)
 	{
 		refElement(refTarget);
 	}

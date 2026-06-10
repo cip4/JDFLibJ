@@ -108,7 +108,7 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoChangedAttribute(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoChangedAttribute(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -120,7 +120,7 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoChangedAttribute(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoChangedAttribute(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoChangedAttribute(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoChangedAttribute(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -154,7 +154,7 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAttributeName(String value)
+	public void setAttributeName(final String value)
 	{
 		setAttribute(AttributeName.ATTRIBUTENAME, value, null);
 	}
@@ -179,7 +179,7 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setElementID(String value)
+	public void setElementID(final String value)
 	{
 		setAttribute(AttributeName.ELEMENTID, value, null);
 	}
@@ -204,7 +204,7 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setElementType(String value)
+	public void setElementType(final String value)
 	{
 		setAttribute(AttributeName.ELEMENTTYPE, value, null);
 	}
@@ -229,7 +229,7 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOldValue(String value)
+	public void setOldValue(final String value)
 	{
 		setAttribute(AttributeName.OLDVALUE, value, null);
 	}
@@ -254,7 +254,7 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNewValue(String value)
+	public void setNewValue(final String value)
 	{
 		setAttribute(AttributeName.NEWVALUE, value, null);
 	}

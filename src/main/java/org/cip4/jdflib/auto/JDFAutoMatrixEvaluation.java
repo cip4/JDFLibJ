@@ -128,7 +128,7 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMatrixEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoMatrixEvaluation(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -140,7 +140,7 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMatrixEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoMatrixEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -153,7 +153,7 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoMatrixEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoMatrixEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -164,7 +164,7 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -185,7 +185,7 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRotateMod(double value)
+	public void setRotateMod(final double value)
 	{
 		setAttribute(AttributeName.ROTATEMOD, value, null);
 	}
@@ -210,7 +210,7 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setShift(String value)
+	public void setShift(final String value)
 	{
 		setAttribute(AttributeName.SHIFT, value, null);
 	}
@@ -235,7 +235,7 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTolerance(JDFXYPair value)
+	public void setTolerance(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.TOLERANCE, value, null);
 	}
@@ -248,8 +248,8 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	 */
 	public JDFXYPair getTolerance()
 	{
-		String strAttrName = getAttribute(AttributeName.TOLERANCE, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TOLERANCE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -263,7 +263,7 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTransforms(String value)
+	public void setTransforms(final String value)
 	{
 		setAttribute(AttributeName.TRANSFORMS, value, null);
 	}
@@ -310,7 +310,7 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFBasicPreflightTest the element
 	 */
-	public JDFBasicPreflightTest getCreateBasicPreflightTest(int iSkip)
+	public JDFBasicPreflightTest getCreateBasicPreflightTest(final int iSkip)
 	{
 		return (JDFBasicPreflightTest) getCreateElement_JDFElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
 	}
@@ -322,7 +322,7 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	 * @return JDFBasicPreflightTest the element
 	 *         default is getBasicPreflightTest(0)
 	 */
-	public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
+	public JDFBasicPreflightTest getBasicPreflightTest(final int iSkip)
 	{
 		return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
 	}
@@ -373,7 +373,7 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFValue the element
 	 */
-	public JDFValue getCreateValue(int iSkip)
+	public JDFValue getCreateValue(final int iSkip)
 	{
 		return (JDFValue) getCreateElement_JDFElement(ElementName.VALUE, null, iSkip);
 	}
@@ -385,7 +385,7 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	 * @return JDFValue the element
 	 *         default is getValue(0)
 	 */
-	public JDFValue getValue(int iSkip)
+	public JDFValue getValue(final int iSkip)
 	{
 		return (JDFValue) getElement(ElementName.VALUE, null, iSkip);
 	}

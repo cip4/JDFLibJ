@@ -75,7 +75,6 @@ public class XMLParser extends DOMParser
 	 * simple search stream that will find a valid xml wherever it starts
 	 *
 	 * @author prosirai
-	 *
 	 */
 	private class XMLReaderStream extends SkipInputStream
 	{
@@ -98,7 +97,9 @@ public class XMLParser extends DOMParser
 		{
 			int i = super.read();
 			while (i < 10 && i >= 0)
+			{
 				i = super.read();
+			}
 			return i;
 		}
 
@@ -125,7 +126,6 @@ public class XMLParser extends DOMParser
 
 	/**
 	 * @return the class name
-	 *
 	 */
 	public String getDocumentClass()
 	{
@@ -249,7 +249,9 @@ public class XMLParser extends DOMParser
 			return null;
 		}
 		if (inputID == null)
+		{
 			inputID = "String";
+		}
 
 		ByteArrayInputStream is;
 		try
@@ -277,7 +279,9 @@ public class XMLParser extends DOMParser
 			return null;
 		}
 		if (inputID == null)
+		{
 			inputID = "Stream";
+		}
 		XMLDoc d = null;
 		if (m_searchStream)
 		{
@@ -297,7 +301,8 @@ public class XMLParser extends DOMParser
 		}
 		else
 		{
-			final InputStream bis = (inStream instanceof BufferedInputStream) || (inStream instanceof ByteArrayIOInputStream) ? inStream : new BufferedInputStream(inStream);
+			final InputStream bis = (inStream instanceof BufferedInputStream) || (inStream instanceof ByteArrayIOInputStream) ? inStream
+					: new BufferedInputStream(inStream);
 			final InputSource inSource = new InputSource(bis);
 			d = parseInputSource(inSource);
 		}
@@ -348,7 +353,7 @@ public class XMLParser extends DOMParser
 
 	/**
 	 * @param schemaLocation
-	 * @param errorHandler default: initParser(null, DocumentJDFImpl.class.getName(), null);
+	 * @param errorHandler   default: initParser(null, DocumentJDFImpl.class.getName(), null);
 	 */
 	protected void initParser(final String schemaLocation, final XMLErrorHandler errorHandler)
 	{
@@ -464,7 +469,7 @@ public class XMLParser extends DOMParser
 	/**
 	 * set the physical schema location
 	 *
-	 * @param nsURI the schema namespace uri
+	 * @param nsURI       the schema namespace uri
 	 * @param locationURL the schema location url
 	 */
 	public void setSchemaLocation(final String nsURI, final String locationURL)
@@ -475,7 +480,7 @@ public class XMLParser extends DOMParser
 	/**
 	 * add an additional physical schema location
 	 *
-	 * @param nsURI the schema namespace uri
+	 * @param nsURI       the schema namespace uri
 	 * @param locationURL the schema location url
 	 */
 	public void addSchemaLocation(final String nsURI, final String locationURL)
@@ -495,7 +500,8 @@ public class XMLParser extends DOMParser
 	 *      org.apache.xerces.xni.Augmentations)
 	 */
 	@Override
-	public void startDocument(final XMLLocator locator, final String encoding, final NamespaceContext namespaceContext, final Augmentations augs) throws XNIException
+	public void startDocument(final XMLLocator locator, final String encoding, final NamespaceContext namespaceContext, final Augmentations augs)
+			throws XNIException
 	{
 		super.startDocument(locator, encoding, namespaceContext, augs);
 		final DocumentXMLImpl memberDocument = (DocumentXMLImpl) getDocument();
@@ -513,7 +519,9 @@ public class XMLParser extends DOMParser
 		ignoreNSDefault = false;
 		m_eraseEmpty = true;
 		if (m_ErrorHandler != null)
+		{
 			m_ErrorHandler.reset();
+		}
 		m_SchemaLocation = null;
 		fDocument = null;
 		fDocumentSource = null;

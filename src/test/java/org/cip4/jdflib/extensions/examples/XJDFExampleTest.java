@@ -101,7 +101,7 @@ class XJDFExampleTest extends ExampleTest
 	void testNamespace()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("Extension", null, null);
-		xjdfHelper.setTypes(EnumType.Product.getName());
+		xjdfHelper.setTypes(EnumType.Product.name());
 		final SetHelper shMedia = xjdfHelper.getCreateSet(ElementName.MEDIA, EnumUsage.Input);
 		final ResourceHelper rh = shMedia.appendPartition(AttributeName.SHEETNAME, "S1", true);
 		final JDFMedia m = (JDFMedia) rh.getResource();
@@ -180,7 +180,7 @@ class XJDFExampleTest extends ExampleTest
 	void testIntentNamespace()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("IntentExtension", null, null);
-		xjdfHelper.setTypes(EnumType.Product.getName());
+		xjdfHelper.setTypes(EnumType.Product.name());
 		final ProductHelper product = xjdfHelper.getCreateRootProduct(0);
 		xjdfHelper.getRoot().addNameSpace("foo", "http://www.foo.org");
 		final IntentHelper ih = product.appendIntent("foo:FooIntent");

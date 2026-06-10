@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -96,12 +91,13 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[13];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BOXTYPE, 0x3333111111l, AttributeInfo.EnumAttributeType.enumeration, EnumBoxType.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BOXTYPE, 0x3333111111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumBoxType.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.BOXTYPEDETAILS, 0x3333111111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.COMPONENTSPERROW, 0x3333333111l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.COLUMNS, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.COMPONENTORIENTATION, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumComponentOrientation.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumComponentOrientation.class, 0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.COPIES, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.FILLMATERIAL, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.LAYERS, 0x3333333111l, AttributeInfo.EnumAttributeType.integer, null, null);
@@ -124,7 +120,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBoxPackingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoBoxPackingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -136,7 +132,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBoxPackingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoBoxPackingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -149,7 +145,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoBoxPackingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoBoxPackingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -160,7 +156,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -175,168 +171,36 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for BoxType
+	 * Enumeration strings for numBoxType
 	 */
 
-	public enum EBoxType
+	public enum EnumBoxType
 	{
 		Box, Carton, Envelope;
 
-		public static EBoxType getEnum(String val)
+		public static EnumBoxType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EBoxType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumBoxType.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for BoxType
+	 * Enumeration strings for numComponentOrientation
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumBoxType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumBoxType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumBoxType getEnum(String enumName)
-		{
-			return (EnumBoxType) getEnum(EnumBoxType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumBoxType getEnum(int enumValue)
-		{
-			return (EnumBoxType) getEnum(EnumBoxType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumBoxType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumBoxType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumBoxType.class);
-		}
-
-		/**  */
-		public static final EnumBoxType Box = new EnumBoxType("Box");
-		/**  */
-		public static final EnumBoxType Carton = new EnumBoxType("Carton");
-		/**  */
-		public static final EnumBoxType Envelope = new EnumBoxType("Envelope");
-	}
-
-	/**
-	 * Enumeration strings for ComponentOrientation
-	 */
-
-	public enum EComponentOrientation
+	public enum EnumComponentOrientation
 	{
 		XY, XZ, YZ;
 
-		public static EComponentOrientation getEnum(String val)
+		public static EnumComponentOrientation getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EComponentOrientation.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumComponentOrientation.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for ComponentOrientation
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumComponentOrientation extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumComponentOrientation(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumComponentOrientation getEnum(String enumName)
-		{
-			return (EnumComponentOrientation) getEnum(EnumComponentOrientation.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumComponentOrientation getEnum(int enumValue)
-		{
-			return (EnumComponentOrientation) getEnum(EnumComponentOrientation.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumComponentOrientation.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumComponentOrientation.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumComponentOrientation.class);
-		}
-
-		/**  */
-		public static final EnumComponentOrientation XY = new EnumComponentOrientation("XY");
-		/**  */
-		public static final EnumComponentOrientation XZ = new EnumComponentOrientation("XZ");
-		/**  */
-		public static final EnumComponentOrientation YZ = new EnumComponentOrientation("YZ");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -348,9 +212,9 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setBoxType(EBoxType enumVar)
+	public void setBoxType(final EnumBoxType enumVar)
 	{
-		setAttribute(AttributeName.BOXTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.BOXTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -358,35 +222,6 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EBoxType getEBoxType()
-	{
-		return EBoxType.getEnum(getAttribute(AttributeName.BOXTYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute BoxType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute BoxType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetBoxType(EBoxType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setBoxType(EnumBoxType enumVar)
-	{
-		setAttribute(AttributeName.BOXTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute BoxType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EBoxType GetEBoxType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumBoxType getBoxType()
 	{
 		return EnumBoxType.getEnum(getAttribute(AttributeName.BOXTYPE, null, null));
@@ -402,7 +237,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBoxTypeDetails(String value)
+	public void setBoxTypeDetails(final String value)
 	{
 		setAttribute(AttributeName.BOXTYPEDETAILS, value, null);
 	}
@@ -427,7 +262,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setComponentsPerRow(int value)
+	public void setComponentsPerRow(final int value)
 	{
 		setAttribute(AttributeName.COMPONENTSPERROW, value, null);
 	}
@@ -452,7 +287,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setColumns(int value)
+	public void setColumns(final int value)
 	{
 		setAttribute(AttributeName.COLUMNS, value, null);
 	}
@@ -477,9 +312,9 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setComponentOrientation(EComponentOrientation enumVar)
+	public void setComponentOrientation(final EnumComponentOrientation enumVar)
 	{
-		setAttribute(AttributeName.COMPONENTORIENTATION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.COMPONENTORIENTATION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -487,35 +322,6 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EComponentOrientation getEComponentOrientation()
-	{
-		return EComponentOrientation.getEnum(getAttribute(AttributeName.COMPONENTORIENTATION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ComponentOrientation
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ComponentOrientation
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetComponentOrientation(EComponentOrientation) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setComponentOrientation(EnumComponentOrientation enumVar)
-	{
-		setAttribute(AttributeName.COMPONENTORIENTATION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ComponentOrientation
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EComponentOrientation GetEComponentOrientation() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumComponentOrientation getComponentOrientation()
 	{
 		return EnumComponentOrientation.getEnum(getAttribute(AttributeName.COMPONENTORIENTATION, null, null));
@@ -531,7 +337,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCopies(int value)
+	public void setCopies(final int value)
 	{
 		setAttribute(AttributeName.COPIES, value, null);
 	}
@@ -556,7 +362,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFillMaterial(String value)
+	public void setFillMaterial(final String value)
 	{
 		setAttribute(AttributeName.FILLMATERIAL, value, null);
 	}
@@ -581,7 +387,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLayers(int value)
+	public void setLayers(final int value)
 	{
 		setAttribute(AttributeName.LAYERS, value, null);
 	}
@@ -606,7 +412,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaxWeight(double value)
+	public void setMaxWeight(final double value)
 	{
 		setAttribute(AttributeName.MAXWEIGHT, value, null);
 	}
@@ -631,7 +437,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPattern(String value)
+	public void setPattern(final String value)
 	{
 		setAttribute(AttributeName.PATTERN, value, null);
 	}
@@ -656,7 +462,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRows(int value)
+	public void setRows(final int value)
 	{
 		setAttribute(AttributeName.ROWS, value, null);
 	}
@@ -681,7 +487,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTies(JDFIntegerList value)
+	public void setTies(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.TIES, value, null);
 	}
@@ -694,8 +500,8 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 */
 	public JDFIntegerList getTies()
 	{
-		String strAttrName = getAttribute(AttributeName.TIES, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TIES, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -709,7 +515,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setUnderLays(JDFIntegerList value)
+	public void setUnderLays(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.UNDERLAYS, value, null);
 	}
@@ -722,8 +528,8 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 */
 	public JDFIntegerList getUnderLays()
 	{
-		String strAttrName = getAttribute(AttributeName.UNDERLAYS, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.UNDERLAYS, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 

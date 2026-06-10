@@ -71,12 +71,8 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -105,25 +101,27 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASSES, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations,
-				JDFResource.EnumResourceClass.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CONTEXT, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumContext.getEnum(0), null);
+				JavaEnumUtil.getEnum(JDFResource.EnumResourceClass.class, 0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CONTEXT, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumContext.class, 0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.EXACT, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.LOCATION, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.LOTDETAILS, 0x4444331111l, AttributeInfo.EnumAttributeType.enumeration, EnumLotDetails.getEnum(0),
-				"Brief");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.LOTDETAILS, 0x4444331111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumLotDetails.class, 0), "Brief");
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.LOTID, 0x4444331111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.PROCESSUSAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.PRODUCTID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.RESOURCEDETAILS, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumResourceDetails.getEnum(0), "Full");
+				JavaEnumUtil.getEnum(EnumResourceDetails.class, 0), "Full");
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.RESOURCEID, 0x4444333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[13] = new AtrInfoTable(AttributeName.RESOURCENAME, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[14] = new AtrInfoTable(AttributeName.SCOPE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumScope.getEnum(0), null);
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.SCOPE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumScope.class, 0), null);
 		atrInfoTable[15] = new AtrInfoTable(AttributeName.USAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				JDFResourceLink.EnumUsage.getEnum(0), null);
+				JavaEnumUtil.getEnum(JDFResourceLink.EnumUsage.class, 0), null);
 	}
 
 	@Override
@@ -150,7 +148,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoResourceQuParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoResourceQuParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -162,7 +160,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoResourceQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoResourceQuParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -175,332 +173,70 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoResourceQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoResourceQuParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for Context
+	 * Enumeration strings for numContext
 	 */
 
-	public enum EContext
+	public enum EnumContext
 	{
 		Job, Global;
 
-		public static EContext getEnum(String val)
+		public static EnumContext getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EContext.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumContext.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for Context
+	 * Enumeration strings for numLotDetails
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumContext extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumContext(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumContext getEnum(String enumName)
-		{
-			return (EnumContext) getEnum(EnumContext.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumContext getEnum(int enumValue)
-		{
-			return (EnumContext) getEnum(EnumContext.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumContext.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumContext.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumContext.class);
-		}
-
-		/**  */
-		public static final EnumContext Job = new EnumContext("Job");
-		/**  */
-		public static final EnumContext Global = new EnumContext("Global");
-	}
-
-	/**
-	 * Enumeration strings for LotDetails
-	 */
-
-	public enum ELotDetails
+	public enum EnumLotDetails
 	{
 		Brief, Full, Amount;
 
-		public static ELotDetails getEnum(String val)
+		public static EnumLotDetails getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ELotDetails.class, val, ELotDetails.Brief);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumLotDetails.class, val, EnumLotDetails.Brief);
 		}
 	}
 
 	/**
-	 * Enumeration strings for LotDetails
+	 * Enumeration strings for numResourceDetails
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumLotDetails extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumLotDetails(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumLotDetails getEnum(String enumName)
-		{
-			return (EnumLotDetails) getEnum(EnumLotDetails.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumLotDetails getEnum(int enumValue)
-		{
-			return (EnumLotDetails) getEnum(EnumLotDetails.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumLotDetails.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumLotDetails.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumLotDetails.class);
-		}
-
-		/**  */
-		public static final EnumLotDetails Brief = new EnumLotDetails("Brief");
-		/**  */
-		public static final EnumLotDetails Full = new EnumLotDetails("Full");
-		/**  */
-		public static final EnumLotDetails Amount = new EnumLotDetails("Amount");
-	}
-
-	/**
-	 * Enumeration strings for ResourceDetails
-	 */
-
-	public enum EResourceDetails
+	public enum EnumResourceDetails
 	{
 		Brief, Full;
 
-		public static EResourceDetails getEnum(String val)
+		public static EnumResourceDetails getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EResourceDetails.class, val, EResourceDetails.Full);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumResourceDetails.class, val, EnumResourceDetails.Full);
 		}
 	}
 
 	/**
-	 * Enumeration strings for ResourceDetails
+	 * Enumeration strings for numScope
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumResourceDetails extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumResourceDetails(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumResourceDetails getEnum(String enumName)
-		{
-			return (EnumResourceDetails) getEnum(EnumResourceDetails.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumResourceDetails getEnum(int enumValue)
-		{
-			return (EnumResourceDetails) getEnum(EnumResourceDetails.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumResourceDetails.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumResourceDetails.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumResourceDetails.class);
-		}
-
-		/**  */
-		public static final EnumResourceDetails Brief = new EnumResourceDetails("Brief");
-		/**  */
-		public static final EnumResourceDetails Full = new EnumResourceDetails("Full");
-	}
-
-	/**
-	 * Enumeration strings for Scope
-	 */
-
-	public enum EScope
+	public enum EnumScope
 	{
 		Allowed, Device, Present, Job, Estimate;
 
-		public static EScope getEnum(String val)
+		public static EnumScope getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EScope.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumScope.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Scope
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumScope extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumScope(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumScope getEnum(String enumName)
-		{
-			return (EnumScope) getEnum(EnumScope.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumScope getEnum(int enumValue)
-		{
-			return (EnumScope) getEnum(EnumScope.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumScope.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumScope.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumScope.class);
-		}
-
-		/**  */
-		public static final EnumScope Allowed = new EnumScope("Allowed");
-		/**  */
-		public static final EnumScope Device = new EnumScope("Device");
-		/**  */
-		public static final EnumScope Present = new EnumScope("Present");
-		/**  */
-		public static final EnumScope Job = new EnumScope("Job");
-		/**  */
-		public static final EnumScope Estimate = new EnumScope("Estimate");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -512,7 +248,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 *
 	 * @param v List of the enumeration values
 	 */
-	public void setEClasses(List<JDFResource.EResourceClass> v)
+	public void setClasses(final List<JDFResource.EnumResourceClass> v)
 	{
 		setEnumsAttribute(AttributeName.CLASSES, v, null);
 	}
@@ -522,38 +258,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public List<JDFResource.EResourceClass> getEnumsClasses()
+	public List<JDFResource.EnumResourceClass> getClasses()
 	{
-		return getEnumerationsAttribute(AttributeName.CLASSES, null, JDFResource.EResourceClass.class);
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Classes
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5.2) set attribute Classes
-	 *
-	 * @param v List of the enumeration values
-	 * @deprecated use SetEClasses(List<Eesource.EnumResourceClass>) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setClasses(List<JDFResource.EnumResourceClass> v)
-	{
-		setEnumerationsAttribute(AttributeName.CLASSES, v, null);
-	}
-
-	/**
-	 * (9.2) get Classes attribute Classes
-	 *
-	 * @return Vector of the enumerations
-	 * @deprecated use List<Eesource.EnumResourceClass > GetEClasses() based on java.lang.enum instead
-	 */
-	@Deprecated
-	public Vector<JDFResource.EnumResourceClass> getClasses()
-	{
-		return getEnumerationsAttribute(AttributeName.CLASSES, null, JDFResource.EnumResourceClass.getEnum(0), false);
+		return getEnumerationsAttribute(AttributeName.CLASSES, null, JDFResource.EnumResourceClass.class);
 	}
 
 	/*
@@ -566,9 +273,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setContext(EContext enumVar)
+	public void setContext(final EnumContext enumVar)
 	{
-		setAttribute(AttributeName.CONTEXT, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.CONTEXT, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -576,35 +283,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EContext getEContext()
-	{
-		return EContext.getEnum(getAttribute(AttributeName.CONTEXT, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Context
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Context
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetContext(EContext) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setContext(EnumContext enumVar)
-	{
-		setAttribute(AttributeName.CONTEXT, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Context
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EContext GetEContext() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumContext getContext()
 	{
 		return EnumContext.getEnum(getAttribute(AttributeName.CONTEXT, null, null));
@@ -620,7 +298,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setExact(boolean value)
+	public void setExact(final boolean value)
 	{
 		setAttribute(AttributeName.EXACT, value, null);
 	}
@@ -645,7 +323,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -670,7 +348,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobPartID(String value)
+	public void setJobPartID(final String value)
 	{
 		setAttribute(AttributeName.JOBPARTID, value, null);
 	}
@@ -695,7 +373,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLocation(String value)
+	public void setLocation(final String value)
 	{
 		setAttribute(AttributeName.LOCATION, value, null);
 	}
@@ -720,9 +398,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setLotDetails(ELotDetails enumVar)
+	public void setLotDetails(final EnumLotDetails enumVar)
 	{
-		setAttribute(AttributeName.LOTDETAILS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.LOTDETAILS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -730,35 +408,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ELotDetails getELotDetails()
-	{
-		return ELotDetails.getEnum(getAttribute(AttributeName.LOTDETAILS, null, "Brief"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute LotDetails
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute LotDetails
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetLotDetails(ELotDetails) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setLotDetails(EnumLotDetails enumVar)
-	{
-		setAttribute(AttributeName.LOTDETAILS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute LotDetails
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ELotDetails GetELotDetails() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumLotDetails getLotDetails()
 	{
 		return EnumLotDetails.getEnum(getAttribute(AttributeName.LOTDETAILS, null, "Brief"));
@@ -774,7 +423,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLotID(String value)
+	public void setLotID(final String value)
 	{
 		setAttribute(AttributeName.LOTID, value, null);
 	}
@@ -799,7 +448,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProcessUsage(String value)
+	public void setProcessUsage(final String value)
 	{
 		setAttribute(AttributeName.PROCESSUSAGE, value, null);
 	}
@@ -824,7 +473,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProductID(String value)
+	public void setProductID(final String value)
 	{
 		setAttribute(AttributeName.PRODUCTID, value, null);
 	}
@@ -849,7 +498,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setQueueEntryID(String value)
+	public void setQueueEntryID(final String value)
 	{
 		setAttribute(AttributeName.QUEUEENTRYID, value, null);
 	}
@@ -874,9 +523,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setResourceDetails(EResourceDetails enumVar)
+	public void setResourceDetails(final EnumResourceDetails enumVar)
 	{
-		setAttribute(AttributeName.RESOURCEDETAILS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.RESOURCEDETAILS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -884,35 +533,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EResourceDetails getEResourceDetails()
-	{
-		return EResourceDetails.getEnum(getAttribute(AttributeName.RESOURCEDETAILS, null, "Full"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ResourceDetails
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ResourceDetails
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetResourceDetails(EResourceDetails) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setResourceDetails(EnumResourceDetails enumVar)
-	{
-		setAttribute(AttributeName.RESOURCEDETAILS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ResourceDetails
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EResourceDetails GetEResourceDetails() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumResourceDetails getResourceDetails()
 	{
 		return EnumResourceDetails.getEnum(getAttribute(AttributeName.RESOURCEDETAILS, null, "Full"));
@@ -928,7 +548,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setResourceID(String value)
+	public void setResourceID(final String value)
 	{
 		setAttribute(AttributeName.RESOURCEID, value, null);
 	}
@@ -953,7 +573,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setResourceName(VString value)
+	public void setResourceName(final VString value)
 	{
 		setAttribute(AttributeName.RESOURCENAME, value, null);
 	}
@@ -965,8 +585,8 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 */
 	public VString getResourceName()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.RESOURCENAME, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.RESOURCENAME, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -981,9 +601,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setScope(EScope enumVar)
+	public void setScope(final EnumScope enumVar)
 	{
-		setAttribute(AttributeName.SCOPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SCOPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -991,35 +611,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EScope getEScope()
-	{
-		return EScope.getEnum(getAttribute(AttributeName.SCOPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Scope
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Scope
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetScope(EScope) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setScope(EnumScope enumVar)
-	{
-		setAttribute(AttributeName.SCOPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Scope
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EScope GetEScope() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumScope getScope()
 	{
 		return EnumScope.getEnum(getAttribute(AttributeName.SCOPE, null, null));
@@ -1035,9 +626,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setUsage(JDFResourceLink.EUsage enumVar)
+	public void setUsage(final JDFResourceLink.EnumUsage enumVar)
 	{
-		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.USAGE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -1045,35 +636,6 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public JDFResourceLink.EUsage getEUsage()
-	{
-		return JDFResourceLink.EUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Usage
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Usage
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetUsage(EesourceLink.EnumUsage) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setUsage(JDFResourceLink.EnumUsage enumVar)
-	{
-		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Usage
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EesourceLink.EnumUsage GetEUsage() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public JDFResourceLink.EnumUsage getUsage()
 	{
 		return JDFResourceLink.EnumUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
@@ -1111,7 +673,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
-	public JDFPart getCreatePart(int iSkip)
+	public JDFPart getCreatePart(final int iSkip)
 	{
 		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
@@ -1123,7 +685,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * @return JDFPart the element
 	 *         default is getPart(0)
 	 */
-	public JDFPart getPart(int iSkip)
+	public JDFPart getPart(final int iSkip)
 	{
 		return (JDFPart) getElement(ElementName.PART, null, iSkip);
 	}

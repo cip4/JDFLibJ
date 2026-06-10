@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -100,7 +96,8 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.POLICY, 0x3331111111l, AttributeInfo.EnumAttributeType.enumeration, EnumPolicy.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.POLICY, 0x3331111111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumPolicy.class, 0), null);
 	}
 
 	@Override
@@ -128,7 +125,7 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSheetOptimizingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoSheetOptimizingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -140,7 +137,7 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSheetOptimizingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoSheetOptimizingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -153,7 +150,7 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoSheetOptimizingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoSheetOptimizingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -164,7 +161,7 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -179,89 +176,22 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for Policy
+	 * Enumeration strings for numPolicy
 	 */
 
-	public enum EPolicy
+	public enum EnumPolicy
 	{
 		Gang, GangAndForce, NoGang;
 
-		public static EPolicy getEnum(String val)
+		public static EnumPolicy getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPolicy.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPolicy.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Policy
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumPolicy extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPolicy(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumPolicy getEnum(String enumName)
-		{
-			return (EnumPolicy) getEnum(EnumPolicy.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPolicy getEnum(int enumValue)
-		{
-			return (EnumPolicy) getEnum(EnumPolicy.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPolicy.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPolicy.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPolicy.class);
-		}
-
-		/**  */
-		public static final EnumPolicy Gang = new EnumPolicy("Gang");
-		/**  */
-		public static final EnumPolicy GangAndForce = new EnumPolicy("GangAndForce");
-		/**  */
-		public static final EnumPolicy NoGang = new EnumPolicy("NoGang");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -273,9 +203,9 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPolicy(EPolicy enumVar)
+	public void setPolicy(final EnumPolicy enumVar)
 	{
-		setAttribute(AttributeName.POLICY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.POLICY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -283,35 +213,6 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPolicy getEPolicy()
-	{
-		return EPolicy.getEnum(getAttribute(AttributeName.POLICY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Policy
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Policy
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPolicy(EPolicy) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPolicy(EnumPolicy enumVar)
-	{
-		setAttribute(AttributeName.POLICY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Policy
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EPolicy GetEPolicy() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumPolicy getPolicy()
 	{
 		return EnumPolicy.getEnum(getAttribute(AttributeName.POLICY, null, null));
@@ -349,7 +250,7 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFConvertingConfig the element
 	 */
-	public JDFConvertingConfig getCreateConvertingConfig(int iSkip)
+	public JDFConvertingConfig getCreateConvertingConfig(final int iSkip)
 	{
 		return (JDFConvertingConfig) getCreateElement_JDFElement(ElementName.CONVERTINGCONFIG, null, iSkip);
 	}
@@ -361,7 +262,7 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	 * @return JDFConvertingConfig the element
 	 *         default is getConvertingConfig(0)
 	 */
-	public JDFConvertingConfig getConvertingConfig(int iSkip)
+	public JDFConvertingConfig getConvertingConfig(final int iSkip)
 	{
 		return (JDFConvertingConfig) getElement(ElementName.CONVERTINGCONFIG, null, iSkip);
 	}
@@ -412,7 +313,7 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFGangElement the element
 	 */
-	public JDFGangElement getCreateGangElement(int iSkip)
+	public JDFGangElement getCreateGangElement(final int iSkip)
 	{
 		return (JDFGangElement) getCreateElement_JDFElement(ElementName.GANGELEMENT, null, iSkip);
 	}
@@ -424,7 +325,7 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	 * @return JDFGangElement the element
 	 *         default is getGangElement(0)
 	 */
-	public JDFGangElement getGangElement(int iSkip)
+	public JDFGangElement getGangElement(final int iSkip)
 	{
 		return (JDFGangElement) getElement(ElementName.GANGELEMENT, null, iSkip);
 	}

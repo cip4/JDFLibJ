@@ -80,8 +80,7 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
- * walker for PhaseAmount
+ *         walker for PhaseAmount
  */
 public class WalkXJDFAuditAmount extends WalkXElement
 {
@@ -106,7 +105,6 @@ public class WalkXJDFAuditAmount extends WalkXElement
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXJDFResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override

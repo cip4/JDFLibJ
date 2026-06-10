@@ -56,7 +56,6 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         before August 21, 2009
  */
 public class JDFRefElement extends JDFElement
@@ -75,7 +74,9 @@ public class JDFRefElement extends JDFElement
 	{
 		AttributeInfo ai = AttributeInfo.fixedMap.get("JDFRefElement");
 		if (ai != null)
+		{
 			return ai;
+		}
 		ai = super.getTheAttributeInfo().updateReplace(atrInfoTable);
 		AttributeInfo.fixedMap.put("JDFRefElement", ai);
 		return ai;
@@ -133,7 +134,6 @@ public class JDFRefElement extends JDFElement
 	 * test Part element existence
 	 *
 	 * @return
-	 *
 	 * @deprecated 060310 use inline hasChildElement(ElementName.PART, null);
 	 */
 	@Deprecated
@@ -149,13 +149,13 @@ public class JDFRefElement extends JDFElement
 	 */
 	public void setrRef(final String value)
 	{
-		setAttribute(JDFConstants.RREF, value, JDFConstants.EMPTYSTRING);
+		setAttribute(JDFConstants.RREF, value, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
 	 * returns true if the name specified fits the node name of this
 	 *
-	 * @param nodeName the name of the node to test. may be either local or qualified
+	 * @param nodeName     the name of the node to test. may be either local or qualified
 	 * @param nameSpaceURI the namespace of the node to test.
 	 * @return true if ok
 	 */
@@ -200,7 +200,7 @@ public class JDFRefElement extends JDFElement
 	@Deprecated
 	public void setrSubRef(final String value)
 	{
-		setAttribute(JDFConstants.RSUBREF, value, JDFConstants.EMPTYSTRING);
+		setAttribute(JDFConstants.RSUBREF, value, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -210,11 +210,10 @@ public class JDFRefElement extends JDFElement
 	 */
 	public String getrSubRef()
 	{
-		return getAttribute(JDFConstants.RSUBREF, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING);
+		return getAttribute(JDFConstants.RSUBREF, JDFCoreConstants.EMPTYSTRING, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.core.JDFElement#isValid(org.cip4.jdflib.core.JDFElement.EnumValidationLevel)
 	 */
 	@Override
@@ -228,17 +227,7 @@ public class JDFRefElement extends JDFElement
 
 		final JDFResource r = getTarget();
 
-		if (r == null)
-		{
-			return false;
-		}
-
-		if (!getNodeName().equals(r.getRefString()))
-		{
-			return false;
-		}
-
-		if (!validResourcePosition())
+		if ((r == null) || !getNodeName().equals(r.getRefString()) || !validResourcePosition())
 		{
 			return false;
 		}
@@ -295,7 +284,6 @@ public class JDFRefElement extends JDFElement
 	/**
 	 * get the referenced target resource The resource's PartUsage is evaluated to correctly retrieve implicit or explicit partitions<br>
 	 * may return null
-	 *
 	 * overrides the deprecated method JDFElement.getTarget()
 	 *
 	 * @return JDFResource - the reference target partition
@@ -324,7 +312,7 @@ public class JDFRefElement extends JDFElement
 	 */
 	public JDFPart getPart()
 	{
-		return (JDFPart) getElement(ElementName.PART, JDFConstants.EMPTYSTRING, 0);
+		return (JDFPart) getElement(ElementName.PART, JDFCoreConstants.EMPTYSTRING, 0);
 	}
 
 	/**
@@ -419,7 +407,7 @@ public class JDFRefElement extends JDFElement
 	 * delete this refElement and it's target
 	 *
 	 * @param bCheckRefCount if true, check that no other element refers to the target before deleting<br>
-	 *        if bCheckRefCount=false, the target is force deleted
+	 *                       if bCheckRefCount=false, the target is force deleted
 	 * @return JDFElement the deleted targeelement
 	 * @since 290502
 	 */
@@ -452,7 +440,6 @@ public class JDFRefElement extends JDFElement
 	}
 
 	/**
-	 *
 	 * @param base
 	 * @return
 	 */
@@ -462,14 +449,15 @@ public class JDFRefElement extends JDFElement
 	}
 
 	/**
-	 *
 	 * @param ref the string to check
 	 * @return the string without ref if it ends with ref, else null
 	 */
 	public static String getRefLocalName(final String ref)
 	{
 		if (JDFConstants.REF.equals(StringUtil.rightStr(ref, 3)))
+		{
 			return StringUtil.leftStr(ref, -3);
+		}
 		return null;
 	}
 

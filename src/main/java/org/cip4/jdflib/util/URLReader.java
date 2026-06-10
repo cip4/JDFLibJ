@@ -82,7 +82,7 @@ import java.util.zip.ZipEntry;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.XMLDoc;
@@ -132,7 +132,7 @@ public class URLReader
 	 *
 	 * @param localPackMethod
 	 */
-	public void setLocalPackMethod(EPackage localPackMethod)
+	public void setLocalPackMethod(final EPackage localPackMethod)
 	{
 		this.localPackMethod = localPackMethod;
 	}
@@ -146,7 +146,7 @@ public class URLReader
 	{
 		MIME, ZIP, PACKAGE, NONE;
 
-		public static EPackage getEnum(String s)
+		public static EPackage getEnum(final String s)
 		{
 			return JavaEnumUtil.getEnumIgnoreCase(EPackage.class, s, EPackage.PACKAGE);
 		}
@@ -158,12 +158,12 @@ public class URLReader
 	 * @param host the hostname to add
 	 * @return the current list of valid hosts
 	 */
-	public static Collection<String> addHost(String host)
+	public static Collection<String> addHost(final String host)
 	{
 		return ContainerUtil.appendUnique(validhosts, StringUtil.getNonEmpty(host));
 	}
 
-	public static boolean removeHost(Object o)
+	public static boolean removeHost(final Object o)
 	{
 		return validhosts.remove(o);
 	}
@@ -176,7 +176,7 @@ public class URLReader
 	public static class InvalidHostException extends RuntimeException
 	{
 
-		public InvalidHostException(String message)
+		public InvalidHostException(final String message)
 		{
 			super(message);
 		}
@@ -200,9 +200,9 @@ public class URLReader
 		localPackMethod = null;
 	}
 
-	boolean checkHost(String urlStr)
+	boolean checkHost(final String urlStr)
 	{
-		if (validhosts.contains(JDFConstants.STAR))
+		if (validhosts.contains(JDFCoreConstants.STAR))
 		{
 			return true;
 		}
@@ -268,7 +268,7 @@ public class URLReader
 		return false;
 	}
 
-	boolean checkPack(EPackage pack)
+	boolean checkPack(final EPackage pack)
 	{
 		final EPackage currentPackMethod = localPackMethod == null ? packMethod : localPackMethod;
 		return currentPackMethod == pack || currentPackMethod == EPackage.PACKAGE;
@@ -501,7 +501,7 @@ public class URLReader
 	public static void initFilters()
 	{
 		clearHosts();
-		validhosts.add(JDFConstants.STAR);
+		validhosts.add(JDFCoreConstants.STAR);
 		packMethod = EPackage.PACKAGE;
 	}
 
@@ -510,7 +510,7 @@ public class URLReader
 		return packMethod;
 	}
 
-	public static void setPackMethod(EPackage packMethod)
+	public static void setPackMethod(final EPackage packMethod)
 	{
 		if (packMethod != null)
 		{

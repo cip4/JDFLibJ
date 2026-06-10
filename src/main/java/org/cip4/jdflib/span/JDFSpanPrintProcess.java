@@ -9,12 +9,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanPrintProcess extends JDFEnumerationSpan
@@ -23,39 +19,39 @@ public class JDFSpanPrintProcess extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanPrintProcess
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanPrintProcess(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanPrintProcess(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanPrintProcess
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanPrintProcess(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanPrintProcess(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanPrintProcess
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanPrintProcess(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanPrintProcess(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -63,49 +59,14 @@ public class JDFSpanPrintProcess extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanPrintProcess
 	 */
-	public static class EnumSpanPrintProcess extends ValuedEnum
+	public enum EnumSpanPrintProcess
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Electrophotography, Flexography, Gravure, Lithography, Letterpress, Screen, Inkjet, Thermography;
 
-		private EnumSpanPrintProcess(String name)
+		public static EnumSpanPrintProcess getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanPrintProcess.class, val, null);
 		}
-
-		public static EnumSpanPrintProcess getEnum(String enumName)
-		{
-			return (EnumSpanPrintProcess) getEnum(EnumSpanPrintProcess.class, enumName);
-		}
-
-		public static EnumSpanPrintProcess getEnum(int enumValue)
-		{
-			return (EnumSpanPrintProcess) getEnum(EnumSpanPrintProcess.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanPrintProcess.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanPrintProcess.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanPrintProcess.class);
-		}
-
-		public static final EnumSpanPrintProcess Electrophotography = new EnumSpanPrintProcess("Electrophotography");
-		public static final EnumSpanPrintProcess Flexography = new EnumSpanPrintProcess("Flexography");
-		public static final EnumSpanPrintProcess Gravure = new EnumSpanPrintProcess("Gravure");
-		public static final EnumSpanPrintProcess Lithography = new EnumSpanPrintProcess("Lithography");
-		public static final EnumSpanPrintProcess Letterpress = new EnumSpanPrintProcess("Letterpress");
-		public static final EnumSpanPrintProcess Screen = new EnumSpanPrintProcess("Screen");
-		public static final EnumSpanPrintProcess Inkjet = new EnumSpanPrintProcess("Inkjet");
-		public static final EnumSpanPrintProcess Thermography = new EnumSpanPrintProcess("Thermography");
 
 	}
 
@@ -114,18 +75,18 @@ public class JDFSpanPrintProcess extends JDFEnumerationSpan
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanPrintProcess.getEnum(0);
+		return EnumSpanPrintProcess.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

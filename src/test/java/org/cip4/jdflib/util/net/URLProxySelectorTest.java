@@ -75,12 +75,11 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.jupiter.api.Test;
 
 /**
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 class URLProxySelectorTest extends JDFTestCaseBase
 {
 	/**
-	 * 
 	 * @throws URISyntaxException
 	 */
 	@Test

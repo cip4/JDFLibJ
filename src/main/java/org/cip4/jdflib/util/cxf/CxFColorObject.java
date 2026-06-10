@@ -52,7 +52,6 @@ public class CxFColorObject extends CxFBase
 {
 
 	/**
-	 *
 	 * @param root
 	 */
 	CxFColorObject(final KElement object)
@@ -61,7 +60,6 @@ public class CxFColorObject extends CxFBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public JDFColor getJDFColor()
@@ -79,14 +77,15 @@ public class CxFColorObject extends CxFBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public JDFLabColor getCieLab()
 	{
 		final KElement cie = getXPathElement("ColorValues/ColorCIELab");
 		if (cie == null)
+		{
 			return null;
+		}
 		final double l = StringUtil.parseDouble(cie.getXPathAttribute("L", null), 0);
 		final double a = StringUtil.parseDouble(cie.getXPathAttribute("A", null), 0);
 		final double b = StringUtil.parseDouble(cie.getXPathAttribute("B", null), 0);
@@ -94,14 +93,15 @@ public class CxFColorObject extends CxFBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public JDFRGBColor getRGBColor()
 	{
 		final KElement cie = getXPathElement("ColorValues/ColorSRGB");
 		if (cie == null)
+		{
 			return null;
+		}
 		final double range = StringUtil.parseDouble(cie.getXPathAttribute("MaxRange", null), 255);
 		final double r = StringUtil.parseDouble(cie.getXPathAttribute("R", null), 0);
 		final double g = StringUtil.parseDouble(cie.getXPathAttribute("G", null), 0);
@@ -110,34 +110,40 @@ public class CxFColorObject extends CxFBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public JDFTransferFunction getSpectrum()
 	{
 		final KElement spectrum = getXPathElement("ColorValues/ReflectanceSpectrum");
 		if (spectrum == null)
+		{
 			return null;
+		}
 		final double start = spectrum.getRealAttribute("StartWL", null, 0);
 		if (start == 0)
+		{
 			return null;
+		}
 		final JDFNumberList l = JDFNumberList.createNumberList(spectrum.getText());
 		if (l == null)
+		{
 			return null;
+		}
 		final JDFTransferFunction tf = new JDFTransferFunction();
 		tf.set(start, 10, l.getDoubleVector());
 		return tf;
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public JDFCMYKColor getCMYKColor()
 	{
 		final KElement cie = getXPathElement("DeviceColorValues/ColorCMYK");
 		if (cie == null)
+		{
 			return null;
+		}
 		final double range = StringUtil.parseDouble(cie.getXPathAttribute("MaxRange", null), 255);
 		final double c = StringUtil.parseDouble(cie.getXPathAttribute("Cyan", null), 255);
 		final double m = StringUtil.parseDouble(cie.getXPathAttribute("Magenta", null), 0);

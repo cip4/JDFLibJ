@@ -71,12 +71,8 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -107,7 +103,7 @@ public abstract class JDFAutoQuery extends JDFMessage
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ACKNOWLEDGETEMPLATE, 0x4444433111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.ACKNOWLEDGEURL, 0x3333333111l, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.ACKNOWLEDGETYPE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumerations,
-				EnumAcknowledgeType.getEnum(0), "Completed");
+				JavaEnumUtil.getEnum(EnumAcknowledgeType.class, 0), "Completed");
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.LANGUAGES, 0x3311111111l, AttributeInfo.EnumAttributeType.languages, null, null);
 	}
 
@@ -136,7 +132,7 @@ public abstract class JDFAutoQuery extends JDFMessage
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoQuery(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoQuery(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -148,7 +144,7 @@ public abstract class JDFAutoQuery extends JDFMessage
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoQuery(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoQuery(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -161,95 +157,28 @@ public abstract class JDFAutoQuery extends JDFMessage
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoQuery(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoQuery(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for AcknowledgeType
+	 * Enumeration strings for numAcknowledgeType
 	 */
 
-	public enum EAcknowledgeType
+	public enum EnumAcknowledgeType
 	{
 		Received, Applied, Completed;
 
-		public static EAcknowledgeType getEnum(String val)
+		public static EnumAcknowledgeType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EAcknowledgeType.class, val, EAcknowledgeType.Completed);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumAcknowledgeType.class, val, EnumAcknowledgeType.Completed);
 		}
-	}
-
-	/**
-	 * Enumeration strings for AcknowledgeType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumAcknowledgeType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumAcknowledgeType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumAcknowledgeType getEnum(String enumName)
-		{
-			return (EnumAcknowledgeType) getEnum(EnumAcknowledgeType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumAcknowledgeType getEnum(int enumValue)
-		{
-			return (EnumAcknowledgeType) getEnum(EnumAcknowledgeType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumAcknowledgeType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAcknowledgeType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAcknowledgeType.class);
-		}
-
-		/**  */
-		public static final EnumAcknowledgeType Received = new EnumAcknowledgeType("Received");
-		/**  */
-		public static final EnumAcknowledgeType Applied = new EnumAcknowledgeType("Applied");
-		/**  */
-		public static final EnumAcknowledgeType Completed = new EnumAcknowledgeType("Completed");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -261,7 +190,7 @@ public abstract class JDFAutoQuery extends JDFMessage
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAcknowledgeFormat(String value)
+	public void setAcknowledgeFormat(final String value)
 	{
 		setAttribute(AttributeName.ACKNOWLEDGEFORMAT, value, null);
 	}
@@ -286,7 +215,7 @@ public abstract class JDFAutoQuery extends JDFMessage
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAcknowledgeTemplate(String value)
+	public void setAcknowledgeTemplate(final String value)
 	{
 		setAttribute(AttributeName.ACKNOWLEDGETEMPLATE, value, null);
 	}
@@ -311,7 +240,7 @@ public abstract class JDFAutoQuery extends JDFMessage
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAcknowledgeURL(String value)
+	public void setAcknowledgeURL(final String value)
 	{
 		setAttribute(AttributeName.ACKNOWLEDGEURL, value, null);
 	}
@@ -336,7 +265,7 @@ public abstract class JDFAutoQuery extends JDFMessage
 	 *
 	 * @param v List of the enumeration values
 	 */
-	public void setEAcknowledgeType(List<EAcknowledgeType> v)
+	public void setAcknowledgeType(final List<EnumAcknowledgeType> v)
 	{
 		setEnumsAttribute(AttributeName.ACKNOWLEDGETYPE, v, null);
 	}
@@ -346,38 +275,9 @@ public abstract class JDFAutoQuery extends JDFMessage
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public List<EAcknowledgeType> getEnumsAcknowledgeType()
+	public List<EnumAcknowledgeType> getAcknowledgeType()
 	{
-		return getEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, null, EAcknowledgeType.class);
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute AcknowledgeType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5.2) set attribute AcknowledgeType
-	 *
-	 * @param v List of the enumeration values
-	 * @deprecated use SetEAcknowledgeType(List<EAcknowledgeType>) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setAcknowledgeType(List<EnumAcknowledgeType> v)
-	{
-		setEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, v, null);
-	}
-
-	/**
-	 * (9.2) get AcknowledgeType attribute AcknowledgeType
-	 *
-	 * @return Vector of the enumerations
-	 * @deprecated use List<EAcknowledgeType > GetEAcknowledgeType() based on java.lang.enum instead
-	 */
-	@Deprecated
-	public Vector<EnumAcknowledgeType> getAcknowledgeType()
-	{
-		return getEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, null, EnumAcknowledgeType.Completed, false);
+		return getEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, null, EnumAcknowledgeType.class);
 	}
 
 	/*
@@ -390,7 +290,7 @@ public abstract class JDFAutoQuery extends JDFMessage
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLanguages(VString value)
+	public void setLanguages(final VString value)
 	{
 		setAttribute(AttributeName.LANGUAGES, value, null);
 	}
@@ -402,8 +302,8 @@ public abstract class JDFAutoQuery extends JDFMessage
 	 */
 	public VString getLanguages()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -471,7 +371,7 @@ public abstract class JDFAutoQuery extends JDFMessage
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
-	public JDFEmployee getCreateEmployee(int iSkip)
+	public JDFEmployee getCreateEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -483,7 +383,7 @@ public abstract class JDFAutoQuery extends JDFMessage
 	 * @return JDFEmployee the element
 	 *         default is getEmployee(0)
 	 */
-	public JDFEmployee getEmployee(int iSkip)
+	public JDFEmployee getEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
 	}

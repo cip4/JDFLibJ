@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -101,11 +97,12 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BYTEORDER, 0x4444433311l, AttributeInfo.EnumAttributeType.enumeration, EnumByteOrder.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BYTEORDER, 0x4444433311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumByteOrder.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.INTERLEAVING, 0x4444433311l, AttributeInfo.EnumAttributeType.integer, null, "1");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.WHITEISZERO, 0x4444433311l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.SEGMENTATION, 0x4444433311l, AttributeInfo.EnumAttributeType.enumeration, EnumSegmentation.getEnum(0),
-				null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SEGMENTATION, 0x4444433311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumSegmentation.class, 0), null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.ROWSPERSTRIP, 0x4444433311l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.TILESIZE, 0x4444433311l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.SEPARATIONNAMETAG, 0x4444433311l, AttributeInfo.EnumAttributeType.integer, null, "270");
@@ -136,7 +133,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTIFFFormatParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoTIFFFormatParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -148,7 +145,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTIFFFormatParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoTIFFFormatParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -161,172 +158,42 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoTIFFFormatParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoTIFFFormatParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for ByteOrder
+	 * Enumeration strings for numByteOrder
 	 */
 
-	public enum EByteOrder
+	public enum EnumByteOrder
 	{
 		II, MM;
 
-		public static EByteOrder getEnum(String val)
+		public static EnumByteOrder getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EByteOrder.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumByteOrder.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for ByteOrder
+	 * Enumeration strings for numSegmentation
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumByteOrder extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumByteOrder(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumByteOrder getEnum(String enumName)
-		{
-			return (EnumByteOrder) getEnum(EnumByteOrder.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumByteOrder getEnum(int enumValue)
-		{
-			return (EnumByteOrder) getEnum(EnumByteOrder.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumByteOrder.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumByteOrder.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumByteOrder.class);
-		}
-
-		/**  */
-		public static final EnumByteOrder II = new EnumByteOrder("II");
-		/**  */
-		public static final EnumByteOrder MM = new EnumByteOrder("MM");
-	}
-
-	/**
-	 * Enumeration strings for Segmentation
-	 */
-
-	public enum ESegmentation
+	public enum EnumSegmentation
 	{
 		SingleStrip, Stripped, Tiled;
 
-		public static ESegmentation getEnum(String val)
+		public static EnumSegmentation getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ESegmentation.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSegmentation.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Segmentation
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumSegmentation extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumSegmentation(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumSegmentation getEnum(String enumName)
-		{
-			return (EnumSegmentation) getEnum(EnumSegmentation.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumSegmentation getEnum(int enumValue)
-		{
-			return (EnumSegmentation) getEnum(EnumSegmentation.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSegmentation.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSegmentation.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSegmentation.class);
-		}
-
-		/**  */
-		public static final EnumSegmentation SingleStrip = new EnumSegmentation("SingleStrip");
-		/**  */
-		public static final EnumSegmentation Stripped = new EnumSegmentation("Stripped");
-		/**  */
-		public static final EnumSegmentation Tiled = new EnumSegmentation("Tiled");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -338,9 +205,9 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setByteOrder(EByteOrder enumVar)
+	public void setByteOrder(final EnumByteOrder enumVar)
 	{
-		setAttribute(AttributeName.BYTEORDER, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.BYTEORDER, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -348,35 +215,6 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EByteOrder getEByteOrder()
-	{
-		return EByteOrder.getEnum(getAttribute(AttributeName.BYTEORDER, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ByteOrder
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ByteOrder
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetByteOrder(EByteOrder) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setByteOrder(EnumByteOrder enumVar)
-	{
-		setAttribute(AttributeName.BYTEORDER, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ByteOrder
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EByteOrder GetEByteOrder() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumByteOrder getByteOrder()
 	{
 		return EnumByteOrder.getEnum(getAttribute(AttributeName.BYTEORDER, null, null));
@@ -392,7 +230,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setInterleaving(int value)
+	public void setInterleaving(final int value)
 	{
 		setAttribute(AttributeName.INTERLEAVING, value, null);
 	}
@@ -417,7 +255,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWhiteIsZero(boolean value)
+	public void setWhiteIsZero(final boolean value)
 	{
 		setAttribute(AttributeName.WHITEISZERO, value, null);
 	}
@@ -442,9 +280,9 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSegmentation(ESegmentation enumVar)
+	public void setSegmentation(final EnumSegmentation enumVar)
 	{
-		setAttribute(AttributeName.SEGMENTATION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SEGMENTATION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -452,35 +290,6 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESegmentation getESegmentation()
-	{
-		return ESegmentation.getEnum(getAttribute(AttributeName.SEGMENTATION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Segmentation
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Segmentation
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetSegmentation(ESegmentation) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSegmentation(EnumSegmentation enumVar)
-	{
-		setAttribute(AttributeName.SEGMENTATION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Segmentation
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ESegmentation GetESegmentation() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumSegmentation getSegmentation()
 	{
 		return EnumSegmentation.getEnum(getAttribute(AttributeName.SEGMENTATION, null, null));
@@ -496,7 +305,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRowsPerStrip(int value)
+	public void setRowsPerStrip(final int value)
 	{
 		setAttribute(AttributeName.ROWSPERSTRIP, value, null);
 	}
@@ -521,7 +330,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTileSize(JDFXYPair value)
+	public void setTileSize(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.TILESIZE, value, null);
 	}
@@ -534,8 +343,8 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 */
 	public JDFXYPair getTileSize()
 	{
-		String strAttrName = getAttribute(AttributeName.TILESIZE, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TILESIZE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -549,7 +358,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSeparationNameTag(int value)
+	public void setSeparationNameTag(final int value)
 	{
 		setAttribute(AttributeName.SEPARATIONNAMETAG, value, null);
 	}
@@ -596,7 +405,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFTIFFtag the element
 	 */
-	public JDFTIFFtag getCreateTIFFtag(int iSkip)
+	public JDFTIFFtag getCreateTIFFtag(final int iSkip)
 	{
 		return (JDFTIFFtag) getCreateElement_JDFElement(ElementName.TIFFTAG, null, iSkip);
 	}
@@ -608,7 +417,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 * @return JDFTIFFtag the element
 	 *         default is getTIFFtag(0)
 	 */
-	public JDFTIFFtag getTIFFtag(int iSkip)
+	public JDFTIFFtag getTIFFtag(final int iSkip)
 	{
 		return (JDFTIFFtag) getElement(ElementName.TIFFTAG, null, iSkip);
 	}
@@ -659,7 +468,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFTIFFEmbeddedFile the element
 	 */
-	public JDFTIFFEmbeddedFile getCreateTIFFEmbeddedFile(int iSkip)
+	public JDFTIFFEmbeddedFile getCreateTIFFEmbeddedFile(final int iSkip)
 	{
 		return (JDFTIFFEmbeddedFile) getCreateElement_JDFElement(ElementName.TIFFEMBEDDEDFILE, null, iSkip);
 	}
@@ -671,7 +480,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 * @return JDFTIFFEmbeddedFile the element
 	 *         default is getTIFFEmbeddedFile(0)
 	 */
-	public JDFTIFFEmbeddedFile getTIFFEmbeddedFile(int iSkip)
+	public JDFTIFFEmbeddedFile getTIFFEmbeddedFile(final int iSkip)
 	{
 		return (JDFTIFFEmbeddedFile) getElement(ElementName.TIFFEMBEDDEDFILE, null, iSkip);
 	}

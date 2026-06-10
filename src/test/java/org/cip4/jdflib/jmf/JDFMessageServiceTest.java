@@ -74,10 +74,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Vector;
 
-import org.cip4.jdflib.auto.JDFAutoSignal.EChannelMode;
-import org.cip4.jdflib.auto.JDFAutoSignal.EnumChannelMode;
+import org.cip4.jdflib.auto.JDFAutoMessageService;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
@@ -163,10 +164,9 @@ class JDFMessageServiceTest
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
 		final JDFMessageService ms = (JDFMessageService) doc.getRoot();
-		ms.setChannelMode((EnumChannelMode) null);
-		ms.setChannelMode(EnumChannelMode.FireAndForget);
-		assertEquals(EnumChannelMode.FireAndForget, ms.getChannelMode().get(0));
-		assertEquals(EChannelMode.FireAndForget, ms.getEnumsChannelMode().get(0));
+		ms.setChannelMode((List<JDFAutoMessageService.EnumChannelMode>) null);
+		ms.setChannelMode(Arrays.asList(JDFAutoMessageService.EnumChannelMode.FireAndForget));
+		assertEquals(JDFAutoMessageService.EnumChannelMode.FireAndForget, ms.getChannelMode().get(0));
 	}
 
 	/**
@@ -192,11 +192,11 @@ class JDFMessageServiceTest
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
 		final JDFMessageService ms = (JDFMessageService) doc.getRoot();
-		ms.setChannelMode(EnumChannelMode.FireAndForget);
-		final Vector<EnumChannelMode> channelMode = ms.getChannelMode();
-		ms.setChannelMode((EnumChannelMode) null);
+		ms.setChannelMode(Arrays.asList(JDFAutoMessageService.EnumChannelMode.FireAndForget));
+		final List<JDFAutoMessageService.EnumChannelMode> channelMode = ms.getChannelMode();
+		ms.setChannelMode((List<JDFAutoMessageService.EnumChannelMode>) null);
 		ms.setChannelMode(channelMode);
-		assertEquals(EnumChannelMode.FireAndForget, channelMode.get(0));
+		assertEquals(JDFAutoMessageService.EnumChannelMode.FireAndForget, channelMode.get(0));
 	}
 
 	/**

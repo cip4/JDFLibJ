@@ -298,7 +298,7 @@ public class StatusCounter
 
 		if (node == null)
 		{
-			setPhase(null, null, EnumDeviceStatus.Idle, EnumDeviceStatus.Idle.getName());
+			setPhase(null, null, EnumDeviceStatus.Idle, EnumDeviceStatus.Idle.name());
 		}
 
 		if (m_vPartMap == null && m_Node != null)
@@ -357,7 +357,7 @@ public class StatusCounter
 		return null;
 	}
 
-	protected LinkAmount getLinkAmount(final String refID, JDFAttributeMap map)
+	protected LinkAmount getLinkAmount(final String refID, final JDFAttributeMap map)
 	{
 		final LinkAmount la = getLinkAmount(refID);
 		return (la != null && la.hasBag(map)) ? la : null;
@@ -444,7 +444,7 @@ public class StatusCounter
 		}
 		else
 		{
-			m_ignoreParts.add(key.getName());
+			m_ignoreParts.add(key.name());
 		}
 	}
 
@@ -491,7 +491,7 @@ public class StatusCounter
 		addPhase(refID, amount, waste, sumTotal, null);
 	}
 
-	public synchronized void addPhase(final String refID, final double amount, final double waste, final boolean sumTotal, JDFAttributeMap map)
+	public synchronized void addPhase(final String refID, final double amount, final double waste, final boolean sumTotal, final JDFAttributeMap map)
 	{
 		final LinkAmount la = getLinkAmount(refID);
 		if (la == null)
@@ -524,7 +524,7 @@ public class StatusCounter
 		setPhase(refID, amount, waste, null);
 	}
 
-	public synchronized void setPhase(final String refID, final double amount, final double waste, JDFAttributeMap map)
+	public synchronized void setPhase(final String refID, final double amount, final double waste, final JDFAttributeMap map)
 	{
 		final LinkAmount la = getLinkAmount(refID);
 		if (la == null)
@@ -561,7 +561,7 @@ public class StatusCounter
 		setTotal(refID, amount, bWaste, null);
 	}
 
-	public synchronized void setTotal(String refID, final double amount, final boolean bWaste, JDFAttributeMap map)
+	public synchronized void setTotal(final String refID, final double amount, final boolean bWaste, final JDFAttributeMap map)
 	{
 		final LinkAmount la = getLinkAmount(refID);
 		if (la == null)
@@ -591,7 +591,7 @@ public class StatusCounter
 	 * @param refID , type or usage of the resource,
 	 * @return
 	 */
-	public double getTotalAmount(final String refID, JDFAttributeMap map)
+	public double getTotalAmount(final String refID, final JDFAttributeMap map)
 	{
 		final LinkAmount la = getLinkAmount(refID);
 		return la == null ? 0 : la.getAmount(EAmountType.TotalAmount, map);
@@ -635,7 +635,7 @@ public class StatusCounter
 		return getPhaseAmount(refID, null);
 	}
 
-	public double getPhaseAmount(final String refID, JDFAttributeMap map)
+	public double getPhaseAmount(final String refID, final JDFAttributeMap map)
 	{
 		final LinkAmount la = getLinkAmount(refID);
 		return la == null ? 0 : la.getAmount(EAmountType.PhaseAmount, map);
@@ -652,7 +652,7 @@ public class StatusCounter
 		return getTotalWaste(refID, null);
 	}
 
-	public double getTotalWaste(final String refID, JDFAttributeMap map)
+	public double getTotalWaste(final String refID, final JDFAttributeMap map)
 	{
 		final LinkAmount la = getLinkAmount(refID);
 		return la == null ? 0 : la.getAmount(EAmountType.TotalWaste, map);
@@ -669,7 +669,7 @@ public class StatusCounter
 		return getPhaseWaste(refID, null);
 	}
 
-	public double getPhaseWaste(final String refID, JDFAttributeMap map)
+	public double getPhaseWaste(final String refID, final JDFAttributeMap map)
 	{
 		final LinkAmount la = getLinkAmount(refID);
 		return la == null ? 0 : la.getAmount(EAmountType.PhaseWaste, map);
@@ -1190,19 +1190,19 @@ public class StatusCounter
 				theMap.put(EAmountType.PhaseWaste, 0.0);
 			}
 
-			double increment(EAmountType typ, double val)
+			double increment(final EAmountType typ, final double val)
 			{
 				final double d = theMap.get(typ) + val;
 				theMap.put(typ, d);
 				return d;
 			}
 
-			double get(EAmountType typ)
+			double get(final EAmountType typ)
 			{
 				return theMap.get(typ);
 			}
 
-			void set(EAmountType typ, double d)
+			void set(final EAmountType typ, final double d)
 			{
 				theMap.put(typ, d);
 			}
@@ -1315,21 +1315,21 @@ public class StatusCounter
 			}
 		}
 
-		void setAmount(EAmountType typ, double amount, JDFAttributeMap map)
+		void setAmount(final EAmountType typ, final double amount, final JDFAttributeMap map)
 		{
 			final AmountBag bag = getCreateBag(map);
 			bag.set(typ, amount);
 
 		}
 
-		void addAmount(EAmountType typ, double amount, JDFAttributeMap map)
+		void addAmount(final EAmountType typ, final double amount, final JDFAttributeMap map)
 		{
 			final AmountBag bag = getCreateBag(map);
 			bag.increment(typ, amount);
 
 		}
 
-		boolean hasBag(JDFAttributeMap map)
+		boolean hasBag(final JDFAttributeMap map)
 		{
 			return lastBags.get(map == null ? new JDFAttributeMap() : map) != null;
 		}
@@ -1647,7 +1647,7 @@ public class StatusCounter
 		 * @param amount
 		 * @return the formatted amount, either as integer or double
 		 */
-		double getAmount(EAmountType typ)
+		double getAmount(final EAmountType typ)
 		{
 			double d = 0;
 			for (final AmountBag ab : lastBags.values())
@@ -1663,7 +1663,7 @@ public class StatusCounter
 		 * @param amount
 		 * @return the formatted amount, either as integer or double
 		 */
-		double getAmount(EAmountType typ, JDFAttributeMap map)
+		double getAmount(final EAmountType typ, final JDFAttributeMap map)
 		{
 			final AmountBag ab = getBag(map);
 			return getAmount(ab == null ? 0 : ab.get(typ));
@@ -1678,7 +1678,7 @@ public class StatusCounter
 			return lastBags.get(map);
 		}
 
-		AmountBag getCreateBag(JDFAttributeMap map)
+		AmountBag getCreateBag(final JDFAttributeMap map)
 		{
 			AmountBag ab = getBag(map);
 			if (ab == null)
@@ -1720,7 +1720,7 @@ public class StatusCounter
 			addPhase(amount, waste, bNewPhase, sumTotal, null);
 		}
 
-		void addPhase(final double amount, final double waste, final boolean bNewPhase, final boolean sumTotal, JDFAttributeMap map)
+		void addPhase(final double amount, final double waste, final boolean bNewPhase, final boolean sumTotal, final JDFAttributeMap map)
 		{
 			getCreateBag(map).addPhase(amount, waste, bNewPhase, sumTotal);
 		}
@@ -1868,7 +1868,7 @@ public class StatusCounter
 	 * @return
 	 */
 	@Deprecated
-	public synchronized JDFResourceAudit setResourceAudit(String res, final EnumReason reason)
+	public synchronized JDFResourceAudit setResourceAudit(final String res, final EnumReason reason)
 	{
 		final LinkAmount la = getLinkAmount(res);
 		return setResourceAudit(la, reason);
@@ -1879,7 +1879,7 @@ public class StatusCounter
 	 * @param reason
 	 * @return JDFResourceAudit the generated audit
 	 */
-	synchronized JDFResourceAudit setResourceAudit(LinkAmount la, final EnumReason reason)
+	synchronized JDFResourceAudit setResourceAudit(final LinkAmount la, final EnumReason reason)
 	{
 		final JDFAuditPool ap = m_Node.getCreateAuditPool();
 

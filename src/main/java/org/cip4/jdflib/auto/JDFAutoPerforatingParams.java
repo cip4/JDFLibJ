@@ -106,7 +106,7 @@ public abstract class JDFAutoPerforatingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPerforatingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPerforatingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoPerforatingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPerforatingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPerforatingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoPerforatingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPerforatingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPerforatingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -142,7 +142,7 @@ public abstract class JDFAutoPerforatingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -188,7 +188,7 @@ public abstract class JDFAutoPerforatingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFPerforate the element
 	 */
-	public JDFPerforate getCreatePerforate(int iSkip)
+	public JDFPerforate getCreatePerforate(final int iSkip)
 	{
 		return (JDFPerforate) getCreateElement_JDFElement(ElementName.PERFORATE, null, iSkip);
 	}
@@ -200,7 +200,7 @@ public abstract class JDFAutoPerforatingParams extends JDFResource
 	 * @return JDFPerforate the element
 	 *         default is getPerforate(0)
 	 */
-	public JDFPerforate getPerforate(int iSkip)
+	public JDFPerforate getPerforate(final int iSkip)
 	{
 		return (JDFPerforate) getElement(ElementName.PERFORATE, null, iSkip);
 	}

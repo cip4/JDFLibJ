@@ -104,7 +104,7 @@ public class WalkChannelBinding extends WalkJDFSubElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		map.renameKey(ElementName.CHANNELBRAND, AttributeName.BRAND);
 		map.remove(ElementName.COVER);
@@ -125,7 +125,7 @@ public class WalkChannelBinding extends WalkJDFSubElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#getXJDFName(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected String getXJDFName(KElement jdf)
+	protected String getXJDFName(final KElement jdf)
 	{
 		return XJDFConstants.LooseBinding;
 	}

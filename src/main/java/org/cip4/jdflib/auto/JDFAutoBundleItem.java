@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoBundleItem : public JDFElement
@@ -96,8 +97,8 @@ public abstract class JDFAutoBundleItem extends JDFElement
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.AMOUNT, 0x2222222221l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ITEMNAME, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ORIENTATION, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0),
-				null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ORIENTATION, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumOrientation.class, 0), null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x3333333331l, AttributeInfo.EnumAttributeType.matrix, null, null);
 	}
 
@@ -125,7 +126,7 @@ public abstract class JDFAutoBundleItem extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBundleItem(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoBundleItem(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -137,7 +138,7 @@ public abstract class JDFAutoBundleItem extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBundleItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoBundleItem(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -150,16 +151,28 @@ public abstract class JDFAutoBundleItem extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoBundleItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoBundleItem(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * Enumeration strings for numOrientation
 	 */
+
+	public enum EnumOrientation
+	{
+		Rotate0, Rotate90, Rotate180, Rotate270, Flip0, Flip90, Flip180, Flip270;
+
+		public static EnumOrientation getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumOrientation.class, val, null);
+		}
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
+		 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -171,7 +184,7 @@ public abstract class JDFAutoBundleItem extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAmount(int value)
+	public void setAmount(final int value)
 	{
 		setAttribute(AttributeName.AMOUNT, value, null);
 	}
@@ -196,7 +209,7 @@ public abstract class JDFAutoBundleItem extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setItemName(String value)
+	public void setItemName(final String value)
 	{
 		setAttribute(AttributeName.ITEMNAME, value, null);
 	}
@@ -221,9 +234,9 @@ public abstract class JDFAutoBundleItem extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setOrientation(EOrientation enumVar)
+	public void setOrientation(final EnumOrientation enumVar)
 	{
-		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ORIENTATION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -231,35 +244,6 @@ public abstract class JDFAutoBundleItem extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EOrientation getEOrientation()
-	{
-		return EOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Orientation
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Orientation
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetOrientation(EOrientation) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setOrientation(EnumOrientation enumVar)
-	{
-		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Orientation
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EOrientation GetEOrientation() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumOrientation getOrientation()
 	{
 		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
@@ -275,7 +259,7 @@ public abstract class JDFAutoBundleItem extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTransformation(JDFMatrix value)
+	public void setTransformation(final JDFMatrix value)
 	{
 		setAttribute(AttributeName.TRANSFORMATION, value, null);
 	}
@@ -288,8 +272,8 @@ public abstract class JDFAutoBundleItem extends JDFElement
 	 */
 	public JDFMatrix getTransformation()
 	{
-		String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, null);
-		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -335,7 +319,7 @@ public abstract class JDFAutoBundleItem extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refComponent(JDFComponent refTarget)
+	public void refComponent(final JDFComponent refTarget)
 	{
 		refElement(refTarget);
 	}

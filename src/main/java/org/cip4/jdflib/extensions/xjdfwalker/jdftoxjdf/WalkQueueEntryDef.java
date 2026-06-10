@@ -70,16 +70,14 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkQueueEntryDef extends WalkJDFSubElement
 {
@@ -93,6 +91,7 @@ public class WalkQueueEntryDef extends WalkJDFSubElement
 
 	/**
 	 * replace separationspec elements with their respective values
+	 *
 	 * @param xjdf
 	 * @return true if must continue
 	 */
@@ -102,7 +101,7 @@ public class WalkQueueEntryDef extends WalkJDFSubElement
 		String qeid = jdf.getNonEmpty(AttributeName.QUEUEENTRYID);
 		qeid = StringUtil.replaceChar(qeid, ' ', "_", 0);
 
-		xjdf.appendAttribute(XJDFConstants.QueueEntryIDs, qeid, null, JDFConstants.BLANK, true);
+		xjdf.appendAttribute(XJDFConstants.QueueEntryIDs, qeid, null, JDFCoreConstants.BLANK, true);
 		return null;
 	}
 

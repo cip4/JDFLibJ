@@ -63,7 +63,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer
- *
  *         To change the template for this generated type comment go to Window - Preferences - Java - Code Generation - Code and Comments
  */
 class QueueHotFolderTest extends JDFTestCaseBase
@@ -264,7 +263,6 @@ class QueueHotFolderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override

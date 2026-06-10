@@ -50,7 +50,7 @@ class WalkIgnoreTest extends JDFTestCaseBase
 	void testMatches()
 	{
 		final WalkIgnore w = new WalkIgnore();
-		for (String s : w.getElementNames())
+		for (final String s : w.getElementNames())
 		{
 			assertTrue(w.matches(KElement.createRoot(s, null)));
 		}

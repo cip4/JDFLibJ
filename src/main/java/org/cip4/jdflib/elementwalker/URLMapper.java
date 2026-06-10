@@ -84,9 +84,8 @@ public class URLMapper extends BaseElementWalker implements IElementConverter
 	private boolean wantLog;
 
 	/**
-	 * @param baseIn the input (to be modified) base url
+	 * @param baseIn  the input (to be modified) base url
 	 * @param baseOut the output base url
-	 *
 	 */
 	public URLMapper(final String baseIn, final String baseOut)
 	{
@@ -116,7 +115,6 @@ public class URLMapper extends BaseElementWalker implements IElementConverter
 	 * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super classes
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkURL extends WalkElement
 	{
@@ -131,7 +129,7 @@ public class URLMapper extends BaseElementWalker implements IElementConverter
 
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param e the element to walk over
+		 * @param e         the element to walk over
 		 * @param trackElem - unused should be null
 		 * @return the element to continue walking
 		 */

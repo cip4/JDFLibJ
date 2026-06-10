@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -101,7 +97,7 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTPRIORITY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumDefaultPriority.getEnum(0), "DefaultJDF");
+				JavaEnumUtil.getEnum(EnumDefaultPriority.class, 0), "DefaultJDF");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEFAULTID, 0x4444444443l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFAULTJDF, 0x3333333333l, AttributeInfo.EnumAttributeType.URL, null, null);
 	}
@@ -130,7 +126,7 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoResourceDefinitionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoResourceDefinitionParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -142,7 +138,7 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoResourceDefinitionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoResourceDefinitionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -155,7 +151,7 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoResourceDefinitionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoResourceDefinitionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -166,7 +162,7 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -181,87 +177,22 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for DefaultPriority
+	 * Enumeration strings for numDefaultPriority
 	 */
 
-	public enum EDefaultPriority
+	public enum EnumDefaultPriority
 	{
 		Application, DefaultJDF;
 
-		public static EDefaultPriority getEnum(String val)
+		public static EnumDefaultPriority getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EDefaultPriority.class, val, EDefaultPriority.DefaultJDF);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumDefaultPriority.class, val, EnumDefaultPriority.DefaultJDF);
 		}
-	}
-
-	/**
-	 * Enumeration strings for DefaultPriority
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumDefaultPriority extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumDefaultPriority(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumDefaultPriority getEnum(String enumName)
-		{
-			return (EnumDefaultPriority) getEnum(EnumDefaultPriority.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDefaultPriority getEnum(int enumValue)
-		{
-			return (EnumDefaultPriority) getEnum(EnumDefaultPriority.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDefaultPriority.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDefaultPriority.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDefaultPriority.class);
-		}
-
-		/**  */
-		public static final EnumDefaultPriority Application = new EnumDefaultPriority("Application");
-		/**  */
-		public static final EnumDefaultPriority DefaultJDF = new EnumDefaultPriority("DefaultJDF");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -273,9 +204,9 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDefaultPriority(EDefaultPriority enumVar)
+	public void setDefaultPriority(final EnumDefaultPriority enumVar)
 	{
-		setAttribute(AttributeName.DEFAULTPRIORITY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DEFAULTPRIORITY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -283,35 +214,6 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EDefaultPriority getEDefaultPriority()
-	{
-		return EDefaultPriority.getEnum(getAttribute(AttributeName.DEFAULTPRIORITY, null, "DefaultJDF"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute DefaultPriority
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute DefaultPriority
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDefaultPriority(EDefaultPriority) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDefaultPriority(EnumDefaultPriority enumVar)
-	{
-		setAttribute(AttributeName.DEFAULTPRIORITY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute DefaultPriority
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EDefaultPriority GetEDefaultPriority() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumDefaultPriority getDefaultPriority()
 	{
 		return EnumDefaultPriority.getEnum(getAttribute(AttributeName.DEFAULTPRIORITY, null, "DefaultJDF"));
@@ -327,7 +229,7 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDefaultID(String value)
+	public void setDefaultID(final String value)
 	{
 		setAttribute(AttributeName.DEFAULTID, value, null);
 	}
@@ -352,7 +254,7 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDefaultJDF(String value)
+	public void setDefaultJDF(final String value)
 	{
 		setAttribute(AttributeName.DEFAULTJDF, value, null);
 	}
@@ -399,7 +301,7 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFResourceParam the element
 	 */
-	public JDFResourceParam getCreateResourceParam(int iSkip)
+	public JDFResourceParam getCreateResourceParam(final int iSkip)
 	{
 		return (JDFResourceParam) getCreateElement_JDFElement(ElementName.RESOURCEPARAM, null, iSkip);
 	}
@@ -411,7 +313,7 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	 * @return JDFResourceParam the element
 	 *         default is getResourceParam(0)
 	 */
-	public JDFResourceParam getResourceParam(int iSkip)
+	public JDFResourceParam getResourceParam(final int iSkip)
 	{
 		return (JDFResourceParam) getElement(ElementName.RESOURCEPARAM, null, iSkip);
 	}

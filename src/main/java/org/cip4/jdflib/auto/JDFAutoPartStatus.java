@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoPartStatus : public JDFElement
@@ -93,7 +94,8 @@ public abstract class JDFAutoPartStatus extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.STATUS, 0x4444444333l, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.STATUS, 0x4444444333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumNodeStatus.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x4444444311l, AttributeInfo.EnumAttributeType.shortString, null, null);
 	}
 
@@ -121,7 +123,7 @@ public abstract class JDFAutoPartStatus extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPartStatus(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPartStatus(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -133,7 +135,7 @@ public abstract class JDFAutoPartStatus extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPartStatus(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPartStatus(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -146,7 +148,7 @@ public abstract class JDFAutoPartStatus extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPartStatus(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPartStatus(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -167,7 +169,7 @@ public abstract class JDFAutoPartStatus extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStatusDetails(String value)
+	public void setStatusDetails(final String value)
 	{
 		setAttribute(AttributeName.STATUSDETAILS, value, null);
 	}

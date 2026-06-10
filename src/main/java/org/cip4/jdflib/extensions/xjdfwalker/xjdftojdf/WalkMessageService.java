@@ -115,11 +115,11 @@ public class WalkMessageService extends WalkXElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void updateAttributes(KElement elem)
+	protected void updateAttributes(final KElement elem)
 	{
-		JDFMessageService ms = (JDFMessageService) elem;
+		final JDFMessageService ms = (JDFMessageService) elem;
 		elem.renameAttribute(XJDFConstants.ResponseModes, AttributeName.CHANNELMODE);
-		VString mode = StringUtil.tokenize(elem.getNonEmpty(AttributeName.CHANNELMODE), null, false);
+		final VString mode = StringUtil.tokenize(elem.getNonEmpty(AttributeName.CHANNELMODE), null, false);
 		if (mode != null)
 		{
 			mode.remove(ElementName.RESPONSE);
@@ -132,8 +132,8 @@ public class WalkMessageService extends WalkXElement
 				elem.setAttribute(AttributeName.CHANNELMODE, mode, null);
 			}
 		}
-		String t = ms.getType();
-		for (String s : new StringArray("Command Query Signal"))
+		final String t = ms.getType();
+		for (final String s : new StringArray("Command Query Signal"))
 		{
 			if (t.startsWith(s))
 			{

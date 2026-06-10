@@ -91,9 +91,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class XJDFProductExampleTest extends ExampleTest
 {
@@ -113,7 +111,7 @@ class XJDFProductExampleTest extends ExampleTest
 		final IntentHelper mih = ph.getCreateIntent(ElementName.MEDIAINTENT);
 		final KElement mir = mih.getCreateResource();
 		mir.setAttribute(AttributeName.WEIGHT, 130, null);
-		mir.setAttribute(ElementName.MEDIATYPE, EnumMediaType.Paper.getName());
+		mir.setAttribute(ElementName.MEDIATYPE, EnumMediaType.Paper.name());
 
 		final IntentHelper lih = ph.getCreateIntent(ElementName.LAYOUTINTENT);
 		final JDFElement lir = (JDFElement) lih.getCreateResource();
@@ -150,7 +148,7 @@ class XJDFProductExampleTest extends ExampleTest
 
 		final IntentHelper bih = ph.getCreateIntent(ElementName.BINDINGINTENT);
 		final KElement bir = bih.getCreateResource();
-		bir.setAttribute(ElementName.BINDINGTYPE, EnumSpanBindingType.SaddleStitch.getName(), null);
+		bir.setAttribute(ElementName.BINDINGTYPE, EnumSpanBindingType.SaddleStitch.name(), null);
 
 		final IntentHelper lih = ph.getCreateIntent(ElementName.LAYOUTINTENT);
 		final JDFElement lir = (JDFElement) lih.getCreateResource();
@@ -163,7 +161,7 @@ class XJDFProductExampleTest extends ExampleTest
 		final IntentHelper mich = phCover.getCreateIntent(ElementName.MEDIAINTENT);
 		final KElement micr = mich.getCreateResource();
 		micr.setAttribute(AttributeName.WEIGHT, 130, null);
-		micr.setAttribute(ElementName.MEDIATYPE, EnumMediaType.Paper.getName());
+		micr.setAttribute(ElementName.MEDIATYPE, EnumMediaType.Paper.name());
 
 		final ColorIntentHelper cich = (ColorIntentHelper) phCover.getCreateIntent(ElementName.COLORINTENT);
 		cich.setNumColors(4, 4);
@@ -171,7 +169,7 @@ class XJDFProductExampleTest extends ExampleTest
 		final IntentHelper lich = phCover.getCreateIntent(ElementName.LAYOUTINTENT);
 		final JDFElement licr = (JDFElement) lich.getCreateResource();
 		licr.setAttribute(ElementName.PAGES, 2, null);
-		licr.setAttribute(AttributeName.SPREADTYPE, EnumSpreadType.Spread.getName(), null);
+		licr.setAttribute(AttributeName.SPREADTYPE, EnumSpreadType.Spread.name(), null);
 
 		final ProductHelper phBody = xjdfHelper.appendProduct();
 		phBody.setProductType(eProductType.Body);
@@ -179,7 +177,7 @@ class XJDFProductExampleTest extends ExampleTest
 		final IntentHelper mibh = phBody.getCreateIntent(ElementName.MEDIAINTENT);
 		final KElement mibr = mibh.getCreateResource();
 		mibr.setAttribute(AttributeName.WEIGHT, 90, null);
-		mibr.setAttribute(ElementName.MEDIATYPE, EnumMediaType.Paper.getName());
+		mibr.setAttribute(ElementName.MEDIATYPE, EnumMediaType.Paper.name());
 
 		final ColorIntentHelper cibh = (ColorIntentHelper) phBody.getCreateIntent(ElementName.COLORINTENT);
 		cibh.setNumColors(1, 1);
@@ -187,7 +185,7 @@ class XJDFProductExampleTest extends ExampleTest
 		final IntentHelper libh = phBody.getCreateIntent(ElementName.LAYOUTINTENT);
 		final JDFElement libr = (JDFElement) libh.getCreateResource();
 		libr.setAttribute(ElementName.PAGES, 16, null);
-		libr.setAttribute(AttributeName.SPREADTYPE, EnumSpreadType.SinglePage.getName(), null);
+		libr.setAttribute(AttributeName.SPREADTYPE, EnumSpreadType.SinglePage.name(), null);
 
 		setSnippet(xjdfHelper, true);
 		setSnippet(xjdfHelper.getAuditPool(), false);

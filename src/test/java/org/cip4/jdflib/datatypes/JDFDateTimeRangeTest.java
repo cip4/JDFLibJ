@@ -53,12 +53,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- *
- *
  * @author rainer prosi
  * @date Apr 12, 2013
  */
-class JDFDateTimeRangeTest {
+class JDFDateTimeRangeTest
+{
 	/**
 	 * Class under test for void JDFDateTimeRange(JDFDateTimeRange)
 	 */
@@ -92,8 +91,6 @@ class JDFDateTimeRangeTest {
 
 	/**
 	 * @throws DataFormatException
-	 *
-	 *
 	 */
 	@Test
 	public final void testInRange() throws DataFormatException
@@ -107,8 +104,6 @@ class JDFDateTimeRangeTest {
 
 	/**
 	 * @throws DataFormatException
-	 *
-	 *
 	 */
 	@Test
 	public final void testHash() throws DataFormatException
@@ -120,8 +115,6 @@ class JDFDateTimeRangeTest {
 
 	/**
 	 * @throws DataFormatException
-	 *
-	 *
 	 */
 	@Test
 	public final void testEq() throws DataFormatException
@@ -133,8 +126,6 @@ class JDFDateTimeRangeTest {
 
 	/**
 	 * @throws DataFormatException
-	 *
-	 *
 	 */
 	@Test
 	public final void testCreateRange() throws DataFormatException

@@ -44,11 +44,10 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         June 7, 2009
  */
 public class WalkJDF extends WalkElement
@@ -129,7 +128,7 @@ public class WalkJDF extends WalkElement
 	 */
 	void fixNamedFeatures(final JDFNode n, final KElement trackElem)
 	{
-		if (EnumUtil.aLessThanB(EnumVersion.Version_1_4, fixVersion.version))
+		if (JavaEnumUtil.aLessThanB(EnumVersion.Version_1_4, fixVersion.version))
 		{
 			final VString v = n.getNamedFeatures();
 			final int size = v == null ? 0 : v.size();
@@ -140,7 +139,9 @@ public class WalkJDF extends WalkElement
 				n.setGeneralID(key, val).setDataType(EnumDataType.NamedFeature);
 			}
 			if (fixVersion.isZappDeprecated())
+			{
 				n.removeAttribute(AttributeName.NAMEDFEATURES);
+			}
 		}
 	}
 

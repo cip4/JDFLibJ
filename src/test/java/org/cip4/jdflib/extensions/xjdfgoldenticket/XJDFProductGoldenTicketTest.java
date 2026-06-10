@@ -37,9 +37,9 @@
 package org.cip4.jdflib.extensions.xjdfgoldenticket;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFElement.EnumSides;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFShape;
@@ -266,7 +266,7 @@ class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 	{
 		final XJDFBaseGoldenTicket bt = new XJDFProductGoldenTicket(1, EnumVersion.Version_2_0);
 		final XJDFHelper xjdfHelper = bt.getXJDFHelper();
-		xjdfHelper.setTypes(EnumType.Product.getName());
+		xjdfHelper.setTypes(EnumType.Product.name());
 		final ProductHelper ph = xjdfHelper.getCreateRootProduct(0);
 		ph.setAmount(10);
 		ph.setProductType("Notebook");
@@ -299,7 +299,7 @@ class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 	{
 		final XJDFBaseGoldenTicket bt = new XJDFProductGoldenTicket(1, EnumVersion.Version_2_0);
 		final XJDFHelper xjdfHelper = bt.getXJDFHelper();
-		xjdfHelper.setTypes(EnumType.Product.getName());
+		xjdfHelper.setTypes(EnumType.Product.name());
 		final ProductHelper ph = xjdfHelper.getCreateRootProduct(0);
 		ph.setAmount(10);
 		ph.setProductType("FilledEnvelope");

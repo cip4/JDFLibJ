@@ -73,8 +73,6 @@ import org.cip4.jdflib.jmf.JDFMessage;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
- *
  */
 public class WalkJMFResponseQueue extends WalkJMFResponseAcknowledge
 {
@@ -90,7 +88,7 @@ public class WalkJMFResponseQueue extends WalkJMFResponseAcknowledge
 	 * @see WalkJMFMessage#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public KElement walk(KElement e1, KElement trackElem)
+	public KElement walk(final KElement e1, final KElement trackElem)
 	{
 		fixQueue((JDFMessage) e1);
 		return super.walk(e1, trackElem);
@@ -105,7 +103,9 @@ public class WalkJMFResponseQueue extends WalkJMFResponseAcknowledge
 	public boolean matches(final KElement toCheck)
 	{
 		if (!super.matches(toCheck))
+		{
 			return false;
+		}
 		return isQueueFilterRemove(toCheck);
 	}
 }

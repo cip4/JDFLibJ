@@ -60,13 +60,11 @@ import org.cip4.jdflib.util.CPUTimer;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 class JDFNumListTest extends JDFTestCaseBase
 {
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -88,7 +86,6 @@ class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	public final void testGetIntArray() throws Exception
@@ -101,7 +98,6 @@ class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	public final void testGetIntArrayDouble() throws Exception
@@ -247,7 +243,6 @@ class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws CloneNotSupportedException
-	 *
 	 */
 	@Test
 	public final void testClone() throws CloneNotSupportedException
@@ -262,7 +257,6 @@ class JDFNumListTest extends JDFTestCaseBase
 	/**
 	 * @throws CloneNotSupportedException
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	public final void testMatches() throws CloneNotSupportedException, DataFormatException
@@ -296,7 +290,6 @@ class JDFNumListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -311,7 +304,6 @@ class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	public final void testContainsInt() throws Exception
@@ -325,7 +317,6 @@ class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	public final void testContainsAll() throws Exception
@@ -339,7 +330,6 @@ class JDFNumListTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	public final void testContainsList() throws Exception
@@ -372,7 +362,6 @@ class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testGetDouble() throws Exception
@@ -387,7 +376,6 @@ class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testNorm() throws Exception
@@ -400,7 +388,6 @@ class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testMin() throws Exception
@@ -411,7 +398,6 @@ class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testMinNeg() throws Exception
@@ -422,7 +408,6 @@ class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testMax() throws Exception
@@ -433,7 +418,6 @@ class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testMaxNeg() throws Exception
@@ -444,7 +428,6 @@ class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testVolume() throws Exception
@@ -457,7 +440,6 @@ class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testToString() throws Exception
@@ -470,7 +452,6 @@ class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testCompare() throws Exception
@@ -504,7 +485,6 @@ class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testGetString() throws Exception
@@ -518,7 +498,6 @@ class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testGet() throws Exception
@@ -529,7 +508,6 @@ class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testGetDoubleList() throws Exception
@@ -542,7 +520,6 @@ class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testGetDoubleVector() throws Exception
@@ -556,7 +533,6 @@ class JDFNumListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testPerformance() throws Exception
@@ -572,7 +548,6 @@ class JDFNumListTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testShape() throws Exception

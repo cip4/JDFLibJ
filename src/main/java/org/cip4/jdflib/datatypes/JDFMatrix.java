@@ -505,11 +505,7 @@ public class JDFMatrix extends JDFNumList
 		{
 			return true;
 		}
-		if (other == null)
-		{
-			return false;
-		}
-		if (!other.getClass().equals(getClass()))
+		if ((other == null) || !other.getClass().equals(getClass()))
 		{
 			return false;
 		}

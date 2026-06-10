@@ -40,14 +40,10 @@ package org.cip4.jdflib.core;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.zip.DataFormatException;
 
-import org.apache.commons.lang.enums.EnumUtils;
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -72,6 +68,7 @@ import org.cip4.jdflib.datatypes.JDFXYPairRange;
 import org.cip4.jdflib.datatypes.JDFXYPairRangeList;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 
@@ -105,7 +102,7 @@ public class AttributeInfo
 	 * Constructor
 	 *
 	 * @param attrInfo_super corresponding attrib info of super; if null: start from scratch, otherwise initialize from other AttributeInfo
-	 * @param attrInfo_own table with element-specific attribute info
+	 * @param attrInfo_own   table with element-specific attribute info
 	 * @deprecated
 	 */
 	@Deprecated
@@ -235,11 +232,9 @@ public class AttributeInfo
 		final long l2 = JDFVersions.getTheMask(version);
 		final long v2 = JDFVersions.getTheOffset(version);
 
-		final Iterator<String> iter = attribInfoTable.keySet().iterator();
 		final boolean bOK = attrValidity == null;
-		while (iter.hasNext())
+		for (final String theKey : attribInfoTable.keySet())
 		{
-			final String theKey = iter.next();
 			final AtrInfo ai = attribInfoTable.get(theKey);
 			if (bOK)
 			{
@@ -275,15 +270,13 @@ public class AttributeInfo
 	{
 		final JDFAttributeMap matchingAttribs = new JDFAttributeMap();
 
-		final Iterator<String> iter = attribInfoTable.keySet().iterator();
-		while (iter.hasNext())
+		for (final String theKey : attribInfoTable.keySet())
 		{
-			final String theKey = iter.next();
 			final AtrInfo ai = attribInfoTable.get(theKey);
 			final long l2 = JDFVersions.getTheMask(version);
 			final long v2 = JDFVersions.getTheOffset(version);
-			final EnumAttributeValidity versionVal = EnumAttributeValidity.getEnum((int) ((ai.getValidityStatus() & l2) >> v2));
-			if (versionVal.equals(EnumAttributeValidity.Optional) || versionVal.equals(EnumAttributeValidity.Required))
+			final EnumAttributeValidity versionVal = EnumAttributeValidity.getEnum(3);
+			if (versionVal == EnumAttributeValidity.Optional || versionVal == EnumAttributeValidity.Required)
 			{
 				final String def = ai.getAtrDefault();
 				if (def != null)
@@ -339,14 +332,15 @@ public class AttributeInfo
 	{
 		final VString optionals = new VString(conformingAttribs(EnumAttributeValidity.Optional));
 		optionals.appendUnique(conformingAttribs(EnumAttributeValidity.Deprecated));
-		final Iterator<String> iter = attribInfoTable.keySet().iterator();
+
 		// anything with a default is at least optional
-		while (iter.hasNext())
+		for (final String theKey : attribInfoTable.keySet())
 		{
-			final String theKey = iter.next();
 			final String defaultVal = getAttributeDefault(theKey);
 			if (defaultVal != null)
+			{
 				optionals.appendUnique(theKey);
+			}
 		}
 
 		return optionals;
@@ -421,12 +415,12 @@ public class AttributeInfo
 	}
 
 	/**
-	 * Returns the ValuedEnum that goes with attributeName
+	 * Returns the enum that goes with attributeName
 	 *
 	 * @param attributeName : name of the attribute
 	 * @return EnumAttributeType: the attribute's type
 	 */
-	public ValuedEnum getAttributeEnum(final String attributeName)
+	public Enum<?> getAttributeEnum(final String attributeName)
 	{
 		final AtrInfo atrInfo = attribInfoTable.get(attributeName);
 		if (atrInfo != null)
@@ -460,19 +454,11 @@ public class AttributeInfo
 	/**
 	 * Enumeration of valid attribute types
 	 */
-	public static final class EnumAttributeType extends ValuedEnum
+	public enum EnumAttributeType
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-		private static Set<EnumAttributeType> setRange = null;
+		Any, boolean_, CMYKColor, dateTime, DateTimeRange, DateTimeRangeList, double_, duration, DurationRange, DurationRangeList, enumeration, enumerations, hexBinary, ID, IDREF, IDREFS, integer, IntegerList, IntegerRange, IntegerRangeList, JDFJMFVersion, LabColor, language, languages, matrix, NameRange, NameRangeList, NMTOKEN, NMTOKENS, NumberList, NumberRange, NumberRangeList, PDFPath, rectangle, RectangleRange, RectangleRangeList, RegExp, RGBColor, shape, ShapeRange, ShapeRangeList, shortString, string, TransferFunction, unbounded, URI, URL, XYPair, XYPairRange, XYPairRangeList, XPath, XYRelation;
 
-		/**
-		 * @param name
-		 */
-		private EnumAttributeType(final String name)
-		{
-			super(name, m_startValue++);
-		}
+		private static Set<EnumAttributeType> setRange = null;
 
 		/**
 		 * @param enumName the name of the enum object to return
@@ -480,7 +466,15 @@ public class AttributeInfo
 		 */
 		public static EnumAttributeType getEnum(final String enumName)
 		{
-			final EnumAttributeType eat = (EnumAttributeType) getEnum(EnumAttributeType.class, enumName);
+			if (JDFConstants.ATTRIBUTETYPE_BOOLEAN.equalsIgnoreCase(enumName))
+			{
+				return boolean_;
+			}
+			if (JDFConstants.ATTRIBUTETYPE_DOUBLE.equalsIgnoreCase(enumName))
+			{
+				return double_;
+			}
+			final EnumAttributeType eat = JavaEnumUtil.getEnumIgnoreCase(EnumAttributeType.class, enumName, null);
 			return (eat == null) ? EnumAttributeType.Any : eat;
 		}
 
@@ -490,31 +484,12 @@ public class AttributeInfo
 		 */
 		public static EnumAttributeType getEnum(final int enumValue)
 		{
-			return (EnumAttributeType) getEnum(EnumAttributeType.class, enumValue);
+			return (EnumAttributeType) JavaEnumUtil.getEnum(EnumAttributeType.class, enumValue);
 		}
 
-		/**
-		 * @return a map of all orientation enums
-		 */
-		public static Map getEnumMap()
+		public int getValue()
 		{
-			return getEnumMap(EnumAttributeType.class);
-		}
-
-		/**
-		 * @return a list of all orientation enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAttributeType.class);
-		}
-
-		/**
-		 * @return an iterator over the enum objects
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAttributeType.class);
+			return ordinal();
 		}
 
 		/**
@@ -548,110 +523,6 @@ public class AttributeInfo
 			return test == null ? false : setRange.contains(test);
 		}
 
-		/** */
-		public static final EnumAttributeType Any = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_ANY);
-		/** */
-		public static final EnumAttributeType boolean_ = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_BOOLEAN);
-		/** */
-		public static final EnumAttributeType CMYKColor = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_CMYKCOLOR);
-		/** */
-		public static final EnumAttributeType dateTime = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_DATETIME);
-		/** */
-		public static final EnumAttributeType DateTimeRange = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_DATETIMERANGE);
-		/** */
-		public static final EnumAttributeType DateTimeRangeList = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_DATETIMERANGELIST);
-		/** */
-		public static final EnumAttributeType double_ = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_DOUBLE);
-		/** */
-		public static final EnumAttributeType duration = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_DURATION);
-		/** */
-		public static final EnumAttributeType DurationRange = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_DURATIONRANGE);
-		/** */
-		public static final EnumAttributeType DurationRangeList = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_DURATIONRANGELIST);
-		/** */
-		public static final EnumAttributeType enumeration = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_ENUMERATION); // also
-		/** */
-		public static final EnumAttributeType enumerations = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_ENUMERATIONS); // also
-		/** */
-		public static final EnumAttributeType hexBinary = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_HEXBINARY);
-		/** */
-		public static final EnumAttributeType ID = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_ID);
-		/** */
-		public static final EnumAttributeType IDREF = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_IDREF);
-		/** */
-		public static final EnumAttributeType IDREFS = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_IDREFS);
-		/** */
-		public static final EnumAttributeType integer = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_INTEGER);
-		/** */
-		public static final EnumAttributeType IntegerList = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_INTEGERLIST);
-		/** */
-		public static final EnumAttributeType IntegerRange = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_INTEGERRANGE);
-		/** */
-		public static final EnumAttributeType IntegerRangeList = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_INTEGERRANGELIST);
-		/** */
-		public static final EnumAttributeType JDFJMFVersion = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_JDFJMFVERSION);
-		/** */
-		public static final EnumAttributeType LabColor = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_LABCOLOR);
-		/** */
-		public static final EnumAttributeType language = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_LANGUAGE);
-		/** */
-		public static final EnumAttributeType languages = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_LANGUAGES);
-		/** */
-		public static final EnumAttributeType matrix = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_MATRIX);
-		/** */
-		public static final EnumAttributeType NameRange = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_NAMERANGE);
-		/** */
-		public static final EnumAttributeType NameRangeList = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_NAMERANGELIST);
-		/** */
-		public static final EnumAttributeType NMTOKEN = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_NMTOKEN);
-		/** */
-		public static final EnumAttributeType NMTOKENS = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_NMTOKENS);
-		/** */
-		public static final EnumAttributeType NumberList = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_NUMBERLIST); // equivalent
-		/** */
-		public static final EnumAttributeType NumberRange = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_NUMBERRANGE);
-		/** */
-		public static final EnumAttributeType NumberRangeList = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_NUMBERRANGELIST);
-		/** */
-		public static final EnumAttributeType PDFPath = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_PDFPATH);
-		/** */
-		public static final EnumAttributeType rectangle = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_RECTANGLE);
-		/** */
-		public static final EnumAttributeType RectangleRange = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_RECTANGLERANGE);
-		/** */
-		public static final EnumAttributeType RectangleRangeList = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_RECTANGLERANGELIST);
-		/** */
-		public static final EnumAttributeType RegExp = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_REGEXP);
-		/** */
-		public static final EnumAttributeType RGBColor = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_RGBCOLOR);
-		/** */
-		public static final EnumAttributeType shape = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_SHAPE);
-		/** */
-		public static final EnumAttributeType ShapeRange = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_SHAPERANGE);
-		/** */
-		public static final EnumAttributeType ShapeRangeList = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_SHAPERANGELIST);
-		/** */
-		public static final EnumAttributeType shortString = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_SHORTSTRING);
-		/** */
-		public static final EnumAttributeType string = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_STRING);
-		/** */
-		public static final EnumAttributeType TransferFunction = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_TRANSFERFUNCTION);
-		/** */
-		public static final EnumAttributeType unbounded = new EnumAttributeType(JDFConstants.UNBOUNDED); // needed
-		/** */
-		public static final EnumAttributeType URI = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_URI);
-		/** */
-		public static final EnumAttributeType URL = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_URL);
-		/** */
-		public static final EnumAttributeType XYPair = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_XYPAIR);
-		/** */
-		public static final EnumAttributeType XYPairRange = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_XYPAIRRANGE);
-		/** */
-		public static final EnumAttributeType XYPairRangeList = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_XYPAIRRANGELIST);
-		/** */
-		public static final EnumAttributeType XPath = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_XPATH);
-		/** */
-		public static final EnumAttributeType XYRelation = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_XYRELATION);
 	}
 
 	/*
@@ -662,18 +533,9 @@ public class AttributeInfo
 	/**
 	 * Enumeration of attribute validity values
 	 */
-	public static final class EnumAttributeValidity extends ValuedEnum
+	public enum EnumAttributeValidity
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		/**
-		 * @param name
-		 */
-		private EnumAttributeValidity(final String name)
-		{
-			super(name, m_startValue++);
-		}
+		Unknown, None, Required, Optional, Deprecated, Any;
 
 		/**
 		 * @param enumName the name of the enum object to return
@@ -681,7 +543,7 @@ public class AttributeInfo
 		 */
 		public static EnumAttributeValidity getEnum(final String enumName)
 		{
-			return (EnumAttributeValidity) getEnum(EnumAttributeValidity.class, enumName);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumAttributeValidity.class, enumName, null);
 		}
 
 		/**
@@ -690,45 +552,13 @@ public class AttributeInfo
 		 */
 		public static EnumAttributeValidity getEnum(final int enumValue)
 		{
-			return (EnumAttributeValidity) getEnum(EnumAttributeValidity.class, enumValue);
+			return (EnumAttributeValidity) JavaEnumUtil.getEnum(EnumAttributeValidity.class, enumValue);
 		}
 
-		/**
-		 * @return a map of all orientation enums
-		 */
-		public static Map getEnumMap()
+		public int getValue()
 		{
-			return getEnumMap(EnumAttributeValidity.class);
+			return ordinal();
 		}
-
-		/**
-		 * @return a list of all orientation enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAttributeValidity.class);
-		}
-
-		/**
-		 * @return an iterator over the enum objects
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAttributeValidity.class);
-		}
-
-		/** */
-		public static final EnumAttributeValidity Unknown = new EnumAttributeValidity(JDFConstants.ATTRIBUTEVALIDITY_UNKNOWN);
-		/** */
-		public static final EnumAttributeValidity None = new EnumAttributeValidity(JDFConstants.ATTRIBUTEVALIDITY_NONE);
-		/** */
-		public static final EnumAttributeValidity Required = new EnumAttributeValidity(JDFConstants.ATTRIBUTEVALIDITY_REQUIRED);
-		/** */
-		public static final EnumAttributeValidity Optional = new EnumAttributeValidity(JDFConstants.ATTRIBUTEVALIDITY_OPTIONAL);
-		/** */
-		public static final EnumAttributeValidity Deprecated = new EnumAttributeValidity(JDFConstants.ATTRIBUTEVALIDITY_DEPRECATED);
-		/** */
-		public static final EnumAttributeValidity Any = new EnumAttributeValidity(JDFConstants.ATTRIBUTEVALIDITY_ANY);
 	}
 
 	/**
@@ -767,10 +597,12 @@ public class AttributeInfo
 	{
 		final EnumAttributeType typ = getAttributeType(key);
 		if (typ == null) // unknown attributes are by definition valid, the check is done in the unknown method
+		{
 			return true;
+		}
 
 		// get the correct enumeration lists
-		ValuedEnum enu = null;
+		Enum<?> enu = null;
 		if ((typ == EnumAttributeType.enumeration) || (typ == EnumAttributeType.enumerations))
 		{
 			enu = getAttributeEnum(key);
@@ -812,15 +644,18 @@ public class AttributeInfo
 	 * @param iType
 	 * @param enu
 	 * @return
-	 *
 	 */
-	public static boolean validStringForType(final String val, final EnumAttributeType iType, final ValuedEnum enu)
+	public static boolean validStringForType(final String val, final EnumAttributeType iType, final Enum<?> enu)
 	{
 		if (val == null || val.isEmpty())
+		{
 			return false;
+		}
 
 		if (iType == null)
+		{
 			return true;
+		}
 
 		try
 		{
@@ -944,7 +779,9 @@ public class AttributeInfo
 			else if (iType == AttributeInfo.EnumAttributeType.dateTime)
 			{
 				if (val.length() < 20)
+				{
 					return false;
+				}
 				new JDFDate(val);
 				return val.indexOf('T') == 10; // pure dates are not valid
 			}
@@ -994,11 +831,13 @@ public class AttributeInfo
 			}
 			else if (iType == AttributeInfo.EnumAttributeType.languages)
 			{
-				final VString v = StringUtil.tokenize(val, JDFConstants.BLANK, false);
+				final VString v = StringUtil.tokenize(val, JDFCoreConstants.BLANK, false);
 				for (int i = 0; i < v.size(); i++)
 				{
 					if (!validLanguageString(v.elementAt(i)))
+					{
 						return false;
+					}
 				}
 				return true;
 			}
@@ -1032,17 +871,20 @@ public class AttributeInfo
 		}
 	}
 
-	static boolean isEnums(final String val, final ValuedEnum enu)
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	static boolean isEnums(final String val, final Enum<?> enu)
 	{
 		if (enu != null)
 		{
-			final VString vs = StringUtil.tokenize(val, JDFConstants.BLANK, false);
-			for (int i = 0; i < vs.size(); i++)
+			final VString vs = StringUtil.tokenize(val, JDFCoreConstants.BLANK, false);
+			for (final String element : vs)
 			{
-				final ValuedEnum ve = (ValuedEnum) EnumUtils.getEnum(enu.getClass(), vs.get(i));
+				final Enum<?> ve = JavaEnumUtil.getEnumIgnoreCase(enu.getClass(), element, null);
 				// there was an invalid token
 				if (ve == null)
+				{
 					return false;
+				}
 			}
 			// all were ok
 			return true;
@@ -1051,11 +893,12 @@ public class AttributeInfo
 		return StringUtil.isNMTOKENS(val, false);
 	}
 
-	static boolean isEnum(final String val, final ValuedEnum enu)
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	static boolean isEnum(final String val, final Enum<?> enu)
 	{
 		if (enu != null)
 		{
-			final ValuedEnum ve = (ValuedEnum) EnumUtils.getEnum(enu.getClass(), val);
+			final Enum<?> ve = JavaEnumUtil.getEnumIgnoreCase((Class) enu.getClass(), val, null);
 			return ve != null;
 		}
 		// limp along if something went wrong

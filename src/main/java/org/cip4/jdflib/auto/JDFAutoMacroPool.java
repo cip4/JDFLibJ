@@ -106,7 +106,7 @@ public abstract class JDFAutoMacroPool extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMacroPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoMacroPool(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoMacroPool extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMacroPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoMacroPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoMacroPool extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoMacroPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoMacroPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoMacroPool extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFmacro the element
 	 */
-	public JDFmacro getCreatemacro(int iSkip)
+	public JDFmacro getCreatemacro(final int iSkip)
 	{
 		return (JDFmacro) getCreateElement_JDFElement(ElementName.MACRO, null, iSkip);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoMacroPool extends JDFElement
 	 * @return JDFmacro the element
 	 *         default is getmacro(0)
 	 */
-	public JDFmacro getmacro(int iSkip)
+	public JDFmacro getmacro(final int iSkip)
 	{
 		return (JDFmacro) getElement(ElementName.MACRO, null, iSkip);
 	}

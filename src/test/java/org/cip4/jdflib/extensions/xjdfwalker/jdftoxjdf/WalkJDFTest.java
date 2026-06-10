@@ -76,7 +76,7 @@ class WalkJDFTest extends JDFTestCaseBase
 		final JDFComment c = n.appendComment();
 		c.setID("i1");
 		final KElement xjdf = new JDFToXJDF().convert(n);
-		Assertions.assertEquals(xjdf.getXPathAttribute("@Types", null), EnumType.ManualLabor.getName());
+		Assertions.assertEquals(xjdf.getXPathAttribute("@Types", null), EnumType.ManualLabor.name());
 	}
 
 	/**

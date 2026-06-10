@@ -94,7 +94,6 @@ class XJDFZipWriterTest extends JDFTestCaseBase
 {
 
 	/**
-	 *
 	 * @throws IOException
 	 */
 	@Test
@@ -109,14 +108,13 @@ class XJDFZipWriterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws IOException
 	 */
 	@Test
 	void testSimpleXJDFAux() throws IOException
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
-		JDFRunList ruli = (JDFRunList) h.appendResourceSet(ElementName.RUNLIST, EnumUsage.Input).getCreateResource().getResource();
+		final JDFRunList ruli = (JDFRunList) h.appendResourceSet(ElementName.RUNLIST, EnumUsage.Input).getCreateResource().getResource();
 		ruli.setFileSpecURL(UrlUtil.fileToUrl(new File(sm_dirTestData + "url1.pdf"), false));
 		final XJDFZipWriter w = new XJDFZipWriter();
 		w.addXJDF(h, true);
@@ -127,7 +125,6 @@ class XJDFZipWriterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws IOException
 	 */
 	@Test
@@ -139,12 +136,11 @@ class XJDFZipWriterTest extends JDFTestCaseBase
 			final XJDFHelper h = new XJDFHelper("j1", "p" + i, null);
 			w.addXJDF(h);
 		}
-		File f = FileUtil.writeFile(w, new File(sm_dirTestDataTemp + "multi.xjdf.zip"));
+		final File f = FileUtil.writeFile(w, new File(sm_dirTestDataTemp + "multi.xjdf.zip"));
 		assertNotNull(f);
 	}
 
 	/**
-	 *
 	 * @throws IOException
 	 */
 	@Test
@@ -158,7 +154,6 @@ class XJDFZipWriterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws IOException
 	 */
 	@Test
@@ -177,7 +172,6 @@ class XJDFZipWriterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws IOException
 	 */
 	@Test
@@ -191,7 +185,6 @@ class XJDFZipWriterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws IOException
 	 */
 	@Test
@@ -209,7 +202,6 @@ class XJDFZipWriterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws IOException
 	 */
 	@Test
@@ -222,7 +214,7 @@ class XJDFZipWriterTest extends JDFTestCaseBase
 		assertEquals("q1", w.getQeID());
 		assertEquals(EnumType.ReturnQueueEntry, w.getCommandType());
 		w.addXJDF(h);
-		XJMFHelper mh = new XJMFHelper();
+		final XJMFHelper mh = new XJMFHelper();
 		mh.appendMessage(EnumFamily.Command, EnumType.ReturnQueueEntry);
 		mh.getCreateElement(ElementName.RETURNQUEUEENTRYPARAMS).setAttribute(AttributeName.URL, "dummy");
 		final XJMFHelper jmf = w.ensureXJMF();
@@ -230,7 +222,6 @@ class XJDFZipWriterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws IOException
 	 */
 	@Test
@@ -243,14 +234,13 @@ class XJDFZipWriterTest extends JDFTestCaseBase
 		assertEquals("q1", w.getQeID());
 		assertEquals(EnumType.ReturnQueueEntry, w.getCommandType());
 		w.addXJDF(h);
-		XJMFHelper mh = new XJMFHelper();
+		final XJMFHelper mh = new XJMFHelper();
 		mh.appendMessage(EnumFamily.Command, EnumType.ReturnQueueEntry);
 		final XJMFHelper jmf = w.ensureXJMF();
 		assertEquals("xjdf/j1.00.xjdf", jmf.getXPathValue("CommandReturnQueueEntry/ReturnQueueEntryParams/@URL"));
 	}
 
 	/**
-	 *
 	 * @throws IOException
 	 */
 	@Test
@@ -263,7 +253,6 @@ class XJDFZipWriterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws IOException
 	 */
 	@Test
@@ -279,7 +268,6 @@ class XJDFZipWriterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws IOException
 	 */
 	@Test
@@ -299,7 +287,6 @@ class XJDFZipWriterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws IOException
 	 */
 	@Test

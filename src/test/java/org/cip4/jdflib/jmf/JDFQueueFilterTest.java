@@ -61,7 +61,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         < July 4, 2009
  */
 class JDFQueueFilterTest extends JDFTestCaseBase
@@ -88,7 +87,6 @@ class JDFQueueFilterTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testMatchDiff_RemoveNonMatching() throws Exception
@@ -238,7 +236,6 @@ class JDFQueueFilterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -389,7 +386,7 @@ class JDFQueueFilterTest extends JDFTestCaseBase
 			final JDFQueueEntry qe = theQueue.appendQueueEntry();
 			qe.setPriority((i * 317) % 99);
 			qe.setQueueEntryID("q" + i);
-			qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum(i % 7 + 1));
+			qe.setQueueEntryStatus(EnumQueueEntryStatus.values()[i % 7 + 1]);
 		}
 		final JDFQueue q2 = (JDFQueue) theQueue.getOwnerDocument_JDFElement().clone().getRoot();
 		q2.getQueueEntry(333).setPriority(100);
@@ -415,7 +412,7 @@ class JDFQueueFilterTest extends JDFTestCaseBase
 			final JDFQueueEntry qe = theQueue.appendQueueEntry();
 			qe.setPriority((i * 317) % 99);
 			qe.setQueueEntryID("q" + i);
-			qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum(i % 7 + 1));
+			qe.setQueueEntryStatus(EnumQueueEntryStatus.values()[i % 7 + 1]);
 		}
 		final JDFQueue qLast = (JDFQueue) theQueue.getOwnerDocument_JDFElement().clone().getRoot();
 		final JDFQueue qCopy = filter.copy(theQueue, qLast, null);
@@ -442,7 +439,7 @@ class JDFQueueFilterTest extends JDFTestCaseBase
 			final JDFQueueEntry qe = theQueue.appendQueueEntry();
 			qe.setPriority((i * 317) % 99);
 			qe.setQueueEntryID("q" + i);
-			qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum(i % 7 + 1));
+			qe.setQueueEntryStatus(EnumQueueEntryStatus.values()[i % 7 + 1]);
 		}
 		final JDFQueue qCopy = filter.copy(theQueue, null, null);
 		Assertions.assertNull(qCopy.getQueueEntry(0));
@@ -461,7 +458,7 @@ class JDFQueueFilterTest extends JDFTestCaseBase
 			final JDFQueueEntry qe = theQueue.appendQueueEntry();
 			qe.setPriority((i * 317) % 99);
 			qe.setQueueEntryID("q" + i);
-			qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum(i % 7 + 1));
+			qe.setQueueEntryStatus(EnumQueueEntryStatus.values()[i % 7 + 1]);
 		}
 		final JDFQueue qLast = (JDFQueue) theQueue.getOwnerDocument_JDFElement().clone().getRoot();
 		final JDFQueueEntry queueEntryLast = qLast.getQueueEntry(333);
@@ -498,29 +495,45 @@ class JDFQueueFilterTest extends JDFTestCaseBase
 				final JDFQueueEntry qe = theQueue.getCreateQueueEntry(i);
 				qe.setPriority((i * 317) % 99);
 				qe.setQueueEntryID("q" + i);
-				qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum(i % 7 + 1));
+				qe.setQueueEntryStatus(EnumQueueEntryStatus.values()[i % 7 + 1]);
 				if (test == 1 || test == 2)
+				{
 					qe.setActivation(EnumActivation.Active);
+				}
 				if (test > 3 && i % 3 == 0)
+				{
 					qe.setActivation(EnumActivation.Inactive);
+				}
 			}
 			if (test > 0)
+			{
 				filter.setActivation(EnumActivation.Active);
+			}
 			if (test == 3 || test == 5)
+			{
 				filter.setActivation(EnumActivation.Inactive);
+			}
 
 			final long l1 = System.currentTimeMillis();
 			final JDFQueue qCopy = filter.copy(theQueue, null, null);
 			final long l2 = System.currentTimeMillis();
 			Assertions.assertEquals(2000, (l2 - l1), 2000, "copy time <1 second");
 			if (test < 3)
+			{
 				Assertions.assertEquals(qCopy.numEntries(null), theQueue.numEntries(null));
+			}
 			if (test == 3)
+			{
 				Assertions.assertEquals(qCopy.numEntries(null), 0);
+			}
 			if (test == 4)
+			{
 				Assertions.assertEquals(qCopy.numEntries(null), 800);
+			}
 			if (test == 5)
+			{
 				Assertions.assertEquals(qCopy.numEntries(null), 400);
+			}
 
 		}
 	}
@@ -537,7 +550,7 @@ class JDFQueueFilterTest extends JDFTestCaseBase
 			final JDFQueueEntry qe = theQueue.appendQueueEntry();
 			qe.setPriority((i * 317) % 99);
 			qe.setQueueEntryID("q" + i);
-			qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum(i % 7 + 1));
+			qe.setQueueEntryStatus(EnumQueueEntryStatus.values()[i % 7 + 1]);
 			qe.appendJobPhase().setStatusDetails("aa" + i);
 		}
 		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
@@ -576,10 +589,12 @@ class JDFQueueFilterTest extends JDFTestCaseBase
 			final JDFQueueEntry qe = theQueue.appendQueueEntry();
 			qe.setPriority((i * 317) % 99);
 			qe.setQueueEntryID("q" + i);
-			qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum(i % 7 + 1));
+			qe.setQueueEntryStatus(EnumQueueEntryStatus.values()[i % 7 + 1]);
 			qe.appendJobPhase().setStatusDetails("aa" + i);
 			if (i % 13 == 0)
+			{
 				set.add("q" + i);
+			}
 		}
 		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
 		filter.setQueueEntrieDefs(set);
@@ -588,14 +603,14 @@ class JDFQueueFilterTest extends JDFTestCaseBase
 		for (int i = 0; i < 1200; i++)
 		{
 			final JDFQueueEntry qe = qLast.getQueueEntry(i);
-			qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum((i + 1) % 7 + 1));
+			qe.setQueueEntryStatus(EnumQueueEntryStatus.values()[(i + 1) % 7 + 1]);
 		}
 		filter.setQueueEntryDetails(EnumQueueEntryDetails.JobPhase);
 		JDFQueue qCopy = filter.copy(theQueue, qLast, null);
 		Assertions.assertEquals(qCopy.getQueueEntryVector().size() - 1, 1200 / 13);
 		final Set<String> ms = qCopy.getQueueEntryIDMap().keySet();
 		Assertions.assertTrue(ms.equals(set));
-		filter.setQueueEntrieDefs(new HashSet<String>());
+		filter.setQueueEntrieDefs(new HashSet<>());
 		qCopy = filter.copy(theQueue, qLast, null);
 		Assertions.assertNull(qCopy);
 	}
@@ -613,10 +628,12 @@ class JDFQueueFilterTest extends JDFTestCaseBase
 			final JDFQueueEntry qe = theQueue.appendQueueEntry();
 			qe.setPriority((i * 317) % 99);
 			qe.setQueueEntryID("q" + i);
-			qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum(i % 7 + 1));
+			qe.setQueueEntryStatus(EnumQueueEntryStatus.values()[i % 7 + 1]);
 			qe.appendJobPhase().setStatusDetails("aa" + i);
 			if (i % 13 == 0)
+			{
 				set.add("q" + i);
+			}
 		}
 		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
 		filter.setQueueEntrieDefs(set);
@@ -631,7 +648,7 @@ class JDFQueueFilterTest extends JDFTestCaseBase
 		Assertions.assertEquals(qCopy.getQueueEntryVector().size() - 1, 1000 / 13);
 		final Set<String> ms = qCopy.getQueueEntryIDMap().keySet();
 		Assertions.assertTrue(set.containsAll(ms));
-		filter.setQueueEntrieDefs(new HashSet<String>());
+		filter.setQueueEntrieDefs(new HashSet<>());
 		qCopy = filter.copy(theQueue, qLast, null);
 		Assertions.assertEquals(qCopy.getQueueEntryVector().size(), 0);
 	}
@@ -652,7 +669,9 @@ class JDFQueueFilterTest extends JDFTestCaseBase
 			qe.setPriority((i * 317) % 99);
 			qe.setQueueEntryID("q" + i);
 			if (i == 9000)
+			{
 				log.info("startup");
+			}
 			if (i > 9000)
 			{
 				ct.start();
@@ -660,7 +679,9 @@ class JDFQueueFilterTest extends JDFTestCaseBase
 				Assertions.assertEquals(qCopy.getQueueEntryVector().size(), 1, "test " + i);
 				Assertions.assertEquals(qCopy.getQueueEntry(0).getQueueEntryID(), "q" + i, "test " + i);
 				if ((i % 100) == 0)
+				{
 					log.info(ct.toString());
+				}
 				ct.stop();
 			}
 		}
@@ -686,7 +707,9 @@ class JDFQueueFilterTest extends JDFTestCaseBase
 			qeLast.setQueueEntryID("q" + i);
 			filter.getCreateQueueEntryDef(0).setQueueEntryID("q" + i);
 			if (i == 9000)
+			{
 				log.info("startup");
+			}
 			if (i > 9000)
 			{
 				ct.start();
@@ -694,7 +717,9 @@ class JDFQueueFilterTest extends JDFTestCaseBase
 				Assertions.assertEquals(qCopy.getQueueEntryVector().size(), 1, "test " + i);
 				Assertions.assertEquals(qCopy.getQueueEntry(0).getQueueEntryID(), "q" + i, "test " + i);
 				if ((i % 100) == 0)
+				{
 					log.info(ct.toString());
+				}
 				ct.stop();
 			}
 		}

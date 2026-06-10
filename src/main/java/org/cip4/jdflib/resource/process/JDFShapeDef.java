@@ -18,7 +18,7 @@ public class JDFShapeDef extends JDFAutoShapeDef
 
 	/**
 	 * Constructor for JDFShapeDef
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
@@ -29,7 +29,7 @@ public class JDFShapeDef extends JDFAutoShapeDef
 
 	/**
 	 * Constructor for JDFShapeDef
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
@@ -41,7 +41,7 @@ public class JDFShapeDef extends JDFAutoShapeDef
 
 	/**
 	 * Constructor for JDFShapeDef
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName

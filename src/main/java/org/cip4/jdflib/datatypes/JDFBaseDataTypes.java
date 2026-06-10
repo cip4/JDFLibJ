@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  *
@@ -79,12 +79,8 @@
  */
 package org.cip4.jdflib.datatypes;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  * all constants of the JDF library
@@ -134,59 +130,30 @@ public interface JDFBaseDataTypes
 	/**
 	 * Enumeration for FitsValue method, switches between Allowed and Present testlists
 	 */
-	public static class EnumFitsValue extends ValuedEnum
+	public enum EnumFitsValue
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Present(JDFConstants.FITSVALUE_PRESENT), Allowed(JDFConstants.FITSVALUE_ALLOWED);
 
-		private EnumFitsValue(String name)
+		private final String name;
+
+		private EnumFitsValue(final String name)
 		{
-			super(name, m_startValue++);
+			this.name = name;
+		}
+
+		@Override
+		public String toString()
+		{
+			return name;
 		}
 
 		/**
-		 * @param enumName the name of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
+		 * @param val the name of the enum object to return
+		 * @return the enum object if val is valid. Otherwise null
 		 */
-		public static EnumFitsValue getEnum(String enumName)
+		public static EnumFitsValue getEnum(final String val)
 		{
-			return (EnumFitsValue) getEnum(EnumFitsValue.class, enumName);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumFitsValue.class, val, null);
 		}
-
-		/**
-		 * @param enumValue the value of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
-		 */
-		public static EnumFitsValue getEnum(int enumValue)
-		{
-			return (EnumFitsValue) getEnum(EnumFitsValue.class, enumValue);
-		}
-
-		/**
-		 * @return a map of all orientation enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumFitsValue.class);
-		}
-
-		/**
-		 * @return a list of all orientation enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumFitsValue.class);
-		}
-
-		/**
-		 * @return an iterator over the enum objects
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumFitsValue.class);
-		}
-
-		public static final EnumFitsValue Present = new EnumFitsValue(JDFConstants.FITSVALUE_PRESENT);
-		public static final EnumFitsValue Allowed = new EnumFitsValue(JDFConstants.FITSVALUE_ALLOWED);
 	}
 }

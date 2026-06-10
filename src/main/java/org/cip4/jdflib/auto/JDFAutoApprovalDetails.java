@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -101,7 +96,7 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.APPROVALSTATE, 0x2222222111l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumApprovalState.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumApprovalState.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.APPROVALSTATEDETAILS, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
@@ -130,7 +125,7 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoApprovalDetails(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoApprovalDetails(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -142,7 +137,7 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoApprovalDetails(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoApprovalDetails(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -155,95 +150,28 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoApprovalDetails(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoApprovalDetails(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for ApprovalState
+	 * Enumeration strings for numApprovalState
 	 */
 
-	public enum EApprovalState
+	public enum EnumApprovalState
 	{
 		Approved, ApprovedWithComment, Rejected;
 
-		public static EApprovalState getEnum(String val)
+		public static EnumApprovalState getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EApprovalState.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumApprovalState.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for ApprovalState
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumApprovalState extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumApprovalState(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumApprovalState getEnum(String enumName)
-		{
-			return (EnumApprovalState) getEnum(EnumApprovalState.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumApprovalState getEnum(int enumValue)
-		{
-			return (EnumApprovalState) getEnum(EnumApprovalState.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumApprovalState.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumApprovalState.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumApprovalState.class);
-		}
-
-		/**  */
-		public static final EnumApprovalState Approved = new EnumApprovalState("Approved");
-		/**  */
-		public static final EnumApprovalState ApprovedWithComment = new EnumApprovalState("ApprovedWithComment");
-		/**  */
-		public static final EnumApprovalState Rejected = new EnumApprovalState("Rejected");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -255,9 +183,9 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setApprovalState(EApprovalState enumVar)
+	public void setApprovalState(final EnumApprovalState enumVar)
 	{
-		setAttribute(AttributeName.APPROVALSTATE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.APPROVALSTATE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -265,35 +193,6 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EApprovalState getEApprovalState()
-	{
-		return EApprovalState.getEnum(getAttribute(AttributeName.APPROVALSTATE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ApprovalState
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ApprovalState
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetApprovalState(EApprovalState) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setApprovalState(EnumApprovalState enumVar)
-	{
-		setAttribute(AttributeName.APPROVALSTATE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ApprovalState
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EApprovalState GetEApprovalState() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumApprovalState getApprovalState()
 	{
 		return EnumApprovalState.getEnum(getAttribute(AttributeName.APPROVALSTATE, null, null));
@@ -309,7 +208,7 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setApprovalStateDetails(String value)
+	public void setApprovalStateDetails(final String value)
 	{
 		setAttribute(AttributeName.APPROVALSTATEDETAILS, value, null);
 	}
@@ -366,7 +265,7 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refContact(JDFContact refTarget)
+	public void refContact(final JDFContact refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -407,7 +306,7 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}

@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -86,7 +82,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.jmf.JDFJobPhase;
-import org.cip4.jdflib.node.JDFNode.EActivation;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.resource.JDFGangSource;
 import org.cip4.jdflib.resource.JDFPart;
@@ -105,21 +100,21 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[15];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0),
-				null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumActivation.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICEID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.ENDTIME, 0x3333333311l, AttributeInfo.EnumAttributeType.dateTime, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.GANGNAME, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.GANGPOLICY, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumGangPolicy.getEnum(0),
-				null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.GANGPOLICY, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumGangPolicy.class, 0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.JOBID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.PRIORITY, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, "1");
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x2222222222l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.RELATEDJOBID, 0x3331111111l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.RELATEDJOBPARTID, 0x3331111111l, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.STATUS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumQueueEntryStatus.getEnum(0),
-				null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.STATUS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumQueueEntryStatus.class, 0), null);
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.STARTTIME, 0x3333333331l, AttributeInfo.EnumAttributeType.dateTime, null, null);
 		atrInfoTable[13] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x3333311111l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[14] = new AtrInfoTable(AttributeName.SUBMISSIONTIME, 0x3333333333l, AttributeInfo.EnumAttributeType.dateTime, null, null);
@@ -151,7 +146,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoQueueEntry(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoQueueEntry(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -163,7 +158,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoQueueEntry(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoQueueEntry(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -176,184 +171,42 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoQueueEntry(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoQueueEntry(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for GangPolicy
+	 * Enumeration strings for numGangPolicy
 	 */
 
-	public enum EGangPolicy
+	public enum EnumGangPolicy
 	{
 		Gang, GangAndForce, NoGang;
 
-		public static EGangPolicy getEnum(String val)
+		public static EnumGangPolicy getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EGangPolicy.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumGangPolicy.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for GangPolicy
+	 * Enumeration strings for numQueueEntryStatus
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumGangPolicy extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumGangPolicy(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumGangPolicy getEnum(String enumName)
-		{
-			return (EnumGangPolicy) getEnum(EnumGangPolicy.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumGangPolicy getEnum(int enumValue)
-		{
-			return (EnumGangPolicy) getEnum(EnumGangPolicy.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumGangPolicy.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumGangPolicy.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumGangPolicy.class);
-		}
-
-		/**  */
-		public static final EnumGangPolicy Gang = new EnumGangPolicy("Gang");
-		/**  */
-		public static final EnumGangPolicy GangAndForce = new EnumGangPolicy("GangAndForce");
-		/**  */
-		public static final EnumGangPolicy NoGang = new EnumGangPolicy("NoGang");
-	}
-
-	/**
-	 * Enumeration strings for QueueEntryStatus
-	 */
-
-	public enum EQueueEntryStatus
+	public enum EnumQueueEntryStatus
 	{
 		Running, Waiting, Held, Removed, Suspended, PendingReturn, Completed, Aborted;
 
-		public static EQueueEntryStatus getEnum(String val)
+		public static EnumQueueEntryStatus getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EQueueEntryStatus.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumQueueEntryStatus.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for QueueEntryStatus
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumQueueEntryStatus extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumQueueEntryStatus(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumQueueEntryStatus getEnum(String enumName)
-		{
-			return (EnumQueueEntryStatus) getEnum(EnumQueueEntryStatus.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumQueueEntryStatus getEnum(int enumValue)
-		{
-			return (EnumQueueEntryStatus) getEnum(EnumQueueEntryStatus.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumQueueEntryStatus.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumQueueEntryStatus.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumQueueEntryStatus.class);
-		}
-
-		/**  */
-		public static final EnumQueueEntryStatus Running = new EnumQueueEntryStatus("Running");
-		/**  */
-		public static final EnumQueueEntryStatus Waiting = new EnumQueueEntryStatus("Waiting");
-		/**  */
-		public static final EnumQueueEntryStatus Held = new EnumQueueEntryStatus("Held");
-		/**  */
-		public static final EnumQueueEntryStatus Removed = new EnumQueueEntryStatus("Removed");
-		/**  */
-		public static final EnumQueueEntryStatus Suspended = new EnumQueueEntryStatus("Suspended");
-		/**  */
-		public static final EnumQueueEntryStatus PendingReturn = new EnumQueueEntryStatus("PendingReturn");
-		/**  */
-		public static final EnumQueueEntryStatus Completed = new EnumQueueEntryStatus("Completed");
-		/**  */
-		public static final EnumQueueEntryStatus Aborted = new EnumQueueEntryStatus("Aborted");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -365,9 +218,9 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setActivation(EActivation enumVar)
+	public void setActivation(final EnumActivation enumVar)
 	{
-		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ACTIVATION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -375,35 +228,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EActivation getEActivation()
-	{
-		return EActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Activation
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Activation
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetActivation(EActivation) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setActivation(EnumActivation enumVar)
-	{
-		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Activation
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EActivation GetEActivation() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumActivation getActivation()
 	{
 		return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
@@ -419,7 +243,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeviceID(String value)
+	public void setDeviceID(final String value)
 	{
 		setAttribute(AttributeName.DEVICEID, value, null);
 	}
@@ -444,7 +268,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setEndTime(JDFDate value)
+	public void setEndTime(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -461,8 +285,8 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 */
 	public JDFDate getEndTime()
 	{
-		String str = getAttribute(AttributeName.ENDTIME, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.ENDTIME, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -476,7 +300,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGangName(String value)
+	public void setGangName(final String value)
 	{
 		setAttribute(AttributeName.GANGNAME, value, null);
 	}
@@ -501,9 +325,9 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setGangPolicy(EGangPolicy enumVar)
+	public void setGangPolicy(final EnumGangPolicy enumVar)
 	{
-		setAttribute(AttributeName.GANGPOLICY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.GANGPOLICY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -511,35 +335,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EGangPolicy getEGangPolicy()
-	{
-		return EGangPolicy.getEnum(getAttribute(AttributeName.GANGPOLICY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute GangPolicy
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute GangPolicy
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetGangPolicy(EGangPolicy) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setGangPolicy(EnumGangPolicy enumVar)
-	{
-		setAttribute(AttributeName.GANGPOLICY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute GangPolicy
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EGangPolicy GetEGangPolicy() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumGangPolicy getGangPolicy()
 	{
 		return EnumGangPolicy.getEnum(getAttribute(AttributeName.GANGPOLICY, null, null));
@@ -555,7 +350,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -580,7 +375,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobPartID(String value)
+	public void setJobPartID(final String value)
 	{
 		setAttribute(AttributeName.JOBPARTID, value, null);
 	}
@@ -605,7 +400,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPriority(int value)
+	public void setPriority(final int value)
 	{
 		setAttribute(AttributeName.PRIORITY, value, null);
 	}
@@ -630,7 +425,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setQueueEntryID(String value)
+	public void setQueueEntryID(final String value)
 	{
 		setAttribute(AttributeName.QUEUEENTRYID, value, null);
 	}
@@ -655,7 +450,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRelatedJobID(String value)
+	public void setRelatedJobID(final String value)
 	{
 		setAttribute(AttributeName.RELATEDJOBID, value, null);
 	}
@@ -680,7 +475,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRelatedJobPartID(String value)
+	public void setRelatedJobPartID(final String value)
 	{
 		setAttribute(AttributeName.RELATEDJOBPARTID, value, null);
 	}
@@ -705,9 +500,9 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setQueueEntryStatus(EQueueEntryStatus enumVar)
+	public void setQueueEntryStatus(final EnumQueueEntryStatus enumVar)
 	{
-		setAttribute(AttributeName.STATUS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.STATUS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -715,35 +510,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EQueueEntryStatus getEQueueEntryStatus()
-	{
-		return EQueueEntryStatus.getEnum(getAttribute(AttributeName.STATUS, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Status
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Status
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetQueueEntryStatus(EQueueEntryStatus) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setQueueEntryStatus(EnumQueueEntryStatus enumVar)
-	{
-		setAttribute(AttributeName.STATUS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Status
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EQueueEntryStatus GetEQueueEntryStatus() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumQueueEntryStatus getQueueEntryStatus()
 	{
 		return EnumQueueEntryStatus.getEnum(getAttribute(AttributeName.STATUS, null, null));
@@ -759,7 +525,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setStartTime(JDFDate value)
+	public void setStartTime(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -776,8 +542,8 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 */
 	public JDFDate getStartTime()
 	{
-		String str = getAttribute(AttributeName.STARTTIME, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.STARTTIME, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -791,7 +557,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStatusDetails(String value)
+	public void setStatusDetails(final String value)
 	{
 		setAttribute(AttributeName.STATUSDETAILS, value, null);
 	}
@@ -816,7 +582,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setSubmissionTime(JDFDate value)
+	public void setSubmissionTime(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -833,8 +599,8 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 */
 	public JDFDate getSubmissionTime()
 	{
-		String str = getAttribute(AttributeName.SUBMISSIONTIME, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.SUBMISSIONTIME, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -870,7 +636,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFJobPhase the element
 	 */
-	public JDFJobPhase getCreateJobPhase(int iSkip)
+	public JDFJobPhase getCreateJobPhase(final int iSkip)
 	{
 		return (JDFJobPhase) getCreateElement_JDFElement(ElementName.JOBPHASE, null, iSkip);
 	}
@@ -882,7 +648,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 * @return JDFJobPhase the element
 	 *         default is getJobPhase(0)
 	 */
-	public JDFJobPhase getJobPhase(int iSkip)
+	public JDFJobPhase getJobPhase(final int iSkip)
 	{
 		return (JDFJobPhase) getElement(ElementName.JOBPHASE, null, iSkip);
 	}
@@ -933,7 +699,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFGangSource the element
 	 */
-	public JDFGangSource getCreateGangSource(int iSkip)
+	public JDFGangSource getCreateGangSource(final int iSkip)
 	{
 		return (JDFGangSource) getCreateElement_JDFElement(ElementName.GANGSOURCE, null, iSkip);
 	}
@@ -945,7 +711,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 * @return JDFGangSource the element
 	 *         default is getGangSource(0)
 	 */
-	public JDFGangSource getGangSource(int iSkip)
+	public JDFGangSource getGangSource(final int iSkip)
 	{
 		return (JDFGangSource) getElement(ElementName.GANGSOURCE, null, iSkip);
 	}
@@ -996,7 +762,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
-	public JDFPart getCreatePart(int iSkip)
+	public JDFPart getCreatePart(final int iSkip)
 	{
 		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
@@ -1008,7 +774,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 * @return JDFPart the element
 	 *         default is getPart(0)
 	 */
-	public JDFPart getPart(int iSkip)
+	public JDFPart getPart(final int iSkip)
 	{
 		return (JDFPart) getElement(ElementName.PART, null, iSkip);
 	}

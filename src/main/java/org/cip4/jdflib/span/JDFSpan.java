@@ -82,7 +82,7 @@ import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFNameRange;
@@ -106,7 +106,8 @@ public abstract class JDFSpan extends JDFSpanBase
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpan(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	@Deprecated
+	public JDFSpan(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -119,7 +120,8 @@ public abstract class JDFSpan extends JDFSpanBase
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	@Deprecated
+	public JDFSpan(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,23 +135,27 @@ public abstract class JDFSpan extends JDFSpanBase
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	@Deprecated
+	public JDFSpan(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	// **************************************** Interfaces
 	// ******************************************
+	@Deprecated
 	interface IntegerSpan
 	{
 		void setRange(JDFIntegerRangeList o);
 	}
 
+	@Deprecated
 	interface NumberSpan
 	{
 		void setRange(JDFNumberRangeList o);
 	}
 
+	@Deprecated
 	interface NameSpan
 	{
 		void setRange(JDFNameRangeList o);
@@ -162,6 +168,7 @@ public abstract class JDFSpan extends JDFSpanBase
 	 *
 	 * @return String
 	 */
+	@Deprecated
 	@Override
 	public String toString()
 	{
@@ -173,9 +180,10 @@ public abstract class JDFSpan extends JDFSpanBase
 	 *
 	 * @param Object o
 	 */
-	public void setPreferred(Object o)
+	@Deprecated
+	public void setPreferred(final Object o)
 	{
-		setAttribute(AttributeName.PREFERRED, o.toString(), JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.PREFERRED, o.toString(), JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -183,9 +191,10 @@ public abstract class JDFSpan extends JDFSpanBase
 	 *
 	 * @param double o
 	 */
-	public void setPreferred(double o)
+	@Deprecated
+	public void setPreferred(final double o)
 	{
-		setAttribute(AttributeName.PREFERRED, JDFConstants.EMPTYSTRING + o, JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.PREFERRED, JDFCoreConstants.EMPTYSTRING + o, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -193,9 +202,10 @@ public abstract class JDFSpan extends JDFSpanBase
 	 *
 	 * @param boolean o
 	 */
-	public void setPreferred(boolean o)
+	@Deprecated
+	public void setPreferred(final boolean o)
 	{
-		setAttribute(AttributeName.PREFERRED, JDFConstants.EMPTYSTRING + o, JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.PREFERRED, JDFCoreConstants.EMPTYSTRING + o, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -203,9 +213,10 @@ public abstract class JDFSpan extends JDFSpanBase
 	 *
 	 * @param String o
 	 */
-	public void setPreferred(String o)
+	@Deprecated
+	public void setPreferred(final String o)
 	{
-		setAttribute(AttributeName.PREFERRED, o, JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.PREFERRED, o, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -213,9 +224,10 @@ public abstract class JDFSpan extends JDFSpanBase
 	 *
 	 * @param Object o
 	 */
-	public void setActual(Object o)
+	@Deprecated
+	public void setActual(final Object o)
 	{
-		setAttribute(AttributeName.ACTUAL, o.toString(), JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.ACTUAL, o.toString(), JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -223,9 +235,10 @@ public abstract class JDFSpan extends JDFSpanBase
 	 *
 	 * @param int o
 	 */
-	public void setActual(int o)
+	@Deprecated
+	public void setActual(final int o)
 	{
-		setAttribute(AttributeName.ACTUAL, JDFConstants.EMPTYSTRING + o, JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.ACTUAL, JDFCoreConstants.EMPTYSTRING + o, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -233,9 +246,10 @@ public abstract class JDFSpan extends JDFSpanBase
 	 *
 	 * @param double o
 	 */
-	public void setActual(double o)
+	@Deprecated
+	public void setActual(final double o)
 	{
-		setAttribute(AttributeName.ACTUAL, JDFConstants.EMPTYSTRING + o, JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.ACTUAL, JDFCoreConstants.EMPTYSTRING + o, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -243,9 +257,10 @@ public abstract class JDFSpan extends JDFSpanBase
 	 *
 	 * @param boolean o
 	 */
-	public void setActual(boolean o)
+	@Deprecated
+	public void setActual(final boolean o)
 	{
-		setAttribute(AttributeName.ACTUAL, JDFConstants.EMPTYSTRING + o, JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.ACTUAL, JDFCoreConstants.EMPTYSTRING + o, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -253,9 +268,10 @@ public abstract class JDFSpan extends JDFSpanBase
 	 *
 	 * @param String o
 	 */
-	public void setActual(String o)
+	@Deprecated
+	public void setActual(final String o)
 	{
-		setAttribute(AttributeName.ACTUAL, o, JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.ACTUAL, o, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -263,9 +279,10 @@ public abstract class JDFSpan extends JDFSpanBase
 	 *
 	 * @param String rs
 	 */
-	public void setRange(String rs)
+	@Deprecated
+	public void setRange(final String rs)
 	{
-		setAttribute(AttributeName.RANGE, rs, JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.RANGE, rs, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -275,9 +292,9 @@ public abstract class JDFSpan extends JDFSpanBase
 	 * @deprecated use specialized routines
 	 */
 	@Deprecated
-	public void setRange(JDFRangeList rl)
+	public void setRange(final JDFRangeList rl)
 	{
-		setAttribute("Range", rl.toString(), JDFConstants.EMPTYSTRING);
+		setAttribute("Range", rl.toString(), JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -285,9 +302,10 @@ public abstract class JDFSpan extends JDFSpanBase
 	 *
 	 * @return String
 	 */
+	@Deprecated
 	public String getPreferred()
 	{
-		return getAttribute(AttributeName.PREFERRED, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.PREFERRED, JDFCoreConstants.EMPTYSTRING, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -295,9 +313,10 @@ public abstract class JDFSpan extends JDFSpanBase
 	 *
 	 * @return String
 	 */
+	@Deprecated
 	public String getActual()
 	{
-		return getAttribute(AttributeName.ACTUAL, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.ACTUAL, JDFCoreConstants.EMPTYSTRING, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -305,9 +324,10 @@ public abstract class JDFSpan extends JDFSpanBase
 	 *
 	 * @return String
 	 */
+	@Deprecated
 	public String getRange()
 	{
-		return getAttribute(AttributeName.RANGE, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.RANGE, JDFCoreConstants.EMPTYSTRING, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -316,15 +336,16 @@ public abstract class JDFSpan extends JDFSpanBase
 	 * @param Object xMin
 	 * @param Object xMax default is both values are equal
 	 */
-	public void addRange(String xMin, String xMax)
+	@Deprecated
+	public void addRange(final String xMin, final String xMax)
 	{
 		try
 		{
-			JDFNameRangeList rl = new JDFNameRangeList(getRange());
+			final JDFNameRangeList rl = new JDFNameRangeList(getRange());
 			rl.append(new JDFNameRange(xMin, xMax));
-			setAttribute(AttributeName.RANGE, rl.toString(), JDFConstants.EMPTYSTRING);
+			setAttribute(AttributeName.RANGE, rl.toString(), JDFCoreConstants.EMPTYSTRING);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFSpan.addRange: DataFormatExceptione while creating JDFNameRange");
 		}

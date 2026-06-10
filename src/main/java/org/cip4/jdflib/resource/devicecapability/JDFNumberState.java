@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2013 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2013 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,22 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFNumberState.java
@@ -100,8 +100,6 @@ import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * 
- *  
  * @author rainer prosi
  * @date Mar 4, 2013
  */
@@ -145,36 +143,36 @@ public class JDFNumberState extends JDFAbstractState
 
 	/**
 	 * constructor for JDFNumberState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFNumberState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFNumberState(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFNumberState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFNumberState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFNumberState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFNumberState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFNumberState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFNumberState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -184,7 +182,7 @@ public class JDFNumberState extends JDFAbstractState
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -197,17 +195,17 @@ public class JDFNumberState extends JDFAbstractState
 	 * // Attribute getter/ setter
 	 */
 
-	public void setDefaultValue(double value)
+	public void setDefaultValue(final double value)
 	{
 		setAttribute(AttributeName.DEFAULTVALUE, value, null);
 	}
 
-	public void setDefaultValue(JDFNumberList value)
+	public void setDefaultValue(final JDFNumberList value)
 	{
 		setAttribute(AttributeName.DEFAULTVALUE, value, null);
 	}
 
-	public void setCurrentValue(JDFNumberList value)
+	public void setCurrentValue(final JDFNumberList value)
 	{
 		setAttribute(AttributeName.CURRENTVALUE, value, null);
 	}
@@ -217,7 +215,7 @@ public class JDFNumberState extends JDFAbstractState
 		return getNumberList(AttributeName.DEFAULTVALUE);
 	}
 
-	public void setCurrentValue(double value)
+	public void setCurrentValue(final double value)
 	{
 		setAttribute(AttributeName.CURRENTVALUE, value, null);
 	}
@@ -227,7 +225,7 @@ public class JDFNumberState extends JDFAbstractState
 		return getNumberList(AttributeName.CURRENTVALUE);
 	}
 
-	public void setAllowedValueList(JDFNumberRangeList value)
+	public void setAllowedValueList(final JDFNumberRangeList value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUELIST, value.toString(), null);
 	}
@@ -237,19 +235,19 @@ public class JDFNumberState extends JDFAbstractState
 		return getNumberRangeList(AttributeName.ALLOWEDVALUELIST);
 	}
 
-	public void setPresentValueList(JDFNumberRangeList value)
+	public void setPresentValueList(final JDFNumberRangeList value)
 	{
 		setAttribute(AttributeName.PRESENTVALUELIST, value.toString(), null);
 	}
 
 	public JDFNumberRangeList getPresentValueList()
 	{
-		JDFNumberRangeList nl = getNumberRangeList(AttributeName.PRESENTVALUELIST);
+		final JDFNumberRangeList nl = getNumberRangeList(AttributeName.PRESENTVALUELIST);
 		return (nl == null) ? getAllowedValueList() : nl;
 	}
 
 	// ///////////////////////////////////////////////////////////////
-	public void setAllowedValueMax(double value)
+	public void setAllowedValueMax(final double value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUEMAX, value, null);
 	}
@@ -261,7 +259,7 @@ public class JDFNumberState extends JDFAbstractState
 	}
 
 	// ///////////////////////////////////////////////////////////////
-	public void setPresentValueMax(double value)
+	public void setPresentValueMax(final double value)
 	{
 		setAttribute(AttributeName.PRESENTVALUEMAX, value, null);
 	}
@@ -275,7 +273,7 @@ public class JDFNumberState extends JDFAbstractState
 		return getAllowedValueMax();
 	}
 
-	public void setAllowedValueMin(double value)
+	public void setAllowedValueMin(final double value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUEMIN, value, null);
 	}
@@ -285,7 +283,7 @@ public class JDFNumberState extends JDFAbstractState
 		return getRealAttribute(AttributeName.ALLOWEDVALUEMIN, null, 0.0);
 	}
 
-	public void setPresentValueMin(double value)
+	public void setPresentValueMin(final double value)
 	{
 		setAttribute(AttributeName.PRESENTVALUEMIN, value, null);
 	}
@@ -299,7 +297,7 @@ public class JDFNumberState extends JDFAbstractState
 		return getAllowedValueMin();
 	}
 
-	public void setAllowedValueMod(JDFXYPair value)
+	public void setAllowedValueMod(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUEMOD, value.toString(), null);
 	}
@@ -310,14 +308,14 @@ public class JDFNumberState extends JDFAbstractState
 		{
 			return new JDFXYPair(getAttribute(AttributeName.ALLOWEDVALUEMOD));
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFNumberState.setAllowedValueMod: Attribute allowvaluemod is not applicable to create JDFXYPair");
 		}
 
 	}
 
-	public void setPresentValueMod(JDFXYPair value)
+	public void setPresentValueMod(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.PRESENTVALUEMOD, value.toString());
 	}
@@ -332,7 +330,7 @@ public class JDFNumberState extends JDFAbstractState
 			}
 			return getAllowedValueMod();
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFNumberState.setAllowedValueMod: The XYPair value is invalid!");
 		}
@@ -344,7 +342,7 @@ public class JDFNumberState extends JDFAbstractState
 		return getAttribute(AttributeName.UNITTYPE);
 	}
 
-	public void setUnitType(String value)
+	public void setUnitType(final String value)
 	{
 		setAttribute(AttributeName.UNITTYPE, value);
 	}
@@ -354,26 +352,27 @@ public class JDFNumberState extends JDFAbstractState
 	 */
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java
 	 * .lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
 	 */
 	@Override
-	public void addValue(String value, EnumFitsValue testlists)
+	public void addValue(final String value, final EnumFitsValue testlists)
 	{
-		if (fitsValue(value, testlists))
+		if (fitsValue(value, testlists) || !StringUtil.isNumber(value))
+		{
 			return;
-
-		if (!StringUtil.isNumber(value))
-			return;
-		double d = StringUtil.parseDouble(value, 0);
+		}
+		final double d = StringUtil.parseDouble(value, 0);
 
 		if (testlists == null || EnumFitsValue.Allowed.equals(testlists))
 		{
 			JDFNumberRangeList list = getAllowedValueList();
 			if (list == null)
+			{
 				list = new JDFNumberRangeList();
+			}
 			list.append(d);
 			setAllowedValueList(list);
 		}
@@ -381,7 +380,9 @@ public class JDFNumberState extends JDFAbstractState
 		{
 			JDFNumberRangeList list = getPresentValueList();
 			if (list == null || !hasAttribute(AttributeName.PRESENTVALUELIST))
+			{
 				list = new JDFNumberRangeList();
+			}
 			list.append(d);
 			setPresentValueList(list);
 		}
@@ -390,20 +391,19 @@ public class JDFNumberState extends JDFAbstractState
 	/**
 	 * fitsValue - checks whether <code>value</code> matches the Allowed/Present
 	 * test lists specified for this State
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *                  value to test
 	 * @param testlists
-	 *            the test lists the value has to match. In this State the test
-	 *            lists are ValueList AND ValueMod.<br>
-	 *            Choose one of two values: FitsValue_Allowed or
-	 *            FitsValue_Present. (Defaults to Allowed)
-	 * 
+	 *                  the test lists the value has to match. In this State the test
+	 *                  lists are ValueList AND ValueMod.<br>
+	 *                  Choose one of two values: FitsValue_Allowed or
+	 *                  FitsValue_Present. (Defaults to Allowed)
 	 * @return boolean - true, if <code>value</code> matches testlists or if
 	 *         AllowedValueList and AllowedValueMod are not specified
 	 */
 	@Override
-	public boolean fitsValue(String value, EnumFitsValue testlists)
+	public boolean fitsValue(final String value, final EnumFitsValue testlists)
 	{
 		if (fitsListType(value))
 		{
@@ -412,7 +412,7 @@ public class JDFNumberState extends JDFAbstractState
 			{
 				rangelist = new JDFNumberRangeList(value);
 			}
-			catch (DataFormatException dfe)
+			catch (final DataFormatException dfe)
 			{
 				return false;
 			}
@@ -425,16 +425,15 @@ public class JDFNumberState extends JDFAbstractState
 	/**
 	 * fitsValueList - checks whether <code>rangelist</code> matches the
 	 * AllowedValueList/PresentValueList specified for this State
-	 * 
+	 *
 	 * @param rangelist
-	 *            range list to test
+	 *                  range list to test
 	 * @param valuelist
-	 *            switches between AllowedValueList and PresentValueList.
-	 * 
+	 *                  switches between AllowedValueList and PresentValueList.
 	 * @return boolean - true, if <code>rangelist</code> matches the valuelist
 	 *         or if AllowedValueList is not specified
 	 */
-	private final boolean fitsValueList(JDFNumberRangeList rangelist, EnumFitsValue valuelist)
+	private final boolean fitsValueList(final JDFNumberRangeList rangelist, final EnumFitsValue valuelist)
 	{
 		JDFNumberRangeList list;
 		if (valuelist.equals(EnumFitsValue.Allowed))
@@ -446,9 +445,11 @@ public class JDFNumberState extends JDFAbstractState
 			list = getPresentValueList();
 		}
 		if (list == null)
+		{
 			return true;
+		}
 
-		EnumListType listType = getListType();
+		final EnumListType listType = getListType();
 		if (listType.equals(EnumListType.CompleteList))
 		{
 			return fitsCompleteList(rangelist, list);
@@ -462,13 +463,15 @@ public class JDFNumberState extends JDFAbstractState
 			return fitsContainedList(rangelist, list);
 		}
 
-		int siz = rangelist.size();
+		final int siz = rangelist.size();
 		for (int i = 0; i < siz; i++)
 		{
-			JDFNumberRange range = (JDFNumberRange) rangelist.at(i);
+			final JDFNumberRange range = (JDFNumberRange) rangelist.at(i);
 
 			if (!list.isPartOfRange(range))
+			{
 				return false;
+			}
 		}
 		return true;
 	}
@@ -476,26 +479,29 @@ public class JDFNumberState extends JDFAbstractState
 	/**
 	 * fitsValueMod - checks whether <code>range</code> matches the
 	 * <code>ValueMod</code> specified for this State.
-	 * 
+	 *
 	 * @param rangelist
-	 *            range list to test
+	 *                  range list to test
 	 * @param valuemod
-	 *            switches between AllowedValueMod and PresentValueMod.
-	 * 
+	 *                  switches between AllowedValueMod and PresentValueMod.
 	 * @return boolean - true, if <code>rangelist</code> matches the valuemod or
 	 *         if AllowedValueMod is not specified
 	 */
-	private final boolean fitsValueMod(JDFNumberRangeList rangelist, EnumFitsValue valuemod)
+	private final boolean fitsValueMod(final JDFNumberRangeList rangelist, final EnumFitsValue valuemod)
 	{
 		if (valuemod.equals(EnumFitsValue.Allowed))
 		{
 			if (!hasAttribute(AttributeName.ALLOWEDVALUEMOD))
+			{
 				return true;
+			}
 		}
 		else
 		{
 			if (!hasAttribute(AttributeName.ALLOWEDVALUEMOD) && !hasAttribute(AttributeName.PRESENTVALUEMOD))
+			{
 				return true;
+			}
 		}
 
 		JDFXYPair mod;
@@ -508,33 +514,37 @@ public class JDFNumberState extends JDFAbstractState
 			mod = getPresentValueMod();
 		}
 
-		int siz = rangelist.size();
+		final int siz = rangelist.size();
 		for (int i = 0; i < siz; i++)
 		{
-			JDFNumberRange range = (JDFNumberRange) rangelist.at(i);
+			final JDFNumberRange range = (JDFNumberRange) rangelist.at(i);
 
-			double left = range.getLeft();
-			double right = range.getRight();
+			final double left = range.getLeft();
+			final double right = range.getRight();
 			if (left != right) // if we have a range return false, check only
-								// single value
+			{
+				// single value
 				return false;
+			}
 
-			double elem = left; // single value
-			double divi = mod.getX(); // X - the Modulo
-			double shift = mod.getY(); // Y - offset of the allowed/present
+			final double elem = left; // single value
+			final double divi = mod.getX(); // X - the Modulo
+			final double shift = mod.getY(); // Y - offset of the allowed/present
 										// value
 
 			if (divi == 0)
+			{
 				return false;
+			}
 
 			// if ValueMod is not "0 x"
-			double n = ((elem - divi * (int) (elem / divi)) - shift); // n =  elem  % divi  - shift
+			final double n = ((elem - divi * (int) (elem / divi)) - shift); // n = elem % divi - shift
 			if (java.lang.Math.abs(n) < EPSILON * java.lang.Math.abs(divi))
 			{
 				return true;
 			}
 
-			double m = (n - divi * (int) (n / divi)); // m = ( elem % divi - shift ) % divi
+			final double m = (n - divi * (int) (n / divi)); // m = ( elem % divi - shift ) % divi
 			if (java.lang.Math.abs(m) < EPSILON * java.lang.Math.abs(divi))
 			{
 				return true;
@@ -548,26 +558,24 @@ public class JDFNumberState extends JDFAbstractState
 	/**
 	 * fitsCompleteList - tests whether <code>value</code> matches the given
 	 * testlist (ListType=fitsCompleteList)
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @param list
-	 *            testlist, either AllowedValueList or PresentValueList.
-	 * 
+	 *              testlist, either AllowedValueList or PresentValueList.
 	 * @return boolean - true, if <code>value</code> matches the testlist
 	 */
-	private final boolean fitsCompleteList(JDFNumberRangeList value, JDFNumberRangeList list)
+	private final boolean fitsCompleteList(final JDFNumberRangeList value, final JDFNumberRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
-		if (v_size != l_size)
+		if ((v_size != l_size) || !value.isUnique())
+		{
 			return false;
+		}
 
-		if (!value.isUnique())
-			return false;
-
-		JDFNumberRangeList valueList = new JDFNumberRangeList(value);
+		final JDFNumberRangeList valueList = new JDFNumberRangeList(value);
 
 		boolean bFound;
 		for (int i = l_size - 1; i >= 0; i--)
@@ -593,24 +601,22 @@ public class JDFNumberState extends JDFAbstractState
 	/**
 	 * fitsCompleteOrderedList - tests whether <code>value</code> matches the
 	 * given testlist (ListType=CompleteOrderedList)
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @param list
-	 *            testlist, either AllowedValueList or PresentValueList.
-	 * 
+	 *              testlist, either AllowedValueList or PresentValueList.
 	 * @return boolean - true, if <code>value</code> matches the testlist
 	 */
-	private final boolean fitsCompleteOrderedList(JDFNumberRangeList value, JDFNumberRangeList list)
+	private final boolean fitsCompleteOrderedList(final JDFNumberRangeList value, final JDFNumberRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
-		if (v_size != l_size)
+		if ((v_size != l_size) || !value.isUnique())
+		{
 			return false;
-
-		if (!value.isUnique())
-			return false;
+		}
 
 		for (int i = 0; i < l_size; i++)
 		{
@@ -625,18 +631,17 @@ public class JDFNumberState extends JDFAbstractState
 	/**
 	 * fitsContainedList - tests whether <code>value</code> matches the given
 	 * testlist (ListType=ContainedList)
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @param list
-	 *            testlist, either AllowedValueList or PresentValueList.
-	 * 
+	 *              testlist, either AllowedValueList or PresentValueList.
 	 * @return boolean - true, if <code>value</code> matches testlist
 	 */
-	private final boolean fitsContainedList(JDFNumberRangeList value, JDFNumberRangeList list)
+	private final boolean fitsContainedList(final JDFNumberRangeList value, final JDFNumberRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
 		for (int i = 0; i < v_size; i++)
 		{
@@ -661,10 +666,12 @@ public class JDFNumberState extends JDFAbstractState
 		{
 			final String attribute = getAttribute(listName, null, null);
 			if (attribute == null)
+			{
 				return null;
+			}
 			return new JDFNumberList(attribute);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFNumberState.getNumberList, Unable to create JDFIntegerRangeList from Attribute value: " + listName);
 		}
@@ -680,24 +687,26 @@ public class JDFNumberState extends JDFAbstractState
 		{
 			final String attribute = getAttribute(listName, null, null);
 			if (attribute == null)
+			{
 				return null;
+			}
 			return new JDFNumberRangeList(attribute);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFIntegerState.getIntegerRangeList, Unable to create JDFIntegerRangeList from Attribute value: " + listName);
 		}
 	}
 
 	@Override
-	public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
+	public VString getInvalidAttributes(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
 	{
 		return getInvalidAttributesImpl(level, bIgnorePrivate, nMax);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
 	 */
 	@Override

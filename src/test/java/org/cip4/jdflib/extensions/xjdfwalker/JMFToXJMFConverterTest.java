@@ -46,13 +46,12 @@ import java.util.List;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
-import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceCondition;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
 import org.cip4.jdflib.auto.JDFAutoMessageService.EnumJMFRole;
-import org.cip4.jdflib.auto.JDFAutoNotification.EClass;
-import org.cip4.jdflib.auto.JDFAutoSignal.EnumChannelMode;
+import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -438,9 +437,9 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 		final JDFSignal sig = jmf.getSignal(0);
 		final JDFDeviceInfo di = sig.appendDeviceInfo();
 		di.setTotalProductionCounter(12345);
-		di.setDeviceStatus(EDeviceStatus.Running);
+		di.setDeviceStatus(EnumDeviceStatus.Running);
 		final JDFNotification not = sig.appendNotification();
-		not.setClass(EClass.Event);
+		not.setClass(EnumClass.Event);
 		not.appendEvent().setEventID("eid");
 
 		final JDFToXJDF conv = new JDFToXJDF();
@@ -458,7 +457,7 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
 		final JDFDeviceInfo di = jmf.getSignal(0).appendDeviceInfo();
-		di.setDeviceStatus(EDeviceStatus.Running);
+		di.setDeviceStatus(EnumDeviceStatus.Running);
 		final JDFJobPhase jp = di.appendJobPhase();
 		jp.setAmount(42);
 		jp.setJobID("j1");

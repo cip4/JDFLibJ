@@ -87,7 +87,6 @@ import java.util.Vector;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDevCaps.EnumContext;
 import org.cip4.jdflib.auto.JDFAutoMessageService;
-import org.cip4.jdflib.auto.JDFAutoSignal.EnumChannelMode;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -213,7 +212,7 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 	 */
 	public void setType(final EnumType value)
 	{
-		final String typeName = value == null ? null : value.getName();
+		final String typeName = JavaEnumUtil.getName(value);
 		setType(typeName);
 	}
 
@@ -231,7 +230,7 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 			return JavaEnumUtil.getEnumList(EResponseMode.class, val, true);
 		}
 
-		public static boolean isSignal(EResponseMode m)
+		public static boolean isSignal(final EResponseMode m)
 		{
 			return FireAndForget.equals(m) || Reliable.equals(m);
 		}
@@ -313,7 +312,7 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 	 */
 	public void setChannelMode(final EnumChannelMode enumVar)
 	{
-		setAttribute(AttributeName.CHANNELMODE, enumVar == null ? null : enumVar.getName(), null);
+		setAttribute(AttributeName.CHANNELMODE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -353,7 +352,7 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 			final int siz = families.size();
 			for (int i = 0; i < siz; i++)
 			{
-				vResult.add(families.get(i).getName());
+				vResult.add(families.get(i).name());
 			}
 		}
 
@@ -437,7 +436,7 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 		{
 			throw new JDFException("setFamily: illegal family:" + family);
 		}
-		setAttribute(family.getName(), true, null);
+		setAttribute(family.name(), true, null);
 	}
 
 	/**
@@ -455,7 +454,7 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 		return null;
 	}
 
-	public void addResponseMode(EResponseMode response)
+	public void addResponseMode(final EResponseMode response)
 	{
 		appendAttribute(XJDFConstants.ResponseModes, JavaEnumUtil.getName(response), true);
 

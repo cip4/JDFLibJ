@@ -86,12 +86,12 @@ class WalkDeviceNColorTest extends JDFTestCaseBase
 	@Test
 	void testWalk()
 	{
-		JDFDeviceNColor dnc = (JDFDeviceNColor) new JDFDoc(ElementName.DEVICENCOLOR).getRoot();
+		final JDFDeviceNColor dnc = (JDFDeviceNColor) new JDFDoc(ElementName.DEVICENCOLOR).getRoot();
 		dnc.setColorList(JDFNumberList.createNumberList("1 0.5 0.6 1 4"));
 		dnc.setN(5);
-		WalkDeviceNColor walkDeviceNColor = new WalkDeviceNColor();
+		final WalkDeviceNColor walkDeviceNColor = new WalkDeviceNColor();
 		walkDeviceNColor.setParent(new JDFToXJDF());
-		KElement dns = new JDFDoc(ElementName.DEVICENSPACE).getRoot();
+		final KElement dns = new JDFDoc(ElementName.DEVICENSPACE).getRoot();
 		walkDeviceNColor.walk(dnc, dns);
 		Assertions.assertNull(dns.getXPathAttribute("DeviceNColor/@N", null));
 	}

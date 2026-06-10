@@ -55,7 +55,6 @@ import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.auto.JDFAutoRegisterMark.EnumMarkUsage;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
@@ -129,7 +128,7 @@ class JDFLayoutTest extends JDFTestCaseBase
 	@Test
 	void testIsNewLayout()
 	{
-		assertEquals(n.getVersion(false), JDFAudit.getDefaultJDFVersion(), "version ok");
+		assertEquals(n.getVersion(false), JDFElement.getDefaultJDFVersion(), "version ok");
 		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
 		assertTrue(JDFLayout.isNewLayout(lo), "lo 1.3");
 		n.setVersion(EnumVersion.Version_1_2);
@@ -146,7 +145,7 @@ class JDFLayoutTest extends JDFTestCaseBase
 	void testAutoRegister()
 	{
 
-		assertEquals(n.getVersion(false), JDFAudit.getDefaultJDFVersion(), "version ok");
+		assertEquals(n.getVersion(false), JDFElement.getDefaultJDFVersion(), "version ok");
 		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
 		final JDFColorControlStrip autoReg = lo.appendMarkObject().appendColorControlStrip();
 		autoReg.setStripType("AutoRegister");

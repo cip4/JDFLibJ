@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -105,7 +101,7 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.BLANKDIMENSIONSX, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.BLANKDIMENSIONSY, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.BOXFOLDINGTYPE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumBoxFoldingType.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumBoxFoldingType.class, 0), null);
 	}
 
 	@Override
@@ -134,7 +130,7 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBoxFoldingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoBoxFoldingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -146,7 +142,7 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBoxFoldingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoBoxFoldingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -159,7 +155,7 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoBoxFoldingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoBoxFoldingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -170,7 +166,7 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -185,105 +181,22 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for BoxFoldingType
+	 * Enumeration strings for numBoxFoldingType
 	 */
 
-	public enum EBoxFoldingType
+	public enum EnumBoxFoldingType
 	{
 		Type00, Type01, Type02, Type03, Type04, Type10, Type11, Type12, Type13, Type15, Type20;
 
-		public static EBoxFoldingType getEnum(String val)
+		public static EnumBoxFoldingType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EBoxFoldingType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumBoxFoldingType.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for BoxFoldingType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumBoxFoldingType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumBoxFoldingType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumBoxFoldingType getEnum(String enumName)
-		{
-			return (EnumBoxFoldingType) getEnum(EnumBoxFoldingType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumBoxFoldingType getEnum(int enumValue)
-		{
-			return (EnumBoxFoldingType) getEnum(EnumBoxFoldingType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumBoxFoldingType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumBoxFoldingType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumBoxFoldingType.class);
-		}
-
-		/**  */
-		public static final EnumBoxFoldingType Type00 = new EnumBoxFoldingType("Type00");
-		/**  */
-		public static final EnumBoxFoldingType Type01 = new EnumBoxFoldingType("Type01");
-		/**  */
-		public static final EnumBoxFoldingType Type02 = new EnumBoxFoldingType("Type02");
-		/**  */
-		public static final EnumBoxFoldingType Type03 = new EnumBoxFoldingType("Type03");
-		/**  */
-		public static final EnumBoxFoldingType Type04 = new EnumBoxFoldingType("Type04");
-		/**  */
-		public static final EnumBoxFoldingType Type10 = new EnumBoxFoldingType("Type10");
-		/**  */
-		public static final EnumBoxFoldingType Type11 = new EnumBoxFoldingType("Type11");
-		/**  */
-		public static final EnumBoxFoldingType Type12 = new EnumBoxFoldingType("Type12");
-		/**  */
-		public static final EnumBoxFoldingType Type13 = new EnumBoxFoldingType("Type13");
-		/**  */
-		public static final EnumBoxFoldingType Type15 = new EnumBoxFoldingType("Type15");
-		/**  */
-		public static final EnumBoxFoldingType Type20 = new EnumBoxFoldingType("Type20");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -295,7 +208,7 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBlankDimensionsX(JDFNumberList value)
+	public void setBlankDimensionsX(final JDFNumberList value)
 	{
 		setAttribute(AttributeName.BLANKDIMENSIONSX, value, null);
 	}
@@ -308,8 +221,8 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 */
 	public JDFNumberList getBlankDimensionsX()
 	{
-		String strAttrName = getAttribute(AttributeName.BLANKDIMENSIONSX, null, null);
-		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.BLANKDIMENSIONSX, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -323,7 +236,7 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBlankDimensionsY(JDFNumberList value)
+	public void setBlankDimensionsY(final JDFNumberList value)
 	{
 		setAttribute(AttributeName.BLANKDIMENSIONSY, value, null);
 	}
@@ -336,8 +249,8 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 */
 	public JDFNumberList getBlankDimensionsY()
 	{
-		String strAttrName = getAttribute(AttributeName.BLANKDIMENSIONSY, null, null);
-		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.BLANKDIMENSIONSY, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -351,9 +264,9 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setBoxFoldingType(EBoxFoldingType enumVar)
+	public void setBoxFoldingType(final EnumBoxFoldingType enumVar)
 	{
-		setAttribute(AttributeName.BOXFOLDINGTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.BOXFOLDINGTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -361,35 +274,6 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EBoxFoldingType getEBoxFoldingType()
-	{
-		return EBoxFoldingType.getEnum(getAttribute(AttributeName.BOXFOLDINGTYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute BoxFoldingType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute BoxFoldingType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetBoxFoldingType(EBoxFoldingType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setBoxFoldingType(EnumBoxFoldingType enumVar)
-	{
-		setAttribute(AttributeName.BOXFOLDINGTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute BoxFoldingType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EBoxFoldingType GetEBoxFoldingType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumBoxFoldingType getBoxFoldingType()
 	{
 		return EnumBoxFoldingType.getEnum(getAttribute(AttributeName.BOXFOLDINGTYPE, null, null));
@@ -427,7 +311,7 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFBoxFoldAction the element
 	 */
-	public JDFBoxFoldAction getCreateBoxFoldAction(int iSkip)
+	public JDFBoxFoldAction getCreateBoxFoldAction(final int iSkip)
 	{
 		return (JDFBoxFoldAction) getCreateElement_JDFElement(ElementName.BOXFOLDACTION, null, iSkip);
 	}
@@ -439,7 +323,7 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 * @return JDFBoxFoldAction the element
 	 *         default is getBoxFoldAction(0)
 	 */
-	public JDFBoxFoldAction getBoxFoldAction(int iSkip)
+	public JDFBoxFoldAction getBoxFoldAction(final int iSkip)
 	{
 		return (JDFBoxFoldAction) getElement(ElementName.BOXFOLDACTION, null, iSkip);
 	}
@@ -490,7 +374,7 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueLine the element
 	 */
-	public JDFGlueLine getCreateGlueLine(int iSkip)
+	public JDFGlueLine getCreateGlueLine(final int iSkip)
 	{
 		return (JDFGlueLine) getCreateElement_JDFElement(ElementName.GLUELINE, null, iSkip);
 	}
@@ -502,7 +386,7 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 * @return JDFGlueLine the element
 	 *         default is getGlueLine(0)
 	 */
-	public JDFGlueLine getGlueLine(int iSkip)
+	public JDFGlueLine getGlueLine(final int iSkip)
 	{
 		return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
 	}
@@ -553,7 +437,7 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFBoxApplication the element
 	 */
-	public JDFBoxApplication getCreateBoxApplication(int iSkip)
+	public JDFBoxApplication getCreateBoxApplication(final int iSkip)
 	{
 		return (JDFBoxApplication) getCreateElement_JDFElement(ElementName.BOXAPPLICATION, null, iSkip);
 	}
@@ -565,7 +449,7 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 * @return JDFBoxApplication the element
 	 *         default is getBoxApplication(0)
 	 */
-	public JDFBoxApplication getBoxApplication(int iSkip)
+	public JDFBoxApplication getBoxApplication(final int iSkip)
 	{
 		return (JDFBoxApplication) getElement(ElementName.BOXAPPLICATION, null, iSkip);
 	}

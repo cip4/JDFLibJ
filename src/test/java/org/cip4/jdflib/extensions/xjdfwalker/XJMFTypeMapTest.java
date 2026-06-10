@@ -95,22 +95,23 @@ class XJMFTypeMapTest extends JDFTestCaseBase
 	@Test
 	void testModifyQE()
 	{
-		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
-		JDFJMF jmf = b.buildHoldQueueEntry("q1");
-		JDFToXJDF c = new JDFToXJDF();
-		KElement xjmf = c.convert(jmf);
+		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
+		final JDFJMF jmf = b.buildHoldQueueEntry("q1");
+		final JDFToXJDF c = new JDFToXJDF();
+		final KElement xjmf = c.convert(jmf);
 		assertEquals(xjmf.getLocalName(), XJDFConstants.XJMF);
-		KElement command = xjmf.getElement("CommandModifyQueueEntry");
+		final KElement command = xjmf.getElement("CommandModifyQueueEntry");
 		assertNotNull(command);
 		assertEquals(command.getElement("ModifyQueueEntryParams").getAttribute(AttributeName.OPERATION), "Hold");
-		KElement xjmfResp = new XMLDoc(XJDFConstants.XJMF, null).getRoot();
-		KElement response = xjmfResp.appendElement("ResponseModifyQueueEntry");
+		final KElement xjmfResp = new XMLDoc(XJDFConstants.XJMF, null).getRoot();
+		final KElement response = xjmfResp.appendElement("ResponseModifyQueueEntry");
 		response.appendAnchor(null);
-		response.getCreateElement(XJDFConstants.Header).copyAttribute(AttributeName.REFID, command.getElement(XJDFConstants.Header), AttributeName.ID, null, null);
+		response.getCreateElement(XJDFConstants.Header).copyAttribute(AttributeName.REFID, command.getElement(XJDFConstants.Header), AttributeName.ID, null,
+				null);
 		assertEquals(1, XJMFTypeMap.getMap().size());
-		XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
-		JDFDoc newDoc = xc.convert(xjmfResp);
-		JDFJMF newJMF = newDoc.getJMFRoot();
+		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
+		final JDFDoc newDoc = xc.convert(xjmfResp);
+		final JDFJMF newJMF = newDoc.getJMFRoot();
 		assertEquals(newJMF.getResponse(0).getType(), "HoldQueueEntry");
 		assertEquals(0, XJMFTypeMap.getMap().size());
 	}
@@ -140,28 +141,28 @@ class XJMFTypeMapTest extends JDFTestCaseBase
 	@Test
 	void testPipePush()
 	{
-		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
-		JDFJMF jmf = b.createJMF(EnumFamily.Command, EnumType.PipePush);
-		JDFToXJDF c = new JDFToXJDF();
-		KElement xjmf = c.convert(jmf);
+		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
+		final JDFJMF jmf = b.createJMF(EnumFamily.Command, EnumType.PipePush);
+		final JDFToXJDF c = new JDFToXJDF();
+		final KElement xjmf = c.convert(jmf);
 		assertEquals(xjmf.getLocalName(), XJDFConstants.XJMF);
-		KElement command = xjmf.getElement("CommandPipeControl");
+		final KElement command = xjmf.getElement("CommandPipeControl");
 		assertNotNull(command);
 		assertEquals(command.getElement("PipeParams").getAttribute(AttributeName.OPERATION), "Push");
-		KElement xjmfResp = new XMLDoc(XJDFConstants.XJMF, null).getRoot();
-		KElement response = xjmfResp.appendElement("ResponsePipeControl");
+		final KElement xjmfResp = new XMLDoc(XJDFConstants.XJMF, null).getRoot();
+		final KElement response = xjmfResp.appendElement("ResponsePipeControl");
 		response.appendAnchor(null);
-		response.getCreateElement(XJDFConstants.Header).copyAttribute(AttributeName.REFID, command.getElement(XJDFConstants.Header), AttributeName.ID, null, null);
+		response.getCreateElement(XJDFConstants.Header).copyAttribute(AttributeName.REFID, command.getElement(XJDFConstants.Header), AttributeName.ID, null,
+				null);
 		assertEquals(1, XJMFTypeMap.getMap().size());
-		XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
-		JDFDoc newDoc = xc.convert(xjmfResp);
-		JDFJMF newJMF = newDoc.getJMFRoot();
+		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
+		final JDFDoc newDoc = xc.convert(xjmfResp);
+		final JDFJMF newJMF = newDoc.getJMFRoot();
 		assertEquals(newJMF.getResponse(0).getType(), "PipePush");
 		assertEquals(0, XJMFTypeMap.getMap().size());
 	}
 
 	/**
-	 *
 	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override

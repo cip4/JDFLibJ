@@ -81,9 +81,7 @@ import org.cip4.jdflib.extensions.ColorIntentHelper.EnumSurface;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class ColorIntentHelperTest
 {

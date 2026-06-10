@@ -70,7 +70,7 @@
 /*
  * MediaColorTest.java
  * @author Dietrich Mucha
- * 
+ *
  * Copyright (C) 2004 Heidelberger Druckmaschinen AG. All Rights Reserved.
  */
 package org.cip4.jdflib.devicecapability;
@@ -84,12 +84,13 @@ import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class JDFDevCapsTest {
+class JDFDevCapsTest
+{
 	@Test
 	void testGetContextName()
 	{
-		JDFDoc d = new JDFDoc("DevCaps");
-		JDFDevCaps dcs = (JDFDevCaps) d.getRoot();
+		final JDFDoc d = new JDFDoc("DevCaps");
+		final JDFDevCaps dcs = (JDFDevCaps) d.getRoot();
 		dcs.setName("foo");
 		Assertions.assertEquals(dcs.getContextName(), "foo");
 		dcs.setContext(EnumContext.Link);
@@ -106,11 +107,11 @@ class JDFDevCapsTest {
 	void testAppendDevCapInPool_DeviceCap()
 	{
 
-		JDFDoc doc = new JDFDoc("DeviceCap");
-		JDFDeviceCap ms = (JDFDeviceCap) doc.getRoot();
-		JDFDevCaps dcs = ms.appendDevCaps();
+		final JDFDoc doc = new JDFDoc("DeviceCap");
+		final JDFDeviceCap ms = (JDFDeviceCap) doc.getRoot();
+		final JDFDevCaps dcs = ms.appendDevCaps();
 		dcs.setName("foo");
-		JDFDevCap dc = dcs.appendDevCapInPool();
+		final JDFDevCap dc = dcs.appendDevCapInPool();
 		Assertions.assertEquals(dc, dcs.getDevCap());
 		Assertions.assertEquals(dc.getName(), dcs.getName());
 	}
@@ -119,11 +120,11 @@ class JDFDevCapsTest {
 	void testAppendDevCapInPool_JMF()
 	{
 
-		JDFDoc doc = new JDFDoc("MessageService");
-		JDFMessageService ms = (JDFMessageService) doc.getRoot();
-		JDFDevCaps dcs = ms.appendDevCaps();
+		final JDFDoc doc = new JDFDoc("MessageService");
+		final JDFMessageService ms = (JDFMessageService) doc.getRoot();
+		final JDFDevCaps dcs = ms.appendDevCaps();
 		dcs.setName("foo");
-		JDFDevCap dc = dcs.appendDevCapInPool();
+		final JDFDevCap dc = dcs.appendDevCapInPool();
 		Assertions.assertEquals(dc, dcs.getDevCap());
 		Assertions.assertEquals(dc.getName(), dcs.getName());
 	}

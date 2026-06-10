@@ -36,9 +36,9 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import java.util.List;
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumGrainDirection;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumHoleType;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumISOPaperSubstrate;
@@ -56,9 +56,7 @@ import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkMedia extends WalkIntentResource
 {
@@ -99,7 +97,7 @@ public class WalkMedia extends WalkIntentResource
 		map.remove(AttributeName.HOLETYPE);
 		map.remove(AttributeName.PREPRINTED);
 		final String mediaType = map.get(AttributeName.MEDIATYPE);
-		if (mediaType == null || EnumMediaType.Unknown.getName().equals(mediaType))
+		if (mediaType == null || EnumMediaType.Unknown.name().equals(mediaType))
 		{
 			map.put(AttributeName.MEDIATYPE, EnumMediaType.Other);
 		}
@@ -123,7 +121,7 @@ public class WalkMedia extends WalkIntentResource
 			final EnumISOPaperSubstrate ips = JDFMedia.getIsoPaperFromGrade(igrade, eCoating.getEnum(map.get(coatkey)));
 			if (ips != null)
 			{
-				map.put(newGrade, ips.getName());
+				map.put(newGrade, ips.name());
 			}
 		}
 	}
@@ -140,24 +138,24 @@ public class WalkMedia extends WalkIntentResource
 	private void updateFluteGrain(final String att, final JDFAttributeMap map)
 	{
 		String value = map.getNonEmpty(att);
-		if (EnumGrainDirection.LongEdge.getName().equals(value))
+		if (EnumGrainDirection.LongEdge.name().equals(value))
 		{
 			final JDFXYPair dim = JDFXYPair.createXYPair(map.get(AttributeName.DIMENSION));
 			if (dim != null)
 			{
-				value = dim.getX() > dim.getY() ? EnumGrainDirection.XDirection.getName() : EnumGrainDirection.YDirection.getName();
+				value = dim.getX() > dim.getY() ? EnumGrainDirection.XDirection.name() : EnumGrainDirection.YDirection.name();
 			}
 			else
 			{
 				value = null;
 			}
 		}
-		else if (EnumGrainDirection.ShortEdge.getName().equals(value))
+		else if (EnumGrainDirection.ShortEdge.name().equals(value))
 		{
 			final JDFXYPair dim = JDFXYPair.createXYPair(map.get(AttributeName.DIMENSION));
 			if (dim != null)
 			{
-				value = dim.getX() < dim.getY() ? EnumGrainDirection.XDirection.getName() : EnumGrainDirection.YDirection.getName();
+				value = dim.getX() < dim.getY() ? EnumGrainDirection.XDirection.name() : EnumGrainDirection.YDirection.name();
 			}
 			else
 			{
@@ -177,14 +175,15 @@ public class WalkMedia extends WalkIntentResource
 
 	void movePattern(final JDFMedia media, final KElement xjdf)
 	{
-		final Vector<? extends ValuedEnum> pattern = media.getHoleType();
+		final List<EnumHoleType> holeType = media.getHoleType();
+		final Vector<EnumHoleType> pattern = holeType == null ? null : new Vector<>(holeType);
 		if (pattern != null)
 		{
 			pattern.remove(EnumHoleType.None);
 			pattern.remove(EnumHoleType.Explicit); // Handeled by HoleList
-			for (final ValuedEnum t : pattern)
+			for (final EnumHoleType t : pattern)
 			{
-				xjdf.appendElement(XJDFConstants.HolePattern).setAttribute(AttributeName.PATTERN, t.getName());
+				xjdf.appendElement(XJDFConstants.HolePattern).setAttribute(AttributeName.PATTERN, JavaEnumUtil.getName(t));
 			}
 		}
 

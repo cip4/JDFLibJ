@@ -46,7 +46,6 @@ import org.cip4.jdflib.util.StringUtil;
  * class to generate named colors from RGB or JDF named colors
  *
  * @author rainer prosi
- *
  *         TODO RGB matching TODO JDF enum matching
  */
 public class ColorMapper
@@ -60,7 +59,6 @@ public class ColorMapper
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	Set<String> getColors()
@@ -371,9 +369,13 @@ public class ColorMapper
 	String getMatchingColorImpl(final String color)
 	{
 		if (StringUtil.isEmpty(color))
+		{
 			return null;
+		}
 		if (myColors.contains(color.toLowerCase()))
+		{
 			return color.toLowerCase();
+		}
 		return null;
 	}
 }

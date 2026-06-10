@@ -82,8 +82,8 @@ import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.node.JDFNode.EActivation;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoAncestor : public JDFElement
@@ -97,22 +97,23 @@ public abstract class JDFAutoAncestor extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[21];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0),
-				null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumActivation.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.CATEGORY, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.FILENAME, 0x3333333333l, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.ICSVERSIONS, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.MAXVERSION, 0x3333333311l, AttributeInfo.EnumAttributeType.JDFJMFVersion, EnumVersion.getEnum(0),
-				null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MAXVERSION, 0x3333333311l, AttributeInfo.EnumAttributeType.JDFJMFVersion,
+				JavaEnumUtil.getEnum(EnumVersion.class, 0), null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.NODEID, 0x2222222222l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.PROJECTID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.RELATEDJOBID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.RELATEDJOBPARTID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.RELATEDPROJECTID, 0x3333111111l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.SPAWNID, 0x3333333331l, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.STATUS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.STATUS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumNodeStatus.class, 0), null);
 		atrInfoTable[14] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[15] = new AtrInfoTable(AttributeName.TEMPLATE, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[16] = new AtrInfoTable(AttributeName.TEMPLATEID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
@@ -147,7 +148,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAncestor(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoAncestor(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -159,7 +160,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAncestor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoAncestor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -172,7 +173,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoAncestor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoAncestor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -193,9 +194,9 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setActivation(EActivation enumVar)
+	public void setActivation(final EnumActivation enumVar)
 	{
-		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ACTIVATION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -203,35 +204,6 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EActivation getEActivation()
-	{
-		return EActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Activation
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Activation
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetActivation(EActivation) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setActivation(EnumActivation enumVar)
-	{
-		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Activation
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EActivation GetEActivation() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumActivation getActivation()
 	{
 		return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
@@ -247,7 +219,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCategory(String value)
+	public void setCategory(final String value)
 	{
 		setAttribute(AttributeName.CATEGORY, value, null);
 	}
@@ -272,7 +244,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFileName(String value)
+	public void setFileName(final String value)
 	{
 		setAttribute(AttributeName.FILENAME, value, null);
 	}
@@ -297,7 +269,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setICSVersions(VString value)
+	public void setICSVersions(final VString value)
 	{
 		setAttribute(AttributeName.ICSVERSIONS, value, null);
 	}
@@ -309,8 +281,8 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 */
 	public VString getICSVersions()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.ICSVERSIONS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ICSVERSIONS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -325,7 +297,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -350,7 +322,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobPartID(String value)
+	public void setJobPartID(final String value)
 	{
 		setAttribute(AttributeName.JOBPARTID, value, null);
 	}
@@ -375,9 +347,9 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMaxVersion(EVersion enumVar)
+	public void setMaxVersion(final EnumVersion enumVar)
 	{
-		setAttribute(AttributeName.MAXVERSION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.MAXVERSION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -385,35 +357,6 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EVersion getEMaxVersion()
-	{
-		return EVersion.getEnum(getAttribute(AttributeName.MAXVERSION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute MaxVersion
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute MaxVersion
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetMaxVersion(EVersion) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setMaxVersion(EnumVersion enumVar)
-	{
-		setAttribute(AttributeName.MAXVERSION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute MaxVersion
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EVersion GetEMaxVersion() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumVersion getMaxVersion()
 	{
 		return EnumVersion.getEnum(getAttribute(AttributeName.MAXVERSION, null, null));
@@ -429,7 +372,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNodeID(String value)
+	public void setNodeID(final String value)
 	{
 		setAttribute(AttributeName.NODEID, value, null);
 	}
@@ -454,7 +397,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProjectID(String value)
+	public void setProjectID(final String value)
 	{
 		setAttribute(AttributeName.PROJECTID, value, null);
 	}
@@ -479,7 +422,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRelatedJobID(String value)
+	public void setRelatedJobID(final String value)
 	{
 		setAttribute(AttributeName.RELATEDJOBID, value, null);
 	}
@@ -504,7 +447,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRelatedJobPartID(String value)
+	public void setRelatedJobPartID(final String value)
 	{
 		setAttribute(AttributeName.RELATEDJOBPARTID, value, null);
 	}
@@ -529,7 +472,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRelatedProjectID(String value)
+	public void setRelatedProjectID(final String value)
 	{
 		setAttribute(AttributeName.RELATEDPROJECTID, value, null);
 	}
@@ -554,7 +497,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSpawnID(String value)
+	public void setSpawnID(final String value)
 	{
 		setAttribute(AttributeName.SPAWNID, value, null);
 	}
@@ -579,7 +522,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStatusDetails(String value)
+	public void setStatusDetails(final String value)
 	{
 		setAttribute(AttributeName.STATUSDETAILS, value, null);
 	}
@@ -604,7 +547,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTemplate(boolean value)
+	public void setTemplate(final boolean value)
 	{
 		setAttribute(AttributeName.TEMPLATE, value, null);
 	}
@@ -629,7 +572,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTemplateID(String value)
+	public void setTemplateID(final String value)
 	{
 		setAttribute(AttributeName.TEMPLATEID, value, null);
 	}
@@ -654,7 +597,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTemplateVersion(String value)
+	public void setTemplateVersion(final String value)
 	{
 		setAttribute(AttributeName.TEMPLATEVERSION, value, null);
 	}
@@ -679,7 +622,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setType(String value)
+	public void setType(final String value)
 	{
 		setAttribute(AttributeName.TYPE, value, null);
 	}
@@ -704,7 +647,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTypes(VString value)
+	public void setTypes(final VString value)
 	{
 		setAttribute(AttributeName.TYPES, value, null);
 	}
@@ -716,8 +659,8 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 */
 	public VString getTypes()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}

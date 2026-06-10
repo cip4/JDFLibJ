@@ -9,12 +9,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanGlueProcedure extends JDFEnumerationSpan
@@ -23,39 +19,39 @@ public class JDFSpanGlueProcedure extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanGlueProcedure
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanGlueProcedure(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanGlueProcedure(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanGlueProcedure
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanGlueProcedure(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanGlueProcedure(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanGlueProcedure
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanGlueProcedure(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanGlueProcedure(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -63,46 +59,14 @@ public class JDFSpanGlueProcedure extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanGlueProcedure
 	 */
-	public static class EnumSpanGlueProcedure extends ValuedEnum
+	public enum EnumSpanGlueProcedure
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Spine, SideOnly, SingleSide, SideSpine;
 
-		private EnumSpanGlueProcedure(String name)
+		public static EnumSpanGlueProcedure getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanGlueProcedure.class, val, null);
 		}
-
-		public static EnumSpanGlueProcedure getEnum(String enumName)
-		{
-			return (EnumSpanGlueProcedure) getEnum(EnumSpanGlueProcedure.class, enumName);
-		}
-
-		public static EnumSpanGlueProcedure getEnum(int enumValue)
-		{
-			return (EnumSpanGlueProcedure) getEnum(EnumSpanGlueProcedure.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanGlueProcedure.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanGlueProcedure.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanGlueProcedure.class);
-		}
-
-		public static final EnumSpanGlueProcedure Spine = new EnumSpanGlueProcedure("Spine");
-		public static final EnumSpanGlueProcedure SideOnly = new EnumSpanGlueProcedure("SideOnly");
-		public static final EnumSpanGlueProcedure SingleSide = new EnumSpanGlueProcedure("SingleSide");
-		public static final EnumSpanGlueProcedure SideSpine = new EnumSpanGlueProcedure("SideSpine");
-
 	}
 
 	// **************************************** Methods
@@ -110,18 +74,18 @@ public class JDFSpanGlueProcedure extends JDFEnumerationSpan
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanGlueProcedure.getEnum(0);
+		return EnumSpanGlueProcedure.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

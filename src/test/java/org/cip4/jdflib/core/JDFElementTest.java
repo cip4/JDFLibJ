@@ -47,6 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Vector;
@@ -70,6 +71,7 @@ import org.cip4.jdflib.core.JDFElement.EnumXYRelation;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFNumberList;
+import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.goldenticket.MISCPGoldenTicket;
@@ -196,9 +198,8 @@ class JDFElementTest extends JDFTestCaseBase
 	@Test
 	void testEnumValidationLevel()
 	{
-		for (final Object e : EnumValidationLevel.getEnumList())
+		for (final EnumValidationLevel v : EnumValidationLevel.values())
 		{
-			final EnumValidationLevel v = (EnumValidationLevel) e;
 			EnumValidationLevel.incompleteLevel(v);
 			EnumValidationLevel.isRecursive(v);
 			EnumValidationLevel.isRequired(v);
@@ -530,8 +531,13 @@ class JDFElementTest extends JDFTestCaseBase
 	@Test
 	void testEnumSeparation()
 	{
-		assertEquals(EnumSeparation.Cyan.getName(), "Cyan");
-		assertNotNull(EnumSeparation.getEnumMap());
+		assertEquals(EnumSeparation.Cyan.name(), "Cyan");
+		final Map<String, EnumSeparation> map = new HashMap<>();
+		for (final EnumSeparation separation : EnumSeparation.values())
+		{
+			map.put(separation.name(), separation);
+		}
+		assertNotNull(map);
 	}
 
 	/**
@@ -867,9 +873,9 @@ class JDFElementTest extends JDFTestCaseBase
 	{
 		assertEquals(JDFElement.getDefaultJDFVersion(), new JDFDoc(ElementName.JMF).getJMFRoot().getVersion(true));
 		assertEquals(JDFElement.getDefaultJDFVersion(), new JDFDoc(ElementName.JDF).getJDFRoot().getVersion(true));
-		assertEquals(XJDFHelper.getDefaultVersion(), ((JDFElement) new JDFDoc(XJDFConstants.XJDF).getRoot()).getVersion(true));
-		assertEquals(XJDFHelper.getDefaultVersion(), ((JDFElement) new JDFDoc(XJDFConstants.XJMF).getRoot()).getVersion(true));
-		assertEquals(XJDFHelper.getDefaultVersion(), ((JDFElement) new JDFDoc(JDFConstants.PRINT_TALK).getRoot()).getVersion(true));
+		assertEquals(BaseXJDFHelper.getDefaultVersion(), ((JDFElement) new JDFDoc(XJDFConstants.XJDF).getRoot()).getVersion(true));
+		assertEquals(BaseXJDFHelper.getDefaultVersion(), ((JDFElement) new JDFDoc(XJDFConstants.XJMF).getRoot()).getVersion(true));
+		assertEquals(BaseXJDFHelper.getDefaultVersion(), ((JDFElement) new JDFDoc(JDFConstants.PRINT_TALK).getRoot()).getVersion(true));
 		assertEquals(null, ((JDFElement) new JDFDoc("foobar").getRoot()).getVersion(true));
 		assertEquals(EnumVersion.Version_1_3.getName(), ((JDFElement) new JDFDoc("foobar").getRoot()).version());
 	}
@@ -904,7 +910,11 @@ class JDFElementTest extends JDFTestCaseBase
 	@Test
 	void testOrientationMap()
 	{
-		final Map<String, EnumOrientation> map = EnumOrientation.getEnumMap();
+		final Map<String, EnumOrientation> map = new HashMap<>();
+		for (final EnumOrientation orientation : EnumOrientation.values())
+		{
+			map.put(orientation.name(), orientation);
+		}
 		assertEquals(map.get("Flip0"), EnumOrientation.Flip0);
 	}
 
@@ -1262,12 +1272,8 @@ class JDFElementTest extends JDFTestCaseBase
 		for (final File file : fList)
 		{
 			// skip directories in CVS environments
-			if (file.isDirectory())
-			{
-				continue;
-			}
 			// skip non jdf
-			if (!file.getPath().endsWith(".jdf") && !file.getPath().endsWith(".jmf") && !file.getPath().endsWith(".xml"))
+			if (file.isDirectory() || (!file.getPath().endsWith(".jdf") && !file.getPath().endsWith(".jmf") && !file.getPath().endsWith(".xml")))
 			{
 				continue;
 			}
@@ -1572,13 +1578,13 @@ class JDFElementTest extends JDFTestCaseBase
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFElement root = d.getJDFRoot();
-		root.setEnumerationsAttribute("dummy", null, null);
-		assertNull(root.getEnumerationsAttribute("dummy", null, EnumNodeStatus.Aborted, false));
+		root.setEnumsAttribute("dummy", null, null);
+		assertNull(root.getEnumerationsAttribute("dummy", null, EnumNodeStatus.class));
 		final Vector<EnumNodeStatus> v = new Vector<>();
 		v.add(EnumNodeStatus.Cleanup);
 		v.add(EnumNodeStatus.Completed);
-		root.setEnumerationsAttribute("dummy", v, null);
-		assertEquals(root.getEnumerationsAttribute("dummy", null, EnumNodeStatus.Aborted, false), v, "round trip enumerations");
+		root.setEnumsAttribute("dummy", v, null);
+		assertEquals(root.getEnumerationsAttribute("dummy", null, EnumNodeStatus.class), v, "round trip enumerations");
 	}
 
 	/**

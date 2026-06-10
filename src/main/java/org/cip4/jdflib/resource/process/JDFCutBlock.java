@@ -87,8 +87,7 @@ import org.w3c.dom.DOMException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
- * Aug 10, 2009
+ *         Aug 10, 2009
  */
 public class JDFCutBlock extends JDFAutoCutBlock
 {
@@ -108,10 +107,10 @@ public class JDFCutBlock extends JDFAutoCutBlock
 
 	/**
 	 * Constructor for JDFCutBlock
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
-	 *
 	 */
 	public JDFCutBlock(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
@@ -120,9 +119,9 @@ public class JDFCutBlock extends JDFAutoCutBlock
 
 	/**
 	 * Constructor for JDFCutBlock
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
-	 *
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
@@ -133,14 +132,15 @@ public class JDFCutBlock extends JDFAutoCutBlock
 
 	/**
 	 * Constructor for JDFCutBlock
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
-	 *
 	 */
-	public JDFCutBlock(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFCutBlock(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -170,7 +170,7 @@ public class JDFCutBlock extends JDFAutoCutBlock
 		Vector<EnumPartIDKey> v = super.getImplicitPartitions();
 		if (v == null)
 		{
-			v = new Vector<EnumPartIDKey>();
+			v = new Vector<>();
 		}
 		v.add(EnumPartIDKey.BlockName);
 		return v;

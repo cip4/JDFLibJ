@@ -88,15 +88,15 @@ public class WalkBinderySignature extends WalkResource
 		if (edge != null)
 		{
 			EnumOrientation orientation = EnumOrientation.Rotate0;
-			if (EnumBindingSide.Top.getName().equals(edge))
+			if (EnumBindingSide.Top.name().equals(edge))
 			{
 				orientation = EnumOrientation.Rotate270;
 			}
-			if (EnumBindingSide.Bottom.getName().equals(edge))
+			if (EnumBindingSide.Bottom.name().equals(edge))
 			{
 				orientation = EnumOrientation.Rotate90;
 			}
-			else if (EnumBindingSide.Right.getName().equals(edge))
+			else if (EnumBindingSide.Right.name().equals(edge))
 			{
 				orientation = EnumOrientation.Flip180;
 			}

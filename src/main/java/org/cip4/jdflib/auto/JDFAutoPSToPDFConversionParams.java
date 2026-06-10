@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -102,15 +97,16 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ASCII85ENCODEPAGES, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.BINDING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumBinding.getEnum(0), "Left");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.BINDING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumBinding.class, 0), "Left");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.DETECTBLEND, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.DOTHUMBNAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.OPTIMIZE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.AUTOROTATEPAGES, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumAutoRotatePages.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumAutoRotatePages.class, 0), null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.COMPRESSPAGES, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.DEFAULTRENDERINGINTENT, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumDefaultRenderingIntent.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumDefaultRenderingIntent.class, 0), null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.ENDPAGE, 0x4444444333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.IMAGEMEMORY, 0x4444444433l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.INITIALPAGESIZE, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, null);
@@ -146,7 +142,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPSToPDFConversionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPSToPDFConversionParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -158,7 +154,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPSToPDFConversionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPSToPDFConversionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -171,7 +167,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPSToPDFConversionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPSToPDFConversionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -182,7 +178,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -197,249 +193,50 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for Binding
+	 * Enumeration strings for numBinding
 	 */
 
-	public enum EBinding
+	public enum EnumBinding
 	{
 		Left, Right;
 
-		public static EBinding getEnum(String val)
+		public static EnumBinding getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EBinding.class, val, EBinding.Left);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumBinding.class, val, EnumBinding.Left);
 		}
 	}
 
 	/**
-	 * Enumeration strings for Binding
+	 * Enumeration strings for numAutoRotatePages
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumBinding extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumBinding(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumBinding getEnum(String enumName)
-		{
-			return (EnumBinding) getEnum(EnumBinding.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumBinding getEnum(int enumValue)
-		{
-			return (EnumBinding) getEnum(EnumBinding.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumBinding.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumBinding.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumBinding.class);
-		}
-
-		/**  */
-		public static final EnumBinding Left = new EnumBinding("Left");
-		/**  */
-		public static final EnumBinding Right = new EnumBinding("Right");
-	}
-
-	/**
-	 * Enumeration strings for AutoRotatePages
-	 */
-
-	public enum EAutoRotatePages
+	public enum EnumAutoRotatePages
 	{
 		None, All, PageByPage;
 
-		public static EAutoRotatePages getEnum(String val)
+		public static EnumAutoRotatePages getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EAutoRotatePages.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumAutoRotatePages.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for AutoRotatePages
+	 * Enumeration strings for numDefaultRenderingIntent
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumAutoRotatePages extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumAutoRotatePages(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumAutoRotatePages getEnum(String enumName)
-		{
-			return (EnumAutoRotatePages) getEnum(EnumAutoRotatePages.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumAutoRotatePages getEnum(int enumValue)
-		{
-			return (EnumAutoRotatePages) getEnum(EnumAutoRotatePages.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumAutoRotatePages.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAutoRotatePages.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAutoRotatePages.class);
-		}
-
-		/**  */
-		public static final EnumAutoRotatePages None = new EnumAutoRotatePages("None");
-		/**  */
-		public static final EnumAutoRotatePages All = new EnumAutoRotatePages("All");
-		/**  */
-		public static final EnumAutoRotatePages PageByPage = new EnumAutoRotatePages("PageByPage");
-	}
-
-	/**
-	 * Enumeration strings for DefaultRenderingIntent
-	 */
-
-	public enum EDefaultRenderingIntent
+	public enum EnumDefaultRenderingIntent
 	{
 		Default, Perceptual, Saturation, RelativeColorimetric, AbsoluteColorimetric;
 
-		public static EDefaultRenderingIntent getEnum(String val)
+		public static EnumDefaultRenderingIntent getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EDefaultRenderingIntent.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumDefaultRenderingIntent.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for DefaultRenderingIntent
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumDefaultRenderingIntent extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumDefaultRenderingIntent(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumDefaultRenderingIntent getEnum(String enumName)
-		{
-			return (EnumDefaultRenderingIntent) getEnum(EnumDefaultRenderingIntent.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDefaultRenderingIntent getEnum(int enumValue)
-		{
-			return (EnumDefaultRenderingIntent) getEnum(EnumDefaultRenderingIntent.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDefaultRenderingIntent.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDefaultRenderingIntent.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDefaultRenderingIntent.class);
-		}
-
-		/**  */
-		public static final EnumDefaultRenderingIntent Default = new EnumDefaultRenderingIntent("Default");
-		/**  */
-		public static final EnumDefaultRenderingIntent Perceptual = new EnumDefaultRenderingIntent("Perceptual");
-		/**  */
-		public static final EnumDefaultRenderingIntent Saturation = new EnumDefaultRenderingIntent("Saturation");
-		/**  */
-		public static final EnumDefaultRenderingIntent RelativeColorimetric = new EnumDefaultRenderingIntent("RelativeColorimetric");
-		/**  */
-		public static final EnumDefaultRenderingIntent AbsoluteColorimetric = new EnumDefaultRenderingIntent("AbsoluteColorimetric");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -451,7 +248,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setASCII85EncodePages(boolean value)
+	public void setASCII85EncodePages(final boolean value)
 	{
 		setAttribute(AttributeName.ASCII85ENCODEPAGES, value, null);
 	}
@@ -476,9 +273,9 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setBinding(EBinding enumVar)
+	public void setBinding(final EnumBinding enumVar)
 	{
-		setAttribute(AttributeName.BINDING, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.BINDING, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -486,35 +283,6 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EBinding getEBinding()
-	{
-		return EBinding.getEnum(getAttribute(AttributeName.BINDING, null, "Left"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Binding
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Binding
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetBinding(EBinding) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setBinding(EnumBinding enumVar)
-	{
-		setAttribute(AttributeName.BINDING, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Binding
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EBinding GetEBinding() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumBinding getBinding()
 	{
 		return EnumBinding.getEnum(getAttribute(AttributeName.BINDING, null, "Left"));
@@ -530,7 +298,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDetectBlend(boolean value)
+	public void setDetectBlend(final boolean value)
 	{
 		setAttribute(AttributeName.DETECTBLEND, value, null);
 	}
@@ -555,7 +323,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDoThumbnails(boolean value)
+	public void setDoThumbnails(final boolean value)
 	{
 		setAttribute(AttributeName.DOTHUMBNAILS, value, null);
 	}
@@ -580,7 +348,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOptimize(boolean value)
+	public void setOptimize(final boolean value)
 	{
 		setAttribute(AttributeName.OPTIMIZE, value, null);
 	}
@@ -605,9 +373,9 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setAutoRotatePages(EAutoRotatePages enumVar)
+	public void setAutoRotatePages(final EnumAutoRotatePages enumVar)
 	{
-		setAttribute(AttributeName.AUTOROTATEPAGES, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.AUTOROTATEPAGES, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -615,35 +383,6 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EAutoRotatePages getEAutoRotatePages()
-	{
-		return EAutoRotatePages.getEnum(getAttribute(AttributeName.AUTOROTATEPAGES, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute AutoRotatePages
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute AutoRotatePages
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetAutoRotatePages(EAutoRotatePages) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setAutoRotatePages(EnumAutoRotatePages enumVar)
-	{
-		setAttribute(AttributeName.AUTOROTATEPAGES, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute AutoRotatePages
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EAutoRotatePages GetEAutoRotatePages() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumAutoRotatePages getAutoRotatePages()
 	{
 		return EnumAutoRotatePages.getEnum(getAttribute(AttributeName.AUTOROTATEPAGES, null, null));
@@ -659,7 +398,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCompressPages(boolean value)
+	public void setCompressPages(final boolean value)
 	{
 		setAttribute(AttributeName.COMPRESSPAGES, value, null);
 	}
@@ -684,9 +423,9 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDefaultRenderingIntent(EDefaultRenderingIntent enumVar)
+	public void setDefaultRenderingIntent(final EnumDefaultRenderingIntent enumVar)
 	{
-		setAttribute(AttributeName.DEFAULTRENDERINGINTENT, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DEFAULTRENDERINGINTENT, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -694,35 +433,6 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EDefaultRenderingIntent getEDefaultRenderingIntent()
-	{
-		return EDefaultRenderingIntent.getEnum(getAttribute(AttributeName.DEFAULTRENDERINGINTENT, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute DefaultRenderingIntent
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute DefaultRenderingIntent
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDefaultRenderingIntent(EDefaultRenderingIntent) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDefaultRenderingIntent(EnumDefaultRenderingIntent enumVar)
-	{
-		setAttribute(AttributeName.DEFAULTRENDERINGINTENT, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute DefaultRenderingIntent
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EDefaultRenderingIntent GetEDefaultRenderingIntent() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumDefaultRenderingIntent getDefaultRenderingIntent()
 	{
 		return EnumDefaultRenderingIntent.getEnum(getAttribute(AttributeName.DEFAULTRENDERINGINTENT, null, null));
@@ -738,7 +448,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setEndPage(int value)
+	public void setEndPage(final int value)
 	{
 		setAttribute(AttributeName.ENDPAGE, value, null);
 	}
@@ -763,7 +473,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setImageMemory(int value)
+	public void setImageMemory(final int value)
 	{
 		setAttribute(AttributeName.IMAGEMEMORY, value, null);
 	}
@@ -788,7 +498,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setInitialPageSize(JDFXYPair value)
+	public void setInitialPageSize(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.INITIALPAGESIZE, value, null);
 	}
@@ -801,8 +511,8 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 */
 	public JDFXYPair getInitialPageSize()
 	{
-		String strAttrName = getAttribute(AttributeName.INITIALPAGESIZE, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.INITIALPAGESIZE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -816,7 +526,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setInitialResolution(JDFXYPair value)
+	public void setInitialResolution(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.INITIALRESOLUTION, value, null);
 	}
@@ -829,8 +539,8 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 */
 	public JDFXYPair getInitialResolution()
 	{
-		String strAttrName = getAttribute(AttributeName.INITIALRESOLUTION, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.INITIALRESOLUTION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -844,7 +554,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOverPrintMode(int value)
+	public void setOverPrintMode(final int value)
 	{
 		setAttribute(AttributeName.OVERPRINTMODE, value, null);
 	}
@@ -869,7 +579,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPDFVersion(double value)
+	public void setPDFVersion(final double value)
 	{
 		setAttribute(AttributeName.PDFVERSION, value, null);
 	}
@@ -894,7 +604,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStartPage(int value)
+	public void setStartPage(final int value)
 	{
 		setAttribute(AttributeName.STARTPAGE, value, null);
 	}

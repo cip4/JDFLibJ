@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -109,9 +104,9 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.PRESERVEOVERPRINTSETTINGS, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
 		atrInfoTable[13] = new AtrInfoTable(AttributeName.PRESERVEOPICOMMENTS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
 		atrInfoTable[14] = new AtrInfoTable(AttributeName.TRANSFERFUNCTIONINFO, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumTransferFunctionInfo.getEnum(0), "Preserve");
-		atrInfoTable[15] = new AtrInfoTable(AttributeName.UCRANDBGINFO, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumUCRandBGInfo.getEnum(0),
-				"Preserve");
+				JavaEnumUtil.getEnum(EnumTransferFunctionInfo.class, 0), "Preserve");
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.UCRANDBGINFO, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumUCRandBGInfo.class, 0), "Preserve");
 		atrInfoTable[16] = new AtrInfoTable(AttributeName.USEPROLOGUE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 	}
 
@@ -127,7 +122,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAdvancedParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoAdvancedParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -139,7 +134,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAdvancedParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoAdvancedParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -152,172 +147,42 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoAdvancedParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoAdvancedParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for TransferFunctionInfo
+	 * Enumeration strings for numTransferFunctionInfo
 	 */
 
-	public enum ETransferFunctionInfo
+	public enum EnumTransferFunctionInfo
 	{
 		Preserve, Remove, Apply;
 
-		public static ETransferFunctionInfo getEnum(String val)
+		public static EnumTransferFunctionInfo getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ETransferFunctionInfo.class, val, ETransferFunctionInfo.Preserve);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumTransferFunctionInfo.class, val, EnumTransferFunctionInfo.Preserve);
 		}
 	}
 
 	/**
-	 * Enumeration strings for TransferFunctionInfo
+	 * Enumeration strings for numUCRandBGInfo
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumTransferFunctionInfo extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumTransferFunctionInfo(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumTransferFunctionInfo getEnum(String enumName)
-		{
-			return (EnumTransferFunctionInfo) getEnum(EnumTransferFunctionInfo.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumTransferFunctionInfo getEnum(int enumValue)
-		{
-			return (EnumTransferFunctionInfo) getEnum(EnumTransferFunctionInfo.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumTransferFunctionInfo.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumTransferFunctionInfo.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumTransferFunctionInfo.class);
-		}
-
-		/**  */
-		public static final EnumTransferFunctionInfo Preserve = new EnumTransferFunctionInfo("Preserve");
-		/**  */
-		public static final EnumTransferFunctionInfo Remove = new EnumTransferFunctionInfo("Remove");
-		/**  */
-		public static final EnumTransferFunctionInfo Apply = new EnumTransferFunctionInfo("Apply");
-	}
-
-	/**
-	 * Enumeration strings for UCRandBGInfo
-	 */
-
-	public enum EUCRandBGInfo
+	public enum EnumUCRandBGInfo
 	{
 		Preserve, Remove;
 
-		public static EUCRandBGInfo getEnum(String val)
+		public static EnumUCRandBGInfo getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EUCRandBGInfo.class, val, EUCRandBGInfo.Preserve);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumUCRandBGInfo.class, val, EnumUCRandBGInfo.Preserve);
 		}
-	}
-
-	/**
-	 * Enumeration strings for UCRandBGInfo
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumUCRandBGInfo extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumUCRandBGInfo(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumUCRandBGInfo getEnum(String enumName)
-		{
-			return (EnumUCRandBGInfo) getEnum(EnumUCRandBGInfo.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumUCRandBGInfo getEnum(int enumValue)
-		{
-			return (EnumUCRandBGInfo) getEnum(EnumUCRandBGInfo.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumUCRandBGInfo.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumUCRandBGInfo.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumUCRandBGInfo.class);
-		}
-
-		/**  */
-		public static final EnumUCRandBGInfo Preserve = new EnumUCRandBGInfo("Preserve");
-		/**  */
-		public static final EnumUCRandBGInfo Remove = new EnumUCRandBGInfo("Remove");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -329,7 +194,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowPSXObjects(boolean value)
+	public void setAllowPSXObjects(final boolean value)
 	{
 		setAttribute(AttributeName.ALLOWPSXOBJECTS, value, null);
 	}
@@ -354,7 +219,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowTransparency(boolean value)
+	public void setAllowTransparency(final boolean value)
 	{
 		setAttribute(AttributeName.ALLOWTRANSPARENCY, value, null);
 	}
@@ -379,7 +244,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAutoPositionEPSInfo(boolean value)
+	public void setAutoPositionEPSInfo(final boolean value)
 	{
 		setAttribute(AttributeName.AUTOPOSITIONEPSINFO, value, null);
 	}
@@ -404,7 +269,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setEmbedJobOptions(boolean value)
+	public void setEmbedJobOptions(final boolean value)
 	{
 		setAttribute(AttributeName.EMBEDJOBOPTIONS, value, null);
 	}
@@ -429,7 +294,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setEmitDSCWarnings(boolean value)
+	public void setEmitDSCWarnings(final boolean value)
 	{
 		setAttribute(AttributeName.EMITDSCWARNINGS, value, null);
 	}
@@ -454,7 +319,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLockDistillerParams(boolean value)
+	public void setLockDistillerParams(final boolean value)
 	{
 		setAttribute(AttributeName.LOCKDISTILLERPARAMS, value, null);
 	}
@@ -479,7 +344,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setParseDSCComments(boolean value)
+	public void setParseDSCComments(final boolean value)
 	{
 		setAttribute(AttributeName.PARSEDSCCOMMENTS, value, null);
 	}
@@ -504,7 +369,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setParseDSCCommentsForDocInfo(boolean value)
+	public void setParseDSCCommentsForDocInfo(final boolean value)
 	{
 		setAttribute(AttributeName.PARSEDSCCOMMENTSFORDOCINFO, value, null);
 	}
@@ -529,7 +394,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPassThroughJPEGImages(boolean value)
+	public void setPassThroughJPEGImages(final boolean value)
 	{
 		setAttribute(AttributeName.PASSTHROUGHJPEGIMAGES, value, null);
 	}
@@ -554,7 +419,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPreserveCopyPage(boolean value)
+	public void setPreserveCopyPage(final boolean value)
 	{
 		setAttribute(AttributeName.PRESERVECOPYPAGE, value, null);
 	}
@@ -579,7 +444,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPreserveEPSInfo(boolean value)
+	public void setPreserveEPSInfo(final boolean value)
 	{
 		setAttribute(AttributeName.PRESERVEEPSINFO, value, null);
 	}
@@ -604,7 +469,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPreserveHalftoneInfo(boolean value)
+	public void setPreserveHalftoneInfo(final boolean value)
 	{
 		setAttribute(AttributeName.PRESERVEHALFTONEINFO, value, null);
 	}
@@ -629,7 +494,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPreserveOverprintSettings(boolean value)
+	public void setPreserveOverprintSettings(final boolean value)
 	{
 		setAttribute(AttributeName.PRESERVEOVERPRINTSETTINGS, value, null);
 	}
@@ -654,7 +519,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPreserveOPIComments(boolean value)
+	public void setPreserveOPIComments(final boolean value)
 	{
 		setAttribute(AttributeName.PRESERVEOPICOMMENTS, value, null);
 	}
@@ -679,9 +544,9 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setTransferFunctionInfo(ETransferFunctionInfo enumVar)
+	public void setTransferFunctionInfo(final EnumTransferFunctionInfo enumVar)
 	{
-		setAttribute(AttributeName.TRANSFERFUNCTIONINFO, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.TRANSFERFUNCTIONINFO, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -689,35 +554,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ETransferFunctionInfo getETransferFunctionInfo()
-	{
-		return ETransferFunctionInfo.getEnum(getAttribute(AttributeName.TRANSFERFUNCTIONINFO, null, "Preserve"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute TransferFunctionInfo
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute TransferFunctionInfo
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetTransferFunctionInfo(ETransferFunctionInfo) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setTransferFunctionInfo(EnumTransferFunctionInfo enumVar)
-	{
-		setAttribute(AttributeName.TRANSFERFUNCTIONINFO, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute TransferFunctionInfo
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ETransferFunctionInfo GetETransferFunctionInfo() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumTransferFunctionInfo getTransferFunctionInfo()
 	{
 		return EnumTransferFunctionInfo.getEnum(getAttribute(AttributeName.TRANSFERFUNCTIONINFO, null, "Preserve"));
@@ -733,9 +569,9 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setUCRandBGInfo(EUCRandBGInfo enumVar)
+	public void setUCRandBGInfo(final EnumUCRandBGInfo enumVar)
 	{
-		setAttribute(AttributeName.UCRANDBGINFO, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.UCRANDBGINFO, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -743,35 +579,6 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EUCRandBGInfo getEUCRandBGInfo()
-	{
-		return EUCRandBGInfo.getEnum(getAttribute(AttributeName.UCRANDBGINFO, null, "Preserve"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute UCRandBGInfo
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute UCRandBGInfo
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetUCRandBGInfo(EUCRandBGInfo) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setUCRandBGInfo(EnumUCRandBGInfo enumVar)
-	{
-		setAttribute(AttributeName.UCRANDBGINFO, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute UCRandBGInfo
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EUCRandBGInfo GetEUCRandBGInfo() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumUCRandBGInfo getUCRandBGInfo()
 	{
 		return EnumUCRandBGInfo.getEnum(getAttribute(AttributeName.UCRANDBGINFO, null, "Preserve"));
@@ -787,7 +594,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setUsePrologue(boolean value)
+	public void setUsePrologue(final boolean value)
 	{
 		setAttribute(AttributeName.USEPROLOGUE, value, null);
 	}

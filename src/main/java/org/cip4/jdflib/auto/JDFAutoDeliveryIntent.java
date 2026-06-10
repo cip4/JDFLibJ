@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -114,8 +110,8 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACCEPTED, 0x4444444333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ADDITIONALAMOUNT, 0x4444444311l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.OWNERSHIP, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumOwnership.getEnum(0),
-				"Origin");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.OWNERSHIP, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumOwnership.class, 0), "Origin");
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.BUYERACCOUNT, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.PICKUP, 0x4444444443l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 	}
@@ -160,7 +156,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDeliveryIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDeliveryIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -172,7 +168,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDeliveryIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDeliveryIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -185,93 +181,28 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDeliveryIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDeliveryIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for Ownership
+	 * Enumeration strings for numOwnership
 	 */
 
-	public enum EOwnership
+	public enum EnumOwnership
 	{
 		Origin, Destination;
 
-		public static EOwnership getEnum(String val)
+		public static EnumOwnership getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EOwnership.class, val, EOwnership.Origin);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumOwnership.class, val, EnumOwnership.Origin);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Ownership
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumOwnership extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumOwnership(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumOwnership getEnum(String enumName)
-		{
-			return (EnumOwnership) getEnum(EnumOwnership.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumOwnership getEnum(int enumValue)
-		{
-			return (EnumOwnership) getEnum(EnumOwnership.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumOwnership.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumOwnership.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumOwnership.class);
-		}
-
-		/**  */
-		public static final EnumOwnership Origin = new EnumOwnership("Origin");
-		/**  */
-		public static final EnumOwnership Destination = new EnumOwnership("Destination");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -283,7 +214,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAccepted(boolean value)
+	public void setAccepted(final boolean value)
 	{
 		setAttribute(AttributeName.ACCEPTED, value, null);
 	}
@@ -308,7 +239,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAdditionalAmount(int value)
+	public void setAdditionalAmount(final int value)
 	{
 		setAttribute(AttributeName.ADDITIONALAMOUNT, value, null);
 	}
@@ -333,9 +264,9 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setOwnership(EOwnership enumVar)
+	public void setOwnership(final EnumOwnership enumVar)
 	{
-		setAttribute(AttributeName.OWNERSHIP, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.OWNERSHIP, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -343,35 +274,6 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EOwnership getEOwnership()
-	{
-		return EOwnership.getEnum(getAttribute(AttributeName.OWNERSHIP, null, "Origin"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Ownership
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Ownership
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetOwnership(EOwnership) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setOwnership(EnumOwnership enumVar)
-	{
-		setAttribute(AttributeName.OWNERSHIP, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Ownership
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EOwnership GetEOwnership() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumOwnership getOwnership()
 	{
 		return EnumOwnership.getEnum(getAttribute(AttributeName.OWNERSHIP, null, "Origin"));
@@ -387,7 +289,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBuyerAccount(String value)
+	public void setBuyerAccount(final String value)
 	{
 		setAttribute(AttributeName.BUYERACCOUNT, value, null);
 	}
@@ -412,7 +314,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPickup(boolean value)
+	public void setPickup(final boolean value)
 	{
 		setAttribute(AttributeName.PICKUP, value, null);
 	}
@@ -841,7 +743,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refCompany(JDFCompany refTarget)
+	public void refCompany(final JDFCompany refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -872,7 +774,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
-	public JDFFileSpec getCreateFileSpec(int iSkip)
+	public JDFFileSpec getCreateFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -884,7 +786,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 * @return JDFFileSpec the element
 	 *         default is getFileSpec(0)
 	 */
-	public JDFFileSpec getFileSpec(int iSkip)
+	public JDFFileSpec getFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -914,7 +816,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -947,7 +849,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
-	public JDFContact getCreateContact(int iSkip)
+	public JDFContact getCreateContact(final int iSkip)
 	{
 		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -959,7 +861,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 * @return JDFContact the element
 	 *         default is getContact(0)
 	 */
-	public JDFContact getContact(int iSkip)
+	public JDFContact getContact(final int iSkip)
 	{
 		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -990,7 +892,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refContact(JDFContact refTarget)
+	public void refContact(final JDFContact refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1021,7 +923,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFDropIntent the element
 	 */
-	public JDFDropIntent getCreateDropIntent(int iSkip)
+	public JDFDropIntent getCreateDropIntent(final int iSkip)
 	{
 		return (JDFDropIntent) getCreateElement_JDFElement(ElementName.DROPINTENT, null, iSkip);
 	}
@@ -1033,7 +935,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 * @return JDFDropIntent the element
 	 *         default is getDropIntent(0)
 	 */
-	public JDFDropIntent getDropIntent(int iSkip)
+	public JDFDropIntent getDropIntent(final int iSkip)
 	{
 		return (JDFDropIntent) getElement(ElementName.DROPINTENT, null, iSkip);
 	}

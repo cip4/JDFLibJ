@@ -18,15 +18,13 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * Object for formatting output in the same way as the C <tt>printf</tt> methodName.
- * 
  * <p>
  * A <tt>printf</tt> style format string is specified in the constructor. Once instantiated, the <tt>tostr</tt> methods of this class may be used to convert primitives types
  * (float, double, char, int, long, String) into Strings. Alternatively, instances of this class may be passed as arguments to the <tt>printf</tt> methods of the
  * <tt>PrintfWriter</tt> or <tt>PrintfStream</tt> classes.
- * 
  * <p>
  * Examples:
- * 
+ *
  * <pre>
  * double theta1 = 45.0;
  * double theta2 = 85.0;
@@ -38,7 +36,7 @@ import org.cip4.jdflib.util.StringUtil;
  * pfw.print(&quot;theta2=&quot;);
  * pfw.printf(fmt, theta2);
  * </pre>
- * 
+ *
  * @see PrintfWriter
  * @see PrintfStream
  * @.author John E. Lloyd
@@ -57,16 +55,26 @@ public class PrintfFormat
 	// ~ Instance fields
 	// ////////////////////////////////////////////////////////
 
+	@Deprecated
 	boolean addBlank = false;
+	@Deprecated
 	boolean addSign = false;
+	@Deprecated
 	boolean alternate = false;
+	@Deprecated
 	boolean leftAdjust = false;
+	@Deprecated
 	int prec = -1;
 
+	@Deprecated
 	String prefix = null;
+	@Deprecated
 	String suffix = null;
+	@Deprecated
 	char type = 0;
+	@Deprecated
 	int width = 0;
+	@Deprecated
 	boolean zeropad = false;
 	private DecDouble dd;
 	private int idx;
@@ -78,11 +86,12 @@ public class PrintfFormat
 
 	/**
 	 * Creates a new instance of PrintfFormat from the supplied format string. The structure of the format string is described in the documentation for the <tt>set</tt> method.
-	 * 
+	 *
 	 * @param fmt Format string
 	 * @throws IllegalArgumentException Malformed format string
 	 * @see PrintfFormat#set
 	 */
+	@Deprecated
 	public PrintfFormat(final String fmt) throws IllegalArgumentException
 	{
 		output = new OutBuffer(1024);
@@ -94,10 +103,11 @@ public class PrintfFormat
 
 	/**
 	 * Gets the prefix string associated with the format. The prefix string is that part of the format that appears before the conversion.
-	 * 
+	 *
 	 * @return Prefix string
 	 * @see PrintfFormat#setPrefix
 	 */
+	@Deprecated
 	public String getPrefix()
 	{
 		return prefix;
@@ -105,10 +115,11 @@ public class PrintfFormat
 
 	/**
 	 * Gets the suffix string associated with the format. The suffix string is that part of the format that appears after the conversion.
-	 * 
+	 *
 	 * @return Suffix string
 	 * @see PrintfFormat#setSuffix
 	 */
+	@Deprecated
 	public String getSuffix()
 	{
 		return suffix;
@@ -116,22 +127,17 @@ public class PrintfFormat
 
 	/**
 	 * Sets the format characteristics according to the supplied String.
-	 *
 	 * <p>
 	 * The format string has the same form as the one used by the C <tt>printf</tt> methodName, except that only one conversion sequence may be specified (because routines which
 	 * use PrintfFormat each convert only one object).
-	 *
 	 * <p>
 	 * The format string consists of an optional <em>prefix</em> of regular characters, followed by a conversion sequence, followed by an optional <em>suffix</em> of regular
 	 * characters.
-	 *
 	 * <p>
 	 * The conversion sequence is introduced by a '%' character, and is followed by any number of optional <em>flag</em> characters, an optional unsigned decimal integer specifying
 	 * a <em>field width</em>, another optional unsigned decimal integer (preceded by a '.' character) specifying a <em>precision</em>, and finally a <tt>conversion character</tt>.
 	 * To incorporate a '%' character into either the prefix or suffix, one should specify the sequence "%%".
-	 *
 	 * The allowed flag characters are:
-	 *
 	 * <dl>
 	 * <dt>#
 	 * <dd>The value is converted into an "alternate" form. For 'o' conversions, the output is always prefixed with a '0'. For 'x' and 'X' conversions, the output is prefixed with
@@ -148,7 +154,6 @@ public class PrintfFormat
 	 * </dl>
 	 * <p>
 	 * The conversion character is one of:
-	 *
 	 * <dt>d,i
 	 * <dd>The integer argument is output as a signed decimal number. If a precision is given, it describes the minimum number of digits that must appear (default 1). If the
 	 * precision exceeds the number of digits that would normally appear, the output is padded on the left with zeros. When 0 is printed with precision 0, the result is empty.
@@ -180,6 +185,7 @@ public class PrintfFormat
 	 * @param fmt Format string
 	 * @throws IllegalArgumentException Malformed format string
 	 */
+	@Deprecated
 	public void set(final String fmt) throws IllegalArgumentException
 	{
 		final char[] buf = new char[fmt.length()];
@@ -355,10 +361,11 @@ public class PrintfFormat
 
 	/**
 	 * Sets the prefix string associated with the format.
-	 * 
+	 *
 	 * @param s New prefix string
 	 * @see PrintfFormat#getPrefix
 	 */
+	@Deprecated
 	public String setPrefix(final String s)
 	{
 		final String old = prefix;
@@ -369,10 +376,11 @@ public class PrintfFormat
 
 	/**
 	 * Sets the suffix string associated with the format.
-	 * 
+	 *
 	 * @param s New suffix string
 	 * @see PrintfFormat#getSuffix
 	 */
+	@Deprecated
 	public String setSuffix(final String s)
 	{
 		final String old = suffix;
@@ -383,10 +391,11 @@ public class PrintfFormat
 
 	/**
 	 * Formats a float into a string.
-	 * 
+	 *
 	 * @param x Float value to convert
 	 * @return Resulting string
 	 */
+	@Deprecated
 	public String tostr(final float x)
 	{
 		return tostr((double) x);
@@ -394,10 +403,11 @@ public class PrintfFormat
 
 	/**
 	 * Formats a Double into a string.
-	 * 
+	 *
 	 * @param x Float value to convert
 	 * @return Resulting string
 	 */
+	@Deprecated
 	public String tostr(final Double x)
 	{
 		return tostr(x.doubleValue());
@@ -405,10 +415,11 @@ public class PrintfFormat
 
 	/**
 	 * Formats an Integer into a string.
-	 * 
+	 *
 	 * @param x Float value to convert
 	 * @return Resulting string
 	 */
+	@Deprecated
 	public String tostr(final Integer x)
 	{
 		return tostr(x.intValue());
@@ -416,14 +427,17 @@ public class PrintfFormat
 
 	/**
 	 * Formats a double into a string.
-	 * 
+	 *
 	 * @param x Double value to convert
 	 * @return Resulting string
 	 */
+	@Deprecated
 	public String tostr(final double x)
 	{
 		if ("diuoxX".indexOf(type) > -1)
+		{
 			return tostr((long) x);
+		}
 
 		if (dd == null)
 		{
@@ -504,10 +518,11 @@ public class PrintfFormat
 
 	/**
 	 * Formats an int into a string.
-	 * 
+	 *
 	 * @param x Int value to convert
 	 * @return Resulting string
 	 */
+	@Deprecated
 	public String tostr(final int x)
 	{
 		String intStr;
@@ -528,10 +543,11 @@ public class PrintfFormat
 
 	/**
 	 * Formats a long into a string.
-	 * 
+	 *
 	 * @param x Long value to convert
 	 * @return Resulting string
 	 */
+	@Deprecated
 	public String tostr(final long x)
 	{
 		long xLocal = x;
@@ -631,10 +647,11 @@ public class PrintfFormat
 
 	/**
 	 * Formats a char into a string.
-	 * 
+	 *
 	 * @param x Char value to convert
 	 * @return Resulting string
 	 */
+	@Deprecated
 	public String tostr(final char x)
 	{
 		if (type != 'c')
@@ -650,18 +667,23 @@ public class PrintfFormat
 
 	/**
 	 * Formats a String into a string.
-	 * 
+	 *
 	 * @param x String value to format
 	 * @return Resulting string
 	 */
+	@Deprecated
 	public String tostr(final String x)
 	{
 		if (type != 's')
 		{
 			if (StringUtil.isInteger(x))
+			{
 				return tostr(StringUtil.parseInt(x, 0));
+			}
 			if (StringUtil.isNumber(x))
+			{
 				return tostr(StringUtil.parseDouble(x, 0));
+			}
 			// no more choices, gotta go..
 			throw new java.lang.IllegalArgumentException();
 		}

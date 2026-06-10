@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -99,11 +95,12 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BEARERBARS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumBearerBars.getEnum(0),
-				null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BEARERBARS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumBearerBars.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.HEIGHT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAGNIFICATION, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.MASKING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumMasking.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.MASKING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumMasking.class, 0), null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.MODULEHEIGHT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.MODULEWIDTH, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.RATIO, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
@@ -133,7 +130,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBarcodeReproParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoBarcodeReproParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -145,7 +142,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBarcodeReproParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoBarcodeReproParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -158,174 +155,42 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoBarcodeReproParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoBarcodeReproParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for BearerBars
+	 * Enumeration strings for numBearerBars
 	 */
 
-	public enum EBearerBars
+	public enum EnumBearerBars
 	{
 		None, TopBottom, Box, BoxHMarks;
 
-		public static EBearerBars getEnum(String val)
+		public static EnumBearerBars getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EBearerBars.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumBearerBars.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for BearerBars
+	 * Enumeration strings for numMasking
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumBearerBars extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumBearerBars(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumBearerBars getEnum(String enumName)
-		{
-			return (EnumBearerBars) getEnum(EnumBearerBars.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumBearerBars getEnum(int enumValue)
-		{
-			return (EnumBearerBars) getEnum(EnumBearerBars.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumBearerBars.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumBearerBars.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumBearerBars.class);
-		}
-
-		/**  */
-		public static final EnumBearerBars None = new EnumBearerBars("None");
-		/**  */
-		public static final EnumBearerBars TopBottom = new EnumBearerBars("TopBottom");
-		/**  */
-		public static final EnumBearerBars Box = new EnumBearerBars("Box");
-		/**  */
-		public static final EnumBearerBars BoxHMarks = new EnumBearerBars("BoxHMarks");
-	}
-
-	/**
-	 * Enumeration strings for Masking
-	 */
-
-	public enum EMasking
+	public enum EnumMasking
 	{
 		None, WhiteBox;
 
-		public static EMasking getEnum(String val)
+		public static EnumMasking getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EMasking.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumMasking.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Masking
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumMasking extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumMasking(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumMasking getEnum(String enumName)
-		{
-			return (EnumMasking) getEnum(EnumMasking.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumMasking getEnum(int enumValue)
-		{
-			return (EnumMasking) getEnum(EnumMasking.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumMasking.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumMasking.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumMasking.class);
-		}
-
-		/**  */
-		public static final EnumMasking None = new EnumMasking("None");
-		/**  */
-		public static final EnumMasking WhiteBox = new EnumMasking("WhiteBox");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -337,9 +202,9 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setBearerBars(EBearerBars enumVar)
+	public void setBearerBars(final EnumBearerBars enumVar)
 	{
-		setAttribute(AttributeName.BEARERBARS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.BEARERBARS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -347,35 +212,6 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EBearerBars getEBearerBars()
-	{
-		return EBearerBars.getEnum(getAttribute(AttributeName.BEARERBARS, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute BearerBars
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute BearerBars
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetBearerBars(EBearerBars) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setBearerBars(EnumBearerBars enumVar)
-	{
-		setAttribute(AttributeName.BEARERBARS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute BearerBars
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EBearerBars GetEBearerBars() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumBearerBars getBearerBars()
 	{
 		return EnumBearerBars.getEnum(getAttribute(AttributeName.BEARERBARS, null, null));
@@ -391,7 +227,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHeight(double value)
+	public void setHeight(final double value)
 	{
 		setAttribute(AttributeName.HEIGHT, value, null);
 	}
@@ -416,7 +252,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMagnification(double value)
+	public void setMagnification(final double value)
 	{
 		setAttribute(AttributeName.MAGNIFICATION, value, null);
 	}
@@ -441,9 +277,9 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMasking(EMasking enumVar)
+	public void setMasking(final EnumMasking enumVar)
 	{
-		setAttribute(AttributeName.MASKING, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.MASKING, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -451,35 +287,6 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EMasking getEMasking()
-	{
-		return EMasking.getEnum(getAttribute(AttributeName.MASKING, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Masking
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Masking
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetMasking(EMasking) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setMasking(EnumMasking enumVar)
-	{
-		setAttribute(AttributeName.MASKING, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Masking
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EMasking GetEMasking() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumMasking getMasking()
 	{
 		return EnumMasking.getEnum(getAttribute(AttributeName.MASKING, null, null));
@@ -495,7 +302,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setModuleHeight(double value)
+	public void setModuleHeight(final double value)
 	{
 		setAttribute(AttributeName.MODULEHEIGHT, value, null);
 	}
@@ -520,7 +327,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setModuleWidth(double value)
+	public void setModuleWidth(final double value)
 	{
 		setAttribute(AttributeName.MODULEWIDTH, value, null);
 	}
@@ -545,7 +352,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRatio(double value)
+	public void setRatio(final double value)
 	{
 		setAttribute(AttributeName.RATIO, value, null);
 	}
@@ -592,7 +399,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFBarcodeCompParams the element
 	 */
-	public JDFBarcodeCompParams getCreateBarcodeCompParams(int iSkip)
+	public JDFBarcodeCompParams getCreateBarcodeCompParams(final int iSkip)
 	{
 		return (JDFBarcodeCompParams) getCreateElement_JDFElement(ElementName.BARCODECOMPPARAMS, null, iSkip);
 	}
@@ -604,7 +411,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	 * @return JDFBarcodeCompParams the element
 	 *         default is getBarcodeCompParams(0)
 	 */
-	public JDFBarcodeCompParams getBarcodeCompParams(int iSkip)
+	public JDFBarcodeCompParams getBarcodeCompParams(final int iSkip)
 	{
 		return (JDFBarcodeCompParams) getElement(ElementName.BARCODECOMPPARAMS, null, iSkip);
 	}

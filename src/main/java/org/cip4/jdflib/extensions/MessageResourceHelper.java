@@ -56,7 +56,6 @@ public class MessageResourceHelper extends MessageHelper
 	}
 
 	/**
-	 *
 	 * @return the ResourceSet if it exists
 	 */
 	public SetHelper getSet()
@@ -67,7 +66,6 @@ public class MessageResourceHelper extends MessageHelper
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public SetHelper getCreateSet()
@@ -77,7 +75,6 @@ public class MessageResourceHelper extends MessageHelper
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public SetHelper getSet(final String name)
@@ -87,7 +84,6 @@ public class MessageResourceHelper extends MessageHelper
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public SetHelper appendSet(final String setName)
@@ -99,7 +95,6 @@ public class MessageResourceHelper extends MessageHelper
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public SetHelper copySet(final SetHelper sh, final boolean keepDetails)
@@ -131,7 +126,6 @@ public class MessageResourceHelper extends MessageHelper
 	}
 
 	/**
-	 *
 	 * @param amount
 	 * @param partMap
 	 * @param bGood

@@ -78,7 +78,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
  * @date Apr 21, 2011
  */
@@ -91,10 +90,10 @@ class URLMapperTest extends JDFTestCaseBase
 	@Test
 	void testMapToUrl()
 	{
-		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
-		JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC, EnumUsage.Input);
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC, EnumUsage.Input);
 		fs.setURL("file://foo/bar/a.b");
-		URLMapper m = new URLMapper("File://foo", "http://www.foo.com");
+		final URLMapper m = new URLMapper("File://foo", "http://www.foo.com");
 		m.convert(n);
 		Assertions.assertEquals(fs.getURL(), "http://www.foo.com/bar/a.b");
 	}
@@ -106,10 +105,10 @@ class URLMapperTest extends JDFTestCaseBase
 	@Test
 	void testWantLog()
 	{
-		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
-		JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC, EnumUsage.Input);
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC, EnumUsage.Input);
 		fs.setURL("file://foo/bar/a.b");
-		URLMapper m = new URLMapper("File://foo", "http://www.foo.com");
+		final URLMapper m = new URLMapper("File://foo", "http://www.foo.com");
 		m.setWantLog(true);
 		m.convert(n);
 		Assertions.assertTrue(m.isWantLog());

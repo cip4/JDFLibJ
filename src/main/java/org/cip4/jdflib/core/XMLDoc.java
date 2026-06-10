@@ -98,7 +98,6 @@ import jakarta.mail.Multipart;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         < July 15, 2009
  */
 @SuppressWarnings("deprecation")
@@ -146,11 +145,7 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	@Override
 	public boolean equals(final Object o)
 	{
-		if (o == null)
-		{
-			return false;
-		}
-		if (!(o instanceof XMLDoc))
+		if ((o == null) || !(o instanceof XMLDoc))
 		{
 			return false;
 		}
@@ -276,7 +271,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * convenience constructor
 	 *
 	 * @param strDocType ElementName.JDF, ElementName.JMF, "Config" ...
-	 *
 	 */
 	public XMLDoc(final String strDocType)
 	{
@@ -286,7 +280,7 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	/**
 	 * constructor
 	 *
-	 * @param strDocType ElementName.JDF, ElementName.JMF, "Config" ...
+	 * @param strDocType   ElementName.JDF, ElementName.JMF, "Config" ...
 	 * @param namespaceURI namespace to be used by the new XMLDoc
 	 */
 	public XMLDoc(final String strDocType, final String namespaceURI)
@@ -305,10 +299,9 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	/**
 	 * initialize a new root of strDocType in the document called by constructor XMLDoc(String strDocType)
 	 *
-	 * @param strDocType qualified tag name of the doc root to create if still empty
+	 * @param strDocType   qualified tag name of the doc root to create if still empty
 	 * @param namespaceURI namespace URI of the doc root
 	 * @return JDFElement - the root element
-	 *
 	 * @default setRoot(ElementName.JDF, null)
 	 */
 	public KElement setRoot(final String strDocType, final String namespaceURI)
@@ -349,7 +342,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * get the root of the dom tree
 	 *
 	 * @return JDFElement
-	 *
 	 *         default: getRoot()
 	 */
 	public KElement getRoot()
@@ -361,7 +353,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * write2String - write to a string;
 	 *
 	 * @param indent the indentation of the xml
-	 *
 	 * @return String - output
 	 */
 	public String write2String(final int indent)
@@ -402,7 +393,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 *
 	 * @param oFilePath
 	 * @param indent
-	 *
 	 * @return boolean
 	 * @deprecated 060419 use write2File(oFilePath, indent, true);
 	 * @default write2File(String oFilePath, 0)
@@ -418,7 +408,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 *
 	 * @param oFilePath
 	 * @param indent
-	 *
 	 * @return boolean
 	 * @default write2File(String oFilePath, 0)
 	 */
@@ -432,7 +421,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 *
 	 * @param oFilePath
 	 * @param indent
-	 *
 	 * @return boolean
 	 * @default write2File(String oFilePath, 0)
 	 */
@@ -445,18 +433,20 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * write2Zip - write to a file and compress as zip; remove the .zip from the extension in the zip entry or add .zip
 	 *
 	 * @param file
-	 *
 	 * @return the created file
-	 * 
 	 */
 	public File write2Zip(File file)
 	{
 		if (file == null)
 		{
 			if (getOriginalFileName() != null)
+			{
 				file = new File(getOriginalFileName());
+			}
 			if (!UrlUtil.isZip(FileUtil.getExtension(file)))
+			{
 				file = new File(file.getAbsolutePath() + ".zip");
+			}
 		}
 
 		final XMLZipWriter w = new XMLZipWriter(this, file.getName());
@@ -466,12 +456,10 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	/**
 	 * write2File - write to a file; Create if it doesn't exist DO NOT attempt any url escaping voodoo @see write2URL
 	 *
-	 * @param oFilePath the file path where to write the file
-	 * @param indent indentation
+	 * @param oFilePath      the file path where to write the file
+	 * @param indent         indentation
 	 * @param bPreserveSpace if true, preserve whitespace
-	 *
 	 * @return boolean - true if successful
-	 *
 	 * @default write2File(String oFilePath, 0)
 	 */
 	public boolean write2File(String oFilePath, final int indent, final boolean bPreserveSpace)
@@ -493,12 +481,10 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	/**
 	 * write2File - write to a file; Create if it doesn't exist
 	 *
-	 * @param file the file to write to
-	 * @param indent indentation
+	 * @param file           the file to write to
+	 * @param indent         indentation
 	 * @param bPreserveSpace if true, preserve whitespace
-	 *
 	 * @return boolean - true if successful
-	 *
 	 * @default write2File(String oFilePath, 0)
 	 */
 	public boolean write2File(File file, final int indent, final boolean bPreserveSpace)
@@ -705,7 +691,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * Another way would be to use KElement.appendElement(String elementName, String nameSpaceURI)
 	 *
 	 * @param elementName name of the element that is created
-	 *
 	 * @return Element - unconnected element that is created
 	 */
 	public Element createElement(final String elementName)
@@ -734,7 +719,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * createTextNode
 	 *
 	 * @param data
-	 *
 	 * @return Text
 	 */
 	public Text createTextNode(final String data)
@@ -746,7 +730,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * createComment
 	 *
 	 * @param data
-	 *
 	 * @return Comment
 	 */
 	public Comment createComment(final String data)
@@ -758,7 +741,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * create a CDATA section, which has this document as ownerDoc
 	 *
 	 * @param data content of the CDATA
-	 *
 	 * @return CDATASection
 	 */
 	public CDATASection createCDATASection(final String data)
@@ -783,7 +765,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 
 	/**
 	 * gets the url for an xslt stylesheet
-	 *
 	 * e
 	 */
 	public String getXSLTURL()
@@ -833,8 +814,7 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * creates a ProcessingInstruction having this Document as ownerDoc
 	 *
 	 * @param target the target "processor channel"
-	 * @param data parameter string to be passed to the target
-	 *
+	 * @param data   parameter string to be passed to the target
 	 * @return ProcessingInstruction
 	 */
 	public ProcessingInstruction createProcessingInstruction(final String target, final String data)
@@ -843,18 +823,16 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	}
 
 	/**
-	 *
 	 * @param skip
 	 * @param name
 	 * @return
 	 */
 	public ProcessingInstruction getProcessingInstruction(final int skip, final String name)
 	{
-		return (ProcessingInstruction) getNode(Document.PROCESSING_INSTRUCTION_NODE, skip, name);
+		return (ProcessingInstruction) getNode(Node.PROCESSING_INSTRUCTION_NODE, skip, name);
 	}
 
 	/**
-	 *
 	 * @param type the node type see {@link Document}
 	 * @param skip the number onodes to skip
 	 * @return
@@ -862,7 +840,9 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	public Node getNode(final short type, int skip, final String nodeName)
 	{
 		if (m_doc == null)
+		{
 			return null;
+		}
 		Node n = m_doc.getFirstChild();
 		while (n != null)
 		{
@@ -918,7 +898,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * creates an EntityReference
 	 *
 	 * @param name name of the entity to refer to
-	 *
 	 * @return the newly created EntityReference
 	 */
 	public EntityReference createEntityReference(final String name)
@@ -930,7 +909,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * return a NodeList of all elements having the specified tagname
 	 *
 	 * @param tagname tag name of the elements to find (JDFCoreConstants.star for all elements)
-	 *
 	 * @return NodeList
 	 */
 	public NodeList getElementsByTagName(final String tagname)
@@ -942,8 +920,7 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * copy a node from another document in this document
 	 *
 	 * @param importedNode node to import
-	 * @param deep if true: recurse and import the subtree under the node as well
-	 *
+	 * @param deep         if true: recurse and import the subtree under the node as well
 	 * @return Node
 	 */
 	public Node importNode(final Node importedNode, final boolean deep)
@@ -954,9 +931,8 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	/**
 	 * create a Element that floats in nirvana, this must be appended to a node with appendChild
 	 *
-	 * @param namespaceURI the namespace uri of the created element
+	 * @param namespaceURI  the namespace uri of the created element
 	 * @param qualifiedName name of the element that is created
-	 *
 	 * @return Element - unconnected element that is created
 	 */
 	public Element createElementNS(final String namespaceURI, final String qualifiedName)
@@ -967,9 +943,8 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	/**
 	 * create an attribute withe the given name in the given namespace
 	 *
-	 * @param namespaceURI namespace URI of the attribute
+	 * @param namespaceURI  namespace URI of the attribute
 	 * @param qualifiedName qualified name of the attribute
-	 *
 	 * @return Attr - the newly created attribute
 	 */
 	public Attr createAttributeNS(final String namespaceURI, final String qualifiedName)
@@ -981,8 +956,7 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * get a NodeList of all elements with a given name and namespace URI
 	 *
 	 * @param namespaceURI the namespace URI to look for
-	 * @param myLocalName the element name to look for
-	 *
+	 * @param myLocalName  the element name to look for
 	 * @return NodeList with all elements found
 	 */
 	public NodeList getElementsByTagNameNS(final String namespaceURI, final String myLocalName)
@@ -994,7 +968,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * get element with ID = elementId similar to Docoment.getElementByID but works with non schema parsed documents
 	 *
 	 * @param elementId the element ID to look for
-	 *
 	 * @return the Element found
 	 */
 	public Element getElementById(final String elementId)
@@ -1051,7 +1024,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 
 	/**
 	 * get a copy of the nsmap
-	 *
 	 */
 	public JDFAttributeMap getNSMap()
 	{
@@ -1147,7 +1119,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 *
 	 * @param newChild the new child node to insert
 	 * @param refChild the ref child node, the new node is inserted before it
-	 *
 	 * @return Node
 	 */
 	public Node insertBefore(final Node newChild, final Node refChild)
@@ -1160,7 +1131,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 *
 	 * @param newChild the new child node to add
 	 * @param oldChild the old child node to be replaced
-	 *
 	 * @return Node
 	 */
 	public Node replaceChild(final Node newChild, final Node oldChild)
@@ -1172,7 +1142,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * remove a child from 'this'
 	 *
 	 * @param oldChild the child node to be removed
-	 *
 	 * @return oldChild, in its new state (removed)
 	 */
 	public Node removeChild(final Node oldChild)
@@ -1184,7 +1153,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * append a new child node to 'this'
 	 *
 	 * @param newChild new child node to add
-	 *
 	 * @return Node
 	 */
 	public Node appendChild(final Node newChild)
@@ -1206,7 +1174,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * get a copy of 'this'
 	 *
 	 * @param deep true: copy children as well
-	 *
 	 * @return Node - a copy of 'this'
 	 */
 	public Node cloneNode(final boolean deep)
@@ -1230,7 +1197,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 *
 	 * @param feature package name of the feature to test
 	 * @param version version number of the package name to test
-	 *
 	 * @return boolean - true, if the feature is sopported
 	 * @see <a href="http://xerces.apache.org/xerces-j/apiDocs/org/apache/xerces/dom/NodeImpl.html#isSupported(java.lang.String,%20java.lang.String)" <a>Xerxes-Documentation</a>
 	 */
@@ -1313,7 +1279,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * @param qualifiedName
 	 * @param publicID
 	 * @param systemID
-	 *
 	 * @return DocumentType
 	 */
 	public DocumentType createDocumentType(final String qualifiedName, final String publicID, final String systemID)
@@ -1348,7 +1313,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * create an entity
 	 *
 	 * @param name name of the entity
-	 *
 	 * @return Entity - the newly created entity
 	 */
 	public Entity createEntity(final String name)
@@ -1360,7 +1324,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * creates a Notation having this Document as its OwnerDoc
 	 *
 	 * @param name name of the notation
-	 *
 	 * @return Notation - the newly created notation
 	 */
 	public Notation createNotation(final String name)
@@ -1372,7 +1335,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * creates an element definition. Element definitions hold default attribute values.
 	 *
 	 * @param name
-	 *
 	 * @return ElementDefinitionImpl
 	 */
 	public ElementDefinitionImpl createElementDefinition(final String name)
@@ -1398,7 +1360,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * gets the element with the registered name = "idName"
 	 *
 	 * @param idName name of the element to get
-	 *
 	 * @return Element - the element with "idName"
 	 */
 	public Element getIdentifier(final String idName)
@@ -1432,10 +1393,9 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	/**
 	 * create a node iterator
 	 *
-	 * @param root the root of the iterator
+	 * @param root       the root of the iterator
 	 * @param whatToShow the whatToShow mask
-	 * @param filter the node filter (null = no filter)
-	 *
+	 * @param filter     the node filter (null = no filter)
 	 * @return the newly created NodeIterator
 	 */
 	public NodeIterator createNodeIterator(final Node root, final short whatToShow, final NodeFilter filter)
@@ -1446,11 +1406,10 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	/**
 	 * createNodeIterator
 	 *
-	 * @param root the root of the iterator
-	 * @param whatToShow the whatToShow mask
-	 * @param filter the node filter (null = no filter)
+	 * @param root                     the root of the iterator
+	 * @param whatToShow               the whatToShow mask
+	 * @param filter                   the node filter (null = no filter)
 	 * @param entityReferenceExpansion true: expand the contents of EntityReference nodes
-	 *
 	 * @return the newly created NodeIterator
 	 */
 	public NodeIterator createNodeIterator(final Node root, final int whatToShow, final NodeFilter filter, final boolean entityReferenceExpansion)
@@ -1461,10 +1420,9 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	/**
 	 * creates a TreeWalker
 	 *
-	 * @param root the root of the iterator
+	 * @param root       the root of the iterator
 	 * @param whatToShow the whatToShow mask
-	 * @param filter the node filter (null = no filter)
-	 *
+	 * @param filter     the node filter (null = no filter)
 	 * @return the newly created TreeWalker
 	 */
 	public TreeWalker createTreeWalker(final Node root, final short whatToShow, final NodeFilter filter)
@@ -1475,11 +1433,10 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	/**
 	 * creates a TreeWalker
 	 *
-	 * @param root the root of the iterator
-	 * @param whatToShow the whatToShow mask
-	 * @param filter the node filter (null = no filter)
+	 * @param root                     the root of the iterator
+	 * @param whatToShow               the whatToShow mask
+	 * @param filter                   the node filter (null = no filter)
 	 * @param entityReferenceExpansion true: expand the contents of EntityReference nodes
-	 *
 	 * @return the newly created TreeWalker
 	 */
 	public TreeWalker createTreeWalker(final Node root, final int whatToShow, final NodeFilter filter, final boolean entityReferenceExpansion)
@@ -1501,7 +1458,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * create an Event object
 	 *
 	 * @param type type of Event interface to be created
-	 *
 	 * @return the newly created Event
 	 */
 	public Event createEvent(final String type)
@@ -1554,11 +1510,9 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	/**
 	 * This method sends the contents of this XMLDoc to the URL <code>strURL</code> and receives the response in the returned XMLDoc.
 	 *
-	 * @param strURL the URL to write to
+	 * @param strURL         the URL to write to
 	 * @param strContentType the content type to write to
-	 *
 	 * @return docResponse the response received from URL. if url is a file, an empty doc is returned
-	 *
 	 *         A Null document if no response was received, or an exception occurred
 	 */
 	public XMLDoc write2URL(final String strURL, final String strContentType)
@@ -1569,11 +1523,9 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	/**
 	 * This method sends the contents of this XMLDoc to the URL <code>strURL</code> and receives the response in the returned XMLDoc.
 	 *
-	 * @param strURL the URL to write to
+	 * @param strURL         the URL to write to
 	 * @param strContentType the content type to write to
-	 *
 	 * @return docResponse the response received from URL. if url is a file, an empty doc is returned
-	 *
 	 *         A Null document if no response was received, or an exception occurred
 	 */
 
@@ -1603,7 +1555,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	}
 
 	/**
-	 *
 	 * @param xmlParser
 	 */
 	protected void pushParser(final XMLParser xmlParser)
@@ -1615,23 +1566,22 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * gets the n'th child node of nodetype <code>nodeType</code> with n = iPos
 	 *
 	 * @param nodeType the DOM node type to get <blockquote> - copy from KElement -
-	 *
-	 *        <ul>
-	 *        <li>ELEMENT_NODE = 1
-	 *        <li>ATTRIBUTE_NODE = 2
-	 *        <li>TEXT_NODE = 3
-	 *        <li>CDATA_SECTION_NODE = 4
-	 *        <li>ENTITY_REFERENCE_NODE = 5
-	 *        <li>ENTITY_NODE = 6
-	 *        <li>PROCESSING_INSTRUCTION_NODE = 7
-	 *        <li>COMMENT_NODE = 8
-	 *        <li>DOCUMENT_NODE = 9
-	 *        <li>DOCUMENT_TYPE_NODE = 10
-	 *        <li>DOCUMENT_FRAGMENT_NODE = 11
-	 *        <li>NOTATION_NODE = 12
-	 *        <li>XML_DECL_NODE = 13 </blockquote>
-	 *        </ul>
-	 * @param iPos the index of the node with default 0 for the first occurance
+	 *                 <ul>
+	 *                 <li>ELEMENT_NODE = 1
+	 *                 <li>ATTRIBUTE_NODE = 2
+	 *                 <li>TEXT_NODE = 3
+	 *                 <li>CDATA_SECTION_NODE = 4
+	 *                 <li>ENTITY_REFERENCE_NODE = 5
+	 *                 <li>ENTITY_NODE = 6
+	 *                 <li>PROCESSING_INSTRUCTION_NODE = 7
+	 *                 <li>COMMENT_NODE = 8
+	 *                 <li>DOCUMENT_NODE = 9
+	 *                 <li>DOCUMENT_TYPE_NODE = 10
+	 *                 <li>DOCUMENT_FRAGMENT_NODE = 11
+	 *                 <li>NOTATION_NODE = 12
+	 *                 <li>XML_DECL_NODE = 13 </blockquote>
+	 *                 </ul>
+	 * @param iPos     the index of the node with default 0 for the first occurance
 	 * @return KElement: a node that matches the filter, null if iPos is higher then the number of child nodes
 	 */
 	protected Node getChildNode(final int nodeType, final int iPos)
@@ -1668,8 +1618,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	}
 
 	/**
-	 *
-	 *
 	 * @return
 	 */
 	protected XMLParser getXMLParser()
@@ -1694,9 +1642,9 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	}
 
 	/**
-	 * @param url the url to write to
+	 * @param url            the url to write to
 	 * @param strContentType the content type; if null use text/xml
-	 * @param det the details to set
+	 * @param det            the details to set
 	 * @return the HttpURLConnection, null if failure
 	 */
 	public HttpURLConnection write2HTTPURL(final URL url, final String strContentType, final HTTPDetails det)
@@ -1707,17 +1655,21 @@ public class XMLDoc implements Cloneable, IStreamWriter
 
 			p = write2HttpURL(url, strContentType, det);
 			if (p == null && i == 0)
+			{
 				ThreadUtil.sleep(1000); // wait and retry once
+			}
 			else
+			{
 				break;
+			}
 		}
 		return p == null || !(p.getConnection() instanceof HttpURLConnection) ? null : (HttpURLConnection) p.getConnection();
 	}
 
 	/**
-	 * @param url the url to write to
+	 * @param url            the url to write to
 	 * @param strContentType the content type; if null use text/xml
-	 * @param det the details to set
+	 * @param det            the details to set
 	 * @return the HttpURLConnection, null if failure
 	 */
 	public UrlPart write2HttpURL(final URL url, String strContentType, final HTTPDetails det)
@@ -1913,7 +1865,9 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	public static XMLDoc parseStream(final InputStream is)
 	{
 		if (is == null)
+		{
 			return null;
+		}
 		final XMLParserFactory factory = XMLParserFactory.getFactory();
 		final XMLParser p = factory.get();
 		final XMLDoc d = p.parseStream(is);
@@ -1985,7 +1939,7 @@ public class XMLDoc implements Cloneable, IStreamWriter
 	 * parse a given url
 	 *
 	 * @param url the url to search
-	 * @param bp the bodypart that the CID url is located in
+	 * @param bp  the bodypart that the CID url is located in
 	 * @return the parsed JDFDoc
 	 */
 	public static XMLDoc parseURL(final String url, final BodyPart bp)

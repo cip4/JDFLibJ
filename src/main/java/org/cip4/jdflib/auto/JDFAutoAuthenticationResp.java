@@ -121,7 +121,7 @@ public abstract class JDFAutoAuthenticationResp extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAuthenticationResp(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoAuthenticationResp(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoAuthenticationResp extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAuthenticationResp(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoAuthenticationResp(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -146,7 +146,7 @@ public abstract class JDFAutoAuthenticationResp extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoAuthenticationResp(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoAuthenticationResp(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -167,7 +167,7 @@ public abstract class JDFAutoAuthenticationResp extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSecureURL(String value)
+	public void setSecureURL(final String value)
 	{
 		setAttribute(AttributeName.SECUREURL, value, null);
 	}
@@ -214,7 +214,7 @@ public abstract class JDFAutoAuthenticationResp extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFElement the element
 	 */
-	public JDFElement getCreateCertificate(int iSkip)
+	public JDFElement getCreateCertificate(final int iSkip)
 	{
 		return (JDFElement) getCreateElement_JDFElement(ElementName.CERTIFICATE, null, iSkip);
 	}
@@ -226,7 +226,7 @@ public abstract class JDFAutoAuthenticationResp extends JDFElement
 	 * @return JDFElement the element
 	 *         default is getCertificate(0)
 	 */
-	public JDFElement getCertificate(int iSkip)
+	public JDFElement getCertificate(final int iSkip)
 	{
 		return (JDFElement) getElement(ElementName.CERTIFICATE, null, iSkip);
 	}

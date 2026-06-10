@@ -44,12 +44,10 @@ import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
  * elementwalker class that allows you to traverse a dom tree starting at a given root also handles the construction of the walker classes by name, just make sure that your walker
  * subclasses match the naming convention $Walk<name>, e.g. if your class is called FixVersion, the subclasses must be called WalkFoo, WalkBar etc.
  *
  * @author rainer prosi
- *
  */
 public class BaseElementWalker extends ElementWalker
 {

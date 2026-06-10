@@ -86,9 +86,7 @@ import org.cip4.jdflib.resource.process.JDFPreflightAction;
 import org.w3c.dom.DOMException;
 
 /**
- * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class JDFAction extends JDFAutoAction
 {
@@ -96,46 +94,46 @@ public class JDFAction extends JDFAutoAction
 
 	/**
 	 * Constructor for JDFAction
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFAction(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFAction(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFAction
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFAction(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFAction(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFAction
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFAction(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFAction(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -146,27 +144,31 @@ public class JDFAction extends JDFAutoAction
 
 	/**
 	 * get the Test element in the TestPool that is referenced by this action
-	 * 
+	 *
 	 * @return JDFTest: the referenced test, null if none exists
 	 */
 	public JDFTest getTest()
 	{
 		final JDFTestPool testPool = getTestPool();
 		if (testPool == null)
+		{
 			return null;
+		}
 		return testPool.getTest(getTestRef());
 	}
 
 	/**
 	 * get the testPool that all IDRefs in this action refer to
-	 * 
+	 *
 	 * @return JDFTestPool: the neighboring TestPool
 	 */
 	public JDFTestPool getTestPool()
 	{
 		final KElement commonParent = getActionPool().getParentNode_KElement();
 		if (commonParent == null)
+		{
 			return null;
+		}
 
 		final JDFTestPool testPool = (JDFTestPool) commonParent.getElement(ElementName.TESTPOOL);
 		return testPool;
@@ -174,20 +176,22 @@ public class JDFAction extends JDFAutoAction
 
 	/**
 	 * get the root Term of the Test element in the TestPool that is referenced by this action
-	 * 
+	 *
 	 * @return JDFTerm: the referenced term, null if none exists
 	 */
 	public JDFTerm getTestTerm()
 	{
 		final JDFTest test = getTest();
 		if (test == null)
+		{
 			return null;
+		}
 		return test.getTerm(null, 0);
 	}
 
 	/**
 	 * get the action pool <code>this</code> resides in
-	 * 
+	 *
 	 * @return JDFActionPool - the actionpool
 	 */
 	public JDFActionPool getActionPool()
@@ -197,7 +201,7 @@ public class JDFAction extends JDFAutoAction
 
 	/**
 	 * init()
-	 * 
+	 *
 	 * @see org.cip4.jdflib.core.KElement#init()
 	 */
 	@Override
@@ -209,7 +213,7 @@ public class JDFAction extends JDFAutoAction
 
 	/**
 	 * getIDPrefix
-	 * 
+	 *
 	 * @return String: the default ID prefix of non-overwritten JDF elements
 	 */
 	@Override
@@ -220,10 +224,10 @@ public class JDFAction extends JDFAutoAction
 
 	/**
 	 * set testRef to the value of test/@ID
-	 * 
+	 *
 	 * @param test the value to set testRef to
 	 */
-	public void setTest(JDFTest test)
+	public void setTest(final JDFTest test)
 	{
 		if (test != null)
 		{
@@ -239,10 +243,10 @@ public class JDFAction extends JDFAutoAction
 
 	/**
 	 * set PreflightAction/@SetRef to the value of test/@ID
-	 * 
+	 *
 	 * @param test the test to use
 	 */
-	public void setPreflightActionSetRef(JDFTest test)
+	public void setPreflightActionSetRef(final JDFTest test)
 	{
 		if (test != null)
 		{
@@ -254,31 +258,37 @@ public class JDFAction extends JDFAutoAction
 
 	/**
 	 * get the test defined by PreflightAction/@SetRef
-	 * 
+	 *
 	 * @return JDFTest: the test to use
 	 */
 	public JDFTest getPreflightActionSetRef()
 	{
-		JDFPreflightAction pfa = getPreflightAction(0);
+		final JDFPreflightAction pfa = getPreflightAction(0);
 		if (pfa == null)
+		{
 			return null;
-		String setRef = pfa.getSetRef();
+		}
+		final String setRef = pfa.getSetRef();
 		final JDFTestPool testPool = getTestPool();
 		if (testPool == null)
+		{
 			return null;
+		}
 		return testPool.getTest(setRef);
 	}
 
 	/**
 	 * get the term defined by PreflightAction/@SetRef
-	 * 
+	 *
 	 * @return JDFTerm: the term to use
 	 */
 	public JDFTerm getPreflightActionSetTerm()
 	{
 		final JDFTest test = getPreflightActionSetRef();
 		if (test == null)
+		{
 			return null;
+		}
 		return test.getTerm();
 	}
 

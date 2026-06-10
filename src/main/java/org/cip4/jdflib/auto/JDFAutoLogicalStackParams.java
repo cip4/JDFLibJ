@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -100,8 +96,8 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.MAXSTACKDEPTH, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.RESTRICTIONS, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumRestrictions.getEnum(0),
-				"None");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.RESTRICTIONS, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumRestrictions.class, 0), "None");
 	}
 
 	@Override
@@ -128,7 +124,7 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLogicalStackParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoLogicalStackParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -140,7 +136,7 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLogicalStackParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoLogicalStackParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -153,95 +149,28 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoLogicalStackParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoLogicalStackParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for Restrictions
+	 * Enumeration strings for numRestrictions
 	 */
 
-	public enum ERestrictions
+	public enum EnumRestrictions
 	{
 		None, WithinImposedSheetSet, WithinLogicalStack;
 
-		public static ERestrictions getEnum(String val)
+		public static EnumRestrictions getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ERestrictions.class, val, ERestrictions.None);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumRestrictions.class, val, EnumRestrictions.None);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Restrictions
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumRestrictions extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumRestrictions(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumRestrictions getEnum(String enumName)
-		{
-			return (EnumRestrictions) getEnum(EnumRestrictions.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumRestrictions getEnum(int enumValue)
-		{
-			return (EnumRestrictions) getEnum(EnumRestrictions.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumRestrictions.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumRestrictions.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumRestrictions.class);
-		}
-
-		/**  */
-		public static final EnumRestrictions None = new EnumRestrictions("None");
-		/**  */
-		public static final EnumRestrictions WithinImposedSheetSet = new EnumRestrictions("WithinImposedSheetSet");
-		/**  */
-		public static final EnumRestrictions WithinLogicalStack = new EnumRestrictions("WithinLogicalStack");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -253,7 +182,7 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaxStackDepth(int value)
+	public void setMaxStackDepth(final int value)
 	{
 		setAttribute(AttributeName.MAXSTACKDEPTH, value, null);
 	}
@@ -278,9 +207,9 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setRestrictions(ERestrictions enumVar)
+	public void setRestrictions(final EnumRestrictions enumVar)
 	{
-		setAttribute(AttributeName.RESTRICTIONS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.RESTRICTIONS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -288,35 +217,6 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ERestrictions getERestrictions()
-	{
-		return ERestrictions.getEnum(getAttribute(AttributeName.RESTRICTIONS, null, "None"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Restrictions
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Restrictions
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetRestrictions(ERestrictions) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setRestrictions(EnumRestrictions enumVar)
-	{
-		setAttribute(AttributeName.RESTRICTIONS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Restrictions
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ERestrictions GetERestrictions() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumRestrictions getRestrictions()
 	{
 		return EnumRestrictions.getEnum(getAttribute(AttributeName.RESTRICTIONS, null, "None"));
@@ -354,7 +254,7 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFStack the element
 	 */
-	public JDFStack getCreateStack(int iSkip)
+	public JDFStack getCreateStack(final int iSkip)
 	{
 		return (JDFStack) getCreateElement_JDFElement(ElementName.STACK, null, iSkip);
 	}
@@ -366,7 +266,7 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 	 * @return JDFStack the element
 	 *         default is getStack(0)
 	 */
-	public JDFStack getStack(int iSkip)
+	public JDFStack getStack(final int iSkip)
 	{
 		return (JDFStack) getElement(ElementName.STACK, null, iSkip);
 	}

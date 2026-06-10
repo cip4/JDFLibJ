@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2004 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2004 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,22 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFBooleanEvaluation.java
@@ -87,7 +87,7 @@ import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.ContainerUtil;
@@ -100,7 +100,7 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumBoolean.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.VALUELIST, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, null, null);
 	}
 
 	@Override
@@ -111,36 +111,36 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 
 	/**
 	 * Constructor for JDFBooleanEvaluation
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFBooleanEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFBooleanEvaluation(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFBooleanEvaluation
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFBooleanEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFBooleanEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFBooleanEvaluation
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFBooleanEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFBooleanEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -150,7 +150,7 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -164,22 +164,22 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 	 */
 	/**
 	 * getValueList
-	 * 
+	 *
 	 * @return Vector of Boolean objects
 	 */
 	public Vector getValueList()
 	{
-		String s = getAttribute(AttributeName.VALUELIST, null, null);
-		VString v = StringUtil.tokenize(s, JDFConstants.BLANK, false);
-		Vector<Boolean> vRet = new Vector<Boolean>();
+		final String s = getAttribute(AttributeName.VALUELIST, null, null);
+		final VString v = StringUtil.tokenize(s, JDFCoreConstants.BLANK, false);
+		final Vector<Boolean> vRet = new Vector<>();
 		for (int i = 0; i < v.size(); i++)
 		{
-			String s2 = v.elementAt(i);
-			if (s2.equalsIgnoreCase(JDFConstants.TRUE))
+			final String s2 = v.elementAt(i);
+			if (s2.equalsIgnoreCase(JDFCoreConstants.TRUE))
 			{
 				vRet.add(Boolean.valueOf(true));
 			}
-			else if (s2.equalsIgnoreCase(JDFConstants.FALSE))
+			else if (s2.equalsIgnoreCase(JDFCoreConstants.FALSE))
 			{
 				vRet.add(Boolean.valueOf(false));
 			}
@@ -191,25 +191,27 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 
 	/**
 	 * set ValueList
-	 * 
+	 *
 	 * @param value vector of Boolean values
 	 */
-	public void setValueList(Vector value)
+	public void setValueList(final Vector value)
 	{
-		String s = JDFConstants.EMPTYSTRING;
+		String s = JDFCoreConstants.EMPTYSTRING;
 		for (int i = 0; i < ContainerUtil.size(value); i++)
 		{
-			Boolean b = (Boolean) value.elementAt(i);
+			final Boolean b = (Boolean) value.elementAt(i);
 			if (b.booleanValue())
 			{
-				s += JDFConstants.TRUE;
+				s += JDFCoreConstants.TRUE;
 			}
 			else
 			{
-				s += JDFConstants.FALSE;
+				s += JDFCoreConstants.FALSE;
 			}
 			if (i > 0)
-				s += JDFConstants.BLANK;
+			{
+				s += JDFCoreConstants.BLANK;
+			}
 		}
 		setAttribute(AttributeName.VALUELIST, s, null);
 
@@ -217,10 +219,10 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 
 	/**
 	 * convenience method for single valued boolean lists
-	 * 
+	 *
 	 * @param value the single boolean to set ValueList to
 	 */
-	public void setValueList(boolean value)
+	public void setValueList(final boolean value)
 	{
 		setAttribute(AttributeName.VALUELIST, value, null);
 	}
@@ -231,21 +233,23 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 
 	/**
 	 * fitsValue - tests, if the defined value matches ValueList, specified for this Evaluation
-	 * 
+	 *
 	 * @param valueStr value to test
 	 * @return boolean - true, if <code>value</code> matches testlists or if ValueList is not specified
 	 */
 	@Override
-	public final boolean fitsValue(String valueStr)
+	public final boolean fitsValue(final String valueStr)
 	{
 		if (fitsListType(valueStr))
 		{
-			VString value = new VString(valueStr, null);
+			final VString value = new VString(valueStr, null);
 
 			for (int i = 0; i < value.size(); i++)
 			{
 				if (!fitsValueList(value.elementAt(i)))
+				{
 					return false;
+				}
 			}
 			return true; // if we are here a whole 'valueStr' fits
 		}
@@ -254,48 +258,56 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 
 	/**
 	 * fitsValueList - tests, if the defined 'value' matches ValueList,
-	 * 
+	 *
 	 * @param value token to test
 	 * @return boolean - true, if <code>value</code> matches valuelist or if ValueList is not specified
 	 */
-	private final boolean fitsValueList(String value)
+	private final boolean fitsValueList(final String value)
 	{
 		if (!hasAttribute(AttributeName.VALUELIST))
+		{
 			return true;
+		}
 		if (!StringUtil.isBoolean(value))
+		{
 			return false;
+		}
 
-		Vector<Boolean> v = getValueList();
+		final Vector<Boolean> v = getValueList();
 
 		for (int i = 0, size = v.size(); i < size; i++)
 		{
-			boolean a = "true".equals(value);
-			boolean b = (v.elementAt(i)).booleanValue();
+			final boolean a = "true".equals(value);
+			final boolean b = (v.elementAt(i)).booleanValue();
 			if (a == b)
+			{
 				return true; // we have found it
+			}
 		}
 		return false;
 	}
 
 	/**
 	 * fitsListType - tests, if the defined 'value' matches value of ListType attribute, specified for this Evaluation
-	 * 
+	 *
 	 * @param value value to test
 	 * @return boolean - true, if 'value' matches specified value of ListType
 	 */
-	private final boolean fitsListType(String value)
+	private final boolean fitsListType(final String value)
 	{
-		VString vBool = new VString(value, null);
-		int size = vBool.size();
+		final VString vBool = new VString(value, null);
+		final int size = vBool.size();
 		for (int i = 0; i < size; i++)
 		{
 			if (!StringUtil.isBoolean(vBool.elementAt(i)))
+			{
 				return false;
+			}
 		}
 
-		EnumListType listType = getListType();
+		final EnumListType listType = getListType();
 
-		if (listType.equals(EnumListType.SingleValue) || listType.equals(EnumListType.getEnum(0)))
+		if (listType.equals(EnumListType.SingleValue))
 		{// default ListType = SingleValue
 			return (size == 1);
 		}
@@ -311,10 +323,12 @@ public class JDFBooleanEvaluation extends JDFEvaluation
 				{
 					if (j != i)
 					{
-						String bi = vBool.elementAt(i);
-						String bj = vBool.elementAt(j);
+						final String bi = vBool.elementAt(i);
+						final String bj = vBool.elementAt(j);
 						if (bi.compareTo(bj) == 0)
+						{
 							return false;
+						}
 					}
 				}
 			}

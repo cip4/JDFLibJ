@@ -61,8 +61,8 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.util.ContainerUtil;
-import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 
@@ -244,7 +244,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 		doc.setInitOnCreate(false);
 
 		theElement = doc.getRoot();
-		if (EnumUtil.aLessThanB(EnumVersion.Version_2_0, version))
+		if (JavaEnumUtil.aLessThanB(EnumVersion.Version_2_0, version))
 		{
 			theElement.setAttribute(AttributeName.VERSION, version.getName());
 		}
@@ -1178,7 +1178,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 */
 	public XJDFHelper addType(final EnumType typ)
 	{
-		return addType(typ.getName());
+		return addType(typ.name());
 	}
 
 	/**

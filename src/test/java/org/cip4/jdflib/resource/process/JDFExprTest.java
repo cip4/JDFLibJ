@@ -77,7 +77,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
  * @date Mar 17, 2013
  */
@@ -91,8 +90,8 @@ class JDFExprTest extends JDFTestCaseBase
 	@Test
 	void testgetTerm()
 	{
-		JDFExpr expr = (JDFExpr) new JDFDoc("Expr").getRoot();
-		JDFand a = (JDFand) expr.appendTerm(EnumTerm.and);
+		final JDFExpr expr = (JDFExpr) new JDFDoc("Expr").getRoot();
+		final JDFand a = (JDFand) expr.appendTerm(EnumTerm.and);
 		Assertions.assertEquals(a, expr.getTerm(null, 0));
 	}
 
@@ -103,8 +102,8 @@ class JDFExprTest extends JDFTestCaseBase
 	@Test
 	void testgetCreateTerm()
 	{
-		JDFExpr expr = (JDFExpr) new JDFDoc("Expr").getRoot();
-		JDFNameEvaluation a = (JDFNameEvaluation) expr.getCreateTerm(EnumTerm.NameEvaluation, 0);
+		final JDFExpr expr = (JDFExpr) new JDFDoc("Expr").getRoot();
+		final JDFNameEvaluation a = (JDFNameEvaluation) expr.getCreateTerm(EnumTerm.NameEvaluation, 0);
 		Assertions.assertEquals(a, expr.getTerm(null, 0));
 	}
 

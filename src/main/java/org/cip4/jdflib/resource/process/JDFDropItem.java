@@ -67,13 +67,13 @@
  *
  */
 /**
- * ========================================================================== 
+ * ==========================================================================
  * class JDFDropItem extends JDFResource
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author sabjon@topmail.de    using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * @Author sabjon@topmail.de    using a code generator
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  */
 
 package org.cip4.jdflib.resource.process;
@@ -88,7 +88,6 @@ import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
 import org.w3c.dom.DOMException;
 
 /**
- * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFDropItem extends JDFAutoDropItem
@@ -97,10 +96,9 @@ public class JDFDropItem extends JDFAutoDropItem
 
 	/**
 	 * Constructor for JDFDropItem
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
-	 * 
 	 * @throws DOMException
 	 */
 	public JDFDropItem(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
@@ -110,10 +108,9 @@ public class JDFDropItem extends JDFAutoDropItem
 
 	/**
 	 * Constructor for JDFDropItem
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
-	 * 
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
@@ -124,15 +121,15 @@ public class JDFDropItem extends JDFAutoDropItem
 
 	/**
 	 * Constructor for JDFDropItem
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
-	 * 
 	 */
-	public JDFDropItem(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFDropItem(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -157,13 +154,14 @@ public class JDFDropItem extends JDFAutoDropItem
 	}
 
 	/**
-	 * 
 	 * @param dropItemIntent
 	 */
 	public void setFromDropItemIntent(final JDFDropItemIntent dropItemIntent)
 	{
 		if (dropItemIntent == null)
+		{
 			return;
+		}
 		copyAttribute(AttributeName.AMOUNT, dropItemIntent);
 		KElement e = dropItemIntent.getFirstChildElement();
 		while (e != null)

@@ -78,7 +78,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
  * @date July 10, 2012
  */
@@ -100,89 +99,83 @@ class RollingBackupDirectoryTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
-	 *
 	 */
 	@Test
 	void testCreateSimple() throws IOException
 	{
-		RollingBackupDirectory dir = new RollingBackupDirectory(theDir, 42, "test.txt");
+		final RollingBackupDirectory dir = new RollingBackupDirectory(theDir, 42, "test.txt");
 		for (int i = 0; i < 155; i++)
 		{
-			File newFile = dir.getNewFile();
+			final File newFile = dir.getNewFile();
 			Assertions.assertTrue(newFile.exists());
 		}
 	}
 
 	/**
 	 * @throws IOException
-	 *
-	 *
 	 */
 	@Test
 	void testCreateSimpleNoExt() throws IOException
 	{
-		RollingBackupDirectory dir = new RollingBackupDirectory(theDir, 42, "test");
+		final RollingBackupDirectory dir = new RollingBackupDirectory(theDir, 42, "test");
 		for (int i = 0; i < 55; i++)
 		{
-			File newFile = dir.getNewFile();
+			final File newFile = dir.getNewFile();
 			Assertions.assertTrue(newFile.exists());
 		}
 	}
 
 	/**
 	 * @throws IOException
-	 *
-	 *
 	 */
 	@Test
 	void testCreateNewExt() throws IOException
 	{
-		RollingBackupDirectory dir = new RollingBackupDirectory(theDir, 42, "test");
+		final RollingBackupDirectory dir = new RollingBackupDirectory(theDir, 42, "test");
 		for (int i = 0; i < 155; i++)
 		{
 			String ext = ".txt";
 			if (i % 3 == 1)
+			{
 				ext = "xml";
+			}
 			else if (i % 3 == 2)
+			{
 				ext = ".foo";
-			File newFile = dir.getNewFileWithExt(ext);
+			}
+			final File newFile = dir.getNewFileWithExt(ext);
 			Assertions.assertTrue(newFile.exists());
 		}
 	}
 
 	/**
 	 * @throws IOException
-	 *
-	 *
 	 */
 	@Test
 	void testCreateNew() throws IOException
 	{
-		RollingBackupDirectory dir = new RollingBackupDirectory(theDir, 42, "test");
+		final RollingBackupDirectory dir = new RollingBackupDirectory(theDir, 42, "test");
 		for (int i = 0; i < 2; i++)
 		{
-			File newFile = dir.getNewFileWithExt("txt");
+			final File newFile = dir.getNewFileWithExt("txt");
 			Assertions.assertTrue(newFile.exists());
 		}
-		RollingBackupDirectory dir2 = new RollingBackupDirectory(theDir, 42, "test");
-		File newFile = dir2.getNewFileWithExt("txt");
+		final RollingBackupDirectory dir2 = new RollingBackupDirectory(theDir, 42, "test");
+		final File newFile = dir2.getNewFileWithExt("txt");
 		Assertions.assertEquals(newFile.getName(), "test.3.txt");
 	}
 
 	/**
 	 * @throws IOException
-	 *
-	 *
 	 */
 	@Test
 	void testCreateNewDir() throws IOException
 	{
-		RollingBackupDirectory dir = new RollingBackupDirectory(theDir, 42, "testDir");
+		final RollingBackupDirectory dir = new RollingBackupDirectory(theDir, 42, "testDir");
 		dir.setDirectory(true);
 		for (int i = 0; i < 200; i++)
 		{
-			File newFile = dir.getNewFile();
+			final File newFile = dir.getNewFile();
 			Assertions.assertTrue(newFile.isDirectory());
 		}
 		dir.persist();
@@ -191,40 +184,40 @@ class RollingBackupDirectoryTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
-	 *
 	 */
 	@Test
 	void testCreateNewNumeric() throws IOException
 	{
-		RollingBackupDirectory dir = new RollingBackupDirectory(theDir, 42, "42");
+		final RollingBackupDirectory dir = new RollingBackupDirectory(theDir, 42, "42");
 		for (int i = 0; i < 2; i++)
 		{
-			File newFile = dir.getNewFileWithExt("txt");
+			final File newFile = dir.getNewFileWithExt("txt");
 			Assertions.assertTrue(newFile.exists());
 		}
-		RollingBackupDirectory dir2 = new RollingBackupDirectory(theDir, 42, "42");
-		File newFile = dir2.getNewFileWithExt("txt");
+		final RollingBackupDirectory dir2 = new RollingBackupDirectory(theDir, 42, "42");
+		final File newFile = dir2.getNewFileWithExt("txt");
 		Assertions.assertEquals(newFile.getName(), "42.3.txt");
 	}
 
 	/**
 	 * @throws IOException
-	 *
-	 *
 	 */
 	@Test
 	void testCreateNewExtWitxExt() throws IOException
 	{
-		RollingBackupDirectory dir = new RollingBackupDirectory(theDir, 42, "test.txt");
+		final RollingBackupDirectory dir = new RollingBackupDirectory(theDir, 42, "test.txt");
 		for (int i = 0; i < 155; i++)
 		{
 			String ext = ".txt";
 			if (i % 3 == 1)
+			{
 				ext = "xml";
+			}
 			else if (i % 3 == 2)
+			{
 				ext = ".foo";
-			File newFile = dir.getNewFileWithExt(ext);
+			}
+			final File newFile = dir.getNewFileWithExt(ext);
 			Assertions.assertTrue(newFile.exists());
 		}
 	}

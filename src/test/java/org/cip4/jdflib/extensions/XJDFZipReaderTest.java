@@ -180,8 +180,8 @@ class XJDFZipReaderTest extends JDFTestCaseBase
 			final XJDFHelper h = new XJDFHelper("j1", "p" + i, null);
 			w.addXJDF(h);
 		}
-		File file = new File(sm_dirTestDataTemp + "multi.xjdf3.zip");
-		File f = FileUtil.writeFile(w, file);
+		final File file = new File(sm_dirTestDataTemp + "multi.xjdf3.zip");
+		final File f = FileUtil.writeFile(w, file);
 		assertNotNull(f);
 
 		final XJDFZipReader zr = new XJDFZipReader(f);

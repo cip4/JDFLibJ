@@ -111,10 +111,10 @@ public class WalkQueue extends WalkXElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void updateAttributes(KElement elem)
+	protected void updateAttributes(final KElement elem)
 	{
-		JDFQueue q = (JDFQueue) elem;
-		KElement p = elem.getParentNode_KElement();
+		final JDFQueue q = (JDFQueue) elem;
+		final KElement p = elem.getParentNode_KElement();
 		if (p instanceof JDFMessage)
 		{
 			q.setDeviceID(((JDFMessage) p).getSenderID());

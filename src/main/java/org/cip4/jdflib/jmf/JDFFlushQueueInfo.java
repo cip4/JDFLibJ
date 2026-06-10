@@ -91,43 +91,43 @@ public class JDFFlushQueueInfo extends JDFAutoFlushQueueInfo
 
 	/**
 	 * Constructor for JDFFlushQueueInfo
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFFlushQueueInfo(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFFlushQueueInfo(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFFlushQueueInfo
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFFlushQueueInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFFlushQueueInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFFlushQueueInfo
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFFlushQueueInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFFlushQueueInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoFlushQueueInfo#toString()
 	 * @return String
 	 */
@@ -139,17 +139,19 @@ public class JDFFlushQueueInfo extends JDFAutoFlushQueueInfo
 
 	/**
 	 * create a queuefilter from the zapped queuentries
-	 * 
+	 *
 	 * @param zapped vector of {@link JDFQueueEntry}
 	 */
-	public void setQueueEntryDefsFromQE(VElement zapped)
+	public void setQueueEntryDefsFromQE(final VElement zapped)
 	{
 		if (zapped != null)
 		{
-			int zs = zapped.size();
-			JDFQueueFilter qf = appendQueueFilter();
+			final int zs = zapped.size();
+			final JDFQueueFilter qf = appendQueueFilter();
 			for (int i = 0; i < zs; i++)
+			{
 				qf.appendQueueEntryDef(((JDFQueueEntry) zapped.get(i)).getQueueEntryID());
+			}
 		}
 	}
 }

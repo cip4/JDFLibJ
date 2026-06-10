@@ -95,31 +95,30 @@ class WalkIntentTest extends JDFTestCaseBase
 	@Test
 	void testProofingIntent()
 	{
-		XJDFHelper h = new XJDFHelper("j1", "p1", null);
-		h.setXPathValue("ProductList/Product/Intent[@Name=\"ContentCheckIntent\"]/ContentCheckIntent/ProofItem/@ProofType", EnumSpanProofType.Page.getName());
-		XJDFToJDFConverter c = new XJDFToJDFConverter(null);
-		JDFDoc dJDF = c.convert(h);
-		JDFNode jdfRoot = dJDF.getJDFRoot();
-		JDFProofingIntent pi = (JDFProofingIntent) jdfRoot.getResource(ElementName.PROOFINGINTENT, EnumUsage.Input, 0);
+		final XJDFHelper h = new XJDFHelper("j1", "p1", null);
+		h.setXPathValue("ProductList/Product/Intent[@Name=\"ContentCheckIntent\"]/ContentCheckIntent/ProofItem/@ProofType", EnumSpanProofType.Page.name());
+		final XJDFToJDFConverter c = new XJDFToJDFConverter(null);
+		final JDFDoc dJDF = c.convert(h);
+		final JDFNode jdfRoot = dJDF.getJDFRoot();
+		final JDFProofingIntent pi = (JDFProofingIntent) jdfRoot.getResource(ElementName.PROOFINGINTENT, EnumUsage.Input, 0);
 		Assertions.assertEquals(pi.getProofItem(0).getProofType().guessActual(), "Page");
 	}
 
 	/**
 	 * @throws DataFormatException
 	 * @throws JDFException
-	 *
 	 */
 	@Test
 	void testInsertingIntent() throws JDFException, DataFormatException
 	{
-		XJDFHelper h = new XJDFHelper("j1", "p1", null);
+		final XJDFHelper h = new XJDFHelper("j1", "p1", null);
 		h.setXPathValue("ProductList/Product/Intent[@Name=\"AssemblingIntent\"]/AssemblingIntent/BlowIn/@FolioFrom", "1");
 		h.setXPathValue("ProductList/Product/Intent[@Name=\"AssemblingIntent\"]/AssemblingIntent/BlowIn/@FolioTo", "4");
 
-		XJDFToJDFConverter c = new XJDFToJDFConverter(null);
-		JDFDoc dJDF = c.convert(h);
-		JDFNode jdfRoot = dJDF.getJDFRoot();
-		JDFInsertingIntent ii = (JDFInsertingIntent) jdfRoot.getResource(ElementName.INSERTINGINTENT, EnumUsage.Input, 0);
+		final XJDFToJDFConverter c = new XJDFToJDFConverter(null);
+		final JDFDoc dJDF = c.convert(h);
+		final JDFNode jdfRoot = dJDF.getJDFRoot();
+		final JDFInsertingIntent ii = (JDFInsertingIntent) jdfRoot.getResource(ElementName.INSERTINGINTENT, EnumUsage.Input, 0);
 		Assertions.assertEquals(ii.getInsertList().getInsert(0).getFolio(), new JDFIntegerRangeList("1 ~ 4"));
 	}
 
@@ -129,15 +128,15 @@ class WalkIntentTest extends JDFTestCaseBase
 	@Test
 	void testHoleMakingIntent()
 	{
-		XJDFHelper h = new XJDFHelper("j1", "p1", null);
+		final XJDFHelper h = new XJDFHelper("j1", "p1", null);
 
 		h.setXPathValue("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Extent", "44 55");
 		h.setXPathValue("ProductList/Product/Intent/HoleMakingIntent/HolePattern/@Pattern", "R2i-US-b");
 
-		XJDFToJDFConverter c = new XJDFToJDFConverter(null);
-		JDFDoc dJDF = c.convert(h);
-		JDFNode jdfRoot = dJDF.getJDFRoot();
-		JDFHoleMakingIntent hi = (JDFHoleMakingIntent) jdfRoot.getResource(ElementName.HOLEMAKINGINTENT, EnumUsage.Input, 0);
+		final XJDFToJDFConverter c = new XJDFToJDFConverter(null);
+		final JDFDoc dJDF = c.convert(h);
+		final JDFNode jdfRoot = dJDF.getJDFRoot();
+		final JDFHoleMakingIntent hi = (JDFHoleMakingIntent) jdfRoot.getResource(ElementName.HOLEMAKINGINTENT, EnumUsage.Input, 0);
 		Assertions.assertEquals("R2i-US-b", hi.getHoleType().getActual());
 	}
 
@@ -147,14 +146,14 @@ class WalkIntentTest extends JDFTestCaseBase
 	@Test
 	void testFoldingIntent()
 	{
-		XJDFHelper h = new XJDFHelper("j1", "p1", null);
+		final XJDFHelper h = new XJDFHelper("j1", "p1", null);
 
 		h.setXPathValue("ProductList/Product/Intent/FoldingIntent/@FoldCatalog", "F4-1");
 
-		XJDFToJDFConverter c = new XJDFToJDFConverter(null);
-		JDFDoc dJDF = c.convert(h);
-		JDFNode jdfRoot = dJDF.getJDFRoot();
-		JDFFoldingIntent fi = (JDFFoldingIntent) jdfRoot.getResource(ElementName.FOLDINGINTENT, EnumUsage.Input, 0);
+		final XJDFToJDFConverter c = new XJDFToJDFConverter(null);
+		final JDFDoc dJDF = c.convert(h);
+		final JDFNode jdfRoot = dJDF.getJDFRoot();
+		final JDFFoldingIntent fi = (JDFFoldingIntent) jdfRoot.getResource(ElementName.FOLDINGINTENT, EnumUsage.Input, 0);
 		Assertions.assertEquals("F4-1", fi.getFoldingCatalog().getActual());
 
 	}

@@ -64,7 +64,6 @@ public class WalkRegisterMark extends WalkXElement
 	}
 
 	/**
-	 *
 	 * @param elem
 	 */
 	@Override

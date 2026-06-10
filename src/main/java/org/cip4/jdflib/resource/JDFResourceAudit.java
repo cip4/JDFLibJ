@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoResourceAudit;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -113,8 +113,7 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * 14.11.2008
+ *         14.11.2008
  */
 public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAudit
 {
@@ -122,7 +121,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 
 	/**
 	 * Constructor for JDFResourceAudit
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -133,7 +132,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 
 	/**
 	 * Constructor for JDFResourceAudit
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -145,7 +144,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 
 	/**
 	 * Constructor for JDFResourceAudit
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -158,10 +157,10 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 
 	/**
 	 * add a link to the new resource
-	 * 
-	 * @param r the resource that is valid after modification<br>
-	 * if r is not specified, return the link that already exists
-	 * @param bInput 
+	 *
+	 * @param r      the resource that is valid after modification<br>
+	 *               if r is not specified, return the link that already exists
+	 * @param bInput
 	 * @return the ResourceLink object in the ResourceAudit that points to r
 	 * @deprecated use addNewOldLink(true,...)
 	 */
@@ -173,13 +172,12 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 
 	/**
 	 * add a link to the new resource
-	 * 
-	 * @param r the resource that is valid after modification<br>
-	 * if r is not specified, return the link that already exists
-	 * @param bInput 
+	 *
+	 * @param r      the resource that is valid after modification<br>
+	 *               if r is not specified, return the link that already exists
+	 * @param bInput
 	 * @return the ResourceLink object in the ResourceAudit that points to r
 	 * @deprecated use addNewOldLink(false,...)
-	 * 
 	 */
 	@Deprecated
 	public JDFResourceLink addOldLink(final JDFResource r, final boolean bInput)
@@ -189,9 +187,9 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 
 	/**
 	 * add a link to one of the resources
-	 * 
-	 * @param bNew new or original?
-	 * @param r the resource that was valid before modification
+	 *
+	 * @param bNew   new or original?
+	 * @param r      the resource that was valid before modification
 	 * @param bInput usage of the resource
 	 * @return the ResourceLink object in the ResourceAudit that points to r
 	 * @deprecated use addNewOldLink(bNew, r, bInput ? EnumUsage.Input : EnumUsage.Output);
@@ -205,9 +203,9 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 
 	/**
 	 * add a link to one of the resources
-	 * 
-	 * @param bNew true - new link, false - original link
-	 * @param r the resource that was valid before modification
+	 *
+	 * @param bNew  true - new link, false - original link
+	 * @param r     the resource that was valid before modification
 	 * @param usage usage of the resource
 	 * @return the ResourceLink object in the ResourceAudit that points to r
 	 */
@@ -228,7 +226,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 		{
 			throw new JDFException("JDFResourceLink::AddNewOldLink invalid  ResourceAudit");
 		}
-		final JDFResourceLink l = (JDFResourceLink) appendElement(r.getLinkString(), JDFConstants.EMPTYSTRING);
+		final JDFResourceLink l = (JDFResourceLink) appendElement(r.getLinkString(), JDFCoreConstants.EMPTYSTRING);
 		l.setTarget(r);
 		l.setUsage(usage);
 		return l;
@@ -236,7 +234,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 
 	/**
 	 * add a link to the new resource
-	 * 
+	 *
 	 * @return the ResourceLink object in the ResourceAudit
 	 */
 	public JDFResourceLink getNewLink()
@@ -246,7 +244,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 
 	/**
 	 * add a link to the new resource
-	 * 
+	 *
 	 * @return the ResourceLink object in the ResourceAudit
 	 */
 	public JDFResourceLink getOldLink()
@@ -256,10 +254,8 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 
 	/**
 	 * add a link to one of the resources
-	 * 
+	 *
 	 * @param bNew new or original?
-	 * 
-	 * 
 	 * @return the ResourceLink object in the ResourceAudit that points to r
 	 */
 	public JDFResourceLink getNewOldLink(final boolean bNew)
@@ -285,7 +281,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 
 	/**
 	 * replace
-	 * 
+	 *
 	 * @param newLink node to insert
 	 * @return the updated element
 	 */
@@ -318,7 +314,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 
 	/**
 	 * Get the vector of ResourceLinks
-	 * 
+	 *
 	 * @return VElement: the resource links in this
 	 */
 	public VElement getResourceLinkVector()
@@ -340,12 +336,11 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 	 * return a vector of unknown element nodenames
 	 * <p>
 	 * default: getUnknownElements(true, 999999)
-	 * 
+	 *
 	 * @param bIgnorePrivate used by JDFElement during the validation
-	 * @param nMax maximum size of the returned vector
+	 * @param nMax           maximum size of the returned vector
 	 * @return Vector - vector of unknown element nodenames
-	 * 
-	 * !!! Do not change the signature of this method
+	 *         !!! Do not change the signature of this method
 	 */
 	@Override
 	public VString getUnknownElements(final boolean bIgnorePrivate, final int nMax)
@@ -355,7 +350,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 
 	/**
 	 * get list of missing elements
-	 * 
+	 *
 	 * @param nMax maximum size of the returned vector
 	 */
 	@Override
@@ -384,7 +379,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 
 	/**
 	 * set all parts to those defined in vParts
-	 * 
+	 *
 	 * @param vParts vector of attribute maps for the parts
 	 */
 	@Override
@@ -395,7 +390,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 
 	/**
 	 * set all parts to those defined by mPart
-	 * 
+	 *
 	 * @param mPart attribute map for the part to set
 	 */
 	@Override
@@ -406,7 +401,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 
 	/**
 	 * remove the part defined by mPart
-	 * 
+	 *
 	 * @param mPart attribute map for the part to remove
 	 */
 	@Override
@@ -417,7 +412,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 
 	/**
 	 * check whether the part defined in mPart is included
-	 * 
+	 *
 	 * @param mPart attribute map to look for
 	 * @return boolean - returns true if the part exists
 	 */

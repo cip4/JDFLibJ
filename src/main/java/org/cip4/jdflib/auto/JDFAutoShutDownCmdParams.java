@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -98,8 +93,8 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHUTDOWNTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumShutDownType.getEnum(0),
-				"StandBy");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHUTDOWNTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumShutDownType.class, 0), "StandBy");
 	}
 
 	@Override
@@ -126,7 +121,7 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoShutDownCmdParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoShutDownCmdParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -138,7 +133,7 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoShutDownCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoShutDownCmdParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -151,93 +146,28 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoShutDownCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoShutDownCmdParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for ShutDownType
+	 * Enumeration strings for numShutDownType
 	 */
 
-	public enum EShutDownType
+	public enum EnumShutDownType
 	{
 		StandBy, Full;
 
-		public static EShutDownType getEnum(String val)
+		public static EnumShutDownType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EShutDownType.class, val, EShutDownType.StandBy);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumShutDownType.class, val, EnumShutDownType.StandBy);
 		}
-	}
-
-	/**
-	 * Enumeration strings for ShutDownType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumShutDownType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumShutDownType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumShutDownType getEnum(String enumName)
-		{
-			return (EnumShutDownType) getEnum(EnumShutDownType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumShutDownType getEnum(int enumValue)
-		{
-			return (EnumShutDownType) getEnum(EnumShutDownType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumShutDownType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumShutDownType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumShutDownType.class);
-		}
-
-		/**  */
-		public static final EnumShutDownType StandBy = new EnumShutDownType("StandBy");
-		/**  */
-		public static final EnumShutDownType Full = new EnumShutDownType("Full");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -249,9 +179,9 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setShutDownType(EShutDownType enumVar)
+	public void setShutDownType(final EnumShutDownType enumVar)
 	{
-		setAttribute(AttributeName.SHUTDOWNTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SHUTDOWNTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -259,35 +189,6 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EShutDownType getEShutDownType()
-	{
-		return EShutDownType.getEnum(getAttribute(AttributeName.SHUTDOWNTYPE, null, "StandBy"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ShutDownType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ShutDownType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetShutDownType(EShutDownType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setShutDownType(EnumShutDownType enumVar)
-	{
-		setAttribute(AttributeName.SHUTDOWNTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ShutDownType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EShutDownType GetEShutDownType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumShutDownType getShutDownType()
 	{
 		return EnumShutDownType.getEnum(getAttribute(AttributeName.SHUTDOWNTYPE, null, "StandBy"));

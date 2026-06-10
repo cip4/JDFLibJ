@@ -108,7 +108,7 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPRGroupOccurrence(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPRGroupOccurrence(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -120,7 +120,7 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPRGroupOccurrence(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPRGroupOccurrence(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPRGroupOccurrence(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPRGroupOccurrence(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -170,7 +170,7 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringListValue the element
 	 */
-	public JDFStringListValue getCreateStringListValue(int iSkip)
+	public JDFStringListValue getCreateStringListValue(final int iSkip)
 	{
 		return (JDFStringListValue) getCreateElement_JDFElement(ElementName.STRINGLISTVALUE, null, iSkip);
 	}
@@ -182,7 +182,7 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 	 * @return JDFStringListValue the element
 	 *         default is getStringListValue(0)
 	 */
-	public JDFStringListValue getStringListValue(int iSkip)
+	public JDFStringListValue getStringListValue(final int iSkip)
 	{
 		return (JDFStringListValue) getElement(ElementName.STRINGLISTVALUE, null, iSkip);
 	}
@@ -233,7 +233,7 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFArgumentValue the element
 	 */
-	public JDFArgumentValue getCreateArgumentValue(int iSkip)
+	public JDFArgumentValue getCreateArgumentValue(final int iSkip)
 	{
 		return (JDFArgumentValue) getCreateElement_JDFElement(ElementName.ARGUMENTVALUE, null, iSkip);
 	}
@@ -245,7 +245,7 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 	 * @return JDFArgumentValue the element
 	 *         default is getArgumentValue(0)
 	 */
-	public JDFArgumentValue getArgumentValue(int iSkip)
+	public JDFArgumentValue getArgumentValue(final int iSkip)
 	{
 		return (JDFArgumentValue) getElement(ElementName.ARGUMENTVALUE, null, iSkip);
 	}

@@ -90,7 +90,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * all kinds of fun tests around JDF 1.2 vs JDF 1.3 Layouts also some tests for automated layout
- *
  */
 class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 {
@@ -127,7 +126,6 @@ class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testConvertStripStepRepeat() throws DataFormatException
@@ -145,7 +143,7 @@ class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	@Test
 	void testConvertStripDeep()
 	{
-		JDFNode nProd = new JDFDoc("JDF").getJDFRoot();
+		final JDFNode nProd = new JDFDoc("JDF").getJDFRoot();
 		nProd.setType(EnumType.Product);
 		n = (JDFNode) nProd.moveElement(n, null);
 		lpp = (JDFLayoutPreparationParams) n.getResource(ElementName.LAYOUTPREPARATIONPARAMS, null, 0);
@@ -167,9 +165,9 @@ class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 		n.setCombined(new VString("LayoutPreparation Imposition", null));
 		lpp.convertToStripping(null);
 		final VString types = n.getTypes();
-		Assertions.assertTrue(types.contains(EnumType.Stripping.getName()));
-		Assertions.assertTrue(types.contains(EnumType.Imposition.getName()));
-		Assertions.assertFalse(types.contains(EnumType.LayoutPreparation.getName()));
+		Assertions.assertTrue(types.contains(EnumType.Stripping.name()));
+		Assertions.assertTrue(types.contains(EnumType.Imposition.name()));
+		Assertions.assertFalse(types.contains(EnumType.LayoutPreparation.name()));
 	}
 
 	/**
@@ -178,7 +176,7 @@ class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	@Test
 	void testBorderless()
 	{
-		JDFPageCell pc = lpp.appendPageCell();
+		final JDFPageCell pc = lpp.appendPageCell();
 		pc.setTrimSize(new JDFXYPair(500, 700));
 		pc.setClipBox(new JDFRectangle(-5, -4, 505, 705));
 		lpp.setSurfaceContentsBox(new JDFRectangle(0, 0, 500, 700));
@@ -214,12 +212,12 @@ class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	void testGetClipBox()
 	{
 		Assertions.assertNull(lpp.getClipBox());
-		JDFPageCell pc = lpp.appendPageCell();
+		final JDFPageCell pc = lpp.appendPageCell();
 		Assertions.assertNull(lpp.getClipBox());
-		JDFXYPair size = new JDFXYPair(10, 20);
+		final JDFXYPair size = new JDFXYPair(10, 20);
 		pc.setTrimSize(size);
 		Assertions.assertEquals(lpp.getClipBox().getSize(), size);
-		JDFRectangle rect = new JDFRectangle(1, 2, 33, 44);
+		final JDFRectangle rect = new JDFRectangle(1, 2, 33, 44);
 		pc.setClipBox(rect);
 		Assertions.assertEquals(lpp.getClipBox(), rect);
 	}
@@ -231,12 +229,12 @@ class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	void testTrimSize()
 	{
 		Assertions.assertNull(lpp.getTrimSize());
-		JDFPageCell pc = lpp.appendPageCell();
+		final JDFPageCell pc = lpp.appendPageCell();
 		Assertions.assertNull(lpp.getTrimSize());
-		JDFRectangle rect = new JDFRectangle(1, 2, 33, 44);
+		final JDFRectangle rect = new JDFRectangle(1, 2, 33, 44);
 		pc.setClipBox(rect);
 		Assertions.assertEquals(lpp.getTrimSize(), rect.getSize());
-		JDFXYPair size = new JDFXYPair(10, 20);
+		final JDFXYPair size = new JDFXYPair(10, 20);
 		pc.setTrimSize(size);
 		Assertions.assertEquals(lpp.getTrimSize(), size);
 	}

@@ -76,9 +76,7 @@ import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFNotification;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkNotificationAudit extends WalkAudit
 {
@@ -98,7 +96,7 @@ public class WalkNotificationAudit extends WalkAudit
 	@Override
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		KElement notificationAudit = xjdf.appendElement(XJDFConstants.AuditNotification);
+		final KElement notificationAudit = xjdf.appendElement(XJDFConstants.AuditNotification);
 		moveToParentAudit(jdf, notificationAudit);
 		return super.walk(jdf, notificationAudit);
 	}
@@ -107,7 +105,7 @@ public class WalkNotificationAudit extends WalkAudit
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		map.remove(AttributeName.TIMESTAMP);
 		map.remove(AttributeName.ID);
@@ -116,7 +114,7 @@ public class WalkNotificationAudit extends WalkAudit
 		map.remove(AttributeName.AGENTVERSION);
 		map.remove(AttributeName.AGENTNAME);
 		map.remove(AttributeName.TYPE);
-		String clas = map.get(AttributeName.CLASS);
+		final String clas = map.get(AttributeName.CLASS);
 		if (clas == null || "Event".equals(clas))
 		{
 			map.put(AttributeName.CLASS, "Information");

@@ -110,9 +110,9 @@ public class WalkLayoutElementProductionParams extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public KElement walk(KElement e, KElement trackElem)
+	public KElement walk(final KElement e, final KElement trackElem)
 	{
-		KElement walk = super.walk(e, trackElem);
+		final KElement walk = super.walk(e, trackElem);
 
 		return walk;
 	}

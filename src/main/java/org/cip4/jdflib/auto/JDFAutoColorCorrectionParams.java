@@ -124,7 +124,7 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoColorCorrectionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoColorCorrectionParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -136,7 +136,7 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoColorCorrectionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoColorCorrectionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -149,7 +149,7 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoColorCorrectionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoColorCorrectionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -160,7 +160,7 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -190,7 +190,7 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setColorManagementSystem(String value)
+	public void setColorManagementSystem(final String value)
 	{
 		setAttribute(AttributeName.COLORMANAGEMENTSYSTEM, value, null);
 	}
@@ -237,7 +237,7 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
-	public JDFFileSpec getCreateFileSpec(int iSkip)
+	public JDFFileSpec getCreateFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -249,7 +249,7 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 	 * @return JDFFileSpec the element
 	 *         default is getFileSpec(0)
 	 */
-	public JDFFileSpec getFileSpec(int iSkip)
+	public JDFFileSpec getFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -279,7 +279,7 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -310,7 +310,7 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorCorrectionOp the element
 	 */
-	public JDFColorCorrectionOp getCreateColorCorrectionOp(int iSkip)
+	public JDFColorCorrectionOp getCreateColorCorrectionOp(final int iSkip)
 	{
 		return (JDFColorCorrectionOp) getCreateElement_JDFElement(ElementName.COLORCORRECTIONOP, null, iSkip);
 	}
@@ -322,7 +322,7 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 	 * @return JDFColorCorrectionOp the element
 	 *         default is getColorCorrectionOp(0)
 	 */
-	public JDFColorCorrectionOp getColorCorrectionOp(int iSkip)
+	public JDFColorCorrectionOp getColorCorrectionOp(final int iSkip)
 	{
 		return (JDFColorCorrectionOp) getElement(ElementName.COLORCORRECTIONOP, null, iSkip);
 	}

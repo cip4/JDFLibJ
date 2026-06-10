@@ -97,8 +97,8 @@ public class IDRemover extends BaseElementWalker
 	public IDRemover()
 	{
 		super(new BaseWalkerFactory());
-		theMap = new HashMap<String, KElement>();
-		refSet = new HashSet<String>();
+		theMap = new HashMap<>();
+		refSet = new HashSet<>();
 		new BaseWalker(getFactory()); // need a default walker
 	}
 
@@ -135,7 +135,6 @@ public class IDRemover extends BaseElementWalker
 	 * the walker
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkResource extends BaseWalker
 	{
@@ -193,10 +192,9 @@ public class IDRemover extends BaseElementWalker
 	}
 
 	/**
-	 *
 	 * @param e
 	 */
-	public void removeIDs(KElement e)
+	public void removeIDs(final KElement e)
 	{
 		walkTree(e, null);
 		for (final String ref : refSet)

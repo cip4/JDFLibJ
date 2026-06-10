@@ -90,43 +90,43 @@ public class JDFQueueEntryDef extends JDFAutoQueueEntryDef
 
 	/**
 	 * Constructor for JDFQueueEntryDef
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFQueueEntryDef(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFQueueEntryDef(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFQueueEntryDef
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFQueueEntryDef(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFQueueEntryDef(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFQueueEntryDef
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFQueueEntryDef(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFQueueEntryDef(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * toString()
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -137,20 +137,26 @@ public class JDFQueueEntryDef extends JDFAutoQueueEntryDef
 
 	/**
 	 * retrieves the queuentryid from a queue related query or command
-	 * 
+	 *
 	 * @param m the query or command
 	 * @return String the queuentryID in Query/QueueEntryDef/@QueueEntryID
 	 */
-	public static String getQueueEntryIDFromMessage(JDFMessage m)
+	public static String getQueueEntryIDFromMessage(final JDFMessage m)
 	{
 		if (m == null)
+		{
 			return null;
-		JDFQueueEntryDef def = m.getQueueEntryDef(0);
+		}
+		final JDFQueueEntryDef def = m.getQueueEntryDef(0);
 		if (def == null)
+		{
 			return null;
-		String s = def.getQueueEntryID();
+		}
+		final String s = def.getQueueEntryID();
 		if (isWildCard(s))
+		{
 			return null;
+		}
 		return s;
 	}
 }

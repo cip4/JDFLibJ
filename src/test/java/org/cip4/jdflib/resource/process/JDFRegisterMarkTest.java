@@ -79,7 +79,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.junit.jupiter.api.Test;
 
 /**
- * 
+ *
  */
 class JDFRegisterMarkTest extends JDFTestCaseBase
 {
@@ -87,7 +87,7 @@ class JDFRegisterMarkTest extends JDFTestCaseBase
 	@Test
 	void testSetCenter()
 	{
-		JDFRegisterMark rm = (JDFRegisterMark) JDFElement.createRoot(ElementName.REGISTERMARK);
+		final JDFRegisterMark rm = (JDFRegisterMark) JDFElement.createRoot(ElementName.REGISTERMARK);
 		rm.setCenter(1, 2);
 		assertEquals(new JDFXYPair(1, 2), rm.getCenter());
 	}

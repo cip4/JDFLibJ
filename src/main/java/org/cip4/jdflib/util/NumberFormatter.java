@@ -70,7 +70,7 @@ package org.cip4.jdflib.util;
 
 import java.util.Locale;
 
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 
 /**
  * class to format integers, longs, doubles etc.
@@ -107,9 +107,8 @@ public class NumberFormatter
 
 	/**
 	 * returns a formatted integer with length digits<br>
-	 * 
 	 *
-	 * @param i the integer to format
+	 * @param i      the integer to format
 	 * @param length total length of including leading zeros
 	 * @return the formatted string that represents the integer
 	 */
@@ -137,7 +136,7 @@ public class NumberFormatter
 	 * returns a formatted double. Truncates to at most precision digits after the "." <br>
 	 * If precision=0, the . is stripped
 	 *
-	 * @param d the double to format
+	 * @param d         the double to format
 	 * @param precision maximum precision, depending on value of zapp0, trailing 0s are discarded or kept
 	 * @return the formatted string that represents d TBD handle exp format, null if NaN
 	 */
@@ -146,11 +145,11 @@ public class NumberFormatter
 		final String s;
 		if (d == Double.MAX_VALUE)
 		{
-			s = JDFConstants.POSINF;
+			s = JDFCoreConstants.POSINF;
 		}
 		else if (d == -Double.MAX_VALUE)
 		{
-			s = JDFConstants.NEGINF;
+			s = JDFCoreConstants.NEGINF;
 		}
 		else if (Double.isNaN(d))
 		{
@@ -197,7 +196,9 @@ public class NumberFormatter
 			}
 			s = s.substring(0, n);
 			if ("-0".equals(s))
+			{
 				s = "0";
+			}
 		}
 		return s;
 	}

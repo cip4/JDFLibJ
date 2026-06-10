@@ -47,10 +47,10 @@ class MyMutexTest extends MyMutex
 	class WaitThread implements Runnable
 	{
 
-		private int w;
-		private MyMutex mrh;
+		private final int w;
+		private final MyMutex mrh;
 
-		WaitThread(int w, MyMutex mrh)
+		WaitThread(final int w, final MyMutex mrh)
 		{
 			this.w = w;
 			this.mrh = mrh;
@@ -74,9 +74,9 @@ class MyMutexTest extends MyMutex
 	@Test
 	void testMyNotify()
 	{
-		MyMutex myMutex = new MyMutex();
+		final MyMutex myMutex = new MyMutex();
 		myMutex.notifyMe();
-		long t = System.currentTimeMillis();
+		final long t = System.currentTimeMillis();
 		new Thread(new WaitThread(42, myMutex)).start();
 		myMutex.waitForMe(3000);
 		assertEquals(1000l, System.currentTimeMillis() - t, 1000l);

@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,22 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFRectangleEvaluation.java
@@ -114,36 +114,36 @@ public class JDFRectangleEvaluation extends JDFEvaluation
 
 	/**
 	 * JDFRectangleEvaluation
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFRectangleEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFRectangleEvaluation(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * JDFRectangleEvaluation
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFRectangleEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFRectangleEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * JDFRectangleEvaluation
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFRectangleEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFRectangleEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -153,7 +153,7 @@ public class JDFRectangleEvaluation extends JDFEvaluation
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -166,44 +166,45 @@ public class JDFRectangleEvaluation extends JDFEvaluation
 	 * // Attribute getter / setter
 	 */
 
-	public void setValueList(JDFRectangleRangeList value)
+	public void setValueList(final JDFRectangleRangeList value)
 	{
 		setAttribute(AttributeName.VALUELIST, value.toString());
 	}
 
 	/**
 	 * set valuelist to exactly one rectangle
-	 * 
+	 *
 	 * @param value
 	 */
-	public void setValueList(JDFRectangle value)
+	public void setValueList(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.VALUELIST, value.toString());
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
 	public JDFRectangleRangeList getValueList()
 	{
 		final String vl = getAttribute(AttributeName.VALUELIST, null, null);
 		if (vl == null)
+		{
 			return null;
+		}
 
 		try
 		{
 			return new JDFRectangleRangeList(vl);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFRectangleEvaluation.getValueList: Attribute VALUELIST is not capable to create JDFRectangleRangeList");
 		}
 	}
 
-	public void setHWRelation(EnumXYRelation value)
+	public void setHWRelation(final EnumXYRelation value)
 	{
-		setAttribute(AttributeName.HWRELATION, value.getName(), null);
+		setAttribute(AttributeName.HWRELATION, value.name(), null);
 	}
 
 	public JDFElement.EnumXYRelation getHWRelation()
@@ -211,7 +212,7 @@ public class JDFRectangleEvaluation extends JDFEvaluation
 		return JDFElement.EnumXYRelation.getEnum(getAttribute(AttributeName.HWRELATION, null, null));
 	}
 
-	public void setTolerance(JDFXYPair value)
+	public void setTolerance(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.TOLERANCE, value.toString(), null);
 	}
@@ -229,50 +230,56 @@ public class JDFRectangleEvaluation extends JDFEvaluation
 	/**
 	 * fitsValue - checks whether <code>value</code> matches the testlists
 	 * specified for this Evaluation
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @return boolean - true, if <code>value</code> matches the testlists or if
 	 *         testlists are not specified
 	 */
 	@Override
-	public final boolean fitsValue(String value)
+	public final boolean fitsValue(final String value)
 	{
 		if (!fitsListType(value))
+		{
 			return false;
+		}
 
 		JDFRectangleRangeList rrl = null;
 		try
 		{
 			rrl = new JDFRectangleRangeList(value);
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			return false;
 		}
 
-		int siz = rrl.size();
+		final int siz = rrl.size();
 		for (int i = 0; i < siz; i++) // For every range, that rangelist
 										// consists of,
 		{ // we test both of range deliminators - right and left, if they fit
 			// HWRelation
 			// In this case test of deliminators is sufficient for evaluation of
 			// the whole range
-			JDFRectangleRange range = (JDFRectangleRange) rrl.at(i);
+			final JDFRectangleRange range = (JDFRectangleRange) rrl.at(i);
 
-			JDFRectangle left = range.getLeft();
-			JDFRectangle right = range.getRight();
+			final JDFRectangle left = range.getLeft();
+			final JDFRectangle right = range.getRight();
 
 			if (left.equals(right))
 			{
-				JDFRectangle rectangle = left;
-				if ((fitsValueList(new JDFRectangleRange(rectangle)) && fitsHWRelation(rectangle)) == false)
+				final JDFRectangle rectangle = left;
+				if ((!fitsValueList(new JDFRectangleRange(rectangle)) || !fitsHWRelation(rectangle)))
+				{
 					return false;
+				}
 			}
 			else
 			{
-				if ((fitsValueList(range) && fitsHWRelation(left) && fitsHWRelation(right)) == false)
+				if ((!fitsValueList(range) || !fitsHWRelation(left) || !fitsHWRelation(right)))
+				{
 					return false;
+				}
 			}
 		}
 		return true;
@@ -282,41 +289,41 @@ public class JDFRectangleEvaluation extends JDFEvaluation
 	/**
 	 * fitsListType - checks whether <code>value</code> matches the value of the
 	 * ListType attribute specified for this Evaluation
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @return boolean - true, if <code>value</code> matches the specified value
 	 *         of ListType
 	 */
-	private final boolean fitsListType(String value)
+	private final boolean fitsListType(final String value)
 	{
-		EnumListType listType = getListType();
+		final EnumListType listType = getListType();
 
 		JDFRectangleRangeList rangelist;
 		try
 		{
 			rangelist = new JDFRectangleRangeList(value);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			return false;
 		}
-		catch (JDFException e)
+		catch (final JDFException e)
 		{
 			return false;
 		}
 
-		if (listType.equals(EnumListType.SingleValue) || listType.equals(EnumListType.getEnum(0)))
+		if (listType.equals(EnumListType.SingleValue))
 		{// default ListType = SingleValue
 			try
 			{
 				new JDFRectangle(value);
 			}
-			catch (JDFException e)
+			catch (final JDFException e)
 			{
 				return false;
 			}
-			catch (DataFormatException e)
+			catch (final DataFormatException e)
 			{
 				return false;
 			}
@@ -363,21 +370,25 @@ public class JDFRectangleEvaluation extends JDFEvaluation
 	/**
 	 * fitsValueList - checks whether <code>range</code> is in the ValueList
 	 * specified for this Evaluation
-	 * 
+	 *
 	 * @param range
-	 *            range to test
+	 *              range to test
 	 * @return boolean - true, if <code>range</code> is in the ValueList or if
 	 *         ValueList is not specified
 	 */
-	private final boolean fitsValueList(JDFRectangleRange range)
+	private final boolean fitsValueList(final JDFRectangleRange range)
 	{
 		if (!hasAttribute(AttributeName.VALUELIST))
+		{
 			return true;
+		}
 
-		JDFRectangleRangeList rangelist = getValueList();
+		final JDFRectangleRangeList rangelist = getValueList();
 
 		if (hasAttribute(AttributeName.TOLERANCE))
+		{
 			return (fitsTolerance(rangelist).isPartOfRange(range));
+		}
 		return rangelist.isPartOfRange(range);
 
 	}
@@ -386,16 +397,16 @@ public class JDFRectangleEvaluation extends JDFEvaluation
 	 * fitsTolerance - checks whether this Evaluation has a specified Tolerance
 	 * that it is not equal to "0 0", and expands original the rangelist to the
 	 * rangelist that fits Tolerance.
-	 * 
+	 *
 	 * @param rangeList
-	 *            original rangelist
+	 *                  original rangelist
 	 * @return NumberRangeList - expanded rangelist, returns original range if
 	 *         Tolerance=="0 0"
 	 */
-	private JDFRectangleRangeList fitsTolerance(JDFRectangleRangeList origRangeList)
+	private JDFRectangleRangeList fitsTolerance(final JDFRectangleRangeList origRangeList)
 	{
-		double nt = getTolerance().getX(); // negative tolerance
-		double pt = getTolerance().getY(); // positive tolerance
+		final double nt = getTolerance().getX(); // negative tolerance
+		final double pt = getTolerance().getY(); // positive tolerance
 
 		if ((nt == 0) && (pt == 0))
 		{
@@ -404,30 +415,30 @@ public class JDFRectangleEvaluation extends JDFEvaluation
 
 		// expand our original range into the range +/- Tolerance
 
-		JDFRectangleRangeList rangeList = new JDFRectangleRangeList(origRangeList);
+		final JDFRectangleRangeList rangeList = new JDFRectangleRangeList(origRangeList);
 
-		JDFRectangleRangeList tolRangeList = new JDFRectangleRangeList();
+		final JDFRectangleRangeList tolRangeList = new JDFRectangleRangeList();
 
-		int size = rangeList.size();
+		final int size = rangeList.size();
 		for (int i = 0; i < size; i++)
 		{
-			JDFRectangleRange range = (JDFRectangleRange) rangeList.at(i);
+			final JDFRectangleRange range = (JDFRectangleRange) rangeList.at(i);
 
-			JDFRectangle left = range.getLeft();
-			double leftLlx = left.getLlx();
-			double leftLly = left.getLly();
-			double leftUrx = left.getUrx();
-			double leftUry = left.getUry();
+			final JDFRectangle left = range.getLeft();
+			final double leftLlx = left.getLlx();
+			final double leftLly = left.getLly();
+			final double leftUrx = left.getUrx();
+			final double leftUry = left.getUry();
 			left.setLlx(leftLlx - nt);
 			left.setLly(leftLly - nt);
 			left.setUrx(leftUrx - nt);
 			left.setUry(leftUry - nt);
 
-			JDFRectangle right = range.getRight();
-			double rightLlx = right.getLlx();
-			double rightLly = right.getLly();
-			double rightUrx = right.getUrx();
-			double rightUry = right.getUry();
+			final JDFRectangle right = range.getRight();
+			final double rightLlx = right.getLlx();
+			final double rightLly = right.getLly();
+			final double rightUrx = right.getUrx();
+			final double rightUry = right.getUry();
 			right.setLlx(rightLlx + pt);
 			right.setLly(rightLly + pt);
 			right.setUrx(rightUrx + pt);
@@ -446,24 +457,28 @@ public class JDFRectangleEvaluation extends JDFEvaluation
 	/**
 	 * fitsHWRelation - checks whether <code>rect</code> value matches the
 	 * HWRelation specified for this Evaluation
-	 * 
+	 *
 	 * @param rect
-	 *            rectangle value to test
+	 *             rectangle value to test
 	 * @return boolean - true, if <code>rect</code> matches HWRelation or if
 	 *         HWRelation is not specified
 	 */
-	private final boolean fitsHWRelation(JDFRectangle rect)
+	private final boolean fitsHWRelation(final JDFRectangle rect)
 	{
-		double width = rect.getUrx() - rect.getLlx();
-		double height = rect.getUry() - rect.getLly();
+		final double width = rect.getUrx() - rect.getLlx();
+		final double height = rect.getUry() - rect.getLly();
 
 		if (!hasAttribute(AttributeName.HWRELATION))
+		{
 			return true;
+		}
 		if (!hasAttribute(AttributeName.TOLERANCE))
+		{
 			return getHWRelation().evaluateXY(width, height, EPSILON, EPSILON);
+		}
 
-		double nt = getTolerance().getX(); // negative tolerance
-		double pt = getTolerance().getY(); // positive tolerance
+		final double nt = getTolerance().getX(); // negative tolerance
+		final double pt = getTolerance().getY(); // positive tolerance
 
 		return getHWRelation().evaluateXY(width, height, nt, pt);
 	}

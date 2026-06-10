@@ -124,7 +124,7 @@ public abstract class JDFAutoProductionPath extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoProductionPath(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoProductionPath(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -136,7 +136,7 @@ public abstract class JDFAutoProductionPath extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoProductionPath(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoProductionPath(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -149,7 +149,7 @@ public abstract class JDFAutoProductionPath extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoProductionPath(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoProductionPath(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -160,7 +160,7 @@ public abstract class JDFAutoProductionPath extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -190,7 +190,7 @@ public abstract class JDFAutoProductionPath extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProductionPathID(String value)
+	public void setProductionPathID(final String value)
 	{
 		setAttribute(AttributeName.PRODUCTIONPATHID, value, null);
 	}
@@ -268,7 +268,7 @@ public abstract class JDFAutoProductionPath extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFProductionSubPath the element
 	 */
-	public JDFProductionSubPath getCreatePostPressComponentPath(int iSkip)
+	public JDFProductionSubPath getCreatePostPressComponentPath(final int iSkip)
 	{
 		return (JDFProductionSubPath) getCreateElement_JDFElement(ElementName.POSTPRESSCOMPONENTPATH, null, iSkip);
 	}
@@ -280,7 +280,7 @@ public abstract class JDFAutoProductionPath extends JDFResource
 	 * @return JDFProductionSubPath the element
 	 *         default is getPostPressComponentPath(0)
 	 */
-	public JDFProductionSubPath getPostPressComponentPath(int iSkip)
+	public JDFProductionSubPath getPostPressComponentPath(final int iSkip)
 	{
 		return (JDFProductionSubPath) getElement(ElementName.POSTPRESSCOMPONENTPATH, null, iSkip);
 	}
@@ -331,7 +331,7 @@ public abstract class JDFAutoProductionPath extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFProductionSubPath the element
 	 */
-	public JDFProductionSubPath getCreatePrintingUnitWebPath(int iSkip)
+	public JDFProductionSubPath getCreatePrintingUnitWebPath(final int iSkip)
 	{
 		return (JDFProductionSubPath) getCreateElement_JDFElement(ElementName.PRINTINGUNITWEBPATH, null, iSkip);
 	}
@@ -343,7 +343,7 @@ public abstract class JDFAutoProductionPath extends JDFResource
 	 * @return JDFProductionSubPath the element
 	 *         default is getPrintingUnitWebPath(0)
 	 */
-	public JDFProductionSubPath getPrintingUnitWebPath(int iSkip)
+	public JDFProductionSubPath getPrintingUnitWebPath(final int iSkip)
 	{
 		return (JDFProductionSubPath) getElement(ElementName.PRINTINGUNITWEBPATH, null, iSkip);
 	}

@@ -80,7 +80,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
  * @date Mar 18, 2012
  */
@@ -95,7 +94,7 @@ class RollingDateFileTest extends JDFTestCaseBase
 	@Test
 	void testGetFileNameInt()
 	{
-		long t = 1332096687756l; // System.currentTimeMillis();
+		final long t = 1332096687756l; // System.currentTimeMillis();
 		assertTrue(rdf.getNewFileName(t).equals("Date.120318.txt") || rdf.getNewFileName(t).equals("Date.120319.txt"));
 	}
 
@@ -121,7 +120,7 @@ class RollingDateFileTest extends JDFTestCaseBase
 	@Test
 	void testSetFormat()
 	{
-		long t = 1332096687756l; // System.currentTimeMillis();
+		final long t = 1332096687756l; // System.currentTimeMillis();
 		rdf.setFormat("yyyy");
 		assertEquals(rdf.getNewFileName(t), "Date.2012.txt");
 	}

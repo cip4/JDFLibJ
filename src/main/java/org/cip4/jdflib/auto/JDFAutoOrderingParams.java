@@ -125,7 +125,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoOrderingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoOrderingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -137,7 +137,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoOrderingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoOrderingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -150,7 +150,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoOrderingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoOrderingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -161,7 +161,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -192,7 +192,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 	 * @param value the value to set the attribute to
 	 */
 	@Override
-	public void setAmount(double value)
+	public void setAmount(final double value)
 	{
 		setAttribute(AttributeName.AMOUNT, value, null);
 	}
@@ -219,7 +219,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 	 * @param value the value to set the attribute to
 	 */
 	@Override
-	public void setUnit(String value)
+	public void setUnit(final String value)
 	{
 		setAttribute(AttributeName.UNIT, value, null);
 	}
@@ -277,7 +277,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refCompany(JDFCompany refTarget)
+	public void refCompany(final JDFCompany refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -310,7 +310,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
-	public JDFContact getCreateContact(int iSkip)
+	public JDFContact getCreateContact(final int iSkip)
 	{
 		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -322,7 +322,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 	 * @return JDFContact the element
 	 *         default is getContact(0)
 	 */
-	public JDFContact getContact(int iSkip)
+	public JDFContact getContact(final int iSkip)
 	{
 		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -353,7 +353,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refContact(JDFContact refTarget)
+	public void refContact(final JDFContact refTarget)
 	{
 		refElement(refTarget);
 	}

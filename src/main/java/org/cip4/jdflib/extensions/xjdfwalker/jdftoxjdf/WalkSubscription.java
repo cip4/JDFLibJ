@@ -76,9 +76,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFSubscription;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkSubscription extends WalkJDFSubElement
 {
@@ -114,7 +112,7 @@ public class WalkSubscription extends WalkJDFSubElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFSubElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		map.remove(AttributeName.FORMAT);
 		map.remove(AttributeName.MINDELAYTIME);

@@ -108,7 +108,7 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoShapeDefProductionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoShapeDefProductionParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -120,7 +120,7 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoShapeDefProductionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoShapeDefProductionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoShapeDefProductionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoShapeDefProductionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -144,7 +144,7 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -190,7 +190,7 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFObjectModel the element
 	 */
-	public JDFObjectModel getCreateObjectModel(int iSkip)
+	public JDFObjectModel getCreateObjectModel(final int iSkip)
 	{
 		return (JDFObjectModel) getCreateElement_JDFElement(ElementName.OBJECTMODEL, null, iSkip);
 	}
@@ -202,7 +202,7 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
 	 * @return JDFObjectModel the element
 	 *         default is getObjectModel(0)
 	 */
-	public JDFObjectModel getObjectModel(int iSkip)
+	public JDFObjectModel getObjectModel(final int iSkip)
 	{
 		return (JDFObjectModel) getElement(ElementName.OBJECTMODEL, null, iSkip);
 	}

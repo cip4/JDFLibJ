@@ -78,8 +78,7 @@ import org.w3c.dom.DOMException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * way before June 4, 2009
+ *         way before June 4, 2009
  */
 public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 {
@@ -87,10 +86,10 @@ public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 
 	/**
 	 * Constructor for JDFLayoutPreparationParams
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
-	 * 
 	 */
 	public JDFLayoutPreparationParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
@@ -99,9 +98,9 @@ public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 
 	/**
 	 * Constructor for JDFLayoutPreparationParams
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
-	 * 
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
@@ -112,21 +111,22 @@ public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 
 	/**
 	 * Constructor for JDFLayoutPreparationParams
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
-	 * 
 	 */
-	public JDFLayoutPreparationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFLayoutPreparationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -137,10 +137,11 @@ public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 
 	/**
 	 * convert this to stripping - also remove this and replace LayoutPrep in the node type list
+	 *
 	 * @param n the node to convert
 	 * @return the converter which can be queried for the modified resources
 	 */
-	public StrippingConverter convertToStripping(JDFNode n)
+	public StrippingConverter convertToStripping(final JDFNode n)
 	{
 		final StrippingConverter c = new StrippingConverter(this, n);
 		c.convert();
@@ -148,23 +149,21 @@ public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 	}
 
 	/**
-	 * 
 	 * @return the clipbox from the pagecells - if all are equal or null - else null
 	 */
 	public JDFRectangle getClipBox()
 	{
-		JDFPageCell pc = getPageCell();
+		final JDFPageCell pc = getPageCell();
 		return pc == null ? null : pc.getClipBox();
 	}
 
 	/**
-	 * 
 	 * @return the trimsize from the pagecells - if all are equal or null - else null
 	 */
 
 	public JDFXYPair getTrimSize()
 	{
-		JDFPageCell pc = getPageCell();
+		final JDFPageCell pc = getPageCell();
 		return pc == null ? null : pc.getTrimSize();
 	}
 }

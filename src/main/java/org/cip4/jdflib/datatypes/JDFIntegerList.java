@@ -51,7 +51,7 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 import java.util.zip.DataFormatException;
 
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.StringUtil;
@@ -103,7 +103,6 @@ public class JDFIntegerList extends JDFNumList
 	 * constructs an integer list with all values set via a String
 	 *
 	 * @param s the given String
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFIntegerList(final String s) throws DataFormatException
@@ -112,7 +111,6 @@ public class JDFIntegerList extends JDFNumList
 	}
 
 	/**
-	 *
 	 * convert a string to an integerlist, and return null if the string is no good
 	 *
 	 * @param s the string to parse
@@ -126,7 +124,6 @@ public class JDFIntegerList extends JDFNumList
 	}
 
 	/**
-	 *
 	 * convert a string to an integerlist, and return null if the string is no good
 	 *
 	 * @param s the string to parse
@@ -135,7 +132,9 @@ public class JDFIntegerList extends JDFNumList
 	public static JDFIntegerList createIntegerList(final String s)
 	{
 		if (s == null || s.length() == 0)
+		{
 			return null;
+		}
 		try
 		{
 			return new JDFIntegerList(s);
@@ -150,7 +149,6 @@ public class JDFIntegerList extends JDFNumList
 	 * constructs an integer list with all values set via a JDFIntegerList
 	 *
 	 * @param il the given integer list
-	 *
 	 * @throws DataFormatException - if the JDFIntegerList has not a valid format
 	 */
 	public JDFIntegerList(final JDFIntegerList il) throws DataFormatException
@@ -222,11 +220,7 @@ public class JDFIntegerList extends JDFNumList
 		{
 			return true;
 		}
-		if (other == null)
-		{
-			return false;
-		}
-		if (!other.getClass().equals(getClass()))
+		if ((other == null) || !other.getClass().equals(getClass()))
 		{
 			return false;
 		}
@@ -292,12 +286,11 @@ public class JDFIntegerList extends JDFNumList
 	 * add - adds a integer list string to the existing integer list
 	 *
 	 * @param s the given string
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public void add(final String s) throws DataFormatException
 	{
-		final StringTokenizer sToken = new StringTokenizer(s, JDFConstants.BLANK);
+		final StringTokenizer sToken = new StringTokenizer(s, JDFCoreConstants.BLANK);
 		while (sToken.hasMoreTokens())
 		{
 			if (StringUtil.isInteger(s))
@@ -317,7 +310,6 @@ public class JDFIntegerList extends JDFNumList
 	 * Note: if pos is negative, getInt returns the pos'th integer counting from the end.
 	 *
 	 * @param pos index of the integer to get
-	 *
 	 * @return int - the pos'th int
 	 */
 	public int getInt(int pos)
@@ -349,7 +341,6 @@ public class JDFIntegerList extends JDFNumList
 	 *
 	 * @param pos index of the integer to get
 	 * @param val the value to set
-	 *
 	 */
 	public void setInt(int pos, final int val)
 	{

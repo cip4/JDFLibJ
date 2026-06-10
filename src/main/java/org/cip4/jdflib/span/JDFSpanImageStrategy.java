@@ -9,12 +9,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 /**
@@ -26,39 +22,39 @@ public class JDFSpanImageStrategy extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanImageStrategy
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanImageStrategy(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanImageStrategy(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanImageStrategy
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanImageStrategy(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanImageStrategy(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanImageStrategy
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanImageStrategy(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanImageStrategy(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -66,44 +62,14 @@ public class JDFSpanImageStrategy extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanImageStrategy
 	 */
-	public static class EnumSpanImageStrategy extends ValuedEnum
+	public enum EnumSpanImageStrategy
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		NoImages, LowResolution, HighResolution;
 
-		private EnumSpanImageStrategy(String name)
+		public static EnumSpanImageStrategy getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanImageStrategy.class, val, null);
 		}
-
-		public static EnumSpanImageStrategy getEnum(String enumName)
-		{
-			return (EnumSpanImageStrategy) getEnum(EnumSpanImageStrategy.class, enumName);
-		}
-
-		public static EnumSpanImageStrategy getEnum(int enumValue)
-		{
-			return (EnumSpanImageStrategy) getEnum(EnumSpanImageStrategy.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanImageStrategy.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanImageStrategy.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanImageStrategy.class);
-		}
-
-		public static final EnumSpanImageStrategy NoImages = new EnumSpanImageStrategy("NoImages");
-		public static final EnumSpanImageStrategy LowResolution = new EnumSpanImageStrategy("LowResolution");
-		public static final EnumSpanImageStrategy HighResolution = new EnumSpanImageStrategy("HighResolution");
 
 	}
 
@@ -112,18 +78,18 @@ public class JDFSpanImageStrategy extends JDFEnumerationSpan
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanImageStrategy.getEnum(0);
+		return EnumSpanImageStrategy.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -135,7 +101,7 @@ public class JDFSpanImageStrategy extends JDFEnumerationSpan
 	@Override
 	public boolean init()
 	{
-		boolean b = super.init();
+		final boolean b = super.init();
 		setDataType(EnumDataType.EnumerationSpan);
 		return b;
 	}

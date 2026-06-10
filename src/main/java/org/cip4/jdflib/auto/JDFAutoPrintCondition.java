@@ -129,7 +129,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPrintCondition(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPrintCondition(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -141,7 +141,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPrintCondition(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPrintCondition(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -154,7 +154,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPrintCondition(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPrintCondition(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -165,7 +165,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -195,7 +195,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setName(String value)
+	public void setName(final String value)
 	{
 		setAttribute(AttributeName.NAME, value, null);
 	}
@@ -220,7 +220,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAimCurve(JDFTransferFunction value)
+	public void setAimCurve(final JDFTransferFunction value)
 	{
 		setAttribute(AttributeName.AIMCURVE, value, null);
 	}
@@ -233,8 +233,8 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	 */
 	public JDFTransferFunction getAimCurve()
 	{
-		String strAttrName = getAttribute(AttributeName.AIMCURVE, null, null);
-		JDFTransferFunction nPlaceHolder = JDFTransferFunction.createTransferFunction(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.AIMCURVE, null, null);
+		final JDFTransferFunction nPlaceHolder = JDFTransferFunction.createTransferFunction(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -248,7 +248,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDensity(double value)
+	public void setDensity(final double value)
 	{
 		setAttribute(AttributeName.DENSITY, value, null);
 	}
@@ -305,7 +305,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refColorMeasurementConditions(JDFColorMeasurementConditions refTarget)
+	public void refColorMeasurementConditions(final JDFColorMeasurementConditions refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -346,7 +346,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refDevice(JDFDevice refTarget)
+	public void refDevice(final JDFDevice refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -377,7 +377,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
-	public JDFFileSpec getCreateFileSpec(int iSkip)
+	public JDFFileSpec getCreateFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -389,7 +389,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	 * @return JDFFileSpec the element
 	 *         default is getFileSpec(0)
 	 */
-	public JDFFileSpec getFileSpec(int iSkip)
+	public JDFFileSpec getFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -419,7 +419,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}

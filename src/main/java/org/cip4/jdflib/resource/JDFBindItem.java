@@ -23,46 +23,46 @@ public class JDFBindItem extends JDFAutoBindItem
 
 	/**
 	 * Constructor for JDFBindItem
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFBindItem(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFBindItem(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFBindItem
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFBindItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFBindItem(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFBindItem
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFBindItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFBindItem(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -73,19 +73,19 @@ public class JDFBindItem extends JDFAutoBindItem
 
 	/**
 	 * get parent node of <code>this</code> - node BindingIntent
-	 * 
+	 *
 	 * @return JDFBindingIntent: BindingIntent node
 	 */
 	public JDFBindingIntent getParentBindingIntent()
 	{
-		Node parentNode = getParentNode();
+		final Node parentNode = getParentNode();
 		return (parentNode instanceof JDFBindingIntent) ? (JDFBindingIntent) parentNode : null;
 	}
 
 	/**
 	 * Get the value of the BindingType element of <code>this</code>.<br>
 	 * If not specified, defaults to the value of the BindingType which is specified in its parent element (node BindingIntent).
-	 * 
+	 *
 	 * @return JDFSpanBindingType: BindingType value
 	 */
 	@Override

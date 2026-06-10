@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -104,8 +100,8 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.BANDHEIGHT, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.BANDORDERING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumBandOrdering.getEnum(0),
-				null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.BANDORDERING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumBandOrdering.class, 0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.BANDWIDTH, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.COLORANTDEPTH, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.INTERLEAVED, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
@@ -139,7 +135,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoRenderingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoRenderingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -151,7 +147,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoRenderingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoRenderingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -164,7 +160,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoRenderingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoRenderingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -175,7 +171,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -190,87 +186,22 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for BandOrdering
+	 * Enumeration strings for numBandOrdering
 	 */
 
-	public enum EBandOrdering
+	public enum EnumBandOrdering
 	{
 		BandMajor, ColorMajor;
 
-		public static EBandOrdering getEnum(String val)
+		public static EnumBandOrdering getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EBandOrdering.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumBandOrdering.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for BandOrdering
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumBandOrdering extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumBandOrdering(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumBandOrdering getEnum(String enumName)
-		{
-			return (EnumBandOrdering) getEnum(EnumBandOrdering.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumBandOrdering getEnum(int enumValue)
-		{
-			return (EnumBandOrdering) getEnum(EnumBandOrdering.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumBandOrdering.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumBandOrdering.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumBandOrdering.class);
-		}
-
-		/**  */
-		public static final EnumBandOrdering BandMajor = new EnumBandOrdering("BandMajor");
-		/**  */
-		public static final EnumBandOrdering ColorMajor = new EnumBandOrdering("ColorMajor");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -282,7 +213,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBandHeight(int value)
+	public void setBandHeight(final int value)
 	{
 		setAttribute(AttributeName.BANDHEIGHT, value, null);
 	}
@@ -307,9 +238,9 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setBandOrdering(EBandOrdering enumVar)
+	public void setBandOrdering(final EnumBandOrdering enumVar)
 	{
-		setAttribute(AttributeName.BANDORDERING, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.BANDORDERING, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -317,35 +248,6 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EBandOrdering getEBandOrdering()
-	{
-		return EBandOrdering.getEnum(getAttribute(AttributeName.BANDORDERING, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute BandOrdering
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute BandOrdering
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetBandOrdering(EBandOrdering) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setBandOrdering(EnumBandOrdering enumVar)
-	{
-		setAttribute(AttributeName.BANDORDERING, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute BandOrdering
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EBandOrdering GetEBandOrdering() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumBandOrdering getBandOrdering()
 	{
 		return EnumBandOrdering.getEnum(getAttribute(AttributeName.BANDORDERING, null, null));
@@ -361,7 +263,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBandWidth(int value)
+	public void setBandWidth(final int value)
 	{
 		setAttribute(AttributeName.BANDWIDTH, value, null);
 	}
@@ -386,7 +288,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setColorantDepth(int value)
+	public void setColorantDepth(final int value)
 	{
 		setAttribute(AttributeName.COLORANTDEPTH, value, null);
 	}
@@ -411,7 +313,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setInterleaved(boolean value)
+	public void setInterleaved(final boolean value)
 	{
 		setAttribute(AttributeName.INTERLEAVED, value, null);
 	}
@@ -436,7 +338,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMimeType(String value)
+	public void setMimeType(final String value)
 	{
 		setAttribute(AttributeName.MIMETYPE, value, null);
 	}
@@ -514,7 +416,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFObjectResolution the element
 	 */
-	public JDFObjectResolution getCreateObjectResolution(int iSkip)
+	public JDFObjectResolution getCreateObjectResolution(final int iSkip)
 	{
 		return (JDFObjectResolution) getCreateElement_JDFElement(ElementName.OBJECTRESOLUTION, null, iSkip);
 	}
@@ -526,7 +428,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	 * @return JDFObjectResolution the element
 	 *         default is getObjectResolution(0)
 	 */
-	public JDFObjectResolution getObjectResolution(int iSkip)
+	public JDFObjectResolution getObjectResolution(final int iSkip)
 	{
 		return (JDFObjectResolution) getElement(ElementName.OBJECTRESOLUTION, null, iSkip);
 	}
@@ -587,7 +489,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMedia(JDFMedia refTarget)
+	public void refMedia(final JDFMedia refTarget)
 	{
 		refElement(refTarget);
 	}

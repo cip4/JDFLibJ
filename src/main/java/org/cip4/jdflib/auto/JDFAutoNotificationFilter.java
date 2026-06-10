@@ -72,10 +72,8 @@ package org.cip4.jdflib.auto;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoNotification.EClass;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -87,6 +85,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoNotificationFilter : public JDFElement
@@ -107,7 +106,8 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x4444433311l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.SIGNALTYPES, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKENS, null, "Notification");
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.TYPES, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.CLASSES, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations, EnumClass.getEnum(0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.CLASSES, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations,
+				JavaEnumUtil.getEnum(EnumClass.class, 0), null);
 	}
 
 	@Override
@@ -134,7 +134,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNotificationFilter(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoNotificationFilter(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -146,7 +146,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNotificationFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoNotificationFilter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -159,7 +159,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoNotificationFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoNotificationFilter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeviceID(String value)
+	public void setDeviceID(final String value)
 	{
 		setAttribute(AttributeName.DEVICEID, value, null);
 	}
@@ -205,7 +205,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -230,7 +230,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobPartID(String value)
+	public void setJobPartID(final String value)
 	{
 		setAttribute(AttributeName.JOBPARTID, value, null);
 	}
@@ -255,7 +255,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMilestoneTypes(VString value)
+	public void setMilestoneTypes(final VString value)
 	{
 		setAttribute(AttributeName.MILESTONETYPES, value, null);
 	}
@@ -267,8 +267,8 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 */
 	public VString getMilestoneTypes()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.MILESTONETYPES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.MILESTONETYPES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -283,7 +283,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setQueueEntryID(String value)
+	public void setQueueEntryID(final String value)
 	{
 		setAttribute(AttributeName.QUEUEENTRYID, value, null);
 	}
@@ -308,7 +308,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSignalTypes(VString value)
+	public void setSignalTypes(final VString value)
 	{
 		setAttribute(AttributeName.SIGNALTYPES, value, null);
 	}
@@ -320,8 +320,8 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 */
 	public VString getSignalTypes()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.SIGNALTYPES, null, "Notification");
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.SIGNALTYPES, null, "Notification");
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -336,7 +336,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTypes(VString value)
+	public void setTypes(final VString value)
 	{
 		setAttribute(AttributeName.TYPES, value, null);
 	}
@@ -348,8 +348,8 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 */
 	public VString getTypes()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -364,7 +364,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 *
 	 * @param v List of the enumeration values
 	 */
-	public void setEClasses(List<EClass> v)
+	public void setClasses(final List<EnumClass> v)
 	{
 		setEnumsAttribute(AttributeName.CLASSES, v, null);
 	}
@@ -374,38 +374,9 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public List<EClass> getEnumsClasses()
+	public List<EnumClass> getClasses()
 	{
-		return getEnumerationsAttribute(AttributeName.CLASSES, null, EClass.class);
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Classes
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5.2) set attribute Classes
-	 *
-	 * @param v List of the enumeration values
-	 * @deprecated use SetEClasses(List<EClass>) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setClasses(List<EnumClass> v)
-	{
-		setEnumerationsAttribute(AttributeName.CLASSES, v, null);
-	}
-
-	/**
-	 * (9.2) get Classes attribute Classes
-	 *
-	 * @return Vector of the enumerations
-	 * @deprecated use List<EClass > GetEClasses() based on java.lang.enum instead
-	 */
-	@Deprecated
-	public Vector<EnumClass> getClasses()
-	{
-		return getEnumerationsAttribute(AttributeName.CLASSES, null, EnumClass.getEnum(0), false);
+		return getEnumerationsAttribute(AttributeName.CLASSES, null, EnumClass.class);
 	}
 
 	/*
@@ -440,7 +411,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
-	public JDFPart getCreatePart(int iSkip)
+	public JDFPart getCreatePart(final int iSkip)
 	{
 		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
@@ -452,7 +423,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 * @return JDFPart the element
 	 *         default is getPart(0)
 	 */
-	public JDFPart getPart(int iSkip)
+	public JDFPart getPart(final int iSkip)
 	{
 		return (JDFPart) getElement(ElementName.PART, null, iSkip);
 	}

@@ -54,7 +54,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  *         Sep 3, 2009
  */
 class LinkRefFinderTest extends JDFTestCaseBase

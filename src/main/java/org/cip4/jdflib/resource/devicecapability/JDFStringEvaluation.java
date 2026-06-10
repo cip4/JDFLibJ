@@ -31,9 +31,9 @@
  *
  * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
  * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- * 
+ *
  * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
- * 
+ *
  *
  */
 
@@ -57,7 +57,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
@@ -126,7 +126,8 @@ public class JDFStringEvaluation extends JDFEvaluation
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFStringEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFStringEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -183,7 +184,7 @@ public class JDFStringEvaluation extends JDFEvaluation
 
 	public JDFValue getValue(final int iSkip)
 	{
-		return (JDFValue) getElement(ElementName.VALUE, JDFConstants.EMPTYSTRING, iSkip);
+		return (JDFValue) getElement(ElementName.VALUE, JDFCoreConstants.EMPTYSTRING, iSkip);
 	}
 
 	/**
@@ -200,7 +201,6 @@ public class JDFStringEvaluation extends JDFEvaluation
 	 * append a <code>Value</code> element and set Value/@Value to value
 	 *
 	 * @param value the value string to set
-	 *
 	 * @return JDFValue - the newly created element
 	 */
 	public JDFValue appendValueValue(final String value)
@@ -236,7 +236,9 @@ public class JDFStringEvaluation extends JDFEvaluation
 	{
 		final JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
 		if (e == null)
+		{
 			return null;
+		}
 		return e.getValue();
 	}
 
@@ -281,7 +283,9 @@ public class JDFStringEvaluation extends JDFEvaluation
 	private final boolean fitsRegExp(final String str)
 	{
 		if (!hasAttribute(AttributeName.REGEXP))
+		{
 			return true;
+		}
 
 		return StringUtil.matches(str, getRegExp());
 	}
@@ -295,17 +299,23 @@ public class JDFStringEvaluation extends JDFEvaluation
 	private final boolean fitsValueElem(final String str)
 	{
 		if (str == null)
+		{
 			return false;
+		}
 		final VElement v = getChildElementVector(ElementName.VALUE, null, null, true, 0, false);
 		final int siz = v.size();
 		if (siz == 0)
+		{
 			return true; // Evaluation has no Value elements
+		}
 
 		for (int i = 0; i < siz; i++)
 		{
 			final String value = getValueValue(i);
 			if (str.equals(value))
+			{
 				return true; // we have found it
+			}
 
 		}
 		return false;

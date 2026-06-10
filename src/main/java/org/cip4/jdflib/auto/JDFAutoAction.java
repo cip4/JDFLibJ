@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -101,8 +97,8 @@ public abstract class JDFAutoAction extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SEVERITY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSeverity.getEnum(0),
-				"Error");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SEVERITY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumSeverity.class, 0), "Error");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ID, 0x2222222222l, AttributeInfo.EnumAttributeType.ID, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.TESTREF, 0x2222222222l, AttributeInfo.EnumAttributeType.IDREF, null, null);
 	}
@@ -132,7 +128,7 @@ public abstract class JDFAutoAction extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAction(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoAction(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -144,7 +140,7 @@ public abstract class JDFAutoAction extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAction(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoAction(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -157,95 +153,28 @@ public abstract class JDFAutoAction extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoAction(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoAction(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for Severity
+	 * Enumeration strings for numSeverity
 	 */
 
-	public enum ESeverity
+	public enum EnumSeverity
 	{
 		Error, Warning, Information;
 
-		public static ESeverity getEnum(String val)
+		public static EnumSeverity getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ESeverity.class, val, ESeverity.Error);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSeverity.class, val, EnumSeverity.Error);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Severity
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumSeverity extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumSeverity(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumSeverity getEnum(String enumName)
-		{
-			return (EnumSeverity) getEnum(EnumSeverity.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumSeverity getEnum(int enumValue)
-		{
-			return (EnumSeverity) getEnum(EnumSeverity.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSeverity.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSeverity.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSeverity.class);
-		}
-
-		/**  */
-		public static final EnumSeverity Error = new EnumSeverity("Error");
-		/**  */
-		public static final EnumSeverity Warning = new EnumSeverity("Warning");
-		/**  */
-		public static final EnumSeverity Information = new EnumSeverity("Information");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -257,9 +186,9 @@ public abstract class JDFAutoAction extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSeverity(ESeverity enumVar)
+	public void setSeverity(final EnumSeverity enumVar)
 	{
-		setAttribute(AttributeName.SEVERITY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SEVERITY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -267,35 +196,6 @@ public abstract class JDFAutoAction extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESeverity getESeverity()
-	{
-		return ESeverity.getEnum(getAttribute(AttributeName.SEVERITY, null, "Error"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Severity
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Severity
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetSeverity(ESeverity) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSeverity(EnumSeverity enumVar)
-	{
-		setAttribute(AttributeName.SEVERITY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Severity
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ESeverity GetESeverity() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumSeverity getSeverity()
 	{
 		return EnumSeverity.getEnum(getAttribute(AttributeName.SEVERITY, null, "Error"));
@@ -312,7 +212,7 @@ public abstract class JDFAutoAction extends JDFElement
 	 * @param value the value to set the attribute to
 	 */
 	@Override
-	public void setID(String value)
+	public void setID(final String value)
 	{
 		setAttribute(AttributeName.ID, value, null);
 	}
@@ -338,7 +238,7 @@ public abstract class JDFAutoAction extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTestRef(String value)
+	public void setTestRef(final String value)
 	{
 		setAttribute(AttributeName.TESTREF, value, null);
 	}
@@ -385,7 +285,7 @@ public abstract class JDFAutoAction extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc the element
 	 */
-	public JDFLoc getCreateLoc(int iSkip)
+	public JDFLoc getCreateLoc(final int iSkip)
 	{
 		return (JDFLoc) getCreateElement_JDFElement(ElementName.LOC, null, iSkip);
 	}
@@ -397,7 +297,7 @@ public abstract class JDFAutoAction extends JDFElement
 	 * @return JDFLoc the element
 	 *         default is getLoc(0)
 	 */
-	public JDFLoc getLoc(int iSkip)
+	public JDFLoc getLoc(final int iSkip)
 	{
 		return (JDFLoc) getElement(ElementName.LOC, null, iSkip);
 	}
@@ -448,7 +348,7 @@ public abstract class JDFAutoAction extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPreflightAction the element
 	 */
-	public JDFPreflightAction getCreatePreflightAction(int iSkip)
+	public JDFPreflightAction getCreatePreflightAction(final int iSkip)
 	{
 		return (JDFPreflightAction) getCreateElement_JDFElement(ElementName.PREFLIGHTACTION, null, iSkip);
 	}
@@ -460,7 +360,7 @@ public abstract class JDFAutoAction extends JDFElement
 	 * @return JDFPreflightAction the element
 	 *         default is getPreflightAction(0)
 	 */
-	public JDFPreflightAction getPreflightAction(int iSkip)
+	public JDFPreflightAction getPreflightAction(final int iSkip)
 	{
 		return (JDFPreflightAction) getElement(ElementName.PREFLIGHTACTION, null, iSkip);
 	}

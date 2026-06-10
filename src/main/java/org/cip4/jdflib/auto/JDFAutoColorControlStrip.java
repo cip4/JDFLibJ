@@ -132,7 +132,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoColorControlStrip(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoColorControlStrip(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -144,7 +144,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoColorControlStrip(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoColorControlStrip(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -157,7 +157,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoColorControlStrip(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoColorControlStrip(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -198,7 +198,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCenter(JDFXYPair value)
+	public void setCenter(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.CENTER, value, null);
 	}
@@ -211,8 +211,8 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 */
 	public JDFXYPair getCenter()
 	{
-		String strAttrName = getAttribute(AttributeName.CENTER, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CENTER, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -226,7 +226,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRotation(double value)
+	public void setRotation(final double value)
 	{
 		setAttribute(AttributeName.ROTATION, value, null);
 	}
@@ -251,7 +251,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSize(JDFXYPair value)
+	public void setSize(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.SIZE, value, null);
 	}
@@ -264,8 +264,8 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 */
 	public JDFXYPair getSize()
 	{
-		String strAttrName = getAttribute(AttributeName.SIZE, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SIZE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -279,7 +279,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStripType(String value)
+	public void setStripType(final String value)
 	{
 		setAttribute(AttributeName.STRIPTYPE, value, null);
 	}
@@ -326,7 +326,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFCIELABMeasuringField the element
 	 */
-	public JDFCIELABMeasuringField getCreateCIELABMeasuringField(int iSkip)
+	public JDFCIELABMeasuringField getCreateCIELABMeasuringField(final int iSkip)
 	{
 		return (JDFCIELABMeasuringField) getCreateElement_JDFElement(ElementName.CIELABMEASURINGFIELD, null, iSkip);
 	}
@@ -338,7 +338,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 * @return JDFCIELABMeasuringField the element
 	 *         default is getCIELABMeasuringField(0)
 	 */
-	public JDFCIELABMeasuringField getCIELABMeasuringField(int iSkip)
+	public JDFCIELABMeasuringField getCIELABMeasuringField(final int iSkip)
 	{
 		return (JDFCIELABMeasuringField) getElement(ElementName.CIELABMEASURINGFIELD, null, iSkip);
 	}
@@ -389,7 +389,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFDensityMeasuringField the element
 	 */
-	public JDFDensityMeasuringField getCreateDensityMeasuringField(int iSkip)
+	public JDFDensityMeasuringField getCreateDensityMeasuringField(final int iSkip)
 	{
 		return (JDFDensityMeasuringField) getCreateElement_JDFElement(ElementName.DENSITYMEASURINGFIELD, null, iSkip);
 	}
@@ -401,7 +401,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 * @return JDFDensityMeasuringField the element
 	 *         default is getDensityMeasuringField(0)
 	 */
-	public JDFDensityMeasuringField getDensityMeasuringField(int iSkip)
+	public JDFDensityMeasuringField getDensityMeasuringField(final int iSkip)
 	{
 		return (JDFDensityMeasuringField) getElement(ElementName.DENSITYMEASURINGFIELD, null, iSkip);
 	}
@@ -431,7 +431,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refDensityMeasuringField(JDFDensityMeasuringField refTarget)
+	public void refDensityMeasuringField(final JDFDensityMeasuringField refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -462,7 +462,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFPatch the element
 	 */
-	public JDFPatch getCreatePatch(int iSkip)
+	public JDFPatch getCreatePatch(final int iSkip)
 	{
 		return (JDFPatch) getCreateElement_JDFElement(ElementName.PATCH, null, iSkip);
 	}
@@ -474,7 +474,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 * @return JDFPatch the element
 	 *         default is getPatch(0)
 	 */
-	public JDFPatch getPatch(int iSkip)
+	public JDFPatch getPatch(final int iSkip)
 	{
 		return (JDFPatch) getElement(ElementName.PATCH, null, iSkip);
 	}
@@ -525,7 +525,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationSpec the element
 	 */
-	public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
+	public JDFSeparationSpec getCreateSeparationSpec(final int iSkip)
 	{
 		return (JDFSeparationSpec) getCreateElement_JDFElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}
@@ -537,7 +537,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 * @return JDFSeparationSpec the element
 	 *         default is getSeparationSpec(0)
 	 */
-	public JDFSeparationSpec getSeparationSpec(int iSkip)
+	public JDFSeparationSpec getSeparationSpec(final int iSkip)
 	{
 		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}

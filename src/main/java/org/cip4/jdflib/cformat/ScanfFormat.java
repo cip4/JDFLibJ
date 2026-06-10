@@ -15,11 +15,10 @@ package org.cip4.jdflib.cformat;
 
 /**
  * Format object for scanning input in the same way as the C <tt>scanf</tt> methodName.
- * 
  * <p>
  * A <tt>scanf</tt> style format string is specified in the constructor. Once instantiated, objects of this class may be passed as arguments to the <tt>scan</tt> methods of the
  * <tt>ScanfReader</tt> class.
- * 
+ *
  * @see ScanfReader
  * @.author John E. Lloyd
  * @deprecated
@@ -35,10 +34,15 @@ public class ScanfFormat
 	// ~ Instance fields
 	// ////////////////////////////////////////////////////////
 
+	@Deprecated
 	String cmatch;
+	@Deprecated
 	String prefix;
+	@Deprecated
 	String suffix;
+	@Deprecated
 	public int type;
+	@Deprecated
 	int width;
 
 	// ~ Constructors
@@ -46,11 +50,12 @@ public class ScanfFormat
 
 	/**
 	 * Constructs a ScanfFormat class from a format string. The structure of the format string is described in the documentation for the <tt>set</tt> method.
-	 * 
+	 *
 	 * @param fmt Format string
 	 * @throws IllegalArgumentException Malformed format string
 	 * @see ScanfReader
 	 */
+	@Deprecated
 	public ScanfFormat(final String fmt)
 	{
 		set(fmt);
@@ -61,24 +66,18 @@ public class ScanfFormat
 
 	/**
 	 * Sets the contents of the object according to the information provided in the format string.
-	 *
-	 *
 	 * <p>
 	 * The format string describes what input to expect for a ScanfReader, and its form closely matches that for the C <tt>scanf</tt> methodName, expect that multiple conversions
 	 * cannot be specified.
-	 *
 	 * <p>
 	 * A conversion sequence is introduced by the '%' character; valid conversion sequences are described below. Other characters may appear in the format string. A white space
 	 * character requests a match of any amount of white space, including none. Other characters request an exact match of themselves. The character sequence "%%" requests a match
 	 * of the '%' character.
-	 *
 	 * <p>
 	 * The '%' character introducing a conversion sequence may be followed by an unsigned decimal integer indicating the field width, which is the maximum number of characters used
 	 * for a particular conversion. Field widths must be greater than 0.
-	 *
 	 * <p>
 	 * The optional field width is followed by one of the following <em>conversion characters</em>, which specifies the primitive type to be scanned:
-	 *
 	 * <dl>
 	 * <dt>f
 	 * <dd>floating point (double).
@@ -107,6 +106,7 @@ public class ScanfFormat
 	 * @throws IllegalArgumentException Malformed format string
 	 * @see ScanfReader
 	 */
+	@Deprecated
 	public void set(final String fmt)
 	{
 		type = -1;
@@ -259,10 +259,11 @@ public class ScanfFormat
 
 	/**
 	 * Checks to see if a character matches the sequence specified by the character set cmatch.
-	 * 
+	 *
 	 * @param c Character to test
 	 * @return True if c is a member of the character set specified by the string cmatch (or not a member, if the string begins with a '^').
 	 */
+	@Deprecated
 	boolean matchChar(final char c)
 	{
 		int i0 = 0;
@@ -324,6 +325,7 @@ public class ScanfFormat
 	// ~ Inner Classes
 	// //////////////////////////////////////////////////////////
 
+	@Deprecated
 	class Cmatch
 	{
 		char clower;

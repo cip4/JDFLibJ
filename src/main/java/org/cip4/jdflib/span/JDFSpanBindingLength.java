@@ -9,12 +9,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanBindingLength extends JDFEnumerationSpan
@@ -23,39 +19,39 @@ public class JDFSpanBindingLength extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanBindingLength
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanBindingLength(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanBindingLength(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanBindingLength
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanBindingLength(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanBindingLength(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanBindingLength
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanBindingLength(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanBindingLength(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -63,55 +59,26 @@ public class JDFSpanBindingLength extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanBindingLength
 	 */
-	public static class EnumSpanBindingLength extends ValuedEnum
+	public enum EnumSpanBindingLength
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Long, Short;
 
-		private EnumSpanBindingLength(String name)
+		public static EnumSpanBindingLength getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanBindingLength.class, val, null);
 		}
-
-		public static EnumSpanBindingLength getEnum(String enumName)
-		{
-			return (EnumSpanBindingLength) getEnum(EnumSpanBindingLength.class, enumName);
-		}
-
-		public static EnumSpanBindingLength getEnum(int enumValue)
-		{
-			return (EnumSpanBindingLength) getEnum(EnumSpanBindingLength.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanBindingLength.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanBindingLength.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanBindingLength.class);
-		}
-
-		public static final EnumSpanBindingLength Long = new EnumSpanBindingLength("Long");
-		public static final EnumSpanBindingLength Short = new EnumSpanBindingLength("Short");
 
 	}
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanBindingLength.getEnum(0);
+		return EnumSpanBindingLength.class;
 	}
 
 	// **************************************** Methods
@@ -119,7 +86,7 @@ public class JDFSpanBindingLength extends JDFEnumerationSpan
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

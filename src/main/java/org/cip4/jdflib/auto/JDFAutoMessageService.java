@@ -71,15 +71,9 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoSignal.EChannelMode;
-import org.cip4.jdflib.auto.JDFAutoSignal.EnumChannelMode;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -109,11 +103,12 @@ public abstract class JDFAutoMessageService extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACKNOWLEDGE, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumerations, EnumChannelMode.getEnum(0),
-				null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumerations,
+				JavaEnumUtil.getEnum(EnumChannelMode.class, 0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.COMMAND, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.GENERICATTRIBUTES, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.JMFROLE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumJMFRole.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.JMFROLE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumJMFRole.class, 0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.PERSISTENT, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.QUERY, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.REGISTRATION, 0x3333333111l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
@@ -150,7 +145,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMessageService(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoMessageService(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -162,7 +157,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMessageService(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoMessageService(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -175,93 +170,42 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoMessageService(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoMessageService(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for JMFRole
+	 * Enumeration strings for numChannelMode
 	 */
 
-	public enum EJMFRole
+	public enum EnumChannelMode
 	{
-		Receiver, Sender;
+		FireAndForget, Reliable;
 
-		public static EJMFRole getEnum(String val)
+		public static EnumChannelMode getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EJMFRole.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumChannelMode.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for JMFRole
+	 * Enumeration strings for numJMFRole
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumJMFRole extends ValuedEnum
+	public enum EnumJMFRole
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Receiver, Sender;
 
-		protected EnumJMFRole(String name)
+		public static EnumJMFRole getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumJMFRole.class, val, null);
 		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumJMFRole getEnum(String enumName)
-		{
-			return (EnumJMFRole) getEnum(EnumJMFRole.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumJMFRole getEnum(int enumValue)
-		{
-			return (EnumJMFRole) getEnum(EnumJMFRole.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumJMFRole.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumJMFRole.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumJMFRole.class);
-		}
-
-		/**  */
-		public static final EnumJMFRole Receiver = new EnumJMFRole("Receiver");
-		/**  */
-		public static final EnumJMFRole Sender = new EnumJMFRole("Sender");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -273,7 +217,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAcknowledge(boolean value)
+	public void setAcknowledge(final boolean value)
 	{
 		setAttribute(AttributeName.ACKNOWLEDGE, value, null);
 	}
@@ -298,7 +242,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 *
 	 * @param v List of the enumeration values
 	 */
-	public void setEChannelMode(List<EChannelMode> v)
+	public void setChannelMode(final List<EnumChannelMode> v)
 	{
 		setEnumsAttribute(AttributeName.CHANNELMODE, v, null);
 	}
@@ -308,38 +252,9 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public List<EChannelMode> getEnumsChannelMode()
+	public List<EnumChannelMode> getChannelMode()
 	{
-		return getEnumerationsAttribute(AttributeName.CHANNELMODE, null, EChannelMode.class);
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ChannelMode
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5.2) set attribute ChannelMode
-	 *
-	 * @param v List of the enumeration values
-	 * @deprecated use SetEChannelMode(List<EChannelMode>) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setChannelMode(List<EnumChannelMode> v)
-	{
-		setEnumerationsAttribute(AttributeName.CHANNELMODE, v, null);
-	}
-
-	/**
-	 * (9.2) get ChannelMode attribute ChannelMode
-	 *
-	 * @return Vector of the enumerations
-	 * @deprecated use List<EChannelMode > GetEChannelMode() based on java.lang.enum instead
-	 */
-	@Deprecated
-	public Vector<EnumChannelMode> getChannelMode()
-	{
-		return getEnumerationsAttribute(AttributeName.CHANNELMODE, null, EnumChannelMode.getEnum(0), false);
+		return getEnumerationsAttribute(AttributeName.CHANNELMODE, null, EnumChannelMode.class);
 	}
 
 	/*
@@ -352,7 +267,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCommand(boolean value)
+	public void setCommand(final boolean value)
 	{
 		setAttribute(AttributeName.COMMAND, value, null);
 	}
@@ -377,7 +292,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGenericAttributes(VString value)
+	public void setGenericAttributes(final VString value)
 	{
 		setAttribute(AttributeName.GENERICATTRIBUTES, value, null);
 	}
@@ -389,8 +304,8 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 */
 	public VString getGenericAttributes()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.GENERICATTRIBUTES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.GENERICATTRIBUTES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -405,9 +320,9 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setJMFRole(EJMFRole enumVar)
+	public void setJMFRole(final EnumJMFRole enumVar)
 	{
-		setAttribute(AttributeName.JMFROLE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.JMFROLE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -415,35 +330,6 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EJMFRole getEJMFRole()
-	{
-		return EJMFRole.getEnum(getAttribute(AttributeName.JMFROLE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute JMFRole
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute JMFRole
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetJMFRole(EJMFRole) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setJMFRole(EnumJMFRole enumVar)
-	{
-		setAttribute(AttributeName.JMFROLE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute JMFRole
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EJMFRole GetEJMFRole() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumJMFRole getJMFRole()
 	{
 		return EnumJMFRole.getEnum(getAttribute(AttributeName.JMFROLE, null, null));
@@ -459,7 +345,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPersistent(boolean value)
+	public void setPersistent(final boolean value)
 	{
 		setAttribute(AttributeName.PERSISTENT, value, null);
 	}
@@ -484,7 +370,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setQuery(boolean value)
+	public void setQuery(final boolean value)
 	{
 		setAttribute(AttributeName.QUERY, value, null);
 	}
@@ -509,7 +395,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRegistration(boolean value)
+	public void setRegistration(final boolean value)
 	{
 		setAttribute(AttributeName.REGISTRATION, value, null);
 	}
@@ -534,7 +420,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSignal(boolean value)
+	public void setSignal(final boolean value)
 	{
 		setAttribute(AttributeName.SIGNAL, value, null);
 	}
@@ -559,7 +445,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setType(String value)
+	public void setType(final String value)
 	{
 		setAttribute(AttributeName.TYPE, value, null);
 	}
@@ -584,7 +470,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setURLSchemes(VString value)
+	public void setURLSchemes(final VString value)
 	{
 		setAttribute(AttributeName.URLSCHEMES, value, null);
 	}
@@ -596,8 +482,8 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 */
 	public VString getURLSchemes()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.URLSCHEMES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.URLSCHEMES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -696,7 +582,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevCaps the element
 	 */
-	public JDFDevCaps getCreateDevCaps(int iSkip)
+	public JDFDevCaps getCreateDevCaps(final int iSkip)
 	{
 		return (JDFDevCaps) getCreateElement_JDFElement(ElementName.DEVCAPS, null, iSkip);
 	}
@@ -708,7 +594,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 * @return JDFDevCaps the element
 	 *         default is getDevCaps(0)
 	 */
-	public JDFDevCaps getDevCaps(int iSkip)
+	public JDFDevCaps getDevCaps(final int iSkip)
 	{
 		return (JDFDevCaps) getElement(ElementName.DEVCAPS, null, iSkip);
 	}

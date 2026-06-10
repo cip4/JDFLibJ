@@ -108,7 +108,7 @@ public abstract class JDFAutoVerificationParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoVerificationParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoVerificationParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -120,7 +120,7 @@ public abstract class JDFAutoVerificationParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoVerificationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoVerificationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoVerificationParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoVerificationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoVerificationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -144,7 +144,7 @@ public abstract class JDFAutoVerificationParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -174,7 +174,7 @@ public abstract class JDFAutoVerificationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFieldRange(JDFIntegerRangeList value)
+	public void setFieldRange(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.FIELDRANGE, value, null);
 	}
@@ -187,8 +187,8 @@ public abstract class JDFAutoVerificationParams extends JDFResource
 	 */
 	public JDFIntegerRangeList getFieldRange()
 	{
-		String strAttrName = getAttribute(AttributeName.FIELDRANGE, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.FIELDRANGE, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -202,7 +202,7 @@ public abstract class JDFAutoVerificationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setInsertError(String value)
+	public void setInsertError(final String value)
 	{
 		setAttribute(AttributeName.INSERTERROR, value, null);
 	}
@@ -227,7 +227,7 @@ public abstract class JDFAutoVerificationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setInsertOK(String value)
+	public void setInsertOK(final String value)
 	{
 		setAttribute(AttributeName.INSERTOK, value, null);
 	}
@@ -252,7 +252,7 @@ public abstract class JDFAutoVerificationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTolerance(double value)
+	public void setTolerance(final double value)
 	{
 		setAttribute(AttributeName.TOLERANCE, value, null);
 	}

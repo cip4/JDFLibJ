@@ -133,7 +133,7 @@ public abstract class JDFAutoPerson extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPerson(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPerson(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -145,7 +145,7 @@ public abstract class JDFAutoPerson extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPerson(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPerson(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -158,7 +158,7 @@ public abstract class JDFAutoPerson extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPerson(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPerson(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -169,7 +169,7 @@ public abstract class JDFAutoPerson extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -199,7 +199,7 @@ public abstract class JDFAutoPerson extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAdditionalNames(String value)
+	public void setAdditionalNames(final String value)
 	{
 		setAttribute(AttributeName.ADDITIONALNAMES, value, null);
 	}
@@ -224,7 +224,7 @@ public abstract class JDFAutoPerson extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFamilyName(String value)
+	public void setFamilyName(final String value)
 	{
 		setAttribute(AttributeName.FAMILYNAME, value, null);
 	}
@@ -249,7 +249,7 @@ public abstract class JDFAutoPerson extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPhoneticLastName(String value)
+	public void setPhoneticLastName(final String value)
 	{
 		setAttribute(AttributeName.PHONETICLASTNAME, value, null);
 	}
@@ -274,7 +274,7 @@ public abstract class JDFAutoPerson extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFirstName(String value)
+	public void setFirstName(final String value)
 	{
 		setAttribute(AttributeName.FIRSTNAME, value, null);
 	}
@@ -299,7 +299,7 @@ public abstract class JDFAutoPerson extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPhoneticFirstName(String value)
+	public void setPhoneticFirstName(final String value)
 	{
 		setAttribute(AttributeName.PHONETICFIRSTNAME, value, null);
 	}
@@ -324,7 +324,7 @@ public abstract class JDFAutoPerson extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobTitle(String value)
+	public void setJobTitle(final String value)
 	{
 		setAttribute(AttributeName.JOBTITLE, value, null);
 	}
@@ -349,7 +349,7 @@ public abstract class JDFAutoPerson extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLanguages(VString value)
+	public void setLanguages(final VString value)
 	{
 		setAttribute(AttributeName.LANGUAGES, value, null);
 	}
@@ -361,8 +361,8 @@ public abstract class JDFAutoPerson extends JDFResource
 	 */
 	public VString getLanguages()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -377,7 +377,7 @@ public abstract class JDFAutoPerson extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNamePrefix(String value)
+	public void setNamePrefix(final String value)
 	{
 		setAttribute(AttributeName.NAMEPREFIX, value, null);
 	}
@@ -402,7 +402,7 @@ public abstract class JDFAutoPerson extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNameSuffix(String value)
+	public void setNameSuffix(final String value)
 	{
 		setAttribute(AttributeName.NAMESUFFIX, value, null);
 	}
@@ -459,7 +459,7 @@ public abstract class JDFAutoPerson extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refAddress(JDFAddress refTarget)
+	public void refAddress(final JDFAddress refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -490,7 +490,7 @@ public abstract class JDFAutoPerson extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFComChannel the element
 	 */
-	public JDFComChannel getCreateComChannel(int iSkip)
+	public JDFComChannel getCreateComChannel(final int iSkip)
 	{
 		return (JDFComChannel) getCreateElement_JDFElement(ElementName.COMCHANNEL, null, iSkip);
 	}
@@ -502,7 +502,7 @@ public abstract class JDFAutoPerson extends JDFResource
 	 * @return JDFComChannel the element
 	 *         default is getComChannel(0)
 	 */
-	public JDFComChannel getComChannel(int iSkip)
+	public JDFComChannel getComChannel(final int iSkip)
 	{
 		return (JDFComChannel) getElement(ElementName.COMCHANNEL, null, iSkip);
 	}
@@ -532,7 +532,7 @@ public abstract class JDFAutoPerson extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refComChannel(JDFComChannel refTarget)
+	public void refComChannel(final JDFComChannel refTarget)
 	{
 		refElement(refTarget);
 	}

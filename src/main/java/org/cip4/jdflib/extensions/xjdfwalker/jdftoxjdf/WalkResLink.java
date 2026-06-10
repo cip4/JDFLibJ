@@ -40,7 +40,7 @@ import java.util.List;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -49,14 +49,13 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
-import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF.EnumProcessPartition;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.util.ContainerUtil;
-import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -127,7 +126,7 @@ public class WalkResLink extends WalkJDFElement
 			final List<KElement> v = setResource(rl, linkTarget, jdfToXJDF.newRoot);
 			if (v != null)
 			{
-				final boolean isLegacy = EnumUtil.aLessThanB(jdfToXJDF.getNewVersion(), EnumVersion.Version_2_1);
+				final boolean isLegacy = jdfToXJDF.getNewVersion().ordinal() < EnumVersion.Version_2_1.ordinal();
 				final String productID = isLegacy ? getXJDFProductID(n) : getXJDFExternalID(n);
 				final String key = isLegacy ? XJDFConstants.ProductPart : XJDFConstants.Product;
 
@@ -154,7 +153,9 @@ public class WalkResLink extends WalkJDFElement
 			{
 				final String productID = c.getProductID();
 				if (!StringUtil.isEmpty(productID))
+				{
 					return productID;
+				}
 			}
 		}
 		final String jpid = node.ensureJobPartID();
@@ -167,7 +168,9 @@ public class WalkResLink extends WalkJDFElement
 	private void setProcess(final JDFResourceLink rl)
 	{
 		if (!jdfToXJDF.isWantProcessList() || rl == null)
+		{
 			return;
+		}
 
 		final KElement process = getProcess(rl);
 		setLink(process, rl);
@@ -180,12 +183,14 @@ public class WalkResLink extends WalkJDFElement
 	private void setLink(final KElement process, final JDFResourceLink rl)
 	{
 		if (rl == null || process == null)
+		{
 			return;
+		}
 		final EnumUsage usage = rl.getUsage();
-		final String usageName = usage == null ? null : usage.getName();
+		final String usageName = JavaEnumUtil.getName(usage);
 		if (usageName != null)
 		{
-			process.appendAttribute(usageName, rl.getrRef(), null, JDFConstants.BLANK, true);
+			process.appendAttribute(usageName, rl.getrRef(), null, JDFCoreConstants.BLANK, true);
 		}
 	}
 
@@ -196,18 +201,15 @@ public class WalkResLink extends WalkJDFElement
 	private KElement getProcess(final JDFResourceLink rl)
 	{
 		final JDFNode parent = rl.getParentJDF();
-		if (parent == null || parent.isProduct())
-		{
-			// products are handled by productList
-			return null;
-		}
-		if (parent.getElement(ElementName.JDF) != null)
+		if (parent == null || parent.isProduct() || (parent.getElement(ElementName.JDF) != null))
 		{
 			return null;
 		}
 		final String jobPartID = getJobPartID(parent);
 		if (jobPartID == null)
+		{
 			return null;
+		}
 
 		final KElement processList = jdfToXJDF.newRoot.getCreateElement(XJDFConstants.ProcessList, null, 0);
 		KElement process = processList.getChildWithAttribute(XJDFConstants.Process, AttributeName.JOBPARTID, null, jobPartID, 0, true);
@@ -249,7 +251,9 @@ public class WalkResLink extends WalkJDFElement
 	{
 		String jobPartID = StringUtil.getNonEmpty(parent.getJobPartID(false));
 		if (jobPartID == null)
+		{
 			jobPartID = StringUtil.getNonEmpty(parent.getID());
+		}
 		return jobPartID;
 	}
 
@@ -272,7 +276,7 @@ public class WalkResLink extends WalkJDFElement
 	protected List<KElement> setResource(final JDFElement rl, final JDFResource linkTarget, final KElement xRoot)
 	{
 		final List<KElement> newResources = super.setResource(rl, linkTarget, xRoot);
-		if (XJDF20.rootName.equals(xRoot.getLocalName()))
+		if (JDFToXJDF.rootName.equals(xRoot.getLocalName()))
 		{
 			setNodePartitions(rl, newResources);
 		}
@@ -296,7 +300,7 @@ public class WalkResLink extends WalkJDFElement
 				boolean bChange = false;
 				if (parentProduct != null)
 				{
-					final boolean isLegacy = EnumUtil.aLessThanB(jdfToXJDF.getNewVersion(), EnumVersion.Version_2_1);
+					final boolean isLegacy = jdfToXJDF.getNewVersion().ordinal() < EnumVersion.Version_2_1.ordinal();
 					final String productID = isLegacy ? getXJDFProductID(parentProduct) : getXJDFExternalID(parentProduct);
 					final String key = isLegacy ? XJDFConstants.ProductPart : XJDFConstants.Product;
 					partMaps.put(key, productID);

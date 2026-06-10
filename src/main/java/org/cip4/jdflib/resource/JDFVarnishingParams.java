@@ -17,46 +17,46 @@ public class JDFVarnishingParams extends JDFAutoVarnishingParams
 
 	/**
 	 * Constructor for JDFVarnishingParams
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFVarnishingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFVarnishingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFVarnishingParams
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFVarnishingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFVarnishingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFVarnishingParams
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFVarnishingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFVarnishingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -66,12 +66,11 @@ public class JDFVarnishingParams extends JDFAutoVarnishingParams
 	}
 
 	/**
-	 * 
 	 * @return true if we are a varnish with offset plates rather than flexo / varnishing plates
 	 */
 	public boolean isPressModule()
 	{
-		String mt = getModuleType();
+		final String mt = getModuleType();
 		return "PrintModule".equalsIgnoreCase(mt);
 	}
 }

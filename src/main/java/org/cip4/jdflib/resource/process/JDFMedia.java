@@ -94,7 +94,6 @@ import org.cip4.jdflib.ifaces.IMatches;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFMedia extends JDFAutoMedia implements IMatches
@@ -114,10 +113,9 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 
 	/**
 	 * implementation of spec table Translation of Paper grades between [ISO12647-2:2004] and [ISO12647-2:2013]
-	 * 
+	 *
 	 * @param coating TODO
 	 * @param iso
-	 *
 	 * @return 1-5 if valid; else null
 	 */
 	public static EnumISOPaperSubstrate getIsoPaperFromGrade(final int grade, final eCoating coating)
@@ -223,7 +221,6 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
-	 *
 	 */
 	public JDFMedia(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
@@ -235,7 +232,6 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
-	 *
 	 * @param qualifiedName
 	 */
 	public JDFMedia(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
@@ -250,7 +246,6 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
-	 *
 	 */
 	public JDFMedia(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
@@ -258,7 +253,6 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoMedia#toString()
 	 * @return
 	 */
@@ -271,29 +265,37 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	/**
 	 * calculates paper thickness from weight, if and only if weight exists but not thickness
 	 *
-	 * @param bLocal if true, only evaluate locally set attributes in this partition, else check inherited attributes
+	 * @param bLocal   if true, only evaluate locally set attributes in this partition, else check inherited attributes
 	 * @param bRecurse if true, do for all children, grandchildren rtc, else only local
 	 */
 	public void setThicknessFromWeight(final boolean bLocal, final boolean bRecurse)
 	{
 		final EnumMediaType mT = getMediaType();
 		if (!EnumMediaType.Paper.equals(mT))
+		{
 			return; // only useful for paper
+		}
 		if (bRecurse)
 		{
 			final VElement v = getLeaves(true);
 			final int size = v.size();
 			for (int i = 0; i < size; i++)
+			{
 				((JDFMedia) v.get(i)).setThicknessFromWeight(bLocal, false);
+			}
 		}
 		else
 		{
 			final String w = bLocal ? getAttribute_KElement(AttributeName.WEIGHT) : getAttribute(AttributeName.WEIGHT);
 			if (isWildCard(w))
+			{
 				return; // no weight to use
+			}
 			final String t = bLocal ? getAttribute_KElement(AttributeName.THICKNESS) : getAttribute(AttributeName.THICKNESS);
 			if (!isWildCard(t))
+			{
 				return; // no weight to use
+			}
 			setThickness(getWeight() * 1.25); // assume average density of 0.8
 			// g/cm^3
 			// TODO improve calculation based on grade etc.
@@ -308,7 +310,9 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	public void setDimensionCM(final JDFXYPair value)
 	{
 		if (value == null)
+		{
 			setDimension(null);
+		}
 		else
 		{
 			final JDFXYPair xyp = new JDFXYPair(value); // don't change the original
@@ -336,7 +340,9 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	{
 		final JDFXYPair xyp = getDimension();
 		if (xyp != null)
+		{
 			xyp.scaleToCM();
+		}
 		return xyp;
 	}
 
@@ -348,7 +354,9 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	public void setDimensionInch(final JDFXYPair value)
 	{
 		if (value == null)
+		{
 			setDimension(null);
+		}
 		else
 		{
 			final JDFXYPair xyp = new JDFXYPair(value); // don't change the original
@@ -366,7 +374,9 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	{
 		final JDFXYPair xyp = getDimension();
 		if (xyp != null)
+		{
 			xyp.scale(1.0 / 72.0);
+		}
 		return xyp;
 	}
 
@@ -386,22 +396,29 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 		{
 			final int frontGrade = getGrade();
 			if (frontGrade == 0 || frontGrade >= 4)
+			{
 				return frontGrade; // uncoated or web crap paper
+			}
 
 			final EnumBackCoatings coatings = super.getBackCoatings();
 			if (coatings == null)
+			{
 				return frontGrade; // no back details
+			}
 			if (EnumBackCoatings.None.equals(coatings))
+			{
 				return 4; // uncoated
+			}
 			if (EnumBackCoatings.Matte.equals(coatings))
+			{
 				return 2; // matte
+			}
 
 			return frontGrade;
 		}
 	}
 
 	/**
-	 *
 	 * @param checkIsoPaper
 	 * @return
 	 */
@@ -409,7 +426,9 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	{
 		final int grade = super.getGrade();
 		if (grade > 0 || !checkIsoPaper)
+		{
 			return grade;
+		}
 		return getGradeFromIsoPaper(getISOPaperSubstrate(), getCoating());
 	}
 
@@ -417,7 +436,9 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	{
 		String c = getNonEmpty(AttributeName.FRONTCOATINGS);
 		if (c == null)
+		{
 			c = getNonEmpty(XJDFConstants.Coating);
+		}
 		return eCoating.getEnum(c);
 	}
 
@@ -435,7 +456,9 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	{
 		String c = getNonEmpty(AttributeName.BACKCOATINGS);
 		if (c == null)
+		{
 			c = getNonEmpty(XJDFConstants.BackCoating);
+		}
 		final eCoating coating = eCoating.getEnum(c);
 		return coating == null ? getCoating() : coating;
 	}
@@ -462,8 +485,8 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 			{
 				matches = StringUtil.getDistance(getBrand(), other.getBrand(), true, true, true) == 0;
 				matches = matches && StringUtil.getDistance(getMediaQuality(), other.getMediaQuality(), true, true, true) == 0;
-				matches = matches
-						&& StringUtil.getDistance(getAttribute(AttributeName.ISOPAPERSUBSTRATE), other.getAttribute(AttributeName.ISOPAPERSUBSTRATE), true, true, true) == 0;
+				matches = matches && StringUtil.getDistance(getAttribute(AttributeName.ISOPAPERSUBSTRATE), other.getAttribute(AttributeName.ISOPAPERSUBSTRATE),
+						true, true, true) == 0;
 				matches = matches && (getGrade() == 0 || other.getGrade() == 0 || other.getGrade() == getGrade());
 				matches = matches && (getBackGrade() == 0 || other.getBackGrade() == 0 || other.getBackGrade() == getBackGrade());
 				matches = matches && (getWeight() == 0 || other.getWeight() == 0 || Math.abs(other.getWeight() - getWeight()) < 1);
@@ -487,12 +510,12 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	public boolean isComponentMedia()
 	{
 		final EnumMediaType typ = getMediaType();
-		return EnumMediaType.Paper.equals(typ) || EnumMediaType.CorrugatedBoard.equals(typ) || EnumMediaType.SelfAdhesive.equals(typ) || EnumMediaType.Transparency.equals(typ)
-				|| EnumMediaType.Vinyl.equals(typ) || EnumMediaType.Textile.equals(typ) || EnumMediaType.Synthetic.equals(typ);
+		return EnumMediaType.Paper.equals(typ) || EnumMediaType.CorrugatedBoard.equals(typ) || EnumMediaType.SelfAdhesive.equals(typ)
+				|| EnumMediaType.Transparency.equals(typ) || EnumMediaType.Vinyl.equals(typ) || EnumMediaType.Textile.equals(typ)
+				|| EnumMediaType.Synthetic.equals(typ);
 	}
 
 	/**
-	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoMedia#setGrade(int)
 	 * @throws IllegalArgumentException if grade not in range 1-5
 	 * @param 1-5 set grade ; 0 zapp grade
@@ -501,15 +524,20 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	public void setGrade(final int grade)
 	{
 		if (grade > 0 && grade <= 5)
+		{
 			super.setGrade(grade);
+		}
 		else if (grade == 0)
+		{
 			removeAttribute(AttributeName.GRADE);
+		}
 		else
+		{
 			throw new IllegalArgumentException("Invalid grade (1-5); " + grade);
+		}
 	}
 
 	/**
-	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoMedia#setRecycledPercentage(double)
 	 * @throws IllegalArgumentException if value<0 or >100
 	 */
@@ -517,7 +545,9 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	public void setRecycledPercentage(final double value)
 	{
 		if (value < 0 || value > 100)
+		{
 			throw new IllegalArgumentException("Invalid RecycledPercentage (0-100); " + value);
+		}
 		super.setRecycledPercentage(value);
 	}
 }

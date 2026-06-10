@@ -71,14 +71,9 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoQueueEntry.EQueueEntryStatus;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -90,7 +85,6 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.jmf.JDFQueueEntryDef;
-import org.cip4.jdflib.node.JDFNode.EActivation;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFGangSource;
@@ -110,8 +104,8 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[15];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0),
-				null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumActivation.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.FIRSTENTRY, 0x3333111111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.GANGNAMES, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
@@ -122,14 +116,14 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.MINPRIORITY, 0x3333111111l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.OLDERTHAN, 0x3333333311l, AttributeInfo.EnumAttributeType.dateTime, null, null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.PREVIEWUSAGES, 0x3333331111l, AttributeInfo.EnumAttributeType.enumerations,
-				EnumPreviewUsages.getEnum(0), "Separation");
+				JavaEnumUtil.getEnum(EnumPreviewUsages.class, 0), "Separation");
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.NEWERTHAN, 0x3333333311l, AttributeInfo.EnumAttributeType.dateTime, null, null);
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.QUEUEENTRYDETAILS, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumQueueEntryDetails.getEnum(0), "Brief");
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.STATUSLIST, 0x3333333311l, AttributeInfo.EnumAttributeType.enumerations, EnumStatusList.getEnum(0),
-				null);
+				JavaEnumUtil.getEnum(EnumQueueEntryDetails.class, 0), "Brief");
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.STATUSLIST, 0x3333333311l, AttributeInfo.EnumAttributeType.enumerations,
+				JavaEnumUtil.getEnum(EnumStatusList.class, 0), null);
 		atrInfoTable[14] = new AtrInfoTable(AttributeName.UPDATEGRANULARITY, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumUpdateGranularity.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumUpdateGranularity.class, 0), null);
 	}
 
 	@Override
@@ -159,7 +153,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoQueueFilter(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoQueueFilter(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -171,7 +165,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoQueueFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoQueueFilter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -184,350 +178,70 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoQueueFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoQueueFilter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for PreviewUsages
+	 * Enumeration strings for numPreviewUsages
 	 */
 
-	public enum EPreviewUsages
+	public enum EnumPreviewUsages
 	{
-		PreviewUsages_3D, Animation, Separation, SeparationRaw, SeparatedThumbNail, ThumbNail, Viewable;
+		numPreviewUsages_3D, Animation, Separation, SeparationRaw, SeparatedThumbNail, ThumbNail, Viewable;
 
-		public static EPreviewUsages getEnum(String val)
+		public static EnumPreviewUsages getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPreviewUsages.class, val, EPreviewUsages.Separation);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPreviewUsages.class, val, EnumPreviewUsages.Separation);
 		}
 	}
 
 	/**
-	 * Enumeration strings for PreviewUsages
+	 * Enumeration strings for numQueueEntryDetails
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumPreviewUsages extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPreviewUsages(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumPreviewUsages getEnum(String enumName)
-		{
-			return (EnumPreviewUsages) getEnum(EnumPreviewUsages.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPreviewUsages getEnum(int enumValue)
-		{
-			return (EnumPreviewUsages) getEnum(EnumPreviewUsages.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPreviewUsages.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPreviewUsages.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPreviewUsages.class);
-		}
-
-		/**  */
-		public static final EnumPreviewUsages PreviewUsages_3D = new EnumPreviewUsages("3D");
-		/**  */
-		public static final EnumPreviewUsages Animation = new EnumPreviewUsages("Animation");
-		/**  */
-		public static final EnumPreviewUsages Separation = new EnumPreviewUsages("Separation");
-		/**  */
-		public static final EnumPreviewUsages SeparationRaw = new EnumPreviewUsages("SeparationRaw");
-		/**  */
-		public static final EnumPreviewUsages SeparatedThumbNail = new EnumPreviewUsages("SeparatedThumbNail");
-		/**  */
-		public static final EnumPreviewUsages ThumbNail = new EnumPreviewUsages("ThumbNail");
-		/**  */
-		public static final EnumPreviewUsages Viewable = new EnumPreviewUsages("Viewable");
-	}
-
-	/**
-	 * Enumeration strings for QueueEntryDetails
-	 */
-
-	public enum EQueueEntryDetails
+	public enum EnumQueueEntryDetails
 	{
 		None, Brief, JobPhase, JDF;
 
-		public static EQueueEntryDetails getEnum(String val)
+		public static EnumQueueEntryDetails getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EQueueEntryDetails.class, val, EQueueEntryDetails.Brief);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumQueueEntryDetails.class, val, EnumQueueEntryDetails.Brief);
 		}
 	}
 
 	/**
-	 * Enumeration strings for QueueEntryDetails
+	 * Enumeration strings for numStatusList
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumQueueEntryDetails extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumQueueEntryDetails(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumQueueEntryDetails getEnum(String enumName)
-		{
-			return (EnumQueueEntryDetails) getEnum(EnumQueueEntryDetails.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumQueueEntryDetails getEnum(int enumValue)
-		{
-			return (EnumQueueEntryDetails) getEnum(EnumQueueEntryDetails.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumQueueEntryDetails.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumQueueEntryDetails.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumQueueEntryDetails.class);
-		}
-
-		/**  */
-		public static final EnumQueueEntryDetails None = new EnumQueueEntryDetails("None");
-		/**  */
-		public static final EnumQueueEntryDetails Brief = new EnumQueueEntryDetails("Brief");
-		/**  */
-		public static final EnumQueueEntryDetails JobPhase = new EnumQueueEntryDetails("JobPhase");
-		/**  */
-		public static final EnumQueueEntryDetails JDF = new EnumQueueEntryDetails("JDF");
-	}
-
-	/**
-	 * Enumeration strings for StatusList
-	 */
-
-	public enum EStatusList
+	public enum EnumStatusList
 	{
 		Running, Waiting, Held, Removed, Suspended, PendingReturn, Completed, Aborted;
 
-		public static EStatusList getEnum(String val)
+		public static EnumStatusList getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EStatusList.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumStatusList.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for StatusList
+	 * Enumeration strings for numUpdateGranularity
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumStatusList extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumStatusList(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumStatusList getEnum(String enumName)
-		{
-			return (EnumStatusList) getEnum(EnumStatusList.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumStatusList getEnum(int enumValue)
-		{
-			return (EnumStatusList) getEnum(EnumStatusList.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumStatusList.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumStatusList.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumStatusList.class);
-		}
-
-		/**  */
-		public static final EnumStatusList Running = new EnumStatusList("Running");
-		/**  */
-		public static final EnumStatusList Waiting = new EnumStatusList("Waiting");
-		/**  */
-		public static final EnumStatusList Held = new EnumStatusList("Held");
-		/**  */
-		public static final EnumStatusList Removed = new EnumStatusList("Removed");
-		/**  */
-		public static final EnumStatusList Suspended = new EnumStatusList("Suspended");
-		/**  */
-		public static final EnumStatusList PendingReturn = new EnumStatusList("PendingReturn");
-		/**  */
-		public static final EnumStatusList Completed = new EnumStatusList("Completed");
-		/**  */
-		public static final EnumStatusList Aborted = new EnumStatusList("Aborted");
-	}
-
-	/**
-	 * Enumeration strings for UpdateGranularity
-	 */
-
-	public enum EUpdateGranularity
+	public enum EnumUpdateGranularity
 	{
 		All, ChangesOnly;
 
-		public static EUpdateGranularity getEnum(String val)
+		public static EnumUpdateGranularity getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EUpdateGranularity.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumUpdateGranularity.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for UpdateGranularity
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumUpdateGranularity extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumUpdateGranularity(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumUpdateGranularity getEnum(String enumName)
-		{
-			return (EnumUpdateGranularity) getEnum(EnumUpdateGranularity.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumUpdateGranularity getEnum(int enumValue)
-		{
-			return (EnumUpdateGranularity) getEnum(EnumUpdateGranularity.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumUpdateGranularity.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumUpdateGranularity.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumUpdateGranularity.class);
-		}
-
-		/**  */
-		public static final EnumUpdateGranularity All = new EnumUpdateGranularity("All");
-		/**  */
-		public static final EnumUpdateGranularity ChangesOnly = new EnumUpdateGranularity("ChangesOnly");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -539,9 +253,9 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setActivation(EActivation enumVar)
+	public void setActivation(final EnumActivation enumVar)
 	{
-		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ACTIVATION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -549,35 +263,6 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EActivation getEActivation()
-	{
-		return EActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Activation
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Activation
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetActivation(EActivation) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setActivation(EnumActivation enumVar)
-	{
-		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Activation
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EActivation GetEActivation() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumActivation getActivation()
 	{
 		return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
@@ -593,7 +278,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFirstEntry(String value)
+	public void setFirstEntry(final String value)
 	{
 		setAttribute(AttributeName.FIRSTENTRY, value, null);
 	}
@@ -618,7 +303,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGangNames(VString value)
+	public void setGangNames(final VString value)
 	{
 		setAttribute(AttributeName.GANGNAMES, value, null);
 	}
@@ -630,8 +315,8 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 */
 	public VString getGangNames()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.GANGNAMES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.GANGNAMES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -646,7 +331,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -671,7 +356,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobPartID(String value)
+	public void setJobPartID(final String value)
 	{
 		setAttribute(AttributeName.JOBPARTID, value, null);
 	}
@@ -696,7 +381,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLastEntry(String value)
+	public void setLastEntry(final String value)
 	{
 		setAttribute(AttributeName.LASTENTRY, value, null);
 	}
@@ -721,7 +406,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaxEntries(int value)
+	public void setMaxEntries(final int value)
 	{
 		setAttribute(AttributeName.MAXENTRIES, value, null);
 	}
@@ -746,7 +431,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaxPriority(int value)
+	public void setMaxPriority(final int value)
 	{
 		setAttribute(AttributeName.MAXPRIORITY, value, null);
 	}
@@ -771,7 +456,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMinPriority(int value)
+	public void setMinPriority(final int value)
 	{
 		setAttribute(AttributeName.MINPRIORITY, value, null);
 	}
@@ -796,7 +481,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setOlderThan(JDFDate value)
+	public void setOlderThan(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -813,8 +498,8 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 */
 	public JDFDate getOlderThan()
 	{
-		String str = getAttribute(AttributeName.OLDERTHAN, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.OLDERTHAN, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -828,7 +513,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 *
 	 * @param v List of the enumeration values
 	 */
-	public void setEPreviewUsages(List<EPreviewUsages> v)
+	public void setPreviewUsages(final List<EnumPreviewUsages> v)
 	{
 		setEnumsAttribute(AttributeName.PREVIEWUSAGES, v, null);
 	}
@@ -838,38 +523,9 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public List<EPreviewUsages> getEnumsPreviewUsages()
+	public List<EnumPreviewUsages> getPreviewUsages()
 	{
-		return getEnumerationsAttribute(AttributeName.PREVIEWUSAGES, null, EPreviewUsages.class);
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute PreviewUsages
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5.2) set attribute PreviewUsages
-	 *
-	 * @param v List of the enumeration values
-	 * @deprecated use SetEPreviewUsages(List<EPreviewUsages>) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPreviewUsages(List<EnumPreviewUsages> v)
-	{
-		setEnumerationsAttribute(AttributeName.PREVIEWUSAGES, v, null);
-	}
-
-	/**
-	 * (9.2) get PreviewUsages attribute PreviewUsages
-	 *
-	 * @return Vector of the enumerations
-	 * @deprecated use List<EPreviewUsages > GetEPreviewUsages() based on java.lang.enum instead
-	 */
-	@Deprecated
-	public Vector<EnumPreviewUsages> getPreviewUsages()
-	{
-		return getEnumerationsAttribute(AttributeName.PREVIEWUSAGES, null, EnumPreviewUsages.Separation, false);
+		return getEnumerationsAttribute(AttributeName.PREVIEWUSAGES, null, EnumPreviewUsages.class);
 	}
 
 	/*
@@ -882,7 +538,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setNewerThan(JDFDate value)
+	public void setNewerThan(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -899,8 +555,8 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 */
 	public JDFDate getNewerThan()
 	{
-		String str = getAttribute(AttributeName.NEWERTHAN, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.NEWERTHAN, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -914,9 +570,9 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setQueueEntryDetails(EQueueEntryDetails enumVar)
+	public void setQueueEntryDetails(final EnumQueueEntryDetails enumVar)
 	{
-		setAttribute(AttributeName.QUEUEENTRYDETAILS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.QUEUEENTRYDETAILS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -924,35 +580,6 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EQueueEntryDetails getEQueueEntryDetails()
-	{
-		return EQueueEntryDetails.getEnum(getAttribute(AttributeName.QUEUEENTRYDETAILS, null, "Brief"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute QueueEntryDetails
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute QueueEntryDetails
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetQueueEntryDetails(EQueueEntryDetails) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setQueueEntryDetails(EnumQueueEntryDetails enumVar)
-	{
-		setAttribute(AttributeName.QUEUEENTRYDETAILS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute QueueEntryDetails
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EQueueEntryDetails GetEQueueEntryDetails() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumQueueEntryDetails getQueueEntryDetails()
 	{
 		return EnumQueueEntryDetails.getEnum(getAttribute(AttributeName.QUEUEENTRYDETAILS, null, "Brief"));
@@ -968,7 +595,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 *
 	 * @param v List of the enumeration values
 	 */
-	public void setEStatusList(List<EQueueEntryStatus> v)
+	public void setStatusList(final List<EnumQueueEntryStatus> v)
 	{
 		setEnumsAttribute(AttributeName.STATUSLIST, v, null);
 	}
@@ -978,38 +605,9 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public List<EQueueEntryStatus> getEnumsStatusList()
+	public List<EnumQueueEntryStatus> getStatusList()
 	{
-		return getEnumerationsAttribute(AttributeName.STATUSLIST, null, EQueueEntryStatus.class);
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute StatusList
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5.2) set attribute StatusList
-	 *
-	 * @param v List of the enumeration values
-	 * @deprecated use SetEStatusList(List<EQueueEntryStatus>) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setStatusList(List<EnumQueueEntryStatus> v)
-	{
-		setEnumerationsAttribute(AttributeName.STATUSLIST, v, null);
-	}
-
-	/**
-	 * (9.2) get StatusList attribute StatusList
-	 *
-	 * @return Vector of the enumerations
-	 * @deprecated use List<EQueueEntryStatus > GetEStatusList() based on java.lang.enum instead
-	 */
-	@Deprecated
-	public Vector<EnumQueueEntryStatus> getStatusList()
-	{
-		return getEnumerationsAttribute(AttributeName.STATUSLIST, null, EnumQueueEntryStatus.getEnum(0), false);
+		return getEnumerationsAttribute(AttributeName.STATUSLIST, null, EnumQueueEntryStatus.class);
 	}
 
 	/*
@@ -1022,9 +620,9 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setUpdateGranularity(EUpdateGranularity enumVar)
+	public void setUpdateGranularity(final EnumUpdateGranularity enumVar)
 	{
-		setAttribute(AttributeName.UPDATEGRANULARITY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.UPDATEGRANULARITY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -1032,35 +630,6 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EUpdateGranularity getEUpdateGranularity()
-	{
-		return EUpdateGranularity.getEnum(getAttribute(AttributeName.UPDATEGRANULARITY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute UpdateGranularity
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute UpdateGranularity
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetUpdateGranularity(EUpdateGranularity) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setUpdateGranularity(EnumUpdateGranularity enumVar)
-	{
-		setAttribute(AttributeName.UPDATEGRANULARITY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute UpdateGranularity
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EUpdateGranularity GetEUpdateGranularity() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumUpdateGranularity getUpdateGranularity()
 	{
 		return EnumUpdateGranularity.getEnum(getAttribute(AttributeName.UPDATEGRANULARITY, null, null));
@@ -1098,7 +667,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFQueueEntryDef the element
 	 */
-	public JDFQueueEntryDef getCreateQueueEntryDef(int iSkip)
+	public JDFQueueEntryDef getCreateQueueEntryDef(final int iSkip)
 	{
 		return (JDFQueueEntryDef) getCreateElement_JDFElement(ElementName.QUEUEENTRYDEF, null, iSkip);
 	}
@@ -1110,7 +679,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 * @return JDFQueueEntryDef the element
 	 *         default is getQueueEntryDef(0)
 	 */
-	public JDFQueueEntryDef getQueueEntryDef(int iSkip)
+	public JDFQueueEntryDef getQueueEntryDef(final int iSkip)
 	{
 		return (JDFQueueEntryDef) getElement(ElementName.QUEUEENTRYDEF, null, iSkip);
 	}
@@ -1161,7 +730,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevice the element
 	 */
-	public JDFDevice getCreateDevice(int iSkip)
+	public JDFDevice getCreateDevice(final int iSkip)
 	{
 		return (JDFDevice) getCreateElement_JDFElement(ElementName.DEVICE, null, iSkip);
 	}
@@ -1173,7 +742,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 * @return JDFDevice the element
 	 *         default is getDevice(0)
 	 */
-	public JDFDevice getDevice(int iSkip)
+	public JDFDevice getDevice(final int iSkip)
 	{
 		return (JDFDevice) getElement(ElementName.DEVICE, null, iSkip);
 	}
@@ -1224,7 +793,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFGangSource the element
 	 */
-	public JDFGangSource getCreateGangSource(int iSkip)
+	public JDFGangSource getCreateGangSource(final int iSkip)
 	{
 		return (JDFGangSource) getCreateElement_JDFElement(ElementName.GANGSOURCE, null, iSkip);
 	}
@@ -1236,7 +805,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 * @return JDFGangSource the element
 	 *         default is getGangSource(0)
 	 */
-	public JDFGangSource getGangSource(int iSkip)
+	public JDFGangSource getGangSource(final int iSkip)
 	{
 		return (JDFGangSource) getElement(ElementName.GANGSOURCE, null, iSkip);
 	}
@@ -1287,7 +856,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
-	public JDFPart getCreatePart(int iSkip)
+	public JDFPart getCreatePart(final int iSkip)
 	{
 		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
@@ -1299,7 +868,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 	 * @return JDFPart the element
 	 *         default is getPart(0)
 	 */
-	public JDFPart getPart(int iSkip)
+	public JDFPart getPart(final int iSkip)
 	{
 		return (JDFPart) getElement(ElementName.PART, null, iSkip);
 	}

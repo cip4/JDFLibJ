@@ -122,7 +122,7 @@ public abstract class JDFAutoArgumentValue extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoArgumentValue(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoArgumentValue(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -134,7 +134,7 @@ public abstract class JDFAutoArgumentValue extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoArgumentValue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoArgumentValue(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -147,7 +147,7 @@ public abstract class JDFAutoArgumentValue extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoArgumentValue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoArgumentValue(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoArgumentValue extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setName(String value)
+	public void setName(final String value)
 	{
 		setAttribute(AttributeName.NAME, value, null);
 	}
@@ -215,7 +215,7 @@ public abstract class JDFAutoArgumentValue extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPreflightArgument the element
 	 */
-	public JDFPreflightArgument getCreatePreflightArgument(int iSkip)
+	public JDFPreflightArgument getCreatePreflightArgument(final int iSkip)
 	{
 		return (JDFPreflightArgument) getCreateElement_JDFElement(ElementName.PREFLIGHTARGUMENT, null, iSkip);
 	}
@@ -227,7 +227,7 @@ public abstract class JDFAutoArgumentValue extends JDFElement
 	 * @return JDFPreflightArgument the element
 	 *         default is getPreflightArgument(0)
 	 */
-	public JDFPreflightArgument getPreflightArgument(int iSkip)
+	public JDFPreflightArgument getPreflightArgument(final int iSkip)
 	{
 		return (JDFPreflightArgument) getElement(ElementName.PREFLIGHTARGUMENT, null, iSkip);
 	}

@@ -81,7 +81,6 @@ import org.cip4.jdflib.auto.JDFAutoContentMetadata;
  * note the nasty capitalization, which we retain for backwds compatibility
  *
  * @author prosirai
- *
  */
 public class JDFContentMetadata extends JDFAutoContentMetadata
 {

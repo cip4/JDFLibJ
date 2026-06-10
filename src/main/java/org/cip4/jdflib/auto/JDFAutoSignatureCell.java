@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -99,14 +94,14 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.BACKPAGES, 0x3333333311l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.BACKSPREAD, 0x3333311111l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.BOTTLEANGLE, 0x4444333311l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.BOTTLEAXIS, 0x4444333311l, AttributeInfo.EnumAttributeType.enumeration, EnumBottleAxis.getEnum(0),
-				null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.BOTTLEAXIS, 0x4444333311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumBottleAxis.class, 0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.FACECELLS, 0x3333331111l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.FRONTFACEPAGES, 0x4444443311l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.FRONTPAGES, 0x3333333311l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.FRONTSPREAD, 0x3333311111l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.ORIENTATION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0),
-				"Up");
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.ORIENTATION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumOrientation.class, 0), "Up");
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.SECTIONINDEX, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, "0");
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.STATIONNAME, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, "0");
 	}
@@ -123,7 +118,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSignatureCell(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoSignatureCell(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -135,7 +130,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSignatureCell(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoSignatureCell(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -148,178 +143,42 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoSignatureCell(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoSignatureCell(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for BottleAxis
+	 * Enumeration strings for numBottleAxis
 	 */
 
-	public enum EBottleAxis
+	public enum EnumBottleAxis
 	{
 		SpineHead, SpineFoot, FaceHead, FaceFoot;
 
-		public static EBottleAxis getEnum(String val)
+		public static EnumBottleAxis getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EBottleAxis.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumBottleAxis.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for BottleAxis
+	 * Enumeration strings for numOrientation
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumBottleAxis extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumBottleAxis(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumBottleAxis getEnum(String enumName)
-		{
-			return (EnumBottleAxis) getEnum(EnumBottleAxis.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumBottleAxis getEnum(int enumValue)
-		{
-			return (EnumBottleAxis) getEnum(EnumBottleAxis.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumBottleAxis.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumBottleAxis.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumBottleAxis.class);
-		}
-
-		/**  */
-		public static final EnumBottleAxis SpineHead = new EnumBottleAxis("SpineHead");
-		/**  */
-		public static final EnumBottleAxis SpineFoot = new EnumBottleAxis("SpineFoot");
-		/**  */
-		public static final EnumBottleAxis FaceHead = new EnumBottleAxis("FaceHead");
-		/**  */
-		public static final EnumBottleAxis FaceFoot = new EnumBottleAxis("FaceFoot");
-	}
-
-	/**
-	 * Enumeration strings for Orientation
-	 */
-
-	public enum EOrientation
+	public enum EnumOrientation
 	{
 		Up, Down, Left, Right;
 
-		public static EOrientation getEnum(String val)
+		public static EnumOrientation getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EOrientation.class, val, EOrientation.Up);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumOrientation.class, val, EnumOrientation.Up);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Orientation
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumOrientation extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumOrientation(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumOrientation getEnum(String enumName)
-		{
-			return (EnumOrientation) getEnum(EnumOrientation.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumOrientation getEnum(int enumValue)
-		{
-			return (EnumOrientation) getEnum(EnumOrientation.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumOrientation.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumOrientation.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumOrientation.class);
-		}
-
-		/**  */
-		public static final EnumOrientation Up = new EnumOrientation("Up");
-		/**  */
-		public static final EnumOrientation Down = new EnumOrientation("Down");
-		/**  */
-		public static final EnumOrientation Left = new EnumOrientation("Left");
-		/**  */
-		public static final EnumOrientation Right = new EnumOrientation("Right");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -331,7 +190,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBackFacePages(JDFIntegerList value)
+	public void setBackFacePages(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.BACKFACEPAGES, value, null);
 	}
@@ -344,8 +203,8 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 */
 	public JDFIntegerList getBackFacePages()
 	{
-		String strAttrName = getAttribute(AttributeName.BACKFACEPAGES, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.BACKFACEPAGES, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -359,7 +218,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBackPages(JDFIntegerList value)
+	public void setBackPages(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.BACKPAGES, value, null);
 	}
@@ -372,8 +231,8 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 */
 	public JDFIntegerList getBackPages()
 	{
-		String strAttrName = getAttribute(AttributeName.BACKPAGES, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.BACKPAGES, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -387,7 +246,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBackSpread(JDFIntegerList value)
+	public void setBackSpread(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.BACKSPREAD, value, null);
 	}
@@ -400,8 +259,8 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 */
 	public JDFIntegerList getBackSpread()
 	{
-		String strAttrName = getAttribute(AttributeName.BACKSPREAD, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.BACKSPREAD, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -415,7 +274,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBottleAngle(double value)
+	public void setBottleAngle(final double value)
 	{
 		setAttribute(AttributeName.BOTTLEANGLE, value, null);
 	}
@@ -440,9 +299,9 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setBottleAxis(EBottleAxis enumVar)
+	public void setBottleAxis(final EnumBottleAxis enumVar)
 	{
-		setAttribute(AttributeName.BOTTLEAXIS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.BOTTLEAXIS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -450,35 +309,6 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EBottleAxis getEBottleAxis()
-	{
-		return EBottleAxis.getEnum(getAttribute(AttributeName.BOTTLEAXIS, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute BottleAxis
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute BottleAxis
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetBottleAxis(EBottleAxis) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setBottleAxis(EnumBottleAxis enumVar)
-	{
-		setAttribute(AttributeName.BOTTLEAXIS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute BottleAxis
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EBottleAxis GetEBottleAxis() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumBottleAxis getBottleAxis()
 	{
 		return EnumBottleAxis.getEnum(getAttribute(AttributeName.BOTTLEAXIS, null, null));
@@ -494,7 +324,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFaceCells(JDFIntegerList value)
+	public void setFaceCells(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.FACECELLS, value, null);
 	}
@@ -507,8 +337,8 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 */
 	public JDFIntegerList getFaceCells()
 	{
-		String strAttrName = getAttribute(AttributeName.FACECELLS, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.FACECELLS, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -522,7 +352,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFrontFacePages(JDFIntegerList value)
+	public void setFrontFacePages(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.FRONTFACEPAGES, value, null);
 	}
@@ -535,8 +365,8 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 */
 	public JDFIntegerList getFrontFacePages()
 	{
-		String strAttrName = getAttribute(AttributeName.FRONTFACEPAGES, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.FRONTFACEPAGES, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -550,7 +380,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFrontPages(JDFIntegerList value)
+	public void setFrontPages(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.FRONTPAGES, value, null);
 	}
@@ -563,8 +393,8 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 */
 	public JDFIntegerList getFrontPages()
 	{
-		String strAttrName = getAttribute(AttributeName.FRONTPAGES, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.FRONTPAGES, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -578,7 +408,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFrontSpread(JDFIntegerList value)
+	public void setFrontSpread(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.FRONTSPREAD, value, null);
 	}
@@ -591,8 +421,8 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 */
 	public JDFIntegerList getFrontSpread()
 	{
-		String strAttrName = getAttribute(AttributeName.FRONTSPREAD, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.FRONTSPREAD, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -606,9 +436,9 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setOrientation(EOrientation enumVar)
+	public void setOrientation(final EnumOrientation enumVar)
 	{
-		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ORIENTATION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -616,35 +446,6 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EOrientation getEOrientation()
-	{
-		return EOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, "Up"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Orientation
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Orientation
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetOrientation(EOrientation) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setOrientation(EnumOrientation enumVar)
-	{
-		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Orientation
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EOrientation GetEOrientation() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumOrientation getOrientation()
 	{
 		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, "Up"));
@@ -660,7 +461,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSectionIndex(int value)
+	public void setSectionIndex(final int value)
 	{
 		setAttribute(AttributeName.SECTIONINDEX, value, null);
 	}
@@ -685,7 +486,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStationName(String value)
+	public void setStationName(final String value)
 	{
 		setAttribute(AttributeName.STATIONNAME, value, null);
 	}

@@ -38,9 +38,7 @@
 package org.cip4.jdflib.examples;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoBinderySignature.EBindingEdge;
-import org.cip4.jdflib.auto.JDFAutoMedia.EBackCoatings;
-import org.cip4.jdflib.auto.JDFAutoMedia.EFrontCoatings;
+import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumBindingEdge;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumBackCoatings;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumFrontCoatings;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
@@ -48,7 +46,6 @@ import org.cip4.jdflib.auto.JDFAutoStitchingParams.EnumStitchType;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement.ESides;
 import org.cip4.jdflib.core.JDFElement.EnumSides;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -127,7 +124,7 @@ class IPPTest extends JDFTestCaseBase
 		med.setFrontCoatings(EnumFrontCoatings.None);
 		med.setBackCoatings(EnumBackCoatings.None);
 
-		digiParams.setSides(EnumSides.OneSidedFront);
+		digiParams.setSides(org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumSides.getEnum(EnumSides.OneSidedFront.name()));
 		ruli.addPDF("file://host/dir/name.pdf", 0, -1);
 		rlComp.setAmount(1);
 		comp.refMedia(med);
@@ -146,12 +143,12 @@ class IPPTest extends JDFTestCaseBase
 		med.setDimensionInch(new JDFXYPair(8.5, 11));
 		med.setFrontCoatings(EnumFrontCoatings.Glossy);
 		med.setBackCoatings(EnumBackCoatings.Glossy);
-		digiParams.setSides(EnumSides.TwoSidedFlipY);
+		digiParams.setSides(org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumSides.getEnum(EnumSides.TwoSidedFlipY.name()));
 		ruli.addPDF("file://host/dir/name.pdf", 0, -1);
 		rlComp.setAmount(42);
 		comp.refMedia(med);
 		layoutPrep.setNumberUp(new JDFXYPair(1, 1));
-		layoutPrep.setSides(EnumSides.TwoSidedFlipY);
+		layoutPrep.setSides(org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumSides.getEnum(EnumSides.TwoSidedFlipY.name()));
 		layoutPrep.setPageDistributionScheme("Sequential");
 
 		final JDFStitchingParams stitchParams = (JDFStitchingParams) n.addResource(ElementName.STITCHINGPARAMS, null, EnumUsage.Input, null, null, null, null);
@@ -178,11 +175,11 @@ class IPPTest extends JDFTestCaseBase
 
 		final String bodyIndex = "2 ~ -3";
 		final JDFMedia mBody = (JDFMedia) med.addPartition(EnumPartIDKey.RunIndex, bodyIndex);
-		mBody.setFrontCoatings(EFrontCoatings.None);
-		mBody.setBackCoatings(EBackCoatings.None);
+		mBody.setFrontCoatings(EnumFrontCoatings.None);
+		mBody.setBackCoatings(EnumBackCoatings.None);
 		mBody.setDescriptiveName("Body Paper");
 
-		digiParams.setSides(ESides.TwoSidedFlipY);
+		digiParams.setSides(org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumSides.getEnum(EnumSides.TwoSidedFlipY.name()));
 		final JDFDigitalPrintingParams dpCover = (JDFDigitalPrintingParams) digiParams.addPartition(EnumPartIDKey.RunIndex, coverIndex);
 		dpCover.refMedia(mCover);
 		final JDFDigitalPrintingParams dpBody = (JDFDigitalPrintingParams) digiParams.addPartition(EnumPartIDKey.RunIndex, bodyIndex);
@@ -194,9 +191,9 @@ class IPPTest extends JDFTestCaseBase
 		comp.setDimensions(new JDFShape(21, 29.7, 0.3));
 
 		layoutPrep.setNumberUp(new JDFXYPair(2, 1));
-		layoutPrep.setSides(ESides.TwoSidedFlipY);
+		layoutPrep.setSides(org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumSides.getEnum(EnumSides.TwoSidedFlipY.name()));
 		layoutPrep.setPageDistributionScheme("Saddle");
-		layoutPrep.setBindingEdge(EBindingEdge.Left);
+		layoutPrep.setBindingEdge(EnumBindingEdge.Left);
 
 		final JDFLayoutPreparationParams lppCover = (JDFLayoutPreparationParams) layoutPrep.addPartition(EnumPartIDKey.RunIndex, coverIndex);
 		lppCover.refMedia(mCover);

@@ -68,7 +68,7 @@
  *
  */
 /**
- * 
+ *
  */
 package org.cip4.jdflib.elementwalker;
 
@@ -76,13 +76,12 @@ import org.cip4.jdflib.core.KElement;
 
 /**
  * @author prosirai
- * 
  */
 public interface IWalkerFactory
 {
 	/**
 	 * get a Vector of walkers for a given element
-	 * 
+	 *
 	 * @param toCheck the element to check
 	 * @return {@link IWalker} the validator object, may be null if no further validation is required
 	 */

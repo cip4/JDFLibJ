@@ -66,7 +66,7 @@
  * <http://www.cip4.org/>.
  *
  *
- * 
+ *
  */
 package org.cip4.jdflib.util.event;
 
@@ -75,17 +75,18 @@ import java.util.Vector;
 
 /**
  * class that can be plugged into another class to provide EventQueue functionality by delegation
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class EventQueue implements IEventQueue, IEventListener
 {
 	/**
-	 * 
+	 *
 	 */
 	public EventQueue()
 	{
 		super();
-		v = new Vector<IEventListener>();
+		v = new Vector<>();
 	}
 
 	Vector<IEventListener> v;
@@ -93,8 +94,9 @@ public class EventQueue implements IEventQueue, IEventListener
 	/**
 	 * @see org.cip4.jdflib.util.event.IEventQueue#addListener(org.cip4.jdflib.util.event.IEventListener)
 	 * @param listener
-	*/
-	public void addListener(IEventListener listener)
+	 */
+	@Override
+	public void addListener(final IEventListener listener)
 	{
 		v.add(listener);
 	}
@@ -102,11 +104,14 @@ public class EventQueue implements IEventQueue, IEventListener
 	/**
 	 * @see org.cip4.jdflib.util.event.IEventListener#eventFired(java.util.EventObject)
 	 * @param event
-	*/
-	public void eventFired(EventObject event)
+	 */
+	@Override
+	public void eventFired(final EventObject event)
 	{
-		for (IEventListener l : v)
+		for (final IEventListener l : v)
+		{
 			l.eventFired(event);
+		}
 	}
 
 }

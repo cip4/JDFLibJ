@@ -63,7 +63,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class XJDFGeneratorTest extends XJDFCreatorTest
 {
@@ -165,7 +164,7 @@ class XJDFGeneratorTest extends XJDFCreatorTest
 		bodyMedia.setSpan(AttributeName.MEDIATYPE, "Paper", null);
 
 		final IntentHelper binding = ph.getCreateIntent("BindingIntent");
-		binding.setSpan("BindingType", EnumSpanBindingType.SaddleStitch.getName(), "EnumerationSpan");
+		binding.setSpan("BindingType", EnumSpanBindingType.SaddleStitch.name(), "EnumerationSpan");
 		binding.setSpan("ChildRefs", phCover.getProduct().getID() + " " + phBody.getProduct().getID(), null);
 		final IntentHelper layout = ph.getCreateIntent("LayoutIntent");
 		layout.setSpan("Dimensions", "700 1000", "XYPairSpan");
@@ -234,7 +233,7 @@ class XJDFGeneratorTest extends XJDFCreatorTest
 
 		final SetHelper cpSetHelper = theHelper.appendResourceSet(ElementName.CONVENTIONALPRINTINGPARAMS, null);
 		cpSetHelper.setUsage(EnumUsage.Input);
-		cpSetHelper.getCreatePartition(sheetMap, true).getResource().setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Perfecting.getName());
+		cpSetHelper.getCreatePartition(sheetMap, true).getResource().setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Perfecting.name());
 
 		final SetHelper mediaSetHelper = theHelper.appendResourceSet(ElementName.MEDIA, null);
 		mediaSetHelper.setUsage(EnumUsage.Input);
@@ -244,7 +243,7 @@ class XJDFGeneratorTest extends XJDFCreatorTest
 		mediaPart.setAttribute("ProductID", "ID");
 		final KElement media = mediaHelper.getResource();
 		media.setAttribute("Dimension", new JDFXYPair(72, 49).scaleFromCM(1).toString(), null);
-		media.setAttribute(AttributeName.MEDIATYPE, EnumMediaType.Paper.getName());
+		media.setAttribute(AttributeName.MEDIATYPE, EnumMediaType.Paper.name());
 
 		final SetHelper compSetHelper = theHelper.appendResourceSet(ElementName.COMPONENT, null);
 		compSetHelper.setUsage(EnumUsage.Output);

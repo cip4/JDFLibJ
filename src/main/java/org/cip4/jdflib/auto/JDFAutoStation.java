@@ -125,7 +125,7 @@ public abstract class JDFAutoStation extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoStation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoStation(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -137,7 +137,7 @@ public abstract class JDFAutoStation extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoStation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoStation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -150,7 +150,7 @@ public abstract class JDFAutoStation extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoStation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoStation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -171,7 +171,7 @@ public abstract class JDFAutoStation extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAssemblyIDs(VString value)
+	public void setAssemblyIDs(final VString value)
 	{
 		setAttribute(AttributeName.ASSEMBLYIDS, value, null);
 	}
@@ -183,8 +183,8 @@ public abstract class JDFAutoStation extends JDFElement
 	 */
 	public VString getAssemblyIDs()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -199,7 +199,7 @@ public abstract class JDFAutoStation extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStationAmount(int value)
+	public void setStationAmount(final int value)
 	{
 		setAttribute(AttributeName.STATIONAMOUNT, value, null);
 	}
@@ -224,7 +224,7 @@ public abstract class JDFAutoStation extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStationName(String value)
+	public void setStationName(final String value)
 	{
 		setAttribute(AttributeName.STATIONNAME, value, null);
 	}
@@ -271,7 +271,7 @@ public abstract class JDFAutoStation extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFShapeDef the element
 	 */
-	public JDFShapeDef getCreateShapeDef(int iSkip)
+	public JDFShapeDef getCreateShapeDef(final int iSkip)
 	{
 		return (JDFShapeDef) getCreateElement_JDFElement(ElementName.SHAPEDEF, null, iSkip);
 	}
@@ -283,7 +283,7 @@ public abstract class JDFAutoStation extends JDFElement
 	 * @return JDFShapeDef the element
 	 *         default is getShapeDef(0)
 	 */
-	public JDFShapeDef getShapeDef(int iSkip)
+	public JDFShapeDef getShapeDef(final int iSkip)
 	{
 		return (JDFShapeDef) getElement(ElementName.SHAPEDEF, null, iSkip);
 	}
@@ -313,7 +313,7 @@ public abstract class JDFAutoStation extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refShapeDef(JDFShapeDef refTarget)
+	public void refShapeDef(final JDFShapeDef refTarget)
 	{
 		refElement(refTarget);
 	}

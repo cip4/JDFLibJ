@@ -111,7 +111,7 @@ public class WalkTabs extends WalkJDFSubElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		map.renameKey(ElementName.TABEXTENSIONMYLAR, XJDFConstants.ReinforceTabs);
 		map.renameKey(ElementName.TABBINDMYLAR, XJDFConstants.ReinforceBind);

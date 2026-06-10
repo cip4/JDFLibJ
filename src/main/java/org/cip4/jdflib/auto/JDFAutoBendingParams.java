@@ -106,7 +106,7 @@ public abstract class JDFAutoBendingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBendingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoBendingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoBendingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBendingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoBendingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoBendingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoBendingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoBendingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -142,7 +142,7 @@ public abstract class JDFAutoBendingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -172,7 +172,7 @@ public abstract class JDFAutoBendingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBend(boolean value)
+	public void setBend(final boolean value)
 	{
 		setAttribute(AttributeName.BEND, value, null);
 	}
@@ -197,7 +197,7 @@ public abstract class JDFAutoBendingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPunch(boolean value)
+	public void setPunch(final boolean value)
 	{
 		setAttribute(AttributeName.PUNCH, value, null);
 	}
@@ -222,7 +222,7 @@ public abstract class JDFAutoBendingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPunchType(String value)
+	public void setPunchType(final String value)
 	{
 		setAttribute(AttributeName.PUNCHTYPE, value, null);
 	}

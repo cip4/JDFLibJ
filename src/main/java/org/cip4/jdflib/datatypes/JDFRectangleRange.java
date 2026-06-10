@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,22 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFRectangleRange.java
@@ -104,42 +104,42 @@ public class JDFRectangleRange extends JDFRange
 
 	/**
 	 * constructs a JDFRectangleRange, both values are equal ("from x to x")
-	 * 
+	 *
 	 * @param x - the given JDFRectangle
 	 */
-	public JDFRectangleRange(JDFRectangle x)
+	public JDFRectangleRange(final JDFRectangle x)
 	{
 		init(x, x);
 	}
 
 	/**
 	 * constructor a JDFRectangleRange with two JDFRectangle values/bounds ("from xmin to xmax")
-	 * 
+	 *
 	 * @param xmin the given min value
 	 * @param xmax the given max value
 	 */
-	public JDFRectangleRange(JDFRectangle xmin, JDFRectangle xmax)
+	public JDFRectangleRange(final JDFRectangle xmin, final JDFRectangle xmax)
 	{
 		init(xmin, xmax);
 	}
 
 	/**
 	 * copy constructor - constructs a JDFRectangleRange with the given JDFRectangleRange
-	 * 
+	 *
 	 * @param r the JDFRectangleRange to copy
 	 */
-	public JDFRectangleRange(JDFRectangleRange r)
+	public JDFRectangleRange(final JDFRectangleRange r)
 	{
 		init(r.getLeft(), r.getRight());
 	}
 
 	/**
 	 * Initialization
-	 * 
+	 *
 	 * @param x left value
 	 * @param y right value
 	 */
-	protected void init(JDFRectangle x, JDFRectangle y)
+	protected void init(final JDFRectangle x, final JDFRectangle y)
 	{
 		m_left = x;
 		m_right = y;
@@ -147,14 +147,13 @@ public class JDFRectangleRange extends JDFRange
 
 	/**
 	 * Constructs a JDFRectangleRange with the values of the given string
-	 * 
+	 *
 	 * @param s the given string representation of the range
-	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFRectangleRange(String s) throws DataFormatException
+	public JDFRectangleRange(final String s) throws DataFormatException
 	{
-		String[] strArray = s.split("~");
+		final String[] strArray = s.split("~");
 		if ((strArray.length <= 0) || (strArray.length > 2))
 		{
 			throw new DataFormatException("JDFRectangleRange illegal string: " + s);
@@ -174,7 +173,7 @@ public class JDFRectangleRange extends JDFRange
 				m_right = new JDFRectangle(strArray[1].trim());
 			}
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new DataFormatException("JDFRectangleRange illegal string: " + s);
 		}
@@ -182,18 +181,17 @@ public class JDFRectangleRange extends JDFRange
 
 	/**
 	 * isValid - validate the given String
-	 * 
+	 *
 	 * @param s the given string
-	 * 
 	 * @return boolean - false if the String has not a valid format
 	 */
-	public boolean isValid(String s)
+	public boolean isValid(final String s)
 	{
 		try
 		{
 			new JDFRectangleRange(s);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			return false;
 		}
@@ -202,34 +200,30 @@ public class JDFRectangleRange extends JDFRange
 
 	/**
 	 * equals - returns true if both JDFRectangleRanges are equal otherwise false
-	 * 
+	 *
 	 * @param other the JDFRectangleRange to compare
 	 * @return boolean - true if equal, otherwise false
 	 */
 	@Override
-	public boolean equals(Object other)
+	public boolean equals(final Object other)
 	{
 		if (this == other)
 		{
 			return true;
 		}
-		if (other == null)
-		{
-			return false;
-		}
-		if (!other.getClass().equals(getClass()))
+		if ((other == null) || !other.getClass().equals(getClass()))
 		{
 			return false;
 		}
 
-		JDFRectangleRange range = (JDFRectangleRange) other;
+		final JDFRectangleRange range = (JDFRectangleRange) other;
 
 		return this.getLeft().equals(range.getLeft()) && this.getRight().equals(range.getRight());
 	}
 
 	/**
 	 * hashCode complements equals() to fulfill the equals/hashCode contract
-	 * 
+	 *
 	 * @return int
 	 */
 	@Override
@@ -240,39 +234,37 @@ public class JDFRectangleRange extends JDFRange
 
 	/**
 	 * inRange - tests if the given x inside of this range
-	 * 
+	 *
 	 * @param x comparison value
-	 * 
 	 * @return boolean - true if x in range
 	 */
-	public boolean inRange(JDFRectangle x)
+	public boolean inRange(final JDFRectangle x)
 	{
-		JDFRectangle min = this.getLowerValue();
-		JDFRectangle max = this.getUpperValue();
+		final JDFRectangle min = this.getLowerValue();
+		final JDFRectangle max = this.getUpperValue();
 		return x.isGreaterOrEqual(min) && x.isLessOrEqual(max);
 	}
 
 	/**
 	 * isPartOfRange - is range 'r' within this range?
-	 * 
+	 *
 	 * @param ra the range to test
-	 * 
 	 * @return boolean - true if range 'r' is within this range, else false
 	 */
 	@Override
-	public boolean isPartOfRange(JDFRange ra)
+	public boolean isPartOfRange(final JDFRange ra)
 	{
-		JDFRectangleRange r = (JDFRectangleRange) ra;
-		JDFRectangle min = this.getLowerValue();
-		JDFRectangle r_min = r.getLowerValue();
-		JDFRectangle max = this.getUpperValue();
-		JDFRectangle r_max = r.getUpperValue();
+		final JDFRectangleRange r = (JDFRectangleRange) ra;
+		final JDFRectangle min = this.getLowerValue();
+		final JDFRectangle r_min = r.getLowerValue();
+		final JDFRectangle max = this.getUpperValue();
+		final JDFRectangle r_max = r.getUpperValue();
 		return r_min.isGreaterOrEqual(min) && r_max.isLessOrEqual(max);
 	}
 
 	/**
 	 * getLeft - gets the left JDFRectangle object of the range
-	 * 
+	 *
 	 * @return JDFRectangle - the left JDFRectangle object of the range
 	 */
 	public JDFRectangle getLeft()
@@ -282,7 +274,7 @@ public class JDFRectangleRange extends JDFRange
 
 	/**
 	 * getRight - gets the right JDFRectangle object of the range
-	 * 
+	 *
 	 * @return JDFRectangle - the right JDFRectangle object of the range
 	 */
 	public JDFRectangle getRight()
@@ -292,27 +284,27 @@ public class JDFRectangleRange extends JDFRange
 
 	/**
 	 * sets the left JDFRectangle object of the range
-	 * 
+	 *
 	 * @param x the left JDFRectangle object of the range
 	 */
-	public void setLeft(JDFRectangle x)
+	public void setLeft(final JDFRectangle x)
 	{
 		m_left = x;
 	}
 
 	/**
 	 * sets the right JDFRectangle object of the range
-	 * 
+	 *
 	 * @param JDFRectangle x - the right JDFRectangle object of the range
 	 */
-	public void setRight(JDFRectangle x)
+	public void setRight(final JDFRectangle x)
 	{
 		m_right = x;
 	}
 
 	/**
 	 * getUpperValue - returns the upper value of the bounds
-	 * 
+	 *
 	 * @return JDFRectangle - the upper value of the range
 	 */
 	public JDFRectangle getUpperValue()
@@ -322,7 +314,7 @@ public class JDFRectangleRange extends JDFRange
 
 	/**
 	 * getLowerValue - returns the lower value of the bounds
-	 * 
+	 *
 	 * @return JDFRectangle - the lower value of the range
 	 */
 	public JDFRectangle getLowerValue()
@@ -343,7 +335,7 @@ public class JDFRectangleRange extends JDFRange
 	}
 
 	@Override
-	protected boolean inObjectRange(Object other)
+	protected boolean inObjectRange(final Object other)
 	{
 		return inRange((JDFRectangle) other);
 	}

@@ -88,36 +88,36 @@ public class JDFShapeSpan extends JDFSpanBase
 
 	/**
 	 * Constructor for JDFShapeSpan
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFShapeSpan(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFShapeSpan(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFShapeSpan
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFShapeSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFShapeSpan(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFShapeSpan
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFShapeSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFShapeSpan(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -126,7 +126,7 @@ public class JDFShapeSpan extends JDFSpanBase
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -150,7 +150,7 @@ public class JDFShapeSpan extends JDFSpanBase
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
 
-	public void setActual(JDFShape value)
+	public void setActual(final JDFShape value)
 	{
 		setAttribute(AttributeName.ACTUAL, value.toString(), null);
 	}
@@ -162,7 +162,7 @@ public class JDFShapeSpan extends JDFSpanBase
 
 	/**
 	 * Gets the value of attribute DataType
-	 * 
+	 *
 	 * @return EnumDataType - the attribute DataType value
 	 */
 	@Override
@@ -171,7 +171,7 @@ public class JDFShapeSpan extends JDFSpanBase
 		return EnumDataType.ShapeSpan;
 	}
 
-	public void setPreferred(JDFShape value)
+	public void setPreferred(final JDFShape value)
 	{
 		setAttribute(AttributeName.PREFERRED, value, null);
 	}
@@ -181,7 +181,7 @@ public class JDFShapeSpan extends JDFSpanBase
 		return JDFShape.createShape(getAttribute(AttributeName.PREFERRED));
 	}
 
-	public void setRange(JDFShapeRangeList value)
+	public void setRange(final JDFShapeRangeList value)
 	{
 		setAttribute(AttributeName.RANGE, value, null);
 	}
@@ -199,65 +199,65 @@ public class JDFShapeSpan extends JDFSpanBase
 	@Override
 	public boolean init()
 	{
-		boolean b = super.init();
+		final boolean b = super.init();
 		setDataType(EnumDataType.ShapeSpan);
 		return b;
 	}
 
 	/**
 	 * set the Preferred attribute
-	 * 
+	 *
 	 * @param double x the preferred width
 	 * @param double y the preferred height
 	 * @param double z the preferred depth
 	 */
-	public void setPreferred(double x, double y, double z)
+	public void setPreferred(final double x, final double y, final double z)
 	{
 		setPreferred(new JDFShape(x, y, z));
 	}
 
 	/**
 	 * add an element shape to the Range attribute as a JDFRange
-	 * 
+	 *
 	 * @param JDFShape shape the Range value
 	 */
-	public void addRange(JDFShape shape)
+	public void addRange(final JDFShape shape)
 	{
-		JDFShapeRangeList srl = getRange();
+		final JDFShapeRangeList srl = getRange();
 		srl.append(shape);
 		setRange(srl);
 	}
 
 	/**
 	 * add an element x y to the Range attribute as a JDFRange
-	 * 
+	 *
 	 * @param JDFShape shape1 the Range value
 	 * @param JDFShape shape2 the Range value
 	 */
-	public void addRange(JDFShape shape1, JDFShape shape2)
+	public void addRange(final JDFShape shape1, final JDFShape shape2)
 	{
-		JDFShapeRangeList srl = getRange();
+		final JDFShapeRangeList srl = getRange();
 		srl.append(shape1, shape2);
 		setRange(srl);
 	}
 
 	/**
 	 * add an element x y zto the Range attribute as a JDFRange
-	 * 
+	 *
 	 * @param double x the width
 	 * @param double y the height
 	 * @param double z the depth
 	 */
-	public void addRange(double x, double y, double z)
+	public void addRange(final double x, final double y, final double z)
 	{
-		JDFShapeRangeList srl = getRange();
+		final JDFShapeRangeList srl = getRange();
 		srl.append(new JDFShape(x, y, z));
 		setRange(srl);
 	}
 
 	/**
 	 * add an element x1 y1 z1~ x2 y2 z2to the Range attribute as a JDFRange
-	 * 
+	 *
 	 * @param double x1 the 1. width
 	 * @param double y1 the 1. height
 	 * @param double z1 the 1. depth
@@ -265,9 +265,9 @@ public class JDFShapeSpan extends JDFSpanBase
 	 * @param double y2 the 2. height
 	 * @param double z2 the 2. depth
 	 */
-	public void addRange(double x1, double y1, double z1, double x2, double y2, double z2)
+	public void addRange(final double x1, final double y1, final double z1, final double x2, final double y2, final double z2)
 	{
-		JDFShapeRangeList srl = getRange();
+		final JDFShapeRangeList srl = getRange();
 		srl.append(new JDFShape(x1, y1, z1), new JDFShape(x2, y2, z2));
 		setRange(srl);
 	}

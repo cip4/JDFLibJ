@@ -43,13 +43,13 @@ import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.auto.JDFAutoImageShift.EnumPositionX;
 import org.cip4.jdflib.auto.JDFAutoImageShift.EnumPositionY;
 import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumFinishingOrder;
-import org.cip4.jdflib.auto.JDFAutoPageCell.EnumRotate;
+import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumRotate;
+import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumSides;
 import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchor;
 import org.cip4.jdflib.auto.JDFAutoStripCellParams;
 import org.cip4.jdflib.auto.JDFAutoStripMark.EnumMarkSide;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFElement.EnumSides;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -256,7 +256,7 @@ public class StrippingConverter
 			return;
 		}
 
-		String anchor = posY.getName() + posX.getName();
+		String anchor = posY.name() + posX.name();
 		if ("CenterCenter".equals(anchor))
 		{
 			anchor = "Center";
@@ -329,8 +329,8 @@ public class StrippingConverter
 				: strippingParams.getCreatePartition(new JDFAttributeMap(AttributeName.BINDERYSIGNATURENAME, bsName), null));
 		final JDFPosition position = sp.appendPosition();
 		position.setRelativeBox(getRelativeBox(x, y, n, numberUp));
-		EnumRotate r = layPrepParams.getRotate();
-		JDFMatrix m = new JDFMatrix(org.cip4.jdflib.core.JDFElement.EnumOrientation.getEnum(r.getName()), 0, 0);
+		final EnumRotate r = layPrepParams.getRotate();
+		final JDFMatrix m = new JDFMatrix(org.cip4.jdflib.core.JDFElement.EnumOrientation.getEnum(r.name()), 0, 0);
 		final EnumSides sides = layPrepParams.getSides();
 		if (EnumSides.OneSidedBackFlipX.equals(sides))
 		{
@@ -340,7 +340,7 @@ public class StrippingConverter
 		{
 			m.concat(new JDFMatrix(org.cip4.jdflib.core.JDFElement.EnumOrientation.Flip180, 0, 0));
 		}
-		position.setAttribute(AttributeName.ORIENTATION, m.getOrientation().getName());
+		position.setAttribute(AttributeName.ORIENTATION, m.getOrientation().name());
 		return position;
 	}
 
@@ -485,10 +485,10 @@ public class StrippingConverter
 		}
 		else if (types != null)
 		{
-			final int n = types.index(EnumType.LayoutPreparation.getName());
+			final int n = types.index(EnumType.LayoutPreparation.name());
 			if (n >= 0)
 			{
-				types.set(n, EnumType.Stripping.getName());
+				types.set(n, EnumType.Stripping.name());
 				parent.setTypes(types);
 			}
 		}

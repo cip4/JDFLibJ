@@ -71,8 +71,8 @@
  * class JDFEmployee
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  */
 
 package org.cip4.jdflib.resource.process;
@@ -88,8 +88,7 @@ import org.w3c.dom.DOMException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * before June 4, 2009
+ *         before June 4, 2009
  */
 public class JDFEmployee extends JDFAutoEmployee implements IMatches
 {
@@ -97,10 +96,10 @@ public class JDFEmployee extends JDFAutoEmployee implements IMatches
 
 	/**
 	 * Constructor for JDFEmployee
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
-	 * 
 	 */
 	public JDFEmployee(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
@@ -109,6 +108,7 @@ public class JDFEmployee extends JDFAutoEmployee implements IMatches
 
 	/**
 	 * Constructor for JDFEmployee
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -121,14 +121,15 @@ public class JDFEmployee extends JDFAutoEmployee implements IMatches
 
 	/**
 	 * Constructor for JDFEmployee
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
-	 * 
 	 * @throws DOMException
 	 */
-	public JDFEmployee(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFEmployee(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -143,11 +144,12 @@ public class JDFEmployee extends JDFAutoEmployee implements IMatches
 	}
 
 	/**
-	 * returns true if the input object is equivalent to this or null</br> valid object types are:<br/>
+	 * returns true if the input object is equivalent to this or null</br>
+	 * valid object types are:<br/>
 	 * Employee<br/>
 	 * EmployeeDef<br/>
 	 * String - must match @PersonalID <br/>
-	 * 
+	 *
 	 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
 	 */
 	@Override
@@ -180,6 +182,7 @@ public class JDFEmployee extends JDFAutoEmployee implements IMatches
 
 	/**
 	 * get the PersonalID, defaulting to productID
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoEmployee#getPersonalID()
 	 */
 	@Override
@@ -194,6 +197,7 @@ public class JDFEmployee extends JDFAutoEmployee implements IMatches
 
 	/**
 	 * get the productID, defaulting to PersonalID
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoEmployee#getProductID()
 	 */
 	@Override
@@ -215,7 +219,7 @@ public class JDFEmployee extends JDFAutoEmployee implements IMatches
 		String descName = super.getDescriptiveName();
 		if (StringUtil.getNonEmpty(descName) == null)
 		{
-			JDFPerson person = getPerson();
+			final JDFPerson person = getPerson();
 			if (person != null)
 			{
 				descName = person.getDescriptiveName();

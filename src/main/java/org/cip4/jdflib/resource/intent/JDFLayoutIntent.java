@@ -84,6 +84,7 @@ package org.cip4.jdflib.resource.intent;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoLayoutIntent;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.w3c.dom.DOMException;
 
@@ -101,7 +102,7 @@ public class JDFLayoutIntent extends JDFAutoLayoutIntent
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFLayoutIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFLayoutIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -114,7 +115,7 @@ public class JDFLayoutIntent extends JDFAutoLayoutIntent
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFLayoutIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFLayoutIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -128,7 +129,7 @@ public class JDFLayoutIntent extends JDFAutoLayoutIntent
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFLayoutIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFLayoutIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -151,29 +152,41 @@ public class JDFLayoutIntent extends JDFAutoLayoutIntent
 	 */
 	public VString getSideVector()
 	{
-		EnumSides sides = getSides();
-		return getSideVector(sides);
+		final EnumSides sides = getSides();
+		final JDFElement.EnumSides resolvedSides = sides == null ? null : JDFElement.EnumSides.getEnum(sides.name());
+		return getSideVector(resolvedSides);
 	}
 
 	/**
 	 * @param sides
 	 * @return
 	 */
-	public static VString getSideVector(EnumSides sides)
+	public static VString getSideVector(final JDFElement.EnumSides sides)
 	{
 		if (sides == null)
 		{
 			return null;
 		}
-		VString v = new VString();
-		if (!EnumSides.OneSidedBackFlipX.equals(sides) && !EnumSides.OneSidedBackFlipY.equals(sides))
+		final VString v = new VString();
+		if (!JDFElement.EnumSides.OneSidedBackFlipX.equals(sides) && !JDFElement.EnumSides.OneSidedBackFlipY.equals(sides))
 		{
-			v.add(EnumSide.Front.getName());
+			v.add(EnumSide.Front.name());
 		}
-		if (!EnumSides.OneSidedFront.equals(sides))
+		if (!JDFElement.EnumSides.OneSidedFront.equals(sides))
 		{
-			v.add(EnumSide.Back.getName());
+			v.add(EnumSide.Back.name());
 		}
 		return v;
+	}
+
+	/**
+	 * @param sides
+	 * @return
+	 */
+	@Deprecated
+	public static VString getSideVector(final EnumSides sides)
+	{
+		final JDFElement.EnumSides resolvedSides = sides == null ? null : JDFElement.EnumSides.getEnum(sides.name());
+		return getSideVector(resolvedSides);
 	}
 }

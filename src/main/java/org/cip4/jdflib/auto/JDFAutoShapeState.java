@@ -139,7 +139,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoShapeState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoShapeState(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -151,7 +151,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoShapeState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoShapeState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -164,7 +164,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoShapeState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoShapeState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -175,7 +175,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -196,7 +196,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDefaultValue(JDFShape value)
+	public void setDefaultValue(final JDFShape value)
 	{
 		setAttribute(AttributeName.DEFAULTVALUE, value, null);
 	}
@@ -209,8 +209,8 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 */
 	public JDFShape getDefaultValue()
 	{
-		String strAttrName = getAttribute(AttributeName.DEFAULTVALUE, null, null);
-		JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.DEFAULTVALUE, null, null);
+		final JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -224,7 +224,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCurrentValue(JDFShape value)
+	public void setCurrentValue(final JDFShape value)
 	{
 		setAttribute(AttributeName.CURRENTVALUE, value, null);
 	}
@@ -237,8 +237,8 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 */
 	public JDFShape getCurrentValue()
 	{
-		String strAttrName = getAttribute(AttributeName.CURRENTVALUE, null, null);
-		JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CURRENTVALUE, null, null);
+		final JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -252,7 +252,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowedValueList(JDFShapeRangeList value)
+	public void setAllowedValueList(final JDFShapeRangeList value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUELIST, value, null);
 	}
@@ -265,8 +265,8 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 */
 	public JDFShapeRangeList getAllowedValueList()
 	{
-		String strAttrName = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
-		JDFShapeRangeList nPlaceHolder = JDFShapeRangeList.createShapeRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
+		final JDFShapeRangeList nPlaceHolder = JDFShapeRangeList.createShapeRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -280,7 +280,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowedValueMax(JDFShape value)
+	public void setAllowedValueMax(final JDFShape value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUEMAX, value, null);
 	}
@@ -293,8 +293,8 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 */
 	public JDFShape getAllowedValueMax()
 	{
-		String strAttrName = getAttribute(AttributeName.ALLOWEDVALUEMAX, null, null);
-		JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.ALLOWEDVALUEMAX, null, null);
+		final JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -308,7 +308,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowedValueMin(JDFShape value)
+	public void setAllowedValueMin(final JDFShape value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUEMIN, value, null);
 	}
@@ -321,8 +321,8 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 */
 	public JDFShape getAllowedValueMin()
 	{
-		String strAttrName = getAttribute(AttributeName.ALLOWEDVALUEMIN, null, null);
-		JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.ALLOWEDVALUEMIN, null, null);
+		final JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -336,7 +336,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowedX(JDFNumberRangeList value)
+	public void setAllowedX(final JDFNumberRangeList value)
 	{
 		setAttribute(AttributeName.ALLOWEDX, value, null);
 	}
@@ -349,8 +349,8 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 */
 	public JDFNumberRangeList getAllowedX()
 	{
-		String strAttrName = getAttribute(AttributeName.ALLOWEDX, null, null);
-		JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.ALLOWEDX, null, null);
+		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -364,7 +364,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowedY(JDFNumberRangeList value)
+	public void setAllowedY(final JDFNumberRangeList value)
 	{
 		setAttribute(AttributeName.ALLOWEDY, value, null);
 	}
@@ -377,8 +377,8 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 */
 	public JDFNumberRangeList getAllowedY()
 	{
-		String strAttrName = getAttribute(AttributeName.ALLOWEDY, null, null);
-		JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.ALLOWEDY, null, null);
+		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -392,7 +392,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowedZ(JDFNumberRangeList value)
+	public void setAllowedZ(final JDFNumberRangeList value)
 	{
 		setAttribute(AttributeName.ALLOWEDZ, value, null);
 	}
@@ -405,8 +405,8 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 */
 	public JDFNumberRangeList getAllowedZ()
 	{
-		String strAttrName = getAttribute(AttributeName.ALLOWEDZ, null, null);
-		JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.ALLOWEDZ, null, null);
+		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -420,7 +420,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentValueList(JDFShapeRangeList value)
+	public void setPresentValueList(final JDFShapeRangeList value)
 	{
 		setAttribute(AttributeName.PRESENTVALUELIST, value, null);
 	}
@@ -433,8 +433,8 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 */
 	public JDFShapeRangeList getPresentValueList()
 	{
-		String strAttrName = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
-		JDFShapeRangeList nPlaceHolder = JDFShapeRangeList.createShapeRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
+		final JDFShapeRangeList nPlaceHolder = JDFShapeRangeList.createShapeRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -448,7 +448,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentValueMax(JDFShape value)
+	public void setPresentValueMax(final JDFShape value)
 	{
 		setAttribute(AttributeName.PRESENTVALUEMAX, value, null);
 	}
@@ -461,8 +461,8 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 */
 	public JDFShape getPresentValueMax()
 	{
-		String strAttrName = getAttribute(AttributeName.PRESENTVALUEMAX, null, null);
-		JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PRESENTVALUEMAX, null, null);
+		final JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -476,7 +476,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentValueMin(JDFShape value)
+	public void setPresentValueMin(final JDFShape value)
 	{
 		setAttribute(AttributeName.PRESENTVALUEMIN, value, null);
 	}
@@ -489,8 +489,8 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 */
 	public JDFShape getPresentValueMin()
 	{
-		String strAttrName = getAttribute(AttributeName.PRESENTVALUEMIN, null, null);
-		JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PRESENTVALUEMIN, null, null);
+		final JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -504,7 +504,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentX(JDFNumberRangeList value)
+	public void setPresentX(final JDFNumberRangeList value)
 	{
 		setAttribute(AttributeName.PRESENTX, value, null);
 	}
@@ -517,8 +517,8 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 */
 	public JDFNumberRangeList getPresentX()
 	{
-		String strAttrName = getAttribute(AttributeName.PRESENTX, null, null);
-		JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PRESENTX, null, null);
+		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -532,7 +532,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentY(JDFNumberRangeList value)
+	public void setPresentY(final JDFNumberRangeList value)
 	{
 		setAttribute(AttributeName.PRESENTY, value, null);
 	}
@@ -545,8 +545,8 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 */
 	public JDFNumberRangeList getPresentY()
 	{
-		String strAttrName = getAttribute(AttributeName.PRESENTY, null, null);
-		JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PRESENTY, null, null);
+		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -560,7 +560,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentZ(JDFNumberRangeList value)
+	public void setPresentZ(final JDFNumberRangeList value)
 	{
 		setAttribute(AttributeName.PRESENTZ, value, null);
 	}
@@ -573,8 +573,8 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 */
 	public JDFNumberRangeList getPresentZ()
 	{
-		String strAttrName = getAttribute(AttributeName.PRESENTZ, null, null);
-		JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PRESENTZ, null, null);
+		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -610,7 +610,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc the element
 	 */
-	public JDFLoc getCreateLoc(int iSkip)
+	public JDFLoc getCreateLoc(final int iSkip)
 	{
 		return (JDFLoc) getCreateElement_JDFElement(ElementName.LOC, null, iSkip);
 	}
@@ -622,7 +622,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 * @return JDFLoc the element
 	 *         default is getLoc(0)
 	 */
-	public JDFLoc getLoc(int iSkip)
+	public JDFLoc getLoc(final int iSkip)
 	{
 		return (JDFLoc) getElement(ElementName.LOC, null, iSkip);
 	}
@@ -673,7 +673,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFValueLoc the element
 	 */
-	public JDFValueLoc getCreateValueLoc(int iSkip)
+	public JDFValueLoc getCreateValueLoc(final int iSkip)
 	{
 		return (JDFValueLoc) getCreateElement_JDFElement(ElementName.VALUELOC, null, iSkip);
 	}
@@ -685,7 +685,7 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 * @return JDFValueLoc the element
 	 *         default is getValueLoc(0)
 	 */
-	public JDFValueLoc getValueLoc(int iSkip)
+	public JDFValueLoc getValueLoc(final int iSkip)
 	{
 		return (JDFValueLoc) getElement(ElementName.VALUELOC, null, iSkip);
 	}

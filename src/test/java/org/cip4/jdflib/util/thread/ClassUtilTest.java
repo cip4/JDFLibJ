@@ -74,16 +74,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
  * @date Mar 15, 2013
  */
 class ClassUtilTest extends ClassUtilParent
 {
 	/**
-	 *
-	 *
-	 * @author rainer  prosi
+	 * @author rainer prosi
 	 * @date Mar 15, 2013
 	 */
 	protected class InnerClass
@@ -97,7 +94,7 @@ class ClassUtilTest extends ClassUtilParent
 	@Test
 	void testGetDeclaredClasses()
 	{
-		Vector<Class<?>> v = ClassUtil.getDeclaredClasses(getClass());
+		final Vector<Class<?>> v = ClassUtil.getDeclaredClasses(getClass());
 		Assertions.assertTrue(v.contains(InnerClass.class));
 		Assertions.assertTrue(v.contains(OtherInnerClass.class));
 	}

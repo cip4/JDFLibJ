@@ -9,12 +9,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanSurplusHandling extends JDFEnumerationSpan
@@ -23,39 +19,39 @@ public class JDFSpanSurplusHandling extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanSurplusHandling
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanSurplusHandling(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanSurplusHandling(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanSurplusHandling
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanSurplusHandling(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanSurplusHandling(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanSurplusHandling
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanSurplusHandling(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanSurplusHandling(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -64,64 +60,31 @@ public class JDFSpanSurplusHandling extends JDFEnumerationSpan
 	 * Enumeration strings for EnumSpanSurplusHandling
 	 */
 
-	public static class EnumSpanSurplusHandling extends ValuedEnum
+	public enum EnumSpanSurplusHandling
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_stSurplusValue = 0;
+		ReturnWithProduct, Return, Pickup, Destroy, PrinterOwns, Store;
 
-		private EnumSpanSurplusHandling(String name)
+		public static EnumSpanSurplusHandling getEnum(final String val)
 		{
-			super(name, m_stSurplusValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanSurplusHandling.class, val, null);
 		}
-
-		public static EnumSpanSurplusHandling getEnum(String enumName)
-		{
-			return (EnumSpanSurplusHandling) getEnum(EnumSpanSurplusHandling.class, enumName);
-		}
-
-		public static EnumSpanSurplusHandling getEnum(int enumValue)
-		{
-			return (EnumSpanSurplusHandling) getEnum(EnumSpanSurplusHandling.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanSurplusHandling.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanSurplusHandling.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanSurplusHandling.class);
-		}
-
-		public static final EnumSpanSurplusHandling ReturnWithProduct = new EnumSpanSurplusHandling("ReturnWithProduct");
-		public static final EnumSpanSurplusHandling Return = new EnumSpanSurplusHandling("Return");
-		public static final EnumSpanSurplusHandling Pickup = new EnumSpanSurplusHandling("Pickup");
-		public static final EnumSpanSurplusHandling Destroy = new EnumSpanSurplusHandling("Destroy");
-		public static final EnumSpanSurplusHandling PrinterOwns = new EnumSpanSurplusHandling("PrinterOwns");
-		public static final EnumSpanSurplusHandling Store = new EnumSpanSurplusHandling("Store");
 
 	}
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanSurplusHandling.getEnum(0);
+		return EnumSpanSurplusHandling.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

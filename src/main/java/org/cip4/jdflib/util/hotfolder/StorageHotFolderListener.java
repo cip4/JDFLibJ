@@ -72,7 +72,6 @@ class StorageHotFolderListener implements HotFolderListener
 	/**
 	 * @param storageDir
 	 * @param hfListener
-	 *
 	 */
 	StorageHotFolderListener(final File storageDir, final HotFolderListener hfListener, final StorageHotFolder parent)
 	{
@@ -94,7 +93,6 @@ class StorageHotFolderListener implements HotFolderListener
 	}
 
 	/**
-	 *
 	 * set the directory for successful done
 	 *
 	 * @param ok
@@ -114,7 +112,6 @@ class StorageHotFolderListener implements HotFolderListener
 	}
 
 	/**
-	 *
 	 * set the directory for error done
 	 *
 	 * @param error
@@ -213,7 +210,7 @@ class StorageHotFolderListener implements HotFolderListener
 	 * copy to ok or completed
 	 *
 	 * @param storedFile the file to move
-	 * @param bOK if true, ok else error
+	 * @param bOK        if true, ok else error
 	 * @param bZappTmp
 	 */
 	void copyCompleted(final File storedFile, final boolean bOK, final Throwable t)
@@ -398,7 +395,9 @@ class StorageHotFolderListener implements HotFolderListener
 				{
 					log.warn("could not move aux dir " + aux + " to " + tmpDir + " #" + i);
 					if (i == 3 || !ThreadUtil.sleep(4242 * i))
+					{
 						break;
+					}
 				}
 			}
 		}
@@ -434,9 +433,10 @@ class StorageHotFolderListener implements HotFolderListener
 	@Override
 	public String toString()
 	{
-		return "StorageHotFolderListener [" + (storage != null ? "storage=" + storage + ", " : "") + (errorStorage != null ? "errorStorage=" + errorStorage + ", " : "")
-				+ (okStorage != null ? "okStorage=" + okStorage + ", " : "") + (parent != null ? "parent=" + parent + ", " : "") + "nHotOK=" + nHotOK + ", nHotError=" + nHotError
-				+ ", nQueued=" + nQueued + ", maxStore=" + maxStore + ", maxAux=" + maxAux + "]";
+		return "StorageHotFolderListener [" + (storage != null ? "storage=" + storage + ", " : "")
+				+ (errorStorage != null ? "errorStorage=" + errorStorage + ", " : "") + (okStorage != null ? "okStorage=" + okStorage + ", " : "")
+				+ (parent != null ? "parent=" + parent + ", " : "") + "nHotOK=" + nHotOK + ", nHotError=" + nHotError + ", nQueued=" + nQueued + ", maxStore="
+				+ maxStore + ", maxAux=" + maxAux + "]";
 	}
 
 }

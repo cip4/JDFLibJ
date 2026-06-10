@@ -116,7 +116,7 @@ public abstract class JDFAutoComment extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoComment(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoComment(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -128,7 +128,7 @@ public abstract class JDFAutoComment extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoComment(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoComment(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -141,7 +141,7 @@ public abstract class JDFAutoComment extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoComment(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoComment(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -162,7 +162,7 @@ public abstract class JDFAutoComment extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAgentName(String value)
+	public void setAgentName(final String value)
 	{
 		setAttribute(AttributeName.AGENTNAME, value, null);
 	}
@@ -187,7 +187,7 @@ public abstract class JDFAutoComment extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAgentVersion(String value)
+	public void setAgentVersion(final String value)
 	{
 		setAttribute(AttributeName.AGENTVERSION, value, null);
 	}
@@ -212,7 +212,7 @@ public abstract class JDFAutoComment extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAttributeJDF(String value)
+	public void setAttributeJDF(final String value)
 	{
 		setAttribute(AttributeName.ATTRIBUTE, value, null);
 	}
@@ -237,7 +237,7 @@ public abstract class JDFAutoComment extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAuthor(String value)
+	public void setAuthor(final String value)
 	{
 		setAttribute(AttributeName.AUTHOR, value, null);
 	}
@@ -262,7 +262,7 @@ public abstract class JDFAutoComment extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBox(JDFRectangle value)
+	public void setBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.BOX, value, null);
 	}
@@ -275,8 +275,8 @@ public abstract class JDFAutoComment extends JDFElement
 	 */
 	public JDFRectangle getBox()
 	{
-		String strAttrName = getAttribute(AttributeName.BOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.BOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -291,7 +291,7 @@ public abstract class JDFAutoComment extends JDFElement
 	 * @param value the value to set the attribute to
 	 */
 	@Override
-	public void setID(String value)
+	public void setID(final String value)
 	{
 		setAttribute(AttributeName.ID, value, null);
 	}
@@ -317,7 +317,7 @@ public abstract class JDFAutoComment extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLanguage(String value)
+	public void setLanguage(final String value)
 	{
 		setAttribute(AttributeName.LANGUAGE, value, null);
 	}
@@ -342,7 +342,7 @@ public abstract class JDFAutoComment extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setName(String value)
+	public void setName(final String value)
 	{
 		setAttribute(AttributeName.NAME, value, null);
 	}
@@ -367,7 +367,7 @@ public abstract class JDFAutoComment extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPath(String value)
+	public void setPath(final String value)
 	{
 		setAttribute(AttributeName.PATH, value, null);
 	}
@@ -392,7 +392,7 @@ public abstract class JDFAutoComment extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPersonalID(String value)
+	public void setPersonalID(final String value)
 	{
 		setAttribute(AttributeName.PERSONALID, value, null);
 	}
@@ -417,7 +417,7 @@ public abstract class JDFAutoComment extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setTimeStamp(JDFDate value)
+	public void setTimeStamp(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -434,8 +434,8 @@ public abstract class JDFAutoComment extends JDFElement
 	 */
 	public JDFDate getTimeStamp()
 	{
-		String str = getAttribute(AttributeName.TIMESTAMP, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.TIMESTAMP, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 

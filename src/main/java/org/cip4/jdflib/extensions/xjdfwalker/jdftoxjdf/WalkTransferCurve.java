@@ -74,9 +74,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkTransferCurve extends WalkResource
 {
@@ -105,7 +103,9 @@ public class WalkTransferCurve extends WalkResource
 	{
 		final String name = map.get(XJDFConstants.TransferCurveName);
 		if ("Paper".equals(name))
+		{
 			map.put(XJDFConstants.TransferCurveName, "Substrate");
+		}
 		super.updateAttributes(map);
 	}
 }

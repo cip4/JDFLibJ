@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -105,13 +101,14 @@ public abstract class JDFAutoScanParams extends JDFResource
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.BITDEPTH, 0x2222222222l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.MAGNIFICATION, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, "1 1");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.OUTPUTCOLORSPACE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumOutputColorSpace.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumOutputColorSpace.class, 0), null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.COMPRESSIONFILTER, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumCompressionFilter.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumCompressionFilter.class, 0), null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.DCTQUALITY, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.INPUTBOX, 0x3333333333l, AttributeInfo.EnumAttributeType.rectangle, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.MOUNTID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.MOUNTING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumMounting.getEnum(0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.MOUNTING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumMounting.class, 0), null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.OUTPUTRESOLUTION, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.OUTPUTSIZE, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.SPLITDOCUMENTS, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
@@ -141,7 +138,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoScanParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoScanParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -153,7 +150,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoScanParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoScanParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -166,7 +163,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoScanParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoScanParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -177,7 +174,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -192,255 +189,50 @@ public abstract class JDFAutoScanParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for OutputColorSpace
+	 * Enumeration strings for numOutputColorSpace
 	 */
 
-	public enum EOutputColorSpace
+	public enum EnumOutputColorSpace
 	{
 		LAB, RGB, CMYK, GrayScale;
 
-		public static EOutputColorSpace getEnum(String val)
+		public static EnumOutputColorSpace getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EOutputColorSpace.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumOutputColorSpace.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for OutputColorSpace
+	 * Enumeration strings for numCompressionFilter
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumOutputColorSpace extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumOutputColorSpace(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumOutputColorSpace getEnum(String enumName)
-		{
-			return (EnumOutputColorSpace) getEnum(EnumOutputColorSpace.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumOutputColorSpace getEnum(int enumValue)
-		{
-			return (EnumOutputColorSpace) getEnum(EnumOutputColorSpace.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumOutputColorSpace.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumOutputColorSpace.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumOutputColorSpace.class);
-		}
-
-		/**  */
-		public static final EnumOutputColorSpace LAB = new EnumOutputColorSpace("LAB");
-		/**  */
-		public static final EnumOutputColorSpace RGB = new EnumOutputColorSpace("RGB");
-		/**  */
-		public static final EnumOutputColorSpace CMYK = new EnumOutputColorSpace("CMYK");
-		/**  */
-		public static final EnumOutputColorSpace GrayScale = new EnumOutputColorSpace("GrayScale");
-	}
-
-	/**
-	 * Enumeration strings for CompressionFilter
-	 */
-
-	public enum ECompressionFilter
+	public enum EnumCompressionFilter
 	{
 		CCITTFaxEncode, DCTEncode, FlateEncode, WaveletEncode, JBIG2Encode;
 
-		public static ECompressionFilter getEnum(String val)
+		public static EnumCompressionFilter getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ECompressionFilter.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumCompressionFilter.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for CompressionFilter
+	 * Enumeration strings for numMounting
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumCompressionFilter extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumCompressionFilter(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumCompressionFilter getEnum(String enumName)
-		{
-			return (EnumCompressionFilter) getEnum(EnumCompressionFilter.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumCompressionFilter getEnum(int enumValue)
-		{
-			return (EnumCompressionFilter) getEnum(EnumCompressionFilter.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumCompressionFilter.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumCompressionFilter.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumCompressionFilter.class);
-		}
-
-		/**  */
-		public static final EnumCompressionFilter CCITTFaxEncode = new EnumCompressionFilter("CCITTFaxEncode");
-		/**  */
-		public static final EnumCompressionFilter DCTEncode = new EnumCompressionFilter("DCTEncode");
-		/**  */
-		public static final EnumCompressionFilter FlateEncode = new EnumCompressionFilter("FlateEncode");
-		/**  */
-		public static final EnumCompressionFilter WaveletEncode = new EnumCompressionFilter("WaveletEncode");
-		/**  */
-		public static final EnumCompressionFilter JBIG2Encode = new EnumCompressionFilter("JBIG2Encode");
-	}
-
-	/**
-	 * Enumeration strings for Mounting
-	 */
-
-	public enum EMounting
+	public enum EnumMounting
 	{
 		Unfixed, Fixed, Wet, Registered;
 
-		public static EMounting getEnum(String val)
+		public static EnumMounting getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EMounting.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumMounting.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Mounting
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumMounting extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumMounting(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumMounting getEnum(String enumName)
-		{
-			return (EnumMounting) getEnum(EnumMounting.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumMounting getEnum(int enumValue)
-		{
-			return (EnumMounting) getEnum(EnumMounting.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumMounting.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumMounting.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumMounting.class);
-		}
-
-		/**  */
-		public static final EnumMounting Unfixed = new EnumMounting("Unfixed");
-		/**  */
-		public static final EnumMounting Fixed = new EnumMounting("Fixed");
-		/**  */
-		public static final EnumMounting Wet = new EnumMounting("Wet");
-		/**  */
-		public static final EnumMounting Registered = new EnumMounting("Registered");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -452,7 +244,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBitDepth(int value)
+	public void setBitDepth(final int value)
 	{
 		setAttribute(AttributeName.BITDEPTH, value, null);
 	}
@@ -477,7 +269,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMagnification(JDFXYPair value)
+	public void setMagnification(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.MAGNIFICATION, value, null);
 	}
@@ -490,8 +282,8 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 */
 	public JDFXYPair getMagnification()
 	{
-		String strAttrName = getAttribute(AttributeName.MAGNIFICATION, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.MAGNIFICATION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -505,9 +297,9 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setOutputColorSpace(EOutputColorSpace enumVar)
+	public void setOutputColorSpace(final EnumOutputColorSpace enumVar)
 	{
-		setAttribute(AttributeName.OUTPUTCOLORSPACE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.OUTPUTCOLORSPACE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -515,35 +307,6 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EOutputColorSpace getEOutputColorSpace()
-	{
-		return EOutputColorSpace.getEnum(getAttribute(AttributeName.OUTPUTCOLORSPACE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute OutputColorSpace
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute OutputColorSpace
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetOutputColorSpace(EOutputColorSpace) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setOutputColorSpace(EnumOutputColorSpace enumVar)
-	{
-		setAttribute(AttributeName.OUTPUTCOLORSPACE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute OutputColorSpace
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EOutputColorSpace GetEOutputColorSpace() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumOutputColorSpace getOutputColorSpace()
 	{
 		return EnumOutputColorSpace.getEnum(getAttribute(AttributeName.OUTPUTCOLORSPACE, null, null));
@@ -559,9 +322,9 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setCompressionFilter(ECompressionFilter enumVar)
+	public void setCompressionFilter(final EnumCompressionFilter enumVar)
 	{
-		setAttribute(AttributeName.COMPRESSIONFILTER, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.COMPRESSIONFILTER, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -569,35 +332,6 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ECompressionFilter getECompressionFilter()
-	{
-		return ECompressionFilter.getEnum(getAttribute(AttributeName.COMPRESSIONFILTER, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute CompressionFilter
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute CompressionFilter
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetCompressionFilter(ECompressionFilter) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setCompressionFilter(EnumCompressionFilter enumVar)
-	{
-		setAttribute(AttributeName.COMPRESSIONFILTER, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute CompressionFilter
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ECompressionFilter GetECompressionFilter() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumCompressionFilter getCompressionFilter()
 	{
 		return EnumCompressionFilter.getEnum(getAttribute(AttributeName.COMPRESSIONFILTER, null, null));
@@ -613,7 +347,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDCTQuality(double value)
+	public void setDCTQuality(final double value)
 	{
 		setAttribute(AttributeName.DCTQUALITY, value, null);
 	}
@@ -638,7 +372,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setInputBox(JDFRectangle value)
+	public void setInputBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.INPUTBOX, value, null);
 	}
@@ -651,8 +385,8 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 */
 	public JDFRectangle getInputBox()
 	{
-		String strAttrName = getAttribute(AttributeName.INPUTBOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.INPUTBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -666,7 +400,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMountID(String value)
+	public void setMountID(final String value)
 	{
 		setAttribute(AttributeName.MOUNTID, value, null);
 	}
@@ -691,9 +425,9 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMounting(EMounting enumVar)
+	public void setMounting(final EnumMounting enumVar)
 	{
-		setAttribute(AttributeName.MOUNTING, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.MOUNTING, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -701,35 +435,6 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EMounting getEMounting()
-	{
-		return EMounting.getEnum(getAttribute(AttributeName.MOUNTING, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Mounting
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Mounting
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetMounting(EMounting) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setMounting(EnumMounting enumVar)
-	{
-		setAttribute(AttributeName.MOUNTING, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Mounting
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EMounting GetEMounting() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumMounting getMounting()
 	{
 		return EnumMounting.getEnum(getAttribute(AttributeName.MOUNTING, null, null));
@@ -745,7 +450,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOutputResolution(JDFXYPair value)
+	public void setOutputResolution(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.OUTPUTRESOLUTION, value, null);
 	}
@@ -758,8 +463,8 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 */
 	public JDFXYPair getOutputResolution()
 	{
-		String strAttrName = getAttribute(AttributeName.OUTPUTRESOLUTION, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.OUTPUTRESOLUTION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -773,7 +478,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOutputSize(JDFXYPair value)
+	public void setOutputSize(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.OUTPUTSIZE, value, null);
 	}
@@ -786,8 +491,8 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 */
 	public JDFXYPair getOutputSize()
 	{
-		String strAttrName = getAttribute(AttributeName.OUTPUTSIZE, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.OUTPUTSIZE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -801,7 +506,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSplitDocuments(int value)
+	public void setSplitDocuments(final int value)
 	{
 		setAttribute(AttributeName.SPLITDOCUMENTS, value, null);
 	}
@@ -848,7 +553,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
-	public JDFFileSpec getCreateFileSpec(int iSkip)
+	public JDFFileSpec getCreateFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -860,7 +565,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 * @return JDFFileSpec the element
 	 *         default is getFileSpec(0)
 	 */
-	public JDFFileSpec getFileSpec(int iSkip)
+	public JDFFileSpec getFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -890,7 +595,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}

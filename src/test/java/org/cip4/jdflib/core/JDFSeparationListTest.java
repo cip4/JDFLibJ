@@ -88,7 +88,7 @@ class JDFSeparationListTest extends JDFTestCaseBase
 	@Test
 	void testUnify()
 	{
-		JDFColorsUsed sl = (JDFColorsUsed) new JDFDoc(ElementName.COLORSUSED).getRoot();
+		final JDFColorsUsed sl = (JDFColorsUsed) new JDFDoc(ElementName.COLORSUSED).getRoot();
 		sl.setSeparations(new VString("a b b c", null));
 		Assertions.assertEquals(sl.unify(), new VString("a b c", null));
 		Assertions.assertEquals(sl.getSeparations(), new VString("a b c", null));
@@ -101,7 +101,7 @@ class JDFSeparationListTest extends JDFTestCaseBase
 	@Test
 	void testRemoveSeparations()
 	{
-		JDFSeparationList sl = (JDFSeparationList) new JDFDoc(ElementName.COLORSUSED).getRoot();
+		final JDFSeparationList sl = (JDFSeparationList) new JDFDoc(ElementName.COLORSUSED).getRoot();
 		sl.setSeparations(new VString("a b c", null));
 		sl.removeSeparations(new VString("a c", null));
 		Assertions.assertEquals(sl.getSeparations(), new VString("b", null));
@@ -114,7 +114,7 @@ class JDFSeparationListTest extends JDFTestCaseBase
 	@Test
 	void testEnsureSeparations()
 	{
-		JDFSeparationList sl = (JDFSeparationList) new JDFDoc(ElementName.COLORSUSED).getRoot();
+		final JDFSeparationList sl = (JDFSeparationList) new JDFDoc(ElementName.COLORSUSED).getRoot();
 		sl.setSeparations(new VString("a b c", null));
 		sl.ensureSeparations(new VString("a c d", null));
 		Assertions.assertEquals(sl.getSeparations(), new VString("a b c d", null));

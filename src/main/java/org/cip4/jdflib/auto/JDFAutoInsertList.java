@@ -106,7 +106,7 @@ public abstract class JDFAutoInsertList extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoInsertList(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoInsertList(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoInsertList extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoInsertList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoInsertList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoInsertList extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoInsertList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoInsertList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoInsertList extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFInsert the element
 	 */
-	public JDFInsert getCreateInsert(int iSkip)
+	public JDFInsert getCreateInsert(final int iSkip)
 	{
 		return (JDFInsert) getCreateElement_JDFElement(ElementName.INSERT, null, iSkip);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoInsertList extends JDFElement
 	 * @return JDFInsert the element
 	 *         default is getInsert(0)
 	 */
-	public JDFInsert getInsert(int iSkip)
+	public JDFInsert getInsert(final int iSkip)
 	{
 		return (JDFInsert) getElement(ElementName.INSERT, null, iSkip);
 	}

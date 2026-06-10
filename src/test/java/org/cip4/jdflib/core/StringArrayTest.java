@@ -55,7 +55,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class StringArrayTest extends JDFTestCaseBase
 {
@@ -95,7 +94,6 @@ class StringArrayTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testRemove() throws Exception

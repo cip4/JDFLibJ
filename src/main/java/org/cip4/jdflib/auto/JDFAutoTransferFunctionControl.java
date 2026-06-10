@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -99,7 +94,7 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.TRANSFERFUNCTIONSOURCE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumTransferFunctionSource.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumTransferFunctionSource.class, 0), null);
 	}
 
 	@Override
@@ -126,7 +121,7 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTransferFunctionControl(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoTransferFunctionControl(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -138,7 +133,7 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTransferFunctionControl(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoTransferFunctionControl(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -151,7 +146,7 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoTransferFunctionControl(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoTransferFunctionControl(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -162,7 +157,7 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -177,89 +172,22 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for TransferFunctionSource
+	 * Enumeration strings for numTransferFunctionSource
 	 */
 
-	public enum ETransferFunctionSource
+	public enum EnumTransferFunctionSource
 	{
 		Document, Device, Custom;
 
-		public static ETransferFunctionSource getEnum(String val)
+		public static EnumTransferFunctionSource getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ETransferFunctionSource.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumTransferFunctionSource.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for TransferFunctionSource
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumTransferFunctionSource extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumTransferFunctionSource(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumTransferFunctionSource getEnum(String enumName)
-		{
-			return (EnumTransferFunctionSource) getEnum(EnumTransferFunctionSource.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumTransferFunctionSource getEnum(int enumValue)
-		{
-			return (EnumTransferFunctionSource) getEnum(EnumTransferFunctionSource.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumTransferFunctionSource.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumTransferFunctionSource.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumTransferFunctionSource.class);
-		}
-
-		/**  */
-		public static final EnumTransferFunctionSource Document = new EnumTransferFunctionSource("Document");
-		/**  */
-		public static final EnumTransferFunctionSource Device = new EnumTransferFunctionSource("Device");
-		/**  */
-		public static final EnumTransferFunctionSource Custom = new EnumTransferFunctionSource("Custom");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -271,9 +199,9 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setTransferFunctionSource(ETransferFunctionSource enumVar)
+	public void setTransferFunctionSource(final EnumTransferFunctionSource enumVar)
 	{
-		setAttribute(AttributeName.TRANSFERFUNCTIONSOURCE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.TRANSFERFUNCTIONSOURCE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -281,35 +209,6 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ETransferFunctionSource getETransferFunctionSource()
-	{
-		return ETransferFunctionSource.getEnum(getAttribute(AttributeName.TRANSFERFUNCTIONSOURCE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute TransferFunctionSource
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute TransferFunctionSource
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetTransferFunctionSource(ETransferFunctionSource) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setTransferFunctionSource(EnumTransferFunctionSource enumVar)
-	{
-		setAttribute(AttributeName.TRANSFERFUNCTIONSOURCE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute TransferFunctionSource
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ETransferFunctionSource GetETransferFunctionSource() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumTransferFunctionSource getTransferFunctionSource()
 	{
 		return EnumTransferFunctionSource.getEnum(getAttribute(AttributeName.TRANSFERFUNCTIONSOURCE, null, null));
@@ -357,7 +256,7 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refTransferCurvePool(JDFTransferCurvePool refTarget)
+	public void refTransferCurvePool(final JDFTransferCurvePool refTarget)
 	{
 		refElement(refTarget);
 	}

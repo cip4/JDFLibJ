@@ -69,27 +69,23 @@
  */
 
 /**
- * ========================================================================== 
+ * ==========================================================================
  * class JDFScore extends JDFResource
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author: sabjon@topmail.de    using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * @Author: sabjon@topmail.de    using a code generator
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  */
 
 package org.cip4.jdflib.resource.process.postpress;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoScore;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFScore extends JDFAutoScore
@@ -99,39 +95,39 @@ public class JDFScore extends JDFAutoScore
 
 	/**
 	 * Constructor for JDFScore
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFScore(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFScore(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFScore
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFScore(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFScore(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFScore
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFScore(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFScore(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -139,7 +135,8 @@ public class JDFScore extends JDFAutoScore
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SIDE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumScoreSide.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SIDE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumScoreSide.class, 0), null);
 	}
 
 	@Override
@@ -149,58 +146,35 @@ public class JDFScore extends JDFAutoScore
 	}
 
 	// TODO this should be in the autofile, deleate later.
-	public static class EnumScoreSide extends ValuedEnum
+	public enum EnumScoreSide
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		FromInside, FromOutside;
 
-		private EnumScoreSide(String name)
+		public static EnumScoreSide getEnum(final String enumName)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumScoreSide.class, enumName);
 		}
 
-		public static EnumScoreSide getEnum(String enumName)
+		public static EnumScoreSide getEnum(final int enumValue)
 		{
-			return (EnumScoreSide) getEnum(EnumScoreSide.class, enumName);
+			final EnumScoreSide[] values = values();
+			return enumValue >= 0 && enumValue < values.length ? values[enumValue] : null;
 		}
-
-		public static EnumScoreSide getEnum(int enumValue)
-		{
-			return (EnumScoreSide) getEnum(EnumScoreSide.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumScoreSide.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumScoreSide.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumScoreSide.class);
-		}
-
-		public static final EnumScoreSide FromInside = new EnumScoreSide("FromInside");
-		public static final EnumScoreSide FromOutside = new EnumScoreSide("FromOutside");
 	}
 
 	/**
 	 * set attribute Side
-	 * 
+	 *
 	 * @param EnumScoreSide value: the value to set the attribute to
 	 */
-	public void setSide(EnumScoreSide value)
+	public void setSide(final EnumScoreSide value)
 	{
 		setAttribute(AttributeName.SIDE, value, null);
 	}
 
 	/**
 	 * get Enumeration attribute Side
-	 * 
+	 *
 	 * @return EnumSide - value of the attribute
 	 */
 	public EnumScoreSide getSide()

@@ -70,14 +70,7 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoRefAnchor.EAnchor;
-import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchor;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -106,9 +99,11 @@ public abstract class JDFAutoContentObject extends JDFElement
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.TRIMCLIPPATH, 0x3333331111l, AttributeInfo.EnumAttributeType.PDFPath, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.LOGICALSTACKORD, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.CLIPBOXFORMAT, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.ANCHOR, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.ANCHOR, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumAnchor.class, 0), null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.ORDID, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.TYPE, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumType.getEnum(0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.TYPE, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumType.class, 0), null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.CLIPBOX, 0x3333333333l, AttributeInfo.EnumAttributeType.rectangle, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.ORDEXPRESSION, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.COMPENSATIONCTMTEMPLATE, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
@@ -138,7 +133,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoContentObject(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoContentObject(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -150,7 +145,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoContentObject(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoContentObject(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -163,93 +158,42 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoContentObject(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoContentObject(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for Type
+	 * Enumeration strings for numAnchor
 	 */
 
-	public enum EType
+	public enum EnumAnchor
 	{
-		Content, Mark;
+		TopLeft, TopCenter, TopRight, CenterLeft, Center, CenterRight, BottomLeft, BottomCenter, BottomRight;
 
-		public static EType getEnum(String val)
+		public static EnumAnchor getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumAnchor.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for Type
+	 * Enumeration strings for numType
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumType extends ValuedEnum
+	public enum EnumType
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Content, Mark;
 
-		protected EnumType(String name)
+		public static EnumType getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumType.class, val, null);
 		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumType getEnum(String enumName)
-		{
-			return (EnumType) getEnum(EnumType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumType getEnum(int enumValue)
-		{
-			return (EnumType) getEnum(EnumType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumType.class);
-		}
-
-		/**  */
-		public static final EnumType Content = new EnumType("Content");
-		/**  */
-		public static final EnumType Mark = new EnumType("Mark");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -261,7 +205,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOrd(int value)
+	public void setOrd(final int value)
 	{
 		setAttribute(AttributeName.ORD, value, null);
 	}
@@ -286,7 +230,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSourceClipPath(String value)
+	public void setSourceClipPath(final String value)
 	{
 		setAttribute(AttributeName.SOURCECLIPPATH, value, null);
 	}
@@ -311,7 +255,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTrimClipPath(String value)
+	public void setTrimClipPath(final String value)
 	{
 		setAttribute(AttributeName.TRIMCLIPPATH, value, null);
 	}
@@ -336,7 +280,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLogicalStackOrd(int value)
+	public void setLogicalStackOrd(final int value)
 	{
 		setAttribute(AttributeName.LOGICALSTACKORD, value, null);
 	}
@@ -361,7 +305,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setClipBoxFormat(String value)
+	public void setClipBoxFormat(final String value)
 	{
 		setAttribute(AttributeName.CLIPBOXFORMAT, value, null);
 	}
@@ -386,9 +330,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setAnchor(EAnchor enumVar)
+	public void setAnchor(final EnumAnchor enumVar)
 	{
-		setAttribute(AttributeName.ANCHOR, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ANCHOR, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -396,35 +340,6 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EAnchor getEAnchor()
-	{
-		return EAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Anchor
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Anchor
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetAnchor(EAnchor) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setAnchor(EnumAnchor enumVar)
-	{
-		setAttribute(AttributeName.ANCHOR, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Anchor
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EAnchor GetEAnchor() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumAnchor getAnchor()
 	{
 		return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
@@ -440,7 +355,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOrdID(int value)
+	public void setOrdID(final int value)
 	{
 		setAttribute(AttributeName.ORDID, value, null);
 	}
@@ -465,9 +380,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setType(EType enumVar)
+	public void setType(final EnumType enumVar)
 	{
-		setAttribute(AttributeName.TYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.TYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -475,35 +390,6 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EType getEType()
-	{
-		return EType.getEnum(getAttribute(AttributeName.TYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Type
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Type
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetType(EType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setType(EnumType enumVar)
-	{
-		setAttribute(AttributeName.TYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Type
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EType GetEType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumType getType()
 	{
 		return EnumType.getEnum(getAttribute(AttributeName.TYPE, null, null));
@@ -519,7 +405,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setClipBox(JDFRectangle value)
+	public void setClipBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.CLIPBOX, value, null);
 	}
@@ -532,8 +418,8 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 */
 	public JDFRectangle getClipBox()
 	{
-		String strAttrName = getAttribute(AttributeName.CLIPBOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CLIPBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -547,7 +433,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOrdExpression(String value)
+	public void setOrdExpression(final String value)
 	{
 		setAttribute(AttributeName.ORDEXPRESSION, value, null);
 	}
@@ -572,7 +458,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCompensationCTMTemplate(String value)
+	public void setCompensationCTMTemplate(final String value)
 	{
 		setAttribute(AttributeName.COMPENSATIONCTMTEMPLATE, value, null);
 	}
@@ -597,7 +483,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLayerID(int value)
+	public void setLayerID(final int value)
 	{
 		setAttribute(AttributeName.LAYERID, value, null);
 	}
@@ -622,7 +508,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTrimCTM(JDFMatrix value)
+	public void setTrimCTM(final JDFMatrix value)
 	{
 		setAttribute(AttributeName.TRIMCTM, value, null);
 	}
@@ -635,8 +521,8 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 */
 	public JDFMatrix getTrimCTM()
 	{
-		String strAttrName = getAttribute(AttributeName.TRIMCTM, null, null);
-		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TRIMCTM, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -650,7 +536,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSetOrd(int value)
+	public void setSetOrd(final int value)
 	{
 		setAttribute(AttributeName.SETORD, value, null);
 	}
@@ -675,7 +561,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setClipPath(String value)
+	public void setClipPath(final String value)
 	{
 		setAttribute(AttributeName.CLIPPATH, value, null);
 	}
@@ -700,7 +586,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHalfTonePhaseOrigin(JDFXYPair value)
+	public void setHalfTonePhaseOrigin(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.HALFTONEPHASEORIGIN, value, null);
 	}
@@ -713,8 +599,8 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 */
 	public JDFXYPair getHalfTonePhaseOrigin()
 	{
-		String strAttrName = getAttribute(AttributeName.HALFTONEPHASEORIGIN, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.HALFTONEPHASEORIGIN, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -728,7 +614,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDocOrd(int value)
+	public void setDocOrd(final int value)
 	{
 		setAttribute(AttributeName.DOCORD, value, null);
 	}
@@ -753,7 +639,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCompensationCTMFormat(String value)
+	public void setCompensationCTMFormat(final String value)
 	{
 		setAttribute(AttributeName.COMPENSATIONCTMFORMAT, value, null);
 	}
@@ -779,7 +665,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 * @param value the value to set the attribute to
 	 */
 	@Override
-	public void setID(String value)
+	public void setID(final String value)
 	{
 		setAttribute(AttributeName.ID, value, null);
 	}
@@ -805,7 +691,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAssemblyIDs(VString value)
+	public void setAssemblyIDs(final VString value)
 	{
 		setAttribute(AttributeName.ASSEMBLYIDS, value, null);
 	}
@@ -817,8 +703,8 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 */
 	public VString getAssemblyIDs()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -833,7 +719,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCTM(JDFMatrix value)
+	public void setCTM(final JDFMatrix value)
 	{
 		setAttribute(AttributeName.CTM, value, null);
 	}
@@ -846,8 +732,8 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 */
 	public JDFMatrix getCTM()
 	{
-		String strAttrName = getAttribute(AttributeName.CTM, null, null);
-		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CTM, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -861,7 +747,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setClipBoxTemplate(String value)
+	public void setClipBoxTemplate(final String value)
 	{
 		setAttribute(AttributeName.CLIPBOXTEMPLATE, value, null);
 	}
@@ -886,7 +772,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTrimSize(JDFXYPair value)
+	public void setTrimSize(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.TRIMSIZE, value, null);
 	}
@@ -899,8 +785,8 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 */
 	public JDFXYPair getTrimSize()
 	{
-		String strAttrName = getAttribute(AttributeName.TRIMSIZE, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TRIMSIZE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 

@@ -83,8 +83,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
- *
  * @author rainer prosi
  * @date Jun 21, 2014
  */
@@ -145,14 +143,13 @@ class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 			}
 
 			goldenTicket.assign(nodePre);
-			BaseGoldenTicketTest.write9GTFiles(goldenTicket, "MISPre_" + (i < 2 ? "GB_" : "") + "ImpositionPreparation" + (goldenTicket.bStripping ? "Strip" : ""), null);
+			BaseGoldenTicketTest.write9GTFiles(goldenTicket,
+					"MISPre_" + (i < 2 ? "GB_" : "") + "ImpositionPreparation" + (goldenTicket.bStripping ? "Strip" : ""), null);
 		}
 	}
 
 	/**
 	 * the big thing
-	 *
-	 *
 	 */
 	@Test
 	void testMISPreComplex()
@@ -203,14 +200,13 @@ class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 					pgt.addKid(goldenTicket4);
 				}
 
-				BaseGoldenTicketTest.write3GTFiles(pgt, "MISPre_ComplexPlate" + (i >= 2 ? "Making" : "Setting") + (goldenTicket2.bStripping ? "Strip" : "")
-						+ (bExpand ? "Expand" : ""));
+				BaseGoldenTicketTest.write3GTFiles(pgt,
+						"MISPre_ComplexPlate" + (i >= 2 ? "Making" : "Setting") + (goldenTicket2.bStripping ? "Strip" : "") + (bExpand ? "Expand" : ""));
 			}
 		}
 	}
 
 	/**
-	 *
 	 * @see BaseGoldenTicketTest#setUp()
 	 */
 	@Override
@@ -237,7 +233,6 @@ class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 	}
 
 	/**
-	 *
 	 * @see BaseGoldenTicketTest#tearDown()
 	 */
 	@Override

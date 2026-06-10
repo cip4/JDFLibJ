@@ -123,7 +123,7 @@ public abstract class JDFAutoLocation extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLocation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoLocation(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -135,7 +135,7 @@ public abstract class JDFAutoLocation extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLocation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoLocation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -148,7 +148,7 @@ public abstract class JDFAutoLocation extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoLocation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoLocation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -169,7 +169,7 @@ public abstract class JDFAutoLocation extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLocationName(String value)
+	public void setLocationName(final String value)
 	{
 		setAttribute(AttributeName.LOCATIONNAME, value, null);
 	}
@@ -194,7 +194,7 @@ public abstract class JDFAutoLocation extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLocID(String value)
+	public void setLocID(final String value)
 	{
 		setAttribute(AttributeName.LOCID, value, null);
 	}
@@ -241,7 +241,7 @@ public abstract class JDFAutoLocation extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFAddress the element
 	 */
-	public JDFAddress getCreateAddress(int iSkip)
+	public JDFAddress getCreateAddress(final int iSkip)
 	{
 		return (JDFAddress) getCreateElement_JDFElement(ElementName.ADDRESS, null, iSkip);
 	}
@@ -253,7 +253,7 @@ public abstract class JDFAutoLocation extends JDFElement
 	 * @return JDFAddress the element
 	 *         default is getAddress(0)
 	 */
-	public JDFAddress getAddress(int iSkip)
+	public JDFAddress getAddress(final int iSkip)
 	{
 		return (JDFAddress) getElement(ElementName.ADDRESS, null, iSkip);
 	}
@@ -283,7 +283,7 @@ public abstract class JDFAutoLocation extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refAddress(JDFAddress refTarget)
+	public void refAddress(final JDFAddress refTarget)
 	{
 		refElement(refTarget);
 	}

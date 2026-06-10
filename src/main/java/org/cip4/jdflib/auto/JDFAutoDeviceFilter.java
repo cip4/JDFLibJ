@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -101,7 +97,7 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICEDETAILS, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumDeviceDetails.getEnum(0), "None");
+				JavaEnumUtil.getEnum(EnumDeviceDetails.class, 0), "None");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOCALIZATION, 0x3333333311l, AttributeInfo.EnumAttributeType.languages, null, null);
 	}
 
@@ -129,7 +125,7 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDeviceFilter(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDeviceFilter(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -141,7 +137,7 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDeviceFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDeviceFilter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -154,103 +150,28 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDeviceFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDeviceFilter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for DeviceDetails
+	 * Enumeration strings for numDeviceDetails
 	 */
 
-	public enum EDeviceDetails
+	public enum EnumDeviceDetails
 	{
 		None, Brief, Modules, Details, NamedFeature, Capability, Full;
 
-		public static EDeviceDetails getEnum(String val)
+		public static EnumDeviceDetails getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EDeviceDetails.class, val, EDeviceDetails.None);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumDeviceDetails.class, val, EnumDeviceDetails.None);
 		}
-	}
-
-	/**
-	 * Enumeration strings for DeviceDetails
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumDeviceDetails extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumDeviceDetails(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumDeviceDetails getEnum(String enumName)
-		{
-			return (EnumDeviceDetails) getEnum(EnumDeviceDetails.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDeviceDetails getEnum(int enumValue)
-		{
-			return (EnumDeviceDetails) getEnum(EnumDeviceDetails.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDeviceDetails.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDeviceDetails.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDeviceDetails.class);
-		}
-
-		/**  */
-		public static final EnumDeviceDetails None = new EnumDeviceDetails("None");
-		/**  */
-		public static final EnumDeviceDetails Brief = new EnumDeviceDetails("Brief");
-		/**  */
-		public static final EnumDeviceDetails Modules = new EnumDeviceDetails("Modules");
-		/**  */
-		public static final EnumDeviceDetails Details = new EnumDeviceDetails("Details");
-		/**  */
-		public static final EnumDeviceDetails NamedFeature = new EnumDeviceDetails("NamedFeature");
-		/**  */
-		public static final EnumDeviceDetails Capability = new EnumDeviceDetails("Capability");
-		/**  */
-		public static final EnumDeviceDetails Full = new EnumDeviceDetails("Full");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -262,9 +183,9 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDeviceDetails(EDeviceDetails enumVar)
+	public void setDeviceDetails(final EnumDeviceDetails enumVar)
 	{
-		setAttribute(AttributeName.DEVICEDETAILS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DEVICEDETAILS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -272,35 +193,6 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EDeviceDetails getEDeviceDetails()
-	{
-		return EDeviceDetails.getEnum(getAttribute(AttributeName.DEVICEDETAILS, null, "None"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute DeviceDetails
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute DeviceDetails
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDeviceDetails(EDeviceDetails) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDeviceDetails(EnumDeviceDetails enumVar)
-	{
-		setAttribute(AttributeName.DEVICEDETAILS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute DeviceDetails
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EDeviceDetails GetEDeviceDetails() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumDeviceDetails getDeviceDetails()
 	{
 		return EnumDeviceDetails.getEnum(getAttribute(AttributeName.DEVICEDETAILS, null, "None"));
@@ -316,7 +208,7 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLocalization(String value)
+	public void setLocalization(final String value)
 	{
 		setAttribute(AttributeName.LOCALIZATION, value, null);
 	}
@@ -363,7 +255,7 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevice the element
 	 */
-	public JDFDevice getCreateDevice(int iSkip)
+	public JDFDevice getCreateDevice(final int iSkip)
 	{
 		return (JDFDevice) getCreateElement_JDFElement(ElementName.DEVICE, null, iSkip);
 	}
@@ -375,7 +267,7 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 	 * @return JDFDevice the element
 	 *         default is getDevice(0)
 	 */
-	public JDFDevice getDevice(int iSkip)
+	public JDFDevice getDevice(final int iSkip)
 	{
 		return (JDFDevice) getElement(ElementName.DEVICE, null, iSkip);
 	}

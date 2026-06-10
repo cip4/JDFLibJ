@@ -1,11 +1,11 @@
 /**
- * ========================================================================== 
+ * ==========================================================================
  * class JDFIDPFinishing extends JDFResource
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author: sabjon@topmail.de    using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * @Author: sabjon@topmail.de    using a code generator
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  */
 
 package org.cip4.jdflib.resource.process;
@@ -20,39 +20,39 @@ public class JDFIDPFinishing extends JDFAutoIDPFinishing
 
 	/**
 	 * Constructor for JDFIDPFinishing
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFIDPFinishing(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFIDPFinishing(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFIDPFinishing
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFIDPFinishing(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFIDPFinishing(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFIDPFinishing
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFIDPFinishing(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFIDPFinishing(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -65,9 +65,9 @@ public class JDFIDPFinishing extends JDFAutoIDPFinishing
 
 	/**
 	 * Set attribute Finishings
-	 * 
+	 *
 	 * @param vector
-	 *            value: vector of String the value to set the attribute to
+	 *               value: vector of String the value to set the attribute to
 	 */
 	/*
 	 * public void SetFinishings(vector value) { vector v; for(int
@@ -76,7 +76,7 @@ public class JDFIDPFinishing extends JDFAutoIDPFinishing
 	 */
 	/**
 	 * Get string attribute Finishings
-	 * 
+	 *
 	 * @return vKString the vaue of the attribute
 	 */
 	/*
@@ -85,9 +85,9 @@ public class JDFIDPFinishing extends JDFAutoIDPFinishing
 	 */
 	/**
 	 * Typesafe attribute validation of Finishings
-	 * 
+	 *
 	 * @param EnumValidationLevel
-	 *            level of attribute validation
+	 *                            level of attribute validation
 	 * @return bool true if valid
 	 */
 	/*
@@ -97,4 +97,4 @@ public class JDFIDPFinishing extends JDFAutoIDPFinishing
 	 */
 
 } // class JDFIDPFinishing
-// ==========================================================================
+	// ==========================================================================

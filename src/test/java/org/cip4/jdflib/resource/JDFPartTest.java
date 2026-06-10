@@ -49,6 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Arrays;
 import java.util.Iterator;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -132,13 +133,13 @@ class JDFPartTest extends JDFTestCaseBase
 	void testPartIDConsistency()
 	{
 		final VString knownAtts = part.knownAttributes();
-		final Iterator<EnumPartIDKey> it = EnumPartIDKey.iterator();
+		final Iterator<EnumPartIDKey> it = Arrays.asList(EnumPartIDKey.values()).iterator();
 		while (it.hasNext())
 		{
 			final EnumPartIDKey next = it.next();
 			if (!next.isXJDF())
 			{
-				final String name = next.getName();
+				final String name = next.name();
 				assertTrue(knownAtts.contains(name), "name missing in Part: " + name);
 			}
 		}
@@ -236,7 +237,7 @@ class JDFPartTest extends JDFTestCaseBase
 	{
 		assertFalse(JDFPart.fillFastParts().contains("RunTags"));
 		assertTrue(JDFPart.fillFastParts().contains("Run"));
-		assertTrue(JDFPart.fillFastParts().contains(EnumPartIDKey.SheetName.getName()));
-		assertFalse(JDFPart.fillFastParts().contains(EnumPartIDKey.RunIndex.getName()));
+		assertTrue(JDFPart.fillFastParts().contains(EnumPartIDKey.SheetName.name()));
+		assertFalse(JDFPart.fillFastParts().contains(EnumPartIDKey.RunIndex.name()));
 	}
 }

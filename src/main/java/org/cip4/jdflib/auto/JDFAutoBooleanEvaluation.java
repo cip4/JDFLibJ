@@ -122,7 +122,7 @@ public abstract class JDFAutoBooleanEvaluation extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBooleanEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoBooleanEvaluation(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -134,7 +134,7 @@ public abstract class JDFAutoBooleanEvaluation extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBooleanEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoBooleanEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -147,7 +147,7 @@ public abstract class JDFAutoBooleanEvaluation extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoBooleanEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoBooleanEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -158,7 +158,7 @@ public abstract class JDFAutoBooleanEvaluation extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -179,7 +179,7 @@ public abstract class JDFAutoBooleanEvaluation extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setValueList(String value)
+	public void setValueList(final String value)
 	{
 		setAttribute(AttributeName.VALUELIST, value, null);
 	}
@@ -226,7 +226,7 @@ public abstract class JDFAutoBooleanEvaluation extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFBasicPreflightTest the element
 	 */
-	public JDFBasicPreflightTest getCreateBasicPreflightTest(int iSkip)
+	public JDFBasicPreflightTest getCreateBasicPreflightTest(final int iSkip)
 	{
 		return (JDFBasicPreflightTest) getCreateElement_JDFElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
 	}
@@ -238,7 +238,7 @@ public abstract class JDFAutoBooleanEvaluation extends JDFResource
 	 * @return JDFBasicPreflightTest the element
 	 *         default is getBasicPreflightTest(0)
 	 */
-	public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
+	public JDFBasicPreflightTest getBasicPreflightTest(final int iSkip)
 	{
 		return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
 	}

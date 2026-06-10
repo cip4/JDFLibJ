@@ -82,11 +82,8 @@
 package org.cip4.jdflib.core;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.Attr;
 
 /**
@@ -115,11 +112,12 @@ public class XMLDocUserData
 
 	/**
 	 * constructor
+	 *
 	 * @param parent
 	 */
-	public XMLDocUserData(DocumentJDFImpl parent)
+	public XMLDocUserData(final DocumentJDFImpl parent)
 	{
-		m_mapTarget = new HashMap<String, KElement>(); // default is on
+		m_mapTarget = new HashMap<>(); // default is on
 		m_vDirtyID = new VString();
 
 		m_userData = null;
@@ -131,17 +129,17 @@ public class XMLDocUserData
 
 	/**
 	 * switch on or off the caching method for ids
-	 * 
+	 *
 	 * @param bCache if true, the ids will be cached
 	 */
-	public static void setIDCache(boolean bCache)
+	public static void setIDCache(final boolean bCache)
 	{
 		useIDCache = bCache;
 	}
 
 	/**
 	 * get the status of the caching method for ids
-	 * 
+	 *
 	 * @return if true, the ids will be cached
 	 */
 	public static boolean getIDCache()
@@ -151,7 +149,7 @@ public class XMLDocUserData
 
 	/**
 	 * is target cashing enabled
-	 * 
+	 *
 	 * @return true if cashing is enabled
 	 */
 	public boolean hasTargetCache()
@@ -162,92 +160,28 @@ public class XMLDocUserData
 	/**
 	 * Enumeration of various policies
 	 */
-	public static final class EnumDirtyPolicy extends ValuedEnum
+	public enum EnumDirtyPolicy
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		private EnumDirtyPolicy(String name)
-		{
-			super(name, m_startValue++);
-		}
+		None, ID, Doc, XPath;
 
 		/**
 		 * EnumDirtyPolicy
-		 * 
-		 * @param enumName the name of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null.
+		 *
+		 * @param val the name of the enum object to return
+		 * @return the enum object if val is valid. Otherwise null.
 		 */
-		public static EnumDirtyPolicy getEnum(String enumName)
+		public static EnumDirtyPolicy getEnum(final String val)
 		{
-			return (EnumDirtyPolicy) getEnum(EnumDirtyPolicy.class, enumName);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumDirtyPolicy.class, val, null);
 		}
-
-		/**
-		 * EnumDirtyPolicy
-		 * 
-		 * @param enumValue the value of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
-		 */
-		public static EnumDirtyPolicy getEnum(int enumValue)
-		{
-			return (EnumDirtyPolicy) getEnum(EnumDirtyPolicy.class, enumValue);
-		}
-
-		/**
-		 * get a map of all orientation enums
-		 * 
-		 * @return a map of all orientation enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDirtyPolicy.class);
-		}
-
-		/**
-		 * get a list of all orientation enums
-		 * 
-		 * @return a list of all orientation enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDirtyPolicy.class);
-		}
-
-		/**
-		 * get an iterator over the enum objects
-		 * 
-		 * @return an iterator over the enum objects
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDirtyPolicy.class);
-		}
-
-		/**
-		 * none is default instead of unknown
-		 */
-		public static final EnumDirtyPolicy None = new EnumDirtyPolicy("None");
-		/**
-		 * 
-		 */
-		public static final EnumDirtyPolicy ID = new EnumDirtyPolicy("ID");
-		/**
-		 * 
-		 */
-		public static final EnumDirtyPolicy Doc = new EnumDirtyPolicy("Doc");
-		/**
-		 * 
-		 */
-		public static final EnumDirtyPolicy XPath = new EnumDirtyPolicy("XPath");
 	}
 
 	/**
 	 * Set the dirty policy to dirtPol
-	 * 
+	 *
 	 * @param dirtPol the dirtyPolicy to set
 	 */
-	public void setDirtyPolicy(EnumDirtyPolicy dirtPol)
+	public void setDirtyPolicy(final EnumDirtyPolicy dirtPol)
 	{
 		dirtyPolicy = dirtPol;
 		m_Parent.bGlobalDirtyPolicy = EnumDirtyPolicy.None.equals(dirtPol);
@@ -256,7 +190,7 @@ public class XMLDocUserData
 	/**
 	 * Return the documents user data pointer.<br>
 	 * User data allows application programs to attach extra data to JDF Documents and can be set using the function <code>JDFDoc::SetUserData(p)</code>.
-	 * 
+	 *
 	 * @return The user data pointer.
 	 */
 	public Object getUserData()
@@ -266,26 +200,24 @@ public class XMLDocUserData
 
 	/**
 	 * Set the user data for a document.<br>
-	 * 
 	 * User data allows application programs to attach extra data to DOM nodes, and can be retrieved using the function <code>DOM_Node::getUserData(p)</code>.
 	 * <p>
 	 * Deletion of the user data remains the responsibility of the application program; it will not be automatically deleted when the nodes themselves are
 	 * reclaimed.
-	 * 
 	 * <p>
 	 * Because DOM_Node is not designed to be subclassed, userdata provides an alternative means for extending the information kept with nodes by an application
 	 * program.
-	 * 
+	 *
 	 * @param objUserData the user data to be kept with the node.
 	 */
-	public void setUserData(Object objUserData)
+	public void setUserData(final Object objUserData)
 	{
 		m_userData = objUserData;
 	}
 
 	/**
 	 * get a vector of all IDs of elements that are dirty
-	 * 
+	 *
 	 * @return vKString - the vector of element IDs
 	 */
 	public VString getDirtyIDs()
@@ -300,7 +232,7 @@ public class XMLDocUserData
 
 	/**
 	 * get the vector of dirty XPaths
-	 * 
+	 *
 	 * @return VString - vector of dirty XPaths
 	 */
 	public VString getDirtyXPaths()
@@ -331,12 +263,12 @@ public class XMLDocUserData
 
 	/**
 	 * add string id uniquely to the vector of dirty ids
-	 * 
-	 * @param e the element to be added to the dirty list
+	 *
+	 * @param e          the element to be added to the dirty list
 	 * @param bAttribute if true, only attributes are dirty, else also sub-elements
 	 * @return VString - the vector of element IDs after appending id
 	 */
-	VString setDirty(KElement e, boolean bAttribute)
+	VString setDirty(final KElement e, final boolean bAttribute)
 	{
 
 		if (dirtyPolicy == EnumDirtyPolicy.XPath)
@@ -352,7 +284,7 @@ public class XMLDocUserData
 			final int size = m_vDirtyID.size();
 			for (i = 0; i < size; i++)
 			{
-				String s = m_vDirtyID.elementAt(i);
+				final String s = m_vDirtyID.elementAt(i);
 				if (s.startsWith(x))
 				{
 					if (s.equals(x)) // e is already dirty
@@ -377,33 +309,35 @@ public class XMLDocUserData
 		}
 		else if (dirtyPolicy == EnumDirtyPolicy.ID)
 		{
-			m_vDirtyID.appendUnique(e.getInheritedAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING));
+			m_vDirtyID.appendUnique(e.getInheritedAttribute(AttributeName.ID, null, JDFCoreConstants.EMPTYSTRING));
 		}
 		return m_vDirtyID;
 	}
 
 	/**
 	 * checks if <code>element</code> is dirty
-	 * 
+	 *
 	 * @param element element to check
 	 * @return true, if <code>element</code> is dirty
 	 */
-	public boolean isDirty(KElement element)
+	public boolean isDirty(final KElement element)
 	{
 		if (element == null)
+		{
 			return false;
+		}
 		if (dirtyPolicy == EnumDirtyPolicy.Doc)
 		{
 			return m_Parent.isDirty();
 		}
 		else if (dirtyPolicy == EnumDirtyPolicy.ID)
 		{
-			String id = element.getInheritedAttribute("ID", null, null);
+			final String id = element.getInheritedAttribute("ID", null, null);
 			return isDirty(id);
 		}
 		else if (dirtyPolicy == EnumDirtyPolicy.XPath)
 		{
-			String xPath = element.buildXPath(null, 1);
+			final String xPath = element.buildXPath(null, 1);
 			return isDirty(xPath);
 		}
 		return false;
@@ -411,23 +345,27 @@ public class XMLDocUserData
 
 	/**
 	 * checks wheter the node with <code>strID</code> is dirty
-	 * 
+	 *
 	 * @param strID the id of the node to be checked
 	 * @return bool true if the node with ID=<code>strID</code> is dirty
 	 */
-	public boolean isDirty(String strID)
+	public boolean isDirty(final String strID)
 	{
 		if (dirtyPolicy == EnumDirtyPolicy.ID)
 		{
 			if (strID == null)
+			{
 				return m_vDirtyID.size() > 0;
+			}
 			return m_vDirtyID.contains(strID); // was in C++ .hasString(id);
 		}
 		else if (dirtyPolicy == EnumDirtyPolicy.XPath)
 		{
 			final int size = m_vDirtyID.size();
 			if (strID == null)
+			{
 				return size > 0;
+			}
 
 			for (int i = 0; i < size; i++)
 			{
@@ -449,19 +387,23 @@ public class XMLDocUserData
 
 	/**
 	 * Set the target to target
-	 * 
+	 *
 	 * @param targetElement the target element
 	 * @param id
 	 */
-	public void setTarget(KElement targetElement, String id)
+	public void setTarget(final KElement targetElement, final String id)
 	{
 		String idLocal = id;
 
 		if (!useIDCache || m_mapTarget == null)
+		{
 			return;
+		}
 
 		if (idLocal == null)
+		{
 			idLocal = targetElement.getAttribute(AttributeName.ID, null, null);
+		}
 
 		if (idLocal != null)
 		{
@@ -471,13 +413,15 @@ public class XMLDocUserData
 
 	/**
 	 * remove the KElement from the target list
-	 * 
+	 *
 	 * @param targetElement the element to remove
 	 */
-	public void removeTarget(KElement targetElement)
+	public void removeTarget(final KElement targetElement)
 	{
 		if (!useIDCache || m_mapTarget == null)
+		{
 			return;
+		}
 
 		final String id = targetElement.getAttribute("ID", null, null);
 		if (id != null)
@@ -492,22 +436,24 @@ public class XMLDocUserData
 
 	/**
 	 * remove the target id from the target list
-	 * 
+	 *
 	 * @param id the target element id
 	 */
-	public void removeTarget(String id)
+	public void removeTarget(final String id)
 	{
 		if (useIDCache && m_mapTarget != null)
+		{
 			m_mapTarget.remove(id);
+		}
 	}
 
 	/**
 	 * Get the target with ID=<code>strID</code>
-	 * 
+	 *
 	 * @param strID the id of the target to search
 	 * @return KElement target the target element
 	 */
-	public KElement getTarget(String strID)
+	public KElement getTarget(final String strID)
 	{
 		// m_mapTarget=null; // uncomment this to ensure that the cache is off
 		if (useIDCache && m_mapTarget != null && strID != null)
@@ -516,7 +462,7 @@ public class XMLDocUserData
 			final KElement elem = m_mapTarget.get(strID);
 			if (elem != null)
 			{
-				Attr a = elem.getAttributeNode(AttributeName.ID);
+				final Attr a = elem.getAttributeNode(AttributeName.ID);
 				if (a != null && strID.equals(a.getValue()))
 				{
 					return elem;
@@ -534,7 +480,9 @@ public class XMLDocUserData
 	public void clearTargets()
 	{
 		if (useIDCache && m_mapTarget != null)
+		{
 			m_mapTarget.clear();
+		}
 	}
 
 	/**
@@ -544,21 +492,27 @@ public class XMLDocUserData
 	{
 		clearTargets();
 		if (!useIDCache)
+		{
 			return;
-		KElement root = (KElement) m_Parent.getDocumentElement();
+		}
+		final KElement root = (KElement) m_Parent.getDocumentElement();
 		if (root != null)
+		{
 			fillIDCache(root);
+		}
 
 	}
 
 	/**
 	 * @param root
 	 */
-	private void fillIDCache(KElement root)
+	private void fillIDCache(final KElement root)
 	{
-		Attr attr = root.getAttributeNode(AttributeName.ID);
+		final Attr attr = root.getAttributeNode(AttributeName.ID);
 		if (attr != null)
+		{
 			m_mapTarget.put(attr.getValue(), root);
+		}
 		KElement e = root.getFirstChildElement();
 		while (e != null)
 		{

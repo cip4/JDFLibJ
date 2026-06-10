@@ -54,7 +54,7 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.ifaces.IStreamWriter;
 import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 import org.cip4.jdflib.util.net.HTTPDetails;
@@ -94,11 +94,11 @@ public class URLWriter implements Runnable
 	}
 
 	/**
-	 * @param strUrl the URL to write to
-	 * @param stream the input stream to read from
+	 * @param strUrl       the URL to write to
+	 * @param stream       the input stream to read from
 	 * @param streamWriter
-	 * @param method HEAD, GET or POST
-	 * @param contentType the contenttype to set, if NULL defaults to TEXT/UNKNOWN
+	 * @param method       HEAD, GET or POST
+	 * @param contentType  the contenttype to set, if NULL defaults to TEXT/UNKNOWN
 	 * @param details
 	 */
 	public URLWriter(final URL url, final IStreamWriter streamWriter, final String method, String contentType, final HTTPDetails details)
@@ -107,7 +107,9 @@ public class URLWriter implements Runnable
 		this.url = url;
 		this.method = method;
 		if (contentType == null)
+		{
 			contentType = UrlUtil.TEXT_UNKNOWN;
+		}
 		this.contentType = StringUtil.token(contentType, 0, "\r\n");
 		this.details = details;
 		this.stream = getStream(streamWriter);
@@ -116,11 +118,11 @@ public class URLWriter implements Runnable
 	}
 
 	/**
-	 * @param strUrl the URL to write to
-	 * @param stream the input stream to read from
+	 * @param strUrl       the URL to write to
+	 * @param stream       the input stream to read from
 	 * @param streamWriter
-	 * @param method HEAD, GET or POST
-	 * @param contentType the contenttype to set, if NULL defaults to TEXT/UNKNOWN
+	 * @param method       HEAD, GET or POST
+	 * @param contentType  the contenttype to set, if NULL defaults to TEXT/UNKNOWN
 	 * @param details
 	 */
 	public URLWriter(final String strUrl, final IStreamWriter streamWriter, final String method, final String contentType, final HTTPDetails details)
@@ -129,11 +131,11 @@ public class URLWriter implements Runnable
 	}
 
 	/**
-	 * @param strUrl the URL to write to
-	 * @param stream the input stream to read from
+	 * @param strUrl       the URL to write to
+	 * @param stream       the input stream to read from
 	 * @param streamWriter
-	 * @param method HEAD, GET or POST
-	 * @param contentType the contenttype to set, if NULL defaults to TEXT/UNKNOWN
+	 * @param method       HEAD, GET or POST
+	 * @param contentType  the contenttype to set, if NULL defaults to TEXT/UNKNOWN
 	 * @param details
 	 */
 	public URLWriter(final InputStream is, final String strUrl, final String method, final String contentType, final HTTPDetails details)
@@ -142,11 +144,11 @@ public class URLWriter implements Runnable
 	}
 
 	/**
-	 * @param strUrl the URL to write to
-	 * @param stream the input stream to read from
+	 * @param strUrl       the URL to write to
+	 * @param stream       the input stream to read from
 	 * @param streamWriter
-	 * @param method HEAD, GET or POST
-	 * @param contentType the contenttype to set, if NULL defaults to TEXT/UNKNOWN
+	 * @param method       HEAD, GET or POST
+	 * @param contentType  the contenttype to set, if NULL defaults to TEXT/UNKNOWN
 	 * @param details
 	 */
 	public URLWriter(final InputStream is, final URL url, final String method, String contentType, final HTTPDetails details)
@@ -154,7 +156,9 @@ public class URLWriter implements Runnable
 		this.url = url;
 		this.method = method;
 		if (contentType == null)
+		{
 			contentType = UrlUtil.TEXT_UNKNOWN;
+		}
 		this.contentType = StringUtil.token(contentType, 0, "\r\n");
 		this.details = details;
 		this.stream = (is == null) ? null : new ByteArrayIOFileStream(is, UrlUtil.MAX_STREAM);
@@ -167,7 +171,9 @@ public class URLWriter implements Runnable
 	{
 		// we can retain the original - we never need to buffer
 		if (inWriter == null || UrlUtil.isFile(UrlUtil.urlToString(url)))
+		{
 			return null;
+		}
 
 		final ByteArrayIOStream bufStream = new ByteArrayIOFileStream(UrlUtil.MAX_STREAM);
 		try
@@ -185,7 +191,6 @@ public class URLWriter implements Runnable
 	 * write a Stream to an output URL File: and http: are currently supported Use HttpURLConnection.getInputStream() to retrieve the http response
 	 *
 	 * @return {@link UrlPart} the opened http connection, null in case of error
-	 *
 	 */
 	public UrlPart writeToURL()
 	{
@@ -200,7 +205,9 @@ public class URLWriter implements Runnable
 		{
 			final URI uri = ProxyUtil.getHostURI(url);
 			if (uri == null) // redundant but makes compiler happy
+			{
 				return null;
+			}
 
 			final List<Proxy> list = getProxies(uri);
 
@@ -221,7 +228,7 @@ public class URLWriter implements Runnable
 						String newLocation = urlPart.getConnection().getHeaderField("Location");
 						if (StringUtil.isEmpty(newLocation) && UrlUtil.isHttp(UrlUtil.urlToString(url)))
 						{
-							newLocation = StringUtil.replaceToken(newLocation, 0, JDFConstants.COLON, "https");
+							newLocation = StringUtil.replaceToken(newLocation, 0, JDFCoreConstants.COLON, "https");
 						}
 						if (newLocation != null)
 						{
@@ -254,7 +261,9 @@ public class URLWriter implements Runnable
 	protected List<Proxy> getProxies(final URI uri)
 	{
 		if (addDirect)
+		{
 			return ProxyUtil.getProxiesWithLocal(uri);
+		}
 		else
 		{
 			final List<Proxy> select = ProxySelector.getDefault().select(uri);
@@ -368,9 +377,13 @@ public class URLWriter implements Runnable
 		{
 			final OutputStream out = StreamUtil.getBufferedOutputStream(httpURLconnection.getOutputStream());
 			if (writer != null)
+			{
 				writer.writeStream(out);
+			}
 			else
+			{
 				IOUtils.copy(stream.getInputStream(), out);
+			}
 			out.flush();
 			out.close();
 		}
@@ -383,7 +396,7 @@ public class URLWriter implements Runnable
 
 	/**
 	 * useful for asynchronous sending to a url
-	 * 
+	 *
 	 * @see java.lang.Runnable#run()
 	 */
 	@Override

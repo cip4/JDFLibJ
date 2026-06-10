@@ -63,16 +63,17 @@ public class StringCache
 	/**
 	 *
 	 */
+	@Deprecated
 	static public void enable(final boolean enable)
 	{
 
 	}
 
 	/**
-	 *
 	 * @param s
 	 * @return
 	 */
+	@Deprecated
 	public static String getCreateString(final String s)
 	{
 		return s == null ? null : s.intern();
@@ -84,6 +85,7 @@ public class StringCache
 	 * @param s
 	 * @return
 	 */
+	@Deprecated
 	public static String getString(final String s)
 	{
 
@@ -91,18 +93,18 @@ public class StringCache
 	}
 
 	/**
-	 *
 	 * @return the number of cached strings
 	 */
+	@Deprecated
 	public static int size()
 	{
 		return 0;
 	}
 
 	/**
-	 *
 	 * @param c
 	 */
+	@Deprecated
 	public static void addAll(final Collection<String> c)
 	{
 	}

@@ -111,7 +111,7 @@ public abstract class JDFAutoPageElement extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPageElement(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPageElement(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -123,7 +123,7 @@ public abstract class JDFAutoPageElement extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPageElement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPageElement(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -136,7 +136,7 @@ public abstract class JDFAutoPageElement extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPageElement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPageElement(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -157,7 +157,7 @@ public abstract class JDFAutoPageElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setContentDataRefs(VString value)
+	public void setContentDataRefs(final VString value)
 	{
 		setAttribute(AttributeName.CONTENTDATAREFS, value, null);
 	}
@@ -169,8 +169,8 @@ public abstract class JDFAutoPageElement extends JDFElement
 	 */
 	public VString getContentDataRefs()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.CONTENTDATAREFS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.CONTENTDATAREFS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -185,7 +185,7 @@ public abstract class JDFAutoPageElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setContentListIndex(int value)
+	public void setContentListIndex(final int value)
 	{
 		setAttribute(AttributeName.CONTENTLISTINDEX, value, null);
 	}
@@ -210,7 +210,7 @@ public abstract class JDFAutoPageElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setElementPages(JDFIntegerRangeList value)
+	public void setElementPages(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.ELEMENTPAGES, value, null);
 	}
@@ -223,8 +223,8 @@ public abstract class JDFAutoPageElement extends JDFElement
 	 */
 	public JDFIntegerRangeList getElementPages()
 	{
-		String strAttrName = getAttribute(AttributeName.ELEMENTPAGES, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.ELEMENTPAGES, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -238,7 +238,7 @@ public abstract class JDFAutoPageElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setContentType(String value)
+	public void setContentType(final String value)
 	{
 		setAttribute(AttributeName.CONTENTTYPE, value, null);
 	}
@@ -263,7 +263,7 @@ public abstract class JDFAutoPageElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRelativeBox(JDFRectangle value)
+	public void setRelativeBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.RELATIVEBOX, value, null);
 	}
@@ -276,8 +276,8 @@ public abstract class JDFAutoPageElement extends JDFElement
 	 */
 	public JDFRectangle getRelativeBox()
 	{
-		String strAttrName = getAttribute(AttributeName.RELATIVEBOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.RELATIVEBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 

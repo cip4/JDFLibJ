@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -101,8 +97,8 @@ public abstract class JDFAutoBundle extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BUNDLETYPE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumBundleType.getEnum(0),
-				"Stack");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BUNDLETYPE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumBundleType.class, 0), "Stack");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.FOLIOCOUNT, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.READERPAGECOUNT, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.SHEETCOUNT, 0x3333311111l, AttributeInfo.EnumAttributeType.integer, null, null);
@@ -135,7 +131,7 @@ public abstract class JDFAutoBundle extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBundle(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoBundle(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -147,7 +143,7 @@ public abstract class JDFAutoBundle extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBundle(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoBundle(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -160,7 +156,7 @@ public abstract class JDFAutoBundle extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoBundle(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoBundle(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -171,7 +167,7 @@ public abstract class JDFAutoBundle extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Quantity);
 		return bRet;
 	}
@@ -186,109 +182,22 @@ public abstract class JDFAutoBundle extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for BundleType
+	 * Enumeration strings for numBundleType
 	 */
 
-	public enum EBundleType
+	public enum EnumBundleType
 	{
 		BoundSet, Box, Carton, CollectedStack, CompensatedStack, Pallet, Roll, Sheet, SheetStream, Stack, StrappedStack, StrappedCompensatedStack, WrappedBundle;
 
-		public static EBundleType getEnum(String val)
+		public static EnumBundleType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EBundleType.class, val, EBundleType.Stack);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumBundleType.class, val, EnumBundleType.Stack);
 		}
-	}
-
-	/**
-	 * Enumeration strings for BundleType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumBundleType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumBundleType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumBundleType getEnum(String enumName)
-		{
-			return (EnumBundleType) getEnum(EnumBundleType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumBundleType getEnum(int enumValue)
-		{
-			return (EnumBundleType) getEnum(EnumBundleType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumBundleType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumBundleType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumBundleType.class);
-		}
-
-		/**  */
-		public static final EnumBundleType BoundSet = new EnumBundleType("BoundSet");
-		/**  */
-		public static final EnumBundleType Box = new EnumBundleType("Box");
-		/**  */
-		public static final EnumBundleType Carton = new EnumBundleType("Carton");
-		/**  */
-		public static final EnumBundleType CollectedStack = new EnumBundleType("CollectedStack");
-		/**  */
-		public static final EnumBundleType CompensatedStack = new EnumBundleType("CompensatedStack");
-		/**  */
-		public static final EnumBundleType Pallet = new EnumBundleType("Pallet");
-		/**  */
-		public static final EnumBundleType Roll = new EnumBundleType("Roll");
-		/**  */
-		public static final EnumBundleType Sheet = new EnumBundleType("Sheet");
-		/**  */
-		public static final EnumBundleType SheetStream = new EnumBundleType("SheetStream");
-		/**  */
-		public static final EnumBundleType Stack = new EnumBundleType("Stack");
-		/**  */
-		public static final EnumBundleType StrappedStack = new EnumBundleType("StrappedStack");
-		/**  */
-		public static final EnumBundleType StrappedCompensatedStack = new EnumBundleType("StrappedCompensatedStack");
-		/**  */
-		public static final EnumBundleType WrappedBundle = new EnumBundleType("WrappedBundle");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -300,9 +209,9 @@ public abstract class JDFAutoBundle extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setBundleType(EBundleType enumVar)
+	public void setBundleType(final EnumBundleType enumVar)
 	{
-		setAttribute(AttributeName.BUNDLETYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.BUNDLETYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -310,35 +219,6 @@ public abstract class JDFAutoBundle extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EBundleType getEBundleType()
-	{
-		return EBundleType.getEnum(getAttribute(AttributeName.BUNDLETYPE, null, "Stack"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute BundleType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute BundleType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetBundleType(EBundleType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setBundleType(EnumBundleType enumVar)
-	{
-		setAttribute(AttributeName.BUNDLETYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute BundleType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EBundleType GetEBundleType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumBundleType getBundleType()
 	{
 		return EnumBundleType.getEnum(getAttribute(AttributeName.BUNDLETYPE, null, "Stack"));
@@ -354,7 +234,7 @@ public abstract class JDFAutoBundle extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFolioCount(int value)
+	public void setFolioCount(final int value)
 	{
 		setAttribute(AttributeName.FOLIOCOUNT, value, null);
 	}
@@ -379,7 +259,7 @@ public abstract class JDFAutoBundle extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setReaderPageCount(int value)
+	public void setReaderPageCount(final int value)
 	{
 		setAttribute(AttributeName.READERPAGECOUNT, value, null);
 	}
@@ -404,7 +284,7 @@ public abstract class JDFAutoBundle extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSheetCount(int value)
+	public void setSheetCount(final int value)
 	{
 		setAttribute(AttributeName.SHEETCOUNT, value, null);
 	}
@@ -429,7 +309,7 @@ public abstract class JDFAutoBundle extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTotalAmount(int value)
+	public void setTotalAmount(final int value)
 	{
 		setAttribute(AttributeName.TOTALAMOUNT, value, null);
 	}
@@ -476,7 +356,7 @@ public abstract class JDFAutoBundle extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFBundleItem the element
 	 */
-	public JDFBundleItem getCreateBundleItem(int iSkip)
+	public JDFBundleItem getCreateBundleItem(final int iSkip)
 	{
 		return (JDFBundleItem) getCreateElement_JDFElement(ElementName.BUNDLEITEM, null, iSkip);
 	}
@@ -488,7 +368,7 @@ public abstract class JDFAutoBundle extends JDFResource
 	 * @return JDFBundleItem the element
 	 *         default is getBundleItem(0)
 	 */
-	public JDFBundleItem getBundleItem(int iSkip)
+	public JDFBundleItem getBundleItem(final int iSkip)
 	{
 		return (JDFBundleItem) getElement(ElementName.BUNDLEITEM, null, iSkip);
 	}
@@ -541,7 +421,7 @@ public abstract class JDFAutoBundle extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
-	public JDFContact getCreateContact(int iSkip)
+	public JDFContact getCreateContact(final int iSkip)
 	{
 		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -553,7 +433,7 @@ public abstract class JDFAutoBundle extends JDFResource
 	 * @return JDFContact the element
 	 *         default is getContact(0)
 	 */
-	public JDFContact getContact(int iSkip)
+	public JDFContact getContact(final int iSkip)
 	{
 		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -584,7 +464,7 @@ public abstract class JDFAutoBundle extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refContact(JDFContact refTarget)
+	public void refContact(final JDFContact refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -616,7 +496,7 @@ public abstract class JDFAutoBundle extends JDFResource
 	 * @return JDFIdentificationField the element
 	 */
 	@Override
-	public JDFIdentificationField getCreateIdentificationField(int iSkip)
+	public JDFIdentificationField getCreateIdentificationField(final int iSkip)
 	{
 		return (JDFIdentificationField) getCreateElement_JDFElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
 	}
@@ -629,7 +509,7 @@ public abstract class JDFAutoBundle extends JDFResource
 	 *         default is getIdentificationField(0)
 	 */
 	@Override
-	public JDFIdentificationField getIdentificationField(int iSkip)
+	public JDFIdentificationField getIdentificationField(final int iSkip)
 	{
 		return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
 	}
@@ -660,7 +540,7 @@ public abstract class JDFAutoBundle extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refIdentificationField(JDFIdentificationField refTarget)
+	public void refIdentificationField(final JDFIdentificationField refTarget)
 	{
 		refElement(refTarget);
 	}

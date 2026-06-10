@@ -9,12 +9,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 /**
@@ -26,39 +22,39 @@ public class JDFSpanScreeningType extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanScreeningType
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanScreeningType(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanScreeningType(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanScreeningType
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanScreeningType(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanScreeningType(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanScreeningType
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanScreeningType(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanScreeningType(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -66,43 +62,14 @@ public class JDFSpanScreeningType extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanScreeningType
 	 */
-	public static class EnumSpanScreeningType extends ValuedEnum
+	public enum EnumSpanScreeningType
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		AM, FM;
 
-		private EnumSpanScreeningType(String name)
+		public static EnumSpanScreeningType getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanScreeningType.class, val, null);
 		}
-
-		public static EnumSpanScreeningType getEnum(String enumName)
-		{
-			return (EnumSpanScreeningType) getEnum(EnumSpanScreeningType.class, enumName);
-		}
-
-		public static EnumSpanScreeningType getEnum(int enumValue)
-		{
-			return (EnumSpanScreeningType) getEnum(EnumSpanScreeningType.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanScreeningType.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanScreeningType.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanScreeningType.class);
-		}
-
-		public static final EnumSpanScreeningType AM = new EnumSpanScreeningType("AM");
-		public static final EnumSpanScreeningType FM = new EnumSpanScreeningType("FM");
 
 	}
 
@@ -111,18 +78,18 @@ public class JDFSpanScreeningType extends JDFEnumerationSpan
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanScreeningType.getEnum(0);
+		return EnumSpanScreeningType.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

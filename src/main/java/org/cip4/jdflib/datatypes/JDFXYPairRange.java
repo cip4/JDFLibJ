@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,22 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFXYPairRange.java
@@ -106,42 +106,42 @@ public class JDFXYPairRange extends JDFRange
 
 	/**
 	 * constructs a xy pair range with both values equal ("from x to x")
-	 * 
+	 *
 	 * @param x left/right pair
 	 */
-	public JDFXYPairRange(JDFXYPair x)
+	public JDFXYPairRange(final JDFXYPair x)
 	{
 		this(x, x);
 	}
 
 	/**
 	 * constructs a xy pair range with the given left and right xy pair
-	 * 
+	 *
 	 * @param min the given left xy pair
 	 * @param max the given right xy pair
 	 */
-	public JDFXYPairRange(JDFXYPair min, JDFXYPair max)
+	public JDFXYPairRange(final JDFXYPair min, final JDFXYPair max)
 	{
 		init(min, max);
 	}
 
 	/**
 	 * constructs a xy pair range with the given xy pair range
-	 * 
+	 *
 	 * @param JDFXYPairRange r - the given xy pair range
 	 */
-	public JDFXYPairRange(JDFXYPairRange r)
+	public JDFXYPairRange(final JDFXYPairRange r)
 	{
 		init(r.getLeft(), r.getRight());
 	}
 
 	/**
 	 * Initialization
-	 * 
+	 *
 	 * @param min
 	 * @param max
 	 */
-	protected void init(JDFXYPair min, JDFXYPair max)
+	protected void init(final JDFXYPair min, final JDFXYPair max)
 	{
 		m_left = min;
 		m_right = max;
@@ -149,14 +149,13 @@ public class JDFXYPairRange extends JDFRange
 
 	/**
 	 * constructs a xy pair range with all values set via a string
-	 * 
+	 *
 	 * @param s the given string
-	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFXYPairRange(String s) throws DataFormatException
+	public JDFXYPairRange(final String s) throws DataFormatException
 	{
-		String[] strArray = s.split("~");
+		final String[] strArray = s.split("~");
 		if (strArray.length > 2)
 		{
 			throw new DataFormatException("JDFXYPairRange illegal string: " + s);
@@ -176,7 +175,7 @@ public class JDFXYPairRange extends JDFRange
 				m_right = new JDFXYPair(strArray[1].trim());
 			}
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new DataFormatException("JDFXYPairRange illegal string: " + s);
 		}
@@ -184,18 +183,17 @@ public class JDFXYPairRange extends JDFRange
 
 	/**
 	 * isValid - validate the given String
-	 * 
+	 *
 	 * @param s the given string
-	 * 
 	 * @return boolean - false if the String has not a valid format
 	 */
-	public boolean isValid(String s)
+	public boolean isValid(final String s)
 	{
 		try
 		{
 			new JDFXYPairRange(s);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			return false;
 		}
@@ -204,33 +202,29 @@ public class JDFXYPairRange extends JDFRange
 
 	/**
 	 * equals - returns true if both JDFXYPaiRanges are equal otherwise false
-	 * 
+	 *
 	 * @return boolean - true if equal otherwise false
 	 */
 	@Override
-	public boolean equals(Object other)
+	public boolean equals(final Object other)
 	{
 		if (this == other)
 		{
 			return true;
 		}
-		if (other == null)
-		{
-			return false;
-		}
-		if (!other.getClass().equals(getClass()))
+		if ((other == null) || !other.getClass().equals(getClass()))
 		{
 			return false;
 		}
 
-		JDFXYPairRange range = (JDFXYPairRange) other;
+		final JDFXYPairRange range = (JDFXYPairRange) other;
 
 		return this.getLeft().equals(range.getLeft()) && this.getRight().equals(range.getRight());
 	}
 
 	/**
 	 * hashCode complements equals() to fulfill the equals/hashCode contract
-	 * 
+	 *
 	 * @return int
 	 */
 	@Override
@@ -241,7 +235,7 @@ public class JDFXYPairRange extends JDFRange
 
 	/**
 	 * getLeft - returns the left JDFXYPair object
-	 * 
+	 *
 	 * @return JDFXYPair - the left JDFXYPair object
 	 */
 	public JDFXYPair getLeft()
@@ -251,7 +245,7 @@ public class JDFXYPairRange extends JDFRange
 
 	/**
 	 * getRight - returns the right JDFXYPair object
-	 * 
+	 *
 	 * @return JDFXYPair - the right JDFXYPair object
 	 */
 	public JDFXYPair getRight()
@@ -261,27 +255,27 @@ public class JDFXYPairRange extends JDFRange
 
 	/**
 	 * sets the left JDFXYPair object of the range
-	 * 
+	 *
 	 * @param xy the left JDFXYPair object of the range
 	 */
-	public void setLeft(JDFXYPair xy)
+	public void setLeft(final JDFXYPair xy)
 	{
 		m_left = xy;
 	}
 
 	/**
 	 * sets the right JDFXYPair object of the range
-	 * 
+	 *
 	 * @param xy the right JDFXYPair object of the range
 	 */
-	public void setRight(JDFXYPair xy)
+	public void setRight(final JDFXYPair xy)
 	{
 		m_right = xy;
 	}
 
 	/**
 	 * getLowerXValue - returns the lower x value of the bounds for example 2.9 4.5~6.3 7.9 return 2.9
-	 * 
+	 *
 	 * @return double - the lower x value of the range
 	 */
 	public double getLowerXValue()
@@ -291,7 +285,7 @@ public class JDFXYPairRange extends JDFRange
 
 	/**
 	 * getUpperXValue - return the upper x value of the bounds for example 2.9 4.5~6.3 7.9 return 6.3
-	 * 
+	 *
 	 * @return double - the upper x value of the range
 	 */
 	public double getUpperXValue()
@@ -301,7 +295,7 @@ public class JDFXYPairRange extends JDFRange
 
 	/**
 	 * getLowerYValue - returns the lower y value of the bounds for example 2.9 4.5~6.3 7.9 return 4.5
-	 * 
+	 *
 	 * @return double - the lower y value of the range
 	 */
 	public double getLowerYValue()
@@ -311,7 +305,7 @@ public class JDFXYPairRange extends JDFRange
 
 	/**
 	 * getUpperYValue - return the upper y value of the bounds for example 2.9 4.5~6.3 7.9 return 7.9
-	 * 
+	 *
 	 * @return double - the upper y value of the range
 	 */
 	public double getUpperYValue()
@@ -321,7 +315,7 @@ public class JDFXYPairRange extends JDFRange
 
 	/**
 	 * getUpperValue - returns the upper value of the bounds
-	 * 
+	 *
 	 * @return JDFXYPair - the upper value of the range
 	 */
 	public JDFXYPair getUpperValue()
@@ -331,7 +325,7 @@ public class JDFXYPairRange extends JDFRange
 
 	/**
 	 * getLowerValue - returns the lower value of the bounds
-	 * 
+	 *
 	 * @return JDFXYPair - the lower value of the range
 	 */
 	public JDFXYPair getLowerValue()
@@ -341,44 +335,42 @@ public class JDFXYPairRange extends JDFRange
 
 	/**
 	 * isEqual - boolean equivalence
-	 * 
+	 *
 	 * @return boolean - true if the ranges are equivalent
 	 */
-	public boolean isEqual(JDFXYPairRange g)
+	public boolean isEqual(final JDFXYPairRange g)
 	{
 		return (m_left.equals(g.m_left)) && (m_right.equals(g.m_right));
 	}
 
 	/**
 	 * inRange - returns true if <code>this</code> contains <code>xypair</code>
-	 * 
+	 *
 	 * @param xypair comparison pair
-	 * 
 	 * @return boolean - true if xy in range
 	 */
-	public boolean inRange(JDFXYPair xypair)
+	public boolean inRange(final JDFXYPair xypair)
 	{
-		JDFXYPair min = this.getLowerValue();
-		JDFXYPair max = this.getUpperValue();
+		final JDFXYPair min = this.getLowerValue();
+		final JDFXYPair max = this.getUpperValue();
 		return xypair.isGreaterOrEqual(min) && xypair.isLessOrEqual(max);
 	}
 
 	/**
 	 * isPartOfRange - is range 'r' within this range?
-	 * 
+	 *
 	 * @param ra the range to test
-	 * 
 	 * @return boolean - true if range 'r' is within this range, else false
 	 */
 	@Override
-	public boolean isPartOfRange(JDFRange ra)
+	public boolean isPartOfRange(final JDFRange ra)
 	{
-		JDFXYPairRange r = (JDFXYPairRange) ra;
+		final JDFXYPairRange r = (JDFXYPairRange) ra;
 
-		JDFXYPair min = this.getLowerValue();
-		JDFXYPair r_min = r.getLowerValue();
-		JDFXYPair max = this.getUpperValue();
-		JDFXYPair r_max = r.getUpperValue();
+		final JDFXYPair min = this.getLowerValue();
+		final JDFXYPair r_min = r.getLowerValue();
+		final JDFXYPair max = this.getUpperValue();
+		final JDFXYPair r_max = r.getUpperValue();
 		return r_min.isGreaterOrEqual(min) && r_max.isLessOrEqual(max);
 	}
 
@@ -389,13 +381,13 @@ public class JDFXYPairRange extends JDFRange
 	}
 
 	@Override
-	public String getRightString(int precision)
+	public String getRightString(final int precision)
 	{
 		return getRight().getString(precision);
 	}
 
 	@Override
-	public String getLeftString(int precision)
+	public String getLeftString(final int precision)
 	{
 		return getLeft().getString(precision);
 	}
@@ -407,7 +399,7 @@ public class JDFXYPairRange extends JDFRange
 	}
 
 	@Override
-	protected boolean inObjectRange(Object other)
+	protected boolean inObjectRange(final Object other)
 	{
 		return inRange((JDFXYPair) other);
 	}

@@ -38,13 +38,12 @@ package org.cip4.jdflib.extensions;
 
 import java.util.List;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.XSDConstants.eAttributeUse;
-import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 public class XSDUtil
@@ -61,10 +60,10 @@ public class XSDUtil
 	{
 		if (v == null)
 		{
-			v = XJDFHelper.getDefaultVersion();
+			v = BaseXJDFHelper.getDefaultVersion();
 		}
-		v = (EnumVersion) EnumUtil.max(v, EnumVersion.Version_2_0);
-		v = (EnumVersion) EnumUtil.min(v, EnumVersion.Version_2_3);
+		v = JavaEnumUtil.max(v, EnumVersion.Version_2_0);
+		v = JavaEnumUtil.min(v, EnumVersion.Version_2_3);
 		final String path = SCHEMA + v.getMinorVersion() + XJDF_XSD;
 		return XMLDoc.parseStream(XSDUtil.class.getResourceAsStream(path));
 	}
@@ -75,7 +74,7 @@ public class XSDUtil
 	 * @param typ
 	 * @param required
 	 */
-	public static KElement setXSAttribute(KElement root, final String attName, String typ, boolean required)
+	public static KElement setXSAttribute(KElement root, final String attName, final String typ, boolean required)
 	{
 		final KElement root2 = root.getElement(XSDConstants.XS_COMPLEX_CONTENT);
 		boolean extension = false;
@@ -123,7 +122,7 @@ public class XSDUtil
 	 * @param typ
 	 * @param required
 	 */
-	public static KElement createPatternType(final KElement root, final String simpleType, String pattern)
+	public static KElement createPatternType(final KElement root, final String simpleType, final String pattern)
 	{
 		final KElement restrict = createRestriction(root, simpleType);
 		restrict.setAttribute(XSDConstants.BASE, XSDConstants.XS_STRING);
@@ -138,20 +137,20 @@ public class XSDUtil
 	 * @param typ
 	 * @param required
 	 */
-	public static KElement createEnumType(final KElement root, final String simpleType, final Class<? extends ValuedEnum> c)
+	public static KElement createEnumType(final KElement root, final String simpleType, final Class<? extends Enum<?>> c)
 	{
 		final KElement restrict = createRestriction(root, simpleType);
 		updateRestrictions(restrict, c);
 		return restrict;
 	}
 
-	public static void removeAttribute(KElement parent, String name)
+	public static void removeAttribute(final KElement parent, final String name)
 	{
 		removeXSElement(parent, XSDConstants.XS_ATTRIBUTE, XSDConstants.NAME, name);
 
 	}
 
-	static void removeXSElement(KElement parent, String typ, String attName, String name)
+	static void removeXSElement(final KElement parent, final String typ, final String attName, final String name)
 	{
 		final KElement e = parent.getChildWithAttribute(typ, attName, null, name, 0, true);
 		if (e != null)
@@ -161,7 +160,7 @@ public class XSDUtil
 
 	}
 
-	static String shortString(KElement schema)
+	static String shortString(final KElement schema)
 	{
 		String s = schema.getNodeName();
 		for (final String key : new StringArray("name ref type base"))
@@ -171,7 +170,7 @@ public class XSDUtil
 		return s;
 	}
 
-	public static void updateRestrictions(KElement copy, List<String> values)
+	public static void updateRestrictions(final KElement copy, final List<String> values)
 	{
 		final KElement res = XSDConstants.XS_RESTRICTION.equals(copy.getNodeName()) ? copy : copy.getCreateElement(XSDConstants.XS_RESTRICTION);
 		res.setAttribute(XSDConstants.BASE, "xs:NMTOKEN");
@@ -181,9 +180,10 @@ public class XSDUtil
 		}
 	}
 
-	public static void updateRestrictions(KElement copy, final Class<? extends ValuedEnum> c)
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static void updateRestrictions(final KElement copy, final Class<? extends Enum<?>> c)
 	{
-		updateRestrictions(copy, EnumUtil.getNamesVector(c));
+		updateRestrictions(copy, StringUtil.getNamesVector((Class) c));
 	}
 
 }

@@ -106,7 +106,7 @@ public abstract class JDFAutoDisplayGroupPool extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDisplayGroupPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDisplayGroupPool(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoDisplayGroupPool extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDisplayGroupPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDisplayGroupPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoDisplayGroupPool extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDisplayGroupPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDisplayGroupPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoDisplayGroupPool extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFDisplayGroup the element
 	 */
-	public JDFDisplayGroup getCreateDisplayGroup(int iSkip)
+	public JDFDisplayGroup getCreateDisplayGroup(final int iSkip)
 	{
 		return (JDFDisplayGroup) getCreateElement_JDFElement(ElementName.DISPLAYGROUP, null, iSkip);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoDisplayGroupPool extends JDFElement
 	 * @return JDFDisplayGroup the element
 	 *         default is getDisplayGroup(0)
 	 */
-	public JDFDisplayGroup getDisplayGroup(int iSkip)
+	public JDFDisplayGroup getDisplayGroup(final int iSkip)
 	{
 		return (JDFDisplayGroup) getElement(ElementName.DISPLAYGROUP, null, iSkip);
 	}

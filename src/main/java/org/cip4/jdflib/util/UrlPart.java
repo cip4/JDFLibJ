@@ -64,12 +64,10 @@ import jakarta.mail.MessagingException;
  * simple struct to contain the stream and type of a bodypart
  *
  * @author rainer prosi
- *
  */
 public class UrlPart implements IPollDetails, IStreamWriter
 {
 	/**
-	 *
 	 * @return the response code
 	 */
 	@Override
@@ -97,7 +95,6 @@ public class UrlPart implements IPollDetails, IStreamWriter
 	}
 
 	/**
-	 *
 	 * @param connection
 	 * @param isHttp
 	 * @throws IOException
@@ -119,7 +116,9 @@ public class UrlPart implements IPollDetails, IStreamWriter
 				inStream = null;
 			}
 			if (inStream == null)
+			{
 				inStream = ((HttpURLConnection) connection).getErrorStream();
+			}
 			rc = ((HttpURLConnection) connection).getResponseCode();
 		}
 		else
@@ -147,7 +146,6 @@ public class UrlPart implements IPollDetails, IStreamWriter
 	}
 
 	/**
-	 *
 	 * @param f
 	 * @throws IOException
 	 */
@@ -213,7 +211,6 @@ public class UrlPart implements IPollDetails, IStreamWriter
 	}
 
 	/**
-	 * 
 	 * @param maxLen
 	 * @return
 	 */
@@ -247,7 +244,6 @@ public class UrlPart implements IPollDetails, IStreamWriter
 
 	/**
 	 * buffer my input stream
-	 *
 	 */
 	public void buffer()
 	{
@@ -279,7 +275,8 @@ public class UrlPart implements IPollDetails, IStreamWriter
 	@Override
 	public String toString()
 	{
-		return "URLPart: " + contentType + " length=" + contentLength + " rc=" + rc + " URL=" + url + "\n" + ((bufferStream == null) ? " <not buffered>" : getResponseString(1234));
+		return "URLPart: " + contentType + " length=" + contentLength + " rc=" + rc + " URL=" + url + "\n"
+				+ ((bufferStream == null) ? " <not buffered>" : getResponseString(1234));
 	}
 
 	/**
@@ -305,7 +302,9 @@ public class UrlPart implements IPollDetails, IStreamWriter
 	protected void finalize() throws Throwable
 	{
 		if (bufferStream != null)
+		{
 			bufferStream.close();
+		}
 		super.finalize();
 	}
 

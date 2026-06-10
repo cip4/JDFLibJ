@@ -45,7 +45,6 @@ import org.cip4.jdflib.jmf.JDFJMF;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  *         walker for the JMF or XJMF root
  */
 public class WalkJMF extends WalkXElement
@@ -78,7 +77,6 @@ public class WalkJMF extends WalkXElement
 	}
 
 	/**
-	 *
 	 * @param elem
 	 */
 	@Override

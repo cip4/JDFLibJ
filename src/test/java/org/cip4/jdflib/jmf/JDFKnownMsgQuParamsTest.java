@@ -72,9 +72,10 @@ package org.cip4.jdflib.jmf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Arrays;
 import java.util.List;
 
-import org.cip4.jdflib.auto.JDFAutoSignal.EChannelMode;
+import org.cip4.jdflib.auto.JDFAutoKnownMsgQuParams;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.junit.jupiter.api.Test;
@@ -93,9 +94,9 @@ class JDFKnownMsgQuParamsTest
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.KNOWNMSGQUPARAMS);
 		final JDFKnownMsgQuParams ms = (JDFKnownMsgQuParams) doc.getRoot();
-		ms.setChannelMode((EChannelMode) null);
-		ms.setChannelMode(EChannelMode.FireAndForget);
-		assertEquals(EChannelMode.FireAndForget, ms.getEnumsChannelMode().get(0));
+		ms.setChannelMode((List<JDFAutoKnownMsgQuParams.EnumChannelMode>) null);
+		ms.setChannelMode(Arrays.asList(JDFAutoKnownMsgQuParams.EnumChannelMode.FireAndForget));
+		assertEquals(JDFAutoKnownMsgQuParams.EnumChannelMode.FireAndForget, ms.getChannelMode().get(0));
 	}
 
 	/**
@@ -106,11 +107,11 @@ class JDFKnownMsgQuParamsTest
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.KNOWNMSGQUPARAMS);
 		final JDFKnownMsgQuParams ms = (JDFKnownMsgQuParams) doc.getRoot();
-		ms.setChannelMode(EChannelMode.FireAndForget);
-		final List<EChannelMode> channelMode = ms.getEnumsChannelMode();
-		ms.setChannelMode((EChannelMode) null);
-		ms.setEChannelMode(channelMode);
-		assertEquals(EChannelMode.FireAndForget, channelMode.get(0));
+		ms.setChannelMode(Arrays.asList(JDFAutoKnownMsgQuParams.EnumChannelMode.FireAndForget));
+		final List<JDFAutoKnownMsgQuParams.EnumChannelMode> channelMode = ms.getChannelMode();
+		ms.setChannelMode((List<JDFAutoKnownMsgQuParams.EnumChannelMode>) null);
+		ms.setChannelMode(channelMode);
+		assertEquals(JDFAutoKnownMsgQuParams.EnumChannelMode.FireAndForget, channelMode.get(0));
 	}
 
 }

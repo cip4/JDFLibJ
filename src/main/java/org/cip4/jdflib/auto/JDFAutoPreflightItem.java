@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -95,7 +90,7 @@ public abstract class JDFAutoPreflightItem extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREFLIGHTLEVEL, 0x3333111111l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumPreflightLevel.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumPreflightLevel.class, 0), null);
 	}
 
 	@Override
@@ -110,7 +105,7 @@ public abstract class JDFAutoPreflightItem extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPreflightItem(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPreflightItem(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -122,7 +117,7 @@ public abstract class JDFAutoPreflightItem extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPreflightItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPreflightItem(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -135,95 +130,28 @@ public abstract class JDFAutoPreflightItem extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPreflightItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPreflightItem(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for PreflightLevel
+	 * Enumeration strings for numPreflightLevel
 	 */
 
-	public enum EPreflightLevel
+	public enum EnumPreflightLevel
 	{
 		Basic, Extended, Premium;
 
-		public static EPreflightLevel getEnum(String val)
+		public static EnumPreflightLevel getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPreflightLevel.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPreflightLevel.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for PreflightLevel
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumPreflightLevel extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPreflightLevel(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumPreflightLevel getEnum(String enumName)
-		{
-			return (EnumPreflightLevel) getEnum(EnumPreflightLevel.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPreflightLevel getEnum(int enumValue)
-		{
-			return (EnumPreflightLevel) getEnum(EnumPreflightLevel.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPreflightLevel.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPreflightLevel.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPreflightLevel.class);
-		}
-
-		/**  */
-		public static final EnumPreflightLevel Basic = new EnumPreflightLevel("Basic");
-		/**  */
-		public static final EnumPreflightLevel Extended = new EnumPreflightLevel("Extended");
-		/**  */
-		public static final EnumPreflightLevel Premium = new EnumPreflightLevel("Premium");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -235,9 +163,9 @@ public abstract class JDFAutoPreflightItem extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPreflightLevel(EPreflightLevel enumVar)
+	public void setPreflightLevel(final EnumPreflightLevel enumVar)
 	{
-		setAttribute(AttributeName.PREFLIGHTLEVEL, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.PREFLIGHTLEVEL, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -245,35 +173,6 @@ public abstract class JDFAutoPreflightItem extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPreflightLevel getEPreflightLevel()
-	{
-		return EPreflightLevel.getEnum(getAttribute(AttributeName.PREFLIGHTLEVEL, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute PreflightLevel
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute PreflightLevel
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPreflightLevel(EPreflightLevel) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPreflightLevel(EnumPreflightLevel enumVar)
-	{
-		setAttribute(AttributeName.PREFLIGHTLEVEL, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute PreflightLevel
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EPreflightLevel GetEPreflightLevel() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumPreflightLevel getPreflightLevel()
 	{
 		return EnumPreflightLevel.getEnum(getAttribute(AttributeName.PREFLIGHTLEVEL, null, null));

@@ -106,7 +106,7 @@ public abstract class JDFAutoAmountPool extends JDFPool
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAmountPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoAmountPool(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoAmountPool extends JDFPool
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAmountPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoAmountPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoAmountPool extends JDFPool
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoAmountPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoAmountPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoAmountPool extends JDFPool
 	 * @param iSkip number of elements to skip
 	 * @return JDFPartAmount the element
 	 */
-	public JDFPartAmount getCreatePartAmount(int iSkip)
+	public JDFPartAmount getCreatePartAmount(final int iSkip)
 	{
 		return (JDFPartAmount) getCreateElement_JDFElement(ElementName.PARTAMOUNT, null, iSkip);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoAmountPool extends JDFPool
 	 * @return JDFPartAmount the element
 	 *         default is getPartAmount(0)
 	 */
-	public JDFPartAmount getPartAmount(int iSkip)
+	public JDFPartAmount getPartAmount(final int iSkip)
 	{
 		return (JDFPartAmount) getElement(ElementName.PARTAMOUNT, null, iSkip);
 	}

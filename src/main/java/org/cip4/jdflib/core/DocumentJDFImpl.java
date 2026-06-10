@@ -68,7 +68,6 @@ import org.w3c.dom.Node;
  * implementation of the JDFLib class factory
  *
  * @author prosirai
- *
  */
 public class DocumentJDFImpl extends DocumentXMLImpl
 {
@@ -138,7 +137,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	/**
 	 * register new custom class in the factory
 	 *
-	 * @param strElement local name
+	 * @param strElement  local name
 	 * @param packagepath package path
 	 */
 	public static void registerCustomClass(final String strElement, final String packagepath)
@@ -230,7 +229,9 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		{
 
 			if (namespaceURI != null)
+			{
 				bInJDFJMF = namespaceURI.startsWith(jdfNSURIPrefix);
+			}
 			bInJDFJMF = bInJDFJMF || ElementName.JDF.equals(localPart) || XJDFConstants.XJDF.equals(localPart) || XJDFConstants.XJMF.equals(localPart)
 					|| ElementName.JMF.equals(localPart) || PRINTTALK.equals(localPart);
 		}
@@ -245,10 +246,14 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			{
 				path = getFactoryClassPath(namespaceURI, qualifiedName, localPart);
 				if (path == null)
+				{
 					path = getSpecialClassPath(namespaceURI, qualifiedName);
+				}
 
 				if (path != null)
+				{
 					constructi = data.sm_hashCtorElementNS.get(path);
+				}
 			}
 			if (constructi == null)// AS 17.09.02
 			{
@@ -349,7 +354,6 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	/**
 	 * Searches for the matching factory class in sm_PackageNames If a match could not be found then JDFResource.class is returned if the element is in a resource pool else if the
 	 * element is in the default name space JDFElement.class is returned else KElement.class is returned
-	 *
 	 * will return JDFElement.class or JDFResource.class only.
 	 *
 	 * @param qualifiedName the qualified name of the class
@@ -368,7 +372,8 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		return null;
 	}
 
-	private Class<?> getFactoryClass(final String strNameSpaceURI, final String qualifiedName, final String localPart, String strClassPath) throws ClassNotFoundException
+	private Class<?> getFactoryClass(final String strNameSpaceURI, final String qualifiedName, final String localPart, String strClassPath)
+			throws ClassNotFoundException
 	{
 		Class<?> packageNameClass = data.sm_ClassAlreadyInstantiated.get(qualifiedName);
 
@@ -377,7 +382,9 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			synchronized (data.sm_PackageNames)
 			{
 				if (strClassPath == null)
+				{
 					strClassPath = getFactoryClassPath(strNameSpaceURI, qualifiedName, localPart);
+				}
 
 				boolean normalElement = true;
 				if (strClassPath == null)
@@ -441,8 +448,8 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		else
 		{
 			strClassPath = data.sm_PackageNames.get(qualifiedName);
-			if (strClassPath == null
-					&& (null == strNameSpaceURI || (strNameSpaceURI != null && strNameSpaceURI.startsWith(jdfNSURIPrefix)) || JDFConstants.EMPTYSTRING.equals(strNameSpaceURI)))
+			if (strClassPath == null && (null == strNameSpaceURI || (strNameSpaceURI != null && strNameSpaceURI.startsWith(jdfNSURIPrefix))
+					|| JDFCoreConstants.EMPTYSTRING.equals(strNameSpaceURI)))
 			{ // the maps only contain local names for jdf - recheck in case of prefix
 				strClassPath = data.sm_PackageNames.get(localPart);
 			}
@@ -485,7 +492,8 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			else
 			{
 				// should never get her - needed for compiler happiness
-				strClassPath = (nameSpaceURI == null && bInJDFJMF || (nameSpaceURI != null && nameSpaceURI.startsWith(jdfNSURIPrefix))) ? data.sm_PackageNames.get("EleDefault")
+				strClassPath = (nameSpaceURI == null && bInJDFJMF || (nameSpaceURI != null && nameSpaceURI.startsWith(jdfNSURIPrefix)))
+						? data.sm_PackageNames.get("EleDefault")
 						: data.sm_PackageNames.get("OtherNSDefault");
 			}
 		}
@@ -497,7 +505,8 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			}
 			else
 			{
-				strClassPath = (nameSpaceURI == null && bInJDFJMF || (nameSpaceURI != null && nameSpaceURI.startsWith(jdfNSURIPrefix))) ? data.sm_PackageNames.get("EleDefault")
+				strClassPath = (nameSpaceURI == null && bInJDFJMF || (nameSpaceURI != null && nameSpaceURI.startsWith(jdfNSURIPrefix)))
+						? data.sm_PackageNames.get("EleDefault")
 						: data.sm_PackageNames.get("OtherNSDefault");
 			}
 		}
@@ -591,8 +600,6 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	}
 
 	/**
-	 *
-	 *
 	 * @param node
 	 */
 	public void setParentNode(final Node node)
@@ -606,12 +613,8 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		{
 			return false;
 		}
-		if (m_ParentNode instanceof JDFResourcePool)
-		{
-			return true;
-		}
 		// we assume any foreign ns thingy in resourceInfo is a resource
-		if (m_ParentNode instanceof JDFResourceInfo)
+		if ((m_ParentNode instanceof JDFResourcePool) || (m_ParentNode instanceof JDFResourceInfo))
 		{
 			return true;
 		}

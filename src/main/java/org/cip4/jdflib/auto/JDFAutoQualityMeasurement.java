@@ -123,7 +123,7 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoQualityMeasurement(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoQualityMeasurement(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -135,7 +135,7 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoQualityMeasurement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoQualityMeasurement(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -148,7 +148,7 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoQualityMeasurement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoQualityMeasurement(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -169,7 +169,7 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setEnd(JDFDate value)
+	public void setEnd(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -186,8 +186,8 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 	 */
 	public JDFDate getEnd()
 	{
-		String str = getAttribute(AttributeName.END, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.END, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -201,7 +201,7 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFailed(int value)
+	public void setFailed(final int value)
 	{
 		setAttribute(AttributeName.FAILED, value, null);
 	}
@@ -226,7 +226,7 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPassed(int value)
+	public void setPassed(final int value)
 	{
 		setAttribute(AttributeName.PASSED, value, null);
 	}
@@ -251,7 +251,7 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setStart(JDFDate value)
+	public void setStart(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -268,8 +268,8 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 	 */
 	public JDFDate getStart()
 	{
-		String str = getAttribute(AttributeName.START, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.START, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 

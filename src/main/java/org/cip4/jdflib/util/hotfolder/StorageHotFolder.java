@@ -59,7 +59,6 @@ import org.cip4.jdflib.util.FileUtil;
  * a hotfolder that handles storage of "hotfolded" data
  *
  * @author rainer prosi
- *
  */
 public class StorageHotFolder
 {
@@ -91,13 +90,12 @@ public class StorageHotFolder
 	final List<StorageHotFolderListener> listenerImpl;
 
 	/**
-	 *
 	 * constructor for a simple queue based hotfolder watcher that is automagically started in its own thread
 	 *
 	 * @param _hotFolderDir the hot folder directory to watch
-	 * @param storageDir the storage directory where hot files are moved to
-	 * @param ext the comma separated list of file extensions that are moved - if null no filtering
-	 * @param hfListener callback that receives the generated JMF - the location of the stored file will be found in the standard command parameters
+	 * @param storageDir    the storage directory where hot files are moved to
+	 * @param ext           the comma separated list of file extensions that are moved - if null no filtering
+	 * @param hfListener    callback that receives the generated JMF - the location of the stored file will be found in the standard command parameters
 	 */
 	public StorageHotFolder(final File _hotFolderDir, final File storageDir, final String ext, final HotFolderListener hfListener)
 	{
@@ -127,7 +125,6 @@ public class StorageHotFolder
 	}
 
 	/**
-	 *
 	 * @param _hotFolderDir
 	 */
 	private void moveFromTemp(final File _hotFolderDir)
@@ -153,7 +150,6 @@ public class StorageHotFolder
 
 	/**
 	 * stop this hot folder
-	 *
 	 */
 	public void stop()
 	{
@@ -162,7 +158,6 @@ public class StorageHotFolder
 
 	/**
 	 * restart this hot folder, creates a new listener thread and stops the old one
-	 *
 	 */
 	public void restart()
 	{
@@ -170,7 +165,6 @@ public class StorageHotFolder
 	}
 
 	/**
-	 *
 	 * add a listener that also stores
 	 *
 	 * @param _hfl
@@ -186,7 +180,6 @@ public class StorageHotFolder
 	}
 
 	/**
-	 *
 	 * @param i
 	 * @return
 	 */
@@ -196,7 +189,6 @@ public class StorageHotFolder
 	}
 
 	/**
-	 *
 	 * set the directory for successful done
 	 *
 	 * @param ok the local directory for ok files in the input hot folder
@@ -204,11 +196,12 @@ public class StorageHotFolder
 	public void setOKStorage(final File ok)
 	{
 		for (final StorageHotFolderListener shfl : listenerImpl)
+		{
 			shfl.setOKStorage(FileUtil.getFileInDirectory(getHfDirectory(), ok));
+		}
 	}
 
 	/**
-	 *
 	 * copy any files to the ok or error files as set by the folder properties
 	 *
 	 * @param storedFile
@@ -220,7 +213,6 @@ public class StorageHotFolder
 	}
 
 	/**
-	 *
 	 * copy any files to the ok or error files as set by the folder properties
 	 *
 	 * @param storedFile
@@ -232,7 +224,6 @@ public class StorageHotFolder
 	}
 
 	/**
-	 *
 	 * set the directory for error done
 	 *
 	 * @param error the local directory for error files in the input hot folder
@@ -240,7 +231,9 @@ public class StorageHotFolder
 	public void setErrorStorage(final File error)
 	{
 		for (final StorageHotFolderListener shfl : listenerImpl)
+		{
 			shfl.setErrorStorage(FileUtil.getFileInDirectory(getHfDirectory(), error));
+		}
 	}
 
 	/**
@@ -251,7 +244,9 @@ public class StorageHotFolder
 	public void setMaxStore(final int maxStore)
 	{
 		for (final StorageHotFolderListener shfl : listenerImpl)
+		{
 			shfl.setMaxStore(maxStore);
+		}
 	}
 
 	/**
@@ -262,7 +257,9 @@ public class StorageHotFolder
 	public void setMaxAux(final int maxStore)
 	{
 		for (final StorageHotFolderListener shfl : listenerImpl)
+		{
 			shfl.setMaxAux(maxStore);
+		}
 	}
 
 	/**
@@ -306,7 +303,9 @@ public class StorageHotFolder
 	public void setRetry(int retry)
 	{
 		if (retry < 1)
+		{
 			retry = 1;
+		}
 		this.retry = retry;
 	}
 

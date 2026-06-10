@@ -86,7 +86,8 @@ import org.cip4.jdflib.node.NodeIdentifier;
 
 //----------------------------------
 /**
- * @author Rainer Prosi <br/> Wrapper for StatusQuParams message element
+ * @author Rainer Prosi <br/>
+ *         Wrapper for StatusQuParams message element
  */
 public class JDFStatusQuParams extends JDFAutoStatusQuParams implements INodeIdentifiable
 {
@@ -94,36 +95,36 @@ public class JDFStatusQuParams extends JDFAutoStatusQuParams implements INodeIde
 
 	/**
 	 * Constructor for JDFStatusQuParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFStatusQuParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFStatusQuParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFStatusQuParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFStatusQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFStatusQuParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFStatusQuParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFStatusQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFStatusQuParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -139,12 +140,13 @@ public class JDFStatusQuParams extends JDFAutoStatusQuParams implements INodeIde
 
 	/**
 	 * gets the NodeIdetifier that matches this
-	 * 
+	 *
 	 * @return {@link NodeIdentifier} the matching nodeidentifier
 	 */
+	@Override
 	public NodeIdentifier getIdentifier()
 	{
-		NodeIdentifier ni = new NodeIdentifier();
+		final NodeIdentifier ni = new NodeIdentifier();
 		ni.setTo(getJobID(), getJobPartID(), getPartMapVector());
 		return ni;
 	}
@@ -153,12 +155,15 @@ public class JDFStatusQuParams extends JDFAutoStatusQuParams implements INodeIde
 	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.NodeIdentifier)
 	 * @param ni
 	 */
-	public void setIdentifier(NodeIdentifier ni)
+	@Override
+	public void setIdentifier(final NodeIdentifier ni)
 	{
 		NodeIdentifier niLocal = ni;
 
 		if (niLocal == null)
+		{
 			niLocal = new NodeIdentifier();
+		}
 
 		setJobID(niLocal.getJobID());
 		setJobPartID(niLocal.getJobPartID());
@@ -167,7 +172,7 @@ public class JDFStatusQuParams extends JDFAutoStatusQuParams implements INodeIde
 
 	/**
 	 * get part map vector
-	 * 
+	 *
 	 * @return VJDFAttributeMap: vector of attribute maps, one for each part
 	 */
 	@Override
@@ -178,45 +183,45 @@ public class JDFStatusQuParams extends JDFAutoStatusQuParams implements INodeIde
 
 	/**
 	 * set all parts to those defined in vParts
-	 * 
+	 *
 	 * @param vParts vector of attribute maps for the parts
 	 */
 	@Override
-	public void setPartMapVector(VJDFAttributeMap vParts)
+	public void setPartMapVector(final VJDFAttributeMap vParts)
 	{
 		super.setPartMapVector(vParts);
 	}
 
 	/**
 	 * set all parts to those defined by mPart
-	 * 
+	 *
 	 * @param mPart attribute map for the part to set
 	 */
 	@Override
-	public void setPartMap(JDFAttributeMap mPart)
+	public void setPartMap(final JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
 	}
 
 	/**
 	 * remove the part defined by mPart
-	 * 
+	 *
 	 * @param mPart attribute map for the part to remove
 	 */
 	@Override
-	public void removePartMap(JDFAttributeMap mPart)
+	public void removePartMap(final JDFAttributeMap mPart)
 	{
 		super.removePartMap(mPart);
 	}
 
 	/**
 	 * check whether the part defined by mPart is included
-	 * 
+	 *
 	 * @param mPart attribute map for the part to remove
 	 * @return boolean - returns true if the part exists
 	 */
 	@Override
-	public boolean hasPartMap(JDFAttributeMap mPart)
+	public boolean hasPartMap(final JDFAttributeMap mPart)
 	{
 		return super.hasPartMap(mPart);
 	}

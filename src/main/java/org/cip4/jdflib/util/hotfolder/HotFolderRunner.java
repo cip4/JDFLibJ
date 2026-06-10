@@ -49,6 +49,7 @@ import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.hotfolder.HotFolder.HotFileRunner;
 import org.cip4.jdflib.util.thread.MultiTaskQueue;
 import org.cip4.jdflib.util.thread.MyMutex;
+import org.cip4.jdflib.util.thread.OrderedTaskQueue;
 
 class HotFolderRunner extends Thread
 {
@@ -70,7 +71,6 @@ class HotFolderRunner extends Thread
 
 	/**
 	 * stop this thread;
-	 *
 	 */
 	void quit()
 	{
@@ -78,14 +78,13 @@ class HotFolderRunner extends Thread
 		log.info("Stopping hot folder runner: " + this);
 		interrupt.set(true);
 		ThreadUtil.notifyAll(mutex);
-		MultiTaskQueue.shutDown(name);
+		OrderedTaskQueue.shutDown(name);
 		ThreadUtil.notifyAll(this);
 		log.info("Finished stopping hot folder: " + this);
 		theRunner.set(null);
 	}
 
 	/**
-	 *
 	 * @param hotFolder
 	 */
 	public synchronized void add(final HotFolder hotFolder)
@@ -97,7 +96,6 @@ class HotFolderRunner extends Thread
 	}
 
 	/**
-	 *
 	 * @param hotFolder
 	 */
 	public synchronized void remove(final HotFolder hotFolder)
@@ -193,7 +191,9 @@ class HotFolderRunner extends Thread
 		synchronized (theRunner)
 		{
 			if (theRunner.get() == null)
+			{
 				theRunner.set(new HotFolderRunner());
+			}
 			return theRunner.get();
 		}
 	}

@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  *
@@ -87,7 +87,7 @@ import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.w3c.dom.DOMException;
 
 /**
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFDeviceList extends JDFAutoDeviceList
 {
@@ -95,48 +95,48 @@ public class JDFDeviceList extends JDFAutoDeviceList
 
 	/**
 	 * Constructor for JDFDeviceList
-	 * @param myOwnerDocument 
-	 * @param qualifiedName 
-	 * @throws DOMException 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
 	 */
-	public JDFDeviceList(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFDeviceList(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFDeviceList
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFDeviceList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFDeviceList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 
-	throws DOMException
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFDeviceList
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @param myLocalName 
-	 * @throws DOMException 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 * @throws DOMException
 	 */
-	public JDFDeviceList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFDeviceList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -147,16 +147,16 @@ public class JDFDeviceList extends JDFAutoDeviceList
 
 	/**
 	 * get a matching deviceInfo for a given DeviceID
-	 * 
+	 *
 	 * @param deviceID the deviceID of the device to get
-	 * @return 
+	 * @return
 	 */
-	public JDFDeviceInfo getDeviceInfo(String deviceID)
+	public JDFDeviceInfo getDeviceInfo(final String deviceID)
 	{
 		JDFDeviceInfo d = (JDFDeviceInfo) getChildWithAttribute(ElementName.DEVICEINFO, AttributeName.DEVICEID, null, deviceID, 0, true);
 		if (d == null)
 		{
-			JDFDevice dev = (JDFDevice) getChildWithAttribute(ElementName.DEVICE, AttributeName.DEVICEID, null, deviceID, 0, false);
+			final JDFDevice dev = (JDFDevice) getChildWithAttribute(ElementName.DEVICE, AttributeName.DEVICEID, null, deviceID, 0, false);
 			if (dev != null)
 			{
 				d = (JDFDeviceInfo) dev.getParentNode_KElement();
@@ -167,11 +167,11 @@ public class JDFDeviceList extends JDFAutoDeviceList
 
 	/**
 	 * get a matching deviceInfo for a given DeviceID, create it if it does not exist
-	 * 
+	 *
 	 * @param deviceID the deviceID of the device to get
-	 * @return 
+	 * @return
 	 */
-	public JDFDeviceInfo getCreateDeviceInfo(String deviceID)
+	public JDFDeviceInfo getCreateDeviceInfo(final String deviceID)
 	{
 		JDFDeviceInfo d = getDeviceInfo(deviceID);
 		if (d == null)

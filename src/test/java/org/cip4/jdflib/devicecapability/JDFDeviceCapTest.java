@@ -122,10 +122,10 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * < July 6, 2009
+ *         < July 6, 2009
  */
 class JDFDeviceCapTest extends JDFTestCaseBase
 {
@@ -228,7 +228,7 @@ class JDFDeviceCapTest extends JDFTestCaseBase
 		{
 			devicecapProduct = device.appendDeviceCap();
 
-			final Vector<EnumCombinedMethod> vMethods = new Vector<EnumCombinedMethod>();
+			final Vector<EnumCombinedMethod> vMethods = new Vector<>();
 			vMethods.add(EnumCombinedMethod.None);
 			vMethods.add(EnumCombinedMethod.ProcessGroup);
 			vMethods.add(EnumCombinedMethod.Combined);
@@ -287,7 +287,7 @@ class JDFDeviceCapTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testGetBadJDFInfo()
@@ -305,7 +305,7 @@ class JDFDeviceCapTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testAction()
@@ -324,7 +324,7 @@ class JDFDeviceCapTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testGetDevCapsByName()
@@ -352,7 +352,7 @@ class JDFDeviceCapTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testDevCapsMinOccurs()
@@ -364,7 +364,7 @@ class JDFDeviceCapTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testDevCapsMaxOccurs()
@@ -376,7 +376,7 @@ class JDFDeviceCapTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testLogic()
@@ -397,14 +397,14 @@ class JDFDeviceCapTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testGetCombinedMethod()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.DEVICECAP);
 		final JDFDeviceCap dc = (JDFDeviceCap) d.getRoot();
-		final Vector<EnumCombinedMethod> v = new Vector<EnumCombinedMethod>();
+		final Vector<EnumCombinedMethod> v = new Vector<>();
 		v.add(EnumCombinedMethod.None);
 		Assertions.assertEquals(dc.getCombinedMethod(), v, "default is none");
 
@@ -413,7 +413,7 @@ class JDFDeviceCapTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testDeviceCapIsValid()
@@ -431,7 +431,7 @@ class JDFDeviceCapTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testGetExecutableJDF()
@@ -491,7 +491,7 @@ class JDFDeviceCapTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testGetMatchingTypeNodeVector()
@@ -516,7 +516,7 @@ class JDFDeviceCapTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testGetMatchingDeviceCapVector()
@@ -598,7 +598,7 @@ class JDFDeviceCapTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testMatchesType()
@@ -667,7 +667,7 @@ class JDFDeviceCapTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testCreateModuleCaps()
@@ -682,7 +682,7 @@ class JDFDeviceCapTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testGetNamePathVector()
@@ -721,7 +721,7 @@ class JDFDeviceCapTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////////////////
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testGetMessageServiceForJMFType()

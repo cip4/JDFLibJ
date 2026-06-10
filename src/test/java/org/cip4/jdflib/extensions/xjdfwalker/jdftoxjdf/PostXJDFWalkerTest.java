@@ -56,7 +56,6 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.MessageHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
-import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.XJMFHelper;
@@ -354,8 +353,8 @@ class PostXJDFWalkerTest extends JDFTestCaseBase
 		c.setAttribute(AttributeName.DEVICEID, "d1");
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) x);
 		w.walkTreeKidsFirst(x);
-		assertEquals(XJDF20.getSchemaURL(), x.getElement(XJDFConstants.Header).getNamespaceURI());
-		assertEquals(XJDF20.getSchemaURL(), c.getElement(XJDFConstants.Header).getNamespaceURI());
+		assertEquals(JDFToXJDF.getSchemaURL(), x.getElement(XJDFConstants.Header).getNamespaceURI());
+		assertEquals(JDFToXJDF.getSchemaURL(), c.getElement(XJDFConstants.Header).getNamespaceURI());
 	}
 
 	/**
@@ -398,12 +397,11 @@ class PostXJDFWalkerTest extends JDFTestCaseBase
 	{
 		final XJDFHelper h = new XJDFHelper("a", null);
 		final SetHelper set = h.appendResourceSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
-		set.getRoot().setAttribute(AttributeName.ORIENTATION, EnumOrientation.Flip0.getName());
+		set.getRoot().setAttribute(AttributeName.ORIENTATION, EnumOrientation.Flip0.name());
 		set.getCreatePartition(AttributeName.PARTVERSION, "P1", true);
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertEquals(EnumOrientation.Flip0.getName(),
-				h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getPartition(0).getAttribute(AttributeName.ORIENTATION));
+		assertEquals(EnumOrientation.Flip0.name(), h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getPartition(0).getAttribute(AttributeName.ORIENTATION));
 		assertNull(h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getAttribute(AttributeName.ORIENTATION));
 	}
 

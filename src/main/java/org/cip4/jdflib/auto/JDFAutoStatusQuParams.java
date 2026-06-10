@@ -71,14 +71,8 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EDeviceDetails;
-import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -103,10 +97,10 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICEDETAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumDeviceDetails.getEnum(0), "None");
+				JavaEnumUtil.getEnum(EnumDeviceDetails.class, 0), "None");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.EMPLOYEEINFO, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBDETAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumJobDetails.getEnum(0),
-				"None");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBDETAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumJobDetails.class, 0), "None");
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
@@ -137,7 +131,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoStatusQuParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoStatusQuParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -149,7 +143,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoStatusQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoStatusQuParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -162,97 +156,42 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoStatusQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoStatusQuParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for JobDetails
+	 * Enumeration strings for numDeviceDetails
 	 */
 
-	public enum EJobDetails
+	public enum EnumDeviceDetails
+	{
+		None, Brief, Modules, Details, Capability, Full;
+
+		public static EnumDeviceDetails getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumDeviceDetails.class, val, EnumDeviceDetails.None);
+		}
+	}
+
+	/**
+	 * Enumeration strings for numJobDetails
+	 */
+
+	public enum EnumJobDetails
 	{
 		None, MIS, Brief, Full;
 
-		public static EJobDetails getEnum(String val)
+		public static EnumJobDetails getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EJobDetails.class, val, EJobDetails.None);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumJobDetails.class, val, EnumJobDetails.None);
 		}
-	}
-
-	/**
-	 * Enumeration strings for JobDetails
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumJobDetails extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumJobDetails(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumJobDetails getEnum(String enumName)
-		{
-			return (EnumJobDetails) getEnum(EnumJobDetails.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumJobDetails getEnum(int enumValue)
-		{
-			return (EnumJobDetails) getEnum(EnumJobDetails.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumJobDetails.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumJobDetails.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumJobDetails.class);
-		}
-
-		/**  */
-		public static final EnumJobDetails None = new EnumJobDetails("None");
-		/**  */
-		public static final EnumJobDetails MIS = new EnumJobDetails("MIS");
-		/**  */
-		public static final EnumJobDetails Brief = new EnumJobDetails("Brief");
-		/**  */
-		public static final EnumJobDetails Full = new EnumJobDetails("Full");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -264,9 +203,9 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDeviceDetails(EDeviceDetails enumVar)
+	public void setDeviceDetails(final EnumDeviceDetails enumVar)
 	{
-		setAttribute(AttributeName.DEVICEDETAILS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DEVICEDETAILS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -274,35 +213,6 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EDeviceDetails getEDeviceDetails()
-	{
-		return EDeviceDetails.getEnum(getAttribute(AttributeName.DEVICEDETAILS, null, "None"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute DeviceDetails
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute DeviceDetails
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDeviceDetails(EDeviceDetails) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDeviceDetails(EnumDeviceDetails enumVar)
-	{
-		setAttribute(AttributeName.DEVICEDETAILS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute DeviceDetails
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EDeviceDetails GetEDeviceDetails() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumDeviceDetails getDeviceDetails()
 	{
 		return EnumDeviceDetails.getEnum(getAttribute(AttributeName.DEVICEDETAILS, null, "None"));
@@ -318,7 +228,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setEmployeeInfo(boolean value)
+	public void setEmployeeInfo(final boolean value)
 	{
 		setAttribute(AttributeName.EMPLOYEEINFO, value, null);
 	}
@@ -343,9 +253,9 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setJobDetails(EJobDetails enumVar)
+	public void setJobDetails(final EnumJobDetails enumVar)
 	{
-		setAttribute(AttributeName.JOBDETAILS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.JOBDETAILS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -353,35 +263,6 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EJobDetails getEJobDetails()
-	{
-		return EJobDetails.getEnum(getAttribute(AttributeName.JOBDETAILS, null, "None"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute JobDetails
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute JobDetails
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetJobDetails(EJobDetails) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setJobDetails(EnumJobDetails enumVar)
-	{
-		setAttribute(AttributeName.JOBDETAILS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute JobDetails
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EJobDetails GetEJobDetails() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumJobDetails getJobDetails()
 	{
 		return EnumJobDetails.getEnum(getAttribute(AttributeName.JOBDETAILS, null, "None"));
@@ -397,7 +278,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -422,7 +303,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobPartID(String value)
+	public void setJobPartID(final String value)
 	{
 		setAttribute(AttributeName.JOBPARTID, value, null);
 	}
@@ -447,7 +328,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setQueueEntryID(String value)
+	public void setQueueEntryID(final String value)
 	{
 		setAttribute(AttributeName.QUEUEENTRYID, value, null);
 	}
@@ -472,7 +353,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setQueueInfo(boolean value)
+	public void setQueueInfo(final boolean value)
 	{
 		setAttribute(AttributeName.QUEUEINFO, value, null);
 	}
@@ -519,7 +400,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
-	public JDFPart getCreatePart(int iSkip)
+	public JDFPart getCreatePart(final int iSkip)
 	{
 		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
@@ -531,7 +412,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 * @return JDFPart the element
 	 *         default is getPart(0)
 	 */
-	public JDFPart getPart(int iSkip)
+	public JDFPart getPart(final int iSkip)
 	{
 		return (JDFPart) getElement(ElementName.PART, null, iSkip);
 	}

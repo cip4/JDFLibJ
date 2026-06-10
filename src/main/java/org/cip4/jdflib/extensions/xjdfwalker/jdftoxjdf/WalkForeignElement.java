@@ -100,17 +100,21 @@ public class WalkForeignElement extends WalkElement
 	@Override
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		KElement foreignParent = getForeignAllowed(xjdf);
+		final KElement foreignParent = getForeignAllowed(xjdf);
 
 		return foreignParent == null ? null : super.walk(jdf, foreignParent);
 	}
 
-	KElement getForeignAllowed(KElement xjdf)
+	KElement getForeignAllowed(final KElement xjdf)
 	{
 		if (xjdf == null)
+		{
 			return null;
+		}
 		if (SetHelper.isSet(xjdf) || ResourceHelper.isAsset(xjdf) || MessageHelper.isMessage(xjdf) || AuditHelper.isAudit(xjdf))
+		{
 			return xjdf;
+		}
 		return getForeignAllowed(xjdf.getParentNode_KElement());
 	}
 
@@ -118,7 +122,7 @@ public class WalkForeignElement extends WalkElement
 	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public boolean matches(KElement e)
+	public boolean matches(final KElement e)
 	{
 		return !JDFElement.isInAnyJDFNameSpaceStatic(e) && !(e instanceof JDFResourceLink) && !(e instanceof JDFResource);
 	}

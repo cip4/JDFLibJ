@@ -108,7 +108,7 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPageAssignedList(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPageAssignedList(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -120,7 +120,7 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPageAssignedList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPageAssignedList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPageAssignedList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPageAssignedList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -154,7 +154,7 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBroadsheetNumber(int value)
+	public void setBroadsheetNumber(final int value)
 	{
 		setAttribute(AttributeName.BROADSHEETNUMBER, value, null);
 	}
@@ -179,7 +179,7 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLogicalPrinterSection(String value)
+	public void setLogicalPrinterSection(final String value)
 	{
 		setAttribute(AttributeName.LOGICALPRINTERSECTION, value, null);
 	}
@@ -204,7 +204,7 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPageListIndex(JDFIntegerRangeList value)
+	public void setPageListIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.PAGELISTINDEX, value, null);
 	}
@@ -217,8 +217,8 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
 	 */
 	public JDFIntegerRangeList getPageListIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.PAGELISTINDEX, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PAGELISTINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -232,7 +232,7 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPagePlacementName(String value)
+	public void setPagePlacementName(final String value)
 	{
 		setAttribute(AttributeName.PAGEPLACEMENTNAME, value, null);
 	}

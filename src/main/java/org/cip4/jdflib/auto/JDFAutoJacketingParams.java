@@ -104,7 +104,7 @@ public abstract class JDFAutoJacketingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoJacketingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoJacketingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -116,7 +116,7 @@ public abstract class JDFAutoJacketingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoJacketingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoJacketingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -129,7 +129,7 @@ public abstract class JDFAutoJacketingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoJacketingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoJacketingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -140,7 +140,7 @@ public abstract class JDFAutoJacketingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -170,7 +170,7 @@ public abstract class JDFAutoJacketingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFoldingDistance(double value)
+	public void setFoldingDistance(final double value)
 	{
 		setAttribute(AttributeName.FOLDINGDISTANCE, value, null);
 	}
@@ -195,7 +195,7 @@ public abstract class JDFAutoJacketingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFoldingWidth(double value)
+	public void setFoldingWidth(final double value)
 	{
 		setAttribute(AttributeName.FOLDINGWIDTH, value, null);
 	}

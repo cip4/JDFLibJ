@@ -58,7 +58,6 @@ import org.cip4.jdflib.util.zip.ZipReader;
  * the declared packages, e.g. if your class is called FixVersion, the classes in the same package must be called WalkFoo, WalkBar etc.
  *
  * @author rainer prosi
- *
  */
 public class PackageElementWalker extends ElementWalker
 {
@@ -78,7 +77,9 @@ public class PackageElementWalker extends ElementWalker
 	{
 		super(_theFactory);
 		if (classes == null)
+		{
 			classes = new ListMap<>();
+		}
 		constructWalkers();
 	}
 
@@ -117,7 +118,6 @@ public class PackageElementWalker extends ElementWalker
 
 	/**
 	 * @param classVector
-	 *
 	 */
 	private void constructWorkersVClass(final List<String> classVector)
 	{
@@ -128,7 +128,6 @@ public class PackageElementWalker extends ElementWalker
 	}
 
 	/**
-	 *
 	 * @param jarFile
 	 */
 	private void constructWorkersJar(final File jarFile)
@@ -153,7 +152,9 @@ public class PackageElementWalker extends ElementWalker
 				{
 					final ZipEntry ze = zr.getNextMatchingEntry(classExpr);
 					if (ze == null)
+					{
 						break;
+					}
 					processSingleEntry(baseClass, packageName, packagePath, ze);
 				}
 				currentClass = getParentClass(currentClass);
@@ -178,7 +179,6 @@ public class PackageElementWalker extends ElementWalker
 	}
 
 	/**
-	 *
 	 * @param dir
 	 */
 	private void constructWorkersDir(final File dir)
@@ -198,7 +198,9 @@ public class PackageElementWalker extends ElementWalker
 					String name = f.getName();
 					name = UrlUtil.prefix(name);
 					if (name.indexOf('$') > 0)
+					{
 						continue;
+					}
 					name = packageName + "." + name;
 					final BaseWalker w = constructWalker(name);
 					if (w == null)
@@ -213,8 +215,6 @@ public class PackageElementWalker extends ElementWalker
 	}
 
 	/**
-	 *
-	 *
 	 * @param currentClass
 	 * @return
 	 */
@@ -223,15 +223,17 @@ public class PackageElementWalker extends ElementWalker
 	{
 		final Class<?> nextClass = currentClass.getSuperclass();
 		if (PackageElementWalker.class.isAssignableFrom(nextClass))
+		{
 			currentClass = (Class<? extends PackageElementWalker>) nextClass;
+		}
 		else
+		{
 			currentClass = null;
+		}
 		return currentClass;
 	}
 
 	/**
-	 *
-	 *
 	 * @param name
 	 * @return
 	 */

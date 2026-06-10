@@ -84,7 +84,8 @@ class JDFModifyQueueEntryParamsTest extends JDFTestCaseBase
 	@Test
 	void testConstruct()
 	{
-		assertEquals(JDFModifyQueueEntryParams.class, JDFElement.parseString("<XJMF><" + XJDFConstants.ModifyQueueEntryParams + "/></XJMF>").getFirstChildElement().getClass());
+		assertEquals(JDFModifyQueueEntryParams.class,
+				JDFElement.parseString("<XJMF><" + XJDFConstants.ModifyQueueEntryParams + "/></XJMF>").getFirstChildElement().getClass());
 	}
 
 	@Test
@@ -101,8 +102,8 @@ class JDFModifyQueueEntryParamsTest extends JDFTestCaseBase
 	@Test
 	void testGetOperation()
 	{
-		assertEquals(eOperation.Move, eOperation.getEnum(EnumType.SetQueueEntryPosition.getName()));
-		assertEquals(eOperation.Abort, eOperation.getEnum(EnumType.AbortQueueEntry.getName()));
+		assertEquals(eOperation.Move, eOperation.getEnum(EnumType.SetQueueEntryPosition.name()));
+		assertEquals(eOperation.Abort, eOperation.getEnum(EnumType.AbortQueueEntry.name()));
 		assertEquals(null, eOperation.getEnum(null));
 	}
 

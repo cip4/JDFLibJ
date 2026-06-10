@@ -68,9 +68,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class XJDFConventionalPrintingTest extends JDFTestCaseBase
 {
@@ -82,7 +80,7 @@ class XJDFConventionalPrintingTest extends JDFTestCaseBase
 	void testSimpleCP()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("SimpleCP", null);
-		xjdfHelper.setTypes(EnumType.ConventionalPrinting.getName());
+		xjdfHelper.setTypes(EnumType.ConventionalPrinting.name());
 
 		final SetHelper shSheet = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Input);
 		final ResourceHelper rhSheet = shSheet.getCreatePartition(0, true);
@@ -109,7 +107,7 @@ class XJDFConventionalPrintingTest extends JDFTestCaseBase
 	{
 
 		final XJDFHelper xjdfHelper = new XJDFHelper("CP2", null);
-		xjdfHelper.setTypes(EnumType.ConventionalPrinting.getName());
+		xjdfHelper.setTypes(EnumType.ConventionalPrinting.name());
 		xjdfHelper.setCategory(ICSConstants.MISCPS_PRINTING);
 		xjdfHelper.setDescriptiveName("My press run of sheet s1");
 
@@ -164,7 +162,7 @@ class XJDFConventionalPrintingTest extends JDFTestCaseBase
 	void testNarrowWeb()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("NarrowWebCP", null);
-		xjdfHelper.addType(EnumType.Feeding.getName()).addType(EnumType.ConventionalPrinting.getName()).addType(EnumType.Winding.getName());
+		xjdfHelper.addType(EnumType.Feeding.name()).addType(EnumType.ConventionalPrinting.name()).addType(EnumType.Winding.name());
 		xjdfHelper.setDescriptiveName("CustomerJob 123");
 
 		final SetHelper shSheet = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Input);

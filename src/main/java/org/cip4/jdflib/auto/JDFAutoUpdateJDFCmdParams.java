@@ -129,7 +129,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoUpdateJDFCmdParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoUpdateJDFCmdParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -141,7 +141,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoUpdateJDFCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoUpdateJDFCmdParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -154,7 +154,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoUpdateJDFCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoUpdateJDFCmdParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -175,7 +175,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setParentJobID(String value)
+	public void setParentJobID(final String value)
 	{
 		setAttribute(AttributeName.PARENTJOBID, value, null);
 	}
@@ -200,7 +200,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setParentJobPartID(String value)
+	public void setParentJobPartID(final String value)
 	{
 		setAttribute(AttributeName.PARENTJOBPARTID, value, null);
 	}
@@ -247,7 +247,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFCreateLink the element
 	 */
-	public JDFCreateLink getCreateCreateLink(int iSkip)
+	public JDFCreateLink getCreateCreateLink(final int iSkip)
 	{
 		return (JDFCreateLink) getCreateElement_JDFElement(ElementName.CREATELINK, null, iSkip);
 	}
@@ -259,7 +259,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 * @return JDFCreateLink the element
 	 *         default is getCreateLink(0)
 	 */
-	public JDFCreateLink getCreateLink(int iSkip)
+	public JDFCreateLink getCreateLink(final int iSkip)
 	{
 		return (JDFCreateLink) getElement(ElementName.CREATELINK, null, iSkip);
 	}
@@ -310,7 +310,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFCreateResource the element
 	 */
-	public JDFCreateResource getCreateCreateResource(int iSkip)
+	public JDFCreateResource getCreateCreateResource(final int iSkip)
 	{
 		return (JDFCreateResource) getCreateElement_JDFElement(ElementName.CREATERESOURCE, null, iSkip);
 	}
@@ -322,7 +322,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 * @return JDFCreateResource the element
 	 *         default is getCreateResource(0)
 	 */
-	public JDFCreateResource getCreateResource(int iSkip)
+	public JDFCreateResource getCreateResource(final int iSkip)
 	{
 		return (JDFCreateResource) getElement(ElementName.CREATERESOURCE, null, iSkip);
 	}
@@ -373,7 +373,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFMoveResource the element
 	 */
-	public JDFMoveResource getCreateMoveResource(int iSkip)
+	public JDFMoveResource getCreateMoveResource(final int iSkip)
 	{
 		return (JDFMoveResource) getCreateElement_JDFElement(ElementName.MOVERESOURCE, null, iSkip);
 	}
@@ -385,7 +385,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 * @return JDFMoveResource the element
 	 *         default is getMoveResource(0)
 	 */
-	public JDFMoveResource getMoveResource(int iSkip)
+	public JDFMoveResource getMoveResource(final int iSkip)
 	{
 		return (JDFMoveResource) getElement(ElementName.MOVERESOURCE, null, iSkip);
 	}
@@ -436,7 +436,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFRemoveLink the element
 	 */
-	public JDFRemoveLink getCreateRemoveLink(int iSkip)
+	public JDFRemoveLink getCreateRemoveLink(final int iSkip)
 	{
 		return (JDFRemoveLink) getCreateElement_JDFElement(ElementName.REMOVELINK, null, iSkip);
 	}
@@ -448,7 +448,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 * @return JDFRemoveLink the element
 	 *         default is getRemoveLink(0)
 	 */
-	public JDFRemoveLink getRemoveLink(int iSkip)
+	public JDFRemoveLink getRemoveLink(final int iSkip)
 	{
 		return (JDFRemoveLink) getElement(ElementName.REMOVELINK, null, iSkip);
 	}

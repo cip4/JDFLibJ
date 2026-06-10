@@ -45,6 +45,7 @@ import java.util.Enumeration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFParserFactory;
@@ -73,7 +74,6 @@ import jakarta.mail.internet.MimeBodyPart;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         Jul 24, 2009
  */
 public class BodyPartHelper
@@ -83,7 +83,6 @@ public class BodyPartHelper
 
 	/**
 	 * @param bp
-	 *
 	 */
 	public BodyPartHelper(final BodyPart bp)
 	{
@@ -120,7 +119,9 @@ public class BodyPartHelper
 	public boolean setHeader(final String key, final String value)
 	{
 		if (theBodyPart == null)
+		{
 			return false;
+		}
 		try
 		{
 			theBodyPart.setHeader(key, value);
@@ -134,7 +135,6 @@ public class BodyPartHelper
 
 	/**
 	 * @param cid
-	 *
 	 */
 	public void setContentID(final String cid)
 	{
@@ -301,26 +301,26 @@ public class BodyPartHelper
 		final KElement root = xmlDoc.getRoot();
 		if (root instanceof JDFJMF)
 		{
-			theBodyPart.setHeader(UrlUtil.CONTENT_TYPE, JDFConstants.MIME_JMF); // JMF
+			theBodyPart.setHeader(UrlUtil.CONTENT_TYPE, JDFCoreConstants.MIME_JMF); // JMF
 		}
 		else if (root instanceof JDFNode)
 		{
-			theBodyPart.setHeader(UrlUtil.CONTENT_TYPE, JDFConstants.MIME_JDF); // JDF
+			theBodyPart.setHeader(UrlUtil.CONTENT_TYPE, JDFCoreConstants.MIME_JDF); // JDF
 		}
 		else
 		{
 			final String localName = root.getLocalName();
 			if (localName.equals(XJDFConstants.XJDF))
 			{
-				theBodyPart.setHeader(UrlUtil.CONTENT_TYPE, JDFConstants.MIME_XJDF);
+				theBodyPart.setHeader(UrlUtil.CONTENT_TYPE, JDFCoreConstants.MIME_XJDF);
 			}
 			else if (localName.equals(XJDFConstants.XJMF))
 			{
-				theBodyPart.setHeader(UrlUtil.CONTENT_TYPE, JDFConstants.MIME_XJMF);
+				theBodyPart.setHeader(UrlUtil.CONTENT_TYPE, JDFCoreConstants.MIME_XJMF);
 			}
 			else if (localName.equals(JDFConstants.PRINT_TALK))
 			{
-				theBodyPart.setHeader(UrlUtil.CONTENT_TYPE, JDFConstants.MIME_PTK);
+				theBodyPart.setHeader(UrlUtil.CONTENT_TYPE, JDFCoreConstants.MIME_PTK);
 			}
 		}
 
@@ -487,13 +487,17 @@ public class BodyPartHelper
 	{
 		final Multipart mp = theBodyPart.getParent();
 		if (mp == null)
+		{
 			return 0;
+		}
 		final MimeHelper mh = new MimeHelper(mp);
 		final BodyPart[] bps = mh.getBodyParts();
 		for (int i = 0; i < bps.length; i++)
 		{
 			if (bps[i] == theBodyPart)
+			{
 				return i;
+			}
 		}
 		return 0;
 	}
@@ -566,7 +570,9 @@ public class BodyPartHelper
 	public boolean matchesKey(final String key, final String value)
 	{
 		if (theBodyPart == null)
+		{
 			return false;
+		}
 		final JDFAttributeMap headerMap = getHeaderMap();
 		final String ignoreCase = headerMap == null ? null : headerMap.getIgnoreCase(key);
 		return ignoreCase != null && StringUtil.equals(ignoreCase, value);

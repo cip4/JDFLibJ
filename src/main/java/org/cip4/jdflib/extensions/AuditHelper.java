@@ -56,9 +56,13 @@ public class AuditHelper extends MessageHelper
 		public static eAudit getEnum(String name)
 		{
 			if (name == null)
+			{
 				return null;
+			}
 			while (name.toLowerCase().startsWith("audit"))
+			{
 				name = name.substring(5);
+			}
 			return EnumUtil.getJavaEnumIgnoreCase(eAudit.class, name);
 		}
 
@@ -69,7 +73,6 @@ public class AuditHelper extends MessageHelper
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public static boolean isAudit(final KElement element)
@@ -91,7 +94,6 @@ public class AuditHelper extends MessageHelper
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public XJMFHelper makeXJMFSignal()

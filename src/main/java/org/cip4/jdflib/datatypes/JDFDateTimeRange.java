@@ -52,8 +52,6 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.util.JDFDate;
 
 /**
- *
- *
  * @author rainer prosi
  * @date Apr 12, 2013
  */
@@ -150,7 +148,6 @@ public class JDFDateTimeRange extends JDFRange
 	 * Construct a JDFDateTimeRange from a string
 	 *
 	 * @param s
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFDateTimeRange(final String s) throws DataFormatException
@@ -208,7 +205,6 @@ public class JDFDateTimeRange extends JDFRange
 	 * isValid - validate the given String
 	 *
 	 * @param s the given string
-	 *
 	 * @return boolean - false if the String has not a valid format
 	 */
 	public boolean isValid(final String s)
@@ -241,7 +237,6 @@ public class JDFDateTimeRange extends JDFRange
 	 * isPartOfRange - is range 'r' within this range?
 	 *
 	 * @param ra the range to test
-	 *
 	 * @return boolean - true if range 'r' is within this range, else false
 	 */
 	@Override
@@ -334,13 +329,13 @@ public class JDFDateTimeRange extends JDFRange
 	}
 
 	@Override
-	public String getRightString(int precision)
+	public String getRightString(final int precision)
 	{
 		return getRight().getDateISO();
 	}
 
 	@Override
-	public String getLeftString(int precision)
+	public String getLeftString(final int precision)
 	{
 		return getLeft().getDateISO();
 	}

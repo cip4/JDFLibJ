@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -95,13 +90,13 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.INCORRECTCOMPONENTQUALITY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumIncorrectComponentQuality.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumIncorrectComponentQuality.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.INCORRECTCOMPONENTS, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.DOUBLEFEEDQUALITY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumDoubleFeedQuality.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumDoubleFeedQuality.class, 0), null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.DOUBLEFEEDS, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.BADFEEDQUALITY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumBadFeedQuality.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumBadFeedQuality.class, 0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.BADFEEDS, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
@@ -117,7 +112,7 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFeederQualityParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoFeederQualityParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -129,7 +124,7 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFeederQualityParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoFeederQualityParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -142,265 +137,56 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoFeederQualityParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoFeederQualityParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for IncorrectComponentQuality
+	 * Enumeration strings for numIncorrectComponentQuality
 	 */
 
-	public enum EIncorrectComponentQuality
+	public enum EnumIncorrectComponentQuality
 	{
 		NotActive, Check, Waste, StopNoWaste, StopWaste;
 
-		public static EIncorrectComponentQuality getEnum(String val)
+		public static EnumIncorrectComponentQuality getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EIncorrectComponentQuality.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumIncorrectComponentQuality.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for IncorrectComponentQuality
+	 * Enumeration strings for numDoubleFeedQuality
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumIncorrectComponentQuality extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumIncorrectComponentQuality(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumIncorrectComponentQuality getEnum(String enumName)
-		{
-			return (EnumIncorrectComponentQuality) getEnum(EnumIncorrectComponentQuality.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumIncorrectComponentQuality getEnum(int enumValue)
-		{
-			return (EnumIncorrectComponentQuality) getEnum(EnumIncorrectComponentQuality.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumIncorrectComponentQuality.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumIncorrectComponentQuality.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumIncorrectComponentQuality.class);
-		}
-
-		/**  */
-		public static final EnumIncorrectComponentQuality NotActive = new EnumIncorrectComponentQuality("NotActive");
-		/**  */
-		public static final EnumIncorrectComponentQuality Check = new EnumIncorrectComponentQuality("Check");
-		/**  */
-		public static final EnumIncorrectComponentQuality Waste = new EnumIncorrectComponentQuality("Waste");
-		/**  */
-		public static final EnumIncorrectComponentQuality StopNoWaste = new EnumIncorrectComponentQuality("StopNoWaste");
-		/**  */
-		public static final EnumIncorrectComponentQuality StopWaste = new EnumIncorrectComponentQuality("StopWaste");
-	}
-
-	/**
-	 * Enumeration strings for DoubleFeedQuality
-	 */
-
-	public enum EDoubleFeedQuality
+	public enum EnumDoubleFeedQuality
 	{
 		NotActive, Check, Waste, StopNoWaste, StopWaste;
 
-		public static EDoubleFeedQuality getEnum(String val)
+		public static EnumDoubleFeedQuality getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EDoubleFeedQuality.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumDoubleFeedQuality.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for DoubleFeedQuality
+	 * Enumeration strings for numBadFeedQuality
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumDoubleFeedQuality extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumDoubleFeedQuality(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumDoubleFeedQuality getEnum(String enumName)
-		{
-			return (EnumDoubleFeedQuality) getEnum(EnumDoubleFeedQuality.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDoubleFeedQuality getEnum(int enumValue)
-		{
-			return (EnumDoubleFeedQuality) getEnum(EnumDoubleFeedQuality.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDoubleFeedQuality.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDoubleFeedQuality.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDoubleFeedQuality.class);
-		}
-
-		/**  */
-		public static final EnumDoubleFeedQuality NotActive = new EnumDoubleFeedQuality("NotActive");
-		/**  */
-		public static final EnumDoubleFeedQuality Check = new EnumDoubleFeedQuality("Check");
-		/**  */
-		public static final EnumDoubleFeedQuality Waste = new EnumDoubleFeedQuality("Waste");
-		/**  */
-		public static final EnumDoubleFeedQuality StopNoWaste = new EnumDoubleFeedQuality("StopNoWaste");
-		/**  */
-		public static final EnumDoubleFeedQuality StopWaste = new EnumDoubleFeedQuality("StopWaste");
-	}
-
-	/**
-	 * Enumeration strings for BadFeedQuality
-	 */
-
-	public enum EBadFeedQuality
+	public enum EnumBadFeedQuality
 	{
 		NotActive, Check, Waste, StopNoWaste, StopWaste;
 
-		public static EBadFeedQuality getEnum(String val)
+		public static EnumBadFeedQuality getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EBadFeedQuality.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumBadFeedQuality.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for BadFeedQuality
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumBadFeedQuality extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumBadFeedQuality(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumBadFeedQuality getEnum(String enumName)
-		{
-			return (EnumBadFeedQuality) getEnum(EnumBadFeedQuality.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumBadFeedQuality getEnum(int enumValue)
-		{
-			return (EnumBadFeedQuality) getEnum(EnumBadFeedQuality.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumBadFeedQuality.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumBadFeedQuality.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumBadFeedQuality.class);
-		}
-
-		/**  */
-		public static final EnumBadFeedQuality NotActive = new EnumBadFeedQuality("NotActive");
-		/**  */
-		public static final EnumBadFeedQuality Check = new EnumBadFeedQuality("Check");
-		/**  */
-		public static final EnumBadFeedQuality Waste = new EnumBadFeedQuality("Waste");
-		/**  */
-		public static final EnumBadFeedQuality StopNoWaste = new EnumBadFeedQuality("StopNoWaste");
-		/**  */
-		public static final EnumBadFeedQuality StopWaste = new EnumBadFeedQuality("StopWaste");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -412,9 +198,9 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setIncorrectComponentQuality(EIncorrectComponentQuality enumVar)
+	public void setIncorrectComponentQuality(final EnumIncorrectComponentQuality enumVar)
 	{
-		setAttribute(AttributeName.INCORRECTCOMPONENTQUALITY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.INCORRECTCOMPONENTQUALITY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -422,35 +208,6 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EIncorrectComponentQuality getEIncorrectComponentQuality()
-	{
-		return EIncorrectComponentQuality.getEnum(getAttribute(AttributeName.INCORRECTCOMPONENTQUALITY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute IncorrectComponentQuality
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute IncorrectComponentQuality
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetIncorrectComponentQuality(EIncorrectComponentQuality) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setIncorrectComponentQuality(EnumIncorrectComponentQuality enumVar)
-	{
-		setAttribute(AttributeName.INCORRECTCOMPONENTQUALITY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute IncorrectComponentQuality
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EIncorrectComponentQuality GetEIncorrectComponentQuality() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumIncorrectComponentQuality getIncorrectComponentQuality()
 	{
 		return EnumIncorrectComponentQuality.getEnum(getAttribute(AttributeName.INCORRECTCOMPONENTQUALITY, null, null));
@@ -466,7 +223,7 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIncorrectComponents(int value)
+	public void setIncorrectComponents(final int value)
 	{
 		setAttribute(AttributeName.INCORRECTCOMPONENTS, value, null);
 	}
@@ -491,9 +248,9 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDoubleFeedQuality(EDoubleFeedQuality enumVar)
+	public void setDoubleFeedQuality(final EnumDoubleFeedQuality enumVar)
 	{
-		setAttribute(AttributeName.DOUBLEFEEDQUALITY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DOUBLEFEEDQUALITY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -501,35 +258,6 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EDoubleFeedQuality getEDoubleFeedQuality()
-	{
-		return EDoubleFeedQuality.getEnum(getAttribute(AttributeName.DOUBLEFEEDQUALITY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute DoubleFeedQuality
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute DoubleFeedQuality
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDoubleFeedQuality(EDoubleFeedQuality) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDoubleFeedQuality(EnumDoubleFeedQuality enumVar)
-	{
-		setAttribute(AttributeName.DOUBLEFEEDQUALITY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute DoubleFeedQuality
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EDoubleFeedQuality GetEDoubleFeedQuality() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumDoubleFeedQuality getDoubleFeedQuality()
 	{
 		return EnumDoubleFeedQuality.getEnum(getAttribute(AttributeName.DOUBLEFEEDQUALITY, null, null));
@@ -545,7 +273,7 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDoubleFeeds(int value)
+	public void setDoubleFeeds(final int value)
 	{
 		setAttribute(AttributeName.DOUBLEFEEDS, value, null);
 	}
@@ -570,9 +298,9 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setBadFeedQuality(EBadFeedQuality enumVar)
+	public void setBadFeedQuality(final EnumBadFeedQuality enumVar)
 	{
-		setAttribute(AttributeName.BADFEEDQUALITY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.BADFEEDQUALITY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -580,35 +308,6 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EBadFeedQuality getEBadFeedQuality()
-	{
-		return EBadFeedQuality.getEnum(getAttribute(AttributeName.BADFEEDQUALITY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute BadFeedQuality
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute BadFeedQuality
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetBadFeedQuality(EBadFeedQuality) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setBadFeedQuality(EnumBadFeedQuality enumVar)
-	{
-		setAttribute(AttributeName.BADFEEDQUALITY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute BadFeedQuality
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EBadFeedQuality GetEBadFeedQuality() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumBadFeedQuality getBadFeedQuality()
 	{
 		return EnumBadFeedQuality.getEnum(getAttribute(AttributeName.BADFEEDQUALITY, null, null));
@@ -624,7 +323,7 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBadFeeds(int value)
+	public void setBadFeeds(final int value)
 	{
 		setAttribute(AttributeName.BADFEEDS, value, null);
 	}

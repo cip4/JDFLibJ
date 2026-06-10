@@ -97,7 +97,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         12.01.2009
  */
 class ProxyUtilTest extends JDFTestCaseBase
@@ -118,20 +117,26 @@ class ProxyUtilTest extends JDFTestCaseBase
 		if (isTestNetwork())
 		{
 			ProxyUtil.setProxy(null);
-			String proxyURL = "http://proxy:8082";
+			final String proxyURL = "http://proxy:8082";
 			UrlPart p = null;
 			int i = 0;
 			p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
 			if (p != null)
+			{
 				i++;
+			}
 			ProxyUtil.setProxy(proxyURL);
 			p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
 			if (p != null)
+			{
 				i++;
+			}
 			ProxyUtil.setProxy(null);
 			p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
 			if (p != null)
+			{
 				i++;
+			}
 			assertTrue(i > 0);
 		}
 	}
@@ -151,7 +156,7 @@ class ProxyUtilTest extends JDFTestCaseBase
 				ProxyUtil.setProxy("dummy", 880, "a", null);
 				ProxyUtil.setProxy("dummy", 80, "a", "b");
 			}
-			catch (Exception x)
+			catch (final Exception x)
 			{
 				fail(x.toString());
 			}
@@ -172,7 +177,6 @@ class ProxyUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -181,15 +185,15 @@ class ProxyUtilTest extends JDFTestCaseBase
 		if (isTestNetwork())
 		{
 			ProxyUtil.setUseSystemDefault(true);
-			String[] v = new String[] { "http://www.yahoo.com", "https://www.google.com", "http://localhost" };
-			for (String s : v)
+			final String[] v = new String[] { "http://www.yahoo.com", "https://www.google.com", "http://localhost" };
+			for (final String s : v)
 			{
-				List<Proxy> l = ProxySelector.getDefault().select(new URI(s));
+				final List<Proxy> l = ProxySelector.getDefault().select(new URI(s));
 
-				for (Proxy proxy : l)
+				for (final Proxy proxy : l)
 				{
 					log.info("proxy type : " + s + " " + proxy.type());
-					InetSocketAddress addr = (InetSocketAddress) proxy.address();
+					final InetSocketAddress addr = (InetSocketAddress) proxy.address();
 					if (addr == null)
 					{
 						if (s.contains("localhost"))
@@ -218,7 +222,9 @@ class ProxyUtilTest extends JDFTestCaseBase
 	void testWriteToURL()
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		ProxyUtil.setUseSystemDefault(true);
 		assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
 	}
@@ -230,9 +236,11 @@ class ProxyUtilTest extends JDFTestCaseBase
 	void testWriteToURLSecure()
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		ProxyUtil.setUseSystemDefault(true);
-		UrlPart part = UrlUtil.writeToURL("https://www.google.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
+		final UrlPart part = UrlUtil.writeToURL("https://www.google.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
 		assertNotNull(part);
 		part.buffer();
 	}

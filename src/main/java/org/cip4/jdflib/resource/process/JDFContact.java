@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2022 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  *
@@ -82,27 +82,22 @@
 package org.cip4.jdflib.resource.process;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.auto.JDFAutoContact;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.ifaces.IMatches;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
 /**
- * 
- * 
  * @author rainer prosi
  * @date way before Jan 31, 2012
  */
@@ -111,144 +106,99 @@ public class JDFContact extends JDFAutoContact implements IMatches
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 
-	 * 
 	 * @author rainerprosi
 	 * @date Jan 31, 2012
 	 */
-	public static final class EnumContactType extends ValuedEnum
+	public enum EnumContactType
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		private EnumContactType(String name)
-		{
-			super(name, m_startValue++);
-		}
+		/** */
+		Accounting,
+		/** */
+		Administrator,
+		/** */
+		Agency,
+		/** */
+		Approver,
+		/** */
+		ArtReturn,
+		/** */
+		Author,
+		/** */
+		Billing,
+		/** */
+		Customer,
+		/** */
+		Delivery,
+		/** */
+		DeliveryCharge,
+		/** */
+		Designer,
+		/** */
+		Editor,
+		/** */
+		Employee,
+		/** */
+		Illustrator,
+		/** */
+		Owner,
+		/** */
+		Photographer,
+		/** */
+		Pickup,
+		/** */
+		Sender,
+		/** */
+		Supplier,
+		/** */
+		SurplusReturn,
+		/** */
+		TelephoneSanitizer;
 
 		/**
 		 * @param enumName the name of the enum object to return
 		 * @return the enum object if enumName is valid. Otherwise null
 		 */
-		public static EnumContactType getEnum(String enumName)
+		public static EnumContactType getEnum(final String enumName)
 		{
-			return (EnumContactType) getEnum(EnumContactType.class, enumName);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumContactType.class, enumName, null);
 		}
-
-		/**
-		 * @param enumValue the value of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
-		 */
-		public static EnumContactType getEnum(int enumValue)
-		{
-			return (EnumContactType) getEnum(EnumContactType.class, enumValue);
-		}
-
-		/**
-		 * @return a map of all EnumContactType enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumContactType.class);
-		}
-
-		/**
-		 * @return a list of all EnumContactType enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumContactType.class);
-		}
-
-		/**
-		 * @return an iterator over the enum objects
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumContactType.class);
-		}
-
-		/** */
-		public static final EnumContactType Accounting = new EnumContactType("Accounting");
-		/** */
-		public static final EnumContactType Administrator = new EnumContactType("Administrator");
-		/** */
-		public static final EnumContactType Agency = new EnumContactType("Agency");
-		/** */
-		public static final EnumContactType Approver = new EnumContactType("Approver");
-		/** */
-		public static final EnumContactType ArtReturn = new EnumContactType("ArtReturn");
-		/** */
-		public static final EnumContactType Author = new EnumContactType("Author");
-		/** */
-		public static final EnumContactType Billing = new EnumContactType("Billing");
-		/** */
-		public static final EnumContactType Customer = new EnumContactType("Customer");
-		/** */
-		public static final EnumContactType Delivery = new EnumContactType("Delivery");
-		/** */
-		public static final EnumContactType DeliveryCharge = new EnumContactType("DeliveryCharge");
-		/** */
-		public static final EnumContactType Designer = new EnumContactType("Designer");
-		/** */
-		public static final EnumContactType Editor = new EnumContactType("Editor");
-		/** */
-		public static final EnumContactType Employee = new EnumContactType("Employee");
-		/** */
-		public static final EnumContactType Illustrator = new EnumContactType("Illustrator");
-		/** */
-		public static final EnumContactType Owner = new EnumContactType("Owner");
-		/** */
-		public static final EnumContactType Photographer = new EnumContactType("Photographer");
-		/** */
-		public static final EnumContactType Pickup = new EnumContactType("Pickup");
-		/** */
-		public static final EnumContactType Sender = new EnumContactType("Sender");
-		/** */
-		public static final EnumContactType Supplier = new EnumContactType("Supplier");
-		/** */
-		public static final EnumContactType SurplusReturn = new EnumContactType("SurplusReturn");
-		/** */
-		public static final EnumContactType TelephoneSanitizer = new EnumContactType("TelephoneSanitizer");
 	}
 
 	/**
 	 * Constructor for JDFContact
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFContact(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFContact(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFContact
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * 
 	 * @throws DOMException
 	 */
-	public JDFContact(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFContact(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFContact
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
-	 * 
 	 * @throws DOMException
 	 */
-	public JDFContact(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFContact(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -257,7 +207,7 @@ public class JDFContact extends JDFAutoContact implements IMatches
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -268,19 +218,19 @@ public class JDFContact extends JDFAutoContact implements IMatches
 
 	/**
 	 * Set attribute ContactTypes
-	 * 
+	 *
 	 * @deprecated use getContactTypes
 	 * @param value the value to set the attribute to
 	 */
 	@Deprecated
-	public void setExtendedContactTypes(VString value)
+	public void setExtendedContactTypes(final VString value)
 	{
 		setContactTypes(value);
 	}
 
 	/**
 	 * Get string attribute ContactTypes
-	 * 
+	 *
 	 * @deprecated use setContactTypes
 	 * @return vKString the vaue of the attribute
 	 */
@@ -293,18 +243,22 @@ public class JDFContact extends JDFAutoContact implements IMatches
 	/**
 	 * @param typ the single contacttype to set this contact to
 	 */
-	public void setContactTypes(EnumContactType typ)
+	public void setContactTypes(final EnumContactType typ)
 	{
 		if (typ == null)
+		{
 			removeAttribute(AttributeName.CONTACTTYPES);
+		}
 		else
-			setAttribute(AttributeName.CONTACTTYPES, typ.getName(), null);
+		{
+			setAttribute(AttributeName.CONTACTTYPES, typ.name(), null);
+		}
 	}
 
 	/**
 	 * @param typ the single contacttype to set this contact to
 	 */
-	public void setContactTypes(String typ)
+	public void setContactTypes(final String typ)
 	{
 		setAttribute(AttributeName.CONTACTTYPES, typ, null);
 	}
@@ -312,17 +266,17 @@ public class JDFContact extends JDFAutoContact implements IMatches
 	/**
 	 * @param typ the single contacttype to set this contact to
 	 */
-	public void addContactTypes(EnumContactType typ)
+	public void addContactTypes(final EnumContactType typ)
 	{
 		if (typ != null)
 		{
-			appendAttribute(AttributeName.CONTACTTYPES, typ.getName(), null, JDFConstants.BLANK, true);
+			appendAttribute(AttributeName.CONTACTTYPES, typ.name(), null, JDFCoreConstants.BLANK, true);
 		}
 	}
 
-	public JDFComChannel getComChannel(EnumChannelType ct)
+	public JDFComChannel getComChannel(final EnumChannelType ct)
 	{
-		JDFComChannel cc = JDFComChannel.getChannelByType(this, ct);
+		final JDFComChannel cc = JDFComChannel.getChannelByType(this, ct);
 		if (cc == null)
 		{
 			return JDFComChannel.getChannelByType(getPerson(), ct);
@@ -330,20 +284,20 @@ public class JDFContact extends JDFAutoContact implements IMatches
 		return cc;
 	}
 
-	public JDFComChannel appendComChannel(EnumChannelType ct, String locator)
+	public JDFComChannel appendComChannel(final EnumChannelType ct, final String locator)
 	{
 		return JDFComChannel.appendChannel(this, ct, locator);
 	}
 
 	/**
 	 * append a comChannel with a given channelType
-	 * 
+	 *
 	 * @param channelType
 	 * @return
 	 */
-	public JDFComChannel appendComChannel(EnumChannelType channelType)
+	public JDFComChannel appendComChannel(final EnumChannelType channelType)
 	{
-		JDFComChannel comCh = appendComChannel();
+		final JDFComChannel comCh = appendComChannel();
 		comCh.setChannelType(channelType);
 		return comCh;
 	}
@@ -353,7 +307,7 @@ public class JDFContact extends JDFAutoContact implements IMatches
 	 * @param familyName
 	 * @return
 	 */
-	public JDFPerson setPerson(String firstName, String familyName)
+	public JDFPerson setPerson(final String firstName, final String familyName)
 	{
 		JDFPerson p = null;
 		if (firstName != null || familyName != null)
@@ -367,13 +321,15 @@ public class JDFContact extends JDFAutoContact implements IMatches
 
 	/**
 	 * merge two contacts while avoiding duplicates
-	 * 
+	 *
 	 * @param other
 	 */
-	public void merge(JDFContact other)
+	public void merge(final JDFContact other)
 	{
 		if (other == null || equals(other))
+		{
 			return;
+		}
 
 		if (getPerson() == null)
 		{
@@ -392,17 +348,17 @@ public class JDFContact extends JDFAutoContact implements IMatches
 
 	}
 
-	private void mergeComChannels(JDFContact other)
+	private void mergeComChannels(final JDFContact other)
 	{
 		Collection<JDFComChannel> cs = getAllComChannel();
 		if (cs == null)
 		{
-			cs = new Vector<JDFComChannel>();
+			cs = new Vector<>();
 		}
-		Collection<JDFComChannel> cso = other.getAllComChannel();
+		final Collection<JDFComChannel> cso = other.getAllComChannel();
 		if (cso != null)
 		{
-			for (JDFComChannel occ : cso)
+			for (final JDFComChannel occ : cso)
 			{
 				if (ContainerUtil.getMatch(cs, occ, 0) == null)
 				{
@@ -413,15 +369,15 @@ public class JDFContact extends JDFAutoContact implements IMatches
 		}
 	}
 
-	private void mergeContactTypes(JDFContact other)
+	private void mergeContactTypes(final JDFContact other)
 	{
-		VString contactTypes = getContactTypes();
-		int s0 = contactTypes.size();
-		Collection<String> vs = ContainerUtil.addAll(contactTypes, other.getContactTypes());
+		final VString contactTypes = getContactTypes();
+		final int s0 = contactTypes.size();
+		final Collection<String> vs = ContainerUtil.addAll(contactTypes, other.getContactTypes());
 		ContainerUtil.unify(vs);
 		if (vs != null && vs.size() > s0)
 		{
-			VString nct = new VString();
+			final VString nct = new VString();
 			nct.addAll(vs);
 			setContactTypes(nct);
 		}
@@ -429,23 +385,23 @@ public class JDFContact extends JDFAutoContact implements IMatches
 
 	/**
 	 * checks a match if subset is a String, then we check userID (ignoring case) if subset is a JDFContact, we do heuristic matching of the person, company and address
-	 * 
+	 *
 	 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
 	 */
 	@Override
-	public boolean matches(Object subset)
+	public boolean matches(final Object subset)
 	{
 		boolean matches = false;
 		if (subset instanceof String)
 		{
-			String subString = StringUtil.normalize((String) subset, true);
+			final String subString = StringUtil.normalize((String) subset, true);
 			matches = subString == null ? false : subString.equalsIgnoreCase(getUserID());
 		}
 		else if (subset instanceof JDFContact)
 		{
-			JDFContact other = (JDFContact) subset;
-			String userID = StringUtil.normalize(getUserID(), true);
-			String otherUserID = StringUtil.normalize(other.getUserID(), true);
+			final JDFContact other = (JDFContact) subset;
+			final String userID = StringUtil.normalize(getUserID(), true);
+			final String otherUserID = StringUtil.normalize(other.getUserID(), true);
 			if (userID != null && otherUserID != null)
 			{
 				matches = userID.equals(otherUserID);
@@ -463,9 +419,8 @@ public class JDFContact extends JDFAutoContact implements IMatches
 	}
 
 	/**
-	 * 
 	 * also search in person
-	 * 
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoContact#getAddress()
 	 */
 	@Override
@@ -474,22 +429,24 @@ public class JDFContact extends JDFAutoContact implements IMatches
 		JDFAddress a = super.getAddress();
 		if (a == null)
 		{
-			JDFPerson p = getPerson();
+			final JDFPerson p = getPerson();
 			if (p != null)
+			{
 				a = p.getAddress();
+			}
 		}
 		return a;
 	}
 
 	/**
 	 * also search in person
-	 * 
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoContact#getCreateAddress()
 	 */
 	@Override
 	public JDFAddress getCreateAddress()
 	{
-		JDFAddress address = getAddress();
+		final JDFAddress address = getAddress();
 		return address == null ? appendAddress() : address;
 	}
 

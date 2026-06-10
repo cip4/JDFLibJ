@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -107,12 +103,13 @@ public abstract class JDFAutoPatch extends JDFElement
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.DENSITY, 0x3331111111l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.LAB, 0x3331111111l, AttributeInfo.EnumAttributeType.LabColor, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.NEUTRALDENSITY, 0x3331111111l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.PATCHUSAGE, 0x2221111111l, AttributeInfo.EnumAttributeType.enumeration, EnumPatchUsage.getEnum(0),
-				null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PATCHUSAGE, 0x2221111111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumPatchUsage.class, 0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.RGB, 0x3331111111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.SIZE, 0x3331111111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.SPECTRUM, 0x3331111111l, AttributeInfo.EnumAttributeType.TransferFunction, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.SPOTTYPE, 0x3311111111l, AttributeInfo.EnumAttributeType.enumeration, EnumSpotType.getEnum(0), null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.SPOTTYPE, 0x3311111111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumSpotType.class, 0), null);
 	}
 
 	@Override
@@ -139,7 +136,7 @@ public abstract class JDFAutoPatch extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPatch(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPatch(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -151,7 +148,7 @@ public abstract class JDFAutoPatch extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPatch(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPatch(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -164,174 +161,42 @@ public abstract class JDFAutoPatch extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPatch(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPatch(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for PatchUsage
+	 * Enumeration strings for numPatchUsage
 	 */
 
-	public enum EPatchUsage
+	public enum EnumPatchUsage
 	{
 		Color, Image, Technical, Ignore;
 
-		public static EPatchUsage getEnum(String val)
+		public static EnumPatchUsage getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPatchUsage.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPatchUsage.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for PatchUsage
+	 * Enumeration strings for numSpotType
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumPatchUsage extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPatchUsage(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumPatchUsage getEnum(String enumName)
-		{
-			return (EnumPatchUsage) getEnum(EnumPatchUsage.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPatchUsage getEnum(int enumValue)
-		{
-			return (EnumPatchUsage) getEnum(EnumPatchUsage.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPatchUsage.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPatchUsage.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPatchUsage.class);
-		}
-
-		/**  */
-		public static final EnumPatchUsage Color = new EnumPatchUsage("Color");
-		/**  */
-		public static final EnumPatchUsage Image = new EnumPatchUsage("Image");
-		/**  */
-		public static final EnumPatchUsage Technical = new EnumPatchUsage("Technical");
-		/**  */
-		public static final EnumPatchUsage Ignore = new EnumPatchUsage("Ignore");
-	}
-
-	/**
-	 * Enumeration strings for SpotType
-	 */
-
-	public enum ESpotType
+	public enum EnumSpotType
 	{
 		Emulated, Spot;
 
-		public static ESpotType getEnum(String val)
+		public static EnumSpotType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ESpotType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpotType.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for SpotType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumSpotType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumSpotType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumSpotType getEnum(String enumName)
-		{
-			return (EnumSpotType) getEnum(EnumSpotType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumSpotType getEnum(int enumValue)
-		{
-			return (EnumSpotType) getEnum(EnumSpotType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpotType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpotType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpotType.class);
-		}
-
-		/**  */
-		public static final EnumSpotType Emulated = new EnumSpotType("Emulated");
-		/**  */
-		public static final EnumSpotType Spot = new EnumSpotType("Spot");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -343,7 +208,7 @@ public abstract class JDFAutoPatch extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCenter(JDFXYPair value)
+	public void setCenter(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.CENTER, value, null);
 	}
@@ -356,8 +221,8 @@ public abstract class JDFAutoPatch extends JDFElement
 	 */
 	public JDFXYPair getCenter()
 	{
-		String strAttrName = getAttribute(AttributeName.CENTER, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CENTER, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -371,7 +236,7 @@ public abstract class JDFAutoPatch extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDensity(double value)
+	public void setDensity(final double value)
 	{
 		setAttribute(AttributeName.DENSITY, value, null);
 	}
@@ -396,7 +261,7 @@ public abstract class JDFAutoPatch extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLab(JDFLabColor value)
+	public void setLab(final JDFLabColor value)
 	{
 		setAttribute(AttributeName.LAB, value, null);
 	}
@@ -409,8 +274,8 @@ public abstract class JDFAutoPatch extends JDFElement
 	 */
 	public JDFLabColor getLab()
 	{
-		String strAttrName = getAttribute(AttributeName.LAB, null, null);
-		JDFLabColor nPlaceHolder = JDFLabColor.createLabColor(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.LAB, null, null);
+		final JDFLabColor nPlaceHolder = JDFLabColor.createLabColor(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -424,7 +289,7 @@ public abstract class JDFAutoPatch extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNeutralDensity(double value)
+	public void setNeutralDensity(final double value)
 	{
 		setAttribute(AttributeName.NEUTRALDENSITY, value, null);
 	}
@@ -449,9 +314,9 @@ public abstract class JDFAutoPatch extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPatchUsage(EPatchUsage enumVar)
+	public void setPatchUsage(final EnumPatchUsage enumVar)
 	{
-		setAttribute(AttributeName.PATCHUSAGE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.PATCHUSAGE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -459,35 +324,6 @@ public abstract class JDFAutoPatch extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPatchUsage getEPatchUsage()
-	{
-		return EPatchUsage.getEnum(getAttribute(AttributeName.PATCHUSAGE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute PatchUsage
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute PatchUsage
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPatchUsage(EPatchUsage) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPatchUsage(EnumPatchUsage enumVar)
-	{
-		setAttribute(AttributeName.PATCHUSAGE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute PatchUsage
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EPatchUsage GetEPatchUsage() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumPatchUsage getPatchUsage()
 	{
 		return EnumPatchUsage.getEnum(getAttribute(AttributeName.PATCHUSAGE, null, null));
@@ -503,7 +339,7 @@ public abstract class JDFAutoPatch extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRGB(JDFRGBColor value)
+	public void setRGB(final JDFRGBColor value)
 	{
 		setAttribute(AttributeName.RGB, value, null);
 	}
@@ -516,8 +352,8 @@ public abstract class JDFAutoPatch extends JDFElement
 	 */
 	public JDFRGBColor getRGB()
 	{
-		String strAttrName = getAttribute(AttributeName.RGB, null, null);
-		JDFRGBColor nPlaceHolder = JDFRGBColor.createRGBColor(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.RGB, null, null);
+		final JDFRGBColor nPlaceHolder = JDFRGBColor.createRGBColor(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -531,7 +367,7 @@ public abstract class JDFAutoPatch extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSize(JDFXYPair value)
+	public void setSize(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.SIZE, value, null);
 	}
@@ -544,8 +380,8 @@ public abstract class JDFAutoPatch extends JDFElement
 	 */
 	public JDFXYPair getSize()
 	{
-		String strAttrName = getAttribute(AttributeName.SIZE, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SIZE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -559,7 +395,7 @@ public abstract class JDFAutoPatch extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSpectrum(JDFTransferFunction value)
+	public void setSpectrum(final JDFTransferFunction value)
 	{
 		setAttribute(AttributeName.SPECTRUM, value, null);
 	}
@@ -572,8 +408,8 @@ public abstract class JDFAutoPatch extends JDFElement
 	 */
 	public JDFTransferFunction getSpectrum()
 	{
-		String strAttrName = getAttribute(AttributeName.SPECTRUM, null, null);
-		JDFTransferFunction nPlaceHolder = JDFTransferFunction.createTransferFunction(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SPECTRUM, null, null);
+		final JDFTransferFunction nPlaceHolder = JDFTransferFunction.createTransferFunction(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -587,9 +423,9 @@ public abstract class JDFAutoPatch extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSpotType(ESpotType enumVar)
+	public void setSpotType(final EnumSpotType enumVar)
 	{
-		setAttribute(AttributeName.SPOTTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SPOTTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -597,35 +433,6 @@ public abstract class JDFAutoPatch extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESpotType getESpotType()
-	{
-		return ESpotType.getEnum(getAttribute(AttributeName.SPOTTYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute SpotType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute SpotType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetSpotType(ESpotType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSpotType(EnumSpotType enumVar)
-	{
-		setAttribute(AttributeName.SPOTTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute SpotType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ESpotType GetESpotType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumSpotType getSpotType()
 	{
 		return EnumSpotType.getEnum(getAttribute(AttributeName.SPOTTYPE, null, null));
@@ -663,7 +470,7 @@ public abstract class JDFAutoPatch extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationTint the element
 	 */
-	public JDFSeparationTint getCreateSeparationTint(int iSkip)
+	public JDFSeparationTint getCreateSeparationTint(final int iSkip)
 	{
 		return (JDFSeparationTint) getCreateElement_JDFElement(ElementName.SEPARATIONTINT, null, iSkip);
 	}
@@ -675,7 +482,7 @@ public abstract class JDFAutoPatch extends JDFElement
 	 * @return JDFSeparationTint the element
 	 *         default is getSeparationTint(0)
 	 */
-	public JDFSeparationTint getSeparationTint(int iSkip)
+	public JDFSeparationTint getSeparationTint(final int iSkip)
 	{
 		return (JDFSeparationTint) getElement(ElementName.SEPARATIONTINT, null, iSkip);
 	}

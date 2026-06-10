@@ -75,7 +75,7 @@ import org.cip4.jdflib.util.FileUtil;
 import org.junit.jupiter.api.Test;
 
 /**
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 class XJDFSchemaCreatorTest extends JDFTestCaseBase
 {
@@ -88,9 +88,11 @@ class XJDFSchemaCreatorTest extends JDFTestCaseBase
 	{
 		File baseDir = new File("./src/main/java/org/cip4/jdflib");
 		if (!baseDir.isDirectory())
+		{
 			baseDir = new File("./src/org/cip4/jdflib");
+		}
 		System.out.println(baseDir.getAbsolutePath());
-		XJDFSchemaCreator sc = new XJDFSchemaCreator(baseDir, FileUtil.getFileInDirectory(new File(sm_dirTestDataTemp), new File("xjdf.xsd")));
+		final XJDFSchemaCreator sc = new XJDFSchemaCreator(baseDir, FileUtil.getFileInDirectory(new File(sm_dirTestDataTemp), new File("xjdf.xsd")));
 
 		sc.create();
 	}

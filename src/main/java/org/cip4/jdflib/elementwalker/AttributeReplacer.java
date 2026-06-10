@@ -67,7 +67,7 @@
  *
  */
 /**
- * 
+ *
  */
 package org.cip4.jdflib.elementwalker;
 
@@ -79,10 +79,8 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * June 9, 2008
- * 
- * replaces all instances of an attribute in all matching elements
+ *         June 9, 2008
+ *         replaces all instances of an attribute in all matching elements
  */
 public class AttributeReplacer extends BaseElementWalker
 {
@@ -94,8 +92,8 @@ public class AttributeReplacer extends BaseElementWalker
 	String elemRegExp;
 
 	/**
-	 * @param attributeName the attribute to replace
-	 * @param newValue the new value, if null the attribute is removed
+	 * @param attributeName     the attribute to replace
+	 * @param newValue          the new value, if null the attribute is removed
 	 * @param elementExpression the elements to match, if null all match
 	 */
 	public AttributeReplacer(final String attributeName, final String newValue, final String elementExpression)
@@ -106,7 +104,7 @@ public class AttributeReplacer extends BaseElementWalker
 	}
 
 	/**
-	 * @param setMap the map of attributes to set
+	 * @param setMap            the map of attributes to set
 	 * @param elementExpression the elements to match, if null all match
 	 */
 	public AttributeReplacer(final JDFAttributeMap setMap, final String elementExpression)
@@ -118,7 +116,7 @@ public class AttributeReplacer extends BaseElementWalker
 
 	/**
 	 * erase all unlinked resources that are in n
-	 * 
+	 *
 	 * @param root the element to clean
 	 */
 	public void replace(final KElement root)
@@ -128,9 +126,8 @@ public class AttributeReplacer extends BaseElementWalker
 
 	/**
 	 * the link and ref walker
-	 * 
+	 *
 	 * @author prosirai
-	 * 
 	 */
 	public class WalkAttributeReplacer extends WalkDefault
 	{
@@ -170,14 +167,13 @@ public class AttributeReplacer extends BaseElementWalker
 
 	/**
 	 * the link and ref walker
-	 * 
+	 *
 	 * @author prosirai
-	 * 
 	 */
 	public class WalkDefault extends BaseWalker
 	{
 		/**
-		 * 
+		 *
 		 */
 		public WalkDefault()
 		{

@@ -39,17 +39,13 @@
 
 package org.cip4.jdflib.resource.devicecapability;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.ifaces.IDeviceCapable;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public abstract class JDFTerm extends JDFElement
@@ -94,7 +90,8 @@ public abstract class JDFTerm extends JDFElement
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFTerm(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFTerm(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -102,7 +99,7 @@ public abstract class JDFTerm extends JDFElement
 	/**
 	 * Evaluates the boolean expression (child Term element): checks whether it fits <code>jdf</code>
 	 *
-	 * @param jdf JDFNode to test to know if the Device can accept it
+	 * @param jdf        JDFNode to test to know if the Device can accept it
 	 * @param reportRoot the report to generate; set to <code>null</code> if no report is requested
 	 * @return boolean - true, if boolean expression (child Term element) evaluates to true
 	 */
@@ -120,7 +117,8 @@ public abstract class JDFTerm extends JDFElement
 
 	/**
 	 * Tests whether this Term is compatible with the attribute map <code>m</code> (and, or, xor, not, Evaluation, TestRef).<br>
-	 * To determine the state of Term tests Evaluations thatdoes not consists of, this method checks if attribute map <code>m</code> has a key. specified by Evaluation/BasicPreflightTest/@Name If
+	 * To determine the state of Term tests Evaluations thatdoes not consists of, this method checks if attribute map <code>m</code> has a key. specified by Evaluation/BasicPreflightTest/@Name
+	 * If
 	 * <code>m</code> has such key, it checks whether the value of <code>m#</code> fits the testlists specified for matching Evaluation (uses FitsValue(value))
 	 *
 	 * @param m key-value pair attribute map
@@ -128,69 +126,14 @@ public abstract class JDFTerm extends JDFElement
 	 */
 	public abstract boolean fitsMap(JDFAttributeMap m);
 
-	public static final class EnumTerm extends ValuedEnum
+	public enum EnumTerm
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		@Override
-		public String toString()
-		{
-			return getName();
-		}
-
-		protected EnumTerm(final String name)
-		{
-			super(name, m_startValue++);
-		}
+		and, or, not, xor, BooleanEvaluation, DateTimeEvaluation, DurationEvaluation, EnumerationEvaluation, IntegerEvaluation, IsPresentEvaluation, MatrixEvaluation, NameEvaluation, NumberEvaluation, PDDFPathEvaluation, RectangleEvaluation, ShapeEvaluation, StringEvaluation, XYPairEvaluation, TestRef;
 
 		public static EnumTerm getEnum(final String enumName)
 		{
-			return (EnumTerm) getEnum(EnumTerm.class, enumName);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumTerm.class, enumName, null);
 		}
-
-		public static EnumTerm getEnum(final int enumValue)
-		{
-			return (EnumTerm) getEnum(EnumTerm.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumTerm.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumTerm.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumTerm.class);
-		}
-
-		/**
-		 * Constants EnumActivation
-		 */
-		public static final EnumTerm and = new EnumTerm(ElementName.AND);
-		public static final EnumTerm or = new EnumTerm(ElementName.OR);
-		public static final EnumTerm not = new EnumTerm(ElementName.NOT);
-		public static final EnumTerm xor = new EnumTerm(ElementName.XOR);
-		public static final EnumTerm BooleanEvaluation = new EnumTerm(ElementName.BOOLEANEVALUATION);
-		public static final EnumTerm DateTimeEvaluation = new EnumTerm(ElementName.DATETIMEEVALUATION);
-		public static final EnumTerm DurationEvaluation = new EnumTerm(ElementName.DURATIONEVALUATION);
-		public static final EnumTerm EnumerationEvaluation = new EnumTerm(ElementName.ENUMERATIONEVALUATION);
-		public static final EnumTerm IntegerEvaluation = new EnumTerm(ElementName.INTEGEREVALUATION);
-		public static final EnumTerm IsPresentEvaluation = new EnumTerm(ElementName.ISPRESENTEVALUATION);
-		public static final EnumTerm MatrixEvaluation = new EnumTerm(ElementName.MATRIXEVALUATION);
-		public static final EnumTerm NameEvaluation = new EnumTerm(ElementName.NAMEEVALUATION);
-		public static final EnumTerm NumberEvaluation = new EnumTerm(ElementName.NUMBEREVALUATION);
-		public static final EnumTerm PDDFPathEvaluation = new EnumTerm(ElementName.PDFPATHEVALUATION);
-		public static final EnumTerm RectangleEvaluation = new EnumTerm(ElementName.RECTANGLEEVALUATION);
-		public static final EnumTerm ShapeEvaluation = new EnumTerm(ElementName.SHAPEEVALUATION);
-		public static final EnumTerm StringEvaluation = new EnumTerm(ElementName.STRINGEVALUATION);
-		public static final EnumTerm XYPairEvaluation = new EnumTerm(ElementName.XYPAIREVALUATION);
-		public static final EnumTerm TestRef = new EnumTerm(ElementName.TESTREF);
 	}
 
 	/**
@@ -202,7 +145,9 @@ public abstract class JDFTerm extends JDFElement
 	{
 		IDeviceCapable deviceCap = (IDeviceCapable) getDeepParent(ElementName.DEVICECAP, 0);
 		if (deviceCap != null)
+		{
 			return deviceCap;
+		}
 		deviceCap = (IDeviceCapable) getDeepParent(ElementName.MESSAGESERVICE, 0);
 		return deviceCap;
 	}

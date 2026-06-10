@@ -91,7 +91,7 @@ class WalkProductTest extends JDFTestCaseBase
 		final WalkProduct w = new WalkProduct();
 		w.jdfToXJDF = new JDFToXJDF();
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
-		KElement product = KElement.createRoot("p", null);
+		final KElement product = KElement.createRoot("p", null);
 		assertFalse(w.readComponent(n, product));
 		n.addResource(ElementName.COMPONENT, EnumUsage.Input);
 		assertFalse(w.readComponent(n, product));

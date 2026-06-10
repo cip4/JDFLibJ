@@ -41,14 +41,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.util.Vector;
 
 import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
-import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EDeviceStatus;
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.auto.JDFAutoResourceQuParams.EnumScope;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
@@ -134,7 +134,7 @@ class JMFExampleTest extends ExampleTest
 		}
 
 		writeTest(jmf, "Activity.jmf", true, null);
-		jmf.removeAttribute(JDFConstants.XSITYPE);
+		jmf.removeAttribute(JDFCoreConstants.XSITYPE);
 		jmf.getOwnerDocument_JDFElement().setSchemaLocation(JDFElement.getSchemaURL(), null);
 		final JDFParser p = new JDFParser();
 		final String schemaLoc = sm_dirTestData + "schema/activity0.xsd";
@@ -232,7 +232,7 @@ class JMFExampleTest extends ExampleTest
 		final JDFSignal s = jmf.getSignal(0);
 		s.getStatusQuParams().setJobID("job1");
 		final JDFDeviceInfo di = s.getDeviceInfo(0);
-		di.setDeviceStatus(EDeviceStatus.Setup);
+		di.setDeviceStatus(EnumDeviceStatus.Setup);
 		final JDFJobPhase jp = di.getCreateJobPhase(0);
 		jp.setJobID("job1");
 		jp.setStatus(EnumNodeStatus.Setup);

@@ -86,10 +86,10 @@ class WalkCommentTest extends JDFTestCaseBase
 	@Test
 	void testID()
 	{
-		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
-		JDFComment c = n.appendComment();
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFComment c = n.appendComment();
 		c.setID("i1");
-		KElement xjdf = new JDFToXJDF().convert(n);
+		final KElement xjdf = new JDFToXJDF().convert(n);
 		Assertions.assertNull(xjdf.getXPathAttribute("Comment/@ID", null));
 	}
 
@@ -99,10 +99,10 @@ class WalkCommentTest extends JDFTestCaseBase
 	@Test
 	void testText()
 	{
-		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
-		JDFComment c = n.appendComment();
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFComment c = n.appendComment();
 		c.setText("abc");
-		KElement xjdf = new JDFToXJDF().convert(n);
+		final KElement xjdf = new JDFToXJDF().convert(n);
 		Assertions.assertEquals(xjdf.getXPathAttribute("Comment", null), "abc");
 	}
 

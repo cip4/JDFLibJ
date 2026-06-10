@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -113,7 +109,8 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.REQUIRED, 0x3333333333l, AttributeInfo.EnumAttributeType.dateTime, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.REQUIREDDURATION, 0x3333333333l, AttributeInfo.EnumAttributeType.duration, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.SERVICELEVEL, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.TRANSFER, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumTransfer.getEnum(0), null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.TRANSFER, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumTransfer.class, 0), null);
 	}
 
 	@Override
@@ -143,7 +140,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDeliveryParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDeliveryParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -155,7 +152,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDeliveryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDeliveryParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -168,7 +165,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDeliveryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDeliveryParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -179,7 +176,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -194,91 +191,22 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for Transfer
+	 * Enumeration strings for numTransfer
 	 */
 
-	public enum ETransfer
+	public enum EnumTransfer
 	{
 		BuyerToPrinterDeliver, BuyerToPrinterPickup, PrinterToBuyerDeliver, PrinterToBuyerPickup;
 
-		public static ETransfer getEnum(String val)
+		public static EnumTransfer getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ETransfer.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumTransfer.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Transfer
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumTransfer extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumTransfer(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumTransfer getEnum(String enumName)
-		{
-			return (EnumTransfer) getEnum(EnumTransfer.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumTransfer getEnum(int enumValue)
-		{
-			return (EnumTransfer) getEnum(EnumTransfer.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumTransfer.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumTransfer.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumTransfer.class);
-		}
-
-		/**  */
-		public static final EnumTransfer BuyerToPrinterDeliver = new EnumTransfer("BuyerToPrinterDeliver");
-		/**  */
-		public static final EnumTransfer BuyerToPrinterPickup = new EnumTransfer("BuyerToPrinterPickup");
-		/**  */
-		public static final EnumTransfer PrinterToBuyerDeliver = new EnumTransfer("PrinterToBuyerDeliver");
-		/**  */
-		public static final EnumTransfer PrinterToBuyerPickup = new EnumTransfer("PrinterToBuyerPickup");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -290,7 +218,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeliveryID(String value)
+	public void setDeliveryID(final String value)
 	{
 		setAttribute(AttributeName.DELIVERYID, value, null);
 	}
@@ -315,7 +243,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setEarliest(JDFDate value)
+	public void setEarliest(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -332,8 +260,8 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 */
 	public JDFDate getEarliest()
 	{
-		String str = getAttribute(AttributeName.EARLIEST, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.EARLIEST, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -347,7 +275,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setEarliestDuration(JDFDuration value)
+	public void setEarliestDuration(final JDFDuration value)
 	{
 		setAttribute(AttributeName.EARLIESTDURATION, value, null);
 	}
@@ -360,8 +288,8 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 */
 	public JDFDuration getEarliestDuration()
 	{
-		String strAttrName = getAttribute(AttributeName.EARLIESTDURATION, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.EARLIESTDURATION, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -375,7 +303,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMethod(String value)
+	public void setMethod(final String value)
 	{
 		setAttribute(AttributeName.METHOD, value, null);
 	}
@@ -400,7 +328,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPickup(boolean value)
+	public void setPickup(final boolean value)
 	{
 		setAttribute(AttributeName.PICKUP, value, null);
 	}
@@ -425,7 +353,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setRequired(JDFDate value)
+	public void setRequired(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -442,8 +370,8 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 */
 	public JDFDate getRequired()
 	{
-		String str = getAttribute(AttributeName.REQUIRED, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.REQUIRED, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -457,7 +385,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRequiredDuration(JDFDuration value)
+	public void setRequiredDuration(final JDFDuration value)
 	{
 		setAttribute(AttributeName.REQUIREDDURATION, value, null);
 	}
@@ -470,8 +398,8 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 */
 	public JDFDuration getRequiredDuration()
 	{
-		String strAttrName = getAttribute(AttributeName.REQUIREDDURATION, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.REQUIREDDURATION, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -485,7 +413,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setServiceLevel(String value)
+	public void setServiceLevel(final String value)
 	{
 		setAttribute(AttributeName.SERVICELEVEL, value, null);
 	}
@@ -510,9 +438,9 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setTransfer(ETransfer enumVar)
+	public void setTransfer(final EnumTransfer enumVar)
 	{
-		setAttribute(AttributeName.TRANSFER, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.TRANSFER, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -520,35 +448,6 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ETransfer getETransfer()
-	{
-		return ETransfer.getEnum(getAttribute(AttributeName.TRANSFER, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Transfer
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Transfer
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetTransfer(ETransfer) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setTransfer(EnumTransfer enumVar)
-	{
-		setAttribute(AttributeName.TRANSFER, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Transfer
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ETransfer GetETransfer() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumTransfer getTransfer()
 	{
 		return EnumTransfer.getEnum(getAttribute(AttributeName.TRANSFER, null, null));
@@ -596,7 +495,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refCompany(JDFCompany refTarget)
+	public void refCompany(final JDFCompany refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -629,7 +528,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
-	public JDFContact getCreateContact(int iSkip)
+	public JDFContact getCreateContact(final int iSkip)
 	{
 		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -641,7 +540,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 * @return JDFContact the element
 	 *         default is getContact(0)
 	 */
-	public JDFContact getContact(int iSkip)
+	public JDFContact getContact(final int iSkip)
 	{
 		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -672,7 +571,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refContact(JDFContact refTarget)
+	public void refContact(final JDFContact refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -703,7 +602,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFDrop the element
 	 */
-	public JDFDrop getCreateDrop(int iSkip)
+	public JDFDrop getCreateDrop(final int iSkip)
 	{
 		return (JDFDrop) getCreateElement_JDFElement(ElementName.DROP, null, iSkip);
 	}
@@ -715,7 +614,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 * @return JDFDrop the element
 	 *         default is getDrop(0)
 	 */
-	public JDFDrop getDrop(int iSkip)
+	public JDFDrop getDrop(final int iSkip)
 	{
 		return (JDFDrop) getElement(ElementName.DROP, null, iSkip);
 	}
@@ -766,7 +665,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
-	public JDFFileSpec getCreateFileSpec(int iSkip)
+	public JDFFileSpec getCreateFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -778,7 +677,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 * @return JDFFileSpec the element
 	 *         default is getFileSpec(0)
 	 */
-	public JDFFileSpec getFileSpec(int iSkip)
+	public JDFFileSpec getFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -808,7 +707,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}

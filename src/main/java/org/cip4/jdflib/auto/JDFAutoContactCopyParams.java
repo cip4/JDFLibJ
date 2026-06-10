@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -103,7 +98,8 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.POLARITYCHANGE, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.REPEATSTEP, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, "1 1");
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.CYCLE, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.DIFFUSION, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumDiffusion.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.DIFFUSION, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumDiffusion.class, 0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.VACUUM, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
@@ -131,7 +127,7 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoContactCopyParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoContactCopyParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -143,7 +139,7 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoContactCopyParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoContactCopyParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -156,7 +152,7 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoContactCopyParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoContactCopyParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -167,7 +163,7 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -182,87 +178,22 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for Diffusion
+	 * Enumeration strings for numDiffusion
 	 */
 
-	public enum EDiffusion
+	public enum EnumDiffusion
 	{
 		On, Off;
 
-		public static EDiffusion getEnum(String val)
+		public static EnumDiffusion getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EDiffusion.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumDiffusion.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Diffusion
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumDiffusion extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumDiffusion(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumDiffusion getEnum(String enumName)
-		{
-			return (EnumDiffusion) getEnum(EnumDiffusion.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDiffusion getEnum(int enumValue)
-		{
-			return (EnumDiffusion) getEnum(EnumDiffusion.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDiffusion.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDiffusion.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDiffusion.class);
-		}
-
-		/**  */
-		public static final EnumDiffusion On = new EnumDiffusion("On");
-		/**  */
-		public static final EnumDiffusion Off = new EnumDiffusion("Off");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -274,7 +205,7 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setContactScreen(boolean value)
+	public void setContactScreen(final boolean value)
 	{
 		setAttribute(AttributeName.CONTACTSCREEN, value, null);
 	}
@@ -299,7 +230,7 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPolarityChange(boolean value)
+	public void setPolarityChange(final boolean value)
 	{
 		setAttribute(AttributeName.POLARITYCHANGE, value, null);
 	}
@@ -324,7 +255,7 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRepeatStep(JDFXYPair value)
+	public void setRepeatStep(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.REPEATSTEP, value, null);
 	}
@@ -337,8 +268,8 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	 */
 	public JDFXYPair getRepeatStep()
 	{
-		String strAttrName = getAttribute(AttributeName.REPEATSTEP, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.REPEATSTEP, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -352,7 +283,7 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCycle(int value)
+	public void setCycle(final int value)
 	{
 		setAttribute(AttributeName.CYCLE, value, null);
 	}
@@ -377,9 +308,9 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDiffusion(EDiffusion enumVar)
+	public void setDiffusion(final EnumDiffusion enumVar)
 	{
-		setAttribute(AttributeName.DIFFUSION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DIFFUSION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -387,35 +318,6 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EDiffusion getEDiffusion()
-	{
-		return EDiffusion.getEnum(getAttribute(AttributeName.DIFFUSION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Diffusion
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Diffusion
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDiffusion(EDiffusion) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDiffusion(EnumDiffusion enumVar)
-	{
-		setAttribute(AttributeName.DIFFUSION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Diffusion
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EDiffusion GetEDiffusion() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumDiffusion getDiffusion()
 	{
 		return EnumDiffusion.getEnum(getAttribute(AttributeName.DIFFUSION, null, null));
@@ -431,7 +333,7 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setVacuum(double value)
+	public void setVacuum(final double value)
 	{
 		setAttribute(AttributeName.VACUUM, value, null);
 	}
@@ -488,7 +390,7 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refScreeningParams(JDFScreeningParams refTarget)
+	public void refScreeningParams(final JDFScreeningParams refTarget)
 	{
 		refElement(refTarget);
 	}

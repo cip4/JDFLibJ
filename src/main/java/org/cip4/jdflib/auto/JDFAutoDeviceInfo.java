@@ -71,13 +71,8 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoMISDetails.EDeviceOperationMode;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumDeviceOperationMode;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -112,12 +107,12 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.COUNTERUNIT, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICECONDITION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumDeviceCondition.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumDeviceCondition.class, 0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVICEID, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.DEVICEOPERATIONMODE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumDeviceOperationMode.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.DEVICESTATUS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumDeviceStatus.getEnum(0),
-				null);
+				JavaEnumUtil.getEnum(EnumDeviceOperationMode.class, 0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.DEVICESTATUS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumDeviceStatus.class, 0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.ENDTIME, 0x3331111111l, AttributeInfo.EnumAttributeType.dateTime, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.HOURCOUNTER, 0x3333333333l, AttributeInfo.EnumAttributeType.duration, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.IDLESTARTTIME, 0x3333331111l, AttributeInfo.EnumAttributeType.dateTime, null, null);
@@ -158,7 +153,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDeviceInfo(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDeviceInfo(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -170,7 +165,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDeviceInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDeviceInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -183,184 +178,42 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDeviceInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDeviceInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for DeviceCondition
+	 * Enumeration strings for numDeviceCondition
 	 */
 
-	public enum EDeviceCondition
+	public enum EnumDeviceCondition
 	{
 		OK, NeedsAttention, Failure, OffLine;
 
-		public static EDeviceCondition getEnum(String val)
+		public static EnumDeviceCondition getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EDeviceCondition.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumDeviceCondition.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for DeviceCondition
+	 * Enumeration strings for numDeviceStatus
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumDeviceCondition extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumDeviceCondition(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumDeviceCondition getEnum(String enumName)
-		{
-			return (EnumDeviceCondition) getEnum(EnumDeviceCondition.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDeviceCondition getEnum(int enumValue)
-		{
-			return (EnumDeviceCondition) getEnum(EnumDeviceCondition.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDeviceCondition.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDeviceCondition.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDeviceCondition.class);
-		}
-
-		/**  */
-		public static final EnumDeviceCondition OK = new EnumDeviceCondition("OK");
-		/**  */
-		public static final EnumDeviceCondition NeedsAttention = new EnumDeviceCondition("NeedsAttention");
-		/**  */
-		public static final EnumDeviceCondition Failure = new EnumDeviceCondition("Failure");
-		/**  */
-		public static final EnumDeviceCondition OffLine = new EnumDeviceCondition("OffLine");
-	}
-
-	/**
-	 * Enumeration strings for DeviceStatus
-	 */
-
-	public enum EDeviceStatus
+	public enum EnumDeviceStatus
 	{
 		Unknown, Idle, Down, Setup, Running, Cleanup, Stopped;
 
-		public static EDeviceStatus getEnum(String val)
+		public static EnumDeviceStatus getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EDeviceStatus.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumDeviceStatus.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for DeviceStatus
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumDeviceStatus extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumDeviceStatus(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumDeviceStatus getEnum(String enumName)
-		{
-			return (EnumDeviceStatus) getEnum(EnumDeviceStatus.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDeviceStatus getEnum(int enumValue)
-		{
-			return (EnumDeviceStatus) getEnum(EnumDeviceStatus.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDeviceStatus.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDeviceStatus.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDeviceStatus.class);
-		}
-
-		/**  */
-		public static final EnumDeviceStatus Unknown = new EnumDeviceStatus("Unknown");
-		/**  */
-		public static final EnumDeviceStatus Idle = new EnumDeviceStatus("Idle");
-		/**  */
-		public static final EnumDeviceStatus Down = new EnumDeviceStatus("Down");
-		/**  */
-		public static final EnumDeviceStatus Setup = new EnumDeviceStatus("Setup");
-		/**  */
-		public static final EnumDeviceStatus Running = new EnumDeviceStatus("Running");
-		/**  */
-		public static final EnumDeviceStatus Cleanup = new EnumDeviceStatus("Cleanup");
-		/**  */
-		public static final EnumDeviceStatus Stopped = new EnumDeviceStatus("Stopped");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -372,7 +225,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCounterUnit(String value)
+	public void setCounterUnit(final String value)
 	{
 		setAttribute(AttributeName.COUNTERUNIT, value, null);
 	}
@@ -397,9 +250,9 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDeviceCondition(EDeviceCondition enumVar)
+	public void setDeviceCondition(final EnumDeviceCondition enumVar)
 	{
-		setAttribute(AttributeName.DEVICECONDITION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DEVICECONDITION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -407,35 +260,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EDeviceCondition getEDeviceCondition()
-	{
-		return EDeviceCondition.getEnum(getAttribute(AttributeName.DEVICECONDITION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute DeviceCondition
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute DeviceCondition
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDeviceCondition(EDeviceCondition) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDeviceCondition(EnumDeviceCondition enumVar)
-	{
-		setAttribute(AttributeName.DEVICECONDITION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute DeviceCondition
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EDeviceCondition GetEDeviceCondition() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumDeviceCondition getDeviceCondition()
 	{
 		return EnumDeviceCondition.getEnum(getAttribute(AttributeName.DEVICECONDITION, null, null));
@@ -451,7 +275,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeviceID(String value)
+	public void setDeviceID(final String value)
 	{
 		setAttribute(AttributeName.DEVICEID, value, null);
 	}
@@ -476,9 +300,9 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDeviceOperationMode(EDeviceOperationMode enumVar)
+	public void setDeviceOperationMode(final EnumDeviceOperationMode enumVar)
 	{
-		setAttribute(AttributeName.DEVICEOPERATIONMODE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DEVICEOPERATIONMODE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -486,35 +310,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EDeviceOperationMode getEDeviceOperationMode()
-	{
-		return EDeviceOperationMode.getEnum(getAttribute(AttributeName.DEVICEOPERATIONMODE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute DeviceOperationMode
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute DeviceOperationMode
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDeviceOperationMode(EDeviceOperationMode) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDeviceOperationMode(EnumDeviceOperationMode enumVar)
-	{
-		setAttribute(AttributeName.DEVICEOPERATIONMODE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute DeviceOperationMode
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EDeviceOperationMode GetEDeviceOperationMode() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumDeviceOperationMode getDeviceOperationMode()
 	{
 		return EnumDeviceOperationMode.getEnum(getAttribute(AttributeName.DEVICEOPERATIONMODE, null, null));
@@ -530,9 +325,9 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDeviceStatus(EDeviceStatus enumVar)
+	public void setDeviceStatus(final EnumDeviceStatus enumVar)
 	{
-		setAttribute(AttributeName.DEVICESTATUS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DEVICESTATUS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -540,35 +335,6 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EDeviceStatus getEDeviceStatus()
-	{
-		return EDeviceStatus.getEnum(getAttribute(AttributeName.DEVICESTATUS, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute DeviceStatus
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute DeviceStatus
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDeviceStatus(EDeviceStatus) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDeviceStatus(EnumDeviceStatus enumVar)
-	{
-		setAttribute(AttributeName.DEVICESTATUS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute DeviceStatus
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EDeviceStatus GetEDeviceStatus() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumDeviceStatus getDeviceStatus()
 	{
 		return EnumDeviceStatus.getEnum(getAttribute(AttributeName.DEVICESTATUS, null, null));
@@ -584,7 +350,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setEndTime(JDFDate value)
+	public void setEndTime(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -601,8 +367,8 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 */
 	public JDFDate getEndTime()
 	{
-		String str = getAttribute(AttributeName.ENDTIME, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.ENDTIME, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -616,7 +382,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHourCounter(JDFDuration value)
+	public void setHourCounter(final JDFDuration value)
 	{
 		setAttribute(AttributeName.HOURCOUNTER, value, null);
 	}
@@ -629,8 +395,8 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 */
 	public JDFDuration getHourCounter()
 	{
-		String strAttrName = getAttribute(AttributeName.HOURCOUNTER, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.HOURCOUNTER, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -644,7 +410,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setIdleStartTime(JDFDate value)
+	public void setIdleStartTime(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -661,8 +427,8 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 */
 	public JDFDate getIdleStartTime()
 	{
-		String str = getAttribute(AttributeName.IDLESTARTTIME, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.IDLESTARTTIME, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -676,7 +442,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setPowerOnTime(JDFDate value)
+	public void setPowerOnTime(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -693,8 +459,8 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 */
 	public JDFDate getPowerOnTime()
 	{
-		String str = getAttribute(AttributeName.POWERONTIME, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.POWERONTIME, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -708,7 +474,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProductionCounter(double value)
+	public void setProductionCounter(final double value)
 	{
 		setAttribute(AttributeName.PRODUCTIONCOUNTER, value, null);
 	}
@@ -733,7 +499,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSpeed(double value)
+	public void setSpeed(final double value)
 	{
 		setAttribute(AttributeName.SPEED, value, null);
 	}
@@ -758,7 +524,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStatusDetails(String value)
+	public void setStatusDetails(final String value)
 	{
 		setAttribute(AttributeName.STATUSDETAILS, value, null);
 	}
@@ -783,7 +549,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setToolIDs(VString value)
+	public void setToolIDs(final VString value)
 	{
 		setAttribute(AttributeName.TOOLIDS, value, null);
 	}
@@ -795,8 +561,8 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 */
 	public VString getToolIDs()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.TOOLIDS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.TOOLIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -811,7 +577,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTotalProductionCounter(double value)
+	public void setTotalProductionCounter(final double value)
 	{
 		setAttribute(AttributeName.TOTALPRODUCTIONCOUNTER, value, null);
 	}
@@ -858,7 +624,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFActivity the element
 	 */
-	public JDFActivity getCreateActivity(int iSkip)
+	public JDFActivity getCreateActivity(final int iSkip)
 	{
 		return (JDFActivity) getCreateElement_JDFElement(ElementName.ACTIVITY, null, iSkip);
 	}
@@ -870,7 +636,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * @return JDFActivity the element
 	 *         default is getActivity(0)
 	 */
-	public JDFActivity getActivity(int iSkip)
+	public JDFActivity getActivity(final int iSkip)
 	{
 		return (JDFActivity) getElement(ElementName.ACTIVITY, null, iSkip);
 	}
@@ -952,7 +718,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
-	public JDFEmployee getCreateEmployee(int iSkip)
+	public JDFEmployee getCreateEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -964,7 +730,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * @return JDFEmployee the element
 	 *         default is getEmployee(0)
 	 */
-	public JDFEmployee getEmployee(int iSkip)
+	public JDFEmployee getEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -1015,7 +781,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFEvent the element
 	 */
-	public JDFEvent getCreateEvent(int iSkip)
+	public JDFEvent getCreateEvent(final int iSkip)
 	{
 		return (JDFEvent) getCreateElement_JDFElement(ElementName.EVENT, null, iSkip);
 	}
@@ -1027,7 +793,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * @return JDFEvent the element
 	 *         default is getEvent(0)
 	 */
-	public JDFEvent getEvent(int iSkip)
+	public JDFEvent getEvent(final int iSkip)
 	{
 		return (JDFEvent) getElement(ElementName.EVENT, null, iSkip);
 	}
@@ -1078,7 +844,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFJobPhase the element
 	 */
-	public JDFJobPhase getCreateJobPhase(int iSkip)
+	public JDFJobPhase getCreateJobPhase(final int iSkip)
 	{
 		return (JDFJobPhase) getCreateElement_JDFElement(ElementName.JOBPHASE, null, iSkip);
 	}
@@ -1090,7 +856,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * @return JDFJobPhase the element
 	 *         default is getJobPhase(0)
 	 */
-	public JDFJobPhase getJobPhase(int iSkip)
+	public JDFJobPhase getJobPhase(final int iSkip)
 	{
 		return (JDFJobPhase) getElement(ElementName.JOBPHASE, null, iSkip);
 	}
@@ -1141,7 +907,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFModuleStatus the element
 	 */
-	public JDFModuleStatus getCreateModuleStatus(int iSkip)
+	public JDFModuleStatus getCreateModuleStatus(final int iSkip)
 	{
 		return (JDFModuleStatus) getCreateElement_JDFElement(ElementName.MODULESTATUS, null, iSkip);
 	}
@@ -1153,7 +919,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * @return JDFModuleStatus the element
 	 *         default is getModuleStatus(0)
 	 */
-	public JDFModuleStatus getModuleStatus(int iSkip)
+	public JDFModuleStatus getModuleStatus(final int iSkip)
 	{
 		return (JDFModuleStatus) getElement(ElementName.MODULESTATUS, null, iSkip);
 	}

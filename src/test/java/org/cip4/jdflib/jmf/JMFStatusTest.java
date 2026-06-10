@@ -83,9 +83,9 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 /**
  * @author Rainer Prosi
- * 
  *         Test of the Status JMF
  */
 class JMFStatusTest extends JDFTestCaseBase
@@ -96,7 +96,6 @@ class JMFStatusTest extends JDFTestCaseBase
 	private JDFStatusQuParams sqp;
 
 	/**
-	 * 
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -118,13 +117,13 @@ class JMFStatusTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testStatusDetails()
 	{
 
-		JDFDeviceInfo di = signal.appendDeviceInfo();
+		final JDFDeviceInfo di = signal.appendDeviceInfo();
 		di.setDeviceCondition(EnumDeviceCondition.NeedsAttention);
 		di.setDeviceStatus(EnumDeviceStatus.Stopped);
 		di.setStatusDetails("OutputAreaFull PaperJam Repair");
@@ -134,19 +133,19 @@ class JMFStatusTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	// ///////////////////////////////////////////////////////////////////
 	@Test
 	void testInheritedPhase()
 	{
 
-		JDFDeviceInfo di = signal.appendDeviceInfo();
+		final JDFDeviceInfo di = signal.appendDeviceInfo();
 		di.setDeviceCondition(EnumDeviceCondition.NeedsAttention);
 		di.setDeviceStatus(EnumDeviceStatus.Stopped);
 		di.setStatusDetails("OutputAreaFull PaperJam Repair");
 
-		JDFJobPhase jp = di.appendJobPhase();
+		final JDFJobPhase jp = di.appendJobPhase();
 		Assertions.assertEquals(jp.getJobID(), sqp.getJobID());
 		Assertions.assertEquals(jp.getJobPartID(), sqp.getJobPartID());
 		jp.setJobID("foo");

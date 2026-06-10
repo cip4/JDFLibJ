@@ -71,16 +71,8 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoBinderySignature.EBindingEdge;
-import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBindingEdge;
-import org.cip4.jdflib.auto.JDFAutoPageCell.ERotate;
-import org.cip4.jdflib.auto.JDFAutoPageCell.EnumRotate;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -116,16 +108,17 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.FINISHINGORDER, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumFinishingOrder.getEnum(0), "GatherFold");
+				JavaEnumUtil.getEnum(EnumFinishingOrder.class, 0), "GatherFold");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.FOLDCATALOGORIENTATION, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumFoldCatalogOrientation.getEnum(0), "Rotate0");
+				JavaEnumUtil.getEnum(EnumFoldCatalogOrientation.class, 0), "Rotate0");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.PAGEDISTRIBUTIONSCHEME, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, "Sequential");
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.PAGEORDER, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, "Reader");
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.ROTATE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumRotate.getEnum(0), "Rotate0");
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.SIDES, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumSides.getEnum(0),
-				"OneSidedFront");
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.BINDINGEDGE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumBindingEdge.getEnum(0),
-				null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.ROTATE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumRotate.class, 0), "Rotate0");
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.SIDES, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumSides.class, 0), "OneSidedFront");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.BINDINGEDGE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumBindingEdge.class, 0), null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.BACKMARKLIST, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.CREEPVALUE, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.FOLDCATALOG, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
@@ -175,7 +168,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLayoutPreparationParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoLayoutPreparationParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -187,7 +180,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLayoutPreparationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoLayoutPreparationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -200,7 +193,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoLayoutPreparationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoLayoutPreparationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -211,7 +204,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -226,180 +219,78 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for FinishingOrder
+	 * Enumeration strings for numFinishingOrder
 	 */
 
-	public enum EFinishingOrder
+	public enum EnumFinishingOrder
 	{
 		FoldGather, FoldCollect, Gather, GatherFold;
 
-		public static EFinishingOrder getEnum(String val)
+		public static EnumFinishingOrder getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EFinishingOrder.class, val, EFinishingOrder.GatherFold);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumFinishingOrder.class, val, EnumFinishingOrder.GatherFold);
 		}
 	}
 
 	/**
-	 * Enumeration strings for FinishingOrder
+	 * Enumeration strings for numFoldCatalogOrientation
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumFinishingOrder extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumFinishingOrder(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumFinishingOrder getEnum(String enumName)
-		{
-			return (EnumFinishingOrder) getEnum(EnumFinishingOrder.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumFinishingOrder getEnum(int enumValue)
-		{
-			return (EnumFinishingOrder) getEnum(EnumFinishingOrder.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumFinishingOrder.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumFinishingOrder.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumFinishingOrder.class);
-		}
-
-		/**  */
-		public static final EnumFinishingOrder FoldGather = new EnumFinishingOrder("FoldGather");
-		/**  */
-		public static final EnumFinishingOrder FoldCollect = new EnumFinishingOrder("FoldCollect");
-		/**  */
-		public static final EnumFinishingOrder Gather = new EnumFinishingOrder("Gather");
-		/**  */
-		public static final EnumFinishingOrder GatherFold = new EnumFinishingOrder("GatherFold");
-	}
-
-	/**
-	 * Enumeration strings for FoldCatalogOrientation
-	 */
-
-	public enum EFoldCatalogOrientation
+	public enum EnumFoldCatalogOrientation
 	{
 		Rotate0, Rotate90, Rotate180, Rotate270, Flip0, Flip90, Flip180, Flip270;
 
-		public static EFoldCatalogOrientation getEnum(String val)
+		public static EnumFoldCatalogOrientation getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EFoldCatalogOrientation.class, val, EFoldCatalogOrientation.Rotate0);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumFoldCatalogOrientation.class, val, EnumFoldCatalogOrientation.Rotate0);
 		}
 	}
 
 	/**
-	 * Enumeration strings for FoldCatalogOrientation
+	 * Enumeration strings for numRotate
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumFoldCatalogOrientation extends ValuedEnum
+	public enum EnumRotate
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Rotate0, Rotate90, Rotate180, Rotate270;
 
-		protected EnumFoldCatalogOrientation(String name)
+		public static EnumRotate getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumRotate.class, val, EnumRotate.Rotate0);
 		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumFoldCatalogOrientation getEnum(String enumName)
-		{
-			return (EnumFoldCatalogOrientation) getEnum(EnumFoldCatalogOrientation.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumFoldCatalogOrientation getEnum(int enumValue)
-		{
-			return (EnumFoldCatalogOrientation) getEnum(EnumFoldCatalogOrientation.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumFoldCatalogOrientation.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumFoldCatalogOrientation.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumFoldCatalogOrientation.class);
-		}
-
-		/**  */
-		public static final EnumFoldCatalogOrientation Rotate0 = new EnumFoldCatalogOrientation("Rotate0");
-		/**  */
-		public static final EnumFoldCatalogOrientation Rotate90 = new EnumFoldCatalogOrientation("Rotate90");
-		/**  */
-		public static final EnumFoldCatalogOrientation Rotate180 = new EnumFoldCatalogOrientation("Rotate180");
-		/**  */
-		public static final EnumFoldCatalogOrientation Rotate270 = new EnumFoldCatalogOrientation("Rotate270");
-		/**  */
-		public static final EnumFoldCatalogOrientation Flip0 = new EnumFoldCatalogOrientation("Flip0");
-		/**  */
-		public static final EnumFoldCatalogOrientation Flip90 = new EnumFoldCatalogOrientation("Flip90");
-		/**  */
-		public static final EnumFoldCatalogOrientation Flip180 = new EnumFoldCatalogOrientation("Flip180");
-		/**  */
-		public static final EnumFoldCatalogOrientation Flip270 = new EnumFoldCatalogOrientation("Flip270");
 	}
 
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * Enumeration strings for numSides
 	 */
+
+	public enum EnumSides
+	{
+		OneSidedBackFlipX, OneSidedBackFlipY, OneSidedFront, TwoSidedFlipX, TwoSidedFlipY;
+
+		public static EnumSides getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSides.class, val, EnumSides.OneSidedFront);
+		}
+	}
+
+	/**
+	 * Enumeration strings for numBindingEdge
+	 */
+
+	public enum EnumBindingEdge
+	{
+		Left, Right, Top, Bottom, None;
+
+		public static EnumBindingEdge getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumBindingEdge.class, val, null);
+		}
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
+		 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -411,9 +302,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setFinishingOrder(EFinishingOrder enumVar)
+	public void setFinishingOrder(final EnumFinishingOrder enumVar)
 	{
-		setAttribute(AttributeName.FINISHINGORDER, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.FINISHINGORDER, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -421,35 +312,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EFinishingOrder getEFinishingOrder()
-	{
-		return EFinishingOrder.getEnum(getAttribute(AttributeName.FINISHINGORDER, null, "GatherFold"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute FinishingOrder
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute FinishingOrder
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetFinishingOrder(EFinishingOrder) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setFinishingOrder(EnumFinishingOrder enumVar)
-	{
-		setAttribute(AttributeName.FINISHINGORDER, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute FinishingOrder
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EFinishingOrder GetEFinishingOrder() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumFinishingOrder getFinishingOrder()
 	{
 		return EnumFinishingOrder.getEnum(getAttribute(AttributeName.FINISHINGORDER, null, "GatherFold"));
@@ -465,9 +327,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setFoldCatalogOrientation(EFoldCatalogOrientation enumVar)
+	public void setFoldCatalogOrientation(final EnumFoldCatalogOrientation enumVar)
 	{
-		setAttribute(AttributeName.FOLDCATALOGORIENTATION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.FOLDCATALOGORIENTATION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -475,35 +337,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EFoldCatalogOrientation getEFoldCatalogOrientation()
-	{
-		return EFoldCatalogOrientation.getEnum(getAttribute(AttributeName.FOLDCATALOGORIENTATION, null, "Rotate0"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute FoldCatalogOrientation
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute FoldCatalogOrientation
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetFoldCatalogOrientation(EFoldCatalogOrientation) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setFoldCatalogOrientation(EnumFoldCatalogOrientation enumVar)
-	{
-		setAttribute(AttributeName.FOLDCATALOGORIENTATION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute FoldCatalogOrientation
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EFoldCatalogOrientation GetEFoldCatalogOrientation() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumFoldCatalogOrientation getFoldCatalogOrientation()
 	{
 		return EnumFoldCatalogOrientation.getEnum(getAttribute(AttributeName.FOLDCATALOGORIENTATION, null, "Rotate0"));
@@ -519,7 +352,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPageDistributionScheme(String value)
+	public void setPageDistributionScheme(final String value)
 	{
 		setAttribute(AttributeName.PAGEDISTRIBUTIONSCHEME, value, null);
 	}
@@ -544,7 +377,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPageOrder(String value)
+	public void setPageOrder(final String value)
 	{
 		setAttribute(AttributeName.PAGEORDER, value, null);
 	}
@@ -569,9 +402,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setRotate(ERotate enumVar)
+	public void setRotate(final EnumRotate enumVar)
 	{
-		setAttribute(AttributeName.ROTATE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ROTATE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -579,35 +412,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ERotate getERotate()
-	{
-		return ERotate.getEnum(getAttribute(AttributeName.ROTATE, null, "Rotate0"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Rotate
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Rotate
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetRotate(ERotate) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setRotate(EnumRotate enumVar)
-	{
-		setAttribute(AttributeName.ROTATE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Rotate
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ERotate GetERotate() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumRotate getRotate()
 	{
 		return EnumRotate.getEnum(getAttribute(AttributeName.ROTATE, null, "Rotate0"));
@@ -623,9 +427,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSides(ESides enumVar)
+	public void setSides(final EnumSides enumVar)
 	{
-		setAttribute(AttributeName.SIDES, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SIDES, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -633,35 +437,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESides getESides()
-	{
-		return ESides.getEnum(getAttribute(AttributeName.SIDES, null, "OneSidedFront"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Sides
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Sides
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetSides(ESides) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSides(EnumSides enumVar)
-	{
-		setAttribute(AttributeName.SIDES, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Sides
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ESides GetESides() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumSides getSides()
 	{
 		return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, "OneSidedFront"));
@@ -677,9 +452,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setBindingEdge(EBindingEdge enumVar)
+	public void setBindingEdge(final EnumBindingEdge enumVar)
 	{
-		setAttribute(AttributeName.BINDINGEDGE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.BINDINGEDGE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -687,35 +462,6 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EBindingEdge getEBindingEdge()
-	{
-		return EBindingEdge.getEnum(getAttribute(AttributeName.BINDINGEDGE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute BindingEdge
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute BindingEdge
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetBindingEdge(EBindingEdge) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setBindingEdge(EnumBindingEdge enumVar)
-	{
-		setAttribute(AttributeName.BINDINGEDGE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute BindingEdge
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EBindingEdge GetEBindingEdge() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumBindingEdge getBindingEdge()
 	{
 		return EnumBindingEdge.getEnum(getAttribute(AttributeName.BINDINGEDGE, null, null));
@@ -731,7 +477,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBackMarkList(VString value)
+	public void setBackMarkList(final VString value)
 	{
 		setAttribute(AttributeName.BACKMARKLIST, value, null);
 	}
@@ -743,8 +489,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 */
 	public VString getBackMarkList()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.BACKMARKLIST, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.BACKMARKLIST, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -759,7 +505,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCreepValue(JDFXYPair value)
+	public void setCreepValue(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.CREEPVALUE, value, null);
 	}
@@ -772,8 +518,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 */
 	public JDFXYPair getCreepValue()
 	{
-		String strAttrName = getAttribute(AttributeName.CREEPVALUE, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CREEPVALUE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -787,7 +533,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFoldCatalog(String value)
+	public void setFoldCatalog(final String value)
 	{
 		setAttribute(AttributeName.FOLDCATALOG, value, null);
 	}
@@ -812,7 +558,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFrontMarkList(VString value)
+	public void setFrontMarkList(final VString value)
 	{
 		setAttribute(AttributeName.FRONTMARKLIST, value, null);
 	}
@@ -824,8 +570,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 */
 	public VString getFrontMarkList()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.FRONTMARKLIST, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.FRONTMARKLIST, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -840,7 +586,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGutter(JDFXYPair value)
+	public void setGutter(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.GUTTER, value, null);
 	}
@@ -853,8 +599,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 */
 	public JDFXYPair getGutter()
 	{
-		String strAttrName = getAttribute(AttributeName.GUTTER, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.GUTTER, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -868,7 +614,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGutterMinimumLimit(JDFXYPair value)
+	public void setGutterMinimumLimit(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.GUTTERMINIMUMLIMIT, value, null);
 	}
@@ -881,8 +627,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 */
 	public JDFXYPair getGutterMinimumLimit()
 	{
-		String strAttrName = getAttribute(AttributeName.GUTTERMINIMUMLIMIT, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.GUTTERMINIMUMLIMIT, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -896,7 +642,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHorizontalCreep(JDFIntegerList value)
+	public void setHorizontalCreep(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.HORIZONTALCREEP, value, null);
 	}
@@ -909,8 +655,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 */
 	public JDFIntegerList getHorizontalCreep()
 	{
-		String strAttrName = getAttribute(AttributeName.HORIZONTALCREEP, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.HORIZONTALCREEP, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -924,7 +670,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setImplicitGutter(JDFXYPair value)
+	public void setImplicitGutter(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.IMPLICITGUTTER, value, null);
 	}
@@ -937,8 +683,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 */
 	public JDFXYPair getImplicitGutter()
 	{
-		String strAttrName = getAttribute(AttributeName.IMPLICITGUTTER, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.IMPLICITGUTTER, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -952,7 +698,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setImplicitGutterMinimumLimit(JDFXYPair value)
+	public void setImplicitGutterMinimumLimit(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.IMPLICITGUTTERMINIMUMLIMIT, value, null);
 	}
@@ -965,8 +711,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 */
 	public JDFXYPair getImplicitGutterMinimumLimit()
 	{
-		String strAttrName = getAttribute(AttributeName.IMPLICITGUTTERMINIMUMLIMIT, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.IMPLICITGUTTERMINIMUMLIMIT, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -980,7 +726,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNumberUp(JDFXYPair value)
+	public void setNumberUp(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.NUMBERUP, value, null);
 	}
@@ -993,8 +739,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 */
 	public JDFXYPair getNumberUp()
 	{
-		String strAttrName = getAttribute(AttributeName.NUMBERUP, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.NUMBERUP, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1008,7 +754,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentationDirection(String value)
+	public void setPresentationDirection(final String value)
 	{
 		setAttribute(AttributeName.PRESENTATIONDIRECTION, value, null);
 	}
@@ -1033,7 +779,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStackDepth(int value)
+	public void setStackDepth(final int value)
 	{
 		setAttribute(AttributeName.STACKDEPTH, value, null);
 	}
@@ -1058,7 +804,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStepDocs(JDFXYPair value)
+	public void setStepDocs(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.STEPDOCS, value, null);
 	}
@@ -1071,8 +817,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 */
 	public JDFXYPair getStepDocs()
 	{
-		String strAttrName = getAttribute(AttributeName.STEPDOCS, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.STEPDOCS, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1086,7 +832,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStepRepeat(JDFIntegerList value)
+	public void setStepRepeat(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.STEPREPEAT, value, null);
 	}
@@ -1099,8 +845,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 */
 	public JDFIntegerList getStepRepeat()
 	{
-		String strAttrName = getAttribute(AttributeName.STEPREPEAT, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.STEPREPEAT, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1114,7 +860,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSurfaceContentsBox(JDFRectangle value)
+	public void setSurfaceContentsBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.SURFACECONTENTSBOX, value, null);
 	}
@@ -1127,8 +873,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 */
 	public JDFRectangle getSurfaceContentsBox()
 	{
-		String strAttrName = getAttribute(AttributeName.SURFACECONTENTSBOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SURFACECONTENTSBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1142,7 +888,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setVerticalCreep(JDFIntegerList value)
+	public void setVerticalCreep(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.VERTICALCREEP, value, null);
 	}
@@ -1155,8 +901,8 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 */
 	public JDFIntegerList getVerticalCreep()
 	{
-		String strAttrName = getAttribute(AttributeName.VERTICALCREEP, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.VERTICALCREEP, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -1178,7 +924,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (25) getCreateImageShift
-	 *
+	 * 
 	 * @return JDFImageShift the element
 	 */
 	public JDFImageShift getCreateImageShift()
@@ -1209,7 +955,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (25) getCreateInsertSheet
-	 *
+	 * 
 	 * @return JDFInsertSheet the element
 	 */
 	public JDFInsertSheet getCreateInsertSheet()
@@ -1219,11 +965,11 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (26) getCreateInsertSheet
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFInsertSheet the element
 	 */
-	public JDFInsertSheet getCreateInsertSheet(int iSkip)
+	public JDFInsertSheet getCreateInsertSheet(final int iSkip)
 	{
 		return (JDFInsertSheet) getCreateElement_JDFElement(ElementName.INSERTSHEET, null, iSkip);
 	}
@@ -1235,14 +981,14 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 * @return JDFInsertSheet the element
 	 *         default is getInsertSheet(0)
 	 */
-	public JDFInsertSheet getInsertSheet(int iSkip)
+	public JDFInsertSheet getInsertSheet(final int iSkip)
 	{
 		return (JDFInsertSheet) getElement(ElementName.INSERTSHEET, null, iSkip);
 	}
 
 	/**
 	 * Get all InsertSheet from the current element
-	 *
+	 * 
 	 * @return Collection<JDFInsertSheet>, null if none are available
 	 */
 	public Collection<JDFInsertSheet> getAllInsertSheet()
@@ -1265,7 +1011,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refInsertSheet(JDFInsertSheet refTarget)
+	public void refInsertSheet(final JDFInsertSheet refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1282,7 +1028,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (25) getCreateDeviceMark
-	 *
+	 * 
 	 * @return JDFDeviceMark the element
 	 */
 	public JDFDeviceMark getCreateDeviceMark()
@@ -1313,7 +1059,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (25) getCreateExternalImpositionTemplate
-	 *
+	 * 
 	 * @return JDFExternalImpositionTemplate the element
 	 */
 	public JDFExternalImpositionTemplate getCreateExternalImpositionTemplate()
@@ -1337,7 +1083,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refExternalImpositionTemplate(JDFExternalImpositionTemplate refTarget)
+	public void refExternalImpositionTemplate(final JDFExternalImpositionTemplate refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1354,7 +1100,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (25) getCreateFitPolicy
-	 *
+	 * 
 	 * @return JDFFitPolicy the element
 	 */
 	public JDFFitPolicy getCreateFitPolicy()
@@ -1385,7 +1131,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (25) getCreateJobField
-	 *
+	 * 
 	 * @return JDFJobField the element
 	 */
 	public JDFJobField getCreateJobField()
@@ -1395,11 +1141,11 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (26) getCreateJobField
-	 *
+	 * 
 	 * @param iSkip number of elements to skip
 	 * @return JDFJobField the element
 	 */
-	public JDFJobField getCreateJobField(int iSkip)
+	public JDFJobField getCreateJobField(final int iSkip)
 	{
 		return (JDFJobField) getCreateElement_JDFElement(ElementName.JOBFIELD, null, iSkip);
 	}
@@ -1411,14 +1157,14 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 * @return JDFJobField the element
 	 *         default is getJobField(0)
 	 */
-	public JDFJobField getJobField(int iSkip)
+	public JDFJobField getJobField(final int iSkip)
 	{
 		return (JDFJobField) getElement(ElementName.JOBFIELD, null, iSkip);
 	}
 
 	/**
 	 * Get all JobField from the current element
-	 *
+	 * 
 	 * @return Collection<JDFJobField>, null if none are available
 	 */
 	public Collection<JDFJobField> getAllJobField()
@@ -1448,7 +1194,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (25) getCreateMedia
-	 *
+	 * 
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia getCreateMedia()
@@ -1472,7 +1218,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMedia(JDFMedia refTarget)
+	public void refMedia(final JDFMedia refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1489,7 +1235,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 
 	/**
 	 * (25) getCreatePageCell
-	 *
+	 * 
 	 * @return JDFPageCell the element
 	 */
 	public JDFPageCell getCreatePageCell()

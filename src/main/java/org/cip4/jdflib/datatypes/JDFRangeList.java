@@ -48,12 +48,13 @@ package org.cip4.jdflib.datatypes;
 
 import java.util.ArrayList;
 
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.util.HashUtil;
 
 /**
- * This abstract class is the representation of a range list. Intern these object are collected in a vector and there are several methods to provide an access to the data. A range has the following
+ * This abstract class is the representation of a range list. Intern these object are collected in a vector and there are several methods to provide an access to the data. A range has the
+ * following
  * format : "1~3.4" The class member Vector rangeList contains for example "1~3.4" , "7~5"
  */
 public abstract class JDFRangeList implements JDFBaseDataTypes
@@ -126,7 +127,9 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
 		{
 			final JDFRange range = x.at(i);
 			if (isPartOfRange(range))
+			{
 				return true;
+			}
 		}
 		return false;
 	}
@@ -158,7 +161,7 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
 			s.append(rangeList.get(i).toString());
 			if (i < (sz - 1))
 			{
-				s.append(JDFConstants.BLANK);
+				s.append(JDFCoreConstants.BLANK);
 			}
 		}
 		return s.toString();
@@ -178,7 +181,7 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
 			s.append(rangeList.get(i).getString(precision));
 			if (i < (sz - 1))
 			{
-				s.append(JDFConstants.BLANK);
+				s.append(JDFCoreConstants.BLANK);
 			}
 		}
 		return s.toString();
@@ -206,13 +209,14 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
 	 * at(i) - get the i-th range element
 	 *
 	 * @param i index of the range to retrieve
-	 *
 	 * @return JDFRange - JDFDateTimeRange at the position i
 	 */
 	public final JDFRange at(final int i)
 	{
 		if ((i < 0) || (i >= rangeList.size()))
+		{
 			throw new JDFException("JDFDateTimeRangeList.at(i): illegal index" + i);
+		}
 		return rangeList.get(i);
 	}
 
@@ -258,7 +262,9 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
 		{
 			final JDFRange range = at(i);
 			if (!range.getLeftObject().equals(range.getRightObject()))
+			{
 				return false;
+			}
 		}
 		return true; // if we are here 'this' is a List
 	}
@@ -275,11 +281,7 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
 		{
 			return true;
 		}
-		if (other == null)
-		{
-			return false;
-		}
-		if (!other.getClass().equals(getClass()))
+		if ((other == null) || !other.getClass().equals(getClass()))
 		{
 			return false;
 		}
@@ -340,7 +342,9 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
 					// even if one of the range deliminators belongs to any
 					// other range - return false (range is not unique)
 					if ((other.inObjectRange(range.getLeftObject())) || (other.inObjectRange(range.getRightObject())))
+					{
 						return false;
+					}
 				}
 			}
 		}

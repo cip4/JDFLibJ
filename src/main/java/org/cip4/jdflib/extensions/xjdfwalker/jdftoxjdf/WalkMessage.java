@@ -131,7 +131,6 @@ public class WalkMessage extends WalkJDFElement
 	}
 
 	/**
-	 *
 	 * @param m
 	 */
 	JDFMessage makeTypesafe(final JDFMessage m)
@@ -150,17 +149,15 @@ public class WalkMessage extends WalkJDFElement
 	}
 
 	/**
-	 *
 	 * @param family
 	 * @return
 	 */
 	String getFamilyName(final EnumFamily family)
 	{
-		return family.getName();
+		return family.name();
 	}
 
 	/**
-	 *
 	 * @param m
 	 * @return
 	 */
@@ -172,11 +169,10 @@ public class WalkMessage extends WalkJDFElement
 		{
 			log.warn("Removing unsupported message Type: " + m.getType());
 		}
-		return zappType ? null : type.getName();
+		return zappType ? null : type.name();
 	}
 
 	/**
-	 *
 	 * @param type
 	 * @return
 	 */
@@ -186,8 +182,6 @@ public class WalkMessage extends WalkJDFElement
 	}
 
 	/**
-	 *
-	 *
 	 * @param m
 	 * @return
 	 */
@@ -202,9 +196,13 @@ public class WalkMessage extends WalkJDFElement
 		if (jdfToXJDF.isAbstractMessage())
 		{
 			if (EnumFamily.Command.equals(family) || EnumFamily.Registration.equals(family))
+			{
 				family = EnumFamily.Query;
+			}
 			if (EnumFamily.Acknowledge.equals(family))
+			{
 				family = EnumFamily.Response;
+			}
 		}
 		return family;
 	}

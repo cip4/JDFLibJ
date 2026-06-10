@@ -47,9 +47,7 @@ import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
  * @author rainer prosi
- *
  */
 public class MiscConsumableMaker
 {
@@ -58,7 +56,6 @@ public class MiscConsumableMaker
 	private ResourceHelper miscPart;
 
 	/**
-	 *
 	 * @param ph the source partition
 	 */
 	MiscConsumableMaker(final ResourceHelper ph)
@@ -69,9 +66,8 @@ public class MiscConsumableMaker
 	}
 
 	/**
-	 *
 	 * @param consumableType
-	 * @param processUsage TODO
+	 * @param processUsage   TODO
 	 * @return
 	 */
 	public ResourceHelper create(final String consumableType, String processUsage)
@@ -101,7 +97,6 @@ public class MiscConsumableMaker
 	}
 
 	/**
-	 *
 	 * @param color
 	 */
 	public void setColor(final String color)
@@ -113,7 +108,6 @@ public class MiscConsumableMaker
 	}
 
 	/**
-	 *
 	 * @param color
 	 */
 	public void setColor(final EnumNamedColor color)
@@ -125,7 +119,6 @@ public class MiscConsumableMaker
 	}
 
 	/**
-	 *
 	 * @param color
 	 */
 	public void setColorDetails(final String color)
@@ -137,7 +130,6 @@ public class MiscConsumableMaker
 	}
 
 	/**
-	 *
 	 * @param details
 	 */
 	public void setTypeDetails(final String details)
@@ -149,7 +141,6 @@ public class MiscConsumableMaker
 	}
 
 	/**
-	 *
 	 * @param brand
 	 */
 	public void setBrand(final String brand)

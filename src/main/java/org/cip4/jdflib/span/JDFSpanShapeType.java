@@ -9,12 +9,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanShapeType extends JDFEnumerationSpan
@@ -23,39 +19,39 @@ public class JDFSpanShapeType extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanShapeType
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanShapeType(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanShapeType(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanShapeType
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanShapeType(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanShapeType(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanShapeType
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanShapeType(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanShapeType(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -63,44 +59,14 @@ public class JDFSpanShapeType extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanShapeType
 	 */
-	public static class EnumSpanShapeType extends ValuedEnum
+	public enum EnumSpanShapeType
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Rectangular, Round, Path;
 
-		private EnumSpanShapeType(String name)
+		public static EnumSpanShapeType getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanShapeType.class, val, null);
 		}
-
-		public static EnumSpanShapeType getEnum(String enumName)
-		{
-			return (EnumSpanShapeType) getEnum(EnumSpanShapeType.class, enumName);
-		}
-
-		public static EnumSpanShapeType getEnum(int enumValue)
-		{
-			return (EnumSpanShapeType) getEnum(EnumSpanShapeType.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanShapeType.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanShapeType.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanShapeType.class);
-		}
-
-		public static final EnumSpanShapeType Rectangular = new EnumSpanShapeType("Rectangular");
-		public static final EnumSpanShapeType Round = new EnumSpanShapeType("Round");
-		public static final EnumSpanShapeType Path = new EnumSpanShapeType("Path");
 
 	}
 
@@ -109,18 +75,18 @@ public class JDFSpanShapeType extends JDFEnumerationSpan
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanShapeType.getEnum(0);
+		return EnumSpanShapeType.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

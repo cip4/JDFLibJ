@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,22 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFDurationState.java
@@ -127,36 +127,36 @@ public class JDFDurationState extends JDFAbstractState
 
 	/**
 	 * constructor for JDFDurationState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFDurationState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFDurationState(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFDurationState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFDurationState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFDurationState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFDurationState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFDurationState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFDurationState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -166,7 +166,7 @@ public class JDFDurationState extends JDFAbstractState
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -179,7 +179,7 @@ public class JDFDurationState extends JDFAbstractState
 	 * // Attribute getter/ Setter
 	 */
 
-	public void setCurrentValue(JDFDuration value)
+	public void setCurrentValue(final JDFDuration value)
 	{
 		setAttribute(AttributeName.CURRENTVALUE, value, null);
 	}
@@ -188,19 +188,21 @@ public class JDFDurationState extends JDFAbstractState
 	{
 		final String str = getAttribute(AttributeName.CURRENTVALUE, null, null);
 		if (str == null)
+		{
 			return null;
+		}
 
 		try
 		{
 			return new JDFDuration(str);
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			return null;
 		}
 	}
 
-	public void setDefaultValue(JDFDuration value)
+	public void setDefaultValue(final JDFDuration value)
 	{
 		setAttribute(AttributeName.DEFAULTVALUE, value, null);
 	}
@@ -209,19 +211,21 @@ public class JDFDurationState extends JDFAbstractState
 	{
 		final String str = getAttribute(AttributeName.DEFAULTVALUE, null, null);
 		if (str == null)
+		{
 			return null;
+		}
 
 		try
 		{
 			return new JDFDuration(str);
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			return null;
 		}
 	}
 
-	public void setAllowedValueList(JDFDurationRangeList value)
+	public void setAllowedValueList(final JDFDurationRangeList value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUELIST, value, null);
 	}
@@ -232,16 +236,18 @@ public class JDFDurationState extends JDFAbstractState
 		{
 			final String attribute = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
 			if (attribute != null)
+			{
 				return new JDFDurationRangeList(attribute);
+			}
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			// nop
 		}
 		return null;
 	}
 
-	public void setPresentValueList(JDFDurationRangeList value)
+	public void setPresentValueList(final JDFDurationRangeList value)
 	{
 		setAttribute(AttributeName.PRESENTVALUELIST, value, null);
 	}
@@ -252,9 +258,11 @@ public class JDFDurationState extends JDFAbstractState
 		{
 			final String attribute = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
 			if (attribute != null)
+			{
 				return new JDFDurationRangeList(attribute);
+			}
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			return null; // malformed so don't default
 		}
@@ -271,21 +279,23 @@ public class JDFDurationState extends JDFAbstractState
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java .lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
 	 */
 	@Override
-	public void addValue(String value, EnumFitsValue testlists)
+	public void addValue(final String value, final EnumFitsValue testlists)
 	{
 		if (fitsValue(value, testlists))
+		{
 			return;
+		}
 
 		JDFDuration duration;
 		try
 		{
 			duration = new JDFDuration(value);
 		}
-		catch (DataFormatException x)
+		catch (final DataFormatException x)
 		{
 			return; // nop for bad values
 		}
@@ -293,7 +303,9 @@ public class JDFDurationState extends JDFAbstractState
 		{
 			JDFDurationRangeList list = getAllowedValueList();
 			if (list == null)
+			{
 				list = new JDFDurationRangeList();
+			}
 			list.append(duration);
 			setAllowedValueList(list);
 		}
@@ -301,7 +313,9 @@ public class JDFDurationState extends JDFAbstractState
 		{
 			JDFDurationRangeList list = getPresentValueList();
 			if (list == null || !hasAttribute(AttributeName.PRESENTVALUELIST))
+			{
 				list = new JDFDurationRangeList();
+			}
 			list.append(duration);
 			setPresentValueList(list);
 		}
@@ -309,15 +323,14 @@ public class JDFDurationState extends JDFAbstractState
 
 	/**
 	 * fitsValue - tests, if the defined value matches Allowed test lists or Present test lists, specified for this State
-	 * 
-	 * @param value value to test
+	 *
+	 * @param value     value to test
 	 * @param testlists test lists, that the value has to match. In this State the test list is ValueList.<br>
-	 *        Choose one of two values: FitsValue_Allowed or FitsValue_Present. (Defaults to Allowed)
-	 * 
+	 *                  Choose one of two values: FitsValue_Allowed or FitsValue_Present. (Defaults to Allowed)
 	 * @return boolean - true, if the value matches test list or if AllowedValueList is not specified
 	 */
 	@Override
-	public final boolean fitsValue(String value, EnumFitsValue testlists)
+	public final boolean fitsValue(final String value, final EnumFitsValue testlists)
 	{
 		if (fitsListType(value))
 		{
@@ -326,7 +339,7 @@ public class JDFDurationState extends JDFAbstractState
 			{
 				rangelist = new JDFDurationRangeList(value);
 			}
-			catch (DataFormatException dfe)
+			catch (final DataFormatException dfe)
 			{
 				return false;
 			}
@@ -338,13 +351,12 @@ public class JDFDurationState extends JDFAbstractState
 
 	/**
 	 * fitsValueList - tests, if the defined 'rangelist' matches the AllowedValueList or in the PresentValueList, specified for this State
-	 * 
+	 *
 	 * @param rangelist range list to test
 	 * @param valuelist switches between AllowedValueList and PresentValueList.
-	 * 
 	 * @return boolean - true, if 'rangelist' matches the valuelist or if AllowedValueList is not specified
 	 */
-	private final boolean fitsValueList(JDFDurationRangeList rangelist, EnumFitsValue valuelist)
+	private final boolean fitsValueList(final JDFDurationRangeList rangelist, final EnumFitsValue valuelist)
 	{
 		JDFDurationRangeList list;
 		if (valuelist.equals(EnumFitsValue.Allowed))
@@ -356,9 +368,11 @@ public class JDFDurationState extends JDFAbstractState
 			list = getPresentValueList();
 		}
 		if (list == null)
+		{
 			return true;
+		}
 
-		EnumListType listType = getListType();
+		final EnumListType listType = getListType();
 		if (listType.equals(EnumListType.CompleteList))
 		{
 			return fitsCompleteList(rangelist, list);
@@ -378,24 +392,22 @@ public class JDFDurationState extends JDFAbstractState
 
 	/**
 	 * fitsCompleteList - tests for the case, when ListType=CompleteList, if the defined 'value' matches AllowedValueList or PresentValueList, specified for this State
-	 * 
+	 *
 	 * @param value value to test
-	 * @param list testlists are either AllowedValueList or PresentValueList.
-	 * 
+	 * @param list  testlists are either AllowedValueList or PresentValueList.
 	 * @return boolean - true, if 'value' matches testlist
 	 */
-	private final boolean fitsCompleteList(JDFDurationRangeList value, JDFDurationRangeList list)
+	private final boolean fitsCompleteList(final JDFDurationRangeList value, final JDFDurationRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
-		if (v_size != l_size)
+		if ((v_size != l_size) || !value.isUnique())
+		{
 			return false;
+		}
 
-		if (!value.isUnique())
-			return false;
-
-		JDFDurationRangeList valueList = new JDFDurationRangeList(value);
+		final JDFDurationRangeList valueList = new JDFDurationRangeList(value);
 
 		boolean bFound;
 		for (int i = l_size - 1; i >= 0; i--)
@@ -421,22 +433,20 @@ public class JDFDurationState extends JDFAbstractState
 	/**
 	 * fitsCompleteOrderedList - tests for the case, when ListType=CompleteOrderedList, if the defined 'value' matches AllowedValueList or PresentValueList, specified for this
 	 * State
-	 * 
+	 *
 	 * @param value value to test
-	 * @param list testlists are either AllowedValueList or PresentValueList.
-	 * 
+	 * @param list  testlists are either AllowedValueList or PresentValueList.
 	 * @return boolean - true, if 'value' matches testlist
 	 */
-	private final boolean fitsCompleteOrderedList(JDFDurationRangeList value, JDFDurationRangeList list)
+	private final boolean fitsCompleteOrderedList(final JDFDurationRangeList value, final JDFDurationRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
-		if (v_size != l_size)
+		if ((v_size != l_size) || !value.isUnique())
+		{
 			return false;
-
-		if (!value.isUnique())
-			return false;
+		}
 
 		for (int i = 0; i < l_size; i++)
 		{
@@ -450,16 +460,15 @@ public class JDFDurationState extends JDFAbstractState
 
 	/**
 	 * fitsContainedList - tests for the case, when ListType=ContainedList, if the defined 'value' matches AllowedValueList or PresentValueList, specified for this State
-	 * 
+	 *
 	 * @param value value to test
-	 * @param list testlists are either AllowedValueList or PresentValueList.
-	 * 
+	 * @param list  testlists are either AllowedValueList or PresentValueList.
 	 * @return boolean - true, if 'value' matches testlist
 	 */
-	private final boolean fitsContainedList(JDFDurationRangeList value, JDFDurationRangeList list)
+	private final boolean fitsContainedList(final JDFDurationRangeList value, final JDFDurationRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
 		for (int i = 0; i < v_size; i++)
 		{
@@ -476,7 +485,7 @@ public class JDFDurationState extends JDFAbstractState
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
 	 */
 	@Override

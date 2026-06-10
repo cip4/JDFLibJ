@@ -115,7 +115,9 @@ public class WalkHolePattern extends WalkXElement
 	{
 		final KElement parentParams = elem.getParentNode_KElement();
 		if (parentParams != null)
+		{
 			parentParams.moveAttribute(AttributeName.HOLETYPE, elem, XJDFConstants.Pattern, null, null);
+		}
 		super.updateAttributes(elem);
 	}
 

@@ -94,9 +94,8 @@ class JDFDieLayoutTest extends JDFTestCaseBase
 
 	/**
 	 * tests the proposed Color/@PDLName attribute
-	 * 
-	 * @throws Exception
 	 *
+	 * @throws Exception
 	 */
 	@Test
 	public final void testStationMapStrip() throws Exception

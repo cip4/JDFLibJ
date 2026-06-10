@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -106,8 +102,10 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.CUTBOX, 0x3333311111l, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DIESIDE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumDieSide.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MEDIASIDE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumMediaSide.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DIESIDE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumDieSide.class, 0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MEDIASIDE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumMediaSide.class, 0), null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATED, 0x3333331111l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.WASTE, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
@@ -141,7 +139,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDieLayout(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDieLayout(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -153,7 +151,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDieLayout(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDieLayout(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -166,7 +164,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDieLayout(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDieLayout(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -177,7 +175,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -192,166 +190,36 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for DieSide
+	 * Enumeration strings for numDieSide
 	 */
 
-	public enum EDieSide
+	public enum EnumDieSide
 	{
 		Up, Down;
 
-		public static EDieSide getEnum(String val)
+		public static EnumDieSide getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EDieSide.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumDieSide.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for DieSide
+	 * Enumeration strings for numMediaSide
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumDieSide extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumDieSide(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumDieSide getEnum(String enumName)
-		{
-			return (EnumDieSide) getEnum(EnumDieSide.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDieSide getEnum(int enumValue)
-		{
-			return (EnumDieSide) getEnum(EnumDieSide.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDieSide.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDieSide.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDieSide.class);
-		}
-
-		/**  */
-		public static final EnumDieSide Up = new EnumDieSide("Up");
-		/**  */
-		public static final EnumDieSide Down = new EnumDieSide("Down");
-	}
-
-	/**
-	 * Enumeration strings for MediaSide
-	 */
-
-	public enum EMediaSide
+	public enum EnumMediaSide
 	{
 		Front, Back, Both;
 
-		public static EMediaSide getEnum(String val)
+		public static EnumMediaSide getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EMediaSide.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumMediaSide.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for MediaSide
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumMediaSide extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumMediaSide(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumMediaSide getEnum(String enumName)
-		{
-			return (EnumMediaSide) getEnum(EnumMediaSide.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumMediaSide getEnum(int enumValue)
-		{
-			return (EnumMediaSide) getEnum(EnumMediaSide.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumMediaSide.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumMediaSide.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumMediaSide.class);
-		}
-
-		/**  */
-		public static final EnumMediaSide Front = new EnumMediaSide("Front");
-		/**  */
-		public static final EnumMediaSide Back = new EnumMediaSide("Back");
-		/**  */
-		public static final EnumMediaSide Both = new EnumMediaSide("Both");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -363,7 +231,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCutBox(JDFRectangle value)
+	public void setCutBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.CUTBOX, value, null);
 	}
@@ -376,8 +244,8 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 */
 	public JDFRectangle getCutBox()
 	{
-		String strAttrName = getAttribute(AttributeName.CUTBOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CUTBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -391,9 +259,9 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDieSide(EDieSide enumVar)
+	public void setDieSide(final EnumDieSide enumVar)
 	{
-		setAttribute(AttributeName.DIESIDE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DIESIDE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -401,35 +269,6 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EDieSide getEDieSide()
-	{
-		return EDieSide.getEnum(getAttribute(AttributeName.DIESIDE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute DieSide
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute DieSide
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDieSide(EDieSide) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDieSide(EnumDieSide enumVar)
-	{
-		setAttribute(AttributeName.DIESIDE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute DieSide
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EDieSide GetEDieSide() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumDieSide getDieSide()
 	{
 		return EnumDieSide.getEnum(getAttribute(AttributeName.DIESIDE, null, null));
@@ -445,9 +284,9 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMediaSide(EMediaSide enumVar)
+	public void setMediaSide(final EnumMediaSide enumVar)
 	{
-		setAttribute(AttributeName.MEDIASIDE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.MEDIASIDE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -455,35 +294,6 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EMediaSide getEMediaSide()
-	{
-		return EMediaSide.getEnum(getAttribute(AttributeName.MEDIASIDE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute MediaSide
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute MediaSide
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetMediaSide(EMediaSide) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setMediaSide(EnumMediaSide enumVar)
-	{
-		setAttribute(AttributeName.MEDIASIDE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute MediaSide
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EMediaSide GetEMediaSide() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumMediaSide getMediaSide()
 	{
 		return EnumMediaSide.getEnum(getAttribute(AttributeName.MEDIASIDE, null, null));
@@ -499,7 +309,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRotated(boolean value)
+	public void setRotated(final boolean value)
 	{
 		setAttribute(AttributeName.ROTATED, value, null);
 	}
@@ -524,7 +334,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWaste(double value)
+	public void setWaste(final double value)
 	{
 		setAttribute(AttributeName.WASTE, value, null);
 	}
@@ -571,7 +381,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevice the element
 	 */
-	public JDFDevice getCreateDevice(int iSkip)
+	public JDFDevice getCreateDevice(final int iSkip)
 	{
 		return (JDFDevice) getCreateElement_JDFElement(ElementName.DEVICE, null, iSkip);
 	}
@@ -583,7 +393,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 * @return JDFDevice the element
 	 *         default is getDevice(0)
 	 */
-	public JDFDevice getDevice(int iSkip)
+	public JDFDevice getDevice(final int iSkip)
 	{
 		return (JDFDevice) getElement(ElementName.DEVICE, null, iSkip);
 	}
@@ -613,7 +423,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refDevice(JDFDevice refTarget)
+	public void refDevice(final JDFDevice refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -644,7 +454,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
-	public JDFFileSpec getCreateFileSpec(int iSkip)
+	public JDFFileSpec getCreateFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -656,7 +466,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 * @return JDFFileSpec the element
 	 *         default is getFileSpec(0)
 	 */
-	public JDFFileSpec getFileSpec(int iSkip)
+	public JDFFileSpec getFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -686,7 +496,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -727,7 +537,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMedia(JDFMedia refTarget)
+	public void refMedia(final JDFMedia refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -758,7 +568,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFRuleLength the element
 	 */
-	public JDFRuleLength getCreateRuleLength(int iSkip)
+	public JDFRuleLength getCreateRuleLength(final int iSkip)
 	{
 		return (JDFRuleLength) getCreateElement_JDFElement(ElementName.RULELENGTH, null, iSkip);
 	}
@@ -770,7 +580,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 * @return JDFRuleLength the element
 	 *         default is getRuleLength(0)
 	 */
-	public JDFRuleLength getRuleLength(int iSkip)
+	public JDFRuleLength getRuleLength(final int iSkip)
 	{
 		return (JDFRuleLength) getElement(ElementName.RULELENGTH, null, iSkip);
 	}
@@ -821,7 +631,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFStation the element
 	 */
-	public JDFStation getCreateStation(int iSkip)
+	public JDFStation getCreateStation(final int iSkip)
 	{
 		return (JDFStation) getCreateElement_JDFElement(ElementName.STATION, null, iSkip);
 	}
@@ -833,7 +643,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 * @return JDFStation the element
 	 *         default is getStation(0)
 	 */
-	public JDFStation getStation(int iSkip)
+	public JDFStation getStation(final int iSkip)
 	{
 		return (JDFStation) getElement(ElementName.STATION, null, iSkip);
 	}

@@ -60,7 +60,6 @@ import org.cip4.jdflib.util.MyPair;
 // ----------------------------------
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         prior to 10.02.2009
  */
 public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams implements IURLSetter
@@ -123,13 +122,12 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams imple
 	/**
 	 * add a queueentry to a queue based on the parameters of this you can get the new queueentry by getQueueEntry(0) on the response
 	 *
-	 * @param theQueue the queue to submit to, note that the queue IS modified by this call
+	 * @param theQueue   the queue to submit to, note that the queue IS modified by this call
 	 * @param responseIn the jmf that serves as a container for the new response
-	 * @param filter the filter to apply
-	 *
+	 * @param filter     the filter to apply
 	 * @return the response jmf to the submission message
 	 */
-	public JDFResponse addEntry(final JDFQueue theQueue, final JDFJMF responseIn, JDFQueueFilter filter)
+	public JDFResponse addEntry(final JDFQueue theQueue, final JDFJMF responseIn, final JDFQueueFilter filter)
 	{
 		return addQueueEntry(theQueue, responseIn, filter).getA();
 	}
@@ -148,10 +146,9 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams imple
 	/**
 	 * add a queueentry to a queue based on the parameters of this you can get the new queueentry by getQueueEntry(0) on the response
 	 *
-	 * @param theQueue the queue to submit to, note that the queue IS modified by this call
+	 * @param theQueue   the queue to submit to, note that the queue IS modified by this call
 	 * @param responseIn the jmf that serves as a container for the new response
-	 * @param filter the filter to apply
-	 *
+	 * @param filter     the filter to apply
 	 * @return the response jmf to the submission message
 	 */
 	public MyPair<JDFResponse, JDFQueueEntry> addQueueEntry(final JDFQueue theQueue, final JDFJMF responseIn, JDFQueueFilter filter)
@@ -167,7 +164,7 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams imple
 		{
 			resp = (JDFResponse) responseIn.copyElement(resp, null);
 		}
-		MyPair<JDFResponse, JDFQueueEntry> ret = new MyPair<JDFResponse, JDFQueueEntry>(resp, null);
+		final MyPair<JDFResponse, JDFQueueEntry> ret = new MyPair<>(resp, null);
 
 		if (theQueue == null)
 		{
@@ -201,8 +198,8 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams imple
 		return ret;
 	}
 
-	private static final String copyAtts[] = new String[] { AttributeName.GANGNAME, AttributeName.GANGPOLICY, AttributeName.DESCRIPTIVENAME, AttributeName.PRIORITY,
-			AttributeName.ACTIVATION };
+	private static final String copyAtts[] = new String[] { AttributeName.GANGNAME, AttributeName.GANGPOLICY, AttributeName.DESCRIPTIVENAME,
+			AttributeName.PRIORITY, AttributeName.ACTIVATION };
 
 	void internalAdd(final JDFQueue theQueue, final JDFQueueFilter filter, final JDFResponse resp, final boolean bAuto, final JDFQueueEntry qe)
 	{
@@ -230,7 +227,6 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams imple
 	}
 
 	/**
-	 *
 	 * @return the filename of this; null if not implemented
 	 */
 	@Override

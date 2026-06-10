@@ -121,7 +121,8 @@ public class JDFPreflightItem extends JDFAutoPreflightItem
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFPreflightItem(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFPreflightItem(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

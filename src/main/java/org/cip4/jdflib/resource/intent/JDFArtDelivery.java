@@ -81,7 +81,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoArtDelivery;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFDropItem;
@@ -94,7 +94,6 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
 /**
- * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFArtDelivery extends JDFAutoArtDelivery
@@ -103,42 +102,39 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 
 	/**
 	 * Constructor for JDFArtDelivery
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
-	 * 
 	 */
-	public JDFArtDelivery(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFArtDelivery(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFArtDelivery
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * 
 	 * @throws DOMException
 	 */
-	public JDFArtDelivery(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFArtDelivery(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFArtDelivery
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
-	 * 
 	 */
-	public JDFArtDelivery(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFArtDelivery(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -147,7 +143,7 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -158,19 +154,19 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 
 	/**
 	 * Get parent node of 'this' - node ArtDeliveryIntent
-	 * 
+	 *
 	 * @return JDFArtDeliveryIntent: ArtDeliveryIntent node
 	 */
 	public JDFArtDeliveryIntent getParentArtDeliveryIntent()
 	{
-		Node parentNode = getParentNode();
+		final Node parentNode = getParentNode();
 		return (parentNode instanceof JDFArtDeliveryIntent) ? (JDFArtDeliveryIntent) parentNode : null;
 	}
 
 	/**
 	 * Get of 'this' the value of element ArtHandling. If not specified, get the default value of element ArtHandling, that is specified in it's parent element (node
 	 * ArtDeliveryIntent)
-	 * 
+	 *
 	 * @return JDFSpanArtHandling: element value
 	 */
 	@Override
@@ -180,14 +176,14 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 		{
 			return super.getArtHandling();
 		}
-		JDFArtDeliveryIntent parentArtDeliveryIntent = getParentArtDeliveryIntent();
+		final JDFArtDeliveryIntent parentArtDeliveryIntent = getParentArtDeliveryIntent();
 		return parentArtDeliveryIntent == null ? null : parentArtDeliveryIntent.getArtHandling();
 	}
 
 	/**
 	 * Get of 'this' the value of element DeliveryCharge. If not specified, get the default value of element DeliveryCharge, that is specified in it's parent element (node
 	 * ArtDeliveryIntent)
-	 * 
+	 *
 	 * @return JDFSpanDeliveryCharge: element value
 	 */
 	@Override
@@ -197,13 +193,13 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 		{
 			return super.getDeliveryCharge();
 		}
-		JDFArtDeliveryIntent parentArtDeliveryIntent = getParentArtDeliveryIntent();
+		final JDFArtDeliveryIntent parentArtDeliveryIntent = getParentArtDeliveryIntent();
 		return parentArtDeliveryIntent == null ? null : parentArtDeliveryIntent.getDeliveryCharge();
 	}
 
 	/**
 	 * Get of 'this' the value of element Method. If not specified, get the default value of element Method, that is specified in it's parent element (node ArtDeliveryIntent)
-	 * 
+	 *
 	 * @return JDFNameSpan: element value
 	 */
 	@Override
@@ -213,14 +209,14 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 		{
 			return super.getMethod();
 		}
-		JDFArtDeliveryIntent parentArtDeliveryIntent = getParentArtDeliveryIntent();
+		final JDFArtDeliveryIntent parentArtDeliveryIntent = getParentArtDeliveryIntent();
 		return parentArtDeliveryIntent == null ? null : parentArtDeliveryIntent.getMethod();
 	}
 
 	/**
 	 * Get of 'this' the value of attribute PreflightStatus. If not specified, get the default value of attribute PreflightStatus, that is specified in it's parent element (node
 	 * ArtDeliveryIntent)
-	 * 
+	 *
 	 * @return EnumPreflightStatus: attribute value
 	 */
 	// TODO this does not work!
@@ -235,7 +231,7 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 	/**
 	 * Get of 'this' the value of element ReturnMethod. If not specified, get the default value of element ReturnMethod, that is specified in it's parent element (node
 	 * ArtDeliveryIntent)
-	 * 
+	 *
 	 * @return JDFNameSpan: element value
 	 */
 	@Override
@@ -245,14 +241,14 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 		{
 			return super.getReturnMethod();
 		}
-		JDFArtDeliveryIntent parentArtDeliveryIntent = getParentArtDeliveryIntent();
+		final JDFArtDeliveryIntent parentArtDeliveryIntent = getParentArtDeliveryIntent();
 		return parentArtDeliveryIntent == null ? null : parentArtDeliveryIntent.getReturnMethod();
 	}
 
 	/**
 	 * Get of 'this' the value of element ServiceLevel. If not specified, get the default value of element ServiceLevel, that is specified in it's parent element (node
 	 * ArtDeliveryIntent)
-	 * 
+	 *
 	 * @return JDFStringSpan: element value
 	 */
 	@Override
@@ -262,13 +258,13 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 		{
 			return super.getServiceLevel();
 		}
-		JDFArtDeliveryIntent parentArtDeliveryIntent = getParentArtDeliveryIntent();
+		final JDFArtDeliveryIntent parentArtDeliveryIntent = getParentArtDeliveryIntent();
 		return parentArtDeliveryIntent == null ? null : parentArtDeliveryIntent.getServiceLevel();
 	}
 
 	/**
 	 * Get of 'this' the value of element Transfer. If not specified, get the default value of element Transfer, that is specified in it's parent element (node ArtDeliveryIntent)
-	 * 
+	 *
 	 * @return JDFSpanTransfer: element value
 	 */
 	@Override
@@ -278,34 +274,35 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 		{
 			return super.getTransfer();
 		}
-		JDFArtDeliveryIntent parentArtDeliveryIntent = getParentArtDeliveryIntent();
+		final JDFArtDeliveryIntent parentArtDeliveryIntent = getParentArtDeliveryIntent();
 		return parentArtDeliveryIntent == null ? null : parentArtDeliveryIntent.getTransfer();
 	}
 
 	/**
 	 * Get of 'this' the iSkip-th child element Contact. If not specified, get the child element Contact of it's parent element (node ArtDeliveryIntent)
-	 * 
+	 *
 	 * @return JDFContact: the found element
 	 */
 	@Override
-	public JDFContact getContact(int iSkip)
+	public JDFContact getContact(final int iSkip)
 	{
-		if (hasChildElement(ElementName.CONTACT, JDFConstants.EMPTYSTRING))
+		if (hasChildElement(ElementName.CONTACT, JDFCoreConstants.EMPTYSTRING))
 		{
 			return super.getContact(iSkip);
 		}
-		JDFArtDeliveryIntent parentArtDeliveryIntent = getParentArtDeliveryIntent();
+		final JDFArtDeliveryIntent parentArtDeliveryIntent = getParentArtDeliveryIntent();
 		return parentArtDeliveryIntent == null ? null : parentArtDeliveryIntent.getContact();
 	}
 
 	/**
-	 * 
 	 * @param dropItem
 	 */
-	public void setFromDropItem(JDFDropItem dropItem)
+	public void setFromDropItem(final JDFDropItem dropItem)
 	{
 		if (dropItem == null)
+		{
 			return;
+		}
 
 		copyAttribute(AttributeName.AMOUNT, dropItem);
 		KElement e = dropItem.getFirstChildElement();

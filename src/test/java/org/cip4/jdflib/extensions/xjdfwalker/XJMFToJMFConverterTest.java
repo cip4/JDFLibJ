@@ -43,10 +43,10 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceCondition;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.auto.JDFAutoResourceCmdParams.EnumUpdateMethod;
 import org.cip4.jdflib.auto.JDFAutoResourceQuParams.EnumScope;
-import org.cip4.jdflib.auto.JDFAutoSignal.EnumChannelMode;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -82,7 +82,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author rainer prosi
- *
  */
 class XJMFToJMFConverterTest extends JDFTestCaseBase
 {
@@ -100,7 +99,7 @@ class XJMFToJMFConverterTest extends JDFTestCaseBase
 		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		final JDFDoc d = xc.convert(h.getRoot());
 		final JDFDeviceInfo dij = d.getJMFRoot().getSignal(0).getDeviceInfo(0);
-		assertEquals(EnumDeviceCondition.OffLine.getName(), dij.getAttribute(AttributeName.DEVICECONDITION));
+		assertEquals(EnumDeviceCondition.OffLine.name(), dij.getAttribute(AttributeName.DEVICECONDITION));
 	}
 
 	/**
@@ -124,7 +123,7 @@ class XJMFToJMFConverterTest extends JDFTestCaseBase
 	{
 		final XJMFHelper h = new XJMFHelper();
 		final MessageHelper mh = h.appendMessage(EnumFamily.Command, EnumType.ResubmitQueueEntry);
-		mh.appendElement(ElementName.RESUBMISSIONPARAMS).setAttribute(AttributeName.UPDATEMETHOD, EnumUpdateMethod.Incremental.getName());
+		mh.appendElement(ElementName.RESUBMISSIONPARAMS).setAttribute(AttributeName.UPDATEMETHOD, EnumUpdateMethod.Incremental.name());
 		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		final JDFDoc d = xc.convert(h.getRoot());
 		assertNotNull(d);
@@ -179,7 +178,7 @@ class XJMFToJMFConverterTest extends JDFTestCaseBase
 	{
 		final XJMFHelper h = new XJMFHelper();
 		final MessageHelper mh = h.appendMessage(EnumFamily.Query, EnumType.Resource);
-		mh.appendElement(ElementName.RESOURCEQUPARAMS).setAttribute(AttributeName.SCOPE, EnumScope.Allowed.getName());
+		mh.appendElement(ElementName.RESOURCEQUPARAMS).setAttribute(AttributeName.SCOPE, EnumScope.Allowed.name());
 		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		final JDFDoc d = xc.convert(h.getRoot());
 		final JDFResourceQuParams rqp2 = d.getJMFRoot().getQuery(0).getResourceQuParams();

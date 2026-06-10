@@ -77,9 +77,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.pool.JDFAmountPool;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkAmountPool extends WalkJDFSubElement
 {
@@ -109,13 +107,13 @@ public class WalkAmountPool extends WalkJDFSubElement
 	@Override
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
-		JDFAmountPool newAP = (JDFAmountPool) super.walk(jdf, xjdf);
+		final JDFAmountPool newAP = (JDFAmountPool) super.walk(jdf, xjdf);
 		if (jdfToXJDF.isExplicitWaste())
 		{
-			Collection<JDFPartAmount> v = ((JDFAmountPool) jdf).getAllPartAmount();
+			final Collection<JDFPartAmount> v = ((JDFAmountPool) jdf).getAllPartAmount();
 			if (v != null)
 			{
-				for (JDFPartAmount pa : v)
+				for (final JDFPartAmount pa : v)
 				{
 					moveToAmountPool(newAP, pa);
 				}

@@ -132,7 +132,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMatrixState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoMatrixState(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -144,7 +144,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMatrixState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoMatrixState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -157,7 +157,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoMatrixState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoMatrixState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -189,7 +189,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDefaultValue(JDFMatrix value)
+	public void setDefaultValue(final JDFMatrix value)
 	{
 		setAttribute(AttributeName.DEFAULTVALUE, value, null);
 	}
@@ -202,8 +202,8 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	 */
 	public JDFMatrix getDefaultValue()
 	{
-		String strAttrName = getAttribute(AttributeName.DEFAULTVALUE, null, null);
-		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.DEFAULTVALUE, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -217,7 +217,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCurrentValue(JDFMatrix value)
+	public void setCurrentValue(final JDFMatrix value)
 	{
 		setAttribute(AttributeName.CURRENTVALUE, value, null);
 	}
@@ -230,8 +230,8 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	 */
 	public JDFMatrix getCurrentValue()
 	{
-		String strAttrName = getAttribute(AttributeName.CURRENTVALUE, null, null);
-		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CURRENTVALUE, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -245,7 +245,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowedRotateMod(double value)
+	public void setAllowedRotateMod(final double value)
 	{
 		setAttribute(AttributeName.ALLOWEDROTATEMOD, value, null);
 	}
@@ -270,7 +270,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowedShift(String value)
+	public void setAllowedShift(final String value)
 	{
 		setAttribute(AttributeName.ALLOWEDSHIFT, value, null);
 	}
@@ -295,7 +295,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowedTransforms(String value)
+	public void setAllowedTransforms(final String value)
 	{
 		setAttribute(AttributeName.ALLOWEDTRANSFORMS, value, null);
 	}
@@ -320,7 +320,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentRotateMod(double value)
+	public void setPresentRotateMod(final double value)
 	{
 		setAttribute(AttributeName.PRESENTROTATEMOD, value, null);
 	}
@@ -345,7 +345,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentShift(String value)
+	public void setPresentShift(final String value)
 	{
 		setAttribute(AttributeName.PRESENTSHIFT, value, null);
 	}
@@ -370,7 +370,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentTransforms(String value)
+	public void setPresentTransforms(final String value)
 	{
 		setAttribute(AttributeName.PRESENTTRANSFORMS, value, null);
 	}
@@ -417,7 +417,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc the element
 	 */
-	public JDFLoc getCreateLoc(int iSkip)
+	public JDFLoc getCreateLoc(final int iSkip)
 	{
 		return (JDFLoc) getCreateElement_JDFElement(ElementName.LOC, null, iSkip);
 	}
@@ -429,7 +429,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	 * @return JDFLoc the element
 	 *         default is getLoc(0)
 	 */
-	public JDFLoc getLoc(int iSkip)
+	public JDFLoc getLoc(final int iSkip)
 	{
 		return (JDFLoc) getElement(ElementName.LOC, null, iSkip);
 	}
@@ -480,7 +480,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFValue the element
 	 */
-	public JDFValue getCreateValue(int iSkip)
+	public JDFValue getCreateValue(final int iSkip)
 	{
 		return (JDFValue) getCreateElement_JDFElement(ElementName.VALUE, null, iSkip);
 	}
@@ -492,7 +492,7 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	 * @return JDFValue the element
 	 *         default is getValue(0)
 	 */
-	public JDFValue getValue(int iSkip)
+	public JDFValue getValue(final int iSkip)
 	{
 		return (JDFValue) getElement(ElementName.VALUE, null, iSkip);
 	}

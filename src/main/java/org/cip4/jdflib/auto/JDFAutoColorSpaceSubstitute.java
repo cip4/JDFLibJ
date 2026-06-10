@@ -108,7 +108,7 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoColorSpaceSubstitute(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoColorSpaceSubstitute(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -120,7 +120,7 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoColorSpaceSubstitute(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoColorSpaceSubstitute(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoColorSpaceSubstitute(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoColorSpaceSubstitute(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refPDLResourceAlias(JDFPDLResourceAlias refTarget)
+	public void refPDLResourceAlias(final JDFPDLResourceAlias refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -211,7 +211,7 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationSpec the element
 	 */
-	public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
+	public JDFSeparationSpec getCreateSeparationSpec(final int iSkip)
 	{
 		return (JDFSeparationSpec) getCreateElement_JDFElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}
@@ -223,7 +223,7 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
 	 * @return JDFSeparationSpec the element
 	 *         default is getSeparationSpec(0)
 	 */
-	public JDFSeparationSpec getSeparationSpec(int iSkip)
+	public JDFSeparationSpec getSeparationSpec(final int iSkip)
 	{
 		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}

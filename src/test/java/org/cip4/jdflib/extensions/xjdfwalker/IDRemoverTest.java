@@ -80,7 +80,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class IDRemoverTest extends JDFTestCaseBase
 {
@@ -93,7 +92,7 @@ class IDRemoverTest extends JDFTestCaseBase
 	@Test
 	void testRemoveIDs()
 	{
-		IDRemover finder = new IDRemover();
+		final IDRemover finder = new IDRemover();
 		finder.removeIDs(root);
 		Assertions.assertEquals(root.toString().indexOf("ID="), -1);
 	}
@@ -104,20 +103,20 @@ class IDRemoverTest extends JDFTestCaseBase
 	@Test
 	void testHeader()
 	{
-		IDRemover finder = new IDRemover();
-		XJDFHelper h = XJDFHelper.getHelper(root);
+		final IDRemover finder = new IDRemover();
+		final XJDFHelper h = XJDFHelper.getHelper(root);
 		h.getCreateAuditPool().appendMessage(XJDFConstants.AuditResource);
 		finder.removeIDs(root);
 		Assertions.assertNotNull(h.getAuditPool().getMessageHelpers().get(0).getHeader().getID());
 	}
 
 	/**
-	 * 	@Test
+	 * @Test
 	 */
 	void testRefs()
 	{
-		IDRemover finder = new IDRemover();
-		XJDFHelper h = XJDFHelper.getHelper(root);
+		final IDRemover finder = new IDRemover();
+		final XJDFHelper h = XJDFHelper.getHelper(root);
 		h.getCreateAuditPool().appendMessage(XJDFConstants.AuditResource);
 		root.setXPathAttribute("foo/@blahRefs", "R1.1 R1.2");
 		finder.removeIDs(root);
@@ -127,12 +126,12 @@ class IDRemoverTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 	@Test
+	 * @Test
 	 */
 	void testRef()
 	{
-		IDRemover finder = new IDRemover();
-		XJDFHelper h = XJDFHelper.getHelper(root);
+		final IDRemover finder = new IDRemover();
+		final XJDFHelper h = XJDFHelper.getHelper(root);
 		h.getCreateAuditPool().appendMessage(XJDFConstants.AuditResource);
 		root.setXPathAttribute("foo/@blahRef", "R1.1");
 		finder.removeIDs(root);

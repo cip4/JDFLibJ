@@ -45,7 +45,6 @@ package org.cip4.jdflib.core;
 
 import java.util.zip.DataFormatException;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
@@ -64,13 +63,12 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         Aug 10, 2009
  */
 public class AtrInfo extends AtrElemInfo
 {
 	private final AttributeInfo.EnumAttributeType atrType;
-	private final ValuedEnum enumEnum;
+	private final Enum<?> enumEnum;
 	private final String atrDefault;
 
 	/**
@@ -79,7 +77,7 @@ public class AtrInfo extends AtrElemInfo
 	 * @param e
 	 * @param _atrDefault
 	 */
-	public AtrInfo(final long s, final AttributeInfo.EnumAttributeType t, final ValuedEnum e, final String _atrDefault)
+	public AtrInfo(final long s, final AttributeInfo.EnumAttributeType t, final Enum<?> e, final String _atrDefault)
 	{
 		super(s);
 		atrType = t;
@@ -92,7 +90,7 @@ public class AtrInfo extends AtrElemInfo
 	 * @param t
 	 * @param e
 	 */
-	public AtrInfo(final long s, final AttributeInfo.EnumAttributeType t, final ValuedEnum e)
+	public AtrInfo(final long s, final AttributeInfo.EnumAttributeType t, final Enum<?> e)
 	{
 		super(s);
 		atrType = t;
@@ -104,9 +102,8 @@ public class AtrInfo extends AtrElemInfo
 	 * checks whether smallAtt is a matching subset of bigAtt depending on datatype
 	 *
 	 * @param smallAtt the small att to test
-	 * @param bigAtt the big att, e.g. list to test against
+	 * @param bigAtt   the big att, e.g. list to test against
 	 * @param dataType the datatype of the big att
-	 *
 	 * @return true if smallAtt is a matching subset of bigAtt
 	 */
 	public static boolean matchesAttribute(final String smallAtt, final String bigAtt, final AttributeInfo.EnumAttributeType dataType)
@@ -294,18 +291,18 @@ public class AtrInfo extends AtrElemInfo
 	public static boolean matchesTokenList(final String smallAtt, final String bigAtt)
 	{
 		// check for matching individual NMTOKEN
-		if (smallAtt.indexOf(JDFConstants.BLANK) > 0)
+		if (smallAtt.indexOf(JDFCoreConstants.BLANK) > 0)
 		{
-			final VString vSmall = StringUtil.tokenize(smallAtt, JDFConstants.BLANK, false);
-			for (int i = 0; i < vSmall.size(); i++)
+			final VString vSmall = StringUtil.tokenize(smallAtt, JDFCoreConstants.BLANK, false);
+			for (final String element : vSmall)
 			{
-				if (!StringUtil.hasToken(bigAtt, vSmall.get(i), JDFConstants.BLANK, 0))
+				if (!StringUtil.hasToken(bigAtt, element, JDFCoreConstants.BLANK, 0))
 				{
 					return false;
 				}
 			}
 		}
-		else if (!StringUtil.hasToken(bigAtt, smallAtt, JDFConstants.BLANK, 0))
+		else if (!StringUtil.hasToken(bigAtt, smallAtt, JDFCoreConstants.BLANK, 0))
 		{
 			return false;
 		}
@@ -333,7 +330,7 @@ public class AtrInfo extends AtrElemInfo
 	/**
 	 * @return the enum used for type declaration
 	 */
-	public ValuedEnum getEnumEnum()
+	public Enum<?> getEnumEnum()
 	{
 		return enumEnum;
 	}

@@ -46,9 +46,7 @@ import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkAssembly extends WalkResource
 {
@@ -112,7 +110,7 @@ public class WalkAssembly extends WalkResource
 	{
 		if (!jdf.hasAttribute(AttributeName.ORDER) && jdf.getElement(ElementName.ASSEMBLYSECTION) != null)
 		{
-			jdf.setAttribute(AttributeName.ORDER, EnumOrder.List.getName());
+			jdf.setAttribute(AttributeName.ORDER, EnumOrder.List.name());
 		}
 		return super.walk(jdf, xjdf);
 	}

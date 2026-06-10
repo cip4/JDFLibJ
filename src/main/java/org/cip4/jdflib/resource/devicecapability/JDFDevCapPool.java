@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,22 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFDevCapPool.java
@@ -90,43 +90,43 @@ public class JDFDevCapPool extends JDFAutoDevCapPool
 
 	/**
 	 * Constructor for JDFDevCapPool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFDevCapPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFDevCapPool(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFDevCapPool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFDevCapPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFDevCapPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFDevCapPool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFDevCapPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFDevCapPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -137,13 +137,13 @@ public class JDFDevCapPool extends JDFAutoDevCapPool
 
 	/**
 	 * get iSkip'th element <code>DevCap</code>, create if it doesn't exist
-	 * 
+	 *
 	 * @param iSkip
-	 *            number of elements to skip
+	 *              number of elements to skip
 	 * @return JDFDevCap - the element
 	 */
 	@Override
-	public JDFDevCap getCreateDevCap(int iSkip)
+	public JDFDevCap getCreateDevCap(final int iSkip)
 	{
 		return (JDFDevCap) getCreateElement_KElement(ElementName.DEVCAP, null, iSkip);
 	}
@@ -152,40 +152,40 @@ public class JDFDevCapPool extends JDFAutoDevCapPool
 	 * get iSkip'th element DevCap
 	 * <p>
 	 * default: getDevCap(0)
-	 * 
+	 *
 	 * @param iSkip
-	 *            number of elements to skip
+	 *              number of elements to skip
 	 * @return JDFDevCap - the element
 	 */
 	@Override
-	public JDFDevCap getDevCap(int iSkip)
+	public JDFDevCap getDevCap(final int iSkip)
 	{
 		return (JDFDevCap) getElement(ElementName.DEVCAP, null, iSkip);
 	}
 
 	/**
 	 * get element DevCap by ID
-	 * 
+	 *
 	 * @param id
-	 *            the ID of the DevCap
+	 *           the ID of the DevCap
 	 * @return JDFDevCap - the element
 	 */
-	public JDFDevCap getDevCap(String id)
+	public JDFDevCap getDevCap(final String id)
 	{
 		return (JDFDevCap) getChildWithAttribute(ElementName.DEVCAP, AttributeName.ID, null, id, 0, false);
 	}
 
 	/**
 	 * get element DevCap by name, create if it doesn't exist
-	 * 
+	 *
 	 * @param dcName
-	 *            the Name of the DevCap
+	 *               the Name of the DevCap
 	 * @param newId
-	 *            the new ID of the DevCap to create, ignored if the DevCap
-	 *            already exists
+	 *               the new ID of the DevCap to create, ignored if the DevCap
+	 *               already exists
 	 * @return JDFDevCap - the element
 	 */
-	public JDFDevCap getCreateDevCapByName(String dcName, String newID)
+	public JDFDevCap getCreateDevCapByName(final String dcName, final String newID)
 	{
 		JDFDevCap dc = (JDFDevCap) getChildWithAttribute(ElementName.DEVCAP, AttributeName.NAME, null, name, 0, false);
 		if (dc == null)
@@ -193,14 +193,16 @@ public class JDFDevCapPool extends JDFAutoDevCapPool
 			dc = appendDevCap();
 			dc.setName(dcName);
 			if (newID != null)
+			{
 				dc.setID(newID);
+			}
 		}
 		return dc;
 	}
 
 	/**
 	 * append new DevCap element
-	 * 
+	 *
 	 * @return JDFDevCap - newly created DevCap element
 	 */
 	@Override

@@ -70,9 +70,15 @@
  */
 package org.cip4.jdflib.util;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 import org.cip4.jdflib.core.StringArray;
 
@@ -83,10 +89,58 @@ import org.cip4.jdflib.core.StringArray;
  */
 public class JavaEnumUtil
 {
+	private static final String ENUM_TOKENS_RESOURCE = "/org/cip4/jdflib/util/enumtokens.properties";
+
+	private static class EnumTokensHolder
+	{
+		private static final Map<String, String> ID_TO_TOKEN = loadIdToTokenMap();
+	}
 
 	private JavaEnumUtil()
 	{
 		super();
+	}
+
+	private static Map<String, String> getIdToToken()
+	{
+		return EnumTokensHolder.ID_TO_TOKEN;
+	}
+
+	private static Map<String, String> loadIdToTokenMap()
+	{
+		final Properties properties = new Properties();
+		try (InputStream is = JavaEnumUtil.class.getResourceAsStream(ENUM_TOKENS_RESOURCE))
+		{
+			if (is == null)
+			{
+				return Collections.emptyMap();
+			}
+			properties.load(is);
+			if (properties.isEmpty())
+			{
+				return Collections.emptyMap();
+			}
+			final Map<String, String> map = new HashMap<>();
+			for (final String name : properties.stringPropertyNames())
+			{
+				map.put(name, properties.getProperty(name));
+			}
+			return map;
+		}
+		catch (final IOException x)
+		{
+			return Collections.emptyMap();
+		}
+	}
+
+	private static String tokenOf(final Enum<?> e)
+	{
+		if (e == null)
+		{
+			return null;
+		}
+		final String token = getIdToToken().get(e.name());
+		return token != null ? token : e.toString();
 	}
 
 	/**
@@ -133,7 +187,7 @@ public class JavaEnumUtil
 	 */
 	public static String getName(final Enum<?> en)
 	{
-		return en == null ? null : en.name();
+		return tokenOf(en);
 	}
 
 	/**
@@ -187,23 +241,24 @@ public class JavaEnumUtil
 	public static <T extends Enum<T>> T getEnumIgnoreCase(final Class<T> c, String val, final T def)
 	{
 		val = StringUtil.trim(val, null);
-		if (!StringUtil.isEmpty(val))
+		if (StringUtil.isEmpty(val))
 		{
-			try
+			return def;
+		}
+		try
+		{
+			return Enum.valueOf(c, val);
+		}
+		catch (final Exception x)
+		{
+			final T[] vals = c.getEnumConstants();
+			if (vals != null)
 			{
-				return Enum.valueOf(c, val);
-			}
-			catch (final Exception x)
-			{
-				final T[] vals = c.getEnumConstants();
-				if (vals != null)
+				for (final T e : vals)
 				{
-					for (final T e : vals)
+					if (e.name().equalsIgnoreCase(val) || tokenOf(e).equalsIgnoreCase(val))
 					{
-						if (e.name().equalsIgnoreCase(val))
-						{
-							return e;
-						}
+						return e;
 					}
 				}
 			}
@@ -224,11 +279,26 @@ public class JavaEnumUtil
 			final StringArray ret = new StringArray();
 			for (final T e : vals)
 			{
-				ret.add(e.name());
+				ret.add(tokenOf(e));
 			}
 			return ret;
 		}
 		return null;
+	}
+
+	/**
+	 * @param <T>
+	 * @param c
+	 * @return
+	 */
+	public static <T extends Enum<T>> Enum<T> getEnum(final Class<T> c, final int pos)
+	{
+		final T[] vals = c == null ? null : c.getEnumConstants();
+		if (pos < 0 || pos >= ContainerUtil.length(vals))
+		{
+			return null;
+		}
+		return vals[pos];
 	}
 
 	/**
@@ -244,7 +314,7 @@ public class JavaEnumUtil
 		{
 			for (final Enum<?> e : esn)
 			{
-				ret.add(e.name());
+				ret.add(tokenOf(e));
 			}
 			if (unique)
 			{
@@ -262,7 +332,7 @@ public class JavaEnumUtil
 	 */
 	public static <T extends Enum<T>> List<T> getEnumList(final Class<T> c, final Collection<String> strings, final boolean unique)
 	{
-		final ArrayList<T> ret = new ArrayList<T>();
+		final ArrayList<T> ret = new ArrayList<>();
 		if (!StringUtil.isEmpty(strings))
 		{
 			for (final String s : strings)

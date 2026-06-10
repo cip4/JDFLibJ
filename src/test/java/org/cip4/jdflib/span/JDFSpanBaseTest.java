@@ -94,15 +94,15 @@ class JDFSpanBaseTest extends JDFTestCaseBase
 
 	/**
 	 * make sure that corrupt files always return a null document
-	 * @throws DataFormatException
 	 *
+	 * @throws DataFormatException
 	 */
 	@Test
 	void testGuessRange() throws DataFormatException
 	{
-		JDFDoc doc = new JDFDoc("LayoutIntent");
-		JDFLayoutIntent e = (JDFLayoutIntent) doc.getRoot();
-		JDFIntegerSpan is = e.appendPages();
+		final JDFDoc doc = new JDFDoc("LayoutIntent");
+		final JDFLayoutIntent e = (JDFLayoutIntent) doc.getRoot();
+		final JDFIntegerSpan is = e.appendPages();
 		Assertions.assertNull(is.guessActual());
 		is.setRange(new JDFIntegerRangeList("3 ~ 5 8"));
 		Assertions.assertEquals("5", is.guessActual());
@@ -113,16 +113,16 @@ class JDFSpanBaseTest extends JDFTestCaseBase
 	}
 
 	/**
-	* make sure that corrupt files always return a null document
-	* @throws DataFormatException
-	*
-	*/
+	 * make sure that corrupt files always return a null document
+	 *
+	 * @throws DataFormatException
+	 */
 	@Test
 	void testPreferredToActual() throws DataFormatException
 	{
-		JDFDoc doc = new JDFDoc("LayoutIntent");
-		JDFLayoutIntent e = (JDFLayoutIntent) doc.getRoot();
-		JDFIntegerSpan is = e.appendPages();
+		final JDFDoc doc = new JDFDoc("LayoutIntent");
+		final JDFLayoutIntent e = (JDFLayoutIntent) doc.getRoot();
+		final JDFIntegerSpan is = e.appendPages();
 		Assertions.assertFalse(is.preferredToActual());
 		is.setPreferred(7);
 		is.preferredToActual();

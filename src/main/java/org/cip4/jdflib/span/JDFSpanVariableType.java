@@ -38,12 +38,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanVariableType extends JDFEnumerationSpan
@@ -84,7 +80,8 @@ public class JDFSpanVariableType extends JDFEnumerationSpan
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanVariableType(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFSpanVariableType(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -92,45 +89,14 @@ public class JDFSpanVariableType extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanCutType
 	 */
-	public static class EnumSpanVariableType extends ValuedEnum
+	public enum EnumSpanVariableType
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		OneLine, AddressField, IdentificationField, Area;
 
-		private EnumSpanVariableType(final String name)
+		public static EnumSpanVariableType getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanVariableType.class, val, null);
 		}
-
-		public static EnumSpanVariableType getEnum(final String enumName)
-		{
-			return (EnumSpanVariableType) getEnum(EnumSpanVariableType.class, enumName);
-		}
-
-		public static EnumSpanVariableType getEnum(final int enumValue)
-		{
-			return (EnumSpanVariableType) getEnum(EnumSpanVariableType.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanVariableType.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanVariableType.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanVariableType.class);
-		}
-
-		public static final EnumSpanVariableType OneLine = new EnumSpanVariableType("OneLine");
-		public static final EnumSpanVariableType AddressField = new EnumSpanVariableType("AddressField");
-		public static final EnumSpanVariableType IdentificationField = new EnumSpanVariableType("IdentificationField");
-		public static final EnumSpanVariableType Area = new EnumSpanVariableType("Area");
 
 	}
 
@@ -140,9 +106,9 @@ public class JDFSpanVariableType extends JDFEnumerationSpan
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanVariableType.getEnum(0);
+		return EnumSpanVariableType.class;
 	}
 
 }

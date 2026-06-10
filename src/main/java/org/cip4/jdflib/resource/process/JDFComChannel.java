@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2021 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  *
@@ -79,11 +79,6 @@
  */
 package org.cip4.jdflib.resource.process;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoComChannel;
 import org.cip4.jdflib.core.AttributeName;
@@ -92,11 +87,11 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.ifaces.IMatches;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
  *         13.02.2009
  */
 public class JDFComChannel extends JDFAutoComChannel implements IMatches
@@ -104,98 +99,37 @@ public class JDFComChannel extends JDFAutoComChannel implements IMatches
 	private static final String PHONE_CHARS = "+0123456789";
 	private static final long serialVersionUID = 1L;
 	/**
-	 * 
+	 *
 	 */
 	public static final String MAILTO = "mailto:";
 	/**
-	 * 
+	 *
 	 */
 	public static final String TEL = "tel:";
 
 	/**
 	 * some additionally specified details from the spec
+	 *
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
-	 * 
 	 *         13.02.2009
 	 */
-	public static class EnumChannelTypeDetails extends ValuedEnum
+	public enum EnumChannelTypeDetails
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		private EnumChannelTypeDetails(final String name)
-		{
-			super(name, m_startValue++);
-		}
+		Unknown, LandLine, Mobile, Secure, ISDN, Form, Target;
 
 		/**
-		 * 
-		 * 
 		 * @param enumName
 		 * @return
 		 */
 		public static EnumChannelTypeDetails getEnum(final String enumName)
 		{
-			return (EnumChannelTypeDetails) getEnum(EnumChannelTypeDetails.class, enumName);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumChannelTypeDetails.class, enumName, null);
 		}
-
-		/**
-		 * 
-		 * 
-		 * @param enumValue
-		 * @return
-		 */
-		public static EnumChannelTypeDetails getEnum(final int enumValue)
-		{
-			return (EnumChannelTypeDetails) getEnum(EnumChannelTypeDetails.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumChannelTypeDetails.class);
-		}
-
-		/**
-		 * 
-		 * 
-		 * @return
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumChannelTypeDetails.class);
-		}
-
-		/**
-		 * 
-		 * 
-		 * @return
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumChannelTypeDetails.class);
-		}
-
-		/**
-		 * @deprectated - use null
-		 */
-		public static final EnumChannelTypeDetails Unknown = new EnumChannelTypeDetails("Unknown");
-		/** */
-		public static final EnumChannelTypeDetails LandLine = new EnumChannelTypeDetails("LandLine");
-		/** */
-		public static final EnumChannelTypeDetails Mobile = new EnumChannelTypeDetails("Mobile");
-		/** */
-		public static final EnumChannelTypeDetails Secure = new EnumChannelTypeDetails("Secure");
-		/** */
-		public static final EnumChannelTypeDetails ISDN = new EnumChannelTypeDetails("ISDN");
-		/** */
-		public static final EnumChannelTypeDetails Form = new EnumChannelTypeDetails("Form");
-		/** */
-		public static final EnumChannelTypeDetails Target = new EnumChannelTypeDetails("Target");
 	}
 
 	/**
 	 * Constructor for JDFComChannel
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -206,7 +140,7 @@ public class JDFComChannel extends JDFAutoComChannel implements IMatches
 
 	/**
 	 * Constructor for JDFComChannel
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -217,8 +151,8 @@ public class JDFComChannel extends JDFAutoComChannel implements IMatches
 	}
 
 	/**
-	 * 
 	 * Constructor for JDFComChannel
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -233,7 +167,7 @@ public class JDFComChannel extends JDFAutoComChannel implements IMatches
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -243,25 +177,22 @@ public class JDFComChannel extends JDFAutoComChannel implements IMatches
 	}
 
 	/**
-	 * 
 	 * @param parent
 	 * @return
 	 */
-	static JDFComChannel getChannelByType(JDFElement parent, EnumChannelType ct)
+	static JDFComChannel getChannelByType(final JDFElement parent, final EnumChannelType ct)
 	{
-		JDFComChannel cc = parent == null ? null
-				: parent.getChildWithAttribute(JDFComChannel.class, AttributeName.CHANNELTYPE, ct == null ? null : ct.getName());
+		final JDFComChannel cc = parent == null ? null : parent.getChildWithAttribute(JDFComChannel.class, AttributeName.CHANNELTYPE, JavaEnumUtil.getName(ct));
 		return cc;
 	}
 
 	/**
-	 * 
 	 * @param parent
 	 * @return
 	 */
-	static JDFComChannel appendChannel(JDFElement parent, EnumChannelType ct, String locator)
+	static JDFComChannel appendChannel(final JDFElement parent, final EnumChannelType ct, final String locator)
 	{
-		JDFComChannel cc = (JDFComChannel) parent.appendElement(ElementName.COMCHANNEL);
+		final JDFComChannel cc = (JDFComChannel) parent.appendElement(ElementName.COMCHANNEL);
 		cc.setChannelType(ct);
 		cc.setLocator(locator);
 		return cc;
@@ -269,7 +200,7 @@ public class JDFComChannel extends JDFAutoComChannel implements IMatches
 
 	/**
 	 * sets locator to the string specified in eMail, checking valid email syntax "mailto:" is prepended, if it is not yet there
-	 * 
+	 *
 	 * @param eMail the email address
 	 * @throws IllegalArgumentException if eMail is not a valid emai as defined by JDFConstants.REGEXP_EMAIL
 	 */
@@ -298,7 +229,7 @@ public class JDFComChannel extends JDFAutoComChannel implements IMatches
 
 	/**
 	 * get the email address of this, if this is an email address, else null any "mailto" is stripped
-	 * 
+	 *
 	 * @return
 	 */
 	public String getEMailAddress()
@@ -317,9 +248,9 @@ public class JDFComChannel extends JDFAutoComChannel implements IMatches
 
 	/**
 	 * get the phone number of this, if this is a valid phone address, else null any "tel:" or "fax:" is stripped
-	 * 
+	 *
 	 * @param stripNonNumerical if true, remove any valid brackets, . / etc. so that a purely numerical code (except for an optional "+" for international) is
-	 *            returned
+	 *                          returned
 	 * @return the phone number
 	 */
 	public String getPhoneNumber(final boolean stripNonNumerical)
@@ -344,36 +275,35 @@ public class JDFComChannel extends JDFAutoComChannel implements IMatches
 
 	/**
 	 * set the phone number of this, if this is a valid phone url, "tel:" or "fax:" is prepended, if it is not yet there
-	 * 
+	 *
 	 * @param phone the phone number string
 	 * @throws IllegalArgumentException if phone is not a valid phone number
-	 * 
 	 */
-	public void setPhoneNumber(String phone)
+	public void setPhoneNumber(final String phone)
 	{
 		if (phone == null)
 		{
 			setLocator(null);
 			return;
 		}
-		EnumChannelType channelType = getChannelType();
+		final EnumChannelType channelType = getChannelType();
 		setPhoneNumber(phone, ".", channelType);
 	}
 
 	/**
 	 * set the phone number of this, if this is a valid phone url, "tel:" or "fax:" is prepended, if it is not yet there
-	 * 
-	 * @param phone the phone number string
+	 *
+	 * @param phone           the phone number string
 	 * @param replaceForBlank the replacement char for non-leading blanks , typically "." or null are a good idea
-	 * @param channelType the channelType - must be either Fax, Phone or Mobile
-	 * 
+	 * @param channelType     the channelType - must be either Fax, Phone or Mobile
 	 * @throws IllegalArgumentException if phone is not a valid phone number
-	 * 
 	 */
 	public void setPhoneNumber(String phone, final String replaceForBlank, EnumChannelType channelType)
 	{
 		if (channelType == null)
+		{
 			channelType = getChannelType();
+		}
 		if (!EnumChannelType.Fax.equals(channelType) && !EnumChannelType.Phone.equals(channelType) && !EnumChannelType.Mobile.equals(channelType))
 		{
 			throw new IllegalArgumentException("illegal channelType: " + channelType);
@@ -401,7 +331,7 @@ public class JDFComChannel extends JDFAutoComChannel implements IMatches
 
 	/**
 	 * update to mobile
-	 * 
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoComChannel#getChannelType()
 	 */
 	@Override
@@ -421,7 +351,7 @@ public class JDFComChannel extends JDFAutoComChannel implements IMatches
 	}
 
 	@Override
-	public boolean matches(Object subset)
+	public boolean matches(final Object subset)
 	{
 		if (subset instanceof String)
 		{
@@ -435,32 +365,28 @@ public class JDFComChannel extends JDFAutoComChannel implements IMatches
 	}
 
 	/**
-	 * 
 	 * @param other
 	 * @return
 	 */
-	boolean matchesComChannel(JDFComChannel other)
+	boolean matchesComChannel(final JDFComChannel other)
 	{
-		if (!ContainerUtil.equals(getChannelType(), other.getChannelType()))
+		if (!ContainerUtil.equals(getChannelType(), other.getChannelType()) || !ContainerUtil.equals(getChannelTypeDetails(), other.getChannelTypeDetails()) || !ContainerUtil.equals(getChannelUsage(), other.getChannelUsage()))
+		{
 			return false;
-		if (!ContainerUtil.equals(getChannelTypeDetails(), other.getChannelTypeDetails()))
-			return false;
-		if (!ContainerUtil.equals(getChannelUsage(), other.getChannelUsage()))
-			return false;
+		}
 		return matches(other.getLocator());
 	}
 
 	/**
-	 * 
 	 * @param s
 	 * @return
 	 */
-	boolean stringMatch(String s)
+	boolean stringMatch(final String s)
 	{
 		boolean b = StringUtil.equals(StringUtil.normalize(s, true, null), StringUtil.normalize(getLocator(), true, null));
 		if (!b)
 		{
-			EnumChannelType channelType = getChannelType();
+			final EnumChannelType channelType = getChannelType();
 			if (EnumChannelType.Fax.equals(channelType) || EnumChannelType.Phone.equals(channelType) || EnumChannelType.Mobile.equals(channelType))
 			{
 				b = StringUtil.equals(StringUtil.stripNot(s, PHONE_CHARS), StringUtil.stripNot(getLocator(), PHONE_CHARS));

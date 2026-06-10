@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -104,7 +100,7 @@ public abstract class JDFAutoFillMark extends JDFElement
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.KNOCKOUTBLEED, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.KNOCKOUTREFS, 0x3333333333l, AttributeInfo.EnumAttributeType.IDREFS, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.KNOCKOUTSOURCE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumKnockoutSource.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumKnockoutSource.class, 0), null);
 	}
 
 	@Override
@@ -131,7 +127,7 @@ public abstract class JDFAutoFillMark extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFillMark(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoFillMark(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -143,7 +139,7 @@ public abstract class JDFAutoFillMark extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFillMark(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoFillMark(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -156,97 +152,28 @@ public abstract class JDFAutoFillMark extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoFillMark(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoFillMark(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for KnockoutSource
+	 * Enumeration strings for numKnockoutSource
 	 */
 
-	public enum EKnockoutSource
+	public enum EnumKnockoutSource
 	{
 		ClipPath, SourceClipPath, TrimClipPath, TrimBox;
 
-		public static EKnockoutSource getEnum(String val)
+		public static EnumKnockoutSource getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EKnockoutSource.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumKnockoutSource.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for KnockoutSource
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumKnockoutSource extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumKnockoutSource(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumKnockoutSource getEnum(String enumName)
-		{
-			return (EnumKnockoutSource) getEnum(EnumKnockoutSource.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumKnockoutSource getEnum(int enumValue)
-		{
-			return (EnumKnockoutSource) getEnum(EnumKnockoutSource.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumKnockoutSource.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumKnockoutSource.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumKnockoutSource.class);
-		}
-
-		/**  */
-		public static final EnumKnockoutSource ClipPath = new EnumKnockoutSource("ClipPath");
-		/**  */
-		public static final EnumKnockoutSource SourceClipPath = new EnumKnockoutSource("SourceClipPath");
-		/**  */
-		public static final EnumKnockoutSource TrimClipPath = new EnumKnockoutSource("TrimClipPath");
-		/**  */
-		public static final EnumKnockoutSource TrimBox = new EnumKnockoutSource("TrimBox");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -258,7 +185,7 @@ public abstract class JDFAutoFillMark extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setKnockoutBleed(double value)
+	public void setKnockoutBleed(final double value)
 	{
 		setAttribute(AttributeName.KNOCKOUTBLEED, value, null);
 	}
@@ -283,7 +210,7 @@ public abstract class JDFAutoFillMark extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setKnockoutRefs(VString value)
+	public void setKnockoutRefs(final VString value)
 	{
 		setAttribute(AttributeName.KNOCKOUTREFS, value, null);
 	}
@@ -295,8 +222,8 @@ public abstract class JDFAutoFillMark extends JDFElement
 	 */
 	public VString getKnockoutRefs()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.KNOCKOUTREFS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.KNOCKOUTREFS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -311,9 +238,9 @@ public abstract class JDFAutoFillMark extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setKnockoutSource(EKnockoutSource enumVar)
+	public void setKnockoutSource(final EnumKnockoutSource enumVar)
 	{
-		setAttribute(AttributeName.KNOCKOUTSOURCE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.KNOCKOUTSOURCE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -321,35 +248,6 @@ public abstract class JDFAutoFillMark extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EKnockoutSource getEKnockoutSource()
-	{
-		return EKnockoutSource.getEnum(getAttribute(AttributeName.KNOCKOUTSOURCE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute KnockoutSource
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute KnockoutSource
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetKnockoutSource(EKnockoutSource) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setKnockoutSource(EnumKnockoutSource enumVar)
-	{
-		setAttribute(AttributeName.KNOCKOUTSOURCE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute KnockoutSource
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EKnockoutSource GetEKnockoutSource() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumKnockoutSource getKnockoutSource()
 	{
 		return EnumKnockoutSource.getEnum(getAttribute(AttributeName.KNOCKOUTSOURCE, null, null));
@@ -387,7 +285,7 @@ public abstract class JDFAutoFillMark extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFMarkColor the element
 	 */
-	public JDFMarkColor getCreateMarkColor(int iSkip)
+	public JDFMarkColor getCreateMarkColor(final int iSkip)
 	{
 		return (JDFMarkColor) getCreateElement_JDFElement(ElementName.MARKCOLOR, null, iSkip);
 	}
@@ -399,7 +297,7 @@ public abstract class JDFAutoFillMark extends JDFElement
 	 * @return JDFMarkColor the element
 	 *         default is getMarkColor(0)
 	 */
-	public JDFMarkColor getMarkColor(int iSkip)
+	public JDFMarkColor getMarkColor(final int iSkip)
 	{
 		return (JDFMarkColor) getElement(ElementName.MARKCOLOR, null, iSkip);
 	}

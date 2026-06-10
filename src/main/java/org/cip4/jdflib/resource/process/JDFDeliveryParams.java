@@ -88,7 +88,6 @@ import org.cip4.jdflib.resource.intent.JDFDropIntent;
 import org.w3c.dom.DOMException;
 
 /**
- * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFDeliveryParams extends JDFAutoDeliveryParams
@@ -97,11 +96,10 @@ public class JDFDeliveryParams extends JDFAutoDeliveryParams
 
 	/**
 	 * Constructor for JDFDeliveryParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
-	 * 
 	 */
 	public JDFDeliveryParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
@@ -110,12 +108,11 @@ public class JDFDeliveryParams extends JDFAutoDeliveryParams
 
 	/**
 	 * Constructor for JDFDeliveryParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
-	 * 
 	 */
 	public JDFDeliveryParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
@@ -124,15 +121,15 @@ public class JDFDeliveryParams extends JDFAutoDeliveryParams
 
 	/**
 	 * Constructor for JDFDeliveryParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
-	 * 
 	 * @throws DOMException
 	 */
-	public JDFDeliveryParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFDeliveryParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -141,7 +138,7 @@ public class JDFDeliveryParams extends JDFAutoDeliveryParams
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -156,7 +153,9 @@ public class JDFDeliveryParams extends JDFAutoDeliveryParams
 	public void setFromArtDelivery(final JDFArtDeliveryIntent adi)
 	{
 		if (adi == null)
+		{
 			return;
+		}
 
 		final Vector<JDFArtDelivery> v = adi.getChildrenByClass(JDFArtDelivery.class, false, 0);
 
@@ -169,13 +168,14 @@ public class JDFDeliveryParams extends JDFAutoDeliveryParams
 	}
 
 	/**
-	 * 
 	 * @param delIntent
 	 */
 	public void setFromDeliveryIntent(final JDFDeliveryIntent delIntent)
 	{
 		if (delIntent == null)
+		{
 			return;
+		}
 		final Vector<JDFDropIntent> v = delIntent.getChildrenByClass(JDFDropIntent.class, false, 0);
 		for (final JDFDropIntent di : v)
 		{
@@ -196,7 +196,7 @@ public class JDFDeliveryParams extends JDFAutoDeliveryParams
 
 	/**
 	 * XJDF Only
-	 * 
+	 *
 	 * @return JDFDropItem the element
 	 */
 	public JDFDropItem getCreateDropItem()
@@ -206,7 +206,7 @@ public class JDFDeliveryParams extends JDFAutoDeliveryParams
 
 	/**
 	 * XJDF Only
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFDropItem the element
 	 */
@@ -228,7 +228,7 @@ public class JDFDeliveryParams extends JDFAutoDeliveryParams
 
 	/**
 	 * XJDF Only
-	 * 
+	 *
 	 * @return Collection<JDFDropItem>, null if none are available
 	 */
 	public Collection<JDFDropItem> getAllDropItem()

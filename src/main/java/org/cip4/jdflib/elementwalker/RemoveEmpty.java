@@ -69,7 +69,6 @@ import org.cip4.jdflib.util.StringUtil;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG<br/>
  *         removes any empty or unlinked resources
- *
  */
 public class RemoveEmpty extends BaseElementWalker
 {
@@ -99,7 +98,6 @@ public class RemoveEmpty extends BaseElementWalker
 	}
 
 	/**
-	 *
 	 * remove all unlinked crap and empty string attributes
 	 *
 	 * @param n
@@ -116,14 +114,16 @@ public class RemoveEmpty extends BaseElementWalker
 
 		int last = removEmptyElement(n);
 		if (last > 0)
+		{
 			last = unLinkFinder.eraseUnlinked(n);
+		}
 		if (last > 0)
+		{
 			removEmptyElement(n);
+		}
 	}
 
 	/**
-	 *
-	 *
 	 * @param e
 	 */
 	public int removEmptyElement(final KElement e)
@@ -132,7 +132,6 @@ public class RemoveEmpty extends BaseElementWalker
 	}
 
 	/**
-	 *
 	 * remove all empty string attributes
 	 *
 	 * @param e
@@ -149,7 +148,6 @@ public class RemoveEmpty extends BaseElementWalker
 	 * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super classes
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkElement extends BaseWalker
 	{
@@ -164,7 +162,7 @@ public class RemoveEmpty extends BaseElementWalker
 
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param e1 - the element to track
+		 * @param e1        - the element to track
 		 * @param trackElem - always null
 		 * @return the element to continue walking
 		 */
@@ -186,7 +184,6 @@ public class RemoveEmpty extends BaseElementWalker
 		}
 
 		/**
-		 *
 		 * @param e1
 		 * @return
 		 */
@@ -205,7 +202,6 @@ public class RemoveEmpty extends BaseElementWalker
 		}
 
 		/**
-		 *
 		 * @param e1
 		 * @return true if something good was inside
 		 */
@@ -230,7 +226,6 @@ public class RemoveEmpty extends BaseElementWalker
 		}
 
 		/**
-		 *
 		 * @return
 		 */
 		protected StringArray getDummyAttributes()
@@ -258,14 +253,13 @@ public class RemoveEmpty extends BaseElementWalker
 	 * zapp me
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkGeneralID extends WalkElement
 	{
 
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param e - the element to track
+		 * @param e         - the element to track
 		 * @param trackElem - always null
 		 * @return the element to continue walking
 		 */
@@ -311,13 +305,12 @@ public class RemoveEmpty extends BaseElementWalker
 	 * zapp me
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkComment extends WalkElement
 	{
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param e - the element to track
+		 * @param e         - the element to track
 		 * @param trackElem - always null
 		 * @return the element to continue walking
 		 */
@@ -361,13 +354,12 @@ public class RemoveEmpty extends BaseElementWalker
 	 * zapp me
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkSpan extends WalkElement
 	{
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param e1 - the element to track
+		 * @param e1        - the element to track
 		 * @param trackElem - always null
 		 * @return the element to continue walking
 		 */
@@ -412,13 +404,12 @@ public class RemoveEmpty extends BaseElementWalker
 	 * zapp me
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkResourceAudit extends WalkElement
 	{
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param e - the element to track
+		 * @param e         - the element to track
 		 * @param trackElem - always null
 		 * @return the element to continue walking
 		 */
@@ -449,9 +440,6 @@ public class RemoveEmpty extends BaseElementWalker
 
 	/**
 	 * never zapp me
-	 *
-	 *
-	 *
 	 */
 	public class WalkIgnore extends WalkElement
 	{
@@ -463,7 +451,7 @@ public class RemoveEmpty extends BaseElementWalker
 
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param e - the element to track
+		 * @param e         - the element to track
 		 * @param trackElem - always null
 		 * @return the element to continue walking
 		 */
@@ -490,7 +478,6 @@ public class RemoveEmpty extends BaseElementWalker
 	 * zapp me
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkResource extends WalkElement
 	{
@@ -527,7 +514,6 @@ public class RemoveEmpty extends BaseElementWalker
 		}
 
 		/**
-		 *
 		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 */
 		@Override
@@ -551,7 +537,6 @@ public class RemoveEmpty extends BaseElementWalker
 		}
 
 		/**
-		 *
 		 * @param r
 		 * @return
 		 */
@@ -615,7 +600,6 @@ public class RemoveEmpty extends BaseElementWalker
 		}
 
 		/**
-		 *
 		 * @param r
 		 * @return
 		 */
@@ -638,7 +622,6 @@ public class RemoveEmpty extends BaseElementWalker
 		}
 
 		/**
-		 *
 		 * @param r
 		 * @return
 		 */
@@ -665,7 +648,6 @@ public class RemoveEmpty extends BaseElementWalker
 	 * zapp me
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkComChannel extends WalkResource
 	{
@@ -706,7 +688,6 @@ public class RemoveEmpty extends BaseElementWalker
 	 * zapp me
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkMessage extends WalkElement
 	{
@@ -735,7 +716,6 @@ public class RemoveEmpty extends BaseElementWalker
 	}
 
 	/**
-	 *
 	 * if set to true, attributes with proprietary namespace prefixes are zapped, else kept
 	 *
 	 * @param zappElements if true, zapp 'em (the default) else keep 'em

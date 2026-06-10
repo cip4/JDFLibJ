@@ -61,7 +61,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         Jul 16, 2009
  */
 class ByteArrayIOFileStreamTest extends JDFTestCaseBase
@@ -84,7 +83,6 @@ class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testFileSize() throws IOException
@@ -168,7 +166,6 @@ class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testConstructFile() throws IOException
@@ -200,7 +197,6 @@ class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testDeleteFile() throws IOException
@@ -214,8 +210,8 @@ class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 			fos.write(i % 256);
 		}
 		fos.close();
-		ByteArrayIOStream ios = new ByteArrayIOFileStream(f, 333, true);
-		InputStream is = ios.getInputStream();
+		final ByteArrayIOStream ios = new ByteArrayIOFileStream(f, 333, true);
+		final InputStream is = ios.getInputStream();
 		for (int i = 0; i < 20000; i++)
 		{
 			assertEquals(is.read(), i % 256);
@@ -226,7 +222,6 @@ class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testDeleteFileLarge() throws IOException
@@ -240,8 +235,8 @@ class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 			fos.write(i % 256);
 		}
 		fos.close();
-		ByteArrayIOStream ios = new ByteArrayIOFileStream(f, 33333, true);
-		InputStream is = ios.getInputStream();
+		final ByteArrayIOStream ios = new ByteArrayIOFileStream(f, 33333, true);
+		final InputStream is = ios.getInputStream();
 		for (int i = 0; i < 20000; i++)
 		{
 			assertEquals(is.read(), i % 256);
@@ -252,7 +247,6 @@ class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testConstructBadFile() throws IOException
@@ -483,10 +477,10 @@ class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 			fos.write(i % 256);
 		}
 		fos.close();
-		ByteArrayIOFileStream ios = new ByteArrayIOFileStream(f, 333, true);
-		ByteArrayIOFileStream ios2 = new ByteArrayIOFileStream(ios.getInputStream(), 333);
+		final ByteArrayIOFileStream ios = new ByteArrayIOFileStream(f, 333, true);
+		final ByteArrayIOFileStream ios2 = new ByteArrayIOFileStream(ios.getInputStream(), 333);
 		ios.finalize();
-		ByteArrayIOInputStream is = ios2.getInputStream();
+		final ByteArrayIOInputStream is = ios2.getInputStream();
 		int n = 0;
 		while (is.read() >= 0)
 		{
@@ -512,16 +506,16 @@ class ByteArrayIOFileStreamTest extends JDFTestCaseBase
 			fos.write(i % 256);
 		}
 		fos.close();
-		ByteArrayIOFileStream ios = new ByteArrayIOFileStream(f, 333, true);
-		ByteArrayIOInputStream is = ios.getInputStream();
+		final ByteArrayIOFileStream ios = new ByteArrayIOFileStream(f, 333, true);
+		final ByteArrayIOInputStream is = ios.getInputStream();
 		ios.finalize();
-		int n = 0;
+		final int n = 0;
 		try
 		{
 			is.read();
 			fail();
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			// nop
 		}

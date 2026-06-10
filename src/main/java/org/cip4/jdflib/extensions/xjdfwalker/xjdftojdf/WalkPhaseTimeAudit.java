@@ -29,9 +29,9 @@
  *
  * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
  * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- * 
+ *
  * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
- * 
+ *
  *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
@@ -50,11 +50,8 @@ import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  *         at this point only a dummy since we have a specific WalkResourceAudit child
- *
  *         TODO how should resource consumption be tracked?
  */
 public class WalkPhaseTimeAudit extends WalkAudit

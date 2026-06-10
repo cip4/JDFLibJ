@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -109,8 +105,8 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRIORITY, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, "1");
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.REPEATPOLICY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumRepeatPolicy.getEnum(0),
-				null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.REPEATPOLICY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumRepeatPolicy.class, 0), null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.RESOURCEID, 0x2222222211l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.RETURNURL, 0x3333333311l, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.WATCHURL, 0x3333333311l, AttributeInfo.EnumAttributeType.URL, null, null);
@@ -142,7 +138,7 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoResourcePullParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoResourcePullParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -154,7 +150,7 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoResourcePullParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoResourcePullParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -167,95 +163,28 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoResourcePullParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoResourcePullParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for RepeatPolicy
+	 * Enumeration strings for numRepeatPolicy
 	 */
 
-	public enum ERepeatPolicy
+	public enum EnumRepeatPolicy
 	{
 		Complete, CompleteOnly, Fast;
 
-		public static ERepeatPolicy getEnum(String val)
+		public static EnumRepeatPolicy getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ERepeatPolicy.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumRepeatPolicy.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for RepeatPolicy
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumRepeatPolicy extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumRepeatPolicy(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumRepeatPolicy getEnum(String enumName)
-		{
-			return (EnumRepeatPolicy) getEnum(EnumRepeatPolicy.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumRepeatPolicy getEnum(int enumValue)
-		{
-			return (EnumRepeatPolicy) getEnum(EnumRepeatPolicy.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumRepeatPolicy.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumRepeatPolicy.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumRepeatPolicy.class);
-		}
-
-		/**  */
-		public static final EnumRepeatPolicy Complete = new EnumRepeatPolicy("Complete");
-		/**  */
-		public static final EnumRepeatPolicy CompleteOnly = new EnumRepeatPolicy("CompleteOnly");
-		/**  */
-		public static final EnumRepeatPolicy Fast = new EnumRepeatPolicy("Fast");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -267,7 +196,7 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAmount(double value)
+	public void setAmount(final double value)
 	{
 		setAttribute(AttributeName.AMOUNT, value, null);
 	}
@@ -292,7 +221,7 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHold(boolean value)
+	public void setHold(final boolean value)
 	{
 		setAttribute(AttributeName.HOLD, value, null);
 	}
@@ -317,7 +246,7 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNextQueueEntryID(String value)
+	public void setNextQueueEntryID(final String value)
 	{
 		setAttribute(AttributeName.NEXTQUEUEENTRYID, value, null);
 	}
@@ -342,7 +271,7 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPrevQueueEntryID(String value)
+	public void setPrevQueueEntryID(final String value)
 	{
 		setAttribute(AttributeName.PREVQUEUEENTRYID, value, null);
 	}
@@ -367,7 +296,7 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -392,7 +321,7 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPriority(int value)
+	public void setPriority(final int value)
 	{
 		setAttribute(AttributeName.PRIORITY, value, null);
 	}
@@ -417,7 +346,7 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setQueueEntryID(String value)
+	public void setQueueEntryID(final String value)
 	{
 		setAttribute(AttributeName.QUEUEENTRYID, value, null);
 	}
@@ -442,9 +371,9 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setRepeatPolicy(ERepeatPolicy enumVar)
+	public void setRepeatPolicy(final EnumRepeatPolicy enumVar)
 	{
-		setAttribute(AttributeName.REPEATPOLICY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.REPEATPOLICY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -452,35 +381,6 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ERepeatPolicy getERepeatPolicy()
-	{
-		return ERepeatPolicy.getEnum(getAttribute(AttributeName.REPEATPOLICY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute RepeatPolicy
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute RepeatPolicy
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetRepeatPolicy(ERepeatPolicy) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setRepeatPolicy(EnumRepeatPolicy enumVar)
-	{
-		setAttribute(AttributeName.REPEATPOLICY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute RepeatPolicy
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ERepeatPolicy GetERepeatPolicy() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumRepeatPolicy getRepeatPolicy()
 	{
 		return EnumRepeatPolicy.getEnum(getAttribute(AttributeName.REPEATPOLICY, null, null));
@@ -496,7 +396,7 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setResourceID(String value)
+	public void setResourceID(final String value)
 	{
 		setAttribute(AttributeName.RESOURCEID, value, null);
 	}
@@ -521,7 +421,7 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setReturnURL(String value)
+	public void setReturnURL(final String value)
 	{
 		setAttribute(AttributeName.RETURNURL, value, null);
 	}
@@ -546,7 +446,7 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWatchURL(String value)
+	public void setWatchURL(final String value)
 	{
 		setAttribute(AttributeName.WATCHURL, value, null);
 	}
@@ -593,7 +493,7 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
-	public JDFPart getCreatePart(int iSkip)
+	public JDFPart getCreatePart(final int iSkip)
 	{
 		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
@@ -605,7 +505,7 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 * @return JDFPart the element
 	 *         default is getPart(0)
 	 */
-	public JDFPart getPart(int iSkip)
+	public JDFPart getPart(final int iSkip)
 	{
 		return (JDFPart) getElement(ElementName.PART, null, iSkip);
 	}

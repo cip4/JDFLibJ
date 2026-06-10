@@ -70,7 +70,7 @@
  */
 /**
  * FactoryTest.java
- * 
+ *
  * @author Dietrich Mucha
  *
  * Copyright (C) 2002 Heidelberger Druckmaschinen AG. All Rights Reserved.
@@ -82,14 +82,14 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * 
+ *
  */
 class FactoryTest extends JDFTestCaseBase
 {
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
 	void testFactory()

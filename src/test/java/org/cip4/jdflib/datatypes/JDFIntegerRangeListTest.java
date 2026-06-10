@@ -91,8 +91,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
- *
  * @author rainer prosi
  * @date way before Jan 11, 2012
  */
@@ -115,8 +113,6 @@ class JDFIntegerRangeListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -134,8 +130,6 @@ class JDFIntegerRangeListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -193,8 +187,6 @@ class JDFIntegerRangeListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	public final void testNormalize() throws Exception
@@ -274,7 +266,9 @@ class JDFIntegerRangeListTest extends JDFTestCaseBase
 
 		// now some performance
 		for (int i = 0; i < 1000; i++)
+		{
 			rangeList.append(i * 10, i * 10 + 5);
+		}
 
 		int n = 0;
 		for (int i = 0; i < rangeList.getElementCount(); i++)
@@ -363,7 +357,9 @@ class JDFIntegerRangeListTest extends JDFTestCaseBase
 		}
 
 		if (rangeList != null)
+		{
 			assertEquals(rangeList, copyRangeList);
+		}
 	}
 
 	// ///////////////////////////////////////////////////////////////////////
@@ -401,8 +397,6 @@ class JDFIntegerRangeListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	public final void testIsOverlapping() throws Exception
@@ -416,8 +410,6 @@ class JDFIntegerRangeListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	public final void testIsUnique() throws Exception
@@ -430,8 +422,6 @@ class JDFIntegerRangeListTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
-	 * 
 	 * @throws Exception
 	 */
 	@Test
@@ -449,8 +439,6 @@ class JDFIntegerRangeListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	public final void testIsOrdered_Reverse_True() throws Exception
@@ -464,8 +452,6 @@ class JDFIntegerRangeListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	public final void testIsUniqueOrdered_Reverse_False() throws Exception
@@ -479,8 +465,6 @@ class JDFIntegerRangeListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	public final void testIsUniqueOrdered_False() throws Exception
@@ -495,8 +479,6 @@ class JDFIntegerRangeListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	public final void testIsUniqueOrdered_True() throws Exception
@@ -547,8 +529,6 @@ class JDFIntegerRangeListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	public final void testDefaultDef() throws Exception
@@ -569,8 +549,6 @@ class JDFIntegerRangeListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	void testInRange() throws Exception
@@ -584,8 +562,6 @@ class JDFIntegerRangeListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	void testInfiniteList() throws Exception
@@ -599,8 +575,6 @@ class JDFIntegerRangeListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	void testgetElementCount() throws Exception
@@ -623,8 +597,6 @@ class JDFIntegerRangeListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	void testgetElementCountBad() throws Exception
@@ -636,8 +608,6 @@ class JDFIntegerRangeListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	void testgetElement() throws Exception
@@ -647,8 +617,6 @@ class JDFIntegerRangeListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 *
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -661,8 +629,6 @@ class JDFIntegerRangeListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 *
 	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override

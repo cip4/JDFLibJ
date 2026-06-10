@@ -110,7 +110,7 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFormatConversionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoFormatConversionParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -122,7 +122,7 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFormatConversionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoFormatConversionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -135,7 +135,7 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoFormatConversionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoFormatConversionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -146,7 +146,7 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -202,7 +202,7 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -274,7 +274,7 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refImageCompressionParams(JDFImageCompressionParams refTarget)
+	public void refImageCompressionParams(final JDFImageCompressionParams refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -315,7 +315,7 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refColorPool(JDFColorPool refTarget)
+	public void refColorPool(final JDFColorPool refTarget)
 	{
 		refElement(refTarget);
 	}

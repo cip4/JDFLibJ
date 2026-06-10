@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -99,7 +94,8 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.TYPE, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumType.getEnum(0), "Folded");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TYPE, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumType.class, 0), "Folded");
 	}
 
 	@Override
@@ -127,7 +123,7 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSizeIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoSizeIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -139,7 +135,7 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSizeIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoSizeIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -152,93 +148,28 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoSizeIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoSizeIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for Type
+	 * Enumeration strings for numType
 	 */
 
-	public enum EType
+	public enum EnumType
 	{
 		Folded, Flat;
 
-		public static EType getEnum(String val)
+		public static EnumType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EType.class, val, EType.Folded);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumType.class, val, EnumType.Folded);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Type
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumType getEnum(String enumName)
-		{
-			return (EnumType) getEnum(EnumType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumType getEnum(int enumValue)
-		{
-			return (EnumType) getEnum(EnumType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumType.class);
-		}
-
-		/**  */
-		public static final EnumType Folded = new EnumType("Folded");
-		/**  */
-		public static final EnumType Flat = new EnumType("Flat");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -250,9 +181,9 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setType(EType enumVar)
+	public void setType(final EnumType enumVar)
 	{
-		setAttribute(AttributeName.TYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.TYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -260,35 +191,6 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EType getEType()
-	{
-		return EType.getEnum(getAttribute(AttributeName.TYPE, null, "Folded"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Type
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Type
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetType(EType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setType(EnumType enumVar)
-	{
-		setAttribute(AttributeName.TYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Type
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EType GetEType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumType getType()
 	{
 		return EnumType.getEnum(getAttribute(AttributeName.TYPE, null, "Folded"));

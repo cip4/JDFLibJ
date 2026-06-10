@@ -75,14 +75,11 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFPart;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class IDPart
 {
 	/**
-	 *
 	 * @param idParent
 	 * @param parts
 	 */

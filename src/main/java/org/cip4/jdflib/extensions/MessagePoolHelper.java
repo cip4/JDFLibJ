@@ -262,7 +262,7 @@ public class MessagePoolHelper extends BaseXJDFHelper
 	 * @param elementName
 	 * @return
 	 */
-	public MessageHelper getCreateMessage(final String elementName, int skip)
+	public MessageHelper getCreateMessage(final String elementName, final int skip)
 	{
 		MessageHelper messageHelper = getMessageHelper(elementName, skip);
 		if (StringUtil.isEmpty(elementName) || messageHelper != null)

@@ -76,7 +76,7 @@ import org.cip4.jdflib.extensions.XJDFConstants;
 
 /**
  * continue walking on these without copying e
- * 
+ *
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
  */
 public class WalkContent extends WalkResource
@@ -105,7 +105,6 @@ public class WalkContent extends WalkResource
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override

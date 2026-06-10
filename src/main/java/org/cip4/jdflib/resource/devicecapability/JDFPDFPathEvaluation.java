@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2004 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2004 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,22 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFPDFPathEvaluation.java
@@ -89,7 +89,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
@@ -125,36 +125,36 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
 
 	/**
 	 * constructor for JDFPDFPathEvaluation
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFPDFPathEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFPDFPathEvaluation(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFPDFPathEvaluation
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFPDFPathEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFPDFPathEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFPDFPathEvaluation
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFPDFPathEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFPDFPathEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -164,7 +164,7 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -177,7 +177,7 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
 	 * // Attribute getter / setter
 	 */
 
-	public void setLength(JDFIntegerRange value)
+	public void setLength(final JDFIntegerRange value)
 	{
 		setAttribute(AttributeName.LENGTH, value.toString());
 	}
@@ -188,7 +188,7 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
 		{
 			return new JDFIntegerRange(getAttribute(AttributeName.LENGTH));
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			throw new JDFException("JDFPDFPathEvaluation.getLengthRange: Attribute LENGTH is not applicable to create JDFIntegerRange");
 		}
@@ -198,9 +198,9 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
 	 * // Element getter / setter
 	 */
 
-	public JDFValue getValue(int iSkip)
+	public JDFValue getValue(final int iSkip)
 	{
-		JDFValue e = (JDFValue) getElement(ElementName.VALUE, JDFConstants.EMPTYSTRING, iSkip);
+		final JDFValue e = (JDFValue) getElement(ElementName.VALUE, JDFCoreConstants.EMPTYSTRING, iSkip);
 		return e;
 	}
 
@@ -215,28 +215,28 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
 
 	/**
 	 * Set the value of the iSkip'th element <code>Value</code>
-	 * 
+	 *
 	 * @param iSkip
-	 *            the number of <code>Value</code> elements to skip
+	 *              the number of <code>Value</code> elements to skip
 	 * @param value
-	 *            value to set the element to
+	 *              value to set the element to
 	 */
-	public void setValueValue(int iSkip, String value)
+	public void setValueValue(final int iSkip, final String value)
 	{
-		JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
+		final JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
 		e.setValue(value);
 	}
 
 	/**
 	 * Get the value of the iSkip'th subelement <code>Value</code>
-	 * 
+	 *
 	 * @param iSkip
-	 *            the number of <code>Value</code> elements to skip
+	 *              the number of <code>Value</code> elements to skip
 	 * @return String: the value
 	 */
-	public final String getValueValue(int iSkip)
+	public final String getValueValue(final int iSkip)
 	{
-		JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
+		final JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
 		return e.getValue();
 	}
 
@@ -247,14 +247,14 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
 	/**
 	 * fitsValue - checks whether <code>value</code> matches the testlists
 	 * specified for this Evaluation
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @return boolean - true, if <code>value</code> matches the testlists or if
 	 *         testlists are not specified
 	 */
 	@Override
-	public final boolean fitsValue(String value)
+	public final boolean fitsValue(final String value)
 	{
 		// TBD __Lena__ Ihhalt! Test of 20 symbols
 
@@ -264,17 +264,17 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
 	/**
 	 * fitsLength - checks whether <code>pfdPath</code> matches the Length
 	 * specified for this Evaluation
-	 * 
+	 *
 	 * @param pdfPath
-	 *            PDFPath to test
+	 *                PDFPath to test
 	 * @return boolean - true, if <code>pdfPath</code> matches the Length or if
 	 *         Length is not specified
 	 */
-	private final boolean fitsLength(String pdfPath)
+	private final boolean fitsLength(final String pdfPath)
 	{
 		if (!hasAttribute(AttributeName.LENGTH))
 		{
-			int len = pdfPath.length();
+			final int len = pdfPath.length();
 			return getLengthRange().inRange(len);
 		}
 		return true;
@@ -283,25 +283,28 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
 	/**
 	 * fitsValueElem - checks whether <code>pdfPath</code> matches the
 	 * subelement Value specified for this Evaluation
-	 * 
+	 *
 	 * @param pdfPath
-	 *            PDFPath to test
-	 * 
+	 *                PDFPath to test
 	 * @return boolean - true, if <code>pdfPath</code> matches subelement Value
 	 */
-	private final boolean fitsValueElem(String pdfPath)
+	private final boolean fitsValueElem(final String pdfPath)
 	{
-		VElement v = getChildElementVector(ElementName.VALUE, null, null, true, 0, false);
-		int siz = v.size();
+		final VElement v = getChildElementVector(ElementName.VALUE, null, null, true, 0, false);
+		final int siz = v.size();
 		if (siz == 0)
+		{
 			return true; // Evaluation has no Value elements
+		}
 
 		for (int i = 0; i < siz; i++)
 		{
-			String value = getValueValue(i); // JDFValue elm = (JDFValue)
+			final String value = getValueValue(i); // JDFValue elm = (JDFValue)
 												// v.elementAt(i);
 			if (value.compareTo(pdfPath) == 0)
+			{
 				return true; // we have found it
+			}
 		}
 		return false;
 	}

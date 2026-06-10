@@ -64,7 +64,7 @@ public class RollingBackupDirectory extends BackupDirectory
 	/**
 	 * @param file
 	 * @param nBackupp
-	 * @param base the file base name including its extension
+	 * @param base     the file base name including its extension
 	 * @throws IllegalArgumentException
 	 */
 	public RollingBackupDirectory(final File file, final int nBackupp, final String base) throws IllegalArgumentException
@@ -76,7 +76,6 @@ public class RollingBackupDirectory extends BackupDirectory
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	private int calcOrdBackup()
@@ -85,7 +84,9 @@ public class RollingBackupDirectory extends BackupDirectory
 		final File[] files = FileUtil.listFilesWithExpression(this, baseName + ext);
 		int nMax = 0;
 		if (files == null)
+		{
 			return nMax;
+		}
 		for (final File file : files)
 		{
 			final int n = calcN(file);
@@ -98,14 +99,15 @@ public class RollingBackupDirectory extends BackupDirectory
 	}
 
 	/**
-	 *
 	 * @param file
 	 * @return
 	 */
 	private int calcN(final File file)
 	{
 		if (file == null)
+		{
 			return 0;
+		}
 		final String name = file.getName();
 		final VString v = StringUtil.tokenize(name.substring(baseName.length()), ".", false);
 		for (final String s : v)
@@ -119,8 +121,6 @@ public class RollingBackupDirectory extends BackupDirectory
 	}
 
 	/**
-	 *
-	 *
 	 * @return
 	 */
 	public File getNewFile()
@@ -129,8 +129,6 @@ public class RollingBackupDirectory extends BackupDirectory
 	}
 
 	/**
-	 *
-	 *
 	 * @param ext
 	 * @return
 	 */
@@ -138,9 +136,13 @@ public class RollingBackupDirectory extends BackupDirectory
 	{
 		final String newExt = baseExt == null ? "" : "." + baseExt;
 		if (StringUtil.getNonEmpty(ext) == null)
+		{
 			ext = "";
+		}
 		else if (!ext.startsWith("."))
+		{
 			ext = "." + ext;
+		}
 		final String newFile = baseName + "." + ordBackup.incrementAndGet() + ext + newExt;
 		return getNewFile(newFile);
 	}

@@ -80,26 +80,24 @@ import org.cip4.jdflib.util.thread.TimeSweeper;
 
 /**
  * class to maintain a map of refID to type values so that we can correctly modify @Type in responses messages older than 4242 seconds are discarded
- * 
- * @author rainer prosi
  *
+ * @author rainer prosi
  */
 public class XJMFTypeMap implements Runnable
 {
 	private class TimePair extends MyPair<String, MyLong>
 	{
 		/**
-		 * 
 		 * @param val
 		 */
-		TimePair(String val)
+		TimePair(final String val)
 		{
 			super(val, new MyLong(System.currentTimeMillis()));
 		}
 
 		/**
 		 * age in seconds
-		 * 
+		 *
 		 * @return
 		 */
 		long age()
@@ -109,7 +107,7 @@ public class XJMFTypeMap implements Runnable
 
 		/**
 		 * age in seconds
-		 * 
+		 *
 		 * @return
 		 */
 		void touch()
@@ -122,16 +120,15 @@ public class XJMFTypeMap implements Runnable
 	private XJMFTypeMap()
 	{
 		super();
-		map = new HashMap<String, TimePair>();
+		map = new HashMap<>();
 		RegularJanitor.getJanitor().addSweeper(new TimeSweeper(4242, this), true);
 		RegularJanitor.getJanitor().startSweep(42);
 	}
 
-	private static final XJMFTypeMap theMap = new XJMFTypeMap();;
+	private static final XJMFTypeMap theMap = new XJMFTypeMap();
 	private final Map<String, TimePair> map;
 
 	/**
-	 * 
 	 * @return
 	 */
 	public static XJMFTypeMap getMap()
@@ -140,36 +137,33 @@ public class XJMFTypeMap implements Runnable
 	}
 
 	/**
-	 * 
 	 * @param key
 	 * @param value
 	 * @return
 	 */
-	public String put(String key, String value)
+	public String put(final String key, final String value)
 	{
-		TimePair put = map.put(key, new TimePair(value));
+		final TimePair put = map.put(key, new TimePair(value));
 		return put == null ? null : put.a;
 	}
 
 	/**
-	 * 
 	 * @param key
 	 * @return
 	 */
-	public String remove(String key)
+	public String remove(final String key)
 	{
-		TimePair put = map.remove(key);
+		final TimePair put = map.remove(key);
 		return put == null ? null : put.a;
 	}
 
 	/**
-	 * 
 	 * @param key
 	 * @return
 	 */
-	public String get(String key)
+	public String get(final String key)
 	{
-		TimePair put = map.get(key);
+		final TimePair put = map.get(key);
 		if (put != null)
 		{
 			put.touch();
@@ -179,7 +173,7 @@ public class XJMFTypeMap implements Runnable
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void clear()
 	{
@@ -188,18 +182,20 @@ public class XJMFTypeMap implements Runnable
 
 	/**
 	 * called by the sweeper
-	 * 
+	 *
 	 * @see java.lang.Runnable#run()
 	 */
 	@Override
 	public void run()
 	{
-		Collection<String> keys = ContainerUtil.getKeyArray(map);
+		final Collection<String> keys = ContainerUtil.getKeyArray(map);
 		if (keys == null)
-			return;
-		for (String key : keys)
 		{
-			TimePair val = map.get(key);
+			return;
+		}
+		for (final String key : keys)
+		{
+			final TimePair val = map.get(key);
 			if (val != null && val.age() > 4242l)
 			{
 				map.remove(key);
@@ -208,7 +204,7 @@ public class XJMFTypeMap implements Runnable
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public static void shutDown()
 	{
@@ -217,7 +213,6 @@ public class XJMFTypeMap implements Runnable
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
 	public int size()

@@ -52,8 +52,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 
 /**
- *
- *
  * @author rainer prosi
  * @date Oct 22, 2012
  */
@@ -135,7 +133,6 @@ public class JDFBinderySignature extends JDFAutoBinderySignature
 	}
 
 	/**
-	 * 
 	 * @param pages
 	 * @param index
 	 */
@@ -150,7 +147,6 @@ public class JDFBinderySignature extends JDFAutoBinderySignature
 	}
 
 	/**
-	 * 
 	 * @param pages
 	 * @param index
 	 * @return the foldcatalog entry
@@ -159,9 +155,13 @@ public class JDFBinderySignature extends JDFAutoBinderySignature
 	public static String getCatalog(final int pages, final int index)
 	{
 		if (pages < 1 || pages % 2 != 0)
+		{
 			throw new IllegalArgumentException("invalid pages for fold catalog: " + pages);
+		}
 		if (index < 1)
+		{
 			throw new IllegalArgumentException("invalid index for fold catalog: " + index);
+		}
 
 		return "F" + pages + "-" + index;
 	}

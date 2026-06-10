@@ -86,7 +86,6 @@ import org.w3c.dom.DOMException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
  *         before June 7, 2009
  */
 public class JDFTool extends JDFAutoTool
@@ -95,7 +94,7 @@ public class JDFTool extends JDFAutoTool
 
 	/**
 	 * Constructor for JDFTool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
@@ -107,7 +106,7 @@ public class JDFTool extends JDFAutoTool
 
 	/**
 	 * Constructor for JDFTool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -120,20 +119,21 @@ public class JDFTool extends JDFAutoTool
 
 	/**
 	 * Constructor for JDFTool
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFTool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFTool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	@Override
-	public void setToolID(String value)
+	public void setToolID(final String value)
 	{
 		if (!hasNonEmpty_KElement(AttributeName.PRODUCTID))
 		{
@@ -145,7 +145,7 @@ public class JDFTool extends JDFAutoTool
 	@Override
 	public String getToolID()
 	{
-		String toolID = super.getToolID();
+		final String toolID = super.getToolID();
 		return StringUtil.isEmpty(toolID) ? getProductID() : toolID;
 	}
 

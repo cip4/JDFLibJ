@@ -23,36 +23,36 @@ public class JDFPartStatus extends JDFAutoPartStatus
 
 	/**
 	 * Constructor for JDFPartStatus
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFPartStatus(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFPartStatus(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFPartStatus
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFPartStatus(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFPartStatus(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFPartStatus
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFPartStatus(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFPartStatus(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -61,7 +61,7 @@ public class JDFPartStatus extends JDFAutoPartStatus
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -81,18 +81,18 @@ public class JDFPartStatus extends JDFAutoPartStatus
 
 	/**
 	 * SetPartMap - set all parts to those define in vParts
-	 * 
+	 *
 	 * @param mPart attribute map for the part to set
 	 */
 	@Override
-	public void setPartMap(JDFAttributeMap mPart)
+	public void setPartMap(final JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
 	}
 
 	/**
 	 * Gets string value of attribute StatusDetails, if it is not specified, inherit it from the StatusPool
-	 * 
+	 *
 	 * @return String: the attribute value
 	 */
 	@Override
@@ -108,7 +108,7 @@ public class JDFPartStatus extends JDFAutoPartStatus
 
 	/**
 	 * Gets enum value of attribute Status, if it is not specified, inherit it from the StatusPool
-	 * 
+	 *
 	 * @return EnumNodeStatus: the attribute value
 	 */
 	@Override

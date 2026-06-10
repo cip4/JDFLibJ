@@ -9,12 +9,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanColorType extends JDFEnumerationSpan
@@ -23,39 +19,39 @@ public class JDFSpanColorType extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanColorType
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanColorType(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanColorType(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanColorType
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanColorType(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanColorType(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanColorType
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanColorType(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanColorType(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -63,44 +59,14 @@ public class JDFSpanColorType extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanColorType
 	 */
-	public static class EnumSpanColorType extends ValuedEnum
+	public enum EnumSpanColorType
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Monochrome, BasicColor, MatchedColor;
 
-		private EnumSpanColorType(String name)
+		public static EnumSpanColorType getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanColorType.class, val, null);
 		}
-
-		public static EnumSpanColorType getEnum(String enumName)
-		{
-			return (EnumSpanColorType) getEnum(EnumSpanColorType.class, enumName);
-		}
-
-		public static EnumSpanColorType getEnum(int enumValue)
-		{
-			return (EnumSpanColorType) getEnum(EnumSpanColorType.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanColorType.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanColorType.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanColorType.class);
-		}
-
-		public static final EnumSpanColorType Monochrome = new EnumSpanColorType("Monochrome");
-		public static final EnumSpanColorType BasicColor = new EnumSpanColorType("BasicColor");
-		public static final EnumSpanColorType MatchedColor = new EnumSpanColorType("MatchedColor");
 
 	}
 
@@ -109,18 +75,18 @@ public class JDFSpanColorType extends JDFEnumerationSpan
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanColorType.getEnum(0);
+		return EnumSpanColorType.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

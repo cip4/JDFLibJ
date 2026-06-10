@@ -93,14 +93,14 @@ class JDFIntentResourceTest extends JDFTestCaseBase
 	@Test
 	void testGuessActualStatic()
 	{
-		JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
+		final JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
 		assertNull(JDFIntentResource.guessActual(di, AttributeName.TRANSFER));
-		JDFSpanTransfer transfer = di.appendTransfer();
+		final JDFSpanTransfer transfer = di.appendTransfer();
 		assertNull(JDFIntentResource.guessActual(di, AttributeName.TRANSFER));
 		transfer.setPreferred(EnumTransfer.BuyerToPrinterDeliver);
-		assertEquals(JDFIntentResource.guessActual(di, AttributeName.TRANSFER), EnumTransfer.BuyerToPrinterDeliver.getName());
+		assertEquals(JDFIntentResource.guessActual(di, AttributeName.TRANSFER), EnumTransfer.BuyerToPrinterDeliver.name());
 		transfer.setActual(EnumTransfer.BuyerToPrinterPickup);
-		assertEquals(JDFIntentResource.guessActual(di, AttributeName.TRANSFER), EnumTransfer.BuyerToPrinterPickup.getName());
+		assertEquals(JDFIntentResource.guessActual(di, AttributeName.TRANSFER), EnumTransfer.BuyerToPrinterPickup.name());
 	}
 
 	/**
@@ -109,10 +109,10 @@ class JDFIntentResourceTest extends JDFTestCaseBase
 	@Test
 	void testGuessActualAttribute()
 	{
-		JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
+		final JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
 		assertNull(JDFIntentResource.guessActual(di, AttributeName.TRANSFER));
-		di.setAttribute(AttributeName.TRANSFER, EnumTransfer.BuyerToPrinterDeliver.getName());
-		assertEquals(JDFIntentResource.guessActual(di, AttributeName.TRANSFER), EnumTransfer.BuyerToPrinterDeliver.getName());
+		di.setAttribute(AttributeName.TRANSFER, EnumTransfer.BuyerToPrinterDeliver.name());
+		assertEquals(JDFIntentResource.guessActual(di, AttributeName.TRANSFER), EnumTransfer.BuyerToPrinterDeliver.name());
 	}
 
 	/**
@@ -121,17 +121,17 @@ class JDFIntentResourceTest extends JDFTestCaseBase
 	@Test
 	void testCopyActualStatic()
 	{
-		JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
-		JDFDeliveryParams dp = (JDFDeliveryParams) new JDFDoc(ElementName.DELIVERYPARAMS).getRoot();
-		JDFSpanTransfer transfer = di.appendTransfer();
+		final JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
+		final JDFDeliveryParams dp = (JDFDeliveryParams) new JDFDoc(ElementName.DELIVERYPARAMS).getRoot();
+		final JDFSpanTransfer transfer = di.appendTransfer();
 		JDFIntentResource.copyActualToProcess(di, dp, AttributeName.TRANSFER, null);
 		assertNull(dp.getTransfer());
 		transfer.setPreferred(EnumTransfer.BuyerToPrinterDeliver);
 		JDFIntentResource.copyActualToProcess(di, dp, AttributeName.TRANSFER, null);
-		assertEquals(dp.getTransfer().getName(), EnumTransfer.BuyerToPrinterDeliver.getName());
+		assertEquals(dp.getTransfer().name(), EnumTransfer.BuyerToPrinterDeliver.name());
 		transfer.setActual(EnumTransfer.BuyerToPrinterPickup);
 		JDFIntentResource.copyActualToProcess(di, dp, AttributeName.TRANSFER, null);
-		assertEquals(dp.getTransfer().getName(), EnumTransfer.BuyerToPrinterPickup.getName());
+		assertEquals(dp.getTransfer().name(), EnumTransfer.BuyerToPrinterPickup.name());
 	}
 
 	/**
@@ -140,8 +140,8 @@ class JDFIntentResourceTest extends JDFTestCaseBase
 	@Test
 	void testPreferredToActual()
 	{
-		JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
-		JDFSpanTransfer transfer = di.appendTransfer();
+		final JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
+		final JDFSpanTransfer transfer = di.appendTransfer();
 		transfer.setPreferred(EnumSpanTransfer.BuyerToPrinterDeliver);
 		assertNull(transfer.getActual());
 		di.preferredToActual();
@@ -154,11 +154,11 @@ class JDFIntentResourceTest extends JDFTestCaseBase
 	@Test
 	void testCopyProcessStatic()
 	{
-		JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
-		JDFDeliveryParams dp = (JDFDeliveryParams) new JDFDoc(ElementName.DELIVERYPARAMS).getRoot();
+		final JDFDeliveryIntent di = (JDFDeliveryIntent) new JDFDoc(ElementName.DELIVERYINTENT).getRoot();
+		final JDFDeliveryParams dp = (JDFDeliveryParams) new JDFDoc(ElementName.DELIVERYPARAMS).getRoot();
 		dp.setTransfer(EnumTransfer.BuyerToPrinterDeliver);
 		assertNull(di.getTransfer());
 		JDFIntentResource.copyProcessToActual(dp, di, null, AttributeName.TRANSFER);
-		assertEquals(EnumTransfer.BuyerToPrinterDeliver.getName(), di.getTransfer().getActual().getName());
+		assertEquals(EnumTransfer.BuyerToPrinterDeliver.name(), di.getTransfer().getActual().name());
 	}
 }

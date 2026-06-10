@@ -68,13 +68,13 @@
  *
  */
 /**
- * ========================================================================== 
+ * ==========================================================================
  * class JDFExposedMedia extends JDFResource
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author sabjon@topmail.de    using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * @Author sabjon@topmail.de    using a code generator
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  */
 
 package org.cip4.jdflib.resource.process;
@@ -85,9 +85,8 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 
 /**
  * wrapper for ExposedMedia elements
- * 
- * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
  */
 public class JDFExposedMedia extends JDFAutoExposedMedia
 {
@@ -95,7 +94,7 @@ public class JDFExposedMedia extends JDFAutoExposedMedia
 
 	/**
 	 * Constructor for JDFExposedMedia
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
@@ -106,7 +105,7 @@ public class JDFExposedMedia extends JDFAutoExposedMedia
 
 	/**
 	 * Constructor for JDFExposedMedia
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
@@ -118,7 +117,7 @@ public class JDFExposedMedia extends JDFAutoExposedMedia
 
 	/**
 	 * Constructor for JDFExposedMedia
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
@@ -141,20 +140,22 @@ public class JDFExposedMedia extends JDFAutoExposedMedia
 
 	/**
 	 * gets the media dimension in points,
-	 * 
+	 *
 	 * @return the media/@Dimension; null if no media is available
 	 */
 	public JDFXYPair getMediaDimension()
 	{
 		final JDFMedia m = getMedia();
 		if (m == null)
+		{
 			return null;
+		}
 		return m.getDimension();
 	}
 
 	/**
 	 * gets the media dimension in points,
-	 * 
+	 *
 	 * @return the media/@Dimension; null if no media is available
 	 */
 	@Override

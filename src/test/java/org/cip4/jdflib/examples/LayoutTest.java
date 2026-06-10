@@ -69,8 +69,8 @@ class LayoutTest extends JDFTestCaseBase
 		n.setJobID("J_Content");
 		n.setType(EnumType.Imposition);
 		final JDFLayout layout = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Input);
-		final JDFLayout front = (JDFLayout) layout.addPartition(EnumPartIDKey.SignatureName, "sig1").addPartition(EnumPartIDKey.SheetName, "s1").addPartition(EnumPartIDKey.Side,
-				EnumSide.Front.getName());
+		final JDFLayout front = (JDFLayout) layout.addPartition(EnumPartIDKey.SignatureName, "sig1").addPartition(EnumPartIDKey.SheetName, "s1")
+				.addPartition(EnumPartIDKey.Side, EnumSide.Front.name());
 		final String id0 = front.appendContentObject(0, JDFMatrix.getUnitMatrix()).appendAnchor(null);
 		final String id1 = front.appendContentObject(1, JDFMatrix.getUnitMatrix().shift(420, 0)).appendAnchor(null);
 

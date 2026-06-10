@@ -69,7 +69,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author MuchaD
- *
  *         This implements the first fixture with unit tests for class JDFQueue.
  */
 class QueueTest extends JDFTestCaseBase
@@ -332,7 +331,7 @@ class QueueTest extends JDFTestCaseBase
 		{
 			final JDFQueueEntry qe = q.appendQueueEntry();
 			qe.setPriority((i * 317) % 99);
-			qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum(i % 7 + 1));
+			qe.setQueueEntryStatus(EnumQueueEntryStatus.values()[i % 7 + 1]);
 		}
 		final long l1 = System.currentTimeMillis();
 		q.sortChildren();
@@ -648,7 +647,6 @@ class QueueTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@Override

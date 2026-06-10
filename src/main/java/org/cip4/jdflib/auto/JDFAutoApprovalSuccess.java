@@ -110,7 +110,7 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoApprovalSuccess(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoApprovalSuccess(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -122,7 +122,7 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoApprovalSuccess(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoApprovalSuccess(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -135,7 +135,7 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoApprovalSuccess(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoApprovalSuccess(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -146,7 +146,7 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -192,7 +192,7 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFApprovalDetails the element
 	 */
-	public JDFApprovalDetails getCreateApprovalDetails(int iSkip)
+	public JDFApprovalDetails getCreateApprovalDetails(final int iSkip)
 	{
 		return (JDFApprovalDetails) getCreateElement_JDFElement(ElementName.APPROVALDETAILS, null, iSkip);
 	}
@@ -204,7 +204,7 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 	 * @return JDFApprovalDetails the element
 	 *         default is getApprovalDetails(0)
 	 */
-	public JDFApprovalDetails getApprovalDetails(int iSkip)
+	public JDFApprovalDetails getApprovalDetails(final int iSkip)
 	{
 		return (JDFApprovalDetails) getElement(ElementName.APPROVALDETAILS, null, iSkip);
 	}
@@ -265,7 +265,7 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -298,7 +298,7 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
-	public JDFContact getCreateContact(int iSkip)
+	public JDFContact getCreateContact(final int iSkip)
 	{
 		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -310,7 +310,7 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 	 * @return JDFContact the element
 	 *         default is getContact(0)
 	 */
-	public JDFContact getContact(int iSkip)
+	public JDFContact getContact(final int iSkip)
 	{
 		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -341,7 +341,7 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refContact(JDFContact refTarget)
+	public void refContact(final JDFContact refTarget)
 	{
 		refElement(refTarget);
 	}

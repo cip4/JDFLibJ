@@ -35,7 +35,8 @@
  * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
  *
  *
- */package org.cip4.jdflib.datatypes;
+ */
+package org.cip4.jdflib.datatypes;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

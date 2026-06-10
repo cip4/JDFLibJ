@@ -81,7 +81,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 
@@ -91,36 +91,36 @@ public class JDFIntegerSpan extends JDFSpanBase
 
 	/**
 	 * Constructor for JDFIntegerSpan
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFIntegerSpan(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFIntegerSpan(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFIntegerSpan
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFIntegerSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFIntegerSpan(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFIntegerSpan
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFIntegerSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFIntegerSpan(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -144,7 +144,7 @@ public class JDFIntegerSpan extends JDFSpanBase
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -155,17 +155,17 @@ public class JDFIntegerSpan extends JDFSpanBase
 
 	/**
 	 * Set attribute Actual
-	 * 
+	 *
 	 * @param int value - the value to set
 	 */
-	public void setActual(int value)
+	public void setActual(final int value)
 	{
 		setAttribute(AttributeName.ACTUAL, value, null);
 	}
 
 	/**
 	 * Get attribute Actual value
-	 * 
+	 *
 	 * @return int - the value of attribute Actual
 	 */
 	public int getActual()
@@ -175,17 +175,17 @@ public class JDFIntegerSpan extends JDFSpanBase
 
 	/**
 	 * Set attribute Preferred
-	 * 
+	 *
 	 * @param int value - the value to set
 	 */
-	public void setPreferred(int value)
+	public void setPreferred(final int value)
 	{
 		setAttribute(AttributeName.PREFERRED, value, null);
 	}
 
 	/**
 	 * Get attribute Preferred value
-	 * 
+	 *
 	 * @return int - the value of attribute Preferred
 	 */
 	public int getPreferred()
@@ -195,26 +195,26 @@ public class JDFIntegerSpan extends JDFSpanBase
 
 	/**
 	 * Set attribute Range as a IntegerRangeList
-	 * 
+	 *
 	 * @param JDFIntegerRangeList value - the value to set
 	 */
-	public void setRange(JDFIntegerRangeList value)
+	public void setRange(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.RANGE, value.toString(), null);
 	}
 
 	/**
 	 * Get attribute Range value
-	 * 
+	 *
 	 * @return JDFIntegerRangeList - the value of attribute Range
 	 */
 	public JDFIntegerRangeList getRange()
 	{
 		try
 		{
-			return new JDFIntegerRangeList(getAttribute(AttributeName.RANGE, null, JDFConstants.EMPTYSTRING));
+			return new JDFIntegerRangeList(getAttribute(AttributeName.RANGE, null, JDFCoreConstants.EMPTYSTRING));
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFIntegerState.getRange: Unable to create JDFIntegerRangeList from Attribute value \"Range\"");
 		}
@@ -222,7 +222,7 @@ public class JDFIntegerSpan extends JDFSpanBase
 
 	/**
 	 * Gets the value of attribute DataType
-	 * 
+	 *
 	 * @return EnumDataType - the attribute DataType value
 	 */
 	@Override
@@ -234,7 +234,7 @@ public class JDFIntegerSpan extends JDFSpanBase
 	@Override
 	public boolean init()
 	{
-		boolean b = super.init();
+		final boolean b = super.init();
 		setDataType(EnumDataType.IntegerSpan);
 		return b;
 	}

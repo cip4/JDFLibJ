@@ -134,7 +134,7 @@ public abstract class JDFAutoModule extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoModule(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoModule(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -146,7 +146,7 @@ public abstract class JDFAutoModule extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoModule(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoModule(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -159,7 +159,7 @@ public abstract class JDFAutoModule extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoModule(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoModule(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoModule extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeviceType(String value)
+	public void setDeviceType(final String value)
 	{
 		setAttribute(AttributeName.DEVICETYPE, value, null);
 	}
@@ -205,7 +205,7 @@ public abstract class JDFAutoModule extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setManufacturer(String value)
+	public void setManufacturer(final String value)
 	{
 		setAttribute(AttributeName.MANUFACTURER, value, null);
 	}
@@ -230,7 +230,7 @@ public abstract class JDFAutoModule extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setManufacturerURL(String value)
+	public void setManufacturerURL(final String value)
 	{
 		setAttribute(AttributeName.MANUFACTURERURL, value, null);
 	}
@@ -255,7 +255,7 @@ public abstract class JDFAutoModule extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setModelDescription(String value)
+	public void setModelDescription(final String value)
 	{
 		setAttribute(AttributeName.MODELDESCRIPTION, value, null);
 	}
@@ -280,7 +280,7 @@ public abstract class JDFAutoModule extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setModelName(String value)
+	public void setModelName(final String value)
 	{
 		setAttribute(AttributeName.MODELNAME, value, null);
 	}
@@ -305,7 +305,7 @@ public abstract class JDFAutoModule extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setModelNumber(String value)
+	public void setModelNumber(final String value)
 	{
 		setAttribute(AttributeName.MODELNUMBER, value, null);
 	}
@@ -330,7 +330,7 @@ public abstract class JDFAutoModule extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setModelURL(String value)
+	public void setModelURL(final String value)
 	{
 		setAttribute(AttributeName.MODELURL, value, null);
 	}
@@ -355,7 +355,7 @@ public abstract class JDFAutoModule extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setModuleID(String value)
+	public void setModuleID(final String value)
 	{
 		setAttribute(AttributeName.MODULEID, value, null);
 	}
@@ -380,7 +380,7 @@ public abstract class JDFAutoModule extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setModuleIndex(int value)
+	public void setModuleIndex(final int value)
 	{
 		setAttribute(AttributeName.MODULEINDEX, value, null);
 	}
@@ -405,7 +405,7 @@ public abstract class JDFAutoModule extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setModuleType(String value)
+	public void setModuleType(final String value)
 	{
 		setAttribute(AttributeName.MODULETYPE, value, null);
 	}
@@ -430,7 +430,7 @@ public abstract class JDFAutoModule extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRevision(String value)
+	public void setRevision(final String value)
 	{
 		setAttribute(AttributeName.REVISION, value, null);
 	}
@@ -455,7 +455,7 @@ public abstract class JDFAutoModule extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSerialNumber(String value)
+	public void setSerialNumber(final String value)
 	{
 		setAttribute(AttributeName.SERIALNUMBER, value, null);
 	}
@@ -480,7 +480,7 @@ public abstract class JDFAutoModule extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSubModuleIndex(int value)
+	public void setSubModuleIndex(final int value)
 	{
 		setAttribute(AttributeName.SUBMODULEINDEX, value, null);
 	}
@@ -527,7 +527,7 @@ public abstract class JDFAutoModule extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFModule the element
 	 */
-	public JDFModule getCreateModule(int iSkip)
+	public JDFModule getCreateModule(final int iSkip)
 	{
 		return (JDFModule) getCreateElement_JDFElement(ElementName.MODULE, null, iSkip);
 	}
@@ -539,7 +539,7 @@ public abstract class JDFAutoModule extends JDFElement
 	 * @return JDFModule the element
 	 *         default is getModule(0)
 	 */
-	public JDFModule getModule(int iSkip)
+	public JDFModule getModule(final int iSkip)
 	{
 		return (JDFModule) getElement(ElementName.MODULE, null, iSkip);
 	}

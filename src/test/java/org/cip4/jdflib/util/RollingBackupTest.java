@@ -48,7 +48,6 @@ import org.junit.jupiter.api.io.TempDir;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         08.12.2008
  */
 class RollingBackupTest extends JDFTestCaseBase

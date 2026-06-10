@@ -29,9 +29,9 @@
  *
  * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
  * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- * 
+ *
  * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
- * 
+ *
  *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
@@ -46,7 +46,6 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFPerson;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen at this point only a dummy since we have a specific WalkResourceAudit child
  */
 public class WalkPerson extends WalkJDFElement
@@ -72,7 +71,6 @@ public class WalkPerson extends WalkJDFElement
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
@@ -85,7 +83,9 @@ public class WalkPerson extends WalkJDFElement
 			final VElement comChannels = person.getChildElementVector(ElementName.COMCHANNEL, null);
 			final JDFAddress address = person.getAddress();
 			if (address != null)
+			{
 				comChannels.add(address);
+			}
 
 			for (final KElement e : comChannels)
 			{

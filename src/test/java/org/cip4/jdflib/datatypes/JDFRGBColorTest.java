@@ -53,7 +53,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         23.01.2009
  */
 class JDFRGBColorTest extends JDFTestCaseBase

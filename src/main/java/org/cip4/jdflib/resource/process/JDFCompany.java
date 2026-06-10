@@ -61,8 +61,6 @@ import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
 /**
- *
- *
  * @author rainer prosi
  * @date June 9, 2011
  */
@@ -88,7 +86,6 @@ public class JDFCompany extends JDFAutoCompany implements IMatches
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 *
 	 * @throws DOMException
 	 */
 	public JDFCompany(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
@@ -104,9 +101,9 @@ public class JDFCompany extends JDFAutoCompany implements IMatches
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
-	 *
 	 */
-	public JDFCompany(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFCompany(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -154,7 +151,6 @@ public class JDFCompany extends JDFAutoCompany implements IMatches
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public VString getOrganizationalUnits()
@@ -176,7 +172,6 @@ public class JDFCompany extends JDFAutoCompany implements IMatches
 	}
 
 	/**
-	 *
 	 * @param unit the unit name to set
 	 */
 	public void setOrganizationalUnit(final String unit)
@@ -186,7 +181,6 @@ public class JDFCompany extends JDFAutoCompany implements IMatches
 	}
 
 	/**
-	 *
 	 * @param unit the unit name to set
 	 */
 	public void appendOrganizationalUnit(final String unit)
@@ -208,7 +202,9 @@ public class JDFCompany extends JDFAutoCompany implements IMatches
 		final Collection<KElement> c = getChildArray(ElementName.ORGANIZATIONALUNIT, null);
 		final Collection<JDFElement> cc = new ArrayList<>();
 		for (final KElement l : c)
+		{
 			cc.add((JDFElement) l);
+		}
 		return cc;
 	}
 

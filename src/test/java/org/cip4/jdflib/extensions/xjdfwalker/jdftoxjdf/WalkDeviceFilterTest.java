@@ -79,9 +79,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class WalkDeviceFilterTest extends JDFTestCaseBase
 {
@@ -91,8 +89,8 @@ class WalkDeviceFilterTest extends JDFTestCaseBase
 	@Test
 	void testDeviceDetails()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildKnownDevicesQuery(null);
-		JDFDeviceFilter f = jmf.getQuery(0).getDeviceFilter(0);
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildKnownDevicesQuery(null);
+		final JDFDeviceFilter f = jmf.getQuery(0).getDeviceFilter(0);
 		f.setDeviceDetails(EnumDeviceDetails.NamedFeature);
 		KElement e = new JDFToXJDF().convert(jmf);
 		JDFDeviceFilter fConverted = (JDFDeviceFilter) e.getElement("QueryKnownDevices").getElement(ElementName.DEVICEFILTER);
@@ -109,14 +107,14 @@ class WalkDeviceFilterTest extends JDFTestCaseBase
 	@Test
 	void testLocalization()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildKnownDevicesQuery(null);
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildKnownDevicesQuery(null);
 		KElement e = new JDFToXJDF().convert(jmf);
 		Assertions.assertNotNull(e, "no exception");
-		JDFDeviceFilter f = jmf.getQuery(0).getDeviceFilter(0);
+		final JDFDeviceFilter f = jmf.getQuery(0).getDeviceFilter(0);
 		f.setLocalization("DE");
 		f.setDeviceDetails(EnumDeviceDetails.Details);
 		e = new JDFToXJDF().convert(jmf);
-		JDFDeviceFilter fConverted = (JDFDeviceFilter) e.getElement("QueryKnownDevices").getElement(ElementName.DEVICEFILTER);
+		final JDFDeviceFilter fConverted = (JDFDeviceFilter) e.getElement("QueryKnownDevices").getElement(ElementName.DEVICEFILTER);
 		Assertions.assertEquals("", fConverted.getLocalization());
 	}
 
@@ -126,13 +124,13 @@ class WalkDeviceFilterTest extends JDFTestCaseBase
 	@Test
 	void testDevice()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildKnownDevicesQuery(null);
-		JDFDeviceFilter f = jmf.getQuery(0).getDeviceFilter(0);
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildKnownDevicesQuery(null);
+		final JDFDeviceFilter f = jmf.getQuery(0).getDeviceFilter(0);
 		f.appendDevice().setDeviceID("ID1");
 		f.setDeviceDetails(EnumDeviceDetails.Details);
-		JDFToXJDF jdfToXJDF = new JDFToXJDF();
-		KElement e = jdfToXJDF.convert(jmf);
-		JDFDeviceFilter fConverted = (JDFDeviceFilter) e.getElement("QueryKnownDevices").getElement(ElementName.DEVICEFILTER);
+		final JDFToXJDF jdfToXJDF = new JDFToXJDF();
+		final KElement e = jdfToXJDF.convert(jmf);
+		final JDFDeviceFilter fConverted = (JDFDeviceFilter) e.getElement("QueryKnownDevices").getElement(ElementName.DEVICEFILTER);
 		Assertions.assertNull(fConverted.getDevice(0), "");
 	}
 
@@ -142,12 +140,12 @@ class WalkDeviceFilterTest extends JDFTestCaseBase
 	@Test
 	void testDeviceFilter()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildKnownDevicesQuery(null);
-		JDFDeviceFilter f = jmf.getQuery(0).getDeviceFilter(0);
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildKnownDevicesQuery(null);
+		final JDFDeviceFilter f = jmf.getQuery(0).getDeviceFilter(0);
 		f.appendDevice().setDeviceID("ID1");
-		JDFToXJDF jdfToXJDF = new JDFToXJDF();
-		KElement e = jdfToXJDF.convert(jmf);
-		JDFDeviceFilter fConverted = (JDFDeviceFilter) e.getElement("QueryKnownDevices").getElement(ElementName.DEVICEFILTER);
+		final JDFToXJDF jdfToXJDF = new JDFToXJDF();
+		final KElement e = jdfToXJDF.convert(jmf);
+		final JDFDeviceFilter fConverted = (JDFDeviceFilter) e.getElement("QueryKnownDevices").getElement(ElementName.DEVICEFILTER);
 		Assertions.assertNull(fConverted, "");
 	}
 

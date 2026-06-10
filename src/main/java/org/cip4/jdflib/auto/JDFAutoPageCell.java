@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -108,7 +103,8 @@ public abstract class JDFAutoPageCell extends JDFElement
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.BORDER, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.CLIPBOX, 0x3333333331l, AttributeInfo.EnumAttributeType.rectangle, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.MARKLIST, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumRotate.getEnum(0), "Rotate0");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumRotate.class, 0), "Rotate0");
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.TRIMSIZE, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
@@ -139,7 +135,7 @@ public abstract class JDFAutoPageCell extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPageCell(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPageCell(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -151,7 +147,7 @@ public abstract class JDFAutoPageCell extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPageCell(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPageCell(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -164,97 +160,28 @@ public abstract class JDFAutoPageCell extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPageCell(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPageCell(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for Rotate
+	 * Enumeration strings for numRotate
 	 */
 
-	public enum ERotate
+	public enum EnumRotate
 	{
 		Rotate0, Rotate90, Rotate180, Rotate270;
 
-		public static ERotate getEnum(String val)
+		public static EnumRotate getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ERotate.class, val, ERotate.Rotate0);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumRotate.class, val, EnumRotate.Rotate0);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Rotate
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumRotate extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumRotate(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumRotate getEnum(String enumName)
-		{
-			return (EnumRotate) getEnum(EnumRotate.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumRotate getEnum(int enumValue)
-		{
-			return (EnumRotate) getEnum(EnumRotate.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumRotate.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumRotate.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumRotate.class);
-		}
-
-		/**  */
-		public static final EnumRotate Rotate0 = new EnumRotate("Rotate0");
-		/**  */
-		public static final EnumRotate Rotate90 = new EnumRotate("Rotate90");
-		/**  */
-		public static final EnumRotate Rotate180 = new EnumRotate("Rotate180");
-		/**  */
-		public static final EnumRotate Rotate270 = new EnumRotate("Rotate270");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -266,7 +193,7 @@ public abstract class JDFAutoPageCell extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBorder(double value)
+	public void setBorder(final double value)
 	{
 		setAttribute(AttributeName.BORDER, value, null);
 	}
@@ -291,7 +218,7 @@ public abstract class JDFAutoPageCell extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setClipBox(JDFRectangle value)
+	public void setClipBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.CLIPBOX, value, null);
 	}
@@ -304,8 +231,8 @@ public abstract class JDFAutoPageCell extends JDFElement
 	 */
 	public JDFRectangle getClipBox()
 	{
-		String strAttrName = getAttribute(AttributeName.CLIPBOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CLIPBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -319,7 +246,7 @@ public abstract class JDFAutoPageCell extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMarkList(VString value)
+	public void setMarkList(final VString value)
 	{
 		setAttribute(AttributeName.MARKLIST, value, null);
 	}
@@ -331,8 +258,8 @@ public abstract class JDFAutoPageCell extends JDFElement
 	 */
 	public VString getMarkList()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.MARKLIST, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.MARKLIST, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -347,9 +274,9 @@ public abstract class JDFAutoPageCell extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setRotate(ERotate enumVar)
+	public void setRotate(final EnumRotate enumVar)
 	{
-		setAttribute(AttributeName.ROTATE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ROTATE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -357,35 +284,6 @@ public abstract class JDFAutoPageCell extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ERotate getERotate()
-	{
-		return ERotate.getEnum(getAttribute(AttributeName.ROTATE, null, "Rotate0"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Rotate
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Rotate
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetRotate(ERotate) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setRotate(EnumRotate enumVar)
-	{
-		setAttribute(AttributeName.ROTATE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Rotate
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ERotate GetERotate() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumRotate getRotate()
 	{
 		return EnumRotate.getEnum(getAttribute(AttributeName.ROTATE, null, "Rotate0"));
@@ -401,7 +299,7 @@ public abstract class JDFAutoPageCell extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTrimSize(JDFXYPair value)
+	public void setTrimSize(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.TRIMSIZE, value, null);
 	}
@@ -414,8 +312,8 @@ public abstract class JDFAutoPageCell extends JDFElement
 	 */
 	public JDFXYPair getTrimSize()
 	{
-		String strAttrName = getAttribute(AttributeName.TRIMSIZE, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TRIMSIZE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -461,7 +359,7 @@ public abstract class JDFAutoPageCell extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refColor(JDFColor refTarget)
+	public void refColor(final JDFColor refTarget)
 	{
 		refElement(refTarget);
 	}

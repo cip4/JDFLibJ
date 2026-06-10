@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2006 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,7 @@ public class JDFLayoutShift extends JDFAutoLayoutShift
 
 	/**
 	 * Constructor for JDFLayoutShift
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
@@ -93,7 +93,7 @@ public class JDFLayoutShift extends JDFAutoLayoutShift
 
 	/**
 	 * Constructor for JDFLayoutShift
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
@@ -106,14 +106,15 @@ public class JDFLayoutShift extends JDFAutoLayoutShift
 
 	/**
 	 * Constructor for JDFLayoutShift
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFLayoutShift(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFLayoutShift(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -122,7 +123,7 @@ public class JDFLayoutShift extends JDFAutoLayoutShift
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

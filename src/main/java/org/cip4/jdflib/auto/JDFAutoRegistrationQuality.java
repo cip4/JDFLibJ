@@ -106,7 +106,7 @@ public abstract class JDFAutoRegistrationQuality extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoRegistrationQuality(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoRegistrationQuality(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoRegistrationQuality extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoRegistrationQuality(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoRegistrationQuality(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoRegistrationQuality extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoRegistrationQuality(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoRegistrationQuality(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -152,7 +152,7 @@ public abstract class JDFAutoRegistrationQuality extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOffset(JDFXYPair value)
+	public void setOffset(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.OFFSET, value, null);
 	}
@@ -165,8 +165,8 @@ public abstract class JDFAutoRegistrationQuality extends JDFElement
 	 */
 	public JDFXYPair getOffset()
 	{
-		String strAttrName = getAttribute(AttributeName.OFFSET, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.OFFSET, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -180,7 +180,7 @@ public abstract class JDFAutoRegistrationQuality extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setReference(String value)
+	public void setReference(final String value)
 	{
 		setAttribute(AttributeName.REFERENCE, value, null);
 	}

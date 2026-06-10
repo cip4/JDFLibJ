@@ -142,7 +142,7 @@ public abstract class JDFAutoContentData extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoContentData(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoContentData(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -154,7 +154,7 @@ public abstract class JDFAutoContentData extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoContentData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoContentData(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -167,7 +167,7 @@ public abstract class JDFAutoContentData extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoContentData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoContentData(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -188,7 +188,7 @@ public abstract class JDFAutoContentData extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCatalogID(String value)
+	public void setCatalogID(final String value)
 	{
 		setAttribute(AttributeName.CATALOGID, value, null);
 	}
@@ -213,7 +213,7 @@ public abstract class JDFAutoContentData extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCatalogDetails(String value)
+	public void setCatalogDetails(final String value)
 	{
 		setAttribute(AttributeName.CATALOGDETAILS, value, null);
 	}
@@ -238,7 +238,7 @@ public abstract class JDFAutoContentData extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setContentRefs(VString value)
+	public void setContentRefs(final VString value)
 	{
 		setAttribute(AttributeName.CONTENTREFS, value, null);
 	}
@@ -250,8 +250,8 @@ public abstract class JDFAutoContentData extends JDFElement
 	 */
 	public VString getContentRefs()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.CONTENTREFS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.CONTENTREFS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -266,7 +266,7 @@ public abstract class JDFAutoContentData extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setContentType(String value)
+	public void setContentType(final String value)
 	{
 		setAttribute(AttributeName.CONTENTTYPE, value, null);
 	}
@@ -291,7 +291,7 @@ public abstract class JDFAutoContentData extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHasBleeds(boolean value)
+	public void setHasBleeds(final boolean value)
 	{
 		setAttribute(AttributeName.HASBLEEDS, value, null);
 	}
@@ -317,7 +317,7 @@ public abstract class JDFAutoContentData extends JDFElement
 	 * @param value the value to set the attribute to
 	 */
 	@Override
-	public void setID(String value)
+	public void setID(final String value)
 	{
 		setAttribute(AttributeName.ID, value, null);
 	}
@@ -343,7 +343,7 @@ public abstract class JDFAutoContentData extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIsBlank(boolean value)
+	public void setIsBlank(final boolean value)
 	{
 		setAttribute(AttributeName.ISBLANK, value, null);
 	}
@@ -368,7 +368,7 @@ public abstract class JDFAutoContentData extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIsTrapped(boolean value)
+	public void setIsTrapped(final boolean value)
 	{
 		setAttribute(AttributeName.ISTRAPPED, value, null);
 	}
@@ -393,7 +393,7 @@ public abstract class JDFAutoContentData extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -418,7 +418,7 @@ public abstract class JDFAutoContentData extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProductID(String value)
+	public void setProductID(final String value)
 	{
 		setAttribute(AttributeName.PRODUCTID, value, null);
 	}
@@ -506,7 +506,7 @@ public abstract class JDFAutoContentData extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refElementColorParams(JDFElementColorParams refTarget)
+	public void refElementColorParams(final JDFElementColorParams refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -547,7 +547,7 @@ public abstract class JDFAutoContentData extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refImageCompressionParams(JDFImageCompressionParams refTarget)
+	public void refImageCompressionParams(final JDFImageCompressionParams refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -578,7 +578,7 @@ public abstract class JDFAutoContentData extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFOCGControl the element
 	 */
-	public JDFOCGControl getCreateOCGControl(int iSkip)
+	public JDFOCGControl getCreateOCGControl(final int iSkip)
 	{
 		return (JDFOCGControl) getCreateElement_JDFElement(ElementName.OCGCONTROL, null, iSkip);
 	}
@@ -590,7 +590,7 @@ public abstract class JDFAutoContentData extends JDFElement
 	 * @return JDFOCGControl the element
 	 *         default is getOCGControl(0)
 	 */
-	public JDFOCGControl getOCGControl(int iSkip)
+	public JDFOCGControl getOCGControl(final int iSkip)
 	{
 		return (JDFOCGControl) getElement(ElementName.OCGCONTROL, null, iSkip);
 	}
@@ -651,7 +651,7 @@ public abstract class JDFAutoContentData extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refScreeningParams(JDFScreeningParams refTarget)
+	public void refScreeningParams(final JDFScreeningParams refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -682,7 +682,7 @@ public abstract class JDFAutoContentData extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationSpec the element
 	 */
-	public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
+	public JDFSeparationSpec getCreateSeparationSpec(final int iSkip)
 	{
 		return (JDFSeparationSpec) getCreateElement_JDFElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}
@@ -694,7 +694,7 @@ public abstract class JDFAutoContentData extends JDFElement
 	 * @return JDFSeparationSpec the element
 	 *         default is getSeparationSpec(0)
 	 */
-	public JDFSeparationSpec getSeparationSpec(int iSkip)
+	public JDFSeparationSpec getSeparationSpec(final int iSkip)
 	{
 		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}

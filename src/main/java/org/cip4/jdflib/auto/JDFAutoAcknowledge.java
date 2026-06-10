@@ -72,11 +72,8 @@ package org.cip4.jdflib.auto;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoQuery.EAcknowledgeType;
-import org.cip4.jdflib.auto.JDFAutoQuery.EnumAcknowledgeType;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -87,6 +84,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.process.JDFEmployee;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoAcknowledge : public JDFMessage
@@ -102,7 +100,7 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.REFID, 0x2222222222l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ACKNOWLEDGETYPE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumerations,
-				EnumAcknowledgeType.getEnum(0), "Completed");
+				JavaEnumUtil.getEnum(EnumAcknowledgeType.class, 0), "Completed");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.RETURNCODE, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, "0");
 	}
 
@@ -131,7 +129,7 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAcknowledge(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoAcknowledge(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -143,7 +141,7 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAcknowledge(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoAcknowledge(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -156,16 +154,28 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoAcknowledge(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoAcknowledge(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * Enumeration strings for numAcknowledgeType
 	 */
+
+	public enum EnumAcknowledgeType
+	{
+		Received, Applied, Completed;
+
+		public static EnumAcknowledgeType getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumAcknowledgeType.class, val, EnumAcknowledgeType.Completed);
+		}
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
+		 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -178,7 +188,7 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	 * @param value the value to set the attribute to
 	 */
 	@Override
-	public void setrefID(String value)
+	public void setrefID(final String value)
 	{
 		setAttribute(AttributeName.REFID, value, null);
 	}
@@ -204,7 +214,7 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	 *
 	 * @param v List of the enumeration values
 	 */
-	public void setEAcknowledgeType(List<EAcknowledgeType> v)
+	public void setAcknowledgeType(final List<EnumAcknowledgeType> v)
 	{
 		setEnumsAttribute(AttributeName.ACKNOWLEDGETYPE, v, null);
 	}
@@ -214,38 +224,9 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public List<EAcknowledgeType> getEnumsAcknowledgeType()
+	public List<EnumAcknowledgeType> getAcknowledgeType()
 	{
-		return getEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, null, EAcknowledgeType.class);
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute AcknowledgeType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5.2) set attribute AcknowledgeType
-	 *
-	 * @param v List of the enumeration values
-	 * @deprecated use SetEAcknowledgeType(List<EAcknowledgeType>) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setAcknowledgeType(List<EnumAcknowledgeType> v)
-	{
-		setEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, v, null);
-	}
-
-	/**
-	 * (9.2) get AcknowledgeType attribute AcknowledgeType
-	 *
-	 * @return Vector of the enumerations
-	 * @deprecated use List<EAcknowledgeType > GetEAcknowledgeType() based on java.lang.enum instead
-	 */
-	@Deprecated
-	public Vector<EnumAcknowledgeType> getAcknowledgeType()
-	{
-		return getEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, null, EnumAcknowledgeType.Completed, false);
+		return getEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, null, EnumAcknowledgeType.class);
 	}
 
 	/*
@@ -258,7 +239,7 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setReturnCode(int value)
+	public void setReturnCode(final int value)
 	{
 		setAttribute(AttributeName.RETURNCODE, value, null);
 	}
@@ -337,7 +318,7 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
-	public JDFEmployee getCreateEmployee(int iSkip)
+	public JDFEmployee getCreateEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -349,7 +330,7 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	 * @return JDFEmployee the element
 	 *         default is getEmployee(0)
 	 */
-	public JDFEmployee getEmployee(int iSkip)
+	public JDFEmployee getEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
 	}

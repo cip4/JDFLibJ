@@ -70,20 +70,7 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EFeedSheetLay;
-import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EPrintingType;
-import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.ESheetLay;
-import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumFeedSheetLay;
-import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumPrintingType;
-import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumSheetLay;
-import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EPrintQuality;
-import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPrintQuality;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -115,24 +102,27 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.DIRECTPROOFAMOUNT, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, "0");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.MANUALFEED, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.COLLATE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumCollate.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.FEEDSHEETLAY, 0x3111111111l, AttributeInfo.EnumAttributeType.enumeration, EnumFeedSheetLay.getEnum(0),
-				null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.COLLATE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumCollate.class, 0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.FEEDSHEETLAY, 0x3111111111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumFeedSheetLay.class, 0), null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.NONPRINTABLEMARGINBOTTOM, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.NONPRINTABLEMARGINLEFT, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.NONPRINTABLEMARGINRIGHT, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.NONPRINTABLEMARGINTOP, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.OUTPUTBIN, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.PAGEDELIVERY, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumPageDelivery.getEnum(0),
-				null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.PRINTPASS, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumPrintPass.getEnum(0),
-				null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.PRINTQUALITY, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumPrintQuality.getEnum(0),
-				null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.PRINTINGTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumPrintingType.getEnum(0),
-				null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.SHEETLAY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), null);
-		atrInfoTable[14] = new AtrInfoTable(AttributeName.SIDES, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumSides.getEnum(0), null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.PAGEDELIVERY, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumPageDelivery.class, 0), null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.PRINTPASS, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumPrintPass.class, 0), null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.PRINTQUALITY, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumPrintQuality.class, 0), null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.PRINTINGTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumPrintingType.class, 0), null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.SHEETLAY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumSheetLay.class, 0), null);
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.SIDES, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumSides.class, 0), null);
 		atrInfoTable[15] = new AtrInfoTable(AttributeName.STACKAMOUNT, 0x3333311111l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
@@ -165,7 +155,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDigitalPrintingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDigitalPrintingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -177,7 +167,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDigitalPrintingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDigitalPrintingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -190,7 +180,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDigitalPrintingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDigitalPrintingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -201,7 +191,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -216,255 +206,120 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for Collate
+	 * Enumeration strings for numCollate
 	 */
 
-	public enum ECollate
+	public enum EnumCollate
 	{
 		None, Sheet, SheetAndSet, SheetSetAndJob, SystemSpecified;
 
-		public static ECollate getEnum(String val)
+		public static EnumCollate getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ECollate.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumCollate.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for Collate
+	 * Enumeration strings for numFeedSheetLay
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumCollate extends ValuedEnum
+	public enum EnumFeedSheetLay
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Leading, Trailing;
 
-		protected EnumCollate(String name)
+		public static EnumFeedSheetLay getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumFeedSheetLay.class, val, null);
 		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumCollate getEnum(String enumName)
-		{
-			return (EnumCollate) getEnum(EnumCollate.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumCollate getEnum(int enumValue)
-		{
-			return (EnumCollate) getEnum(EnumCollate.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumCollate.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumCollate.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumCollate.class);
-		}
-
-		/**  */
-		public static final EnumCollate None = new EnumCollate("None");
-		/**  */
-		public static final EnumCollate Sheet = new EnumCollate("Sheet");
-		/**  */
-		public static final EnumCollate SheetAndSet = new EnumCollate("SheetAndSet");
-		/**  */
-		public static final EnumCollate SheetSetAndJob = new EnumCollate("SheetSetAndJob");
-		/**  */
-		public static final EnumCollate SystemSpecified = new EnumCollate("SystemSpecified");
 	}
 
 	/**
-	 * Enumeration strings for PageDelivery
+	 * Enumeration strings for numPageDelivery
 	 */
 
-	public enum EPageDelivery
+	public enum EnumPageDelivery
 	{
 		FanFold, SameOrderFaceUp, SameOrderFaceDown, ReverseOrderFaceUp, ReverseOrderFaceDown, SystemSpecified;
 
-		public static EPageDelivery getEnum(String val)
+		public static EnumPageDelivery getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPageDelivery.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPageDelivery.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for PageDelivery
+	 * Enumeration strings for numPrintPass
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumPageDelivery extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPageDelivery(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumPageDelivery getEnum(String enumName)
-		{
-			return (EnumPageDelivery) getEnum(EnumPageDelivery.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPageDelivery getEnum(int enumValue)
-		{
-			return (EnumPageDelivery) getEnum(EnumPageDelivery.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPageDelivery.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPageDelivery.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPageDelivery.class);
-		}
-
-		/**  */
-		public static final EnumPageDelivery FanFold = new EnumPageDelivery("FanFold");
-		/**  */
-		public static final EnumPageDelivery SameOrderFaceUp = new EnumPageDelivery("SameOrderFaceUp");
-		/**  */
-		public static final EnumPageDelivery SameOrderFaceDown = new EnumPageDelivery("SameOrderFaceDown");
-		/**  */
-		public static final EnumPageDelivery ReverseOrderFaceUp = new EnumPageDelivery("ReverseOrderFaceUp");
-		/**  */
-		public static final EnumPageDelivery ReverseOrderFaceDown = new EnumPageDelivery("ReverseOrderFaceDown");
-		/**  */
-		public static final EnumPageDelivery SystemSpecified = new EnumPageDelivery("SystemSpecified");
-	}
-
-	/**
-	 * Enumeration strings for PrintPass
-	 */
-
-	public enum EPrintPass
+	public enum EnumPrintPass
 	{
 		OneShot, MultiShot;
 
-		public static EPrintPass getEnum(String val)
+		public static EnumPrintPass getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPrintPass.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPrintPass.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for PrintPass
+	 * Enumeration strings for numPrintQuality
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumPrintPass extends ValuedEnum
+	public enum EnumPrintQuality
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		High, Normal, Draft, SystemSpecified;
 
-		protected EnumPrintPass(String name)
+		public static EnumPrintQuality getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPrintQuality.class, val, null);
 		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumPrintPass getEnum(String enumName)
-		{
-			return (EnumPrintPass) getEnum(EnumPrintPass.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPrintPass getEnum(int enumValue)
-		{
-			return (EnumPrintPass) getEnum(EnumPrintPass.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPrintPass.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPrintPass.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPrintPass.class);
-		}
-
-		/**  */
-		public static final EnumPrintPass OneShot = new EnumPrintPass("OneShot");
-		/**  */
-		public static final EnumPrintPass MultiShot = new EnumPrintPass("MultiShot");
 	}
 
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * Enumeration strings for numPrintingType
 	 */
+
+	public enum EnumPrintingType
+	{
+		SheetFed, WebFed, ContinuousFed, SystemSpecified;
+
+		public static EnumPrintingType getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPrintingType.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for numSheetLay
+	 */
+
+	public enum EnumSheetLay
+	{
+		Left, Right, Center, SystemSpecified;
+
+		public static EnumSheetLay getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSheetLay.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for numSides
+	 */
+
+	public enum EnumSides
+	{
+		OneSidedBack, OneSidedBackFlipX, OneSidedBackFlipY, OneSidedFront, TwoSided, TwoSidedFlipX, TwoSidedFlipY;
+
+		public static EnumSides getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSides.class, val, null);
+		}
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
+		 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -476,7 +331,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDirectProofAmount(int value)
+	public void setDirectProofAmount(final int value)
 	{
 		setAttribute(AttributeName.DIRECTPROOFAMOUNT, value, null);
 	}
@@ -501,7 +356,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setManualFeed(boolean value)
+	public void setManualFeed(final boolean value)
 	{
 		setAttribute(AttributeName.MANUALFEED, value, null);
 	}
@@ -526,9 +381,9 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setCollate(ECollate enumVar)
+	public void setCollate(final EnumCollate enumVar)
 	{
-		setAttribute(AttributeName.COLLATE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.COLLATE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -536,35 +391,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ECollate getECollate()
-	{
-		return ECollate.getEnum(getAttribute(AttributeName.COLLATE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Collate
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Collate
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetCollate(ECollate) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setCollate(EnumCollate enumVar)
-	{
-		setAttribute(AttributeName.COLLATE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Collate
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ECollate GetECollate() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumCollate getCollate()
 	{
 		return EnumCollate.getEnum(getAttribute(AttributeName.COLLATE, null, null));
@@ -580,9 +406,9 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setFeedSheetLay(EFeedSheetLay enumVar)
+	public void setFeedSheetLay(final EnumFeedSheetLay enumVar)
 	{
-		setAttribute(AttributeName.FEEDSHEETLAY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.FEEDSHEETLAY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -590,35 +416,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EFeedSheetLay getEFeedSheetLay()
-	{
-		return EFeedSheetLay.getEnum(getAttribute(AttributeName.FEEDSHEETLAY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute FeedSheetLay
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute FeedSheetLay
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetFeedSheetLay(EFeedSheetLay) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setFeedSheetLay(EnumFeedSheetLay enumVar)
-	{
-		setAttribute(AttributeName.FEEDSHEETLAY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute FeedSheetLay
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EFeedSheetLay GetEFeedSheetLay() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumFeedSheetLay getFeedSheetLay()
 	{
 		return EnumFeedSheetLay.getEnum(getAttribute(AttributeName.FEEDSHEETLAY, null, null));
@@ -634,7 +431,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNonPrintableMarginBottom(double value)
+	public void setNonPrintableMarginBottom(final double value)
 	{
 		setAttribute(AttributeName.NONPRINTABLEMARGINBOTTOM, value, null);
 	}
@@ -659,7 +456,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNonPrintableMarginLeft(double value)
+	public void setNonPrintableMarginLeft(final double value)
 	{
 		setAttribute(AttributeName.NONPRINTABLEMARGINLEFT, value, null);
 	}
@@ -684,7 +481,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNonPrintableMarginRight(double value)
+	public void setNonPrintableMarginRight(final double value)
 	{
 		setAttribute(AttributeName.NONPRINTABLEMARGINRIGHT, value, null);
 	}
@@ -709,7 +506,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNonPrintableMarginTop(double value)
+	public void setNonPrintableMarginTop(final double value)
 	{
 		setAttribute(AttributeName.NONPRINTABLEMARGINTOP, value, null);
 	}
@@ -734,7 +531,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOutputBin(VString value)
+	public void setOutputBin(final VString value)
 	{
 		setAttribute(AttributeName.OUTPUTBIN, value, null);
 	}
@@ -746,8 +543,8 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 */
 	public VString getOutputBin()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.OUTPUTBIN, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.OUTPUTBIN, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -762,9 +559,9 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPageDelivery(EPageDelivery enumVar)
+	public void setPageDelivery(final EnumPageDelivery enumVar)
 	{
-		setAttribute(AttributeName.PAGEDELIVERY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.PAGEDELIVERY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -772,35 +569,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPageDelivery getEPageDelivery()
-	{
-		return EPageDelivery.getEnum(getAttribute(AttributeName.PAGEDELIVERY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute PageDelivery
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute PageDelivery
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPageDelivery(EPageDelivery) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPageDelivery(EnumPageDelivery enumVar)
-	{
-		setAttribute(AttributeName.PAGEDELIVERY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute PageDelivery
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EPageDelivery GetEPageDelivery() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumPageDelivery getPageDelivery()
 	{
 		return EnumPageDelivery.getEnum(getAttribute(AttributeName.PAGEDELIVERY, null, null));
@@ -816,9 +584,9 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPrintPass(EPrintPass enumVar)
+	public void setPrintPass(final EnumPrintPass enumVar)
 	{
-		setAttribute(AttributeName.PRINTPASS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.PRINTPASS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -826,35 +594,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPrintPass getEPrintPass()
-	{
-		return EPrintPass.getEnum(getAttribute(AttributeName.PRINTPASS, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute PrintPass
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute PrintPass
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPrintPass(EPrintPass) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPrintPass(EnumPrintPass enumVar)
-	{
-		setAttribute(AttributeName.PRINTPASS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute PrintPass
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EPrintPass GetEPrintPass() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumPrintPass getPrintPass()
 	{
 		return EnumPrintPass.getEnum(getAttribute(AttributeName.PRINTPASS, null, null));
@@ -870,9 +609,9 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPrintQuality(EPrintQuality enumVar)
+	public void setPrintQuality(final EnumPrintQuality enumVar)
 	{
-		setAttribute(AttributeName.PRINTQUALITY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.PRINTQUALITY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -880,35 +619,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPrintQuality getEPrintQuality()
-	{
-		return EPrintQuality.getEnum(getAttribute(AttributeName.PRINTQUALITY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute PrintQuality
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute PrintQuality
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPrintQuality(EPrintQuality) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPrintQuality(EnumPrintQuality enumVar)
-	{
-		setAttribute(AttributeName.PRINTQUALITY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute PrintQuality
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EPrintQuality GetEPrintQuality() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumPrintQuality getPrintQuality()
 	{
 		return EnumPrintQuality.getEnum(getAttribute(AttributeName.PRINTQUALITY, null, null));
@@ -924,9 +634,9 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPrintingType(EPrintingType enumVar)
+	public void setPrintingType(final EnumPrintingType enumVar)
 	{
-		setAttribute(AttributeName.PRINTINGTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.PRINTINGTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -934,35 +644,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPrintingType getEPrintingType()
-	{
-		return EPrintingType.getEnum(getAttribute(AttributeName.PRINTINGTYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute PrintingType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute PrintingType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPrintingType(EPrintingType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPrintingType(EnumPrintingType enumVar)
-	{
-		setAttribute(AttributeName.PRINTINGTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute PrintingType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EPrintingType GetEPrintingType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumPrintingType getPrintingType()
 	{
 		return EnumPrintingType.getEnum(getAttribute(AttributeName.PRINTINGTYPE, null, null));
@@ -978,9 +659,9 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSheetLay(ESheetLay enumVar)
+	public void setSheetLay(final EnumSheetLay enumVar)
 	{
-		setAttribute(AttributeName.SHEETLAY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SHEETLAY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -988,35 +669,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESheetLay getESheetLay()
-	{
-		return ESheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute SheetLay
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute SheetLay
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetSheetLay(ESheetLay) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSheetLay(EnumSheetLay enumVar)
-	{
-		setAttribute(AttributeName.SHEETLAY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute SheetLay
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ESheetLay GetESheetLay() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumSheetLay getSheetLay()
 	{
 		return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
@@ -1032,9 +684,9 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSides(ESides enumVar)
+	public void setSides(final EnumSides enumVar)
 	{
-		setAttribute(AttributeName.SIDES, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SIDES, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -1042,35 +694,6 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESides getESides()
-	{
-		return ESides.getEnum(getAttribute(AttributeName.SIDES, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Sides
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Sides
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetSides(ESides) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSides(EnumSides enumVar)
-	{
-		setAttribute(AttributeName.SIDES, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Sides
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ESides GetESides() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumSides getSides()
 	{
 		return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, null));
@@ -1086,7 +709,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStackAmount(int value)
+	public void setStackAmount(final int value)
 	{
 		setAttribute(AttributeName.STACKAMOUNT, value, null);
 	}
@@ -1119,7 +742,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 
 	/**
 	 * (25) getCreateComponent
-	 *
+	 * 
 	 * @return JDFComponent the element
 	 */
 	public JDFComponent getCreateComponent()
@@ -1143,7 +766,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refComponent(JDFComponent refTarget)
+	public void refComponent(final JDFComponent refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1160,7 +783,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 
 	/**
 	 * (25) getCreateApprovalParams
-	 *
+	 * 
 	 * @return JDFApprovalParams the element
 	 */
 	public JDFApprovalParams getCreateApprovalParams()
@@ -1184,7 +807,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refApprovalParams(JDFApprovalParams refTarget)
+	public void refApprovalParams(final JDFApprovalParams refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1201,7 +824,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 
 	/**
 	 * (25) getCreateDisjointing
-	 *
+	 * 
 	 * @return JDFDisjointing the element
 	 */
 	public JDFDisjointing getCreateDisjointing()
@@ -1232,7 +855,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 
 	/**
 	 * (25) getCreateInk
-	 *
+	 * 
 	 * @return JDFInk the element
 	 */
 	public JDFInk getCreateInk()
@@ -1256,7 +879,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refInk(JDFInk refTarget)
+	public void refInk(final JDFInk refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1273,7 +896,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 
 	/**
 	 * (25) getCreateMedia
-	 *
+	 * 
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia getCreateMedia()
@@ -1297,7 +920,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMedia(JDFMedia refTarget)
+	public void refMedia(final JDFMedia refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1314,7 +937,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 
 	/**
 	 * (25) getCreateMediaSource
-	 *
+	 * 
 	 * @return JDFMediaSource the element
 	 */
 	public JDFMediaSource getCreateMediaSource()
@@ -1338,7 +961,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMediaSource(JDFMediaSource refTarget)
+	public void refMediaSource(final JDFMediaSource refTarget)
 	{
 		refElement(refTarget);
 	}

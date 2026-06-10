@@ -62,7 +62,6 @@ import jakarta.mail.internet.MimeMultipart;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         Jul 24, 2009
  */
 public class MimeReader extends MimeHelper
@@ -81,7 +80,6 @@ public class MimeReader extends MimeHelper
 	 * create a reader from an existing mutipart
 	 *
 	 * @param mp
-	 *
 	 */
 	public MimeReader(final Multipart mp)
 	{
@@ -192,7 +190,7 @@ public class MimeReader extends MimeHelper
 	 * get the JDF Doc from a stream, also handle non mime streams gracefully
 	 *
 	 * @param stream the stream to search in
-	 * @param index the index of the body part to search
+	 * @param index  the index of the body part to search
 	 * @return JDFDoc the parsed xml JDFDoc, null if stream does not contain xml
 	 */
 	public JDFDoc getJDFDoc(final InputStream stream, final int index)
@@ -205,7 +203,7 @@ public class MimeReader extends MimeHelper
 	 * get the JDF Doc from a stream, also handle non mime streams gracefully
 	 *
 	 * @param stream the stream to search in
-	 * @param index the index of the body part to search
+	 * @param index  the index of the body part to search
 	 * @return JDFDoc the parsed xml JDFDoc, null if stream does not contain xml
 	 */
 	public XMLDoc getXMLDoc(final InputStream stream, final int index)

@@ -95,7 +95,7 @@ public class JDFNewJDFQuParams extends JDFAutoNewJDFQuParams implements INodeIde
 
 	/**
 	 * Constructor for JDFNewJDFQuParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -106,7 +106,7 @@ public class JDFNewJDFQuParams extends JDFAutoNewJDFQuParams implements INodeIde
 
 	/**
 	 * Constructor for JDFNewJDFQuParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -118,7 +118,7 @@ public class JDFNewJDFQuParams extends JDFAutoNewJDFQuParams implements INodeIde
 
 	/**
 	 * Constructor for JDFNewJDFQuParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -133,7 +133,7 @@ public class JDFNewJDFQuParams extends JDFAutoNewJDFQuParams implements INodeIde
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -145,6 +145,7 @@ public class JDFNewJDFQuParams extends JDFAutoNewJDFQuParams implements INodeIde
 	/**
 	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#getIdentifier()
 	 */
+	@Override
 	public NodeIdentifier getIdentifier()
 	{
 		return new NodeIdentifier(getJobID(), getJobPartID(), null);
@@ -153,6 +154,7 @@ public class JDFNewJDFQuParams extends JDFAutoNewJDFQuParams implements INodeIde
 	/**
 	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.JDFNode.NodeIdentifier)
 	 */
+	@Override
 	public void setIdentifier(final NodeIdentifier ni)
 	{
 		setJobID(ni.getJobID());

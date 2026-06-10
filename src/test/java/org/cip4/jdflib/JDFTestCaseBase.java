@@ -163,7 +163,7 @@ public abstract class JDFTestCaseBase
 
 	protected static int getXJDFMinor()
 	{
-		return XJDF20.getDefaultVersion().getMinorVersion();
+		return JDFToXJDF.getDefaultVersion().getMinorVersion();
 	}
 
 	/**
@@ -210,14 +210,14 @@ public abstract class JDFTestCaseBase
 		return getXJDFSchemaParser(xjdfSchema);
 	}
 
-	protected static JDFParser getXJDFSchemaParser(String xjdfSchemaUrl)
+	protected static JDFParser getXJDFSchemaParser(final String xjdfSchemaUrl)
 	{
 		final JDFParser parser = JDFParserFactory.getFactory().get();
 		parser.setSchemaLocation(JDFElement.getSchemaURL(2, XJDFHelper.defaultVersion().getMinorVersion()), xjdfSchemaUrl);
 		return parser;
 	}
 
-	protected static JDFParser getXJDFSchemaParser(File xjdfSchema)
+	protected static JDFParser getXJDFSchemaParser(final File xjdfSchema)
 	{
 		final String xjdfSchemaUrl = UrlUtil.fileToUrl(xjdfSchema, true);
 		return getXJDFSchemaParser(xjdfSchemaUrl);

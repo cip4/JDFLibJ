@@ -182,7 +182,6 @@ class DelayedPersistTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
 	class TestPersist implements IPersistable
@@ -200,7 +199,6 @@ class DelayedPersistTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
 	class TestRun implements Runnable
@@ -218,7 +216,6 @@ class DelayedPersistTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
 	class TestRunPersist implements Runnable, IPersistable

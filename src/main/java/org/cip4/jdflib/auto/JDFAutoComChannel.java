@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -96,8 +91,8 @@ public abstract class JDFAutoComChannel extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELTYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumChannelType.getEnum(0),
-				null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELTYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumChannelType.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOCATOR, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.CHANNELTYPEDETAILS, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.CHANNELUSAGE, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
@@ -115,7 +110,7 @@ public abstract class JDFAutoComChannel extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoComChannel(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoComChannel(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -127,7 +122,7 @@ public abstract class JDFAutoComChannel extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoComChannel(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoComChannel(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -140,7 +135,7 @@ public abstract class JDFAutoComChannel extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoComChannel(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoComChannel(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -151,7 +146,7 @@ public abstract class JDFAutoComChannel extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -166,101 +161,22 @@ public abstract class JDFAutoComChannel extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for ChannelType
+	 * Enumeration strings for numChannelType
 	 */
 
-	public enum EChannelType
+	public enum EnumChannelType
 	{
 		ComputerName, Email, Fax, InstantMessaging, JMF, Mobile, Phone, PrivateDirectory, WWW;
 
-		public static EChannelType getEnum(String val)
+		public static EnumChannelType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EChannelType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumChannelType.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for ChannelType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumChannelType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumChannelType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumChannelType getEnum(String enumName)
-		{
-			return (EnumChannelType) getEnum(EnumChannelType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumChannelType getEnum(int enumValue)
-		{
-			return (EnumChannelType) getEnum(EnumChannelType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumChannelType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumChannelType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumChannelType.class);
-		}
-
-		/**  */
-		public static final EnumChannelType ComputerName = new EnumChannelType("ComputerName");
-		/**  */
-		public static final EnumChannelType Email = new EnumChannelType("Email");
-		/**  */
-		public static final EnumChannelType Fax = new EnumChannelType("Fax");
-		/**  */
-		public static final EnumChannelType InstantMessaging = new EnumChannelType("InstantMessaging");
-		/**  */
-		public static final EnumChannelType JMF = new EnumChannelType("JMF");
-		/**  */
-		public static final EnumChannelType Mobile = new EnumChannelType("Mobile");
-		/**  */
-		public static final EnumChannelType Phone = new EnumChannelType("Phone");
-		/**  */
-		public static final EnumChannelType PrivateDirectory = new EnumChannelType("PrivateDirectory");
-		/**  */
-		public static final EnumChannelType WWW = new EnumChannelType("WWW");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -272,9 +188,9 @@ public abstract class JDFAutoComChannel extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setChannelType(EChannelType enumVar)
+	public void setChannelType(final EnumChannelType enumVar)
 	{
-		setAttribute(AttributeName.CHANNELTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.CHANNELTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -282,35 +198,6 @@ public abstract class JDFAutoComChannel extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EChannelType getEChannelType()
-	{
-		return EChannelType.getEnum(getAttribute(AttributeName.CHANNELTYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ChannelType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ChannelType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetChannelType(EChannelType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setChannelType(EnumChannelType enumVar)
-	{
-		setAttribute(AttributeName.CHANNELTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ChannelType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EChannelType GetEChannelType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumChannelType getChannelType()
 	{
 		return EnumChannelType.getEnum(getAttribute(AttributeName.CHANNELTYPE, null, null));
@@ -326,7 +213,7 @@ public abstract class JDFAutoComChannel extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLocator(String value)
+	public void setLocator(final String value)
 	{
 		setAttribute(AttributeName.LOCATOR, value, null);
 	}
@@ -351,7 +238,7 @@ public abstract class JDFAutoComChannel extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setChannelTypeDetails(String value)
+	public void setChannelTypeDetails(final String value)
 	{
 		setAttribute(AttributeName.CHANNELTYPEDETAILS, value, null);
 	}
@@ -376,7 +263,7 @@ public abstract class JDFAutoComChannel extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setChannelUsage(VString value)
+	public void setChannelUsage(final VString value)
 	{
 		setAttribute(AttributeName.CHANNELUSAGE, value, null);
 	}
@@ -388,8 +275,8 @@ public abstract class JDFAutoComChannel extends JDFResource
 	 */
 	public VString getChannelUsage()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.CHANNELUSAGE, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.CHANNELUSAGE, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}

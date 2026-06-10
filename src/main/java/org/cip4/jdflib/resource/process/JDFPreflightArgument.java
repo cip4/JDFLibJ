@@ -89,39 +89,39 @@ public class JDFPreflightArgument extends JDFAutoPreflightArgument
 
 	/**
 	 * Constructor for JDFPreflightArgument
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPreflightArgument(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFPreflightArgument(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFPreflightArgument
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPreflightArgument(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFPreflightArgument(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFPreflightArgument
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFPreflightArgument(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFPreflightArgument(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -130,7 +130,7 @@ public class JDFPreflightArgument extends JDFAutoPreflightArgument
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -141,13 +141,13 @@ public class JDFPreflightArgument extends JDFAutoPreflightArgument
 
 	/**
 	 * append a boxargument and set its box type to the value defined in box
-	 * 
+	 *
 	 * @param type
 	 * @return
 	 */
-	public JDFBoxArgument appendBoxArgument(EnumBox type)
+	public JDFBoxArgument appendBoxArgument(final EnumBox type)
 	{
-		JDFBoxArgument ba = (JDFBoxArgument) appendElementN(ElementName.BOXARGUMENT, 1, null);
+		final JDFBoxArgument ba = (JDFBoxArgument) appendElementN(ElementName.BOXARGUMENT, 1, null);
 		ba.setBox(type);
 		return ba;
 	}

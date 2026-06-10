@@ -82,7 +82,7 @@ public class XJDFProductGoldenTicket extends XJDFBaseGoldenTicket
 	 * @param pIcsLevel
 	 * @param jdfVersion
 	 */
-	public XJDFProductGoldenTicket(int pIcsLevel, EnumVersion jdfVersion)
+	public XJDFProductGoldenTicket(final int pIcsLevel, final EnumVersion jdfVersion)
 	{
 		super(pIcsLevel, jdfVersion, null);
 	}

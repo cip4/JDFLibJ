@@ -70,12 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -97,15 +93,15 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SOURCECSS, 0x4444333311l, AttributeInfo.EnumAttributeType.enumerations, EnumSourceCSs.getEnum(0),
-				null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SOURCECSS, 0x4444333311l, AttributeInfo.EnumAttributeType.enumerations,
+				JavaEnumUtil.getEnum(EnumSourceCSs.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.HSAMPLES, 0x3333333311l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.VSAMPLES, 0x3333333311l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.QFACTOR, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, "1.0");
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.QUANTTABLE, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.HUFFTABLE, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.COLORTRANSFORM, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumColorTransform.getEnum(0), "Automatic");
+				JavaEnumUtil.getEnum(EnumColorTransform.class, 0), "Automatic");
 	}
 
 	@Override
@@ -120,7 +116,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDCTParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDCTParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -132,7 +128,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDCTParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDCTParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -145,204 +141,42 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDCTParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDCTParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for SourceCSs
+	 * Enumeration strings for numSourceCSs
 	 */
 
-	public enum ESourceCSs
+	public enum EnumSourceCSs
 	{
 		CalGray, CalRGB, Calibrated, CIEBased, CMYK, DeviceN, DevIndep, RGB, Gray, ICCBased, ICCCMYK, ICCGray, ICCLAB, ICCRGB, Lab, Separation, YUV, All;
 
-		public static ESourceCSs getEnum(String val)
+		public static EnumSourceCSs getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ESourceCSs.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSourceCSs.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for SourceCSs
+	 * Enumeration strings for numColorTransform
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumSourceCSs extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumSourceCSs(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumSourceCSs getEnum(String enumName)
-		{
-			return (EnumSourceCSs) getEnum(EnumSourceCSs.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumSourceCSs getEnum(int enumValue)
-		{
-			return (EnumSourceCSs) getEnum(EnumSourceCSs.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSourceCSs.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSourceCSs.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSourceCSs.class);
-		}
-
-		/**  */
-		public static final EnumSourceCSs CalGray = new EnumSourceCSs("CalGray");
-		/**  */
-		public static final EnumSourceCSs CalRGB = new EnumSourceCSs("CalRGB");
-		/**  */
-		public static final EnumSourceCSs Calibrated = new EnumSourceCSs("Calibrated");
-		/**  */
-		public static final EnumSourceCSs CIEBased = new EnumSourceCSs("CIEBased");
-		/**  */
-		public static final EnumSourceCSs CMYK = new EnumSourceCSs("CMYK");
-		/**  */
-		public static final EnumSourceCSs DeviceN = new EnumSourceCSs("DeviceN");
-		/**  */
-		public static final EnumSourceCSs DevIndep = new EnumSourceCSs("DevIndep");
-		/**  */
-		public static final EnumSourceCSs RGB = new EnumSourceCSs("RGB");
-		/**  */
-		public static final EnumSourceCSs Gray = new EnumSourceCSs("Gray");
-		/**  */
-		public static final EnumSourceCSs ICCBased = new EnumSourceCSs("ICCBased");
-		/**  */
-		public static final EnumSourceCSs ICCCMYK = new EnumSourceCSs("ICCCMYK");
-		/**  */
-		public static final EnumSourceCSs ICCGray = new EnumSourceCSs("ICCGray");
-		/**  */
-		public static final EnumSourceCSs ICCLAB = new EnumSourceCSs("ICCLAB");
-		/**  */
-		public static final EnumSourceCSs ICCRGB = new EnumSourceCSs("ICCRGB");
-		/**  */
-		public static final EnumSourceCSs Lab = new EnumSourceCSs("Lab");
-		/**  */
-		public static final EnumSourceCSs Separation = new EnumSourceCSs("Separation");
-		/**  */
-		public static final EnumSourceCSs YUV = new EnumSourceCSs("YUV");
-		/**  */
-		public static final EnumSourceCSs All = new EnumSourceCSs("All");
-	}
-
-	/**
-	 * Enumeration strings for ColorTransform
-	 */
-
-	public enum EColorTransform
+	public enum EnumColorTransform
 	{
 		YUV, None, Automatic;
 
-		public static EColorTransform getEnum(String val)
+		public static EnumColorTransform getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EColorTransform.class, val, EColorTransform.Automatic);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumColorTransform.class, val, EnumColorTransform.Automatic);
 		}
-	}
-
-	/**
-	 * Enumeration strings for ColorTransform
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumColorTransform extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumColorTransform(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumColorTransform getEnum(String enumName)
-		{
-			return (EnumColorTransform) getEnum(EnumColorTransform.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumColorTransform getEnum(int enumValue)
-		{
-			return (EnumColorTransform) getEnum(EnumColorTransform.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumColorTransform.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumColorTransform.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumColorTransform.class);
-		}
-
-		/**  */
-		public static final EnumColorTransform YUV = new EnumColorTransform("YUV");
-		/**  */
-		public static final EnumColorTransform None = new EnumColorTransform("None");
-		/**  */
-		public static final EnumColorTransform Automatic = new EnumColorTransform("Automatic");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -354,7 +188,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 *
 	 * @param v List of the enumeration values
 	 */
-	public void setESourceCSs(List<ESourceCSs> v)
+	public void setSourceCSs(final List<EnumSourceCSs> v)
 	{
 		setEnumsAttribute(AttributeName.SOURCECSS, v, null);
 	}
@@ -364,38 +198,9 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public List<ESourceCSs> getEnumsSourceCSs()
+	public List<EnumSourceCSs> getSourceCSs()
 	{
-		return getEnumerationsAttribute(AttributeName.SOURCECSS, null, ESourceCSs.class);
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute SourceCSs
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5.2) set attribute SourceCSs
-	 *
-	 * @param v List of the enumeration values
-	 * @deprecated use SetESourceCSs(List<ESourceCSs>) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSourceCSs(List<EnumSourceCSs> v)
-	{
-		setEnumerationsAttribute(AttributeName.SOURCECSS, v, null);
-	}
-
-	/**
-	 * (9.2) get SourceCSs attribute SourceCSs
-	 *
-	 * @return Vector of the enumerations
-	 * @deprecated use List<ESourceCSs > GetESourceCSs() based on java.lang.enum instead
-	 */
-	@Deprecated
-	public Vector<EnumSourceCSs> getSourceCSs()
-	{
-		return getEnumerationsAttribute(AttributeName.SOURCECSS, null, EnumSourceCSs.getEnum(0), false);
+		return getEnumerationsAttribute(AttributeName.SOURCECSS, null, EnumSourceCSs.class);
 	}
 
 	/*
@@ -408,7 +213,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHSamples(JDFIntegerList value)
+	public void setHSamples(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.HSAMPLES, value, null);
 	}
@@ -421,8 +226,8 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 */
 	public JDFIntegerList getHSamples()
 	{
-		String strAttrName = getAttribute(AttributeName.HSAMPLES, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.HSAMPLES, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -436,7 +241,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setVSamples(JDFIntegerList value)
+	public void setVSamples(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.VSAMPLES, value, null);
 	}
@@ -449,8 +254,8 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 */
 	public JDFIntegerList getVSamples()
 	{
-		String strAttrName = getAttribute(AttributeName.VSAMPLES, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.VSAMPLES, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -464,7 +269,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setQFactor(double value)
+	public void setQFactor(final double value)
 	{
 		setAttribute(AttributeName.QFACTOR, value, null);
 	}
@@ -489,7 +294,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setQuantTable(JDFNumberList value)
+	public void setQuantTable(final JDFNumberList value)
 	{
 		setAttribute(AttributeName.QUANTTABLE, value, null);
 	}
@@ -502,8 +307,8 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 */
 	public JDFNumberList getQuantTable()
 	{
-		String strAttrName = getAttribute(AttributeName.QUANTTABLE, null, null);
-		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.QUANTTABLE, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -517,7 +322,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHuffTable(JDFNumberList value)
+	public void setHuffTable(final JDFNumberList value)
 	{
 		setAttribute(AttributeName.HUFFTABLE, value, null);
 	}
@@ -530,8 +335,8 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 */
 	public JDFNumberList getHuffTable()
 	{
-		String strAttrName = getAttribute(AttributeName.HUFFTABLE, null, null);
-		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.HUFFTABLE, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -545,9 +350,9 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setColorTransform(EColorTransform enumVar)
+	public void setColorTransform(final EnumColorTransform enumVar)
 	{
-		setAttribute(AttributeName.COLORTRANSFORM, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.COLORTRANSFORM, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -555,35 +360,6 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EColorTransform getEColorTransform()
-	{
-		return EColorTransform.getEnum(getAttribute(AttributeName.COLORTRANSFORM, null, "Automatic"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ColorTransform
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ColorTransform
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetColorTransform(EColorTransform) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setColorTransform(EnumColorTransform enumVar)
-	{
-		setAttribute(AttributeName.COLORTRANSFORM, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ColorTransform
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EColorTransform GetEColorTransform() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumColorTransform getColorTransform()
 	{
 		return EnumColorTransform.getEnum(getAttribute(AttributeName.COLORTRANSFORM, null, "Automatic"));

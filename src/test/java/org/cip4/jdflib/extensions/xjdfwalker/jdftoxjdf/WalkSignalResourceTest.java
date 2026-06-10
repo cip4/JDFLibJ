@@ -94,10 +94,10 @@ class WalkSignalResourceTest extends JDFTestCaseBase
 	@Test
 	void testRQP()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
-		JDFSignal sig = jmf.getSignal(0);
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
+		final JDFSignal sig = jmf.getSignal(0);
 		sig.appendResourceQuParams().setJobID("j1");
-		JDFResourceInfo ri = sig.appendResourceInfo();
+		final JDFResourceInfo ri = sig.appendResourceInfo();
 
 		new WalkSignalResource().moveFromQuParams(sig);
 		Assertions.assertNull(sig.getResourceQuParams());
@@ -110,14 +110,14 @@ class WalkSignalResourceTest extends JDFTestCaseBase
 	@Test
 	void testJobID()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
-		JDFSignal sig = jmf.getSignal(0);
-		JDFResourceQuParams rqp = sig.appendResourceQuParams();
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
+		final JDFSignal sig = jmf.getSignal(0);
+		final JDFResourceQuParams rqp = sig.appendResourceQuParams();
 		rqp.setJobID("j1");
 		rqp.setJobPartID("p1");
 		sig.appendResourceInfo();
 
-		KElement xjmf = new JDFToXJDF().convert(jmf);
+		final KElement xjmf = new JDFToXJDF().convert(jmf);
 
 		Assertions.assertNull(xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/@JobID", null));
 		Assertions.assertNull(xjmf.getXPathAttribute("SignalResource/ResourceInfo/ResourceSet/@JobPartID", null));
@@ -131,21 +131,21 @@ class WalkSignalResourceTest extends JDFTestCaseBase
 	@Test
 	void testExposedMedia()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
 
-		JDFSignal sig = jmf.getSignal(0);
+		final JDFSignal sig = jmf.getSignal(0);
 		sig.appendResourceQuParams().setJobID("j1");
 
-		JDFResourceInfo ri = sig.appendResourceInfo();
-		JDFExposedMedia xm = (JDFExposedMedia) ri.appendResource(ElementName.EXPOSEDMEDIA);
+		final JDFResourceInfo ri = sig.appendResourceInfo();
+		final JDFExposedMedia xm = (JDFExposedMedia) ri.appendResource(ElementName.EXPOSEDMEDIA);
 		xm.setProductID("pid");
-		JDFMedia media = xm.appendMedia();
+		final JDFMedia media = xm.appendMedia();
 		media.setBrand("plate");
 
-		JDFToXJDF jdfToXJDF = new JDFToXJDF();
-		KElement xjmf = jdfToXJDF.convert(jmf);
+		final JDFToXJDF jdfToXJDF = new JDFToXJDF();
+		final KElement xjmf = jdfToXJDF.convert(jmf);
 
-		KElement sr = xjmf.getElement("SignalResource");
+		final KElement sr = xjmf.getElement("SignalResource");
 		Assertions.assertEquals(sr.numChildElements(ElementName.RESOURCEINFO, null), 2);
 		Assertions.assertEquals(sr.getChildrenByTagName(XJDFConstants.ResourceSet, null, null, false, true, 0).size(), 2);
 	}
@@ -156,12 +156,12 @@ class WalkSignalResourceTest extends JDFTestCaseBase
 	@Test
 	void testConvert()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
-		JDFSignal sig = jmf.getSignal(0);
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
+		final JDFSignal sig = jmf.getSignal(0);
 		sig.appendResourceQuParams().setJobID("j1");
 		sig.appendResourceInfo();
 
-		KElement xjmf = new JDFToXJDF().convert(jmf);
+		final KElement xjmf = new JDFToXJDF().convert(jmf);
 
 		Assertions.assertNull(xjmf.getXPathElement("SignalResource/ResourceQuParams"));
 		Assertions.assertEquals("j1", xjmf.getXPathAttribute("SignalResource/ResourceInfo/@JobID", null));

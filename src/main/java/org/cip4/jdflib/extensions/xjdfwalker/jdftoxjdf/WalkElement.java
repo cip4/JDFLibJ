@@ -42,6 +42,7 @@ import java.util.Set;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -223,10 +224,10 @@ public class WalkElement extends BaseWalker
 							final JDFNameRange r = (JDFNameRange) rl.at(i);
 							if (i > 0)
 							{
-								buf.append(JDFConstants.BLANK);
+								buf.append(JDFCoreConstants.BLANK);
 							}
 							buf.append(r.getLeft());
-							buf.append(JDFConstants.BLANK);
+							buf.append(JDFCoreConstants.BLANK);
 							buf.append(r.getRight());
 						}
 						map.put(key, buf.toString());

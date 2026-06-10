@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,22 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFDateTimeState.java
@@ -90,7 +90,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFDateTimeRange;
 import org.cip4.jdflib.datatypes.JDFDateTimeRangeList;
@@ -134,43 +134,43 @@ public class JDFDateTimeState extends JDFAbstractState
 
 	/**
 	 * Constructor for JDFDateTimeState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFDateTimeState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFDateTimeState(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFDateTimeState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFDateTimeState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFDateTimeState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFDateTimeState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFDateTimeState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFDateTimeState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -185,30 +185,30 @@ public class JDFDateTimeState extends JDFAbstractState
 
 	/**
 	 * set attribute <code>CurrentValue</code>
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCurrentValue(JDFDate value)
+	public void setCurrentValue(final JDFDate value)
 	{
-		setAttribute(AttributeName.CURRENTVALUE, value == null ? null : value.getDateTimeISO(), JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.CURRENTVALUE, value == null ? null : value.getDateTimeISO(), JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
 	 * get attribute <code>CurrentValue</code>
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public JDFDate getCurrentValue()
 	{
 		JDFDate currentValue = null;
-		String str = getAttribute(AttributeName.CURRENTVALUE, null, JDFConstants.EMPTYSTRING);
-		if (!JDFConstants.EMPTYSTRING.equals(str))
+		final String str = getAttribute(AttributeName.CURRENTVALUE, null, JDFCoreConstants.EMPTYSTRING);
+		if (!JDFCoreConstants.EMPTYSTRING.equals(str))
 		{
 			try
 			{
 				currentValue = new JDFDate(str);
 			}
-			catch (DataFormatException dfe)
+			catch (final DataFormatException dfe)
 			{
 				throw new JDFException("not a valid date string. Malformed JDF");
 			}
@@ -218,30 +218,30 @@ public class JDFDateTimeState extends JDFAbstractState
 
 	/**
 	 * set attribute <code>DefaultValue</code>
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDefaultValue(JDFDate value)
+	public void setDefaultValue(final JDFDate value)
 	{
-		setAttribute(AttributeName.DEFAULTVALUE, value == null ? null : value.getDateTimeISO(), JDFConstants.EMPTYSTRING);
+		setAttribute(AttributeName.DEFAULTVALUE, value == null ? null : value.getDateTimeISO(), JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
 	 * get attribute <code>DefaultValue</code>
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public JDFDate getDefaultValue()
 	{
 		JDFDate defaultValue = null;
-		String str = getAttribute(AttributeName.DEFAULTVALUE, null, JDFConstants.EMPTYSTRING);
-		if (!JDFConstants.EMPTYSTRING.equals(str))
+		final String str = getAttribute(AttributeName.DEFAULTVALUE, null, JDFCoreConstants.EMPTYSTRING);
+		if (!JDFCoreConstants.EMPTYSTRING.equals(str))
 		{
 			try
 			{
 				defaultValue = new JDFDate(str);
 			}
-			catch (DataFormatException dfe)
+			catch (final DataFormatException dfe)
 			{
 				throw new JDFException("not a valid date string. Malformed JDF");
 			}
@@ -251,17 +251,17 @@ public class JDFDateTimeState extends JDFAbstractState
 
 	/**
 	 * set attribute <code>AllowedValueList</code>
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowedValueList(JDFDateTimeRangeList value)
+	public void setAllowedValueList(final JDFDateTimeRangeList value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUELIST, value == null ? null : value.toString());
 	}
 
 	/**
 	 * get attribute <code>AllowedValueList</code>
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public JDFDateTimeRangeList getAllowedValueList()
@@ -270,9 +270,11 @@ public class JDFDateTimeState extends JDFAbstractState
 		{
 			final String attribute = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
 			if (attribute != null)
+			{
 				return new JDFDateTimeRangeList(attribute);
+			}
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			// nop
 		}
@@ -281,17 +283,17 @@ public class JDFDateTimeState extends JDFAbstractState
 
 	/**
 	 * set attribute <code>PresentValueList</code>
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentValueList(JDFDateTimeRangeList value)
+	public void setPresentValueList(final JDFDateTimeRangeList value)
 	{
 		setAttribute(AttributeName.PRESENTVALUELIST, value == null ? null : value.toString());
 	}
 
 	/**
 	 * get attribute <code>PresentValueList</code>
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public JDFDateTimeRangeList getPresentValueList()
@@ -303,7 +305,7 @@ public class JDFDateTimeState extends JDFAbstractState
 			{
 				r = new JDFDateTimeRangeList(getAttribute(AttributeName.PRESENTVALUELIST));
 			}
-			catch (DataFormatException dfe)
+			catch (final DataFormatException dfe)
 			{
 				return null;
 			}
@@ -314,17 +316,17 @@ public class JDFDateTimeState extends JDFAbstractState
 
 	/**
 	 * set attribute <code>AllowedValueDurationList</code>
-	 * 
+	 *
 	 * @param value the value of the attribute
 	 */
-	public void setAllowedValueDurationList(JDFDurationRangeList value)
+	public void setAllowedValueDurationList(final JDFDurationRangeList value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUEDURATIONLIST, value == null ? null : value.toString());
 	}
 
 	/**
 	 * get attribute <code>AllowedValueDurationList</code>
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public JDFDurationRangeList getAllowedValueDurationList()
@@ -338,7 +340,7 @@ public class JDFDateTimeState extends JDFAbstractState
 			{
 				r = new JDFDurationRangeList(allowedValueDurList);
 			}
-			catch (DataFormatException dfe)
+			catch (final DataFormatException dfe)
 			{
 				return null;
 			}
@@ -348,17 +350,17 @@ public class JDFDateTimeState extends JDFAbstractState
 
 	/**
 	 * set attribute <code>PresentValueDurationList</code>
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentValueDurationList(JDFDurationRangeList value)
+	public void setPresentValueDurationList(final JDFDurationRangeList value)
 	{
 		setAttribute(AttributeName.PRESENTVALUEDURATIONLIST, value == null ? null : value.toString());
 	}
 
 	/**
 	 * get attribute <code>PresentValueDurationList</code>
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public JDFDurationRangeList getPresentValueDurationList()
@@ -370,7 +372,7 @@ public class JDFDateTimeState extends JDFAbstractState
 			{
 				r = new JDFDurationRangeList(getAttribute(AttributeName.PRESENTVALUEDURATIONLIST));
 			}
-			catch (DataFormatException dfe)
+			catch (final DataFormatException dfe)
 			{
 				return null;
 			}
@@ -384,21 +386,23 @@ public class JDFDateTimeState extends JDFAbstractState
 	 */
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java .lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
 	 */
 	@Override
-	public void addValue(String value, EnumFitsValue testlists)
+	public void addValue(final String value, final EnumFitsValue testlists)
 	{
 		if (fitsValue(value, testlists))
+		{
 			return;
+		}
 
 		JDFDate date;
 		try
 		{
 			date = new JDFDate(value);
 		}
-		catch (DataFormatException x)
+		catch (final DataFormatException x)
 		{
 			return; // nop for bad values
 		}
@@ -406,7 +410,9 @@ public class JDFDateTimeState extends JDFAbstractState
 		{
 			JDFDateTimeRangeList list = getAllowedValueList();
 			if (list == null)
+			{
 				list = new JDFDateTimeRangeList();
+			}
 			list.append(date);
 			setAllowedValueList(list);
 
@@ -415,7 +421,9 @@ public class JDFDateTimeState extends JDFAbstractState
 		{
 			JDFDateTimeRangeList list = getPresentValueList();
 			if (list == null || !hasAttribute(AttributeName.PRESENTVALUELIST))
+			{
 				list = new JDFDateTimeRangeList();
+			}
 			list.append(date);
 			setPresentValueList(list);
 		}
@@ -423,15 +431,14 @@ public class JDFDateTimeState extends JDFAbstractState
 
 	/**
 	 * fitsValue - tests, if the defined value matches Allowed test lists or Present test lists, specified for this State
-	 * 
-	 * @param value value to test
+	 *
+	 * @param value     value to test
 	 * @param testlists the test lists the value has to match. In this State the test lists are ValueList and ValueDurationList.<br>
-	 *        Choose one of two values: FitsValue_Allowed or FitsValue_Present. (Defaults to Allowed)
-	 * 
+	 *                  Choose one of two values: FitsValue_Allowed or FitsValue_Present. (Defaults to Allowed)
 	 * @return boolean - true, if the value matches test list or if AllowedValueList is not specified
 	 */
 	@Override
-	public boolean fitsValue(String value, EnumFitsValue testlists)
+	public boolean fitsValue(final String value, final EnumFitsValue testlists)
 	{
 		if (fitsListType(value))
 		{
@@ -440,7 +447,7 @@ public class JDFDateTimeState extends JDFAbstractState
 			{
 				rangelist = new JDFDateTimeRangeList(value);
 			}
-			catch (DataFormatException dfe)
+			catch (final DataFormatException dfe)
 			{
 				return false;
 			}
@@ -452,13 +459,12 @@ public class JDFDateTimeState extends JDFAbstractState
 
 	/**
 	 * fitsValueList - tests, if the defined 'rangelist' matches the AllowedValueList or in the PresentValueList, specified for this State
-	 * 
+	 *
 	 * @param rangelist range list to test
 	 * @param valuelist switches between AllowedValueList and PresentValueList
-	 * 
 	 * @return boolean - true, if <code>rangelist</code> matches the valuelist or if AllowedValueList is not specified
 	 */
-	private final boolean fitsValueList(JDFDateTimeRangeList rangelist, EnumFitsValue valuelist)
+	private final boolean fitsValueList(final JDFDateTimeRangeList rangelist, final EnumFitsValue valuelist)
 	{
 		JDFDateTimeRangeList list;
 		if (valuelist.equals(EnumFitsValue.Allowed))
@@ -470,9 +476,11 @@ public class JDFDateTimeState extends JDFAbstractState
 			list = getPresentValueList();
 		}
 		if (list == null)
+		{
 			return true;
+		}
 
-		EnumListType listType = getListType();
+		final EnumListType listType = getListType();
 		if (listType.equals(EnumListType.CompleteList))
 		{
 			return fitsCompleteList(rangelist, list);
@@ -491,12 +499,12 @@ public class JDFDateTimeState extends JDFAbstractState
 
 	/**
 	 * fitsValueDurationList - tests, if the duration of the defined <code>rangelist</code> value matchest the ValueDurationList, specified for this State
-	 * 
+	 *
 	 * @param rangelist range list to test
 	 * @param valuelist switches between AllowedValueList and PresentValueList
 	 * @return boolean - true, if the duration of the defined rangelist is in <code>valueList</code> or if ValueDurationList is not specified
 	 */
-	private final boolean fitsValueDurationList(JDFDateTimeRangeList rangelist, EnumFitsValue valuelist)
+	private final boolean fitsValueDurationList(final JDFDateTimeRangeList rangelist, final EnumFitsValue valuelist)
 	{
 		JDFDurationRangeList list;
 
@@ -509,42 +517,44 @@ public class JDFDateTimeState extends JDFAbstractState
 			list = getPresentValueDurationList();
 		}
 		if (list == null)
+		{
 			return true;
+		}
 
-		int siz = rangelist.size();
+		final int siz = rangelist.size();
 		for (int i = 0; i < siz; i++)
 		{
-			JDFDateTimeRange range = (JDFDateTimeRange) rangelist.at(i);
+			final JDFDateTimeRange range = (JDFDateTimeRange) rangelist.at(i);
 
-			int duration = (int) ((range.getRight().getTimeInMillis() - range.getLeft().getTimeInMillis()) / 1000);
-			JDFDuration d = new JDFDuration();
+			final int duration = (int) ((range.getRight().getTimeInMillis() - range.getLeft().getTimeInMillis()) / 1000);
+			final JDFDuration d = new JDFDuration();
 			d.setDuration(duration);
 			if (!list.inRange(d))
+			{
 				return false;
+			}
 		}
 		return true;
 	}
 
 	/**
 	 * fitsCompleteList - tests for the case, when ListType=CompleteList, if <code>value</code> matches AllowedValueList or PresentValueList, specified for this State
-	 * 
+	 *
 	 * @param value value to test
-	 * @param list testlists are either AllowedValueList or PresentValueList
-	 * 
+	 * @param list  testlists are either AllowedValueList or PresentValueList
 	 * @return boolean - true, if <code>value</code> matches testlist
 	 */
-	private final boolean fitsCompleteList(JDFDateTimeRangeList value, JDFDateTimeRangeList list)
+	private final boolean fitsCompleteList(final JDFDateTimeRangeList value, final JDFDateTimeRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
-		if (v_size != l_size)
+		if ((v_size != l_size) || !value.isUnique())
+		{
 			return false;
+		}
 
-		if (!value.isUnique())
-			return false;
-
-		JDFDateTimeRangeList valueList = new JDFDateTimeRangeList(value);
+		final JDFDateTimeRangeList valueList = new JDFDateTimeRangeList(value);
 
 		boolean bFound;
 		for (int i = l_size - 1; i >= 0; i--)
@@ -570,22 +580,20 @@ public class JDFDateTimeState extends JDFAbstractState
 	/**
 	 * fitsCompleteOrderedList - tests for the case, when ListType=CompleteOrderedList, if the defined 'value' matches AllowedValueList or PresentValueList, specified for this
 	 * State
-	 * 
+	 *
 	 * @param value value to test
-	 * @param list testlists are either AllowedValueList or PresentValueList
-	 * 
+	 * @param list  testlists are either AllowedValueList or PresentValueList
 	 * @return boolean - true, if <code>value</code> matches testlist
 	 */
-	private final boolean fitsCompleteOrderedList(JDFDateTimeRangeList value, JDFDateTimeRangeList list)
+	private final boolean fitsCompleteOrderedList(final JDFDateTimeRangeList value, final JDFDateTimeRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
-		if (v_size != l_size)
+		if ((v_size != l_size) || !value.isUnique())
+		{
 			return false;
-
-		if (!value.isUnique())
-			return false;
+		}
 
 		for (int i = 0; i < l_size; i++)
 		{
@@ -599,16 +607,15 @@ public class JDFDateTimeState extends JDFAbstractState
 
 	/**
 	 * fitsContainedList - tests for the case, when ListType=ContainedList, if the defined <code>value</code> matches AllowedValueList or PresentValueList, specified for this State
-	 * 
-	 * @param value to test
+	 *
+	 * @param value     to test
 	 * @param testlists are either AllowedValueList or PresentValueList
-	 * 
 	 * @return boolean - true, if <code>value</code> matches testlist
 	 */
-	private final boolean fitsContainedList(JDFDateTimeRangeList value, JDFDateTimeRangeList list)
+	private final boolean fitsContainedList(final JDFDateTimeRangeList value, final JDFDateTimeRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
 		for (int i = 0; i < v_size; i++)
 		{
@@ -625,7 +632,7 @@ public class JDFDateTimeState extends JDFAbstractState
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
 	 */
 	@Override

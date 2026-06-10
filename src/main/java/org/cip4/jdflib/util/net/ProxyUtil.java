@@ -69,7 +69,9 @@ public class ProxyUtil
 	public static URI getHostURI(final URL url)
 	{
 		if (url == null)
+		{
 			return null;
+		}
 		URI uri;
 		try
 		{
@@ -89,7 +91,6 @@ public class ProxyUtil
 	}
 
 	/**
-	 *
 	 * @param use, if true use the system proxy properties
 	 */
 	public static void setUseSystemDefault(final boolean use)
@@ -98,7 +99,6 @@ public class ProxyUtil
 	}
 
 	/**
-	 *
 	 * @param use, the default if not set
 	 * @return if true use the system proxy properties
 	 */
@@ -136,9 +136,9 @@ public class ProxyUtil
 	 * setup the environment for proxies
 	 *
 	 * @param proxy the proxy url - NO PORT!
-	 * @param port the proxy port
-	 * @param user the user for authentication, if null no authentication is attempted
-	 * @param pw the pass word for authentication
+	 * @param port  the proxy port
+	 * @param user  the user for authentication, if null no authentication is attempted
+	 * @param pw    the pass word for authentication
 	 */
 	public static void setProxy(String proxy, final int port, final String user, final String pw)
 	{
@@ -161,7 +161,6 @@ public class ProxyUtil
 	}
 
 	/**
-	 *
 	 * @param proxy
 	 */
 	public static void setProxy(String proxy)
@@ -179,7 +178,7 @@ public class ProxyUtil
 		}
 	}
 
-	public static Proxy getProxy(String url)
+	public static Proxy getProxy(final String url)
 	{
 		try
 		{

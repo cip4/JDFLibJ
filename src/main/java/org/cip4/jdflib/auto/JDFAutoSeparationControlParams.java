@@ -108,7 +108,7 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSeparationControlParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoSeparationControlParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -120,7 +120,7 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSeparationControlParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoSeparationControlParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoSeparationControlParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoSeparationControlParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -144,7 +144,7 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -190,7 +190,7 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFAutomatedOverPrintParams the element
 	 */
-	public JDFAutomatedOverPrintParams getCreateAutomatedOverPrintParams(int iSkip)
+	public JDFAutomatedOverPrintParams getCreateAutomatedOverPrintParams(final int iSkip)
 	{
 		return (JDFAutomatedOverPrintParams) getCreateElement_JDFElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, iSkip);
 	}
@@ -202,7 +202,7 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
 	 * @return JDFAutomatedOverPrintParams the element
 	 *         default is getAutomatedOverPrintParams(0)
 	 */
-	public JDFAutomatedOverPrintParams getAutomatedOverPrintParams(int iSkip)
+	public JDFAutomatedOverPrintParams getAutomatedOverPrintParams(final int iSkip)
 	{
 		return (JDFAutomatedOverPrintParams) getElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null, iSkip);
 	}
@@ -253,7 +253,7 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFTransferFunctionControl the element
 	 */
-	public JDFTransferFunctionControl getCreateTransferFunctionControl(int iSkip)
+	public JDFTransferFunctionControl getCreateTransferFunctionControl(final int iSkip)
 	{
 		return (JDFTransferFunctionControl) getCreateElement_JDFElement(ElementName.TRANSFERFUNCTIONCONTROL, null, iSkip);
 	}
@@ -265,7 +265,7 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
 	 * @return JDFTransferFunctionControl the element
 	 *         default is getTransferFunctionControl(0)
 	 */
-	public JDFTransferFunctionControl getTransferFunctionControl(int iSkip)
+	public JDFTransferFunctionControl getTransferFunctionControl(final int iSkip)
 	{
 		return (JDFTransferFunctionControl) getElement(ElementName.TRANSFERFUNCTIONCONTROL, null, iSkip);
 	}
@@ -295,7 +295,7 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refTransferFunctionControl(JDFTransferFunctionControl refTarget)
+	public void refTransferFunctionControl(final JDFTransferFunctionControl refTarget)
 	{
 		refElement(refTarget);
 	}

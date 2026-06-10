@@ -52,7 +52,7 @@ import org.cip4.jdflib.auto.JDFAutoFileSpec;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.ifaces.IURLSetter;
 import org.cip4.jdflib.util.EnumUtil;
-import org.cip4.jdflib.util.MimeUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.mime.MimeReader;
@@ -60,7 +60,6 @@ import org.w3c.dom.DOMException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         July 24, 2009
  */
 public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
@@ -72,7 +71,6 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
-	 *
 	 * @throws DOMException
 	 */
 	public JDFFileSpec(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
@@ -87,7 +85,6 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
-	 *
 	 */
 	public JDFFileSpec(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
@@ -102,9 +99,9 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
-	 *
 	 */
-	public JDFFileSpec(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFFileSpec(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -121,7 +118,7 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 	/**
 	 * sets the URL attribute to an absolute file IRL (internationalized)
 	 *
-	 * @param f the file to set the URL to
+	 * @param f          the file to set the URL to
 	 * @param bEscape128 if true, escape chars>128 (URL) else don't escape (IRL)
 	 */
 	public void setAbsoluteFileURL(final File f, final boolean bEscape128)
@@ -133,8 +130,8 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 	/**
 	 * sets the URL attribute to an absolute file IRL (internationalized)
 	 *
-	 * @param f the file to set the URL to
-	 * @param baseDir the File representing the relative location. if null use current working dir
+	 * @param f          the file to set the URL to
+	 * @param baseDir    the File representing the relative location. if null use current working dir
 	 * @param bEscape128 if true, escape chars>128 (URL) else don't escape (IRL)
 	 */
 	public void setRelativeURL(final File f, final File baseDir, final boolean bEscape128)
@@ -144,9 +141,7 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 	}
 
 	/**
-	 *
 	 * list of predefined resourceUsages
-	 *
 	 */
 	public enum EnumResourceUsage
 	{
@@ -179,7 +174,7 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 	{
 		setURL(url);
 		final String mimeTypeFromURL = UrlUtil.getMimeTypeFromURL(url);
-		if (!MimeUtil.TEXT_UNKNOWN.equals(mimeTypeFromURL))
+		if (!UrlUtil.TEXT_UNKNOWN.equals(mimeTypeFromURL))
 		{
 			setMimeType(mimeTypeFromURL);
 		}
@@ -207,7 +202,9 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 	{
 		final String filename = getUserFileName();
 		if (!StringUtil.isEmpty(filename))
+		{
 			return filename;
+		}
 
 		final String url = getURL();
 		if (StringUtil.isEmpty(url))
@@ -257,7 +254,6 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 	}
 
 	/**
-	 *
 	 * @return the value of FileSize
 	 */
 	public long getFileSizeLong()
@@ -282,16 +278,14 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 	}
 
 	/**
-	 *
 	 * @param usage
 	 */
 	public void setResourceUsage(final EnumResourceUsage usage)
 	{
-		super.setResourceUsage(usage == null ? null : usage.name());
+		super.setResourceUsage(JavaEnumUtil.getName(usage));
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public EnumResourceUsage getResourceUsageEnum()

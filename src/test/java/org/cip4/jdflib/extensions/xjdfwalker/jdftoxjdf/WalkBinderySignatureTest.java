@@ -87,13 +87,13 @@ class WalkBinderySignatureTest extends JDFTestCaseBase
 	@Test
 	void testWalkElements()
 	{
-		JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
+		final JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
 		bs.appendFold();
-		WalkBinderySignature wa = new WalkBinderySignature();
+		final WalkBinderySignature wa = new WalkBinderySignature();
 		wa.setParent(new JDFToXJDF());
-		KElement root = new JDFDoc(ElementName.RESOURCE).getRoot();
+		final KElement root = new JDFDoc(ElementName.RESOURCE).getRoot();
 		wa.walk(bs, root);
-		JDFBinderySignature bs2 = (JDFBinderySignature) root.getElement(ElementName.BINDERYSIGNATURE);
+		final JDFBinderySignature bs2 = (JDFBinderySignature) root.getElement(ElementName.BINDERYSIGNATURE);
 		Assertions.assertNotNull(bs2);
 		Assertions.assertNull(bs.getFold(0));
 	}
@@ -104,13 +104,13 @@ class WalkBinderySignatureTest extends JDFTestCaseBase
 	@Test
 	void testWalkAttributes()
 	{
-		JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
+		final JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
 		bs.setBindingEdge(EnumBindingEdge.Bottom);
-		WalkBinderySignature wa = new WalkBinderySignature();
+		final WalkBinderySignature wa = new WalkBinderySignature();
 		wa.setParent(new JDFToXJDF());
-		KElement root = new JDFDoc(ElementName.RESOURCE).getRoot();
+		final KElement root = new JDFDoc(ElementName.RESOURCE).getRoot();
 		wa.walk(bs, root);
-		JDFBinderySignature bs2 = (JDFBinderySignature) root.getElement(ElementName.BINDERYSIGNATURE);
+		final JDFBinderySignature bs2 = (JDFBinderySignature) root.getElement(ElementName.BINDERYSIGNATURE);
 		Assertions.assertNotNull(bs2);
 		Assertions.assertNull(bs2.getNonEmpty(AttributeName.BINDINGEDGE));
 	}
@@ -121,9 +121,9 @@ class WalkBinderySignatureTest extends JDFTestCaseBase
 	@Test
 	void testMatches()
 	{
-		JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
+		final JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
 		bs.setBindingEdge(EnumBindingEdge.Bottom);
-		WalkBinderySignature wa = new WalkBinderySignature();
+		final WalkBinderySignature wa = new WalkBinderySignature();
 		wa.setParent(new JDFToXJDF());
 		Assertions.assertTrue(wa.matches(bs));
 	}
@@ -134,9 +134,9 @@ class WalkBinderySignatureTest extends JDFTestCaseBase
 	@Test
 	void testGetElementNames()
 	{
-		JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
+		final JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
 		bs.setBindingEdge(EnumBindingEdge.Bottom);
-		WalkBinderySignature wa = new WalkBinderySignature();
+		final WalkBinderySignature wa = new WalkBinderySignature();
 		Assertions.assertTrue(wa.getElementNames().contains(bs.getLocalName()));
 	}
 

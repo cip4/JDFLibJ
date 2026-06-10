@@ -106,7 +106,7 @@ public abstract class JDFAutoResumeQueueEntryParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoResumeQueueEntryParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoResumeQueueEntryParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoResumeQueueEntryParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoResumeQueueEntryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoResumeQueueEntryParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoResumeQueueEntryParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoResumeQueueEntryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoResumeQueueEntryParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoResumeQueueEntryParams extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFQueueFilter the element
 	 */
-	public JDFQueueFilter getCreateQueueFilter(int iSkip)
+	public JDFQueueFilter getCreateQueueFilter(final int iSkip)
 	{
 		return (JDFQueueFilter) getCreateElement_JDFElement(ElementName.QUEUEFILTER, null, iSkip);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoResumeQueueEntryParams extends JDFElement
 	 * @return JDFQueueFilter the element
 	 *         default is getQueueFilter(0)
 	 */
-	public JDFQueueFilter getQueueFilter(int iSkip)
+	public JDFQueueFilter getQueueFilter(final int iSkip)
 	{
 		return (JDFQueueFilter) getElement(ElementName.QUEUEFILTER, null, iSkip);
 	}

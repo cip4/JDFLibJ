@@ -29,9 +29,9 @@
  *
  * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
  * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- * 
+ *
  * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
- * 
+ *
  *
  */
 package org.cip4.jdflib.util.hotfolder;
@@ -60,9 +60,8 @@ import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 
 /**
- *
  * hot folder listener that submits to a queue
- * 
+ *
  * @author rainer prosi
  * @date Feb 14, 2011
  */
@@ -72,9 +71,8 @@ public class QueueHotFolderListenerImpl implements HotFolderListener
 	protected final Log log;
 
 	/**
-	 *
 	 * @param qhfl
-	 * @param jmf the list of commands - if null create submit + resubmit
+	 * @param jmf  the list of commands - if null create submit + resubmit
 	 */
 	public QueueHotFolderListenerImpl(final QueueHotFolderListener qhfl, JDFJMF jmf)
 	{
@@ -111,7 +109,6 @@ public class QueueHotFolderListenerImpl implements HotFolderListener
 	}
 
 	/**
-	 *
 	 * @param jdfRoot
 	 * @param hotFile
 	 * @param iMessage
@@ -125,7 +122,9 @@ public class QueueHotFolderListenerImpl implements HotFolderListener
 		final JDFJMF jmfRoot = jmfDoc.getJMFRoot();
 		final JDFCommand queueCommand = getQueueCommand(iMessage);
 		if (queueCommand == null)
+		{
 			return false;
+		}
 
 		final JDFCommand newCommand = (JDFCommand) jmfRoot.copyElement(queueCommand, null);
 		newCommand.removeAttribute(AttributeName.ID);
@@ -154,7 +153,6 @@ public class QueueHotFolderListenerImpl implements HotFolderListener
 	}
 
 	/**
-	 *
 	 * @param iMessage
 	 * @return
 	 */
@@ -166,9 +164,9 @@ public class QueueHotFolderListenerImpl implements HotFolderListener
 	/**
 	 * overwrite this method in case you want to customize the hotfolder for returnqueueentryparams and paramtetrizing the ReturnQueueEntryParams template is insufficient
 	 *
-	 * @param stringURL the file url of the hotfolder jdf in the local storage directory (NOT the hf)
+	 * @param stringURL  the file url of the hotfolder jdf in the local storage directory (NOT the hf)
 	 * @param newCommand the command that was generated from the template
-	 * @param jdfRoot the root jdf node of the dropped file
+	 * @param jdfRoot    the root jdf node of the dropped file
 	 */
 	protected void extractReturnParams(final String stringURL, final JDFCommand newCommand, final JDFNode jdfRoot)
 	{
@@ -189,9 +187,9 @@ public class QueueHotFolderListenerImpl implements HotFolderListener
 	/**
 	 * overwrite this method in case you want to customize the hotfolder for submitqueentry and parametrizing the QueueSubmissionParams template is insufficient
 	 *
-	 * @param stringURL the file url of the hotfolder jdf in the local storage directory (NOT the hf)
+	 * @param stringURL  the file url of the hotfolder jdf in the local storage directory (NOT the hf)
 	 * @param newCommand the command that was generated from the template
-	 * @param jdfRoot the root jdfnode of the dropped file
+	 * @param jdfRoot    the root jdfnode of the dropped file
 	 */
 	protected void extractSubmitParams(final String stringURL, final JDFCommand newCommand, final JDFNode jdfRoot)
 	{
@@ -207,9 +205,9 @@ public class QueueHotFolderListenerImpl implements HotFolderListener
 	/**
 	 * overwrite this method in case you want to customize the hotfolder for submitqueentry and parametrizing the QueueSubmissionParams template is insufficient
 	 *
-	 * @param stringURL the file url of the hotfolder jdf in the local storage directory (NOT the hf)
+	 * @param stringURL  the file url of the hotfolder jdf in the local storage directory (NOT the hf)
 	 * @param newCommand the command that was generated from the template
-	 * @param jdfRoot the root jdfnode of the dropped file
+	 * @param jdfRoot    the root jdfnode of the dropped file
 	 */
 	protected void extractResubmitParams(final String stringURL, final JDFCommand newCommand, final JDFNode jdfRoot)
 	{

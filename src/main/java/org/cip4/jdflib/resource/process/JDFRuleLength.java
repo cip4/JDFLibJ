@@ -11,8 +11,8 @@ import org.cip4.jdflib.auto.JDFAutoRuleLength;
 import org.w3c.dom.DOMException;
 
 /**
- * 
  * TODO Please insert comment!
+ *
  * @author rainerprosi
  * @date May 13, 2014
  */
@@ -22,40 +22,39 @@ public class JDFRuleLength extends JDFAutoRuleLength
 
 	/**
 	 * Constructor for JDFRuleLength
-	 * @param myOwnerDocument 
-	 * @param qualifiedName 
-	 * @throws DOMException 
-	 * 
-	
+	 *
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
 	 */
-	public JDFRuleLength(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFRuleLength(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFRuleLength
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFRuleLength(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFRuleLength(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFRuleLength
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @param myLocalName 
-	 * @throws DOMException 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 * @throws DOMException
 	 */
-	public JDFRuleLength(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFRuleLength(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -63,7 +62,7 @@ public class JDFRuleLength extends JDFAutoRuleLength
 	// **************************************** Methods
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

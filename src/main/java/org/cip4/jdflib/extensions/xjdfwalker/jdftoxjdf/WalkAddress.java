@@ -75,9 +75,7 @@ import org.cip4.jdflib.resource.process.JDFAddress;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkAddress extends WalkJDFSubElement
 {
@@ -120,7 +118,6 @@ public class WalkAddress extends WalkJDFSubElement
 	}
 
 	/**
-	 *
 	 * @param jdf
 	 * @param eNew
 	 */

@@ -71,15 +71,13 @@
 package org.cip4.jdflib.auto;
 
 import java.util.List;
-import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoSignal.EChannelMode;
-import org.cip4.jdflib.auto.JDFAutoSignal.EnumChannelMode;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoKnownMsgQuParams : public JDFElement
@@ -93,8 +91,8 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumerations, EnumChannelMode.getEnum(0),
-				null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumerations,
+				JavaEnumUtil.getEnum(EnumChannelMode.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.EXACT, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.LISTCOMMANDS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.LISTQUERIES, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
@@ -115,7 +113,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoKnownMsgQuParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoKnownMsgQuParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -127,7 +125,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoKnownMsgQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoKnownMsgQuParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -140,16 +138,28 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoKnownMsgQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoKnownMsgQuParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * Enumeration strings for numChannelMode
 	 */
+
+	public enum EnumChannelMode
+	{
+		FireAndForget, Reliable;
+
+		public static EnumChannelMode getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumChannelMode.class, val, null);
+		}
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
+		 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -161,7 +171,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	 *
 	 * @param v List of the enumeration values
 	 */
-	public void setEChannelMode(List<EChannelMode> v)
+	public void setChannelMode(final List<EnumChannelMode> v)
 	{
 		setEnumsAttribute(AttributeName.CHANNELMODE, v, null);
 	}
@@ -171,38 +181,9 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public List<EChannelMode> getEnumsChannelMode()
+	public List<EnumChannelMode> getChannelMode()
 	{
-		return getEnumerationsAttribute(AttributeName.CHANNELMODE, null, EChannelMode.class);
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ChannelMode
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5.2) set attribute ChannelMode
-	 *
-	 * @param v List of the enumeration values
-	 * @deprecated use SetEChannelMode(List<EChannelMode>) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setChannelMode(List<EnumChannelMode> v)
-	{
-		setEnumerationsAttribute(AttributeName.CHANNELMODE, v, null);
-	}
-
-	/**
-	 * (9.2) get ChannelMode attribute ChannelMode
-	 *
-	 * @return Vector of the enumerations
-	 * @deprecated use List<EChannelMode > GetEChannelMode() based on java.lang.enum instead
-	 */
-	@Deprecated
-	public Vector<EnumChannelMode> getChannelMode()
-	{
-		return getEnumerationsAttribute(AttributeName.CHANNELMODE, null, EnumChannelMode.getEnum(0), false);
+		return getEnumerationsAttribute(AttributeName.CHANNELMODE, null, EnumChannelMode.class);
 	}
 
 	/*
@@ -215,7 +196,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setExact(boolean value)
+	public void setExact(final boolean value)
 	{
 		setAttribute(AttributeName.EXACT, value, null);
 	}
@@ -240,7 +221,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setListCommands(boolean value)
+	public void setListCommands(final boolean value)
 	{
 		setAttribute(AttributeName.LISTCOMMANDS, value, null);
 	}
@@ -265,7 +246,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setListQueries(boolean value)
+	public void setListQueries(final boolean value)
 	{
 		setAttribute(AttributeName.LISTQUERIES, value, null);
 	}
@@ -290,7 +271,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setListRegistrations(boolean value)
+	public void setListRegistrations(final boolean value)
 	{
 		setAttribute(AttributeName.LISTREGISTRATIONS, value, null);
 	}
@@ -315,7 +296,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setListSignals(boolean value)
+	public void setListSignals(final boolean value)
 	{
 		setAttribute(AttributeName.LISTSIGNALS, value, null);
 	}
@@ -340,7 +321,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPersistent(boolean value)
+	public void setPersistent(final boolean value)
 	{
 		setAttribute(AttributeName.PERSISTENT, value, null);
 	}

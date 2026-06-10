@@ -78,7 +78,7 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * File that gets a new file whenever time and date changes
- * 
+ *
  * @author rainer prosi
  * @date Mar 18, 2012
  */
@@ -151,7 +151,7 @@ public class RollingDateFile extends RollingFile
 
 	/**
 	 * Getter for format attribute.
-	 * 
+	 *
 	 * @return the format
 	 */
 	public String getFormat()
@@ -161,7 +161,7 @@ public class RollingDateFile extends RollingFile
 
 	/**
 	 * Setter for format attribute used to format the file names
-	 * 
+	 *
 	 * @param format the format to set
 	 */
 	public void setFormat(final String format)
@@ -194,13 +194,15 @@ public class RollingDateFile extends RollingFile
 
 	/**
 	 * initialization routine for a new file
-	 * 
+	 *
 	 * @param file
 	 */
 	public void init(final File file)
 	{
 		if (janitor != null)
+		{
 			janitor.cleanup();
+		}
 
 	}
 

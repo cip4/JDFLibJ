@@ -71,7 +71,7 @@
 /*
  * MediaColorTest.java
  * @author Dietrich Mucha
- * 
+ *
  * Copyright (C) 2004 Heidelberger Druckmaschinen AG. All Rights Reserved.
  */
 package org.cip4.jdflib.resource;
@@ -104,18 +104,18 @@ import org.cip4.jdflib.span.JDFStringSpan;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class JDFAutoResourceTest {
+class JDFAutoResourceTest
+{
 	@Test
 	void testRunList()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode r = d.getJDFRoot();
-		JDFRunList rl = (JDFRunList) r.addResource("RunList", null,
-				EnumUsage.Input, null, null, null, null);
-		JDFInsertSheet is1 = rl.appendInsertSheet();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode r = d.getJDFRoot();
+		final JDFRunList rl = (JDFRunList) r.addResource("RunList", null, EnumUsage.Input, null, null, null, null);
+		final JDFInsertSheet is1 = rl.appendInsertSheet();
 		is1.setSheetType(EnumSheetType.SeparatorSheet);
 		is1.setSheetUsage(EnumSheetUsage.Slip);
-		JDFInsertSheet is2 = rl.appendInsertSheet();
+		final JDFInsertSheet is2 = rl.appendInsertSheet();
 		is2.setSheetType(EnumSheetType.SeparatorSheet);
 		is2.setSheetUsage(EnumSheetUsage.Slip);
 		Assertions.assertNotSame(is1, is2, "two insert sheets");
@@ -126,7 +126,8 @@ class JDFAutoResourceTest {
 		try
 		{
 			rl.appendLayoutElement();
-		} catch (JDFException e)
+		}
+		catch (final JDFException e)
 		{
 			b1 = true;
 		}
@@ -136,28 +137,23 @@ class JDFAutoResourceTest {
 	@Test
 	void testEnumerations()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode r = d.getJDFRoot();
-		JDFColorPool cp = (JDFColorPool) r.addResource("ColorPool", null,
-				EnumUsage.Input, null, null, null, null);
-		JDFColor col = cp.appendColor();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode r = d.getJDFRoot();
+		final JDFColorPool cp = (JDFColorPool) r.addResource("ColorPool", null, EnumUsage.Input, null, null, null, null);
+		final JDFColor col = cp.appendColor();
 		col.setColorName(EnumNamedColor.Red);
 		Assertions.assertTrue(col.getColorName() == EnumNamedColor.Red, "named color get");
-		Assertions.assertTrue(col
-				.getAttribute(AttributeName.COLORNAME) == "Red", "named color get raw");
+		Assertions.assertTrue(col.getAttribute(AttributeName.COLORNAME) == "Red", "named color get raw");
 	}
 
 	@Test
 	void testBinderySignature()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
-		JDFResource bs = n.addResource(ElementName.BINDERYSIGNATURE, null,
-				null, null, null, null, null);
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
+		JDFResource bs = n.addResource(ElementName.BINDERYSIGNATURE, null, null, null, null, null, null);
 		Assertions.assertEquals(bs.getResourceClass(), EnumResourceClass.Parameter, "bs class");
-		bs = n.addResource(ElementName.BINDERYSIGNATURE,
-				JDFResource.EnumResourceClass.Parameter, null, null, n, null,
-				null);
+		bs = n.addResource(ElementName.BINDERYSIGNATURE, JDFResource.EnumResourceClass.Parameter, null, null, n, null, null);
 		Assertions.assertEquals(bs.getResourceClass(), EnumResourceClass.Parameter, "bs class old style");
 		Assertions.assertTrue(bs.validClass());
 	}
@@ -165,13 +161,12 @@ class JDFAutoResourceTest {
 	@Test
 	void testMediaIntent()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setType("Product", true);
 
-		JDFMediaIntent mi = (JDFMediaIntent) n.appendMatchingResource(
-				ElementName.MEDIAINTENT, EnumProcessUsage.AnyInput, null);
-		JDFStringSpan sb = mi.appendStockBrand();
+		final JDFMediaIntent mi = (JDFMediaIntent) n.appendMatchingResource(ElementName.MEDIAINTENT, EnumProcessUsage.AnyInput, null);
+		final JDFStringSpan sb = mi.appendStockBrand();
 		sb.setActual("abc foo");
 		sb.setPreferred("abc foo");
 		Assertions.assertTrue(sb.isValid(EnumValidationLevel.Complete), "valid StockBrand");
@@ -182,25 +177,24 @@ class JDFAutoResourceTest {
 	@Test
 	void testDevice()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setType("Stitching", true);
-		JDFDevice dev = (JDFDevice) n.appendMatchingResource(
-				ElementName.DEVICE, EnumProcessUsage.AnyInput, null);
+		final JDFDevice dev = (JDFDevice) n.appendMatchingResource(ElementName.DEVICE, EnumProcessUsage.AnyInput, null);
 		dev.setResStatus(EnumResStatus.Available, true);
 		dev.setKnownLocalizations(new VString("De", null));
 		dev.setSerialNumber("12345");
 		dev.setSecureJMFURL("http://fififi");
-		JDFModule m = dev.appendModule();
+		final JDFModule m = dev.appendModule();
 		// m.setModuleIndex(0);
 		m.setModelDescription("1234");
-		JDFIconList il = dev.appendIconList();
+		final JDFIconList il = dev.appendIconList();
 		Assertions.assertFalse(il.isValid(EnumValidationLevel.Complete), "empty iconlist");
 		Assertions.assertTrue(il.isValid(EnumValidationLevel.Incomplete), "empty iconlist");
-		JDFIcon ic = il.appendIcon();
+		final JDFIcon ic = il.appendIcon();
 		ic.setSize(new JDFXYPair(200, 200));
 		ic.setBitDepth(8);
-		JDFFileSpec fs = ic.appendFileSpec();
+		final JDFFileSpec fs = ic.appendFileSpec();
 		fs.setURL("file:///this.ico");
 
 		Assertions.assertTrue(ic.isValid(EnumValidationLevel.Complete), "icon valid");
@@ -216,12 +210,11 @@ class JDFAutoResourceTest {
 	void testScore()
 	{
 
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setType("CoverApplication", true);
-		JDFCoverApplicationParams cap = (JDFCoverApplicationParams) n
-				.appendMatchingResource(ElementName.COVERAPPLICATIONPARAMS,
-						EnumProcessUsage.AnyInput, null);
+		final JDFCoverApplicationParams cap = (JDFCoverApplicationParams) n.appendMatchingResource(ElementName.COVERAPPLICATIONPARAMS, EnumProcessUsage.AnyInput,
+				null);
 		JDFScore score = cap.appendScore();
 		score.setSide(EnumScoreSide.FromInside);
 		score.setOffset(1234.5);

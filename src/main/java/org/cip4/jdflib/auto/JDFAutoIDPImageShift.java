@@ -71,14 +71,11 @@
 package org.cip4.jdflib.auto;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoImageShift.EPositionX;
-import org.cip4.jdflib.auto.JDFAutoImageShift.EPositionY;
-import org.cip4.jdflib.auto.JDFAutoImageShift.EnumPositionX;
-import org.cip4.jdflib.auto.JDFAutoImageShift.EnumPositionY;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoIDPImageShift : public JDFElement
@@ -92,10 +89,10 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.POSITIONX, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumPositionX.getEnum(0),
-				"None");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITIONY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumPositionY.getEnum(0),
-				"None");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.POSITIONX, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumPositionX.class, 0), "None");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITIONY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumPositionY.class, 0), "None");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHIFTX, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.SHIFTY, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.SHIFTXSIDE1, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
@@ -116,7 +113,7 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIDPImageShift(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoIDPImageShift(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -128,7 +125,7 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIDPImageShift(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoIDPImageShift(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -141,16 +138,42 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoIDPImageShift(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoIDPImageShift(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * Enumeration strings for numPositionX
 	 */
+
+	public enum EnumPositionX
+	{
+		Center, Left, None, Right;
+
+		public static EnumPositionX getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPositionX.class, val, EnumPositionX.None);
+		}
+	}
+
+	/**
+	 * Enumeration strings for numPositionY
+	 */
+
+	public enum EnumPositionY
+	{
+		Bottom, Center, None, Top;
+
+		public static EnumPositionY getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPositionY.class, val, EnumPositionY.None);
+		}
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
+		 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -162,9 +185,9 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPositionX(EPositionX enumVar)
+	public void setPositionX(final EnumPositionX enumVar)
 	{
-		setAttribute(AttributeName.POSITIONX, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.POSITIONX, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -172,35 +195,6 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPositionX getEPositionX()
-	{
-		return EPositionX.getEnum(getAttribute(AttributeName.POSITIONX, null, "None"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute PositionX
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute PositionX
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPositionX(EPositionX) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPositionX(EnumPositionX enumVar)
-	{
-		setAttribute(AttributeName.POSITIONX, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute PositionX
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EPositionX GetEPositionX() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumPositionX getPositionX()
 	{
 		return EnumPositionX.getEnum(getAttribute(AttributeName.POSITIONX, null, "None"));
@@ -216,9 +210,9 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPositionY(EPositionY enumVar)
+	public void setPositionY(final EnumPositionY enumVar)
 	{
-		setAttribute(AttributeName.POSITIONY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.POSITIONY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -226,35 +220,6 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPositionY getEPositionY()
-	{
-		return EPositionY.getEnum(getAttribute(AttributeName.POSITIONY, null, "None"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute PositionY
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute PositionY
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPositionY(EPositionY) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPositionY(EnumPositionY enumVar)
-	{
-		setAttribute(AttributeName.POSITIONY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute PositionY
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EPositionY GetEPositionY() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumPositionY getPositionY()
 	{
 		return EnumPositionY.getEnum(getAttribute(AttributeName.POSITIONY, null, "None"));
@@ -270,7 +235,7 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setShiftX(int value)
+	public void setShiftX(final int value)
 	{
 		setAttribute(AttributeName.SHIFTX, value, null);
 	}
@@ -295,7 +260,7 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setShiftY(int value)
+	public void setShiftY(final int value)
 	{
 		setAttribute(AttributeName.SHIFTY, value, null);
 	}
@@ -320,7 +285,7 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setShiftXSide1(int value)
+	public void setShiftXSide1(final int value)
 	{
 		setAttribute(AttributeName.SHIFTXSIDE1, value, null);
 	}
@@ -345,7 +310,7 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setShiftXSide2(int value)
+	public void setShiftXSide2(final int value)
 	{
 		setAttribute(AttributeName.SHIFTXSIDE2, value, null);
 	}
@@ -370,7 +335,7 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setShiftYSide1(int value)
+	public void setShiftYSide1(final int value)
 	{
 		setAttribute(AttributeName.SHIFTYSIDE1, value, null);
 	}
@@ -395,7 +360,7 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setShiftYSide2(int value)
+	public void setShiftYSide2(final int value)
 	{
 		setAttribute(AttributeName.SHIFTYSIDE2, value, null);
 	}

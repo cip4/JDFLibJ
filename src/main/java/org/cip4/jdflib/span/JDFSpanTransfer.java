@@ -9,12 +9,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanTransfer extends JDFEnumerationSpan
@@ -23,39 +19,39 @@ public class JDFSpanTransfer extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanTransfer
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanTransfer(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanTransfer(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanTransfer
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanTransfer(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanTransfer(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanTransfer
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanTransfer(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanTransfer(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -64,50 +60,21 @@ public class JDFSpanTransfer extends JDFEnumerationSpan
 	 * Enumeration strings for EnumSpanTransfer
 	 */
 
-	public static class EnumSpanTransfer extends ValuedEnum
+	public enum EnumSpanTransfer
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		BuyerToPrinterDeliver, BuyerToPrinterPickup;
 
-		private EnumSpanTransfer(String name)
+		public static EnumSpanTransfer getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanTransfer.class, val, null);
 		}
-
-		public static EnumSpanTransfer getEnum(String enumName)
-		{
-			return (EnumSpanTransfer) getEnum(EnumSpanTransfer.class, enumName);
-		}
-
-		public static EnumSpanTransfer getEnum(int enumValue)
-		{
-			return (EnumSpanTransfer) getEnum(EnumSpanTransfer.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanTransfer.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanTransfer.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanTransfer.class);
-		}
-
-		public static final EnumSpanTransfer BuyerToPrinterDeliver = new EnumSpanTransfer("BuyerToPrinterDeliver");
-		public static final EnumSpanTransfer BuyerToPrinterPickup = new EnumSpanTransfer("BuyerToPrinterPickup");
 
 	}
 
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanTransfer.getEnum(0);
+		return EnumSpanTransfer.class;
 	}
 
 	// **************************************** Methods
@@ -115,7 +82,7 @@ public class JDFSpanTransfer extends JDFEnumerationSpan
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

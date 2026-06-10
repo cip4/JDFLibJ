@@ -80,8 +80,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- *
- *
  * @author rainer prosi
  * @date May 9, 2014
  */
@@ -89,7 +87,6 @@ class JDFAddressTest extends JDFTestCaseBase
 {
 	/**
 	 * tests the JDFAddress class
-	 *
 	 */
 	@Test
 	final void testExtendedAddress()
@@ -102,7 +99,6 @@ class JDFAddressTest extends JDFTestCaseBase
 
 	/**
 	 * tests the JDFAddress class
-	 *
 	 */
 	@Test
 	final void testAddressLine()
@@ -122,7 +118,6 @@ class JDFAddressTest extends JDFTestCaseBase
 
 	/**
 	 * tests the JDFAddress class
-	 *
 	 */
 	@Test
 	final void testAddressLines()
@@ -144,7 +139,6 @@ class JDFAddressTest extends JDFTestCaseBase
 
 	/**
 	 * tests the JDFAddress class
-	 *
 	 */
 	@Test
 	final void testExtendedAddressText()

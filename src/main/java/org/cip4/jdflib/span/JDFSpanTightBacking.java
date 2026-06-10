@@ -9,12 +9,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanTightBacking extends JDFEnumerationSpan
@@ -23,39 +19,39 @@ public class JDFSpanTightBacking extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanTightBacking
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanTightBacking(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanTightBacking(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanTightBacking
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanTightBacking(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanTightBacking(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanTightBacking
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanTightBacking(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanTightBacking(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -63,45 +59,14 @@ public class JDFSpanTightBacking extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanTightBacking
 	 */
-	public static class EnumSpanTightBacking extends ValuedEnum
+	public enum EnumSpanTightBacking
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Flat, Round, FlatBacked, RoundBacked;
 
-		private EnumSpanTightBacking(String name)
+		public static EnumSpanTightBacking getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanTightBacking.class, val, null);
 		}
-
-		public static EnumSpanTightBacking getEnum(String enumName)
-		{
-			return (EnumSpanTightBacking) getEnum(EnumSpanTightBacking.class, enumName);
-		}
-
-		public static EnumSpanTightBacking getEnum(int enumValue)
-		{
-			return (EnumSpanTightBacking) getEnum(EnumSpanTightBacking.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanTightBacking.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanTightBacking.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanTightBacking.class);
-		}
-
-		public static final EnumSpanTightBacking Flat = new EnumSpanTightBacking("Flat");
-		public static final EnumSpanTightBacking Round = new EnumSpanTightBacking("Round");
-		public static final EnumSpanTightBacking FlatBacked = new EnumSpanTightBacking("FlatBacked");
-		public static final EnumSpanTightBacking RoundBacked = new EnumSpanTightBacking("RoundBacked");
 
 	}
 
@@ -110,18 +75,18 @@ public class JDFSpanTightBacking extends JDFEnumerationSpan
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanTightBacking.getEnum(0);
+		return EnumSpanTightBacking.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

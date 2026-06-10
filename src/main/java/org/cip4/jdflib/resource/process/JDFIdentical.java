@@ -91,7 +91,6 @@ import org.w3c.dom.DOMException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         Jul 9, 2009
  */
 public class JDFIdentical extends JDFAutoIdentical
@@ -130,10 +129,10 @@ public class JDFIdentical extends JDFAutoIdentical
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
-	 *
 	 * @throws DOMException
 	 */
-	public JDFIdentical(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFIdentical(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -185,12 +184,18 @@ public class JDFIdentical extends JDFAutoIdentical
 		final JDFAttributeMap identityMap = getPartMap();
 		final JDFResource parentResource = getParentResource();
 		if (parentResource == null)
+		{
 			return null;
+		}
 		final JDFAttributeMap myMap = parentResource.getPartMap();
 		if (ContainerUtil.equals(identityMap, myMap))
+		{
 			return parentResource;
+		}
 		else
+		{
 			return parentResource.getResourceRoot().getPartition(identityMap, null);
+		}
 	}
 
 	/**
@@ -224,7 +229,6 @@ public class JDFIdentical extends JDFAutoIdentical
 	}
 
 	/**
-	 *
 	 * @param leaves
 	 */
 	public static VElement removeIdenticals(final VElement leaves)

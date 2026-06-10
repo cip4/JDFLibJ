@@ -133,7 +133,7 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDateTimeState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDateTimeState(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -145,7 +145,7 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDateTimeState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDateTimeState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -158,7 +158,7 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDateTimeState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDateTimeState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -169,7 +169,7 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -190,7 +190,7 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setDefaultValue(JDFDate value)
+	public void setDefaultValue(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -207,8 +207,8 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	 */
 	public JDFDate getDefaultValue()
 	{
-		String str = getAttribute(AttributeName.DEFAULTVALUE, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.DEFAULTVALUE, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -222,7 +222,7 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setCurrentValue(JDFDate value)
+	public void setCurrentValue(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -239,8 +239,8 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	 */
 	public JDFDate getCurrentValue()
 	{
-		String str = getAttribute(AttributeName.CURRENTVALUE, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.CURRENTVALUE, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -254,7 +254,7 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowedValueDurationList(JDFDurationRangeList value)
+	public void setAllowedValueDurationList(final JDFDurationRangeList value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUEDURATIONLIST, value, null);
 	}
@@ -267,8 +267,8 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	 */
 	public JDFDurationRangeList getAllowedValueDurationList()
 	{
-		String strAttrName = getAttribute(AttributeName.ALLOWEDVALUEDURATIONLIST, null, null);
-		JDFDurationRangeList nPlaceHolder = JDFDurationRangeList.createDurationRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.ALLOWEDVALUEDURATIONLIST, null, null);
+		final JDFDurationRangeList nPlaceHolder = JDFDurationRangeList.createDurationRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -282,7 +282,7 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowedValueList(JDFDateTimeRangeList value)
+	public void setAllowedValueList(final JDFDateTimeRangeList value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUELIST, value, null);
 	}
@@ -295,8 +295,8 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	 */
 	public JDFDateTimeRangeList getAllowedValueList()
 	{
-		String strAttrName = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
-		JDFDateTimeRangeList nPlaceHolder = JDFDateTimeRangeList.createDateTimeRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
+		final JDFDateTimeRangeList nPlaceHolder = JDFDateTimeRangeList.createDateTimeRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -310,7 +310,7 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentValueDurationList(JDFDurationRangeList value)
+	public void setPresentValueDurationList(final JDFDurationRangeList value)
 	{
 		setAttribute(AttributeName.PRESENTVALUEDURATIONLIST, value, null);
 	}
@@ -323,8 +323,8 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	 */
 	public JDFDurationRangeList getPresentValueDurationList()
 	{
-		String strAttrName = getAttribute(AttributeName.PRESENTVALUEDURATIONLIST, null, null);
-		JDFDurationRangeList nPlaceHolder = JDFDurationRangeList.createDurationRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PRESENTVALUEDURATIONLIST, null, null);
+		final JDFDurationRangeList nPlaceHolder = JDFDurationRangeList.createDurationRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -338,7 +338,7 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentValueList(JDFDateTimeRangeList value)
+	public void setPresentValueList(final JDFDateTimeRangeList value)
 	{
 		setAttribute(AttributeName.PRESENTVALUELIST, value, null);
 	}
@@ -351,8 +351,8 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	 */
 	public JDFDateTimeRangeList getPresentValueList()
 	{
-		String strAttrName = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
-		JDFDateTimeRangeList nPlaceHolder = JDFDateTimeRangeList.createDateTimeRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
+		final JDFDateTimeRangeList nPlaceHolder = JDFDateTimeRangeList.createDateTimeRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -388,7 +388,7 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc the element
 	 */
-	public JDFLoc getCreateLoc(int iSkip)
+	public JDFLoc getCreateLoc(final int iSkip)
 	{
 		return (JDFLoc) getCreateElement_JDFElement(ElementName.LOC, null, iSkip);
 	}
@@ -400,7 +400,7 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	 * @return JDFLoc the element
 	 *         default is getLoc(0)
 	 */
-	public JDFLoc getLoc(int iSkip)
+	public JDFLoc getLoc(final int iSkip)
 	{
 		return (JDFLoc) getElement(ElementName.LOC, null, iSkip);
 	}
@@ -451,7 +451,7 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFValueLoc the element
 	 */
-	public JDFValueLoc getCreateValueLoc(int iSkip)
+	public JDFValueLoc getCreateValueLoc(final int iSkip)
 	{
 		return (JDFValueLoc) getCreateElement_JDFElement(ElementName.VALUELOC, null, iSkip);
 	}
@@ -463,7 +463,7 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	 * @return JDFValueLoc the element
 	 *         default is getValueLoc(0)
 	 */
-	public JDFValueLoc getValueLoc(int iSkip)
+	public JDFValueLoc getValueLoc(final int iSkip)
 	{
 		return (JDFValueLoc) getElement(ElementName.VALUELOC, null, iSkip);
 	}

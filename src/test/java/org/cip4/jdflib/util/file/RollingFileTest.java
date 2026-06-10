@@ -105,7 +105,9 @@ class RollingFileTest extends JDFTestCaseBase
 		for (int i = 0; i < 1620; i++)
 		{
 			if (files.size() == 42)
+			{
 				break;
+			}
 			ThreadUtil.sleep(23);
 		}
 		assertEquals(42, files.size(), 2);
@@ -147,7 +149,6 @@ class RollingFileTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	synchronized void testPreExist() throws IOException
@@ -158,7 +159,6 @@ class RollingFileTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * TODO Please insert comment!
 	 */
 	@Test

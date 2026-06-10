@@ -1,6 +1,6 @@
 /*
  * JDFExampleDocTest.java
- * 
+ *
  * @author muchadie
  */
 package org.cip4.jdflib.examples;
@@ -27,6 +27,7 @@ import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 class IterationTest extends JDFTestCaseBase
 {
 	private static final String ITERATION_PAUSED = "IterationPaused";
@@ -41,7 +42,7 @@ class IterationTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////
 	/**
 	 * test iteration
-	 * 
+	 *
 	 * @return
 	 */
 	@Test
@@ -65,7 +66,8 @@ class IterationTest extends JDFTestCaseBase
 		iterNode = iterDoc.getJDFRoot();
 		iterNode.setCombined(new VString("LayoutElementProduction Approval", " "));
 		iterNode.setStatus(EnumNodeStatus.Waiting);
-		iterLepp = (JDFLayoutElementProductionParams) iterNode.appendMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumProcessUsage.AnyInput, null);
+		iterLepp = (JDFLayoutElementProductionParams) iterNode.appendMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumProcessUsage.AnyInput,
+				null);
 		iterLepp.setResStatus(EnumResStatus.Available, true);
 		iterApp = (JDFApprovalParams) iterNode.appendMatchingResource(ElementName.APPROVALPARAMS, EnumProcessUsage.AnyInput, null);
 		iterApp.setResStatus(EnumResStatus.Available, true);
@@ -86,13 +88,14 @@ class IterationTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////
 
-	private void iterateRead(int i)
+	private void iterateRead(final int i)
 	{
 		iterDoc = JDFDoc.parseFile(getIteration(i));
 		Assertions.assertNotNull(iterDoc);
 		iterNode = iterDoc.getJDFRoot();
 		Assertions.assertNotNull(iterNode);
-		iterLepp = (JDFLayoutElementProductionParams) iterNode.getMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumProcessUsage.AnyInput, null, 0);
+		iterLepp = (JDFLayoutElementProductionParams) iterNode.getMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumProcessUsage.AnyInput, null,
+				0);
 		Assertions.assertNotNull(iterLepp);
 		iterApp = (JDFApprovalParams) iterNode.getMatchingResource(ElementName.APPROVALPARAMS, EnumProcessUsage.AnyInput, null, 0);
 		Assertions.assertNotNull(iterApp);
@@ -108,7 +111,7 @@ class IterationTest extends JDFTestCaseBase
 	private void iterateFirst()
 	{
 		iterateRead(0);
-		JDFPhaseTime pt = iterNode.getAuditPool().setPhase(EnumNodeStatus.InProgress, "First Iteration Ongoing", null, null);
+		final JDFPhaseTime pt = iterNode.getAuditPool().setPhase(EnumNodeStatus.InProgress, "First Iteration Ongoing", null, null);
 		pt.setStart(new JDFDate(System.currentTimeMillis() - 100000));
 		pt.setEnd(new JDFDate(System.currentTimeMillis()));
 		pt.appendEmployee().setPersonalID("Employee 1");
@@ -124,7 +127,7 @@ class IterationTest extends JDFTestCaseBase
 	private void iterateSecond()
 	{
 		iterateRead(1);
-		JDFPhaseTime pt = iterNode.getAuditPool().setPhase(EnumNodeStatus.InProgress, "First Approval Ongoing", null, null);
+		final JDFPhaseTime pt = iterNode.getAuditPool().setPhase(EnumNodeStatus.InProgress, "First Approval Ongoing", null, null);
 		pt.setStart(new JDFDate(System.currentTimeMillis() + 1000000));
 		pt.setEnd(new JDFDate(System.currentTimeMillis() + 1100000));
 		pt.appendEmployee().setPersonalID("Employee 2");
@@ -140,13 +143,13 @@ class IterationTest extends JDFTestCaseBase
 	private void iterateThird()
 	{
 		iterateRead(2);
-		JDFPhaseTime pt = iterNode.getAuditPool().setPhase(EnumNodeStatus.InProgress, "Second Iteration Ongoing", null, null);
+		final JDFPhaseTime pt = iterNode.getAuditPool().setPhase(EnumNodeStatus.InProgress, "Second Iteration Ongoing", null, null);
 		pt.setStart(new JDFDate(System.currentTimeMillis() + 2000000));
 		pt.setEnd(new JDFDate(System.currentTimeMillis() + 2100000));
 		pt.appendEmployee().setPersonalID("Employee 1");
 		pt.appendDevice().setDeviceID("Device 2");
 		iterRuli.setResStatus(EnumResStatus.Unavailable, false);
-		JDFResourceAudit ra = iterNode.cloneResourceToModify(iterNode.getLink(iterRuli, null));
+		final JDFResourceAudit ra = iterNode.cloneResourceToModify(iterNode.getLink(iterRuli, null));
 		iterRuli = (JDFRunList) ra.getNewLink().getTarget();
 		iterRuli.setResStatus(EnumResStatus.Draft, false);
 		iterRuli.setFileURL(StringUtil.uncToUrl("C:\\local\\MyUpdatedInOutput.pdf", false));
@@ -161,7 +164,7 @@ class IterationTest extends JDFTestCaseBase
 	private void iterateForth()
 	{
 		iterateRead(3);
-		JDFPhaseTime pt = iterNode.getAuditPool().setPhase(EnumNodeStatus.InProgress, "Second Approval Ongoing", null, null);
+		final JDFPhaseTime pt = iterNode.getAuditPool().setPhase(EnumNodeStatus.InProgress, "Second Approval Ongoing", null, null);
 		pt.setStart(new JDFDate(System.currentTimeMillis() + 3000000));
 		pt.setEnd(new JDFDate(System.currentTimeMillis() + 3100000));
 		pt.appendEmployee().setPersonalID("Employee 3");
@@ -178,7 +181,7 @@ class IterationTest extends JDFTestCaseBase
 	private void iterateLast()
 	{
 		iterateRead(4);
-		JDFPhaseTime pt = iterNode.getAuditPool().setPhase(EnumNodeStatus.InProgress, "Final Iteration Ongoing - final output", null, null);
+		final JDFPhaseTime pt = iterNode.getAuditPool().setPhase(EnumNodeStatus.InProgress, "Final Iteration Ongoing - final output", null, null);
 		pt.setStart(new JDFDate(System.currentTimeMillis() + 4000000));
 		pt.setEnd(new JDFDate(System.currentTimeMillis() + 4100000));
 		pt.appendEmployee().setPersonalID("Employee 1");
@@ -189,7 +192,7 @@ class IterationTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////
 
-	private String getIteration(int i)
+	private String getIteration(final int i)
 	{
 		return sm_dirTestDataTemp + File.separator + "Interation_" + String.valueOf(i) + ".jdf";
 	}

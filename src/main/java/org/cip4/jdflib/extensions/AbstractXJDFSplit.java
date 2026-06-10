@@ -56,7 +56,6 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author rainer prosi
- *
  */
 public abstract class AbstractXJDFSplit implements IXJDFSplit
 {
@@ -102,7 +101,9 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 			{
 				final EnumUsage usage = getExchangeUsage(set, types, allTypes);
 				if (usage != null)
+				{
 					set.setUsage(usage);
+				}
 				final SetHelper set2 = matchesType(set, types, allTypes);
 				if (map != null)
 				{
@@ -113,9 +114,8 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 	}
 
 	/**
-	 *
-	 * @param set the set to keep or zapp
-	 * @param types from the xjdf root
+	 * @param set      the set to keep or zapp
+	 * @param types    from the xjdf root
 	 * @param allTypes
 	 * @return null if deleted or no further processing is required
 	 */
@@ -126,9 +126,8 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 	}
 
 	/**
-	 *
-	 * @param set the set to keep or zapp
-	 * @param types from the xjdf root
+	 * @param set      the set to keep or zapp
+	 * @param types    from the xjdf root
 	 * @param allTypes
 	 * @return null if deleted or no further processing is required
 	 */
@@ -145,7 +144,6 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 	}
 
 	/**
-	 *
 	 * @param set
 	 * @param types
 	 * @return
@@ -165,7 +163,6 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	protected VString getProductResources()
@@ -198,7 +195,6 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 	}
 
 	/**
-	 *
 	 * @param set
 	 * @param types
 	 * @param allTypes
@@ -226,7 +222,6 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 	}
 
 	/**
-	 *
 	 * @param set
 	 * @param types
 	 * @param allTypes
@@ -261,7 +256,6 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 	}
 
 	/**
-	 *
 	 * @param xjdf
 	 * @return
 	 */
@@ -274,7 +268,6 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 	}
 
 	/**
-	 *
 	 * @param set
 	 * @param map
 	 */
@@ -308,9 +301,13 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 	{
 		String name = set.getName();
 		if (ElementName.COLOR.equals(name))
+		{
 			name = ElementName.COLORPOOL;
+		}
 		else if (XJDFConstants.Content.equals(name))
+		{
 			name = ElementName.PAGELIST;
+		}
 		return name;
 	}
 
@@ -326,7 +323,6 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 	}
 
 	/**
-	 *
 	 * @param set
 	 * @param li
 	 */
@@ -366,13 +362,14 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 	}
 
 	/**
-	 *
 	 * @param v
 	 */
 	protected void consolidateExchangeResources(final Vector<XJDFHelper> v)
 	{
 		if (v == null || v.size() < 2)
+		{
 			return;
+		}
 		for (int i = 1; i < v.size(); i++)
 		{
 			final XJDFHelper h0 = v.get(i - 1);

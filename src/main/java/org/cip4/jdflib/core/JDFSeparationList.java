@@ -178,10 +178,12 @@ public class JDFSeparationList extends JDFAutoSeparationList
 	public void appendSeparations(final List<String> vSeps)
 	{
 		if (vSeps != null)
+		{
 			for (final String sep : vSeps)
 			{
 				appendSeparation(sep);
 			}
+		}
 	}
 
 	public void ensureSeparations(final VString vSeps)
@@ -207,8 +209,6 @@ public class JDFSeparationList extends JDFAutoSeparationList
 
 	/**
 	 * convenience utility to set to cmyk
-	 *
-	 *
 	 */
 	public void setCMYK()
 	{
@@ -287,7 +287,6 @@ public class JDFSeparationList extends JDFAutoSeparationList
 	}
 
 	/**
-	 *
 	 * ensure that all separations are unique
 	 *
 	 * @return the unified vector of separation names
@@ -298,12 +297,13 @@ public class JDFSeparationList extends JDFAutoSeparationList
 		final int l = v.size();
 		v.unify();
 		if (v.size() != l)
+		{
 			setSeparations(v);
+		}
 		return v;
 	}
 
 	/**
-	 *
 	 * @param seps
 	 */
 	public void removeSeparations(final List<String> seps)

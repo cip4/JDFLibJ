@@ -104,7 +104,7 @@ public abstract class JDFAutoRuleLength extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoRuleLength(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoRuleLength(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -116,7 +116,7 @@ public abstract class JDFAutoRuleLength extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoRuleLength(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoRuleLength(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -129,7 +129,7 @@ public abstract class JDFAutoRuleLength extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoRuleLength(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoRuleLength(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -150,7 +150,7 @@ public abstract class JDFAutoRuleLength extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDDESCutType(int value)
+	public void setDDESCutType(final int value)
 	{
 		setAttribute(AttributeName.DDESCUTTYPE, value, null);
 	}
@@ -175,7 +175,7 @@ public abstract class JDFAutoRuleLength extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLengthJDF(double value)
+	public void setLengthJDF(final double value)
 	{
 		setAttribute(AttributeName.LENGTHJDF, value, null);
 	}

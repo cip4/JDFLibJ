@@ -147,7 +147,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDropItemIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDropItemIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -159,7 +159,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDropItemIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDropItemIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -172,7 +172,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDropItemIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDropItemIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -193,7 +193,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAdditionalAmount(int value)
+	public void setAdditionalAmount(final int value)
 	{
 		setAttribute(AttributeName.ADDITIONALAMOUNT, value, null);
 	}
@@ -218,7 +218,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAmount(int value)
+	public void setAmount(final int value)
 	{
 		setAttribute(AttributeName.AMOUNT, value, null);
 	}
@@ -243,7 +243,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDropID(String value)
+	public void setDropID(final String value)
 	{
 		setAttribute(AttributeName.DROPID, value, null);
 	}
@@ -268,7 +268,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOrderedAmount(int value)
+	public void setOrderedAmount(final int value)
 	{
 		setAttribute(AttributeName.ORDEREDAMOUNT, value, null);
 	}
@@ -293,7 +293,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProof(String value)
+	public void setProof(final String value)
 	{
 		setAttribute(AttributeName.PROOF, value, null);
 	}
@@ -318,7 +318,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setUnit(String value)
+	public void setUnit(final String value)
 	{
 		setAttribute(AttributeName.UNIT, value, null);
 	}
@@ -406,7 +406,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refComponent(JDFComponent refTarget)
+	public void refComponent(final JDFComponent refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -447,7 +447,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refExposedMedia(JDFExposedMedia refTarget)
+	public void refExposedMedia(final JDFExposedMedia refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -488,7 +488,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refInk(JDFInk refTarget)
+	public void refInk(final JDFInk refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -529,7 +529,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMedia(JDFMedia refTarget)
+	public void refMedia(final JDFMedia refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -570,7 +570,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refPallet(JDFPallet refTarget)
+	public void refPallet(final JDFPallet refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -611,7 +611,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refRegisterRibbon(JDFRegisterRibbon refTarget)
+	public void refRegisterRibbon(final JDFRegisterRibbon refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -652,7 +652,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refStrap(JDFStrap refTarget)
+	public void refStrap(final JDFStrap refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -693,7 +693,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refBundle(JDFBundle refTarget)
+	public void refBundle(final JDFBundle refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -734,7 +734,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refDigitalMedia(JDFDigitalMedia refTarget)
+	public void refDigitalMedia(final JDFDigitalMedia refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -775,7 +775,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refRollStand(JDFRollStand refTarget)
+	public void refRollStand(final JDFRollStand refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -816,7 +816,7 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refTool(JDFTool refTarget)
+	public void refTool(final JDFTool refTarget)
 	{
 		refElement(refTarget);
 	}

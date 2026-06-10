@@ -124,7 +124,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoStripBindingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoStripBindingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -136,7 +136,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoStripBindingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoStripBindingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -149,7 +149,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoStripBindingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoStripBindingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -160,7 +160,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -191,7 +191,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	 * @param value the value to set the attribute to
 	 */
 	@Override
-	public void setBrand(String value)
+	public void setBrand(final String value)
 	{
 		setAttribute(AttributeName.BRAND, value, null);
 	}
@@ -217,7 +217,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDistance(double value)
+	public void setDistance(final double value)
 	{
 		setAttribute(AttributeName.DISTANCE, value, null);
 	}
@@ -242,7 +242,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLengthJDF(double value)
+	public void setLengthJDF(final double value)
 	{
 		setAttribute(AttributeName.LENGTHJDF, value, null);
 	}
@@ -267,7 +267,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStripColor(EnumNamedColor value)
+	public void setStripColor(final EnumNamedColor value)
 	{
 		setAttribute(AttributeName.STRIPCOLOR, value == null ? null : value.getName(), null);
 	}
@@ -296,7 +296,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStripColorDetails(String value)
+	public void setStripColorDetails(final String value)
 	{
 		setAttribute(AttributeName.STRIPCOLORDETAILS, value, null);
 	}
@@ -353,7 +353,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refHoleMakingParams(JDFHoleMakingParams refTarget)
+	public void refHoleMakingParams(final JDFHoleMakingParams refTarget)
 	{
 		refElement(refTarget);
 	}

@@ -79,16 +79,13 @@ package org.cip4.jdflib.core;
 
 import java.io.File;
 import java.io.InputStream;
-import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -104,6 +101,7 @@ import org.cip4.jdflib.datatypes.JDFRange;
 import org.cip4.jdflib.datatypes.JDFRangeList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.FixVersion;
+import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -181,14 +179,14 @@ public class JDFElement extends KElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SETTINGSPOLICY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumSettingsPolicy.getEnum(0),
-				null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SETTINGSPOLICY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumSettingsPolicy.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.COMMENTURL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.DESCRIPTIVENAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.BESTEFFORTEXCEPTIONS, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.MUSTHONOREXCEPTIONS, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.OPERATORINTERVENTIONEXCEPTIONS, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[6] = new AtrInfoTable(JDFConstants.XMLNS, 0x33333333, AttributeInfo.EnumAttributeType.URI, null, null);
+		atrInfoTable[6] = new AtrInfoTable(JDFCoreConstants.XMLNS, 0x33333333, AttributeInfo.EnumAttributeType.URI, null, null);
 	}
 
 	/**
@@ -452,18 +450,18 @@ public class JDFElement extends KElement
 
 		final VString vAtts = getAttributeVector();
 		String prefix = getPrefix();
-		if (prefix != null && !JDFConstants.EMPTYSTRING.equals(prefix))
+		if (prefix != null && !JDFCoreConstants.EMPTYSTRING.equals(prefix))
 		{
-			prefix += JDFConstants.COLON;
+			prefix += JDFCoreConstants.COLON;
 		}
 		else
 		{
-			prefix = JDFConstants.EMPTYSTRING;
+			prefix = JDFCoreConstants.EMPTYSTRING;
 		}
 		for (int i = 0; i < vReqKeys.size() && vMissing.size() < nMax; i++)
 		{
 			final String req = vReqKeys.get(i);
-			if (!vAtts.contains(prefix + req) && !vAtts.contains(req) && (!JDFConstants.XMLNS.equals(req) || super.getNamespaceURI() == null))
+			if (!vAtts.contains(prefix + req) && !vAtts.contains(req) && (!JDFCoreConstants.XMLNS.equals(req) || super.getNamespaceURI() == null))
 			{
 				vMissing.addElement(prefix + req);
 			}
@@ -487,13 +485,13 @@ public class JDFElement extends KElement
 		// vReqKeys
 
 		String prefix = getPrefix();
-		if (prefix != null && !JDFConstants.EMPTYSTRING.equals(prefix))
+		if (prefix != null && !JDFCoreConstants.EMPTYSTRING.equals(prefix))
 		{
-			prefix += JDFConstants.COLON;
+			prefix += JDFCoreConstants.COLON;
 		}
 		else
 		{
-			prefix = JDFConstants.EMPTYSTRING;
+			prefix = JDFCoreConstants.EMPTYSTRING;
 		}
 		for (int i = 0; i < vReqKeys.size() && vMatching.size() < nMax; i++)
 		{
@@ -577,7 +575,7 @@ public class JDFElement extends KElement
 	public String prereleaseElements()
 	{
 		final VString v = getElementInfo().prereleaseElements();
-		return StringUtil.setvString(v, JDFConstants.COMMA, null, null);
+		return StringUtil.setvString(v, JDFCoreConstants.COMMA, null, null);
 	}
 
 	/**
@@ -687,7 +685,7 @@ public class JDFElement extends KElement
 	public VString getUnknownAttributes(final boolean bIgnorePrivate, final int nMax)
 	{
 		final VString vKnownAttribs = knownAttributes();
-		final VString v = bIgnorePrivate ? new VString(StringUtil.tokenize(" :JDF", JDFConstants.COLON, false)) : new VString();
+		final VString v = bIgnorePrivate ? new VString(StringUtil.tokenize(" :JDF", JDFCoreConstants.COLON, false)) : new VString();
 		return getUnknownAttributeVector(vKnownAttribs, v, nMax);
 	}
 
@@ -722,9 +720,9 @@ public class JDFElement extends KElement
 			for (int j = 0; j < vInNameSpace.size(); j++)
 			{
 				// tokenize needs a blank
-				if (JDFConstants.BLANK.equals(vInNameSpace.elementAt(j)))
+				if (JDFCoreConstants.BLANK.equals(vInNameSpace.elementAt(j)))
 				{
-					vInNameSpace.setElementAt(JDFConstants.EMPTYSTRING, j);
+					vInNameSpace.setElementAt(JDFCoreConstants.EMPTYSTRING, j);
 				}
 			}
 		}
@@ -734,7 +732,7 @@ public class JDFElement extends KElement
 			for (final String strAtts : vAtts)
 			{
 				final String ns = KElement.xmlnsPrefix(strAtts);
-				if ((JDFConstants.XSI.equals(ns)) || JDFConstants.XMLNS.equals(ns))
+				if ((JDFConstants.XSI.equals(ns)) || JDFCoreConstants.XMLNS.equals(ns))
 				{
 					continue;
 				}
@@ -764,7 +762,7 @@ public class JDFElement extends KElement
 	public VString getUnknownElements(final boolean bIgnorePrivate, final int nMax)
 	{
 		final VString v1 = knownElements();
-		final VString v2 = StringUtil.tokenize(" :JDF", JDFConstants.COLON, false);
+		final VString v2 = StringUtil.tokenize(" :JDF", JDFCoreConstants.COLON, false);
 
 		return getUnknownElementVector(v1, bIgnorePrivate ? v2 : new VString(), nMax);
 	}
@@ -784,9 +782,9 @@ public class JDFElement extends KElement
 		for (int j = 0; j < vInNameSpace.size(); j++)
 		{
 			// tokenize needs a blank
-			if (JDFConstants.BLANK.equals(vInNameSpace.elementAt(j)))
+			if (JDFCoreConstants.BLANK.equals(vInNameSpace.elementAt(j)))
 			{
-				vInNameSpace.setElementAt(JDFConstants.EMPTYSTRING, j);
+				vInNameSpace.setElementAt(JDFCoreConstants.EMPTYSTRING, j);
 			}
 		}
 
@@ -804,7 +802,7 @@ public class JDFElement extends KElement
 				String ns = KElement.xmlnsPrefix(attr);
 				if (ns == null)
 				{
-					ns = JDFConstants.EMPTYSTRING;
+					ns = JDFCoreConstants.EMPTYSTRING;
 				}
 
 				if ((bAllNS || (vInNameSpace.contains(ns))) && !vKnownKeys.contains(attr))
@@ -824,7 +822,7 @@ public class JDFElement extends KElement
 	 * @param key the local name of the attribute
 	 * @return EnumAttributeType of the attribute
 	 */
-	public ValuedEnum getTypeForAttribute(final String key)
+	public EnumAttributeType getTypeForAttribute(final String key)
 	{
 		return getAttributeInfo().getAttributeType(key);
 	}
@@ -845,14 +843,15 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 * Get the ValuedEnum for an enumerated attribute
+	 * Get the enum value for an enumerated attribute
 	 *
 	 * @param key the local name of the attribute
-	 * @return ValuedEnum.Unknown of the requested attribute or null if the attribute is not an enum
+	 * @return enum value of the requested attribute or null if the attribute is not an enum
 	 */
-	public ValuedEnum getEnumforAttribute(final String key)
+	public Enum<?> getEnumforAttribute(final String key)
 	{
-		return getAttributeInfo().getAttributeEnum(key);
+		final Object enumValue = getAttributeInfo().getAttributeEnum(key);
+		return enumValue instanceof Enum<?> ? (Enum<?>) enumValue : null;
 	}
 
 	/**
@@ -1026,10 +1025,15 @@ public class JDFElement extends KElement
 	 */
 	public VString getNamesVector(final String key)
 	{
-		final ValuedEnum enu = getEnumforAttribute(key);
+		final Enum<?> enu = getEnumforAttribute(key);
 		if (enu != null)
 		{
-			return EnumUtil.getNamesVector(enu.getClass());
+			final VString v = new VString();
+			for (final Enum<?> e : enu.getDeclaringClass().getEnumConstants())
+			{
+				v.add(e.name());
+			}
+			return v;
 		}
 		return null;
 	}
@@ -1126,67 +1130,25 @@ public class JDFElement extends KElement
 	/**
 	 * Boolean Enumeration from JDF Spec Orientation of a physical resource.
 	 */
-	public static final class EnumBoolean extends ValuedEnum
+	public enum EnumBoolean
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		True, False;
 
-		private EnumBoolean(final String name)
-		{
-			super(name.toLowerCase(), m_startValue++);
-		}
-
-		/**
-		 * @param enumName the name of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
-		 */
 		public static EnumBoolean getEnum(final String enumName)
 		{
-			return (EnumBoolean) getEnum(EnumBoolean.class, enumName.toLowerCase());
+			return JavaEnumUtil.getEnumIgnoreCase(EnumBoolean.class, enumName, null);
 		}
 
-		/**
-		 * @param enumValue the value of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
-		 */
 		public static EnumBoolean getEnum(final int enumValue)
 		{
-			return (EnumBoolean) getEnum(EnumBoolean.class, enumValue);
+			final EnumBoolean[] values = values();
+			return enumValue >= 0 && enumValue < values.length ? values[enumValue] : null;
 		}
 
-		/**
-		 * @return a map of all orientation enums
-		 */
-		public static Map getEnumMap()
+		public String getName()
 		{
-			return getEnumMap(EnumBoolean.class);
+			return name().toLowerCase();
 		}
-
-		/**
-		 * @return a list of all orientation enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumBoolean.class);
-		}
-
-		/**
-		 * @return an iterator over the enum objects
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumBoolean.class);
-		}
-
-		// enums for validation of booleans
-		/**
-		 *
-		 */
-		public static final EnumBoolean True = new EnumBoolean(JDFConstants.BOOLEAN_TRUE);
-		/**
-		 *
-		 */
-		public static final EnumBoolean False = new EnumBoolean(JDFConstants.BOOLEAN_FALSE);
 	}
 
 	/**
@@ -1197,7 +1159,7 @@ public class JDFElement extends KElement
 	{
 		Rotate0, Rotate90, Rotate180, Rotate270, Flip0, Flip90, Flip180, Flip270;
 
-		public static EOrientation getEnum(String val)
+		public static EOrientation getEnum(final String val)
 		{
 			return JavaEnumUtil.getEnumIgnoreCase(EOrientation.class, val, null);
 		}
@@ -1207,92 +1169,25 @@ public class JDFElement extends KElement
 	 * Orientation Enumeration <br>
 	 * Orientation of a physical resource.
 	 */
-	@SuppressWarnings("unchecked")
-	public static final class EnumOrientation extends ValuedEnum
+	public enum EnumOrientation
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Flip0, Flip90, Flip180, Flip270, Rotate0, Rotate90, Rotate180, Rotate270;
 
-		private EnumOrientation(final String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the name of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
-		 */
 		public static EnumOrientation getEnum(final String enumName)
 		{
-			return (EnumOrientation) getEnum(EnumOrientation.class, enumName);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumOrientation.class, enumName, null);
 		}
 
-		/**
-		 * @param enumValue the value of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
-		 */
 		public static EnumOrientation getEnum(final int enumValue)
 		{
-			return (EnumOrientation) getEnum(EnumOrientation.class, enumValue);
+			final EnumOrientation[] values = values();
+			return enumValue >= 0 && enumValue < values.length ? values[enumValue] : null;
 		}
 
-		/**
-		 * @return a map of all orientation enums
-		 */
-		public static Map<String, EnumOrientation> getEnumMap()
+		public String getName()
 		{
-			return getEnumMap(EnumOrientation.class);
+			return name();
 		}
-
-		/**
-		 * @return a list of all orientation enums
-		 */
-		public static List<EnumOrientation> getEnumList()
-		{
-			return getEnumList(EnumOrientation.class);
-		}
-
-		/**
-		 * @return an iterator over the enum objects
-		 */
-		public static Iterator<EnumOrientation> iterator()
-		{
-			return iterator(EnumOrientation.class);
-		}
-
-		// enums accordng to JDF spec A.3.3.3, Table 3-3 Orientation
-		/**
-		 *
-		 */
-		public static final EnumOrientation Flip0 = new EnumOrientation(JDFConstants.ORIENTATION_FLIP0);
-		/**
-		 *
-		 */
-		public static final EnumOrientation Flip90 = new EnumOrientation(JDFConstants.ORIENTATION_FLIP90);
-		/**
-		 *
-		 */
-		public static final EnumOrientation Flip180 = new EnumOrientation(JDFConstants.ORIENTATION_FLIP180);
-		/**
-		 *
-		 */
-		public static final EnumOrientation Flip270 = new EnumOrientation(JDFConstants.ORIENTATION_FLIP270);
-		/**
-		 *
-		 */
-		public static final EnumOrientation Rotate0 = new EnumOrientation(JDFConstants.ORIENTATION_ROTATE0);
-		/**
-		 *
-		 */
-		public static final EnumOrientation Rotate90 = new EnumOrientation(JDFConstants.ORIENTATION_ROTATE90);
-		/**
-		 *
-		 */
-		public static final EnumOrientation Rotate180 = new EnumOrientation(JDFConstants.ORIENTATION_ROTATE180);
-		/**
-		 *
-		 */
-		public static final EnumOrientation Rotate270 = new EnumOrientation(JDFConstants.ORIENTATION_ROTATE270);
 	}
 
 	public enum eUnit
@@ -1316,84 +1211,20 @@ public class JDFElement extends KElement
 	 * ne X!=Y <br>
 	 * see JDF Spec (Appendix A.3.4) for latest changes
 	 */
-	public static final class EnumXYRelation extends ValuedEnum
+	public enum EnumXYRelation
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		gt, ge, eq, le, lt, ne;
 
-		private EnumXYRelation(final String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the name of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
-		 */
 		public static EnumXYRelation getEnum(final String enumName)
 		{
-			return (EnumXYRelation) getEnum(EnumXYRelation.class, enumName);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumXYRelation.class, enumName, null);
 		}
 
-		/**
-		 * @param enumValue the value of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
-		 */
 		public static EnumXYRelation getEnum(final int enumValue)
 		{
-			return (EnumXYRelation) getEnum(EnumXYRelation.class, enumValue);
+			final EnumXYRelation[] values = values();
+			return enumValue >= 0 && enumValue < values.length ? values[enumValue] : null;
 		}
-
-		/**
-		 * @return a map of all XYRelation enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumXYRelation.class);
-		}
-
-		/**
-		 * @return a list of all XYRelation enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumXYRelation.class);
-		}
-
-		/**
-		 * @return an iterator over the enum objects
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumXYRelation.class);
-		}
-
-		// enums accordng to JDF spec 3.1.2, Table 3-3 Status
-
-		/**
-		 *
-		 */
-		public static final EnumXYRelation gt = new EnumXYRelation(JDFConstants.XYRELATION_GT);
-		/**
-		 *
-		 */
-		public static final EnumXYRelation ge = new EnumXYRelation(JDFConstants.XYRELATION_GE);
-		/**
-		 *
-		 */
-		public static final EnumXYRelation eq = new EnumXYRelation(JDFConstants.XYRELATION_EQ);
-		/**
-		 *
-		 */
-		public static final EnumXYRelation le = new EnumXYRelation(JDFConstants.XYRELATION_LE);
-		/**
-		 *
-		 */
-		public static final EnumXYRelation lt = new EnumXYRelation(JDFConstants.XYRELATION_LT);
-		/**
-		 *
-		 */
-		public static final EnumXYRelation ne = new EnumXYRelation(JDFConstants.XYRELATION_NE);
 
 		/**
 		 * xyRelation - tests if relation x/y matches XYRelation enumeration value
@@ -1406,27 +1237,27 @@ public class JDFElement extends KElement
 		 */
 		public boolean evaluateXY(final double x, final double y, final double nt, final double pt)
 		{
-			if (this == EnumXYRelation.gt)
+			if (this == gt)
 			{
 				return x + pt > y - nt;
 			}
-			else if (this == EnumXYRelation.ge)
+			else if (this == ge)
 			{
 				return x + pt >= y - nt;
 			}
-			else if (this == EnumXYRelation.eq)
+			else if (this == eq)
 			{
 				return x >= y - nt && x <= y + pt;
 			}
-			else if (this == EnumXYRelation.le)
+			else if (this == le)
 			{
 				return x - nt <= y + pt;
 			}
-			else if (this == EnumXYRelation.lt)
+			else if (this == lt)
 			{
 				return x - nt < y + pt;
 			}
-			else if (this == EnumXYRelation.ne)
+			else if (this == ne)
 			{
 				return x < y - nt || x > y + pt;
 			}
@@ -1434,6 +1265,11 @@ public class JDFElement extends KElement
 			{
 				return true;
 			}
+		}
+
+		public String getName()
+		{
+			return name();
 		}
 
 	}
@@ -1462,152 +1298,49 @@ public class JDFElement extends KElement
 	 * {@link org.cip4.jdflib.resource.process.JDFColorPool}. When Separation is applied to a ColorantControlLink, it defines an implicit partition that selects a subset of
 	 * separations for the process that is described by the ColorantControl.
 	 */
-	@SuppressWarnings("unchecked")
-	public static final class EnumSeparation extends ValuedEnum
+	public enum EnumSeparation
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Cyan, Magenta, Yellow, Black, Red, Green, Blue, Orange, Spot, Varnish;
 
-		private EnumSeparation(final String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the name of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
-		 */
 		public static EnumSeparation getEnum(final String enumName)
 		{
-			return (EnumSeparation) getEnum(EnumSeparation.class, enumName);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSeparation.class, enumName, null);
 		}
 
-		/**
-		 * @param enumValue the value of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
-		 */
 		public static EnumSeparation getEnum(final int enumValue)
 		{
-			return (EnumSeparation) getEnum(EnumSeparation.class, enumValue);
+			final EnumSeparation[] values = values();
+			return enumValue >= 0 && enumValue < values.length ? values[enumValue] : null;
 		}
 
-		/**
-		 * @return a map of all orientation enums
-		 */
-		public static Map<EnumSeparation, String> getEnumMap()
+		public String getName()
 		{
-			return getEnumMap(EnumSeparation.class);
+			return name();
 		}
-
-		/**
-		 * @return a list of all orientation enums
-		 */
-		public static List<EnumSeparation> getEnumList()
-		{
-			return getEnumList(EnumSeparation.class);
-		}
-
-		/**
-		 * @return an iterator over the enum objects
-		 */
-		public static Iterator<EnumSeparation> iterator()
-		{
-			return iterator(EnumSeparation.class);
-		}
-
-		// enums accordng to JDF spec Table 3-28: Contents of the Part element
-		/** * */
-		public static final EnumSeparation Cyan = new EnumSeparation(JDFConstants.SEPARATION_CYAN);
-		/** * */
-		public static final EnumSeparation Magenta = new EnumSeparation(JDFConstants.SEPARATION_MAGENTA);
-		/** * */
-		public static final EnumSeparation Yellow = new EnumSeparation(JDFConstants.SEPARATION_YELLOW);
-		/** * */
-		public static final EnumSeparation Black = new EnumSeparation(JDFConstants.SEPARATION_BLACK);
-		/** * */
-		public static final EnumSeparation Red = new EnumSeparation(JDFConstants.SEPARATION_RED);
-		/** * */
-		public static final EnumSeparation Green = new EnumSeparation(JDFConstants.SEPARATION_GREEN);
-		/** * */
-		public static final EnumSeparation Blue = new EnumSeparation(JDFConstants.SEPARATION_BLUE);
-		/** * */
-		public static final EnumSeparation Orange = new EnumSeparation(JDFConstants.SEPARATION_ORANGE);
-		/** * */
-		public static final EnumSeparation Spot = new EnumSeparation(JDFConstants.SEPARATION_SPOT);
-		/** * */
-		public static final EnumSeparation Varnish = new EnumSeparation(JDFConstants.SEPARATION_VARNISH);
 	}
 
 	/**
 	 * Enumeration of various pool types
 	 */
-	@SuppressWarnings("unchecked")
-	public static final class EnumPoolType extends ValuedEnum
+	public enum EnumPoolType
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		RefElement, ResourcePool, PipeParams, ResourceLinkPool, AncestorPool, AuditPool, ProductionIntent;
 
-		private EnumPoolType(final String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the name of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
-		 */
 		public static EnumPoolType getEnum(final String enumName)
 		{
-			return (EnumPoolType) getEnum(EnumPoolType.class, enumName);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPoolType.class, enumName, null);
 		}
 
-		/**
-		 * @param enumValue the value of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
-		 */
 		public static EnumPoolType getEnum(final int enumValue)
 		{
-			return (EnumPoolType) getEnum(EnumPoolType.class, enumValue);
+			final EnumPoolType[] values = values();
+			return enumValue >= 0 && enumValue < values.length ? values[enumValue] : null;
 		}
 
-		/**
-		 * @return a map of all orientation enums
-		 */
-		public static Map getEnumMap()
+		public String getName()
 		{
-			return getEnumMap(EnumPoolType.class);
+			return name();
 		}
-
-		/**
-		 * @return a list of all orientation enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPoolType.class);
-		}
-
-		/**
-		 * @return an iterator over the enum objects
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPoolType.class);
-		}
-
-		/** * */
-		public static final EnumPoolType RefElement = new EnumPoolType(ElementName.REFELEMENT);
-		/** * */
-		public static final EnumPoolType ResourcePool = new EnumPoolType(ElementName.RESOURCEPOOL);
-		/** * */
-		public static final EnumPoolType PipeParams = new EnumPoolType(ElementName.PIPEPARAMS);
-		/** * */
-		public static final EnumPoolType ResourceLinkPool = new EnumPoolType(ElementName.RESOURCELINKPOOL);
-		/** * */
-		public static final EnumPoolType AncestorPool = new EnumPoolType(ElementName.ANCESTORPOOL);
-		/** * */
-		public static final EnumPoolType AuditPool = new EnumPoolType(ElementName.AUDITPOOL);
-		/** * */
-		public static final EnumPoolType ProductionIntent = new EnumPoolType(ElementName.PRODUCTIONINTENT);
 	}
 
 	public enum ENodeStatus
@@ -1629,14 +1362,14 @@ public class JDFElement extends KElement
 			final EVersion v = EnumUtil.getJavaEnumIgnoreCase(EVersion.class, name);
 			if (v == null && name != null && !name.startsWith("Version"))
 			{
-				return getEnum("Version_" + StringUtil.replaceString(name, JDFConstants.DOT, JDFConstants.UNDERSCORE));
+				return getEnum("Version_" + StringUtil.replaceString(name, JDFCoreConstants.DOT, JDFCoreConstants.UNDERSCORE));
 			}
 			return v;
 		}
 
 		public static EVersion getEnum(final int major, final int minor)
 		{
-			return getEnum("VERSION_" + major + JDFConstants.UNDERSCORE + minor);
+			return getEnum("VERSION_" + major + JDFCoreConstants.UNDERSCORE + minor);
 		}
 
 		/**
@@ -1646,7 +1379,7 @@ public class JDFElement extends KElement
 		 */
 		public int getMinorVersion()
 		{
-			return StringUtil.parseInt(StringUtil.token(name(), -1, JDFConstants.UNDERSCORE), 0);
+			return StringUtil.parseInt(StringUtil.token(name(), -1, JDFCoreConstants.UNDERSCORE), 0);
 		}
 
 		/**
@@ -1656,7 +1389,7 @@ public class JDFElement extends KElement
 		 */
 		public int getMajorVersion()
 		{
-			return StringUtil.parseInt(StringUtil.token(name(), -2, JDFConstants.UNDERSCORE), 0);
+			return StringUtil.parseInt(StringUtil.token(name(), -2, JDFCoreConstants.UNDERSCORE), 0);
 		}
 
 	}
@@ -1686,49 +1419,19 @@ public class JDFElement extends KElement
 	 * Derivation of the Status of a parent node from the Status of child nodes is non-trivial and implementation-dependent
 	 * </ul>
 	 */
-	@SuppressWarnings("unchecked")
-	public static final class EnumNodeStatus extends ValuedEnum
+	public enum EnumNodeStatus
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Waiting, TestRunInProgress, Ready, FailedTestRun, Setup, InProgress, Cleanup, Spawned, Suspended, Stopped, Completed, Aborted, Part, Pool;
 
-		private EnumNodeStatus(final String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the name of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
-		 */
 		public static EnumNodeStatus getEnum(final String enumName)
 		{
-			return (EnumNodeStatus) getEnum(EnumNodeStatus.class, enumName);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumNodeStatus.class, enumName, null);
 		}
 
-		/**
-		 * @param enumValue the value of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
-		 */
 		public static EnumNodeStatus getEnum(final int enumValue)
 		{
-			return (EnumNodeStatus) getEnum(EnumNodeStatus.class, enumValue);
-		}
-
-		/**
-		 * @return a map of all orientation enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumNodeStatus.class);
-		}
-
-		/**
-		 * @return a list of all orientation enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumNodeStatus.class);
+			final EnumNodeStatus[] values = values();
+			return enumValue >= 0 && enumValue < values.length ? values[enumValue] : null;
 		}
 
 		/**
@@ -1739,15 +1442,7 @@ public class JDFElement extends KElement
 		 */
 		public static EnumQueueEntryStatus getQueueEntryStatus(final EnumNodeStatus ns)
 		{
-			if (EnumNodeStatus.Waiting.equals(ns))
-			{
-				return EnumQueueEntryStatus.Waiting;
-			}
-			if (EnumNodeStatus.TestRunInProgress.equals(ns))
-			{
-				return EnumQueueEntryStatus.Waiting;
-			}
-			if (EnumNodeStatus.Ready.equals(ns))
+			if (EnumNodeStatus.Waiting.equals(ns) || EnumNodeStatus.TestRunInProgress.equals(ns) || EnumNodeStatus.Ready.equals(ns))
 			{
 				return EnumQueueEntryStatus.Waiting;
 			}
@@ -1807,11 +1502,7 @@ public class JDFElement extends KElement
 			{
 				return EnumDeviceStatus.Setup;
 			}
-			if (EnumNodeStatus.Ready.equals(ns))
-			{
-				return EnumDeviceStatus.Stopped;
-			}
-			if (EnumNodeStatus.FailedTestRun.equals(ns))
+			if (EnumNodeStatus.Ready.equals(ns) || EnumNodeStatus.FailedTestRun.equals(ns))
 			{
 				return EnumDeviceStatus.Stopped;
 			}
@@ -1892,44 +1583,6 @@ public class JDFElement extends KElement
 		}
 
 		/**
-		 * @return an iterator over the enum objects
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumNodeStatus.class);
-		}
-
-		// enums accordng to JDF spec Table 3-4 Contents of a node
-		/** * */
-		public static final EnumNodeStatus Waiting = new EnumNodeStatus(JDFConstants.WAITING);
-		/** * */
-		public static final EnumNodeStatus TestRunInProgress = new EnumNodeStatus(JDFConstants.TESTRUNINPROGRESS);
-		/** * */
-		public static final EnumNodeStatus Ready = new EnumNodeStatus(JDFConstants.READY);
-		/** * */
-		public static final EnumNodeStatus FailedTestRun = new EnumNodeStatus(JDFConstants.FAILEDTESTRUN);
-		/** * */
-		public static final EnumNodeStatus Setup = new EnumNodeStatus(JDFConstants.SETUP);
-		/** * */
-		public static final EnumNodeStatus InProgress = new EnumNodeStatus(JDFConstants.INPROGRESS);
-		/** * */
-		public static final EnumNodeStatus Cleanup = new EnumNodeStatus(JDFConstants.CLEANUP);
-		/** * */
-		public static final EnumNodeStatus Spawned = new EnumNodeStatus(JDFConstants.SPAWNED);
-		/** * */
-		public static final EnumNodeStatus Suspended = new EnumNodeStatus(JDFConstants.SUSPENDED);
-		/** * */
-		public static final EnumNodeStatus Stopped = new EnumNodeStatus(JDFConstants.STOPPED);
-		/** * */
-		public static final EnumNodeStatus Completed = new EnumNodeStatus(JDFConstants.COMPLETED);
-		/** * */
-		public static final EnumNodeStatus Aborted = new EnumNodeStatus(JDFConstants.ABORTED);
-		/** * */
-		public static final EnumNodeStatus Part = new EnumNodeStatus(JDFConstants.PART);
-		/** * */
-		public static final EnumNodeStatus Pool = new EnumNodeStatus(JDFConstants.POOL);
-
-		/**
 		 * returns true if we are in an end phase (Completed or Aborted)
 		 *
 		 * @param nodeStatus the status to compare
@@ -1938,6 +1591,11 @@ public class JDFElement extends KElement
 		public static boolean isCompleted(final EnumNodeStatus nodeStatus)
 		{
 			return EnumNodeStatus.Completed.equals(nodeStatus) || EnumNodeStatus.Aborted.equals(nodeStatus);
+		}
+
+		public String getName()
+		{
+			return name();
 		}
 	}
 
@@ -1955,65 +1613,25 @@ public class JDFElement extends KElement
 	 * "BestEffort". In JDF 1.1 SettingsPolicy was specified in "Contents of a JDF node" and "Contents of the abstract Resource element". It has been removed from JDF node and
 	 * Resource and been promoted to all JDF elements.
 	 */
-	@SuppressWarnings("unchecked")
-	public static final class EnumSettingsPolicy extends ValuedEnum
+	public enum EnumSettingsPolicy
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		BestEffort, MustHonor, OperatorIntervention;
 
-		private EnumSettingsPolicy(final String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the name of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
-		 */
 		public static EnumSettingsPolicy getEnum(final String enumName)
 		{
-			return (EnumSettingsPolicy) getEnum(EnumSettingsPolicy.class, enumName);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSettingsPolicy.class, enumName, null);
 		}
 
-		/**
-		 * @param enumValue the value of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
-		 */
 		public static EnumSettingsPolicy getEnum(final int enumValue)
 		{
-			return (EnumSettingsPolicy) getEnum(EnumSettingsPolicy.class, enumValue);
+			final EnumSettingsPolicy[] values = values();
+			return enumValue >= 0 && enumValue < values.length ? values[enumValue] : null;
 		}
 
-		/**
-		 * @return a map of all orientation enums
-		 */
-		public static Map getEnumMap()
+		public String getName()
 		{
-			return getEnumMap(EnumSettingsPolicy.class);
+			return name();
 		}
-
-		/**
-		 * @return a list of all orientation enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSettingsPolicy.class);
-		}
-
-		/**
-		 * @return an iterator over the enum objects
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSettingsPolicy.class);
-		}
-
-		/** * */
-		public static final EnumSettingsPolicy BestEffort = new EnumSettingsPolicy(JDFConstants.SETTINGSPOLICY_BESTEFFORT);
-		/** * */
-		public static final EnumSettingsPolicy MustHonor = new EnumSettingsPolicy(JDFConstants.SETTINGSPOLICY_MUSTHONOR);
-		/** * */
-		public static final EnumSettingsPolicy OperatorIntervention = new EnumSettingsPolicy(JDFConstants.SETTINGSPOLICY_OPERATORINTERVENTION);
 	}
 
 	/**
@@ -2045,273 +1663,25 @@ public class JDFElement extends KElement
 	 * <li>Yellow
 	 * </ul>
 	 */
-	@SuppressWarnings("unchecked")
-	public static final class EnumNamedColor extends ValuedEnum
+	public enum EnumNamedColor
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		White, Black, Gray, Red, Yellow, Green, Blue, Turquoise, Violet, Orange, Brown, Gold, Silver, Pink, Buff, Ivory, Goldenrod, DarkWhite, DarkBlack, DarkGray, DarkRed, DarkYellow, DarkGreen, DarkBlue, DarkTurquoise, DarkViolet, DarkOrange, DarkBrown, DarkGold, DarkSilver, DarkPink, DarkBuff, DarkIvory, DarkGoldenrod, DarkMustard, LightWhite, LightBlack, LightGray, LightRed, LightYellow, LightGreen, LightBlue, LightTurquoise, LightViolet, LightOrange, LightBrown, LightGold, LightSilver, LightPink, LightBuff, LightIvory, LightGoldenrod, LightMustard, ClearWhite, ClearBlack, ClearGray, ClearRed, ClearGreen, ClearBlue, ClearTurquoise, ClearViolet, ClearOrange, ClearBrown, ClearGold, ClearSilver, ClearPink, ClearBuff, ClearIvory, ClearGoldenrod, ClearMustard, ClearDarkWhite, ClearDarkBlack, ClearDarkGray, ClearDarkRed, ClearDarkYellow, ClearDarkGreen, ClearDarkBlue, ClearDarkTurquoise, ClearDarkViolet, ClearDarkOrange, ClearDarkBrown, ClearDarkGold, ClearDarkSilver, ClearDarkPink, ClearDarkBuff, ClearDarkIvory, ClearDarkGoldenrod, ClearLightWhite, ClearLightBlack, ClearLightGray, ClearLightRed, ClearLightYellow, ClearLightGreen, ClearLightBlue, ClearLightTurquoise, ClearLightViolet, ClearLightOrange, ClearLightBrown, ClearLightGold, ClearLightSilver, ClearLightPink, ClearLightBuff, ClearLightIvory, ClearLightGoldenrod, ClearLightMustard, MultiColor, NoColor;
 
-		private EnumNamedColor(final String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the name of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
-		 */
 		public static EnumNamedColor getEnum(final String enumName)
 		{
-			return (EnumNamedColor) getEnum(EnumNamedColor.class, enumName);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumNamedColor.class, enumName, null);
 		}
 
-		/**
-		 * @param enumValue the value of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
-		 */
 		public static EnumNamedColor getEnum(final int enumValue)
 		{
-			return (EnumNamedColor) getEnum(EnumNamedColor.class, enumValue);
+			final EnumNamedColor[] values = values();
+			return enumValue >= 0 && enumValue < values.length ? values[enumValue] : null;
 		}
 
-		/**
-		 * @return a map of all orientation enums
-		 */
-		public static Map getEnumMap()
+		public String getName()
 		{
-			return getEnumMap(EnumNamedColor.class);
+			return name();
 		}
-
-		/**
-		 * @return a list of all orientation enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumNamedColor.class);
-		}
-
-		/**
-		 * @return an iterator over the enum objects
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumNamedColor.class);
-		}
-
-		/** * */
-		public static final EnumNamedColor White = new EnumNamedColor(JDFConstants.NAMEDCOLOR_WHITE);
-		/** * */
-		public static final EnumNamedColor Black = new EnumNamedColor(JDFConstants.NAMEDCOLOR_BLACK);
-		/** * */
-		public static final EnumNamedColor Gray = new EnumNamedColor(JDFConstants.NAMEDCOLOR_GRAY);
-		/** * */
-		public static final EnumNamedColor Red = new EnumNamedColor(JDFConstants.NAMEDCOLOR_RED);
-		/** * */
-		public static final EnumNamedColor Yellow = new EnumNamedColor(JDFConstants.NAMEDCOLOR_YELLOW);
-		/** * */
-		public static final EnumNamedColor Green = new EnumNamedColor(JDFConstants.NAMEDCOLOR_GREEN);
-		/** * */
-		public static final EnumNamedColor Blue = new EnumNamedColor(JDFConstants.NAMEDCOLOR_BLUE);
-		/** * */
-		public static final EnumNamedColor Turquoise = new EnumNamedColor(JDFConstants.NAMEDCOLOR_TURQUOISE);
-		/** * */
-		public static final EnumNamedColor Violet = new EnumNamedColor(JDFConstants.NAMEDCOLOR_VIOLET);
-		/** * */
-		public static final EnumNamedColor Orange = new EnumNamedColor(JDFConstants.NAMEDCOLOR_ORANGE);
-		/** * */
-		public static final EnumNamedColor Brown = new EnumNamedColor(JDFConstants.NAMEDCOLOR_BROWN);
-		/** * */
-		public static final EnumNamedColor Gold = new EnumNamedColor(JDFConstants.NAMEDCOLOR_GOLD);
-		/** * */
-		public static final EnumNamedColor Silver = new EnumNamedColor(JDFConstants.NAMEDCOLOR_SILVER);
-		/** * */
-		public static final EnumNamedColor Pink = new EnumNamedColor(JDFConstants.NAMEDCOLOR_PINK);
-		/** * */
-		public static final EnumNamedColor Buff = new EnumNamedColor(JDFConstants.NAMEDCOLOR_BUFF);
-		/** * */
-		public static final EnumNamedColor Ivory = new EnumNamedColor(JDFConstants.NAMEDCOLOR_IVORY);
-		/** * */
-		public static final EnumNamedColor Goldenrod = new EnumNamedColor(JDFConstants.NAMEDCOLOR_GOLDENROD);
-		/** * */
-		public static final EnumNamedColor DarkWhite = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKWHITE);
-		/** * */
-		public static final EnumNamedColor DarkBlack = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKBLACK);
-		/** * */
-		public static final EnumNamedColor DarkGray = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKGRAY);
-		/** * */
-		public static final EnumNamedColor DarkRed = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKRED);
-		/** * */
-		public static final EnumNamedColor DarkYellow = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKYELLOW);
-		/** * */
-		public static final EnumNamedColor DarkGreen = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKGREEN);
-		/** * */
-		public static final EnumNamedColor DarkBlue = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKBLUE);
-		/** * */
-		public static final EnumNamedColor DarkTurquoise = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKTURQUOISE);
-		/** * */
-		public static final EnumNamedColor DarkViolet = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKVIOLET);
-		/** * */
-		public static final EnumNamedColor DarkOrange = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKORANGE);
-		/** * */
-		public static final EnumNamedColor DarkBrown = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKBROWN);
-		/** * */
-		public static final EnumNamedColor DarkGold = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKGOLD);
-		/** * */
-		public static final EnumNamedColor DarkSilver = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKSILVER);
-		/** * */
-		public static final EnumNamedColor DarkPink = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKPINK);
-		/** * */
-		public static final EnumNamedColor DarkBuff = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKBUFF);
-		/** * */
-		public static final EnumNamedColor DarkIvory = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKIVORY);
-		/** * */
-		public static final EnumNamedColor DarkGoldenrod = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKGOLDENROD);
-		/** * */
-		public static final EnumNamedColor DarkMustard = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKMUSTARD);
-		/** * */
-		public static final EnumNamedColor LightWhite = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTWHITE);
-		/** * */
-		public static final EnumNamedColor LightBlack = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTBLACK);
-		/** * */
-		public static final EnumNamedColor LightGray = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTGRAY);
-		/** * */
-		public static final EnumNamedColor LightRed = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTRED);
-		/** * */
-		public static final EnumNamedColor LightYellow = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTYELLOW);
-		/** * */
-		public static final EnumNamedColor LightGreen = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTGREEN);
-		/** * */
-		public static final EnumNamedColor LightBlue = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTBLUE);
-		/** * */
-		public static final EnumNamedColor LightTurquoise = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTTURQUOISE);
-		/** * */
-		public static final EnumNamedColor LightViolet = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTVIOLET);
-		/** * */
-		public static final EnumNamedColor LightOrange = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTORANGE);
-		/** * */
-		public static final EnumNamedColor LightBrown = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTBROWN);
-		/** * */
-		public static final EnumNamedColor LightGold = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTGOLD);
-		/** * */
-		public static final EnumNamedColor LightSilver = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTSILVER);
-		/** * */
-		public static final EnumNamedColor LightPink = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTPINK);
-		/** * */
-		public static final EnumNamedColor LightBuff = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTBUFF);
-		/** * */
-		public static final EnumNamedColor LightIvory = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTIVORY);
-		/** * */
-		public static final EnumNamedColor LightGoldenrod = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTGOLDENROD);
-		/** * */
-		public static final EnumNamedColor LightMustard = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTMUSTARD);
-		/** * */
-		public static final EnumNamedColor ClearWhite = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARWHITE);
-		/** * */
-		public static final EnumNamedColor ClearBlack = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARBLACK);
-		/** * */
-		public static final EnumNamedColor ClearGray = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARGRAY);
-		/** * */
-		public static final EnumNamedColor ClearRed = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARRED);
-		/** * */
-		public static final EnumNamedColor ClearGreen = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARGREEN);
-		/** * */
-		public static final EnumNamedColor ClearBlue = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARBLUE);
-		/** * */
-		public static final EnumNamedColor ClearTurquoise = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARTURQUOISE);
-		/** * */
-		public static final EnumNamedColor ClearViolet = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARVIOLET);
-		/** * */
-		public static final EnumNamedColor ClearOrange = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARORANGE);
-		/** * */
-		public static final EnumNamedColor ClearBrown = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARBROWN);
-		/** * */
-		public static final EnumNamedColor ClearGold = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARGOLD);
-		/** * */
-		public static final EnumNamedColor ClearSilver = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARSILVER);
-		/** * */
-		public static final EnumNamedColor ClearPink = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARPINK);
-		/** * */
-		public static final EnumNamedColor ClearBuff = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARBUFF);
-		/** * */
-		public static final EnumNamedColor ClearIvory = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARIVORY);
-		/** * */
-		public static final EnumNamedColor ClearGoldenrod = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARGOLDENROD);
-		/** * */
-		public static final EnumNamedColor ClearMustard = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARMUSTARD);
-		/** * */
-		public static final EnumNamedColor ClearDarkWhite = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKWHITE);
-		/** * */
-		public static final EnumNamedColor ClearDarkBlack = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKBLACK);
-		/** * */
-		public static final EnumNamedColor ClearDarkGray = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKGRAY);
-		/** * */
-		public static final EnumNamedColor ClearDarkRed = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKRED);
-		/** * */
-		public static final EnumNamedColor ClearDarkYellow = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKYELLOW);
-		/** * */
-		public static final EnumNamedColor ClearDarkGreen = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKGREEN);
-		/** * */
-		public static final EnumNamedColor ClearDarkBlue = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKBLUE);
-		/** * */
-		public static final EnumNamedColor ClearDarkTurquoise = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKTURQUOISE);
-		/** * */
-		public static final EnumNamedColor ClearDarkViolet = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKVIOLET);
-		/** * */
-		public static final EnumNamedColor ClearDarkOrange = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKORANGE);
-		/** * */
-		public static final EnumNamedColor ClearDarkBrown = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKBROWN);
-		/** * */
-		public static final EnumNamedColor ClearDarkGold = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKGOLD);
-		/** * */
-		public static final EnumNamedColor ClearDarkSilver = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKSILVER);
-		/** * */
-		public static final EnumNamedColor ClearDarkPink = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKPINK);
-		/** * */
-		public static final EnumNamedColor ClearDarkBuff = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKBUFF);
-		/** * */
-		public static final EnumNamedColor ClearDarkIvory = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKIVORY);
-		/** * */
-		public static final EnumNamedColor ClearDarkGoldenrod = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKGOLDENROD);
-		/** * */
-		public static final EnumNamedColor ClearLightWhite = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTWHITE);
-		/** * */
-		public static final EnumNamedColor ClearLightBlack = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTBLACK);
-		/** * */
-		public static final EnumNamedColor ClearLightGray = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTGRAY);
-		/** * */
-		public static final EnumNamedColor ClearLightRed = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTRED);
-		/** * */
-		public static final EnumNamedColor ClearLightYellow = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTYELLOW);
-		/** * */
-		public static final EnumNamedColor ClearLightGreen = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTGREEN);
-		/** * */
-		public static final EnumNamedColor ClearLightBlue = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTBLUE);
-		/** * */
-		public static final EnumNamedColor ClearLightTurquoise = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTTURQUOISE);
-		/** * */
-		public static final EnumNamedColor ClearLightViolet = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTVIOLET);
-		/** * */
-		public static final EnumNamedColor ClearLightOrange = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTORANGE);
-		/** * */
-		public static final EnumNamedColor ClearLightBrown = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTBROWN);
-		/** * */
-		public static final EnumNamedColor ClearLightGold = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTGOLD);
-		/** * */
-		public static final EnumNamedColor ClearLightSilver = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTSILVER);
-		/** * */
-		public static final EnumNamedColor ClearLightPink = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTPINK);
-		/** * */
-		public static final EnumNamedColor ClearLightBuff = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTBUFF);
-		/** * */
-		public static final EnumNamedColor ClearLightIvory = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTIVORY);
-		/** * */
-		public static final EnumNamedColor ClearLightGoldenrod = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTGOLDENROD);
-		/** * */
-		public static final EnumNamedColor ClearLightMustard = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTMUSTARD);
-		/** * */
-		public static final EnumNamedColor MultiColor = new EnumNamedColor(JDFConstants.NAMEDCOLOR_MULTICOLOR);
-		/** * */
-		public static final EnumNamedColor NoColor = new EnumNamedColor(JDFConstants.NAMEDCOLOR_NOCOLOR);
 	}
 
 	/**
@@ -2457,7 +1827,7 @@ public class JDFElement extends KElement
 	@Deprecated
 	public String getHRef()
 	{
-		return getAttribute(JDFConstants.RREF, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(JDFConstants.RREF, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -2478,7 +1848,7 @@ public class JDFElement extends KElement
 
 		String idRef = target.getID();
 
-		if (idRef == null || JDFConstants.EMPTYSTRING.equals(idRef))
+		if (idRef == null || JDFCoreConstants.EMPTYSTRING.equals(idRef))
 		{
 			target.appendAnchor(preSet);
 			idRef = target.getID();
@@ -2505,7 +1875,7 @@ public class JDFElement extends KElement
 			return null;
 		}
 
-		if (refAttributeLocal == null || JDFConstants.EMPTYSTRING.equals(refAttributeLocal))
+		if (refAttributeLocal == null || JDFCoreConstants.EMPTYSTRING.equals(refAttributeLocal))
 		{
 			refAttributeLocal = JDFConstants.RREF;
 		}
@@ -2690,11 +2060,11 @@ public class JDFElement extends KElement
 		final boolean hasAtt1 = hasAttribute(att1);
 		n += hasAtt1 ? 1 : 0;
 		n += hasAttribute(att2) ? 1 : 0;
-		if (!JDFConstants.EMPTYSTRING.equals(att3))
+		if (!JDFCoreConstants.EMPTYSTRING.equals(att3))
 		{
 			n += hasAttribute(att3) ? 1 : 0;
 		}
-		if (!JDFConstants.EMPTYSTRING.equals(att4))
+		if (!JDFCoreConstants.EMPTYSTRING.equals(att4))
 		{
 			n += hasAttribute(att4) ? 1 : 0;
 		}
@@ -2756,9 +2126,9 @@ public class JDFElement extends KElement
 		for (int i = 0; i < l; i++)
 		{
 			final KElement kElem = nl.elementAt(i);
-			final String s = kElem.getAttribute(attrib, nameSpaceURI, JDFConstants.EMPTYSTRING);
+			final String s = kElem.getAttribute(attrib, nameSpaceURI, JDFCoreConstants.EMPTYSTRING);
 
-			if (JDFConstants.EMPTYSTRING.equals(s))
+			if (JDFCoreConstants.EMPTYSTRING.equals(s))
 			{
 				continue;
 			}
@@ -3009,7 +2379,7 @@ public class JDFElement extends KElement
 	 */
 	public static boolean isInJDFNameSpaceStatic(final String ns)
 	{
-		return ns == null || JDFConstants.EMPTYSTRING.equals(ns) || (ns.compareToIgnoreCase("http://www.CIP4.org/JDFSchema_1_1") == 0)
+		return ns == null || JDFCoreConstants.EMPTYSTRING.equals(ns) || (ns.compareToIgnoreCase("http://www.CIP4.org/JDFSchema_1_1") == 0)
 				|| (ns.compareToIgnoreCase("http://www.CIP4.org/JDFSchema_1") == 0);
 	}
 
@@ -3264,7 +2634,7 @@ public class JDFElement extends KElement
 	{
 		final String id = target.getID();
 
-		if (JDFConstants.EMPTYSTRING.equals(id))
+		if (JDFCoreConstants.EMPTYSTRING.equals(id))
 		{
 			throw new JDFException("RemoveRefElement: target has no id");
 		}
@@ -3312,7 +2682,7 @@ public class JDFElement extends KElement
 		for (int i = 0; i < size; i++)
 		{
 			final KElement el_i = (v.elementAt(i));
-			vrRefs.add(el_i.getAttribute(JDFConstants.RREF, null, JDFConstants.EMPTYSTRING));
+			vrRefs.add(el_i.getAttribute(JDFConstants.RREF, null, JDFCoreConstants.EMPTYSTRING));
 		}
 		vrRefs.unify();
 		return vrRefs;
@@ -3429,7 +2799,7 @@ public class JDFElement extends KElement
 		final VElement v = super.getChildrenByTagName_KElement(bFollowRefs ? null : elementName, nameSpaceURI, mAttrib, bDirect, bAnd,
 				bFollowRefs ? -1 : maxSize);
 
-		if (bFollowRefs == false)
+		if (!bFollowRefs)
 		{
 			return v; // do not folow refs if explicit refs are requested
 		}
@@ -3707,11 +3077,7 @@ public class JDFElement extends KElement
 		final JDFNode nodeLink = getParentJDF();
 		if ((nodeResource != null) && (nodeLink != null))
 		{
-			if (nodeResource.equals(nodeLink))
-			{
-				return true;
-			}
-			if (nodeResource.isAncestor(nodeLink))
+			if (nodeResource.equals(nodeLink) || nodeResource.isAncestor(nodeLink))
 			{
 				return true;
 			}
@@ -3763,9 +3129,9 @@ public class JDFElement extends KElement
 		{
 			return getAttribute(AttributeName.ID, null, null);
 		}
-		else if ((strName == null) || JDFConstants.EMPTYSTRING.equals(strName))
+		else if ((strName == null) || JDFCoreConstants.EMPTYSTRING.equals(strName))
 		{
-			String local = JDFConstants.EMPTYSTRING;
+			String local = JDFCoreConstants.EMPTYSTRING;
 			final JDFNode n = getJDFRoot();
 			if (n != null)
 			{
@@ -3979,7 +3345,7 @@ public class JDFElement extends KElement
 				final String nodeName = a.getNodeName();
 				final String key = xmlnsLocalName(nodeName);
 				final String ns = xmlnsPrefix(nodeName);
-				if ((JDFConstants.XSI.equals(ns)) || JDFConstants.XMLNS.equals(ns))
+				if ((JDFConstants.XSI.equals(ns)) || JDFCoreConstants.XMLNS.equals(ns))
 				{
 					continue;
 				}
@@ -4168,7 +3534,7 @@ public class JDFElement extends KElement
 	 */
 	public String getCommentURL()
 	{
-		return getAttribute(AttributeName.COMMENTURL, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.COMMENTURL, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -4266,7 +3632,7 @@ public class JDFElement extends KElement
 	public String newID(final String lastID)
 	{
 		final String idPrefix = getIDPrefix();
-		if (lastID == null || JDFConstants.EMPTYSTRING.equals(lastID))
+		if (lastID == null || JDFCoreConstants.EMPTYSTRING.equals(lastID))
 		{
 			return idPrefix + uniqueID(0);
 		}
@@ -4302,14 +3668,14 @@ public class JDFElement extends KElement
 
 		if (bInherit)
 		{
-			s = getInheritedAttribute(key, nameSpaceURI, JDFConstants.EMPTYSTRING);
+			s = getInheritedAttribute(key, nameSpaceURI, JDFCoreConstants.EMPTYSTRING);
 		}
 		else
 		{
-			s = getAttribute(key, nameSpaceURI, JDFConstants.EMPTYSTRING);
+			s = getAttribute(key, nameSpaceURI, JDFCoreConstants.EMPTYSTRING);
 		}
 
-		if (!JDFConstants.EMPTYSTRING.equals(s) && v.contains(s))
+		if (!JDFCoreConstants.EMPTYSTRING.equals(s) && v.contains(s))
 		{
 			i = v.indexOf(s);
 		}
@@ -4336,23 +3702,23 @@ public class JDFElement extends KElement
 		final VString vAllowed = new VString();
 		vAllowed.addAll(v);
 
-		String strAtt = JDFConstants.EMPTYSTRING;
+		String strAtt = JDFCoreConstants.EMPTYSTRING;
 		final VString vs = new VString();
 		Vector vAtts = null;
 
 		if (bInherit)
 		{
-			strAtt = getInheritedAttribute(key, nameSpaceURI, JDFConstants.EMPTYSTRING);
+			strAtt = getInheritedAttribute(key, nameSpaceURI, JDFCoreConstants.EMPTYSTRING);
 		}
 		else
 		{
-			strAtt = getAttribute(key, nameSpaceURI, JDFConstants.EMPTYSTRING);
+			strAtt = getAttribute(key, nameSpaceURI, JDFCoreConstants.EMPTYSTRING);
 		}
-		if (JDFConstants.EMPTYSTRING.equals(strAtt))
+		if (JDFCoreConstants.EMPTYSTRING.equals(strAtt))
 		{
 			vs.add(strAtt);
 		}
-		vAtts = StringUtil.tokenize(strAtt, JDFConstants.BLANK, false);
+		vAtts = StringUtil.tokenize(strAtt, JDFCoreConstants.BLANK, false);
 		vs.addAll(vAtts);
 
 		final Vector ret = new Vector();
@@ -4386,69 +3752,16 @@ public class JDFElement extends KElement
 	/**
 	 * defines an enumerated list of attributes; used by the automated code generator
 	 *
-	 * @param key          the attribute local name
-	 * @param nameSpaceURI the namespace URI
-	 * @param enu          a dummy enumeration of the correct type, typically EnumXYZ.getEnum(0)
-	 * @param bInherit     if true, also recurse into parent elements when searching the attribute
-	 * @return Vector of ValuedEnum, null if no enum was set
-	 */
-	public <T extends ValuedEnum> Vector<T> getEnumerationsAttribute(final String key, final String nameSpaceURI, final T enu, final boolean bInherit)
-	{
-		String strAtt = null;
-		final Vector<T> vEnum = new Vector<>();
-
-		if (bInherit)
-		{
-			strAtt = getInheritedAttribute(key, nameSpaceURI, null);
-		}
-		else
-		{
-			strAtt = getAttribute(key, nameSpaceURI, null);
-		}
-		if (strAtt == null)
-		{
-			return null;
-		}
-
-		final VString vAtts = StringUtil.tokenize(strAtt, JDFConstants.BLANK, false);
-
-		try
-		{
-			final Class<?> methodArgs[] = { String.class };
-			final Method m = enu.getClass().getMethod("getEnum", methodArgs);
-			for (int i = 0; i < vAtts.size(); i++)
-			{
-				final Object args[] = { vAtts.elementAt(i) };
-				final T ve = (T) m.invoke(null, args);
-				// there was an invalid token
-				if (ve != null)
-				{
-					vEnum.add(ve);
-
-				}
-			}
-		}
-		catch (final Exception e1)
-		{
-			// in case of exceptions, simply apply NMTOKENS rule
-		}
-		// all were ok
-		return vEnum.size() == 0 ? null : vEnum;
-	}
-
-	/**
-	 * defines an enumerated list of attributes; used by the automated code generator
-	 *
-	 * @param key          the attribute local name
-	 * @param nameSpaceURI the namespace URI
-	 * @param enu          a dummy enumeration of the correct type, typically EnumXYZ.getEnum(0)
-	 * @param bInherit     if true, also recurse into parent elements when searching the attribute
-	 * @return Vector of ValuedEnum, null if no enum was set
+	 * @param key the attribute local name
+	 * @param def the default enum if the value is unknown
+	 * @param c   enum class for conversion
+	 * @return list of enum values, null if no enum was set
 	 */
 	public <T extends Enum<T>> List<T> getEnumerationsAttribute(final String key, final T def, final Class<T> c)
 	{
 		final String val = getAttribute(key);
-		return JavaEnumUtil.getEnumList(c, val, false);
+		final List<T> ret = JavaEnumUtil.getEnumList(c, val, false);
+		return ret == null || ret.isEmpty() ? null : ret;
 	}
 
 	public <T extends Enum<T>> void setEnumsAttribute(final String key, final List<T> v, final String nameSpaceURI)
@@ -4460,48 +3773,18 @@ public class JDFElement extends KElement
 			{
 				if (s != null)
 				{
-					s += JDFConstants.BLANK;
+					s += JDFCoreConstants.BLANK;
 				}
 				else
 				{
 					s = "";
 				}
 
-				s += o.name();
+				s += JavaEnumUtil.getName(o);
 			}
 		}
 		setAttribute(key, s, nameSpaceURI);
 
-	}
-
-	/**
-	 * set an enumerated list of attributes; used by the automated code generator
-	 *
-	 * @param key          the attribute name
-	 * @param values       the enumeration vector
-	 * @param nameSpaceURI attribute namespace uri
-	 * @throws JDFException wrong data type in vector
-	 */
-	protected void setEnumerationsAttribute(final String key, final List<? extends ValuedEnum> values, final String nameSpaceURI)
-	{
-		String s = null;
-		if (values != null)
-		{
-			for (final ValuedEnum o : values)
-			{
-				if (s != null)
-				{
-					s += JDFConstants.BLANK;
-				}
-				else
-				{
-					s = "";
-				}
-
-				s += o.getName();
-			}
-		}
-		setAttribute(key, s, nameSpaceURI);
 	}
 
 	/**
@@ -4795,11 +4078,11 @@ public class JDFElement extends KElement
 	public String getEnumString(final int value, final String allowedValues)
 	{
 		final Vector vs = new Vector();
-		vs.addAll(StringUtil.tokenize(allowedValues, JDFConstants.COMMA, false));
+		vs.addAll(StringUtil.tokenize(allowedValues, JDFCoreConstants.COMMA, false));
 
 		if (value >= vs.size())
 		{
-			return JDFConstants.EMPTYSTRING;
+			return JDFCoreConstants.EMPTYSTRING;
 		}
 
 		return (String) vs.elementAt(value);
@@ -5123,7 +4406,7 @@ public class JDFElement extends KElement
 	@Deprecated
 	public void appendrRefs(final String value)
 	{
-		appendAttribute(AttributeName.RREFS, value, null, JDFConstants.BLANK, true);
+		appendAttribute(AttributeName.RREFS, value, null, JDFCoreConstants.BLANK, true);
 	}
 
 	/**
@@ -5136,7 +4419,7 @@ public class JDFElement extends KElement
 	@Deprecated
 	public int removeFromrRefs(final String value)
 	{
-		return removeFromAttribute(AttributeName.RREFS, value, null, JDFConstants.BLANK, -1);
+		return removeFromAttribute(AttributeName.RREFS, value, null, JDFCoreConstants.BLANK, -1);
 	}
 
 	/**
@@ -5149,7 +4432,7 @@ public class JDFElement extends KElement
 	public VString getrRefs()
 	{
 		final VString vStr = new VString();
-		vStr.setAllStrings(getAttribute_KElement(AttributeName.RREFS, null, JDFConstants.EMPTYSTRING), JDFConstants.BLANK);
+		vStr.setAllStrings(getAttribute_KElement(AttributeName.RREFS, null, JDFCoreConstants.EMPTYSTRING), JDFCoreConstants.BLANK);
 
 		return vStr;
 	}
@@ -5250,13 +4533,13 @@ public class JDFElement extends KElement
 	@Deprecated
 	public final String version()
 	{
-		final String ver = getInheritedAttribute(AttributeName.VERSION, null, JDFConstants.EMPTYSTRING);
+		final String ver = getInheritedAttribute(AttributeName.VERSION, null, JDFCoreConstants.EMPTYSTRING);
 		final EnumVersion e = JDFElement.EnumVersion.getEnum(ver);
 		if (e == null)
 		{
 			return JDFConstants.VERSION_1_3;
 		}
-		return e.getName();
+		return e.getJDFVersionName();
 	}
 
 	/**
@@ -5296,7 +4579,7 @@ public class JDFElement extends KElement
 	 */
 	public void setVersion(final EnumVersion enumVer)
 	{
-		setAttribute(AttributeName.VERSION, enumVer == null ? null : enumVer.getName(), null);
+		setAttribute(AttributeName.VERSION, enumVer == null ? null : enumVer.getJDFVersionName(), null);
 		AttributeInfo.fixedMap.clear();
 		ElementInfo.getFixedmap().clear();
 	}
@@ -5334,7 +4617,7 @@ public class JDFElement extends KElement
 				}
 				else if (XJDFConstants.XJDF.equals(rootName) || XJDFConstants.XJMF.equals(rootName) || JDFConstants.PRINT_TALK.equals(rootName))
 				{
-					return XJDFHelper.getDefaultVersion();
+					return BaseXJDFHelper.getDefaultVersion();
 				}
 			}
 		}
@@ -5364,26 +4647,14 @@ public class JDFElement extends KElement
 	 * Enumeration strings for Version
 	 * NOTE: If not specified the version defaults to Version 1.3
 	 */
-	@SuppressWarnings("unchecked")
-	public static final class EnumVersion extends ValuedEnum
+	public enum EnumVersion
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Unknown, Version_1_0, Version_1_1, Version_1_2, Version_1_3, Version_1_4, Version_1_5, Version_1_6, Version_1_7, Version_1_8, Version_1_9, Version_1_10, Version_1_11, Version_2_0, Version_2_1, Version_2_2, Version_2_3, Version_2_4;
 
-		/**
-		 * return the version as a readable string, e.g 1.7 or 2.1
-		 *
-		 * @see java.lang.Object#toString()
-		 */
 		@Override
 		public String toString()
 		{
-			return getMajorVersion() + JDFConstants.DOT + getMinorVersion();
-		}
-
-		private EnumVersion(final String name)
-		{
-			super(name, m_startValue++);
+			return getJDFVersionName();
 		}
 
 		public EnumVersion getXJDFVersion()
@@ -5406,18 +4677,15 @@ public class JDFElement extends KElement
 
 		public String getJDFVersionName()
 		{
-			return getMajorVersion() + JDFConstants.DOT + getMinorVersion();
+			if (name().startsWith("Version_"))
+			{
+				return StringUtil.replaceString(name().substring(8), JDFCoreConstants.UNDERSCORE, JDFCoreConstants.DOT);
+			}
+			return name();
 		}
 
-		/**
-		 * casts a String into a corresponding EnumVersion hand coded for speed!
-		 *
-		 * @param enumName the name of the EnumVersion
-		 * @return the corresponding EnumVersion
-		 */
 		public static EnumVersion getEnum(String enumName)
 		{
-
 			if (enumName != null && enumName.indexOf(' ') >= 0)
 			{
 				enumName = StringUtil.normalize(enumName, false, null);
@@ -5426,208 +4694,61 @@ public class JDFElement extends KElement
 			{
 				return null;
 			}
-
-			final char charAt = enumName.charAt(0);
-			if (charAt == '1')
+			final String lookupName = enumName.startsWith("Version_") ? enumName
+					: (Character.isDigit(enumName.charAt(0))
+							? "Version_" + StringUtil.replaceString(enumName, JDFCoreConstants.DOT, JDFCoreConstants.UNDERSCORE)
+							: enumName);
+			final EnumVersion v = JavaEnumUtil.getEnumIgnoreCase(EnumVersion.class, lookupName, null);
+			if (v != null)
 			{
-				if ("1.9".equals(enumName))
-				{
-					return EnumVersion.Version_1_9;
-				}
-				else if ("1.8".equals(enumName))
-				{
-					return EnumVersion.Version_1_8;
-				}
-				else if ("1.7".equals(enumName))
-				{
-					return EnumVersion.Version_1_7;
-				}
-				else if ("1.6".equals(enumName))
-				{
-					return EnumVersion.Version_1_6;
-				}
-				else if ("1.5".equals(enumName))
-				{
-					return EnumVersion.Version_1_5;
-				}
-				else if ("1.4".equals(enumName))
-				{
-					return EnumVersion.Version_1_4;
-				}
-				else if ("1.3".equals(enumName))
-				{
-					return EnumVersion.Version_1_3;
-				}
-				else if ("1.2".equals(enumName))
-				{
-					return EnumVersion.Version_1_2;
-				}
-				else if ("1.1".equals(enumName))
-				{
-					return EnumVersion.Version_1_1;
-				}
-				else if ("1.0".equals(enumName))
-				{
-					return EnumVersion.Version_1_0;
-				}
+				return v;
 			}
-			else if (charAt == '2')
+			if (!StringUtil.isEmpty(enumName) && enumName.charAt(0) == '2')
 			{
-				if ("2.0".equals(enumName))
-				{
-					return EnumVersion.Version_2_0;
-				}
-				else if ("2.1".equals(enumName))
-				{
-					return EnumVersion.Version_2_1;
-				}
-				else if ("2.2".equals(enumName))
-				{
-					return EnumVersion.Version_2_2;
-				}
-				else if ("2.3".equals(enumName))
-				{
-					return EnumVersion.Version_2_3;
-				}
-				else
-				{
-					return XJDFHelper.defaultVersion();
-				}
+				return XJDFHelper.defaultVersion();
 			}
-			return JDFElement.getDefaultJDFVersion(); // the default
+			return JDFElement.getDefaultJDFVersion();
 		}
 
-		/**
-		 * casts a EnumVersion into its corresponding String
-		 *
-		 * @param enumValue the EnumVersion to cast
-		 * @return the corresponding String
-		 */
 		public static EnumVersion getEnum(final int enumValue)
 		{
-			return (EnumVersion) getEnum(EnumVersion.class, enumValue);
+			final EnumVersion[] values = values();
+			return enumValue >= 0 && enumValue < values.length ? values[enumValue] : null;
 		}
 
-		/**
-		 * casts a EnumVersion into its corresponding String
-		 *
-		 * @param enumValue the EnumVersion to cast
-		 * @return the corresponding String
-		 */
 		public static EnumVersion getEnum(final int major, final int minor)
 		{
 			return getEnum(major + "." + minor);
 		}
 
-		/**
-		 * @return Map
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumVersion.class);
-		}
-
-		/**
-		 * @return List
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumVersion.class);
-		}
-
-		/**
-		 * gets the EnumVersion iterator
-		 *
-		 * @return Iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumVersion.class);
-		}
-
-		/**
-		 * returns true if this is greater than other
-		 *
-		 * @param other
-		 * @return boolean true if this>other
-		 */
 		public boolean isGreater(final EnumVersion other)
 		{
 			if (other == null)
 			{
 				return true;
 			}
-			return getValue() > other.getValue();
+			return ordinal() > other.ordinal();
 		}
 
-		/**
-		 * @param jdfVersion
-		 * @return
-		 */
 		public boolean isXJDF()
 		{
-			return !EnumUtil.aLessThanB(this, EnumVersion.Version_2_0);
+			return getMajorVersion() >= 2;
 		}
 
-		/**
-		 * @ deprecated EnumVersion.Unknown - don't use EnumVersion.Unknown, it can't be deprecated because of bit operations in eg. AtrInfo.getFirstVersion()
-		 */
-		/** * */
-		public static final EnumVersion Unknown = new EnumVersion(JDFConstants.UNKNOWN);
-
-		/** * */
-		public static final EnumVersion Version_1_0 = new EnumVersion(JDFConstants.VERSION_1_0);
-		/** * */
-		public static final EnumVersion Version_1_1 = new EnumVersion(JDFConstants.VERSION_1_1);
-		/** * */
-		public static final EnumVersion Version_1_2 = new EnumVersion(JDFConstants.VERSION_1_2);
-		/** * */
-		public static final EnumVersion Version_1_3 = new EnumVersion(JDFConstants.VERSION_1_3);
-		/** * */
-		public static final EnumVersion Version_1_4 = new EnumVersion(JDFConstants.VERSION_1_4);
-		/** * */
-		public static final EnumVersion Version_1_5 = new EnumVersion(JDFConstants.VERSION_1_5);
-		/** * */
-		public static final EnumVersion Version_1_6 = new EnumVersion(JDFConstants.VERSION_1_6);
-		/** * */
-		public static final EnumVersion Version_1_7 = new EnumVersion(JDFConstants.VERSION_1_7);
-		/** * */
-		public static final EnumVersion Version_1_8 = new EnumVersion(JDFConstants.VERSION_1_8);
-		/** * */
-		public static final EnumVersion Version_1_9 = new EnumVersion(JDFConstants.VERSION_1_9);
-		/** * */
-		public static final EnumVersion Version_1_10 = new EnumVersion(JDFConstants.VERSION_1_10);
-		/** * */
-		public static final EnumVersion Version_1_11 = new EnumVersion(JDFConstants.VERSION_1_11);
-
-		public static final EnumVersion Version_2_0 = new EnumVersion(JDFConstants.VERSION_2_0);
-		public static final EnumVersion Version_2_1 = new EnumVersion(JDFConstants.VERSION_2_1);
-		public static final EnumVersion Version_2_2 = new EnumVersion(JDFConstants.VERSION_2_2);
-		public static final EnumVersion Version_2_3 = new EnumVersion(JDFConstants.VERSION_2_3);
-		public static final EnumVersion Version_2_4 = new EnumVersion(JDFConstants.VERSION_2_4);
-
-		private static int LAST_1 = getEnumList().indexOf(Version_2_0) - 1;
-
-		/**
-		 * gets the integer value of the minor version, e.g 2 for 1.3 etc
-		 *
-		 * @return
-		 */
 		public int getMinorVersion()
 		{
-			return (getValue() - 1) % LAST_1;
+			return StringUtil.parseInt(StringUtil.token(name(), -1, JDFCoreConstants.UNDERSCORE), 0);
 		}
 
-		/**
-		 * gets the integer value of the major version, e.g 2 for 1.3 etc
-		 *
-		 * @return
-		 */
 		public int getMajorVersion()
 		{
-			return 1 + (getValue() - 1) / LAST_1;
+			return StringUtil.parseInt(StringUtil.token(name(), -2, JDFCoreConstants.UNDERSCORE), 0);
 		}
 
+		public String getName()
+		{
+			return getJDFVersionName();
+		}
 	}
 
 	/**
@@ -5643,122 +4764,36 @@ public class JDFElement extends KElement
 	 * </ul>
 	 * </blockquote>
 	 */
-	@SuppressWarnings("unchecked")
-	public static final class EnumValidationLevel extends ValuedEnum
+	public enum EnumValidationLevel
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		NoWarnIncomplete, NoWarnComplete, Incomplete, Complete, RecursiveIncomplete, RecursiveComplete;
 
-		protected EnumValidationLevel(final String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName
-		 * @return
-		 */
 		public static EnumValidationLevel getEnum(final String enumName)
 		{
-			return (EnumValidationLevel) getEnum(EnumValidationLevel.class, enumName);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumValidationLevel.class, enumName, null);
 		}
 
-		/**
-		 * @param enumValue
-		 * @return
-		 */
 		public static EnumValidationLevel getEnum(final int enumValue)
 		{
-			return (EnumValidationLevel) getEnum(EnumValidationLevel.class, enumValue);
+			final EnumValidationLevel[] values = values();
+			return enumValue >= 0 && enumValue < values.length ? values[enumValue] : null;
 		}
 
-		/**
-		 * @return
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumValidationLevel.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumValidationLevel.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumValidationLevel.class);
-		}
-
-		/**
-		 * return true if vl is a recursvive EnumValidationLevel
-		 *
-		 * @param vl the EnumValidationLevel to check
-		 * @return true if vl is recursive
-		 */
 		public static boolean isRecursive(final EnumValidationLevel vl)
 		{
 			return EnumValidationLevel.RecursiveIncomplete.equals(vl) || EnumValidationLevel.RecursiveComplete.equals(vl);
 		}
 
-		/**
-		 * return true if vl is a recursvive EnumValidationLevel
-		 *
-		 * @param vl the EnumValidationLevel to check
-		 * @return true if vl is recursive
-		 */
 		public static boolean isNoWarn(final EnumValidationLevel vl)
 		{
 			return EnumValidationLevel.NoWarnComplete.equals(vl) || EnumValidationLevel.NoWarnIncomplete.equals(vl);
 		}
 
-		/**
-		 * returns true if the enumeration level is either Complete, NoWarnComplete or RecursiveComplete, i.e. if the parameter is required
-		 *
-		 * @param level the level to check
-		 * @return true if required
-		 */
 		public static boolean isRequired(final EnumValidationLevel level)
 		{
 			return EnumValidationLevel.Complete.equals(level) || EnumValidationLevel.RecursiveComplete.equals(level)
 					|| EnumValidationLevel.NoWarnComplete.equals(level);
 		}
-
-		/**
-		 * ignore warnings and allow missing traits
-		 */
-		public static final EnumValidationLevel NoWarnIncomplete = new EnumValidationLevel("NoWarnIncomplete");
-
-		/**
-		 * ignore warnings and require all traits
-		 */
-		public static final EnumValidationLevel NoWarnComplete = new EnumValidationLevel("NoWarnComplete");
-
-		/**
-		 * show warnings and allow missing traits
-		 */
-		public static final EnumValidationLevel Incomplete = new EnumValidationLevel(JDFConstants.VALIDATIONLEVEL_INCOMPLETE);
-
-		/**
-		 * show warnings and require all traits
-		 */
-		public static final EnumValidationLevel Complete = new EnumValidationLevel(JDFConstants.VALIDATIONLEVEL_COMPLETE);
-
-		/**
-		 * show warnings and allow missing traits- also recurse referenced elements
-		 */
-		public static final EnumValidationLevel RecursiveIncomplete = new EnumValidationLevel(JDFConstants.VALIDATIONLEVEL_RECURSIVEINCOMPLETE);
-
-		/**
-		 * show warnings and require all traits - also recurse referenced elements
-		 */
-		public static final EnumValidationLevel RecursiveComplete = new EnumValidationLevel(JDFConstants.VALIDATIONLEVEL_RECURSIVECOMPLETE);
 
 		/**
 		 * calculate the corresponding nowarn level based on level
@@ -5802,79 +4837,36 @@ public class JDFElement extends KElement
 			}
 			return level;
 		}
+
+		public String getName()
+		{
+			return name();
+		}
 	}
 
 	/**
 	 * Enumeration strings for Sides
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumSides extends ValuedEnum
+	public enum EnumSides
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		OneSided, OneSidedFront, OneSidedBack, OneSidedBackFlipX, OneSidedBackFlipY, TwoSidedFlipX, TwoSidedHeadToFoot, TwoSidedFlipY, TwoSidedHeadToHead, TwoSided, Unprinted;
 
-		protected EnumSides(String name)
+		public static EnumSides getEnum(final String enumName)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSides.class, enumName, null);
 		}
 
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumSides getEnum(String enumName)
+		public static EnumSides getEnum(final int enumValue)
 		{
-			return (EnumSides) getEnum(EnumSides.class, enumName);
+			final EnumSides[] values = values();
+			return enumValue >= 0 && enumValue < values.length ? values[enumValue] : null;
 		}
 
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumSides getEnum(int enumValue)
+		public String getName()
 		{
-			return (EnumSides) getEnum(EnumSides.class, enumValue);
+			return name();
 		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSides.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSides.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSides.class);
-		}
-
-		public static final EnumSides OneSided = new EnumSides("OneSided");
-		public static final EnumSides OneSidedFront = new EnumSides("OneSidedFront");
-
-		public static final EnumSides OneSidedBack = new EnumSides("OneSidedBack");
-		public static final EnumSides OneSidedBackFlipX = new EnumSides("OneSidedBackFlipX");
-		public static final EnumSides OneSidedBackFlipY = new EnumSides("OneSidedBackFlipY");
-
-		public static final EnumSides TwoSidedFlipX = new EnumSides("TwoSidedFlipX");
-		public static final EnumSides TwoSidedHeadToFoot = new EnumSides("TwoSidedHeadToFoot");
-
-		public static final EnumSides TwoSidedFlipY = new EnumSides("TwoSidedFlipY");
-		public static final EnumSides TwoSidedHeadToHead = new EnumSides("TwoSidedHeadToHead");
-		public static final EnumSides TwoSided = new EnumSides("TwoSided");
-		public static final EnumSides Unprinted = new EnumSides("Unprinted");
 	}
 
 	/**
@@ -5885,7 +4877,7 @@ public class JDFElement extends KElement
 	{
 		OneSided, OneSidedFront, OneSidedBack, OneSidedBackFlipX, OneSidedBackFlipY, TwoSidedFlipX, TwoSidedFlipY, TwoSidedHeadToFoot, TwoSidedHeadToHead, TwoSided, Unprinted;
 
-		public static ESides getEnum(String val)
+		public static ESides getEnum(final String val)
 		{
 			return JavaEnumUtil.getEnumIgnoreCase(ESides.class, val, ESides.OneSidedFront);
 		}
@@ -6007,12 +4999,7 @@ public class JDFElement extends KElement
 				continue;
 			}
 
-			if (EnumPoolType.AuditPool.equals(poolType) && e instanceof JDFAudit)
-			{
-				continue;
-			}
-
-			if (EnumPoolType.AncestorPool.equals(poolType) && e instanceof JDFAncestor)
+			if ((EnumPoolType.AuditPool.equals(poolType) && e instanceof JDFAudit) || (EnumPoolType.AncestorPool.equals(poolType) && e instanceof JDFAncestor))
 			{
 				continue;
 			}
@@ -6086,7 +5073,7 @@ public class JDFElement extends KElement
 	 */
 	public void appendBestEffortExceptions(final String value)
 	{
-		appendAttribute(AttributeName.BESTEFFORTEXCEPTIONS, value, null, JDFConstants.BLANK, true);
+		appendAttribute(AttributeName.BESTEFFORTEXCEPTIONS, value, null, JDFCoreConstants.BLANK, true);
 	}
 
 	/**
@@ -6096,7 +5083,7 @@ public class JDFElement extends KElement
 	 */
 	public void removeFromBestEffortExceptions(final String value)
 	{
-		removeFromAttribute(AttributeName.BESTEFFORTEXCEPTIONS, value, null, JDFConstants.BLANK, -1);
+		removeFromAttribute(AttributeName.BESTEFFORTEXCEPTIONS, value, null, JDFCoreConstants.BLANK, -1);
 	}
 
 	/**
@@ -6106,7 +5093,7 @@ public class JDFElement extends KElement
 	 */
 	public String getBestEffortExceptions()
 	{
-		return getAttribute(AttributeName.BESTEFFORTEXCEPTIONS, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.BESTEFFORTEXCEPTIONS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -6126,7 +5113,7 @@ public class JDFElement extends KElement
 	 */
 	public void appendMustHonorExceptions(final String value)
 	{
-		appendAttribute(AttributeName.MUSTHONOREXCEPTIONS, value, null, JDFConstants.BLANK, true);
+		appendAttribute(AttributeName.MUSTHONOREXCEPTIONS, value, null, JDFCoreConstants.BLANK, true);
 	}
 
 	/**
@@ -6136,7 +5123,7 @@ public class JDFElement extends KElement
 	 */
 	public void removeFromMustHonorExceptions(final String value)
 	{
-		removeFromAttribute(AttributeName.MUSTHONOREXCEPTIONS, value, null, JDFConstants.BLANK, -1);
+		removeFromAttribute(AttributeName.MUSTHONOREXCEPTIONS, value, null, JDFCoreConstants.BLANK, -1);
 	}
 
 	/**
@@ -6146,7 +5133,7 @@ public class JDFElement extends KElement
 	 */
 	public String getMustHonorExceptions()
 	{
-		return getAttribute(AttributeName.MUSTHONOREXCEPTIONS, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.MUSTHONOREXCEPTIONS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -6166,7 +5153,7 @@ public class JDFElement extends KElement
 	 */
 	public void appendOperatorInterventionExceptions(final String value)
 	{
-		appendAttribute(AttributeName.OPERATORINTERVENTIONEXCEPTIONS, value, null, JDFConstants.BLANK, true);
+		appendAttribute(AttributeName.OPERATORINTERVENTIONEXCEPTIONS, value, null, JDFCoreConstants.BLANK, true);
 	}
 
 	/**
@@ -6176,7 +5163,7 @@ public class JDFElement extends KElement
 	 */
 	public void removeFromOperatorInterventionExceptions(final String value)
 	{
-		removeFromAttribute(AttributeName.OPERATORINTERVENTIONEXCEPTIONS, value, null, JDFConstants.BLANK, -1);
+		removeFromAttribute(AttributeName.OPERATORINTERVENTIONEXCEPTIONS, value, null, JDFCoreConstants.BLANK, -1);
 	}
 
 	/**
@@ -6186,7 +5173,7 @@ public class JDFElement extends KElement
 	 */
 	public String getOperatorInterventionExceptions()
 	{
-		return getAttribute(AttributeName.OPERATORINTERVENTIONEXCEPTIONS, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.OPERATORINTERVENTIONEXCEPTIONS, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -6206,7 +5193,7 @@ public class JDFElement extends KElement
 	 */
 	public String getDescriptiveName()
 	{
-		return getAttribute(AttributeName.DESCRIPTIVENAME, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.DESCRIPTIVENAME, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	// ////////////////////////////////////////////////////////////////////
@@ -6694,11 +5681,7 @@ public class JDFElement extends KElement
 		{
 			return false;
 		}
-		if (isWildCard(attVal))
-		{
-			return true;
-		}
-		if (attVal.equals(thisVal))
+		if (isWildCard(attVal) || attVal.equals(thisVal))
 		{
 			return true;
 		}
@@ -6712,7 +5695,7 @@ public class JDFElement extends KElement
 	 */
 	public void setStatus(final EnumNodeStatus s)
 	{
-		setAttribute(AttributeName.STATUS, s == null ? null : s.getName(), null);
+		setAttribute(AttributeName.STATUS, JavaEnumUtil.getName(s), null);
 	}
 
 	/**
@@ -7011,10 +5994,10 @@ public class JDFElement extends KElement
 				}
 			}
 		}
-		final ValuedEnum en = e.getEnumforAttribute(attName);
+		final Enum<?> en = e.getEnumforAttribute(attName);
 		if (en != null)
 		{
-			return en.getName();
+			return en.name();
 		}
 		return "New Value";
 	}
@@ -7051,7 +6034,8 @@ public class JDFElement extends KElement
 	 */
 	public static String getSchemaURL(final EnumVersion version)
 	{
-		if (EnumUtil.aLessThanB(version, EnumVersion.Version_2_0))
+		final EnumVersion v = version != null ? version : getDefaultJDFVersion();
+		if (v.getMajorVersion() < 2)
 		{
 			return getSchemaURL(1, 1);
 		}

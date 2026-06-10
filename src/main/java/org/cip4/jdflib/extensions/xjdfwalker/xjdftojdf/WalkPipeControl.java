@@ -85,26 +85,24 @@ public class WalkPipeControl extends WalkTypesafeMessage
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkTypesafeMessage#matches(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public boolean matches(KElement toCheck)
+	public boolean matches(final KElement toCheck)
 	{
 		return true;
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkTypesafeMessage#getMessageType(org.cip4.jdflib.core.KElement, java.lang.String, java.lang.String)
 	 */
 	@Override
-	String getMessageType(KElement e, String messageName, String family)
+	String getMessageType(final KElement e, final String messageName, final String family)
 	{
 		String operation = e.getXPathAttribute("PipeParams/@Operation", null);
 		if (operation == null)
 		{
-			String refID = e.getAttribute(AttributeName.REFID, null, null);
+			final String refID = e.getAttribute(AttributeName.REFID, null, null);
 			if (refID != null)
 			{
 				operation = XJMFTypeMap.getMap().remove(refID);

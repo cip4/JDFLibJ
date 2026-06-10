@@ -31,9 +31,9 @@
  *
  * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
  * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- * 
+ *
  * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
- * 
+ *
  *
  */
 
@@ -134,7 +134,7 @@ public class JDFTest extends JDFNodeTerm
 	/**
 	 * Evaluates the boolean expression (child Term element) if it fits the JDFNode 'jdf' a value of true corresponds to a failed test, i.e. the test describes INVALID states for the jdf
 	 *
-	 * @param jdf JDFNode to test to know if the Device can accept it
+	 * @param jdf        JDFNode to test to know if the Device can accept it
 	 * @param reportRoot the report to generate. Set to <code>null</code> if no report is requested.
 	 * @return boolean - true, if boolean expression (child Term element) evaluates to �true�
 	 */
@@ -144,10 +144,14 @@ public class JDFTest extends JDFNodeTerm
 		KElement reportRootLocal = reportRoot;
 
 		if (reportRootLocal != null)
+		{
 			reportRootLocal = reportRootLocal.appendElement("TestReport");
+		}
 		final JDFTerm t = getTerm();
 		if (t == null)
+		{
 			return true; // no term --> assume it is a non test; i.e. ok
+		}
 
 		boolean checkContext = true;
 		if (hasAttribute(AttributeName.CONTEXT))
@@ -155,10 +159,14 @@ public class JDFTest extends JDFNodeTerm
 			checkContext = !jdf.matchesPath(getContext(), true);
 		}
 		if (checkContext && !t.fitsContext(jdf))
+		{
 			return true;
+		}
 		final boolean b = t.fitsJDF(jdf, reportRootLocal);
 		if (reportRootLocal != null)
+		{
 			reportRootLocal.setAttribute("Value", b, null);
+		}
 		return b;
 	}
 
@@ -206,7 +214,9 @@ public class JDFTest extends JDFNodeTerm
 	{
 		final VString v = super.getInvalidElements(level, bIgnorePrivate, nMax);
 		if (v.size() >= nMax)
+		{
 			return v;
+		}
 
 		v.appendUnique(getInvalidTerms(1));
 
@@ -225,7 +235,9 @@ public class JDFTest extends JDFNodeTerm
 	{
 		final VString v = super.getMissingElements(nMax);
 		if (v.size() >= nMax)
+		{
 			return v;
+		}
 
 		v.appendUnique(getMissingTerms(1));
 		return v;

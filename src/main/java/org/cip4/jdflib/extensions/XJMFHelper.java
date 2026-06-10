@@ -53,7 +53,7 @@ import org.cip4.jdflib.extensions.MessageHelper.EType;
 import org.cip4.jdflib.extensions.xjdfwalker.IDRemover;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
-import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 public class XJMFHelper extends MessagePoolHelper
@@ -133,7 +133,7 @@ public class XJMFHelper extends MessagePoolHelper
 		final JDFDoc doc = new JDFDoc(XJDFConstants.XJMF, v);
 		doc.setInitOnCreate(false);
 		theElement = doc.getRoot();
-		if (EnumUtil.aLessThanB(EnumVersion.Version_2_0, v))
+		if (JavaEnumUtil.aLessThanB(EnumVersion.Version_2_0, v))
 		{
 			theElement.setAttribute(AttributeName.VERSION, v.getName());
 		}
@@ -148,7 +148,7 @@ public class XJMFHelper extends MessagePoolHelper
 	 */
 	public MessageHelper appendMessage(final EnumFamily family, final EnumType typ)
 	{
-		return appendMessage(getMessageName(family, typ.getName()));
+		return appendMessage(getMessageName(family, typ.name()));
 	}
 
 	/**
@@ -170,9 +170,9 @@ public class XJMFHelper extends MessagePoolHelper
 	 * @param typ
 	 * @return
 	 */
-	public MessageHelper getCreateMessage(final EnumFamily family, final EnumType typ, int iSkip)
+	public MessageHelper getCreateMessage(final EnumFamily family, final EnumType typ, final int iSkip)
 	{
-		return getCreateMessage(getMessageName(family, typ.getName()), iSkip);
+		return getCreateMessage(getMessageName(family, typ.name()), iSkip);
 	}
 
 	/**
@@ -197,7 +197,7 @@ public class XJMFHelper extends MessagePoolHelper
 		{
 			throw new IllegalArgumentException("Invalid type of family for XJMF " + family + " / " + typ);
 		}
-		return family.getName() + typ;
+		return family.name() + typ;
 	}
 
 	/**

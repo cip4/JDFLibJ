@@ -71,14 +71,8 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EPrintQuality;
-import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPrintQuality;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -113,10 +107,10 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.IPPJOBPRIORITY, 0x4444444443l, AttributeInfo.EnumAttributeType.integer, null, "50");
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.IPPVERSION, 0x4444444443l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.OUTPUTBIN, 0x4444444443l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.PAGEDELIVERY, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumPageDelivery.getEnum(0),
-				null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.PRINTQUALITY, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumPrintQuality.getEnum(0),
-				null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PAGEDELIVERY, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumPageDelivery.class, 0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PRINTQUALITY, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumPrintQuality.class, 0), null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.SHEETCOLLATE, 0x4444444443l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 	}
 
@@ -149,7 +143,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIDPrintingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoIDPrintingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -161,7 +155,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIDPrintingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoIDPrintingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -174,7 +168,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoIDPrintingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoIDPrintingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -185,7 +179,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -200,93 +194,36 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for PageDelivery
+	 * Enumeration strings for numPageDelivery
 	 */
 
-	public enum EPageDelivery
+	public enum EnumPageDelivery
 	{
 		SameOrderFaceUp, SameOrderFaceDown, ReverseOrderFaceUp, ReverseOrderFaceDown, SystemSpecified;
 
-		public static EPageDelivery getEnum(String val)
+		public static EnumPageDelivery getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPageDelivery.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPageDelivery.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for PageDelivery
+	 * Enumeration strings for numPrintQuality
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumPageDelivery extends ValuedEnum
+	public enum EnumPrintQuality
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		High, Normal, Draft;
 
-		protected EnumPageDelivery(String name)
+		public static EnumPrintQuality getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPrintQuality.class, val, null);
 		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumPageDelivery getEnum(String enumName)
-		{
-			return (EnumPageDelivery) getEnum(EnumPageDelivery.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPageDelivery getEnum(int enumValue)
-		{
-			return (EnumPageDelivery) getEnum(EnumPageDelivery.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPageDelivery.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPageDelivery.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPageDelivery.class);
-		}
-
-		/**  */
-		public static final EnumPageDelivery SameOrderFaceUp = new EnumPageDelivery("SameOrderFaceUp");
-		/**  */
-		public static final EnumPageDelivery SameOrderFaceDown = new EnumPageDelivery("SameOrderFaceDown");
-		/**  */
-		public static final EnumPageDelivery ReverseOrderFaceUp = new EnumPageDelivery("ReverseOrderFaceUp");
-		/**  */
-		public static final EnumPageDelivery ReverseOrderFaceDown = new EnumPageDelivery("ReverseOrderFaceDown");
-		/**  */
-		public static final EnumPageDelivery SystemSpecified = new EnumPageDelivery("SystemSpecified");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -298,7 +235,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAttributesNaturalLang(String value)
+	public void setAttributesNaturalLang(final String value)
 	{
 		setAttribute(AttributeName.ATTRIBUTESNATURALLANG, value, null);
 	}
@@ -323,7 +260,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIDPAttributeFidelity(boolean value)
+	public void setIDPAttributeFidelity(final boolean value)
 	{
 		setAttribute(AttributeName.IDPATTRIBUTEFIDELITY, value, null);
 	}
@@ -348,7 +285,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIPPJobPriority(int value)
+	public void setIPPJobPriority(final int value)
 	{
 		setAttribute(AttributeName.IPPJOBPRIORITY, value, null);
 	}
@@ -373,7 +310,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIPPVersion(JDFXYPair value)
+	public void setIPPVersion(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.IPPVERSION, value, null);
 	}
@@ -386,8 +323,8 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 */
 	public JDFXYPair getIPPVersion()
 	{
-		String strAttrName = getAttribute(AttributeName.IPPVERSION, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.IPPVERSION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -401,7 +338,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOutputBin(String value)
+	public void setOutputBin(final String value)
 	{
 		setAttribute(AttributeName.OUTPUTBIN, value, null);
 	}
@@ -426,9 +363,9 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPageDelivery(EPageDelivery enumVar)
+	public void setPageDelivery(final EnumPageDelivery enumVar)
 	{
-		setAttribute(AttributeName.PAGEDELIVERY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.PAGEDELIVERY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -436,35 +373,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPageDelivery getEPageDelivery()
-	{
-		return EPageDelivery.getEnum(getAttribute(AttributeName.PAGEDELIVERY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute PageDelivery
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute PageDelivery
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPageDelivery(EPageDelivery) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPageDelivery(EnumPageDelivery enumVar)
-	{
-		setAttribute(AttributeName.PAGEDELIVERY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute PageDelivery
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EPageDelivery GetEPageDelivery() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumPageDelivery getPageDelivery()
 	{
 		return EnumPageDelivery.getEnum(getAttribute(AttributeName.PAGEDELIVERY, null, null));
@@ -480,9 +388,9 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPrintQuality(EPrintQuality enumVar)
+	public void setPrintQuality(final EnumPrintQuality enumVar)
 	{
-		setAttribute(AttributeName.PRINTQUALITY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.PRINTQUALITY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -490,35 +398,6 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPrintQuality getEPrintQuality()
-	{
-		return EPrintQuality.getEnum(getAttribute(AttributeName.PRINTQUALITY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute PrintQuality
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute PrintQuality
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPrintQuality(EPrintQuality) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPrintQuality(EnumPrintQuality enumVar)
-	{
-		setAttribute(AttributeName.PRINTQUALITY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute PrintQuality
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EPrintQuality GetEPrintQuality() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumPrintQuality getPrintQuality()
 	{
 		return EnumPrintQuality.getEnum(getAttribute(AttributeName.PRINTQUALITY, null, null));
@@ -534,7 +413,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSheetCollate(boolean value)
+	public void setSheetCollate(final boolean value)
 	{
 		setAttribute(AttributeName.SHEETCOLLATE, value, null);
 	}
@@ -581,7 +460,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFCover the element
 	 */
-	public JDFCover getCreateCover(int iSkip)
+	public JDFCover getCreateCover(final int iSkip)
 	{
 		return (JDFCover) getCreateElement_JDFElement(ElementName.COVER, null, iSkip);
 	}
@@ -593,7 +472,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 * @return JDFCover the element
 	 *         default is getCover(0)
 	 */
-	public JDFCover getCover(int iSkip)
+	public JDFCover getCover(final int iSkip)
 	{
 		return (JDFCover) getElement(ElementName.COVER, null, iSkip);
 	}
@@ -706,7 +585,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFJobSheet the element
 	 */
-	public JDFJobSheet getCreateJobSheet(int iSkip)
+	public JDFJobSheet getCreateJobSheet(final int iSkip)
 	{
 		return (JDFJobSheet) getCreateElement_JDFElement(ElementName.JOBSHEET, null, iSkip);
 	}
@@ -718,7 +597,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 * @return JDFJobSheet the element
 	 *         default is getJobSheet(0)
 	 */
-	public JDFJobSheet getJobSheet(int iSkip)
+	public JDFJobSheet getJobSheet(final int iSkip)
 	{
 		return (JDFJobSheet) getElement(ElementName.JOBSHEET, null, iSkip);
 	}
@@ -779,7 +658,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMediaIntent(JDFMediaIntent refTarget)
+	public void refMediaIntent(final JDFMediaIntent refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -820,7 +699,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMediaSource(JDFMediaSource refTarget)
+	public void refMediaSource(final JDFMediaSource refTarget)
 	{
 		refElement(refTarget);
 	}

@@ -110,7 +110,7 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPreflightParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPreflightParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -122,7 +122,7 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPreflightParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPreflightParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -135,7 +135,7 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPreflightParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPreflightParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -146,7 +146,7 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -192,7 +192,7 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFActionPool the element
 	 */
-	public JDFActionPool getCreateActionPool(int iSkip)
+	public JDFActionPool getCreateActionPool(final int iSkip)
 	{
 		return (JDFActionPool) getCreateElement_JDFElement(ElementName.ACTIONPOOL, null, iSkip);
 	}
@@ -204,7 +204,7 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 	 * @return JDFActionPool the element
 	 *         default is getActionPool(0)
 	 */
-	public JDFActionPool getActionPool(int iSkip)
+	public JDFActionPool getActionPool(final int iSkip)
 	{
 		return (JDFActionPool) getElement(ElementName.ACTIONPOOL, null, iSkip);
 	}
@@ -265,7 +265,7 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}

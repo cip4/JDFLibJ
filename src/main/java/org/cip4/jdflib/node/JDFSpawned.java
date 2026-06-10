@@ -85,18 +85,16 @@ package org.cip4.jdflib.node;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoSpawned;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 
 /**
- * 
  * Description: This class represents a vector of JDFAttributeMap
- * 
+ *
  * @author Torsten Kaehlert
- * 
  * @version 1.0 2002-01-24
- * 
  */
 public class JDFSpawned extends JDFAutoSpawned
 {
@@ -104,36 +102,36 @@ public class JDFSpawned extends JDFAutoSpawned
 
 	/**
 	 * Constructor for JDFSpawned
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFSpawned(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFSpawned(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpawned
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFSpawned(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFSpawned(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpawned
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFSpawned(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFSpawned(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -143,7 +141,7 @@ public class JDFSpawned extends JDFAutoSpawned
 
 	/**
 	 * get part map vector
-	 * 
+	 *
 	 * @return VJDFAttributeMap: vector of attribute maps, one for each part
 	 */
 	@Override
@@ -154,89 +152,89 @@ public class JDFSpawned extends JDFAutoSpawned
 
 	/**
 	 * set all parts to those define in vParts
-	 * 
+	 *
 	 * @param vParts vector of attribute maps for the parts
 	 */
 	@Override
-	public void setPartMapVector(VJDFAttributeMap vParts)
+	public void setPartMapVector(final VJDFAttributeMap vParts)
 	{
 		super.setPartMapVector(vParts);
 	}
 
 	/**
 	 * set all parts to those define in vParts
-	 * 
+	 *
 	 * @param mPart attribute map for the part to set
 	 */
 	@Override
-	public void setPartMap(JDFAttributeMap mPart)
+	public void setPartMap(final JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
 	}
 
 	/**
 	 * remove the part defined in mPart
-	 * 
+	 *
 	 * @param mPart attribute map for the part to remove
 	 */
 	@Override
-	public void removePartMap(JDFAttributeMap mPart)
+	public void removePartMap(final JDFAttributeMap mPart)
 	{
 		super.removePartMap(mPart);
 	}
 
 	/**
 	 * check whether the part defined in mPart is included
-	 * 
+	 *
 	 * @param mPart attribute map for the part to remove
 	 * @return boolean - returns true if the part exists
 	 */
 	@Override
-	public boolean hasPartMap(JDFAttributeMap mPart)
+	public boolean hasPartMap(final JDFAttributeMap mPart)
 	{
 		return super.hasPartMap(mPart);
 	}
 
 	/**
 	 * Typesafe attribute adder of rRefsROCopied
-	 * 
+	 *
 	 * @param rRefs the reference list
 	 */
-	public void appendrRefsROCopied(String rRefs)
+	public void appendrRefsROCopied(final String rRefs)
 	{
-		appendAttribute(JDFConstants.RREFSROCOPIED, rRefs, JDFConstants.EMPTYSTRING, JDFConstants.BLANK, true);
+		appendAttribute(JDFConstants.RREFSROCOPIED, rRefs, JDFCoreConstants.EMPTYSTRING, JDFCoreConstants.BLANK, true);
 	}
 
 	/**
 	 * Typesafe attribute adder of rRefsRWCopied
-	 * 
+	 *
 	 * @param rRefs the reference list
 	 */
-	public void appendrRefsRWCopied(String rRefs)
+	public void appendrRefsRWCopied(final String rRefs)
 	{
-		appendAttribute(JDFConstants.RREFSRWCOPIED, rRefs, JDFConstants.EMPTYSTRING, JDFConstants.BLANK, true);
+		appendAttribute(JDFConstants.RREFSRWCOPIED, rRefs, JDFCoreConstants.EMPTYSTRING, JDFCoreConstants.BLANK, true);
 	}
 
 	/**
 	 * Typesafe attribute adder of rRefsROCopied
-	 * 
+	 *
 	 * @param rRefs the reference list
 	 */
-	public void appendrRefsROCopied(VString rRefs)
+	public void appendrRefsROCopied(final VString rRefs)
 	{
-		VString v0 = getrRefsROCopied();
+		final VString v0 = getrRefsROCopied();
 		v0.appendUnique(rRefs);
 		setrRefsROCopied(v0);
 	}
 
 	/**
 	 * Typesafe attribute adder of rRefsRWCopied
-	 * 
-	 * @param  rRefs the reference list
+	 *
+	 * @param rRefs the reference list
 	 */
-	public void appendrRefsRWCopied(VString rRefs)
+	public void appendrRefsRWCopied(final VString rRefs)
 	{
-		VString v0 = getrRefsRWCopied();
+		final VString v0 = getrRefsRWCopied();
 		v0.appendUnique(rRefs);
 		setrRefsRWCopied(v0);
 

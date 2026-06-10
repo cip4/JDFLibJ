@@ -46,6 +46,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.Arrays;
+
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -74,8 +76,8 @@ class JDFMessageTest
 	@Test
 	void testEnumFamily()
 	{
-		assertEquals(EnumFamily.getEnumMap().get("Signal"), EnumFamily.Signal);
-		assertNotNull(EnumFamily.getEnumList().get(2));
+		assertEquals(EnumFamily.valueOf("Signal"), EnumFamily.Signal);
+		assertNotNull(Arrays.asList(EnumFamily.values()).get(2));
 	}
 
 	/**
@@ -356,7 +358,7 @@ class JDFMessageTest
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.UpdateJDF);
 		assertNotNull(sig.appendValidElement(ElementName.UPDATEJDFCMDPARAMS, null));
 		assertFalse(sig.getInvalidAttributes(EnumValidationLevel.Complete, true, 999).contains(AttributeName.XSITYPE));
-		sig.setAttribute("Type", EnumType.AbortQueueEntry.getName());
+		sig.setAttribute("Type", EnumType.AbortQueueEntry.name());
 		assertTrue(sig.getInvalidAttributes(EnumValidationLevel.Complete, true, 999).contains(AttributeName.XSITYPE));
 	}
 

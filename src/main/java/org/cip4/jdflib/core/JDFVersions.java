@@ -76,7 +76,6 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 
 /**
  * @author funkevol
- *
  *         TODO To change the template for this generated type comment go to Window - Preferences - Java - Code Style - Code Templates
  */
 public class JDFVersions
@@ -109,14 +108,13 @@ public class JDFVersions
 	@Deprecated
 	public static int getDefaultVersion()
 	{
-		return JDFElement.getDefaultJDFVersion().getValue() - 1;
+		return JDFElement.getDefaultJDFVersion().ordinal();
 	}
 
 	/**
 	 * Sets the default JDF version.
-	 * 
-	 * @param v
 	 *
+	 * @param v
 	 * @deprecated use JDFElement.setDefaultJDFVersion(v);
 	 */
 	@Deprecated
@@ -175,14 +173,20 @@ public class JDFVersions
 	 */
 	private static int getIndexFromVersion(final EnumVersion v)
 	{
-		int i = v.getValue();
+		int i = v.ordinal();
 		if (forceVersion || (i <= 0) || (i > jdfVersions.length))
-			i = JDFElement.getDefaultJDFVersion().getValue();
+		{
+			i = JDFElement.getDefaultJDFVersion().ordinal();
+		}
 
 		if (i <= 0)
+		{
 			i = 0;
+		}
 		else if (i > jdfVersions.length)
+		{
 			i = jdfVersions.length;
+		}
 
 		i--; // must be removed if unknown is removed
 		return i;
@@ -204,7 +208,7 @@ public class JDFVersions
 		@Override
 		public String toString()
 		{
-			String s = "Version: " + version.getName();
+			String s = "Version: " + version.name();
 			s += "; ValidityMask: " + Long.toHexString(validityMask);
 			s += "; ValidityOffset: " + validityOffset;
 

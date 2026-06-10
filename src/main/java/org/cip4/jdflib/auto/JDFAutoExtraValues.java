@@ -105,7 +105,7 @@ public abstract class JDFAutoExtraValues extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoExtraValues(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoExtraValues(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -117,7 +117,7 @@ public abstract class JDFAutoExtraValues extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoExtraValues(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoExtraValues(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -130,7 +130,7 @@ public abstract class JDFAutoExtraValues extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoExtraValues(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoExtraValues(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -151,7 +151,7 @@ public abstract class JDFAutoExtraValues extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setUsage(String value)
+	public void setUsage(final String value)
 	{
 		setAttribute(AttributeName.USAGE, value, null);
 	}
@@ -176,7 +176,7 @@ public abstract class JDFAutoExtraValues extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setValue(String value)
+	public void setValue(final String value)
 	{
 		setAttribute(AttributeName.VALUE, value, null);
 	}

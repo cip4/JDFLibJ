@@ -9,12 +9,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanScoring extends JDFEnumerationSpan
@@ -23,39 +19,39 @@ public class JDFSpanScoring extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanScoring
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanScoring(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanScoring(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanScoring
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanScoring(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanScoring(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanScoring
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanScoring(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanScoring(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -63,44 +59,14 @@ public class JDFSpanScoring extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanScoring
 	 */
-	public static class EnumSpanScoring extends ValuedEnum
+	public enum EnumSpanScoring
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		TwiceScored, QuadScored, None;
 
-		private EnumSpanScoring(String name)
+		public static EnumSpanScoring getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanScoring.class, val, null);
 		}
-
-		public static EnumSpanScoring getEnum(String enumName)
-		{
-			return (EnumSpanScoring) getEnum(EnumSpanScoring.class, enumName);
-		}
-
-		public static EnumSpanScoring getEnum(int enumValue)
-		{
-			return (EnumSpanScoring) getEnum(EnumSpanScoring.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanScoring.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanScoring.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanScoring.class);
-		}
-
-		public static final EnumSpanScoring TwiceScored = new EnumSpanScoring("TwiceScored");
-		public static final EnumSpanScoring QuadScored = new EnumSpanScoring("QuadScored");
-		public static final EnumSpanScoring None = new EnumSpanScoring("None");
 
 	}
 
@@ -109,18 +75,18 @@ public class JDFSpanScoring extends JDFEnumerationSpan
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanScoring.getEnum(0);
+		return EnumSpanScoring.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

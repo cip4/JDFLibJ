@@ -93,10 +93,8 @@ import org.cip4.jdflib.resource.process.postpress.JDFThreadSealing;
 import org.cip4.jdflib.resource.process.postpress.JDFThreadSewing;
 
 /**
- *
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
- * Mar 17, 2010
+ *         Mar 17, 2010
  */
 public class WalkIntentElement extends WalkXElement
 {
@@ -115,7 +113,7 @@ public class WalkIntentElement extends WalkXElement
 	@Override
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
-		KElement ret = super.walk(e, trackElem);
+		final KElement ret = super.walk(e, trackElem);
 		xjdfToJDFImpl.attributesToSpan(ret);
 		return ret;
 	}
@@ -128,11 +126,13 @@ public class WalkIntentElement extends WalkXElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return (toCheck instanceof JDFDropIntent) || (toCheck instanceof JDFDropItemIntent) || (toCheck instanceof JDFArtDelivery) || (toCheck instanceof JDFBindItem)
-				|| (toCheck instanceof JDFChannelBinding) || (toCheck instanceof JDFCoilBinding) || (toCheck instanceof JDFEdgeGluing) || (toCheck instanceof JDFHardCoverBinding)
-				|| (toCheck instanceof JDFPlasticCombBinding) || (toCheck instanceof JDFRingBinding) || (toCheck instanceof JDFSaddleStitching)
-				|| (toCheck instanceof JDFSideSewing) || (toCheck instanceof JDFSoftCoverBinding) || (toCheck instanceof JDFStripBinding) || (toCheck instanceof JDFTabs)
-				|| (toCheck instanceof JDFThreadSealing) || (toCheck instanceof JDFThreadSewing) || (toCheck instanceof JDFEmbossingItem) || (toCheck instanceof JDFInsert)
-				|| (toCheck instanceof JDFNumberItem) || (toCheck instanceof JDFProofItem) || (toCheck instanceof JDFShapeCut);
+		return (toCheck instanceof JDFDropIntent) || (toCheck instanceof JDFDropItemIntent) || (toCheck instanceof JDFArtDelivery)
+				|| (toCheck instanceof JDFBindItem) || (toCheck instanceof JDFChannelBinding) || (toCheck instanceof JDFCoilBinding)
+				|| (toCheck instanceof JDFEdgeGluing) || (toCheck instanceof JDFHardCoverBinding) || (toCheck instanceof JDFPlasticCombBinding)
+				|| (toCheck instanceof JDFRingBinding) || (toCheck instanceof JDFSaddleStitching) || (toCheck instanceof JDFSideSewing)
+				|| (toCheck instanceof JDFSoftCoverBinding) || (toCheck instanceof JDFStripBinding) || (toCheck instanceof JDFTabs)
+				|| (toCheck instanceof JDFThreadSealing) || (toCheck instanceof JDFThreadSewing) || (toCheck instanceof JDFEmbossingItem)
+				|| (toCheck instanceof JDFInsert) || (toCheck instanceof JDFNumberItem) || (toCheck instanceof JDFProofItem)
+				|| (toCheck instanceof JDFShapeCut);
 	}
 }

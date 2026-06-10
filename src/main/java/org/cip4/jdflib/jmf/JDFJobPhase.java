@@ -70,7 +70,6 @@ import org.cip4.jdflib.util.StringUtil;
 // ----------------------------------
 /**
  * describes the actual status of jobs in a device
- *
  * Note that the old EnumStatus local class has been move to @see JDFNode.EnumNodeStatus
  */
 public class JDFJobPhase extends JDFAutoJobPhase implements INodeIdentifiable
@@ -283,7 +282,7 @@ public class JDFJobPhase extends JDFAutoJobPhase implements INodeIdentifiable
 			final JDFNode.EnumActivation activation = node.getActivation(true);
 			if (activation != null)
 			{
-				setActivation(EnumActivation.getEnum(activation.getName()));
+				setActivation(EnumActivation.getEnum(activation.name()));
 			}
 			final VJDFAttributeMap vMap = ni.getPartMapVector();
 			setStatus(node.getVectorPartStatus(vMap));
@@ -372,7 +371,6 @@ public class JDFJobPhase extends JDFAutoJobPhase implements INodeIdentifiable
 	 *
 	 * @param mp the modulephase to copy
 	 * @return the new ModuleStatus element
-	 *
 	 */
 	public JDFModuleStatus createModuleStatusFromModulePhase(final JDFModulePhase mp)
 	{
@@ -422,7 +420,7 @@ public class JDFJobPhase extends JDFAutoJobPhase implements INodeIdentifiable
 	 * returns true if this is the same phase, i.e. the
 	 *
 	 * @param lastphase the phase to compare with
-	 * @param bExact if true, use startTime as hook, else compare stati
+	 * @param bExact    if true, use startTime as hook, else compare stati
 	 * @return
 	 */
 	public boolean isSamePhase(final JDFJobPhase lastphase, final boolean bExact)
@@ -437,19 +435,7 @@ public class JDFJobPhase extends JDFAutoJobPhase implements INodeIdentifiable
 			final JDFDate lastStartTime = lastphase.getPhaseStartTime();
 			return startTime != null && startTime.equals(lastStartTime);
 		}
-		if (!ContainerUtil.equals(getStatus(), lastphase.getStatus()))
-		{
-			return false;
-		}
-		if (!ContainerUtil.equals(StringUtil.getNonEmpty(getStatusDetails()), StringUtil.getNonEmpty(lastphase.getStatusDetails())))
-		{
-			return false;
-		}
-		if (!ContainerUtil.equals(StringUtil.getNonEmpty(getDescriptiveName()), StringUtil.getNonEmpty(lastphase.getDescriptiveName())))
-		{
-			return false;
-		}
-		if (!ContainerUtil.equals(getIdentifier(), lastphase.getIdentifier()))
+		if (!ContainerUtil.equals(getStatus(), lastphase.getStatus()) || !ContainerUtil.equals(StringUtil.getNonEmpty(getStatusDetails()), StringUtil.getNonEmpty(lastphase.getStatusDetails())) || !ContainerUtil.equals(StringUtil.getNonEmpty(getDescriptiveName()), StringUtil.getNonEmpty(lastphase.getDescriptiveName())) || !ContainerUtil.equals(getIdentifier(), lastphase.getIdentifier()))
 		{
 			return false;
 		}
@@ -597,9 +583,13 @@ public class JDFJobPhase extends JDFAutoJobPhase implements INodeIdentifiable
 	public void setPercentCompleted(double value)
 	{
 		if (value < 0)
+		{
 			throw new IllegalArgumentException("Invalid PercentCompleted (0-100); " + value);
+		}
 		else if (value > 100)
+		{
 			value = 100;
+		}
 		super.setPercentCompleted(value);
 	}
 }

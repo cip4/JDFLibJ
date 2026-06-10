@@ -50,12 +50,11 @@ package org.cip4.jdflib.datatypes;
 import java.util.ArrayList;
 import java.util.zip.DataFormatException;
 
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFShapeRangeList extends JDFRangeList
@@ -108,12 +107,11 @@ public class JDFShapeRangeList extends JDFRangeList
 	 * constructs a JDFShapeRangeList from the values of a given String
 	 *
 	 * @param s the given String
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFShapeRangeList(final String s) throws DataFormatException
 	{
-		if (s != null && !s.equals(JDFConstants.EMPTYSTRING))
+		if (s != null && !s.equals(JDFCoreConstants.EMPTYSTRING))
 		{
 			setString(s);
 		}
@@ -145,34 +143,39 @@ public class JDFShapeRangeList extends JDFRangeList
 	 * setString - deserialize a string Reads the string, which represents JDFShapeRangeList, and converts it into real JDFShapeRangeList
 	 *
 	 * @param s string to read
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public void setString(final String s) throws DataFormatException
 	{
-		if (s.indexOf(JDFConstants.TILDE) == 0 || s.lastIndexOf(JDFConstants.TILDE) == (s.length() - 1))
+		if (s.indexOf(JDFCoreConstants.TILDE) == 0 || s.lastIndexOf(JDFCoreConstants.TILDE) == (s.length() - 1))
+		{
 			throw new DataFormatException("JDFShapeRangeList.setString: Illegal string " + s);
-		final String zappedWS = StringUtil.zappTokenWS(s, JDFConstants.TILDE);
-		final VString vs = new VString(zappedWS, JDFConstants.BLANK);
+		}
+		final String zappedWS = StringUtil.zappTokenWS(s, JDFCoreConstants.TILDE);
+		final VString vs = new VString(zappedWS, JDFCoreConstants.BLANK);
 		rangeList.clear();
 		for (int i = 0, size = vs.size(); i < size; i++)
 		{
 			if (size - i < MAX_SHAPE_DIMENSION) // the last Shape is incomplete
+			{
 				throw new DataFormatException("JDFShapeRangeList.setString: Illegal string " + s);
+			}
 
 			final StringBuffer str = new StringBuffer(100);
-			str.append(vs.elementAt(i)).append(JDFConstants.BLANK).append(vs.elementAt(++i)).append(JDFConstants.BLANK);
+			str.append(vs.elementAt(i)).append(JDFCoreConstants.BLANK).append(vs.elementAt(++i)).append(JDFCoreConstants.BLANK);
 			// the third token 'tildeToken' can be with or without "~"
 			final String tildeToken = vs.elementAt(++i);
 			str.append(tildeToken);
-			if (tildeToken.indexOf(JDFConstants.TILDE) != -1) // str -
+			if (tildeToken.indexOf(JDFCoreConstants.TILDE) != -1) // str -
 			// JDFShapeRange
 			{
 				if (size - i < MAX_SHAPE_DIMENSION) // the last ShapeRange is
+				{
 					// incomplete
 					throw new DataFormatException("JDFShapeRangeList.setString: Illegal string " + s);
+				}
 
-				str.append(JDFConstants.BLANK).append(vs.elementAt(++i)).append(JDFConstants.BLANK).append(vs.elementAt(++i));
+				str.append(JDFCoreConstants.BLANK).append(vs.elementAt(++i)).append(JDFCoreConstants.BLANK).append(vs.elementAt(++i));
 			}
 			try
 			{
@@ -190,7 +193,6 @@ public class JDFShapeRangeList extends JDFRangeList
 	 * isValid - validate the given String
 	 *
 	 * @param s the given string
-	 *
 	 * @return boolean - false if the String has not a valid format
 	 */
 	public boolean isValid(final String s)
@@ -249,7 +251,9 @@ public class JDFShapeRangeList extends JDFRangeList
 
 		final int n = v == null ? 0 : v.size() - 1;
 		if (n == 0)
+		{
 			return true; // single value
+		}
 
 		final JDFShape first = (v.get(0));
 		final JDFShape last = (v.get(n));
@@ -259,8 +263,10 @@ public class JDFShapeRangeList extends JDFRangeList
 			final JDFShape value = (v.get(j));
 			final JDFShape nextvalue = (v.get(j + 1));
 
-			if (((first.equals(last) && value.equals(nextvalue)) || (first.isLess(last) && value.isLessOrEqual(nextvalue)) || (first.isGreater(last) && value.isGreaterOrEqual(nextvalue))) == false)
+			if (((!first.equals(last) || !value.equals(nextvalue)) && (!first.isLess(last) || !value.isLessOrEqual(nextvalue)) && (!first.isGreater(last) || !value.isGreaterOrEqual(nextvalue))))
+			{
 				return false;
+			}
 		}
 		return true;
 	}
@@ -269,7 +275,9 @@ public class JDFShapeRangeList extends JDFRangeList
 	{
 		final int siz = rangeList.size();
 		if (siz == 0)
+		{
 			return null; // attempt to operate on a null element
+		}
 
 		final ArrayList<JDFShape> v = new ArrayList<>(); // vector of ranges
 		for (int i = 0; i < siz; i++)
@@ -311,8 +319,10 @@ public class JDFShapeRangeList extends JDFRangeList
 			final JDFShape value = v.get(j);
 			final JDFShape nextvalue = v.get(j + 1);
 
-			if (((first.isLess(last) && value.isLess(nextvalue)) || (first.isGreater(last) && value.isGreater(nextvalue))) == false)
+			if (((!first.isLess(last) || !value.isLess(nextvalue)) && (!first.isGreater(last) || !value.isGreater(nextvalue))))
+			{
 				return false;
+			}
 		}
 		return true;
 	}

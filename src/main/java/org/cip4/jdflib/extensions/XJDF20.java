@@ -72,16 +72,15 @@ import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG <br/>
- * conversion class to convert JDF 1.x to the experimental JDF 2.0<br/>
- * very experimental and subject to change without notice
- * 
- * 15.01.2009
+ *         conversion class to convert JDF 1.x to the experimental JDF 2.0<br/>
+ *         very experimental and subject to change without notice
+ *         15.01.2009
  */
 public class XJDF20 extends JDFToXJDF
 {
 
 	/**
-	 * 
+	 *
 	 */
 	public XJDF20()
 	{

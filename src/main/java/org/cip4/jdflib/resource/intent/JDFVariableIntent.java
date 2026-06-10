@@ -51,7 +51,8 @@ public class JDFVariableIntent extends JDFAutoVariableIntent
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFVariableIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFVariableIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

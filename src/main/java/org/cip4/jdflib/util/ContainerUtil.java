@@ -62,7 +62,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Vector;
 
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.ifaces.IMatches;
 
 /**
@@ -214,7 +214,7 @@ public class ContainerUtil
 	{
 		if (c == null)
 		{
-			return JDFConstants.EMPTYSTRING;
+			return JDFCoreConstants.EMPTYSTRING;
 		}
 		final List<A> l = new ArrayList<>();
 		l.addAll(c);
@@ -225,7 +225,7 @@ public class ContainerUtil
 		{
 			if (i++ > 0)
 			{
-				b.append(JDFConstants.COMMA);
+				b.append(JDFCoreConstants.COMMA);
 			}
 			b.append(e.toString());
 		}
@@ -433,7 +433,7 @@ public class ContainerUtil
 	 *
 	 * @param strings the array of strings to append to <code>this</code>
 	 */
-	public static <A> Collection<A> removeAll(final Collection<A> c, Collection<A> a)
+	public static <A> Collection<A> removeAll(final Collection<A> c, final Collection<A> a)
 	{
 		if (a != null && c != null)
 		{
@@ -488,7 +488,7 @@ public class ContainerUtil
 	 * @param name
 	 * @return
 	 */
-	public static <A> A getIgnoreCase(Map<String, A> map, final String name)
+	public static <A> A getIgnoreCase(final Map<String, A> map, final String name)
 	{
 		if (isEmpty(map))
 		{
@@ -1373,6 +1373,11 @@ public class ContainerUtil
 			}
 		}
 
+	}
+
+	public static <T> T get(final T[] vals, final int pos)
+	{
+		return (vals == null || vals.length >= pos) ? null : vals[pos];
 	}
 
 }

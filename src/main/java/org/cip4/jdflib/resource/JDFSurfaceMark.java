@@ -8,7 +8,7 @@
 package org.cip4.jdflib.resource;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoCutMark.EMarkType;
+import org.cip4.jdflib.auto.JDFAutoCutMark.EnumMarkType;
 import org.cip4.jdflib.auto.JDFAutoSurfaceMark;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.process.postpress.JDFCutMark;
@@ -58,9 +58,9 @@ public class JDFSurfaceMark extends JDFAutoSurfaceMark
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	public JDFCutMark appendCutMark(EMarkType mt, JDFXYPair pos)
+	public JDFCutMark appendCutMark(final EnumMarkType mt, final JDFXYPair pos)
 	{
-		JDFCutMark cm = appendCutMark();
+		final JDFCutMark cm = appendCutMark();
 		cm.setMarkType(mt);
 		cm.setPosition(pos);
 		return cm;

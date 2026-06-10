@@ -112,7 +112,7 @@ public interface IWalker
 	 * @param b
 	 * @param trackElem
 	 */
-	default void postWalk(KElement b, KElement trackElem)
+	default void postWalk(final KElement b, final KElement trackElem)
 	{
 	}
 }

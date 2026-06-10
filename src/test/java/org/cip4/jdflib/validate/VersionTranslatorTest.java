@@ -75,14 +75,13 @@ import java.util.Vector;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.XMLDoc;
-import org.cip4.jdflib.extensions.XJDF20;
+import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
-
  * @author rainer prosi
  * @date Nov 16, 2010
  */
@@ -94,10 +93,10 @@ class VersionTranslatorTest extends JDFTestCaseBase
 	@Test
 	void testStreamToXJDF()
 	{
-		VersionTranslator vt = new VersionTranslator(EnumVersion.Version_2_0);
-		String s = "<JDF Type=\"Product\"/>";
-		ByteArrayIOStream bis = new ByteArrayIOStream(s.getBytes());
-		Vector<InputStream> is2 = vt.convertStream(bis.getInputStream());
+		final VersionTranslator vt = new VersionTranslator(EnumVersion.Version_2_0);
+		final String s = "<JDF Type=\"Product\"/>";
+		final ByteArrayIOStream bis = new ByteArrayIOStream(s.getBytes());
+		final Vector<InputStream> is2 = vt.convertStream(bis.getInputStream());
 		Assertions.assertTrue(StringUtil.createString(is2.get(0)).indexOf("<XJDF") >= 0);
 		bis.close();
 	}
@@ -108,13 +107,13 @@ class VersionTranslatorTest extends JDFTestCaseBase
 	@Test
 	void testFileToXJDF()
 	{
-		VersionTranslator vt = new VersionTranslator(EnumVersion.Version_2_0);
-		File input = new File(sm_dirTestData + "ApprovalSubJDF.jdf");
-		File outDir = new File(sm_dirTestDataTemp);
-		File newFile = new File(sm_dirTestDataTemp + "ApprovalSubJDF.xjdf");
+		final VersionTranslator vt = new VersionTranslator(EnumVersion.Version_2_0);
+		final File input = new File(sm_dirTestData + "ApprovalSubJDF.jdf");
+		final File outDir = new File(sm_dirTestDataTemp);
+		final File newFile = new File(sm_dirTestDataTemp + "ApprovalSubJDF.xjdf");
 		newFile.delete();
 		vt.convertFile(input, outDir);
-		Assertions.assertTrue(XMLDoc.parseFile(newFile).getRoot().getLocalName().equals(XJDF20.rootName));
+		Assertions.assertTrue(XMLDoc.parseFile(newFile).getRoot().getLocalName().equals(JDFToXJDF.rootName));
 	}
 
 	/**
@@ -123,10 +122,10 @@ class VersionTranslatorTest extends JDFTestCaseBase
 	@Test
 	void testStreamFromXJDF()
 	{
-		VersionTranslator vt = new VersionTranslator(EnumVersion.Version_1_4);
-		String s = "<XJDF Types=\"Product\"/>";
-		ByteArrayIOStream bis = new ByteArrayIOStream(s.getBytes());
-		Vector<InputStream> is2 = vt.convertStream(bis.getInputStream());
+		final VersionTranslator vt = new VersionTranslator(EnumVersion.Version_1_4);
+		final String s = "<XJDF Types=\"Product\"/>";
+		final ByteArrayIOStream bis = new ByteArrayIOStream(s.getBytes());
+		final Vector<InputStream> is2 = vt.convertStream(bis.getInputStream());
 		Assertions.assertTrue(StringUtil.createString(is2.get(0)).indexOf("<JDF") >= 0);
 		bis.close();
 	}

@@ -73,8 +73,6 @@ package org.cip4.jdflib.auto;
 import java.util.Collection;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoRefAnchor.EAnchor;
-import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchor;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -85,6 +83,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFConvertingConfig;
 import org.cip4.jdflib.resource.process.JDFRepeatDesc;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoDieLayoutProductionParams : public JDFResource
@@ -99,7 +98,8 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ESTIMATE, 0x3333331111l, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumPosition.class, 0), null);
 	}
 
 	@Override
@@ -128,7 +128,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDieLayoutProductionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDieLayoutProductionParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -140,7 +140,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDieLayoutProductionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDieLayoutProductionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -153,7 +153,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDieLayoutProductionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDieLayoutProductionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -164,7 +164,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -178,11 +178,23 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * Enumeration strings for numPosition
 	 */
+
+	public enum EnumPosition
+	{
+		TopLeft, TopCenter, TopRight, CenterLeft, Center, CenterRight, BottomLeft, BottomCenter, BottomRight;
+
+		public static EnumPosition getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPosition.class, val, null);
+		}
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
+		 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -194,7 +206,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setEstimate(boolean value)
+	public void setEstimate(final boolean value)
 	{
 		setAttribute(AttributeName.ESTIMATE, value, null);
 	}
@@ -219,9 +231,9 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPosition(EAnchor enumVar)
+	public void setPosition(final EnumPosition enumVar)
 	{
-		setAttribute(AttributeName.POSITION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.POSITION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -229,38 +241,9 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EAnchor getEPosition()
+	public EnumPosition getPosition()
 	{
-		return EAnchor.getEnum(getAttribute(AttributeName.POSITION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Position
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Position
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPosition(EAnchor) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPosition(EnumAnchor enumVar)
-	{
-		setAttribute(AttributeName.POSITION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Position
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EAnchor GetEPosition() based on java.lang.enum instead
-	 */
-	@Deprecated
-	public EnumAnchor getPosition()
-	{
-		return EnumAnchor.getEnum(getAttribute(AttributeName.POSITION, null, null));
+		return EnumPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));
 	}
 
 	/*
@@ -295,7 +278,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFConvertingConfig the element
 	 */
-	public JDFConvertingConfig getCreateConvertingConfig(int iSkip)
+	public JDFConvertingConfig getCreateConvertingConfig(final int iSkip)
 	{
 		return (JDFConvertingConfig) getCreateElement_JDFElement(ElementName.CONVERTINGCONFIG, null, iSkip);
 	}
@@ -307,7 +290,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 * @return JDFConvertingConfig the element
 	 *         default is getConvertingConfig(0)
 	 */
-	public JDFConvertingConfig getConvertingConfig(int iSkip)
+	public JDFConvertingConfig getConvertingConfig(final int iSkip)
 	{
 		return (JDFConvertingConfig) getElement(ElementName.CONVERTINGCONFIG, null, iSkip);
 	}
@@ -358,7 +341,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFRepeatDesc the element
 	 */
-	public JDFRepeatDesc getCreateRepeatDesc(int iSkip)
+	public JDFRepeatDesc getCreateRepeatDesc(final int iSkip)
 	{
 		return (JDFRepeatDesc) getCreateElement_JDFElement(ElementName.REPEATDESC, null, iSkip);
 	}
@@ -370,7 +353,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 * @return JDFRepeatDesc the element
 	 *         default is getRepeatDesc(0)
 	 */
-	public JDFRepeatDesc getRepeatDesc(int iSkip)
+	public JDFRepeatDesc getRepeatDesc(final int iSkip)
 	{
 		return (JDFRepeatDesc) getElement(ElementName.REPEATDESC, null, iSkip);
 	}
@@ -423,7 +406,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
-	public JDFContact getCreateContact(int iSkip)
+	public JDFContact getCreateContact(final int iSkip)
 	{
 		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -435,7 +418,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 * @return JDFContact the element
 	 *         default is getContact(0)
 	 */
-	public JDFContact getContact(int iSkip)
+	public JDFContact getContact(final int iSkip)
 	{
 		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -466,7 +449,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refContact(JDFContact refTarget)
+	public void refContact(final JDFContact refTarget)
 	{
 		refElement(refTarget);
 	}

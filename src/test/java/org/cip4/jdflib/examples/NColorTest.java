@@ -55,7 +55,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.goldenticket.MISCPGoldenTicket;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -66,7 +66,7 @@ import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFModuleStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
-import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.junit.jupiter.api.Test;
 
 class NColorTest extends JDFTestCaseBase
@@ -118,9 +118,9 @@ class NColorTest extends JDFTestCaseBase
 	@Test
 	void testPerfectingJMF() throws Exception
 	{
-		if (EnumUtil.aLessThanB(getDefaultXJDFVersion(), EnumVersion.Version_2_3))
+		if (JavaEnumUtil.aLessThanB(getDefaultXJDFVersion(), EnumVersion.Version_2_3))
 		{
-			XJDFHelper.setDefaultVersion(EnumVersion.Version_2_3);
+			BaseXJDFHelper.setDefaultVersion(EnumVersion.Version_2_3);
 			JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_9);
 		}
 		KElement.setLongID(false);
@@ -161,7 +161,7 @@ class NColorTest extends JDFTestCaseBase
 	@Test
 	void testPerfectingJMFOld() throws Exception
 	{
-		XJDFHelper.setDefaultVersion(EnumVersion.Version_2_2);
+		BaseXJDFHelper.setDefaultVersion(EnumVersion.Version_2_2);
 		JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_8);
 		KElement.setLongID(false);
 		final JDFJMF jmfStatus = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Status);
@@ -271,7 +271,7 @@ class NColorTest extends JDFTestCaseBase
 		map[0] = new JDFAttributeMap(EnumPartIDKey.SheetName, sheet);
 		map[0].put(EnumPartIDKey.Side, side);
 		map[0].put(EnumPartIDKey.SignatureName, "Sig1");
-		jmfFile += sheet + "_" + side.getName();
+		jmfFile += sheet + "_" + side.name();
 		final boolean bFirst = !doneSheets.contains(sheet);
 		if (bFirst)
 		{

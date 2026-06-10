@@ -48,7 +48,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.util.Vector;
 
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -99,7 +99,8 @@ public class MimeUtil extends UrlUtil
 		@Override
 		public String toString()
 		{
-			return "MIMEDetails [httpDetails=" + httpDetails + ", transferEncoding=" + transferEncoding + ", modifyBoundarySemicolon=" + modifyBoundarySemicolon + "]";
+			return "MIMEDetails [httpDetails=" + httpDetails + ", transferEncoding=" + transferEncoding + ", modifyBoundarySemicolon=" + modifyBoundarySemicolon
+					+ "]";
 		}
 	}
 
@@ -125,7 +126,7 @@ public class MimeUtil extends UrlUtil
 		/**
 		 * create a data source from a byte array
 		 *
-		 * @param _ioStream the ByteArrayIOStream to use
+		 * @param _ioStream    the ByteArrayIOStream to use
 		 * @param _contentType the content type of the contents
 		 */
 		public ByteArrayDataSource(final ByteArrayIOStream _ioStream, final String _contentType)
@@ -185,7 +186,6 @@ public class MimeUtil extends UrlUtil
 	/**
 	 * @param bp
 	 * @param cid
-	 *
 	 */
 	public static void setContentID(final BodyPart bp, final String cid)
 	{
@@ -195,7 +195,7 @@ public class MimeUtil extends UrlUtil
 	/**
 	 * set the filename header of a bodypart to a string
 	 *
-	 * @param bp the bodypart
+	 * @param bp   the bodypart
 	 * @param path the path to set
 	 */
 	public static void setFileName(final BodyPart bp, final String path)
@@ -251,7 +251,7 @@ public class MimeUtil extends UrlUtil
 	/**
 	 * get the MIME BodyPart from a multiPart package with a given cid
 	 *
-	 * @param mp the multipart package to search in
+	 * @param mp  the multipart package to search in
 	 * @param cid the cid of the requested bodypart
 	 * @return BodyPart the matching BodyPart, null if none is found
 	 */
@@ -263,7 +263,7 @@ public class MimeUtil extends UrlUtil
 	/**
 	 * get the MIME BodyPart from a multiPart package with a given file name
 	 *
-	 * @param mp the multipart package to search in
+	 * @param mp   the multipart package to search in
 	 * @param name the cid of the requested bodypart
 	 * @return BodyPart the matching BodyPart, null if none is found
 	 */
@@ -275,7 +275,7 @@ public class MimeUtil extends UrlUtil
 	/**
 	 * get the MIME BodyPart from a multiPart package with a given cid create one if it does not exist;
 	 *
-	 * @param mp the multipart package to search in
+	 * @param mp  the multipart package to search in
 	 * @param cid the cid of the requested bodypart
 	 * @return BodyPart the matching BodyPart, null if none is found
 	 */
@@ -288,7 +288,7 @@ public class MimeUtil extends UrlUtil
 	 * get the JDF Doc from a stream, also handle non mime streams gracefully
 	 *
 	 * @param stream the stream to search in
-	 * @param index the index of the body part to search
+	 * @param index  the index of the body part to search
 	 * @return JDFDoc the parsed xml JDFDoc, null if stream does not contain xml
 	 */
 	public static JDFDoc getJDFDoc(final InputStream stream, final int index)
@@ -311,7 +311,7 @@ public class MimeUtil extends UrlUtil
 	/**
 	 * check if a BodyPart matches a given cid
 	 *
-	 * @param bp the bodyPart to check
+	 * @param bp  the bodyPart to check
 	 * @param cid the cid string any '<' '>' or 'cid:' prefixes are removed if null, anything matches
 	 * @return true if this bp matches the cid
 	 */
@@ -396,8 +396,9 @@ public class MimeUtil extends UrlUtil
 			return false;
 		}
 		mimeType = StringUtil.token(mimeType, 0, ";");
-		return JDFConstants.MIME_JDF.equalsIgnoreCase(mimeType) || JDFConstants.MIME_XJDF.equalsIgnoreCase(mimeType) || JDFConstants.MIME_JMF.equalsIgnoreCase(mimeType)
-				|| JDFConstants.MIME_XJMF.equalsIgnoreCase(mimeType) || JDFConstants.MIME_TEXTXML.equalsIgnoreCase(mimeType) || UrlUtil.APPLICATION_XML.equalsIgnoreCase(mimeType);
+		return JDFCoreConstants.MIME_JDF.equalsIgnoreCase(mimeType) || JDFCoreConstants.MIME_XJDF.equalsIgnoreCase(mimeType)
+				|| JDFCoreConstants.MIME_JMF.equalsIgnoreCase(mimeType) || JDFCoreConstants.MIME_XJMF.equalsIgnoreCase(mimeType)
+				|| JDFCoreConstants.MIME_TEXTXML.equalsIgnoreCase(mimeType) || UrlUtil.APPLICATION_XML.equalsIgnoreCase(mimeType);
 	}
 
 	/**
@@ -413,13 +414,13 @@ public class MimeUtil extends UrlUtil
 			return false;
 		}
 		mimeType = StringUtil.token(mimeType, 0, ";");
-		return JDFConstants.MIME_CIP3.equalsIgnoreCase(mimeType);
+		return JDFCoreConstants.MIME_CIP3.equalsIgnoreCase(mimeType);
 	}
 
 	/**
 	 * checks whether the mime type corresponds to mimetyoe
 	 *
-	 * @param toCheck the string to check against
+	 * @param toCheck  the string to check against
 	 * @param mimeType the mime type
 	 * @return true if matches
 	 */
@@ -448,9 +449,9 @@ public class MimeUtil extends UrlUtil
 	/**
 	 * build a MIME package that contains all references in all FileSpecs of a given JDFDoc the doc is modified so that all URLs are cids
 	 *
-	 * @param docJMF the JDFDoc representation of the JMF that references the jdf to package, if null only the jdf is packaged note that the URL of docJDF must already be specified
-	 *        as a CID
-	 * @param docJDF the JDFDoc representation of the JDF to package
+	 * @param docJMF           the JDFDoc representation of the JMF that references the jdf to package, if null only the jdf is packaged note that the URL of docJDF must already be specified
+	 *                         as a CID
+	 * @param docJDF           the JDFDoc representation of the JDF to package
 	 * @param extendReferenced if true, also package any further referenced files
 	 * @return a Message representing the resulting MIME package, null if an error occurred
 	 */
@@ -500,7 +501,9 @@ public class MimeUtil extends UrlUtil
 		}
 
 		if (!raw)
+		{
 			normalized = StringUtil.normalizeASCII(urlString);
+		}
 		return CID + normalized; //
 	}
 
@@ -532,7 +535,7 @@ public class MimeUtil extends UrlUtil
 	 * sets the content of a bodypart to the xmlDoc - correctly handling non-ascii features and setting the correct content type
 	 *
 	 * @param messageBodyPart the BodyPart to fill
-	 * @param xmlDoc the xmlDoc to fill in
+	 * @param xmlDoc          the xmlDoc to fill in
 	 * @throws MessagingException
 	 * @throws IOException
 	 */
@@ -547,7 +550,7 @@ public class MimeUtil extends UrlUtil
 	/**
 	 * write a Multipart to an output URL File: and http: are currently supported Use HttpURLConnection.getInputStream() to retrieve the http response
 	 *
-	 * @param mp the mime MultiPart to write
+	 * @param mp     the mime MultiPart to write
 	 * @param strUrl the URL to write to
 	 * @return {@link HttpURLConnection} the opened http connection, null in case of error or file
 	 * @throws IOException
@@ -561,8 +564,8 @@ public class MimeUtil extends UrlUtil
 	/**
 	 * write a Multipart to an output URL File: and http: are currently supported Use HttpURLConnection.getInputStream() to retrieve the http response
 	 *
-	 * @param mp the mime MultiPart to write
-	 * @param strUrl the URL to write to
+	 * @param mp          the mime MultiPart to write
+	 * @param strUrl      the URL to write to
 	 * @param mimeDetails
 	 * @return {@link HttpURLConnection} the opened http connection, null in case of error or file
 	 * @throws IOException
@@ -587,7 +590,8 @@ public class MimeUtil extends UrlUtil
 	 * @throws IOException
 	 * @throws MessagingException
 	 */
-	public static JDFDoc writeToQueue(final JDFDoc docJMF, final JDFDoc docJDF, final String strUrl, final MIMEDetails urlDet) throws IOException, MessagingException
+	public static JDFDoc writeToQueue(final JDFDoc docJMF, final JDFDoc docJDF, final String strUrl, final MIMEDetails urlDet)
+			throws IOException, MessagingException
 	{
 		final MimeWriter mw = new MimeWriter();
 		mw.setMIMEDetails(urlDet);
@@ -609,7 +613,7 @@ public class MimeUtil extends UrlUtil
 	/**
 	 * write a Multipart to an output file
 	 *
-	 * @param m the mime MultiPart to write
+	 * @param m        the mime MultiPart to write
 	 * @param fileName the file name
 	 * @param md
 	 * @return
@@ -637,9 +641,9 @@ public class MimeUtil extends UrlUtil
 	/**
 	 * write a Multipart to a Stream
 	 *
-	 * @param m the mime MultiPart to write
+	 * @param m         the mime MultiPart to write
 	 * @param outStream the existing output stream, note that a buffered output stream is created in case outStream is unbuffered
-	 * @param md details for messaging
+	 * @param md        details for messaging
 	 * @throws IOException
 	 * @throws MessagingException
 	 */
@@ -653,7 +657,7 @@ public class MimeUtil extends UrlUtil
 	/**
 	 * write a Message to a directory
 	 *
-	 * @param mp the mime Message to write
+	 * @param mp        the mime Message to write
 	 * @param directory the directory to use as '.' for writing the mime parts
 	 * @throws MessagingException
 	 * @throws IOException

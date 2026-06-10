@@ -50,7 +50,6 @@ import org.cip4.jdflib.auto.JDFAutoStripMark.EnumMarkSide;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -59,7 +58,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
@@ -99,7 +98,7 @@ class StrippingTest extends JDFTestCaseBase
 		ass.setAttribute(AttributeName.COMMONFOLDS, "2");
 		final JDFAssemblySection ass2 = a.appendAssemblySection();
 		ass2.setAssemblyIDs(new VString("bs2"));
-		writeRoundTrip(n, "commonfolds", XJDFHelper.getDefaultVersion(), EnumValidationLevel.Incomplete);
+		writeRoundTrip(n, "commonfolds", BaseXJDFHelper.getDefaultVersion(), EnumValidationLevel.Incomplete);
 		writeTest(n, "resources/commonfolds.jdf", true, null);
 	}
 
@@ -233,11 +232,11 @@ class StrippingTest extends JDFTestCaseBase
 		spBS2.appendBinderySignature();
 		final JDFPosition posBS2_1 = spBS2.appendPosition();
 		posBS2_1.setRelativeBox(new JDFRectangle(0.5, 0, 1, 0.5));
-		posBS2_1.setOrientation(EnumOrientation.Rotate270);
+		posBS2_1.setOrientation(org.cip4.jdflib.auto.JDFAutoPosition.EnumOrientation.valueOf(org.cip4.jdflib.core.JDFElement.EnumOrientation.Rotate270.name()));
 
 		final JDFPosition posBS2_2 = spBS2.appendPosition();
 		posBS2_2.setRelativeBox(new JDFRectangle(0.5, 0.5, 1, 1));
-		posBS2_2.setOrientation(EnumOrientation.Flip90);
+		posBS2_2.setOrientation(org.cip4.jdflib.auto.JDFAutoPosition.EnumOrientation.valueOf(org.cip4.jdflib.core.JDFElement.EnumOrientation.Flip90.name()));
 
 		{
 			final JDFStripMark sm2_1 = spBS2.appendStripMark();

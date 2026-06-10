@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -101,7 +97,8 @@ public abstract class JDFAutoError extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ERRORID, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.RESEND, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumResend.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.RESEND, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumResend.class, 0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.RETURNCODE, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
@@ -129,7 +126,7 @@ public abstract class JDFAutoError extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoError(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoError(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -141,7 +138,7 @@ public abstract class JDFAutoError extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoError(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoError(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -154,93 +151,28 @@ public abstract class JDFAutoError extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoError(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoError(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for Resend
+	 * Enumeration strings for numResend
 	 */
 
-	public enum EResend
+	public enum EnumResend
 	{
 		Required, Prohibited;
 
-		public static EResend getEnum(String val)
+		public static EnumResend getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EResend.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumResend.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Resend
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumResend extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumResend(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumResend getEnum(String enumName)
-		{
-			return (EnumResend) getEnum(EnumResend.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumResend getEnum(int enumValue)
-		{
-			return (EnumResend) getEnum(EnumResend.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumResend.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumResend.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumResend.class);
-		}
-
-		/**  */
-		public static final EnumResend Required = new EnumResend("Required");
-		/**  */
-		public static final EnumResend Prohibited = new EnumResend("Prohibited");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -252,7 +184,7 @@ public abstract class JDFAutoError extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setErrorID(String value)
+	public void setErrorID(final String value)
 	{
 		setAttribute(AttributeName.ERRORID, value, null);
 	}
@@ -277,9 +209,9 @@ public abstract class JDFAutoError extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setResend(EResend enumVar)
+	public void setResend(final EnumResend enumVar)
 	{
-		setAttribute(AttributeName.RESEND, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.RESEND, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -287,35 +219,6 @@ public abstract class JDFAutoError extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EResend getEResend()
-	{
-		return EResend.getEnum(getAttribute(AttributeName.RESEND, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Resend
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Resend
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetResend(EResend) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setResend(EnumResend enumVar)
-	{
-		setAttribute(AttributeName.RESEND, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Resend
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EResend GetEResend() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumResend getResend()
 	{
 		return EnumResend.getEnum(getAttribute(AttributeName.RESEND, null, null));
@@ -331,7 +234,7 @@ public abstract class JDFAutoError extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setReturnCode(int value)
+	public void setReturnCode(final int value)
 	{
 		setAttribute(AttributeName.RETURNCODE, value, null);
 	}
@@ -378,7 +281,7 @@ public abstract class JDFAutoError extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFErrorData the element
 	 */
-	public JDFErrorData getCreateErrorData(int iSkip)
+	public JDFErrorData getCreateErrorData(final int iSkip)
 	{
 		return (JDFErrorData) getCreateElement_JDFElement(ElementName.ERRORDATA, null, iSkip);
 	}
@@ -390,7 +293,7 @@ public abstract class JDFAutoError extends JDFElement
 	 * @return JDFErrorData the element
 	 *         default is getErrorData(0)
 	 */
-	public JDFErrorData getErrorData(int iSkip)
+	public JDFErrorData getErrorData(final int iSkip)
 	{
 		return (JDFErrorData) getElement(ElementName.ERRORDATA, null, iSkip);
 	}

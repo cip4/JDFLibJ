@@ -119,7 +119,7 @@ public abstract class JDFAutoDBMergeParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDBMergeParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDBMergeParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoDBMergeParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDBMergeParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDBMergeParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -144,7 +144,7 @@ public abstract class JDFAutoDBMergeParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDBMergeParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDBMergeParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -155,7 +155,7 @@ public abstract class JDFAutoDBMergeParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -185,7 +185,7 @@ public abstract class JDFAutoDBMergeParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSplitDocuments(int value)
+	public void setSplitDocuments(final int value)
 	{
 		setAttribute(AttributeName.SPLITDOCUMENTS, value, null);
 	}
@@ -242,7 +242,7 @@ public abstract class JDFAutoDBMergeParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}

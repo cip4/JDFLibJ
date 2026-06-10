@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -86,7 +82,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.jmf.JDFQueue;
-import org.cip4.jdflib.node.JDFNode.EActivation;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.util.JavaEnumUtil;
@@ -103,13 +98,13 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0),
-				null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumActivation.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.QUEUEURL, 0x2222222211l, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.SUBMITPOLICY, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumSubmitPolicy.getEnum(0),
-				null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.SUBMITPOLICY, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumSubmitPolicy.class, 0), null);
 	}
 
 	@Override
@@ -137,7 +132,7 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoRequestQueueEntryParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoRequestQueueEntryParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -149,7 +144,7 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoRequestQueueEntryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoRequestQueueEntryParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -162,95 +157,28 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoRequestQueueEntryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoRequestQueueEntryParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for SubmitPolicy
+	 * Enumeration strings for numSubmitPolicy
 	 */
 
-	public enum ESubmitPolicy
+	public enum EnumSubmitPolicy
 	{
 		Standard, Late, Force;
 
-		public static ESubmitPolicy getEnum(String val)
+		public static EnumSubmitPolicy getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ESubmitPolicy.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSubmitPolicy.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for SubmitPolicy
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumSubmitPolicy extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumSubmitPolicy(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumSubmitPolicy getEnum(String enumName)
-		{
-			return (EnumSubmitPolicy) getEnum(EnumSubmitPolicy.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumSubmitPolicy getEnum(int enumValue)
-		{
-			return (EnumSubmitPolicy) getEnum(EnumSubmitPolicy.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSubmitPolicy.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSubmitPolicy.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSubmitPolicy.class);
-		}
-
-		/**  */
-		public static final EnumSubmitPolicy Standard = new EnumSubmitPolicy("Standard");
-		/**  */
-		public static final EnumSubmitPolicy Late = new EnumSubmitPolicy("Late");
-		/**  */
-		public static final EnumSubmitPolicy Force = new EnumSubmitPolicy("Force");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -262,9 +190,9 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setActivation(EActivation enumVar)
+	public void setActivation(final EnumActivation enumVar)
 	{
-		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ACTIVATION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -272,35 +200,6 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EActivation getEActivation()
-	{
-		return EActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Activation
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Activation
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetActivation(EActivation) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setActivation(EnumActivation enumVar)
-	{
-		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Activation
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EActivation GetEActivation() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumActivation getActivation()
 	{
 		return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
@@ -316,7 +215,7 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -341,7 +240,7 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobPartID(String value)
+	public void setJobPartID(final String value)
 	{
 		setAttribute(AttributeName.JOBPARTID, value, null);
 	}
@@ -366,7 +265,7 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setQueueURL(String value)
+	public void setQueueURL(final String value)
 	{
 		setAttribute(AttributeName.QUEUEURL, value, null);
 	}
@@ -391,9 +290,9 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSubmitPolicy(ESubmitPolicy enumVar)
+	public void setSubmitPolicy(final EnumSubmitPolicy enumVar)
 	{
-		setAttribute(AttributeName.SUBMITPOLICY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SUBMITPOLICY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -401,35 +300,6 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESubmitPolicy getESubmitPolicy()
-	{
-		return ESubmitPolicy.getEnum(getAttribute(AttributeName.SUBMITPOLICY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute SubmitPolicy
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute SubmitPolicy
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetSubmitPolicy(ESubmitPolicy) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSubmitPolicy(EnumSubmitPolicy enumVar)
-	{
-		setAttribute(AttributeName.SUBMITPOLICY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute SubmitPolicy
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ESubmitPolicy GetESubmitPolicy() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumSubmitPolicy getSubmitPolicy()
 	{
 		return EnumSubmitPolicy.getEnum(getAttribute(AttributeName.SUBMITPOLICY, null, null));
@@ -467,7 +337,7 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
-	public JDFPart getCreatePart(int iSkip)
+	public JDFPart getCreatePart(final int iSkip)
 	{
 		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
@@ -479,7 +349,7 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 	 * @return JDFPart the element
 	 *         default is getPart(0)
 	 */
-	public JDFPart getPart(int iSkip)
+	public JDFPart getPart(final int iSkip)
 	{
 		return (JDFPart) getElement(ElementName.PART, null, iSkip);
 	}

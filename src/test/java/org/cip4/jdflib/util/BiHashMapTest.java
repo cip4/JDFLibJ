@@ -76,8 +76,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
- * 08.12.2008
+ *         08.12.2008
  */
 class BiHashMapTest extends JDFTestCaseBase
 {
@@ -89,7 +88,7 @@ class BiHashMapTest extends JDFTestCaseBase
 	@Test
 	void testPut()
 	{
-		final BiHashMap<String, String> hm = new BiHashMap<String, String>();
+		final BiHashMap<String, String> hm = new BiHashMap<>();
 		hm.put("a", "b");
 		Assertions.assertEquals(hm.getValue("a"), "b");
 		Assertions.assertEquals(hm.getKey("b"), "a");
@@ -110,7 +109,7 @@ class BiHashMapTest extends JDFTestCaseBase
 	@Test
 	void testClear()
 	{
-		final BiHashMap<String, String> hm = new BiHashMap<String, String>();
+		final BiHashMap<String, String> hm = new BiHashMap<>();
 		hm.put("a", "b");
 		Assertions.assertEquals(hm.getValue("a"), "b");
 		Assertions.assertEquals(hm.getKey("b"), "a");
@@ -125,7 +124,7 @@ class BiHashMapTest extends JDFTestCaseBase
 	@Test
 	void testRemoveNull()
 	{
-		final BiHashMap<String, String> hm = new BiHashMap<String, String>();
+		final BiHashMap<String, String> hm = new BiHashMap<>();
 		hm.put("a", "b");
 		hm.put("a", "c");
 		Assertions.assertEquals(hm.getValue("a"), "c");
@@ -146,7 +145,7 @@ class BiHashMapTest extends JDFTestCaseBase
 	@Test
 	void testRemove()
 	{
-		final BiHashMap<String, String> hm = new BiHashMap<String, String>();
+		final BiHashMap<String, String> hm = new BiHashMap<>();
 		hm.put("a", "b");
 		Assertions.assertEquals(hm.getValue("a"), "b");
 		Assertions.assertEquals(hm.getKey("b"), "a");
@@ -164,7 +163,7 @@ class BiHashMapTest extends JDFTestCaseBase
 	@Test
 	void testRemoveVal()
 	{
-		final BiHashMap<String, String> hm = new BiHashMap<String, String>();
+		final BiHashMap<String, String> hm = new BiHashMap<>();
 		hm.put("a", "b");
 		Assertions.assertEquals(hm.getValue("a"), "b");
 		Assertions.assertEquals(hm.getKey("b"), "a");

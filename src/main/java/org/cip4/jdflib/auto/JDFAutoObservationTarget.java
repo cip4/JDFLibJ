@@ -108,7 +108,7 @@ public abstract class JDFAutoObservationTarget extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoObservationTarget(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoObservationTarget(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -120,7 +120,7 @@ public abstract class JDFAutoObservationTarget extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoObservationTarget(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoObservationTarget(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoObservationTarget extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoObservationTarget(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoObservationTarget(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -154,7 +154,7 @@ public abstract class JDFAutoObservationTarget extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setElementType(String value)
+	public void setElementType(final String value)
 	{
 		setAttribute(AttributeName.ELEMENTTYPE, value, null);
 	}
@@ -179,7 +179,7 @@ public abstract class JDFAutoObservationTarget extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAttributes(VString value)
+	public void setAttributes(final VString value)
 	{
 		setAttribute(AttributeName.ATTRIBUTES, value, null);
 	}
@@ -191,8 +191,8 @@ public abstract class JDFAutoObservationTarget extends JDFElement
 	 */
 	public VString getAttributesJDF()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.ATTRIBUTES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ATTRIBUTES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -207,7 +207,7 @@ public abstract class JDFAutoObservationTarget extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setElementIDs(VString value)
+	public void setElementIDs(final VString value)
 	{
 		setAttribute(AttributeName.ELEMENTIDS, value, null);
 	}
@@ -219,8 +219,8 @@ public abstract class JDFAutoObservationTarget extends JDFElement
 	 */
 	public VString getElementIDs()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.ELEMENTIDS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ELEMENTIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -235,7 +235,7 @@ public abstract class JDFAutoObservationTarget extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setObservationPath(String value)
+	public void setObservationPath(final String value)
 	{
 		setAttribute(AttributeName.OBSERVATIONPATH, value, null);
 	}

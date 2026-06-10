@@ -105,7 +105,7 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSystemTimeSet(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoSystemTimeSet(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -117,7 +117,7 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSystemTimeSet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoSystemTimeSet(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -130,7 +130,7 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoSystemTimeSet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoSystemTimeSet(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -151,7 +151,7 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setNewTime(JDFDate value)
+	public void setNewTime(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -168,8 +168,8 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
 	 */
 	public JDFDate getNewTime()
 	{
-		String str = getAttribute(AttributeName.NEWTIME, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.NEWTIME, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -183,7 +183,7 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setOldTime(JDFDate value)
+	public void setOldTime(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -200,8 +200,8 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
 	 */
 	public JDFDate getOldTime()
 	{
-		String str = getAttribute(AttributeName.OLDTIME, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.OLDTIME, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 

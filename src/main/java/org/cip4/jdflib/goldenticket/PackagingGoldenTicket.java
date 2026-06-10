@@ -74,7 +74,7 @@ import java.io.File;
 
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumGrainDirection;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
-import org.cip4.jdflib.auto.JDFAutoRefAnchor.EAnchor;
+import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchor;
 import org.cip4.jdflib.auto.JDFAutoRepeatDesc.EnumAllowedRotate;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -143,14 +143,14 @@ public class PackagingGoldenTicket extends MISGoldenTicket
 	public void createDieLayoutProduction()
 	{
 		theNode.addTypes(EnumType.DieLayoutProduction);
-		JDFShapeDef shapeDef = (JDFShapeDef) theNode.getResource(ElementName.SHAPEDEF, null, 0);
+		final JDFShapeDef shapeDef = (JDFShapeDef) theNode.getResource(ElementName.SHAPEDEF, null, 0);
 		if (shapeDef == null)
 		{
 			makeShapeDef(EnumUsage.Input);
 		}
 
 		final JDFDieLayoutProductionParams dlp = (JDFDieLayoutProductionParams) theNode.addResource(ElementName.DIELAYOUTPRODUCTIONPARAMS, EnumUsage.Input);
-		dlp.setPosition(EAnchor.TopCenter);
+		dlp.setPosition(org.cip4.jdflib.auto.JDFAutoDieLayoutProductionParams.EnumPosition.getEnum(EnumAnchor.TopCenter.name()));
 
 		final JDFConvertingConfig cc = dlp.appendConvertingConfig();
 		cc.setSheetHeightMM(650, 750);
@@ -182,7 +182,7 @@ public class PackagingGoldenTicket extends MISGoldenTicket
 		final JDFFileSpec fs = st.appendFileSpec();
 		fs.setAbsoluteFileURL(new File("\\\\Server\\share\\dir\\CADFile für mich.cad"), true);
 
-		JDFObjectModel objModel = sdpp.appendObjectModel();
+		final JDFObjectModel objModel = sdpp.appendObjectModel();
 		objModel.appendFileSpec().setURL("http://vrml.file");
 		final JDFShapeDef sdOut = makeShapeDef(EnumUsage.Output);
 		final JDFMedia m = sdOut.appendMedia();
@@ -203,7 +203,7 @@ public class PackagingGoldenTicket extends MISGoldenTicket
 		final JDFShape size = new JDFShape(100, 70, 30);
 		size.scaleFromMM();
 		shapeDef.setDimensions(size);
-		shapeDef.setGrainDirection(EnumGrainDirection.YDirection);
+		shapeDef.setGrainDirection(org.cip4.jdflib.auto.JDFAutoShapeDef.EnumGrainDirection.getEnum(EnumGrainDirection.YDirection.name()));
 		final JDFFileSpec fso = shapeDef.appendFileSpec();
 		fso.setAbsoluteFileURL(new File(shapeFile), true);
 		return shapeDef;

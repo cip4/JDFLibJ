@@ -169,8 +169,6 @@ public class WalkProduct extends WalkXElement
 	}
 
 	/**
-	 *
-	 *
 	 * @param e
 	 * @param theNode
 	 */

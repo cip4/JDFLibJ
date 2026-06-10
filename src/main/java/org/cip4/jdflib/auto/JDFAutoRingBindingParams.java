@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -106,8 +101,8 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.RINGDIAMETER, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.RINGMECHANIC, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.RINGSHAPE, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.RINGSYSTEM, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumRingSystem.getEnum(0),
-				null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.RINGSYSTEM, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumRingSystem.class, 0), null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.RIVETSEXPOSED, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.SPINECOLOR, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.SPINECOLORDETAILS, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
@@ -139,7 +134,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoRingBindingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoRingBindingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -151,7 +146,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoRingBindingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoRingBindingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -164,7 +159,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoRingBindingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoRingBindingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -175,7 +170,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -190,89 +185,22 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for RingSystem
+	 * Enumeration strings for numRingSystem
 	 */
 
-	public enum ERingSystem
+	public enum EnumRingSystem
 	{
-		RingSystem_2HoleEuro, RingSystem_3HoleUS, RingSystem_4HoleEuro;
+		numRingSystem_2HoleEuro, numRingSystem_3HoleUS, numRingSystem_4HoleEuro;
 
-		public static ERingSystem getEnum(String val)
+		public static EnumRingSystem getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ERingSystem.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumRingSystem.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for RingSystem
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumRingSystem extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumRingSystem(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumRingSystem getEnum(String enumName)
-		{
-			return (EnumRingSystem) getEnum(EnumRingSystem.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumRingSystem getEnum(int enumValue)
-		{
-			return (EnumRingSystem) getEnum(EnumRingSystem.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumRingSystem.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumRingSystem.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumRingSystem.class);
-		}
-
-		/**  */
-		public static final EnumRingSystem RingSystem_2HoleEuro = new EnumRingSystem("2HoleEuro");
-		/**  */
-		public static final EnumRingSystem RingSystem_3HoleUS = new EnumRingSystem("3HoleUS");
-		/**  */
-		public static final EnumRingSystem RingSystem_4HoleEuro = new EnumRingSystem("4HoleEuro");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -284,7 +212,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBinderColor(EnumNamedColor value)
+	public void setBinderColor(final EnumNamedColor value)
 	{
 		setAttribute(AttributeName.BINDERCOLOR, value == null ? null : value.getName(), null);
 	}
@@ -313,7 +241,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBinderColorDetails(String value)
+	public void setBinderColorDetails(final String value)
 	{
 		setAttribute(AttributeName.BINDERCOLORDETAILS, value, null);
 	}
@@ -338,7 +266,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBinderMaterial(String value)
+	public void setBinderMaterial(final String value)
 	{
 		setAttribute(AttributeName.BINDERMATERIAL, value, null);
 	}
@@ -363,7 +291,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBinderName(String value)
+	public void setBinderName(final String value)
 	{
 		setAttribute(AttributeName.BINDERNAME, value, null);
 	}
@@ -388,7 +316,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRingDiameter(double value)
+	public void setRingDiameter(final double value)
 	{
 		setAttribute(AttributeName.RINGDIAMETER, value, null);
 	}
@@ -413,7 +341,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRingMechanic(boolean value)
+	public void setRingMechanic(final boolean value)
 	{
 		setAttribute(AttributeName.RINGMECHANIC, value, null);
 	}
@@ -438,7 +366,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRingShape(String value)
+	public void setRingShape(final String value)
 	{
 		setAttribute(AttributeName.RINGSHAPE, value, null);
 	}
@@ -463,9 +391,9 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setRingSystem(ERingSystem enumVar)
+	public void setRingSystem(final EnumRingSystem enumVar)
 	{
-		setAttribute(AttributeName.RINGSYSTEM, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.RINGSYSTEM, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -473,35 +401,6 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ERingSystem getERingSystem()
-	{
-		return ERingSystem.getEnum(getAttribute(AttributeName.RINGSYSTEM, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute RingSystem
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute RingSystem
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetRingSystem(ERingSystem) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setRingSystem(EnumRingSystem enumVar)
-	{
-		setAttribute(AttributeName.RINGSYSTEM, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute RingSystem
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ERingSystem GetERingSystem() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumRingSystem getRingSystem()
 	{
 		return EnumRingSystem.getEnum(getAttribute(AttributeName.RINGSYSTEM, null, null));
@@ -517,7 +416,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRivetsExposed(boolean value)
+	public void setRivetsExposed(final boolean value)
 	{
 		setAttribute(AttributeName.RIVETSEXPOSED, value, null);
 	}
@@ -542,7 +441,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSpineColor(EnumNamedColor value)
+	public void setSpineColor(final EnumNamedColor value)
 	{
 		setAttribute(AttributeName.SPINECOLOR, value == null ? null : value.getName(), null);
 	}
@@ -571,7 +470,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSpineColorDetails(String value)
+	public void setSpineColorDetails(final String value)
 	{
 		setAttribute(AttributeName.SPINECOLORDETAILS, value, null);
 	}
@@ -596,7 +495,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSpineWidth(double value)
+	public void setSpineWidth(final double value)
 	{
 		setAttribute(AttributeName.SPINEWIDTH, value, null);
 	}
@@ -621,7 +520,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setViewBinder(String value)
+	public void setViewBinder(final String value)
 	{
 		setAttribute(AttributeName.VIEWBINDER, value, null);
 	}
@@ -678,7 +577,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refHoleMakingParams(JDFHoleMakingParams refTarget)
+	public void refHoleMakingParams(final JDFHoleMakingParams refTarget)
 	{
 		refElement(refTarget);
 	}

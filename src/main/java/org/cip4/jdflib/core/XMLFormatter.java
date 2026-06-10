@@ -48,8 +48,6 @@ import org.apache.xml.serialize.OutputFormat;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
- *
  */
 public class XMLFormatter implements Cloneable
 {
@@ -80,7 +78,6 @@ public class XMLFormatter implements Cloneable
 	private static XMLFormatter theFormatter = new XMLFormatter();
 
 	/**
-	 *
 	 * @return
 	 */
 	public static XMLFormatter getFormatter()

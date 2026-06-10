@@ -127,7 +127,7 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCaseMakingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoCaseMakingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -139,7 +139,7 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCaseMakingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoCaseMakingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -152,7 +152,7 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoCaseMakingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoCaseMakingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -163,7 +163,7 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -193,7 +193,7 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBottomFoldIn(double value)
+	public void setBottomFoldIn(final double value)
 	{
 		setAttribute(AttributeName.BOTTOMFOLDIN, value, null);
 	}
@@ -218,7 +218,7 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCoverWidth(double value)
+	public void setCoverWidth(final double value)
 	{
 		setAttribute(AttributeName.COVERWIDTH, value, null);
 	}
@@ -243,7 +243,7 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCornerType(String value)
+	public void setCornerType(final String value)
 	{
 		setAttribute(AttributeName.CORNERTYPE, value, null);
 	}
@@ -268,7 +268,7 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFrontFoldIn(double value)
+	public void setFrontFoldIn(final double value)
 	{
 		setAttribute(AttributeName.FRONTFOLDIN, value, null);
 	}
@@ -293,7 +293,7 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTopFoldIn(double value)
+	public void setTopFoldIn(final double value)
 	{
 		setAttribute(AttributeName.TOPFOLDIN, value, null);
 	}
@@ -318,7 +318,7 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHeight(double value)
+	public void setHeight(final double value)
 	{
 		setAttribute(AttributeName.HEIGHT, value, null);
 	}
@@ -343,7 +343,7 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJointWidth(double value)
+	public void setJointWidth(final double value)
 	{
 		setAttribute(AttributeName.JOINTWIDTH, value, null);
 	}
@@ -368,7 +368,7 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSpineWidth(double value)
+	public void setSpineWidth(final double value)
 	{
 		setAttribute(AttributeName.SPINEWIDTH, value, null);
 	}

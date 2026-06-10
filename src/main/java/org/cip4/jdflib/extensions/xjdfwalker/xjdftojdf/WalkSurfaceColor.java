@@ -82,7 +82,8 @@ import org.cip4.jdflib.util.ContainerUtil;
 
 /**
  * TODO discuss and implement varying numcolors for front and back, e.g. 4/1
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class WalkSurfaceColor extends WalkXElement
 {

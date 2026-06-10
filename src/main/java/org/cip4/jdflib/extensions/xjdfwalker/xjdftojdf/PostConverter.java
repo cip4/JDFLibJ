@@ -387,7 +387,7 @@ class PostConverter
 
 		private String getRes(final String fixType)
 		{
-			if (EnumType.DieLayoutProduction.getName().equals(fixType))
+			if (EnumType.DieLayoutProduction.name().equals(fixType))
 			{
 				return ElementName.SHAPEDEF;
 			}
@@ -396,7 +396,7 @@ class PostConverter
 
 		private EnumUsage getUsage(final String fixType)
 		{
-			if (EnumType.DieLayoutProduction.getName().equals(fixType))
+			if (EnumType.DieLayoutProduction.name().equals(fixType))
 			{
 				return EnumUsage.Input;
 			}
@@ -405,9 +405,9 @@ class PostConverter
 
 		private String getFixType(final VString types)
 		{
-			if (types != null && types.contains(EnumType.DieLayoutProduction.getName()))
+			if (types != null && types.contains(EnumType.DieLayoutProduction.name()))
 			{
-				return EnumType.DieLayoutProduction.getName();
+				return EnumType.DieLayoutProduction.name();
 			}
 			return null;
 		}
@@ -429,7 +429,7 @@ class PostConverter
 		public ResourceCleaner()
 		{
 			super();
-			products = theNode.getvJDFNode(EnumType.Product.getName(), null, false);
+			products = theNode.getvJDFNode(EnumType.Product.name(), null, false);
 			rootLinks = new HashSet<>();
 		}
 

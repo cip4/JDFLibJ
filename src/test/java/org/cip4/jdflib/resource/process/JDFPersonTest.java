@@ -82,7 +82,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author prosirai
- *
  */
 class JDFPersonTest extends JDFTestCaseBase
 {
@@ -237,7 +236,6 @@ class JDFPersonTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override

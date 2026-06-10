@@ -56,8 +56,8 @@ import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -500,7 +500,7 @@ public class VString extends Vector<String>
 	 */
 	public String getString()
 	{
-		return StringUtil.setvString(this, JDFConstants.BLANK, null, null);
+		return StringUtil.setvString(this, JDFCoreConstants.BLANK, null, null);
 	}
 
 	/**
@@ -628,14 +628,14 @@ public class VString extends Vector<String>
 
 	/**
 	 * appends enumType to <code>this</code><br>
-	 * if enumType is a ValuedEnum, the name is appended
+	 * if enumType is an Enum, the name is appended
 	 *
 	 * @param enumType the object to append
 	 * @return true if successfully added
 	 */
-	public boolean add(final ValuedEnum enumType)
+	public boolean add(final Enum<?> enumType)
 	{
-		return super.add(enumType.getName());
+		return super.add(JavaEnumUtil.getName(enumType));
 	}
 
 	/**

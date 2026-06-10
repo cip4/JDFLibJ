@@ -70,7 +70,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -79,9 +79,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFInk;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkInk extends WalkResource
 {
@@ -117,20 +115,20 @@ public class WalkInk extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
-		VString specialInks = VString.getVString(map.remove(AttributeName.SPECIALINK), null);
+		final VString specialInks = VString.getVString(map.remove(AttributeName.SPECIALINK), null);
 		if (specialInks == null)
 		{
 			map.renameKey(AttributeName.FAMILY, XJDFConstants.InkType);
 		}
 		else
 		{
-			String family = map.remove(AttributeName.FAMILY);
+			final String family = map.remove(AttributeName.FAMILY);
 			if (StringUtil.getNonEmpty(family) != null)
 			{
 				specialInks.appendUnique(family);
-				map.put(XJDFConstants.InkType, StringUtil.setvString(specialInks, JDFConstants.BLANK, null, null));
+				map.put(XJDFConstants.InkType, StringUtil.setvString(specialInks, JDFCoreConstants.BLANK, null, null));
 			}
 		}
 		map.remove(AttributeName.INKNAME);

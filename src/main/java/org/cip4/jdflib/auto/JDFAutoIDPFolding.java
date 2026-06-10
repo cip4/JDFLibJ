@@ -106,7 +106,7 @@ public abstract class JDFAutoIDPFolding extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIDPFolding(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoIDPFolding(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoIDPFolding extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIDPFolding(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoIDPFolding(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoIDPFolding extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoIDPFolding(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoIDPFolding(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoIDPFolding extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFFoldingParams the element
 	 */
-	public JDFFoldingParams getCreateFoldingParams(int iSkip)
+	public JDFFoldingParams getCreateFoldingParams(final int iSkip)
 	{
 		return (JDFFoldingParams) getCreateElement_JDFElement(ElementName.FOLDINGPARAMS, null, iSkip);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoIDPFolding extends JDFElement
 	 * @return JDFFoldingParams the element
 	 *         default is getFoldingParams(0)
 	 */
-	public JDFFoldingParams getFoldingParams(int iSkip)
+	public JDFFoldingParams getFoldingParams(final int iSkip)
 	{
 		return (JDFFoldingParams) getElement(ElementName.FOLDINGPARAMS, null, iSkip);
 	}
@@ -210,7 +210,7 @@ public abstract class JDFAutoIDPFolding extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFoldingParams(JDFFoldingParams refTarget)
+	public void refFoldingParams(final JDFFoldingParams refTarget)
 	{
 		refElement(refTarget);
 	}

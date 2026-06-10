@@ -98,7 +98,8 @@ public class JDFScavengerArea extends JDFAutoScavengerArea
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFScavengerArea(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFScavengerArea(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -115,7 +116,6 @@ public class JDFScavengerArea extends JDFAutoScavengerArea
 	}
 
 	/**
-	 *
 	 * @return the rectangle in layout coordinate system
 	 */
 	public JDFRectangle getRect()
@@ -123,7 +123,9 @@ public class JDFScavengerArea extends JDFAutoScavengerArea
 		final JDFXYPair c = getCenter();
 		final JDFXYPair s = getSize();
 		if (c == null || s == null)
+		{
 			return null;
+		}
 
 		final double rot = getRotation();
 		if (rot == 90 || rot == 270)
@@ -146,7 +148,6 @@ public class JDFScavengerArea extends JDFAutoScavengerArea
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public JDFMarkObject getParentMarkObject()
@@ -203,7 +204,9 @@ public class JDFScavengerArea extends JDFAutoScavengerArea
 	public void appendSeparations(final VString vSeps)
 	{
 		if (vSeps == null)
+		{
 			return;
+		}
 
 		for (final String sep : vSeps)
 		{

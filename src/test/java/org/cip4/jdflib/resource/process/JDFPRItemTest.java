@@ -75,9 +75,9 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 /**
  * all kinds of fun tests around JDF 1.2 vs JDF 1.3 Layouts
- * 
  */
 class JDFPRItemTest extends JDFTestCaseBase
 {
@@ -87,8 +87,8 @@ class JDFPRItemTest extends JDFTestCaseBase
 	@Test
 	void testInsertPageSet()
 	{
-		JDFDoc d = new JDFDoc("PRItem");
-		JDFPRItem pi = (JDFPRItem) d.getRoot();
+		final JDFDoc d = new JDFDoc("PRItem");
+		final JDFPRItem pi = (JDFPRItem) d.getRoot();
 
 		pi.insertPageSet(3);
 		Assertions.assertEquals(pi.getAttribute(AttributeName.PAGESET), "3");

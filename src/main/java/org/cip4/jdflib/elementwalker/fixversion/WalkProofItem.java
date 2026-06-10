@@ -79,8 +79,7 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
- * June 7, 2009
+ *         June 7, 2009
  */
 public class WalkProofItem extends WalkElement
 {
@@ -93,7 +92,6 @@ public class WalkProofItem extends WalkElement
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.elementwalker.fixversion.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override

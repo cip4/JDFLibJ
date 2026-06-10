@@ -83,8 +83,6 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 
 /**
- *
- *
  * @author rainer prosi
  * @date May 9, 2014
  */
@@ -98,7 +96,7 @@ public class JDFPageCondition extends JDFAutoPageCondition
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFPageCondition(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFPageCondition(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -110,7 +108,7 @@ public class JDFPageCondition extends JDFAutoPageCondition
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFPageCondition(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFPageCondition(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -123,7 +121,7 @@ public class JDFPageCondition extends JDFAutoPageCondition
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFPageCondition(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFPageCondition(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -143,7 +141,7 @@ public class JDFPageCondition extends JDFAutoPageCondition
 	 * @see org.cip4.jdflib.core.JDFElement#setPartMapVector(org.cip4.jdflib.datatypes.VJDFAttributeMap)
 	 */
 	@Override
-	public void setPartMapVector(VJDFAttributeMap vPart)
+	public void setPartMapVector(final VJDFAttributeMap vPart)
 	{
 		super.setPartMapVector(vPart);
 	}
@@ -152,7 +150,7 @@ public class JDFPageCondition extends JDFAutoPageCondition
 	 * @see org.cip4.jdflib.core.JDFElement#setPartMap(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	public void setPartMap(JDFAttributeMap mPart)
+	public void setPartMap(final JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
 	}

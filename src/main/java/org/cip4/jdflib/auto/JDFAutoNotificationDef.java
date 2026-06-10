@@ -71,16 +71,15 @@
 package org.cip4.jdflib.auto;
 
 import java.util.List;
-import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoNotification.EClass;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoNotificationDef : public JDFElement
@@ -94,7 +93,8 @@ public abstract class JDFAutoNotificationDef extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASSES, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations, EnumClass.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASSES, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations,
+				JavaEnumUtil.getEnum(EnumClass.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.SIGNALTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, "Notification");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.TYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
@@ -111,7 +111,7 @@ public abstract class JDFAutoNotificationDef extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNotificationDef(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoNotificationDef(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -123,7 +123,7 @@ public abstract class JDFAutoNotificationDef extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNotificationDef(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoNotificationDef(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -136,7 +136,7 @@ public abstract class JDFAutoNotificationDef extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoNotificationDef(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoNotificationDef(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -157,7 +157,7 @@ public abstract class JDFAutoNotificationDef extends JDFElement
 	 *
 	 * @param v List of the enumeration values
 	 */
-	public void setEClasses(List<EClass> v)
+	public void setClasses(final List<EnumClass> v)
 	{
 		setEnumsAttribute(AttributeName.CLASSES, v, null);
 	}
@@ -167,38 +167,9 @@ public abstract class JDFAutoNotificationDef extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public List<EClass> getEnumsClasses()
+	public List<EnumClass> getClasses()
 	{
-		return getEnumerationsAttribute(AttributeName.CLASSES, null, EClass.class);
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Classes
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5.2) set attribute Classes
-	 *
-	 * @param v List of the enumeration values
-	 * @deprecated use SetEClasses(List<EClass>) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setClasses(List<EnumClass> v)
-	{
-		setEnumerationsAttribute(AttributeName.CLASSES, v, null);
-	}
-
-	/**
-	 * (9.2) get Classes attribute Classes
-	 *
-	 * @return Vector of the enumerations
-	 * @deprecated use List<EClass > GetEClasses() based on java.lang.enum instead
-	 */
-	@Deprecated
-	public Vector<EnumClass> getClasses()
-	{
-		return getEnumerationsAttribute(AttributeName.CLASSES, null, EnumClass.getEnum(0), false);
+		return getEnumerationsAttribute(AttributeName.CLASSES, null, EnumClass.class);
 	}
 
 	/*
@@ -211,7 +182,7 @@ public abstract class JDFAutoNotificationDef extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSignalType(String value)
+	public void setSignalType(final String value)
 	{
 		setAttribute(AttributeName.SIGNALTYPE, value, null);
 	}
@@ -236,7 +207,7 @@ public abstract class JDFAutoNotificationDef extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setType(String value)
+	public void setType(final String value)
 	{
 		setAttribute(AttributeName.TYPE, value, null);
 	}

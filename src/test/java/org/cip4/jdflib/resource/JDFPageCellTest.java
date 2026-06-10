@@ -86,12 +86,12 @@ class JDFPageCellTest extends JDFTestCaseBase
 	@Test
 	void testGetClipBox()
 	{
-		JDFPageCell pc = (JDFPageCell) new JDFDoc(ElementName.PAGECELL).getRoot();
+		final JDFPageCell pc = (JDFPageCell) new JDFDoc(ElementName.PAGECELL).getRoot();
 		Assertions.assertNull(pc.getClipBox());
-		JDFXYPair size = new JDFXYPair(10, 20);
+		final JDFXYPair size = new JDFXYPair(10, 20);
 		pc.setTrimSize(size);
 		Assertions.assertEquals(pc.getClipBox().getSize(), size);
-		JDFRectangle rect = new JDFRectangle(1, 2, 33, 44);
+		final JDFRectangle rect = new JDFRectangle(1, 2, 33, 44);
 		pc.setClipBox(rect);
 		Assertions.assertEquals(pc.getClipBox(), rect);
 	}
@@ -102,12 +102,12 @@ class JDFPageCellTest extends JDFTestCaseBase
 	@Test
 	void testTrimSize()
 	{
-		JDFPageCell pc = (JDFPageCell) new JDFDoc(ElementName.PAGECELL).getRoot();
+		final JDFPageCell pc = (JDFPageCell) new JDFDoc(ElementName.PAGECELL).getRoot();
 		Assertions.assertNull(pc.getTrimSize());
-		JDFRectangle rect = new JDFRectangle(1, 2, 33, 44);
+		final JDFRectangle rect = new JDFRectangle(1, 2, 33, 44);
 		pc.setClipBox(rect);
 		Assertions.assertEquals(pc.getTrimSize(), rect.getSize());
-		JDFXYPair size = new JDFXYPair(10, 20);
+		final JDFXYPair size = new JDFXYPair(10, 20);
 		pc.setTrimSize(size);
 		Assertions.assertEquals(pc.getTrimSize(), size);
 	}

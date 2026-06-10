@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -94,7 +94,7 @@ import org.w3c.dom.Node;
 
 /**
  * Title: JDFCustomerInfo.java Description: Copyright: Copyright (c) 2002 Company: Heidelberger Druckmaschinen
- * 
+ *
  * @author Dietrich Mucha
  * @version 1.0
  */
@@ -162,7 +162,7 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo implements IMatches
 
 	/**
 	 * Constructor for JDFCustomerInfo
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -173,7 +173,7 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo implements IMatches
 
 	/**
 	 * Constructor for JDFCustomerInfo
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -185,7 +185,7 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo implements IMatches
 
 	/**
 	 * Constructor for JDFCustomerInfo
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -223,13 +223,11 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo implements IMatches
 
 	/**
 	 * Get the linked resources matching some conditions
-	 * 
-	 * @param mResAtt map of Resource attributes to search for
+	 *
+	 * @param mResAtt     map of Resource attributes to search for
 	 * @param bFollowRefs true if internal references shall be followed
-	 * 
 	 * @return VResource - vector with all elements matching the conditions
-	 * 
-	 * default: GetLinkedResources(new JDFAttributeMap(), false)
+	 *         default: GetLinkedResources(new JDFAttributeMap(), false)
 	 */
 	public VElement getLinkedResources(final JDFAttributeMap mResAtt, final boolean bFollowRefs)
 	{
@@ -260,33 +258,34 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo implements IMatches
 
 	/**
 	 * get a Contact with at least one contacttype set
-	 * 
+	 *
 	 * @param contactType the contatcttype string
-	 * @param iSkip number of occurrences to skip - if 0 take the first
+	 * @param iSkip       number of occurrences to skip - if 0 take the first
 	 * @return a matching JDFContact, null if none are found
 	 */
 	public JDFContact getContactWithContactType(final String contactType, final int iSkip)
 	{
-		return (JDFContact) getChildWithMatchingAttribute(ElementName.CONTACT, AttributeName.CONTACTTYPES, null, contactType, iSkip, true, EnumAttributeType.NMTOKENS);
+		return (JDFContact) getChildWithMatchingAttribute(ElementName.CONTACT, AttributeName.CONTACTTYPES, null, contactType, iSkip, true,
+				EnumAttributeType.NMTOKENS);
 	}
 
 	/**
 	 * get a Contact with at least one contactType set; create on if non existent
-	 * 
+	 *
 	 * @param contactType the contactType string
-	 * @param iSkip number of occurrences to skip - if 0 take the first
+	 * @param iSkip       number of occurrences to skip - if 0 take the first
 	 * @return a matching JDFContact, null if none are found
 	 */
 	public JDFContact getCreateContactWithContactType(final String contactType, final int iSkip)
 	{
-		JDFContact c = getContactWithContactType(contactType, iSkip);
+		final JDFContact c = getContactWithContactType(contactType, iSkip);
 		return c == null ? appendContact(contactType) : c;
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
 	/**
 	 * get a list of contacts with at least one matching contactType set
-	 * 
+	 *
 	 * @param contactType the contactType to look for - if null return all contacts
 	 * @return VElement the vector of matching JDFContacts, null if none are found
 	 */
@@ -313,7 +312,7 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo implements IMatches
 
 	/**
 	 * add a contact with a given contacttype
-	 * 
+	 *
 	 * @param typ
 	 * @return
 	 */
@@ -326,7 +325,7 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo implements IMatches
 
 	/**
 	 * add a contact with a given contacttype
-	 * 
+	 *
 	 * @param typ
 	 * @return
 	 */
@@ -338,28 +337,28 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo implements IMatches
 	}
 
 	@Override
-	public boolean matches(Object subset)
+	public boolean matches(final Object subset)
 	{
 		boolean matches = false;
 		if (subset instanceof String)
 		{
-			String subString = StringUtil.normalize((String) subset, true);
+			final String subString = StringUtil.normalize((String) subset, true);
 			matches = subString == null ? false : subString.equalsIgnoreCase(getCustomerID());
 		}
 		else if (subset instanceof JDFCustomerInfo)
 		{
-			JDFCustomerInfo ci = (JDFCustomerInfo) subset;
-			String customerID = StringUtil.normalize(getCustomerID(), true);
-			String othercustomerID = StringUtil.normalize(ci.getCustomerID(), true);
+			final JDFCustomerInfo ci = (JDFCustomerInfo) subset;
+			final String customerID = StringUtil.normalize(getCustomerID(), true);
+			final String othercustomerID = StringUtil.normalize(ci.getCustomerID(), true);
 			if (customerID != null && othercustomerID != null)
 			{
 				matches = customerID.equals(othercustomerID);
 			}
 			else
 			{
-				JDFContact contact = getContactWithContactType(EnumContactType.Customer.getName(), 0);
+				final JDFContact contact = getContactWithContactType(EnumContactType.Customer.name(), 0);
 
-				matches = contact == null ? false : contact.matches(ci.getContactWithContactType(EnumContactType.Customer.getName(), 0));
+				matches = contact == null ? false : contact.matches(ci.getContactWithContactType(EnumContactType.Customer.name(), 0));
 			}
 		}
 		return matches;

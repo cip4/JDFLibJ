@@ -107,7 +107,7 @@ public abstract class JDFAutoWindingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoWindingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoWindingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -119,7 +119,7 @@ public abstract class JDFAutoWindingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoWindingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoWindingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -132,7 +132,7 @@ public abstract class JDFAutoWindingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoWindingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoWindingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -143,7 +143,7 @@ public abstract class JDFAutoWindingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -173,7 +173,7 @@ public abstract class JDFAutoWindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFixation(String value)
+	public void setFixation(final String value)
 	{
 		setAttribute(AttributeName.FIXATION, value, null);
 	}
@@ -198,7 +198,7 @@ public abstract class JDFAutoWindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCopies(int value)
+	public void setCopies(final int value)
 	{
 		setAttribute(AttributeName.COPIES, value, null);
 	}
@@ -223,7 +223,7 @@ public abstract class JDFAutoWindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDiameter(double value)
+	public void setDiameter(final double value)
 	{
 		setAttribute(AttributeName.DIAMETER, value, null);
 	}
@@ -248,7 +248,7 @@ public abstract class JDFAutoWindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLengthJDF(double value)
+	public void setLengthJDF(final double value)
 	{
 		setAttribute(AttributeName.LENGTHJDF, value, null);
 	}

@@ -41,7 +41,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import org.apache.xerces.dom.AttrNSImpl;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.util.BiHashMap;
 import org.cip4.jdflib.util.ContainerUtil;
@@ -51,7 +51,6 @@ import org.w3c.dom.Attr;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG<br/>
  *         ensures correct ns uri
- *
  */
 public class EnsureNSUri extends BaseElementWalker
 {
@@ -63,33 +62,38 @@ public class EnsureNSUri extends BaseElementWalker
 	 * add a prefix / uri pair
 	 *
 	 * @param prefix the namespace prefix - may be null for empty namespace
-	 * @param uri the URI must not be null
+	 * @param uri    the URI must not be null
 	 * @throws IllegalArgumentException if uri is null
 	 */
 	public void addNS(String prefix, final String uri)
 	{
 		if (uri == null)
+		{
 			throw new IllegalArgumentException("uri MUST NOT be null");
+		}
 		if (prefix == null)
+		{
 			prefix = "";
+		}
 		nsMap.put(prefix, uri);
 	}
 
 	/**
 	 * add a an alias
 	 *
-	 * @param badPrefix the ns prefix to rename (e.g. ns1)
+	 * @param badPrefix  the ns prefix to rename (e.g. ns1)
 	 * @param goodPrefix the destination prefix
 	 */
 	public void addAlias(final String badPrefix, String goodPrefix)
 	{
 		if (goodPrefix == null)
+		{
 			goodPrefix = "<";
+		}
 		aliasMap.put(badPrefix, goodPrefix);
 	}
 
 	/**
-	 *
 	 * @param root
 	 */
 	public void walk(final KElement root)
@@ -128,7 +132,6 @@ public class EnsureNSUri extends BaseElementWalker
 	 * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super classes
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkElement extends BaseWalker
 	{
@@ -143,7 +146,7 @@ public class EnsureNSUri extends BaseElementWalker
 
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param e1 - the element to track
+		 * @param e1        - the element to track
 		 * @param trackElem - always null
 		 * @return the element to continue walking
 		 */
@@ -159,7 +162,9 @@ public class EnsureNSUri extends BaseElementWalker
 				e1.setNamespaceURI(nsMap.get(destPrefix));
 			}
 			if ("".equals(destPrefix))
+			{
 				destPrefix = null;
+			}
 			if (destPrefix != null && !destPrefix.equals(prefix) || (prefix != null && destPrefix == null))
 			{
 				e1.setPrefix(destPrefix);
@@ -175,7 +180,6 @@ public class EnsureNSUri extends BaseElementWalker
 		}
 
 		/**
-		 *
 		 * @param e1
 		 * @param att
 		 */
@@ -185,12 +189,14 @@ public class EnsureNSUri extends BaseElementWalker
 			String prefix = getAlias(origPrefix, null);
 			final String uri = nsMap.get(prefix);
 			if ("".equals(prefix))
+			{
 				prefix = null;
-			if (uri != null && !JDFConstants.XMLNS.equals(att))
+			}
+			if (uri != null && !JDFCoreConstants.XMLNS.equals(att))
 			{
 				processStandardAttribute(e1, att, origPrefix, prefix, uri);
 			}
-			else if (JDFConstants.XMLNS.equals(prefix) || JDFConstants.XMLNS.equals(att))
+			else if (JDFCoreConstants.XMLNS.equals(prefix) || JDFCoreConstants.XMLNS.equals(att))
 			{
 				processXmlns(e1, att);
 			}
@@ -206,11 +212,17 @@ public class EnsureNSUri extends BaseElementWalker
 					final String val = e1.getAttribute(att);
 					e1.removeAttribute(att);
 					if (origPrefix != null && !origPrefix.equals(prefix))
+					{
 						att = StringUtil.replaceToken(att, 0, ":", prefix);
+					}
 					if (prefix == null)
+					{
 						e1.setAttribute(att, val);
+					}
 					else
+					{
 						e1.setAttributeNS(uri, att, val);
+					}
 				}
 			}
 		}
@@ -219,7 +231,9 @@ public class EnsureNSUri extends BaseElementWalker
 		{
 			String prefix = KElement.xmlnsLocalName(att);
 			if ("xmlns".equals(prefix))
+			{
 				prefix = "";
+			}
 			final String alias = getAlias(prefix, null);
 			if (alias != null && !alias.equals(prefix))
 			{
@@ -229,7 +243,7 @@ public class EnsureNSUri extends BaseElementWalker
 			{
 				if (prefix == null)
 				{
-					prefix = JDFConstants.COLON;
+					prefix = JDFCoreConstants.COLON;
 				}
 				final String uri = nsMap.get(prefix);
 				if (uri != null)
@@ -244,8 +258,6 @@ public class EnsureNSUri extends BaseElementWalker
 		}
 
 		/**
-		 *
-		 *
 		 * @param prefix
 		 * @param localName
 		 * @param uri
@@ -254,7 +266,9 @@ public class EnsureNSUri extends BaseElementWalker
 		private String getAlias(String prefix, final String uri)
 		{
 			if (prefix == null)
+			{
 				prefix = "";
+			}
 			String s2 = aliasMap.get(prefix);
 			if ("<".equals(s2))
 			{

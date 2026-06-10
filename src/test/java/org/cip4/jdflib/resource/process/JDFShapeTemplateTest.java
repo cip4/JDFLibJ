@@ -78,7 +78,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author rainer prosi
- *
  */
 class JDFShapeTemplateTest extends JDFTestCaseBase
 {
@@ -89,9 +88,9 @@ class JDFShapeTemplateTest extends JDFTestCaseBase
 	@Test
 	void testSetStandard()
 	{
-		JDFShapeTemplate st = (JDFShapeTemplate) new JDFDoc(ElementName.SHAPETEMPLATE).getRoot();
+		final JDFShapeTemplate st = (JDFShapeTemplate) new JDFDoc(ElementName.SHAPETEMPLATE).getRoot();
 		st.setStandard(EnumStandard.FEFCO);
-		Assertions.assertEquals(EnumStandard.FEFCO.getName(), st.getStandard());
+		Assertions.assertEquals(EnumStandard.FEFCO.name(), st.getStandard());
 	}
 
 	/**
@@ -101,7 +100,7 @@ class JDFShapeTemplateTest extends JDFTestCaseBase
 	@Test
 	void testGetEnumStandard()
 	{
-		JDFShapeTemplate st = (JDFShapeTemplate) new JDFDoc(ElementName.SHAPETEMPLATE).getRoot();
+		final JDFShapeTemplate st = (JDFShapeTemplate) new JDFDoc(ElementName.SHAPETEMPLATE).getRoot();
 		st.setStandard(EnumStandard.ECMA);
 		Assertions.assertEquals(EnumStandard.ECMA, st.getEnumStandard());
 	}
@@ -113,7 +112,7 @@ class JDFShapeTemplateTest extends JDFTestCaseBase
 	@Test
 	void testSetNonStandard()
 	{
-		JDFShapeTemplate st = (JDFShapeTemplate) new JDFDoc(ElementName.SHAPETEMPLATE).getRoot();
+		final JDFShapeTemplate st = (JDFShapeTemplate) new JDFDoc(ElementName.SHAPETEMPLATE).getRoot();
 		st.setStandard("myStandard");
 		Assertions.assertEquals("myStandard", st.getStandard());
 		Assertions.assertNull(st.getEnumStandard());

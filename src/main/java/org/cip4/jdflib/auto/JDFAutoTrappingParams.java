@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -114,7 +110,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.IMAGETOIMAGETRAPPING, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.IMAGETOOBJECTTRAPPING, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[13] = new AtrInfoTable(AttributeName.IMAGETRAPPLACEMENT, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumImageTrapPlacement.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumImageTrapPlacement.class, 0), null);
 		atrInfoTable[14] = new AtrInfoTable(AttributeName.IMAGETRAPWIDTH, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[15] = new AtrInfoTable(AttributeName.IMAGETRAPWIDTHY, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[16] = new AtrInfoTable(AttributeName.SLIDINGTRAPLIMIT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
@@ -148,7 +144,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTrappingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoTrappingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -160,7 +156,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTrappingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoTrappingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -173,7 +169,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoTrappingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoTrappingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -184,7 +180,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -199,91 +195,22 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for ImageTrapPlacement
+	 * Enumeration strings for numImageTrapPlacement
 	 */
 
-	public enum EImageTrapPlacement
+	public enum EnumImageTrapPlacement
 	{
 		Center, Choke, Normal, Spread;
 
-		public static EImageTrapPlacement getEnum(String val)
+		public static EnumImageTrapPlacement getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EImageTrapPlacement.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumImageTrapPlacement.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for ImageTrapPlacement
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumImageTrapPlacement extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumImageTrapPlacement(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumImageTrapPlacement getEnum(String enumName)
-		{
-			return (EnumImageTrapPlacement) getEnum(EnumImageTrapPlacement.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumImageTrapPlacement getEnum(int enumValue)
-		{
-			return (EnumImageTrapPlacement) getEnum(EnumImageTrapPlacement.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumImageTrapPlacement.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumImageTrapPlacement.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumImageTrapPlacement.class);
-		}
-
-		/**  */
-		public static final EnumImageTrapPlacement Center = new EnumImageTrapPlacement("Center");
-		/**  */
-		public static final EnumImageTrapPlacement Choke = new EnumImageTrapPlacement("Choke");
-		/**  */
-		public static final EnumImageTrapPlacement Normal = new EnumImageTrapPlacement("Normal");
-		/**  */
-		public static final EnumImageTrapPlacement Spread = new EnumImageTrapPlacement("Spread");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -295,7 +222,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMinimumBlackWidth(double value)
+	public void setMinimumBlackWidth(final double value)
 	{
 		setAttribute(AttributeName.MINIMUMBLACKWIDTH, value, null);
 	}
@@ -320,7 +247,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTrapEndStyle(String value)
+	public void setTrapEndStyle(final String value)
 	{
 		setAttribute(AttributeName.TRAPENDSTYLE, value, null);
 	}
@@ -345,7 +272,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTrapJoinStyle(String value)
+	public void setTrapJoinStyle(final String value)
 	{
 		setAttribute(AttributeName.TRAPJOINSTYLE, value, null);
 	}
@@ -370,7 +297,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBlackColorLimit(double value)
+	public void setBlackColorLimit(final double value)
 	{
 		setAttribute(AttributeName.BLACKCOLORLIMIT, value, null);
 	}
@@ -395,7 +322,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBlackDensityLimit(double value)
+	public void setBlackDensityLimit(final double value)
 	{
 		setAttribute(AttributeName.BLACKDENSITYLIMIT, value, null);
 	}
@@ -420,7 +347,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBlackWidth(double value)
+	public void setBlackWidth(final double value)
 	{
 		setAttribute(AttributeName.BLACKWIDTH, value, null);
 	}
@@ -445,7 +372,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setEnabled(boolean value)
+	public void setEnabled(final boolean value)
 	{
 		setAttribute(AttributeName.ENABLED, value, null);
 	}
@@ -470,7 +397,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHalftoneName(String value)
+	public void setHalftoneName(final String value)
 	{
 		setAttribute(AttributeName.HALFTONENAME, value, null);
 	}
@@ -495,7 +422,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setImageInternalTrapping(boolean value)
+	public void setImageInternalTrapping(final boolean value)
 	{
 		setAttribute(AttributeName.IMAGEINTERNALTRAPPING, value, null);
 	}
@@ -520,7 +447,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setImageResolution(int value)
+	public void setImageResolution(final int value)
 	{
 		setAttribute(AttributeName.IMAGERESOLUTION, value, null);
 	}
@@ -545,7 +472,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setImageMaskTrapping(boolean value)
+	public void setImageMaskTrapping(final boolean value)
 	{
 		setAttribute(AttributeName.IMAGEMASKTRAPPING, value, null);
 	}
@@ -570,7 +497,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setImageToImageTrapping(boolean value)
+	public void setImageToImageTrapping(final boolean value)
 	{
 		setAttribute(AttributeName.IMAGETOIMAGETRAPPING, value, null);
 	}
@@ -595,7 +522,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setImageToObjectTrapping(boolean value)
+	public void setImageToObjectTrapping(final boolean value)
 	{
 		setAttribute(AttributeName.IMAGETOOBJECTTRAPPING, value, null);
 	}
@@ -620,9 +547,9 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setImageTrapPlacement(EImageTrapPlacement enumVar)
+	public void setImageTrapPlacement(final EnumImageTrapPlacement enumVar)
 	{
-		setAttribute(AttributeName.IMAGETRAPPLACEMENT, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.IMAGETRAPPLACEMENT, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -630,35 +557,6 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EImageTrapPlacement getEImageTrapPlacement()
-	{
-		return EImageTrapPlacement.getEnum(getAttribute(AttributeName.IMAGETRAPPLACEMENT, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ImageTrapPlacement
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ImageTrapPlacement
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetImageTrapPlacement(EImageTrapPlacement) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setImageTrapPlacement(EnumImageTrapPlacement enumVar)
-	{
-		setAttribute(AttributeName.IMAGETRAPPLACEMENT, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ImageTrapPlacement
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EImageTrapPlacement GetEImageTrapPlacement() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumImageTrapPlacement getImageTrapPlacement()
 	{
 		return EnumImageTrapPlacement.getEnum(getAttribute(AttributeName.IMAGETRAPPLACEMENT, null, null));
@@ -674,7 +572,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setImageTrapWidth(double value)
+	public void setImageTrapWidth(final double value)
 	{
 		setAttribute(AttributeName.IMAGETRAPWIDTH, value, null);
 	}
@@ -699,7 +597,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setImageTrapWidthY(double value)
+	public void setImageTrapWidthY(final double value)
 	{
 		setAttribute(AttributeName.IMAGETRAPWIDTHY, value, null);
 	}
@@ -724,7 +622,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSlidingTrapLimit(double value)
+	public void setSlidingTrapLimit(final double value)
 	{
 		setAttribute(AttributeName.SLIDINGTRAPLIMIT, value, null);
 	}
@@ -749,7 +647,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStepLimit(double value)
+	public void setStepLimit(final double value)
 	{
 		setAttribute(AttributeName.STEPLIMIT, value, null);
 	}
@@ -774,7 +672,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTrapColorScaling(double value)
+	public void setTrapColorScaling(final double value)
 	{
 		setAttribute(AttributeName.TRAPCOLORSCALING, value, null);
 	}
@@ -799,7 +697,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTrapWidth(double value)
+	public void setTrapWidth(final double value)
 	{
 		setAttribute(AttributeName.TRAPWIDTH, value, null);
 	}
@@ -824,7 +722,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTrapWidthY(double value)
+	public void setTrapWidthY(final double value)
 	{
 		setAttribute(AttributeName.TRAPWIDTHY, value, null);
 	}
@@ -871,7 +769,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorantZoneDetails the element
 	 */
-	public JDFColorantZoneDetails getCreateColorantZoneDetails(int iSkip)
+	public JDFColorantZoneDetails getCreateColorantZoneDetails(final int iSkip)
 	{
 		return (JDFColorantZoneDetails) getCreateElement_JDFElement(ElementName.COLORANTZONEDETAILS, null, iSkip);
 	}
@@ -883,7 +781,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 * @return JDFColorantZoneDetails the element
 	 *         default is getColorantZoneDetails(0)
 	 */
-	public JDFColorantZoneDetails getColorantZoneDetails(int iSkip)
+	public JDFColorantZoneDetails getColorantZoneDetails(final int iSkip)
 	{
 		return (JDFColorantZoneDetails) getElement(ElementName.COLORANTZONEDETAILS, null, iSkip);
 	}

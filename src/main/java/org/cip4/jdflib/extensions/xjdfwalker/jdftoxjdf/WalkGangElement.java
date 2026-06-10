@@ -42,9 +42,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFGangElement;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkGangElement extends WalkJDFSubElement
 {
@@ -83,7 +81,9 @@ public class WalkGangElement extends WalkJDFSubElement
 	protected boolean mustInline(final String refLocalName)
 	{
 		if (ElementName.MEDIA.equals(refLocalName))
+		{
 			return true;
+		}
 
 		return super.mustInline(refLocalName);
 	}

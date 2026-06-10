@@ -52,6 +52,7 @@ import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -79,7 +80,6 @@ public class JDFXYPair extends JDFNumList
 	 * constructs a xy pair with all values set via a Vector of Double objects
 	 *
 	 * @param v Vector of Double
-	 *
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 * @deprecated use typesafe constructors
 	 */
@@ -93,7 +93,6 @@ public class JDFXYPair extends JDFNumList
 	 * constructs a xy pair with all values set via a String if a single numerical value is specified, s is padded with " 0"
 	 *
 	 * @param s the given String
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFXYPair(final String s) throws DataFormatException
@@ -130,7 +129,6 @@ public class JDFXYPair extends JDFNumList
 	 * constructs a xy pair with all values set via a JDFNumberList
 	 *
 	 * @param nl the given number list
-	 *
 	 * @throws DataFormatException - if the JDFNumberList has not a valid format
 	 */
 	public JDFXYPair(final JDFNumList nl) throws DataFormatException
@@ -142,7 +140,6 @@ public class JDFXYPair extends JDFNumList
 	 * constructs a xy pair with all values set via a JDFNumberList
 	 *
 	 * @param shape the given number list
-	 *
 	 */
 	public JDFXYPair(final JDFShape shape)
 	{
@@ -155,8 +152,6 @@ public class JDFXYPair extends JDFNumList
 	 * constructs a xy pair with all values set via a JDFNumberList
 	 *
 	 * @param nl the given number list
-	 *
-	 *
 	 */
 	public JDFXYPair(final JDFXYPair nl)
 	{
@@ -224,7 +219,6 @@ public class JDFXYPair extends JDFNumList
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public Point2D getPoint2D()
@@ -254,7 +248,6 @@ public class JDFXYPair extends JDFNumList
 
 	/**
 	 * swap x and y coordinates -
-	 *
 	 */
 	public void swapXY()
 	{
@@ -348,7 +341,7 @@ public class JDFXYPair extends JDFNumList
 			}
 			else
 			{
-				final VString v = StringUtil.tokenize(string, JDFConstants.SLASH, false);
+				final VString v = StringUtil.tokenize(string, JDFCoreConstants.SLASH, false);
 				if (v.size() == 2)
 				{
 					super.setString(StringUtil.replaceChar(string, '/', JDFConstants.SPACE, 0));
@@ -363,7 +356,6 @@ public class JDFXYPair extends JDFNumList
 	}
 
 	/**
-	 *
 	 * @param x
 	 * @param y
 	 * @return
@@ -376,16 +368,19 @@ public class JDFXYPair extends JDFNumList
 	}
 
 	/**
-	 *
 	 * @param xy
 	 * @return
 	 */
 	public JDFXYPair shift(final JDFXYPair xy)
 	{
 		if (xy == null)
+		{
 			return this;
+		}
 		else
+		{
 			return shift(xy.getX(), xy.getY());
+		}
 
 	}
 

@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -97,7 +92,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDROTATE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumAllowedRotate.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumAllowedRotate.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.GUTTERX, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.GUTTERX2, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.GUTTERY, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
@@ -119,7 +114,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoRepeatDesc(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoRepeatDesc(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -131,7 +126,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoRepeatDesc(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoRepeatDesc(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -144,97 +139,28 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoRepeatDesc(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoRepeatDesc(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for AllowedRotate
+	 * Enumeration strings for numAllowedRotate
 	 */
 
-	public enum EAllowedRotate
+	public enum EnumAllowedRotate
 	{
 		None, Grain, MinorGrain, CrossGrain;
 
-		public static EAllowedRotate getEnum(String val)
+		public static EnumAllowedRotate getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EAllowedRotate.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumAllowedRotate.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for AllowedRotate
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumAllowedRotate extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumAllowedRotate(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumAllowedRotate getEnum(String enumName)
-		{
-			return (EnumAllowedRotate) getEnum(EnumAllowedRotate.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumAllowedRotate getEnum(int enumValue)
-		{
-			return (EnumAllowedRotate) getEnum(EnumAllowedRotate.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumAllowedRotate.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAllowedRotate.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAllowedRotate.class);
-		}
-
-		/**  */
-		public static final EnumAllowedRotate None = new EnumAllowedRotate("None");
-		/**  */
-		public static final EnumAllowedRotate Grain = new EnumAllowedRotate("Grain");
-		/**  */
-		public static final EnumAllowedRotate MinorGrain = new EnumAllowedRotate("MinorGrain");
-		/**  */
-		public static final EnumAllowedRotate CrossGrain = new EnumAllowedRotate("CrossGrain");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -246,9 +172,9 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setAllowedRotate(EAllowedRotate enumVar)
+	public void setAllowedRotate(final EnumAllowedRotate enumVar)
 	{
-		setAttribute(AttributeName.ALLOWEDROTATE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ALLOWEDROTATE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -256,35 +182,6 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EAllowedRotate getEAllowedRotate()
-	{
-		return EAllowedRotate.getEnum(getAttribute(AttributeName.ALLOWEDROTATE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute AllowedRotate
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute AllowedRotate
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetAllowedRotate(EAllowedRotate) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setAllowedRotate(EnumAllowedRotate enumVar)
-	{
-		setAttribute(AttributeName.ALLOWEDROTATE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute AllowedRotate
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EAllowedRotate GetEAllowedRotate() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumAllowedRotate getAllowedRotate()
 	{
 		return EnumAllowedRotate.getEnum(getAttribute(AttributeName.ALLOWEDROTATE, null, null));
@@ -300,7 +197,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGutterX(double value)
+	public void setGutterX(final double value)
 	{
 		setAttribute(AttributeName.GUTTERX, value, null);
 	}
@@ -325,7 +222,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGutterX2(double value)
+	public void setGutterX2(final double value)
 	{
 		setAttribute(AttributeName.GUTTERX2, value, null);
 	}
@@ -350,7 +247,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGutterY(double value)
+	public void setGutterY(final double value)
 	{
 		setAttribute(AttributeName.GUTTERY, value, null);
 	}
@@ -375,7 +272,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGutterY2(double value)
+	public void setGutterY2(final double value)
 	{
 		setAttribute(AttributeName.GUTTERY2, value, null);
 	}
@@ -400,7 +297,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLayoutStyle(VString value)
+	public void setLayoutStyle(final VString value)
 	{
 		setAttribute(AttributeName.LAYOUTSTYLE, value, null);
 	}
@@ -412,8 +309,8 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 */
 	public VString getLayoutStyle()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.LAYOUTSTYLE, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.LAYOUTSTYLE, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -428,7 +325,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOrderQuantity(int value)
+	public void setOrderQuantity(final int value)
 	{
 		setAttribute(AttributeName.ORDERQUANTITY, value, null);
 	}
@@ -453,7 +350,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setUseBleed(boolean value)
+	public void setUseBleed(final boolean value)
 	{
 		setAttribute(AttributeName.USEBLEED, value, null);
 	}

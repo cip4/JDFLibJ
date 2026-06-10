@@ -106,7 +106,7 @@ public abstract class JDFAutoDependencies extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDependencies(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDependencies(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoDependencies extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDependencies(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDependencies(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoDependencies extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDependencies(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDependencies(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoDependencies extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFLayoutElement the element
 	 */
-	public JDFLayoutElement getCreateLayoutElement(int iSkip)
+	public JDFLayoutElement getCreateLayoutElement(final int iSkip)
 	{
 		return (JDFLayoutElement) getCreateElement_JDFElement(ElementName.LAYOUTELEMENT, null, iSkip);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoDependencies extends JDFElement
 	 * @return JDFLayoutElement the element
 	 *         default is getLayoutElement(0)
 	 */
-	public JDFLayoutElement getLayoutElement(int iSkip)
+	public JDFLayoutElement getLayoutElement(final int iSkip)
 	{
 		return (JDFLayoutElement) getElement(ElementName.LAYOUTELEMENT, null, iSkip);
 	}
@@ -210,7 +210,7 @@ public abstract class JDFAutoDependencies extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refLayoutElement(JDFLayoutElement refTarget)
+	public void refLayoutElement(final JDFLayoutElement refTarget)
 	{
 		refElement(refTarget);
 	}

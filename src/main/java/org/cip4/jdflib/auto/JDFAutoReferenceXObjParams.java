@@ -120,7 +120,7 @@ public abstract class JDFAutoReferenceXObjParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoReferenceXObjParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoReferenceXObjParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -132,7 +132,7 @@ public abstract class JDFAutoReferenceXObjParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoReferenceXObjParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoReferenceXObjParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -145,7 +145,7 @@ public abstract class JDFAutoReferenceXObjParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoReferenceXObjParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoReferenceXObjParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -166,7 +166,7 @@ public abstract class JDFAutoReferenceXObjParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMode(String value)
+	public void setMode(final String value)
 	{
 		setAttribute(AttributeName.MODE, value, null);
 	}
@@ -223,7 +223,7 @@ public abstract class JDFAutoReferenceXObjParams extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}

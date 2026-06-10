@@ -74,7 +74,6 @@ public class JDFLabColor extends JDFNumList
 	 * constructs a Lab color with all values set via a Vector of Double objects
 	 *
 	 * @param v the given vector
-	 *
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 * @deprecated use typesafe constructors
 	 */
@@ -88,7 +87,6 @@ public class JDFLabColor extends JDFNumList
 	 * constructs a Lab color with all values set via a String
 	 *
 	 * @param s the given String
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFLabColor(final String s) throws DataFormatException
@@ -105,7 +103,9 @@ public class JDFLabColor extends JDFNumList
 	public static JDFLabColor createLabColor(final String s)
 	{
 		if (s == null || s.length() < 5) // we want at least 3 values + 3 blank=5
+		{
 			return null;
+		}
 
 		try
 		{
@@ -121,7 +121,6 @@ public class JDFLabColor extends JDFNumList
 	 * constructs a Lab color with all values set via a JDFNumberList
 	 *
 	 * @param nl the given number list
-	 *
 	 * @throws DataFormatException - if the String does not have a valid format
 	 */
 	public JDFLabColor(final JDFLabColor nl)
@@ -239,7 +238,9 @@ public class JDFLabColor extends JDFNumList
 	public double deltaE(final JDFLabColor other)
 	{
 		if (other == null)
+		{
 			return -1;
+		}
 		return new JDFLabColor(this).subtract(other).norm();
 	}
 }

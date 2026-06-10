@@ -80,7 +80,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author prosirai
- *
  */
 class AttributeReplacerTest extends JDFTestCaseBase
 {

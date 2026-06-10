@@ -96,7 +96,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCustomerInfo(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoCustomerInfo(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -108,7 +108,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCustomerInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoCustomerInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -121,7 +121,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoCustomerInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoCustomerInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -132,7 +132,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -162,7 +162,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBillingCode(String value)
+	public void setBillingCode(final String value)
 	{
 		setAttribute(AttributeName.BILLINGCODE, value, null);
 	}
@@ -187,7 +187,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCustomerID(String value)
+	public void setCustomerID(final String value)
 	{
 		setAttribute(AttributeName.CUSTOMERID, value, null);
 	}
@@ -212,7 +212,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCustomerJobName(String value)
+	public void setCustomerJobName(final String value)
 	{
 		setAttribute(AttributeName.CUSTOMERJOBNAME, value, null);
 	}
@@ -237,7 +237,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCustomerOrderID(String value)
+	public void setCustomerOrderID(final String value)
 	{
 		setAttribute(AttributeName.CUSTOMERORDERID, value, null);
 	}
@@ -262,7 +262,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCustomerProjectID(String value)
+	public void setCustomerProjectID(final String value)
 	{
 		setAttribute(AttributeName.CUSTOMERPROJECTID, value, null);
 	}
@@ -319,7 +319,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refCompany(JDFCompany refTarget)
+	public void refCompany(final JDFCompany refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -352,7 +352,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
-	public JDFContact getCreateContact(int iSkip)
+	public JDFContact getCreateContact(final int iSkip)
 	{
 		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -364,7 +364,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	 * @return JDFContact the element
 	 *         default is getContact(0)
 	 */
-	public JDFContact getContact(int iSkip)
+	public JDFContact getContact(final int iSkip)
 	{
 		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -395,7 +395,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refContact(JDFContact refTarget)
+	public void refContact(final JDFContact refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -426,7 +426,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFCustomerMessage the element
 	 */
-	public JDFCustomerMessage getCreateCustomerMessage(int iSkip)
+	public JDFCustomerMessage getCreateCustomerMessage(final int iSkip)
 	{
 		return (JDFCustomerMessage) getCreateElement_JDFElement(ElementName.CUSTOMERMESSAGE, null, iSkip);
 	}
@@ -438,7 +438,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	 * @return JDFCustomerMessage the element
 	 *         default is getCustomerMessage(0)
 	 */
-	public JDFCustomerMessage getCustomerMessage(int iSkip)
+	public JDFCustomerMessage getCustomerMessage(final int iSkip)
 	{
 		return (JDFCustomerMessage) getElement(ElementName.CUSTOMERMESSAGE, null, iSkip);
 	}

@@ -71,38 +71,38 @@ public class WalkJDF extends WalkJDFElement
 	{
 		super();
 		deprecatedTypes = new HashSet<>();
-		deprecatedTypes.add(EnumType.Buffer.getName());
-		deprecatedTypes.add(EnumType.Combine.getName());
-		deprecatedTypes.add(EnumType.Dividing.getName());
-		deprecatedTypes.add(EnumType.Ordering.getName());
-		deprecatedTypes.add(EnumType.Packing.getName());
-		deprecatedTypes.add(EnumType.ResourceDefinition.getName());
-		deprecatedTypes.add(EnumType.Split.getName());
+		deprecatedTypes.add(EnumType.Buffer.name());
+		deprecatedTypes.add(EnumType.Combine.name());
+		deprecatedTypes.add(EnumType.Dividing.name());
+		deprecatedTypes.add(EnumType.Ordering.name());
+		deprecatedTypes.add(EnumType.Packing.name());
+		deprecatedTypes.add(EnumType.ResourceDefinition.name());
+		deprecatedTypes.add(EnumType.Split.name());
 
-		deprecatedTypes.add(EnumType.AssetListCreation.getName());
-		deprecatedTypes.add(EnumType.ContactCopying.getName());
-		deprecatedTypes.add(EnumType.ContoneCalibration.getName());
-		deprecatedTypes.add(EnumType.CylinderLayoutPreparation.getName());
-		deprecatedTypes.add(EnumType.DBDocTemplateLayout.getName());
-		deprecatedTypes.add(EnumType.DBTemplateMerging.getName());
-		deprecatedTypes.add(EnumType.DigitalDelivery.getName());
-		deprecatedTypes.add(EnumType.ImageReplacement.getName());
-		deprecatedTypes.add(EnumType.PageAssigning.getName());
-		deprecatedTypes.add(EnumType.PDFToPSConversion.getName());
-		deprecatedTypes.add(EnumType.Proofing.getName());
-		deprecatedTypes.add(EnumType.PSToPDFConversion.getName());
-		deprecatedTypes.add(EnumType.ResourceDefinition.getName());
-		deprecatedTypes.add(EnumType.Scanning.getName());
-		deprecatedTypes.add(EnumType.StaticBlocking.getName());
-		deprecatedTypes.add(EnumType.Tiling.getName());
+		deprecatedTypes.add(EnumType.AssetListCreation.name());
+		deprecatedTypes.add(EnumType.ContactCopying.name());
+		deprecatedTypes.add(EnumType.ContoneCalibration.name());
+		deprecatedTypes.add(EnumType.CylinderLayoutPreparation.name());
+		deprecatedTypes.add(EnumType.DBDocTemplateLayout.name());
+		deprecatedTypes.add(EnumType.DBTemplateMerging.name());
+		deprecatedTypes.add(EnumType.DigitalDelivery.name());
+		deprecatedTypes.add(EnumType.ImageReplacement.name());
+		deprecatedTypes.add(EnumType.PageAssigning.name());
+		deprecatedTypes.add(EnumType.PDFToPSConversion.name());
+		deprecatedTypes.add(EnumType.Proofing.name());
+		deprecatedTypes.add(EnumType.PSToPDFConversion.name());
+		deprecatedTypes.add(EnumType.ResourceDefinition.name());
+		deprecatedTypes.add(EnumType.Scanning.name());
+		deprecatedTypes.add(EnumType.StaticBlocking.name());
+		deprecatedTypes.add(EnumType.Tiling.name());
 
 		looseBindingTypes = new HashSet<>();
-		looseBindingTypes.add(EnumType.ChannelBinding.getName());
-		looseBindingTypes.add(EnumType.CoilBinding.getName());
-		looseBindingTypes.add(EnumType.PlasticCombBinding.getName());
-		looseBindingTypes.add(EnumType.RingBinding.getName());
-		looseBindingTypes.add(EnumType.StripBinding.getName());
-		looseBindingTypes.add(EnumType.WireCombBinding.getName());
+		looseBindingTypes.add(EnumType.ChannelBinding.name());
+		looseBindingTypes.add(EnumType.CoilBinding.name());
+		looseBindingTypes.add(EnumType.PlasticCombBinding.name());
+		looseBindingTypes.add(EnumType.RingBinding.name());
+		looseBindingTypes.add(EnumType.StripBinding.name());
+		looseBindingTypes.add(EnumType.WireCombBinding.name());
 
 	}
 
@@ -274,7 +274,7 @@ public class WalkJDF extends WalkJDFElement
 			final String typ = t1.get(i);
 			if (isDeprecatedType(typ))
 			{
-				t1.setElementAt(EnumType.ManualLabor.getName(), i);
+				t1.setElementAt(EnumType.ManualLabor.name(), i);
 			}
 			else if (looseBindingTypes.contains(typ))
 			{

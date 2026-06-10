@@ -56,7 +56,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
  * @date Dec 23, 2012
  */
@@ -144,7 +143,7 @@ class XPathHelperTest extends JDFTestCaseBase
 
 			for (int j = 0; j < 3; j++)
 			{
-				c.appendComChannel(EnumChannelType.getEnum(j)).setLocator("loc" + i + " " + j);
+				c.appendComChannel(EnumChannelType.values()[j]).setLocator("loc" + i + " " + j);
 			}
 			final JDFPerson p = c.appendPerson();
 			p.setFirstName("Name" + i);
@@ -178,7 +177,9 @@ class XPathHelperTest extends JDFTestCaseBase
 			final JDFDoc dNew = new JDFDoc();
 			dNew.setXPathValues(map);
 			if (i % 100 == 0)
+			{
 				log.info(i + " " + ct.getSingleSummary());
+			}
 			ct.stop();
 		}
 		assertEquals(ct.getTotalCPUTime(), 20.0E9, 20.0E9);
@@ -310,7 +311,7 @@ class XPathHelperTest extends JDFTestCaseBase
 		b.setAttribute("test", "it");
 		final JDFAttributeMap m = b.getXPathValueMap(true);
 		assertEquals(m.get("./b[1]/c[3]/d[1]/@foo"), "bar3");
-		KElement b2 = root.appendElement("bbb");
+		final KElement b2 = root.appendElement("bbb");
 		b2.setXPathValues(m);
 		assertTrue(b.isEqual(b2));
 	}

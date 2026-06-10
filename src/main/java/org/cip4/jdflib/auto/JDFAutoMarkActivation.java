@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -95,7 +90,8 @@ public abstract class JDFAutoMarkActivation extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTEXT, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumContext.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTEXT, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumContext.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.INDEX, 0x2222222222l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 	}
 
@@ -111,7 +107,7 @@ public abstract class JDFAutoMarkActivation extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMarkActivation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoMarkActivation(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -123,7 +119,7 @@ public abstract class JDFAutoMarkActivation extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMarkActivation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoMarkActivation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -136,119 +132,28 @@ public abstract class JDFAutoMarkActivation extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoMarkActivation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoMarkActivation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for Context
+	 * Enumeration strings for numContext
 	 */
 
-	public enum EContext
+	public enum EnumContext
 	{
 		CollectIndex, DocIndex, SetDocIndex, SetIndex, SheetIndex, SubDocIndex0, SubDocIndex1, SubDocIndex2, SubDocIndex3, SubDocIndex4, SubDocIndex5, SubDocIndex6, SubDocIndex7, SubDocIndex8, SubDocIndex9;
 
-		public static EContext getEnum(String val)
+		public static EnumContext getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EContext.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumContext.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Context
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumContext extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumContext(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumContext getEnum(String enumName)
-		{
-			return (EnumContext) getEnum(EnumContext.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumContext getEnum(int enumValue)
-		{
-			return (EnumContext) getEnum(EnumContext.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumContext.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumContext.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumContext.class);
-		}
-
-		/**  */
-		public static final EnumContext CollectIndex = new EnumContext("CollectIndex");
-		/**  */
-		public static final EnumContext DocIndex = new EnumContext("DocIndex");
-		/**  */
-		public static final EnumContext SetDocIndex = new EnumContext("SetDocIndex");
-		/**  */
-		public static final EnumContext SetIndex = new EnumContext("SetIndex");
-		/**  */
-		public static final EnumContext SheetIndex = new EnumContext("SheetIndex");
-		/**  */
-		public static final EnumContext SubDocIndex0 = new EnumContext("SubDocIndex0");
-		/**  */
-		public static final EnumContext SubDocIndex1 = new EnumContext("SubDocIndex1");
-		/**  */
-		public static final EnumContext SubDocIndex2 = new EnumContext("SubDocIndex2");
-		/**  */
-		public static final EnumContext SubDocIndex3 = new EnumContext("SubDocIndex3");
-		/**  */
-		public static final EnumContext SubDocIndex4 = new EnumContext("SubDocIndex4");
-		/**  */
-		public static final EnumContext SubDocIndex5 = new EnumContext("SubDocIndex5");
-		/**  */
-		public static final EnumContext SubDocIndex6 = new EnumContext("SubDocIndex6");
-		/**  */
-		public static final EnumContext SubDocIndex7 = new EnumContext("SubDocIndex7");
-		/**  */
-		public static final EnumContext SubDocIndex8 = new EnumContext("SubDocIndex8");
-		/**  */
-		public static final EnumContext SubDocIndex9 = new EnumContext("SubDocIndex9");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -260,9 +165,9 @@ public abstract class JDFAutoMarkActivation extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setContext(EContext enumVar)
+	public void setContext(final EnumContext enumVar)
 	{
-		setAttribute(AttributeName.CONTEXT, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.CONTEXT, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -270,35 +175,6 @@ public abstract class JDFAutoMarkActivation extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EContext getEContext()
-	{
-		return EContext.getEnum(getAttribute(AttributeName.CONTEXT, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Context
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Context
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetContext(EContext) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setContext(EnumContext enumVar)
-	{
-		setAttribute(AttributeName.CONTEXT, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Context
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EContext GetEContext() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumContext getContext()
 	{
 		return EnumContext.getEnum(getAttribute(AttributeName.CONTEXT, null, null));
@@ -314,7 +190,7 @@ public abstract class JDFAutoMarkActivation extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIndex(JDFIntegerRangeList value)
+	public void setIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.INDEX, value, null);
 	}
@@ -327,8 +203,8 @@ public abstract class JDFAutoMarkActivation extends JDFElement
 	 */
 	public JDFIntegerRangeList getIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.INDEX, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.INDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 

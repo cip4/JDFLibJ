@@ -99,7 +99,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class JDFPageListTest extends JDFTestCaseBase
 {
@@ -144,14 +143,16 @@ class JDFPageListTest extends JDFTestCaseBase
 			final JDFPageElement pe = pd.appendPageElement();
 			pe.setAttribute("ContentDataRefs", cd.getID());
 		}
-		pl.setXMLComment("Note that multiple page elements may but need not be specified\nit is also possible to reference only on pageEleemnt that spans the entire book", true);
+		pl.setXMLComment(
+				"Note that multiple page elements may but need not be specified\nit is also possible to reference only on pageEleemnt that spans the entire book",
+				true);
 
 		writeTest(d.getRoot(), "resources/ContentMetaData.jdf", false, null);
 	}
 
 	/**
 	 * test that creates a contentdata for a component with multiple blocks
-	 * 
+	 *
 	 * @throws DataFormatException
 	 */
 	@Test
@@ -164,12 +165,12 @@ class JDFPageListTest extends JDFTestCaseBase
 		c.refElement(pl);
 		c1.setPageListIndex(new JDFIntegerRangeList("0~8"));
 		c2.setPageListIndex(new JDFIntegerRangeList("9~16"));
-		c.setXMLComment("this is the output component with two stacks\n the imposition engine is aware of the pagelist index and can set it appropriately", true);
+		c.setXMLComment("this is the output component with two stacks\n the imposition engine is aware of the pagelist index and can set it appropriately",
+				true);
 		d.write2File(sm_dirTestDataTemp + "ContentMetaDataStack.jdf", 2, false);
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -188,7 +189,6 @@ class JDFPageListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -209,7 +209,6 @@ class JDFPageListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -230,7 +229,6 @@ class JDFPageListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -250,7 +248,6 @@ class JDFPageListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -271,7 +268,6 @@ class JDFPageListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -295,7 +291,6 @@ class JDFPageListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -314,7 +309,6 @@ class JDFPageListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -328,7 +322,6 @@ class JDFPageListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test

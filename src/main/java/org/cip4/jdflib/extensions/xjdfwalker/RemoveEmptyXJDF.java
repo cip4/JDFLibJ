@@ -78,9 +78,7 @@ import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.util.ContainerUtil;
 
 /**
- *
  * @author rainer prosi
- *
  */
 public class RemoveEmptyXJDF extends RemoveEmpty
 {
@@ -102,7 +100,6 @@ public class RemoveEmptyXJDF extends RemoveEmpty
 	 * zapp me
 	 *
 	 * @author rainer prosi
-	 *
 	 */
 	public class WalkResourceSet extends WalkElement
 	{
@@ -117,7 +114,6 @@ public class RemoveEmptyXJDF extends RemoveEmpty
 		}
 
 		/**
-		 *
 		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#getDummyAttributes()
 		 */
 		@Override
@@ -150,7 +146,6 @@ public class RemoveEmptyXJDF extends RemoveEmpty
 		}
 
 		/**
-		 *
 		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#hasRequiredChild(org.cip4.jdflib.core.KElement)
 		 */
 		@Override
@@ -178,7 +173,7 @@ public class RemoveEmptyXJDF extends RemoveEmpty
 
 		/**
 		 * part elements are ignored
-		 * 
+		 *
 		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#hasChild(org.cip4.jdflib.core.KElement)
 		 */
 		@Override
@@ -188,7 +183,6 @@ public class RemoveEmptyXJDF extends RemoveEmpty
 		}
 
 		/**
-		 *
 		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#getDummyAttributes()
 		 */
 		@Override

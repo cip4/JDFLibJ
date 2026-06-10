@@ -170,7 +170,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	protected void fillCatMaps()
 	{
 		super.fillCatMaps();
-		catMap.put(MISPRE_CONTENTCREATION, new VString(EnumType.LayoutElementProduction.getName(), null));
+		catMap.put(MISPRE_CONTENTCREATION, new VString(EnumType.LayoutElementProduction.name(), null));
 
 		catMap.put(MISPRE_IMPOSITIONPREPARATION, new VString("ImpositionPreparation", null));
 
@@ -228,7 +228,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 		{
 			return;
 		}
-		final String icsTag = "MISPre_L" + icsLevel + "-" + theVersion.getName();
+		final String icsTag = "MISPre_L" + icsLevel + "-" + theVersion.name();
 		theNode.appendAttribute(AttributeName.ICSVERSIONS, icsTag, null, " ", true);
 		if (!theNode.hasAttribute(AttributeName.DESCRIPTIVENAME))
 		{
@@ -379,7 +379,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	{
 		final JDFStrippingParams sp = (JDFStrippingParams) theNode.getCreateResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
 		sp.setDescriptiveName("Impositioning for job " + theNode.getJobID(true));
-		sp.setWorkStyle(workStyle);
+		sp.setWorkStyle(org.cip4.jdflib.auto.JDFAutoStrippingParams.EnumWorkStyle.getEnum(workStyle.name()));
 		getReducedMap(new VString("Separation PartVersion", null));
 		final JDFBinderySignature bs0 = (JDFBinderySignature) theNode.getResource(ElementName.BINDERYSIGNATURE, EnumUsage.Input, 0);
 		JDFBinderySignature bs1 = (JDFBinderySignature) theNode.getResource(ElementName.BINDERYSIGNATURE, EnumUsage.Input, 1);
@@ -474,7 +474,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	 */
 	private void initGBContentCreation()
 	{
-		theNode.setTypes(new VString(EnumType.LayoutElementProduction.getName(), null));
+		theNode.setTypes(new VString(EnumType.LayoutElementProduction.name(), null));
 		final JDFRunList ruli = initDocumentRunList();
 		final JDFResourceLink rl = theNode.getLink(ruli, EnumUsage.Input);
 		rl.setProcessUsage((EnumProcessUsage) null);
@@ -615,7 +615,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 				for (int i = 0; i < size; i++)
 				{
 					final JDFAttributeMap part = reducedMap.elementAt(i);
-					if (bSingleSided == true && "Back".equals(part.get("Side")))
+					if (bSingleSided && "Back".equals(part.get("Side")))
 					{
 						continue;
 					}
@@ -657,7 +657,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 
 				for (int j = 0; j < ncols; j++)
 				{
-					JDFPreview pvsep = (JDFPreview) pvp.getCreatePartition(EnumPartIDKey.Separation, cols.get(j), partIDKeys);
+					final JDFPreview pvsep = (JDFPreview) pvp.getCreatePartition(EnumPartIDKey.Separation, cols.get(j), partIDKeys);
 					pvsep.setURL("http://foo.preview." + i + "." + cols.get(j) + ".pdf");
 					pvsep.setResStatus(EnumResStatus.Incomplete, false);
 				}
@@ -713,11 +713,11 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	private void makeReadyPreviewGeneration()
 	{
 		final VString v = theExpandedNode.getAllTypes();
-		if (v != null && v.contains(EnumType.PreviewGeneration.getName()))
+		if (v != null && v.contains(EnumType.PreviewGeneration.name()))
 		{
 			final JDFPreviewGenerationParams pgp = (JDFPreviewGenerationParams) theExpandedNode.getCreateResource(ElementName.PREVIEWGENERATIONPARAMS,
 					EnumUsage.Input, 0);
-			pgp.setPreviewUsage(EnumPreviewUsage.Separation);
+			pgp.setPreviewUsage(org.cip4.jdflib.auto.JDFAutoPreviewGenerationParams.EnumPreviewUsage.getEnum(EnumPreviewUsage.Separation.name()));
 		}
 	}
 

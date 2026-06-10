@@ -87,7 +87,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         14.11.2008
  */
 class AuditToJMFTest extends JDFTestCaseBase

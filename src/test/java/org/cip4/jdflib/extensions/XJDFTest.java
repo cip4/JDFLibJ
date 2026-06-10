@@ -69,6 +69,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.elementwalker.EnsureNSUri;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
+import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF.EnumProcessPartition;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
@@ -248,7 +249,7 @@ class XJDFTest extends JDFTestCaseBase
 		final JDFDoc d2 = xCon.convert(xjdf);
 		assertNotNull(d2);
 		JDFNode nConv = d2.getJDFRoot();
-		nConv = (JDFNode) nConv.getvJDFNode(EnumType.ProcessGroup.getName(), null, true).get(0);
+		nConv = (JDFNode) nConv.getvJDFNode(EnumType.ProcessGroup.name(), null, true).get(0);
 		assertNotNull(nConv);
 		JDFExposedMedia xm = (JDFExposedMedia) nConv.getResource("ExposedMedia", EnumUsage.Input, 0);
 		assertNotNull(xm);
@@ -741,10 +742,10 @@ class XJDFTest extends JDFTestCaseBase
 		cp.appendColorWithName("Black", null).setCMYK(new JDFCMYKColor(0, 0, 0, 1));
 		cp.appendColorWithName("Yellow", null).setCMYK(new JDFCMYKColor(0, 0, 1, 0));
 		xjdf = new XJDF20().makeNewJDF(n, null);
-		assertEquals(XJDF20.getSchemaURL(), xjdf.getNamespaceURI());
+		assertEquals(JDFToXJDF.getSchemaURL(), xjdf.getNamespaceURI());
 		final KElement xPathElement = xjdf.getXPathElement("ResourceSet[@Name=\"Color\"]/Resource/Part[@Separation=\"Black\"]");
 		assertNotNull(xPathElement);
-		assertEquals(XJDF20.getSchemaURL(), xPathElement.getNamespaceURI());
+		assertEquals(JDFToXJDF.getSchemaURL(), xPathElement.getNamespaceURI());
 	}
 
 	/**
@@ -754,7 +755,7 @@ class XJDFTest extends JDFTestCaseBase
 	void testNamespacePrefix()
 	{
 		xjdf = new XMLDoc("xjdf:XJDF", JDFElement.getSchemaURL(2, 0)).getRoot();
-		assertEquals(XJDF20.getSchemaURL(), xjdf.getNamespaceURI());
+		assertEquals(JDFToXJDF.getSchemaURL(), xjdf.getNamespaceURI());
 		final KElement xPathElement = xjdf.getCreateXPathElement("xjdf:ResourceSet[@Name=\"RunList\"]/xjdf:Resource/xjdf:RunList/xjdf:LayoutElement");
 		assertNotNull(xPathElement);
 		final JDFDoc d = new XJDFToJDFConverter(null).convert(xjdf);

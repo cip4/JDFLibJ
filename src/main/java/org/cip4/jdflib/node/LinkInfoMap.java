@@ -41,13 +41,11 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.util.ContainerUtil;
 
 /**
- *
  * @author rainer prosi
- *
  */
 public class LinkInfoMap extends HashMap<String, LinkInfo>
 {
@@ -85,7 +83,6 @@ public class LinkInfoMap extends HashMap<String, LinkInfo>
 	}
 
 	/**
-	 *
 	 * @see java.util.HashMap#put(java.lang.Object, java.lang.Object)
 	 */
 	@Override
@@ -101,7 +98,6 @@ public class LinkInfoMap extends HashMap<String, LinkInfo>
 	}
 
 	/**
-	 *
 	 * @param typeLinkInfo
 	 */
 	void merge(final LinkInfoMap typeLinkInfo)
@@ -146,7 +142,6 @@ public class LinkInfoMap extends HashMap<String, LinkInfo>
 
 	/**
 	 * get the entry for key or "*" if key does not exist
-	 *
 	 * also checks for "*" by merging both
 	 *
 	 * @see java.util.HashMap#get(java.lang.Object)
@@ -157,7 +152,7 @@ public class LinkInfoMap extends HashMap<String, LinkInfo>
 		final boolean wantStar = !exchangeOnly || Arrays.binarySearch(exchangeSet, key) >= 0;
 		if (wantStar)
 		{
-			final LinkInfo li2 = super.get(JDFConstants.STAR);
+			final LinkInfo li2 = super.get(JDFCoreConstants.STAR);
 			if (li == null)
 			{
 				if (li2 != null)

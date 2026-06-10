@@ -72,16 +72,16 @@ package org.cip4.jdflib.core;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * 02.12.2008
+ *         02.12.2008
  */
 class XMLDocUserDataTest extends JDFTestCaseBase
 {
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testGlobalDirty()

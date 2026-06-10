@@ -69,7 +69,6 @@
  */
 package org.cip4.jdflib.span;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoStitchingParams.EnumStapleShape;
 import org.w3c.dom.DOMException;
@@ -112,7 +111,8 @@ public class JDFSpanStapleShape extends JDFEnumerationSpan
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanStapleShape(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFSpanStapleShape(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -126,9 +126,9 @@ public class JDFSpanStapleShape extends JDFEnumerationSpan
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumStapleShape.getEnum(0);
+		return EnumStapleShape.class;
 	}
 
 	/**

@@ -86,7 +86,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         May 14, 2009
  */
 class JDFNumberRangeTest extends JDFTestCaseBase

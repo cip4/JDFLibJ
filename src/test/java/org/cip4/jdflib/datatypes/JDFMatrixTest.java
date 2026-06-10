@@ -119,7 +119,7 @@ class JDFMatrixTest extends JDFTestCaseBase
 	@Test
 	void testGetOrientation()
 	{
-		for (final EnumOrientation o : EnumOrientation.getEnumList())
+		for (final EnumOrientation o : EnumOrientation.values())
 		{
 			assertEquals(o, new JDFMatrix(o, 3, 4).getOrientation());
 		}

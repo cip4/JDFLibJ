@@ -78,13 +78,13 @@
  */
 package org.cip4.jdflib.resource.process;
 
+import java.util.List;
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoComponent;
-import org.cip4.jdflib.auto.JDFAutoDefect.EFace;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.auto.JDFAutoSurfaceMark.EnumFace;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.datatypes.JDFShape;
@@ -172,7 +172,7 @@ public class JDFComponent extends JDFAutoComponent
 	 *
 	 * @param dimension
 	 */
-	public JDFSurfaceMark getCreateSurfaceMark(final EFace face)
+	public JDFSurfaceMark getCreateSurfaceMark(final EnumFace face)
 	{
 		JDFSurfaceMark sm = getSurfaceMark(face);
 		if (sm == null)
@@ -182,12 +182,12 @@ public class JDFComponent extends JDFAutoComponent
 		return sm;
 	}
 
-	public JDFSurfaceMark getSurfaceMark(final EFace face)
+	public JDFSurfaceMark getSurfaceMark(final EnumFace face)
 	{
 		return getChildWithAttribute(JDFSurfaceMark.class, AttributeName.SURFACE, face.name());
 	}
 
-	public JDFSurfaceMark appendSurfaceMark(final EFace face)
+	public JDFSurfaceMark appendSurfaceMark(final EnumFace face)
 	{
 		JDFSurfaceMark sm;
 		sm = appendSurfaceMark();
@@ -225,7 +225,7 @@ public class JDFComponent extends JDFAutoComponent
 	 */
 	public boolean isComponentType(final EnumComponentType typ)
 	{
-		final Vector<? extends ValuedEnum> v = getComponentType();
+		final List<EnumComponentType> v = getComponentType();
 		return (v != null && typ != null && v.contains(typ));
 
 	}

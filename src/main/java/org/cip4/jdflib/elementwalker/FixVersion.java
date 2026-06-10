@@ -67,7 +67,7 @@
  *
  */
 /**
- * 
+ *
  */
 package org.cip4.jdflib.elementwalker;
 
@@ -79,14 +79,11 @@ import org.cip4.jdflib.elementwalker.fixversion.FixVersionImpl;
  *         fixes versions within JDF 1.x June 7, 2009<br/>
  *         uses heuristics to modify this element and its children to be compatible with a given version<br>
  *         in general, it will be able to move from low to high versions, but potentially fail when attempting to move from higher to lower versions
- * 
  *         This class is the result of refactoring the recursive fixVersion routines from the dom node tree into one class
- * 
  */
 public class FixVersion extends FixVersionImpl
 {
 	/**
-	 * 
 	 * @param fixVersion
 	 */
 	public FixVersion(final FixVersionImpl fixVersion)

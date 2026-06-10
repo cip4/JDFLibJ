@@ -67,14 +67,14 @@
  *
  *
  *//**
-*
-* Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
-*
-* JDFDieLayout.java
-*
-* Last changes
-*
-*/
+	*
+	* Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
+	*
+	* JDFDieLayout.java
+	*
+	* Last changes
+	*
+	*/
 package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -84,8 +84,7 @@ import org.w3c.dom.DOMException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * May 14, 2009
+ *         May 14, 2009
  */
 public class JDFConvertingConfig extends JDFAutoConvertingConfig
 {
@@ -93,10 +92,10 @@ public class JDFConvertingConfig extends JDFAutoConvertingConfig
 
 	/**
 	 * Constructor for JDFDieLayout
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
-	 * 
 	 */
 	public JDFConvertingConfig(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
@@ -105,11 +104,11 @@ public class JDFConvertingConfig extends JDFAutoConvertingConfig
 
 	/**
 	 * Constructor for JDFDieLayout
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
-	 * 
 	 */
 	public JDFConvertingConfig(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
@@ -118,14 +117,15 @@ public class JDFConvertingConfig extends JDFAutoConvertingConfig
 
 	/**
 	 * Constructor for JDFDieLayout
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
-	 * 
 	 * @throws DOMException
 	 */
-	public JDFConvertingConfig(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFConvertingConfig(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

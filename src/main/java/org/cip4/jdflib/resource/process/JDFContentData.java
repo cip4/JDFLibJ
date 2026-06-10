@@ -89,36 +89,36 @@ public class JDFContentData extends JDFAutoContentData
 
 	/**
 	 * Constructor for JDFContentData
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFContentData(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFContentData(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFContentData
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFContentData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFContentData(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFContentData
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFContentData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFContentData(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -127,7 +127,7 @@ public class JDFContentData extends JDFAutoContentData
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -142,16 +142,20 @@ public class JDFContentData extends JDFAutoContentData
 	 */
 	public int getIndex()
 	{
-		KElement parent = getParentNode_KElement();
+		final KElement parent = getParentNode_KElement();
 		if (parent == null || !(parent instanceof JDFContentList))
+		{
 			return -1;
-		JDFContentList cl = (JDFContentList) parent;
+		}
+		final JDFContentList cl = (JDFContentList) parent;
 		int n = 0;
 		JDFContentData cd = cl.getContentData(0);
 		while (cd != null)
 		{
 			if (cd == this)
+			{
 				return n;
+			}
 			n++;
 			cd = (JDFContentData) cd.getNextSiblingElement(ElementName.CONTENTDATA, null);
 		}

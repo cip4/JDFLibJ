@@ -124,7 +124,7 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCoverApplicationParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoCoverApplicationParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -136,7 +136,7 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCoverApplicationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoCoverApplicationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -149,7 +149,7 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoCoverApplicationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoCoverApplicationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -160,7 +160,7 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -190,7 +190,7 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCoverOffset(JDFXYPair value)
+	public void setCoverOffset(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.COVEROFFSET, value, null);
 	}
@@ -203,8 +203,8 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 	 */
 	public JDFXYPair getCoverOffset()
 	{
-		String strAttrName = getAttribute(AttributeName.COVEROFFSET, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.COVEROFFSET, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -240,7 +240,7 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueApplication the element
 	 */
-	public JDFGlueApplication getCreateGlueApplication(int iSkip)
+	public JDFGlueApplication getCreateGlueApplication(final int iSkip)
 	{
 		return (JDFGlueApplication) getCreateElement_JDFElement(ElementName.GLUEAPPLICATION, null, iSkip);
 	}
@@ -252,7 +252,7 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 	 * @return JDFGlueApplication the element
 	 *         default is getGlueApplication(0)
 	 */
-	public JDFGlueApplication getGlueApplication(int iSkip)
+	public JDFGlueApplication getGlueApplication(final int iSkip)
 	{
 		return (JDFGlueApplication) getElement(ElementName.GLUEAPPLICATION, null, iSkip);
 	}
@@ -282,7 +282,7 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refGlueApplication(JDFGlueApplication refTarget)
+	public void refGlueApplication(final JDFGlueApplication refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -313,7 +313,7 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFScore the element
 	 */
-	public JDFScore getCreateScore(int iSkip)
+	public JDFScore getCreateScore(final int iSkip)
 	{
 		return (JDFScore) getCreateElement_JDFElement(ElementName.SCORE, null, iSkip);
 	}
@@ -325,7 +325,7 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 	 * @return JDFScore the element
 	 *         default is getScore(0)
 	 */
-	public JDFScore getScore(int iSkip)
+	public JDFScore getScore(final int iSkip)
 	{
 		return (JDFScore) getElement(ElementName.SCORE, null, iSkip);
 	}

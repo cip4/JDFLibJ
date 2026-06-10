@@ -52,7 +52,6 @@ import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 // //////////////////////////////////////////////////////////////////////////////
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  *         walker for the various resource sets
  */
 public class WalkResource extends WalkJDFElement
@@ -75,7 +74,9 @@ public class WalkResource extends WalkJDFElement
 	{
 		final JDFResource r = (JDFResource) jdf;
 		if (r.getNoOp() || jdf.getNodeName().equals(xjdf.getNodeName()))
+		{
 			return null;
+		}
 		final KElement newResLeaf = super.walk(jdf, xjdf);
 
 		if (newResLeaf != null)
@@ -162,7 +163,6 @@ public class WalkResource extends WalkJDFElement
 	}
 
 	/**
-	 *
 	 * @param xjdf
 	 * @return
 	 */
@@ -174,7 +174,6 @@ public class WalkResource extends WalkJDFElement
 	}
 
 	/**
-	 *
 	 * @param eNew
 	 * @param details
 	 * @param key
@@ -207,8 +206,6 @@ public class WalkResource extends WalkJDFElement
 	}
 
 	/**
-	 *
-	 *
 	 * @param r
 	 * @return
 	 */
@@ -262,7 +259,6 @@ public class WalkResource extends WalkJDFElement
 	}
 
 	/**
-	 *
 	 * @param linkTarget
 	 * @return
 	 */

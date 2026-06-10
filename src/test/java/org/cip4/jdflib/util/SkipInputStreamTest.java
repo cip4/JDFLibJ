@@ -79,7 +79,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         July 23, 2009
  */
 class SkipInputStreamTest extends JDFTestCaseBase

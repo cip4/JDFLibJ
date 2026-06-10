@@ -115,7 +115,7 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	{
 		DeviceCMY, DeviceCMYK, DeviceGray, DeviceN, DeviceRGB, None;
 
-		public static EProcessColorModel getEnum(String val)
+		public static EProcessColorModel getEnum(final String val)
 		{
 			return JavaEnumUtil.getEnumIgnoreCase(EProcessColorModel.class, val, null);
 		}
@@ -127,7 +127,7 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProcessColorModel(EProcessColorModel model)
+	public void setProcessColorModel(final EProcessColorModel model)
 	{
 		setAttribute(AttributeName.PROCESSCOLORMODEL, model, null);
 	}
@@ -218,7 +218,7 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	 *
 	 * @return
 	 */
-	void setSeparations(final String listName, List<String> seps)
+	void setSeparations(final String listName, final List<String> seps)
 	{
 		if (isXJDF())
 		{
@@ -231,17 +231,17 @@ public class JDFColorantControl extends JDFAutoColorantControl
 		}
 	}
 
-	public void setDeviceColorantOrderSeparations(List<String> seps)
+	public void setDeviceColorantOrderSeparations(final List<String> seps)
 	{
 		setSeparations(ElementName.DEVICECOLORANTORDER, seps);
 	}
 
-	public void setColorantOrderSeparations(List<String> seps)
+	public void setColorantOrderSeparations(final List<String> seps)
 	{
 		setSeparations(ElementName.COLORANTORDER, seps);
 	}
 
-	public void setColorantParamSeparations(List<String> seps)
+	public void setColorantParamSeparations(final List<String> seps)
 	{
 		setSeparations(ElementName.COLORANTPARAMS, seps);
 	}

@@ -9,12 +9,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanWireCombMaterial extends JDFEnumerationSpan
@@ -23,39 +19,39 @@ public class JDFSpanWireCombMaterial extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanWireCombMaterial
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanWireCombMaterial(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanWireCombMaterial(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanWireCombMaterial
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanWireCombMaterial(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanWireCombMaterial(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanWireCombMaterial
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanWireCombMaterial(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanWireCombMaterial(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -63,43 +59,14 @@ public class JDFSpanWireCombMaterial extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanWireCombMaterial
 	 */
-	public static class EnumSpanWireCombMaterial extends ValuedEnum
+	public enum EnumSpanWireCombMaterial
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		SteelSilver, ColorCoatedSteel;
 
-		private EnumSpanWireCombMaterial(String name)
+		public static EnumSpanWireCombMaterial getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanWireCombMaterial.class, val, null);
 		}
-
-		public static EnumSpanWireCombMaterial getEnum(String enumName)
-		{
-			return (EnumSpanWireCombMaterial) getEnum(EnumSpanWireCombMaterial.class, enumName);
-		}
-
-		public static EnumSpanWireCombMaterial getEnum(int enumValue)
-		{
-			return (EnumSpanWireCombMaterial) getEnum(EnumSpanWireCombMaterial.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanWireCombMaterial.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanWireCombMaterial.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanWireCombMaterial.class);
-		}
-
-		public static final EnumSpanWireCombMaterial SteelSilver = new EnumSpanWireCombMaterial("SteelSilver");
-		public static final EnumSpanWireCombMaterial ColorCoatedSteel = new EnumSpanWireCombMaterial("ColorCoatedSteel");
 
 	}
 
@@ -108,18 +75,18 @@ public class JDFSpanWireCombMaterial extends JDFEnumerationSpan
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanWireCombMaterial.getEnum(0);
+		return EnumSpanWireCombMaterial.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

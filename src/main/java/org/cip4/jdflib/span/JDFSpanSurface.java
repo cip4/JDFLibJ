@@ -9,12 +9,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanSurface extends JDFEnumerationSpan
@@ -23,39 +19,39 @@ public class JDFSpanSurface extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanSurface
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanSurface(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanSurface(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanSurface
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanSurface(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanSurface(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanSurface
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanSurface(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanSurface(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -63,45 +59,14 @@ public class JDFSpanSurface extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanSurface
 	 */
-	public static class EnumSpanSurface extends ValuedEnum
+	public enum EnumSpanSurface
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Unknown, Front, Back, Both;
 
-		private EnumSpanSurface(String name)
+		public static EnumSpanSurface getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanSurface.class, val, null);
 		}
-
-		public static EnumSpanSurface getEnum(String enumName)
-		{
-			return (EnumSpanSurface) getEnum(EnumSpanSurface.class, enumName);
-		}
-
-		public static EnumSpanSurface getEnum(int enumValue)
-		{
-			return (EnumSpanSurface) getEnum(EnumSpanSurface.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanSurface.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanSurface.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanSurface.class);
-		}
-
-		public static final EnumSpanSurface Unknown = new EnumSpanSurface("Unknown");
-		public static final EnumSpanSurface Front = new EnumSpanSurface("Front");
-		public static final EnumSpanSurface Back = new EnumSpanSurface("Back");
-		public static final EnumSpanSurface Both = new EnumSpanSurface("Both");
 
 	}
 
@@ -110,18 +75,18 @@ public class JDFSpanSurface extends JDFEnumerationSpan
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanSurface.getEnum(0);
+		return EnumSpanSurface.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

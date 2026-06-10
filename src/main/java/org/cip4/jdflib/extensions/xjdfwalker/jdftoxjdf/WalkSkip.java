@@ -44,7 +44,6 @@ import org.cip4.jdflib.core.VString;
  * any matching class will be ignored and all children will be moved into the respective parent element
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkSkip extends WalkJDFSubElement
 {

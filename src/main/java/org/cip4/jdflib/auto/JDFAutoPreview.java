@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -104,11 +100,11 @@ public abstract class JDFAutoPreview extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREVIEWFILETYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, "PNG");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREVIEWUSAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewUsage.getEnum(0),
-				"Separation");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREVIEWUSAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumPreviewUsage.class, 0), "Separation");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.URL, 0x3333333333l, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.COMPENSATION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumCompensation.getEnum(0),
-				null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.COMPENSATION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumCompensation.class, 0), null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.CTM, 0x3333333333l, AttributeInfo.EnumAttributeType.matrix, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.DIRECTORY, 0x3333333333l, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.MIMETYPEDETAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
@@ -137,36 +133,36 @@ public abstract class JDFAutoPreview extends JDFResource
 
 	/**
 	 * Constructor for JDFAutoPreview
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPreview(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPreview(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFAutoPreview
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPreview(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPreview(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFAutoPreview
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPreview(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPreview(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -177,188 +173,42 @@ public abstract class JDFAutoPreview extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
 
 	/**
-	 * Enumeration strings for PreviewUsage
+	 * Enumeration strings for numPreviewUsage
 	 */
 
-	public enum EPreviewUsage
+	public enum EnumPreviewUsage
 	{
 		Animation, Identification, Separation, SeparatedThumbNail, SeparationRaw, ThumbNail, Static3D, Viewable;
 
-		public static EPreviewUsage getEnum(String val)
+		public static EnumPreviewUsage getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPreviewUsage.class, val, EPreviewUsage.Separation);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPreviewUsage.class, val, EnumPreviewUsage.Separation);
 		}
 	}
 
 	/**
-	 * Enumeration strings for PreviewUsage
+	 * Enumeration strings for numCompensation
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumPreviewUsage extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPreviewUsage(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumPreviewUsage getEnum(String enumName)
-		{
-			return (EnumPreviewUsage) getEnum(EnumPreviewUsage.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPreviewUsage getEnum(int enumValue)
-		{
-			return (EnumPreviewUsage) getEnum(EnumPreviewUsage.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPreviewUsage.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPreviewUsage.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPreviewUsage.class);
-		}
-
-		/**  */
-		public static final EnumPreviewUsage Animation = new EnumPreviewUsage("Animation");
-		/**  */
-		public static final EnumPreviewUsage Identification = new EnumPreviewUsage("Identification");
-		/**  */
-		public static final EnumPreviewUsage Separation = new EnumPreviewUsage("Separation");
-		/**  */
-		public static final EnumPreviewUsage SeparatedThumbNail = new EnumPreviewUsage("SeparatedThumbNail");
-		/**  */
-		public static final EnumPreviewUsage SeparationRaw = new EnumPreviewUsage("SeparationRaw");
-		/**  */
-		public static final EnumPreviewUsage ThumbNail = new EnumPreviewUsage("ThumbNail");
-		/**  */
-		public static final EnumPreviewUsage Static3D = new EnumPreviewUsage("Static3D");
-		/**  */
-		public static final EnumPreviewUsage Viewable = new EnumPreviewUsage("Viewable");
-	}
-
-	/**
-	 * Enumeration strings for Compensation
-	 */
-
-	public enum ECompensation
+	public enum EnumCompensation
 	{
 		Unknown, None, Film, Plate, Press;
 
-		public static ECompensation getEnum(String val)
+		public static EnumCompensation getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ECompensation.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumCompensation.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Compensation
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumCompensation extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumCompensation(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumCompensation getEnum(String enumName)
-		{
-			return (EnumCompensation) getEnum(EnumCompensation.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumCompensation getEnum(int enumValue)
-		{
-			return (EnumCompensation) getEnum(EnumCompensation.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumCompensation.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumCompensation.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumCompensation.class);
-		}
-
-		/**  */
-		public static final EnumCompensation Unknown = new EnumCompensation("Unknown");
-		/**  */
-		public static final EnumCompensation None = new EnumCompensation("None");
-		/**  */
-		public static final EnumCompensation Film = new EnumCompensation("Film");
-		/**  */
-		public static final EnumCompensation Plate = new EnumCompensation("Plate");
-		/**  */
-		public static final EnumCompensation Press = new EnumCompensation("Press");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -367,17 +217,17 @@ public abstract class JDFAutoPreview extends JDFResource
 	 */
 	/**
 	 * (36) set attribute PreviewFileType
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPreviewFileType(String value)
+	public void setPreviewFileType(final String value)
 	{
 		setAttribute(AttributeName.PREVIEWFILETYPE, value, null);
 	}
 
 	/**
 	 * (23) get String attribute PreviewFileType
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getPreviewFileType()
@@ -392,48 +242,19 @@ public abstract class JDFAutoPreview extends JDFResource
 	 */
 	/**
 	 * (5) set attribute PreviewUsage
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPreviewUsage(EPreviewUsage enumVar)
+	public void setPreviewUsage(final EnumPreviewUsage enumVar)
 	{
-		setAttribute(AttributeName.PREVIEWUSAGE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.PREVIEWUSAGE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
 	 * (9) get attribute PreviewUsage
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
-	public EPreviewUsage getEPreviewUsage()
-	{
-		return EPreviewUsage.getEnum(getAttribute(AttributeName.PREVIEWUSAGE, null, "Separation"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute PreviewUsage
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute PreviewUsage
-	 * 
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPreviewUsage(EPreviewUsage) based on java.lang.enum
-	 */
-	@Deprecated
-	public void setPreviewUsage(EnumPreviewUsage enumVar)
-	{
-		setAttribute(AttributeName.PREVIEWUSAGE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute PreviewUsage
-	 * 
-	 * @return the value of the attribute
-	 * @deprecated use EPreviewUsage GetEPreviewUsage() based on java.lang.enum
-	 */
-	@Deprecated
 	public EnumPreviewUsage getPreviewUsage()
 	{
 		return EnumPreviewUsage.getEnum(getAttribute(AttributeName.PREVIEWUSAGE, null, "Separation"));
@@ -446,17 +267,17 @@ public abstract class JDFAutoPreview extends JDFResource
 	 */
 	/**
 	 * (36) set attribute URL
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setURL(String value)
+	public void setURL(final String value)
 	{
 		setAttribute(AttributeName.URL, value, null);
 	}
 
 	/**
 	 * (23) get String attribute URL
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getURL()
@@ -471,48 +292,19 @@ public abstract class JDFAutoPreview extends JDFResource
 	 */
 	/**
 	 * (5) set attribute Compensation
-	 * 
+	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setCompensation(ECompensation enumVar)
+	public void setCompensation(final EnumCompensation enumVar)
 	{
-		setAttribute(AttributeName.COMPENSATION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.COMPENSATION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
 	 * (9) get attribute Compensation
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
-	public ECompensation getECompensation()
-	{
-		return ECompensation.getEnum(getAttribute(AttributeName.COMPENSATION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Compensation
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Compensation
-	 * 
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetCompensation(ECompensation) based on java.lang.enum
-	 */
-	@Deprecated
-	public void setCompensation(EnumCompensation enumVar)
-	{
-		setAttribute(AttributeName.COMPENSATION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Compensation
-	 * 
-	 * @return the value of the attribute
-	 * @deprecated use ECompensation GetECompensation() based on java.lang.enum
-	 */
-	@Deprecated
 	public EnumCompensation getCompensation()
 	{
 		return EnumCompensation.getEnum(getAttribute(AttributeName.COMPENSATION, null, null));
@@ -525,24 +317,24 @@ public abstract class JDFAutoPreview extends JDFResource
 	 */
 	/**
 	 * (36) set attribute CTM
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCTM(JDFMatrix value)
+	public void setCTM(final JDFMatrix value)
 	{
 		setAttribute(AttributeName.CTM, value, null);
 	}
 
 	/**
 	 * (20) get JDFMatrix attribute CTM
-	 * 
+	 *
 	 * @return JDFMatrix the value of the attribute, null if a the
 	 *         attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getCTM()
 	{
-		String strAttrName = getAttribute(AttributeName.CTM, null, null);
-		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CTM, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -553,17 +345,17 @@ public abstract class JDFAutoPreview extends JDFResource
 	 */
 	/**
 	 * (36) set attribute Directory
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDirectory(String value)
+	public void setDirectory(final String value)
 	{
 		setAttribute(AttributeName.DIRECTORY, value, null);
 	}
 
 	/**
 	 * (23) get String attribute Directory
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getDirectory()
@@ -578,17 +370,17 @@ public abstract class JDFAutoPreview extends JDFResource
 	 */
 	/**
 	 * (36) set attribute MimeTypeDetails
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMimeTypeDetails(String value)
+	public void setMimeTypeDetails(final String value)
 	{
 		setAttribute(AttributeName.MIMETYPEDETAILS, value, null);
 	}
 
 	/**
 	 * (23) get String attribute MimeTypeDetails
-	 * 
+	 *
 	 * @return the value of the attribute
 	 */
 	public String getMimeTypeDetails()
@@ -603,24 +395,24 @@ public abstract class JDFAutoPreview extends JDFResource
 	 */
 	/**
 	 * (36) set attribute Resolution
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setResolution(JDFXYPair value)
+	public void setResolution(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.RESOLUTION, value, null);
 	}
 
 	/**
 	 * (20) get JDFXYPair attribute Resolution
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the
 	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getResolution()
 	{
-		String strAttrName = getAttribute(AttributeName.RESOLUTION, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.RESOLUTION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -631,24 +423,24 @@ public abstract class JDFAutoPreview extends JDFResource
 	 */
 	/**
 	 * (36) set attribute Size
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSize(JDFXYPair value)
+	public void setSize(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.SIZE, value, null);
 	}
 
 	/**
 	 * (20) get JDFXYPair attribute Size
-	 * 
+	 *
 	 * @return JDFXYPair the value of the attribute, null if a the
 	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getSize()
 	{
-		String strAttrName = getAttribute(AttributeName.SIZE, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SIZE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -660,7 +452,7 @@ public abstract class JDFAutoPreview extends JDFResource
 
 	/**
 	 * (24) const get element Comment
-	 * 
+	 *
 	 * @return JDFComment the element
 	 */
 	public JDFComment getComment()
@@ -685,20 +477,20 @@ public abstract class JDFAutoPreview extends JDFResource
 	 * @return JDFComment the element
 	 */
 	@Override
-	public JDFComment getCreateComment(int iSkip)
+	public JDFComment getCreateComment(final int iSkip)
 	{
 		return (JDFComment) getCreateElement_JDFElement(ElementName.COMMENT, null, iSkip);
 	}
 
 	/**
 	 * (27) const get element Comment
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFComment the element
 	 *         default is getComment(0)
 	 */
 	@Override
-	public JDFComment getComment(int iSkip)
+	public JDFComment getComment(final int iSkip)
 	{
 		return (JDFComment) getElement(ElementName.COMMENT, null, iSkip);
 	}
@@ -715,7 +507,7 @@ public abstract class JDFAutoPreview extends JDFResource
 
 	/**
 	 * (30) append element Comment
-	 * 
+	 *
 	 * @return JDFComment the element
 	 */
 	@Override
@@ -726,7 +518,7 @@ public abstract class JDFAutoPreview extends JDFResource
 
 	/**
 	 * (24) const get element GeneralID
-	 * 
+	 *
 	 * @return JDFGeneralID the element
 	 */
 	public JDFGeneralID getGeneralID()
@@ -750,20 +542,20 @@ public abstract class JDFAutoPreview extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFGeneralID the element
 	 */
-	public JDFGeneralID getCreateGeneralID(int iSkip)
+	public JDFGeneralID getCreateGeneralID(final int iSkip)
 	{
 		return (JDFGeneralID) getCreateElement_JDFElement(ElementName.GENERALID, null, iSkip);
 	}
 
 	/**
 	 * (27) const get element GeneralID
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFGeneralID the element
 	 *         default is getGeneralID(0)
 	 */
 	@Override
-	public JDFGeneralID getGeneralID(int iSkip)
+	public JDFGeneralID getGeneralID(final int iSkip)
 	{
 		return (JDFGeneralID) getElement(ElementName.GENERALID, null, iSkip);
 	}
@@ -780,7 +572,7 @@ public abstract class JDFAutoPreview extends JDFResource
 
 	/**
 	 * (30) append element GeneralID
-	 * 
+	 *
 	 * @return JDFGeneralID the element
 	 */
 	@Override

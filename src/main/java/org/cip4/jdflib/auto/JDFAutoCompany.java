@@ -124,7 +124,7 @@ public abstract class JDFAutoCompany extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCompany(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoCompany(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -136,7 +136,7 @@ public abstract class JDFAutoCompany extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCompany(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoCompany(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -149,7 +149,7 @@ public abstract class JDFAutoCompany extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoCompany(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoCompany(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -160,7 +160,7 @@ public abstract class JDFAutoCompany extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -190,7 +190,7 @@ public abstract class JDFAutoCompany extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOrganizationName(String value)
+	public void setOrganizationName(final String value)
 	{
 		setAttribute(AttributeName.ORGANIZATIONNAME, value, null);
 	}
@@ -239,7 +239,7 @@ public abstract class JDFAutoCompany extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
-	public JDFContact getCreateContact(int iSkip)
+	public JDFContact getCreateContact(final int iSkip)
 	{
 		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -251,7 +251,7 @@ public abstract class JDFAutoCompany extends JDFResource
 	 * @return JDFContact the element
 	 *         default is getContact(0)
 	 */
-	public JDFContact getContact(int iSkip)
+	public JDFContact getContact(final int iSkip)
 	{
 		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -282,7 +282,7 @@ public abstract class JDFAutoCompany extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refContact(JDFContact refTarget)
+	public void refContact(final JDFContact refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -313,7 +313,7 @@ public abstract class JDFAutoCompany extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFElement the element
 	 */
-	public JDFElement getCreateOrganizationalUnit(int iSkip)
+	public JDFElement getCreateOrganizationalUnit(final int iSkip)
 	{
 		return (JDFElement) getCreateElement_JDFElement(ElementName.ORGANIZATIONALUNIT, null, iSkip);
 	}
@@ -325,7 +325,7 @@ public abstract class JDFAutoCompany extends JDFResource
 	 * @return JDFElement the element
 	 *         default is getOrganizationalUnit(0)
 	 */
-	public JDFElement getOrganizationalUnit(int iSkip)
+	public JDFElement getOrganizationalUnit(final int iSkip)
 	{
 		return (JDFElement) getElement(ElementName.ORGANIZATIONALUNIT, null, iSkip);
 	}

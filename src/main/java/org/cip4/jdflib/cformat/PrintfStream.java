@@ -20,7 +20,6 @@ import java.io.PrintStream;
  * PrintStream which outputs primitive types using C <tt>printf</tt> style formatting. For each primitive type (float, double, char, int, long, String), there is a <tt>printf</tt>
  * method which takes (as a first argument) either a <tt>printf</tt> style format string, or a PrintfFormat object. Using the latter can be more efficient because it permits an
  * application to prorate the overhead of parsing a format string.
- *
  * <p>
  * Because Java does not permit variable numbers of arguments, each <tt>printf</tt> methodName accepts only one primitive type, and the format can correspondingly contain only one
  * conversion sequence.
@@ -40,6 +39,7 @@ public class PrintfStream extends PrintStream
 	 *
 	 * @param out An output stream
 	 */
+	@Deprecated
 	public PrintfStream(final OutputStream pout)
 	{
 		super(pout);
@@ -48,10 +48,11 @@ public class PrintfStream extends PrintStream
 	/**
 	 * Creates a PrintfStream from an existing OutputStream.
 	 *
-	 * @param out An output stream
+	 * @param out       An output stream
 	 * @param autoFlush If true, specifies that output flushing will automatically occur when the println() methods are called, a byte array is written, or a new line character or
-	 *        byte is encountered in the output.
+	 *                  byte is encountered in the output.
 	 */
+	@Deprecated
 	public PrintfStream(final OutputStream pout, final boolean autoFlush)
 	{
 		super(pout, autoFlush);
@@ -63,9 +64,10 @@ public class PrintfStream extends PrintStream
 	 * Prints a double in accordance with the supplied format string.
 	 *
 	 * @param fs Format string
-	 * @param x Double to output
+	 * @param x  Double to output
 	 * @throws IllegalArgumentException Malformed format string
 	 */
+	@Deprecated
 	public void printf(final String fs, final double x)
 	{
 		print(new PrintfFormat(fs).tostr(x));
@@ -75,9 +77,10 @@ public class PrintfStream extends PrintStream
 	 * Prints a float in accordance with the supplied format string.
 	 *
 	 * @param fs Format string
-	 * @param x Float to output
+	 * @param x  Float to output
 	 * @throws IllegalArgumentException Malformed format string
 	 */
+	@Deprecated
 	public void printf(final String fs, final float x)
 	{
 		print(new PrintfFormat(fs).tostr(x));
@@ -87,9 +90,10 @@ public class PrintfStream extends PrintStream
 	 * Prints a long in accordance with the supplied format string.
 	 *
 	 * @param fs Format string
-	 * @param x Long to output
+	 * @param x  Long to output
 	 * @throws IllegalArgumentException Malformed format string
 	 */
+	@Deprecated
 	public void printf(final String fs, final long x)
 	{
 		print(new PrintfFormat(fs).tostr(x));
@@ -99,9 +103,10 @@ public class PrintfStream extends PrintStream
 	 * Prints an int in accordance with the supplied format string.
 	 *
 	 * @param fs Format string
-	 * @param x Int to output
+	 * @param x  Int to output
 	 * @throws IllegalArgumentException Malformed format string
 	 */
+	@Deprecated
 	public void printf(final String fs, final int x)
 	{
 		print(new PrintfFormat(fs).tostr(x));
@@ -111,9 +116,10 @@ public class PrintfStream extends PrintStream
 	 * Prints a String in accordance with the supplied format string.
 	 *
 	 * @param fs Format string
-	 * @param x String to output
+	 * @param x  String to output
 	 * @throws IllegalArgumentException Malformed format string
 	 */
+	@Deprecated
 	public void printf(final String fs, final String x)
 	{
 		print(new PrintfFormat(fs).tostr(x));
@@ -123,9 +129,10 @@ public class PrintfStream extends PrintStream
 	 * Prints a char in accordance with the supplied format string.
 	 *
 	 * @param fs Format string
-	 * @param x Char to output
+	 * @param x  Char to output
 	 * @throws IllegalArgumentException Malformed format string
 	 */
+	@Deprecated
 	public void printf(final String fs, final char x)
 	{
 		print(new PrintfFormat(fs).tostr(x));
@@ -135,9 +142,10 @@ public class PrintfStream extends PrintStream
 	 * Prints a double in accordance with the supplied PrintfFormat object.
 	 *
 	 * @param fmt Formatting object
-	 * @param x Double to output
+	 * @param x   Double to output
 	 * @see PrintfFormat
 	 */
+	@Deprecated
 	public void printf(final PrintfFormat fmt, final double x)
 	{
 		print(fmt.tostr(x));
@@ -147,9 +155,10 @@ public class PrintfStream extends PrintStream
 	 * Prints a float in accordance with the supplied PrintfFormat object.
 	 *
 	 * @param fmt Formatting object
-	 * @param x Float to output
+	 * @param x   Float to output
 	 * @see PrintfFormat
 	 */
+	@Deprecated
 	public void printf(final PrintfFormat fmt, final float x)
 	{
 		print(fmt.tostr(x));
@@ -159,9 +168,10 @@ public class PrintfStream extends PrintStream
 	 * Prints a long in accordance with the supplied PrintfFormat object.
 	 *
 	 * @param fmt Formatting object
-	 * @param x Long to output
+	 * @param x   Long to output
 	 * @see PrintfFormat
 	 */
+	@Deprecated
 	public void printf(final PrintfFormat fmt, final long x)
 	{
 		print(fmt.tostr(x));
@@ -171,9 +181,10 @@ public class PrintfStream extends PrintStream
 	 * Prints an int in accordance with the supplied PrintfFormat object.
 	 *
 	 * @param fmt Formatting object
-	 * @param x Int to output
+	 * @param x   Int to output
 	 * @see PrintfFormat
 	 */
+	@Deprecated
 	public void printf(final PrintfFormat fmt, final int x)
 	{
 		print(fmt.tostr(x));
@@ -183,9 +194,10 @@ public class PrintfStream extends PrintStream
 	 * Prints a String in accordance with the supplied PrintfFormat object.
 	 *
 	 * @param fmt Formatting object
-	 * @param x String to output
+	 * @param x   String to output
 	 * @see PrintfFormat
 	 */
+	@Deprecated
 	public void printf(final PrintfFormat fmt, final String x)
 	{
 		print(fmt.tostr(x));
@@ -195,9 +207,10 @@ public class PrintfStream extends PrintStream
 	 * Prints a char in accordance with the supplied PrintfFormat object.
 	 *
 	 * @param fmt Formatting object
-	 * @param x Char to output
+	 * @param x   Char to output
 	 * @see PrintfFormat
 	 */
+	@Deprecated
 	public void printf(final PrintfFormat fmt, final char x)
 	{
 		print(fmt.tostr(x));

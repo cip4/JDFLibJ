@@ -112,7 +112,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLongitudinalRibbonOperationParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoLongitudinalRibbonOperationParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -124,7 +124,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLongitudinalRibbonOperationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoLongitudinalRibbonOperationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -137,7 +137,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoLongitudinalRibbonOperationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoLongitudinalRibbonOperationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -148,7 +148,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -194,7 +194,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 * @param iSkip number of elements to skip
 	 * @return JDFLongFold the element
 	 */
-	public JDFLongFold getCreateLongFold(int iSkip)
+	public JDFLongFold getCreateLongFold(final int iSkip)
 	{
 		return (JDFLongFold) getCreateElement_JDFElement(ElementName.LONGFOLD, null, iSkip);
 	}
@@ -206,7 +206,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 * @return JDFLongFold the element
 	 *         default is getLongFold(0)
 	 */
-	public JDFLongFold getLongFold(int iSkip)
+	public JDFLongFold getLongFold(final int iSkip)
 	{
 		return (JDFLongFold) getElement(ElementName.LONGFOLD, null, iSkip);
 	}
@@ -257,7 +257,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 * @param iSkip number of elements to skip
 	 * @return JDFLongGlue the element
 	 */
-	public JDFLongGlue getCreateLongGlue(int iSkip)
+	public JDFLongGlue getCreateLongGlue(final int iSkip)
 	{
 		return (JDFLongGlue) getCreateElement_JDFElement(ElementName.LONGGLUE, null, iSkip);
 	}
@@ -269,7 +269,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 * @return JDFLongGlue the element
 	 *         default is getLongGlue(0)
 	 */
-	public JDFLongGlue getLongGlue(int iSkip)
+	public JDFLongGlue getLongGlue(final int iSkip)
 	{
 		return (JDFLongGlue) getElement(ElementName.LONGGLUE, null, iSkip);
 	}
@@ -320,7 +320,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 * @param iSkip number of elements to skip
 	 * @return JDFLongPerforate the element
 	 */
-	public JDFLongPerforate getCreateLongPerforate(int iSkip)
+	public JDFLongPerforate getCreateLongPerforate(final int iSkip)
 	{
 		return (JDFLongPerforate) getCreateElement_JDFElement(ElementName.LONGPERFORATE, null, iSkip);
 	}
@@ -332,7 +332,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 * @return JDFLongPerforate the element
 	 *         default is getLongPerforate(0)
 	 */
-	public JDFLongPerforate getLongPerforate(int iSkip)
+	public JDFLongPerforate getLongPerforate(final int iSkip)
 	{
 		return (JDFLongPerforate) getElement(ElementName.LONGPERFORATE, null, iSkip);
 	}
@@ -383,7 +383,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 * @param iSkip number of elements to skip
 	 * @return JDFLongSlit the element
 	 */
-	public JDFLongSlit getCreateLongSlit(int iSkip)
+	public JDFLongSlit getCreateLongSlit(final int iSkip)
 	{
 		return (JDFLongSlit) getCreateElement_JDFElement(ElementName.LONGSLIT, null, iSkip);
 	}
@@ -395,7 +395,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 * @return JDFLongSlit the element
 	 *         default is getLongSlit(0)
 	 */
-	public JDFLongSlit getLongSlit(int iSkip)
+	public JDFLongSlit getLongSlit(final int iSkip)
 	{
 		return (JDFLongSlit) getElement(ElementName.LONGSLIT, null, iSkip);
 	}

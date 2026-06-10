@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,26 +56,26 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  *//**
-*
-* Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
-*
-* JDFPreflightReport.java
-*
-* Last changes
-*
-*/
+	*
+	* Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
+	*
+	* JDFPreflightReport.java
+	*
+	* Last changes
+	*
+	*/
 package org.cip4.jdflib.resource.process;
 
 import java.util.Set;
@@ -96,39 +96,39 @@ public class JDFPreflightReport extends JDFAutoPreflightReport
 
 	/**
 	 * Constructor for JDFPreflightReport
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPreflightReport(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFPreflightReport(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFPreflightReport
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPreflightReport(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFPreflightReport(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFPreflightReport
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFPreflightReport(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFPreflightReport(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -137,7 +137,7 @@ public class JDFPreflightReport extends JDFAutoPreflightReport
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -146,7 +146,7 @@ public class JDFPreflightReport extends JDFAutoPreflightReport
 		return "JDFPreflightReport[  --> " + super.toString() + " ]";
 	}
 
-	public JDFPRItem setPR(JDFAction action, int pageSet, JDFAttributeMap prMap, VString groupBy)
+	public JDFPRItem setPR(final JDFAction action, final int pageSet, final JDFAttributeMap prMap, final VString groupBy)
 	{
 
 		JDFAttributeMap groupMap = null;
@@ -159,10 +159,10 @@ public class JDFPreflightReport extends JDFAutoPreflightReport
 			instanceMap = new JDFAttributeMap(prMap);
 			instanceMap.removeKeys(set);
 		}
-		JDFPRItem pi = getCreatePRItem(action, groupMap);
+		final JDFPRItem pi = getCreatePRItem(action, groupMap);
 
-		JDFPRGroup pg = pi.getCreatePRGroup(groupMap);
-		JDFPROccurrence pgInstance = pg.getCreatePROccurrence(instanceMap);
+		final JDFPRGroup pg = pi.getCreatePRGroup(groupMap);
+		final JDFPROccurrence pgInstance = pg.getCreatePROccurrence(instanceMap);
 		pgInstance.addOccurrences(1, action.getSeverity());
 		pi.insertPageSet(pageSet);
 		return pi;
@@ -170,22 +170,22 @@ public class JDFPreflightReport extends JDFAutoPreflightReport
 
 	/**
 	 * increments the errorCount attribute by i
-	 * 
+	 *
 	 * @param i
-	 *            the amount to increment by
+	 *          the amount to increment by
 	 */
-	public int addErrorCount(int i)
+	public int addErrorCount(final int i)
 	{
 		return addAttribute(AttributeName.ERRORCOUNT, i, null);
 	}
 
 	/**
 	 * increments the WarningCount attribute by i
-	 * 
+	 *
 	 * @param i
-	 *            the amount to increment by
+	 *          the amount to increment by
 	 */
-	public int addWarningCount(int i)
+	public int addWarningCount(final int i)
 	{
 		return addAttribute(AttributeName.WARNINGCOUNT, i, null);
 	}
@@ -193,18 +193,22 @@ public class JDFPreflightReport extends JDFAutoPreflightReport
 	/**
 	 * recursive call that sets errorcount and warning count according to the
 	 * value of severity
-	 * 
+	 *
 	 * @param i
 	 *            the number of occurrences to add
 	 * @param sev
 	 *            the severity of the occurrences
 	 */
-	public void addOccurrences(int i, EnumSeverity sev)
+	public void addOccurrences(final int i, final EnumSeverity sev)
 	{
 		if (EnumSeverity.Warning.equals(sev))
+		{
 			addWarningCount(i);
+		}
 		else if (EnumSeverity.Error.equals(sev))
+		{
 			addErrorCount(i);
+		}
 
 	}
 
@@ -213,7 +217,7 @@ public class JDFPreflightReport extends JDFAutoPreflightReport
 	 * @param groupMap
 	 * @return
 	 */
-	public JDFPRItem getCreatePRItem(JDFAction action, JDFAttributeMap groupMap)
+	public JDFPRItem getCreatePRItem(final JDFAction action, final JDFAttributeMap groupMap)
 	{
 		JDFPRItem pi = getPRItem(action, null);
 		if (pi == null)
@@ -230,16 +234,18 @@ public class JDFPreflightReport extends JDFAutoPreflightReport
 	 * @param action
 	 * @return
 	 */
-	private JDFPRItem getPRItem(JDFAction action, JDFAttributeMap groupMap)
+	private JDFPRItem getPRItem(final JDFAction action, final JDFAttributeMap groupMap)
 	{
-		String id = action == null ? null : action.getID();
-		JDFAttributeMap map = (id == null) ? null : new JDFAttributeMap("ActionRef", id);
-		JDFPRItem pi = (JDFPRItem) getChildByTagName(ElementName.PRITEM, null, 0, map, true, true);
+		final String id = action == null ? null : action.getID();
+		final JDFAttributeMap map = (id == null) ? null : new JDFAttributeMap("ActionRef", id);
+		final JDFPRItem pi = (JDFPRItem) getChildByTagName(ElementName.PRITEM, null, 0, map, true, true);
 		if (groupMap != null && pi != null)
 		{
-			JDFPRGroup pg = pi.getPRGroup(groupMap);
+			final JDFPRGroup pg = pi.getPRGroup(groupMap);
 			if (pg == null)
+			{
 				return null;
+			}
 		}
 		return pi;
 	}
@@ -251,7 +257,7 @@ public class JDFPreflightReport extends JDFAutoPreflightReport
 	@Override
 	public boolean init()
 	{
-		boolean b = super.init();
+		final boolean b = super.init();
 		setWarningCount(0);
 		setErrorCount(0);
 		return b;

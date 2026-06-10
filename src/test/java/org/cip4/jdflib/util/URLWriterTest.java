@@ -67,28 +67,31 @@ class URLWriterTest extends JDFTestCaseBase
 {
 	/**
 	 * @throws MalformedURLException
-	 *
 	 */
 	@Test
 	void testWriteToURL() throws MalformedURLException
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		assertNotNull(new URLWriter(null, new URL("http://www.example.com"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null).writeToURL());
 		new URLWriter(null, new URL("http://www.example.com"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null).run();
 	}
 
 	/**
 	 * @throws MalformedURLException
-	 *
 	 */
 	@Test
 	void testRun() throws MalformedURLException
 	{
-		final URLWriter urlWriter0 = new URLWriter(null, UrlUtil.fileToUrl(new File(sm_dirTestDataTemp + "dummy.txt"), false), UrlUtil.POST, UrlUtil.TEXT_PLAIN, null);
+		final URLWriter urlWriter0 = new URLWriter(null, UrlUtil.fileToUrl(new File(sm_dirTestDataTemp + "dummy.txt"), false), UrlUtil.POST, UrlUtil.TEXT_PLAIN,
+				null);
 		urlWriter0.run();
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		for (int i = 0; i < 3; i++)
 		{
 			final URLWriter urlWriter = new URLWriter(null, new URL("http://www.example.com"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
@@ -100,13 +103,14 @@ class URLWriterTest extends JDFTestCaseBase
 
 	/**
 	 * @throws MalformedURLException
-	 *
 	 */
 	@Test
 	void testWriteToURLBad() throws MalformedURLException
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		final URLWriter urlWriter = new URLWriter(null, new URL("http://nosuchhost123456789"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
 		assertNull(urlWriter.writeToURL());
 		assertNotNull(urlWriter.getLastException());
@@ -114,7 +118,6 @@ class URLWriterTest extends JDFTestCaseBase
 
 	/**
 	 * @throws MalformedURLException
-	 *
 	 */
 	@Test
 	void testgetAddDirect() throws MalformedURLException
@@ -128,7 +131,6 @@ class URLWriterTest extends JDFTestCaseBase
 	/**
 	 * @throws MalformedURLException
 	 * @throws URISyntaxException
-	 *
 	 */
 	@Test
 	void testgetProxyList() throws MalformedURLException, URISyntaxException
@@ -141,7 +143,6 @@ class URLWriterTest extends JDFTestCaseBase
 
 	/**
 	 * @throws MalformedURLException
-	 *
 	 */
 	@Test
 	void testTostringt() throws MalformedURLException
@@ -152,13 +153,14 @@ class URLWriterTest extends JDFTestCaseBase
 
 	/**
 	 * @throws MalformedURLException
-	 *
 	 */
 	@Test
 	void testWriteToURLPost() throws MalformedURLException
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		final UrlPart writeToURL = new URLWriter(null, new URL("http://www.google.com"), UrlUtil.POST, UrlUtil.TEXT_PLAIN, null).writeToURL();
 		assertNotNull(writeToURL);
 		writeToURL.buffer();
@@ -168,13 +170,14 @@ class URLWriterTest extends JDFTestCaseBase
 	 * @throws MalformedURLException
 	 * @throws IOException
 	 * @throws ProtocolException
-	 *
 	 */
 	@Test
 	void testWriteToURLPatch() throws MalformedURLException
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		final URLWriter w = new URLWriter(null, new URL("http://www.example.com"), UrlUtil.PATCH, UrlUtil.TEXT_PLAIN, null);
 		final UrlPart writeToURL = w.writeToURL();
 		assertNotNull(writeToURL);
@@ -184,7 +187,6 @@ class URLWriterTest extends JDFTestCaseBase
 	/**
 	 * @throws IOException
 	 * @throws ProtocolException
-	 *
 	 */
 	@Test
 	void testWriteToURLPatch2() throws ProtocolException, IOException
@@ -199,13 +201,14 @@ class URLWriterTest extends JDFTestCaseBase
 
 	/**
 	 * @throws MalformedURLException
-	 *
 	 */
 	@Test
 	void testWriteToURLBadMethod() throws MalformedURLException
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 
 		final URLWriter w = new URLWriter(null, new URL("http://www.example.com"), "bad", UrlUtil.TEXT_PLAIN, null);
 		final UrlPart writeToURL = w.writeToURL();

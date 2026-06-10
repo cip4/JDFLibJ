@@ -82,7 +82,6 @@ package org.cip4.jdflib.jmf;
 
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -104,13 +103,11 @@ import org.cip4.jdflib.util.StringUtil;
 //----------------------------------
 /**
  * @author prosirai
- *
  */
 public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElement>, INodeIdentifiable
 {
 	/**
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
-	 *
 	 *         Apr 29, 2009
 	 */
 	public static class QueueEntryComparator implements Comparator<KElement>
@@ -123,12 +120,10 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 			super();
 			if (fastStat == null)
 			{
-				final HashMap<String, MyInteger> fastStat2 = new HashMap<String, MyInteger>();
-				final Iterator<EnumQueueEntryStatus> it = EnumQueueEntryStatus.iterator();
-				while (it.hasNext())
+				final HashMap<String, MyInteger> fastStat2 = new HashMap<>();
+				for (final EnumQueueEntryStatus eqs : EnumQueueEntryStatus.values())
 				{
-					final EnumQueueEntryStatus eqs = it.next();
-					fastStat2.put(eqs.getName(), new MyInteger(eqs.getValue()));
+					fastStat2.put(eqs.name(), new MyInteger(eqs.ordinal()));
 				}
 				fastStat = fastStat2;
 			}
@@ -413,7 +408,6 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	 * concurrently running jobs also sets StartTime and EndTime appropriately if the queue is automated
 	 *
 	 * @param value the queuentry status to set
-	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoQueueEntry#setQueueEntryStatus(org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus)
 	 */
 	@Override
@@ -478,10 +472,8 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 
 	/**
 	 * gets the NodeIdentifier that matches this
-	 * 
+	 *
 	 * @param ni
-	 *
-	 *
 	 */
 	@Override
 	public void setIdentifier(final NodeIdentifier ni)
@@ -523,15 +515,14 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	@SuppressWarnings("unchecked")
 	public Vector<EnumQueueEntryStatus> getNextStatusVector()
 	{
-		final Vector<EnumQueueEntryStatus> v = new Vector<EnumQueueEntryStatus>();
+		final Vector<EnumQueueEntryStatus> v = new Vector<>();
 
 		final EnumQueueEntryStatus qesThis = getQueueEntryStatus();
 		if (qesThis == null)
 		{
-			final Iterator<EnumQueueEntryStatus> it = EnumQueueEntryStatus.iterator();
-			while (it.hasNext())
+			for (final EnumQueueEntryStatus status : EnumQueueEntryStatus.values())
 			{
-				v.add(it.next());
+				v.add(status);
 			}
 		}
 		else if (EnumQueueEntryStatus.Running.equals(qesThis))
@@ -620,16 +611,15 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	/**
 	 * return a value based on QueueEntryStatus and Priority to sort the queue the status is the major order whereas the priority is used to order within regions of identical
 	 * status
-	 * 
+	 *
 	 * @param status
 	 * @param priority
-	 *
 	 * @return int a priority for sorting - low value = back of queue, high value = front of queue
 	 */
 	@Deprecated
 	public static int getSortPriority(final EnumQueueEntryStatus status, final int priority)
 	{
-		int sort = (status == null) ? 0 : 10000 - 1000 * status.getValue();
+		int sort = (status == null) ? 0 : 10000 - 1000 * status.ordinal();
 		sort += priority;
 		return sort;
 	}
@@ -649,7 +639,9 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 		setJobPartID(jdf.getJobPartID(false));
 		setPartMapVector(jdf.getPartMapVector());
 		if (!hasAttribute(AttributeName.DESCRIPTIVENAME))
+		{
 			setDescriptiveName(StringUtil.getNonEmpty(jdf.getDescriptiveName()));
+		}
 
 		if (!hasAttribute(AttributeName.PRIORITY))
 		{
@@ -701,7 +693,9 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	private void setSortDate(final String attName, String value)
 	{
 		if (value == null)
+		{
 			value = new JDFDate().getDateTimeISO();
+		}
 		final String oldVal = getAttribute(attName, null, null);
 		if (!ContainerUtil.equals(oldVal, value))
 		{

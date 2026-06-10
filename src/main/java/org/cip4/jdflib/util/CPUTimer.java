@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.util;
 
@@ -83,30 +83,28 @@ import org.cip4.jdflib.core.XMLDoc;
 
 /**
  * class for cpu time measurements
+ *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
  */
 public class CPUTimer
 {
 
 	/**
-	 * 
-	  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
 	public static class CPUTimerFactory
 	{
 		/**
-		 * 
+		 *
 		 */
 		public CPUTimerFactory()
 		{
 			super();
-			globalMap = new HashMap<ThreadIdentifier, CPUTimer>();
+			globalMap = new HashMap<>();
 		}
 
 		/**
-		 * 
-		  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+		 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 		 */
 		protected class ThreadIdentifier
 		{
@@ -115,9 +113,8 @@ public class CPUTimer
 
 			/**
 			 * @param id a unique Identifier, may be null
-			 * 
 			 */
-			public ThreadIdentifier(String id)
+			public ThreadIdentifier(final String id)
 			{
 				this.id = id;
 				theThread = Thread.currentThread();
@@ -127,20 +124,22 @@ public class CPUTimer
 			 * @see java.lang.Object#equals(java.lang.Object)
 			 * @param obj
 			 * @return
-			*/
+			 */
 			@Override
-			public boolean equals(Object obj)
+			public boolean equals(final Object obj)
 			{
 				if (!(obj instanceof ThreadIdentifier))
+				{
 					return false;
-				ThreadIdentifier ti = (ThreadIdentifier) obj;
+				}
+				final ThreadIdentifier ti = (ThreadIdentifier) obj;
 				return ContainerUtil.equals(id, ti.id) && ContainerUtil.equals(theThread, ti.theThread);
 			}
 
 			/**
 			 * @see java.lang.Object#hashCode()
 			 * @return
-			*/
+			 */
 			@Override
 			public int hashCode()
 			{
@@ -150,7 +149,7 @@ public class CPUTimer
 			/**
 			 * @see java.lang.Object#toString()
 			 * @return
-			*/
+			 */
 			@Override
 			public String toString()
 			{
@@ -162,30 +161,32 @@ public class CPUTimer
 		protected static CPUTimerFactory theFactory = null;
 
 		/**
-		 * 
 		 * get the CPUTimer for a given ID for this thread
 		 * the timer is in paused mode
+		 *
 		 * @param id the id for the timer
 		 * @return the timer
 		 */
-		public CPUTimer getCurrentTimer(String id)
+		public CPUTimer getCurrentTimer(final String id)
 		{
 			return globalMap.get(new ThreadIdentifier(id));
 		}
 
 		/**
 		 * get the summary of all matching timers over all threads
-		 * 
+		 *
 		 * @param id if null get all
-		 * @return  a disposable summary timer
+		 * @return a disposable summary timer
 		 */
-		public CPUTimer getGlobalTimer(String id)
+		public CPUTimer getGlobalTimer(final String id)
 		{
-			CPUTimer timer = new CPUTimer(false);
+			final CPUTimer timer = new CPUTimer(false);
 			timer.setName(id);
-			Vector<CPUTimer> v = getTimers(id);
-			for (CPUTimer ti : v)
+			final Vector<CPUTimer> v = getTimers(id);
+			for (final CPUTimer ti : v)
+			{
 				timer.add(ti);
+			}
 			return timer;
 		}
 
@@ -195,16 +196,16 @@ public class CPUTimer
 		 * @param id if null get all
 		 * @return
 		 */
-		public Vector<CPUTimer> getTimers(String id)
+		public Vector<CPUTimer> getTimers(final String id)
 		{
-			Vector<CPUTimer> v = new Vector<CPUTimer>();
+			final Vector<CPUTimer> v = new Vector<>();
 			synchronized (globalMap)
 			{
-				Set<ThreadIdentifier> s = globalMap.keySet();
-				Iterator<ThreadIdentifier> it = s.iterator();
+				final Set<ThreadIdentifier> s = globalMap.keySet();
+				final Iterator<ThreadIdentifier> it = s.iterator();
 				while (it.hasNext())
 				{
-					ThreadIdentifier ti = it.next();
+					final ThreadIdentifier ti = it.next();
 					if (id == null || id.equals(ti.id))
 					{
 						v.add(globalMap.get(ti));
@@ -217,10 +218,11 @@ public class CPUTimer
 		/**
 		 * get the CPUTimer for a given ID for this thread, create it if it does not yet exist
 		 * the timer is in paused mode
+		 *
 		 * @param id the id for the timer
 		 * @return the timer
 		 */
-		public CPUTimer getCreateCurrentTimer(String id)
+		public CPUTimer getCreateCurrentTimer(final String id)
 		{
 			synchronized (globalMap)
 			{
@@ -238,7 +240,7 @@ public class CPUTimer
 		/**
 		 * @see java.lang.Object#toString()
 		 * @return
-		*/
+		 */
 		@Override
 		public String toString()
 		{
@@ -246,7 +248,7 @@ public class CPUTimer
 		}
 	}
 
-	/**    -----------    end of private classes    -----------    **/
+	/** ----------- end of private classes ----------- **/
 
 	private long createT0;
 	private long realT0;
@@ -270,20 +272,21 @@ public class CPUTimer
 
 	/**
 	 * add a timer to this
+	 *
 	 * @param timer
 	 */
-	public void add(CPUTimer timer)
+	public void add(final CPUTimer timer)
 	{
 		totalReal += timer.totalReal;
 		toatalCPU += timer.toatalCPU;
 		nStartStop += timer.getNumStarts();
 		createT0 = Math.min(createT0, timer.getCreationTime());
-		long currentRealTime = timer.getCurrentRealTime();
+		final long currentRealTime = timer.getCurrentRealTime();
 		if (currentRealTime > 0)
 		{
 			currentReal += currentRealTime;
 		}
-		long currentCPUTime = timer.getCurrentCPUTime();
+		final long currentCPUTime = timer.getCurrentCPUTime();
 		if (currentCPUTime > 0)
 		{
 			currentCPU += currentCPUTime;
@@ -293,16 +296,15 @@ public class CPUTimer
 	/**
 	 * @param name the name to set
 	 */
-	public void setName(String name)
+	public void setName(final String name)
 	{
 		this.name = name;
 	}
 
 	/**
 	 * @param bStart if true, start measuring now
-	 * 
 	 */
-	public CPUTimer(boolean bStart)
+	public CPUTimer(final boolean bStart)
 	{
 		super();
 		bean = ManagementFactory.getThreadMXBean();
@@ -316,19 +318,22 @@ public class CPUTimer
 		nStartStop = 0;
 		createT0 = System.currentTimeMillis();
 		if (bStart)
+		{
 			start();
+		}
 	}
 
 	/**
 	 * method to get the amount of cpu time since construction
-	 * @return  amount of cpu time in nano seconds
-	 * 
 	 *
+	 * @return amount of cpu time in nano seconds
 	 */
 	public long getTotalCPUTime()
 	{
 		if (!threadCpuTimeEnabled)
+		{
 			return -1;
+		}
 		return toatalCPU + getCurrentCPUTime();
 	}
 
@@ -338,18 +343,21 @@ public class CPUTimer
 	public long getCurrentCPUTime()
 	{
 		if (!threadCpuTimeEnabled)
+		{
 			return -1;
+		}
 		else if (cpuT0 > 0)
+		{
 			return currentCPU + bean.getCurrentThreadCpuTime() - cpuT0;
+		}
 		else
+		{
 			return currentCPU;
+		}
 	}
 
 	/**
-	 * 
-	 * @return  creation time in milliseconds (see System.currentTimeMillis());
-	 * 
-	 *
+	 * @return creation time in milliseconds (see System.currentTimeMillis());
 	 */
 	public long getCreationTime()
 	{
@@ -358,8 +366,8 @@ public class CPUTimer
 
 	/**
 	 * method to get the amount of real time since construction in milliseconds
+	 *
 	 * @return amount of real in milliseconds
-	 * 
 	 */
 	public long getTotalRealTime()
 	{
@@ -372,37 +380,45 @@ public class CPUTimer
 	public long getCurrentRealTime()
 	{
 		if (realT0 > 0)
+		{
 			return currentReal + System.currentTimeMillis() - realT0;
+		}
 		else
+		{
 			return currentReal;
+		}
 	}
 
 	/**
 	 * start measuring times
-	 * 
-	 *
 	 */
 	public void start()
 	{
 		if (realT0 > 0)
+		{
 			return;
+		}
 		if (threadCpuTimeEnabled)
+		{
 			cpuT0 = bean.getCurrentThreadCpuTime();
+		}
 		realT0 = System.currentTimeMillis();
 		nStartStop++;
 	}
 
 	/**
 	 * stop/pause measuring times
-	 * 
-	 *
 	 */
 	public void stop()
 	{
 		if (realT0 <= 0)
+		{
 			return;
+		}
 		if (threadCpuTimeEnabled)
+		{
 			toatalCPU = getTotalCPUTime();
+		}
 		totalReal = getTotalRealTime();
 		cpuT0 = -1;
 		realT0 = -1;
@@ -410,13 +426,13 @@ public class CPUTimer
 
 	/**
 	 * stop/pause measuring times - decrement the number of start/stop so that we don't recount the next start
-	 * 
-	 *
 	 */
 	public void pause()
 	{
 		if (realT0 <= 0)
+		{
 			return;
+		}
 
 		stop();
 		nStartStop--;
@@ -449,36 +465,40 @@ public class CPUTimer
 	/**
 	 * @see java.lang.Object#toString()
 	 * @return
-	*/
+	 */
 	@Override
 	public String toString()
 	{
 		String label = "CPUTimer: ";
 		if (name != null)
+		{
 			label += getName();
-		return label + " totalCPU=" + getTotalCPUTime() / 1000000000. + " currentCPU=" + getCurrentCPUTime() / 1000000000. + " totalT=" + getTotalRealTime() / 1000. + " currentT="
-				+ getCurrentRealTime() / 1000. + " starts=" + nStartStop + " active=" + (realT0 > 0);
+		}
+		return label + " totalCPU=" + getTotalCPUTime() / 1000000000. + " currentCPU=" + getCurrentCPUTime() / 1000000000. + " totalT="
+				+ getTotalRealTime() / 1000. + " currentT=" + getCurrentRealTime() / 1000. + " starts=" + nStartStop + " active=" + (realT0 > 0);
 	}
 
 	/**
 	 * get a summary for a single run
+	 *
 	 * @return
-	*/
+	 */
 	public String getSingleSummary()
 	{
 		String label = "CPUTimer: ";
 		if (name != null)
+		{
 			label += getName();
+		}
 		return label + " CPU=" + getTotalCPUTime() / 1000000000. + " RealTime=" + getTotalRealTime() / 1000.;
 	}
 
 	/**
-	 * 
 	 * @return the XML representation of this
 	 */
 	public KElement toXML()
 	{
-		KElement root = new XMLDoc("CPUTimer", null).getRoot();
+		final KElement root = new XMLDoc("CPUTimer", null).getRoot();
 		root.setAttribute("Name", getName(), null);
 		root.setAttribute("TotalRealTime", getTotalRealTime() / 1000., null);
 		root.setAttribute("CurrentRealTime", getCurrentRealTime() / 1000., null);
@@ -497,7 +517,9 @@ public class CPUTimer
 	public static CPUTimerFactory getFactory()
 	{
 		if (CPUTimerFactory.theFactory == null)
+		{
 			CPUTimerFactory.theFactory = new CPUTimerFactory();
+		}
 		return CPUTimerFactory.theFactory;
 	}
 

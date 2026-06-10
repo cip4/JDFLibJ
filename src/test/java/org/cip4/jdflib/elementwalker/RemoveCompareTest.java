@@ -45,7 +45,6 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
  * @date Oct 11, 2012
  */

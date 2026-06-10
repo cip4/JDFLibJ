@@ -40,14 +40,11 @@
 package org.cip4.jdflib.core;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.lang.enums.ValuedEnum;
-import org.cip4.jdflib.core.AttributeInfo.EnumAttributeValidity;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /*
  * @author MatternK
@@ -86,7 +83,7 @@ public class ElementInfo
 	 * Constructor
 	 *
 	 * @param elemInfo_super elemInfo_super: corresponding element info of super; if null: start from scratch, otherwise initialize from other ElementInfo
-	 * @param elemInfo_own [] elemInfo_own: table with element-specific element info
+	 * @param elemInfo_own   [] elemInfo_own: table with element-specific element info
 	 */
 	public ElementInfo(final ElementInfo elemInfo_super, final ElemInfoTable[] elemInfo_own)
 	{
@@ -231,12 +228,15 @@ public class ElementInfo
 	 * @param elemValidity4
 	 * @return VString: list of strings containing the names of the matching elements
 	 */
-	private VString conformingElements(final EnumElementValidity elemValidity1, final EnumElementValidity elemValidity2, final EnumElementValidity elemValidity3, final EnumElementValidity elemValidity4)
+	private VString conformingElements(final EnumElementValidity elemValidity1, final EnumElementValidity elemValidity2,
+			final EnumElementValidity elemValidity3, final EnumElementValidity elemValidity4)
 	{
 		final VString matchingElements = new VString();
 		final Set<String> keySet = elementInfoTable.keySet();
 		if (keySet.isEmpty())
+		{
 			return matchingElements;
+		}
 		final long l2 = JDFVersions.getTheMask(version);
 		final long v2 = JDFVersions.getTheOffset(version);
 		final long s1 = (long) elemValidity1.getValue() << v2;
@@ -280,7 +280,9 @@ public class ElementInfo
 		final VString matchingElements = new VString();
 		final Set<String> keySet = elementInfoTable.keySet();
 		if (keySet.isEmpty())
+		{
 			return matchingElements;
+		}
 		final long l2 = JDFVersions.getTheMask(version);
 		final long v2 = JDFVersions.getTheOffset(version);
 		final long s1 = (long) elemValidity1.getValue() << v2;
@@ -311,7 +313,8 @@ public class ElementInfo
 	 * @param elemValidity4
 	 * @return boolean: true if at least one sub-element matches the requested validity
 	 */
-	public boolean hasConformingElements(final EnumElementValidity elemValidity1, final EnumElementValidity elemValidity2, final EnumElementValidity elemValidity3, final EnumElementValidity elemValidity4)
+	public boolean hasConformingElements(final EnumElementValidity elemValidity1, final EnumElementValidity elemValidity2,
+			final EnumElementValidity elemValidity3, final EnumElementValidity elemValidity4)
 	{
 		return !conformingElements(elemValidity1, elemValidity2, elemValidity3, elemValidity4).isEmpty();
 	}
@@ -334,7 +337,8 @@ public class ElementInfo
 	 */
 	public VString optionalElements()
 	{
-		return conformingElements(EnumElementValidity.Optional, EnumElementValidity.Deprecated, EnumElementValidity.SingleDeprecated, EnumElementValidity.SingleOptional);
+		return conformingElements(EnumElementValidity.Optional, EnumElementValidity.Deprecated, EnumElementValidity.SingleDeprecated,
+				EnumElementValidity.SingleOptional);
 	}
 
 	/**
@@ -354,7 +358,8 @@ public class ElementInfo
 	 */
 	public VString uniqueElements()
 	{
-		return conformingElements(EnumElementValidity.SingleRequired, EnumElementValidity.SingleOptional, EnumElementValidity.SingleDeprecated, EnumElementValidity.Dummy);
+		return conformingElements(EnumElementValidity.SingleRequired, EnumElementValidity.SingleOptional, EnumElementValidity.SingleDeprecated,
+				EnumElementValidity.Dummy);
 	}
 
 	/**
@@ -375,80 +380,33 @@ public class ElementInfo
 	/**
 	 * Enumeration of element validity values
 	 */
-	@SuppressWarnings("unchecked")
-	public static final class EnumElementValidity extends ValuedEnum
+	public enum EnumElementValidity
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Unknown(0), None(1), Required(2), Optional(3), Deprecated(4), SingleRequired(5), SingleOptional(6), SingleDeprecated(7), Dummy(8);
 
-		/**
-		 * @param name
-		 */
-		private EnumElementValidity(final String name)
+		private final int value;
+
+		private EnumElementValidity(final int value)
 		{
-			super(name, m_startValue++);
+			this.value = value;
 		}
 
 		/**
-		 * @param enumName the name of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
+		 * @param val the name of the enum object to return
+		 * @return the enum object if val is valid. Otherwise null
 		 */
-		public static EnumElementValidity getEnum(final String enumName)
+		public static EnumElementValidity getEnum(final String val)
 		{
-			return (EnumElementValidity) getEnum(EnumElementValidity.class, enumName);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumElementValidity.class, val, null);
 		}
 
 		/**
-		 * @param enumValue the value of the enum object to return
-		 * @return the enum object if enumName is valid. Otherwise null
+		 * @return legacy integer value, preserving the previous order-based numbering
 		 */
-		public static EnumAttributeValidity getEnum(final int enumValue)
+		public int getValue()
 		{
-			return (EnumAttributeValidity) getEnum(EnumAttributeValidity.class, enumValue);
+			return value;
 		}
-
-		/**
-		 * @return a map of all orientation enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumElementValidity.class);
-		}
-
-		/**
-		 * @return a list of all orientation enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumElementValidity.class);
-		}
-
-		/**
-		 * @return an iterator over the enum objects
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumElementValidity.class);
-		}
-
-		/** */
-		public static final EnumElementValidity Unknown = new EnumElementValidity(JDFConstants.ELEMENTVALIDITY_UNKNOWN);
-		/** */
-		public static final EnumElementValidity None = new EnumElementValidity(JDFConstants.ELEMENTVALIDITY_NONE);
-		/** */
-		public static final EnumElementValidity Required = new EnumElementValidity(JDFConstants.ELEMENTVALIDITY_REQUIRED);
-		/** */
-		public static final EnumElementValidity Optional = new EnumElementValidity(JDFConstants.ELEMENTVALIDITY_OPTIONAL);
-		/** */
-		public static final EnumElementValidity Deprecated = new EnumElementValidity(JDFConstants.ELEMENTVALIDITY_DEPRECATED);
-		/** */
-		public static final EnumElementValidity SingleRequired = new EnumElementValidity(JDFConstants.ELEMENTVALIDITY_SINGLEREQUIRED);
-		/** */
-		public static final EnumElementValidity SingleOptional = new EnumElementValidity(JDFConstants.ELEMENTVALIDITY_SINGLEOPTIONAL);
-		/** */
-		public static final EnumElementValidity SingleDeprecated = new EnumElementValidity(JDFConstants.ELEMENTVALIDITY_SINGLEDEPRECATED);
-		/** */
-		public static final EnumElementValidity Dummy = new EnumElementValidity(JDFConstants.ELEMENTVALIDITY_DUMMY);
 	}
 
 	/**

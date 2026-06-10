@@ -124,7 +124,7 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCylinderLayout(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoCylinderLayout(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -136,7 +136,7 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCylinderLayout(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoCylinderLayout(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -149,7 +149,7 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoCylinderLayout(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoCylinderLayout(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -160,7 +160,7 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -190,7 +190,7 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeviceID(String value)
+	public void setDeviceID(final String value)
 	{
 		setAttribute(AttributeName.DEVICEID, value, null);
 	}
@@ -247,7 +247,7 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refLayout(JDFLayout refTarget)
+	public void refLayout(final JDFLayout refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -278,7 +278,7 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFCylinderPosition the element
 	 */
-	public JDFCylinderPosition getCreateCylinderPosition(int iSkip)
+	public JDFCylinderPosition getCreateCylinderPosition(final int iSkip)
 	{
 		return (JDFCylinderPosition) getCreateElement_JDFElement(ElementName.CYLINDERPOSITION, null, iSkip);
 	}
@@ -290,7 +290,7 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
 	 * @return JDFCylinderPosition the element
 	 *         default is getCylinderPosition(0)
 	 */
-	public JDFCylinderPosition getCylinderPosition(int iSkip)
+	public JDFCylinderPosition getCylinderPosition(final int iSkip)
 	{
 		return (JDFCylinderPosition) getElement(ElementName.CYLINDERPOSITION, null, iSkip);
 	}

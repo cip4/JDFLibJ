@@ -168,7 +168,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMediaIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoMediaIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMediaIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoMediaIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -193,7 +193,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoMediaIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoMediaIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -214,7 +214,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPrePrinted(boolean value)
+	public void setPrePrinted(final boolean value)
 	{
 		setAttribute(AttributeName.PREPRINTED, value, null);
 	}
@@ -239,7 +239,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMediaSetCount(int value)
+	public void setMediaSetCount(final int value)
 	{
 		setAttribute(AttributeName.MEDIASETCOUNT, value, null);
 	}
@@ -264,7 +264,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setUserMediaType(String value)
+	public void setUserMediaType(final String value)
 	{
 		setAttribute(AttributeName.USERMEDIATYPE, value, null);
 	}
@@ -404,7 +404,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFCertification the element
 	 */
-	public JDFCertification getCreateCertification(int iSkip)
+	public JDFCertification getCreateCertification(final int iSkip)
 	{
 		return (JDFCertification) getCreateElement_JDFElement(ElementName.CERTIFICATION, null, iSkip);
 	}
@@ -416,7 +416,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
 	 * @return JDFCertification the element
 	 *         default is getCertification(0)
 	 */
-	public JDFCertification getCertification(int iSkip)
+	public JDFCertification getCertification(final int iSkip)
 	{
 		return (JDFCertification) getElement(ElementName.CERTIFICATION, null, iSkip);
 	}

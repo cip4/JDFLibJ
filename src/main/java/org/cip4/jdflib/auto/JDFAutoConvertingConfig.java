@@ -131,7 +131,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoConvertingConfig(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoConvertingConfig(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -143,7 +143,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoConvertingConfig(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoConvertingConfig(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -156,7 +156,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoConvertingConfig(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoConvertingConfig(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -177,7 +177,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMarginBottom(double value)
+	public void setMarginBottom(final double value)
 	{
 		setAttribute(AttributeName.MARGINBOTTOM, value, null);
 	}
@@ -202,7 +202,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMarginLeft(double value)
+	public void setMarginLeft(final double value)
 	{
 		setAttribute(AttributeName.MARGINLEFT, value, null);
 	}
@@ -227,7 +227,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMarginRight(double value)
+	public void setMarginRight(final double value)
 	{
 		setAttribute(AttributeName.MARGINRIGHT, value, null);
 	}
@@ -252,7 +252,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMarginTop(double value)
+	public void setMarginTop(final double value)
 	{
 		setAttribute(AttributeName.MARGINTOP, value, null);
 	}
@@ -277,7 +277,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSheetHeight(JDFNumberRange value)
+	public void setSheetHeight(final JDFNumberRange value)
 	{
 		setAttribute(AttributeName.SHEETHEIGHT, value, null);
 	}
@@ -290,8 +290,8 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	 */
 	public JDFNumberRange getSheetHeight()
 	{
-		String strAttrName = getAttribute(AttributeName.SHEETHEIGHT, null, null);
-		JDFNumberRange nPlaceHolder = JDFNumberRange.createNumberRange(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SHEETHEIGHT, null, null);
+		final JDFNumberRange nPlaceHolder = JDFNumberRange.createNumberRange(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -305,7 +305,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSheetWidth(JDFNumberRange value)
+	public void setSheetWidth(final JDFNumberRange value)
 	{
 		setAttribute(AttributeName.SHEETWIDTH, value, null);
 	}
@@ -318,8 +318,8 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	 */
 	public JDFNumberRange getSheetWidth()
 	{
-		String strAttrName = getAttribute(AttributeName.SHEETWIDTH, null, null);
-		JDFNumberRange nPlaceHolder = JDFNumberRange.createNumberRange(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SHEETWIDTH, null, null);
+		final JDFNumberRange nPlaceHolder = JDFNumberRange.createNumberRange(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -355,7 +355,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFCutBlock the element
 	 */
-	public JDFCutBlock getCreateCutBlock(int iSkip)
+	public JDFCutBlock getCreateCutBlock(final int iSkip)
 	{
 		return (JDFCutBlock) getCreateElement_JDFElement(ElementName.CUTBLOCK, null, iSkip);
 	}
@@ -367,7 +367,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	 * @return JDFCutBlock the element
 	 *         default is getCutBlock(0)
 	 */
-	public JDFCutBlock getCutBlock(int iSkip)
+	public JDFCutBlock getCutBlock(final int iSkip)
 	{
 		return (JDFCutBlock) getElement(ElementName.CUTBLOCK, null, iSkip);
 	}
@@ -428,7 +428,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refDevice(JDFDevice refTarget)
+	public void refDevice(final JDFDevice refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -469,7 +469,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMedia(JDFMedia refTarget)
+	public void refMedia(final JDFMedia refTarget)
 	{
 		refElement(refTarget);
 	}

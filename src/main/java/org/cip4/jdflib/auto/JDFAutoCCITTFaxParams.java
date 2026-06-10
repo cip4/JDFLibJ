@@ -107,7 +107,7 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCCITTFaxParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoCCITTFaxParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -119,7 +119,7 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCCITTFaxParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoCCITTFaxParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -132,7 +132,7 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoCCITTFaxParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoCCITTFaxParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -153,7 +153,7 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setUncompressed(boolean value)
+	public void setUncompressed(final boolean value)
 	{
 		setAttribute(AttributeName.UNCOMPRESSED, value, null);
 	}
@@ -178,7 +178,7 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setK(int value)
+	public void setK(final int value)
 	{
 		setAttribute(AttributeName.K, value, null);
 	}
@@ -203,7 +203,7 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setEndOfLine(boolean value)
+	public void setEndOfLine(final boolean value)
 	{
 		setAttribute(AttributeName.ENDOFLINE, value, null);
 	}
@@ -228,7 +228,7 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setEncodedByteAlign(boolean value)
+	public void setEncodedByteAlign(final boolean value)
 	{
 		setAttribute(AttributeName.ENCODEDBYTEALIGN, value, null);
 	}
@@ -253,7 +253,7 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setEndOfBlock(boolean value)
+	public void setEndOfBlock(final boolean value)
 	{
 		setAttribute(AttributeName.ENDOFBLOCK, value, null);
 	}

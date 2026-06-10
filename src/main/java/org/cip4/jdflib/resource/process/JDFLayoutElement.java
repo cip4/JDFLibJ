@@ -81,39 +81,39 @@ public class JDFLayoutElement extends JDFAutoLayoutElement
 
 	/**
 	 * Constructor for JDFLayoutElement
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFLayoutElement(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFLayoutElement(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFLayoutElement
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFLayoutElement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFLayoutElement(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFLayoutElement
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFLayoutElement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFLayoutElement(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -123,7 +123,7 @@ public class JDFLayoutElement extends JDFAutoLayoutElement
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -134,36 +134,36 @@ public class JDFLayoutElement extends JDFAutoLayoutElement
 
 	/**
 	 * SetFileName set FileName and URL in the FileSpec
-	 * 
+	 *
 	 * @param String fileName
 	 * @deprecated use setMimeURL
 	 */
 	@Deprecated
-	public void setFileName(String fileName)
+	public void setFileName(final String fileName)
 	{
 		getCreateFileSpec().setURL(fileName);
 	}
 
 	/**
 	 * SetFileName set FileName and URL in the FileSpec
-	 * 
+	 *
 	 * @param String fileName
 	 */
-	public void setMimeURL(String fileName)
+	public void setMimeURL(final String fileName)
 	{
 		getCreateFileSpec().setMimeURL(fileName);
 	}
 
 	/**
 	 * this is broken - needs to be a vector
-	 * 
+	 *
 	 * @deprecated 060907
 	 */
 	@Deprecated
 	public JDFPageData getPageListPageData()
 	{
 		// TODO lena - make vector
-		JDFPageList pageList = getPageList();
+		final JDFPageList pageList = getPageList();
 		return pageList == null ? null : pageList.getPageData(0);
 	}
 }

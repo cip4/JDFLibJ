@@ -106,7 +106,7 @@ public abstract class JDFAutoImageEnhancementParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoImageEnhancementParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoImageEnhancementParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoImageEnhancementParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoImageEnhancementParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoImageEnhancementParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoImageEnhancementParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoImageEnhancementParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoImageEnhancementParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -142,7 +142,7 @@ public abstract class JDFAutoImageEnhancementParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -188,7 +188,7 @@ public abstract class JDFAutoImageEnhancementParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFImageEnhancementOp the element
 	 */
-	public JDFImageEnhancementOp getCreateImageEnhancementOp(int iSkip)
+	public JDFImageEnhancementOp getCreateImageEnhancementOp(final int iSkip)
 	{
 		return (JDFImageEnhancementOp) getCreateElement_JDFElement(ElementName.IMAGEENHANCEMENTOP, null, iSkip);
 	}
@@ -200,7 +200,7 @@ public abstract class JDFAutoImageEnhancementParams extends JDFResource
 	 * @return JDFImageEnhancementOp the element
 	 *         default is getImageEnhancementOp(0)
 	 */
-	public JDFImageEnhancementOp getImageEnhancementOp(int iSkip)
+	public JDFImageEnhancementOp getImageEnhancementOp(final int iSkip)
 	{
 		return (JDFImageEnhancementOp) getElement(ElementName.IMAGEENHANCEMENTOP, null, iSkip);
 	}

@@ -85,8 +85,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi
- *
- * Test of the Status JMF
+ *         Test of the Status JMF
  */
 class JDFDeviceFilterTest extends JDFTestCaseBase
 {
@@ -106,7 +105,7 @@ class JDFDeviceFilterTest extends JDFTestCaseBase
 		{
 			final JDFDeviceInfo di = dl.appendDeviceInfo();
 			di.setDeviceID("I" + i);
-			JDFDevice dev = di.appendDevice();
+			final JDFDevice dev = di.appendDevice();
 			dev.appendDeviceCap();
 			di.appendModuleStatus();
 			di.setDeviceStatus(EnumDeviceStatus.Running);
@@ -160,7 +159,7 @@ class JDFDeviceFilterTest extends JDFTestCaseBase
 	@Test
 	void testApplyToClass()
 	{
-		//ToDo upgrade Filter
+		// ToDo upgrade Filter
 	}
 
 	/**

@@ -45,7 +45,6 @@
  */
 package org.cip4.jdflib.span;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 
 public class JDFSpanOrientation extends JDFEnumerationSpan
@@ -53,7 +52,6 @@ public class JDFSpanOrientation extends JDFEnumerationSpan
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -63,7 +61,6 @@ public class JDFSpanOrientation extends JDFEnumerationSpan
 	}
 
 	/**
-	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -74,7 +71,6 @@ public class JDFSpanOrientation extends JDFEnumerationSpan
 	}
 
 	/**
-	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -91,9 +87,9 @@ public class JDFSpanOrientation extends JDFEnumerationSpan
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumOrientation.getEnum(0);
+		return EnumOrientation.class;
 	}
 
 }

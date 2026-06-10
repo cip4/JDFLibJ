@@ -66,7 +66,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class FileUtilTest extends JDFTestCaseBase
 {
@@ -133,7 +132,6 @@ class FileUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testisLocked() throws IOException
@@ -199,7 +197,6 @@ class FileUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testGetBufferedOutputStream() throws IOException
@@ -214,7 +211,6 @@ class FileUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testGetBufferedInputStream() throws IOException
@@ -233,7 +229,6 @@ class FileUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testGetBufferedInputStreamDir() throws IOException
@@ -418,7 +413,9 @@ class FileUtilTest extends JDFTestCaseBase
 		final File root = new File(sm_dirTestData + File.separator + "dir1");
 		final Vector<File> list = FileUtil.listFilesInTree(root, new FileUtil.DirectoryFileFilter());
 		for (final File f : list)
+		{
 			assertTrue(f.isDirectory());
+		}
 		assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2a"))));
 		assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2b"))));
 	}
@@ -573,7 +570,6 @@ class FileUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testForceDelete() throws Exception
@@ -726,7 +722,9 @@ class FileUtilTest extends JDFTestCaseBase
 		}
 		final OutputStream os = FileUtil.getBufferedOutputStream(fNew);
 		for (int i = 0; i < 5000; i++)
+		{
 			os.write(b);
+		}
 
 		os.flush();
 		os.close();
@@ -805,7 +803,9 @@ class FileUtilTest extends JDFTestCaseBase
 		}
 		final OutputStream os = FileUtil.getBufferedOutputStream(fNew);
 		for (int i = 0; i < 5000; i++)
+		{
 			os.write(b);
+		}
 
 		os.flush();
 		os.close();

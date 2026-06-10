@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -101,7 +96,7 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.HOLEREFERENCEEDGE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumHoleReferenceEdge.getEnum(0), "Left");
+				JavaEnumUtil.getEnum(EnumHoleReferenceEdge.class, 0), "Left");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.EXTENT, 0x3333333311l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
@@ -130,7 +125,7 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoHoleMakingIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoHoleMakingIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -142,7 +137,7 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoHoleMakingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoHoleMakingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -155,99 +150,28 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoHoleMakingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoHoleMakingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for HoleReferenceEdge
+	 * Enumeration strings for numHoleReferenceEdge
 	 */
 
-	public enum EHoleReferenceEdge
+	public enum EnumHoleReferenceEdge
 	{
 		Left, Right, Top, Bottom, Pattern;
 
-		public static EHoleReferenceEdge getEnum(String val)
+		public static EnumHoleReferenceEdge getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EHoleReferenceEdge.class, val, EHoleReferenceEdge.Left);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumHoleReferenceEdge.class, val, EnumHoleReferenceEdge.Left);
 		}
-	}
-
-	/**
-	 * Enumeration strings for HoleReferenceEdge
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumHoleReferenceEdge extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumHoleReferenceEdge(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumHoleReferenceEdge getEnum(String enumName)
-		{
-			return (EnumHoleReferenceEdge) getEnum(EnumHoleReferenceEdge.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumHoleReferenceEdge getEnum(int enumValue)
-		{
-			return (EnumHoleReferenceEdge) getEnum(EnumHoleReferenceEdge.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumHoleReferenceEdge.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumHoleReferenceEdge.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumHoleReferenceEdge.class);
-		}
-
-		/**  */
-		public static final EnumHoleReferenceEdge Left = new EnumHoleReferenceEdge("Left");
-		/**  */
-		public static final EnumHoleReferenceEdge Right = new EnumHoleReferenceEdge("Right");
-		/**  */
-		public static final EnumHoleReferenceEdge Top = new EnumHoleReferenceEdge("Top");
-		/**  */
-		public static final EnumHoleReferenceEdge Bottom = new EnumHoleReferenceEdge("Bottom");
-		/**  */
-		public static final EnumHoleReferenceEdge Pattern = new EnumHoleReferenceEdge("Pattern");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -259,9 +183,9 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setHoleReferenceEdge(EHoleReferenceEdge enumVar)
+	public void setHoleReferenceEdge(final EnumHoleReferenceEdge enumVar)
 	{
-		setAttribute(AttributeName.HOLEREFERENCEEDGE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.HOLEREFERENCEEDGE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -269,35 +193,6 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EHoleReferenceEdge getEHoleReferenceEdge()
-	{
-		return EHoleReferenceEdge.getEnum(getAttribute(AttributeName.HOLEREFERENCEEDGE, null, "Left"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute HoleReferenceEdge
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute HoleReferenceEdge
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetHoleReferenceEdge(EHoleReferenceEdge) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setHoleReferenceEdge(EnumHoleReferenceEdge enumVar)
-	{
-		setAttribute(AttributeName.HOLEREFERENCEEDGE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute HoleReferenceEdge
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EHoleReferenceEdge GetEHoleReferenceEdge() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumHoleReferenceEdge getHoleReferenceEdge()
 	{
 		return EnumHoleReferenceEdge.getEnum(getAttribute(AttributeName.HOLEREFERENCEEDGE, null, "Left"));
@@ -313,7 +208,7 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setExtent(JDFXYPair value)
+	public void setExtent(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.EXTENT, value, null);
 	}
@@ -326,8 +221,8 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	 */
 	public JDFXYPair getExtent()
 	{
-		String strAttrName = getAttribute(AttributeName.EXTENT, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.EXTENT, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 

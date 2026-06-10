@@ -88,6 +88,7 @@ import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoPhaseTime : public JDFAudit
@@ -103,7 +104,8 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.END, 0x3333333333l, AttributeInfo.EnumAttributeType.dateTime, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.START, 0x2222222222l, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.STATUS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.STATUS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumNodeStatus.class, 0), null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 	}
 
@@ -136,7 +138,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPhaseTime(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPhaseTime(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -148,7 +150,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPhaseTime(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPhaseTime(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -161,7 +163,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPhaseTime(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPhaseTime(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -182,7 +184,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setEnd(JDFDate value)
+	public void setEnd(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -199,8 +201,8 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 */
 	public JDFDate getEnd()
 	{
-		String str = getAttribute(AttributeName.END, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.END, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -214,7 +216,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setStart(JDFDate value)
+	public void setStart(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -231,8 +233,8 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 */
 	public JDFDate getStart()
 	{
-		String str = getAttribute(AttributeName.START, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.START, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -246,7 +248,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStatusDetails(String value)
+	public void setStatusDetails(final String value)
 	{
 		setAttribute(AttributeName.STATUSDETAILS, value, null);
 	}
@@ -293,7 +295,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevice the element
 	 */
-	public JDFDevice getCreateDevice(int iSkip)
+	public JDFDevice getCreateDevice(final int iSkip)
 	{
 		return (JDFDevice) getCreateElement_JDFElement(ElementName.DEVICE, null, iSkip);
 	}
@@ -305,7 +307,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 * @return JDFDevice the element
 	 *         default is getDevice(0)
 	 */
-	public JDFDevice getDevice(int iSkip)
+	public JDFDevice getDevice(final int iSkip)
 	{
 		return (JDFDevice) getElement(ElementName.DEVICE, null, iSkip);
 	}
@@ -335,7 +337,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refDevice(JDFDevice refTarget)
+	public void refDevice(final JDFDevice refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -367,7 +369,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 * @return JDFEmployee the element
 	 */
 	@Override
-	public JDFEmployee getCreateEmployee(int iSkip)
+	public JDFEmployee getCreateEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -380,7 +382,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 *         default is getEmployee(0)
 	 */
 	@Override
-	public JDFEmployee getEmployee(int iSkip)
+	public JDFEmployee getEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -412,7 +414,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refEmployee(JDFEmployee refTarget)
+	public void refEmployee(final JDFEmployee refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -443,7 +445,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 * @param iSkip number of elements to skip
 	 * @return JDFActivity the element
 	 */
-	public JDFActivity getCreateActivity(int iSkip)
+	public JDFActivity getCreateActivity(final int iSkip)
 	{
 		return (JDFActivity) getCreateElement_JDFElement(ElementName.ACTIVITY, null, iSkip);
 	}
@@ -455,7 +457,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 * @return JDFActivity the element
 	 *         default is getActivity(0)
 	 */
-	public JDFActivity getActivity(int iSkip)
+	public JDFActivity getActivity(final int iSkip)
 	{
 		return (JDFActivity) getElement(ElementName.ACTIVITY, null, iSkip);
 	}
@@ -537,7 +539,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 * @param iSkip number of elements to skip
 	 * @return JDFModulePhase the element
 	 */
-	public JDFModulePhase getCreateModulePhase(int iSkip)
+	public JDFModulePhase getCreateModulePhase(final int iSkip)
 	{
 		return (JDFModulePhase) getCreateElement_JDFElement(ElementName.MODULEPHASE, null, iSkip);
 	}
@@ -549,7 +551,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 * @return JDFModulePhase the element
 	 *         default is getModulePhase(0)
 	 */
-	public JDFModulePhase getModulePhase(int iSkip)
+	public JDFModulePhase getModulePhase(final int iSkip)
 	{
 		return (JDFModulePhase) getElement(ElementName.MODULEPHASE, null, iSkip);
 	}
@@ -600,7 +602,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
-	public JDFPart getCreatePart(int iSkip)
+	public JDFPart getCreatePart(final int iSkip)
 	{
 		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
@@ -612,7 +614,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 * @return JDFPart the element
 	 *         default is getPart(0)
 	 */
-	public JDFPart getPart(int iSkip)
+	public JDFPart getPart(final int iSkip)
 	{
 		return (JDFPart) getElement(ElementName.PART, null, iSkip);
 	}

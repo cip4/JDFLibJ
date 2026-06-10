@@ -100,7 +100,7 @@ public class JDFIntegerRange extends JDFRange
 
 	/**
 	 * factory for JDFIntegerRange that silently returns null in case of illegal strings
-	 * 
+	 *
 	 * @param s the string to parse
 	 * @return the JDFIntegerRange, null if s is not compatible
 	 */
@@ -124,7 +124,6 @@ public class JDFIntegerRange extends JDFRange
 	}
 
 	/**
-	 *
 	 * create a JDFIntegerRange from a string - return null if no go
 	 *
 	 * @param range
@@ -209,7 +208,6 @@ public class JDFIntegerRange extends JDFRange
 	 * constructs an integer range with the given string
 	 *
 	 * @param s the given string
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFIntegerRange(final String s) throws DataFormatException
@@ -220,9 +218,8 @@ public class JDFIntegerRange extends JDFRange
 	/**
 	 * constructs an integer range with the given string
 	 *
-	 * @param s the given string
+	 * @param s    the given string
 	 * @param xdef value which is used for negative numbers the value that -1 will represent in this range
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFIntegerRange(final String s, final int xdef) throws DataFormatException
@@ -277,7 +274,6 @@ public class JDFIntegerRange extends JDFRange
 	 * isValid - validate the given String
 	 *
 	 * @param s the given string
-	 *
 	 * @return boolean - false if the String has not a valid format
 	 */
 	public boolean isValid(final String s)
@@ -305,11 +301,7 @@ public class JDFIntegerRange extends JDFRange
 		{
 			return true;
 		}
-		if (other == null)
-		{
-			return false;
-		}
-		if (!other.getClass().equals(getClass()))
+		if ((other == null) || !other.getClass().equals(getClass()))
 		{
 			return false;
 		}
@@ -453,7 +445,6 @@ public class JDFIntegerRange extends JDFRange
 	 * inRange - returns true if (lower value >= x <= upper value)
 	 *
 	 * @param x comparison value
-	 *
 	 * @return boolean - true if x in range
 	 */
 	public boolean inRange(final int x)
@@ -465,7 +456,6 @@ public class JDFIntegerRange extends JDFRange
 	 * isPartOfRange - is range 'r' within this range?
 	 *
 	 * @param r the range to test
-	 *
 	 * @return boolean - true if range 'r' is within this range, else false
 	 */
 	@Override
@@ -509,7 +499,6 @@ public class JDFIntegerRange extends JDFRange
 	 * </pre>
 	 *
 	 * @param x the new value
-	 *
 	 * @return boolean - true if successful
 	 */
 	public boolean append(final int x)
@@ -555,9 +544,7 @@ public class JDFIntegerRange extends JDFRange
 	 * the JDF library this method is called Element.
 	 *
 	 * @param i the position, if it is a negativ value start counting from the right side +1
-	 *
 	 * @return int the value at the ith position
-	 *
 	 * @throws NoSuchElementException - if the index is out of range
 	 */
 	public int getElement(final int i) throws NoSuchElementException
@@ -648,7 +635,9 @@ public class JDFIntegerRange extends JDFRange
 		{
 			final int ii = getElement(i);
 			if (ii >= 0)
+			{
 				irl.add(ii);
+			}
 		}
 		return irl;
 

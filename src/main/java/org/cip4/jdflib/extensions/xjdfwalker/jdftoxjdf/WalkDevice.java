@@ -45,9 +45,7 @@ import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.JDFDevice;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkDevice extends WalkResource
 {

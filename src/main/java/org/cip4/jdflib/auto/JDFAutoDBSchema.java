@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -94,8 +89,8 @@ public abstract class JDFAutoDBSchema extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DBSCHEMATYPE, 0x4444422222l, AttributeInfo.EnumAttributeType.enumeration, EnumDBSchemaType.getEnum(0),
-				null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DBSCHEMATYPE, 0x4444422222l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumDBSchemaType.class, 0), null);
 	}
 
 	@Override
@@ -110,7 +105,7 @@ public abstract class JDFAutoDBSchema extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDBSchema(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDBSchema(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -122,7 +117,7 @@ public abstract class JDFAutoDBSchema extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDBSchema(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDBSchema(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -135,7 +130,7 @@ public abstract class JDFAutoDBSchema extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDBSchema(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDBSchema(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -146,7 +141,7 @@ public abstract class JDFAutoDBSchema extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -161,89 +156,22 @@ public abstract class JDFAutoDBSchema extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for DBSchemaType
+	 * Enumeration strings for numDBSchemaType
 	 */
 
-	public enum EDBSchemaType
+	public enum EnumDBSchemaType
 	{
 		CommaDelimited, SQL, XML;
 
-		public static EDBSchemaType getEnum(String val)
+		public static EnumDBSchemaType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EDBSchemaType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumDBSchemaType.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for DBSchemaType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumDBSchemaType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumDBSchemaType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumDBSchemaType getEnum(String enumName)
-		{
-			return (EnumDBSchemaType) getEnum(EnumDBSchemaType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDBSchemaType getEnum(int enumValue)
-		{
-			return (EnumDBSchemaType) getEnum(EnumDBSchemaType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDBSchemaType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDBSchemaType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDBSchemaType.class);
-		}
-
-		/**  */
-		public static final EnumDBSchemaType CommaDelimited = new EnumDBSchemaType("CommaDelimited");
-		/**  */
-		public static final EnumDBSchemaType SQL = new EnumDBSchemaType("SQL");
-		/**  */
-		public static final EnumDBSchemaType XML = new EnumDBSchemaType("XML");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -255,9 +183,9 @@ public abstract class JDFAutoDBSchema extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDBSchemaType(EDBSchemaType enumVar)
+	public void setDBSchemaType(final EnumDBSchemaType enumVar)
 	{
-		setAttribute(AttributeName.DBSCHEMATYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DBSCHEMATYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -265,35 +193,6 @@ public abstract class JDFAutoDBSchema extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EDBSchemaType getEDBSchemaType()
-	{
-		return EDBSchemaType.getEnum(getAttribute(AttributeName.DBSCHEMATYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute DBSchemaType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute DBSchemaType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDBSchemaType(EDBSchemaType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDBSchemaType(EnumDBSchemaType enumVar)
-	{
-		setAttribute(AttributeName.DBSCHEMATYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute DBSchemaType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EDBSchemaType GetEDBSchemaType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumDBSchemaType getDBSchemaType()
 	{
 		return EnumDBSchemaType.getEnum(getAttribute(AttributeName.DBSCHEMATYPE, null, null));

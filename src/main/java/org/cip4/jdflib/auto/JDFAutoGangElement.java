@@ -73,8 +73,6 @@ package org.cip4.jdflib.auto;
 import java.util.Collection;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoMedia.EGrainDirection;
-import org.cip4.jdflib.auto.JDFAutoMedia.EnumGrainDirection;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -90,6 +88,7 @@ import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoGangElement : public JDFElement
@@ -111,7 +110,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.FILLPRIORITY, 0x3333311111l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.GANGELEMENTID, 0x2222211111l, AttributeInfo.EnumAttributeType.ID, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.GRAINDIRECTION, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumGrainDirection.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumGrainDirection.class, 0), null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.GROUPCODE, 0x3333311111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.JOBID, 0x3333311111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.MAXQUANTITY, 0x3333311111l, AttributeInfo.EnumAttributeType.integer, null, null);
@@ -156,7 +155,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGangElement(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoGangElement(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -168,7 +167,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGangElement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoGangElement(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -181,16 +180,28 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoGangElement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoGangElement(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * Enumeration strings for numGrainDirection
 	 */
+
+	public enum EnumGrainDirection
+	{
+		Any, Both, ShortEdge, LongEdge, SameDirection, XDirection, YDirection;
+
+		public static EnumGrainDirection getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumGrainDirection.class, val, null);
+		}
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
+		 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -202,7 +213,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAssemblyIDs(VString value)
+	public void setAssemblyIDs(final VString value)
 	{
 		setAttribute(AttributeName.ASSEMBLYIDS, value, null);
 	}
@@ -214,8 +225,8 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 */
 	public VString getAssemblyIDs()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -230,7 +241,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCollapseBleeds(boolean value)
+	public void setCollapseBleeds(final boolean value)
 	{
 		setAttribute(AttributeName.COLLAPSEBLEEDS, value, null);
 	}
@@ -255,7 +266,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCustomerID(String value)
+	public void setCustomerID(final String value)
 	{
 		setAttribute(AttributeName.CUSTOMERID, value, null);
 	}
@@ -280,7 +291,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDimension(JDFXYPair value)
+	public void setDimension(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.DIMENSION, value, null);
 	}
@@ -293,8 +304,8 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 */
 	public JDFXYPair getDimension()
 	{
-		String strAttrName = getAttribute(AttributeName.DIMENSION, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.DIMENSION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -308,7 +319,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setDueDate(JDFDate value)
+	public void setDueDate(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -325,8 +336,8 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 */
 	public JDFDate getDueDate()
 	{
-		String str = getAttribute(AttributeName.DUEDATE, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.DUEDATE, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -340,7 +351,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFillPriority(int value)
+	public void setFillPriority(final int value)
 	{
 		setAttribute(AttributeName.FILLPRIORITY, value, null);
 	}
@@ -365,7 +376,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGangElementID(String value)
+	public void setGangElementID(final String value)
 	{
 		setAttribute(AttributeName.GANGELEMENTID, value, null);
 	}
@@ -390,9 +401,9 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setGrainDirection(EGrainDirection enumVar)
+	public void setGrainDirection(final EnumGrainDirection enumVar)
 	{
-		setAttribute(AttributeName.GRAINDIRECTION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.GRAINDIRECTION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -400,35 +411,6 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EGrainDirection getEGrainDirection()
-	{
-		return EGrainDirection.getEnum(getAttribute(AttributeName.GRAINDIRECTION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute GrainDirection
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute GrainDirection
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetGrainDirection(EGrainDirection) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setGrainDirection(EnumGrainDirection enumVar)
-	{
-		setAttribute(AttributeName.GRAINDIRECTION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute GrainDirection
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EGrainDirection GetEGrainDirection() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumGrainDirection getGrainDirection()
 	{
 		return EnumGrainDirection.getEnum(getAttribute(AttributeName.GRAINDIRECTION, null, null));
@@ -444,7 +426,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGroupCode(String value)
+	public void setGroupCode(final String value)
 	{
 		setAttribute(AttributeName.GROUPCODE, value, null);
 	}
@@ -469,7 +451,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -494,7 +476,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaxQuantity(int value)
+	public void setMaxQuantity(final int value)
 	{
 		setAttribute(AttributeName.MAXQUANTITY, value, null);
 	}
@@ -519,7 +501,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMinQuantity(int value)
+	public void setMinQuantity(final int value)
 	{
 		setAttribute(AttributeName.MINQUANTITY, value, null);
 	}
@@ -544,7 +526,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNPage(int value)
+	public void setNPage(final int value)
 	{
 		setAttribute(AttributeName.NPAGE, value, null);
 	}
@@ -569,7 +551,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNumColors(JDFXYPair value)
+	public void setNumColors(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.NUMCOLORS, value, null);
 	}
@@ -582,8 +564,8 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 */
 	public JDFXYPair getNumColors()
 	{
-		String strAttrName = getAttribute(AttributeName.NUMCOLORS, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.NUMCOLORS, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -597,7 +579,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNumberUp(JDFXYPair value)
+	public void setNumberUp(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.NUMBERUP, value, null);
 	}
@@ -610,8 +592,8 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 */
 	public JDFXYPair getNumberUp()
 	{
-		String strAttrName = getAttribute(AttributeName.NUMBERUP, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.NUMBERUP, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -625,7 +607,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOneSheet(String value)
+	public void setOneSheet(final String value)
 	{
 		setAttribute(AttributeName.ONESHEET, value, null);
 	}
@@ -650,7 +632,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOperations(VString value)
+	public void setOperations(final VString value)
 	{
 		setAttribute(AttributeName.OPERATIONS, value, null);
 	}
@@ -662,8 +644,8 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 */
 	public VString getOperations()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.OPERATIONS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.OPERATIONS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -678,7 +660,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOrderQuantity(int value)
+	public void setOrderQuantity(final int value)
 	{
 		setAttribute(AttributeName.ORDERQUANTITY, value, null);
 	}
@@ -703,7 +685,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPageDimension(JDFXYPair value)
+	public void setPageDimension(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.PAGEDIMENSION, value, null);
 	}
@@ -716,8 +698,8 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 */
 	public JDFXYPair getPageDimension()
 	{
-		String strAttrName = getAttribute(AttributeName.PAGEDIMENSION, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PAGEDIMENSION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -731,7 +713,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPlacedQuantity(int value)
+	public void setPlacedQuantity(final int value)
 	{
 		setAttribute(AttributeName.PLACEDQUANTITY, value, null);
 	}
@@ -756,7 +738,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPriority(int value)
+	public void setPriority(final int value)
 	{
 		setAttribute(AttributeName.PRIORITY, value, null);
 	}
@@ -781,7 +763,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProductID(String value)
+	public void setProductID(final String value)
 	{
 		setAttribute(AttributeName.PRODUCTID, value, null);
 	}
@@ -828,7 +810,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFMedia the element
 	 */
-	public JDFMedia getCreateMedia(int iSkip)
+	public JDFMedia getCreateMedia(final int iSkip)
 	{
 		return (JDFMedia) getCreateElement_JDFElement(ElementName.MEDIA, null, iSkip);
 	}
@@ -840,7 +822,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 * @return JDFMedia the element
 	 *         default is getMedia(0)
 	 */
-	public JDFMedia getMedia(int iSkip)
+	public JDFMedia getMedia(final int iSkip)
 	{
 		return (JDFMedia) getElement(ElementName.MEDIA, null, iSkip);
 	}
@@ -870,7 +852,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMedia(JDFMedia refTarget)
+	public void refMedia(final JDFMedia refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -901,7 +883,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFRunList the element
 	 */
-	public JDFRunList getCreateRunList(int iSkip)
+	public JDFRunList getCreateRunList(final int iSkip)
 	{
 		return (JDFRunList) getCreateElement_JDFElement(ElementName.RUNLIST, null, iSkip);
 	}
@@ -913,7 +895,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 * @return JDFRunList the element
 	 *         default is getRunList(0)
 	 */
-	public JDFRunList getRunList(int iSkip)
+	public JDFRunList getRunList(final int iSkip)
 	{
 		return (JDFRunList) getElement(ElementName.RUNLIST, null, iSkip);
 	}
@@ -943,7 +925,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refRunList(JDFRunList refTarget)
+	public void refRunList(final JDFRunList refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1046,7 +1028,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refStrippingParams(JDFStrippingParams refTarget)
+	public void refStrippingParams(final JDFStrippingParams refTarget)
 	{
 		refElement(refTarget);
 	}

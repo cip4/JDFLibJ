@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -97,7 +92,8 @@ public abstract class JDFAutoLongGlue extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.GLUEBRAND, 0x4444444443l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.GLUETYPE, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumGlueType.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.GLUETYPE, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumGlueType.class, 0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.LINEWIDTH, 0x4444444443l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.MELTINGTEMPERATURE, 0x4444444443l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.WORKINGLIST, 0x4444444443l, AttributeInfo.EnumAttributeType.string, null, "0 1000000000");
@@ -116,7 +112,7 @@ public abstract class JDFAutoLongGlue extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLongGlue(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoLongGlue(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -128,7 +124,7 @@ public abstract class JDFAutoLongGlue extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLongGlue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoLongGlue(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -141,95 +137,28 @@ public abstract class JDFAutoLongGlue extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoLongGlue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoLongGlue(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for GlueType
+	 * Enumeration strings for numGlueType
 	 */
 
-	public enum EGlueType
+	public enum EnumGlueType
 	{
 		ColdGlue, Hotmelt, PUR;
 
-		public static EGlueType getEnum(String val)
+		public static EnumGlueType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EGlueType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumGlueType.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for GlueType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumGlueType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumGlueType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumGlueType getEnum(String enumName)
-		{
-			return (EnumGlueType) getEnum(EnumGlueType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumGlueType getEnum(int enumValue)
-		{
-			return (EnumGlueType) getEnum(EnumGlueType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumGlueType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumGlueType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumGlueType.class);
-		}
-
-		/**  */
-		public static final EnumGlueType ColdGlue = new EnumGlueType("ColdGlue");
-		/**  */
-		public static final EnumGlueType Hotmelt = new EnumGlueType("Hotmelt");
-		/**  */
-		public static final EnumGlueType PUR = new EnumGlueType("PUR");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -241,7 +170,7 @@ public abstract class JDFAutoLongGlue extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGlueBrand(String value)
+	public void setGlueBrand(final String value)
 	{
 		setAttribute(AttributeName.GLUEBRAND, value, null);
 	}
@@ -266,9 +195,9 @@ public abstract class JDFAutoLongGlue extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setGlueType(EGlueType enumVar)
+	public void setGlueType(final EnumGlueType enumVar)
 	{
-		setAttribute(AttributeName.GLUETYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.GLUETYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -276,35 +205,6 @@ public abstract class JDFAutoLongGlue extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EGlueType getEGlueType()
-	{
-		return EGlueType.getEnum(getAttribute(AttributeName.GLUETYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute GlueType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute GlueType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetGlueType(EGlueType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setGlueType(EnumGlueType enumVar)
-	{
-		setAttribute(AttributeName.GLUETYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute GlueType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EGlueType GetEGlueType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumGlueType getGlueType()
 	{
 		return EnumGlueType.getEnum(getAttribute(AttributeName.GLUETYPE, null, null));
@@ -320,7 +220,7 @@ public abstract class JDFAutoLongGlue extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLineWidth(double value)
+	public void setLineWidth(final double value)
 	{
 		setAttribute(AttributeName.LINEWIDTH, value, null);
 	}
@@ -345,7 +245,7 @@ public abstract class JDFAutoLongGlue extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMeltingTemperature(int value)
+	public void setMeltingTemperature(final int value)
 	{
 		setAttribute(AttributeName.MELTINGTEMPERATURE, value, null);
 	}
@@ -370,7 +270,7 @@ public abstract class JDFAutoLongGlue extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWorkingList(JDFNumberList value)
+	public void setWorkingList(final JDFNumberList value)
 	{
 		setAttribute(AttributeName.WORKINGLIST, value, null);
 	}
@@ -383,8 +283,8 @@ public abstract class JDFAutoLongGlue extends JDFElement
 	 */
 	public JDFNumberList getWorkingList()
 	{
-		String strAttrName = getAttribute(AttributeName.WORKINGLIST, null, null);
-		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.WORKINGLIST, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -398,7 +298,7 @@ public abstract class JDFAutoLongGlue extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setXOffset(double value)
+	public void setXOffset(final double value)
 	{
 		setAttribute(AttributeName.XOFFSET, value, null);
 	}

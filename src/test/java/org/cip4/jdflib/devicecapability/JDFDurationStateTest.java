@@ -71,8 +71,8 @@
  * JDFStateBaseTest.java
  *
  * @author Elena Skobchenko
- * 
- * Copyright (c) 2001-2004 The International Cooperation for the Integration 
+ *
+ * Copyright (c) 2001-2004 The International Cooperation for the Integration
  * of Processes in  Prepress, Press and Postpress (CIP4).  All rights reserved.
  */
 package org.cip4.jdflib.devicecapability;
@@ -90,6 +90,7 @@ import org.cip4.jdflib.util.JDFDuration;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 class JDFDurationStateTest extends JDFTestCaseBase
 {
 
@@ -100,7 +101,7 @@ class JDFDurationStateTest extends JDFTestCaseBase
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		JDFDoc doc = new JDFDoc("DurationState");
+		final JDFDoc doc = new JDFDoc("DurationState");
 		iState = (JDFDurationState) doc.getRoot();
 
 	}
@@ -110,23 +111,19 @@ class JDFDurationStateTest extends JDFTestCaseBase
 	@Test
 	public final void testFitsValue()
 	{
-		JDFParser p = new JDFParser();
-		String strNode = "<DurationState Name=\"BitDepth\" DefaultValue=\"PT1H\" AllowedValueList=\"PT1H~PT4H30M5S\"/>";
+		final JDFParser p = new JDFParser();
+		final String strNode = "<DurationState Name=\"BitDepth\" DefaultValue=\"PT1H\" AllowedValueList=\"PT1H~PT4H30M5S\"/>";
 
-		JDFDoc jdfDoc = p.parseString(strNode);
-		JDFDurationState state = (JDFDurationState) jdfDoc.getRoot();
+		final JDFDoc jdfDoc = p.parseString(strNode);
+		final JDFDurationState state = (JDFDurationState) jdfDoc.getRoot();
 
 		state.setListType(EnumListType.SingleValue);
-		Assertions.assertTrue(state.fitsValue("PT2H",
-				JDFBaseDataTypes.EnumFitsValue.Allowed), "ListType=SingleValue");
-		Assertions.assertFalse(state.fitsValue("PT6H",
-				JDFBaseDataTypes.EnumFitsValue.Allowed), "ListType=SingleValue");
+		Assertions.assertTrue(state.fitsValue("PT2H", JDFBaseDataTypes.EnumFitsValue.Allowed), "ListType=SingleValue");
+		Assertions.assertFalse(state.fitsValue("PT6H", JDFBaseDataTypes.EnumFitsValue.Allowed), "ListType=SingleValue");
 
 		state.removeAttribute(AttributeName.ALLOWEDVALUELIST);
-		Assertions.assertTrue(state.fitsValue("PT2H",
-				JDFBaseDataTypes.EnumFitsValue.Allowed), "ListType=SingleValue");
-		Assertions.assertTrue(state.fitsValue("PT6H",
-				JDFBaseDataTypes.EnumFitsValue.Allowed), "ListType=SingleValue");
+		Assertions.assertTrue(state.fitsValue("PT2H", JDFBaseDataTypes.EnumFitsValue.Allowed), "ListType=SingleValue");
+		Assertions.assertTrue(state.fitsValue("PT6H", JDFBaseDataTypes.EnumFitsValue.Allowed), "ListType=SingleValue");
 
 	}
 
@@ -139,8 +136,7 @@ class JDFDurationStateTest extends JDFTestCaseBase
 		iState.setCurrentValue(new JDFDuration("PT30M"));
 		iState.setListType(EnumListType.SingleValue);
 		Assertions.assertTrue(iState.isValid(EnumValidationLevel.Complete));
-		final JDFDurationRangeList integerRList = new JDFDurationRangeList(
-				"PT2S PT5S");
+		final JDFDurationRangeList integerRList = new JDFDurationRangeList("PT2S PT5S");
 		iState.setAllowedValueList(integerRList);
 		Assertions.assertTrue(iState.isValid(EnumValidationLevel.Complete));
 		Assertions.assertTrue(iState.isValid(EnumValidationLevel.Complete));

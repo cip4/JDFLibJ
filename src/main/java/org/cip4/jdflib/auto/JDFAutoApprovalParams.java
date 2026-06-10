@@ -121,7 +121,7 @@ public abstract class JDFAutoApprovalParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoApprovalParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoApprovalParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoApprovalParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoApprovalParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoApprovalParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -146,7 +146,7 @@ public abstract class JDFAutoApprovalParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoApprovalParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoApprovalParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -157,7 +157,7 @@ public abstract class JDFAutoApprovalParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -187,7 +187,7 @@ public abstract class JDFAutoApprovalParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMinApprovals(int value)
+	public void setMinApprovals(final int value)
 	{
 		setAttribute(AttributeName.MINAPPROVALS, value, null);
 	}
@@ -234,7 +234,7 @@ public abstract class JDFAutoApprovalParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFApprovalPerson the element
 	 */
-	public JDFApprovalPerson getCreateApprovalPerson(int iSkip)
+	public JDFApprovalPerson getCreateApprovalPerson(final int iSkip)
 	{
 		return (JDFApprovalPerson) getCreateElement_JDFElement(ElementName.APPROVALPERSON, null, iSkip);
 	}
@@ -246,7 +246,7 @@ public abstract class JDFAutoApprovalParams extends JDFResource
 	 * @return JDFApprovalPerson the element
 	 *         default is getApprovalPerson(0)
 	 */
-	public JDFApprovalPerson getApprovalPerson(int iSkip)
+	public JDFApprovalPerson getApprovalPerson(final int iSkip)
 	{
 		return (JDFApprovalPerson) getElement(ElementName.APPROVALPERSON, null, iSkip);
 	}

@@ -57,8 +57,6 @@ class StorageHotFolderListenerTest extends JDFTestCaseBase
 	{
 
 		/**
-		 *
-		 *
 		 * @see org.cip4.jdflib.util.HotFolderListener#hotFile(java.io.File)
 		 */
 		@Override
@@ -73,8 +71,6 @@ class StorageHotFolderListenerTest extends JDFTestCaseBase
 	{
 
 		/**
-		 *
-		 *
 		 * @see org.cip4.jdflib.util.HotFolderListener#hotFile(java.io.File)
 		 */
 		@Override
@@ -168,7 +164,6 @@ class StorageHotFolderListenerTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testBoom2() throws IOException
@@ -187,7 +182,6 @@ class StorageHotFolderListenerTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testHandleBad() throws IOException

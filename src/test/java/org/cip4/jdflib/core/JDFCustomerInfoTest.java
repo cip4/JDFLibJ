@@ -55,7 +55,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         before July 7, 2009
  */
 class JDFCustomerInfoTest extends JDFTestCaseBase

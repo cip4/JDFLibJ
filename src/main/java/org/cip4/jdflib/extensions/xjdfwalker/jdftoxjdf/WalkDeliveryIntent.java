@@ -75,9 +75,7 @@ import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkDeliveryIntent extends WalkResource
 {
@@ -90,7 +88,6 @@ public class WalkDeliveryIntent extends WalkResource
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResLink#isProductResource(org.cip4.jdflib.resource.JDFResource)
 	 */
 	@Override
@@ -111,7 +108,6 @@ public class WalkDeliveryIntent extends WalkResource
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResource#getClassName(org.cip4.jdflib.resource.JDFResource)
 	 */
 	@Override
@@ -121,7 +117,6 @@ public class WalkDeliveryIntent extends WalkResource
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#getXJDFName(org.cip4.jdflib.core.KElement)
 	 */
 	@Override

@@ -77,9 +77,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFQueueEntry;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkQueueEntry extends WalkJDFElement
 {
@@ -115,24 +113,24 @@ public class WalkQueueEntry extends WalkJDFElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
-		String status = map.get(AttributeName.STATUS);
-		if (EnumQueueEntryStatus.Running.getName().equals(status))
+		final String status = map.get(AttributeName.STATUS);
+		if (EnumQueueEntryStatus.Running.name().equals(status))
 		{
 			map.put(AttributeName.STATUS, "InProgress");
 		}
-		else if (EnumQueueEntryStatus.Held.getName().equals(status))
+		else if (EnumQueueEntryStatus.Held.name().equals(status))
 		{
 			map.put(AttributeName.STATUS, "Waiting");
 			map.put(AttributeName.ACTIVATION, "Held");
 		}
-		else if (EnumQueueEntryStatus.Removed.getName().equals(status))
+		else if (EnumQueueEntryStatus.Removed.name().equals(status))
 		{
 			map.put(AttributeName.STATUS, "Completed");
 			map.put(AttributeName.STATUSDETAILS, "Removed");
 		}
-		else if (EnumQueueEntryStatus.PendingReturn.getName().equals(status))
+		else if (EnumQueueEntryStatus.PendingReturn.name().equals(status))
 		{
 			map.put(AttributeName.STATUS, "Completed");
 			map.put(AttributeName.STATUSDETAILS, "PendingReturn");

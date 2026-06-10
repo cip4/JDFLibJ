@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
@@ -82,14 +82,15 @@ import org.cip4.jdflib.resource.intent.JDFColorIntent;
 
 /**
  * TODO discuss and implement varying numcolors for front and back, e.g. 4/1
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class WalkColorIntent extends WalkIntentResource
 {
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public WalkColorIntent()
 	{
@@ -111,33 +112,34 @@ public class WalkColorIntent extends WalkIntentResource
 		{
 			evaluateNumColors(e, trackElem);
 		}
-		for (String att : backAtts)
+		for (final String att : backAtts)
 		{
 			evaluateBackAttribute(e, att);
 		}
 
-		KElement ret = super.walk(e, trackElem);
+		final KElement ret = super.walk(e, trackElem);
 		repartitionSide(e, trackElem);
 		return ret;
 	}
 
 	/**
 	 * repartition in case stuff that is side dependent exists - note that trackEleme is the new element
+	 *
 	 * @param e
 	 */
 	private void repartitionSide(final KElement e, final KElement trackElem)
 	{
-		KElement cuBack = e.getElement("ColorsUsedBack");
-		KElement cuFront = e.getElement("ColorsUsed");
+		final KElement cuBack = e.getElement("ColorsUsedBack");
+		final KElement cuFront = e.getElement("ColorsUsed");
 		if (cuBack != null && cuFront != null)
 		{
-			VElement sepsFront = cuFront.getChildElementVector(ElementName.SEPARATIONSPEC, null);
-			VElement sepsBack = cuBack.getChildElementVector(ElementName.SEPARATIONSPEC, null);
+			final VElement sepsFront = cuFront.getChildElementVector(ElementName.SEPARATIONSPEC, null);
+			final VElement sepsBack = cuBack.getChildElementVector(ElementName.SEPARATIONSPEC, null);
 			if (!sepsFront.isEqual(sepsBack))
 			{
 				if (cuFront.getElement(ElementName.SEPARATIONSPEC) != null)
 				{
-					JDFResource ciFront = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Front", null);
+					final JDFResource ciFront = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Front", null);
 					ciFront.moveElement(cuFront, null);
 				}
 				else
@@ -146,7 +148,7 @@ public class WalkColorIntent extends WalkIntentResource
 				}
 				if (cuBack.getElement(ElementName.SEPARATIONSPEC) != null)
 				{
-					JDFResource ciBack = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Back", null);
+					final JDFResource ciBack = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Back", null);
 					cuBack.renameElement("ColorsUsed", null);
 					ciBack.moveElement(cuBack, null);
 				}
@@ -165,7 +167,7 @@ public class WalkColorIntent extends WalkIntentResource
 		{
 			if (cuFront.getElement(ElementName.SEPARATIONSPEC) != null)
 			{
-				JDFResource ciFront = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Front", null);
+				final JDFResource ciFront = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Front", null);
 				ciFront.moveElement(cuFront, null);
 			}
 			else
@@ -177,7 +179,7 @@ public class WalkColorIntent extends WalkIntentResource
 		{
 			if (cuBack.getElement(ElementName.SEPARATIONSPEC) != null)
 			{
-				JDFResource ciBack = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Back", null);
+				final JDFResource ciBack = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Back", null);
 				ciBack.moveElement(cuBack, null);
 			}
 			else
@@ -185,19 +187,19 @@ public class WalkColorIntent extends WalkIntentResource
 				cuBack.deleteNode();
 			}
 		}
-		for (String att : backAtts)
+		for (final String att : backAtts)
 		{
-			String back = att + "Back";
-			KElement coatBack = e.getElement(back);
+			final String back = att + "Back";
+			final KElement coatBack = e.getElement(back);
 			if (coatBack != null)
 			{
-				KElement coatings = e.getElement(att);
+				final KElement coatings = e.getElement(att);
 				if (coatings != null)
 				{
-					JDFResource ciFront = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Front", null);
+					final JDFResource ciFront = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Front", null);
 					ciFront.moveElement(coatings, null);
 				}
-				JDFResource ciBack = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Back", null);
+				final JDFResource ciBack = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Back", null);
 				ciBack.moveElement(e.getElement(back), null).renameElement(att, null);
 			}
 			evaluateBackAttribute(e, att);
@@ -213,9 +215,11 @@ public class WalkColorIntent extends WalkIntentResource
 		if (e.hasAttribute("ColorsUsedBack"))
 		{
 			if (sl != null)
+			{
 				sl = (JDFSeparationList) sl.deleteNode();
+			}
 			e.renameAttribute("ColorsUsedBack", "ColorsUsed", null, null);
-			JDFSeparationList slBack = createSeparationList(e, "ColorsUsed");
+			final JDFSeparationList slBack = createSeparationList(e, "ColorsUsed");
 			slBack.renameElement("ColorsUsedBack", null);
 			if (sl != null)
 			{
@@ -224,14 +228,14 @@ public class WalkColorIntent extends WalkIntentResource
 		}
 	}
 
-	private void evaluateBackAttribute(final KElement e, String front)
+	private void evaluateBackAttribute(final KElement e, final String front)
 	{
-		String back = front + "Back";
+		final String back = front + "Back";
 		if (e.hasAttribute(back))
 		{
-			String frontVal = e.getAttribute(front, null, null);
+			final String frontVal = e.getAttribute(front, null, null);
 			e.renameAttribute(back, front, null, null);
-			KElement span = xjdfToJDFImpl.attributeToSpan(e, front);
+			final KElement span = xjdfToJDFImpl.attributeToSpan(e, front);
 			span.renameElement(back, null);
 			e.setAttribute(front, frontVal);
 		}
@@ -243,27 +247,27 @@ public class WalkColorIntent extends WalkIntentResource
 	 */
 	private void evaluateNumColors(final KElement e, final KElement trackElem)
 	{
-		JDFXYPair xyp = JDFXYPair.createXYPair(e.getAttribute("NumColors", null, null));
+		final JDFXYPair xyp = JDFXYPair.createXYPair(e.getAttribute("NumColors", null, null));
 		e.removeAttribute(AttributeName.NUMCOLORS);
 		if (xyp != null)
 		{
-			int front = (int) xyp.getX();
-			int back = (int) xyp.getY();
+			final int front = (int) xyp.getX();
+			final int back = (int) xyp.getY();
 			if (front == back)
 			{
 				trackElem.setAttribute(AttributeName.NUMCOLORS, front, null);
 			}
 			else if (trackElem instanceof JDFColorIntent)
 			{
-				JDFColorIntent ci = (JDFColorIntent) trackElem;
+				final JDFColorIntent ci = (JDFColorIntent) trackElem;
 				if (front > 0)
 				{
-					JDFColorIntent cif = (JDFColorIntent) ci.getCreatePartition(new JDFAttributeMap("Side", "Front"), null);
+					final JDFColorIntent cif = (JDFColorIntent) ci.getCreatePartition(new JDFAttributeMap("Side", "Front"), null);
 					cif.setNumColors(front);
 				}
 				if (back > 0)
 				{
-					JDFColorIntent cib = (JDFColorIntent) ci.getCreatePartition(new JDFAttributeMap("Side", "Back"), null);
+					final JDFColorIntent cib = (JDFColorIntent) ci.getCreatePartition(new JDFAttributeMap("Side", "Back"), null);
 					cib.setNumColors(back);
 				}
 			}

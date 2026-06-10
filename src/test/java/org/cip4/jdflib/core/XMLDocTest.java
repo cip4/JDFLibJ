@@ -101,7 +101,6 @@ import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -305,9 +304,9 @@ class XMLDocTest extends JDFTestCaseBase
 	{
 		final XMLDoc doc = new XMLDoc("test", null);
 		final KElement e = doc.getRoot();
-		assertEquals(e, doc.getNode(Document.ELEMENT_NODE, 0, null));
-		assertEquals(e, doc.getNode(Document.ELEMENT_NODE, 0, "test"));
-		assertNull(doc.getNode(Document.ELEMENT_NODE, 1, "test"));
+		assertEquals(e, doc.getNode(Node.ELEMENT_NODE, 0, null));
+		assertEquals(e, doc.getNode(Node.ELEMENT_NODE, 0, "test"));
+		assertNull(doc.getNode(Node.ELEMENT_NODE, 1, "test"));
 	}
 
 	/**
@@ -343,8 +342,8 @@ class XMLDocTest extends JDFTestCaseBase
 	{
 		final XMLDoc doc = new XMLDoc("test", null);
 		doc.setXSLTURL("a.b");
-		assertTrue(doc.getNode(Document.PROCESSING_INSTRUCTION_NODE, 0, null).getNodeValue().indexOf("a.b") > 0);
-		assertEquals("xml-stylesheet", doc.getNode(Document.PROCESSING_INSTRUCTION_NODE, 0, "xml-stylesheet").getNodeName());
+		assertTrue(doc.getNode(Node.PROCESSING_INSTRUCTION_NODE, 0, null).getNodeValue().indexOf("a.b") > 0);
+		assertEquals("xml-stylesheet", doc.getNode(Node.PROCESSING_INSTRUCTION_NODE, 0, "xml-stylesheet").getNodeName());
 	}
 
 	/**

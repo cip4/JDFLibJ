@@ -130,7 +130,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTrappingDetails(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoTrappingDetails(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -142,7 +142,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTrappingDetails(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoTrappingDetails(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -155,7 +155,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoTrappingDetails(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoTrappingDetails(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -166,7 +166,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -196,7 +196,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDefaultTrapping(boolean value)
+	public void setDefaultTrapping(final boolean value)
 	{
 		setAttribute(AttributeName.DEFAULTTRAPPING, value, null);
 	}
@@ -221,7 +221,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIgnoreFileParams(boolean value)
+	public void setIgnoreFileParams(final boolean value)
 	{
 		setAttribute(AttributeName.IGNOREFILEPARAMS, value, null);
 	}
@@ -246,7 +246,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTrapping(boolean value)
+	public void setTrapping(final boolean value)
 	{
 		setAttribute(AttributeName.TRAPPING, value, null);
 	}
@@ -271,7 +271,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTrappingType(int value)
+	public void setTrappingType(final int value)
 	{
 		setAttribute(AttributeName.TRAPPINGTYPE, value, null);
 	}
@@ -359,7 +359,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refTrappingParams(JDFTrappingParams refTarget)
+	public void refTrappingParams(final JDFTrappingParams refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -390,7 +390,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFObjectResolution the element
 	 */
-	public JDFObjectResolution getCreateObjectResolution(int iSkip)
+	public JDFObjectResolution getCreateObjectResolution(final int iSkip)
 	{
 		return (JDFObjectResolution) getCreateElement_JDFElement(ElementName.OBJECTRESOLUTION, null, iSkip);
 	}
@@ -402,7 +402,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	 * @return JDFObjectResolution the element
 	 *         default is getObjectResolution(0)
 	 */
-	public JDFObjectResolution getObjectResolution(int iSkip)
+	public JDFObjectResolution getObjectResolution(final int iSkip)
 	{
 		return (JDFObjectResolution) getElement(ElementName.OBJECTRESOLUTION, null, iSkip);
 	}
@@ -453,7 +453,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFTrapRegion the element
 	 */
-	public JDFTrapRegion getCreateTrapRegion(int iSkip)
+	public JDFTrapRegion getCreateTrapRegion(final int iSkip)
 	{
 		return (JDFTrapRegion) getCreateElement_JDFElement(ElementName.TRAPREGION, null, iSkip);
 	}
@@ -465,7 +465,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	 * @return JDFTrapRegion the element
 	 *         default is getTrapRegion(0)
 	 */
-	public JDFTrapRegion getTrapRegion(int iSkip)
+	public JDFTrapRegion getTrapRegion(final int iSkip)
 	{
 		return (JDFTrapRegion) getElement(ElementName.TRAPREGION, null, iSkip);
 	}
@@ -495,7 +495,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refTrapRegion(JDFTrapRegion refTarget)
+	public void refTrapRegion(final JDFTrapRegion refTarget)
 	{
 		refElement(refTarget);
 	}

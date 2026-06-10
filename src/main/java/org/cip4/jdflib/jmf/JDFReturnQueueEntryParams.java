@@ -97,43 +97,43 @@ public class JDFReturnQueueEntryParams extends JDFAutoReturnQueueEntryParams imp
 
 	/**
 	 * Constructor for JDFReturnQueueEntryParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFReturnQueueEntryParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFReturnQueueEntryParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFReturnQueueEntryParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFReturnQueueEntryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFReturnQueueEntryParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFReturnQueueEntryParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFReturnQueueEntryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFReturnQueueEntryParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * returns the jdf doc referenced by url
-	 * 
+	 *
 	 * @return the document
 	 */
 	public JDFDoc getURLDoc()
@@ -142,7 +142,6 @@ public class JDFReturnQueueEntryParams extends JDFAutoReturnQueueEntryParams imp
 	}
 
 	/**
-	 * 
 	 * @return the filename of this; null if not implemented
 	 */
 	@Override
@@ -153,7 +152,7 @@ public class JDFReturnQueueEntryParams extends JDFAutoReturnQueueEntryParams imp
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -174,23 +173,21 @@ public class JDFReturnQueueEntryParams extends JDFAutoReturnQueueEntryParams imp
 	}
 
 	/**
-	 * 
 	 * convenience for single node
-	 * 
+	 *
 	 * @param value
 	 */
-	public void setAborted(String value)
+	public void setAborted(final String value)
 	{
 		super.setAborted(VString.getVString(value, null));
 	}
 
 	/**
-	 * 
 	 * convenience for single node
-	 * 
+	 *
 	 * @param value
 	 */
-	public void setCompleted(String value)
+	public void setCompleted(final String value)
 	{
 		super.setCompleted(VString.getVString(value, null));
 	}

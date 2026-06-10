@@ -112,7 +112,7 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNumberingIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoNumberingIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -124,7 +124,7 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNumberingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoNumberingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -137,7 +137,7 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoNumberingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoNumberingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -205,7 +205,7 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element
 	 */
-	public JDFStringSpan getCreateColorNameDetails(int iSkip)
+	public JDFStringSpan getCreateColorNameDetails(final int iSkip)
 	{
 		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.COLORNAMEDETAILS, null, iSkip);
 	}
@@ -217,7 +217,7 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 	 * @return JDFStringSpan the element
 	 *         default is getColorNameDetails(0)
 	 */
-	public JDFStringSpan getColorNameDetails(int iSkip)
+	public JDFStringSpan getColorNameDetails(final int iSkip)
 	{
 		return (JDFStringSpan) getElement(ElementName.COLORNAMEDETAILS, null, iSkip);
 	}
@@ -278,7 +278,7 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refColorPool(JDFColorPool refTarget)
+	public void refColorPool(final JDFColorPool refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -309,7 +309,7 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFNumberItem the element
 	 */
-	public JDFNumberItem getCreateNumberItem(int iSkip)
+	public JDFNumberItem getCreateNumberItem(final int iSkip)
 	{
 		return (JDFNumberItem) getCreateElement_JDFElement(ElementName.NUMBERITEM, null, iSkip);
 	}
@@ -321,7 +321,7 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 	 * @return JDFNumberItem the element
 	 *         default is getNumberItem(0)
 	 */
-	public JDFNumberItem getNumberItem(int iSkip)
+	public JDFNumberItem getNumberItem(final int iSkip)
 	{
 		return (JDFNumberItem) getElement(ElementName.NUMBERITEM, null, iSkip);
 	}

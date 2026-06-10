@@ -80,7 +80,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author rainerprosi
- *
  */
 class XMLParserFactoryTest extends JDFTestCaseBase
 {
@@ -91,8 +90,8 @@ class XMLParserFactoryTest extends JDFTestCaseBase
 	@Test
 	void testMemory()
 	{
-		XMLParserFactory f = XMLParserFactory.getFactory();
-		Vector<XMLParser> v = new Vector<XMLParser>();
+		final XMLParserFactory f = XMLParserFactory.getFactory();
+		final Vector<XMLParser> v = new Vector<>();
 		for (int i = 0; i < 10; i++)
 		{
 			final XMLParser xmlParser = f.get();
@@ -103,20 +102,22 @@ class XMLParserFactoryTest extends JDFTestCaseBase
 			f.push(v.remove(0));
 		}
 
-		long mem = new MemorySpy().getCurrentMem();
+		final long mem = new MemorySpy().getCurrentMem();
 		for (int i = 0; i < 10; i++)
 		{
 			final XMLParser xmlParser = f.get();
-			XMLDoc d = xmlParser.parseFile(sm_dirTestData + "bigWhite.jdf");
+			final XMLDoc d = xmlParser.parseFile(sm_dirTestData + "bigWhite.jdf");
 			f.push(xmlParser);
 			Assertions.assertNotNull(d);
 			System.gc();
 		}
 		System.gc();
 		ThreadUtil.sleep(123);
-		long mem2 = new MemorySpy().getCurrentMem();
+		final long mem2 = new MemorySpy().getCurrentMem();
 		if (mem2 > mem)
+		{
 			Assertions.assertEquals(mem2, mem, 20000000, "mem: ");
+		}
 	}
 
 }

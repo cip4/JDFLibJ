@@ -61,8 +61,6 @@ import org.cip4.jdflib.ifaces.IPlacedObject;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
- *
  * @author rainer prosi
  * @date Sep 18, 2012
  */
@@ -153,7 +151,6 @@ public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.ifaces.IPlacedObject#setTrimSize(double, double)
 	 */
 	@Override
@@ -202,7 +199,6 @@ public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.ifaces.IPlacedObject#setClipPath(java.lang.String, int)
 	 */
 	@Override
@@ -215,7 +211,9 @@ public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
 			{
 				final String s = v.get(i);
 				if (StringUtil.isNumber(s))
+				{
 					v.set(i, StringUtil.formatDouble(StringUtil.parseDouble(s, 0), precision));
+				}
 			}
 		}
 		super.setClipPath(StringUtil.setvString(v));
@@ -230,7 +228,9 @@ public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
 		final JDFMatrix ctm = getTrimCTM();
 		final JDFXYPair trimSize = getTrimSize();
 		if (ctm == null || trimSize == null)
+		{
 			return null;
+		}
 		return ctm.transform(new JDFRectangle(trimSize));
 	}
 

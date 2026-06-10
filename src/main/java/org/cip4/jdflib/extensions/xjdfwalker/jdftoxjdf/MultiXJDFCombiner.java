@@ -48,7 +48,6 @@ import org.cip4.jdflib.extensions.XJDFHelper;
  * class that generates a set of multiple JDF elements from the leaf nodes of a JDF
  *
  * @author rainer prosi
- *
  */
 public class MultiXJDFCombiner
 {
@@ -68,7 +67,6 @@ public class MultiXJDFCombiner
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public XJDFHelper getCombinedHelper()
@@ -108,7 +106,6 @@ public class MultiXJDFCombiner
 	}
 
 	/**
-	 *
 	 * @param h
 	 */
 	private void mergeHelper(final XJDFHelper h)

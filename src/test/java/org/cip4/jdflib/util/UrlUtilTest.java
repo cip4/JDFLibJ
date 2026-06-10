@@ -61,7 +61,7 @@ import java.util.Base64;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -139,7 +139,7 @@ class UrlUtilTest extends JDFTestCaseBase
 		assertEquals("pdf", UrlUtil.getExtensionFromMimeType(UrlUtil.APPLICATION_PDF));
 		assertEquals("ps", UrlUtil.getExtensionFromMimeType(UrlUtil.APPLICATION_PS));
 		assertEquals("mim", UrlUtil.getExtensionFromMimeType(MimeUtil.MULTIPART_RELATED));
-		assertEquals("ppf", UrlUtil.getExtensionFromMimeType(MimeUtil.VND_PPF));
+		assertEquals("ppf", UrlUtil.getExtensionFromMimeType(UrlUtil.VND_PPF));
 	}
 
 	/**
@@ -165,8 +165,8 @@ class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(UrlUtil.APPLICATION_ZIP, UrlUtil.getMimeTypeFromURL("http://fobar.con/snarf.zip"));
 		assertEquals(UrlUtil.APPLICATION_JSON, UrlUtil.getMimeTypeFromURL("http://fobar.con/snarf.jsn"));
 		assertEquals(UrlUtil.APPLICATION_JSON, UrlUtil.getMimeTypeFromURL("http://fobar.con/snarf.json"));
-		assertEquals(UrlUtil.getMimeTypeFromURL(null), JDFConstants.MIME_TEXTUNKNOWN);
-		assertEquals(UrlUtil.getMimeTypeFromURL("foo.PDF"), JDFConstants.MIME_PDF);
+		assertEquals(UrlUtil.getMimeTypeFromURL(null), JDFCoreConstants.MIME_TEXTUNKNOWN);
+		assertEquals(UrlUtil.getMimeTypeFromURL("foo.PDF"), JDFCoreConstants.MIME_PDF);
 	}
 
 	/**

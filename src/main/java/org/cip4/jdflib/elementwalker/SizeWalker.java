@@ -59,7 +59,6 @@ public class SizeWalker extends BaseElementWalker
 	 * the link and ref walker
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkElement extends BaseWalker
 	{
@@ -92,7 +91,9 @@ public class SizeWalker extends BaseElementWalker
 				final Sizes ps = getSize(parent.getNodeName());
 				ps.local -= locSize;
 				if (siz == ps) // no double counting
+				{
 					ps.total -= locSize;
+				}
 			}
 
 			siz.n++;

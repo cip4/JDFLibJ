@@ -91,8 +91,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author RP
- *
- * This implements the first fixture with unit tests for class JDFAmountPool.
+ *         This implements the first fixture with unit tests for class JDFAmountPool.
  */
 class JDFAmountPoolTest extends JDFTestCaseBase
 {
@@ -113,8 +112,6 @@ class JDFAmountPoolTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////
 	/**
 	 * Method testReducePartAmounts.
-	 *
-	 *
 	 */
 	@Test
 	void testReducePartAmounts()
@@ -150,7 +147,6 @@ class JDFAmountPoolTest extends JDFTestCaseBase
 
 	/**
 	 * Method testVirtualAmounts.
-	 *
 	 */
 	@Test
 	void testVirtualAmounts()
@@ -181,7 +177,6 @@ class JDFAmountPoolTest extends JDFTestCaseBase
 
 	/**
 	 * Method .
-	 *
 	 */
 	@Test
 	void testSetPartAmount()
@@ -205,7 +200,6 @@ class JDFAmountPoolTest extends JDFTestCaseBase
 
 	/**
 	 * Method testVirtualAmounts.
-	 *
 	 */
 	@Test
 	void testVirtualAmountsSplit()
@@ -243,7 +237,6 @@ class JDFAmountPoolTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetMatchingPartAmountVector.
-	 *
 	 */
 	@Test
 	void testGetMatchingPartAmountVector()
@@ -272,7 +265,6 @@ class JDFAmountPoolTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -289,8 +281,8 @@ class JDFAmountPoolTest extends JDFTestCaseBase
 	@Test
 	void testGetPartVectorNull()
 	{
-		JDFAmountPool ap = (JDFAmountPool) new JDFDoc(ElementName.AMOUNTPOOL).getRoot();
-		JDFPartAmount pa = ap.appendPartAmount();
+		final JDFAmountPool ap = (JDFAmountPool) new JDFDoc(ElementName.AMOUNTPOOL).getRoot();
+		final JDFPartAmount pa = ap.appendPartAmount();
 		pa.setAmount(42);
 		Assertions.assertEquals(pa, ap.getPartAmount(new VJDFAttributeMap()));
 		Assertions.assertEquals(pa, ap.getPartAmount((VJDFAttributeMap) null));
@@ -302,7 +294,6 @@ class JDFAmountPoolTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetMatchingPartAmountVector.
-	 *
 	 */
 	@Test
 	void testGetPartAmountMulti()
@@ -336,7 +327,6 @@ class JDFAmountPoolTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetMatchingPartAmountVector.
-	 *
 	 */
 	@Test
 	void testGetCreatePartAmount()
@@ -359,7 +349,6 @@ class JDFAmountPoolTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetMatchingPartAmountVector.
-	 *
 	 */
 	@Test
 	void testGetAmountMap()
@@ -391,7 +380,6 @@ class JDFAmountPoolTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetMatchingPartAmountVector.
-	 *
 	 */
 	@Test
 	void testGetPartMapVector()
@@ -410,14 +398,13 @@ class JDFAmountPoolTest extends JDFTestCaseBase
 				ap.appendPartAmount(vMap).setAmount(j, null);
 			}
 		}
-		VJDFAttributeMap am = ap.getPartMapVector();
+		final VJDFAttributeMap am = ap.getPartMapVector();
 		Assertions.assertEquals(am.size(), 2000);
 		Assertions.assertEquals(3, am.getKeys().size());
 	}
 
 	/**
 	 * Method testGetMatchingPartAmountVector.
-	 *
 	 */
 	@Test
 	void testGetCorruptAmountMap()
@@ -466,7 +453,7 @@ class JDFAmountPoolTest extends JDFTestCaseBase
 
 		final JDFResourceLink rl = (JDFResourceLink) new JDFDoc("MediaLink").getRoot();
 		ap = rl.appendAmountPool();
-		JDFPartAmount pa = ap.appendPartAmount();
+		final JDFPartAmount pa = ap.appendPartAmount();
 		Assertions.assertEquals(pa, ap.getPartAmount(new JDFAttributeMap()));
 		Assertions.assertEquals(pa, ap.getPartAmount((JDFAttributeMap) null));
 		pa.appendPart();

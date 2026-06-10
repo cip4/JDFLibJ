@@ -56,8 +56,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
- *
  * @author rainer prosi
  * @date Jan 18, 2013
  */
@@ -67,7 +65,6 @@ class JDFContactTest extends JDFTestCaseBase
 	JDFContact co;
 
 	/**
-	 *
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override

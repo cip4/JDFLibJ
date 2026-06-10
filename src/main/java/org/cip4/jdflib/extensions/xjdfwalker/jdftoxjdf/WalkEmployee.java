@@ -71,7 +71,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -139,7 +139,7 @@ public class WalkEmployee extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public KElement walk(KElement jdf, KElement xjdf)
+	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		final KElement parent = jdf.getParentNode_KElement();
 		final JDFEmployee emp = (JDFEmployee) jdf;
@@ -163,7 +163,7 @@ public class WalkEmployee extends WalkResource
 		{
 			if (parent instanceof JDFNodeInfo)
 			{
-				jdf.appendAttribute(AttributeName.ROLES, "CSR", null, JDFConstants.BLANK, true);
+				jdf.appendAttribute(AttributeName.ROLES, "CSR", null, JDFCoreConstants.BLANK, true);
 				final KElement e = moveToContact(jdf);
 				final KElement walk = super.walk(e, xjdf);
 				walk.moveAttribute(XJDFConstants.ExternalID, e);
@@ -185,7 +185,7 @@ public class WalkEmployee extends WalkResource
 	 * @param jdfEmployee
 	 * @return
 	 */
-	public KElement moveToContact(KElement jdfEmployee)
+	public KElement moveToContact(final KElement jdfEmployee)
 	{
 		final JDFContact contact = (JDFContact) safeRename(jdfEmployee, ElementName.CONTACT);
 

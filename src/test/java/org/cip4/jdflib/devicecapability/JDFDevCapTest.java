@@ -79,12 +79,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- *
- *
  * @author rainer prosi
  * @date before Jun 7, 2012
  */
-class JDFDevCapTest {
+class JDFDevCapTest
+{
 	/**
 	 *
 	 *
@@ -122,8 +121,6 @@ class JDFDevCapTest {
 
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	void testIntegerState() throws Exception
@@ -209,8 +206,6 @@ class JDFDevCapTest {
 
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	void testNumberState() throws Exception
@@ -285,7 +280,9 @@ class JDFDevCapTest {
 			es.setListType(EnumListType.List);
 			es.setAllowedRegExp("a b( c)?( d)*");
 			if (i == 1)
+			{
 				es.setAllowedValueList(new VString("a b c d", " "));
+			}
 			Assertions.assertTrue(es.fitsValue("a b", EnumFitsValue.Allowed));
 			Assertions.assertTrue(es.fitsValue("a b c", EnumFitsValue.Allowed));
 			Assertions.assertTrue(es.fitsValue("a b c d d", EnumFitsValue.Allowed));

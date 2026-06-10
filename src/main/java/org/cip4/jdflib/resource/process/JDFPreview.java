@@ -45,11 +45,7 @@
 package org.cip4.jdflib.resource.process;
 
 import java.io.InputStream;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPreview;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -57,6 +53,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.ifaces.IURLSetter;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.w3c.dom.DOMException;
 
@@ -87,7 +84,6 @@ public class JDFPreview extends JDFAutoPreview implements IURLSetter
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
-	 *
 	 */
 	public JDFPreview(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
@@ -100,7 +96,6 @@ public class JDFPreview extends JDFAutoPreview implements IURLSetter
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 *
 	 * @throws DOMException
 	 */
 	public JDFPreview(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
@@ -115,10 +110,10 @@ public class JDFPreview extends JDFAutoPreview implements IURLSetter
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
-	 *
 	 * @throws DOMException
 	 */
-	public JDFPreview(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFPreview(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -137,48 +132,17 @@ public class JDFPreview extends JDFAutoPreview implements IURLSetter
 	/**
 	 * Enumeration strings for PreviewFileType
 	 */
-	public static class EnumPreviewFileType extends ValuedEnum
+	public enum EnumPreviewFileType
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		private EnumPreviewFileType(final String name)
-		{
-			super(name, m_startValue++);
-		}
+		PNG, CIP3Multiple, CIP3Single;
 
 		public static EnumPreviewFileType getEnum(final String enumName)
 		{
-			return (EnumPreviewFileType) getEnum(EnumPreviewFileType.class, enumName);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPreviewFileType.class, enumName, null);
 		}
-
-		public static EnumPreviewFileType getEnum(final int enumValue)
-		{
-			return (EnumPreviewFileType) getEnum(EnumPreviewFileType.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPreviewFileType.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPreviewFileType.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumPreviewFileType.class);
-		}
-
-		public static final EnumPreviewFileType PNG = new EnumPreviewFileType("PNG");
-		public static final EnumPreviewFileType CIP3Multiple = new EnumPreviewFileType("CIP3Multiple");
-		public static final EnumPreviewFileType CIP3Single = new EnumPreviewFileType("CIP3Single");
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoPreview#toString()
 	 * @return
 	 */
@@ -189,7 +153,6 @@ public class JDFPreview extends JDFAutoPreview implements IURLSetter
 	}
 
 	/**
-	 *
 	 * @return the filename of this; null if not implemented
 	 */
 	@Override
@@ -205,7 +168,7 @@ public class JDFPreview extends JDFAutoPreview implements IURLSetter
 	 */
 	public void setPreviewFileType(final EnumPreviewFileType enumPreviewFileType)
 	{
-		super.setPreviewFileType(enumPreviewFileType == null ? null : enumPreviewFileType.getName());
+		super.setPreviewFileType(JavaEnumUtil.getName(enumPreviewFileType));
 	}
 
 	/**
@@ -215,7 +178,7 @@ public class JDFPreview extends JDFAutoPreview implements IURLSetter
 	 */
 	public EnumPreviewFileType getEnumPreviewFileType()
 	{
-		return EnumPreviewFileType.getEnum(getAttribute(AttributeName.PREVIEWFILETYPE, null, EnumPreviewFileType.PNG.getName()));
+		return EnumPreviewFileType.getEnum(getAttribute(AttributeName.PREVIEWFILETYPE, null, EnumPreviewFileType.PNG.name()));
 	}
 
 	/**
@@ -242,7 +205,6 @@ public class JDFPreview extends JDFAutoPreview implements IURLSetter
 	 * get RunList/LayoutElement/FileSpec/@URL also evaluate RunList/@directory and concatinate Directory + URL in case URL is a relative URL
 	 *
 	 * @Directory is ignored if URL contains a scheme or is an absolute URL
-	 *
 	 * @return URL if a URL or Directory attribute exists, else null
 	 */
 	public String getFileURL()

@@ -104,7 +104,7 @@ public abstract class JDFAutoCylinderLayoutPreparationParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCylinderLayoutPreparationParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoCylinderLayoutPreparationParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -116,7 +116,7 @@ public abstract class JDFAutoCylinderLayoutPreparationParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCylinderLayoutPreparationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoCylinderLayoutPreparationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -129,7 +129,7 @@ public abstract class JDFAutoCylinderLayoutPreparationParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoCylinderLayoutPreparationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoCylinderLayoutPreparationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -140,7 +140,7 @@ public abstract class JDFAutoCylinderLayoutPreparationParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -196,7 +196,7 @@ public abstract class JDFAutoCylinderLayoutPreparationParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refProductionPath(JDFProductionPath refTarget)
+	public void refProductionPath(final JDFProductionPath refTarget)
 	{
 		refElement(refTarget);
 	}

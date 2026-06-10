@@ -59,7 +59,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 {
 	private final KElement xjdfXSD;
 
-	public XJDFToJDFSchema(KElement xjdfXsd)
+	public XJDFToJDFSchema(final KElement xjdfXsd)
 	{
 		super(new BaseWalkerFactory());
 		this.xjdfXSD = xjdfXsd;
@@ -118,7 +118,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return XSDConstants.XS_SIMPLE_TYPE.equals(e.getNodeName());
 		}
@@ -129,7 +129,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return XSDConstants.XS_SEQUENCE.equals(e.getNodeName());
 		}
@@ -160,7 +160,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && AttributeName.VERSION.equals(e.getAttribute(XSDConstants.NAME));
 		}
@@ -178,7 +178,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && AttributeName.NODESTATUS.equals(e.getAttribute(XSDConstants.NAME));
 		}
@@ -196,7 +196,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && AttributeName.DEVICESTATUS.equals(e.getAttribute(XSDConstants.NAME));
 		}
@@ -214,7 +214,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && AttributeName.COSTCENTERID.equals(e.getAttribute(XSDConstants.NAME));
 		}
@@ -242,7 +242,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && ElementName.DEVICEINFO.equals(e.getInheritedAttribute(XSDConstants.NAME));
 		}
@@ -254,7 +254,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 			updateDevice(e, trackElem);
 		}
 
-		void updateDevice(KElement xsseq, KElement trackElem)
+		void updateDevice(final KElement xsseq, final KElement trackElem)
 		{
 			final KElement ref = xsseq.getCreateChildWithAttribute(XSDConstants.XS_ELEMENT, XSDConstants.REF, null, ElementName.DEVICE, 0);
 			ref.setAttribute(XSDConstants.MIN_OCCURS, 0, null);
@@ -266,7 +266,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && ElementName.NOTIFICATION.equals(e.getInheritedAttribute(XSDConstants.NAME));
 		}
@@ -279,7 +279,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 			return copy;
 		}
 
-		void updateEmployee(KElement xsseq, KElement trackElem)
+		void updateEmployee(final KElement xsseq, final KElement trackElem)
 		{
 			final KElement ref = xsseq.getCreateChildWithAttribute(XSDConstants.XS_ELEMENT, XSDConstants.REF, null, ElementName.EMPLOYEE, 0);
 			ref.setAttribute(XSDConstants.MIN_OCCURS, 0, null);
@@ -304,7 +304,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && "SignalStatus".equals(e.getInheritedAttribute(XSDConstants.NAME));
 		}
@@ -320,7 +320,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 			return copy;
 		}
 
-		void addNotification(KElement xsseq, KElement trackElem)
+		void addNotification(final KElement xsseq, final KElement trackElem)
 		{
 			final KElement ref = xsseq.getCreateChildWithAttribute(XSDConstants.XS_ELEMENT, XSDConstants.REF, null, ElementName.NOTIFICATION, 0);
 			ref.setAttribute(XSDConstants.MIN_OCCURS, 0, null);
@@ -328,7 +328,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 		}
 
-		void addStatusQuParams(KElement xsseq, KElement trackElem)
+		void addStatusQuParams(final KElement xsseq, final KElement trackElem)
 		{
 			final KElement ref = xsseq.getCreateChildWithAttribute(XSDConstants.XS_ELEMENT, XSDConstants.REF, null, ElementName.STATUSQUPARAMS, 0);
 			ref.setAttribute(XSDConstants.MIN_OCCURS, 0, null);
@@ -360,13 +360,13 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return XSDConstants.XS_COMPLEX_TYPE.equals(e.getNodeName());
 		}
 
 		@Override
-		public void postWalk(KElement b, KElement trackElem)
+		public void postWalk(final KElement b, final KElement trackElem)
 		{
 			if (!StringUtil.parseBoolean(b.getInheritedAttribute("abstract"), false))
 			{
@@ -379,7 +379,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return XSDConstants.XS_EXTENSION.equals(e.getNodeName());
 		}
@@ -390,7 +390,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && ElementName.DEVICE.equals(e.getInheritedAttribute(XSDConstants.NAME, null, null));
 		}
@@ -411,7 +411,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && EFamily.getEnum(e.getInheritedAttribute(XSDConstants.NAME, null, null)) != null
 					&& EType.getEnum(e.getInheritedAttribute(XSDConstants.NAME, null, null)) == null;
@@ -431,14 +431,14 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public void postWalk(KElement b, KElement trackElem)
+		public void postWalk(final KElement b, final KElement trackElem)
 		{
 			// TODO Auto-generated method stub
 			super.postWalk(b, trackElem);
 		}
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && EFamily.getEnum(e.getInheritedAttribute(XSDConstants.NAME, null, null)) != null
 					&& EType.getEnum(e.getInheritedAttribute(XSDConstants.NAME, null, null)) != null;
@@ -462,7 +462,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && "Message".equals(e.getAttribute(XSDConstants.NAME));
 		}
@@ -493,7 +493,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return XSDConstants.XS_ELEMENT.equals(e.getNodeName());
 		}
@@ -504,7 +504,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return XSDConstants.XS_ATTRIBUTE.equals(e.getNodeName());
 		}
@@ -515,7 +515,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && AttributeName.SHEETNAME.equals(e.getAttribute(XSDConstants.NAME));
 		}
@@ -538,7 +538,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	public class WalkStringType extends WalkXSAttribute
 	{
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			final String name = e.getAttribute(XSDConstants.NAME);
 			return super.matches(e) && stringList.contains(name);
@@ -558,7 +558,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && EFamily.getEnum(e.getAttribute(XSDConstants.NAME)) != null && EType.getEnum(e.getAttribute(XSDConstants.NAME)) == null;
 		}
@@ -575,7 +575,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && EFamily.getEnum(e.getAttribute(XSDConstants.NAME)) != null && EType.getEnum(e.getAttribute(XSDConstants.NAME)) == null;
 		}
@@ -592,7 +592,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e)
 					&& (XJDFConstants.Header.equals(e.getAttribute(XSDConstants.NAME)) || XJDFConstants.Header.equals(e.getAttribute(XSDConstants.REF)));
@@ -610,7 +610,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && XJDFConstants.XJMF.equals(e.getAttribute(XSDConstants.NAME));
 		}
@@ -629,7 +629,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && XJDFConstants.XJMF.equals(e.getInheritedAttribute(XSDConstants.NAME, null, null));
 		}
@@ -658,7 +658,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && EFamily.getEnum(e.getAttribute(XSDConstants.NAME)) != null && EType.getEnum(e.getAttribute(XSDConstants.NAME)) != null;
 		}
@@ -682,7 +682,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && XJDFConstants.ModuleInfo.equals(e.getAttribute(XSDConstants.NAME));
 		}
@@ -701,7 +701,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && XJDFConstants.ModuleInfo.equals(e.getInheritedAttribute(XSDConstants.NAME));
 		}
@@ -725,7 +725,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && ElementName.DEVICEINFO.equals(e.getInheritedAttribute(XSDConstants.NAME));
 		}
@@ -746,7 +746,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && ElementName.JOBPHASE.equals(e.getInheritedAttribute(XSDConstants.NAME));
 		}
@@ -777,7 +777,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && ElementName.MISDETAILS.equals(e.getInheritedAttribute(XSDConstants.NAME));
 		}
@@ -797,7 +797,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && ElementName.NOTIFICATION.equals(e.getInheritedAttribute(XSDConstants.NAME));
 		}
@@ -814,7 +814,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && ElementName.EMPLOYEE.equals(e.getInheritedAttribute(XSDConstants.NAME));
 		}
@@ -834,7 +834,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	{
 
 		@Override
-		public boolean matches(KElement e)
+		public boolean matches(final KElement e)
 		{
 			return super.matches(e) && XJDFConstants.ModuleInfo.equals(e.getAttribute(XSDConstants.REF));
 		}
@@ -849,12 +849,12 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
-	KElement copyAttribute(KElement root, String name)
+	KElement copyAttribute(final KElement root, final String name)
 	{
 		return copyAttribute(root, name, name);
 	}
 
-	KElement copyAttribute(KElement root, String name, String newName)
+	KElement copyAttribute(final KElement root, final String name, final String newName)
 	{
 		KElement copy = root.getChildWithAttribute(XSDConstants.XS_ATTRIBUTE, XSDConstants.NAME, null, newName, 0, true);
 		if (copy != null)
@@ -870,7 +870,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 		return copy;
 	}
 
-	KElement copyAttribute(KElement root, String name, String newName, boolean required)
+	KElement copyAttribute(final KElement root, final String name, final String newName, final boolean required)
 	{
 		final KElement copy = copyAttribute(root, name, newName);
 		copy.setAttribute(XSDConstants.USE, required ? eAttributeUse.required : eAttributeUse.optional, null);

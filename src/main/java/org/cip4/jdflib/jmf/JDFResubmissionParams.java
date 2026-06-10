@@ -89,7 +89,6 @@ import org.cip4.jdflib.ifaces.IURLSetter;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
  *         July 10, 2009
  */
 public class JDFResubmissionParams extends JDFAutoResubmissionParams implements IURLSetter
@@ -98,7 +97,7 @@ public class JDFResubmissionParams extends JDFAutoResubmissionParams implements 
 
 	/**
 	 * Constructor for JDFResubmissionParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -109,7 +108,7 @@ public class JDFResubmissionParams extends JDFAutoResubmissionParams implements 
 
 	/**
 	 * Constructor for JDFResubmissionParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -121,7 +120,7 @@ public class JDFResubmissionParams extends JDFAutoResubmissionParams implements 
 
 	/**
 	 * Constructor for JDFResubmissionParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -134,7 +133,7 @@ public class JDFResubmissionParams extends JDFAutoResubmissionParams implements 
 
 	/**
 	 * toString()
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -156,7 +155,7 @@ public class JDFResubmissionParams extends JDFAutoResubmissionParams implements 
 
 	/**
 	 * returns the jdf doc referenced by url
-	 * 
+	 *
 	 * @return the document
 	 */
 	public JDFDoc getURLDoc()
@@ -165,7 +164,6 @@ public class JDFResubmissionParams extends JDFAutoResubmissionParams implements 
 	}
 
 	/**
-	 * 
 	 * @return the filename of this; null if not implemented
 	 */
 	@Override

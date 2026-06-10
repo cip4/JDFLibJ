@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -96,7 +91,7 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.STRAPPINGTYPE, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumStrappingType.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumStrappingType.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.STRAPPOSITIONS, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
@@ -112,7 +107,7 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoStrappingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoStrappingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -124,7 +119,7 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoStrappingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoStrappingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -137,7 +132,7 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoStrappingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoStrappingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -148,7 +143,7 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -163,91 +158,22 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for StrappingType
+	 * Enumeration strings for numStrappingType
 	 */
 
-	public enum EStrappingType
+	public enum EnumStrappingType
 	{
 		Single, Double, Cross, DoubleCross;
 
-		public static EStrappingType getEnum(String val)
+		public static EnumStrappingType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EStrappingType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumStrappingType.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for StrappingType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumStrappingType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumStrappingType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumStrappingType getEnum(String enumName)
-		{
-			return (EnumStrappingType) getEnum(EnumStrappingType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumStrappingType getEnum(int enumValue)
-		{
-			return (EnumStrappingType) getEnum(EnumStrappingType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumStrappingType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumStrappingType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumStrappingType.class);
-		}
-
-		/**  */
-		public static final EnumStrappingType Single = new EnumStrappingType("Single");
-		/**  */
-		public static final EnumStrappingType Double = new EnumStrappingType("Double");
-		/**  */
-		public static final EnumStrappingType Cross = new EnumStrappingType("Cross");
-		/**  */
-		public static final EnumStrappingType DoubleCross = new EnumStrappingType("DoubleCross");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -259,9 +185,9 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setStrappingType(EStrappingType enumVar)
+	public void setStrappingType(final EnumStrappingType enumVar)
 	{
-		setAttribute(AttributeName.STRAPPINGTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.STRAPPINGTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -269,35 +195,6 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EStrappingType getEStrappingType()
-	{
-		return EStrappingType.getEnum(getAttribute(AttributeName.STRAPPINGTYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute StrappingType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute StrappingType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetStrappingType(EStrappingType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setStrappingType(EnumStrappingType enumVar)
-	{
-		setAttribute(AttributeName.STRAPPINGTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute StrappingType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EStrappingType GetEStrappingType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumStrappingType getStrappingType()
 	{
 		return EnumStrappingType.getEnum(getAttribute(AttributeName.STRAPPINGTYPE, null, null));
@@ -313,7 +210,7 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStrapPositions(JDFNumberList value)
+	public void setStrapPositions(final JDFNumberList value)
 	{
 		setAttribute(AttributeName.STRAPPOSITIONS, value, null);
 	}
@@ -326,8 +223,8 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 	 */
 	public JDFNumberList getStrapPositions()
 	{
-		String strAttrName = getAttribute(AttributeName.STRAPPOSITIONS, null, null);
-		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.STRAPPOSITIONS, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 

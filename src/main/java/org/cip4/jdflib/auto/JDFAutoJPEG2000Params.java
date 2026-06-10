@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -101,7 +96,7 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.LAYERRATES, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.NUMRESOLUTIONS, 0x3333333111l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.PROGRESSIONORDER, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumProgressionOrder.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumProgressionOrder.class, 0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.TILESIZE, 0x3333333111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
@@ -117,7 +112,7 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoJPEG2000Params(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoJPEG2000Params(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -129,7 +124,7 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoJPEG2000Params(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoJPEG2000Params(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -142,99 +137,28 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoJPEG2000Params(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoJPEG2000Params(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for ProgressionOrder
+	 * Enumeration strings for numProgressionOrder
 	 */
 
-	public enum EProgressionOrder
+	public enum EnumProgressionOrder
 	{
 		LRCP, RLCP, RPCL, PCRL, CPRL;
 
-		public static EProgressionOrder getEnum(String val)
+		public static EnumProgressionOrder getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EProgressionOrder.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumProgressionOrder.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for ProgressionOrder
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumProgressionOrder extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumProgressionOrder(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumProgressionOrder getEnum(String enumName)
-		{
-			return (EnumProgressionOrder) getEnum(EnumProgressionOrder.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumProgressionOrder getEnum(int enumValue)
-		{
-			return (EnumProgressionOrder) getEnum(EnumProgressionOrder.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumProgressionOrder.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumProgressionOrder.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumProgressionOrder.class);
-		}
-
-		/**  */
-		public static final EnumProgressionOrder LRCP = new EnumProgressionOrder("LRCP");
-		/**  */
-		public static final EnumProgressionOrder RLCP = new EnumProgressionOrder("RLCP");
-		/**  */
-		public static final EnumProgressionOrder RPCL = new EnumProgressionOrder("RPCL");
-		/**  */
-		public static final EnumProgressionOrder PCRL = new EnumProgressionOrder("PCRL");
-		/**  */
-		public static final EnumProgressionOrder CPRL = new EnumProgressionOrder("CPRL");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -246,7 +170,7 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCodeBlockSize(int value)
+	public void setCodeBlockSize(final int value)
 	{
 		setAttribute(AttributeName.CODEBLOCKSIZE, value, null);
 	}
@@ -271,7 +195,7 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLayersPerTile(int value)
+	public void setLayersPerTile(final int value)
 	{
 		setAttribute(AttributeName.LAYERSPERTILE, value, null);
 	}
@@ -296,7 +220,7 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLayerRates(JDFNumberList value)
+	public void setLayerRates(final JDFNumberList value)
 	{
 		setAttribute(AttributeName.LAYERRATES, value, null);
 	}
@@ -309,8 +233,8 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	 */
 	public JDFNumberList getLayerRates()
 	{
-		String strAttrName = getAttribute(AttributeName.LAYERRATES, null, null);
-		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.LAYERRATES, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -324,7 +248,7 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNumResolutions(int value)
+	public void setNumResolutions(final int value)
 	{
 		setAttribute(AttributeName.NUMRESOLUTIONS, value, null);
 	}
@@ -349,9 +273,9 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setProgressionOrder(EProgressionOrder enumVar)
+	public void setProgressionOrder(final EnumProgressionOrder enumVar)
 	{
-		setAttribute(AttributeName.PROGRESSIONORDER, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.PROGRESSIONORDER, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -359,35 +283,6 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EProgressionOrder getEProgressionOrder()
-	{
-		return EProgressionOrder.getEnum(getAttribute(AttributeName.PROGRESSIONORDER, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ProgressionOrder
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ProgressionOrder
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetProgressionOrder(EProgressionOrder) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setProgressionOrder(EnumProgressionOrder enumVar)
-	{
-		setAttribute(AttributeName.PROGRESSIONORDER, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ProgressionOrder
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EProgressionOrder GetEProgressionOrder() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumProgressionOrder getProgressionOrder()
 	{
 		return EnumProgressionOrder.getEnum(getAttribute(AttributeName.PROGRESSIONORDER, null, null));
@@ -403,7 +298,7 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTileSize(JDFXYPair value)
+	public void setTileSize(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.TILESIZE, value, null);
 	}
@@ -416,8 +311,8 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	 */
 	public JDFXYPair getTileSize()
 	{
-		String strAttrName = getAttribute(AttributeName.TILESIZE, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TILESIZE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 

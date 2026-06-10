@@ -47,7 +47,6 @@ import org.cip4.jdflib.resource.JDFResource;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  *         walker for the colorSet - this gets translated back to a colorpool
  */
 public class WalkXJDFApprovalDetailsResource extends WalkXJDFResource
@@ -61,7 +60,6 @@ public class WalkXJDFApprovalDetailsResource extends WalkXJDFResource
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXJDFResource#getJDFResName(org.cip4.jdflib.extensions.SetHelper)
 	 */
 	@Override
@@ -95,7 +93,6 @@ public class WalkXJDFApprovalDetailsResource extends WalkXJDFResource
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXJDFResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override

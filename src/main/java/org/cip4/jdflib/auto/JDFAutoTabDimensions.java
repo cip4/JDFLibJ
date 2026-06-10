@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -95,7 +90,8 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.TABEDGE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumTabEdge.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TABEDGE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumTabEdge.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.TABEXTENSIONDISTANCE, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.TABOFFSET, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.TABSPERBANK, 0x3333333111l, AttributeInfo.EnumAttributeType.integer, null, null);
@@ -115,7 +111,7 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTabDimensions(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoTabDimensions(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -127,7 +123,7 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTabDimensions(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoTabDimensions(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -140,97 +136,28 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoTabDimensions(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoTabDimensions(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for TabEdge
+	 * Enumeration strings for numTabEdge
 	 */
 
-	public enum ETabEdge
+	public enum EnumTabEdge
 	{
 		Left, Rigth, Top, Bottom;
 
-		public static ETabEdge getEnum(String val)
+		public static EnumTabEdge getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ETabEdge.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumTabEdge.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for TabEdge
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumTabEdge extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumTabEdge(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumTabEdge getEnum(String enumName)
-		{
-			return (EnumTabEdge) getEnum(EnumTabEdge.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumTabEdge getEnum(int enumValue)
-		{
-			return (EnumTabEdge) getEnum(EnumTabEdge.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumTabEdge.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumTabEdge.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumTabEdge.class);
-		}
-
-		/**  */
-		public static final EnumTabEdge Left = new EnumTabEdge("Left");
-		/**  */
-		public static final EnumTabEdge Rigth = new EnumTabEdge("Rigth");
-		/**  */
-		public static final EnumTabEdge Top = new EnumTabEdge("Top");
-		/**  */
-		public static final EnumTabEdge Bottom = new EnumTabEdge("Bottom");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -242,9 +169,9 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setTabEdge(ETabEdge enumVar)
+	public void setTabEdge(final EnumTabEdge enumVar)
 	{
-		setAttribute(AttributeName.TABEDGE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.TABEDGE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -252,35 +179,6 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ETabEdge getETabEdge()
-	{
-		return ETabEdge.getEnum(getAttribute(AttributeName.TABEDGE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute TabEdge
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute TabEdge
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetTabEdge(ETabEdge) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setTabEdge(EnumTabEdge enumVar)
-	{
-		setAttribute(AttributeName.TABEDGE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute TabEdge
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ETabEdge GetETabEdge() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumTabEdge getTabEdge()
 	{
 		return EnumTabEdge.getEnum(getAttribute(AttributeName.TABEDGE, null, null));
@@ -296,7 +194,7 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTabExtensionDistance(double value)
+	public void setTabExtensionDistance(final double value)
 	{
 		setAttribute(AttributeName.TABEXTENSIONDISTANCE, value, null);
 	}
@@ -321,7 +219,7 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTabOffset(double value)
+	public void setTabOffset(final double value)
 	{
 		setAttribute(AttributeName.TABOFFSET, value, null);
 	}
@@ -346,7 +244,7 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTabsPerBank(int value)
+	public void setTabsPerBank(final int value)
 	{
 		setAttribute(AttributeName.TABSPERBANK, value, null);
 	}
@@ -371,7 +269,7 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTabSetCollationOrder(String value)
+	public void setTabSetCollationOrder(final String value)
 	{
 		setAttribute(AttributeName.TABSETCOLLATIONORDER, value, null);
 	}
@@ -396,7 +294,7 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTabWidth(double value)
+	public void setTabWidth(final double value)
 	{
 		setAttribute(AttributeName.TABWIDTH, value, null);
 	}

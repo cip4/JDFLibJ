@@ -67,7 +67,6 @@ class URLExtractorTest extends JDFTestCaseBase
 {
 	/**
 	 * @return the created doc
-	 *
 	 */
 	public JDFDoc testWalk()
 	{
@@ -95,7 +94,6 @@ class URLExtractorTest extends JDFTestCaseBase
 
 	/**
 	 * @return the created doc
-	 *
 	 */
 	@Test
 	void testWalkNoURL()
@@ -359,16 +357,16 @@ class URLExtractorTest extends JDFTestCaseBase
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
 
-		JDFRunList rl1 = rl.addRun(UrlUtil.fileToUrl(file, false), 0, -1);
-		JDFRunList rl2 = rl.addRun(UrlUtil.fileToUrl(file, false), 0, -1);
+		final JDFRunList rl1 = rl.addRun(UrlUtil.fileToUrl(file, false), 0, -1);
+		final JDFRunList rl2 = rl.addRun(UrlUtil.fileToUrl(file, false), 0, -1);
 		d.write2File(sm_dirTestDataTemp + "URLIn1a/dummy.jdf", 2, false);
 
 		final URLExtractor ex = new URLExtractor(dumpDir, null, null);
 		ex.convert(d.getJDFRoot());
 		final String write2String = rl.toDisplayXML(2);
 		assertTrue(write2String.indexOf("URLOut1a/boooo.pdf") > 0);
-		File outFile = new File(sm_dirTestDataTemp + "URLOut1a/boooo.pdf");
-		String outUrl = UrlUtil.fileToUrl(outFile, true);
+		final File outFile = new File(sm_dirTestDataTemp + "URLOut1a/boooo.pdf");
+		final String outUrl = UrlUtil.fileToUrl(outFile, true);
 		assertTrue(outFile.exists());
 		assertTrue(file.exists());
 		assertEquals(outUrl, rl1.getFileURL());
@@ -391,8 +389,8 @@ class URLExtractorTest extends JDFTestCaseBase
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
 		final JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
 
-		JDFRunList rl1 = rl.addRun(UrlUtil.fileToUrl(file, false), 0, -1);
-		JDFRunList rl2 = rl.addRun(UrlUtil.fileToUrl(file, false), 0, -1);
+		final JDFRunList rl1 = rl.addRun(UrlUtil.fileToUrl(file, false), 0, -1);
+		final JDFRunList rl2 = rl.addRun(UrlUtil.fileToUrl(file, false), 0, -1);
 		d.write2File(sm_dirTestDataTemp + "URLIn1a/dummy.jdf", 2, false);
 
 		final URLExtractor ex = new URLExtractor(dumpDir, null, null);
@@ -400,8 +398,8 @@ class URLExtractorTest extends JDFTestCaseBase
 		ex.walkTree(d.getJDFRoot(), null);
 		final String write2String = rl.toDisplayXML(2);
 		assertTrue(write2String.indexOf("URLOut1a/boooo.pdf") > 0);
-		File outFile = new File(sm_dirTestDataTemp + "URLOut1a/boooo.pdf");
-		String outUrl = UrlUtil.fileToUrl(outFile, true);
+		final File outFile = new File(sm_dirTestDataTemp + "URLOut1a/boooo.pdf");
+		final String outUrl = UrlUtil.fileToUrl(outFile, true);
 		assertTrue(outFile.exists());
 		assertFalse(file.exists());
 		assertEquals(outUrl, rl1.getFileURL());
@@ -444,7 +442,9 @@ class URLExtractorTest extends JDFTestCaseBase
 	void testFromJDFBad()
 	{
 		if (PlatformUtil.isWindows())
+		{
 			return;
+		}
 
 		final File inDir = new File(sm_dirTestDataTemp + File.separator + "URLIn2");
 		FileUtil.deleteAll(inDir);
@@ -477,7 +477,9 @@ class URLExtractorTest extends JDFTestCaseBase
 	void testFromJDFBadParent()
 	{
 		if (PlatformUtil.isWindows())
+		{
 			return;
+		}
 		final File inDir = new File(sm_dirTestDataTemp + File.separator + "URLIn4");
 		FileUtil.deleteAll(inDir);
 		final File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut4");

@@ -73,8 +73,6 @@ package org.cip4.jdflib.auto;
 import java.util.Collection;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.ESheetLay;
-import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumSheetLay;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -86,6 +84,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFCutBlock;
 import org.cip4.jdflib.resource.process.postpress.JDFCut;
 import org.cip4.jdflib.resource.process.postpress.JDFCutMark;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoCuttingParams : public JDFResource
@@ -100,7 +99,8 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.NUPSEPARATION, 0x3333331111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHEETLAY, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHEETLAY, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumSheetLay.class, 0), null);
 	}
 
 	@Override
@@ -129,7 +129,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCuttingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoCuttingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -141,7 +141,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCuttingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoCuttingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -154,7 +154,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoCuttingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoCuttingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -165,7 +165,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -179,11 +179,23 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * Enumeration strings for numSheetLay
 	 */
+
+	public enum EnumSheetLay
+	{
+		Left, Right;
+
+		public static EnumSheetLay getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSheetLay.class, val, null);
+		}
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
+		 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -195,7 +207,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNUpSeparation(JDFXYPair value)
+	public void setNUpSeparation(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.NUPSEPARATION, value, null);
 	}
@@ -208,8 +220,8 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 */
 	public JDFXYPair getNUpSeparation()
 	{
-		String strAttrName = getAttribute(AttributeName.NUPSEPARATION, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.NUPSEPARATION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -223,9 +235,9 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSheetLay(ESheetLay enumVar)
+	public void setSheetLay(final EnumSheetLay enumVar)
 	{
-		setAttribute(AttributeName.SHEETLAY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SHEETLAY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -233,35 +245,6 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESheetLay getESheetLay()
-	{
-		return ESheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute SheetLay
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute SheetLay
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetSheetLay(ESheetLay) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSheetLay(EnumSheetLay enumVar)
-	{
-		setAttribute(AttributeName.SHEETLAY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute SheetLay
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ESheetLay GetESheetLay() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumSheetLay getSheetLay()
 	{
 		return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
@@ -299,7 +282,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFCutBlock the element
 	 */
-	public JDFCutBlock getCreateCutBlock(int iSkip)
+	public JDFCutBlock getCreateCutBlock(final int iSkip)
 	{
 		return (JDFCutBlock) getCreateElement_JDFElement(ElementName.CUTBLOCK, null, iSkip);
 	}
@@ -311,7 +294,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 * @return JDFCutBlock the element
 	 *         default is getCutBlock(0)
 	 */
-	public JDFCutBlock getCutBlock(int iSkip)
+	public JDFCutBlock getCutBlock(final int iSkip)
 	{
 		return (JDFCutBlock) getElement(ElementName.CUTBLOCK, null, iSkip);
 	}
@@ -341,7 +324,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refCutBlock(JDFCutBlock refTarget)
+	public void refCutBlock(final JDFCutBlock refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -372,7 +355,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFCutMark the element
 	 */
-	public JDFCutMark getCreateCutMark(int iSkip)
+	public JDFCutMark getCreateCutMark(final int iSkip)
 	{
 		return (JDFCutMark) getCreateElement_JDFElement(ElementName.CUTMARK, null, iSkip);
 	}
@@ -384,7 +367,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 * @return JDFCutMark the element
 	 *         default is getCutMark(0)
 	 */
-	public JDFCutMark getCutMark(int iSkip)
+	public JDFCutMark getCutMark(final int iSkip)
 	{
 		return (JDFCutMark) getElement(ElementName.CUTMARK, null, iSkip);
 	}
@@ -414,7 +397,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refCutMark(JDFCutMark refTarget)
+	public void refCutMark(final JDFCutMark refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -445,7 +428,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFCut the element
 	 */
-	public JDFCut getCreateCut(int iSkip)
+	public JDFCut getCreateCut(final int iSkip)
 	{
 		return (JDFCut) getCreateElement_JDFElement(ElementName.CUT, null, iSkip);
 	}
@@ -457,7 +440,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 * @return JDFCut the element
 	 *         default is getCut(0)
 	 */
-	public JDFCut getCut(int iSkip)
+	public JDFCut getCut(final int iSkip)
 	{
 		return (JDFCut) getElement(ElementName.CUT, null, iSkip);
 	}

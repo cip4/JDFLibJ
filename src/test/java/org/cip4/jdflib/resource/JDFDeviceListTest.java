@@ -74,6 +74,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 class JDFDeviceListTest extends JDFTestCaseBase
 {
 	private JDFDeviceList d;
@@ -101,8 +102,8 @@ class JDFDeviceListTest extends JDFTestCaseBase
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	@Override
 	@BeforeEach
 	public void setUp() throws Exception

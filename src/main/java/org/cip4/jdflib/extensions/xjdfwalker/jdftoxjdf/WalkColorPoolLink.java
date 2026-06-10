@@ -74,9 +74,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkColorPoolLink extends WalkResLink
 {

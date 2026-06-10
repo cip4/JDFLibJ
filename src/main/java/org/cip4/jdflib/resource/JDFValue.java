@@ -14,6 +14,7 @@ package org.cip4.jdflib.resource;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoValue;
 import org.cip4.jdflib.auto.JDFAutoValue.EnumValueUsage;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -33,6 +34,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFPDFPathEvaluation;
 import org.cip4.jdflib.resource.devicecapability.JDFPDFPathState;
 import org.cip4.jdflib.resource.devicecapability.JDFStringEvaluation;
 import org.cip4.jdflib.resource.devicecapability.JDFStringState;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.Node;
 
 public class JDFValue extends JDFElement // ignore JDFAutoValue
@@ -42,7 +44,8 @@ public class JDFValue extends JDFElement // ignore JDFAutoValue
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.VALUEUSAGE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumValueUsage.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.VALUEUSAGE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(JDFAutoValue.EnumValueUsage.class, 0), null);
 	}
 
 	private static AtrInfoTable[] atrInfoTable_matrix = new AtrInfoTable[2];
@@ -303,7 +306,7 @@ public class JDFValue extends JDFElement // ignore JDFAutoValue
 	 * (28) get vector of all direct child elements Loc
 	 *
 	 * @param JDFAttributeMap mAttrib the map of attributes to select
-	 * @param boolean bAnd if true all attributes in the map are AND'ed, else they are OR'ed
+	 * @param boolean         bAnd if true all attributes in the map are AND'ed, else they are OR'ed
 	 * @deprecated use getChildElementVector() instead
 	 */
 	@Deprecated

@@ -92,16 +92,14 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author MuchaD
- * 
  *         This implements the first fixture with unit tests for class JDFElement.
  */
 class JDFResourcePoolTest extends JDFTestCaseBase
 {
 
 	/**
-	 * 
 	 * make sure that coomments are not cast as resources
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -113,9 +111,8 @@ class JDFResourcePoolTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
 	 * make sure that coomments are not cast as resources
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -133,7 +130,7 @@ class JDFResourcePoolTest extends JDFTestCaseBase
 
 	/**
 	 * Method testLinkResource.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test

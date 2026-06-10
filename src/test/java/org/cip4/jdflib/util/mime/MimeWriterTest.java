@@ -61,7 +61,6 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.FileUtil;
-import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.PlatformUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.mime.MimeWriter.FixSemiColonStream;
@@ -232,7 +231,7 @@ class MimeWriterTest extends JDFTestCaseBase
 		final MimeWriter mw = new MimeWriter(eMimeSubType.formdata);
 		final BodyPartHelper bphM = new BodyPartHelper();
 		final byte[] bytesM = "{\"PrintTalk\":{...}}".getBytes();
-		assertTrue(bphM.setContent(new ByteArrayInputStream(bytesM), MimeUtil.VND_PTK_J));
+		assertTrue(bphM.setContent(new ByteArrayInputStream(bytesM), UrlUtil.VND_PTK_J));
 		bphM.setFileName("printtalk");
 		mw.addBodyPart(bphM);
 		final byte[] bytes = "%PDF-1.6...".getBytes();

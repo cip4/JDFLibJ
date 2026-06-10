@@ -73,8 +73,6 @@ package org.cip4.jdflib.auto;
 import java.util.Collection;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoHeadBandApplicationParams.EStripMaterial;
-import org.cip4.jdflib.auto.JDFAutoHeadBandApplicationParams.EnumStripMaterial;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -84,6 +82,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoSpineTapingParams : public JDFResource
@@ -105,7 +104,7 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.STRIPCOLORDETAILS, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.STRIPLENGTH, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.STRIPMATERIAL, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumStripMaterial.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumStripMaterial.class, 0), null);
 	}
 
 	@Override
@@ -132,7 +131,7 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSpineTapingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoSpineTapingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -144,7 +143,7 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSpineTapingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoSpineTapingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -157,7 +156,7 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoSpineTapingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoSpineTapingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +167,7 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -182,11 +181,23 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * Enumeration strings for numStripMaterial
 	 */
+
+	public enum EnumStripMaterial
+	{
+		Calico, Cardboard, CrepePaper, Gauze, Paper, PaperlinedMules, Tape;
+
+		public static EnumStripMaterial getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumStripMaterial.class, val, null);
+		}
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
+		 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -198,7 +209,7 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTopExcess(double value)
+	public void setTopExcess(final double value)
 	{
 		setAttribute(AttributeName.TOPEXCESS, value, null);
 	}
@@ -223,7 +234,7 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHorizontalExcess(double value)
+	public void setHorizontalExcess(final double value)
 	{
 		setAttribute(AttributeName.HORIZONTALEXCESS, value, null);
 	}
@@ -248,7 +259,7 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHorizontalExcessBack(double value)
+	public void setHorizontalExcessBack(final double value)
 	{
 		setAttribute(AttributeName.HORIZONTALEXCESSBACK, value, null);
 	}
@@ -273,7 +284,7 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStripBrand(String value)
+	public void setStripBrand(final String value)
 	{
 		setAttribute(AttributeName.STRIPBRAND, value, null);
 	}
@@ -298,7 +309,7 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStripColor(EnumNamedColor value)
+	public void setStripColor(final EnumNamedColor value)
 	{
 		setAttribute(AttributeName.STRIPCOLOR, value == null ? null : value.getName(), null);
 	}
@@ -327,7 +338,7 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStripColorDetails(String value)
+	public void setStripColorDetails(final String value)
 	{
 		setAttribute(AttributeName.STRIPCOLORDETAILS, value, null);
 	}
@@ -352,7 +363,7 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStripLength(double value)
+	public void setStripLength(final double value)
 	{
 		setAttribute(AttributeName.STRIPLENGTH, value, null);
 	}
@@ -377,9 +388,9 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setStripMaterial(EStripMaterial enumVar)
+	public void setStripMaterial(final EnumStripMaterial enumVar)
 	{
-		setAttribute(AttributeName.STRIPMATERIAL, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.STRIPMATERIAL, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -387,35 +398,6 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EStripMaterial getEStripMaterial()
-	{
-		return EStripMaterial.getEnum(getAttribute(AttributeName.STRIPMATERIAL, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute StripMaterial
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute StripMaterial
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetStripMaterial(EStripMaterial) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setStripMaterial(EnumStripMaterial enumVar)
-	{
-		setAttribute(AttributeName.STRIPMATERIAL, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute StripMaterial
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EStripMaterial GetEStripMaterial() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumStripMaterial getStripMaterial()
 	{
 		return EnumStripMaterial.getEnum(getAttribute(AttributeName.STRIPMATERIAL, null, null));
@@ -453,7 +435,7 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueApplication the element
 	 */
-	public JDFGlueApplication getCreateGlueApplication(int iSkip)
+	public JDFGlueApplication getCreateGlueApplication(final int iSkip)
 	{
 		return (JDFGlueApplication) getCreateElement_JDFElement(ElementName.GLUEAPPLICATION, null, iSkip);
 	}
@@ -465,7 +447,7 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	 * @return JDFGlueApplication the element
 	 *         default is getGlueApplication(0)
 	 */
-	public JDFGlueApplication getGlueApplication(int iSkip)
+	public JDFGlueApplication getGlueApplication(final int iSkip)
 	{
 		return (JDFGlueApplication) getElement(ElementName.GLUEAPPLICATION, null, iSkip);
 	}
@@ -495,7 +477,7 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refGlueApplication(JDFGlueApplication refTarget)
+	public void refGlueApplication(final JDFGlueApplication refTarget)
 	{
 		refElement(refTarget);
 	}

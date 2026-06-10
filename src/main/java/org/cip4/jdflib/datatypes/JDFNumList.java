@@ -84,7 +84,7 @@ import java.util.Set;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -104,7 +104,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 	 * @param precision precision of the doubles
 	 * @return
 	 */
-	public static String getString(JDFNumList l, int precision)
+	public static String getString(final JDFNumList l, final int precision)
 	{
 		return l == null ? null : l.getString(precision);
 	}
@@ -370,7 +370,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 		{
 			if (i > 0)
 			{
-				sb.append(JDFConstants.BLANK);
+				sb.append(JDFCoreConstants.BLANK);
 			}
 
 			final Object o = elementAt(i);
@@ -406,7 +406,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 		{
 			if (i > 0)
 			{
-				sb.append(JDFConstants.BLANK);
+				sb.append(JDFCoreConstants.BLANK);
 			}
 
 			final Object o = elementAt(i);
@@ -438,11 +438,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 		{
 			return true;
 		}
-		if (other == null)
-		{
-			return false;
-		}
-		if (!other.getClass().equals(getClass()))
+		if ((other == null) || !other.getClass().equals(getClass()))
 		{
 			return false;
 		}
@@ -454,7 +450,7 @@ public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTy
 		if (size == jdfNumList.size())
 		{
 			retVal = true;
-			for (int i = 0; i < size && retVal == true; i++)
+			for (int i = 0; i < size && retVal; i++)
 			{
 				final double d1 = doubleAt(i);
 				final double d2 = jdfNumList.doubleAt(i);

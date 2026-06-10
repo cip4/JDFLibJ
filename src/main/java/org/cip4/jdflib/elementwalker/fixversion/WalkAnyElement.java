@@ -49,7 +49,6 @@ import org.cip4.jdflib.util.StringUtil;
  * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super classes
  *
  * @author prosirai
- *
  */
 public class WalkAnyElement extends BaseWalker
 {

@@ -76,7 +76,7 @@ import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFRectangle;
-import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.extensions.examples.ExampleTest;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -122,7 +122,7 @@ class StrippingExampleTest extends ExampleTest
 		lo.setDescriptiveName("dummy layout");
 		setSnippet(n.getResourcePool(), true);
 		setSnippet(n.getResourceLinkPool(), true);
-		writeRoundTrip(n, "MultiDieLayout", XJDFHelper.getDefaultVersion(), EnumValidationLevel.Incomplete);
+		writeRoundTrip(n, "MultiDieLayout", BaseXJDFHelper.getDefaultVersion(), EnumValidationLevel.Incomplete);
 
 	}
 

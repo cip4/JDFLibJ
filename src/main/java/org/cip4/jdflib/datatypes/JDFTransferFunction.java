@@ -82,7 +82,8 @@ import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 /**
- * This class is a representation of a whitespace separated list of numbers representing a set of XY coordinates of a transfer function. The total number of x y values must be even because of the
+ * This class is a representation of a whitespace separated list of numbers representing a set of XY coordinates of a transfer function. The total number of x y values must be even because
+ * of the
  * pairs.
  */
 public class JDFTransferFunction extends JDFNumList
@@ -127,7 +128,6 @@ public class JDFTransferFunction extends JDFNumList
 
 	/**
 	 * constructs a xy pair with all values set to 0.0 Double
-	 *
 	 */
 	public JDFTransferFunction()
 	{
@@ -139,7 +139,6 @@ public class JDFTransferFunction extends JDFNumList
 	 * constructs a number list with the given string the number of tokens must be even
 	 *
 	 * @param s the given String in number list format
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFTransferFunction(final String s) throws DataFormatException
@@ -152,7 +151,6 @@ public class JDFTransferFunction extends JDFNumList
 	 * constructs a number list with the given vector the number of elements must be even
 	 *
 	 * @param v the number list as a vector
-	 *
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 * @deprecated use typesafe constructors
 	 */
@@ -167,7 +165,6 @@ public class JDFTransferFunction extends JDFNumList
 	 * constructs a number list with the given number list
 	 *
 	 * @param nl the given number list
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFTransferFunction(final JDFNumList nl) throws DataFormatException
@@ -181,7 +178,6 @@ public class JDFTransferFunction extends JDFNumList
 	 * constructs a number list with the given transfer function
 	 *
 	 * @param tf the given number list
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFTransferFunction(final JDFTransferFunction tf)
@@ -218,8 +214,6 @@ public class JDFTransferFunction extends JDFNumList
 
 	/**
 	 * isUnit - true if we are 0 0 1 1
-	 *
-	 *
 	 */
 	public boolean isUnit()
 	{
@@ -343,15 +337,23 @@ public class JDFTransferFunction extends JDFNumList
 		final double dX = (x - x0) * FAST_POINTS / d;
 		final int iX = (int) dX;
 		if (iX < 0)
+		{
 			return cache[0];
+		}
 		if (iX >= FAST_POINTS)
+		{
 			return cache[FAST_POINTS];
+		}
 		final double mx = dX - iX;
 		// if we are really close, dont bother
 		if (mx < 0.000001)
+		{
 			return cache[iX];
+		}
 		else if (mx > 0.999999)
+		{
 			return cache[iX + 1];
+		}
 		return cache[iX] + mx * (cache[iX + 1] - cache[iX]);
 	}
 
@@ -387,7 +389,6 @@ public class JDFTransferFunction extends JDFNumList
 	}
 
 	/**
-	 *
 	 * @return the number of points
 	 */
 	public int numPoints()
@@ -396,7 +397,6 @@ public class JDFTransferFunction extends JDFNumList
 	}
 
 	/**
-	 *
 	 * @param x
 	 * @param upper
 	 * @return
@@ -423,7 +423,6 @@ public class JDFTransferFunction extends JDFNumList
 	 * add - adds a x and a y coordinate to the vector
 	 *
 	 * @param s a string with the x and y coordinate to add
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public void add(final String s) throws DataFormatException
@@ -495,7 +494,9 @@ public class JDFTransferFunction extends JDFNumList
 	public static JDFTransferFunction multiply(final JDFTransferFunction tf1, final JDFTransferFunction tf2)
 	{
 		if (tf1 == null || tf1.isUnit())
+		{
 			return tf2;
+		}
 		if (tf2 != null && !tf2.isUnit())
 		{
 			final JDFTransferFunction tfRet = new JDFTransferFunction(tf1);

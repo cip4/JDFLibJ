@@ -217,7 +217,7 @@ public class StringArray extends ArrayList<String>
 	 */
 	public String getString()
 	{
-		return StringUtil.setvString(this, JDFConstants.BLANK, null, null);
+		return StringUtil.setvString(this, JDFCoreConstants.BLANK, null, null);
 	}
 
 	/**

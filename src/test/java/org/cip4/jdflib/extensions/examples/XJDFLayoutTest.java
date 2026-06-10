@@ -97,7 +97,7 @@ class XJDFLayoutTest extends JDFTestCaseBase
 		final JDFLayout lo = (JDFLayout) rh.getResource();
 		xjdfHelper.cleanUp();
 		setSnippet(lo, true);
-		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Simplex.getName());
+		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Simplex.name());
 		lo.setAutomated(true);
 		lo.appendElement(ElementName.POSITION);
 		writeTest(xjdfHelper, "processes/LayoutSimplex.xjdf");
@@ -115,7 +115,7 @@ class XJDFLayoutTest extends JDFTestCaseBase
 		final ResourceHelper rh = shLO.appendPartition(null, true);
 		final JDFLayout lo = (JDFLayout) rh.getResource();
 
-		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Perfecting.getName());
+		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Perfecting.name());
 		lo.setAutomated(true);
 		lo.appendElement(ElementName.POSITION);
 
@@ -194,7 +194,7 @@ class XJDFLayoutTest extends JDFTestCaseBase
 
 		for (final JDFLayout lo : vLO)
 		{
-			lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Simplex.getName());
+			lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Simplex.name());
 			lo.setAutomated(true);
 			final ResourceHelper helper = ResourceHelper.getHelper(lo);
 			final JDFAttributeMap partMap = helper.getPartMap();
@@ -219,7 +219,7 @@ class XJDFLayoutTest extends JDFTestCaseBase
 		final JDFLayout lo = (JDFLayout) rh.getResource();
 		xjdfHelper.cleanUp();
 		setSnippet(lo, true);
-		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.WorkAndTumble.getName());
+		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.WorkAndTumble.name());
 		lo.setAutomated(true);
 		lo.appendElement(ElementName.POSITION);
 		writeTest(xjdfHelper, "processes/LayoutDuplexTopBind.xjdf");
@@ -437,7 +437,7 @@ class XJDFLayoutTest extends JDFTestCaseBase
 		xjdfHelper.cleanUp();
 		setSnippet(lo, true);
 
-		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.WorkAndTurn.getName());
+		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.WorkAndTurn.name());
 		lo.setAutomated(true);
 		JDFPosition pos = (JDFPosition) lo.appendElement(ElementName.POSITION);
 		pos.setAttribute("StackDepth", "10");
@@ -471,7 +471,7 @@ class XJDFLayoutTest extends JDFTestCaseBase
 			rhBS.appendPartMap(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "bs" + i));
 			final ResourceHelper rh = shLO.appendPartition(AttributeName.SHEETNAME, "sheet" + i, true);
 			final JDFLayout lo = (JDFLayout) rh.getResource();
-			lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.WorkAndBack.getName());
+			lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.WorkAndBack.name());
 			final KElement pos = lo.appendElement(ElementName.POSITION);
 			pos.setAttribute(XJDFConstants.BinderySignatureID, "bs" + i);
 		}
@@ -513,7 +513,7 @@ class XJDFLayoutTest extends JDFTestCaseBase
 		rhBS.appendPartMap(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "bs1"));
 		final ResourceHelper rh = shLO.appendPartition(AttributeName.SHEETNAME, "sheet1", true);
 		final JDFLayout lo = (JDFLayout) rh.getResource();
-		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.WorkAndBack.getName());
+		lo.setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.WorkAndBack.name());
 		final KElement pos = lo.appendElement(ElementName.POSITION);
 		pos.setAttribute(XJDFConstants.BinderySignatureID, "bs1");
 
@@ -547,10 +547,10 @@ class XJDFLayoutTest extends JDFTestCaseBase
 
 		final KElement mp1 = bs1.appendElement(XJDFConstants.MultiPageFold);
 		mp1.setAttribute(XJDFConstants.BinderySignatureID, "BS1");
-		mp1.setAttribute(AttributeName.ORIENTATION, EnumOrientation.Rotate0.getName());
+		mp1.setAttribute(AttributeName.ORIENTATION, EnumOrientation.Rotate0.name());
 		final KElement mp2 = bs1.appendElement(XJDFConstants.MultiPageFold);
 		mp2.setAttribute(XJDFConstants.BinderySignatureID, "BS2");
-		mp2.setAttribute(AttributeName.ORIENTATION, EnumOrientation.Rotate0.getName());
+		mp2.setAttribute(AttributeName.ORIENTATION, EnumOrientation.Rotate0.name());
 
 		final ResourceHelper rhBS2 = shBS.appendPartition(XJDFConstants.BinderySignatureID, "BS2", true);
 		final JDFBinderySignature bs2 = (JDFBinderySignature) rhBS2.getResource();
@@ -586,10 +586,10 @@ class XJDFLayoutTest extends JDFTestCaseBase
 
 		final KElement mp1 = bs1.appendElement(XJDFConstants.MultiPageFold);
 		mp1.setAttribute(XJDFConstants.BinderySignatureID, "BS1");
-		mp1.setAttribute(AttributeName.ORIENTATION, EnumOrientation.Rotate0.getName());
+		mp1.setAttribute(AttributeName.ORIENTATION, EnumOrientation.Rotate0.name());
 		final KElement mp2 = bs1.appendElement(XJDFConstants.MultiPageFold);
 		mp2.setAttribute(XJDFConstants.BinderySignatureID, "BS3");
-		mp2.setAttribute(AttributeName.ORIENTATION, EnumOrientation.Flip0.getName());
+		mp2.setAttribute(AttributeName.ORIENTATION, EnumOrientation.Flip0.name());
 
 		final ResourceHelper rhBS2 = shBS.appendPartition(XJDFConstants.BinderySignatureID, "BS3", true);
 		final JDFBinderySignature bs2 = (JDFBinderySignature) rhBS2.getResource();
@@ -605,10 +605,10 @@ class XJDFLayoutTest extends JDFTestCaseBase
 
 		final KElement mp3 = bs3.appendElement(XJDFConstants.MultiPageFold);
 		mp3.setAttribute(XJDFConstants.BinderySignatureID, "BS2");
-		mp3.setAttribute(AttributeName.ORIENTATION, EnumOrientation.Rotate0.getName());
+		mp3.setAttribute(AttributeName.ORIENTATION, EnumOrientation.Rotate0.name());
 		final KElement mp3b = bs3.appendElement(XJDFConstants.MultiPageFold);
 		mp3b.setAttribute(XJDFConstants.BinderySignatureID, "BS2");
-		mp3b.setAttribute(AttributeName.ORIENTATION, EnumOrientation.Flip0.getName());
+		mp3b.setAttribute(AttributeName.ORIENTATION, EnumOrientation.Flip0.name());
 
 		final SetHelper shLO = xjdfHelper.getCreateSet(ElementName.LAYOUT, EnumUsage.Input);
 		final ResourceHelper rhLO = shLO.appendPartition(AttributeName.SHEETNAME, "Sheet1", true);

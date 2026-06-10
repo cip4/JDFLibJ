@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -106,8 +101,8 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.PDFXNOTRIMBOXERROR, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.PDFXREGISTRYNAME, 0x3333333311l, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.PDFXSETBLEEDBOXTOMEDIABOX, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.PDFXTRAPPED, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumPDFXTrapped.getEnum(0),
-				null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.PDFXTRAPPED, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumPDFXTrapped.class, 0), null);
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.PDFXTRIMBOXTOMEDIABOXOFFSET, 0x3333333311l, AttributeInfo.EnumAttributeType.rectangle, null, null);
 	}
 
@@ -123,7 +118,7 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPDFXParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPDFXParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -135,7 +130,7 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPDFXParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPDFXParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -148,95 +143,28 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPDFXParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPDFXParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for PDFXTrapped
+	 * Enumeration strings for numPDFXTrapped
 	 */
 
-	public enum EPDFXTrapped
+	public enum EnumPDFXTrapped
 	{
 		Unknown, True, False;
 
-		public static EPDFXTrapped getEnum(String val)
+		public static EnumPDFXTrapped getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPDFXTrapped.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPDFXTrapped.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for PDFXTrapped
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumPDFXTrapped extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPDFXTrapped(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumPDFXTrapped getEnum(String enumName)
-		{
-			return (EnumPDFXTrapped) getEnum(EnumPDFXTrapped.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPDFXTrapped getEnum(int enumValue)
-		{
-			return (EnumPDFXTrapped) getEnum(EnumPDFXTrapped.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPDFXTrapped.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPDFXTrapped.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPDFXTrapped.class);
-		}
-
-		/**  */
-		public static final EnumPDFXTrapped Unknown = new EnumPDFXTrapped("Unknown");
-		/**  */
-		public static final EnumPDFXTrapped True = new EnumPDFXTrapped("True");
-		/**  */
-		public static final EnumPDFXTrapped False = new EnumPDFXTrapped("False");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -248,7 +176,7 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPDFXCheck(String value)
+	public void setPDFXCheck(final String value)
 	{
 		setAttribute(AttributeName.PDFXCHECK, value, null);
 	}
@@ -273,7 +201,7 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPDFX1aCheck(boolean value)
+	public void setPDFX1aCheck(final boolean value)
 	{
 		setAttribute(AttributeName.PDFX1ACHECK, value, null);
 	}
@@ -298,7 +226,7 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPDFX3Check(boolean value)
+	public void setPDFX3Check(final boolean value)
 	{
 		setAttribute(AttributeName.PDFX3CHECK, value, null);
 	}
@@ -323,7 +251,7 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPDFXBleedBoxToTrimBoxOffset(JDFRectangle value)
+	public void setPDFXBleedBoxToTrimBoxOffset(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.PDFXBLEEDBOXTOTRIMBOXOFFSET, value, null);
 	}
@@ -336,8 +264,8 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	 */
 	public JDFRectangle getPDFXBleedBoxToTrimBoxOffset()
 	{
-		String strAttrName = getAttribute(AttributeName.PDFXBLEEDBOXTOTRIMBOXOFFSET, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PDFXBLEEDBOXTOTRIMBOXOFFSET, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -351,7 +279,7 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPDFXCompliantPDFOnly(boolean value)
+	public void setPDFXCompliantPDFOnly(final boolean value)
 	{
 		setAttribute(AttributeName.PDFXCOMPLIANTPDFONLY, value, null);
 	}
@@ -376,7 +304,7 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPDFXOutputCondition(String value)
+	public void setPDFXOutputCondition(final String value)
 	{
 		setAttribute(AttributeName.PDFXOUTPUTCONDITION, value, null);
 	}
@@ -401,7 +329,7 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPDFXOutputIntentProfile(String value)
+	public void setPDFXOutputIntentProfile(final String value)
 	{
 		setAttribute(AttributeName.PDFXOUTPUTINTENTPROFILE, value, null);
 	}
@@ -426,7 +354,7 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPDFXNoTrimBoxError(boolean value)
+	public void setPDFXNoTrimBoxError(final boolean value)
 	{
 		setAttribute(AttributeName.PDFXNOTRIMBOXERROR, value, null);
 	}
@@ -451,7 +379,7 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPDFXRegistryName(String value)
+	public void setPDFXRegistryName(final String value)
 	{
 		setAttribute(AttributeName.PDFXREGISTRYNAME, value, null);
 	}
@@ -476,7 +404,7 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPDFXSetBleedBoxToMediaBox(boolean value)
+	public void setPDFXSetBleedBoxToMediaBox(final boolean value)
 	{
 		setAttribute(AttributeName.PDFXSETBLEEDBOXTOMEDIABOX, value, null);
 	}
@@ -501,9 +429,9 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPDFXTrapped(EPDFXTrapped enumVar)
+	public void setPDFXTrapped(final EnumPDFXTrapped enumVar)
 	{
-		setAttribute(AttributeName.PDFXTRAPPED, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.PDFXTRAPPED, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -511,35 +439,6 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPDFXTrapped getEPDFXTrapped()
-	{
-		return EPDFXTrapped.getEnum(getAttribute(AttributeName.PDFXTRAPPED, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute PDFXTrapped
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute PDFXTrapped
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPDFXTrapped(EPDFXTrapped) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPDFXTrapped(EnumPDFXTrapped enumVar)
-	{
-		setAttribute(AttributeName.PDFXTRAPPED, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute PDFXTrapped
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EPDFXTrapped GetEPDFXTrapped() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumPDFXTrapped getPDFXTrapped()
 	{
 		return EnumPDFXTrapped.getEnum(getAttribute(AttributeName.PDFXTRAPPED, null, null));
@@ -555,7 +454,7 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPDFXTrimBoxToMediaBoxOffset(JDFRectangle value)
+	public void setPDFXTrimBoxToMediaBoxOffset(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.PDFXTRIMBOXTOMEDIABOXOFFSET, value, null);
 	}
@@ -568,8 +467,8 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	 */
 	public JDFRectangle getPDFXTrimBoxToMediaBoxOffset()
 	{
-		String strAttrName = getAttribute(AttributeName.PDFXTRIMBOXTOMEDIABOXOFFSET, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PDFXTRIMBOXTOMEDIABOXOFFSET, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 

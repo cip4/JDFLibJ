@@ -38,7 +38,6 @@
 package org.cip4.jdflib.core;
 
 /**
- *
  * list of ICS related enums and STrings
  *
  * @author rainer prosi

@@ -5,7 +5,7 @@ import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -25,7 +25,6 @@ public class XJDFCombiner
 	int typeIndex[];
 
 	/**
-	 *
 	 * @param mainHelper
 	 * @param helper
 	 */
@@ -47,7 +46,6 @@ public class XJDFCombiner
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public XJDFHelper combine()
@@ -95,7 +93,6 @@ public class XJDFCombiner
 	}
 
 	/**
-	 *
 	 * @param s
 	 */
 	void combineSet(final SetHelper s)
@@ -111,7 +108,6 @@ public class XJDFCombiner
 	}
 
 	/**
-	 *
 	 * @param s
 	 * @return
 	 */
@@ -167,7 +163,6 @@ public class XJDFCombiner
 	}
 
 	/**
-	 *
 	 * @param r
 	 * @return
 	 */
@@ -223,7 +218,6 @@ public class XJDFCombiner
 	}
 
 	/**
-	 *
 	 * @return a list of the index into the combined types list for each index in h.types
 	 */
 	int[] combineTypes()
@@ -250,7 +244,7 @@ public class XJDFCombiner
 					if (pos >= 0)
 					{
 						typeList[i++] = pos;
-						oldTypes.set(pos, JDFConstants.EMPTYSTRING);
+						oldTypes.set(pos, JDFCoreConstants.EMPTYSTRING);
 					}
 					else
 					{

@@ -121,7 +121,7 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoEmbossingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoEmbossingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoEmbossingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoEmbossingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -146,7 +146,7 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoEmbossingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoEmbossingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -157,7 +157,7 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -187,7 +187,7 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setModuleIndex(int value)
+	public void setModuleIndex(final int value)
 	{
 		setAttribute(AttributeName.MODULEINDEX, value, null);
 	}
@@ -234,7 +234,7 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmboss the element
 	 */
-	public JDFEmboss getCreateEmboss(int iSkip)
+	public JDFEmboss getCreateEmboss(final int iSkip)
 	{
 		return (JDFEmboss) getCreateElement_JDFElement(ElementName.EMBOSS, null, iSkip);
 	}
@@ -246,7 +246,7 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
 	 * @return JDFEmboss the element
 	 *         default is getEmboss(0)
 	 */
-	public JDFEmboss getEmboss(int iSkip)
+	public JDFEmboss getEmboss(final int iSkip)
 	{
 		return (JDFEmboss) getElement(ElementName.EMBOSS, null, iSkip);
 	}

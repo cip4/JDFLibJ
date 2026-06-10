@@ -137,8 +137,8 @@ class VectorMapTest extends JDFTestCaseBase
 	@Test
 	void testFillInvertedMap()
 	{
-		VectorMap<String, Integer> vm = new VectorMap<String, Integer>();
-		Map<Integer, String> mis = new HashMap<Integer, String>();
+		final VectorMap<String, Integer> vm = new VectorMap<>();
+		final Map<Integer, String> mis = new HashMap<>();
 		for (int i = 0; i < 100; i++)
 		{
 			mis.put(Integer.valueOf(i), "" + (i % 10));
@@ -147,7 +147,7 @@ class VectorMapTest extends JDFTestCaseBase
 		Assertions.assertEquals(vm.size(), 10);
 		for (int i = 0; i < 10; i++)
 		{
-			Vector<Integer> vector = vm.get("" + i);
+			final Vector<Integer> vector = vm.get("" + i);
 			Assertions.assertEquals(vector.size(), 10);
 			for (int j = 0; j < 10; j++)
 			{
@@ -157,13 +157,13 @@ class VectorMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	* test for getInverted
-	*/
+	 * test for getInverted
+	 */
 	@Test
 	void testGetInverted()
 	{
 		m.putOne("e", "f");
-		Map<String, String> inv = m.getInvertedMap();
+		final Map<String, String> inv = m.getInvertedMap();
 		Assertions.assertNotNull(inv);
 		Assertions.assertEquals(inv.get("b"), "a");
 		Assertions.assertEquals(inv.get("f"), "e");
@@ -180,9 +180,13 @@ class VectorMapTest extends JDFTestCaseBase
 		Assertions.assertEquals(m.getOne("a", 0), "b");
 		m.setUnique(false);
 		for (int i = 0; i < 7; i++)
+		{
 			m.putOne("cc", "d");
+		}
 		for (int i = 0; i < 7; i++)
+		{
 			Assertions.assertEquals(m.getOne("cc", i), "d");
+		}
 	}
 
 	/**
@@ -192,7 +196,7 @@ class VectorMapTest extends JDFTestCaseBase
 	void testAppendUniqueKey()
 	{
 		Assertions.assertEquals(m.size("a"), 2);
-		Vector<String> v2 = new Vector<String>();
+		final Vector<String> v2 = new Vector<>();
 		v2.add("v1");
 		v2.add("v2");
 		m.appendUnique("a", v2);
@@ -209,6 +213,7 @@ class VectorMapTest extends JDFTestCaseBase
 	{
 		Assertions.assertEquals(m.size("a"), 2);
 		@SuppressWarnings("unchecked")
+		final
 		VectorMap<String, String> clone = (VectorMap<String, String>) m.clone();
 		m.appendUnique(clone);
 		Assertions.assertEquals(m, clone);
@@ -258,7 +263,7 @@ class VectorMapTest extends JDFTestCaseBase
 	@Test
 	void testSetOneInt()
 	{
-		m = new VectorMap<String, String>();
+		m = new VectorMap<>();
 		m.setOne("a", "b1", 3);
 		Assertions.assertEquals(m.getOne("a", 3), "b1");
 		Assertions.assertNull(m.getOne("a", 2));
@@ -274,15 +279,13 @@ class VectorMapTest extends JDFTestCaseBase
 			m.setOne("a", "v", -20);
 			Assertions.fail("bad negative");
 		}
-		catch (IllegalArgumentException x)
+		catch (final IllegalArgumentException x)
 		{
 			// nop
 		}
 	}
 
 	/**
-	 *
-	 *
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -290,7 +293,7 @@ class VectorMapTest extends JDFTestCaseBase
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		m = new VectorMap<String, String>();
+		m = new VectorMap<>();
 		m.putOne("a", "b");
 		m.putOne("a", "c");
 		m.putOne("a2", "c");

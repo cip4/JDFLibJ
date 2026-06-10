@@ -172,7 +172,7 @@ class RemovePrivateTest
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testPrintTalk()
@@ -186,14 +186,14 @@ class RemovePrivateTest
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testPrintTalkElem()
 	{
-		final KElement root = KElement
-				.parseString("<PrintTalk xmlns=\"http://www.printtalk.org/schema_20\" Version=\"2.2\"\r\n" + "  payloadID=\"P_000000\" timestamp=\"2024-11-22T13:25:53+01:00\">\r\n"
-						+ "  <Request BusinessID=\"RFQ_000001\">\r\n" + "    <RFQ/>\r\n" + "  </Request>\r\n" + "</PrintTalk>");
+		final KElement root = KElement.parseString("<PrintTalk xmlns=\"http://www.printtalk.org/schema_20\" Version=\"2.2\"\r\n"
+				+ "  payloadID=\"P_000000\" timestamp=\"2024-11-22T13:25:53+01:00\">\r\n" + "  <Request BusinessID=\"RFQ_000001\">\r\n" + "    <RFQ/>\r\n"
+				+ "  </Request>\r\n" + "</PrintTalk>");
 		final RemovePrivate rp = new RemovePrivate();
 		root.appendElement("foo:bar", "www.foo.com");
 		final KElement req = root.getElement("Request");

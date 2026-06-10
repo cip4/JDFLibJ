@@ -38,7 +38,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -48,9 +48,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkTransferCurvePoolLink extends WalkResLink
 {
@@ -82,7 +80,7 @@ public class WalkTransferCurvePoolLink extends WalkResLink
 			}
 			final JDFResource cNew = (JDFResource) safeRename(r, ElementName.TRANSFERCURVE);
 			cNew.addPartIDKey(EnumPartIDKey.TransferCurveName);
-			cNew.appendAttribute(AttributeName.PARTIDKEYS, AttributeName.SEPARATION, null, JDFConstants.BLANK, true);
+			cNew.appendAttribute(AttributeName.PARTIDKEYS, AttributeName.SEPARATION, null, JDFCoreConstants.BLANK, true);
 
 			rl.renameElement("TransferCurveLink", null);
 		}
@@ -99,7 +97,6 @@ public class WalkTransferCurvePoolLink extends WalkResLink
 	}
 
 	/**
-	 *
 	 * @param tcp
 	 */
 	void updateTransferCurvePool(final JDFResource tcp)

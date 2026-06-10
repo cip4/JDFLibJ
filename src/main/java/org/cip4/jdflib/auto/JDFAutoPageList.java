@@ -150,7 +150,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPageList(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPageList(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -162,7 +162,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPageList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPageList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -175,7 +175,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPageList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPageList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -186,7 +186,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -216,7 +216,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTemplate(boolean value)
+	public void setTemplate(final boolean value)
 	{
 		setAttribute(AttributeName.TEMPLATE, value, null);
 	}
@@ -241,7 +241,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAssemblyID(String value)
+	public void setAssemblyID(final String value)
 	{
 		setAttribute(AttributeName.ASSEMBLYID, value, null);
 	}
@@ -266,7 +266,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAssemblyIDs(VString value)
+	public void setAssemblyIDs(final VString value)
 	{
 		setAttribute(AttributeName.ASSEMBLYIDS, value, null);
 	}
@@ -278,8 +278,8 @@ public abstract class JDFAutoPageList extends JDFResource
 	 */
 	public VString getAssemblyIDs()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -294,7 +294,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHasBleeds(boolean value)
+	public void setHasBleeds(final boolean value)
 	{
 		setAttribute(AttributeName.HASBLEEDS, value, null);
 	}
@@ -319,7 +319,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIsBlank(boolean value)
+	public void setIsBlank(final boolean value)
 	{
 		setAttribute(AttributeName.ISBLANK, value, null);
 	}
@@ -344,7 +344,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIsPrintable(boolean value)
+	public void setIsPrintable(final boolean value)
 	{
 		setAttribute(AttributeName.ISPRINTABLE, value, null);
 	}
@@ -369,7 +369,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIsTrapped(boolean value)
+	public void setIsTrapped(final boolean value)
 	{
 		setAttribute(AttributeName.ISTRAPPED, value, null);
 	}
@@ -394,7 +394,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -419,7 +419,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPageLabelPrefix(String value)
+	public void setPageLabelPrefix(final String value)
 	{
 		setAttribute(AttributeName.PAGELABELPREFIX, value, null);
 	}
@@ -444,7 +444,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPageLabelSuffix(String value)
+	public void setPageLabelSuffix(final String value)
 	{
 		setAttribute(AttributeName.PAGELABELSUFFIX, value, null);
 	}
@@ -469,7 +469,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSourceBleedBox(JDFRectangle value)
+	public void setSourceBleedBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.SOURCEBLEEDBOX, value, null);
 	}
@@ -482,8 +482,8 @@ public abstract class JDFAutoPageList extends JDFResource
 	 */
 	public JDFRectangle getSourceBleedBox()
 	{
-		String strAttrName = getAttribute(AttributeName.SOURCEBLEEDBOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SOURCEBLEEDBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -497,7 +497,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSourceClipBox(JDFRectangle value)
+	public void setSourceClipBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.SOURCECLIPBOX, value, null);
 	}
@@ -510,8 +510,8 @@ public abstract class JDFAutoPageList extends JDFResource
 	 */
 	public JDFRectangle getSourceClipBox()
 	{
-		String strAttrName = getAttribute(AttributeName.SOURCECLIPBOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SOURCECLIPBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -525,7 +525,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSourceTrimBox(JDFRectangle value)
+	public void setSourceTrimBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.SOURCETRIMBOX, value, null);
 	}
@@ -538,8 +538,8 @@ public abstract class JDFAutoPageList extends JDFResource
 	 */
 	public JDFRectangle getSourceTrimBox()
 	{
-		String strAttrName = getAttribute(AttributeName.SOURCETRIMBOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SOURCETRIMBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -585,7 +585,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refAssembly(JDFAssembly refTarget)
+	public void refAssembly(final JDFAssembly refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -626,7 +626,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refColorPool(JDFColorPool refTarget)
+	public void refColorPool(final JDFColorPool refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -667,7 +667,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refContentList(JDFContentList refTarget)
+	public void refContentList(final JDFContentList refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -708,7 +708,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refImageCompressionParams(JDFImageCompressionParams refTarget)
+	public void refImageCompressionParams(final JDFImageCompressionParams refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -739,7 +739,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFPageData the element
 	 */
-	public JDFPageData getCreatePageData(int iSkip)
+	public JDFPageData getCreatePageData(final int iSkip)
 	{
 		return (JDFPageData) getCreateElement_JDFElement(ElementName.PAGEDATA, null, iSkip);
 	}
@@ -751,7 +751,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 * @return JDFPageData the element
 	 *         default is getPageData(0)
 	 */
-	public JDFPageData getPageData(int iSkip)
+	public JDFPageData getPageData(final int iSkip)
 	{
 		return (JDFPageData) getElement(ElementName.PAGEDATA, null, iSkip);
 	}
@@ -812,7 +812,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refScreeningParams(JDFScreeningParams refTarget)
+	public void refScreeningParams(final JDFScreeningParams refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -843,7 +843,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFSeparationSpec the element
 	 */
-	public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
+	public JDFSeparationSpec getCreateSeparationSpec(final int iSkip)
 	{
 		return (JDFSeparationSpec) getCreateElement_JDFElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}
@@ -855,7 +855,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 * @return JDFSeparationSpec the element
 	 *         default is getSeparationSpec(0)
 	 */
-	public JDFSeparationSpec getSeparationSpec(int iSkip)
+	public JDFSeparationSpec getSeparationSpec(final int iSkip)
 	{
 		return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
 	}
@@ -916,7 +916,7 @@ public abstract class JDFAutoPageList extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refElementColorParams(JDFElementColorParams refTarget)
+	public void refElementColorParams(final JDFElementColorParams refTarget)
 	{
 		refElement(refTarget);
 	}

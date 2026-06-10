@@ -56,11 +56,8 @@ import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  *         at this point only a dummy since we have a specific WalkResourceAudit child
- *
  *         TODO how should resource consumption be tracked?
  */
 public class WalkResourceAudit extends WalkAudit
@@ -91,7 +88,9 @@ public class WalkResourceAudit extends WalkAudit
 	{
 
 		if (ri == null)
+		{
 			return;
+		}
 
 		final XJDFHelper h = xjdfToJDFImpl.xjdf;
 		final KElement resSet = ri.getElement(XJDFConstants.ResourceSet);

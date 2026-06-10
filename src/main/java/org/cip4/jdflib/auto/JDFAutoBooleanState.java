@@ -71,12 +71,8 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -102,11 +98,11 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST, 0x3333333331l, AttributeInfo.EnumAttributeType.enumerations,
-				EnumAllowedValueList.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumAllowedValueList.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x3333333331l, AttributeInfo.EnumAttributeType.enumerations,
-				EnumPresentValueList.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumPresentValueList.class, 0), null);
 	}
 
 	@Override
@@ -134,7 +130,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBooleanState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoBooleanState(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -146,7 +142,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBooleanState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoBooleanState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -159,7 +155,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoBooleanState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoBooleanState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -170,160 +166,40 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
 
 	/**
-	 * Enumeration strings for AllowedValueList
+	 * Enumeration strings for numAllowedValueList
 	 */
 
-	public enum EAllowedValueList
+	public enum EnumAllowedValueList
 	{
 		;
-		public static EAllowedValueList getEnum(String val)
+		public static EnumAllowedValueList getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EAllowedValueList.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumAllowedValueList.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for AllowedValueList
+	 * Enumeration strings for numPresentValueList
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumAllowedValueList extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumAllowedValueList(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumAllowedValueList getEnum(String enumName)
-		{
-			return (EnumAllowedValueList) getEnum(EnumAllowedValueList.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumAllowedValueList getEnum(int enumValue)
-		{
-			return (EnumAllowedValueList) getEnum(EnumAllowedValueList.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumAllowedValueList.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAllowedValueList.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAllowedValueList.class);
-		}
-
-	}
-
-	/**
-	 * Enumeration strings for PresentValueList
-	 */
-
-	public enum EPresentValueList
+	public enum EnumPresentValueList
 	{
 		;
-		public static EPresentValueList getEnum(String val)
+		public static EnumPresentValueList getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPresentValueList.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPresentValueList.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for PresentValueList
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumPresentValueList extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPresentValueList(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumPresentValueList getEnum(String enumName)
-		{
-			return (EnumPresentValueList) getEnum(EnumPresentValueList.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPresentValueList getEnum(int enumValue)
-		{
-			return (EnumPresentValueList) getEnum(EnumPresentValueList.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPresentValueList.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPresentValueList.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPresentValueList.class);
-		}
-
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -335,7 +211,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 *
 	 * @param v List of the enumeration values
 	 */
-	public void setEAllowedValueList(List<EAllowedValueList> v)
+	public void setAllowedValueList(final List<EnumAllowedValueList> v)
 	{
 		setEnumsAttribute(AttributeName.ALLOWEDVALUELIST, v, null);
 	}
@@ -345,38 +221,9 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public List<EAllowedValueList> getEnumsAllowedValueList()
+	public List<EnumAllowedValueList> getAllowedValueList()
 	{
-		return getEnumerationsAttribute(AttributeName.ALLOWEDVALUELIST, null, EAllowedValueList.class);
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute AllowedValueList
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5.2) set attribute AllowedValueList
-	 *
-	 * @param v List of the enumeration values
-	 * @deprecated use SetEAllowedValueList(List<EAllowedValueList>) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setAllowedValueList(List<EnumAllowedValueList> v)
-	{
-		setEnumerationsAttribute(AttributeName.ALLOWEDVALUELIST, v, null);
-	}
-
-	/**
-	 * (9.2) get AllowedValueList attribute AllowedValueList
-	 *
-	 * @return Vector of the enumerations
-	 * @deprecated use List<EAllowedValueList > GetEAllowedValueList() based on java.lang.enum instead
-	 */
-	@Deprecated
-	public Vector<EnumAllowedValueList> getAllowedValueList()
-	{
-		return getEnumerationsAttribute(AttributeName.ALLOWEDVALUELIST, null, EnumAllowedValueList.getEnum(0), false);
+		return getEnumerationsAttribute(AttributeName.ALLOWEDVALUELIST, null, EnumAllowedValueList.class);
 	}
 
 	/*
@@ -389,7 +236,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCurrentValue(boolean value)
+	public void setCurrentValue(final boolean value)
 	{
 		setAttribute(AttributeName.CURRENTVALUE, value, null);
 	}
@@ -414,7 +261,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDefaultValue(boolean value)
+	public void setDefaultValue(final boolean value)
 	{
 		setAttribute(AttributeName.DEFAULTVALUE, value, null);
 	}
@@ -439,7 +286,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 *
 	 * @param v List of the enumeration values
 	 */
-	public void setEPresentValueList(List<EPresentValueList> v)
+	public void setPresentValueList(final List<EnumPresentValueList> v)
 	{
 		setEnumsAttribute(AttributeName.PRESENTVALUELIST, v, null);
 	}
@@ -449,38 +296,9 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public List<EPresentValueList> getEnumsPresentValueList()
+	public List<EnumPresentValueList> getPresentValueList()
 	{
-		return getEnumerationsAttribute(AttributeName.PRESENTVALUELIST, null, EPresentValueList.class);
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute PresentValueList
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5.2) set attribute PresentValueList
-	 *
-	 * @param v List of the enumeration values
-	 * @deprecated use SetEPresentValueList(List<EPresentValueList>) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPresentValueList(List<EnumPresentValueList> v)
-	{
-		setEnumerationsAttribute(AttributeName.PRESENTVALUELIST, v, null);
-	}
-
-	/**
-	 * (9.2) get PresentValueList attribute PresentValueList
-	 *
-	 * @return Vector of the enumerations
-	 * @deprecated use List<EPresentValueList > GetEPresentValueList() based on java.lang.enum instead
-	 */
-	@Deprecated
-	public Vector<EnumPresentValueList> getPresentValueList()
-	{
-		return getEnumerationsAttribute(AttributeName.PRESENTVALUELIST, null, EnumPresentValueList.getEnum(0), false);
+		return getEnumerationsAttribute(AttributeName.PRESENTVALUELIST, null, EnumPresentValueList.class);
 	}
 
 	/*
@@ -515,7 +333,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc the element
 	 */
-	public JDFLoc getCreateLoc(int iSkip)
+	public JDFLoc getCreateLoc(final int iSkip)
 	{
 		return (JDFLoc) getCreateElement_JDFElement(ElementName.LOC, null, iSkip);
 	}
@@ -527,7 +345,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 * @return JDFLoc the element
 	 *         default is getLoc(0)
 	 */
-	public JDFLoc getLoc(int iSkip)
+	public JDFLoc getLoc(final int iSkip)
 	{
 		return (JDFLoc) getElement(ElementName.LOC, null, iSkip);
 	}
@@ -578,7 +396,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFValueLoc the element
 	 */
-	public JDFValueLoc getCreateValueLoc(int iSkip)
+	public JDFValueLoc getCreateValueLoc(final int iSkip)
 	{
 		return (JDFValueLoc) getCreateElement_JDFElement(ElementName.VALUELOC, null, iSkip);
 	}
@@ -590,7 +408,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 * @return JDFValueLoc the element
 	 *         default is getValueLoc(0)
 	 */
-	public JDFValueLoc getValueLoc(int iSkip)
+	public JDFValueLoc getValueLoc(final int iSkip)
 	{
 		return (JDFValueLoc) getElement(ElementName.VALUELOC, null, iSkip);
 	}

@@ -104,7 +104,7 @@ public abstract class JDFAutoEmployeeDef extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoEmployeeDef(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoEmployeeDef(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -116,7 +116,7 @@ public abstract class JDFAutoEmployeeDef extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoEmployeeDef(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoEmployeeDef(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -129,7 +129,7 @@ public abstract class JDFAutoEmployeeDef extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoEmployeeDef(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoEmployeeDef(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -150,7 +150,7 @@ public abstract class JDFAutoEmployeeDef extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPersonalID(String value)
+	public void setPersonalID(final String value)
 	{
 		setAttribute(AttributeName.PERSONALID, value, null);
 	}

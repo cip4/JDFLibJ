@@ -144,7 +144,7 @@ public class DumpDir
 	 * create a new File in this dump
 	 *
 	 * @param header the header to print prior to the xml
-	 * @param ext the additional extension to add prior to .tmp
+	 * @param ext    the additional extension to add prior to .tmp
 	 * @return
 	 */
 	public File newFile(final String header, final String ext)
@@ -170,7 +170,7 @@ public class DumpDir
 	 * create a new File in this dump and fill it from is
 	 *
 	 * @param header the header to print prior to the stream
-	 * @param is the input stream to fill
+	 * @param is     the input stream to fill
 	 * @return the new file
 	 * @deprecated use the 3 parameter version
 	 */
@@ -184,8 +184,8 @@ public class DumpDir
 	 * create a new File in this dump and fill it from is
 	 *
 	 * @param header the header to print prior to the stream
-	 * @param is the input stream to fill
-	 * @param ext the additional extension
+	 * @param is     the input stream to fill
+	 * @param ext    the additional extension
 	 * @return the new file
 	 */
 	public File newFileFromStream(final String header, InputStream is, final String ext)

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,7 +72,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.util.ContainerUtil;
@@ -104,8 +104,8 @@ public class ICSVersion
 	private final String ics;
 
 	/**
-	 * @param _theNode the jdf node to parse
-	 * @param vParts the job part to search for, if null don't filter
+	 * @param _theNode      the jdf node to parse
+	 * @param vParts        the job part to search for, if null don't filter
 	 * @param inlineUpdates replace all updated audits with the updated version
 	 */
 	public ICSVersion(final String ics, final int level, final EnumVersion version)
@@ -126,11 +126,13 @@ public class ICSVersion
 	public boolean equals(final Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
-		if (obj == null)
+		}
+		if ((obj == null) || (getClass() != obj.getClass()))
+		{
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		}
 		final ICSVersion other = (ICSVersion) obj;
 		return Objects.equals(ics, other.ics) && level == other.level && Objects.equals(version, other.version);
 	}
@@ -170,12 +172,12 @@ public class ICSVersion
 	@Override
 	public String toString()
 	{
-		return ics + "_L" + level + JDFConstants.HYPHEN + version;
+		return ics + "_L" + level + JDFCoreConstants.HYPHEN + version;
 	}
 
 	/**
 	 * get a base ics of the same version family
-	 * 
+	 *
 	 * @param dependentICS
 	 * @param depLevel
 	 * @return

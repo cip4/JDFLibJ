@@ -66,7 +66,7 @@
  * <http://www.cip4.org/>.
  *
  *
- * 
+ *
  */
 package org.cip4.jdflib.util.file;
 
@@ -77,8 +77,8 @@ import org.apache.commons.io.FilenameUtils;
 
 /**
  * common class for editor, bambi etc. to find a home directory
- * @author rainer prosi
  *
+ * @author rainer prosi
  */
 public class UserDir
 {
@@ -86,10 +86,9 @@ public class UserDir
 	private static final String LOGS = "logs";
 
 	/**
-	 * 
 	 * @param toolName
 	 */
-	public UserDir(String toolName)
+	public UserDir(final String toolName)
 	{
 		super();
 		this.toolName = toolName;
@@ -99,18 +98,16 @@ public class UserDir
 	final String toolName;
 
 	/**
-	 * 
 	 * @return the path for all cip4 tools
 	 */
 	public String getToolsPath()
 	{
-		String pathDir = FilenameUtils.concat(FileUtils.getUserDirectoryPath(), CIP4_TOOLS);
+		final String pathDir = FilenameUtils.concat(FileUtils.getUserDirectoryPath(), CIP4_TOOLS);
 		new File(pathDir).mkdirs();
 		return pathDir;
 	}
 
 	/**
-	 * 
 	 * @return the path for this tool
 	 */
 	public String getToolPath()
@@ -122,7 +119,6 @@ public class UserDir
 	}
 
 	/**
-	 * 
 	 * @return the path for this tool
 	 */
 	public String getLogPath()
@@ -134,7 +130,6 @@ public class UserDir
 	}
 
 	/**
-	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

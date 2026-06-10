@@ -72,7 +72,6 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoAbortQueueEntryParams;
 
 /**
- *
  * @author rainer prosi
  * @date May 9, 2014
  */
@@ -88,7 +87,7 @@ public class JDFAbortQueueEntryParams extends JDFAutoAbortQueueEntryParams
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFAbortQueueEntryParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFAbortQueueEntryParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -98,7 +97,7 @@ public class JDFAbortQueueEntryParams extends JDFAutoAbortQueueEntryParams
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFAbortQueueEntryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFAbortQueueEntryParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -109,24 +108,26 @@ public class JDFAbortQueueEntryParams extends JDFAutoAbortQueueEntryParams
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFAbortQueueEntryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFAbortQueueEntryParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	  * (5) set attribute EndStatus
-	  * @param enumVar the enumVar to set the attribute to
-	  */
-	public void setEndStatus(EnumNodeStatus enumVar)
+	 * (5) set attribute EndStatus
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 */
+	public void setEndStatus(final EnumNodeStatus enumVar)
 	{
 		setNodeStatus(enumVar);
 	}
 
 	/**
-	  * (9) get attribute EndStatus
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute EndStatus
+	 *
+	 * @return the value of the attribute
+	 */
 	public EnumNodeStatus getEndStatus()
 	{
 		return getNodeStatus();

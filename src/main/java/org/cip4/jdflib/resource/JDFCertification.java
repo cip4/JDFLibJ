@@ -78,7 +78,8 @@ public class JDFCertification extends JDFAutoCertification
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFCertification(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFCertification(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

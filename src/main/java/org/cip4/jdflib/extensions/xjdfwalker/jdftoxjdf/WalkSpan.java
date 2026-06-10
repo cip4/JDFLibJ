@@ -73,9 +73,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.span.JDFSpanBase;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkSpan extends WalkJDFSubElement
 {
@@ -89,8 +87,9 @@ public class WalkSpan extends WalkJDFSubElement
 
 	/**
 	 * depending on the value of bSpanAsAttribute either <br/>
-	 * 		invert XXXSpan/@Datatype=foo to FooSpan/@Name=Datatype
-	 *      create an Attribute with the name of the span
+	 * invert XXXSpan/@Datatype=foo to FooSpan/@Name=Datatype
+	 * create an Attribute with the name of the span
+	 *
 	 * @param xjdf
 	 * @return true if must continue
 	 */
@@ -120,10 +119,10 @@ public class WalkSpan extends WalkJDFSubElement
 	 * @param xjdf
 	 * @return
 	 */
-	private KElement spanToAttribute(JDFSpanBase span, KElement xjdf)
+	private KElement spanToAttribute(final JDFSpanBase span, final KElement xjdf)
 	{
-		String name = getLocalName(span);
-		String val = span.guessActual();
+		final String name = getLocalName(span);
+		final String val = span.guessActual();
 		if (val != null)
 		{
 			xjdf.setAttribute(name, val);
@@ -131,9 +130,9 @@ public class WalkSpan extends WalkJDFSubElement
 		return null;
 	}
 
-	protected String getLocalName(JDFSpanBase span)
+	protected String getLocalName(final JDFSpanBase span)
 	{
-		String name = span.getLocalName();
+		final String name = span.getLocalName();
 		return name;
 	}
 
@@ -145,10 +144,12 @@ public class WalkSpan extends WalkJDFSubElement
 	private KElement invertSpan(final JDFSpanBase span, final KElement xjdf)
 	{
 		span.inlineRefElements(null, null, false);
-		org.cip4.jdflib.span.JDFSpanBase.EnumDataType dataType = span.getDataType();
+		final org.cip4.jdflib.span.JDFSpanBase.EnumDataType dataType = span.getDataType();
 		if (dataType == null)
+		{
 			return null; // broken!
-		final KElement eNew = xjdf.appendElement(dataType.getName());
+		}
+		final KElement eNew = xjdf.appendElement(dataType.name());
 		eNew.setAttributes(span);
 		eNew.removeAttribute(AttributeName.DATATYPE);
 		eNew.setAttribute(AttributeName.NAME, span.getLocalName());

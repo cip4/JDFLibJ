@@ -134,7 +134,7 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDensityMeasuringField(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDensityMeasuringField(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -146,7 +146,7 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDensityMeasuringField(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDensityMeasuringField(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -159,7 +159,7 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDensityMeasuringField(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDensityMeasuringField(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -170,7 +170,7 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -200,7 +200,7 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCenter(JDFXYPair value)
+	public void setCenter(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.CENTER, value, null);
 	}
@@ -213,8 +213,8 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 */
 	public JDFXYPair getCenter()
 	{
-		String strAttrName = getAttribute(AttributeName.CENTER, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CENTER, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -228,7 +228,7 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDensity(JDFNumberList value)
+	public void setDensity(final JDFNumberList value)
 	{
 		setAttribute(AttributeName.DENSITY, value, null);
 	}
@@ -241,8 +241,8 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 */
 	public JDFNumberList getDensity()
 	{
-		String strAttrName = getAttribute(AttributeName.DENSITY, null, null);
-		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.DENSITY, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -256,7 +256,7 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDiameter(double value)
+	public void setDiameter(final double value)
 	{
 		setAttribute(AttributeName.DIAMETER, value, null);
 	}
@@ -281,7 +281,7 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDotGain(double value)
+	public void setDotGain(final double value)
 	{
 		setAttribute(AttributeName.DOTGAIN, value, null);
 	}
@@ -306,7 +306,7 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPercentage(double value)
+	public void setPercentage(final double value)
 	{
 		setAttribute(AttributeName.PERCENTAGE, value, null);
 	}
@@ -331,7 +331,7 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setScreen(String value)
+	public void setScreen(final String value)
 	{
 		setAttribute(AttributeName.SCREEN, value, null);
 	}
@@ -357,7 +357,7 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 * @param value the value to set the attribute to
 	 */
 	@Override
-	public void setSeparation(String value)
+	public void setSeparation(final String value)
 	{
 		setAttribute(AttributeName.SEPARATION, value, null);
 	}
@@ -383,7 +383,7 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setToleranceCyan(JDFXYPair value)
+	public void setToleranceCyan(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.TOLERANCECYAN, value, null);
 	}
@@ -396,8 +396,8 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 */
 	public JDFXYPair getToleranceCyan()
 	{
-		String strAttrName = getAttribute(AttributeName.TOLERANCECYAN, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TOLERANCECYAN, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -411,7 +411,7 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setToleranceMagenta(JDFXYPair value)
+	public void setToleranceMagenta(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.TOLERANCEMAGENTA, value, null);
 	}
@@ -424,8 +424,8 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 */
 	public JDFXYPair getToleranceMagenta()
 	{
-		String strAttrName = getAttribute(AttributeName.TOLERANCEMAGENTA, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TOLERANCEMAGENTA, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -439,7 +439,7 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setToleranceYellow(JDFXYPair value)
+	public void setToleranceYellow(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.TOLERANCEYELLOW, value, null);
 	}
@@ -452,8 +452,8 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 */
 	public JDFXYPair getToleranceYellow()
 	{
-		String strAttrName = getAttribute(AttributeName.TOLERANCEYELLOW, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TOLERANCEYELLOW, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -467,7 +467,7 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setToleranceBlack(JDFXYPair value)
+	public void setToleranceBlack(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.TOLERANCEBLACK, value, null);
 	}
@@ -480,8 +480,8 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 */
 	public JDFXYPair getToleranceBlack()
 	{
-		String strAttrName = getAttribute(AttributeName.TOLERANCEBLACK, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TOLERANCEBLACK, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -495,7 +495,7 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setToleranceDotGain(JDFXYPair value)
+	public void setToleranceDotGain(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.TOLERANCEDOTGAIN, value, null);
 	}
@@ -508,8 +508,8 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 */
 	public JDFXYPair getToleranceDotGain()
 	{
-		String strAttrName = getAttribute(AttributeName.TOLERANCEDOTGAIN, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TOLERANCEDOTGAIN, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -523,7 +523,7 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSetup(String value)
+	public void setSetup(final String value)
 	{
 		setAttribute(AttributeName.SETUP, value, null);
 	}
@@ -580,7 +580,7 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refColorMeasurementConditions(JDFColorMeasurementConditions refTarget)
+	public void refColorMeasurementConditions(final JDFColorMeasurementConditions refTarget)
 	{
 		refElement(refTarget);
 	}

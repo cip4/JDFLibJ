@@ -108,7 +108,7 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDevelopingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDevelopingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -120,7 +120,7 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDevelopingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDevelopingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDevelopingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDevelopingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -144,7 +144,7 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -174,7 +174,7 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPreHeatTemp(double value)
+	public void setPreHeatTemp(final double value)
 	{
 		setAttribute(AttributeName.PREHEATTEMP, value, null);
 	}
@@ -199,7 +199,7 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPreHeatTime(JDFDuration value)
+	public void setPreHeatTime(final JDFDuration value)
 	{
 		setAttribute(AttributeName.PREHEATTIME, value, null);
 	}
@@ -212,8 +212,8 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 	 */
 	public JDFDuration getPreHeatTime()
 	{
-		String strAttrName = getAttribute(AttributeName.PREHEATTIME, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PREHEATTIME, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -227,7 +227,7 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPostBakeTemp(double value)
+	public void setPostBakeTemp(final double value)
 	{
 		setAttribute(AttributeName.POSTBAKETEMP, value, null);
 	}
@@ -252,7 +252,7 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPostBakeTime(JDFDuration value)
+	public void setPostBakeTime(final JDFDuration value)
 	{
 		setAttribute(AttributeName.POSTBAKETIME, value, null);
 	}
@@ -265,8 +265,8 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 	 */
 	public JDFDuration getPostBakeTime()
 	{
-		String strAttrName = getAttribute(AttributeName.POSTBAKETIME, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.POSTBAKETIME, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -280,7 +280,7 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPostExposeTime(JDFDuration value)
+	public void setPostExposeTime(final JDFDuration value)
 	{
 		setAttribute(AttributeName.POSTEXPOSETIME, value, null);
 	}
@@ -293,8 +293,8 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 	 */
 	public JDFDuration getPostExposeTime()
 	{
-		String strAttrName = getAttribute(AttributeName.POSTEXPOSETIME, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.POSTEXPOSETIME, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 

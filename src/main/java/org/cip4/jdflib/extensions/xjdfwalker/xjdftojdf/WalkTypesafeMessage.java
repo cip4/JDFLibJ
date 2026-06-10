@@ -78,8 +78,7 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
- * walker for the JMF or XJMF root
+ *         walker for the JMF or XJMF root
  */
 public class WalkTypesafeMessage extends WalkXElement
 {
@@ -104,12 +103,12 @@ public class WalkTypesafeMessage extends WalkXElement
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
 		moveFromSender(e, e.getElement(XJDFConstants.Header));
-		String messageName = e.getLocalName();
-		for (String family : families)
+		final String messageName = e.getLocalName();
+		for (final String family : families)
 		{
 			if (messageName.startsWith(family))
 			{
-				String type = getMessageType(e, messageName, family);
+				final String type = getMessageType(e, messageName, family);
 				e.renameElement(family, null);
 				e.setAttribute(AttributeName.TYPE, type);
 				break;
@@ -120,24 +119,22 @@ public class WalkTypesafeMessage extends WalkXElement
 	}
 
 	/**
-	 *
-	 * @param e the element - needed for subclasses
+	 * @param e           the element - needed for subclasses
 	 * @param messageName
 	 * @param family
 	 * @return
 	 */
-	String getMessageType(KElement e, String messageName, String family)
+	String getMessageType(final KElement e, final String messageName, final String family)
 	{
-		String type = StringUtil.rightStr(messageName, -family.length());
+		final String type = StringUtil.rightStr(messageName, -family.length());
 		return type;
 	}
 
 	/**
-	 *
 	 * @param elem
 	 */
 	@Override
-	protected void updateAttributes(KElement elem)
+	protected void updateAttributes(final KElement elem)
 	{
 		super.updateAttributes(elem);
 		elem.renameAttribute(AttributeName.DEVICEID, AttributeName.SENDERID, null, null);
@@ -152,15 +149,17 @@ public class WalkTypesafeMessage extends WalkXElement
 	public boolean matches(final KElement toCheck)
 	{
 		if (!super.matches(toCheck))
+		{
 			return false;
+		}
 
-		String localName = toCheck.getLocalName();
-		char first = localName.charAt(0);
+		final String localName = toCheck.getLocalName();
+		final char first = localName.charAt(0);
 		if (localName.length() < 6 || "CQRS".indexOf(first) < 0)
 		{
 			return false;
 		}
-		for (String family : families)
+		for (final String family : families)
 		{
 			if (localName.startsWith(family))
 			{

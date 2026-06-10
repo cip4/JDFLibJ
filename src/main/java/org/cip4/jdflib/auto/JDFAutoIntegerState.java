@@ -136,7 +136,7 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIntegerState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoIntegerState(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -148,7 +148,7 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIntegerState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoIntegerState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -161,7 +161,7 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoIntegerState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoIntegerState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -172,7 +172,7 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -193,7 +193,7 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDefaultValue(int value)
+	public void setDefaultValue(final int value)
 	{
 		setAttribute(AttributeName.DEFAULTVALUE, value, null);
 	}
@@ -218,7 +218,7 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCurrentValue(int value)
+	public void setCurrentValue(final int value)
 	{
 		setAttribute(AttributeName.CURRENTVALUE, value, null);
 	}
@@ -243,7 +243,7 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowedValueList(JDFIntegerRangeList value)
+	public void setAllowedValueList(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUELIST, value, null);
 	}
@@ -256,8 +256,8 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 */
 	public JDFIntegerRangeList getAllowedValueList()
 	{
-		String strAttrName = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -271,7 +271,7 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowedValueMax(int value)
+	public void setAllowedValueMax(final int value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUEMAX, value, null);
 	}
@@ -296,7 +296,7 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowedValueMin(int value)
+	public void setAllowedValueMin(final int value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUEMIN, value, null);
 	}
@@ -321,7 +321,7 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowedValueMod(JDFXYPair value)
+	public void setAllowedValueMod(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUEMOD, value, null);
 	}
@@ -334,8 +334,8 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 */
 	public JDFXYPair getAllowedValueMod()
 	{
-		String strAttrName = getAttribute(AttributeName.ALLOWEDVALUEMOD, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.ALLOWEDVALUEMOD, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -349,7 +349,7 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentValueList(JDFIntegerRangeList value)
+	public void setPresentValueList(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.PRESENTVALUELIST, value, null);
 	}
@@ -362,8 +362,8 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 */
 	public JDFIntegerRangeList getPresentValueList()
 	{
-		String strAttrName = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -377,7 +377,7 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentValueMax(int value)
+	public void setPresentValueMax(final int value)
 	{
 		setAttribute(AttributeName.PRESENTVALUEMAX, value, null);
 	}
@@ -402,7 +402,7 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentValueMin(int value)
+	public void setPresentValueMin(final int value)
 	{
 		setAttribute(AttributeName.PRESENTVALUEMIN, value, null);
 	}
@@ -427,7 +427,7 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentValueMod(JDFXYPair value)
+	public void setPresentValueMod(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.PRESENTVALUEMOD, value, null);
 	}
@@ -440,8 +440,8 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 */
 	public JDFXYPair getPresentValueMod()
 	{
-		String strAttrName = getAttribute(AttributeName.PRESENTVALUEMOD, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PRESENTVALUEMOD, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -455,7 +455,7 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setUnitType(String value)
+	public void setUnitType(final String value)
 	{
 		setAttribute(AttributeName.UNITTYPE, value, null);
 	}
@@ -502,7 +502,7 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc the element
 	 */
-	public JDFLoc getCreateLoc(int iSkip)
+	public JDFLoc getCreateLoc(final int iSkip)
 	{
 		return (JDFLoc) getCreateElement_JDFElement(ElementName.LOC, null, iSkip);
 	}
@@ -514,7 +514,7 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 * @return JDFLoc the element
 	 *         default is getLoc(0)
 	 */
-	public JDFLoc getLoc(int iSkip)
+	public JDFLoc getLoc(final int iSkip)
 	{
 		return (JDFLoc) getElement(ElementName.LOC, null, iSkip);
 	}
@@ -565,7 +565,7 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFValueLoc the element
 	 */
-	public JDFValueLoc getCreateValueLoc(int iSkip)
+	public JDFValueLoc getCreateValueLoc(final int iSkip)
 	{
 		return (JDFValueLoc) getCreateElement_JDFElement(ElementName.VALUELOC, null, iSkip);
 	}
@@ -577,7 +577,7 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 * @return JDFValueLoc the element
 	 *         default is getValueLoc(0)
 	 */
-	public JDFValueLoc getValueLoc(int iSkip)
+	public JDFValueLoc getValueLoc(final int iSkip)
 	{
 		return (JDFValueLoc) getElement(ElementName.VALUELOC, null, iSkip);
 	}

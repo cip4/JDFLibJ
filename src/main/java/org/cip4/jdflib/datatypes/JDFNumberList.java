@@ -82,7 +82,7 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -114,7 +114,6 @@ public class JDFNumberList extends JDFNumList
 	 * constructs a number list with the given string
 	 *
 	 * @param s the given String
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFNumberList(final String s) throws DataFormatException
@@ -124,6 +123,7 @@ public class JDFNumberList extends JDFNumList
 
 	/**
 	 * factory for JDFNumberList that silently returns null in case of illegal strings
+	 *
 	 * @param s the string to parse
 	 * @return the JDFNumberList, null if s is not compatible
 	 */
@@ -150,7 +150,6 @@ public class JDFNumberList extends JDFNumList
 	 * constructs a number list with the given vector
 	 *
 	 * @param v the given vector
-	 *
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 * @deprecated use typesafe constructors
 	 */
@@ -194,20 +193,23 @@ public class JDFNumberList extends JDFNumList
 	 * add - adds a number list to the already existing number list
 	 *
 	 * @param s the given string
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public void add(final String s) throws DataFormatException
 	{
-		final StringTokenizer sToken = new StringTokenizer(s, JDFConstants.BLANK);
+		final StringTokenizer sToken = new StringTokenizer(s, JDFCoreConstants.BLANK);
 
 		while (sToken.hasMoreTokens())
 		{
 			final String t = sToken.nextToken();
 			if (StringUtil.isNumber(t))
+			{
 				add(StringUtil.parseDouble(t, 0.0));
+			}
 			else
+			{
 				throw new DataFormatException("illegal double: " + t);
+			}
 		}
 	}
 

@@ -64,9 +64,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class XJDFChangeOrderTest extends ExampleTest
 {
@@ -129,7 +127,7 @@ class XJDFChangeOrderTest extends ExampleTest
 		map.put("Side", "Front");
 		map.put("Separation", "Spot1");
 
-		xjdfHelper.setTypes(EnumType.ConventionalPrinting.getName());
+		xjdfHelper.setTypes(EnumType.ConventionalPrinting.name());
 
 		final SetHelper sh2 = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, null);
 		final ResourceHelper rh2 = sh2.appendPartition(null, true);
@@ -220,7 +218,7 @@ class XJDFChangeOrderTest extends ExampleTest
 		final JDFAttributeMap map = new JDFAttributeMap("SheetName", "Body");
 		final XJDFHelper xjdfHelper = new XJDFHelper("ChangeOrder", "RemoveVarnish", new VJDFAttributeMap(map));
 
-		xjdfHelper.setTypes(EnumType.Varnishing.getName());
+		xjdfHelper.setTypes(EnumType.Varnishing.name());
 		xjdfHelper.getSet(ElementName.NODEINFO, 0).deleteNode();
 
 		final SetHelper sh2 = xjdfHelper.getCreateSet(ElementName.VARNISHINGPARAMS, EnumUsage.Input);
@@ -244,7 +242,7 @@ class XJDFChangeOrderTest extends ExampleTest
 		map.put("Side", "Front");
 		map.put("Separation", "Var");
 
-		xjdfHelper.setTypes(EnumType.Varnishing.getName());
+		xjdfHelper.setTypes(EnumType.Varnishing.name());
 
 		final SetHelper sh2 = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, null);
 		final ResourceHelper rh2 = sh2.appendPartition(null, true);

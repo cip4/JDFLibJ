@@ -50,7 +50,6 @@ import org.cip4.jdflib.util.ThreadUtil;
 
 /**
  * class to persist stuff later
- *
  * either an IPersistable or Runnable may be queued
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -66,7 +65,6 @@ public class DelayedPersist extends Thread
 	private static class RunnablePersist implements IPersistable
 	{
 		/**
-		 *
 		 * @param runner
 		 */
 		RunnablePersist(final Runnable runner)
@@ -110,11 +108,13 @@ public class DelayedPersist extends Thread
 		public boolean equals(final Object obj)
 		{
 			if (this == obj)
+			{
 				return true;
-			if (obj == null)
+			}
+			if ((obj == null) || (getClass() != obj.getClass()))
+			{
 				return false;
-			if (getClass() != obj.getClass())
-				return false;
+			}
 			final RunnablePersist other = (RunnablePersist) obj;
 
 			return ContainerUtil.equals(other, this);
@@ -136,18 +136,18 @@ public class DelayedPersist extends Thread
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public static DelayedPersist getDelayedPersist()
 	{
 		if (theDelayed == null)
+		{
 			theDelayed = new DelayedPersist();
+		}
 		return theDelayed;
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public static DelayedPersist getCurrentDelayedPersist()
@@ -182,16 +182,17 @@ public class DelayedPersist extends Thread
 		{
 			log.info("waiting for persist of delayed persist");
 			if (waitMutex != null) // just in case the log opened the time slot
+			{
 				ThreadUtil.wait(waitMutex, 120000); // we should never need more than 2 minutes to shut down
+			}
 			log.info("finished waiting for persist of delayed persist");
 		}
 		theDelayed = null;
 	}
 
 	/**
-	 *
 	 * @param persistable the thing to send off
-	 * @param deltaTime max wait time in milliseconds - if<=null persist immediately
+	 * @param deltaTime   max wait time in milliseconds - if<=null persist immediately
 	 */
 	public void queueRunnable(final Runnable r, final long deltaTime)
 	{
@@ -199,9 +200,8 @@ public class DelayedPersist extends Thread
 	}
 
 	/**
-	 *
 	 * @param persistable the thing to send off
-	 * @param deltaTime max wait time in milliseconds - if<=null persist immediately
+	 * @param deltaTime   max wait time in milliseconds - if<=null persist immediately
 	 */
 	public void queue(final IPersistable persistable, final long deltaTime)
 	{
@@ -268,7 +268,9 @@ public class DelayedPersist extends Thread
 	{
 		long t0 = 424242;
 		if (persistQueue.size() == 0)
+		{
 			return (int) t0;
+		}
 
 		final long t = System.currentTimeMillis();
 		final Vector<IPersistable> theList = new Vector<>();
@@ -277,7 +279,9 @@ public class DelayedPersist extends Thread
 		{
 			final Collection<IPersistable> v = ContainerUtil.getKeyArray(persistQueue);
 			if (v == null)
+			{
 				return (int) t0;
+			}
 
 			for (final IPersistable qp : v)
 			{

@@ -86,7 +86,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFRefElement;
@@ -99,7 +99,6 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class JDFLayout extends JDFSurface
 {
@@ -154,23 +153,28 @@ public class JDFLayout extends JDFSurface
 
 	/**
 	 * get a vector of all Ord Values, multiple entries are entered multiple times
+	 *
 	 * @return
 	 */
 	public Vector<Integer> getAllOrds()
 	{
 		Vector<Integer> vi;
-		Vector<JDFContentObject> v = getChildrenByClass(JDFContentObject.class, true, 0);
+		final Vector<JDFContentObject> v = getChildrenByClass(JDFContentObject.class, true, 0);
 		if (v == null || v.size() == 0)
+		{
 			vi = null;
+		}
 		else
 		{
-			vi = new Vector<Integer>(v.size());
-			for (JDFContentObject co : v)
+			vi = new Vector<>(v.size());
+			for (final JDFContentObject co : v)
 			{
-				String s = co.getAttribute(AttributeName.ORD, null, null);
-				int i = StringUtil.parseInt(s, -123456);
+				final String s = co.getAttribute(AttributeName.ORD, null, null);
+				final int i = StringUtil.parseInt(s, -123456);
 				if (i != 123456)
+				{
 					vi.add(Integer.valueOf(i));
+				}
 			}
 		}
 
@@ -179,62 +183,80 @@ public class JDFLayout extends JDFSurface
 
 	/**
 	 * calculate maxOrd from all ord values, note that this is one based, i.e. the number of objects
+	 *
 	 * @return maxOrd, -1 if none is found
 	 */
 	public int calcMaxOrd()
 	{
-		Vector<Integer> v = getAllOrds();
+		final Vector<Integer> v = getAllOrds();
 		if (v == null)
+		{
 			return -1;
+		}
 		int maxOrd = -2;
-		for (Integer ii : v)
+		for (final Integer ii : v)
 		{
 			if (ii.intValue() > maxOrd)
+			{
 				maxOrd = ii.intValue();
+			}
 		}
 		return maxOrd + 1;
 	}
 
 	/**
 	 * calculate number of same printed elements, non existing slots (i.e. ords that are not on the sheet at all) are ignored
+	 *
 	 * @return the number of equivalent elements, if always the same, else -1
 	 */
 	public int calcNumSame()
 	{
-		Vector<Integer> v = getAllOrds();
+		final Vector<Integer> v = getAllOrds();
 		if (v == null)
+		{
 			return -1;
+		}
 		int maxOrd = -2;
-		for (Integer ii : v)
+		for (final Integer ii : v)
 		{
 			if (ii.intValue() > maxOrd)
+			{
 				maxOrd = ii.intValue();
+			}
 		}
 		maxOrd++;
 		int minmax = -1;
 		if (maxOrd >= 0)
 		{
-			int[] iii = new int[maxOrd];
-			for (int i : iii)
+			final int[] iii = new int[maxOrd];
+			for (final int i : iii)
+			{
 				iii[i] = 0;
-			for (Integer ii : v)
+			}
+			for (final Integer ii : v)
 			{
 				iii[ii.intValue()]++;
 			}
 			int max = -1;
 			int min = Integer.MAX_VALUE;
-			for (int i : iii)
+			for (final int i : iii)
 			{
 				if (i > 0)
 				{
 					if (i > max)
+					{
 						max = i;
+					}
 					if (i < min)
+					{
 						min = i;
+					}
 				}
 			}
 			if (min == max)
+			{
 				minmax = min;
+			}
 		}
 		return minmax;
 	}
@@ -307,7 +329,6 @@ public class JDFLayout extends JDFSurface
 	 * generate a JDF 1.2 compatible Layout from this (1.3)
 	 *
 	 * @return bool true if successful
-	 *
 	 */
 	public boolean fromNewLayout()
 	{
@@ -419,9 +440,9 @@ public class JDFLayout extends JDFSurface
 				}
 			}
 		}
-		removeFromAttribute(AttributeName.PARTIDKEYS, AttributeName.SIGNATURENAME, null, JDFConstants.BLANK, -1);
-		removeFromAttribute(AttributeName.PARTIDKEYS, AttributeName.SHEETNAME, null, JDFConstants.BLANK, -1);
-		removeFromAttribute(AttributeName.PARTIDKEYS, AttributeName.SIDE, null, JDFConstants.BLANK, -1);
+		removeFromAttribute(AttributeName.PARTIDKEYS, AttributeName.SIGNATURENAME, null, JDFCoreConstants.BLANK, -1);
+		removeFromAttribute(AttributeName.PARTIDKEYS, AttributeName.SHEETNAME, null, JDFCoreConstants.BLANK, -1);
+		removeFromAttribute(AttributeName.PARTIDKEYS, AttributeName.SIDE, null, JDFCoreConstants.BLANK, -1);
 		return true;
 	}
 
@@ -450,30 +471,20 @@ public class JDFLayout extends JDFSurface
 
 	/**
 	 * heuristics to check which version an element of a Layout is in: 1.3 or 1.2
-	 *
 	 * Note that this routine is static since it must be used on all sheets, surfaces etc.
 	 *
 	 * @param sheet the Sheet, Surface, Signature or Layout to check
 	 * @return true if this is a new, i.e. partitioned Layout
-	 *
 	 */
 	public static boolean isNewLayout(final JDFResource sheet)
 	{
 		// not one of Layout, Signature, Sheet or Surface
-		if (!(sheet instanceof JDFLayout))
-		{
-			return false;
-		}
+		
 
 		// either Signature, Sheet or Surface --> old
-		if (!sheet.getLocalName().equals(ElementName.LAYOUT))
-		{
-			return false;
-		}
-
 		// it's a layout the only allowed (old) element is a signature , if it
 		// exists --> old
-		if (sheet.getElement_KElement(ElementName.SIGNATURE, null, 0) != null)
+		if (!(sheet instanceof JDFLayout) || !sheet.getLocalName().equals(ElementName.LAYOUT) || (sheet.getElement_KElement(ElementName.SIGNATURE, null, 0) != null))
 		{
 			return false;
 		}
@@ -500,7 +511,7 @@ public class JDFLayout extends JDFSurface
 			return true;
 		}
 
-		return v.getValue() >= EnumVersion.Version_1_3.getValue();
+		return v.ordinal() >= EnumVersion.Version_1_3.ordinal();
 	}
 
 	/**
@@ -552,8 +563,8 @@ public class JDFLayout extends JDFSurface
 
 	/**
 	 * gets a signature in both old and new Layouts if old: a <Signature> element if new: a SignatureName partition leaf
-	 * @param signatureName the SignatureName partition key value(new) or Signature/@Name(old)
 	 *
+	 * @param signatureName the SignatureName partition key value(new) or Signature/@Name(old)
 	 * @return the signature
 	 */
 	public JDFSignature getSignature(final String signatureName)
@@ -563,8 +574,8 @@ public class JDFLayout extends JDFSurface
 
 	/**
 	 * gets a signature in both old and new Layouts if old: a <Signature>creates it if it does not exist element if new: a SignatureName partition leaf
-	 * @param signatureName the SignatureName partition key value(new) or Signature/@Name(old)
 	 *
+	 * @param signatureName the SignatureName partition key value(new) or Signature/@Name(old)
 	 * @return the signature
 	 * @throws JDFException
 	 */

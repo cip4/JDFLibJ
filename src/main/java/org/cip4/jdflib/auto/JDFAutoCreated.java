@@ -125,7 +125,7 @@ public abstract class JDFAutoCreated extends JDFAudit
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCreated(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoCreated(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -137,7 +137,7 @@ public abstract class JDFAutoCreated extends JDFAudit
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCreated(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoCreated(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -150,7 +150,7 @@ public abstract class JDFAutoCreated extends JDFAudit
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoCreated(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoCreated(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -171,7 +171,7 @@ public abstract class JDFAutoCreated extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setref(String value)
+	public void setref(final String value)
 	{
 		setAttribute(AttributeName.REF, value, null);
 	}
@@ -196,7 +196,7 @@ public abstract class JDFAutoCreated extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTemplateID(String value)
+	public void setTemplateID(final String value)
 	{
 		setAttribute(AttributeName.TEMPLATEID, value, null);
 	}
@@ -221,7 +221,7 @@ public abstract class JDFAutoCreated extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTemplateVersion(String value)
+	public void setTemplateVersion(final String value)
 	{
 		setAttribute(AttributeName.TEMPLATEVERSION, value, null);
 	}
@@ -246,7 +246,7 @@ public abstract class JDFAutoCreated extends JDFAudit
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setXPath(String value)
+	public void setXPath(final String value)
 	{
 		setAttribute(AttributeName.XPATH, value, null);
 	}
@@ -294,7 +294,7 @@ public abstract class JDFAutoCreated extends JDFAudit
 	 * @return JDFEmployee the element
 	 */
 	@Override
-	public JDFEmployee getCreateEmployee(int iSkip)
+	public JDFEmployee getCreateEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -307,7 +307,7 @@ public abstract class JDFAutoCreated extends JDFAudit
 	 *         default is getEmployee(0)
 	 */
 	@Override
-	public JDFEmployee getEmployee(int iSkip)
+	public JDFEmployee getEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -339,7 +339,7 @@ public abstract class JDFAutoCreated extends JDFAudit
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refEmployee(JDFEmployee refTarget)
+	public void refEmployee(final JDFEmployee refTarget)
 	{
 		refElement(refTarget);
 	}

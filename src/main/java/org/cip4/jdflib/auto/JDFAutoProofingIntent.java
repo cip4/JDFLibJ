@@ -108,7 +108,7 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoProofingIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoProofingIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -120,7 +120,7 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoProofingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoProofingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoProofingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoProofingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -170,7 +170,7 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFProofItem the element
 	 */
-	public JDFProofItem getCreateProofItem(int iSkip)
+	public JDFProofItem getCreateProofItem(final int iSkip)
 	{
 		return (JDFProofItem) getCreateElement_JDFElement(ElementName.PROOFITEM, null, iSkip);
 	}
@@ -182,7 +182,7 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
 	 * @return JDFProofItem the element
 	 *         default is getProofItem(0)
 	 */
-	public JDFProofItem getProofItem(int iSkip)
+	public JDFProofItem getProofItem(final int iSkip)
 	{
 		return (JDFProofItem) getElement(ElementName.PROOFITEM, null, iSkip);
 	}
@@ -233,7 +233,7 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFPreflightItem the element
 	 */
-	public JDFPreflightItem getCreatePreflightItem(int iSkip)
+	public JDFPreflightItem getCreatePreflightItem(final int iSkip)
 	{
 		return (JDFPreflightItem) getCreateElement_JDFElement(ElementName.PREFLIGHTITEM, null, iSkip);
 	}
@@ -245,7 +245,7 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
 	 * @return JDFPreflightItem the element
 	 *         default is getPreflightItem(0)
 	 */
-	public JDFPreflightItem getPreflightItem(int iSkip)
+	public JDFPreflightItem getPreflightItem(final int iSkip)
 	{
 		return (JDFPreflightItem) getElement(ElementName.PREFLIGHTITEM, null, iSkip);
 	}

@@ -63,7 +63,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
  * @date Dec 23, 2012
  */
@@ -99,7 +98,8 @@ class XJDFSheetOptimizeTest extends ExampleTest
 			phLO.setAmount(1000, partMap, true);
 			final JDFLayout lo = (JDFLayout) phLO.getCreateResource();
 			final SetHelper sh = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
-			final JDFBinderySignature bs = (JDFBinderySignature) sh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS" + i), true).getResource();
+			final JDFBinderySignature bs = (JDFBinderySignature) sh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS" + i), true)
+					.getResource();
 			bs.setBinderySignatureType(EnumBinderySignatureType.Grid);
 			lo.appendElement(ElementName.POSITION).setAttribute(XJDFConstants.BinderySignatureID, "BS" + i);
 		}
@@ -142,7 +142,9 @@ class XJDFSheetOptimizeTest extends ExampleTest
 			e.setAttribute(AttributeName.NPAGE, "1");
 			e.setAttribute(AttributeName.PAGEDIMENSION, new JDFXYPair(500, 350).scaleFromMM(), null);
 			if (i % 2 == 0)
+			{
 				e.setAttribute(AttributeName.OPERATIONS, "Laminate");
+			}
 
 		}
 		xjdfHelper.setVersion(EnumVersion.Version_2_1);
@@ -165,9 +167,13 @@ class XJDFSheetOptimizeTest extends ExampleTest
 			final JDFPosition pos = (JDFPosition) lo.appendElement(ElementName.POSITION);
 			final JDFRectangle relBox = new JDFRectangle(0, 0, 0.5, 0.5);
 			if (i % 2 == 1)
+			{
 				relBox.shift(0.5, 0);
+			}
 			if (i / 2 == 1)
+			{
 				relBox.shift(0.0, 0.5);
+			}
 			pos.setRelativeBox(relBox);
 			pos.setAttribute(XJDFConstants.BinderySignatureID, "BS" + i);
 			pos.setAttribute(AttributeName.GANGELEMENTID, GANG + i);
@@ -201,10 +207,13 @@ class XJDFSheetOptimizeTest extends ExampleTest
 			e.setAttribute(AttributeName.PAGEDIMENSION, new JDFXYPair(500, 350).scaleFromMM(), null);
 			e.setAttribute(XJDFConstants.BinderySignatureIDs, "BS" + i);
 			if (i % 2 == 0)
+			{
 				e.setAttribute(AttributeName.OPERATIONS, "Laminate");
+			}
 
 			final SetHelper sh = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
-			final JDFBinderySignature bs = (JDFBinderySignature) sh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS" + i), true).getResource();
+			final JDFBinderySignature bs = (JDFBinderySignature) sh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, "BS" + i), true)
+					.getResource();
 			bs.setBinderySignatureType(EnumBinderySignatureType.Grid);
 			bs.setNumberUp(1, 1);
 		}
@@ -228,7 +237,9 @@ class XJDFSheetOptimizeTest extends ExampleTest
 			final JDFPosition pos = (JDFPosition) lo.appendElement(ElementName.POSITION);
 			final JDFRectangle relBox = new JDFRectangle(0, 0, 0.5, 1);
 			if (i % 2 == 1)
+			{
 				relBox.shift(0.5, 0);
+			}
 			pos.setRelativeBox(relBox);
 			pos.setAttribute(XJDFConstants.BinderySignatureID, "BS" + i);
 			pos.setAttribute(AttributeName.GANGELEMENTID, GANG + i);
@@ -332,7 +343,6 @@ class XJDFSheetOptimizeTest extends ExampleTest
 	}
 
 	/**
-	 *
 	 * @param i
 	 * @param j
 	 */
@@ -356,7 +366,8 @@ class XJDFSheetOptimizeTest extends ExampleTest
 			final SetHelper sh = xjdfHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
 			final String bsIJ = "BS_" + (k * n + i) + "_" + j;
 			partMap.put(XJDFConstants.BinderySignatureID, bsIJ);
-			final JDFBinderySignature bs = (JDFBinderySignature) sh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, bsIJ), true).getResource();
+			final JDFBinderySignature bs = (JDFBinderySignature) sh.getCreatePartition(new JDFAttributeMap(XJDFConstants.BinderySignatureID, bsIJ), true)
+					.getResource();
 			bs.setBinderySignatureType(EnumBinderySignatureType.Grid);
 			p.setAttribute(XJDFConstants.BinderySignatureID, bsIJ);
 			p2.setAttribute(XJDFConstants.BinderySignatureID, bsIJ);
@@ -397,7 +408,9 @@ class XJDFSheetOptimizeTest extends ExampleTest
 	{
 		layout = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Output);
 		if (addemptypart)
+		{
 			layout.getCreatePartition(0, true);
+		}
 	}
 
 	private void prepareSheetOptimizing()

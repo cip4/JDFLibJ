@@ -52,7 +52,8 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.util.ScaleUtil;
 
 /**
- * This class represents a rectangle JDFRectangle) consisting of a lower left x value (llx), a lower left y value (lly), an upper right x value (urx) and an upper right y value (ury) all values are
+ * This class represents a rectangle JDFRectangle) consisting of a lower left x value (llx), a lower left y value (lly), an upper right x value (urx) and an upper right y value (ury) all
+ * values are
  * Double types.
  */
 public class JDFRectangle extends JDFNumList
@@ -83,7 +84,6 @@ public class JDFRectangle extends JDFNumList
 	 * constructs a rectangle with all values set via a Vector of Double objects
 	 *
 	 * @param v the given Vector with MAX_RECTANGLE_DIMENSION objects of type Double
-	 *
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 * @deprecated use typesafe constructors
 	 */
@@ -97,7 +97,6 @@ public class JDFRectangle extends JDFNumList
 	 * constructs a rectangle with all values set via a String
 	 *
 	 * @param s the given String, blank separated numbers
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFRectangle(final String s) throws DataFormatException
@@ -163,7 +162,6 @@ public class JDFRectangle extends JDFNumList
 	 * constructs a rectangle with all values set via a JDFNumberList
 	 *
 	 * @param nl the given number list
-	 *
 	 * @throws DataFormatException - if the JDFNumberList has not a valid format
 	 */
 	public JDFRectangle(final JDFNumList nl) throws DataFormatException
@@ -190,7 +188,6 @@ public class JDFRectangle extends JDFNumList
 	}
 
 	/**
-	 *
 	 * @param ll
 	 * @param ur
 	 */
@@ -391,7 +388,9 @@ public class JDFRectangle extends JDFNumList
 	public JDFRectangle getInterSection(final JDFRectangle r)
 	{
 		if (r == null)
+		{
 			return null;
+		}
 
 		final double llx = Math.max(getLlx(), r.getLlx());
 		final double lly = Math.max(getLly(), r.getLly());
@@ -410,7 +409,9 @@ public class JDFRectangle extends JDFNumList
 	public JDFRectangle getBoundingRect(final JDFRectangle r)
 	{
 		if (r == null)
+		{
 			return clone();
+		}
 
 		final double llx = Math.min(getLlx(), r.getLlx());
 		final double lly = Math.min(getLly(), r.getLly());
@@ -436,8 +437,6 @@ public class JDFRectangle extends JDFNumList
 
 	/**
 	 * ensures the right points e.g after a rotation
-	 *
-	 *
 	 */
 	public JDFRectangle normalize()
 	{
@@ -453,7 +452,6 @@ public class JDFRectangle extends JDFNumList
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public JDFXYPair getCenter()
@@ -465,14 +463,15 @@ public class JDFRectangle extends JDFNumList
 	}
 
 	/**
-	 *
 	 * @param c
 	 * @return
 	 */
 	public JDFRectangle setCenter(final JDFXYPair c)
 	{
 		if (c == null)
+		{
 			return this;
+		}
 		final JDFXYPair oldCenter = getCenter();
 
 		oldCenter.scale(-1);
@@ -482,7 +481,6 @@ public class JDFRectangle extends JDFNumList
 	}
 
 	/**
-	 *
 	 * @param scaleFactor
 	 * @return
 	 */
@@ -533,7 +531,9 @@ public class JDFRectangle extends JDFNumList
 	public boolean isInside(final JDFXYPair p)
 	{
 		if (p == null)
+		{
 			return false;
+		}
 		return getLlx() <= p.getX() && (getUrx() >= p.getX()) && getLly() <= p.getY() && getUry() >= p.getY();
 	}
 
@@ -560,7 +560,6 @@ public class JDFRectangle extends JDFNumList
 	}
 
 	/**
-	 *
 	 * @return the lower left pout
 	 */
 	public JDFXYPair getLL()
@@ -569,7 +568,6 @@ public class JDFRectangle extends JDFNumList
 	}
 
 	/**
-	 *
 	 * @return the upper right point
 	 */
 	public JDFXYPair getUR()
@@ -578,7 +576,6 @@ public class JDFRectangle extends JDFNumList
 	}
 
 	/**
-	 *
 	 * @return the width and height
 	 */
 	public JDFXYPair getSize()
@@ -587,7 +584,6 @@ public class JDFRectangle extends JDFNumList
 	}
 
 	/**
-	 *
 	 * @return the area
 	 */
 	public double getArea()

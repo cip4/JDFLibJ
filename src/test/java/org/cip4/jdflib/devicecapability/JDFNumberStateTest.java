@@ -71,8 +71,8 @@
  * JDFStateBaseTest.java
  *
  * @author Elena Skobchenko
- * 
- * Copyright (c) 2001-2004 The International Cooperation for the Integration 
+ *
+ * Copyright (c) 2001-2004 The International Cooperation for the Integration
  * of Processes in  Prepress, Press and Postpress (CIP4).  All rights reserved.
  */
 package org.cip4.jdflib.devicecapability;
@@ -91,6 +91,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFNumberState;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 class JDFNumberStateTest extends JDFTestCaseBase
 {
 
@@ -101,7 +102,7 @@ class JDFNumberStateTest extends JDFTestCaseBase
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		JDFDoc doc = new JDFDoc("NumberState");
+		final JDFDoc doc = new JDFDoc("NumberState");
 		iState = (JDFNumberState) doc.getRoot();
 
 	}
@@ -111,30 +112,28 @@ class JDFNumberStateTest extends JDFTestCaseBase
 	@Test
 	public final void testFitsValue()
 	{
-		JDFParser p = new JDFParser();
-		String strNode = "<NumberState Name=\"BitDepth\" DefaultValue=\"1\" AllowedValueList=\"1 8.5 12\"/>";
+		final JDFParser p = new JDFParser();
+		final String strNode = "<NumberState Name=\"BitDepth\" DefaultValue=\"1\" AllowedValueList=\"1 8.5 12\"/>";
 
-		JDFDoc jdfDoc = p.parseString(strNode);
-		JDFNumberState state = (JDFNumberState) jdfDoc.getRoot();
+		final JDFDoc jdfDoc = p.parseString(strNode);
+		final JDFNumberState state = (JDFNumberState) jdfDoc.getRoot();
 
-		JDFNumberRangeList list = new JDFNumberRangeList();
+		final JDFNumberRangeList list = new JDFNumberRangeList();
 		list.append(new JDFNumberRange(1, 12.5)); // 1~12
 		// list.append(12);
 
 		state.setListType(EnumListType.RangeList);
-		Assertions.assertFalse(state.fitsValue(list.toString(),
-				EnumFitsValue.Allowed), "ListType=RangeList");
+		Assertions.assertFalse(state.fitsValue(list.toString(), EnumFitsValue.Allowed), "ListType=RangeList");
 
-		JDFNumberRangeList list2 = new JDFNumberRangeList();
+		final JDFNumberRangeList list2 = new JDFNumberRangeList();
 		list2.append(new JDFNumberRange(1, 12.5)); // 1~-2
 
-		JDFNumberRangeList allowedVL = new JDFNumberRangeList();
+		final JDFNumberRangeList allowedVL = new JDFNumberRangeList();
 		allowedVL.append(new JDFNumberRange(1, 32.666)); // 1~32
 
 		state.setAllowedValueList(allowedVL); // new AllowedVlaueList
 
-		Assertions.assertTrue(state.fitsValue(list2.toString(),
-				EnumFitsValue.Allowed));
+		Assertions.assertTrue(state.fitsValue(list2.toString(), EnumFitsValue.Allowed));
 
 		list.erase(list.size() - 1); // erase "1~12"
 		list.append(2);
@@ -142,8 +141,7 @@ class JDFNumberStateTest extends JDFTestCaseBase
 		list.append(22);
 		state.setListType(EnumListType.List);
 		state.setAllowedValueMod(new JDFXYPair(10, 2));
-		Assertions.assertTrue(state.fitsValue(list.toString(),
-                EnumFitsValue.Allowed), "ListType=List, ValueMod=" + state.getAllowedValueMod());
+		Assertions.assertTrue(state.fitsValue(list.toString(), EnumFitsValue.Allowed), "ListType=List, ValueMod=" + state.getAllowedValueMod());
 	}
 
 	// //////////////////////////////////////////////////////////
@@ -176,14 +174,12 @@ class JDFNumberStateTest extends JDFTestCaseBase
 	@Test
 	public final void testAddValue() throws Exception
 	{
-		final JDFNumberRangeList integerList = new JDFNumberRangeList(
-				"1 2 3 4 ~ 44");
+		final JDFNumberRangeList integerList = new JDFNumberRangeList("1 2 3 4 ~ 44");
 		iState.setAllowedValueList(integerList);
 		iState.addValue("24", EnumFitsValue.Allowed);
 		Assertions.assertEquals(iState.getAllowedValueList(), integerList);
 		iState.addValue("45", EnumFitsValue.Allowed);
-		Assertions.assertEquals(iState.getAllowedValueList(), new JDFNumberRangeList(
-				"1 2 3 4 ~ 44 45"));
+		Assertions.assertEquals(iState.getAllowedValueList(), new JDFNumberRangeList("1 2 3 4 ~ 44 45"));
 		iState.addValue("48", EnumFitsValue.Present);
 		Assertions.assertEquals(iState.getPresentValueList(), new JDFNumberRangeList("48"));
 	}
@@ -192,13 +188,11 @@ class JDFNumberStateTest extends JDFTestCaseBase
 	@Test
 	public final void testSetAllowedValueList() throws Exception
 	{
-		final JDFNumberRangeList integerList = new JDFNumberRangeList(
-				"1 2 3 4 ~ 44");
+		final JDFNumberRangeList integerList = new JDFNumberRangeList("1 2 3 4 ~ 44");
 		iState.setAllowedValueList(integerList);
 		Assertions.assertEquals(iState.getPresentValueList(), integerList);
 		Assertions.assertEquals(iState.getAllowedValueList(), integerList);
-		final JDFNumberRangeList integerList2 = new JDFNumberRangeList(
-				"1 2 3 7~77");
+		final JDFNumberRangeList integerList2 = new JDFNumberRangeList("1 2 3 7~77");
 		iState.setPresentValueList(integerList2);
 		Assertions.assertEquals(iState.getPresentValueList(), integerList2);
 		Assertions.assertEquals(iState.getAllowedValueList(), integerList);
@@ -215,12 +209,10 @@ class JDFNumberStateTest extends JDFTestCaseBase
 		Assertions.assertFalse(iState.isValid(EnumValidationLevel.Complete));
 		iState.setListType(EnumListType.List);
 		Assertions.assertTrue(iState.isValid(EnumValidationLevel.Complete));
-		final JDFNumberRangeList numberRList = new JDFNumberRangeList(
-				"1 2 3 4 ~ 44");
+		final JDFNumberRangeList numberRList = new JDFNumberRangeList("1 2 3 4 ~ 44");
 		iState.setAllowedValueList(numberRList);
 		Assertions.assertTrue(iState.isValid(EnumValidationLevel.Complete));
-		final JDFNumberRangeList numberList2 = new JDFNumberRangeList(
-				"1 2 3 7~77");
+		final JDFNumberRangeList numberList2 = new JDFNumberRangeList("1 2 3 7~77");
 		iState.setPresentValueList(numberList2);
 		Assertions.assertTrue(iState.isValid(EnumValidationLevel.Complete));
 	}

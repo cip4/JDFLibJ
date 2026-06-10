@@ -39,16 +39,15 @@ package org.cip4.jdflib.extensions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.cip4.jdflib.auto.JDFAutoAssembly.EOrder;
 import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
-import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EWorkStyle;
 import org.cip4.jdflib.auto.JDFAutoSignatureCell.EnumOrientation;
+import org.cip4.jdflib.auto.JDFAutoStripCellParams.EnumSides;
+import org.cip4.jdflib.auto.JDFAutoStrippingParams.EnumWorkStyle;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement.ESides;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -256,7 +255,7 @@ class XJDFLayoutStripTest extends XJDFCreatorTest
 	@Test
 	void testStripLayoutMarks()
 	{
-		theHelper.setTypes(EnumType.Stripping.getName());
+		theHelper.setTypes(EnumType.Stripping.name());
 		final JDFAttributeMap sheetMap = getSheetMap(1);
 		final ResourceHelper loh = losh.appendPartition(sheetMap, true);
 		final JDFLayout lo = (JDFLayout) loh.getResource();
@@ -365,7 +364,7 @@ class XJDFLayoutStripTest extends XJDFCreatorTest
 		sp.appendPosition();
 		final JDFStripCellParams scp = sp.appendStripCellParams();
 		scp.setSpine(42);
-		scp.setSides(ESides.TwoSidedHeadToHead);
+		scp.setSides(EnumSides.TwoSidedHeadToHead);
 
 		final JDFToXJDF xjdf20 = new JDFToXJDF();
 
@@ -394,7 +393,7 @@ class XJDFLayoutStripTest extends XJDFCreatorTest
 		final JDFBinderySignature bs = (JDFBinderySignature) n.addResource(ElementName.BINDERYSIGNATURE, null);
 		sp.refBinderySignature(bs);
 		sp.appendPosition();
-		sp.setWorkStyle(EWorkStyle.Simplex);
+		sp.setWorkStyle(EnumWorkStyle.Simplex);
 
 		final JDFToXJDF xjdf20 = new JDFToXJDF();
 
@@ -414,7 +413,7 @@ class XJDFLayoutStripTest extends XJDFCreatorTest
 		bssh = theHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
 		final SetHelper assh = theHelper.getCreateSet(ElementName.ASSEMBLY, EnumUsage.Input);
 		final JDFAssembly assembly = (JDFAssembly) assh.getCreatePartition(0, true).getResource();
-		assembly.setOrder(EOrder.Collecting);
+		assembly.setOrder(EnumOrder.Collecting);
 		assembly.setAttribute(XJDFConstants.BinderySignatureIDs, "bs1 bs2 bs3");
 
 		writeRoundTripX(theHelper, "onlyAssembly", EnumValidationLevel.Incomplete);

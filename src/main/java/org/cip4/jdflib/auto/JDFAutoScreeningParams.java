@@ -122,7 +122,7 @@ public abstract class JDFAutoScreeningParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoScreeningParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoScreeningParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -134,7 +134,7 @@ public abstract class JDFAutoScreeningParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoScreeningParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoScreeningParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -147,7 +147,7 @@ public abstract class JDFAutoScreeningParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoScreeningParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoScreeningParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -158,7 +158,7 @@ public abstract class JDFAutoScreeningParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -188,7 +188,7 @@ public abstract class JDFAutoScreeningParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIgnoreSourceFile(boolean value)
+	public void setIgnoreSourceFile(final boolean value)
 	{
 		setAttribute(AttributeName.IGNORESOURCEFILE, value, null);
 	}
@@ -213,7 +213,7 @@ public abstract class JDFAutoScreeningParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAbortJobWhenScreenMatchingFails(boolean value)
+	public void setAbortJobWhenScreenMatchingFails(final boolean value)
 	{
 		setAttribute(AttributeName.ABORTJOBWHENSCREENMATCHINGFAILS, value, null);
 	}
@@ -260,7 +260,7 @@ public abstract class JDFAutoScreeningParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFScreenSelector the element
 	 */
-	public JDFScreenSelector getCreateScreenSelector(int iSkip)
+	public JDFScreenSelector getCreateScreenSelector(final int iSkip)
 	{
 		return (JDFScreenSelector) getCreateElement_JDFElement(ElementName.SCREENSELECTOR, null, iSkip);
 	}
@@ -272,7 +272,7 @@ public abstract class JDFAutoScreeningParams extends JDFResource
 	 * @return JDFScreenSelector the element
 	 *         default is getScreenSelector(0)
 	 */
-	public JDFScreenSelector getScreenSelector(int iSkip)
+	public JDFScreenSelector getScreenSelector(final int iSkip)
 	{
 		return (JDFScreenSelector) getElement(ElementName.SCREENSELECTOR, null, iSkip);
 	}

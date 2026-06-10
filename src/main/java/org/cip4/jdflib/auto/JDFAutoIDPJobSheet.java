@@ -71,14 +71,8 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoInsertSheet.ESheetType;
-import org.cip4.jdflib.auto.JDFAutoInsertSheet.EnumSheetType;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -106,8 +100,9 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHEETFORMAT, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, "Standard");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHEETOCCURRENCE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumSheetOccurrence.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHEETTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetType.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumSheetOccurrence.class, 0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHEETTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumSheetType.class, 0), null);
 	}
 
 	@Override
@@ -137,7 +132,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIDPJobSheet(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoIDPJobSheet(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -149,7 +144,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIDPJobSheet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoIDPJobSheet(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -162,103 +157,42 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoIDPJobSheet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoIDPJobSheet(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for SheetOccurrence
+	 * Enumeration strings for numSheetOccurrence
 	 */
 
-	public enum ESheetOccurrence
+	public enum EnumSheetOccurrence
 	{
 		Always, End, OnError, Slip, Start, Both, None;
 
-		public static ESheetOccurrence getEnum(String val)
+		public static EnumSheetOccurrence getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ESheetOccurrence.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSheetOccurrence.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for SheetOccurrence
+	 * Enumeration strings for numSheetType
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumSheetOccurrence extends ValuedEnum
+	public enum EnumSheetType
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		AccountingSheet, ErrorSheet, JobSheet, SeparatorSheet;
 
-		protected EnumSheetOccurrence(String name)
+		public static EnumSheetType getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSheetType.class, val, null);
 		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumSheetOccurrence getEnum(String enumName)
-		{
-			return (EnumSheetOccurrence) getEnum(EnumSheetOccurrence.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumSheetOccurrence getEnum(int enumValue)
-		{
-			return (EnumSheetOccurrence) getEnum(EnumSheetOccurrence.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSheetOccurrence.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSheetOccurrence.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSheetOccurrence.class);
-		}
-
-		/**  */
-		public static final EnumSheetOccurrence Always = new EnumSheetOccurrence("Always");
-		/**  */
-		public static final EnumSheetOccurrence End = new EnumSheetOccurrence("End");
-		/**  */
-		public static final EnumSheetOccurrence OnError = new EnumSheetOccurrence("OnError");
-		/**  */
-		public static final EnumSheetOccurrence Slip = new EnumSheetOccurrence("Slip");
-		/**  */
-		public static final EnumSheetOccurrence Start = new EnumSheetOccurrence("Start");
-		/**  */
-		public static final EnumSheetOccurrence Both = new EnumSheetOccurrence("Both");
-		/**  */
-		public static final EnumSheetOccurrence None = new EnumSheetOccurrence("None");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -270,7 +204,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSheetFormat(String value)
+	public void setSheetFormat(final String value)
 	{
 		setAttribute(AttributeName.SHEETFORMAT, value, null);
 	}
@@ -295,9 +229,9 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSheetOccurrence(ESheetOccurrence enumVar)
+	public void setSheetOccurrence(final EnumSheetOccurrence enumVar)
 	{
-		setAttribute(AttributeName.SHEETOCCURRENCE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SHEETOCCURRENCE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -305,35 +239,6 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESheetOccurrence getESheetOccurrence()
-	{
-		return ESheetOccurrence.getEnum(getAttribute(AttributeName.SHEETOCCURRENCE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute SheetOccurrence
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute SheetOccurrence
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetSheetOccurrence(ESheetOccurrence) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSheetOccurrence(EnumSheetOccurrence enumVar)
-	{
-		setAttribute(AttributeName.SHEETOCCURRENCE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute SheetOccurrence
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ESheetOccurrence GetESheetOccurrence() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumSheetOccurrence getSheetOccurrence()
 	{
 		return EnumSheetOccurrence.getEnum(getAttribute(AttributeName.SHEETOCCURRENCE, null, null));
@@ -349,9 +254,9 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSheetType(ESheetType enumVar)
+	public void setSheetType(final EnumSheetType enumVar)
 	{
-		setAttribute(AttributeName.SHEETTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SHEETTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -359,35 +264,6 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESheetType getESheetType()
-	{
-		return ESheetType.getEnum(getAttribute(AttributeName.SHEETTYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute SheetType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute SheetType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetSheetType(ESheetType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSheetType(EnumSheetType enumVar)
-	{
-		setAttribute(AttributeName.SHEETTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute SheetType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ESheetType GetESheetType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumSheetType getSheetType()
 	{
 		return EnumSheetType.getEnum(getAttribute(AttributeName.SHEETTYPE, null, null));
@@ -425,7 +301,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFIDPFinishing the element
 	 */
-	public JDFIDPFinishing getCreateIDPFinishing(int iSkip)
+	public JDFIDPFinishing getCreateIDPFinishing(final int iSkip)
 	{
 		return (JDFIDPFinishing) getCreateElement_JDFElement(ElementName.IDPFINISHING, null, iSkip);
 	}
@@ -437,7 +313,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 * @return JDFIDPFinishing the element
 	 *         default is getIDPFinishing(0)
 	 */
-	public JDFIDPFinishing getIDPFinishing(int iSkip)
+	public JDFIDPFinishing getIDPFinishing(final int iSkip)
 	{
 		return (JDFIDPFinishing) getElement(ElementName.IDPFINISHING, null, iSkip);
 	}
@@ -488,7 +364,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFIDPLayout the element
 	 */
-	public JDFIDPLayout getCreateIDPLayout(int iSkip)
+	public JDFIDPLayout getCreateIDPLayout(final int iSkip)
 	{
 		return (JDFIDPLayout) getCreateElement_JDFElement(ElementName.IDPLAYOUT, null, iSkip);
 	}
@@ -500,7 +376,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 * @return JDFIDPLayout the element
 	 *         default is getIDPLayout(0)
 	 */
-	public JDFIDPLayout getIDPLayout(int iSkip)
+	public JDFIDPLayout getIDPLayout(final int iSkip)
 	{
 		return (JDFIDPLayout) getElement(ElementName.IDPLAYOUT, null, iSkip);
 	}
@@ -551,7 +427,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFMediaIntent the element
 	 */
-	public JDFMediaIntent getCreateMediaIntent(int iSkip)
+	public JDFMediaIntent getCreateMediaIntent(final int iSkip)
 	{
 		return (JDFMediaIntent) getCreateElement_JDFElement(ElementName.MEDIAINTENT, null, iSkip);
 	}
@@ -563,7 +439,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 * @return JDFMediaIntent the element
 	 *         default is getMediaIntent(0)
 	 */
-	public JDFMediaIntent getMediaIntent(int iSkip)
+	public JDFMediaIntent getMediaIntent(final int iSkip)
 	{
 		return (JDFMediaIntent) getElement(ElementName.MEDIAINTENT, null, iSkip);
 	}
@@ -593,7 +469,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMediaIntent(JDFMediaIntent refTarget)
+	public void refMediaIntent(final JDFMediaIntent refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -624,7 +500,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFMediaSource the element
 	 */
-	public JDFMediaSource getCreateMediaSource(int iSkip)
+	public JDFMediaSource getCreateMediaSource(final int iSkip)
 	{
 		return (JDFMediaSource) getCreateElement_JDFElement(ElementName.MEDIASOURCE, null, iSkip);
 	}
@@ -636,7 +512,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 * @return JDFMediaSource the element
 	 *         default is getMediaSource(0)
 	 */
-	public JDFMediaSource getMediaSource(int iSkip)
+	public JDFMediaSource getMediaSource(final int iSkip)
 	{
 		return (JDFMediaSource) getElement(ElementName.MEDIASOURCE, null, iSkip);
 	}
@@ -666,7 +542,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMediaSource(JDFMediaSource refTarget)
+	public void refMediaSource(final JDFMediaSource refTarget)
 	{
 		refElement(refTarget);
 	}

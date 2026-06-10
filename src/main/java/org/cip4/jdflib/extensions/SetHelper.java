@@ -55,6 +55,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.IMatches;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -500,7 +501,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 		return partitionHelper;
 	}
 
-	public List<ResourceHelper> getCreateResources(final VJDFAttributeMap partMaps, boolean addRes)
+	public List<ResourceHelper> getCreateResources(final VJDFAttributeMap partMaps, final boolean addRes)
 	{
 		final List<ResourceHelper> ret = new ArrayList<>();
 		if (ContainerUtil.isEmpty(partMaps))
@@ -669,7 +670,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 			final boolean explicitCPI)
 	{
 		KElement e = parent.getFirstChildElement();
-		final String usageString = usage == null ? null : usage.getName();
+		final String usageString = JavaEnumUtil.getName(usage);
 		while (e != null)
 		{
 			final JDFIntegerList setCpi = new SetHelper(e).getCombinedProcessIndex();
@@ -693,7 +694,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	public static SetHelper getSet(final KElement parent, final String name, final EnumUsage usage)
 	{
 		KElement e = parent.getFirstChildElement();
-		final String usageString = usage == null ? null : usage.getName();
+		final String usageString = JavaEnumUtil.getName(usage);
 		while (e != null)
 		{
 			if (SetHelper.isSet(e) && (name == null || name.equals(e.getNonEmpty(AttributeName.NAME)))
@@ -867,7 +868,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 */
 	public void setUsage(final EnumUsage value)
 	{
-		theElement.setAttribute(AttributeName.USAGE, value == null ? null : value.getName());
+		theElement.setAttribute(AttributeName.USAGE, JavaEnumUtil.getName(value));
 	}
 
 	/**
@@ -1024,7 +1025,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 */
 	public void setUnit(final eUnit unit)
 	{
-		setAttribute(AttributeName.UNIT, unit == null ? null : unit.name());
+		setAttribute(AttributeName.UNIT, JavaEnumUtil.getName(unit));
 	}
 
 	/**
@@ -1290,19 +1291,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	@Override
 	public boolean matches(final Object subset)
 	{
-		if (!(subset instanceof final SetHelper sh))
-		{
-			return false;
-		}
-		if (!ContainerUtil.equals(sh.getUsage(), getUsage()))
-		{
-			return false;
-		}
-		if (!ContainerUtil.equals(sh.getProcessUsage(), getProcessUsage()))
-		{
-			return false;
-		}
-		if (!ContainerUtil.equals(sh.getCombinedProcessIndex(), getCombinedProcessIndex()))
+		if (!(subset instanceof final SetHelper sh) || !ContainerUtil.equals(sh.getUsage(), getUsage()) || !ContainerUtil.equals(sh.getProcessUsage(), getProcessUsage()) || !ContainerUtil.equals(sh.getCombinedProcessIndex(), getCombinedProcessIndex()))
 		{
 			return false;
 		}

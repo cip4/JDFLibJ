@@ -76,9 +76,7 @@ import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFNotification;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkNotification extends WalkAudit
 {

@@ -87,7 +87,7 @@ class BackupDirectoryTest extends JDFTestCaseBase
 	BackupDirectory dir;
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testGet()

@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -102,7 +98,8 @@ public abstract class JDFAutoCutMark extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.MARKTYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumMarkType.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MARKTYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumMarkType.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x2222222222l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.BLOCKS, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 	}
@@ -131,7 +128,7 @@ public abstract class JDFAutoCutMark extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCutMark(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoCutMark(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -143,7 +140,7 @@ public abstract class JDFAutoCutMark extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCutMark(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoCutMark(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -156,7 +153,7 @@ public abstract class JDFAutoCutMark extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoCutMark(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoCutMark(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -167,7 +164,7 @@ public abstract class JDFAutoCutMark extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -182,101 +179,22 @@ public abstract class JDFAutoCutMark extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for MarkType
+	 * Enumeration strings for numMarkType
 	 */
 
-	public enum EMarkType
+	public enum EnumMarkType
 	{
 		CrossCutMark, TopVerticalCutMark, BottomVerticalCutMark, LeftHorizontalCutMark, RightHorizontalCutMark, LowerLeftCutMark, UpperLeftCutMark, LowerRightCutMark, UpperRightCutMark;
 
-		public static EMarkType getEnum(String val)
+		public static EnumMarkType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EMarkType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumMarkType.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for MarkType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumMarkType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumMarkType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumMarkType getEnum(String enumName)
-		{
-			return (EnumMarkType) getEnum(EnumMarkType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumMarkType getEnum(int enumValue)
-		{
-			return (EnumMarkType) getEnum(EnumMarkType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumMarkType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumMarkType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumMarkType.class);
-		}
-
-		/**  */
-		public static final EnumMarkType CrossCutMark = new EnumMarkType("CrossCutMark");
-		/**  */
-		public static final EnumMarkType TopVerticalCutMark = new EnumMarkType("TopVerticalCutMark");
-		/**  */
-		public static final EnumMarkType BottomVerticalCutMark = new EnumMarkType("BottomVerticalCutMark");
-		/**  */
-		public static final EnumMarkType LeftHorizontalCutMark = new EnumMarkType("LeftHorizontalCutMark");
-		/**  */
-		public static final EnumMarkType RightHorizontalCutMark = new EnumMarkType("RightHorizontalCutMark");
-		/**  */
-		public static final EnumMarkType LowerLeftCutMark = new EnumMarkType("LowerLeftCutMark");
-		/**  */
-		public static final EnumMarkType UpperLeftCutMark = new EnumMarkType("UpperLeftCutMark");
-		/**  */
-		public static final EnumMarkType LowerRightCutMark = new EnumMarkType("LowerRightCutMark");
-		/**  */
-		public static final EnumMarkType UpperRightCutMark = new EnumMarkType("UpperRightCutMark");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -288,9 +206,9 @@ public abstract class JDFAutoCutMark extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMarkType(EMarkType enumVar)
+	public void setMarkType(final EnumMarkType enumVar)
 	{
-		setAttribute(AttributeName.MARKTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.MARKTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -298,35 +216,6 @@ public abstract class JDFAutoCutMark extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EMarkType getEMarkType()
-	{
-		return EMarkType.getEnum(getAttribute(AttributeName.MARKTYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute MarkType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute MarkType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetMarkType(EMarkType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setMarkType(EnumMarkType enumVar)
-	{
-		setAttribute(AttributeName.MARKTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute MarkType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EMarkType GetEMarkType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumMarkType getMarkType()
 	{
 		return EnumMarkType.getEnum(getAttribute(AttributeName.MARKTYPE, null, null));
@@ -342,7 +231,7 @@ public abstract class JDFAutoCutMark extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPosition(JDFXYPair value)
+	public void setPosition(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.POSITION, value, null);
 	}
@@ -355,8 +244,8 @@ public abstract class JDFAutoCutMark extends JDFResource
 	 */
 	public JDFXYPair getPosition()
 	{
-		String strAttrName = getAttribute(AttributeName.POSITION, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.POSITION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -370,7 +259,7 @@ public abstract class JDFAutoCutMark extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBlocks(VString value)
+	public void setBlocks(final VString value)
 	{
 		setAttribute(AttributeName.BLOCKS, value, null);
 	}
@@ -382,8 +271,8 @@ public abstract class JDFAutoCutMark extends JDFResource
 	 */
 	public VString getBlocks()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.BLOCKS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.BLOCKS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -420,7 +309,7 @@ public abstract class JDFAutoCutMark extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFAssembly the element
 	 */
-	public JDFAssembly getCreateAssembly(int iSkip)
+	public JDFAssembly getCreateAssembly(final int iSkip)
 	{
 		return (JDFAssembly) getCreateElement_JDFElement(ElementName.ASSEMBLY, null, iSkip);
 	}
@@ -432,7 +321,7 @@ public abstract class JDFAutoCutMark extends JDFResource
 	 * @return JDFAssembly the element
 	 *         default is getAssembly(0)
 	 */
-	public JDFAssembly getAssembly(int iSkip)
+	public JDFAssembly getAssembly(final int iSkip)
 	{
 		return (JDFAssembly) getElement(ElementName.ASSEMBLY, null, iSkip);
 	}
@@ -462,7 +351,7 @@ public abstract class JDFAutoCutMark extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refAssembly(JDFAssembly refTarget)
+	public void refAssembly(final JDFAssembly refTarget)
 	{
 		refElement(refTarget);
 	}

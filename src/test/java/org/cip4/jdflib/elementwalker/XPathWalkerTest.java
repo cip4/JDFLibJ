@@ -150,7 +150,9 @@ class XPathWalkerTest extends JDFTestCaseBase
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		for (int i = 0; i < 100; i++)
+		{
 			d.getJDFRoot().getCreateAuditPool().addModified(null, null);
+		}
 		final ByteArrayIOStream ios = new ByteArrayIOStream();
 		final PrintWriter writer = new PrintWriter(ios);
 		final XPathWalker w = new XPathWalker(writer);
@@ -189,7 +191,9 @@ class XPathWalkerTest extends JDFTestCaseBase
 				final int neq = s.indexOf("=");
 				final VString v = StringUtil.tokenize(s, "= ", false);
 				if (neq > 0 && v.size() == 1)
+				{
 					v.add("");
+				}
 				if (v.size() == 1)
 				{
 					n.getCreateXPathElement(v.get(0));

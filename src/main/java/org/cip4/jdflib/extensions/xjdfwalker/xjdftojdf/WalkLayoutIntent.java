@@ -97,25 +97,25 @@ public class WalkLayoutIntent extends WalkIntentResource
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
 		fixPrintedPages(e);
-		KElement ret = super.walk(e, trackElem);
+		final KElement ret = super.walk(e, trackElem);
 		return ret;
 	}
 
 	/**
 	 * @param e
 	 */
-	void fixPrintedPages(KElement e)
+	void fixPrintedPages(final KElement e)
 	{
-		int printedPages = StringUtil.parseInt(e.getAttribute("PrintedPages", null, null), -1);
+		final int printedPages = StringUtil.parseInt(e.getAttribute("PrintedPages", null, null), -1);
 		if (printedPages >= 0)
 		{
-			int pages = StringUtil.parseInt(e.getAttribute(AttributeName.PAGES, null, null), -1);
+			final int pages = StringUtil.parseInt(e.getAttribute(AttributeName.PAGES, null, null), -1);
 			if (pages < 0)
 			{
-				EnumSides sides = EnumSides.getEnum(e.getAttribute(AttributeName.SIDES));
+				final EnumSides sides = EnumSides.getEnum(e.getAttribute(AttributeName.SIDES));
 				if (sides != null)
 				{
-					int factor = (int) Math.PI - JDFLayoutIntent.getSideVector(sides).size();
+					final int factor = (int) Math.PI - JDFLayoutIntent.getSideVector(sides).size();
 					e.setAttribute(AttributeName.PAGES, printedPages * factor, null);
 				}
 			}

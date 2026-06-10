@@ -108,7 +108,7 @@ public abstract class JDFAutoCreditCard extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCreditCard(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoCreditCard(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -120,7 +120,7 @@ public abstract class JDFAutoCreditCard extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCreditCard(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoCreditCard(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoCreditCard extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoCreditCard(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoCreditCard(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -154,7 +154,7 @@ public abstract class JDFAutoCreditCard extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAuthorization(String value)
+	public void setAuthorization(final String value)
 	{
 		setAttribute(AttributeName.AUTHORIZATION, value, null);
 	}
@@ -179,7 +179,7 @@ public abstract class JDFAutoCreditCard extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAuthorizationExpires(String value)
+	public void setAuthorizationExpires(final String value)
 	{
 		setAttribute(AttributeName.AUTHORIZATIONEXPIRES, value, null);
 	}
@@ -204,7 +204,7 @@ public abstract class JDFAutoCreditCard extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setExpires(String value)
+	public void setExpires(final String value)
 	{
 		setAttribute(AttributeName.EXPIRES, value, null);
 	}
@@ -229,7 +229,7 @@ public abstract class JDFAutoCreditCard extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNumber(String value)
+	public void setNumber(final String value)
 	{
 		setAttribute(AttributeName.NUMBER, value, null);
 	}
@@ -254,7 +254,7 @@ public abstract class JDFAutoCreditCard extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setType(String value)
+	public void setType(final String value)
 	{
 		setAttribute(AttributeName.TYPE, value, null);
 	}

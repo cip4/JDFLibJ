@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2016 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,14 +68,14 @@
  */
 
 /**
- * ========================================================================== 
+ * ==========================================================================
  * class JDFProcessRun extends JDFAutoProcessRun
- * created 2001-09-06T10:02:57GMT+02:00 
+ * created 2001-09-06T10:02:57GMT+02:00
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * Author: sabjon@topmail.de   using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * Author: sabjon@topmail.de   using a code generator
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  * Revision history:   ...
  */
 
@@ -95,8 +95,7 @@ import org.w3c.dom.DOMException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * < July 20, 2009
+ *         < July 20, 2009
  */
 public class JDFProcessRun extends JDFAutoProcessRun
 {
@@ -104,7 +103,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 
 	/**
 	 * Constructor for JDFProcessRun
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
@@ -116,7 +115,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 
 	/**
 	 * Constructor for JDFProcessRun
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -129,21 +128,22 @@ public class JDFProcessRun extends JDFAutoProcessRun
 
 	/**
 	 * Constructor for JDFProcessRun
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFProcessRun(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFProcessRun(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * toString()
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -154,7 +154,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 
 	/**
 	 * set the duration in seconds
-	 * 
+	 *
 	 * @param seconds the value to set
 	 * @throws JDFException
 	 */
@@ -172,8 +172,8 @@ public class JDFProcessRun extends JDFAutoProcessRun
 	// //////////////////////////////////////////////////////////////////////////
 	/**
 	 * get the duration in seconds
-	 * 
-	 * @return  the duration value in seconds, 0 if duration does not exist
+	 *
+	 * @return the duration value in seconds, 0 if duration does not exist
 	 */
 	public long getDurationSeconds()
 	{
@@ -189,7 +189,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 
 	/**
 	 * get the explicit or implied duration specified by Start and End
-	 * 
+	 *
 	 * @return JDFDuration the duration
 	 */
 	@Override
@@ -213,7 +213,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 
 	/**
 	 * set all parts to those defined in vParts
-	 * 
+	 *
 	 * @param vParts vector of attribute maps for the parts
 	 */
 	@Override
@@ -224,7 +224,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 
 	/**
 	 * set all parts to those defined by mPart
-	 * 
+	 *
 	 * @param mPart attribute map for the part to set
 	 */
 	@Override
@@ -235,7 +235,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 
 	/**
 	 * remove the part defined by mPart
-	 * 
+	 *
 	 * @param mPart attribute map for the part to remove
 	 */
 	@Override
@@ -246,7 +246,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 
 	/**
 	 * check whether the part defined by mPart is included
-	 * 
+	 *
 	 * @param mPart attribute map to look for
 	 * @return boolean - returns true if the part exists
 	 */
@@ -260,7 +260,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 
 	/**
 	 * add the active times in the PhaseTime pt to this processrun
-	 * 
+	 *
 	 * @param pt the PhaseTimes to add
 	 */
 	public void addPhase(final JDFPhaseTime pt)
@@ -287,7 +287,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 		final JDFDate start = pt.getStart();
 		if (start != null)
 		{
-			JDFDate start2 = getStart();
+			final JDFDate start2 = getStart();
 			if (start2 == null || start.isEarlier(start2))
 			{
 				setStart(start);
@@ -308,7 +308,6 @@ public class JDFProcessRun extends JDFAutoProcessRun
 	/**
 	 * ensure that duration matches end-start, <br/>
 	 * i.e. that duration is never longer than the full preiod between start and end
-	 * 
 	 */
 	public void ensureNotLonger()
 	{
@@ -328,7 +327,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 
 	/**
 	 * add delta seconds to duration and set the updated attribute value
-	 * 
+	 *
 	 * @param seconds duration to add in seconds
 	 */
 	public void addDuration(final long seconds)
@@ -342,6 +341,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 
 	/**
 	 * also sets an end time for this
+	 *
 	 * @see org.cip4.jdflib.core.JDFAudit#init()
 	 */
 	@Override
@@ -353,18 +353,14 @@ public class JDFProcessRun extends JDFAutoProcessRun
 
 	/**
 	 * returns true if audit belongs to this processrun
-	 * 
+	 *
 	 * @param audit
 	 * @return
 	 */
 	public boolean matches(final JDFAudit audit)
 	{
-		if (audit == null)
-		{
-			return false;
-		}
 		// must be in same pool
-		if (!ContainerUtil.equals(audit.getParentNode(), getParentNode()))
+		if ((audit == null) || !ContainerUtil.equals(audit.getParentNode(), getParentNode()))
 		{
 			return false;
 		}

@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -103,8 +99,8 @@ public abstract class JDFAutoSignal extends JDFMessage
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumChannelMode.getEnum(0),
-				"FireAndForget");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumChannelMode.class, 0), "FireAndForget");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.LASTREPEAT, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.REFID, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.REPLACEAFTER, 0x3331111111l, AttributeInfo.EnumAttributeType.dateTime, null, null);
@@ -137,7 +133,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSignal(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoSignal(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -149,7 +145,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSignal(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoSignal(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -162,93 +158,28 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoSignal(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoSignal(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for ChannelMode
+	 * Enumeration strings for numChannelMode
 	 */
 
-	public enum EChannelMode
+	public enum EnumChannelMode
 	{
 		FireAndForget, Reliable;
 
-		public static EChannelMode getEnum(String val)
+		public static EnumChannelMode getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EChannelMode.class, val, EChannelMode.FireAndForget);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumChannelMode.class, val, EnumChannelMode.FireAndForget);
 		}
-	}
-
-	/**
-	 * Enumeration strings for ChannelMode
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumChannelMode extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumChannelMode(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumChannelMode getEnum(String enumName)
-		{
-			return (EnumChannelMode) getEnum(EnumChannelMode.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumChannelMode getEnum(int enumValue)
-		{
-			return (EnumChannelMode) getEnum(EnumChannelMode.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumChannelMode.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumChannelMode.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumChannelMode.class);
-		}
-
-		/**  */
-		public static final EnumChannelMode FireAndForget = new EnumChannelMode("FireAndForget");
-		/**  */
-		public static final EnumChannelMode Reliable = new EnumChannelMode("Reliable");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -260,9 +191,9 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setChannelMode(EChannelMode enumVar)
+	public void setChannelMode(final EnumChannelMode enumVar)
 	{
-		setAttribute(AttributeName.CHANNELMODE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.CHANNELMODE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -270,35 +201,6 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 *
 	 * @return the value of the attribute
 	 */
-	public EChannelMode getEChannelMode()
-	{
-		return EChannelMode.getEnum(getAttribute(AttributeName.CHANNELMODE, null, "FireAndForget"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ChannelMode
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ChannelMode
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetChannelMode(EChannelMode) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setChannelMode(EnumChannelMode enumVar)
-	{
-		setAttribute(AttributeName.CHANNELMODE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ChannelMode
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EChannelMode GetEChannelMode() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumChannelMode getChannelMode()
 	{
 		return EnumChannelMode.getEnum(getAttribute(AttributeName.CHANNELMODE, null, "FireAndForget"));
@@ -314,7 +216,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLastRepeat(boolean value)
+	public void setLastRepeat(final boolean value)
 	{
 		setAttribute(AttributeName.LASTREPEAT, value, null);
 	}
@@ -340,7 +242,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 * @param value the value to set the attribute to
 	 */
 	@Override
-	public void setrefID(String value)
+	public void setrefID(final String value)
 	{
 		setAttribute(AttributeName.REFID, value, null);
 	}
@@ -366,7 +268,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setReplaceAfter(JDFDate value)
+	public void setReplaceAfter(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -383,8 +285,8 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 */
 	public JDFDate getReplaceAfter()
 	{
-		String str = getAttribute(AttributeName.REPLACEAFTER, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.REPLACEAFTER, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -398,7 +300,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setReplaceBefore(JDFDate value)
+	public void setReplaceBefore(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -415,8 +317,8 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 */
 	public JDFDate getReplaceBefore()
 	{
-		String str = getAttribute(AttributeName.REPLACEBEFORE, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.REPLACEBEFORE, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -452,7 +354,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
-	public JDFEmployee getCreateEmployee(int iSkip)
+	public JDFEmployee getCreateEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getCreateElement_JDFElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -464,7 +366,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 * @return JDFEmployee the element
 	 *         default is getEmployee(0)
 	 */
-	public JDFEmployee getEmployee(int iSkip)
+	public JDFEmployee getEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -515,7 +417,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 * @param iSkip number of elements to skip
 	 * @return JDFNotification the element
 	 */
-	public JDFNotification getCreateNotification(int iSkip)
+	public JDFNotification getCreateNotification(final int iSkip)
 	{
 		return (JDFNotification) getCreateElement_JDFElement(ElementName.NOTIFICATION, null, iSkip);
 	}
@@ -527,7 +429,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 * @return JDFNotification the element
 	 *         default is getNotification(0)
 	 */
-	public JDFNotification getNotification(int iSkip)
+	public JDFNotification getNotification(final int iSkip)
 	{
 		return (JDFNotification) getElement(ElementName.NOTIFICATION, null, iSkip);
 	}

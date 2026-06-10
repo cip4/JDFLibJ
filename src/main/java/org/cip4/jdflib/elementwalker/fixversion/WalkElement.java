@@ -54,8 +54,8 @@ import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.util.ContainerUtil;
-import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDuration;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -236,7 +236,7 @@ public class WalkElement extends WalkAnyElement
 			el.setAttribute(key, fixVersion.version, null);
 		}
 		else if (fixVersion.version != null && AttributeName.MAXVERSION.equals(key)
-				&& EnumUtil.aLessEqualsThanB(EnumVersion.getEnum(value), fixVersion.version))
+				&& JavaEnumUtil.aLessEqualsThanB(EnumVersion.getEnum(value), fixVersion.version))
 		{
 			el.setAttribute(key, fixVersion.version, null);
 		}
@@ -291,7 +291,7 @@ public class WalkElement extends WalkAnyElement
 	 */
 	protected void fixSourceObjects(final JDFElement el, final String key, final String value)
 	{
-		if ((AttributeName.SOURCEOBJECTS.equals(key) && EnumUtil.aLessEqualsThanB(EnumVersion.Version_1_5, fixVersion.version))
+		if ((AttributeName.SOURCEOBJECTS.equals(key) && JavaEnumUtil.aLessEqualsThanB(EnumVersion.Version_1_5, fixVersion.version))
 				&& StringUtil.hasToken(value, "All", null, 0))
 		{
 			el.removeAttribute_KElement(key, null);

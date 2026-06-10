@@ -66,7 +66,7 @@
  * <http://www.cip4.org/>.
  *
  *
- * 
+ *
  */
 package org.cip4.jdflib.util.file;
 
@@ -90,7 +90,7 @@ public class FileTime implements Comparable<FileTime>
 
 	/**
 	 * sort by old last
-	 * 
+	 *
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 * @param o
 	 * @return
@@ -100,9 +100,13 @@ public class FileTime implements Comparable<FileTime>
 	{
 		long l = lastMod - o.lastMod;
 		if (l > 0)
+		{
 			l = -1;
+		}
 		else if (l < 0)
+		{
 			l = 1;
+		}
 		return (int) l;
 	}
 

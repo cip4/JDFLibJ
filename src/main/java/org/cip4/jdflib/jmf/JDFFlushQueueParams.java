@@ -92,36 +92,36 @@ public class JDFFlushQueueParams extends JDFAutoFlushQueueParams
 
 	/**
 	 * JDFFlushQueueParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFFlushQueueParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFFlushQueueParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * JDFFlushQueueParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFFlushQueueParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFFlushQueueParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * JDFFlushQueueParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFFlushQueueParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFFlushQueueParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -130,7 +130,7 @@ public class JDFFlushQueueParams extends JDFAutoFlushQueueParams
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoFlushQueueParams#toString()
 	 * @return String
 	 */

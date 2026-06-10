@@ -73,8 +73,6 @@ package org.cip4.jdflib.auto;
 import java.util.Collection;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoArtDelivery.EPreflightStatus;
-import org.cip4.jdflib.auto.JDFAutoArtDelivery.EnumPreflightStatus;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -93,6 +91,7 @@ import org.cip4.jdflib.span.JDFSpanDeliveryCharge;
 import org.cip4.jdflib.span.JDFSpanTransfer;
 import org.cip4.jdflib.span.JDFStringSpan;
 import org.cip4.jdflib.span.JDFTimeSpan;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoArtDeliveryIntent : public JDFIntentResource
@@ -107,7 +106,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREFLIGHTSTATUS, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumPreflightStatus.getEnum(0), "NotPerformed");
+				JavaEnumUtil.getEnum(EnumPreflightStatus.class, 0), "NotPerformed");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.RETURNLIST, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, "None");
 	}
 
@@ -145,7 +144,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoArtDeliveryIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoArtDeliveryIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -157,7 +156,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoArtDeliveryIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoArtDeliveryIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -170,41 +169,28 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoArtDeliveryIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoArtDeliveryIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * Enumeration strings for numPreflightStatus
 	 */
 
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute PreflightStatus
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute PreflightStatus
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 */
-	public void setPreflightStatus(EPreflightStatus enumVar)
+	public enum EnumPreflightStatus
 	{
-		setAttribute(AttributeName.PREFLIGHTSTATUS, enumVar == null ? null : enumVar.name(), null);
-	}
+		NotPerformed, WithErrors, WithWarnings, WithoutErrors;
 
-	/**
-	 * (9) get attribute PreflightStatus
-	 *
-	 * @return the value of the attribute
-	 */
-	public EPreflightStatus getEPreflightStatus()
-	{
-		return EPreflightStatus.getEnum(getAttribute(AttributeName.PREFLIGHTSTATUS, null, "NotPerformed"));
-	}
+		public static EnumPreflightStatus getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPreflightStatus.class, val, EnumPreflightStatus.NotPerformed);
+		}
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
+		 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -215,21 +201,17 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	 * (5) set attribute PreflightStatus
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPreflightStatus(EPreflightStatus) based on java.lang.enum instead
 	 */
-	@Deprecated
-	public void setPreflightStatus(EnumPreflightStatus enumVar)
+	public void setPreflightStatus(final EnumPreflightStatus enumVar)
 	{
-		setAttribute(AttributeName.PREFLIGHTSTATUS, enumVar == null ? null : enumVar.getName(), null);
+		setAttribute(AttributeName.PREFLIGHTSTATUS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
 	 * (9) get attribute PreflightStatus
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPreflightStatus GetEPreflightStatus() based on java.lang.enum instead
 	 */
-	@Deprecated
 	public EnumPreflightStatus getPreflightStatus()
 	{
 		return EnumPreflightStatus.getEnum(getAttribute(AttributeName.PREFLIGHTSTATUS, null, "NotPerformed"));
@@ -245,7 +227,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setReturnList(VString value)
+	public void setReturnList(final VString value)
 	{
 		setAttribute(AttributeName.RETURNLIST, value, null);
 	}
@@ -257,8 +239,8 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	 */
 	public VString getReturnList()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.RETURNLIST, null, "None");
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.RETURNLIST, null, "None");
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -543,7 +525,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFArtDelivery the element
 	 */
-	public JDFArtDelivery getCreateArtDelivery(int iSkip)
+	public JDFArtDelivery getCreateArtDelivery(final int iSkip)
 	{
 		return (JDFArtDelivery) getCreateElement_JDFElement(ElementName.ARTDELIVERY, null, iSkip);
 	}
@@ -555,7 +537,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	 * @return JDFArtDelivery the element
 	 *         default is getArtDelivery(0)
 	 */
-	public JDFArtDelivery getArtDelivery(int iSkip)
+	public JDFArtDelivery getArtDelivery(final int iSkip)
 	{
 		return (JDFArtDelivery) getElement(ElementName.ARTDELIVERY, null, iSkip);
 	}
@@ -616,7 +598,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refCompany(JDFCompany refTarget)
+	public void refCompany(final JDFCompany refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -649,7 +631,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
-	public JDFContact getCreateContact(int iSkip)
+	public JDFContact getCreateContact(final int iSkip)
 	{
 		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -661,7 +643,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	 * @return JDFContact the element
 	 *         default is getContact(0)
 	 */
-	public JDFContact getContact(int iSkip)
+	public JDFContact getContact(final int iSkip)
 	{
 		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -692,7 +674,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refContact(JDFContact refTarget)
+	public void refContact(final JDFContact refTarget)
 	{
 		refElement(refTarget);
 	}

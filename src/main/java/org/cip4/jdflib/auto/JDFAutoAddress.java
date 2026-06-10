@@ -131,7 +131,7 @@ public abstract class JDFAutoAddress extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAddress(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoAddress(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -143,7 +143,7 @@ public abstract class JDFAutoAddress extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAddress(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoAddress(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -156,7 +156,7 @@ public abstract class JDFAutoAddress extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoAddress(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoAddress(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -167,7 +167,7 @@ public abstract class JDFAutoAddress extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -197,7 +197,7 @@ public abstract class JDFAutoAddress extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAddressUsage(String value)
+	public void setAddressUsage(final String value)
 	{
 		setAttribute(AttributeName.ADDRESSUSAGE, value, null);
 	}
@@ -222,7 +222,7 @@ public abstract class JDFAutoAddress extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCity(String value)
+	public void setCity(final String value)
 	{
 		setAttribute(AttributeName.CITY, value, null);
 	}
@@ -247,7 +247,7 @@ public abstract class JDFAutoAddress extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCivicNumber(String value)
+	public void setCivicNumber(final String value)
 	{
 		setAttribute(AttributeName.CIVICNUMBER, value, null);
 	}
@@ -272,7 +272,7 @@ public abstract class JDFAutoAddress extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCountry(String value)
+	public void setCountry(final String value)
 	{
 		setAttribute(AttributeName.COUNTRY, value, null);
 	}
@@ -297,7 +297,7 @@ public abstract class JDFAutoAddress extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCountryCode(String value)
+	public void setCountryCode(final String value)
 	{
 		setAttribute(AttributeName.COUNTRYCODE, value, null);
 	}
@@ -322,7 +322,7 @@ public abstract class JDFAutoAddress extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPostBox(String value)
+	public void setPostBox(final String value)
 	{
 		setAttribute(AttributeName.POSTBOX, value, null);
 	}
@@ -347,7 +347,7 @@ public abstract class JDFAutoAddress extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPostalCode(String value)
+	public void setPostalCode(final String value)
 	{
 		setAttribute(AttributeName.POSTALCODE, value, null);
 	}
@@ -372,7 +372,7 @@ public abstract class JDFAutoAddress extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRegion(String value)
+	public void setRegion(final String value)
 	{
 		setAttribute(AttributeName.REGION, value, null);
 	}
@@ -397,7 +397,7 @@ public abstract class JDFAutoAddress extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStreet(String value)
+	public void setStreet(final String value)
 	{
 		setAttribute(AttributeName.STREET, value, null);
 	}
@@ -444,7 +444,7 @@ public abstract class JDFAutoAddress extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFElement the element
 	 */
-	public JDFElement getCreateAddressLine(int iSkip)
+	public JDFElement getCreateAddressLine(final int iSkip)
 	{
 		return (JDFElement) getCreateElement_JDFElement(ElementName.ADDRESSLINE, null, iSkip);
 	}
@@ -456,7 +456,7 @@ public abstract class JDFAutoAddress extends JDFResource
 	 * @return JDFElement the element
 	 *         default is getAddressLine(0)
 	 */
-	public JDFElement getAddressLine(int iSkip)
+	public JDFElement getAddressLine(final int iSkip)
 	{
 		return (JDFElement) getElement(ElementName.ADDRESSLINE, null, iSkip);
 	}

@@ -1,11 +1,11 @@
 /**
- * ========================================================================== 
+ * ==========================================================================
  * class JDFTrappingOrder extends JDFResource
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author: sabjon@topmail.de    using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * @Author: sabjon@topmail.de    using a code generator
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  */
 
 package org.cip4.jdflib.resource.process.prepress;
@@ -20,7 +20,7 @@ public class JDFTrappingOrder extends JDFSeparationList
 
 	/**
 	 * Constructor for JDFTrappingOrder
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
@@ -32,7 +32,7 @@ public class JDFTrappingOrder extends JDFSeparationList
 
 	/**
 	 * Constructor for JDFTrappingOrder
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
@@ -45,14 +45,15 @@ public class JDFTrappingOrder extends JDFSeparationList
 
 	/**
 	 * Constructor for JDFTrappingOrder
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFTrappingOrder(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFTrappingOrder(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -63,4 +64,4 @@ public class JDFTrappingOrder extends JDFSeparationList
 		return "JDFTrappingOrder[  --> " + super.toString() + " ]";
 	}
 } // class JDFIDPLayout
-// ==========================================================================
+	// ==========================================================================

@@ -45,8 +45,6 @@ class AmountTest extends ExampleTest
 
 	/**
 	 * test specification of planned waste in AmountPool
-	 *
-	 *
 	 */
 	@Test
 	void testPlannedWaste()
@@ -197,7 +195,9 @@ class AmountTest extends ExampleTest
 				stUtil.setTrackWaste(refMedia, true);
 
 				if (i == 0)
+				{
 					stUtil.setPhase(EnumNodeStatus.Stopped, "PowerOn", EnumDeviceStatus.Stopped, "PowerOn");
+				}
 				stUtil.setPhase(EnumNodeStatus.Setup, "FormChange", EnumDeviceStatus.Setup, "FormChange");
 				stUtil.addPhase(refMedia, 0, 200, true);
 				stUtil.addPhase(refComp, 0, 200, true);

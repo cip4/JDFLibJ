@@ -56,14 +56,12 @@ import org.cip4.jdflib.resource.process.JDFContentObject;
  * class to maintain data from typesafe library
  *
  * @author rainer prosi
- *
  */
 public class JDFToXJDFDataCache
 {
 	private final static JDFToXJDFDataCache theCache = new JDFToXJDFDataCache();
 
 	/**
-	 *
 	 * @return
 	 */
 	public static JDFToXJDFDataCache getCache()
@@ -87,7 +85,6 @@ public class JDFToXJDFDataCache
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	private List<String> generatePlacedObjectAttributes()
@@ -96,7 +93,7 @@ public class JDFToXJDFDataCache
 		final JDFMarkObject mo = (JDFMarkObject) new JDFDoc(ElementName.MARKOBJECT).getRoot();
 		final VString vco = co.knownAttributes();
 		final VString vmo = mo.knownAttributes();
-		VString overlapping = vmo.getOverlapping(vco);
+		final VString overlapping = vmo.getOverlapping(vco);
 		overlapping.add(AttributeName.ID);
 		return overlapping;
 	}
@@ -108,8 +105,6 @@ public class JDFToXJDFDataCache
 	final private StringArray amountAttribs;
 
 	/**
-	 *
-	 *
 	 * @return
 	 */
 	private List<String> generateElementAttributes()
@@ -119,7 +114,6 @@ public class JDFToXJDFDataCache
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	private HashSet<String> generateInlineSet()
@@ -175,13 +169,11 @@ public class JDFToXJDFDataCache
 	}
 
 	/**
-	 *
-	 *
 	 * @return
 	 */
 	private List<String> generateResourceAttributes()
 	{
-		StringArray ra = new StringArray();
+		final StringArray ra = new StringArray();
 		final JDFResourcePool dummyResPool = (JDFResourcePool) new JDFDoc(ElementName.RESOURCEPOOL).getRoot();
 		final JDFResource intRes = dummyResPool.appendResource("intent", EnumResourceClass.Intent, null);
 		final JDFResource physRes = dummyResPool.appendResource("physical", EnumResourceClass.Consumable, null);
@@ -237,7 +229,6 @@ public class JDFToXJDFDataCache
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public static StringArray getAmountAttribs()

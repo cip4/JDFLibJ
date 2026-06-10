@@ -81,6 +81,7 @@ package org.cip4.jdflib.jmf;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoSubscriptionInfo;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 //----------------------------------
 /**
@@ -92,7 +93,7 @@ public class JDFSubscriptionInfo extends JDFAutoSubscriptionInfo
 
 	/**
 	 * Constructor for JDFKnownMsgQuParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -103,7 +104,7 @@ public class JDFSubscriptionInfo extends JDFAutoSubscriptionInfo
 
 	/**
 	 * Constructor for JDFKnownMsgQuParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -115,7 +116,7 @@ public class JDFSubscriptionInfo extends JDFAutoSubscriptionInfo
 
 	/**
 	 * Constructor for JDFKnownMsgQuParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -131,15 +132,15 @@ public class JDFSubscriptionInfo extends JDFAutoSubscriptionInfo
 	 */
 	public EnumType getEnumType()
 	{
-		String s = getMessageType();
+		final String s = getMessageType();
 		return EnumType.getEnum(s);
 	}
 
 	/**
 	 * @param typ the JDFMessage.EnumType from MessageType
 	 */
-	public void setMessageType(EnumType typ)
+	public void setMessageType(final EnumType typ)
 	{
-		setMessageType(typ == null ? null : typ.getName());
+		setMessageType(JavaEnumUtil.getName(typ));
 	}
 }

@@ -75,8 +75,7 @@ import org.cip4.jdflib.util.ContainerUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG<br/>
- * ensures correct ns uri
- * 
+ *         ensures correct ns uri
  */
 public class EnsureElementUri extends BaseElementWalker
 {
@@ -85,42 +84,43 @@ public class EnsureElementUri extends BaseElementWalker
 
 	/**
 	 * add a prefix / uri pair
+	 *
 	 * @param localName the local name
-	 * @param uri the URI must not be null 
+	 * @param uri       the URI must not be null
 	 * @throws IllegalArgumentException if uri is null
 	 */
-	public void addNS(String localName, String uri)
+	public void addNS(final String localName, final String uri)
 	{
 		if (uri == null)
+		{
 			throw new IllegalArgumentException("uri MUST NOT be null");
+		}
 		nsMap.put(localName, uri);
 	}
 
 	/**
-	 * 
 	 * @param root
 	 */
-	public void walk(KElement root)
+	public void walk(final KElement root)
 	{
 		// the root is rare and stupid
 		walkTree(root, KElement.createRoot("kjsaclasuzFGacfsksahcfz:alashfhfgsalJSHFG", "ksafJFHJGasjhcF"));
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public EnsureElementUri()
 	{
 		super(new BaseWalkerFactory());
-		nsMap = new HashMap<String, String>();
+		nsMap = new HashMap<>();
 		new BaseWalker(getFactory()); // need a default walker
 	}
 
 	/**
 	 * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super classes
-	 * 
+	 *
 	 * @author prosirai
-	 * 
 	 */
 	public class WalkElement extends BaseWalker
 	{
@@ -135,14 +135,14 @@ public class EnsureElementUri extends BaseElementWalker
 
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param e1 - the element to track
+		 * @param e1        - the element to track
 		 * @param trackElem - always null
 		 * @return the element to continue walking
 		 */
 		@Override
 		public KElement walk(final KElement e1, KElement trackElem)
 		{
-			String local = e1.getLocalName();
+			final String local = e1.getLocalName();
 			if (nsMap.get(local) != null)
 			{
 				e1.setNamespaceURI(nsMap.get(local));

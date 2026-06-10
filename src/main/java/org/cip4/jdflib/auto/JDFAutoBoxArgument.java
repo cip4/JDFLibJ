@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -95,9 +90,10 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BOX, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumBox.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BOX, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumBox.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.MIRRORMARGINS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumMirrorMargins.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumMirrorMargins.class, 0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.OFFSET, 0x3333333333l, AttributeInfo.EnumAttributeType.rectangle, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.OVERLAP, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 	}
@@ -114,7 +110,7 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBoxArgument(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoBoxArgument(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -126,7 +122,7 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBoxArgument(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoBoxArgument(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -139,180 +135,42 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoBoxArgument(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoBoxArgument(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for Box
+	 * Enumeration strings for numBox
 	 */
 
-	public enum EBox
+	public enum EnumBox
 	{
 		ArtBox, BleedBox, CropBox, MarginsBox, MediaBox, SlugBox, TrimBox;
 
-		public static EBox getEnum(String val)
+		public static EnumBox getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EBox.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumBox.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for Box
+	 * Enumeration strings for numMirrorMargins
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumBox extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumBox(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumBox getEnum(String enumName)
-		{
-			return (EnumBox) getEnum(EnumBox.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumBox getEnum(int enumValue)
-		{
-			return (EnumBox) getEnum(EnumBox.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumBox.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumBox.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumBox.class);
-		}
-
-		/**  */
-		public static final EnumBox ArtBox = new EnumBox("ArtBox");
-		/**  */
-		public static final EnumBox BleedBox = new EnumBox("BleedBox");
-		/**  */
-		public static final EnumBox CropBox = new EnumBox("CropBox");
-		/**  */
-		public static final EnumBox MarginsBox = new EnumBox("MarginsBox");
-		/**  */
-		public static final EnumBox MediaBox = new EnumBox("MediaBox");
-		/**  */
-		public static final EnumBox SlugBox = new EnumBox("SlugBox");
-		/**  */
-		public static final EnumBox TrimBox = new EnumBox("TrimBox");
-	}
-
-	/**
-	 * Enumeration strings for MirrorMargins
-	 */
-
-	public enum EMirrorMargins
+	public enum EnumMirrorMargins
 	{
 		Vertical, Horizontal;
 
-		public static EMirrorMargins getEnum(String val)
+		public static EnumMirrorMargins getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EMirrorMargins.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumMirrorMargins.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for MirrorMargins
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumMirrorMargins extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumMirrorMargins(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumMirrorMargins getEnum(String enumName)
-		{
-			return (EnumMirrorMargins) getEnum(EnumMirrorMargins.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumMirrorMargins getEnum(int enumValue)
-		{
-			return (EnumMirrorMargins) getEnum(EnumMirrorMargins.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumMirrorMargins.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumMirrorMargins.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumMirrorMargins.class);
-		}
-
-		/**  */
-		public static final EnumMirrorMargins Vertical = new EnumMirrorMargins("Vertical");
-		/**  */
-		public static final EnumMirrorMargins Horizontal = new EnumMirrorMargins("Horizontal");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -324,9 +182,9 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setBox(EBox enumVar)
+	public void setBox(final EnumBox enumVar)
 	{
-		setAttribute(AttributeName.BOX, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.BOX, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -334,35 +192,6 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EBox getEBox()
-	{
-		return EBox.getEnum(getAttribute(AttributeName.BOX, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Box
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Box
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetBox(EBox) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setBox(EnumBox enumVar)
-	{
-		setAttribute(AttributeName.BOX, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Box
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EBox GetEBox() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumBox getBox()
 	{
 		return EnumBox.getEnum(getAttribute(AttributeName.BOX, null, null));
@@ -378,9 +207,9 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMirrorMargins(EMirrorMargins enumVar)
+	public void setMirrorMargins(final EnumMirrorMargins enumVar)
 	{
-		setAttribute(AttributeName.MIRRORMARGINS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.MIRRORMARGINS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -388,35 +217,6 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EMirrorMargins getEMirrorMargins()
-	{
-		return EMirrorMargins.getEnum(getAttribute(AttributeName.MIRRORMARGINS, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute MirrorMargins
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute MirrorMargins
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetMirrorMargins(EMirrorMargins) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setMirrorMargins(EnumMirrorMargins enumVar)
-	{
-		setAttribute(AttributeName.MIRRORMARGINS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute MirrorMargins
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EMirrorMargins GetEMirrorMargins() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumMirrorMargins getMirrorMargins()
 	{
 		return EnumMirrorMargins.getEnum(getAttribute(AttributeName.MIRRORMARGINS, null, null));
@@ -432,7 +232,7 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOffset(JDFRectangle value)
+	public void setOffset(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.OFFSET, value, null);
 	}
@@ -445,8 +245,8 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	 */
 	public JDFRectangle getOffset()
 	{
-		String strAttrName = getAttribute(AttributeName.OFFSET, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.OFFSET, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -460,7 +260,7 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOverlap(boolean value)
+	public void setOverlap(final boolean value)
 	{
 		setAttribute(AttributeName.OVERLAP, value, null);
 	}

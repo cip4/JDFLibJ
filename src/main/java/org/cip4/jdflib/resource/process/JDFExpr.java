@@ -91,10 +91,9 @@ public class JDFExpr extends JDFAutoExpr
 
 	/**
 	 * Constructor for JDFRunList
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
-	 * 
 	 * @throws DOMException
 	 */
 	public JDFExpr(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
@@ -104,11 +103,10 @@ public class JDFExpr extends JDFAutoExpr
 
 	/**
 	 * Constructor for JDFRunList
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * 
 	 * @throws DOMException
 	 */
 	public JDFExpr(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
@@ -118,42 +116,38 @@ public class JDFExpr extends JDFAutoExpr
 
 	/**
 	 * Constructor for JDFRunList
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
-	 * 
 	 */
-	public JDFExpr(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFExpr(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * 
-	 * 
 	 * @param term
 	 * @return
 	 */
-	public JDFTerm appendTerm(EnumTerm term)
+	public JDFTerm appendTerm(final EnumTerm term)
 	{
-		return (JDFTerm) appendElement(term.getName());
+		return (JDFTerm) appendElement(term.name());
 	}
 
 	/**
-	 * 
-	 * 
 	 * @param term
 	 * @param i
 	 * @return
 	 */
-	public JDFTerm getTerm(EnumTerm term, int i)
+	public JDFTerm getTerm(final EnumTerm term, final int i)
 	{
 		if (term != null)
 		{
-			return (JDFTerm) getElement(term.getName(), null, i);
+			return (JDFTerm) getElement(term.name(), null, i);
 		}
 		else
 		{
@@ -162,20 +156,18 @@ public class JDFExpr extends JDFAutoExpr
 	}
 
 	/**
-	 * 
-	 * 
 	 * @param term
 	 * @param i
 	 * @return
 	 */
-	public JDFTerm getCreateTerm(EnumTerm term, int i)
+	public JDFTerm getCreateTerm(final EnumTerm term, final int i)
 	{
-		return (JDFTerm) getCreateElement(term.getName(), null, i);
+		return (JDFTerm) getCreateElement(term.name(), null, i);
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -187,20 +179,20 @@ public class JDFExpr extends JDFAutoExpr
 	@Override
 	public VString optionalElements()
 	{
-		VString optionalElements = super.optionalElements();
+		final VString optionalElements = super.optionalElements();
 		optionalElements.add(ElementName.NAMEEVALUATION);
 		return optionalElements;
 	}
 
 	@Override
-	public boolean isValid(EnumValidationLevel level)
+	public boolean isValid(final EnumValidationLevel level)
 	{
 		// TODO Auto-generated method stub
 		return super.isValid(level);
 	}
 
 	@Override
-	public boolean isValid_JDFElement(EnumValidationLevel level)
+	public boolean isValid_JDFElement(final EnumValidationLevel level)
 	{
 		// TODO Auto-generated method stub
 		return super.isValid_JDFElement(level);

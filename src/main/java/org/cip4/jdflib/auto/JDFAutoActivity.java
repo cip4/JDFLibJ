@@ -109,7 +109,7 @@ public abstract class JDFAutoActivity extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoActivity(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoActivity(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -121,7 +121,7 @@ public abstract class JDFAutoActivity extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoActivity(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoActivity(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -134,7 +134,7 @@ public abstract class JDFAutoActivity extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoActivity(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoActivity(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -155,7 +155,7 @@ public abstract class JDFAutoActivity extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setActivityID(String value)
+	public void setActivityID(final String value)
 	{
 		setAttribute(AttributeName.ACTIVITYID, value, null);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoActivity extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setActivityName(String value)
+	public void setActivityName(final String value)
 	{
 		setAttribute(AttributeName.ACTIVITYNAME, value, null);
 	}
@@ -205,7 +205,7 @@ public abstract class JDFAutoActivity extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setEndTime(JDFDate value)
+	public void setEndTime(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -222,8 +222,8 @@ public abstract class JDFAutoActivity extends JDFElement
 	 */
 	public JDFDate getEndTime()
 	{
-		String str = getAttribute(AttributeName.ENDTIME, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.ENDTIME, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -237,7 +237,7 @@ public abstract class JDFAutoActivity extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPersonalID(String value)
+	public void setPersonalID(final String value)
 	{
 		setAttribute(AttributeName.PERSONALID, value, null);
 	}
@@ -262,7 +262,7 @@ public abstract class JDFAutoActivity extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setStartTime(JDFDate value)
+	public void setStartTime(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -279,8 +279,8 @@ public abstract class JDFAutoActivity extends JDFElement
 	 */
 	public JDFDate getStartTime()
 	{
-		String str = getAttribute(AttributeName.STARTTIME, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.STARTTIME, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 

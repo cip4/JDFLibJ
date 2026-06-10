@@ -42,12 +42,11 @@ public class CxFReader extends CxFBase
 {
 	public static CxFReader getReader(final KElement e)
 	{
-		final boolean isCxF = e != null && CxFReader.CXF.equals(e.getLocalName());
+		final boolean isCxF = e != null && CxFBase.CXF.equals(e.getLocalName());
 		return isCxF ? new CxFReader(e) : null;
 	}
 
 	/**
-	 *
 	 * @param filename
 	 * @return
 	 */
@@ -58,7 +57,6 @@ public class CxFReader extends CxFBase
 	}
 
 	/**
-	 *
 	 * @param cxfRoot
 	 */
 	CxFReader(final KElement cxfRoot)
@@ -67,7 +65,6 @@ public class CxFReader extends CxFBase
 	}
 
 	/**
-	 *
 	 * @param index
 	 * @return
 	 */
@@ -78,7 +75,6 @@ public class CxFReader extends CxFBase
 	}
 
 	/**
-	 *
 	 * @param index
 	 * @return
 	 */

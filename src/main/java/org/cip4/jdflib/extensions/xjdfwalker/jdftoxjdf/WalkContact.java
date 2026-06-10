@@ -114,15 +114,15 @@ public class WalkContact extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkResource#moveAttribsToBase(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void moveAttribsToBase(KElement xjdf, KElement newResLeaf)
+	protected void moveAttribsToBase(final KElement xjdf, final KElement newResLeaf)
 	{
 		super.moveAttribsToBase(xjdf, newResLeaf);
-		String ct = newResLeaf.getNonEmpty(AttributeName.CONTACTTYPES);
+		final String ct = newResLeaf.getNonEmpty(AttributeName.CONTACTTYPES);
 		if (ct != null)
 		{
-			ResourceHelper helper = ResourceHelper.getHelper(xjdf);
-			VString vCts = VString.getVString(ct, null);
-			for (String c : vCts)
+			final ResourceHelper helper = ResourceHelper.getHelper(xjdf);
+			final VString vCts = VString.getVString(ct, null);
+			for (final String c : vCts)
 			{
 				helper.appendPartMap(new JDFAttributeMap(XJDFConstants.ContactType, c));
 			}

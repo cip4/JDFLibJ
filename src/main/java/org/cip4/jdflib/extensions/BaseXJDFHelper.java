@@ -41,7 +41,7 @@ import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -324,7 +324,7 @@ public abstract class BaseXJDFHelper
 	 */
 	public String getID()
 	{
-		return getAttribute(JDFConstants.ID);
+		return getAttribute(JDFCoreConstants.ID);
 	}
 
 	/**
@@ -386,11 +386,7 @@ public abstract class BaseXJDFHelper
 		{
 			return true;
 		}
-		if (obj == null)
-		{
-			return false;
-		}
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 		{
 			return false;
 		}

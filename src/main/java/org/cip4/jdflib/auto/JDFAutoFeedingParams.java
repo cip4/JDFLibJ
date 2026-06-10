@@ -108,7 +108,7 @@ public abstract class JDFAutoFeedingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFeedingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoFeedingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -120,7 +120,7 @@ public abstract class JDFAutoFeedingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFeedingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoFeedingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoFeedingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoFeedingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoFeedingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -144,7 +144,7 @@ public abstract class JDFAutoFeedingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -190,7 +190,7 @@ public abstract class JDFAutoFeedingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFFeeder the element
 	 */
-	public JDFFeeder getCreateFeeder(int iSkip)
+	public JDFFeeder getCreateFeeder(final int iSkip)
 	{
 		return (JDFFeeder) getCreateElement_JDFElement(ElementName.FEEDER, null, iSkip);
 	}
@@ -202,7 +202,7 @@ public abstract class JDFAutoFeedingParams extends JDFResource
 	 * @return JDFFeeder the element
 	 *         default is getFeeder(0)
 	 */
-	public JDFFeeder getFeeder(int iSkip)
+	public JDFFeeder getFeeder(final int iSkip)
 	{
 		return (JDFFeeder) getElement(ElementName.FEEDER, null, iSkip);
 	}
@@ -253,7 +253,7 @@ public abstract class JDFAutoFeedingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFCollatingItem the element
 	 */
-	public JDFCollatingItem getCreateCollatingItem(int iSkip)
+	public JDFCollatingItem getCreateCollatingItem(final int iSkip)
 	{
 		return (JDFCollatingItem) getCreateElement_JDFElement(ElementName.COLLATINGITEM, null, iSkip);
 	}
@@ -265,7 +265,7 @@ public abstract class JDFAutoFeedingParams extends JDFResource
 	 * @return JDFCollatingItem the element
 	 *         default is getCollatingItem(0)
 	 */
-	public JDFCollatingItem getCollatingItem(int iSkip)
+	public JDFCollatingItem getCollatingItem(final int iSkip)
 	{
 		return (JDFCollatingItem) getElement(ElementName.COLLATINGITEM, null, iSkip);
 	}

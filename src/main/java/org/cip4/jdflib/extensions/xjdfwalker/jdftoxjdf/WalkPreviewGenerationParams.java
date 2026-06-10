@@ -76,7 +76,6 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen at this point only a dummy since we have a specific WalkResourceAudit child
  */
 public class WalkPreviewGenerationParams extends WalkResource
@@ -102,7 +101,6 @@ public class WalkPreviewGenerationParams extends WalkResource
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override

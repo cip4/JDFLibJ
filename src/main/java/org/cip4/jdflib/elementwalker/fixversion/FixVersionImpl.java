@@ -46,7 +46,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.PackageElementWalker;
-import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.ListMap;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -55,9 +55,7 @@ import org.cip4.jdflib.util.StringUtil;
  *         fixes versions within JDF 1.x June 7, 2009<br/>
  *         uses heuristics to modify this element and its children to be compatible with a given version<br>
  *         in general, it will be able to move from low to high versions, but potentially fail when attempting to move from higher to lower versions
- *
  *         This class is the result of refactoring the recursive fixVersion routines from the dom node tree into one class
- *
  */
 public class FixVersionImpl extends PackageElementWalker
 {
@@ -178,7 +176,6 @@ public class FixVersionImpl extends PackageElementWalker
 
 	/**
 	 * @param _version
-	 *
 	 */
 	public FixVersionImpl(final EnumVersion _version)
 	{
@@ -241,7 +238,6 @@ public class FixVersionImpl extends PackageElementWalker
 	}
 
 	/**
-	 *
 	 * @param elementName
 	 * @param attributeName
 	 */
@@ -300,7 +296,7 @@ public class FixVersionImpl extends PackageElementWalker
 	 */
 	protected boolean lessThanVersion(final EnumVersion v)
 	{
-		return EnumUtil.aLessThanB(version, v);
+		return JavaEnumUtil.aLessThanB(version, v);
 	}
 
 	/**
@@ -319,12 +315,13 @@ public class FixVersionImpl extends PackageElementWalker
 	{
 		final WalkAnyElement constructWalker = (WalkAnyElement) super.constructWalker(name);
 		if (constructWalker != null)
+		{
 			constructWalker.setParent(this);
+		}
 		return constructWalker;
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public boolean isXJDF()
@@ -354,8 +351,8 @@ public class FixVersionImpl extends PackageElementWalker
 	@Override
 	public String toString()
 	{
-		return "FixVersion [bFixIDs=" + bFixIDs + ", bZappInvalid=" + bZappInvalid + ", bZappDeprecated=" + bZappDeprecated + ", bFixNewDuplicate=" + bFixNewDuplicate
-				+ ", firsthour=" + firsthour + ", lasthour=" + lasthour + ", " + (version != null ? "version=" + version + ", " : "") + "fixICSVersions=" + fixICSVersions
-				+ ", bLayoutPrepToStripping=" + bLayoutPrepToStripping + "]";
+		return "FixVersion [bFixIDs=" + bFixIDs + ", bZappInvalid=" + bZappInvalid + ", bZappDeprecated=" + bZappDeprecated + ", bFixNewDuplicate="
+				+ bFixNewDuplicate + ", firsthour=" + firsthour + ", lasthour=" + lasthour + ", " + (version != null ? "version=" + version + ", " : "")
+				+ "fixICSVersions=" + fixICSVersions + ", bLayoutPrepToStripping=" + bLayoutPrepToStripping + "]";
 	}
 }

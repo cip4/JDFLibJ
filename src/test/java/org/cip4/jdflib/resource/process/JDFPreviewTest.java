@@ -60,7 +60,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         19.11.2008
  */
 class JDFPreviewTest extends JDFTestCaseBase
@@ -135,7 +134,7 @@ class JDFPreviewTest extends JDFTestCaseBase
 		final JDFPreview pv = n.appendPreview();
 		pv.setPreviewUsage(EnumPreviewUsage.Separation);
 		final String s = n.getOwnerDocument_JDFElement().write2String(2);
-		Assertions.assertTrue(s.indexOf(EnumPreviewUsage.Separation.getName()) > 0);
+		Assertions.assertTrue(s.indexOf(EnumPreviewUsage.Separation.name()) > 0);
 	}
 
 	/**
@@ -144,7 +143,7 @@ class JDFPreviewTest extends JDFTestCaseBase
 	@Test
 	void testURLInput()
 	{
-		JDFPreview fs = (JDFPreview) JDFElement.createRoot(ElementName.PREVIEW);
+		final JDFPreview fs = (JDFPreview) JDFElement.createRoot(ElementName.PREVIEW);
 		assertNull(fs.getURLInputStream());
 	}
 

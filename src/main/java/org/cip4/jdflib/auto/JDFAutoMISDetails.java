@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -96,10 +91,12 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMPLEXITY, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.COSTTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumCostType.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.COSTTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumCostType.class, 0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVICEOPERATIONMODE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumDeviceOperationMode.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.WORKTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumWorkType.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumDeviceOperationMode.class, 0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.WORKTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumWorkType.class, 0), null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.WORKTYPEDETAILS, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
@@ -115,7 +112,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMISDetails(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoMISDetails(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -127,7 +124,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoMISDetails(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoMISDetails(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -140,251 +137,56 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoMISDetails(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoMISDetails(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for CostType
+	 * Enumeration strings for numCostType
 	 */
 
-	public enum ECostType
+	public enum EnumCostType
 	{
 		Chargeable, NonChargeable;
 
-		public static ECostType getEnum(String val)
+		public static EnumCostType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ECostType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumCostType.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for CostType
+	 * Enumeration strings for numDeviceOperationMode
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumCostType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumCostType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumCostType getEnum(String enumName)
-		{
-			return (EnumCostType) getEnum(EnumCostType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumCostType getEnum(int enumValue)
-		{
-			return (EnumCostType) getEnum(EnumCostType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumCostType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumCostType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumCostType.class);
-		}
-
-		/**  */
-		public static final EnumCostType Chargeable = new EnumCostType("Chargeable");
-		/**  */
-		public static final EnumCostType NonChargeable = new EnumCostType("NonChargeable");
-	}
-
-	/**
-	 * Enumeration strings for DeviceOperationMode
-	 */
-
-	public enum EDeviceOperationMode
+	public enum EnumDeviceOperationMode
 	{
 		Productive, NonProductive, Maintenance;
 
-		public static EDeviceOperationMode getEnum(String val)
+		public static EnumDeviceOperationMode getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EDeviceOperationMode.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumDeviceOperationMode.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for DeviceOperationMode
+	 * Enumeration strings for numWorkType
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumDeviceOperationMode extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumDeviceOperationMode(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumDeviceOperationMode getEnum(String enumName)
-		{
-			return (EnumDeviceOperationMode) getEnum(EnumDeviceOperationMode.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDeviceOperationMode getEnum(int enumValue)
-		{
-			return (EnumDeviceOperationMode) getEnum(EnumDeviceOperationMode.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDeviceOperationMode.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDeviceOperationMode.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDeviceOperationMode.class);
-		}
-
-		/**  */
-		public static final EnumDeviceOperationMode Productive = new EnumDeviceOperationMode("Productive");
-		/**  */
-		public static final EnumDeviceOperationMode NonProductive = new EnumDeviceOperationMode("NonProductive");
-		/**  */
-		public static final EnumDeviceOperationMode Maintenance = new EnumDeviceOperationMode("Maintenance");
-	}
-
-	/**
-	 * Enumeration strings for WorkType
-	 */
-
-	public enum EWorkType
+	public enum EnumWorkType
 	{
 		Original, Alteration, Rework;
 
-		public static EWorkType getEnum(String val)
+		public static EnumWorkType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EWorkType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumWorkType.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for WorkType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumWorkType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumWorkType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumWorkType getEnum(String enumName)
-		{
-			return (EnumWorkType) getEnum(EnumWorkType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumWorkType getEnum(int enumValue)
-		{
-			return (EnumWorkType) getEnum(EnumWorkType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumWorkType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumWorkType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumWorkType.class);
-		}
-
-		/**  */
-		public static final EnumWorkType Original = new EnumWorkType("Original");
-		/**  */
-		public static final EnumWorkType Alteration = new EnumWorkType("Alteration");
-		/**  */
-		public static final EnumWorkType Rework = new EnumWorkType("Rework");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -396,7 +198,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setComplexity(double value)
+	public void setComplexity(final double value)
 	{
 		setAttribute(AttributeName.COMPLEXITY, value, null);
 	}
@@ -421,9 +223,9 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setCostType(ECostType enumVar)
+	public void setCostType(final EnumCostType enumVar)
 	{
-		setAttribute(AttributeName.COSTTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.COSTTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -431,35 +233,6 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ECostType getECostType()
-	{
-		return ECostType.getEnum(getAttribute(AttributeName.COSTTYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute CostType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute CostType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetCostType(ECostType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setCostType(EnumCostType enumVar)
-	{
-		setAttribute(AttributeName.COSTTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute CostType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ECostType GetECostType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumCostType getCostType()
 	{
 		return EnumCostType.getEnum(getAttribute(AttributeName.COSTTYPE, null, null));
@@ -475,9 +248,9 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDeviceOperationMode(EDeviceOperationMode enumVar)
+	public void setDeviceOperationMode(final EnumDeviceOperationMode enumVar)
 	{
-		setAttribute(AttributeName.DEVICEOPERATIONMODE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DEVICEOPERATIONMODE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -485,35 +258,6 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EDeviceOperationMode getEDeviceOperationMode()
-	{
-		return EDeviceOperationMode.getEnum(getAttribute(AttributeName.DEVICEOPERATIONMODE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute DeviceOperationMode
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute DeviceOperationMode
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDeviceOperationMode(EDeviceOperationMode) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDeviceOperationMode(EnumDeviceOperationMode enumVar)
-	{
-		setAttribute(AttributeName.DEVICEOPERATIONMODE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute DeviceOperationMode
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EDeviceOperationMode GetEDeviceOperationMode() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumDeviceOperationMode getDeviceOperationMode()
 	{
 		return EnumDeviceOperationMode.getEnum(getAttribute(AttributeName.DEVICEOPERATIONMODE, null, null));
@@ -529,9 +273,9 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setWorkType(EWorkType enumVar)
+	public void setWorkType(final EnumWorkType enumVar)
 	{
-		setAttribute(AttributeName.WORKTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.WORKTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -539,35 +283,6 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EWorkType getEWorkType()
-	{
-		return EWorkType.getEnum(getAttribute(AttributeName.WORKTYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute WorkType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute WorkType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetWorkType(EWorkType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setWorkType(EnumWorkType enumVar)
-	{
-		setAttribute(AttributeName.WORKTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute WorkType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EWorkType GetEWorkType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumWorkType getWorkType()
 	{
 		return EnumWorkType.getEnum(getAttribute(AttributeName.WORKTYPE, null, null));
@@ -583,7 +298,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWorkTypeDetails(String value)
+	public void setWorkTypeDetails(final String value)
 	{
 		setAttribute(AttributeName.WORKTYPEDETAILS, value, null);
 	}

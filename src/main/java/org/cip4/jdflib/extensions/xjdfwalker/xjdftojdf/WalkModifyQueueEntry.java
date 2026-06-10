@@ -87,7 +87,6 @@ public class WalkModifyQueueEntry extends WalkTypesafeMessage
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkTypesafeMessage#matches(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
@@ -97,7 +96,6 @@ public class WalkModifyQueueEntry extends WalkTypesafeMessage
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkTypesafeMessage#getMessageType(org.cip4.jdflib.core.KElement, java.lang.String, java.lang.String)
 	 */
 	@Override
@@ -123,7 +121,7 @@ public class WalkModifyQueueEntry extends WalkTypesafeMessage
 			else if ("Move".equals(operation))
 			{
 				final String prio = e.getXPathAttribute("ModifyQueueEntryParams/@Priority", null);
-				operation = StringUtil.isEmpty(prio) ? EnumType.SetQueueEntryPosition.getName() : EnumType.SetQueueEntryPriority.getName();
+				operation = StringUtil.isEmpty(prio) ? EnumType.SetQueueEntryPosition.name() : EnumType.SetQueueEntryPriority.name();
 			}
 			else
 			{

@@ -50,7 +50,7 @@ package org.cip4.jdflib.datatypes;
 import java.util.ArrayList;
 import java.util.zip.DataFormatException;
 
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
@@ -98,12 +98,11 @@ public class JDFDurationRangeList extends JDFRangeList
 	 * constructs a JDFDurationRangeList from a given string
 	 *
 	 * @param s the given string
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFDurationRangeList(final String s) throws DataFormatException
 	{
-		if (s != null && !s.equals(JDFConstants.EMPTYSTRING))
+		if (s != null && !s.equals(JDFCoreConstants.EMPTYSTRING))
 		{
 			setString(s);
 		}
@@ -126,7 +125,6 @@ public class JDFDurationRangeList extends JDFRangeList
 	 * inRange - returns true if the given JDFDuration value is in one of the ranges of the range list
 	 *
 	 * @param x the given JDFDuration (duration) value to compare
-	 *
 	 * @return boolean - true if in range otherwise false
 	 */
 	public boolean inRange(final JDFDuration x)
@@ -148,13 +146,14 @@ public class JDFDurationRangeList extends JDFRangeList
 	 * setString - parse the given string and set the duration range list
 	 *
 	 * @param s the given string
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public void setString(final String s) throws DataFormatException
 	{
-		if (s.indexOf(JDFConstants.TILDE) == 0 || s.lastIndexOf(JDFConstants.TILDE) == (s.length() - 1))
+		if (s.indexOf(JDFCoreConstants.TILDE) == 0 || s.lastIndexOf(JDFCoreConstants.TILDE) == (s.length() - 1))
+		{
 			throw new DataFormatException("JDFDurationRangeList::SetString: Illegal string " + s);
+		}
 		final String zappedWS = StringUtil.zappTokenWS(s, "~");
 		final StringArray vs = StringArray.getVString(zappedWS, " \t");
 		rangeList.clear();
@@ -176,7 +175,6 @@ public class JDFDurationRangeList extends JDFRangeList
 	 * isValid - validate the given String
 	 *
 	 * @param s the given string
-	 *
 	 * @return boolean - false if the String has not a valid format
 	 */
 	public boolean isValid(final String s)
@@ -235,7 +233,9 @@ public class JDFDurationRangeList extends JDFRangeList
 
 		final int n = v == null ? 0 : v.size() - 1;
 		if (n == 0)
+		{
 			return true; // single value
+		}
 
 		final JDFDuration first = (v.get(0));
 		final JDFDuration last = (v.get(n));
@@ -245,9 +245,10 @@ public class JDFDurationRangeList extends JDFRangeList
 			final JDFDuration value = (v.get(j));
 			final JDFDuration nextvalue = (v.get(j + 1));
 
-			if (((first.equals(last) && value.equals(nextvalue)) || (first.isShorter(last) && (value.isShorter(nextvalue) || value.equals(nextvalue)))
-					|| (first.isLonger(last) && (value.isLonger(nextvalue) || value.equals(nextvalue)))) == false)
+			if (((!first.equals(last) || !value.equals(nextvalue)) && (!first.isShorter(last) || (!value.isShorter(nextvalue) && !value.equals(nextvalue))) && (!first.isLonger(last) || (!value.isLonger(nextvalue) && !value.equals(nextvalue)))))
+			{
 				return false;
+			}
 		}
 		return true;
 	}
@@ -256,7 +257,9 @@ public class JDFDurationRangeList extends JDFRangeList
 	{
 		final int siz = rangeList.size();
 		if (siz == 0)
+		{
 			return null; // attempt to operate on a null element
+		}
 
 		final ArrayList<JDFDuration> v = new ArrayList<>(); // vector of ranges
 		for (int i = 0; i < siz; i++)
@@ -299,8 +302,10 @@ public class JDFDurationRangeList extends JDFRangeList
 			final JDFDuration value = v.get(j);
 			final JDFDuration nextvalue = v.get(j + 1);
 
-			if (((first.isShorter(last) && value.isShorter(nextvalue)) || (first.isLonger(last) && value.isLonger(nextvalue))) == false)
+			if (((!first.isShorter(last) || !value.isShorter(nextvalue)) && (!first.isLonger(last) || !value.isLonger(nextvalue))))
+			{
 				return false;
+			}
 		}
 		return true;
 	}

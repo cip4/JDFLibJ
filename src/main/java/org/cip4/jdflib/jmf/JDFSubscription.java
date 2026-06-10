@@ -91,43 +91,43 @@ public class JDFSubscription extends JDFAutoSubscription
 
 	/**
 	 * JDFSubscription.java
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFSubscription(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFSubscription(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSubscription
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFSubscription(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFSubscription(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSubscription
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFSubscription(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFSubscription(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * toString()
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -138,10 +138,10 @@ public class JDFSubscription extends JDFAutoSubscription
 
 	/**
 	 * set url to the external form of a URL object
-	 * 
+	 *
 	 * @param url
 	 */
-	public void setURL(URL url)
+	public void setURL(final URL url)
 	{
 		super.setURL(url == null ? null : url.toExternalForm());
 	}

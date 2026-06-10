@@ -106,7 +106,7 @@ public abstract class JDFAutoModulePool extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoModulePool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoModulePool(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoModulePool extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoModulePool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoModulePool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoModulePool extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoModulePool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoModulePool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoModulePool extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFModuleCap the element
 	 */
-	public JDFModuleCap getCreateModuleCap(int iSkip)
+	public JDFModuleCap getCreateModuleCap(final int iSkip)
 	{
 		return (JDFModuleCap) getCreateElement_JDFElement(ElementName.MODULECAP, null, iSkip);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoModulePool extends JDFElement
 	 * @return JDFModuleCap the element
 	 *         default is getModuleCap(0)
 	 */
-	public JDFModuleCap getModuleCap(int iSkip)
+	public JDFModuleCap getModuleCap(final int iSkip)
 	{
 		return (JDFModuleCap) getElement(ElementName.MODULECAP, null, iSkip);
 	}

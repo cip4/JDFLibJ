@@ -69,12 +69,12 @@
 package org.cip4.jdflib.util;
 
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 
 /**
  * trivial typesafe pair class
  *
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         11.12.2008
  * @param <aData> datatype of a
  * @param <bData> datatype of b
@@ -107,7 +107,7 @@ public class MyPair<aData, bData>
 	@Override
 	public String toString()
 	{
-		return getClass().getSimpleName() + JDFConstants.SPACE + a + JDFConstants.COMMA + b;
+		return getClass().getSimpleName() + JDFConstants.SPACE + a + JDFCoreConstants.COMMA + b;
 	}
 
 	/**
@@ -125,7 +125,6 @@ public class MyPair<aData, bData>
 	}
 
 	/**
-	 *
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -138,7 +137,6 @@ public class MyPair<aData, bData>
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public aData getA()
@@ -147,7 +145,6 @@ public class MyPair<aData, bData>
 	}
 
 	/**
-	 *
 	 * @param a
 	 */
 	public void setA(final aData a)
@@ -156,7 +153,6 @@ public class MyPair<aData, bData>
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public bData getB()
@@ -165,7 +161,6 @@ public class MyPair<aData, bData>
 	}
 
 	/**
-	 *
 	 * @param b
 	 */
 	public void setB(final bData b)

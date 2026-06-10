@@ -99,15 +99,20 @@ public class WalkComment extends WalkJDFElement
 	@Override
 	public KElement walk(final KElement jdf, KElement xjdf)
 	{
-		final VString valid = new VString(new String[] { XJDFConstants.XJDF, XJDFConstants.ResourceSet, ElementName.RESOURCE, XJDFConstants.Product, ElementName.NOTIFICATION, ElementName.ACTIVITY });
+		final VString valid = new VString(new String[] { XJDFConstants.XJDF, XJDFConstants.ResourceSet, ElementName.RESOURCE, XJDFConstants.Product,
+				ElementName.NOTIFICATION, ElementName.ACTIVITY });
 		while (xjdf != null)
 		{
 			if (valid.contains(xjdf.getLocalName()))
+			{
 				break;
+			}
 			xjdf = xjdf.getParentNode_KElement();
 		}
 		if (xjdf == null)
+		{
 			return null;
+		}
 		return super.walk(jdf, xjdf);
 	}
 

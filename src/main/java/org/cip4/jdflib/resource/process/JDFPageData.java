@@ -90,8 +90,6 @@ import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
 /**
- * 
- * 
  * @author rainer prosi
  * @date before... Jan 9, 2012
  */
@@ -101,7 +99,7 @@ public class JDFPageData extends JDFAutoPageData
 
 	/**
 	 * Constructor for JDFPageData
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
@@ -113,7 +111,7 @@ public class JDFPageData extends JDFAutoPageData
 
 	/**
 	 * Constructor for JDFPageData
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -126,15 +124,15 @@ public class JDFPageData extends JDFAutoPageData
 
 	/**
 	 * Constructor for JDFPageData
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
-	 * 
 	 */
-	public JDFPageData(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFPageData(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -146,12 +144,14 @@ public class JDFPageData extends JDFAutoPageData
 	{
 		final JDFPageElement pe = appendPageElement();
 		if (letter != null)
+		{
 			pe.setContentListIndex(letter.getIndex());
+		}
 	}
 
 	/**
 	 * if not explicitly specified, assume that the PageData elements are all ordered
-	 * 
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoPageData#getPageIndex()
 	 */
 	@Override
@@ -159,7 +159,9 @@ public class JDFPageData extends JDFAutoPageData
 	{
 		final JDFIntegerRangeList pi = super.getPageIndex();
 		if (pi != null && pi.size() > 0)
+		{
 			return pi;
+		}
 		JDFPageData prev = (JDFPageData) getPreviousSiblingElement(ElementName.PAGEDATA, null);
 		int n = 0;
 		while (prev != null)
@@ -180,49 +182,59 @@ public class JDFPageData extends JDFAutoPageData
 
 	/**
 	 * gets the AssemblyID but alse inherits from the parent PageList
-	 * 
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoPageData#getAssemblyID()
 	 */
 	@Override
 	public VString getAssemblyIDs()
 	{
 		if (hasNonEmpty(AttributeName.ASSEMBLYIDS))
+		{
 			return super.getAssemblyIDs();
+		}
 		if (hasNonEmpty(AttributeName.ASSEMBLYID))
 		{
 			return new VString(super.getAssemblyID());
 		}
 		final JDFPageList parent = getPageList();
 		if (parent != null)
+		{
 			return parent.getAssemblyIDs();
+		}
 		return super.getAssemblyIDs();
 	}
 
 	/**
 	 * gets the AssemblyID but alse inherits from the parent PageList
-	 * 
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoPageData#getAssemblyID()
 	 */
 	@Override
 	public String getAssemblyID()
 	{
 		if (hasNonEmpty(AttributeName.ASSEMBLYID))
+		{
 			return super.getAssemblyID();
+		}
 		if (hasNonEmpty(AttributeName.ASSEMBLYIDS))
 		{
 			final VString ids = super.getAssemblyIDs();
 			if (!StringUtil.isEmpty(ids))
+			{
 				return ids.get(0);
+			}
 		}
 		final JDFPageList parent = getPageList();
 		if (parent != null)
+		{
 			return parent.getAssemblyID();
+		}
 		return super.getAssemblyID();
 	}
 
 	/**
 	 * returns the parent pageList if the parent is a pagelist
-	 * 
+	 *
 	 * @return
 	 */
 	public JDFPageList getPageList()
@@ -233,9 +245,8 @@ public class JDFPageData extends JDFAutoPageData
 
 	/**
 	 * convenience for a single integer index
-	 * 
+	 *
 	 * @param value the integer value
-	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoPageData#setPageIndex(org.cip4.jdflib.datatypes.JDFIntegerRangeList)
 	 */
 	public void setPageIndex(final int value)

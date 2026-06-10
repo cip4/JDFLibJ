@@ -46,9 +46,7 @@ import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFRunList;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkLayoutElement extends WalkResource
 {
@@ -79,11 +77,15 @@ public class WalkLayoutElement extends WalkResource
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		if (!jdfToXJDF.isMergeRunList())
+		{
 			return super.walk(jdf, xjdf);
+		}
 
 		KElement root = jdf.getDeepParentChild(ElementName.RESOURCEPOOL);
 		if (root == null)
+		{
 			root = JDFResource.getResourceRoot(jdf);
+		}
 		if (!(root instanceof JDFRunList) && !(root instanceof JDFLayoutElement))
 		{
 			return xjdf;

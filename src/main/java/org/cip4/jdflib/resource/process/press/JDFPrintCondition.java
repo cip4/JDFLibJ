@@ -69,13 +69,13 @@
  *
  */
 /**
- * ========================================================================== 
+ * ==========================================================================
  * class JDFPrintCondition extends JDFResource
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author: sabjon@topmail.de    using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * @Author: sabjon@topmail.de    using a code generator
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  */
 package org.cip4.jdflib.resource.process.press;
 
@@ -86,8 +86,6 @@ import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 /**
- * 
- * 
  * @author rainer prosi
  * @date Apr 30, 2014
  */
@@ -97,11 +95,10 @@ public class JDFPrintCondition extends JDFAutoPrintCondition
 
 	/**
 	 * Constructor for JDFPrintCondition
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
-	 * 
 	 */
 	public JDFPrintCondition(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
@@ -110,12 +107,11 @@ public class JDFPrintCondition extends JDFAutoPrintCondition
 
 	/**
 	 * Constructor for JDFPrintCondition
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
-	 * 
 	 */
 	public JDFPrintCondition(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
@@ -124,15 +120,15 @@ public class JDFPrintCondition extends JDFAutoPrintCondition
 
 	/**
 	 * Constructor for JDFPrintCondition
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
-	 * 
 	 */
-	public JDFPrintCondition(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFPrintCondition(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -159,7 +155,6 @@ public class JDFPrintCondition extends JDFAutoPrintCondition
 	}
 
 	/**
-	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoPrintCondition#toString()
 	 */
 	@Override

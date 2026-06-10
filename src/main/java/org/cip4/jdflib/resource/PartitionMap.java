@@ -50,7 +50,6 @@ import org.cip4.jdflib.util.ContainerUtil;
 class PartitionMap
 {
 	/**
-	 *
 	 * @param r
 	 */
 	PartitionMap(final JDFResource r)
@@ -90,7 +89,6 @@ class PartitionMap
 	}
 
 	/**
-	 *
 	 * @param arg0
 	 * @return
 	 */
@@ -100,7 +98,6 @@ class PartitionMap
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	Set<JDFAttributeMap> keySet()
@@ -109,7 +106,6 @@ class PartitionMap
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	List<String> getPartIDKeys()
@@ -118,7 +114,6 @@ class PartitionMap
 	}
 
 	/**
-	 *
 	 * @param m
 	 * @return true if at least one key in @PartIDKeys is missing and leaves a gap
 	 */
@@ -126,19 +121,24 @@ class PartitionMap
 	{
 		int s = m.size();
 		if (s == 0)
+		{
 			return false;
+		}
 		for (final String k : partIDKeys)
 		{
 			if (!m.containsKey(k))
+			{
 				return true;
+			}
 			if (--s == 0)
+			{
 				return false;
+			}
 		}
 		return false;
 	}
 
 	/**
-	 *
 	 * @param arg0
 	 * @param arg1
 	 * @return
@@ -149,7 +149,6 @@ class PartitionMap
 	}
 
 	/**
-	 *
 	 * @param vPartIDKeys
 	 */
 	void setPartIDKeys(final List<String> vPartIDKeys)
@@ -159,7 +158,6 @@ class PartitionMap
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	HashMap<JDFAttributeMap, JDFResource> getLeafMap()
@@ -174,7 +172,6 @@ class PartitionMap
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	int size()
@@ -183,7 +180,6 @@ class PartitionMap
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	int partSize()
@@ -202,7 +198,6 @@ class PartitionMap
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	List<JDFAttributeMap> keyVector()

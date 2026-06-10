@@ -74,13 +74,14 @@ public class IDFinder extends BaseElementWalker
 	 * ensure that we always have a SIGNATURENAME partition in case we have a SHEETNAME
 	 *
 	 * @param part the partmap
-	 *
 	 * @return
 	 */
 	public static JDFAttributeMap getPartMap(final JDFPart part)
 	{
 		if (part == null)
+		{
 			return new JDFAttributeMap();
+		}
 		final JDFAttributeMap p = part.getAttributeMap();
 		if (!p.isEmpty())
 		{
@@ -159,7 +160,6 @@ public class IDFinder extends BaseElementWalker
 	 * the link and ref walker
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkResource extends BaseWalker
 	{
@@ -232,7 +232,6 @@ public class IDFinder extends BaseElementWalker
 	 * the link and ref walker
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkSet extends BaseWalker
 	{

@@ -9,15 +9,11 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *defines the data type dependent parts of a ranged Span resource
+ * defines the data type dependent parts of a ranged Span resource
  */
 public class JDFSpanFluteDirection extends JDFEnumerationSpan
 {
@@ -25,36 +21,36 @@ public class JDFSpanFluteDirection extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanFluteDirection
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFSpanFluteDirection(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFSpanFluteDirection(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanFluteDirection
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFSpanFluteDirection(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFSpanFluteDirection(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanFluteDirection
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFSpanFluteDirection(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFSpanFluteDirection(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -63,62 +59,31 @@ public class JDFSpanFluteDirection extends JDFEnumerationSpan
 	 * Enumeration strings for EnumSpanFluteDirection
 	 */
 
-	public static class EnumSpanFluteDirection extends ValuedEnum
+	public enum EnumSpanFluteDirection
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		LongEdge, ShortEdge, XDirection, YDirection;
 
-		private EnumSpanFluteDirection(String name)
+		public static EnumSpanFluteDirection getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanFluteDirection.class, val, null);
 		}
-
-		public static EnumSpanFluteDirection getEnum(String enumName)
-		{
-			return (EnumSpanFluteDirection) getEnum(EnumSpanFluteDirection.class, enumName);
-		}
-
-		public static EnumSpanFluteDirection getEnum(int enumValue)
-		{
-			return (EnumSpanFluteDirection) getEnum(EnumSpanFluteDirection.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanFluteDirection.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanFluteDirection.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanFluteDirection.class);
-		}
-
-		public static final EnumSpanFluteDirection LongEdge = new EnumSpanFluteDirection("LongEdge");
-		public static final EnumSpanFluteDirection ShortEdge = new EnumSpanFluteDirection("ShortEdge");
-		public static final EnumSpanFluteDirection XDirection = new EnumSpanFluteDirection("XDirection");
-		public static final EnumSpanFluteDirection YDirection = new EnumSpanFluteDirection("YDirection");
 	}
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanFluteDirection.getEnum(0);
+		return EnumSpanFluteDirection.class;
 	}
 
 	// **************************************** Methods
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

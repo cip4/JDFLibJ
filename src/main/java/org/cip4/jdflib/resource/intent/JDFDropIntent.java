@@ -119,7 +119,7 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	 */
 	public JDFDeliveryIntent getParentDeliveryIntent()
 	{
-		Node parentNode = getParentNode();
+		final Node parentNode = getParentNode();
 		return (parentNode instanceof JDFDeliveryIntent) ? (JDFDeliveryIntent) parentNode : null;
 	}
 
@@ -283,7 +283,9 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	public JDFDropItemIntent getCreateDropItemWithComponent(final JDFComponent c)
 	{
 		if (c == null)
+		{
 			return null;
+		}
 		JDFDropItemIntent di = getDropItemWithComponent(c);
 		if (di == null)
 		{
@@ -294,7 +296,6 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	}
 
 	/**
-	 *
 	 * @param dropIntent
 	 */
 	public void setFromDrop(final JDFDrop drop)

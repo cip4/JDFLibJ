@@ -119,7 +119,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws IOException
 	 * @throws MessagingException
 	 */
-	synchronized void testBuildMimePackageDocJMF(int pos) throws MessagingException, IOException
+	synchronized void testBuildMimePackageDocJMF(final int pos) throws MessagingException, IOException
 	{
 		final Path tempPath = new File(sm_dirTestDataTemp + "/" + pos).toPath();
 		testBuildMimePackageDocJMF(tempPath);
@@ -311,7 +311,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	@Test
 	void testIsPPF() throws Exception
 	{
-		assertTrue(MimeUtil.isPPFMimeType(MimeUtil.VND_PPF));
+		assertTrue(MimeUtil.isPPFMimeType(UrlUtil.VND_PPF));
 		assertFalse(MimeUtil.isPPFMimeType(MimeUtil.MULTIPART_RELATED + "; foo"));
 	}
 

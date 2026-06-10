@@ -79,9 +79,9 @@ import org.junit.jupiter.api.Test;
 
 /**
  * tests the JDFEmployee class
- * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- * before June 4, 2009
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ *         before June 4, 2009
  */
 class JDFEmployeeTest extends JDFTestCaseBase
 {
@@ -118,7 +118,6 @@ class JDFEmployeeTest extends JDFTestCaseBase
 
 	/**
 	 * tests the matches case
-	 *
 	 */
 	@Test
 	public final void testMatchesEmployeeDef()
@@ -140,7 +139,7 @@ class JDFEmployeeTest extends JDFTestCaseBase
 	void testGetDescriptiveName()
 	{
 		final JDFEmployee emp = (JDFEmployee) new JDFDoc(ElementName.EMPLOYEE).getRoot();
-		JDFPerson p = emp.appendPerson();
+		final JDFPerson p = emp.appendPerson();
 		p.setFirstName("a");
 		p.setFamilyName("b");
 		Assertions.assertEquals(emp.getDescriptiveName(), "a b");

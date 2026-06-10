@@ -76,7 +76,6 @@ public class WalkSet extends WalkXElement
 	/**
 	 * @param xjdf
 	 * @param jdf
-	 *
 	 * @return the current parent node
 	 */
 	@Override
@@ -140,12 +139,14 @@ public class WalkSet extends WalkXElement
 		final StringArray sss = new StringArray(JDFPart.getPartsequence());
 		// final StringArray sss = new StringArray("SignatureName SheetName Side Separation Run");
 		JDFAttributeMap map = new JDFAttributeMap();
-		final Set<String> keyset = new HashSet<String>();
+		final Set<String> keyset = new HashSet<>();
 		for (final ResourceHelper p : vp)
 		{
 			final JDFAttributeMap pMap = p.getPartMap();
 			if (ContainerUtil.containsAny(pMap.keySet(), sss))
+			{
 				return new JDFAttributeMapArray();
+			}
 			final JDFAttributeMap map2 = map.getCommonMap(pMap);
 			if (!JDFAttributeMap.isEmpty(map2))
 			{
@@ -225,7 +226,6 @@ public class WalkSet extends WalkXElement
 	}
 
 	/**
-	 *
 	 * @param e
 	 * @return
 	 */

@@ -38,12 +38,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanCutType extends JDFEnumerationSpan
@@ -84,7 +80,8 @@ public class JDFSpanCutType extends JDFEnumerationSpan
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanCutType(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFSpanCutType(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -92,43 +89,14 @@ public class JDFSpanCutType extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanCutType
 	 */
-	public static class EnumSpanCutType extends ValuedEnum
+	public enum EnumSpanCutType
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Cut, Perforate;
 
-		private EnumSpanCutType(final String name)
+		public static EnumSpanCutType getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanCutType.class, val, null);
 		}
-
-		public static EnumSpanCutType getEnum(final String enumName)
-		{
-			return (EnumSpanCutType) getEnum(EnumSpanCutType.class, enumName);
-		}
-
-		public static EnumSpanCutType getEnum(final int enumValue)
-		{
-			return (EnumSpanCutType) getEnum(EnumSpanCutType.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanCutType.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanCutType.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanCutType.class);
-		}
-
-		public static final EnumSpanCutType Cut = new EnumSpanCutType("Cut");
-		public static final EnumSpanCutType Perforate = new EnumSpanCutType("Perforate");
 
 	}
 
@@ -141,9 +109,9 @@ public class JDFSpanCutType extends JDFEnumerationSpan
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanCutType.getEnum(0);
+		return EnumSpanCutType.class;
 	}
 
 	/**

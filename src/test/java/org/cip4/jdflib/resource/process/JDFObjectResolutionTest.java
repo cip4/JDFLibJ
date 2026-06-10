@@ -78,9 +78,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class JDFObjectResolutionTest extends JDFTestCaseBase
 {
@@ -90,7 +88,7 @@ class JDFObjectResolutionTest extends JDFTestCaseBase
 	@Test
 	void testMatches()
 	{
-		JDFObjectResolution or = (JDFObjectResolution) new JDFDoc(ElementName.OBJECTRESOLUTION).getRoot();
+		final JDFObjectResolution or = (JDFObjectResolution) new JDFDoc(ElementName.OBJECTRESOLUTION).getRoot();
 		or.addSourceObject(EnumSourceObjects.ImagePhotographic);
 		Assertions.assertTrue(or.matches(EnumSourceObjects.ImagePhotographic));
 		Assertions.assertTrue(or.matches(null));
@@ -102,7 +100,7 @@ class JDFObjectResolutionTest extends JDFTestCaseBase
 	@Test
 	void testAddSourceObject()
 	{
-		JDFObjectResolution or = (JDFObjectResolution) new JDFDoc(ElementName.OBJECTRESOLUTION).getRoot();
+		final JDFObjectResolution or = (JDFObjectResolution) new JDFDoc(ElementName.OBJECTRESOLUTION).getRoot();
 		or.addSourceObject(EnumSourceObjects.All);
 		Assertions.assertEquals(or.getSourceObjects().get(0), EnumSourceObjects.All);
 		Assertions.assertEquals(or.getSourceObjects().size(), 1);
@@ -121,7 +119,7 @@ class JDFObjectResolutionTest extends JDFTestCaseBase
 	@Test
 	void testAddObjectTag()
 	{
-		JDFObjectResolution or = (JDFObjectResolution) new JDFDoc(ElementName.OBJECTRESOLUTION).getRoot();
+		final JDFObjectResolution or = (JDFObjectResolution) new JDFDoc(ElementName.OBJECTRESOLUTION).getRoot();
 		or.addObjectTag("foo");
 		Assertions.assertEquals(or.getObjectTags().get(0), "foo");
 		Assertions.assertEquals(or.getObjectTags().size(), 1);

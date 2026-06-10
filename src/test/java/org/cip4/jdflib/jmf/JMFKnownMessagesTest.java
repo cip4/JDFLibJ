@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.jmf;
 
@@ -91,23 +91,23 @@ import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.resource.devicecapability.JDFTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 /**
  * @author Rainer Prosi
- * 
  *         Test of the Resource JMF
  */
 class JMFKnownMessagesTest extends JDFTestCaseBase
 {
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testJMFDevCaps()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.JMF);
-		JDFJMF jmfDC = doc.getJMFRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmfDC = doc.getJMFRoot();
 
-		JDFResponse r = jmfDC.appendResponse(EnumType.KnownMessages);
+		final JDFResponse r = jmfDC.appendResponse(EnumType.KnownMessages);
 		jmfDC.setSenderID("DeviceSenderID");
 
 		JDFMessageService ms = r.appendMessageService();
@@ -117,7 +117,7 @@ class JMFKnownMessagesTest extends JDFTestCaseBase
 		JDFDevCaps dcs = ms.appendDevCaps();
 		dcs.setName("DeviceList");
 		JDFDevCap dc = dcs.appendDevCapInPool();
-		JDFDevCap dcDI = dc.appendDevCap();
+		final JDFDevCap dcDI = dc.appendDevCap();
 		dcDI.setName(ElementName.DEVICEINFO);
 		dcDI.setMinOccurs(1);
 		dcDI.setMaxOccurs(1);
@@ -140,27 +140,27 @@ class JMFKnownMessagesTest extends JDFTestCaseBase
 		state = dc.appendStringState("Foo");
 		state.setRequired(false);
 
-		JDFActionPool ap = ms.appendActionPool();
-		JDFAction a = ap.appendActionTest(EnumTerm.IsPresentEvaluation, true);
-		JDFTest t = a.getTest();
+		final JDFActionPool ap = ms.appendActionPool();
+		final JDFAction a = ap.appendActionTest(EnumTerm.IsPresentEvaluation, true);
+		final JDFTest t = a.getTest();
 		// JDFTerm term=
 		t.getTerm();
 		// TODO
-		JDFDoc docJMF = new JDFDoc("JMF");
-		JDFJMF jmf = docJMF.getJMFRoot();
+		final JDFDoc docJMF = new JDFDoc("JMF");
+		final JDFJMF jmf = docJMF.getJMFRoot();
 		for (int i = 0; i < 3; i++)
 		{
-			JDFResponse resp = jmf.appendResponse(EnumType.KnownDevices);
-			JDFDeviceList dl = resp.appendDeviceList();
-			JDFDeviceInfo di = dl.appendDeviceInfo();
+			final JDFResponse resp = jmf.appendResponse(EnumType.KnownDevices);
+			final JDFDeviceList dl = resp.appendDeviceList();
+			final JDFDeviceInfo di = dl.appendDeviceInfo();
 			di.setDeviceID("d123");
 			di.setDeviceStatus(EnumDeviceStatus.Running);
-			XMLDoc report = JDFDeviceCap.getJMFInfo(jmf, r, EnumFitsValue.Allowed, EnumValidationLevel.Complete, true);
+			final XMLDoc report = JDFDeviceCap.getJMFInfo(jmf, r, EnumFitsValue.Allowed, EnumValidationLevel.Complete, true);
 			Assertions.assertEquals(report.getRoot().getAttribute("IsValid"), "true");
 		}
 		{
-			JDFResponse resp = jmf.appendResponse(EnumType.KnownMessages);
-			JDFMessageService mi = resp.appendMessageService();
+			final JDFResponse resp = jmf.appendResponse(EnumType.KnownMessages);
+			final JDFMessageService mi = resp.appendMessageService();
 			mi.setType("FooBar");
 			doc.write2File(sm_dirTestDataTemp + "JMFDevCap.xml", 2, false);
 			docJMF.write2File(sm_dirTestDataTemp + "JMFDevCapTest.jmf", 2, false);

@@ -75,16 +75,15 @@ package org.cip4.jdflib.core;
 /**
  * @author MatternK
  * @See EnumElementValidity below for current list of validity value
- * 
- * 0 Unknown UNKNOWN); 
- * 1 None NONE); 
- * 2 Required REQUIRED);
- * 3 Optional OPTIONAL); 
- * 4 Deprecated DEPRECATED); 
- * 5 SingleRequired SINGLEREQUIRED); 
- * 6 SingleOptional SINGLEOPTIONAL); 
- * 7 SingleDeprecated SINGLEDEPRECATED); 
- * 8 Dummy DUMMY);
+ *      0 Unknown UNKNOWN);
+ *      1 None NONE);
+ *      2 Required REQUIRED);
+ *      3 Optional OPTIONAL);
+ *      4 Deprecated DEPRECATED);
+ *      5 SingleRequired SINGLEREQUIRED);
+ *      6 SingleOptional SINGLEOPTIONAL);
+ *      7 SingleDeprecated SINGLEDEPRECATED);
+ *      8 Dummy DUMMY);
  */
 public class ElemInfoTable
 {
@@ -93,7 +92,7 @@ public class ElemInfoTable
 	private long validityStatus = 0;
 
 	/**
-	 * @param name the element name
+	 * @param name   the element name
 	 * @param status the element status
 	 */
 	public ElemInfoTable(final String name, final long status)

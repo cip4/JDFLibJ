@@ -92,14 +92,14 @@ class AuditMover
 	}
 
 	/**
-	 *
 	 * @param ah
 	 * @param partAmount
 	 * @param auditSets
 	 */
 	void moveActualToAudit(final ResourceHelper ph, final AuditPoolHelper ah)
 	{
-		if (AmountPoolHelper.getAmountPoolSumDouble(ph, "AcualWaste", null) > 0 || AmountPoolHelper.getAmountPoolSumDouble(ph, AttributeName.ACTUALAMOUNT, null) > 0)
+		if (AmountPoolHelper.getAmountPoolSumDouble(ph, "AcualWaste", null) > 0
+				|| AmountPoolHelper.getAmountPoolSumDouble(ph, AttributeName.ACTUALAMOUNT, null) > 0)
 		{
 			final SetHelper sh = ph.getSet();
 			if (ah != null)
@@ -125,7 +125,7 @@ class AuditMover
 				}
 			}
 			final JDFAmountPool amountPool = ph.getAmountPool();
-			//fix locals
+			// fix locals
 			for (final JDFPartAmount pa : amountPool.getAllPartAmount())
 			{
 				pa.removeAttribute(AttributeName.ACTUALAMOUNT);

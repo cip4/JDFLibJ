@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -108,7 +104,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNodeInfo(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoNodeInfo(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -120,7 +116,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNodeInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoNodeInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,7 +129,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoNodeInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoNodeInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -144,7 +140,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -159,91 +155,22 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for DueLevel
+	 * Enumeration strings for numDueLevel
 	 */
 
-	public enum EDueLevel
+	public enum EnumDueLevel
 	{
 		Unknown, Trivial, Penalty, JobCancelled;
 
-		public static EDueLevel getEnum(String val)
+		public static EnumDueLevel getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EDueLevel.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumDueLevel.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for DueLevel
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumDueLevel extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumDueLevel(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumDueLevel getEnum(String enumName)
-		{
-			return (EnumDueLevel) getEnum(EnumDueLevel.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDueLevel getEnum(int enumValue)
-		{
-			return (EnumDueLevel) getEnum(EnumDueLevel.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDueLevel.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDueLevel.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDueLevel.class);
-		}
-
-		/**  */
-		public static final EnumDueLevel Unknown = new EnumDueLevel("Unknown");
-		/**  */
-		public static final EnumDueLevel Trivial = new EnumDueLevel("Trivial");
-		/**  */
-		public static final EnumDueLevel Penalty = new EnumDueLevel("Penalty");
-		/**  */
-		public static final EnumDueLevel JobCancelled = new EnumDueLevel("JobCancelled");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -255,7 +182,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobPriority(int value)
+	public void setJobPriority(final int value)
 	{
 		setAttribute(AttributeName.JOBPRIORITY, value, null);
 	}
@@ -280,7 +207,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCleanupDuration(JDFDuration value)
+	public void setCleanupDuration(final JDFDuration value)
 	{
 		setAttribute(AttributeName.CLEANUPDURATION, value, null);
 	}
@@ -293,8 +220,8 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 */
 	public JDFDuration getCleanupDuration()
 	{
-		String strAttrName = getAttribute(AttributeName.CLEANUPDURATION, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CLEANUPDURATION, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -308,9 +235,9 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDueLevel(EDueLevel enumVar)
+	public void setDueLevel(final EnumDueLevel enumVar)
 	{
-		setAttribute(AttributeName.DUELEVEL, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DUELEVEL, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -318,35 +245,6 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EDueLevel getEDueLevel()
-	{
-		return EDueLevel.getEnum(getAttribute(AttributeName.DUELEVEL, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute DueLevel
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute DueLevel
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDueLevel(EDueLevel) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDueLevel(EnumDueLevel enumVar)
-	{
-		setAttribute(AttributeName.DUELEVEL, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute DueLevel
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EDueLevel GetEDueLevel() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumDueLevel getDueLevel()
 	{
 		return EnumDueLevel.getEnum(getAttribute(AttributeName.DUELEVEL, null, null));
@@ -362,7 +260,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setEnd(JDFDate value)
+	public void setEnd(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -379,8 +277,8 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 */
 	public JDFDate getEnd()
 	{
-		String str = getAttribute(AttributeName.END, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.END, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -394,7 +292,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setFirstEnd(JDFDate value)
+	public void setFirstEnd(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -411,8 +309,8 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 */
 	public JDFDate getFirstEnd()
 	{
-		String str = getAttribute(AttributeName.FIRSTEND, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.FIRSTEND, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -426,7 +324,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setFirstStart(JDFDate value)
+	public void setFirstStart(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -443,8 +341,8 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 */
 	public JDFDate getFirstStart()
 	{
-		String str = getAttribute(AttributeName.FIRSTSTART, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.FIRSTSTART, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -458,7 +356,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIPPVersion(JDFXYPair value)
+	public void setIPPVersion(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.IPPVERSION, value, null);
 	}
@@ -471,8 +369,8 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 */
 	public JDFXYPair getIPPVersion()
 	{
-		String strAttrName = getAttribute(AttributeName.IPPVERSION, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.IPPVERSION, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -486,7 +384,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setLastEnd(JDFDate value)
+	public void setLastEnd(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -503,8 +401,8 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 */
 	public JDFDate getLastEnd()
 	{
-		String str = getAttribute(AttributeName.LASTEND, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.LASTEND, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -518,7 +416,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setLastStart(JDFDate value)
+	public void setLastStart(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -535,8 +433,8 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 */
 	public JDFDate getLastStart()
 	{
-		String str = getAttribute(AttributeName.LASTSTART, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.LASTSTART, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -550,7 +448,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNaturalLang(String value)
+	public void setNaturalLang(final String value)
 	{
 		setAttribute(AttributeName.NATURALLANG, value, null);
 	}
@@ -575,9 +473,9 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setNodeStatus(ENodeStatus enumVar)
+	public void setNodeStatus(final EnumNodeStatus enumVar)
 	{
-		setAttribute(AttributeName.NODESTATUS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.NODESTATUS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -585,35 +483,6 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ENodeStatus getENodeStatus()
-	{
-		return ENodeStatus.getEnum(getAttribute(AttributeName.NODESTATUS, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute NodeStatus
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute NodeStatus
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetNodeStatus(ENodeStatus) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setNodeStatus(EnumNodeStatus enumVar)
-	{
-		setAttribute(AttributeName.NODESTATUS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute NodeStatus
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ENodeStatus GetENodeStatus() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumNodeStatus getNodeStatus()
 	{
 		return EnumNodeStatus.getEnum(getAttribute(AttributeName.NODESTATUS, null, null));
@@ -629,7 +498,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNodeStatusDetails(String value)
+	public void setNodeStatusDetails(final String value)
 	{
 		setAttribute(AttributeName.NODESTATUSDETAILS, value, null);
 	}
@@ -654,7 +523,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMergeTarget(boolean value)
+	public void setMergeTarget(final boolean value)
 	{
 		setAttribute(AttributeName.MERGETARGET, value, null);
 	}
@@ -679,7 +548,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRoute(String value)
+	public void setRoute(final String value)
 	{
 		setAttribute(AttributeName.ROUTE, value, null);
 	}
@@ -704,7 +573,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSetupDuration(JDFDuration value)
+	public void setSetupDuration(final JDFDuration value)
 	{
 		setAttribute(AttributeName.SETUPDURATION, value, null);
 	}
@@ -717,8 +586,8 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 */
 	public JDFDuration getSetupDuration()
 	{
-		String strAttrName = getAttribute(AttributeName.SETUPDURATION, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SETUPDURATION, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -732,7 +601,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setStart(JDFDate value)
+	public void setStart(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -749,8 +618,8 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 */
 	public JDFDate getStart()
 	{
-		String str = getAttribute(AttributeName.START, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.START, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -764,7 +633,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTargetRoute(String value)
+	public void setTargetRoute(final String value)
 	{
 		setAttribute(AttributeName.TARGETROUTE, value, null);
 	}
@@ -789,7 +658,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTotalDuration(JDFDuration value)
+	public void setTotalDuration(final JDFDuration value)
 	{
 		setAttribute(AttributeName.TOTALDURATION, value, null);
 	}
@@ -802,8 +671,8 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 */
 	public JDFDuration getTotalDuration()
 	{
-		String strAttrName = getAttribute(AttributeName.TOTALDURATION, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TOTALDURATION, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -817,7 +686,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWorkStepID(String value)
+	public void setWorkStepID(final String value)
 	{
 		setAttribute(AttributeName.WORKSTEPID, value, null);
 	}
@@ -842,7 +711,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setrRefs(VString value)
+	public void setrRefs(final VString value)
 	{
 		setAttribute(AttributeName.RREFS, value, null);
 	}
@@ -920,7 +789,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refEmployee(JDFEmployee refTarget)
+	public void refEmployee(final JDFEmployee refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -951,7 +820,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFGangSource the element
 	 */
-	public JDFGangSource getCreateGangSource(int iSkip)
+	public JDFGangSource getCreateGangSource(final int iSkip)
 	{
 		return (JDFGangSource) getCreateElement_JDFElement(ElementName.GANGSOURCE, null, iSkip);
 	}
@@ -963,7 +832,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 * @return JDFGangSource the element
 	 *         default is getGangSource(0)
 	 */
-	public JDFGangSource getGangSource(int iSkip)
+	public JDFGangSource getGangSource(final int iSkip)
 	{
 		return (JDFGangSource) getElement(ElementName.GANGSOURCE, null, iSkip);
 	}
@@ -1014,7 +883,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFJMF the element
 	 */
-	public JDFJMF getCreateJMF(int iSkip)
+	public JDFJMF getCreateJMF(final int iSkip)
 	{
 		return (JDFJMF) getCreateElement_JDFElement(ElementName.JMF, null, iSkip);
 	}
@@ -1026,7 +895,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 * @return JDFJMF the element
 	 *         default is getJMF(0)
 	 */
-	public JDFJMF getJMF(int iSkip)
+	public JDFJMF getJMF(final int iSkip)
 	{
 		return (JDFJMF) getElement(ElementName.JMF, null, iSkip);
 	}
@@ -1108,7 +977,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFNotificationFilter the element
 	 */
-	public JDFNotificationFilter getCreateNotificationFilter(int iSkip)
+	public JDFNotificationFilter getCreateNotificationFilter(final int iSkip)
 	{
 		return (JDFNotificationFilter) getCreateElement_JDFElement(ElementName.NOTIFICATIONFILTER, null, iSkip);
 	}
@@ -1120,7 +989,7 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 * @return JDFNotificationFilter the element
 	 *         default is getNotificationFilter(0)
 	 */
-	public JDFNotificationFilter getNotificationFilter(int iSkip)
+	public JDFNotificationFilter getNotificationFilter(final int iSkip)
 	{
 		return (JDFNotificationFilter) getElement(ElementName.NOTIFICATIONFILTER, null, iSkip);
 	}

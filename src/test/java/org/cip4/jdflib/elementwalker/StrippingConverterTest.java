@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBindingEdge;
+import org.cip4.jdflib.auto.JDFAutoAssembly.EnumBindingSide;
 
 /**
  * The CIP4 Software License, Version 1.0
@@ -83,9 +83,9 @@ import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBindingEdge;
  */
 
 import org.cip4.jdflib.auto.JDFAutoFitPolicy.EnumSizePolicy;
+import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumBindingEdge;
+import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumSides;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFElement.ESides;
-import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -109,15 +109,15 @@ class StrippingConverterTest extends JDFTestCaseBase
 		final StrippingConverter strippingConverter = new StrippingConverter(lpp, parentJDF);
 		strippingConverter.convert();
 		final JDFBinderySignature bs = strippingConverter.getBinderySignature();
-		assertEquals(EnumBindingEdge.Bottom.getName(), bs.getBindingEdge().getName());
+		assertEquals(EnumBindingEdge.Bottom.name(), bs.getBindingEdge().name());
 		final JDFAssembly ass = strippingConverter.getAssembly();
-		assertEquals(EnumBindingEdge.Bottom.getName(), ass.getBindingSide().getName());
+		assertEquals(EnumBindingSide.Bottom.name(), ass.getBindingSide().name());
 	}
 
 	@Test
 	void testSidesBack()
 	{
-		for (ESides s : new ESides[] { ESides.OneSidedBackFlipX, ESides.OneSidedBackFlipY })
+		for (final EnumSides s : new EnumSides[] { EnumSides.OneSidedBackFlipX, EnumSides.OneSidedBackFlipY })
 		{
 			final JDFLayoutPreparationParams lpp = createlpp();
 			lpp.setSides(s);
@@ -125,8 +125,8 @@ class StrippingConverterTest extends JDFTestCaseBase
 			final StrippingConverter strippingConverter = new StrippingConverter(lpp, parentJDF);
 			strippingConverter.convert();
 			final JDFStrippingParams sp = strippingConverter.getStrippingParams();
-			JDFStripCellParams scp = sp.getStripCellParams();
-			assertEquals(ESides.OneSidedBack, scp.getESides());
+			final JDFStripCellParams scp = sp.getStripCellParams();
+			assertEquals(org.cip4.jdflib.auto.JDFAutoStripCellParams.EnumSides.OneSidedBack, scp.getSides());
 		}
 	}
 
@@ -172,19 +172,19 @@ class StrippingConverterTest extends JDFTestCaseBase
 	void testLayoutPrepMultiBS2()
 	{
 		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "xjdf/DigitalPrintingMultiPDF_IDP-ICS-1.5.jdf");
-		JDFLayoutPreparationParams lpp = (JDFLayoutPreparationParams) n.getResource(ElementName.LAYOUTPREPARATIONPARAMS, EnumUsage.Input, 0);
+		final JDFLayoutPreparationParams lpp = (JDFLayoutPreparationParams) n.getResource(ElementName.LAYOUTPREPARATIONPARAMS, EnumUsage.Input, 0);
 		final StrippingConverter strippingConverter = new StrippingConverter(lpp, n);
 		strippingConverter.convert();
 
 		n.write2File(sm_dirTestDataTemp + "lpp2.jdf");
 		final JDFStrippingParams spp = (JDFStrippingParams) n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
 
-		List<JDFPosition> pos0 = spp.getChildArrayByClass_KElement(JDFPosition.class, false, 0);
-		List<JDFPosition> poss = spp.getChildArrayByClass_KElement(JDFPosition.class, true, 0);
+		final List<JDFPosition> pos0 = spp.getChildArrayByClass_KElement(JDFPosition.class, false, 0);
+		final List<JDFPosition> poss = spp.getChildArrayByClass_KElement(JDFPosition.class, true, 0);
 		poss.removeAll(pos0);
 		assertEquals(3, poss.size());
-		assertEquals(EnumOrientation.Rotate0, poss.get(0).getOrientation());
-		assertEquals(EnumOrientation.Flip180, poss.get(2).getOrientation());
+		assertEquals("Rotate0", poss.get(0).getOrientation().name());
+		assertEquals("Flip180", poss.get(2).getOrientation().name());
 
 	}
 

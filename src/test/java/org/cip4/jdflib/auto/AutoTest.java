@@ -99,8 +99,8 @@ class AutoTest
 		// check AdhesiveBindingParams/GlueApplication
 		//
 		root.setVersion(JDFElement.EnumVersion.Version_1_3);
-		final JDFAdhesiveBindingParams adhesiveBindingParam = (JDFAdhesiveBindingParams) root.addResource(ElementName.ADHESIVEBINDINGPARAMS, null, EnumUsage.Input, null, null,
-				null, null);
+		final JDFAdhesiveBindingParams adhesiveBindingParam = (JDFAdhesiveBindingParams) root.addResource(ElementName.ADHESIVEBINDINGPARAMS, null,
+				EnumUsage.Input, null, null, null, null);
 		vDeprecated = adhesiveBindingParam.getTheElementInfo().deprecatedElements();
 		adhesiveBindingParam.appendGlueApplication();
 		vDeprecated = adhesiveBindingParam.getDeprecatedElements(99999999);

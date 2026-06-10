@@ -126,7 +126,7 @@ public abstract class JDFAutomacro extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutomacro(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutomacro(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -138,7 +138,7 @@ public abstract class JDFAutomacro extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutomacro(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutomacro(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -151,7 +151,7 @@ public abstract class JDFAutomacro extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutomacro(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutomacro(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -173,7 +173,7 @@ public abstract class JDFAutomacro extends JDFElement
 	 * @param value the value to set the attribute to
 	 */
 	@Override
-	public void setID(String value)
+	public void setID(final String value)
 	{
 		setAttribute(AttributeName.ID, value, null);
 	}
@@ -221,7 +221,7 @@ public abstract class JDFAutomacro extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFchoice the element
 	 */
-	public JDFchoice getCreatechoice(int iSkip)
+	public JDFchoice getCreatechoice(final int iSkip)
 	{
 		return (JDFchoice) getCreateElement_JDFElement(ElementName.CHOICE, null, iSkip);
 	}
@@ -233,7 +233,7 @@ public abstract class JDFAutomacro extends JDFElement
 	 * @return JDFchoice the element
 	 *         default is getchoice(0)
 	 */
-	public JDFchoice getchoice(int iSkip)
+	public JDFchoice getchoice(final int iSkip)
 	{
 		return (JDFchoice) getElement(ElementName.CHOICE, null, iSkip);
 	}
@@ -284,7 +284,7 @@ public abstract class JDFAutomacro extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFset the element
 	 */
-	public JDFset getCreateset(int iSkip)
+	public JDFset getCreateset(final int iSkip)
 	{
 		return (JDFset) getCreateElement_JDFElement(ElementName.SET, null, iSkip);
 	}
@@ -296,7 +296,7 @@ public abstract class JDFAutomacro extends JDFElement
 	 * @return JDFset the element
 	 *         default is getset(0)
 	 */
-	public JDFset getset(int iSkip)
+	public JDFset getset(final int iSkip)
 	{
 		return (JDFset) getElement(ElementName.SET, null, iSkip);
 	}
@@ -347,7 +347,7 @@ public abstract class JDFAutomacro extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFcall the element
 	 */
-	public JDFcall getCreatecall(int iSkip)
+	public JDFcall getCreatecall(final int iSkip)
 	{
 		return (JDFcall) getCreateElement_JDFElement(ElementName.CALL, null, iSkip);
 	}
@@ -359,7 +359,7 @@ public abstract class JDFAutomacro extends JDFElement
 	 * @return JDFcall the element
 	 *         default is getcall(0)
 	 */
-	public JDFcall getcall(int iSkip)
+	public JDFcall getcall(final int iSkip)
 	{
 		return (JDFcall) getElement(ElementName.CALL, null, iSkip);
 	}

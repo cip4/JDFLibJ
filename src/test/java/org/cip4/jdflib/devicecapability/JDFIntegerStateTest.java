@@ -71,8 +71,8 @@
  * JDFStateBaseTest.java
  *
  * @author Elena Skobchenko
- * 
- * Copyright (c) 2001-2004 The International Cooperation for the Integration 
+ *
+ * Copyright (c) 2001-2004 The International Cooperation for the Integration
  * of Processes in  Prepress, Press and Postpress (CIP4).  All rights reserved.
  */
 package org.cip4.jdflib.devicecapability;
@@ -91,6 +91,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFIntegerState;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 class JDFIntegerStateTest extends JDFTestCaseBase
 {
 
@@ -99,17 +100,14 @@ class JDFIntegerStateTest extends JDFTestCaseBase
 	@Test
 	public final void testAddValue() throws Exception
 	{
-		final JDFIntegerRangeList integerList = new JDFIntegerRangeList(
-				"1 2 3 4 ~ 44");
+		final JDFIntegerRangeList integerList = new JDFIntegerRangeList("1 2 3 4 ~ 44");
 		iState.setAllowedValueList(integerList);
 		iState.addValue("24", EnumFitsValue.Allowed);
 		Assertions.assertEquals(iState.getAllowedValueList(), integerList);
 		iState.addValue("45", EnumFitsValue.Allowed);
-		Assertions.assertEquals(iState.getAllowedValueList(), new JDFIntegerRangeList(
-				"1 ~ 45"));
+		Assertions.assertEquals(iState.getAllowedValueList(), new JDFIntegerRangeList("1 ~ 45"));
 		iState.addValue("48", EnumFitsValue.Allowed);
-		Assertions.assertEquals(iState.getAllowedValueList(), new JDFIntegerRangeList(
-				"1 ~ 45 48"));
+		Assertions.assertEquals(iState.getAllowedValueList(), new JDFIntegerRangeList("1 ~ 45 48"));
 		iState.addValue("49", EnumFitsValue.Present);
 		Assertions.assertEquals(iState.getPresentValueList(), new JDFIntegerRangeList("49"));
 	}
@@ -119,7 +117,7 @@ class JDFIntegerStateTest extends JDFTestCaseBase
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		JDFDoc doc = new JDFDoc("IntegerState");
+		final JDFDoc doc = new JDFDoc("IntegerState");
 		iState = (JDFIntegerState) doc.getRoot();
 
 	}
@@ -129,30 +127,28 @@ class JDFIntegerStateTest extends JDFTestCaseBase
 	@Test
 	public final void testFitsValue()
 	{
-		JDFParser p = new JDFParser();
-		String strNode = "<IntegerState Name=\"BitDepth\" DefaultValue=\"1\" AllowedValueList=\"1 8 12\"/>";
+		final JDFParser p = new JDFParser();
+		final String strNode = "<IntegerState Name=\"BitDepth\" DefaultValue=\"1\" AllowedValueList=\"1 8 12\"/>";
 
-		JDFDoc jdfDoc = p.parseString(strNode);
-		JDFIntegerState state = (JDFIntegerState) jdfDoc.getRoot();
+		final JDFDoc jdfDoc = p.parseString(strNode);
+		final JDFIntegerState state = (JDFIntegerState) jdfDoc.getRoot();
 
-		JDFIntegerRangeList list = new JDFIntegerRangeList();
+		final JDFIntegerRangeList list = new JDFIntegerRangeList();
 		list.append(new JDFIntegerRange(1, 12)); // 1~12
 		// list.append(12);
 
 		state.setListType(EnumListType.RangeList);
-		Assertions.assertFalse(state.fitsValue(list.toString(),
-				EnumFitsValue.Allowed), "ListType=RangeList");
+		Assertions.assertFalse(state.fitsValue(list.toString(), EnumFitsValue.Allowed), "ListType=RangeList");
 
-		JDFIntegerRangeList list2 = new JDFIntegerRangeList();
+		final JDFIntegerRangeList list2 = new JDFIntegerRangeList();
 		list2.append(new JDFIntegerRange(1, -2)); // 1~-2
 
-		JDFIntegerRangeList allowedVL = new JDFIntegerRangeList();
+		final JDFIntegerRangeList allowedVL = new JDFIntegerRangeList();
 		allowedVL.append(new JDFIntegerRange(1, 32)); // 1~32
 
 		state.setAllowedValueList(allowedVL); // new AllowedVlaueList
 
-		Assertions.assertTrue(state.fitsValue(list2.toString(),
-				EnumFitsValue.Allowed), "xDef is wrong");
+		Assertions.assertTrue(state.fitsValue(list2.toString(), EnumFitsValue.Allowed), "xDef is wrong");
 
 		list.erase(list.size() - 1); // erase "1~12"
 		list.append(2);
@@ -160,8 +156,7 @@ class JDFIntegerStateTest extends JDFTestCaseBase
 		list.append(22);
 		state.setListType(EnumListType.List);
 		state.setAllowedValueMod(new JDFXYPair(10, 2));
-		Assertions.assertTrue(state.fitsValue(list.toString(),
-                EnumFitsValue.Allowed), "ListType=List, ValueMod=" + state.getAllowedValueMod());
+		Assertions.assertTrue(state.fitsValue(list.toString(), EnumFitsValue.Allowed), "ListType=List, ValueMod=" + state.getAllowedValueMod());
 	}
 
 	// //////////////////////////////////////////////////////////
@@ -194,13 +189,11 @@ class JDFIntegerStateTest extends JDFTestCaseBase
 	@Test
 	public final void testSetAllowedValueList() throws Exception
 	{
-		final JDFIntegerRangeList integerList = new JDFIntegerRangeList(
-				"1 2 3 4 ~ 44");
+		final JDFIntegerRangeList integerList = new JDFIntegerRangeList("1 2 3 4 ~ 44");
 		iState.setAllowedValueList(integerList);
 		Assertions.assertEquals(iState.getPresentValueList(), integerList);
 		Assertions.assertEquals(iState.getAllowedValueList(), integerList);
-		final JDFIntegerRangeList integerList2 = new JDFIntegerRangeList(
-				"1 2 3 7~77");
+		final JDFIntegerRangeList integerList2 = new JDFIntegerRangeList("1 2 3 7~77");
 		iState.setPresentValueList(integerList2);
 		Assertions.assertEquals(iState.getPresentValueList(), integerList2);
 		Assertions.assertEquals(iState.getAllowedValueList(), integerList);
@@ -216,12 +209,10 @@ class JDFIntegerStateTest extends JDFTestCaseBase
 		Assertions.assertFalse(iState.isValid(EnumValidationLevel.Complete));
 		iState.setListType(EnumListType.List);
 		Assertions.assertTrue(iState.isValid(EnumValidationLevel.Complete));
-		final JDFIntegerRangeList integerRList = new JDFIntegerRangeList(
-				"1 2 3 4 ~ 44");
+		final JDFIntegerRangeList integerRList = new JDFIntegerRangeList("1 2 3 4 ~ 44");
 		iState.setAllowedValueList(integerRList);
 		Assertions.assertTrue(iState.isValid(EnumValidationLevel.Complete));
-		final JDFIntegerRangeList integerList2 = new JDFIntegerRangeList(
-				"1 2 3 7~77");
+		final JDFIntegerRangeList integerList2 = new JDFIntegerRangeList("1 2 3 7~77");
 		iState.setPresentValueList(integerList2);
 		Assertions.assertTrue(iState.isValid(EnumValidationLevel.Complete));
 	}

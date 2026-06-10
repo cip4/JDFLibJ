@@ -75,7 +75,7 @@ import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.XMLDoc;
@@ -100,7 +100,7 @@ public class XJDFSchemaPrune
 		return checkAttributeValues;
 	}
 
-	public void setCheckAttributeValues(boolean checkAttributeValues)
+	public void setCheckAttributeValues(final boolean checkAttributeValues)
 	{
 		this.checkAttributeValues = checkAttributeValues;
 	}
@@ -114,7 +114,7 @@ public class XJDFSchemaPrune
 		return prefix;
 	}
 
-	public void setPrefix(String prefix)
+	public void setPrefix(final String prefix)
 	{
 		this.prefix = prefix;
 	}
@@ -143,7 +143,7 @@ public class XJDFSchemaPrune
 		keepValues = new ListMap<>();
 	}
 
-	String ensureprefix(String in)
+	String ensureprefix(final String in)
 	{
 		if (!StringUtil.isEmpty(in) && StringUtil.isEmpty(KElement.xmlnsPrefix(in)))
 		{
@@ -190,7 +190,7 @@ public class XJDFSchemaPrune
 		return schemaElem;
 	}
 
-	void cleanupValues(KElement schemaElem)
+	void cleanupValues(final KElement schemaElem)
 	{
 		for (final KElement en : schemaElem.getChildrenByTagName(XSDConstants.XS_ENUMERATION))
 		{
@@ -238,7 +238,7 @@ public class XJDFSchemaPrune
 	{
 		final VElement v = new VElement();
 		final String nodeName = example.getNodeName();
-		final String xsitype = example.getAttribute(JDFConstants.XSITYPE);
+		final String xsitype = example.getAttribute(JDFCoreConstants.XSITYPE);
 		final KElement xsElement = getElementByRef(nodeName, xsitype);
 		if (xsElement != null && !StringUtil.isEmpty(nodeName))
 		{
@@ -254,7 +254,7 @@ public class XJDFSchemaPrune
 			final KElement parent = example.getParentNode_KElement();
 			if (parent != null)
 			{
-				KElement schemaParent = getElementByName(parent.getAttribute(JDFConstants.XSITYPE));
+				KElement schemaParent = getElementByName(parent.getAttribute(JDFCoreConstants.XSITYPE));
 				if (schemaParent == null)
 				{
 					schemaParent = getElementByName(parent.getNodeName());
@@ -268,7 +268,7 @@ public class XJDFSchemaPrune
 						ref = getElementByName(schemaParent, XSDConstants.XS_ELEMENT, XSDConstants.REF, ensureprefix(nodeName));
 					}
 					addKeep(v, ref);
-					checkSchemaParent(v, nodeName, schemaParent, parent.getAttribute(JDFConstants.XSITYPE));
+					checkSchemaParent(v, nodeName, schemaParent, parent.getAttribute(JDFCoreConstants.XSITYPE));
 					checkSubstitution(v, xsElement, schemaParent);
 					checkExtension(v, ct);
 					checkGroup(v, ct);
@@ -286,7 +286,7 @@ public class XJDFSchemaPrune
 
 	}
 
-	KElement getElementByRef(String nodeName, String xsitype)
+	KElement getElementByRef(final String nodeName, final String xsitype)
 	{
 		KElement ret = null;
 		if (!StringUtil.isEmpty(xsitype))
@@ -304,7 +304,7 @@ public class XJDFSchemaPrune
 		return ret;
 	}
 
-	KElement getComplexType(final KElement xsElement, final String nodeName, String type)
+	KElement getComplexType(final KElement xsElement, final String nodeName, final String type)
 	{
 		KElement ct = xsElement == null ? null : xsElement.getElement(XSDConstants.XS_COMPLEX_TYPE);
 		if (ct == null && !StringUtil.isEmpty(type))
@@ -358,7 +358,7 @@ public class XJDFSchemaPrune
 		return v;
 	}
 
-	void checkSchemaParent(final VElement v, String nodeName, final KElement schemaParent, String xsitype)
+	void checkSchemaParent(final VElement v, final String nodeName, final KElement schemaParent, final String xsitype)
 	{
 		final String localtype = schemaParent.getNonEmpty(XSDConstants.TYPE);
 		final String parenttyp = StringUtil.isEmpty(xsitype) ? localtype : xsitype;
@@ -457,7 +457,7 @@ public class XJDFSchemaPrune
 		return eAttributeUse.required.equals(eAttributeUse.getEnum(e.getAttribute(XSDConstants.USE)));
 	}
 
-	void addAttribute(final KElement e, String val)
+	void addAttribute(final KElement e, final String val)
 	{
 		addTree(e);
 		final String type = e.getNonEmpty(XSDConstants.TYPE);
@@ -472,7 +472,7 @@ public class XJDFSchemaPrune
 		}
 	}
 
-	void addSimpleType(final String type, String val)
+	void addSimpleType(final String type, final String val)
 	{
 		if (!"xs:".equals(StringUtil.leftStr(type, 3)))
 		{
@@ -481,7 +481,7 @@ public class XJDFSchemaPrune
 		}
 	}
 
-	void addSimpleType(final KElement stType, String val)
+	void addSimpleType(final KElement stType, final String val)
 	{
 		if (stType != null)
 		{
@@ -530,12 +530,12 @@ public class XJDFSchemaPrune
 		}
 	}
 
-	KElement getElementByName(String xstype, final String nodeName)
+	KElement getElementByName(final String xstype, final String nodeName)
 	{
 		return getElementByName(schema, xstype, XSDConstants.NAME, nodeName);
 	}
 
-	KElement getElementByName(KElement base, String xstype, String xsAttName, final String nodeName)
+	KElement getElementByName(final KElement base, final String xstype, final String xsAttName, final String nodeName)
 	{
 		if (StringUtil.isEmpty(nodeName))
 		{

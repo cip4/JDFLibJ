@@ -396,15 +396,15 @@ class JDFSchemaTest extends JDFTestCaseBase
 	 */
 	public static KElement getMergedSchema()
 	{
-		File dir = new File(sm_dirTestSchema);
-		File jdfFile = new File(sm_dirTestSchema + "JDF.xsd");
-		KElement jdf = KElement.parseFile(jdfFile);
-		for (File s : FileUtil.listFilesWithExtension(dir, "xsd"))
+		final File dir = new File(sm_dirTestSchema);
+		final File jdfFile = new File(sm_dirTestSchema + "JDF.xsd");
+		final KElement jdf = KElement.parseFile(jdfFile);
+		for (final File s : FileUtil.listFilesWithExtension(dir, "xsd"))
 		{
 			if (!s.equals(jdfFile))
 			{
-				KElement nex = KElement.parseFile(s);
-				for (KElement e : nex.getChildElementArray())
+				final KElement nex = KElement.parseFile(s);
+				for (final KElement e : nex.getChildElementArray())
 				{
 					jdf.copyElement(e, null);
 				}
@@ -417,12 +417,12 @@ class JDFSchemaTest extends JDFTestCaseBase
 	@Test
 	void testPrunedJMF()
 	{
-		JDFJMF jmf = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
-		jmf.removeAttribute(JDFConstants.XSITYPE);
-		String outSchema = sm_dirTestDataTemp + "status.jmf.xsd";
-		JDFParser p = new JDFParser();
+		final JDFJMF jmf = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
+		jmf.removeAttribute(JDFCoreConstants.XSITYPE);
+		final String outSchema = sm_dirTestDataTemp + "status.jmf.xsd";
+		final JDFParser p = new JDFParser();
 		p.setJDFSchemaLocation(UrlUtil.fileToUrl(new File(outSchema), true));
-		JDFDoc jmf2 = p.parseString(jmf.toXML());
+		final JDFDoc jmf2 = p.parseString(jmf.toXML());
 		assertNotNull(jmf2);
 	}
 
@@ -434,14 +434,14 @@ class JDFSchemaTest extends JDFTestCaseBase
 		final XJDFSchemaPrune prune = new XJDFSchemaPrune(schema);
 		prune.setPrefix("jdf");
 		prune.setCheckAttributes(false);
-		JDFJMF jmf = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
-		jmf.removeAttribute(JDFConstants.XSITYPE);
-		KElement pruned = prune.prune(jmf);
-		String outSchema = sm_dirTestDataTemp + "status.jmf.xsd";
+		final JDFJMF jmf = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
+		jmf.removeAttribute(JDFCoreConstants.XSITYPE);
+		final KElement pruned = prune.prune(jmf);
+		final String outSchema = sm_dirTestDataTemp + "status.jmf.xsd";
 		pruned.write2File(outSchema);
-		JDFParser p = new JDFParser();
+		final JDFParser p = new JDFParser();
 		p.setJDFSchemaLocation(UrlUtil.fileToUrl(new File(outSchema), true));
-		JDFDoc jmf2 = p.parseString(jmf.toXML());
+		final JDFDoc jmf2 = p.parseString(jmf.toXML());
 		assertNotNull(jmf2);
 	}
 
@@ -471,19 +471,7 @@ class JDFSchemaTest extends JDFTestCaseBase
 		{
 			if (!"further".equalsIgnoreCase(f.getParentFile().getName()))
 			{
-				if ("actionpool.jdf".equalsIgnoreCase(f.getName()))
-				{
-					continue;
-				}
-				if ("featurepool.jdf".equalsIgnoreCase(f.getName()))
-				{
-					continue;
-				}
-				if ("updateJDFCommand.jmf".equalsIgnoreCase(f.getName()))
-				{
-					continue;
-				}
-				if ("automatedImpositionMarkObject.jdf".equalsIgnoreCase(f.getName()))
+				if ("actionpool.jdf".equalsIgnoreCase(f.getName()) || "featurepool.jdf".equalsIgnoreCase(f.getName()) || "updateJDFCommand.jmf".equalsIgnoreCase(f.getName()) || "automatedImpositionMarkObject.jdf".equalsIgnoreCase(f.getName()))
 				{
 					continue;
 				}

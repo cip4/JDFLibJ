@@ -51,7 +51,6 @@ import org.cip4.jdflib.util.StringUtil;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG<br/>
  *         removes any empty or unlinked resources
- *
  */
 public class RemoveCompare extends BaseElementWalker
 {
@@ -64,7 +63,7 @@ public class RemoveCompare extends BaseElementWalker
 		return removeAllIdAndRef;
 	}
 
-	public void setRemoveAllIdAndRef(boolean removeAllIdAndRef)
+	public void setRemoveAllIdAndRef(final boolean removeAllIdAndRef)
 	{
 		this.removeAllIdAndRef = removeAllIdAndRef;
 	}
@@ -94,8 +93,6 @@ public class RemoveCompare extends BaseElementWalker
 	}
 
 	/**
-	 *
-	 *
 	 * @param e
 	 */
 	public void cleanup(final KElement e)
@@ -107,7 +104,6 @@ public class RemoveCompare extends BaseElementWalker
 	 * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super classes
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkElement extends BaseWalker
 	{
@@ -122,7 +118,7 @@ public class RemoveCompare extends BaseElementWalker
 
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param e1 - the element to track
+		 * @param e1        - the element to track
 		 * @param trackElem - always null
 		 * @return the element to continue walking
 		 */

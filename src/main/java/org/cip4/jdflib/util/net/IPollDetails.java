@@ -67,7 +67,6 @@ public interface IPollDetails
 	public String getContentType();
 
 	/**
-	 *
 	 * @return false if polling; true if push environment
 	 */
 	public boolean isPush();

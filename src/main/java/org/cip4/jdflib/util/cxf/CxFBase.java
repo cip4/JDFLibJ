@@ -44,7 +44,6 @@ public class CxFBase
 	static final String CXF_NS = "http://colorexchangeformat.com/CxF3-core";
 
 	/**
-	 *
 	 * @param cxfRoot
 	 */
 	CxFBase(final KElement cxfRoot)

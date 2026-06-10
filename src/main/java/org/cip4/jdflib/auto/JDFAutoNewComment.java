@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -100,7 +96,8 @@ public abstract class JDFAutoNewComment extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTION, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumAction.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTION, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumAction.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.COMMENTID, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.REFID, 0x2222222222l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
@@ -129,7 +126,7 @@ public abstract class JDFAutoNewComment extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNewComment(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoNewComment(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -141,7 +138,7 @@ public abstract class JDFAutoNewComment extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNewComment(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoNewComment(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -154,97 +151,28 @@ public abstract class JDFAutoNewComment extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoNewComment(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoNewComment(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for Action
+	 * Enumeration strings for numAction
 	 */
 
-	public enum EAction
+	public enum EnumAction
 	{
 		Add, Concat, Replace, Remove;
 
-		public static EAction getEnum(String val)
+		public static EnumAction getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EAction.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumAction.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Action
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumAction extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumAction(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumAction getEnum(String enumName)
-		{
-			return (EnumAction) getEnum(EnumAction.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumAction getEnum(int enumValue)
-		{
-			return (EnumAction) getEnum(EnumAction.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumAction.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAction.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAction.class);
-		}
-
-		/**  */
-		public static final EnumAction Add = new EnumAction("Add");
-		/**  */
-		public static final EnumAction Concat = new EnumAction("Concat");
-		/**  */
-		public static final EnumAction Replace = new EnumAction("Replace");
-		/**  */
-		public static final EnumAction Remove = new EnumAction("Remove");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -256,9 +184,9 @@ public abstract class JDFAutoNewComment extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setAction(EAction enumVar)
+	public void setAction(final EnumAction enumVar)
 	{
-		setAttribute(AttributeName.ACTION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ACTION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -266,35 +194,6 @@ public abstract class JDFAutoNewComment extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EAction getEAction()
-	{
-		return EAction.getEnum(getAttribute(AttributeName.ACTION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Action
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Action
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetAction(EAction) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setAction(EnumAction enumVar)
-	{
-		setAttribute(AttributeName.ACTION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Action
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EAction GetEAction() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumAction getAction()
 	{
 		return EnumAction.getEnum(getAttribute(AttributeName.ACTION, null, null));
@@ -310,7 +209,7 @@ public abstract class JDFAutoNewComment extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCommentID(String value)
+	public void setCommentID(final String value)
 	{
 		setAttribute(AttributeName.COMMENTID, value, null);
 	}
@@ -335,7 +234,7 @@ public abstract class JDFAutoNewComment extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setrefID(String value)
+	public void setrefID(final String value)
 	{
 		setAttribute(AttributeName.REFID, value, null);
 	}
@@ -382,7 +281,7 @@ public abstract class JDFAutoNewComment extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPart the element
 	 */
-	public JDFPart getCreatePart(int iSkip)
+	public JDFPart getCreatePart(final int iSkip)
 	{
 		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
 	}
@@ -394,7 +293,7 @@ public abstract class JDFAutoNewComment extends JDFElement
 	 * @return JDFPart the element
 	 *         default is getPart(0)
 	 */
-	public JDFPart getPart(int iSkip)
+	public JDFPart getPart(final int iSkip)
 	{
 		return (JDFPart) getElement(ElementName.PART, null, iSkip);
 	}

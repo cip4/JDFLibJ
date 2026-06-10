@@ -59,6 +59,7 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -70,7 +71,8 @@ public class JDFAssembly extends JDFAutoAssembly
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ORDER, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumOrder.getEnum(0), "Gathering");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ORDER, 0x33333311, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(JDFAutoAssembly.EnumOrder.class, 0), "Gathering");
 	}
 
 	@Override
@@ -84,7 +86,6 @@ public class JDFAssembly extends JDFAutoAssembly
 	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
-	 *
 	 */
 	public JDFAssembly(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
@@ -97,7 +98,6 @@ public class JDFAssembly extends JDFAutoAssembly
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 *
 	 */
 	public JDFAssembly(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
@@ -111,7 +111,6 @@ public class JDFAssembly extends JDFAutoAssembly
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
-	 *
 	 */
 	public JDFAssembly(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
@@ -146,14 +145,18 @@ public class JDFAssembly extends JDFAutoAssembly
 			final VElement sections = e.getChildElementVector(ElementName.ASSEMBLYSECTION, null);
 			String at = e.getAttribute(attName, null, null);
 			if (at != null)
+			{
 				v.add(at);
+			}
 			if (sections != null)
 			{
 				for (final KElement es : sections)
 				{
 					at = es.getAttribute(attName, null, null);
 					if (at != null)
+					{
 						v.add(at);
+					}
 				}
 			}
 		}

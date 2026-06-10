@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -113,23 +108,23 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 		atrInfoTable[15] = new AtrInfoTable(AttributeName.IGNORETTFONTSFIRST, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[16] = new AtrInfoTable(AttributeName.IGNOREUCR, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
 		atrInfoTable[17] = new AtrInfoTable(AttributeName.INCLUDEBASEFONTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumIncludeBaseFonts.getEnum(0), "IncludeNever");
+				JavaEnumUtil.getEnum(EnumIncludeBaseFonts.class, 0), "IncludeNever");
 		atrInfoTable[18] = new AtrInfoTable(AttributeName.INCLUDECIDFONTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumIncludeCIDFonts.getEnum(0), "IncludeOncePerDoc");
+				JavaEnumUtil.getEnum(EnumIncludeCIDFonts.class, 0), "IncludeOncePerDoc");
 		atrInfoTable[19] = new AtrInfoTable(AttributeName.INCLUDEEMBEDDEDFONTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumIncludeEmbeddedFonts.getEnum(0), "IncludeOncePerDoc");
+				JavaEnumUtil.getEnum(EnumIncludeEmbeddedFonts.class, 0), "IncludeOncePerDoc");
 		atrInfoTable[20] = new AtrInfoTable(AttributeName.INCLUDEOTHERRESOURCES, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumIncludeOtherResources.getEnum(0), "IncludeOncePerDoc");
+				JavaEnumUtil.getEnum(EnumIncludeOtherResources.class, 0), "IncludeOncePerDoc");
 		atrInfoTable[21] = new AtrInfoTable(AttributeName.INCLUDEPROCSETS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumIncludeProcSets.getEnum(0), "IncludeOncePerDoc");
+				JavaEnumUtil.getEnum(EnumIncludeProcSets.class, 0), "IncludeOncePerDoc");
 		atrInfoTable[22] = new AtrInfoTable(AttributeName.INCLUDETRUETYPEFONTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumIncludeTrueTypeFonts.getEnum(0), "IncludeOncePerDoc");
+				JavaEnumUtil.getEnum(EnumIncludeTrueTypeFonts.class, 0), "IncludeOncePerDoc");
 		atrInfoTable[23] = new AtrInfoTable(AttributeName.INCLUDETYPE1FONTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumIncludeType1Fonts.getEnum(0), "IncludeOncePerDoc");
+				JavaEnumUtil.getEnum(EnumIncludeType1Fonts.class, 0), "IncludeOncePerDoc");
 		atrInfoTable[24] = new AtrInfoTable(AttributeName.INCLUDETYPE3FONTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumIncludeType3Fonts.getEnum(0), null);
-		atrInfoTable[25] = new AtrInfoTable(AttributeName.OUTPUTTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumOutputType.getEnum(0),
-				"PostScript");
+				JavaEnumUtil.getEnum(EnumIncludeType3Fonts.class, 0), null);
+		atrInfoTable[25] = new AtrInfoTable(AttributeName.OUTPUTTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumOutputType.class, 0), "PostScript");
 		atrInfoTable[26] = new AtrInfoTable(AttributeName.PSLEVEL, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, "2");
 		atrInfoTable[27] = new AtrInfoTable(AttributeName.SCALE, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, "100");
 		atrInfoTable[28] = new AtrInfoTable(AttributeName.SETPAGESIZE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
@@ -155,7 +150,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPDFToPSConversionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPDFToPSConversionParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -167,7 +162,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPDFToPSConversionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPDFToPSConversionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -180,7 +175,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPDFToPSConversionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPDFToPSConversionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -191,7 +186,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -206,719 +201,134 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for IncludeBaseFonts
+	 * Enumeration strings for numIncludeBaseFonts
 	 */
 
-	public enum EIncludeBaseFonts
+	public enum EnumIncludeBaseFonts
 	{
 		IncludeNever, IncludeOncePerDoc, IncludeOncePerPage;
 
-		public static EIncludeBaseFonts getEnum(String val)
+		public static EnumIncludeBaseFonts getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EIncludeBaseFonts.class, val, EIncludeBaseFonts.IncludeNever);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumIncludeBaseFonts.class, val, EnumIncludeBaseFonts.IncludeNever);
 		}
 	}
 
 	/**
-	 * Enumeration strings for IncludeBaseFonts
+	 * Enumeration strings for numIncludeCIDFonts
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumIncludeBaseFonts extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumIncludeBaseFonts(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumIncludeBaseFonts getEnum(String enumName)
-		{
-			return (EnumIncludeBaseFonts) getEnum(EnumIncludeBaseFonts.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumIncludeBaseFonts getEnum(int enumValue)
-		{
-			return (EnumIncludeBaseFonts) getEnum(EnumIncludeBaseFonts.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumIncludeBaseFonts.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumIncludeBaseFonts.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumIncludeBaseFonts.class);
-		}
-
-		/**  */
-		public static final EnumIncludeBaseFonts IncludeNever = new EnumIncludeBaseFonts("IncludeNever");
-		/**  */
-		public static final EnumIncludeBaseFonts IncludeOncePerDoc = new EnumIncludeBaseFonts("IncludeOncePerDoc");
-		/**  */
-		public static final EnumIncludeBaseFonts IncludeOncePerPage = new EnumIncludeBaseFonts("IncludeOncePerPage");
-	}
-
-	/**
-	 * Enumeration strings for IncludeCIDFonts
-	 */
-
-	public enum EIncludeCIDFonts
+	public enum EnumIncludeCIDFonts
 	{
 		IncludeNever, IncludeOncePerDoc, IncludeOncePerPage;
 
-		public static EIncludeCIDFonts getEnum(String val)
+		public static EnumIncludeCIDFonts getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EIncludeCIDFonts.class, val, EIncludeCIDFonts.IncludeOncePerDoc);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumIncludeCIDFonts.class, val, EnumIncludeCIDFonts.IncludeOncePerDoc);
 		}
 	}
 
 	/**
-	 * Enumeration strings for IncludeCIDFonts
+	 * Enumeration strings for numIncludeEmbeddedFonts
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumIncludeCIDFonts extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumIncludeCIDFonts(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumIncludeCIDFonts getEnum(String enumName)
-		{
-			return (EnumIncludeCIDFonts) getEnum(EnumIncludeCIDFonts.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumIncludeCIDFonts getEnum(int enumValue)
-		{
-			return (EnumIncludeCIDFonts) getEnum(EnumIncludeCIDFonts.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumIncludeCIDFonts.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumIncludeCIDFonts.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumIncludeCIDFonts.class);
-		}
-
-		/**  */
-		public static final EnumIncludeCIDFonts IncludeNever = new EnumIncludeCIDFonts("IncludeNever");
-		/**  */
-		public static final EnumIncludeCIDFonts IncludeOncePerDoc = new EnumIncludeCIDFonts("IncludeOncePerDoc");
-		/**  */
-		public static final EnumIncludeCIDFonts IncludeOncePerPage = new EnumIncludeCIDFonts("IncludeOncePerPage");
-	}
-
-	/**
-	 * Enumeration strings for IncludeEmbeddedFonts
-	 */
-
-	public enum EIncludeEmbeddedFonts
+	public enum EnumIncludeEmbeddedFonts
 	{
 		IncludeNever, IncludeOncePerDoc, IncludeOncePerPage;
 
-		public static EIncludeEmbeddedFonts getEnum(String val)
+		public static EnumIncludeEmbeddedFonts getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EIncludeEmbeddedFonts.class, val, EIncludeEmbeddedFonts.IncludeOncePerDoc);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumIncludeEmbeddedFonts.class, val, EnumIncludeEmbeddedFonts.IncludeOncePerDoc);
 		}
 	}
 
 	/**
-	 * Enumeration strings for IncludeEmbeddedFonts
+	 * Enumeration strings for numIncludeOtherResources
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumIncludeEmbeddedFonts extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumIncludeEmbeddedFonts(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumIncludeEmbeddedFonts getEnum(String enumName)
-		{
-			return (EnumIncludeEmbeddedFonts) getEnum(EnumIncludeEmbeddedFonts.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumIncludeEmbeddedFonts getEnum(int enumValue)
-		{
-			return (EnumIncludeEmbeddedFonts) getEnum(EnumIncludeEmbeddedFonts.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumIncludeEmbeddedFonts.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumIncludeEmbeddedFonts.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumIncludeEmbeddedFonts.class);
-		}
-
-		/**  */
-		public static final EnumIncludeEmbeddedFonts IncludeNever = new EnumIncludeEmbeddedFonts("IncludeNever");
-		/**  */
-		public static final EnumIncludeEmbeddedFonts IncludeOncePerDoc = new EnumIncludeEmbeddedFonts("IncludeOncePerDoc");
-		/**  */
-		public static final EnumIncludeEmbeddedFonts IncludeOncePerPage = new EnumIncludeEmbeddedFonts("IncludeOncePerPage");
-	}
-
-	/**
-	 * Enumeration strings for IncludeOtherResources
-	 */
-
-	public enum EIncludeOtherResources
+	public enum EnumIncludeOtherResources
 	{
 		IncludeNever, IncludeOncePerDoc, IncludeOncePerPage;
 
-		public static EIncludeOtherResources getEnum(String val)
+		public static EnumIncludeOtherResources getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EIncludeOtherResources.class, val, EIncludeOtherResources.IncludeOncePerDoc);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumIncludeOtherResources.class, val, EnumIncludeOtherResources.IncludeOncePerDoc);
 		}
 	}
 
 	/**
-	 * Enumeration strings for IncludeOtherResources
+	 * Enumeration strings for numIncludeProcSets
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumIncludeOtherResources extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumIncludeOtherResources(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumIncludeOtherResources getEnum(String enumName)
-		{
-			return (EnumIncludeOtherResources) getEnum(EnumIncludeOtherResources.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumIncludeOtherResources getEnum(int enumValue)
-		{
-			return (EnumIncludeOtherResources) getEnum(EnumIncludeOtherResources.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumIncludeOtherResources.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumIncludeOtherResources.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumIncludeOtherResources.class);
-		}
-
-		/**  */
-		public static final EnumIncludeOtherResources IncludeNever = new EnumIncludeOtherResources("IncludeNever");
-		/**  */
-		public static final EnumIncludeOtherResources IncludeOncePerDoc = new EnumIncludeOtherResources("IncludeOncePerDoc");
-		/**  */
-		public static final EnumIncludeOtherResources IncludeOncePerPage = new EnumIncludeOtherResources("IncludeOncePerPage");
-	}
-
-	/**
-	 * Enumeration strings for IncludeProcSets
-	 */
-
-	public enum EIncludeProcSets
+	public enum EnumIncludeProcSets
 	{
 		IncludeNever, IncludeOncePerDoc, IncludeOncePerPage;
 
-		public static EIncludeProcSets getEnum(String val)
+		public static EnumIncludeProcSets getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EIncludeProcSets.class, val, EIncludeProcSets.IncludeOncePerDoc);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumIncludeProcSets.class, val, EnumIncludeProcSets.IncludeOncePerDoc);
 		}
 	}
 
 	/**
-	 * Enumeration strings for IncludeProcSets
+	 * Enumeration strings for numIncludeTrueTypeFonts
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumIncludeProcSets extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumIncludeProcSets(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumIncludeProcSets getEnum(String enumName)
-		{
-			return (EnumIncludeProcSets) getEnum(EnumIncludeProcSets.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumIncludeProcSets getEnum(int enumValue)
-		{
-			return (EnumIncludeProcSets) getEnum(EnumIncludeProcSets.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumIncludeProcSets.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumIncludeProcSets.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumIncludeProcSets.class);
-		}
-
-		/**  */
-		public static final EnumIncludeProcSets IncludeNever = new EnumIncludeProcSets("IncludeNever");
-		/**  */
-		public static final EnumIncludeProcSets IncludeOncePerDoc = new EnumIncludeProcSets("IncludeOncePerDoc");
-		/**  */
-		public static final EnumIncludeProcSets IncludeOncePerPage = new EnumIncludeProcSets("IncludeOncePerPage");
-	}
-
-	/**
-	 * Enumeration strings for IncludeTrueTypeFonts
-	 */
-
-	public enum EIncludeTrueTypeFonts
+	public enum EnumIncludeTrueTypeFonts
 	{
 		IncludeNever, IncludeOncePerDoc, IncludeOncePerPage;
 
-		public static EIncludeTrueTypeFonts getEnum(String val)
+		public static EnumIncludeTrueTypeFonts getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EIncludeTrueTypeFonts.class, val, EIncludeTrueTypeFonts.IncludeOncePerDoc);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumIncludeTrueTypeFonts.class, val, EnumIncludeTrueTypeFonts.IncludeOncePerDoc);
 		}
 	}
 
 	/**
-	 * Enumeration strings for IncludeTrueTypeFonts
+	 * Enumeration strings for numIncludeType1Fonts
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumIncludeTrueTypeFonts extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumIncludeTrueTypeFonts(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumIncludeTrueTypeFonts getEnum(String enumName)
-		{
-			return (EnumIncludeTrueTypeFonts) getEnum(EnumIncludeTrueTypeFonts.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumIncludeTrueTypeFonts getEnum(int enumValue)
-		{
-			return (EnumIncludeTrueTypeFonts) getEnum(EnumIncludeTrueTypeFonts.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumIncludeTrueTypeFonts.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumIncludeTrueTypeFonts.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumIncludeTrueTypeFonts.class);
-		}
-
-		/**  */
-		public static final EnumIncludeTrueTypeFonts IncludeNever = new EnumIncludeTrueTypeFonts("IncludeNever");
-		/**  */
-		public static final EnumIncludeTrueTypeFonts IncludeOncePerDoc = new EnumIncludeTrueTypeFonts("IncludeOncePerDoc");
-		/**  */
-		public static final EnumIncludeTrueTypeFonts IncludeOncePerPage = new EnumIncludeTrueTypeFonts("IncludeOncePerPage");
-	}
-
-	/**
-	 * Enumeration strings for IncludeType1Fonts
-	 */
-
-	public enum EIncludeType1Fonts
+	public enum EnumIncludeType1Fonts
 	{
 		IncludeNever, IncludeOncePerDoc, IncludeOncePerPage;
 
-		public static EIncludeType1Fonts getEnum(String val)
+		public static EnumIncludeType1Fonts getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EIncludeType1Fonts.class, val, EIncludeType1Fonts.IncludeOncePerDoc);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumIncludeType1Fonts.class, val, EnumIncludeType1Fonts.IncludeOncePerDoc);
 		}
 	}
 
 	/**
-	 * Enumeration strings for IncludeType1Fonts
+	 * Enumeration strings for numIncludeType3Fonts
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumIncludeType1Fonts extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumIncludeType1Fonts(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumIncludeType1Fonts getEnum(String enumName)
-		{
-			return (EnumIncludeType1Fonts) getEnum(EnumIncludeType1Fonts.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumIncludeType1Fonts getEnum(int enumValue)
-		{
-			return (EnumIncludeType1Fonts) getEnum(EnumIncludeType1Fonts.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumIncludeType1Fonts.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumIncludeType1Fonts.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumIncludeType1Fonts.class);
-		}
-
-		/**  */
-		public static final EnumIncludeType1Fonts IncludeNever = new EnumIncludeType1Fonts("IncludeNever");
-		/**  */
-		public static final EnumIncludeType1Fonts IncludeOncePerDoc = new EnumIncludeType1Fonts("IncludeOncePerDoc");
-		/**  */
-		public static final EnumIncludeType1Fonts IncludeOncePerPage = new EnumIncludeType1Fonts("IncludeOncePerPage");
-	}
-
-	/**
-	 * Enumeration strings for IncludeType3Fonts
-	 */
-
-	public enum EIncludeType3Fonts
+	public enum EnumIncludeType3Fonts
 	{
 		IncludeNever, IncludeOncePerDoc, IncludeOncePerPage;
 
-		public static EIncludeType3Fonts getEnum(String val)
+		public static EnumIncludeType3Fonts getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EIncludeType3Fonts.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumIncludeType3Fonts.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for IncludeType3Fonts
+	 * Enumeration strings for numOutputType
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumIncludeType3Fonts extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumIncludeType3Fonts(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumIncludeType3Fonts getEnum(String enumName)
-		{
-			return (EnumIncludeType3Fonts) getEnum(EnumIncludeType3Fonts.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumIncludeType3Fonts getEnum(int enumValue)
-		{
-			return (EnumIncludeType3Fonts) getEnum(EnumIncludeType3Fonts.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumIncludeType3Fonts.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumIncludeType3Fonts.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumIncludeType3Fonts.class);
-		}
-
-		/**  */
-		public static final EnumIncludeType3Fonts IncludeNever = new EnumIncludeType3Fonts("IncludeNever");
-		/**  */
-		public static final EnumIncludeType3Fonts IncludeOncePerDoc = new EnumIncludeType3Fonts("IncludeOncePerDoc");
-		/**  */
-		public static final EnumIncludeType3Fonts IncludeOncePerPage = new EnumIncludeType3Fonts("IncludeOncePerPage");
-	}
-
-	/**
-	 * Enumeration strings for OutputType
-	 */
-
-	public enum EOutputType
+	public enum EnumOutputType
 	{
 		PostScript, EPS;
 
-		public static EOutputType getEnum(String val)
+		public static EnumOutputType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EOutputType.class, val, EOutputType.PostScript);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumOutputType.class, val, EnumOutputType.PostScript);
 		}
-	}
-
-	/**
-	 * Enumeration strings for OutputType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumOutputType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumOutputType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumOutputType getEnum(String enumName)
-		{
-			return (EnumOutputType) getEnum(EnumOutputType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumOutputType getEnum(int enumValue)
-		{
-			return (EnumOutputType) getEnum(EnumOutputType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumOutputType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumOutputType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumOutputType.class);
-		}
-
-		/**  */
-		public static final EnumOutputType PostScript = new EnumOutputType("PostScript");
-		/**  */
-		public static final EnumOutputType EPS = new EnumOutputType("EPS");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -930,7 +340,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBinaryOK(boolean value)
+	public void setBinaryOK(final boolean value)
 	{
 		setAttribute(AttributeName.BINARYOK, value, null);
 	}
@@ -955,7 +365,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCenterCropBox(boolean value)
+	public void setCenterCropBox(final boolean value)
 	{
 		setAttribute(AttributeName.CENTERCROPBOX, value, null);
 	}
@@ -980,7 +390,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGeneratePageStreams(boolean value)
+	public void setGeneratePageStreams(final boolean value)
 	{
 		setAttribute(AttributeName.GENERATEPAGESTREAMS, value, null);
 	}
@@ -1005,7 +415,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIgnoreAnnotForms(boolean value)
+	public void setIgnoreAnnotForms(final boolean value)
 	{
 		setAttribute(AttributeName.IGNOREANNOTFORMS, value, null);
 	}
@@ -1030,7 +440,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIgnoreBG(boolean value)
+	public void setIgnoreBG(final boolean value)
 	{
 		setAttribute(AttributeName.IGNOREBG, value, null);
 	}
@@ -1055,7 +465,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIgnoreColorSeps(boolean value)
+	public void setIgnoreColorSeps(final boolean value)
 	{
 		setAttribute(AttributeName.IGNORECOLORSEPS, value, null);
 	}
@@ -1080,7 +490,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIgnoreDSC(boolean value)
+	public void setIgnoreDSC(final boolean value)
 	{
 		setAttribute(AttributeName.IGNOREDSC, value, null);
 	}
@@ -1105,7 +515,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIgnoreExternStreamRef(boolean value)
+	public void setIgnoreExternStreamRef(final boolean value)
 	{
 		setAttribute(AttributeName.IGNOREEXTERNSTREAMREF, value, null);
 	}
@@ -1130,7 +540,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIgnoreHalftones(boolean value)
+	public void setIgnoreHalftones(final boolean value)
 	{
 		setAttribute(AttributeName.IGNOREHALFTONES, value, null);
 	}
@@ -1155,7 +565,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIgnoreOverprint(boolean value)
+	public void setIgnoreOverprint(final boolean value)
 	{
 		setAttribute(AttributeName.IGNOREOVERPRINT, value, null);
 	}
@@ -1180,7 +590,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIgnorePageRotation(boolean value)
+	public void setIgnorePageRotation(final boolean value)
 	{
 		setAttribute(AttributeName.IGNOREPAGEROTATION, value, null);
 	}
@@ -1205,7 +615,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIgnoreRawData(boolean value)
+	public void setIgnoreRawData(final boolean value)
 	{
 		setAttribute(AttributeName.IGNORERAWDATA, value, null);
 	}
@@ -1230,7 +640,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIgnoreSeparableImagesOnly(boolean value)
+	public void setIgnoreSeparableImagesOnly(final boolean value)
 	{
 		setAttribute(AttributeName.IGNORESEPARABLEIMAGESONLY, value, null);
 	}
@@ -1255,7 +665,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIgnoreShowPage(boolean value)
+	public void setIgnoreShowPage(final boolean value)
 	{
 		setAttribute(AttributeName.IGNORESHOWPAGE, value, null);
 	}
@@ -1280,7 +690,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIgnoreTransfers(boolean value)
+	public void setIgnoreTransfers(final boolean value)
 	{
 		setAttribute(AttributeName.IGNORETRANSFERS, value, null);
 	}
@@ -1305,7 +715,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIgnoreTTFontsFirst(boolean value)
+	public void setIgnoreTTFontsFirst(final boolean value)
 	{
 		setAttribute(AttributeName.IGNORETTFONTSFIRST, value, null);
 	}
@@ -1330,7 +740,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIgnoreUCR(boolean value)
+	public void setIgnoreUCR(final boolean value)
 	{
 		setAttribute(AttributeName.IGNOREUCR, value, null);
 	}
@@ -1355,9 +765,9 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setIncludeBaseFonts(EIncludeBaseFonts enumVar)
+	public void setIncludeBaseFonts(final EnumIncludeBaseFonts enumVar)
 	{
-		setAttribute(AttributeName.INCLUDEBASEFONTS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.INCLUDEBASEFONTS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -1365,35 +775,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EIncludeBaseFonts getEIncludeBaseFonts()
-	{
-		return EIncludeBaseFonts.getEnum(getAttribute(AttributeName.INCLUDEBASEFONTS, null, "IncludeNever"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute IncludeBaseFonts
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute IncludeBaseFonts
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetIncludeBaseFonts(EIncludeBaseFonts) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setIncludeBaseFonts(EnumIncludeBaseFonts enumVar)
-	{
-		setAttribute(AttributeName.INCLUDEBASEFONTS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute IncludeBaseFonts
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EIncludeBaseFonts GetEIncludeBaseFonts() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumIncludeBaseFonts getIncludeBaseFonts()
 	{
 		return EnumIncludeBaseFonts.getEnum(getAttribute(AttributeName.INCLUDEBASEFONTS, null, "IncludeNever"));
@@ -1409,9 +790,9 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setIncludeCIDFonts(EIncludeCIDFonts enumVar)
+	public void setIncludeCIDFonts(final EnumIncludeCIDFonts enumVar)
 	{
-		setAttribute(AttributeName.INCLUDECIDFONTS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.INCLUDECIDFONTS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -1419,35 +800,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EIncludeCIDFonts getEIncludeCIDFonts()
-	{
-		return EIncludeCIDFonts.getEnum(getAttribute(AttributeName.INCLUDECIDFONTS, null, "IncludeOncePerDoc"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute IncludeCIDFonts
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute IncludeCIDFonts
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetIncludeCIDFonts(EIncludeCIDFonts) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setIncludeCIDFonts(EnumIncludeCIDFonts enumVar)
-	{
-		setAttribute(AttributeName.INCLUDECIDFONTS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute IncludeCIDFonts
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EIncludeCIDFonts GetEIncludeCIDFonts() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumIncludeCIDFonts getIncludeCIDFonts()
 	{
 		return EnumIncludeCIDFonts.getEnum(getAttribute(AttributeName.INCLUDECIDFONTS, null, "IncludeOncePerDoc"));
@@ -1463,9 +815,9 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setIncludeEmbeddedFonts(EIncludeEmbeddedFonts enumVar)
+	public void setIncludeEmbeddedFonts(final EnumIncludeEmbeddedFonts enumVar)
 	{
-		setAttribute(AttributeName.INCLUDEEMBEDDEDFONTS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.INCLUDEEMBEDDEDFONTS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -1473,35 +825,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EIncludeEmbeddedFonts getEIncludeEmbeddedFonts()
-	{
-		return EIncludeEmbeddedFonts.getEnum(getAttribute(AttributeName.INCLUDEEMBEDDEDFONTS, null, "IncludeOncePerDoc"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute IncludeEmbeddedFonts
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute IncludeEmbeddedFonts
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetIncludeEmbeddedFonts(EIncludeEmbeddedFonts) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setIncludeEmbeddedFonts(EnumIncludeEmbeddedFonts enumVar)
-	{
-		setAttribute(AttributeName.INCLUDEEMBEDDEDFONTS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute IncludeEmbeddedFonts
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EIncludeEmbeddedFonts GetEIncludeEmbeddedFonts() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumIncludeEmbeddedFonts getIncludeEmbeddedFonts()
 	{
 		return EnumIncludeEmbeddedFonts.getEnum(getAttribute(AttributeName.INCLUDEEMBEDDEDFONTS, null, "IncludeOncePerDoc"));
@@ -1517,9 +840,9 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setIncludeOtherResources(EIncludeOtherResources enumVar)
+	public void setIncludeOtherResources(final EnumIncludeOtherResources enumVar)
 	{
-		setAttribute(AttributeName.INCLUDEOTHERRESOURCES, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.INCLUDEOTHERRESOURCES, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -1527,35 +850,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EIncludeOtherResources getEIncludeOtherResources()
-	{
-		return EIncludeOtherResources.getEnum(getAttribute(AttributeName.INCLUDEOTHERRESOURCES, null, "IncludeOncePerDoc"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute IncludeOtherResources
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute IncludeOtherResources
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetIncludeOtherResources(EIncludeOtherResources) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setIncludeOtherResources(EnumIncludeOtherResources enumVar)
-	{
-		setAttribute(AttributeName.INCLUDEOTHERRESOURCES, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute IncludeOtherResources
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EIncludeOtherResources GetEIncludeOtherResources() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumIncludeOtherResources getIncludeOtherResources()
 	{
 		return EnumIncludeOtherResources.getEnum(getAttribute(AttributeName.INCLUDEOTHERRESOURCES, null, "IncludeOncePerDoc"));
@@ -1571,9 +865,9 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setIncludeProcSets(EIncludeProcSets enumVar)
+	public void setIncludeProcSets(final EnumIncludeProcSets enumVar)
 	{
-		setAttribute(AttributeName.INCLUDEPROCSETS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.INCLUDEPROCSETS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -1581,35 +875,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EIncludeProcSets getEIncludeProcSets()
-	{
-		return EIncludeProcSets.getEnum(getAttribute(AttributeName.INCLUDEPROCSETS, null, "IncludeOncePerDoc"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute IncludeProcSets
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute IncludeProcSets
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetIncludeProcSets(EIncludeProcSets) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setIncludeProcSets(EnumIncludeProcSets enumVar)
-	{
-		setAttribute(AttributeName.INCLUDEPROCSETS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute IncludeProcSets
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EIncludeProcSets GetEIncludeProcSets() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumIncludeProcSets getIncludeProcSets()
 	{
 		return EnumIncludeProcSets.getEnum(getAttribute(AttributeName.INCLUDEPROCSETS, null, "IncludeOncePerDoc"));
@@ -1625,9 +890,9 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setIncludeTrueTypeFonts(EIncludeTrueTypeFonts enumVar)
+	public void setIncludeTrueTypeFonts(final EnumIncludeTrueTypeFonts enumVar)
 	{
-		setAttribute(AttributeName.INCLUDETRUETYPEFONTS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.INCLUDETRUETYPEFONTS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -1635,35 +900,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EIncludeTrueTypeFonts getEIncludeTrueTypeFonts()
-	{
-		return EIncludeTrueTypeFonts.getEnum(getAttribute(AttributeName.INCLUDETRUETYPEFONTS, null, "IncludeOncePerDoc"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute IncludeTrueTypeFonts
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute IncludeTrueTypeFonts
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetIncludeTrueTypeFonts(EIncludeTrueTypeFonts) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setIncludeTrueTypeFonts(EnumIncludeTrueTypeFonts enumVar)
-	{
-		setAttribute(AttributeName.INCLUDETRUETYPEFONTS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute IncludeTrueTypeFonts
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EIncludeTrueTypeFonts GetEIncludeTrueTypeFonts() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumIncludeTrueTypeFonts getIncludeTrueTypeFonts()
 	{
 		return EnumIncludeTrueTypeFonts.getEnum(getAttribute(AttributeName.INCLUDETRUETYPEFONTS, null, "IncludeOncePerDoc"));
@@ -1679,9 +915,9 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setIncludeType1Fonts(EIncludeType1Fonts enumVar)
+	public void setIncludeType1Fonts(final EnumIncludeType1Fonts enumVar)
 	{
-		setAttribute(AttributeName.INCLUDETYPE1FONTS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.INCLUDETYPE1FONTS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -1689,35 +925,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EIncludeType1Fonts getEIncludeType1Fonts()
-	{
-		return EIncludeType1Fonts.getEnum(getAttribute(AttributeName.INCLUDETYPE1FONTS, null, "IncludeOncePerDoc"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute IncludeType1Fonts
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute IncludeType1Fonts
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetIncludeType1Fonts(EIncludeType1Fonts) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setIncludeType1Fonts(EnumIncludeType1Fonts enumVar)
-	{
-		setAttribute(AttributeName.INCLUDETYPE1FONTS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute IncludeType1Fonts
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EIncludeType1Fonts GetEIncludeType1Fonts() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumIncludeType1Fonts getIncludeType1Fonts()
 	{
 		return EnumIncludeType1Fonts.getEnum(getAttribute(AttributeName.INCLUDETYPE1FONTS, null, "IncludeOncePerDoc"));
@@ -1733,9 +940,9 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setIncludeType3Fonts(EIncludeType3Fonts enumVar)
+	public void setIncludeType3Fonts(final EnumIncludeType3Fonts enumVar)
 	{
-		setAttribute(AttributeName.INCLUDETYPE3FONTS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.INCLUDETYPE3FONTS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -1743,35 +950,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EIncludeType3Fonts getEIncludeType3Fonts()
-	{
-		return EIncludeType3Fonts.getEnum(getAttribute(AttributeName.INCLUDETYPE3FONTS, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute IncludeType3Fonts
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute IncludeType3Fonts
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetIncludeType3Fonts(EIncludeType3Fonts) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setIncludeType3Fonts(EnumIncludeType3Fonts enumVar)
-	{
-		setAttribute(AttributeName.INCLUDETYPE3FONTS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute IncludeType3Fonts
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EIncludeType3Fonts GetEIncludeType3Fonts() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumIncludeType3Fonts getIncludeType3Fonts()
 	{
 		return EnumIncludeType3Fonts.getEnum(getAttribute(AttributeName.INCLUDETYPE3FONTS, null, null));
@@ -1787,9 +965,9 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setOutputType(EOutputType enumVar)
+	public void setOutputType(final EnumOutputType enumVar)
 	{
-		setAttribute(AttributeName.OUTPUTTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.OUTPUTTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -1797,35 +975,6 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EOutputType getEOutputType()
-	{
-		return EOutputType.getEnum(getAttribute(AttributeName.OUTPUTTYPE, null, "PostScript"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute OutputType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute OutputType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetOutputType(EOutputType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setOutputType(EnumOutputType enumVar)
-	{
-		setAttribute(AttributeName.OUTPUTTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute OutputType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EOutputType GetEOutputType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumOutputType getOutputType()
 	{
 		return EnumOutputType.getEnum(getAttribute(AttributeName.OUTPUTTYPE, null, "PostScript"));
@@ -1841,7 +990,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPSLevel(int value)
+	public void setPSLevel(final int value)
 	{
 		setAttribute(AttributeName.PSLEVEL, value, null);
 	}
@@ -1866,7 +1015,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setScale(double value)
+	public void setScale(final double value)
 	{
 		setAttribute(AttributeName.SCALE, value, null);
 	}
@@ -1891,7 +1040,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSetPageSize(boolean value)
+	public void setSetPageSize(final boolean value)
 	{
 		setAttribute(AttributeName.SETPAGESIZE, value, null);
 	}
@@ -1916,7 +1065,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSetupProcsets(boolean value)
+	public void setSetupProcsets(final boolean value)
 	{
 		setAttribute(AttributeName.SETUPPROCSETS, value, null);
 	}
@@ -1941,7 +1090,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setShrinkToFit(boolean value)
+	public void setShrinkToFit(final boolean value)
 	{
 		setAttribute(AttributeName.SHRINKTOFIT, value, null);
 	}
@@ -1966,7 +1115,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSuppressCenter(boolean value)
+	public void setSuppressCenter(final boolean value)
 	{
 		setAttribute(AttributeName.SUPPRESSCENTER, value, null);
 	}
@@ -1991,7 +1140,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSuppressRotate(boolean value)
+	public void setSuppressRotate(final boolean value)
 	{
 		setAttribute(AttributeName.SUPPRESSROTATE, value, null);
 	}
@@ -2016,7 +1165,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTTasT42(boolean value)
+	public void setTTasT42(final boolean value)
 	{
 		setAttribute(AttributeName.TTAST42, value, null);
 	}
@@ -2041,7 +1190,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setUseFontAliasNames(boolean value)
+	public void setUseFontAliasNames(final boolean value)
 	{
 		setAttribute(AttributeName.USEFONTALIASNAMES, value, null);
 	}
@@ -2066,7 +1215,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIgnoreDeviceExtGState(boolean value)
+	public void setIgnoreDeviceExtGState(final boolean value)
 	{
 		setAttribute(AttributeName.IGNOREDEVICEEXTGSTATE, value, null);
 	}
@@ -2091,7 +1240,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBoundingBox(JDFRectangle value)
+	public void setBoundingBox(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.BOUNDINGBOX, value, null);
 	}
@@ -2104,8 +1253,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 */
 	public JDFRectangle getBoundingBox()
 	{
-		String strAttrName = getAttribute(AttributeName.BOUNDINGBOX, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.BOUNDINGBOX, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 

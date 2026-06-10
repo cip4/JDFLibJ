@@ -56,11 +56,12 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.resource.JDFValue;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 public class JDFStringState extends JDFAbstractState
 {
@@ -156,7 +157,7 @@ public class JDFStringState extends JDFAbstractState
 
 	public String getCurrentValue()
 	{
-		return getAttribute(AttributeName.CURRENTVALUE, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.CURRENTVALUE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	public void setDefaultValue(final String value)
@@ -166,7 +167,7 @@ public class JDFStringState extends JDFAbstractState
 
 	public String getDefaultValue()
 	{
-		return getAttribute(AttributeName.DEFAULTVALUE, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.DEFAULTVALUE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	public void setAllowedRegExp(final String value)
@@ -240,7 +241,9 @@ public class JDFStringState extends JDFAbstractState
 	{
 		final JDFValue val = getValue(iSkip);
 		if (val == null)
+		{
 			return null;
+		}
 		return val.appendLoc();
 	}
 
@@ -265,20 +268,22 @@ public class JDFStringState extends JDFAbstractState
 	{
 		final JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
 		if (e == null)
+		{
 			return null;
+		}
 		return e.getAllowedValue();
 	}
 
 	/**
 	 * Sets the ValueUsage attribute of the i-th subelement Value
 	 *
-	 * @param int iSkip: the number of Value elements to skip
+	 * @param int           iSkip: the number of Value elements to skip
 	 * @param EnumFitsValue value: value to set the attribute to
 	 */
 	public void setValueValueUsage(final int iSkip, final EnumFitsValue value)
 	{
 		final JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
-		e.setValueUsage(EnumValueUsage.getEnum(value.getName()));
+		e.setValueUsage(EnumValueUsage.getEnum(JavaEnumUtil.getName(value)));
 	}
 
 	/**
@@ -290,7 +295,8 @@ public class JDFStringState extends JDFAbstractState
 	public final EnumFitsValue getValueValueUsage(final int iSkip)
 	{
 		final JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
-		return EnumFitsValue.getEnum(e.getValueUsage().getName());
+		final EnumValueUsage valueUsage = e.getValueUsage();
+		return EnumFitsValue.getEnum(JavaEnumUtil.getName(valueUsage));
 	}
 
 	/*
@@ -302,21 +308,27 @@ public class JDFStringState extends JDFAbstractState
 	public void addValue(final String value, final EnumFitsValue testlists)
 	{
 		if (fitsValue(value, testlists))
+		{
 			return;
+		}
 
 		if (testlists == null || EnumFitsValue.Allowed.equals(testlists))
 		{
 			final JDFValue v = appendValue();
 			v.setAllowedValue(value);
 			if (testlists != null)
+			{
 				v.setValueUsage(EnumValueUsage.Allowed);
+			}
 		}
 		if (EnumFitsValue.Present.equals(testlists))
 		{
 			final JDFValue v = appendValue();
 			v.setAllowedValue(value);
 			if (testlists != null)
+			{
 				v.setValueUsage(EnumValueUsage.Present);
+			}
 		}
 	}
 
@@ -327,10 +339,9 @@ public class JDFStringState extends JDFAbstractState
 	/**
 	 * fitsValue - checks whether <code>value</code> matches the Allowed/Present test lists specified for this State
 	 *
-	 * @param value value to test
+	 * @param value     value to test
 	 * @param testlists the test lists the value has to match. In this State the test lists are ValueList AND ValueMod.<br>
-	 *            Choose one of two values: FitsValue_Allowed or FitsValue_Present. (Defaults to Allowed)
-	 *
+	 *                  Choose one of two values: FitsValue_Allowed or FitsValue_Present. (Defaults to Allowed)
 	 * @return boolean - true, if <code>value</code> matches testlists or if AllowedValueList and AllowedValueMod are not specified
 	 */
 	@Override
@@ -342,15 +353,16 @@ public class JDFStringState extends JDFAbstractState
 	/**
 	 * fitsValueElem - checks whether <code>str</code> matches the subelement <code>Value</code> specified for this State
 	 *
-	 * @param str string to test
+	 * @param str        string to test
 	 * @param valueusage switches between Allowed and Present configuration in subelement <code>Value</code>
-	 *
 	 * @return boolean - true, if <code>str</code> matches subelement Value or no corresponding value elements exist
 	 */
 	private final boolean fitsValueElem(final String str, final EnumFitsValue valuelist)
 	{
 		if (str == null)
+		{
 			return false;
+		}
 		final VElement v = getChildElementVector(ElementName.VALUE, null, null, true, 0, false);
 		final int siz = v.size();
 		boolean hasValue = false;
@@ -365,7 +377,9 @@ public class JDFStringState extends JDFAbstractState
 					final String value = getValueAllowedValue(i);
 					hasValue = true;
 					if (str.equals(value))
+					{
 						return true; // we have found it
+					}
 				}
 			}
 			else
@@ -373,7 +387,9 @@ public class JDFStringState extends JDFAbstractState
 				hasValue = true;
 				final String value = getValueAllowedValue(i);
 				if (str.equals(value))
+				{
 					return true; // we have found it
+				}
 			}
 		}
 		return !hasValue;

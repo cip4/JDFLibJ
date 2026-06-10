@@ -525,8 +525,8 @@ class XJDFPrepWalker extends BaseElementWalker
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
 			final SetHelper sh = SetHelper.getHelper(xjdf);
-			if (!ContainerUtil.contains(sh.getXJDF().getTypes(), EnumType.DigitalPrinting.getName())
-					&& !ContainerUtil.contains(sh.getXJDF().getTypes(), EnumType.ConventionalPrinting.getName()))
+			if (!ContainerUtil.contains(sh.getXJDF().getTypes(), EnumType.DigitalPrinting.name())
+					&& !ContainerUtil.contains(sh.getXJDF().getTypes(), EnumType.ConventionalPrinting.name()))
 			{
 				sh.deleteNode();
 				return null;
@@ -568,7 +568,7 @@ class XJDFPrepWalker extends BaseElementWalker
 			return super.walk(xjdf, dummy);
 		}
 
-		void splitIdentical(SetHelper sh)
+		void splitIdentical(final SetHelper sh)
 		{
 			for (final ResourceHelper rh : sh.getResourceList())
 			{

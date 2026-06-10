@@ -44,12 +44,10 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author rainer prosi
- *
  */
 public class LinkInfo
 {
 	/**
-	 *
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -62,24 +60,24 @@ public class LinkInfo
 	}
 
 	/**
-	 *
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals(final Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
-		if (obj == null)
+		}
+		if ((obj == null) || (getClass() != obj.getClass()))
+		{
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		}
 		final LinkInfo other = (LinkInfo) obj;
 		return ContainerUtil.equals(other.theInfo, theInfo);
 	}
 
 	/**
-	 *
 	 * @param info
 	 */
 	LinkInfo(final LinkInfo info)
@@ -89,7 +87,6 @@ public class LinkInfo
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	int size()
@@ -98,7 +95,6 @@ public class LinkInfo
 	}
 
 	/**
-	 *
 	 * @param info
 	 */
 	LinkInfo(final String info)
@@ -108,7 +104,6 @@ public class LinkInfo
 	}
 
 	/**
-	 *
 	 * @param info
 	 */
 	LinkInfo(final VString info)
@@ -120,7 +115,6 @@ public class LinkInfo
 	private final VString theInfo;
 
 	/**
-	 *
 	 * @return
 	 */
 	VString getVString()
@@ -129,7 +123,6 @@ public class LinkInfo
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	String getString()
@@ -138,7 +131,6 @@ public class LinkInfo
 	}
 
 	/**
-	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -202,7 +194,6 @@ public class LinkInfo
 	}
 
 	/**
-	 *
 	 * @param processUsage
 	 * @return
 	 */
@@ -219,20 +210,22 @@ public class LinkInfo
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	boolean matchesUsage(final int iPos, final EnumUsage usage)
 	{
 		if (EnumUsage.Input.equals(usage))
+		{
 			return isInput(iPos);
+		}
 		if (EnumUsage.Output.equals(usage))
+		{
 			return isOutput(iPos);
+		}
 		return theInfo.get(iPos) != null;
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	boolean isInput(final int iPos)
@@ -242,7 +235,6 @@ public class LinkInfo
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	boolean isSingle(final int iPos)
@@ -257,7 +249,6 @@ public class LinkInfo
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	boolean isOutput(final int iPos)
@@ -269,11 +260,8 @@ public class LinkInfo
 	/**
 	 * get the process usage resource that matches the typesafe link described by i
 	 *
-	 *
 	 * @param iPos the index of the pu to find
 	 * @return the enumerated process usage of this checked link
-	 *
-	 *
 	 */
 	String getProcessUsage(final int iPos)
 	{
@@ -292,11 +280,8 @@ public class LinkInfo
 	/**
 	 * get the process usage resource that matches the typesafe link described by i
 	 *
-	 *
 	 * @param iPos the index of the pu to find
 	 * @return the enumerated process usage of this checked link
-	 *
-	 *
 	 */
 	EnumProcessUsage getEnumProcessUsage(final int iPos)
 	{
@@ -321,7 +306,6 @@ public class LinkInfo
 	}
 
 	/**
-	 *
 	 * @param processUsage
 	 * @return
 	 */
@@ -338,7 +322,6 @@ public class LinkInfo
 	}
 
 	/**
-	 *
 	 * @param processUsage
 	 * @return
 	 */
@@ -347,12 +330,13 @@ public class LinkInfo
 		final boolean bInput = hasInput(processUsage);
 		final boolean bOutput = hasOutput(processUsage);
 		if (bInput ^ bOutput)
+		{
 			return bInput ? EnumUsage.Input : EnumUsage.Output;
+		}
 		return null;
 	}
 
 	/**
-	 *
 	 * @param usage
 	 * @param procU
 	 * @param nLink
@@ -367,12 +351,13 @@ public class LinkInfo
 			return false;
 		}
 		if (!hasProcessUsage(procU))
+		{
 			procU = null;
+		}
 		return usage == null || usage.isInput() ? hasInput(procU) : hasOutput(procU);
 	}
 
 	/**
-	 *
 	 * @param bIn
 	 * @param bOut
 	 */
@@ -415,7 +400,6 @@ public class LinkInfo
 	}
 
 	/**
-	 *
 	 * @param usage
 	 * @return
 	 */
@@ -432,7 +416,6 @@ public class LinkInfo
 	}
 
 	/**
-	 *
 	 * @param usage
 	 * @return
 	 */
@@ -445,7 +428,9 @@ public class LinkInfo
 			{
 				final int nn = maxAllowed(i);
 				if (nn == Integer.MAX_VALUE)
+				{
 					return nn;
+				}
 				n += nn;
 			}
 		}
@@ -453,7 +438,6 @@ public class LinkInfo
 	}
 
 	/**
-	 *
 	 * @param i
 	 * @return
 	 */
@@ -461,16 +445,21 @@ public class LinkInfo
 	{
 		final String s = StringUtil.rightStr(get2(i), 1);
 		if (s == null)
+		{
 			return 0;
+		}
 		if ("+".equals(s) || "*".equals(s))
+		{
 			return Integer.MAX_VALUE;
+		}
 		if ("_".equals(s) || "?".equals(s))
+		{
 			return 1;
+		}
 		return 0;
 	}
 
 	/**
-	 *
 	 * @param bInput
 	 * @param bOutput
 	 * @param i
@@ -479,15 +468,14 @@ public class LinkInfo
 	boolean isRequired(final int i)
 	{
 		final String s = get2(i);
-		if ("i_".equals(s) || "i+".equals(s))
+		if ("i_".equals(s) || "i+".equals(s) || "o_".equals(s) || "o+".equals(s))
+		{
 			return true;
-		if ("o_".equals(s) || "o+".equals(s))
-			return true;
+		}
 		return false;
 	}
 
 	/**
-	 *
 	 * @param i
 	 * @return
 	 */
@@ -497,14 +485,15 @@ public class LinkInfo
 	}
 
 	/**
-	 *
 	 * @param procU
 	 * @return
 	 */
 	public boolean hasProcessUsage(final String procU)
 	{
 		if (procU == null)
+		{
 			return theInfo.size() > 0;
+		}
 
 		for (final String s : theInfo)
 		{

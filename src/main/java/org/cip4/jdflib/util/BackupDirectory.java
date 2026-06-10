@@ -66,7 +66,7 @@
  * <http://www.cip4.org/>.
  *
  *
- * 
+ *
  */
 package org.cip4.jdflib.util;
 
@@ -80,11 +80,8 @@ import org.cip4.jdflib.util.thread.IPersistable;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
  *         class to manage a directory by removing the oldest files whenever a new file is created
- * 
  *         The oldest file dies when the maximum number is reached
- * 
  *         08.12.2008
  */
 public class BackupDirectory extends File implements IPersistable
@@ -103,7 +100,7 @@ public class BackupDirectory extends File implements IPersistable
 	}
 
 	/**
-	 * @param file the base file
+	 * @param file     the base file
 	 * @param nBackupp the number of backups to retain
 	 * @throws IllegalArgumentException if file exists and is not a directory
 	 */
@@ -112,15 +109,19 @@ public class BackupDirectory extends File implements IPersistable
 		super(file.getPath());
 		this.nBackup = nBackupp;
 		if (!isDirectory())
+		{
 			mkdirs();
+		}
 		if (!isDirectory())
+		{
 			throw new IllegalArgumentException(file.getAbsolutePath() + " is not a directory");
+		}
 		isDirectory = false;
 	}
 
 	/**
 	 * creates a new file in this and assures than no more than nBackup files remain
-	 * 
+	 *
 	 * @param localFile the local file to place in this directory
 	 * @return the file to write, null if an io exception occurred when creating it
 	 */
@@ -128,10 +129,15 @@ public class BackupDirectory extends File implements IPersistable
 	{
 		final File file = FileUtil.getFileInDirectory(this, localFile);
 		if (file.exists())
+		{
 			FileUtil.forceDelete(file);
+		}
 		else
+		// we only cleanup once a minute
+		{
 			// we only cleanup once a minute
 			DelayedPersist.getDelayedPersist().queue(this, 42000);
+		}
 
 		final boolean ok;
 		if (isDirectory)
@@ -153,7 +159,7 @@ public class BackupDirectory extends File implements IPersistable
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void clean()
 	{
@@ -179,7 +185,7 @@ public class BackupDirectory extends File implements IPersistable
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1521423479898L;
 

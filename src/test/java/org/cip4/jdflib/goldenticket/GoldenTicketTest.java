@@ -81,7 +81,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         May 13, 2009
  */
 class GoldenTicketTest extends BaseGoldenTicketTest
@@ -240,7 +239,6 @@ class GoldenTicketTest extends BaseGoldenTicketTest
 	}
 
 	/**
-	 *
 	 * @see BaseGoldenTicketTest#setUp()
 	 */
 	@Override
@@ -254,7 +252,6 @@ class GoldenTicketTest extends BaseGoldenTicketTest
 	}
 
 	/**
-	 *
 	 * @see BaseGoldenTicketTest#tearDown()
 	 */
 	@Override

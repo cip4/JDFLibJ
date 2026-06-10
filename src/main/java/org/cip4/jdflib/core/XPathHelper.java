@@ -669,7 +669,7 @@ class XPathHelper
 			if (prefix != null)
 			{
 				final String uri = e.getNamespaceURI();
-				map.put(JDFConstants.SLASH + StringUtil.token(baseXPath, 0, JDFConstants.SLASH) + "/@xmlns:" + prefix, uri);
+				map.put(JDFCoreConstants.SLASH + StringUtil.token(baseXPath, 0, JDFCoreConstants.SLASH) + "/@xmlns:" + prefix, uri);
 			}
 			if (vKeys != null)
 			{
@@ -682,7 +682,7 @@ class XPathHelper
 						if (prefix != null)
 						{
 							final String uri = e.getNamespaceURIFromPrefix(prefix);
-							map.put(JDFConstants.SLASH + StringUtil.token(baseXPath, 0, JDFConstants.SLASH) + "/@xmlns:" + prefix, uri);
+							map.put(JDFCoreConstants.SLASH + StringUtil.token(baseXPath, 0, JDFCoreConstants.SLASH) + "/@xmlns:" + prefix, uri);
 						}
 					}
 				}
@@ -694,7 +694,7 @@ class XPathHelper
 				{
 					if (text == null)
 					{
-						text = JDFConstants.EMPTYSTRING;
+						text = JDFCoreConstants.EMPTYSTRING;
 					}
 					map.put(baseXPath, text);
 				}
@@ -714,7 +714,7 @@ class XPathHelper
 	 */
 	KElement getXPathElement(final String path)
 	{
-		if (StringUtil.isEmpty(path) || JDFConstants.DOT.equals(path))
+		if (StringUtil.isEmpty(path) || JDFCoreConstants.DOT.equals(path))
 		{
 			return theElement;
 		}
@@ -1019,7 +1019,7 @@ class XPathHelper
 			final String rootNodeName = r.getLocalName();
 			final int nextPos = path.indexOf('/', 2);
 			final String rootPath = nextPos > 0 ? path.substring(1, nextPos) : path.substring(1);
-			final String nextPath = nextPos > 0 ? path.substring(nextPos + 1) : JDFConstants.EMPTYSTRING;
+			final String nextPath = nextPos > 0 ? path.substring(nextPos + 1) : JDFCoreConstants.EMPTYSTRING;
 			if (rootPath.equals(rootNodeName) || KElement.isWildCard(rootPath))
 			{
 				return new XPathHelper(r).getXPathElementVectorInternal(nextPath, maxSize, true);
@@ -1050,7 +1050,7 @@ class XPathHelper
 				{
 					for (final KElement e : v)
 					{
-						if (e.getXPathAttribute(key, JDFConstants.EMPTYSTRING).equals(map.get(key)))
+						if (e.getXPathAttribute(key, JDFCoreConstants.EMPTYSTRING).equals(map.get(key)))
 						{
 							vRet.add(e);
 						}

@@ -115,14 +115,15 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	/**
 	 * create a BaseGoldenTicket
 	 *
-	 * @param _icsLevel the level to init to (1,2 or 3)
+	 * @param _icsLevel  the level to init to (1,2 or 3)
 	 * @param jdfVersion the version to generate a golden ticket for
-	 * @param _jmfLevel level of jmf ICS to support
-	 * @param _misLevel level of MIS ICS to support
-	 * @param isGrayBox if true, write a grayBox
-	 * @param vPartMap the partmap vector for this node
+	 * @param _jmfLevel  level of jmf ICS to support
+	 * @param _misLevel  level of MIS ICS to support
+	 * @param isGrayBox  if true, write a grayBox
+	 * @param vPartMap   the partmap vector for this node
 	 */
-	public MISCPGoldenTicket(final int _icsLevel, final EnumVersion jdfVersion, final int _jmfLevel, final int _misLevel, final boolean isGrayBox, final VJDFAttributeMap vPartMap)
+	public MISCPGoldenTicket(final int _icsLevel, final EnumVersion jdfVersion, final int _jmfLevel, final int _misLevel, final boolean isGrayBox,
+			final VJDFAttributeMap vPartMap)
 	{
 		super(_misLevel, jdfVersion, _jmfLevel);
 		icsLevel = _icsLevel;
@@ -142,7 +143,6 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	 * create a BaseGoldenTicket
 	 *
 	 * @param parent
-	 *
 	 */
 	public MISCPGoldenTicket(final MISCPGoldenTicket parent)
 	{
@@ -180,8 +180,6 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 
 	/**
 	 * initializes this node to a given ICS version
-	 *
-	 *
 	 */
 	@Override
 	public void init()
@@ -422,7 +420,8 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 		{
 			theNode.linkResource(theParentNode.getResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input, 0), EnumUsage.Input, null);
 		}
-		final JDFConventionalPrintingParams cpp = (JDFConventionalPrintingParams) theNode.getCreateResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input, 0);
+		final JDFConventionalPrintingParams cpp = (JDFConventionalPrintingParams) theNode.getCreateResource(ElementName.CONVENTIONALPRINTINGPARAMS,
+				EnumUsage.Input, 0);
 		cpp.setPrintingType(EnumPrintingType.SheetFed);
 		cpp.setWorkStyle(workStyle);
 		cpp.setResStatus(EnumResStatus.Available, false);
@@ -476,7 +475,6 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 
 	/**
 	 * prepare an mis fuzzy node and make it runnable by the device
-	 *
 	 */
 	@Override
 	public void makeReady()
@@ -515,7 +513,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 		}
 		else
 		{
-			file = new File(previewLeaf.getSheetName() + "_" + previewLeaf.getSide().getName().substring(0, 1) + "_" + previewLeaf.getSeparation() + ".png");
+			file = new File(previewLeaf.getSheetName() + "_" + previewLeaf.getSide().name().substring(0, 1) + "_" + previewLeaf.getSeparation() + ".png");
 
 		}
 		file = FileUtil.getFileInDirectory(share, file);
@@ -525,7 +523,6 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Override

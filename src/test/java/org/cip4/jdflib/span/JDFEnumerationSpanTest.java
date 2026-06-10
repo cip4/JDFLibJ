@@ -45,9 +45,9 @@
  */
 package org.cip4.jdflib.span;
 
+import java.util.List;
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -64,7 +64,6 @@ class JDFEnumerationSpanTest extends JDFTestCaseBase
 
 	/**
 	 * make sure that corrupt files always return a null document
-	 *
 	 */
 	@Test
 	void testRange()
@@ -76,17 +75,16 @@ class JDFEnumerationSpanTest extends JDFTestCaseBase
 		bl.setActual(EnumSpanBindingLength.Long);
 		final EnumSpanBindingLength ebl = (EnumSpanBindingLength) bl.getActual();
 		Assertions.assertEquals(ebl, EnumSpanBindingLength.Long);
-		final Vector<ValuedEnum> v = new Vector<>();
+		final List<EnumSpanBindingLength> v = new Vector<>();
 		v.add(EnumSpanBindingLength.Long);
 		v.add(EnumSpanBindingLength.Short);
 		bl.setRange(v);
-		final Vector<? extends ValuedEnum> v2 = bl.getRange();
+		final List<? extends Enum<?>> v2 = bl.getRange();
 		Assertions.assertEquals(v, v2, "Range");
 	}
 
 	/**
 	 * make sure that corrupt files always return a null document
-	 *
 	 */
 	@Test
 	void testSetActual()

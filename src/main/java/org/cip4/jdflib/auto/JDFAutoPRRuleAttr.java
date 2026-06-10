@@ -109,7 +109,7 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPRRuleAttr(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPRRuleAttr(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -121,7 +121,7 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPRRuleAttr(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPRRuleAttr(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -134,7 +134,7 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPRRuleAttr(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPRRuleAttr(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -155,7 +155,7 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGroupBy(VString value)
+	public void setGroupBy(final VString value)
 	{
 		setAttribute(AttributeName.GROUPBY, value, null);
 	}
@@ -167,8 +167,8 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
 	 */
 	public VString getGroupBy()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.GROUPBY, null, "Tested");
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.GROUPBY, null, "Tested");
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -183,7 +183,7 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setReportAttr(VString value)
+	public void setReportAttr(final VString value)
 	{
 		setAttribute(AttributeName.REPORTATTR, value, null);
 	}
@@ -195,8 +195,8 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
 	 */
 	public VString getReportAttr()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.REPORTATTR, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.REPORTATTR, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -211,7 +211,7 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLogErrors(int value)
+	public void setLogErrors(final int value)
 	{
 		setAttribute(AttributeName.LOGERRORS, value, null);
 	}
@@ -236,7 +236,7 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaxGroups(int value)
+	public void setMaxGroups(final int value)
 	{
 		setAttribute(AttributeName.MAXGROUPS, value, null);
 	}
@@ -261,7 +261,7 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaxPerGroup(int value)
+	public void setMaxPerGroup(final int value)
 	{
 		setAttribute(AttributeName.MAXPERGROUP, value, null);
 	}

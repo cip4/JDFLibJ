@@ -24,29 +24,27 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test for JDFURL.
- * 
+ *
  * @author <a href="mailto:Michael.Kohn@heidelberg.com">Michael Kohn</a>,
  *         Heidelberger Druckmaschinen AG, Tel. 3538
- * 
  */
-class JDFURLTest {
+class JDFURLTest
+{
 
 	@Test
 	public final void testAmpersand()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
 		n.setType("Interpreting", true);
-		JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC,
-				null, EnumUsage.Input, null, null, null, null);
-		String url = "File:///a&b.pdf";
+		final JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC, null, EnumUsage.Input, null, null, null, null);
+		final String url = "File:///a&b.pdf";
 		fs.setURL(url);
-		String s = d.write2String(2);
+		final String s = d.write2String(2);
 
-		JDFParser p = new JDFParser();
-		JDFDoc dNew = p.parseString(s);
-		String newUrl = ((JDFFileSpec) dNew.getJDFRoot().getResourcePool()
-				.getElement(ElementName.FILESPEC, null, 0)).getURL();
+		final JDFParser p = new JDFParser();
+		final JDFDoc dNew = p.parseString(s);
+		final String newUrl = ((JDFFileSpec) dNew.getJDFRoot().getResourcePool().getElement(ElementName.FILESPEC, null, 0)).getURL();
 
 		Assertions.assertEquals(url, newUrl, "url=url");
 

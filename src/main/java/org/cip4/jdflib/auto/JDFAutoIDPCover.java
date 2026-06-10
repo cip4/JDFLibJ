@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -103,8 +99,8 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.BACKSIDE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.COVERTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumCoverType.getEnum(0),
-				"Front");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.COVERTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumCoverType.class, 0), "Front");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.FRONTSIDE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 	}
 
@@ -135,7 +131,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIDPCover(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoIDPCover(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -147,7 +143,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIDPCover(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoIDPCover(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -160,93 +156,28 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoIDPCover(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoIDPCover(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for CoverType
+	 * Enumeration strings for numCoverType
 	 */
 
-	public enum ECoverType
+	public enum EnumCoverType
 	{
 		Front, Back;
 
-		public static ECoverType getEnum(String val)
+		public static EnumCoverType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ECoverType.class, val, ECoverType.Front);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumCoverType.class, val, EnumCoverType.Front);
 		}
-	}
-
-	/**
-	 * Enumeration strings for CoverType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumCoverType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumCoverType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumCoverType getEnum(String enumName)
-		{
-			return (EnumCoverType) getEnum(EnumCoverType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumCoverType getEnum(int enumValue)
-		{
-			return (EnumCoverType) getEnum(EnumCoverType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumCoverType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumCoverType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumCoverType.class);
-		}
-
-		/**  */
-		public static final EnumCoverType Front = new EnumCoverType("Front");
-		/**  */
-		public static final EnumCoverType Back = new EnumCoverType("Back");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -258,7 +189,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBackSide(boolean value)
+	public void setBackSide(final boolean value)
 	{
 		setAttribute(AttributeName.BACKSIDE, value, null);
 	}
@@ -283,9 +214,9 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setCoverType(ECoverType enumVar)
+	public void setCoverType(final EnumCoverType enumVar)
 	{
-		setAttribute(AttributeName.COVERTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.COVERTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -293,35 +224,6 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ECoverType getECoverType()
-	{
-		return ECoverType.getEnum(getAttribute(AttributeName.COVERTYPE, null, "Front"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute CoverType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute CoverType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetCoverType(ECoverType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setCoverType(EnumCoverType enumVar)
-	{
-		setAttribute(AttributeName.COVERTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute CoverType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ECoverType GetECoverType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumCoverType getCoverType()
 	{
 		return EnumCoverType.getEnum(getAttribute(AttributeName.COVERTYPE, null, "Front"));
@@ -337,7 +239,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFrontSide(boolean value)
+	public void setFrontSide(final boolean value)
 	{
 		setAttribute(AttributeName.FRONTSIDE, value, null);
 	}
@@ -384,7 +286,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFIDPFinishing the element
 	 */
-	public JDFIDPFinishing getCreateIDPFinishing(int iSkip)
+	public JDFIDPFinishing getCreateIDPFinishing(final int iSkip)
 	{
 		return (JDFIDPFinishing) getCreateElement_JDFElement(ElementName.IDPFINISHING, null, iSkip);
 	}
@@ -396,7 +298,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 * @return JDFIDPFinishing the element
 	 *         default is getIDPFinishing(0)
 	 */
-	public JDFIDPFinishing getIDPFinishing(int iSkip)
+	public JDFIDPFinishing getIDPFinishing(final int iSkip)
 	{
 		return (JDFIDPFinishing) getElement(ElementName.IDPFINISHING, null, iSkip);
 	}
@@ -447,7 +349,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFIDPLayout the element
 	 */
-	public JDFIDPLayout getCreateIDPLayout(int iSkip)
+	public JDFIDPLayout getCreateIDPLayout(final int iSkip)
 	{
 		return (JDFIDPLayout) getCreateElement_JDFElement(ElementName.IDPLAYOUT, null, iSkip);
 	}
@@ -459,7 +361,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 * @return JDFIDPLayout the element
 	 *         default is getIDPLayout(0)
 	 */
-	public JDFIDPLayout getIDPLayout(int iSkip)
+	public JDFIDPLayout getIDPLayout(final int iSkip)
 	{
 		return (JDFIDPLayout) getElement(ElementName.IDPLAYOUT, null, iSkip);
 	}
@@ -510,7 +412,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFMediaIntent the element
 	 */
-	public JDFMediaIntent getCreateMediaIntent(int iSkip)
+	public JDFMediaIntent getCreateMediaIntent(final int iSkip)
 	{
 		return (JDFMediaIntent) getCreateElement_JDFElement(ElementName.MEDIAINTENT, null, iSkip);
 	}
@@ -522,7 +424,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 * @return JDFMediaIntent the element
 	 *         default is getMediaIntent(0)
 	 */
-	public JDFMediaIntent getMediaIntent(int iSkip)
+	public JDFMediaIntent getMediaIntent(final int iSkip)
 	{
 		return (JDFMediaIntent) getElement(ElementName.MEDIAINTENT, null, iSkip);
 	}
@@ -552,7 +454,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMediaIntent(JDFMediaIntent refTarget)
+	public void refMediaIntent(final JDFMediaIntent refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -583,7 +485,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFMediaSource the element
 	 */
-	public JDFMediaSource getCreateMediaSource(int iSkip)
+	public JDFMediaSource getCreateMediaSource(final int iSkip)
 	{
 		return (JDFMediaSource) getCreateElement_JDFElement(ElementName.MEDIASOURCE, null, iSkip);
 	}
@@ -595,7 +497,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 * @return JDFMediaSource the element
 	 *         default is getMediaSource(0)
 	 */
-	public JDFMediaSource getMediaSource(int iSkip)
+	public JDFMediaSource getMediaSource(final int iSkip)
 	{
 		return (JDFMediaSource) getElement(ElementName.MEDIASOURCE, null, iSkip);
 	}
@@ -625,7 +527,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMediaSource(JDFMediaSource refTarget)
+	public void refMediaSource(final JDFMediaSource refTarget)
 	{
 		refElement(refTarget);
 	}

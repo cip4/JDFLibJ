@@ -128,7 +128,7 @@ public abstract class JDFAutoDurationState extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDurationState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDurationState(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -140,7 +140,7 @@ public abstract class JDFAutoDurationState extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDurationState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDurationState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -153,7 +153,7 @@ public abstract class JDFAutoDurationState extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDurationState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDurationState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -164,7 +164,7 @@ public abstract class JDFAutoDurationState extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -185,7 +185,7 @@ public abstract class JDFAutoDurationState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDefaultValue(JDFDuration value)
+	public void setDefaultValue(final JDFDuration value)
 	{
 		setAttribute(AttributeName.DEFAULTVALUE, value, null);
 	}
@@ -198,8 +198,8 @@ public abstract class JDFAutoDurationState extends JDFResource
 	 */
 	public JDFDuration getDefaultValue()
 	{
-		String strAttrName = getAttribute(AttributeName.DEFAULTVALUE, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.DEFAULTVALUE, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -213,7 +213,7 @@ public abstract class JDFAutoDurationState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCurrentValue(JDFDuration value)
+	public void setCurrentValue(final JDFDuration value)
 	{
 		setAttribute(AttributeName.CURRENTVALUE, value, null);
 	}
@@ -226,8 +226,8 @@ public abstract class JDFAutoDurationState extends JDFResource
 	 */
 	public JDFDuration getCurrentValue()
 	{
-		String strAttrName = getAttribute(AttributeName.CURRENTVALUE, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CURRENTVALUE, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -241,7 +241,7 @@ public abstract class JDFAutoDurationState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowedValueList(JDFDurationRangeList value)
+	public void setAllowedValueList(final JDFDurationRangeList value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUELIST, value, null);
 	}
@@ -254,8 +254,8 @@ public abstract class JDFAutoDurationState extends JDFResource
 	 */
 	public JDFDurationRangeList getAllowedValueList()
 	{
-		String strAttrName = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
-		JDFDurationRangeList nPlaceHolder = JDFDurationRangeList.createDurationRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
+		final JDFDurationRangeList nPlaceHolder = JDFDurationRangeList.createDurationRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -269,7 +269,7 @@ public abstract class JDFAutoDurationState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentValueList(JDFDurationRangeList value)
+	public void setPresentValueList(final JDFDurationRangeList value)
 	{
 		setAttribute(AttributeName.PRESENTVALUELIST, value, null);
 	}
@@ -282,8 +282,8 @@ public abstract class JDFAutoDurationState extends JDFResource
 	 */
 	public JDFDurationRangeList getPresentValueList()
 	{
-		String strAttrName = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
-		JDFDurationRangeList nPlaceHolder = JDFDurationRangeList.createDurationRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
+		final JDFDurationRangeList nPlaceHolder = JDFDurationRangeList.createDurationRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -319,7 +319,7 @@ public abstract class JDFAutoDurationState extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc the element
 	 */
-	public JDFLoc getCreateLoc(int iSkip)
+	public JDFLoc getCreateLoc(final int iSkip)
 	{
 		return (JDFLoc) getCreateElement_JDFElement(ElementName.LOC, null, iSkip);
 	}
@@ -331,7 +331,7 @@ public abstract class JDFAutoDurationState extends JDFResource
 	 * @return JDFLoc the element
 	 *         default is getLoc(0)
 	 */
-	public JDFLoc getLoc(int iSkip)
+	public JDFLoc getLoc(final int iSkip)
 	{
 		return (JDFLoc) getElement(ElementName.LOC, null, iSkip);
 	}
@@ -382,7 +382,7 @@ public abstract class JDFAutoDurationState extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFValueLoc the element
 	 */
-	public JDFValueLoc getCreateValueLoc(int iSkip)
+	public JDFValueLoc getCreateValueLoc(final int iSkip)
 	{
 		return (JDFValueLoc) getCreateElement_JDFElement(ElementName.VALUELOC, null, iSkip);
 	}
@@ -394,7 +394,7 @@ public abstract class JDFAutoDurationState extends JDFResource
 	 * @return JDFValueLoc the element
 	 *         default is getValueLoc(0)
 	 */
-	public JDFValueLoc getValueLoc(int iSkip)
+	public JDFValueLoc getValueLoc(final int iSkip)
 	{
 		return (JDFValueLoc) getElement(ElementName.VALUELOC, null, iSkip);
 	}

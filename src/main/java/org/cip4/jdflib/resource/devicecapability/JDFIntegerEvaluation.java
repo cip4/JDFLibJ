@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,22 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFIntegerEvaluation.java
@@ -87,7 +87,7 @@ import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
@@ -113,36 +113,36 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 
 	/**
 	 * constructor for JDFIntegerEvaluation
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFIntegerEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFIntegerEvaluation(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFIntegerEvaluation
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFIntegerEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFIntegerEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFIntegerEvaluation
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFIntegerEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFIntegerEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -152,7 +152,7 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -167,22 +167,22 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 
 	/**
 	 * set attribute <code>ValueList</code>
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setValueList(JDFIntegerRangeList value)
+	public void setValueList(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.VALUELIST, value.toString(), null);
 	}
 
 	/**
 	 * append the value of int to @ValueList
-	 * 
+	 *
 	 * @param value the integer value to append
 	 */
-	public void appendValueList(int value)
+	public void appendValueList(final int value)
 	{
-		JDFIntegerRangeList irl = getCreateValueList();
+		final JDFIntegerRangeList irl = getCreateValueList();
 		irl.append(value);
 		setValueList(irl);
 	}
@@ -191,33 +191,35 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	{
 		JDFIntegerRangeList irl = getValueList();
 		if (irl == null)
+		{
 			irl = new JDFIntegerRangeList();
+		}
 		return irl;
 	}
 
 	/**
 	 * get attribute <code>ValueList</code>
-	 * 
+	 *
 	 * @return JDFIntegerRangeList - the value of the attribute
 	 */
 	public JDFIntegerRangeList getValueList()
 	{
-		return JDFIntegerRangeList.createIntegerRangeList(getAttribute(AttributeName.VALUELIST, null, JDFConstants.EMPTYSTRING));
+		return JDFIntegerRangeList.createIntegerRangeList(getAttribute(AttributeName.VALUELIST, null, JDFCoreConstants.EMPTYSTRING));
 	}
 
 	/**
 	 * set attribute <code>ValueMod</code>
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setValueMod(JDFXYPair value)
+	public void setValueMod(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.VALUEMOD, value.toString());
 	}
 
 	/**
 	 * get attribute ValueMod
-	 * 
+	 *
 	 * @return JDFXYPair - the value of the attribute
 	 */
 	public JDFXYPair getValueMod()
@@ -231,12 +233,12 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 
 	/**
 	 * fitsValue - tests if the defined 'value' matches testlists, specified for this Evaluation
-	 * 
+	 *
 	 * @param value value to test
 	 * @return boolean - true, if 'value' matches testlists or if testlists are not specified
 	 */
 	@Override
-	public boolean fitsValue(String value)
+	public boolean fitsValue(final String value)
 	{
 		if (fitsListType(value))
 		{
@@ -245,7 +247,7 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 			{
 				rangelist = new JDFIntegerRangeList(value);
 			}
-			catch (DataFormatException dfe)
+			catch (final DataFormatException dfe)
 			{
 				return false;
 			}
@@ -258,29 +260,29 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 
 	/**
 	 * fitsListType - tests if the defined 'value' matches ListType attribute, specified for this Evaluation
-	 * 
+	 *
 	 * @param value value to test
 	 * @return boolean - true, if 'value' matches specified value of ListType
 	 */
-	private final boolean fitsListType(String value)
+	private final boolean fitsListType(final String value)
 	{
-		EnumListType listType = getListType();
+		final EnumListType listType = getListType();
 
 		JDFIntegerRangeList rangelist;
 		try
 		{
 			rangelist = new JDFIntegerRangeList(value);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			return false;
 		}
-		catch (JDFException e)
+		catch (final JDFException e)
 		{
 			return false;
 		}
 
-		if (listType.equals(EnumListType.SingleValue) || listType.equals(EnumListType.getEnum(0)))
+		if (listType.equals(EnumListType.SingleValue))
 		{// default ListType = SingleValue
 			return (StringUtil.isInteger(value));
 		}
@@ -332,18 +334,20 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 
 	/**
 	 * fitsValueList - tests if the defined 'rangelist' matches the ValueList, specified for this Evaluation
-	 * 
+	 *
 	 * @param rangelist range list to test
 	 * @return boolean - true, if 'rangelist' matches the ValueList or if ValueList is not specified
 	 */
-	private final boolean fitsValueList(JDFIntegerRangeList rangelist)
+	private final boolean fitsValueList(final JDFIntegerRangeList rangelist)
 	{
 		if (!hasAttribute(AttributeName.VALUELIST))
+		{
 			return true;
+		}
 
-		JDFIntegerRangeList valuelist = getValueList();
+		final JDFIntegerRangeList valuelist = getValueList();
 
-		EnumListType listType = getListType();
+		final EnumListType listType = getListType();
 
 		if (listType.equals(EnumListType.CompleteList))
 		{
@@ -358,65 +362,72 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 			return fitsContainedList(rangelist, valuelist);
 		}
 
-		int siz = rangelist.size();
+		final int siz = rangelist.size();
 		for (int i = 0; i < siz; i++)
 		{
 			if (!valuelist.isPartOfRange(rangelist.at(i)))
+			{
 				return false;
+			}
 		}
 		return true;
 	}
 
 	/**
 	 * fitsValueMod - tests if the defined 'rangelist' matches the ValueMod, specified for this Evaluation
-	 * 
+	 *
 	 * @param rangelist range list to test
 	 * @return boolean - true, if 'rangelist' matches the ValueMod or if ValueMod is not specified
 	 */
-	private final boolean fitsValueMod(JDFIntegerRangeList rangelist)
+	private final boolean fitsValueMod(final JDFIntegerRangeList rangelist)
 	{
 		if (!hasAttribute(AttributeName.VALUEMOD))
+		{
 			return true;
+		}
 
-		JDFXYPair mod = getValueMod();
+		final JDFXYPair mod = getValueMod();
 
-		int divi = (int) (mod.getX() + 0.5); // X - the Modulo
-		int shift = (int) (mod.getY() + 0.5); // Y - offset of the
+		final int divi = (int) (mod.getX() + 0.5); // X - the Modulo
+		final int shift = (int) (mod.getY() + 0.5); // Y - offset of the
 												// allowed/present value
 
 		if (divi == 0) // ValueMod can't be "0 x"
+		{
 			return false;
+		}
 
-		JDFIntegerList v = rangelist.getIntegerList();
-		int[] vi = v.getIntArray();
-		int siz = vi.length;
+		final JDFIntegerList v = rangelist.getIntegerList();
+		final int[] vi = v.getIntArray();
+		final int siz = vi.length;
 		for (int i = 0; i < siz; i++)
 		{
 			if ((((vi[i] % divi) - shift) % divi) != 0)
+			{
 				return false;
+			}
 		}
 		return true;
 	}
 
 	/**
 	 * fitsContainedList - tests for the case, when ListType=CompleteList, does the defined 'value' match ValueList, specified for this Evaluation
-	 * 
+	 *
 	 * @param value value to test
-	 * @param list specified ValueList
+	 * @param list  specified ValueList
 	 * @return boolean - true, if 'value' matches testlist
 	 */
-	private final boolean fitsCompleteList(JDFIntegerRangeList value, JDFIntegerRangeList list)
+	private final boolean fitsCompleteList(final JDFIntegerRangeList value, final JDFIntegerRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
-		if (v_size != l_size)
+		if ((v_size != l_size) || !value.isUnique())
+		{
 			return false;
+		}
 
-		if (!value.isUnique())
-			return false;
-
-		JDFIntegerRangeList valueList = new JDFIntegerRangeList(value);
+		final JDFIntegerRangeList valueList = new JDFIntegerRangeList(value);
 
 		boolean bFound;
 		for (int i = l_size - 1; i >= 0; i--)
@@ -441,21 +452,20 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 
 	/**
 	 * fitsCompleteOrderedList - tests whether <code>value</code> matches the given ValueList (ListType=CompleteOrderedList)
-	 * 
+	 *
 	 * @param value value to test
-	 * @param list specified ValueList
+	 * @param list  specified ValueList
 	 * @return boolean - true, if 'value' matches testlist
 	 */
-	private final boolean fitsCompleteOrderedList(JDFIntegerRangeList value, JDFIntegerRangeList list)
+	private final boolean fitsCompleteOrderedList(final JDFIntegerRangeList value, final JDFIntegerRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
-		if (v_size != l_size)
+		if ((v_size != l_size) || !value.isUnique())
+		{
 			return false;
-
-		if (!value.isUnique())
-			return false;
+		}
 
 		for (int i = 0; i < l_size; i++)
 		{
@@ -469,15 +479,15 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 
 	/**
 	 * fitsContainedList - tests whether <code>value</code> matches the given ValueList (ListType=ContainedList)
-	 * 
+	 *
 	 * @param value value to test
-	 * @param list specified ValueList
+	 * @param list  specified ValueList
 	 * @return boolean - true, if <code>value</code> matches testlist
 	 */
-	private final boolean fitsContainedList(JDFIntegerRangeList value, JDFIntegerRangeList list)
+	private final boolean fitsContainedList(final JDFIntegerRangeList value, final JDFIntegerRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
 		for (int i = 0; i < v_size; i++)
 		{

@@ -91,9 +91,8 @@ import java.util.Set;
  * HashMap of multiple elements utility class
  *
  * @author Rainer Prosi
- * @param <key> the type used for the key
+ * @param <key>        the type used for the key
  * @param <listObject> the type used for individual elements of each vector in the map
- *
  */
 public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 {
@@ -105,7 +104,7 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 
 	/**
 	 * fill this with the values in map by switching key and value
-	 * 
+	 *
 	 * @param map
 	 */
 	public void fillInvertedMap(final Map<listObject, key> map)
@@ -137,9 +136,9 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 
 	/**
 	 * get the value for key
-	 * 
+	 *
 	 * @param key the search key
-	 * @param i the index in the vecor matching key; if <0 count from the back of the vector
+	 * @param i   the index in the vecor matching key; if <0 count from the back of the vector
 	 * @return the matching vectorObject; null if the key does not exist or i is out of range
 	 */
 	public listObject getOne(final Object key, int i)
@@ -166,8 +165,8 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 
 	/**
 	 * get the index of singleObject in the vector of key
-	 * 
-	 * @param key the key of the vector
+	 *
+	 * @param key          the key of the vector
 	 * @param singleObject the object to search
 	 * @return -2: no such key; -1: no value in key; else the index in the vexctor of key
 	 */
@@ -183,7 +182,7 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 
 	/**
 	 * get the size of the vector for key
-	 * 
+	 *
 	 * @param key the key of the vector
 	 * @return the size of the vector for key, 0 if no key exists
 	 */
@@ -199,7 +198,7 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 
 	/**
 	 * put the value for key, ensuring uniqueness
-	 * 
+	 *
 	 * @param key the key of the vector
 	 * @param val the vector element
 	 */
@@ -208,7 +207,7 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 		List<listObject> v = get(key);
 		if (v == null)
 		{
-			v = new ArrayList<listObject>();
+			v = new ArrayList<>();
 			put(key, v);
 		}
 		if (!bUnique || !v.contains(val))
@@ -218,16 +217,17 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 	}
 
 	/**
-	 *
 	 * append a map, ensuring uniqueness
-	 * 
-	 * @param key the key of the vector
+	 *
+	 * @param key  the key of the vector
 	 * @param vVal the vector of elements
 	 */
 	public synchronized void appendUnique(final key key, final List<listObject> vVal)
 	{
 		if (vVal == null)
+		{
 			return;
+		}
 		final boolean keepUnique = bUnique;
 		bUnique = true;
 		for (final listObject val : vVal)
@@ -238,16 +238,16 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 	}
 
 	/**
-	 *
 	 * append a VectorMap, ensuring uniqueness
-	 * 
-	 * @param map the map to add
 	 *
+	 * @param map the map to add
 	 */
 	public void appendUnique(final ListMap<key, listObject> map)
 	{
 		if (map == null)
+		{
 			return;
+		}
 		final Iterator<key> it = map.keySet().iterator();
 		while (it.hasNext())
 		{
@@ -258,12 +258,12 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 
 	/**
 	 * get all values as one big vector, multiple entries are retained (see {@link ContainerUtil}.unify())
-	 * 
+	 *
 	 * @return a vector of all values, null if empty
 	 */
 	public List<listObject> getAllValues()
 	{
-		List<listObject> v = new ArrayList<listObject>();
+		List<listObject> v = new ArrayList<>();
 		final Collection<List<listObject>> c = values();
 		final Iterator<List<listObject>> it = c.iterator();
 		while (it.hasNext())
@@ -276,12 +276,12 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 	/**
 	 * get an inverted map that uses all entries a s keys and vice versa<br/>
 	 * note that the behavior is undefined in case of multiple identical values
-	 * 
+	 *
 	 * @return an inverted map
 	 */
 	public Map<listObject, key> getInvertedMap()
 	{
-		final HashMap<listObject, key> inverted = new HashMap<listObject, key>();
+		final HashMap<listObject, key> inverted = new HashMap<>();
 		final Set<key> keys = keySet();
 		for (final key k : keys)
 		{
@@ -289,7 +289,9 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 			if (v != null)
 			{
 				for (final listObject vo : v)
+				{
 					inverted.put(vo, k);
+				}
 			}
 		}
 		return inverted;
@@ -317,7 +319,7 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 	/**
 	 * replace the value for key, add if oldObj==null or is not there
 	 *
-	 * @param key the key of the vector
+	 * @param key    the key of the vector
 	 * @param newObj the new object to set
 	 * @param oldObj the old object to replace
 	 */
@@ -346,9 +348,9 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 	/**
 	 * insert the value for keyat position pos
 	 *
-	 * @param key the key of the vector
+	 * @param key    the key of the vector
 	 * @param newObj the new object to set
-	 * @param pos the index in the vector, may be <0 to count from the end
+	 * @param pos    the index in the vector, may be <0 to count from the end
 	 * @throws IllegalArgumentException if pos is negative and abs(pos)>size()
 	 */
 	public void setOne(final key key, final listObject newObj, int pos)
@@ -356,11 +358,13 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 		List<listObject> v = get(key);
 		if (v == null)
 		{
-			v = new ArrayList<listObject>();
+			v = new ArrayList<>();
 			put(key, v);
 		}
 		if (pos < 0)
+		{
 			pos += v.size();
+		}
 
 		if (pos < 0)
 		{
@@ -372,7 +376,7 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 
 	/**
 	 * Getter for bUnique attribute.
-	 * 
+	 *
 	 * @return the bUnique
 	 */
 	public boolean isUnique()
@@ -382,7 +386,7 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 
 	/**
 	 * Setter for bUnique attribute.
-	 * 
+	 *
 	 * @param bUnique the bUnique to set
 	 */
 	public void setUnique(final boolean bUnique)

@@ -52,7 +52,8 @@ public class JDFSeparationSpec extends JDFAutoSeparationSpec
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSeparationSpec(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFSeparationSpec(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -68,7 +69,9 @@ public class JDFSeparationSpec extends JDFAutoSeparationSpec
 	{
 		AttributeInfo ai = AttributeInfo.fixedMap.get("JDFSeparationSpec");
 		if (ai != null)
+		{
 			return ai;
+		}
 		ai = super.getTheAttributeInfo();
 		AttributeInfo.fixedMap.put("JDFSeparationSpec", ai);
 		return ai;
@@ -79,7 +82,9 @@ public class JDFSeparationSpec extends JDFAutoSeparationSpec
 	{
 		ElementInfo ai = ElementInfo.getFixedmap().get(ElementName.SEPARATIONSPEC);
 		if (ai != null)
+		{
 			return ai;
+		}
 		ai = super.getTheElementInfo();
 		ElementInfo.getFixedmap().put(ElementName.SEPARATIONSPEC, ai);
 		return ai;

@@ -53,7 +53,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi
- *
  *         Test of the Status JMF
  */
 class JDFModuleInfoTest extends JDFTestCaseBase

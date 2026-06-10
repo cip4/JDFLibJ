@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -115,11 +111,11 @@ public abstract class JDFAutoImageCompression extends JDFElement
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.IMAGEDEPTH, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.IMAGEDOWNSAMPLETHRESHOLD, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, "2.0");
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.IMAGEDOWNSAMPLETYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumImageDownsampleType.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumImageDownsampleType.class, 0), null);
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.IMAGEFILTER, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.IMAGERESOLUTION, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.IMAGETYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumImageType.getEnum(0),
-				null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.IMAGETYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumImageType.class, 0), null);
 		atrInfoTable[14] = new AtrInfoTable(AttributeName.JPXQUALITY, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
@@ -151,7 +147,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoImageCompression(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoImageCompression(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -163,7 +159,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoImageCompression(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoImageCompression(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -176,176 +172,42 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoImageCompression(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoImageCompression(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for ImageDownsampleType
+	 * Enumeration strings for numImageDownsampleType
 	 */
 
-	public enum EImageDownsampleType
+	public enum EnumImageDownsampleType
 	{
 		Average, Bicubic, Subsample;
 
-		public static EImageDownsampleType getEnum(String val)
+		public static EnumImageDownsampleType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EImageDownsampleType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumImageDownsampleType.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for ImageDownsampleType
+	 * Enumeration strings for numImageType
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumImageDownsampleType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumImageDownsampleType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumImageDownsampleType getEnum(String enumName)
-		{
-			return (EnumImageDownsampleType) getEnum(EnumImageDownsampleType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumImageDownsampleType getEnum(int enumValue)
-		{
-			return (EnumImageDownsampleType) getEnum(EnumImageDownsampleType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumImageDownsampleType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumImageDownsampleType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumImageDownsampleType.class);
-		}
-
-		/**  */
-		public static final EnumImageDownsampleType Average = new EnumImageDownsampleType("Average");
-		/**  */
-		public static final EnumImageDownsampleType Bicubic = new EnumImageDownsampleType("Bicubic");
-		/**  */
-		public static final EnumImageDownsampleType Subsample = new EnumImageDownsampleType("Subsample");
-	}
-
-	/**
-	 * Enumeration strings for ImageType
-	 */
-
-	public enum EImageType
+	public enum EnumImageType
 	{
 		All, Color, Grayscale, Monochrome;
 
-		public static EImageType getEnum(String val)
+		public static EnumImageType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EImageType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumImageType.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for ImageType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumImageType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumImageType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumImageType getEnum(String enumName)
-		{
-			return (EnumImageType) getEnum(EnumImageType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumImageType getEnum(int enumValue)
-		{
-			return (EnumImageType) getEnum(EnumImageType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumImageType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumImageType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumImageType.class);
-		}
-
-		/**  */
-		public static final EnumImageType All = new EnumImageType("All");
-		/**  */
-		public static final EnumImageType Color = new EnumImageType("Color");
-		/**  */
-		public static final EnumImageType Grayscale = new EnumImageType("Grayscale");
-		/**  */
-		public static final EnumImageType Monochrome = new EnumImageType("Monochrome");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -357,7 +219,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAntiAliasImages(boolean value)
+	public void setAntiAliasImages(final boolean value)
 	{
 		setAttribute(AttributeName.ANTIALIASIMAGES, value, null);
 	}
@@ -382,7 +244,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAutoFilterImages(boolean value)
+	public void setAutoFilterImages(final boolean value)
 	{
 		setAttribute(AttributeName.AUTOFILTERIMAGES, value, null);
 	}
@@ -407,7 +269,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setConvertImagesToIndexed(boolean value)
+	public void setConvertImagesToIndexed(final boolean value)
 	{
 		setAttribute(AttributeName.CONVERTIMAGESTOINDEXED, value, null);
 	}
@@ -432,7 +294,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDCTQuality(double value)
+	public void setDCTQuality(final double value)
 	{
 		setAttribute(AttributeName.DCTQUALITY, value, null);
 	}
@@ -457,7 +319,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDownsampleImages(boolean value)
+	public void setDownsampleImages(final boolean value)
 	{
 		setAttribute(AttributeName.DOWNSAMPLEIMAGES, value, null);
 	}
@@ -482,7 +344,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setEncodeColorImages(boolean value)
+	public void setEncodeColorImages(final boolean value)
 	{
 		setAttribute(AttributeName.ENCODECOLORIMAGES, value, null);
 	}
@@ -507,7 +369,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setEncodeImages(boolean value)
+	public void setEncodeImages(final boolean value)
 	{
 		setAttribute(AttributeName.ENCODEIMAGES, value, null);
 	}
@@ -532,7 +394,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setImageAutoFilterStrategy(String value)
+	public void setImageAutoFilterStrategy(final String value)
 	{
 		setAttribute(AttributeName.IMAGEAUTOFILTERSTRATEGY, value, null);
 	}
@@ -557,7 +419,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setImageDepth(int value)
+	public void setImageDepth(final int value)
 	{
 		setAttribute(AttributeName.IMAGEDEPTH, value, null);
 	}
@@ -582,7 +444,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setImageDownsampleThreshold(double value)
+	public void setImageDownsampleThreshold(final double value)
 	{
 		setAttribute(AttributeName.IMAGEDOWNSAMPLETHRESHOLD, value, null);
 	}
@@ -607,9 +469,9 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setImageDownsampleType(EImageDownsampleType enumVar)
+	public void setImageDownsampleType(final EnumImageDownsampleType enumVar)
 	{
-		setAttribute(AttributeName.IMAGEDOWNSAMPLETYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.IMAGEDOWNSAMPLETYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -617,35 +479,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EImageDownsampleType getEImageDownsampleType()
-	{
-		return EImageDownsampleType.getEnum(getAttribute(AttributeName.IMAGEDOWNSAMPLETYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ImageDownsampleType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ImageDownsampleType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetImageDownsampleType(EImageDownsampleType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setImageDownsampleType(EnumImageDownsampleType enumVar)
-	{
-		setAttribute(AttributeName.IMAGEDOWNSAMPLETYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ImageDownsampleType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EImageDownsampleType GetEImageDownsampleType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumImageDownsampleType getImageDownsampleType()
 	{
 		return EnumImageDownsampleType.getEnum(getAttribute(AttributeName.IMAGEDOWNSAMPLETYPE, null, null));
@@ -661,7 +494,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setImageFilter(String value)
+	public void setImageFilter(final String value)
 	{
 		setAttribute(AttributeName.IMAGEFILTER, value, null);
 	}
@@ -686,7 +519,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setImageResolution(double value)
+	public void setImageResolution(final double value)
 	{
 		setAttribute(AttributeName.IMAGERESOLUTION, value, null);
 	}
@@ -711,9 +544,9 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setImageType(EImageType enumVar)
+	public void setImageType(final EnumImageType enumVar)
 	{
-		setAttribute(AttributeName.IMAGETYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.IMAGETYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -721,35 +554,6 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EImageType getEImageType()
-	{
-		return EImageType.getEnum(getAttribute(AttributeName.IMAGETYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ImageType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ImageType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetImageType(EImageType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setImageType(EnumImageType enumVar)
-	{
-		setAttribute(AttributeName.IMAGETYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ImageType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EImageType GetEImageType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumImageType getImageType()
 	{
 		return EnumImageType.getEnum(getAttribute(AttributeName.IMAGETYPE, null, null));
@@ -765,7 +569,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJPXQuality(int value)
+	public void setJPXQuality(final int value)
 	{
 		setAttribute(AttributeName.JPXQUALITY, value, null);
 	}
@@ -874,7 +678,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFJBIG2Params the element
 	 */
-	public JDFJBIG2Params getCreateJBIG2Params(int iSkip)
+	public JDFJBIG2Params getCreateJBIG2Params(final int iSkip)
 	{
 		return (JDFJBIG2Params) getCreateElement_JDFElement(ElementName.JBIG2PARAMS, null, iSkip);
 	}
@@ -886,7 +690,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 * @return JDFJBIG2Params the element
 	 *         default is getJBIG2Params(0)
 	 */
-	public JDFJBIG2Params getJBIG2Params(int iSkip)
+	public JDFJBIG2Params getJBIG2Params(final int iSkip)
 	{
 		return (JDFJBIG2Params) getElement(ElementName.JBIG2PARAMS, null, iSkip);
 	}
@@ -937,7 +741,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFJPEG2000Params the element
 	 */
-	public JDFJPEG2000Params getCreateJPEG2000Params(int iSkip)
+	public JDFJPEG2000Params getCreateJPEG2000Params(final int iSkip)
 	{
 		return (JDFJPEG2000Params) getCreateElement_JDFElement(ElementName.JPEG2000PARAMS, null, iSkip);
 	}
@@ -949,7 +753,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 * @return JDFJPEG2000Params the element
 	 *         default is getJPEG2000Params(0)
 	 */
-	public JDFJPEG2000Params getJPEG2000Params(int iSkip)
+	public JDFJPEG2000Params getJPEG2000Params(final int iSkip)
 	{
 		return (JDFJPEG2000Params) getElement(ElementName.JPEG2000PARAMS, null, iSkip);
 	}

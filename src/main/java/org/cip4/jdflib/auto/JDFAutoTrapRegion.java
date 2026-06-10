@@ -122,7 +122,7 @@ public abstract class JDFAutoTrapRegion extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTrapRegion(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoTrapRegion(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -134,7 +134,7 @@ public abstract class JDFAutoTrapRegion extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTrapRegion(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoTrapRegion(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -147,7 +147,7 @@ public abstract class JDFAutoTrapRegion extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoTrapRegion(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoTrapRegion(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -158,7 +158,7 @@ public abstract class JDFAutoTrapRegion extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -188,7 +188,7 @@ public abstract class JDFAutoTrapRegion extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPages(JDFIntegerRangeList value)
+	public void setPages(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.PAGES, value, null);
 	}
@@ -201,8 +201,8 @@ public abstract class JDFAutoTrapRegion extends JDFResource
 	 */
 	public JDFIntegerRangeList getPages()
 	{
-		String strAttrName = getAttribute(AttributeName.PAGES, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PAGES, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -216,7 +216,7 @@ public abstract class JDFAutoTrapRegion extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTrapZone(String value)
+	public void setTrapZone(final String value)
 	{
 		setAttribute(AttributeName.TRAPZONE, value, null);
 	}
@@ -273,7 +273,7 @@ public abstract class JDFAutoTrapRegion extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refTrappingParams(JDFTrappingParams refTarget)
+	public void refTrappingParams(final JDFTrappingParams refTarget)
 	{
 		refElement(refTarget);
 	}

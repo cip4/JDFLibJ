@@ -106,7 +106,7 @@ public abstract class JDFAutoShapeCuttingIntent extends JDFIntentResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoShapeCuttingIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoShapeCuttingIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoShapeCuttingIntent extends JDFIntentResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoShapeCuttingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoShapeCuttingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoShapeCuttingIntent extends JDFIntentResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoShapeCuttingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoShapeCuttingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoShapeCuttingIntent extends JDFIntentResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFShapeCut the element
 	 */
-	public JDFShapeCut getCreateShapeCut(int iSkip)
+	public JDFShapeCut getCreateShapeCut(final int iSkip)
 	{
 		return (JDFShapeCut) getCreateElement_JDFElement(ElementName.SHAPECUT, null, iSkip);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoShapeCuttingIntent extends JDFIntentResource
 	 * @return JDFShapeCut the element
 	 *         default is getShapeCut(0)
 	 */
-	public JDFShapeCut getShapeCut(int iSkip)
+	public JDFShapeCut getShapeCut(final int iSkip)
 	{
 		return (JDFShapeCut) getElement(ElementName.SHAPECUT, null, iSkip);
 	}

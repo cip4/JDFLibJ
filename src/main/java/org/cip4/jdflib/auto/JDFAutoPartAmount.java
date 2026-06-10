@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -111,11 +107,11 @@ public abstract class JDFAutoPartAmount extends JDFElement
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXAMOUNT, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.MINAMOUNT, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.MINLATESTATUS, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
-				JDFResource.EnumResStatus.getEnum(0), null);
+				JavaEnumUtil.getEnum(JDFResource.EnumResStatus.class, 0), null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.MINSTATUS, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
-				JDFResource.EnumResStatus.getEnum(0), null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.ORIENTATION, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0),
-				null);
+				JavaEnumUtil.getEnum(JDFResource.EnumResStatus.class, 0), null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.ORIENTATION, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumOrientation.class, 0), null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.PIPEPAUSE, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.PIPERESUME, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.PIPEURL, 0x3333333331l, AttributeInfo.EnumAttributeType.URL, null, null);
@@ -150,7 +146,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPartAmount(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPartAmount(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -162,7 +158,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPartAmount(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPartAmount(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -175,190 +171,56 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPartAmount(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPartAmount(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for MinLateStatus
+	 * Enumeration strings for numMinLateStatus
 	 */
 
-	public enum EMinLateStatus
+	public enum EnumMinLateStatus
 	{
 		Incomplete, Rejected, Unavailable, InUse, Draft, Complete, Available;
 
-		public static EMinLateStatus getEnum(String val)
+		public static EnumMinLateStatus getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EMinLateStatus.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumMinLateStatus.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for MinLateStatus
+	 * Enumeration strings for numMinStatus
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumMinLateStatus extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumMinLateStatus(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumMinLateStatus getEnum(String enumName)
-		{
-			return (EnumMinLateStatus) getEnum(EnumMinLateStatus.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumMinLateStatus getEnum(int enumValue)
-		{
-			return (EnumMinLateStatus) getEnum(EnumMinLateStatus.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumMinLateStatus.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumMinLateStatus.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumMinLateStatus.class);
-		}
-
-		/**  */
-		public static final EnumMinLateStatus Incomplete = new EnumMinLateStatus("Incomplete");
-		/**  */
-		public static final EnumMinLateStatus Rejected = new EnumMinLateStatus("Rejected");
-		/**  */
-		public static final EnumMinLateStatus Unavailable = new EnumMinLateStatus("Unavailable");
-		/**  */
-		public static final EnumMinLateStatus InUse = new EnumMinLateStatus("InUse");
-		/**  */
-		public static final EnumMinLateStatus Draft = new EnumMinLateStatus("Draft");
-		/**  */
-		public static final EnumMinLateStatus Complete = new EnumMinLateStatus("Complete");
-		/**  */
-		public static final EnumMinLateStatus Available = new EnumMinLateStatus("Available");
-	}
-
-	/**
-	 * Enumeration strings for MinStatus
-	 */
-
-	public enum EMinStatus
+	public enum EnumMinStatus
 	{
 		Incomplete, Rejected, Unavailable, InUse, Draft, Complete, Available;
 
-		public static EMinStatus getEnum(String val)
+		public static EnumMinStatus getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EMinStatus.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumMinStatus.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for MinStatus
+	 * Enumeration strings for numOrientation
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumMinStatus extends ValuedEnum
+	public enum EnumOrientation
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Rotate0, Rotate90, Rotate180, Rotate270, Flip0, Flip90, Flip180, Flip270;
 
-		protected EnumMinStatus(String name)
+		public static EnumOrientation getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumOrientation.class, val, null);
 		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumMinStatus getEnum(String enumName)
-		{
-			return (EnumMinStatus) getEnum(EnumMinStatus.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumMinStatus getEnum(int enumValue)
-		{
-			return (EnumMinStatus) getEnum(EnumMinStatus.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumMinStatus.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumMinStatus.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumMinStatus.class);
-		}
-
-		/**  */
-		public static final EnumMinStatus Incomplete = new EnumMinStatus("Incomplete");
-		/**  */
-		public static final EnumMinStatus Rejected = new EnumMinStatus("Rejected");
-		/**  */
-		public static final EnumMinStatus Unavailable = new EnumMinStatus("Unavailable");
-		/**  */
-		public static final EnumMinStatus InUse = new EnumMinStatus("InUse");
-		/**  */
-		public static final EnumMinStatus Draft = new EnumMinStatus("Draft");
-		/**  */
-		public static final EnumMinStatus Complete = new EnumMinStatus("Complete");
-		/**  */
-		public static final EnumMinStatus Available = new EnumMinStatus("Available");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -370,7 +232,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setActualAmount(double value)
+	public void setActualAmount(final double value)
 	{
 		setAttribute(AttributeName.ACTUALAMOUNT, value, null);
 	}
@@ -395,7 +257,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAmount(double value)
+	public void setAmount(final double value)
 	{
 		setAttribute(AttributeName.AMOUNT, value, null);
 	}
@@ -420,7 +282,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDraftOK(boolean value)
+	public void setDraftOK(final boolean value)
 	{
 		setAttribute(AttributeName.DRAFTOK, value, null);
 	}
@@ -445,7 +307,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDuration(JDFDuration value)
+	public void setDuration(final JDFDuration value)
 	{
 		setAttribute(AttributeName.DURATION, value, null);
 	}
@@ -458,8 +320,8 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 */
 	public JDFDuration getDuration()
 	{
-		String strAttrName = getAttribute(AttributeName.DURATION, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.DURATION, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -473,7 +335,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaxAmount(double value)
+	public void setMaxAmount(final double value)
 	{
 		setAttribute(AttributeName.MAXAMOUNT, value, null);
 	}
@@ -498,7 +360,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMinAmount(double value)
+	public void setMinAmount(final double value)
 	{
 		setAttribute(AttributeName.MINAMOUNT, value, null);
 	}
@@ -523,9 +385,9 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMinLateStatus(ENodeStatus enumVar)
+	public void setMinLateStatus(final EnumNodeStatus enumVar)
 	{
-		setAttribute(AttributeName.MINLATESTATUS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.MINLATESTATUS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -533,35 +395,6 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ENodeStatus getEMinLateStatus()
-	{
-		return ENodeStatus.getEnum(getAttribute(AttributeName.MINLATESTATUS, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute MinLateStatus
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute MinLateStatus
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetMinLateStatus(ENodeStatus) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setMinLateStatus(EnumNodeStatus enumVar)
-	{
-		setAttribute(AttributeName.MINLATESTATUS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute MinLateStatus
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ENodeStatus GetEMinLateStatus() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumNodeStatus getMinLateStatus()
 	{
 		return EnumNodeStatus.getEnum(getAttribute(AttributeName.MINLATESTATUS, null, null));
@@ -577,9 +410,9 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMinStatus(ENodeStatus enumVar)
+	public void setMinStatus(final EnumNodeStatus enumVar)
 	{
-		setAttribute(AttributeName.MINSTATUS, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.MINSTATUS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -587,35 +420,6 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ENodeStatus getEMinStatus()
-	{
-		return ENodeStatus.getEnum(getAttribute(AttributeName.MINSTATUS, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute MinStatus
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute MinStatus
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetMinStatus(ENodeStatus) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setMinStatus(EnumNodeStatus enumVar)
-	{
-		setAttribute(AttributeName.MINSTATUS, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute MinStatus
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ENodeStatus GetEMinStatus() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumNodeStatus getMinStatus()
 	{
 		return EnumNodeStatus.getEnum(getAttribute(AttributeName.MINSTATUS, null, null));
@@ -631,9 +435,9 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setOrientation(EOrientation enumVar)
+	public void setOrientation(final EnumOrientation enumVar)
 	{
-		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ORIENTATION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -641,35 +445,6 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EOrientation getEOrientation()
-	{
-		return EOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Orientation
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Orientation
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetOrientation(EOrientation) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setOrientation(EnumOrientation enumVar)
-	{
-		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Orientation
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EOrientation GetEOrientation() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumOrientation getOrientation()
 	{
 		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
@@ -685,7 +460,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPipePause(double value)
+	public void setPipePause(final double value)
 	{
 		setAttribute(AttributeName.PIPEPAUSE, value, null);
 	}
@@ -710,7 +485,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPipeResume(double value)
+	public void setPipeResume(final double value)
 	{
 		setAttribute(AttributeName.PIPERESUME, value, null);
 	}
@@ -735,7 +510,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPipeURL(String value)
+	public void setPipeURL(final String value)
 	{
 		setAttribute(AttributeName.PIPEURL, value, null);
 	}
@@ -760,7 +535,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRemotePipeEndPause(double value)
+	public void setRemotePipeEndPause(final double value)
 	{
 		setAttribute(AttributeName.REMOTEPIPEENDPAUSE, value, null);
 	}
@@ -785,7 +560,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRemotePipeEndResume(double value)
+	public void setRemotePipeEndResume(final double value)
 	{
 		setAttribute(AttributeName.REMOTEPIPEENDRESUME, value, null);
 	}
@@ -810,7 +585,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setStart(JDFDate value)
+	public void setStart(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -827,8 +602,8 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 */
 	public JDFDate getStart()
 	{
-		String str = getAttribute(AttributeName.START, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.START, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
@@ -842,7 +617,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStartOffset(JDFDuration value)
+	public void setStartOffset(final JDFDuration value)
 	{
 		setAttribute(AttributeName.STARTOFFSET, value, null);
 	}
@@ -855,8 +630,8 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 */
 	public JDFDuration getStartOffset()
 	{
-		String strAttrName = getAttribute(AttributeName.STARTOFFSET, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.STARTOFFSET, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -870,7 +645,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTransformation(JDFMatrix value)
+	public void setTransformation(final JDFMatrix value)
 	{
 		setAttribute(AttributeName.TRANSFORMATION, value, null);
 	}
@@ -883,8 +658,8 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 */
 	public JDFMatrix getTransformation()
 	{
-		String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, null);
-		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -920,7 +695,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFLot the element
 	 */
-	public JDFLot getCreateLot(int iSkip)
+	public JDFLot getCreateLot(final int iSkip)
 	{
 		return (JDFLot) getCreateElement_JDFElement(ElementName.LOT, null, iSkip);
 	}
@@ -932,7 +707,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 * @return JDFLot the element
 	 *         default is getLot(0)
 	 */
-	public JDFLot getLot(int iSkip)
+	public JDFLot getLot(final int iSkip)
 	{
 		return (JDFLot) getElement(ElementName.LOT, null, iSkip);
 	}

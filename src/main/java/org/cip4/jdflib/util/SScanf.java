@@ -50,7 +50,6 @@ import org.cip4.jdflib.core.VString;
 
 /**
  * @author prosirai
- *
  */
 public class SScanf extends ScanfReader implements Iterator<Object>
 {
@@ -60,11 +59,10 @@ public class SScanf extends ScanfReader implements Iterator<Object>
 
 	/**
 	 * creates a scanf reader for a given string and format and returns the approriate object
-	 *
 	 * valid format identifiers %f - returns Double %i - returns Integer %d - returns Integer %x - returns Integer %o - returns Integer %c - returns String %s - returns String
 	 *
 	 * @param theString the String to scan
-	 * @param format the formatting String to apply according to c++ sscanf rools
+	 * @param format    the formatting String to apply according to c++ sscanf rools
 	 */
 	public SScanf(final String theString, final String format)
 	{
@@ -95,52 +93,61 @@ public class SScanf extends ScanfReader implements Iterator<Object>
 	 * scan a string using C++ sscanf functionality
 	 *
 	 * @return
-	 *
 	 */
 	public Vector<Object> sscanf()
 	{
 		final Vector<Object> v = new Vector<>();
 		while (hasNext())
+		{
 			v.add(next());
+		}
 		return v;
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.cformat.ScanfReader#scanDouble(org.cip4.jdflib.cformat .ScanfFormat)
 	 */
 	@Override
 	public double scanDouble(final ScanfFormat fmt) throws IOException, ScanfMatchException, IllegalArgumentException
 	{
 		if ("dxoi".indexOf(fmt.type) >= 0) // also gracefully handle int as
+		{
 			// double
 			return scanLong(fmt);
+		}
 		return super.scanDouble(fmt);
 	}
 
 	/**
-	 *
-	 *
 	 * @see org.cip4.jdflib.cformat.ScanfReader#scanString(org.cip4.jdflib.cformat .ScanfFormat)
 	 */
 	@Override
 	public String scanString(final ScanfFormat fmt) throws IOException, IllegalArgumentException
 	{
 		if ("di".indexOf(fmt.type) >= 0) // also gracefully handle int as double
+		{
 			return Long.toString(scanLong(fmt), 10);
+		}
 		if ("o".indexOf(fmt.type) >= 0) // also gracefully handle int as double
+		{
 			return Long.toString(scanLong(fmt), 8);
+		}
 		if ("x".indexOf(fmt.type) >= 0) // also gracefully handle int as double
+		{
 			return Long.toString(scanLong(fmt), 16);
+		}
 		if ("f".indexOf(fmt.type) >= 0) // also gracefully handle int as double
+		{
 			return Double.toString(scanDouble(fmt));
+		}
 		if ("c".indexOf(fmt.type) >= 0) // also gracefully handle int as double
+		{
 			return new String(scanChars(fmt));
+		}
 		return super.scanString(fmt);
 	}
 
 	/**
-	 *
 	 * @see java.util.Iterator#hasNext()
 	 */
 	@Override
@@ -156,15 +163,21 @@ public class SScanf extends ScanfReader implements Iterator<Object>
 	public Object next()
 	{
 		if (!hasNext())
+		{
 			return null;
+		}
 		final String fmtString = vFmt.get(pos++);
 		final ScanfFormat fmt = new ScanfFormat(fmtString);
 		try
 		{
 			if ("dxoi".indexOf(fmt.type) >= 0)
+			{
 				return Integer.valueOf(scanInt(fmt));
+			}
 			if ("f".indexOf(fmt.type) >= 0)
+			{
 				return Double.valueOf(scanDouble(fmt));
+			}
 			return scanString(fmt);
 		}
 		catch (final IllegalArgumentException x)

@@ -106,7 +106,7 @@ public abstract class JDFAutoTransferCurvePool extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTransferCurvePool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoTransferCurvePool(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoTransferCurvePool extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTransferCurvePool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoTransferCurvePool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoTransferCurvePool extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoTransferCurvePool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoTransferCurvePool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -142,7 +142,7 @@ public abstract class JDFAutoTransferCurvePool extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -188,7 +188,7 @@ public abstract class JDFAutoTransferCurvePool extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFTransferCurveSet the element
 	 */
-	public JDFTransferCurveSet getCreateTransferCurveSet(int iSkip)
+	public JDFTransferCurveSet getCreateTransferCurveSet(final int iSkip)
 	{
 		return (JDFTransferCurveSet) getCreateElement_JDFElement(ElementName.TRANSFERCURVESET, null, iSkip);
 	}
@@ -200,7 +200,7 @@ public abstract class JDFAutoTransferCurvePool extends JDFResource
 	 * @return JDFTransferCurveSet the element
 	 *         default is getTransferCurveSet(0)
 	 */
-	public JDFTransferCurveSet getTransferCurveSet(int iSkip)
+	public JDFTransferCurveSet getTransferCurveSet(final int iSkip)
 	{
 		return (JDFTransferCurveSet) getElement(ElementName.TRANSFERCURVESET, null, iSkip);
 	}

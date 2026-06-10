@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,9 +72,8 @@ import java.util.Comparator;
 
 /**
  * very simple and fast mutable long integer class
- * 
+ *
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
  */
 public class MyLong implements Comparator<MyLong>
 {
@@ -133,13 +132,20 @@ public class MyLong implements Comparator<MyLong>
 	 * @return o1-o2
 	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 	 */
+	@Override
 	public int compare(final MyLong o1, final MyLong o2)
 	{
 		if (o1.i > o2.i)
+		{
 			return 1;
+		}
 		else if (o1.i < o2.i)
+		{
 			return -1;
+		}
 		else
+		{
 			return 0;
+		}
 	}
 }

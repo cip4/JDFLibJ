@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,22 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFMatrixState.java
@@ -80,10 +80,10 @@
 
 package org.cip4.jdflib.resource.devicecapability;
 
+import java.util.List;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
 import org.cip4.jdflib.auto.JDFAutoValue.EnumValueUsage;
@@ -93,7 +93,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
@@ -101,6 +101,7 @@ import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.resource.JDFValue;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 public class JDFMatrixState extends JDFAbstractState
@@ -112,12 +113,12 @@ public class JDFMatrixState extends JDFAbstractState
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDROTATEMOD, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ALLOWEDSHIFT, 0x33333311, AttributeInfo.EnumAttributeType.NumberList, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDTRANSFORMS, 0x33333311, AttributeInfo.EnumAttributeType.enumerations, EnumOrientation.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDTRANSFORMS, 0x33333311, AttributeInfo.EnumAttributeType.enumerations, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRESENTROTATEMOD, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.PRESENTSHIFT, 0x33333311, AttributeInfo.EnumAttributeType.NumberList, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.PRESENTTRANSFORMS, 0x44444431, AttributeInfo.EnumAttributeType.enumerations, EnumOrientation.getEnum(0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.PRESENTTRANSFORMS, 0x44444431, AttributeInfo.EnumAttributeType.enumerations, null, null);
 	}
 
 	@Override
@@ -140,23 +141,23 @@ public class JDFMatrixState extends JDFAbstractState
 
 	/**
 	 * constructor for JDFMatrixState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFMatrixState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFMatrixState(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFMatrixState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFMatrixState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFMatrixState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -167,7 +168,7 @@ public class JDFMatrixState extends JDFAbstractState
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFMatrixState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFMatrixState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -177,7 +178,7 @@ public class JDFMatrixState extends JDFAbstractState
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -186,7 +187,7 @@ public class JDFMatrixState extends JDFAbstractState
 		return "JDFMatrixState[ --> " + super.toString() + " ]";
 	}
 
-	public void setCurrentValue(JDFMatrix value)
+	public void setCurrentValue(final JDFMatrix value)
 	{
 		setAttribute(AttributeName.CURRENTVALUE, value.toString(), null);
 	}
@@ -197,13 +198,13 @@ public class JDFMatrixState extends JDFAbstractState
 		{
 			return new JDFMatrix(getAttribute(AttributeName.CURRENTVALUE));
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFMatrixState.getCurrentValue: Attribute CURRENTVALUE is not capable to create JDFMatrix");
 		}
 	}
 
-	public void setDefaultValue(JDFMatrix value)
+	public void setDefaultValue(final JDFMatrix value)
 	{
 		setAttribute(AttributeName.DEFAULTVALUE, value.toString(), null);
 	}
@@ -214,13 +215,13 @@ public class JDFMatrixState extends JDFAbstractState
 		{
 			return new JDFMatrix(getAttribute(AttributeName.DEFAULTVALUE));
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFMatrixState.getDefaultValue: Attribute DEFAULTVALUE is not capable to create JDFMatrix");
 		}
 	}
 
-	public void setAllowedRotateMod(double value)
+	public void setAllowedRotateMod(final double value)
 	{
 		setAttribute(AttributeName.ALLOWEDROTATEMOD, value, null);
 	}
@@ -230,7 +231,7 @@ public class JDFMatrixState extends JDFAbstractState
 		return getRealAttribute(AttributeName.ALLOWEDROTATEMOD, null, 0.0);
 	}
 
-	public void setPresentRotateMod(double value)
+	public void setPresentRotateMod(final double value)
 	{
 		setAttribute(AttributeName.PRESENTROTATEMOD, value, null);
 	}
@@ -244,7 +245,7 @@ public class JDFMatrixState extends JDFAbstractState
 		return getAllowedRotateMod();
 	}
 
-	public void setAllowedShift(JDFRectangle value)
+	public void setAllowedShift(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.ALLOWEDSHIFT, value.toString());
 	}
@@ -254,15 +255,15 @@ public class JDFMatrixState extends JDFAbstractState
 
 		try
 		{
-			return new JDFRectangle(getAttribute(AttributeName.ALLOWEDSHIFT, null, JDFConstants.EMPTYSTRING));
+			return new JDFRectangle(getAttribute(AttributeName.ALLOWEDSHIFT, null, JDFCoreConstants.EMPTYSTRING));
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFMatrixState.getAllowedShift: AttributeValue not capable to create JDFRectangle");
 		}
 	}
 
-	public void setPresentShift(JDFRectangle value)
+	public void setPresentShift(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.PRESENTSHIFT, value.toString());
 	}
@@ -273,9 +274,9 @@ public class JDFMatrixState extends JDFAbstractState
 		{
 			try
 			{
-				return new JDFRectangle(getAttribute(AttributeName.PRESENTSHIFT, null, JDFConstants.EMPTYSTRING));
+				return new JDFRectangle(getAttribute(AttributeName.PRESENTSHIFT, null, JDFCoreConstants.EMPTYSTRING));
 			}
-			catch (DataFormatException e)
+			catch (final DataFormatException e)
 			{
 				throw new JDFException("JDFMatrixState.getPresentShift: AttributeValue not capable to create JDFRectangle");
 			}
@@ -285,35 +286,37 @@ public class JDFMatrixState extends JDFAbstractState
 
 	public Vector getAllowedTransforms()
 	{
-		return getEnumerationsAttribute(AttributeName.ALLOWEDTRANSFORMS, null, EnumOrientation.getEnum(0), false);
+		final List<EnumOrientation> value = getEnumerationsAttribute(AttributeName.ALLOWEDTRANSFORMS, null, EnumOrientation.class);
+		return value == null ? null : new Vector(value);
 	}
 
-	public void setAllowedTransforms(Vector value)
+	public void setAllowedTransforms(final Vector value)
 	{
-		setEnumerationsAttribute(AttributeName.ALLOWEDTRANSFORMS, value, null);
+		setEnumsAttribute(AttributeName.ALLOWEDTRANSFORMS, value, null);
 	}
 
 	public Vector getPresentTransforms()
 	{
 		if (hasAttribute(AttributeName.PRESENTTRANSFORMS))
 		{
-			return getEnumerationsAttribute(AttributeName.PRESENTTRANSFORMS, null, EnumOrientation.getEnum(0), false);
+			final List<EnumOrientation> value = getEnumerationsAttribute(AttributeName.PRESENTTRANSFORMS, null, EnumOrientation.class);
+			return value == null ? null : new Vector(value);
 		}
 		return getAllowedTransforms();
 	}
 
-	public void setPresentTransforms(Vector value)
+	public void setPresentTransforms(final Vector value)
 	{
-		setEnumerationsAttribute(AttributeName.PRESENTTRANSFORMS, value, null);
+		setEnumsAttribute(AttributeName.PRESENTTRANSFORMS, value, null);
 	}
 
 	/*
 	 * // Element getter / setter
 	 */
 
-	public JDFValue getValue(int iSkip)
+	public JDFValue getValue(final int iSkip)
 	{
-		return (JDFValue) getElement(ElementName.VALUE, JDFConstants.EMPTYSTRING, iSkip);
+		return (JDFValue) getElement(ElementName.VALUE, JDFCoreConstants.EMPTYSTRING, iSkip);
 	}
 
 	public JDFValue appendValue()
@@ -323,18 +326,20 @@ public class JDFMatrixState extends JDFAbstractState
 
 	/**
 	 * Appends element Loc to the end of the iSkip'th subelement Value
-	 * 
+	 *
 	 * @param iSkip
-	 *            number of Value elements to skip (iSkip=0 - first Value
-	 *            element)
+	 *              number of Value elements to skip (iSkip=0 - first Value
+	 *              element)
 	 * @return JDFLoc: newly created Loc element
 	 */
 	@Override
-	public JDFLoc appendValueLocLoc(int iSkip)
+	public JDFLoc appendValueLocLoc(final int iSkip)
 	{
-		JDFValue val = getValue(iSkip);
+		final JDFValue val = getValue(iSkip);
 		if (val == null)
+		{
 			return null;
+		}
 		return val.appendLoc();
 	}
 
@@ -344,34 +349,34 @@ public class JDFMatrixState extends JDFAbstractState
 
 	/**
 	 * Sets the AllowedValue attribute of the iSkip'th subelement Value
-	 * 
+	 *
 	 * @param iSkip
-	 *            the number of Value elements to skip
+	 *              the number of Value elements to skip
 	 * @param value
-	 *            value to set the attribute to
+	 *              value to set the attribute to
 	 */
-	public void setValueAllowedValue(int iSkip, JDFMatrix value)
+	public void setValueAllowedValue(final int iSkip, final JDFMatrix value)
 	{
-		JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
+		final JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
 		e.setAllowedValue(value.toString());
 	}
 
 	/**
 	 * Gets the AllowedValue attribute of the iSkip'th subelement Value
-	 * 
+	 *
 	 * @param iSkip
-	 *            the number of Value elements to skip
+	 *              the number of Value elements to skip
 	 * @return JDFMatrix: the attribute value
 	 */
-	public final JDFMatrix getValueAllowedValue(int iSkip)
+	public final JDFMatrix getValueAllowedValue(final int iSkip)
 	{
-		JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
+		final JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
 
 		try
 		{
 			return new JDFMatrix(e.getAllowedValue());
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			throw new JDFException("JDFMatrixState.getValueAllowedValue: AttributeValue not capable to create JDFMatrix");
 		}
@@ -380,83 +385,94 @@ public class JDFMatrixState extends JDFAbstractState
 
 	/**
 	 * Sets the ValueUsage attribute of the iSkip'th subelement Value
-	 * 
+	 *
 	 * @param iSkip
-	 *            the number of Value elements to skip
+	 *              the number of Value elements to skip
 	 * @param value
-	 *            value to set the attribute to
+	 *              value to set the attribute to
 	 */
-	public void setValueValueUsage(int iSkip, EnumFitsValue value)
+	public void setValueValueUsage(final int iSkip, final EnumFitsValue value)
 	{
-		JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
-		e.setValueUsage(EnumValueUsage.getEnum(value.getName()));
+		final JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
+		e.setValueUsage(JavaEnumUtil.getEnumIgnoreCase(EnumValueUsage.class, JavaEnumUtil.getName(value), null));
 	}
 
 	/**
 	 * Gets the value of attribute ValueUsage of the iSkip'th subelement Value
-	 * 
+	 *
 	 * @param iSkip
-	 *            the number of Value elements to skip
+	 *              the number of Value elements to skip
 	 * @return EnumFitsValue: the attribute value
 	 */
-	public final EnumFitsValue getValueValueUsage(int iSkip)
+	public final EnumFitsValue getValueValueUsage(final int iSkip)
 	{
-		JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
-		return EnumFitsValue.getEnum(e.getValueUsage().getName());
+		final JDFValue e = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
+		final EnumValueUsage valueUsage = e.getValueUsage();
+		return JavaEnumUtil.getEnumIgnoreCase(EnumFitsValue.class, JavaEnumUtil.getName(valueUsage), null);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java
 	 * .lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
 	 */
 	@Override
-	public void addValue(String value, EnumFitsValue testlists)
+	public void addValue(final String value, final EnumFitsValue testlists)
 	{
 		if (fitsValue(value, testlists))
+		{
 			return;
+		}
 
 		try
 		{
 			new JDFMatrix(value);
 		}
-		catch (DataFormatException x)
+		catch (final DataFormatException x)
 		{
 			return; // nop for bad values
 		}
 		if (testlists == null || EnumFitsValue.Allowed.equals(testlists))
 		{
-			JDFValue v = appendValue();
+			final JDFValue v = appendValue();
 			v.setAllowedValue(value);
 			if (testlists != null)
+			{
 				v.setValueUsage(EnumValueUsage.Allowed);
+			}
 		}
 		if (EnumFitsValue.Present.equals(testlists))
 		{
-			JDFValue v = appendValue();
+			final JDFValue v = appendValue();
 			v.setAllowedValue(value);
 			if (testlists != null)
+			{
 				v.setValueUsage(EnumValueUsage.Present);
+			}
 		}
 	}
 
-	public void appendValue(JDFMatrix value, EnumFitsValue testlists)
+	public void appendValue(final JDFMatrix value, final EnumFitsValue testlists)
 	{
 		if (testlists == null || EnumFitsValue.Allowed.equals(testlists))
 		{
-			JDFValue v = appendValue();
+			final JDFValue v = appendValue();
 			v.setAllowedValue(value.toString());
 			if (testlists != null)
+			{
 				v.setValueUsage(EnumValueUsage.Allowed);
+			}
 		}
 		if (EnumFitsValue.Present.equals(testlists))
 		{
-			JDFValue v = appendValue();
+			final JDFValue v = appendValue();
 			v.setAllowedValue(value.toString());
 			if (testlists != null)
+			{
 				v.setValueUsage(EnumValueUsage.Present);
+			}
 		}
 	}
 
@@ -467,42 +483,43 @@ public class JDFMatrixState extends JDFAbstractState
 	/**
 	 * fitsValue - checks whether <code>value</code> matches the Allowed test
 	 * lists or Present test lists specified for this State
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *                  value to test
 	 * @param testlists
-	 *            the test lists the value has to match. In this State the test
-	 *            lists are RotateMod, Shift, Transforms and ValueElem.<br>
-	 *            Choose one of two values: FitsValue_Allowed or
-	 *            FitsValue_Present. (Defaults to Allowed)
-	 * 
+	 *                  the test lists the value has to match. In this State the test
+	 *                  lists are RotateMod, Shift, Transforms and ValueElem.<br>
+	 *                  Choose one of two values: FitsValue_Allowed or
+	 *                  FitsValue_Present. (Defaults to Allowed)
 	 * @return boolean - true, if the value matches all test lists or if Allowed
 	 *         test lists are not specified
 	 */
 	@Override
-	public boolean fitsValue(String value, EnumFitsValue testlists)
+	public boolean fitsValue(final String value, final EnumFitsValue testlists)
 	{
-		VString vs = new VString(value, JDFConstants.BLANK);
-		int siz = vs.size();
+		final VString vs = new VString(value, JDFCoreConstants.BLANK);
+		final int siz = vs.size();
 		if (siz % 6 != 0)
 		{
 			return false;
 		}
-		Vector<JDFMatrix> matrixList = new Vector<JDFMatrix>();
+		final Vector<JDFMatrix> matrixList = new Vector<>();
 
 		for (int i = 0; i < siz; i += 6)
 		{
-			VString v = new VString();
+			final VString v = new VString();
 			v.ensureCapacity(6);
 			for (int j = 0; j < 6; j++)
+			{
 				v.add(vs.get(i + j));
+			}
 
 			try
 			{
-				JDFMatrix m = new JDFMatrix(StringUtil.setvString(vs, " ", null, null));
+				final JDFMatrix m = new JDFMatrix(StringUtil.setvString(vs, " ", null, null));
 				matrixList.add(m);
 			}
-			catch (DataFormatException x)
+			catch (final DataFormatException x)
 			{
 				return false;
 			}
@@ -512,9 +529,12 @@ public class JDFMatrixState extends JDFAbstractState
 		{
 			for (int k = 0; k < matrixList.size(); k++)
 			{
-				JDFMatrix matrix = matrixList.elementAt(k);
-				if (!fitsRotateMod(matrix, testlists) || !fitsShift(matrix, testlists) || !fitsTransforms(matrix, testlists) || !fitsValueElem(matrix, testlists))
+				final JDFMatrix matrix = matrixList.elementAt(k);
+				if (!fitsRotateMod(matrix, testlists) || !fitsShift(matrix, testlists) || !fitsTransforms(matrix, testlists)
+						|| !fitsValueElem(matrix, testlists))
+				{
 					return false;
+				}
 			}
 			return true;
 		}
@@ -524,19 +544,18 @@ public class JDFMatrixState extends JDFAbstractState
 	/**
 	 * fitsListType - checks whether <code>matrixList</code> matches the value
 	 * of the ListType attribute specified for this State
-	 * 
+	 *
 	 * @param matrixList
-	 *            vector of matrices to test
-	 * 
+	 *                   vector of matrices to test
 	 * @return boolean - true, if 'value' matches specified ListType
 	 */
-	private final boolean fitsListType(Vector matrixList)
+	private final boolean fitsListType(final Vector matrixList)
 	{
-		EnumListType listType = getListType();
+		final EnumListType listType = getListType();
 
-		int size = matrixList.size();
+		final int size = matrixList.size();
 
-		if (listType.equals(EnumListType.SingleValue) || listType.equals(EnumListType.getEnum(0)))
+		if (listType.equals(EnumListType.SingleValue))
 		{// default ListType = SingleValue
 			return (size == 1);
 		}
@@ -550,10 +569,12 @@ public class JDFMatrixState extends JDFAbstractState
 			{
 				for (int j = i + 1; j < size; j++)
 				{
-					JDFMatrix mi = (JDFMatrix) matrixList.elementAt(i);
-					JDFMatrix mj = (JDFMatrix) matrixList.elementAt(j);
+					final JDFMatrix mi = (JDFMatrix) matrixList.elementAt(i);
+					final JDFMatrix mj = (JDFMatrix) matrixList.elementAt(j);
 					if (mi.equals(mj))
+					{
 						return false;
+					}
 				}
 			}
 			return true;
@@ -567,41 +588,44 @@ public class JDFMatrixState extends JDFAbstractState
 	/**
 	 * fitsValueElem - tests, if JDFMatrix <code>matrix</code> matches
 	 * subelement Value, specified for this State
-	 * 
+	 *
 	 * @param matrix
-	 *            JDFMatrix to test
+	 *                  JDFMatrix to test
 	 * @param valuelist
-	 *            switches between Allowed and Present configuration in
-	 *            subelement Value.
-	 * 
+	 *                  switches between Allowed and Present configuration in
+	 *                  subelement Value.
 	 * @return boolean - true, if <code>matrix</code> matches subelement Value
 	 */
-	private final boolean fitsValueElem(JDFMatrix matrix, EnumFitsValue valuelist)
+	private final boolean fitsValueElem(final JDFMatrix matrix, final EnumFitsValue valuelist)
 	{
 
-		VElement v = getChildElementVector(ElementName.VALUE, null, null, true, 0, false);
-		int siz = v.size();
+		final VElement v = getChildElementVector(ElementName.VALUE, null, null, true, 0, false);
+		final int siz = v.size();
 		boolean hasValue = false;
 		for (int i = 0; i < siz; i++)
 		{
-			JDFValue elm = (JDFValue) v.elementAt(i);
+			final JDFValue elm = (JDFValue) v.elementAt(i);
 			if (elm.hasAttribute(AttributeName.VALUEUSAGE))
 			{
-				EnumFitsValue valueUsage = getValueValueUsage(i);
+				final EnumFitsValue valueUsage = getValueValueUsage(i);
 				if (valuelist.equals(valueUsage))
 				{
 					hasValue = true;
-					JDFMatrix value = getValueAllowedValue(i);
+					final JDFMatrix value = getValueAllowedValue(i);
 					if (value.equals(matrix))
+					{
 						return true; // we have found it
+					}
 				}
 			}
 			else
 			{
 				hasValue = true;
-				JDFMatrix value = getValueAllowedValue(i);
+				final JDFMatrix value = getValueAllowedValue(i);
 				if (value.equals(matrix))
+				{
 					return true; // we have found it
+				}
 			}
 		}
 		return !hasValue; // if no matching, there was no filter
@@ -610,25 +634,29 @@ public class JDFMatrixState extends JDFAbstractState
 	/**
 	 * fitsRotateMod - checks whether matrix matches the AllowedRotateMod or
 	 * PresentRotateMod, specified for this State
-	 * 
+	 *
 	 * @param matrix
-	 *            matrix to test
+	 *                  matrix to test
 	 * @param rotatemod
-	 *            switches between AllowedRotateMod and PresentRotateMod.
+	 *                  switches between AllowedRotateMod and PresentRotateMod.
 	 * @return boolean - true, if <code>matrix</code> matches the RotateMod or
 	 *         if AllowedRotateMod is not specified
 	 */
-	private final boolean fitsRotateMod(JDFMatrix matrix, EnumFitsValue rotatemod)
+	private final boolean fitsRotateMod(final JDFMatrix matrix, final EnumFitsValue rotatemod)
 	{
 		if (rotatemod == null || rotatemod.equals(EnumFitsValue.Allowed))
 		{
 			if (!hasAttribute(AttributeName.ALLOWEDROTATEMOD))
+			{
 				return true;
+			}
 		}
 		else
 		{
 			if (!hasAttribute(AttributeName.ALLOWEDROTATEMOD) && !hasAttribute(AttributeName.PRESENTROTATEMOD))
+			{
 				return true;
+			}
 		}
 
 		double rm;
@@ -641,13 +669,15 @@ public class JDFMatrixState extends JDFAbstractState
 			rm = getPresentRotateMod();
 		}
 
-		double a = matrix.getA();
-		double b = matrix.getB();
-		double c = matrix.getC();
-		double d = matrix.getD();
+		final double a = matrix.getA();
+		final double b = matrix.getB();
+		final double c = matrix.getC();
+		final double d = matrix.getD();
 
 		if ((a * d - b * c) == 0)
+		{
 			return false;
+		}
 
 		double param = a / java.lang.Math.sqrt(java.lang.Math.abs(a * d - b * c));
 
@@ -664,10 +694,10 @@ public class JDFMatrixState extends JDFAbstractState
 			param = param + EPSILON;
 		}
 
-		double fi = java.lang.Math.acos(param) * 180 / java.lang.Math.PI; //0~180
+		final double fi = java.lang.Math.acos(param) * 180 / java.lang.Math.PI; // 0~180
 
-		double result = (fi + EPSILON) - (rm * (int) ((fi + EPSILON) / rm));
-		double result180 = (fi + 180 + EPSILON) - (rm * (int) ((fi + 180 + EPSILON) / rm));
+		final double result = (fi + EPSILON) - (rm * (int) ((fi + EPSILON) / rm));
+		final double result180 = (fi + 180 + EPSILON) - (rm * (int) ((fi + 180 + EPSILON) / rm));
 
 		return ((java.lang.Math.abs(result) <= 2 * EPSILON) || (java.lang.Math.abs(result180) <= 2 * EPSILON));
 
@@ -676,26 +706,30 @@ public class JDFMatrixState extends JDFAbstractState
 	/**
 	 * fitsShift - checks whether <code>matrix</code> matches the AllowedShift
 	 * or PresentShift specified for this State
-	 * 
+	 *
 	 * @param matrix
-	 *            matrix to test
+	 *               matrix to test
 	 * @param shift
-	 *            switches between AllowedShift and PresentShift.
+	 *               switches between AllowedShift and PresentShift.
 	 * @return boolean - true, if <code>matrix</code> matches the Shift or if
 	 *         AllowedShift is not specified
 	 */
-	private final boolean fitsShift(JDFMatrix matrix, EnumFitsValue shift)
+	private final boolean fitsShift(final JDFMatrix matrix, final EnumFitsValue shift)
 	{
 
 		if (shift == null || shift.equals(EnumFitsValue.Allowed))
 		{
 			if (!hasAttribute(AttributeName.ALLOWEDSHIFT))
+			{
 				return true;
+			}
 		}
 		else
 		{
 			if (!hasAttribute(AttributeName.ALLOWEDSHIFT) && !hasAttribute(AttributeName.PRESENTSHIFT))
+			{
 				return true;
+			}
 		}
 
 		JDFRectangle shiftValue;
@@ -708,13 +742,13 @@ public class JDFMatrixState extends JDFAbstractState
 			shiftValue = new JDFRectangle(getPresentShift());
 		}
 
-		double minTx = shiftValue.getLlx();
-		double minTy = shiftValue.getLly();
-		double maxTx = shiftValue.getUrx();
-		double maxTy = shiftValue.getUry();
+		final double minTx = shiftValue.getLlx();
+		final double minTy = shiftValue.getLly();
+		final double maxTx = shiftValue.getUrx();
+		final double maxTy = shiftValue.getUry();
 
-		double Tx = matrix.getTx();
-		double Ty = matrix.getTy();
+		final double Tx = matrix.getTx();
+		final double Ty = matrix.getTy();
 
 		return ((Tx >= minTx) && (Tx <= maxTx) && (Ty >= minTy) && (Ty <= maxTy));
 	}
@@ -724,46 +758,52 @@ public class JDFMatrixState extends JDFAbstractState
 	/**
 	 * fitsTransforms - checks whether <code>matrix</code> matches the
 	 * AllowedTransforms or PresentTransforms, specified for this State
-	 * 
+	 *
 	 * @param matrix
-	 *            matrix to test
+	 *                   matrix to test
 	 * @param transforms
-	 *            switches between AllowedTransforms and PresentTransforms.
+	 *                   switches between AllowedTransforms and PresentTransforms.
 	 * @return boolean - true, if <code>matrix</code> matches the Transforms or
 	 *         if AllowedTransforms is not specified
 	 */
-	private final boolean fitsTransforms(JDFMatrix matrix, EnumFitsValue transforms)
+	private final boolean fitsTransforms(final JDFMatrix matrix, final EnumFitsValue transforms)
 	{
 		if (transforms == null || transforms.equals(EnumFitsValue.Allowed))
 		{
 			if (!hasAttribute(AttributeName.ALLOWEDTRANSFORMS))
+			{
 				return true;
+			}
 		}
 		else
 		{
 			if (!hasAttribute(AttributeName.ALLOWEDTRANSFORMS) && !hasAttribute(AttributeName.PRESENTTRANSFORMS))
+			{
 				return true;
+			}
 		}
 
-		double nT = EPSILON; // negative tolerance
-		double pT = EPSILON; // positive tolerance
+		final double nT = EPSILON; // negative tolerance
+		final double pT = EPSILON; // positive tolerance
 
 		double a = matrix.getA();
 		double b = matrix.getB();
 		double c = matrix.getC();
 		double d = matrix.getD();
 
-		double det = (a * d - b * c);
+		final double det = (a * d - b * c);
 
 		if (det == 0)
+		{
 			return false;
+		}
 
 		a = a / java.lang.Math.sqrt(java.lang.Math.abs(det));
 		b = b / java.lang.Math.sqrt(java.lang.Math.abs(det));
 		c = c / java.lang.Math.sqrt(java.lang.Math.abs(det));
 		d = d / java.lang.Math.sqrt(java.lang.Math.abs(det));
 
-		Vector<ValuedEnum> vTransf;
+		Vector vTransf;
 		if (transforms == null || transforms.equals(EnumFitsValue.Allowed))
 		{
 			vTransf = getAllowedTransforms();
@@ -772,43 +812,53 @@ public class JDFMatrixState extends JDFAbstractState
 		{
 			vTransf = getPresentTransforms();
 		}
-		int siz = vTransf.size();
+		final int siz = vTransf.size();
 		for (int i = 0; i < siz; i++)
 		{
-			EnumOrientation orientation = (EnumOrientation) vTransf.elementAt(i);
+			final EnumOrientation orientation = (EnumOrientation) vTransf.elementAt(i);
 
 			if (orientation.equals(EnumOrientation.Flip0)) // a=1 b=0 c=0 d=-1
 			{
 				if ((a - 1 < pT) && (a - 1 > -nT) && (b < pT) && (b > -nT) && (c < pT) && (c > -nT) && (d + 1 < pT) && (d + 1 > -nT))
+				{
 					return true;
+				}
 				continue;
 			}
 			else if (orientation.equals(EnumOrientation.Flip90)) // a=0 b=-1
 																	// c=-1 d=0
 			{
 				if ((a < pT) && (a > -nT) && (b + 1 < pT) && (b + 1 > -nT) && (c + 1 < pT) && (c + 1 > -nT) && (d < pT) && (d > -nT))
+				{
 					return true;
+				}
 				continue;
 			}
 			else if (orientation.equals(EnumOrientation.Flip180)) // a=-1 b=0
 																	// c=0 d=1
 			{
 				if ((a + 1 < pT) && (a + 1 > -nT) && (b < pT) && (b > -nT) && (c < pT) && (c > -nT) && (d - 1 < pT) && (d - 1 > -nT))
+				{
 					return true;
+				}
 				continue;
 			}
 			else if (orientation.equals(EnumOrientation.Flip270)) // a=0 b=1
 																	// c=1 d=0
 			{
 				if ((a < pT) && (a > -nT) && (b - 1 < pT) && (b - 1 > -nT) && (c - 1 < pT) && (c - 1 > -nT) && (d < pT) && (d > -nT))
+				{
 					return true;
+				}
 				continue;
 			}
 			else if (orientation.equals(EnumOrientation.Rotate0)) // a=1 b=0
 																	// c=0 d=1
 			{
 				if ((a - 1 < pT) && (a - 1 > -nT) && (b < pT) && (b > -nT) && (c < pT) && (c > -nT) && (d - 1 < pT) && (d - 1 > -nT))
+				{
 					return true;
+				}
 				continue;
 			}
 			else if (orientation.equals(EnumOrientation.Rotate90)) // a=0 b=1
@@ -816,7 +866,9 @@ public class JDFMatrixState extends JDFAbstractState
 																	// d=0
 			{
 				if ((a < pT) && (a > -nT) && (b - 1 < pT) && (b - 1 > -nT) && (c + 1 < pT) && (c + 1 > -nT) && (d < pT) && (d > -nT))
+				{
 					return true;
+				}
 				continue;
 			}
 			else if (orientation.equals(EnumOrientation.Rotate180)) // a=-1
@@ -825,7 +877,9 @@ public class JDFMatrixState extends JDFAbstractState
 																	// d=-1
 			{
 				if ((a + 1 < pT) && (a + 1 > -nT) && (b < pT) && (b > -nT) && (c < pT) && (c > -nT) && (d + 1 < pT) && (d + 1 > -nT))
+				{
 					return true;
+				}
 				continue;
 			}
 			else if (orientation.equals(EnumOrientation.Rotate270)) // a=0
@@ -834,7 +888,9 @@ public class JDFMatrixState extends JDFAbstractState
 																	// d=0
 			{
 				if ((a < pT) && (a > -nT) && (b + 1 < pT) && (b + 1 > -nT) && (c - 1 < pT) && (c - 1 > -nT) && (d < pT) && (d > -nT))
+				{
 					return true;
+				}
 				continue;
 			}
 			else
@@ -847,7 +903,7 @@ public class JDFMatrixState extends JDFAbstractState
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
 	 */
 	@Override

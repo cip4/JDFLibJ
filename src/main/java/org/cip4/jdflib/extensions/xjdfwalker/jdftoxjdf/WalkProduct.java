@@ -144,8 +144,8 @@ public class WalkProduct extends WalkJDF
 		}
 	}
 
-	final private static StringArray copyKeep = new StringArray(
-			new String[] { XJDFConstants.ExternalID, AttributeName.PRODUCTTYPE, AttributeName.PARTVERSION, AttributeName.PRODUCTTYPEDETAILS, AttributeName.DESCRIPTIVENAME });
+	final private static StringArray copyKeep = new StringArray(new String[] { XJDFConstants.ExternalID, AttributeName.PRODUCTTYPE, AttributeName.PARTVERSION,
+			AttributeName.PRODUCTTYPEDETAILS, AttributeName.DESCRIPTIVENAME });
 
 	/**
 	 * @param node
@@ -155,7 +155,9 @@ public class WalkProduct extends WalkJDF
 	{
 		final JDFResourceLink cOutLink = node.getLink(0, ElementName.COMPONENT, new JDFAttributeMap(AttributeName.USAGE, EnumUsage.Output), null);
 		if (cOutLink == null)
+		{
 			return false;
+		}
 		final int amount = (int) cOutLink.getAmountPoolSumDouble(AttributeName.AMOUNT, null);
 		if (amount > 0)
 		{

@@ -138,7 +138,9 @@ abstract class AtrElemInfo
 			{
 				EnumVersion ret = EnumVersion.getEnum(i + 1);
 				if (i == MAXLOOP - 1)
+				{
 					ret = ret.getXJDFVersion();
+				}
 				return ret;
 			}
 		}

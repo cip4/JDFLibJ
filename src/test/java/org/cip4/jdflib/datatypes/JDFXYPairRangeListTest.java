@@ -40,8 +40,8 @@
  * JDFXYPairRangeListTest.java
  *
  * @author Elena Skobchenko
- * 
- * Copyright (c) 2001-2004 The International Cooperation for the Integration 
+ *
+ * Copyright (c) 2001-2004 The International Cooperation for the Integration
  * of Processes in  Prepress, Press and Postpress (CIP4).  All rights reserved.
  */
 package org.cip4.jdflib.datatypes;
@@ -76,7 +76,7 @@ class JDFXYPairRangeListTest
 	@Test
 	public final void testSetStringX() throws DataFormatException
 	{
-		JDFXYPairRange range = new JDFXYPairRange("0.4 1.9~1.4 2.9");
+		final JDFXYPairRange range = new JDFXYPairRange("0.4 1.9~1.4 2.9");
 
 		assertEquals(range.getString(0), "0 2 ~ 1 3");
 		assertEquals(range.getXJDFString(0), "0 2 1 3");
@@ -85,7 +85,7 @@ class JDFXYPairRangeListTest
 	@Test
 	public final void testConstructXYPairRange()
 	{
-		JDFXYPairRangeList rl = new JDFXYPairRangeList(new JDFXYPairRange(new JDFXYPair(2, 4), new JDFXYPair(6, 8)));
+		final JDFXYPairRangeList rl = new JDFXYPairRangeList(new JDFXYPairRange(new JDFXYPair(2, 4), new JDFXYPair(6, 8)));
 		assertEquals(rl.toString(), "2 4 ~ 6 8");
 	}
 
@@ -94,10 +94,10 @@ class JDFXYPairRangeListTest
 	{
 		new JDFXYPairRangeList("0.4 1.9~1.4 2.9 0.4 1.9~2.4 3.8 0.4 1.6");
 
-		JDFDoc d = new JDFDoc(ElementName.TEST);
-		JDFTest t = (JDFTest) d.getRoot();
+		final JDFDoc d = new JDFDoc(ElementName.TEST);
+		final JDFTest t = (JDFTest) d.getRoot();
 		t.init();
-		JDFXYPairEvaluation xyPairEvaluation = (JDFXYPairEvaluation) t.appendTerm(EnumTerm.XYPairEvaluation);
+		final JDFXYPairEvaluation xyPairEvaluation = (JDFXYPairEvaluation) t.appendTerm(EnumTerm.XYPairEvaluation);
 		xyPairEvaluation.setTolerance(new JDFXYPair("0 0"));
 		assertTrue(t.isValid(EnumValidationLevel.Complete));
 

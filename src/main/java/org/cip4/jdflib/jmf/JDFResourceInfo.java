@@ -69,6 +69,7 @@ import org.cip4.jdflib.pool.JDFAmountPool.AmountPoolHelper;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -115,7 +116,6 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	}
 
 	/**
-	 *
 	 * create a resourceInfo in parent based on resourceLink
 	 *
 	 * @param parent
@@ -170,7 +170,9 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	{
 		JDFResource e = getResource(resName);
 		if (e == null)
+		{
 			e = appendResource(resName);
+		}
 		return e;
 	}
 
@@ -228,7 +230,9 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	public JDFResource appendResource(String resName)
 	{
 		if (StringUtil.isEmpty(resName))
+		{
 			resName = getResourceName();
+		}
 		if (!StringUtil.isEmpty(resName))
 		{
 			final KElement e = appendElement(resName, null);
@@ -237,7 +241,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 				return (JDFResource) e;
 			}
 		}
-		throw new JDFException("JDFResouceInfo.appendResource tried to append a JDFElement("+resName+")instead of a JDFResource");
+		throw new JDFException("JDFResouceInfo.appendResource tried to append a JDFElement(" + resName + ")instead of a JDFResource");
 	}
 
 	/**
@@ -246,8 +250,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	 * default: getUnknownElements(true, 999999)
 	 *
 	 * @param bIgnorePrivate used by JDFElement during the validation
-	 * @param nMax maximum number of elements to get
-	 *
+	 * @param nMax           maximum number of elements to get
 	 * @return Vector - vector of unknown element nodenames
 	 */
 	@Override
@@ -261,10 +264,9 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	 * <p>
 	 * default: GetInvalidElements(level, true, 999999)
 	 *
-	 * @param level validation level
+	 * @param level          validation level
 	 * @param bIgnorePrivate
-	 * @param nMax maximum number of elements to get
-	 *
+	 * @param nMax           maximum number of elements to get
 	 * @return VString - vector of names of invalid elements
 	 */
 	@Override
@@ -416,7 +418,6 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	}
 
 	/**
-	 *
 	 * @param copyResource
 	 * @param r
 	 */
@@ -440,7 +441,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	 * sets all relevant parameters of this to the values specified in resourceLink or its linked resource or JDF node
 	 *
 	 * @param resourceLink the resourceLink to extract the information from
-	 * @param rqp parameters
+	 * @param rqp          parameters
 	 */
 	public void setLink(final JDFResourceLink resourceLink, final JDFResourceQuParams rqp)
 	{
@@ -465,7 +466,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	 */
 	public void setProcessUsage(final EnumProcessUsage processUsage)
 	{
-		setAttribute(AttributeName.PROCESSUSAGE, processUsage == null ? null : processUsage.getName(), null);
+		setAttribute(AttributeName.PROCESSUSAGE, JavaEnumUtil.getName(processUsage), null);
 	}
 
 	/**
@@ -534,7 +535,6 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	}
 
 	/**
-	 *
 	 * if a Resource is available, return it's status
 	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoResourceInfo#getResStatus()
@@ -582,7 +582,6 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	 *
 	 * @param value amount to set
 	 * @param mPart partition map to set amount for
-	 *
 	 * @default setAmount(double value, null)
 	 */
 	public void setAmount(final double value, final JDFAttributeMap mPart)
@@ -593,10 +592,10 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	/**
 	 * sets the attribute occurence in the appropriate PartAmount when called for a resourceLink and creates the AmountPool and/or PartAmount if it is not yet there
 	 *
-	 * @param attrib the attribute name
-	 * @param value value to set in string form.
+	 * @param attrib       the attribute name
+	 * @param value        value to set in string form.
 	 * @param nameSpaceURI the XML-namespace
-	 * @param mPart defines which part of this ResourceLink the Amount belongs to, if empty set the ResourceLink root attribute
+	 * @param mPart        defines which part of this ResourceLink the Amount belongs to, if empty set the ResourceLink root attribute
 	 * @throws JDFException when called directly on a PartAmount
 	 * @since 071103
 	 */
@@ -608,10 +607,10 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	/**
 	 * sets the attribute occurence in the appropriate PartAmount when called for a resourceLink and creates the AmountPool and/or PartAmount(s) if they are not yet there
 	 *
-	 * @param attrib the attribute name
-	 * @param value value to set in string form.
+	 * @param attrib       the attribute name
+	 * @param value        value to set in string form.
 	 * @param nameSpaceURI the XML-namespace
-	 * @param vPart defines which part of this ResourceLink the Amount belongs to, if empty set the ResourceLink root attribute.
+	 * @param vPart        defines which part of this ResourceLink the Amount belongs to, if empty set the ResourceLink root attribute.
 	 * @throws JDFException when called directly on a PartAmount
 	 * @since 060630
 	 */
@@ -623,9 +622,9 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	/**
 	 * returns the attribute occurence in PartAmount, or the default in the ResourceLink
 	 *
-	 * @param attrib the attribute name
+	 * @param attrib       the attribute name
 	 * @param nameSpaceURI the XML-namespace
-	 * @param mPart defines which part of this ResourceLink the Amount belongs to. If empty get the ResourceLink root attribute.
+	 * @param mPart        defines which part of this ResourceLink the Amount belongs to. If empty get the ResourceLink root attribute.
 	 * @param iSkip
 	 * @return value of attribute found, null if not available
 	 * @since 071103
@@ -638,9 +637,9 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	/**
 	 * returns the attribute occurence in PartAmount, or the default in the ResourceLink
 	 *
-	 * @param attrib the attribute name
+	 * @param attrib       the attribute name
 	 * @param nameSpaceURI the XML-namespace
-	 * @param vPart defines which part of this ResourceLink the Amount belongs to. If null get the ResourceLink root attribute.
+	 * @param vPart        defines which part of this ResourceLink the Amount belongs to. If null get the ResourceLink root attribute.
 	 * @return value of attribute found, null if not available
 	 * @since 071103
 	 */
@@ -652,7 +651,6 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	/**
 	 * get the sum of all matching AmountPool/PartAmount/@attName as a double PartAmounts match if all attributes match those in PartAmount, i.e. mPart is a submap of the searche
 	 * PartAmount elements
-	 *
 	 *
 	 * @param attName the Attribute name , e.g Amount, ActualAmount
 	 * @param mPart
@@ -723,7 +721,6 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	}
 
 	/**
-	 *
 	 * the matching against rqp is not completely implemented
 	 *
 	 * @param resourceName
@@ -736,10 +733,14 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 		boolean bRet = resourceNames.isEmpty() || resourceNames.contains(resourceName);
 		final String productID = rqp.getProductID();
 		if (StringUtil.getNonEmpty(productID) != null)
+		{
 			bRet = bRet && ContainerUtil.equals(getProductID(), productID);
+		}
 		final String resourceID = rqp.getResourceID();
 		if (StringUtil.getNonEmpty(resourceID) != null)
+		{
 			bRet = bRet && ContainerUtil.equals(getResourceID(), resourceID);
+		}
 
 		return bRet;
 	}

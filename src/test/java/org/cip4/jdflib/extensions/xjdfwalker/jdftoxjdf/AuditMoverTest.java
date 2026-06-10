@@ -86,7 +86,8 @@ class AuditMoverTest extends JDFTestCaseBase
 
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTreeKidsFirst(h.getRoot());
-		Assertions.assertEquals(h.getRoot().getXPathAttribute("AuditPool/AuditResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null), "66");
+		Assertions.assertEquals(h.getRoot().getXPathAttribute("AuditPool/AuditResource/ResourceInfo/ResourceSet/Resource/AmountPool/PartAmount/@Amount", null),
+				"66");
 
 	}
 }

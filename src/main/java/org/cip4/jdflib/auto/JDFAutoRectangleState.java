@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -105,10 +101,10 @@ public abstract class JDFAutoRectangleState extends JDFResource
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x3333333311l, AttributeInfo.EnumAttributeType.rectangle, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x3333333311l, AttributeInfo.EnumAttributeType.rectangle, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDHWRELATION, 0x3333333311l, AttributeInfo.EnumAttributeType.XYRelation,
-				EnumAllowedHWRelation.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumAllowedHWRelation.class, 0), null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST, 0x3333333311l, AttributeInfo.EnumAttributeType.RectangleRangeList, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.PRESENTHWRELATION, 0x3333333311l, AttributeInfo.EnumAttributeType.XYRelation,
-				EnumPresentHWRelation.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumPresentHWRelation.class, 0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x3333333311l, AttributeInfo.EnumAttributeType.RectangleRangeList, null, null);
 	}
 
@@ -137,7 +133,7 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoRectangleState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoRectangleState(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -149,7 +145,7 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoRectangleState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoRectangleState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -162,7 +158,7 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoRectangleState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoRectangleState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -173,186 +169,42 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
 
 	/**
-	 * Enumeration strings for AllowedHWRelation
+	 * Enumeration strings for numAllowedHWRelation
 	 */
 
-	public enum EAllowedHWRelation
+	public enum EnumAllowedHWRelation
 	{
 		gt, ge, eq, le, lt, ne;
 
-		public static EAllowedHWRelation getEnum(String val)
+		public static EnumAllowedHWRelation getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EAllowedHWRelation.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumAllowedHWRelation.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for AllowedHWRelation
+	 * Enumeration strings for numPresentHWRelation
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumAllowedHWRelation extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumAllowedHWRelation(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumAllowedHWRelation getEnum(String enumName)
-		{
-			return (EnumAllowedHWRelation) getEnum(EnumAllowedHWRelation.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumAllowedHWRelation getEnum(int enumValue)
-		{
-			return (EnumAllowedHWRelation) getEnum(EnumAllowedHWRelation.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumAllowedHWRelation.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAllowedHWRelation.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAllowedHWRelation.class);
-		}
-
-		/**  */
-		public static final EnumAllowedHWRelation gt = new EnumAllowedHWRelation("gt");
-		/**  */
-		public static final EnumAllowedHWRelation ge = new EnumAllowedHWRelation("ge");
-		/**  */
-		public static final EnumAllowedHWRelation eq = new EnumAllowedHWRelation("eq");
-		/**  */
-		public static final EnumAllowedHWRelation le = new EnumAllowedHWRelation("le");
-		/**  */
-		public static final EnumAllowedHWRelation lt = new EnumAllowedHWRelation("lt");
-		/**  */
-		public static final EnumAllowedHWRelation ne = new EnumAllowedHWRelation("ne");
-	}
-
-	/**
-	 * Enumeration strings for PresentHWRelation
-	 */
-
-	public enum EPresentHWRelation
+	public enum EnumPresentHWRelation
 	{
 		gt, ge, eq, le, lt, ne;
 
-		public static EPresentHWRelation getEnum(String val)
+		public static EnumPresentHWRelation getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPresentHWRelation.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumPresentHWRelation.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for PresentHWRelation
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumPresentHWRelation extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPresentHWRelation(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumPresentHWRelation getEnum(String enumName)
-		{
-			return (EnumPresentHWRelation) getEnum(EnumPresentHWRelation.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPresentHWRelation getEnum(int enumValue)
-		{
-			return (EnumPresentHWRelation) getEnum(EnumPresentHWRelation.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPresentHWRelation.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPresentHWRelation.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPresentHWRelation.class);
-		}
-
-		/**  */
-		public static final EnumPresentHWRelation gt = new EnumPresentHWRelation("gt");
-		/**  */
-		public static final EnumPresentHWRelation ge = new EnumPresentHWRelation("ge");
-		/**  */
-		public static final EnumPresentHWRelation eq = new EnumPresentHWRelation("eq");
-		/**  */
-		public static final EnumPresentHWRelation le = new EnumPresentHWRelation("le");
-		/**  */
-		public static final EnumPresentHWRelation lt = new EnumPresentHWRelation("lt");
-		/**  */
-		public static final EnumPresentHWRelation ne = new EnumPresentHWRelation("ne");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -364,7 +216,7 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDefaultValue(JDFRectangle value)
+	public void setDefaultValue(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.DEFAULTVALUE, value, null);
 	}
@@ -377,8 +229,8 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 */
 	public JDFRectangle getDefaultValue()
 	{
-		String strAttrName = getAttribute(AttributeName.DEFAULTVALUE, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.DEFAULTVALUE, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -392,7 +244,7 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCurrentValue(JDFRectangle value)
+	public void setCurrentValue(final JDFRectangle value)
 	{
 		setAttribute(AttributeName.CURRENTVALUE, value, null);
 	}
@@ -405,8 +257,8 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 */
 	public JDFRectangle getCurrentValue()
 	{
-		String strAttrName = getAttribute(AttributeName.CURRENTVALUE, null, null);
-		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CURRENTVALUE, null, null);
+		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -420,9 +272,9 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setAllowedHWRelation(EAllowedHWRelation enumVar)
+	public void setAllowedHWRelation(final EnumAllowedHWRelation enumVar)
 	{
-		setAttribute(AttributeName.ALLOWEDHWRELATION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ALLOWEDHWRELATION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -430,35 +282,6 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EAllowedHWRelation getEAllowedHWRelation()
-	{
-		return EAllowedHWRelation.getEnum(getAttribute(AttributeName.ALLOWEDHWRELATION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute AllowedHWRelation
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute AllowedHWRelation
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetAllowedHWRelation(EAllowedHWRelation) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setAllowedHWRelation(EnumAllowedHWRelation enumVar)
-	{
-		setAttribute(AttributeName.ALLOWEDHWRELATION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute AllowedHWRelation
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EAllowedHWRelation GetEAllowedHWRelation() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumAllowedHWRelation getAllowedHWRelation()
 	{
 		return EnumAllowedHWRelation.getEnum(getAttribute(AttributeName.ALLOWEDHWRELATION, null, null));
@@ -474,7 +297,7 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowedValueList(JDFRectangleRangeList value)
+	public void setAllowedValueList(final JDFRectangleRangeList value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUELIST, value, null);
 	}
@@ -487,8 +310,8 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 */
 	public JDFRectangleRangeList getAllowedValueList()
 	{
-		String strAttrName = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
-		JDFRectangleRangeList nPlaceHolder = JDFRectangleRangeList.createRectangleRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
+		final JDFRectangleRangeList nPlaceHolder = JDFRectangleRangeList.createRectangleRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -502,9 +325,9 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPresentHWRelation(EPresentHWRelation enumVar)
+	public void setPresentHWRelation(final EnumPresentHWRelation enumVar)
 	{
-		setAttribute(AttributeName.PRESENTHWRELATION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.PRESENTHWRELATION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -512,35 +335,6 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPresentHWRelation getEPresentHWRelation()
-	{
-		return EPresentHWRelation.getEnum(getAttribute(AttributeName.PRESENTHWRELATION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute PresentHWRelation
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute PresentHWRelation
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetPresentHWRelation(EPresentHWRelation) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setPresentHWRelation(EnumPresentHWRelation enumVar)
-	{
-		setAttribute(AttributeName.PRESENTHWRELATION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute PresentHWRelation
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EPresentHWRelation GetEPresentHWRelation() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumPresentHWRelation getPresentHWRelation()
 	{
 		return EnumPresentHWRelation.getEnum(getAttribute(AttributeName.PRESENTHWRELATION, null, null));
@@ -556,7 +350,7 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentValueList(JDFRectangleRangeList value)
+	public void setPresentValueList(final JDFRectangleRangeList value)
 	{
 		setAttribute(AttributeName.PRESENTVALUELIST, value, null);
 	}
@@ -569,8 +363,8 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 */
 	public JDFRectangleRangeList getPresentValueList()
 	{
-		String strAttrName = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
-		JDFRectangleRangeList nPlaceHolder = JDFRectangleRangeList.createRectangleRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
+		final JDFRectangleRangeList nPlaceHolder = JDFRectangleRangeList.createRectangleRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -606,7 +400,7 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc the element
 	 */
-	public JDFLoc getCreateLoc(int iSkip)
+	public JDFLoc getCreateLoc(final int iSkip)
 	{
 		return (JDFLoc) getCreateElement_JDFElement(ElementName.LOC, null, iSkip);
 	}
@@ -618,7 +412,7 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 * @return JDFLoc the element
 	 *         default is getLoc(0)
 	 */
-	public JDFLoc getLoc(int iSkip)
+	public JDFLoc getLoc(final int iSkip)
 	{
 		return (JDFLoc) getElement(ElementName.LOC, null, iSkip);
 	}
@@ -669,7 +463,7 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFValueLoc the element
 	 */
-	public JDFValueLoc getCreateValueLoc(int iSkip)
+	public JDFValueLoc getCreateValueLoc(final int iSkip)
 	{
 		return (JDFValueLoc) getCreateElement_JDFElement(ElementName.VALUELOC, null, iSkip);
 	}
@@ -681,7 +475,7 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 * @return JDFValueLoc the element
 	 *         default is getValueLoc(0)
 	 */
-	public JDFValueLoc getValueLoc(int iSkip)
+	public JDFValueLoc getValueLoc(final int iSkip)
 	{
 		return (JDFValueLoc) getElement(ElementName.VALUELOC, null, iSkip);
 	}

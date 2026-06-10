@@ -53,7 +53,6 @@ class JDFDocumentBuilderTest extends JDFTestCaseBase
 
 	/**
 	 * check speed of the parser
-	 *
 	 */
 	@Test
 	void testSpeed()

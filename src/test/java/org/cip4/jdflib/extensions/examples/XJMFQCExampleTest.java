@@ -62,9 +62,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class XJMFQCExampleTest extends ExampleTest
 {
@@ -163,7 +161,9 @@ class XJMFQCExampleTest extends ExampleTest
 			final JDFTransferFunction tf = new JDFTransferFunction();
 			final Vector<Double> v = new Vector<>();
 			for (int j = 1; j < 40; j++)
+			{
 				v.add(Double.valueOf(60.345 * (i + 1) * j % 567));
+			}
 			tf.set(380, 5, v);
 			patch.setAttribute(SPECTRUM, tf.getString(2));
 			patch.setAttribute(AttributeName.POSITION, new JDFXYPair(10, 10 + i * 30).getString(1));

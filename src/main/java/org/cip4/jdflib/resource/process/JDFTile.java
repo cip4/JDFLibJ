@@ -68,13 +68,13 @@
  *
  */
 /**
- * ========================================================================== 
+ * ==========================================================================
  * class JDFTile extends JDFResource
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author: sabjon@topmail.de    using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * @Author: sabjon@topmail.de    using a code generator
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  */
 
 package org.cip4.jdflib.resource.process;
@@ -89,9 +89,8 @@ import org.w3c.dom.DOMException;
 
 /**
  * JDFTile provides utilities for the Tile resource
- * 
+ *
  * @author prosirai
- * 
  */
 public class JDFTile extends JDFAutoTile
 {
@@ -99,39 +98,39 @@ public class JDFTile extends JDFAutoTile
 
 	/**
 	 * Constructor for JDFTile
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFTile(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFTile(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFTile
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFTile(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFTile(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFTile
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFTile(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFTile(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -156,37 +155,37 @@ public class JDFTile extends JDFAutoTile
 
 	/**
 	 * (26) getCreateMarkObject note that this is prerelease for JDF1.4
-	 * 
+	 *
 	 * @param iSkip
-	 *            number of elements to skip
+	 *              number of elements to skip
 	 * @return JDFMarkObject the element
 	 */
 	// TODO remove when in auto files
 	@Override
-	public JDFMarkObject getCreateMarkObject(int iSkip)
+	public JDFMarkObject getCreateMarkObject(final int iSkip)
 	{
 		return (JDFMarkObject) getCreateElement_KElement(ElementName.MARKOBJECT, null, iSkip);
 	}
 
 	/**
 	 * (27) const get element MarkObject
-	 * 
+	 *
 	 * @param iSkip
-	 *            number of elements to skip
+	 *              number of elements to skip
 	 * @return JDFMarkObject the element default is getMarkObject(0) note that
 	 *         this is prerelease for JDF1.4
 	 */
 	@Override
-	public JDFMarkObject getMarkObject(int iSkip)
+	public JDFMarkObject getMarkObject(final int iSkip)
 	{
 		return (JDFMarkObject) getElement(ElementName.MARKOBJECT, null, iSkip);
 	}
 
 	/**
 	 * const append element MarkObject
-	 * 
+	 *
 	 * @param iSkip
-	 *            number of elements to skip
+	 *              number of elements to skip
 	 * @return JDFMarkObject the element default is getMarkObject(0) note that
 	 *         this is prerelease for JDF1.4
 	 */
@@ -196,4 +195,4 @@ public class JDFTile extends JDFAutoTile
 		return (JDFMarkObject) appendElement(ElementName.MARKOBJECT, null);
 	}
 } // class JDFIDPLayout
-// ==========================================================================
+	// ==========================================================================

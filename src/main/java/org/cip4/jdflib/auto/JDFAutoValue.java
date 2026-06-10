@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -102,8 +98,8 @@ public abstract class JDFAutoValue extends JDFElement
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDVALUE, 0x2222222221l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.PRESENTVALUE, 0x4444444431l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.VALUEUSAGE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumValueUsage.getEnum(0),
-				null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.VALUEUSAGE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumValueUsage.class, 0), null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.VALUE, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
@@ -131,7 +127,7 @@ public abstract class JDFAutoValue extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoValue(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoValue(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -143,7 +139,7 @@ public abstract class JDFAutoValue extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoValue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoValue(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -156,99 +152,28 @@ public abstract class JDFAutoValue extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoValue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoValue(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for ValueUsage
+	 * Enumeration strings for numValueUsage
 	 */
 
-	public enum EValueUsage
+	public enum EnumValueUsage
 	{
 		Allowed, Device, Present, Job, Estimate;
 
-		public static EValueUsage getEnum(String val)
+		public static EnumValueUsage getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EValueUsage.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumValueUsage.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for ValueUsage
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumValueUsage extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumValueUsage(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumValueUsage getEnum(String enumName)
-		{
-			return (EnumValueUsage) getEnum(EnumValueUsage.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumValueUsage getEnum(int enumValue)
-		{
-			return (EnumValueUsage) getEnum(EnumValueUsage.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumValueUsage.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumValueUsage.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumValueUsage.class);
-		}
-
-		/**  */
-		public static final EnumValueUsage Allowed = new EnumValueUsage("Allowed");
-		/**  */
-		public static final EnumValueUsage Device = new EnumValueUsage("Device");
-		/**  */
-		public static final EnumValueUsage Present = new EnumValueUsage("Present");
-		/**  */
-		public static final EnumValueUsage Job = new EnumValueUsage("Job");
-		/**  */
-		public static final EnumValueUsage Estimate = new EnumValueUsage("Estimate");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -260,7 +185,7 @@ public abstract class JDFAutoValue extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAllowedValue(String value)
+	public void setAllowedValue(final String value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUE, value, null);
 	}
@@ -285,7 +210,7 @@ public abstract class JDFAutoValue extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPresentValue(String value)
+	public void setPresentValue(final String value)
 	{
 		setAttribute(AttributeName.PRESENTVALUE, value, null);
 	}
@@ -310,9 +235,9 @@ public abstract class JDFAutoValue extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setValueUsage(EValueUsage enumVar)
+	public void setValueUsage(final EnumValueUsage enumVar)
 	{
-		setAttribute(AttributeName.VALUEUSAGE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.VALUEUSAGE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -320,35 +245,6 @@ public abstract class JDFAutoValue extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EValueUsage getEValueUsage()
-	{
-		return EValueUsage.getEnum(getAttribute(AttributeName.VALUEUSAGE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ValueUsage
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ValueUsage
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetValueUsage(EValueUsage) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setValueUsage(EnumValueUsage enumVar)
-	{
-		setAttribute(AttributeName.VALUEUSAGE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ValueUsage
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EValueUsage GetEValueUsage() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumValueUsage getValueUsage()
 	{
 		return EnumValueUsage.getEnum(getAttribute(AttributeName.VALUEUSAGE, null, null));
@@ -364,7 +260,7 @@ public abstract class JDFAutoValue extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setValue(String value)
+	public void setValue(final String value)
 	{
 		setAttribute(AttributeName.VALUE, value, null);
 	}
@@ -411,7 +307,7 @@ public abstract class JDFAutoValue extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc the element
 	 */
-	public JDFLoc getCreateLoc(int iSkip)
+	public JDFLoc getCreateLoc(final int iSkip)
 	{
 		return (JDFLoc) getCreateElement_JDFElement(ElementName.LOC, null, iSkip);
 	}
@@ -423,7 +319,7 @@ public abstract class JDFAutoValue extends JDFElement
 	 * @return JDFLoc the element
 	 *         default is getLoc(0)
 	 */
-	public JDFLoc getLoc(int iSkip)
+	public JDFLoc getLoc(final int iSkip)
 	{
 		return (JDFLoc) getElement(ElementName.LOC, null, iSkip);
 	}

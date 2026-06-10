@@ -84,10 +84,10 @@ import org.cip4.jdflib.util.JDFDate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * July 20, 2009
+ *         July 20, 2009
  */
 class ProcessRunTest extends JDFTestCaseBase
 {
@@ -111,7 +111,7 @@ class ProcessRunTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testAddPhaseTime()
@@ -158,7 +158,7 @@ class ProcessRunTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testMatches()

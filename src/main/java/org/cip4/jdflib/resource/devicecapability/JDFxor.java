@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
@@ -79,15 +79,14 @@ package org.cip4.jdflib.resource.devicecapability;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 
 /**
- * 
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFxor extends JDFNodeTerm
 {
@@ -95,42 +94,41 @@ public class JDFxor extends JDFNodeTerm
 
 	/**
 	 * Constructor for JDFxor
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFxor(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFxor(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFxor
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFxor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFxor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFxor
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFxor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFxor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * 
 	 * @see org.cip4.jdflib.core.JDFElement#toString()
 	 * @return
 	 */
@@ -141,13 +139,12 @@ public class JDFxor extends JDFNodeTerm
 	}
 
 	/**
-	 * 
 	 * @param iSkip
 	 * @return
 	 */
-	public JDFBooleanEvaluation getBooleanEvaluation(int iSkip)
+	public JDFBooleanEvaluation getBooleanEvaluation(final int iSkip)
 	{
-		JDFBooleanEvaluation e = (JDFBooleanEvaluation) getElement(ElementName.BOOLEANEVALUATION, JDFConstants.EMPTYSTRING, iSkip);
+		final JDFBooleanEvaluation e = (JDFBooleanEvaluation) getElement(ElementName.BOOLEANEVALUATION, JDFCoreConstants.EMPTYSTRING, iSkip);
 		return e;
 	}
 
@@ -156,31 +153,34 @@ public class JDFxor extends JDFNodeTerm
 	 * TestRef) to determine if, as a set, they evaluate to "true" when combined
 	 * in a boolean "xor" function. ! For more than two arguments, exactly one
 	 * Term must evaluate to "true" for the "xor" to evaluate to "true".<br>
-	 * 
 	 * Looks for Evaluations that "xor" consists of, and tests the status of
 	 * every Evaluation, until the result of a whole boolean expression is
 	 * determinated. Tests whether attribute map 'm' has a key specified by
 	 * Evaluation/BasicPreflightTest/@Name. If 'm' has such key, checks if its
 	 * value fits the testlists, specified for matching Evaluation (uses
 	 * FitsValue(value))
-	 * 
+	 *
 	 * @param m
-	 *            key-value pair attribute map
+	 *          key-value pair attribute map
 	 * @return boolean - true, if boolean "xor" expression evaluates to "true"
 	 */
 	@Override
-	public boolean fitsMap(JDFAttributeMap m)
+	public boolean fitsMap(final JDFAttributeMap m)
 	{
-		VElement v = getChildElementVector(null, null, null, true, 0, false);
-		int siz = v.size();
+		final VElement v = getChildElementVector(null, null, null, true, 0, false);
+		final int siz = v.size();
 		int count = 0;
 		for (int i = 0; i < siz; i++)
 		{
-			JDFTerm t = (JDFTerm) v.elementAt(i);
+			final JDFTerm t = (JDFTerm) v.elementAt(i);
 			if (t.fitsMap(m))
+			{
 				count++;
+			}
 			if (count > 1)
+			{
 				return false;
+			}
 		}
 
 		return (count == 1);
@@ -190,39 +190,47 @@ public class JDFxor extends JDFNodeTerm
 	 * Evaluates two or more Term elements (and, or, xor, not, Evaluation,
 	 * TestRef) to determine if, as a set, they evaluate to "true" when combined
 	 * in a boolean "xor" function.
-	 * 
+	 *
 	 * @param jdf
-	 *            JDFNode to test to know if the Device can accept it
+	 *                   JDFNode to test to know if the Device can accept it
 	 * @param reportRoot
-	 *            the report to generate; set to <code>null</code> if no report
-	 *            is requested
+	 *                   the report to generate; set to <code>null</code> if no report
+	 *                   is requested
 	 * @return boolean - true, if boolean "xor" expression evaluates to "true"
 	 */
 	@Override
-	public boolean fitsJDF(KElement jdf, KElement reportRoot)
+	public boolean fitsJDF(final KElement jdf, final KElement reportRoot)
 	{
 		KElement reportRootLocal = reportRoot;
 
-		VElement v = getTermVector(null);
+		final VElement v = getTermVector(null);
 		if (reportRootLocal != null)
+		{
 			reportRootLocal = reportRootLocal.appendElement("xor");
+		}
 
-		int siz = v.size();
+		final int siz = v.size();
 
 		int count = 0;
 		for (int i = 0; i < siz; i++)
 		{
-			JDFTerm t = (JDFTerm) v.elementAt(i);
+			final JDFTerm t = (JDFTerm) v.elementAt(i);
 			if (t.fitsJDF(jdf, reportRootLocal))
+			{
 				count++;
+			}
 
 			if (count > 1 && reportRootLocal == null)
+			{
 				break;
+			}
 		}
 
-		boolean b = (count == 1);
+		final boolean b = (count == 1);
 		if (reportRootLocal != null)
+		{
 			reportRootLocal.setAttribute("Value", b, null);
+		}
 
 		return b;
 	}
@@ -230,14 +238,16 @@ public class JDFxor extends JDFNodeTerm
 	// ///////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
-	public VString getMissingElements(int nMax)
+	public VString getMissingElements(final int nMax)
 	{
-		VString v = super.getMissingElements(nMax);
+		final VString v = super.getMissingElements(nMax);
 		if (v.size() >= nMax)
+		{
 			return v;
+		}
 
 		v.appendUnique(getMissingTerms(2));
 		return v;

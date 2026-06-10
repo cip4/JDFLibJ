@@ -91,7 +91,9 @@ class JDFVersionTest extends JDFTestCaseBase
 	void testLibArtifactId()
 	{
 		if (!canTest)
+		{
 			return;
+		}
 
 		// arrange
 		final String expected = "JDFLibJ";
@@ -108,7 +110,9 @@ class JDFVersionTest extends JDFTestCaseBase
 	void testLibName()
 	{
 		if (!canTest)
+		{
 			return;
+		}
 
 		// arrange
 		final String expected = "CIP4 JDF Writer Java";
@@ -125,7 +129,9 @@ class JDFVersionTest extends JDFTestCaseBase
 	void testLibReleaseDate()
 	{
 		if (!canTest)
+		{
 			return;
+		}
 
 		// arrange
 
@@ -141,7 +147,9 @@ class JDFVersionTest extends JDFTestCaseBase
 	void testLibVersion()
 	{
 		if (!canTest)
+		{
 			return;
+		}
 
 		// arrange
 
@@ -157,7 +165,9 @@ class JDFVersionTest extends JDFTestCaseBase
 	void testLibMajorVersion()
 	{
 		if (!canTest)
+		{
 			return;
+		}
 
 		// arrange
 
@@ -176,8 +186,10 @@ class JDFVersionTest extends JDFTestCaseBase
 	{
 
 		if (!canTest)
+		{
 			return;
-		// arrange
+			// arrange
+		}
 
 		// act
 		final String actual = JDFVersion.LIB_MINOR_VERSION;
@@ -193,7 +205,9 @@ class JDFVersionTest extends JDFTestCaseBase
 	void testJdfVersion()
 	{
 		if (!canTest)
+		{
 			return;
+		}
 		// arrange
 		final String expected = "1.8";
 
@@ -209,7 +223,9 @@ class JDFVersionTest extends JDFTestCaseBase
 	void testJdfVersion_LibVersion()
 	{
 		if (!canTest)
+		{
 			return;
+		}
 
 		// arrange
 		final String jdfVersion = JDFVersion.JDF_VERSION;
@@ -230,7 +246,9 @@ class JDFVersionTest extends JDFTestCaseBase
 	void testMinorVersion_1() throws Exception
 	{
 		if (!canTest)
+		{
 			return;
+		}
 
 		// arrange
 		final Method method = JDFVersion.class.getDeclaredMethod("getMinorVersion", String.class);
@@ -250,7 +268,9 @@ class JDFVersionTest extends JDFTestCaseBase
 	void testMinorVersion_2() throws Exception
 	{
 		if (!canTest)
+		{
 			return;
+		}
 
 		// arrange
 		final Method method = JDFVersion.class.getDeclaredMethod("getMinorVersion", String.class);
@@ -270,7 +290,9 @@ class JDFVersionTest extends JDFTestCaseBase
 	void testMajorVersion_1() throws Exception
 	{
 		if (!canTest)
+		{
 			return;
+		}
 
 		// arrange
 		final Method method = JDFVersion.class.getDeclaredMethod("getMajorVersion", String.class);
@@ -290,7 +312,9 @@ class JDFVersionTest extends JDFTestCaseBase
 	void testMajorVersion_2() throws Exception
 	{
 		if (!canTest)
+		{
 			return;
+		}
 
 		// arrange
 		final Method method = JDFVersion.class.getDeclaredMethod("getMajorVersion", String.class);

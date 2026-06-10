@@ -113,7 +113,7 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSpinePreparationParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoSpinePreparationParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -125,7 +125,7 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSpinePreparationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoSpinePreparationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -138,7 +138,7 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoSpinePreparationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoSpinePreparationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -149,7 +149,7 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -179,7 +179,7 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStartPosition(double value)
+	public void setStartPosition(final double value)
 	{
 		setAttribute(AttributeName.STARTPOSITION, value, null);
 	}
@@ -204,7 +204,7 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFlexValue(double value)
+	public void setFlexValue(final double value)
 	{
 		setAttribute(AttributeName.FLEXVALUE, value, null);
 	}
@@ -229,7 +229,7 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMillingDepth(double value)
+	public void setMillingDepth(final double value)
 	{
 		setAttribute(AttributeName.MILLINGDEPTH, value, null);
 	}
@@ -254,7 +254,7 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNotchingDepth(double value)
+	public void setNotchingDepth(final double value)
 	{
 		setAttribute(AttributeName.NOTCHINGDEPTH, value, null);
 	}
@@ -279,7 +279,7 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNotchingDistance(double value)
+	public void setNotchingDistance(final double value)
 	{
 		setAttribute(AttributeName.NOTCHINGDISTANCE, value, null);
 	}
@@ -304,7 +304,7 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOperations(VString value)
+	public void setOperations(final VString value)
 	{
 		setAttribute(AttributeName.OPERATIONS, value, null);
 	}
@@ -316,8 +316,8 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	 */
 	public VString getOperations()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.OPERATIONS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.OPERATIONS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -332,7 +332,7 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPullOutValue(double value)
+	public void setPullOutValue(final double value)
 	{
 		setAttribute(AttributeName.PULLOUTVALUE, value, null);
 	}
@@ -357,7 +357,7 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSealingTemperature(int value)
+	public void setSealingTemperature(final int value)
 	{
 		setAttribute(AttributeName.SEALINGTEMPERATURE, value, null);
 	}
@@ -382,7 +382,7 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWorkingLength(double value)
+	public void setWorkingLength(final double value)
 	{
 		setAttribute(AttributeName.WORKINGLENGTH, value, null);
 	}

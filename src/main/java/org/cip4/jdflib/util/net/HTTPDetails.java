@@ -50,7 +50,6 @@ import org.cip4.jdflib.util.UrlUtil;
  * helper class to set mime details
  *
  * @author prosirai
- *
  */
 public class HTTPDetails
 {
@@ -88,7 +87,6 @@ public class HTTPDetails
 
 	/**
 	 * size of http chunks to be written, if <=0 no chunks
-	 *
 	 */
 	private int chunkSize;
 	private boolean bKeepAlive;
@@ -205,7 +203,6 @@ public class HTTPDetails
 	}
 
 	/**
-	 *
 	 * @param key
 	 * @param val
 	 */
@@ -214,9 +211,13 @@ public class HTTPDetails
 		if (!StringUtil.isEmpty(key))
 		{
 			if (StringUtil.isEmpty(val))
+			{
 				headers.remove(key);
+			}
 			else
+			{
 				headers.put(key, val);
+			}
 		}
 
 	}
@@ -243,14 +244,13 @@ public class HTTPDetails
 	@Override
 	public String toString()
 	{
-		return "HTTPDetails [chunkSize=" + chunkSize + ", bKeepAlive=" + bKeepAlive + ", bearerToken=" + bearerToken + ", redirect=" + redirect + ", connectionTimeout=" + connectionTimeout
-				+ " headers: " + headers.showKeys(null) + "]";
+		return "HTTPDetails [chunkSize=" + chunkSize + ", bKeepAlive=" + bKeepAlive + ", bearerToken=" + bearerToken + ", redirect=" + redirect
+				+ ", connectionTimeout=" + connectionTimeout + " headers: " + headers.showKeys(null) + "]";
 	}
 
 	/**
 	 * @param key
 	 * @return
-	 *
 	 */
 	public String getHeader(final String key)
 	{
@@ -259,7 +259,6 @@ public class HTTPDetails
 
 	/**
 	 * @return
-	 *
 	 */
 	public VString getHeaders()
 	{

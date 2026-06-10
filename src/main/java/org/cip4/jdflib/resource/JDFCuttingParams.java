@@ -85,8 +85,7 @@ import org.w3c.dom.DOMException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * Aug 10, 2009
+ *         Aug 10, 2009
  */
 public class JDFCuttingParams extends JDFAutoCuttingParams
 {
@@ -94,7 +93,7 @@ public class JDFCuttingParams extends JDFAutoCuttingParams
 
 	/**
 	 * Constructor for JDFCuttingParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
@@ -106,7 +105,7 @@ public class JDFCuttingParams extends JDFAutoCuttingParams
 
 	/**
 	 * Constructor for JDFCuttingParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -119,21 +118,22 @@ public class JDFCuttingParams extends JDFAutoCuttingParams
 
 	/**
 	 * Constructor for JDFCuttingParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFCuttingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFCuttingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -151,7 +151,7 @@ public class JDFCuttingParams extends JDFAutoCuttingParams
 		Vector<EnumPartIDKey> v = super.getImplicitPartitions();
 		if (v == null)
 		{
-			v = new Vector<EnumPartIDKey>();
+			v = new Vector<>();
 		}
 		v.add(EnumPartIDKey.BlockName);
 		return v;

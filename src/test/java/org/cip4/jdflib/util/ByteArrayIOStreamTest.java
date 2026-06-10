@@ -91,7 +91,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         Jul 16, 2009
  */
 class ByteArrayIOStreamTest extends JDFTestCaseBase
@@ -122,7 +121,7 @@ class ByteArrayIOStreamTest extends JDFTestCaseBase
 		{
 			ios.write(i);
 		}
-		ByteArrayIOInputStream in = ios.getInputStream();
+		final ByteArrayIOInputStream in = ios.getInputStream();
 		assertEquals(0, in.tell());
 		in.seek(-1);
 		assertTrue(in.read() >= 0);
@@ -134,7 +133,6 @@ class ByteArrayIOStreamTest extends JDFTestCaseBase
 
 	/**
 	 * @param in2
-	 *
 	 */
 	@Test
 	void testGetNewStream()
@@ -144,11 +142,11 @@ class ByteArrayIOStreamTest extends JDFTestCaseBase
 		{
 			ios.write(i);
 		}
-		ByteArrayIOInputStream in = ios.getInputStream();
+		final ByteArrayIOInputStream in = ios.getInputStream();
 		assertTrue(in.read() >= 0);
 		in.seek(42);
 		assertEquals(42, in.tell());
-		ByteArrayIOInputStream in2 = ios.getNewStream();
+		final ByteArrayIOInputStream in2 = ios.getNewStream();
 
 		assertEquals(42, in.tell());
 		assertEquals(0, in2.tell());
@@ -178,7 +176,6 @@ class ByteArrayIOStreamTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testConstructFile() throws IOException
@@ -203,7 +200,6 @@ class ByteArrayIOStreamTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testConstructBadFile() throws IOException

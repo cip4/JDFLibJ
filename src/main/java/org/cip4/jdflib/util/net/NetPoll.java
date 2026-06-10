@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.util.net;
 
@@ -84,18 +84,18 @@ import org.cip4.jdflib.util.thread.MyMutex;
 
 /**
  * class to poll a network address
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class NetPoll
 {
 	private final Log log;
 
 	/**
-	 * @param urls the urls to poll - duh!
-	 * @param poller 
-	 * 
+	 * @param urls   the urls to poll - duh!
+	 * @param poller
 	 */
-	public NetPoll(VString urls, IPollHandler poller)
+	public NetPoll(final VString urls, final IPollHandler poller)
 	{
 		super();
 		this.vUrl = urls;
@@ -111,11 +111,11 @@ public class NetPoll
 
 	/**
 	 * shorthand constructor for single String
-	 * @param url the url to poll - duh!
-	 * @param poller 
-	 * 
+	 *
+	 * @param url    the url to poll - duh!
+	 * @param poller
 	 */
-	public NetPoll(String url, IPollHandler poller)
+	public NetPoll(final String url, final IPollHandler poller)
 	{
 		this(new VString(url, null), poller);
 	}
@@ -132,6 +132,7 @@ public class NetPoll
 
 	/**
 	 * return true if we are running
+	 *
 	 * @return
 	 */
 	public boolean isRunning()
@@ -169,7 +170,7 @@ public class NetPoll
 	private class PollThread extends Thread
 	{
 		/**
-		 * 
+		 *
 		 */
 		public PollThread()
 		{
@@ -182,7 +183,7 @@ public class NetPoll
 		/**
 		 * @see java.lang.Object#toString()
 		 * @return
-		*/
+		 */
 		@Override
 		public String toString()
 		{
@@ -191,13 +192,13 @@ public class NetPoll
 
 		/**
 		 * @see java.lang.Thread#run()
-		*/
+		 */
 		@Override
 		public void run()
 		{
 			int n = 0;
 			int nSinceBad = 0;
-			HashMap<String, MyInteger> badMap = new HashMap<String, MyInteger>();
+			final HashMap<String, MyInteger> badMap = new HashMap<>();
 			if (vUrl == null || vUrl.size() == 0)
 			{
 				log.warn("polling 0 urls - bailing out");
@@ -205,18 +206,18 @@ public class NetPoll
 			}
 			while (running)
 			{
-				String url = vUrl.get(n);
+				final String url = vUrl.get(n);
 				nSinceBad++;
 				MyInteger bad = badMap.get(url);
 				if (bad == null || nSinceBad > bad.i)
 				{
-					IPollDetails details = poll(url);
+					final IPollDetails details = poll(url);
 					PollResult result;
 					try
 					{
 						result = poller.handlePoll(details, url);
 					}
-					catch (Exception x)
+					catch (final Exception x)
 					{
 						result = null;
 					}
@@ -237,23 +238,29 @@ public class NetPoll
 							badMap.remove(url);
 						}
 						if (!ThreadUtil.wait(mutex, getIdleWait()))
+						{
 							break;
+						}
 
 						// we only move on to the next in case nothing is waiting
-						int size = getUrlSize();
+						final int size = getUrlSize();
 						n = ++n % size;
 					}
 					else
 					{
 						if (!ThreadUtil.wait(mutex, getIdleWait()))
+						{
 							break;
+						}
 					}
 				}
 				else
 				// skip errors more often
 				{
 					if (!ThreadUtil.wait(mutex, getIdleWait()))
+					{
 						break;
+					}
 				}
 			}
 			// clean up when we leave
@@ -265,25 +272,27 @@ public class NetPoll
 	{
 		int size = vUrl.size();
 		if (size <= 0)
+		{
 			size = 1;
+		}
 		return size;
 	}
 
 	/**
-	 * @param baseUrl the url to write to 
+	 * @param baseUrl the url to write to
 	 * @return the details, null if no connection could be made
 	 */
-	protected IPollDetails poll(String baseUrl)
+	protected IPollDetails poll(final String baseUrl)
 	{
-		String url = getUrl(baseUrl);
-		UrlPart p = UrlUtil.writeToURL(url, null, method, contentType, null);
+		final String url = getUrl(baseUrl);
+		final UrlPart p = UrlUtil.writeToURL(url, null, method, contentType, null);
 		return p;
 	}
 
 	/**
 	 * @param method the http transfer method to set (GET / POST)
 	 */
-	public void setMethod(String method)
+	public void setMethod(final String method)
 	{
 		this.method = method;
 	}
@@ -291,7 +300,7 @@ public class NetPoll
 	/**
 	 * @param url the additional url to add
 	 */
-	public void addURL(String url)
+	public void addURL(final String url)
 	{
 		vUrl.appendUnique(url);
 	}
@@ -299,7 +308,7 @@ public class NetPoll
 	/**
 	 * @param contentType the contentType to set
 	 */
-	public void setContentType(String contentType)
+	public void setContentType(final String contentType)
 	{
 		this.contentType = contentType;
 	}
@@ -307,7 +316,7 @@ public class NetPoll
 	/**
 	 * @see java.lang.Object#toString()
 	 * @return
-	*/
+	 */
 	@Override
 	public String toString()
 	{
@@ -317,7 +326,7 @@ public class NetPoll
 	/**
 	 * @param idleWait the number of wait milliseconds to set
 	 */
-	public void setIdleWait(int idleWait)
+	public void setIdleWait(final int idleWait)
 	{
 		this.idleWait = idleWait;
 	}
@@ -325,26 +334,25 @@ public class NetPoll
 	/**
 	 * @param busyWait the busyWait to set
 	 */
-	public void setBusyWait(int busyWait)
+	public void setBusyWait(final int busyWait)
 	{
 		this.busyWait = busyWait;
 	}
 
 	/**
-	 * 
 	 * get the URL based on a baseurl
-	 * @param baseUrl 
+	 *
+	 * @param baseUrl
 	 * @return
 	 */
-	protected String getUrl(String baseUrl)
+	protected String getUrl(final String baseUrl)
 	{
 		return baseUrl;
 	}
 
 	/**
-	 * 
 	 * get the vector of urls
-	 *  
+	 * 
 	 * @return
 	 */
 	public VString getUrls()
@@ -354,6 +362,7 @@ public class NetPoll
 
 	/**
 	 * make sur we stop all threads prior to dying
+	 *
 	 * @see java.lang.Object#finalize()
 	 */
 	@Override
@@ -365,14 +374,16 @@ public class NetPoll
 
 	/**
 	 * get the idle wait period divided by the # of urls to ping
-	 *  
+	 * 
 	 * @return
 	 */
 	protected int getIdleWait()
 	{
 		int iw = idleWait / getUrlSize();
 		if (iw < busyWait)
+		{
 			iw = busyWait;
+		}
 		return iw;
 	}
 }

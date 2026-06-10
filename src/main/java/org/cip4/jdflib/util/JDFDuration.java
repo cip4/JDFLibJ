@@ -41,11 +41,10 @@ package org.cip4.jdflib.util;
 
 import java.util.zip.DataFormatException;
 
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         Aug 10, 2009
  */
 public class JDFDuration implements Comparable<JDFDuration>
@@ -96,7 +95,9 @@ public class JDFDuration implements Comparable<JDFDuration>
 	{
 		duration = StringUtil.normalize(duration, false, null);
 		if (duration == null)
+		{
 			return null;
+		}
 
 		// all characters in a valid duration are upper
 		duration = duration.toUpperCase();
@@ -125,7 +126,9 @@ public class JDFDuration implements Comparable<JDFDuration>
 			}
 		}
 		if (duration.length() < 3)
+		{
 			return null;
+		}
 		final int posD = duration.indexOf("D");
 		final int posT = duration.indexOf("T");
 		if (posD > 0 && posD < duration.length() - 1 && posT < 0)
@@ -161,8 +164,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	 * creates a duration from two dates; may be negative if start later end
 	 *
 	 * @param start the starting point
-	 * @param end the end point
-	 *
+	 * @param end   the end point
 	 */
 	public JDFDuration(final JDFDate start, final JDFDate end)
 	{
@@ -196,7 +198,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 
 	/**
 	 * Allocates a <code>JDFDuration</code> object and initializes it with days, hours, minutes, seconds
-	 * 
+	 *
 	 * @param d
 	 * @param h
 	 * @param m
@@ -228,7 +230,6 @@ public class JDFDuration implements Comparable<JDFDuration>
 	 *
 	 * @param seconds number of seconds to add
 	 * @return the new duration in seconds
-	 *
 	 */
 	public double addSeconds(final double seconds)
 	{
@@ -242,8 +243,8 @@ public class JDFDuration implements Comparable<JDFDuration>
 	 *
 	 * @param seconds seconds to add to this
 	 * @param minutes minutes to add to this
-	 * @param hours hours to add to this
-	 * @param days days to add to this
+	 * @param hours   hours to add to this
+	 * @param days    days to add to this
 	 */
 	public JDFDuration addOffset(final int seconds, final int minutes, final int hours, final int days)
 	{
@@ -306,7 +307,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 		}
 		else if (m_lDuration >= Long.MAX_VALUE)
 		{
-			return JDFConstants.POSINF;
+			return JDFCoreConstants.POSINF;
 		}
 
 		int temp = Math.abs((int) m_lDuration);
@@ -389,7 +390,6 @@ public class JDFDuration implements Comparable<JDFDuration>
 	 *
 	 * @return true - the duration was set<br>
 	 *         false - the duration was not set, because a NumberFormatException was thrown (-> parseInt())
-	 *
 	 * @param a_aDuration formatted duration string 'P1Y2M3DT10H30M'
 	 */
 	public boolean setDurationISO(final String a_aDuration)
@@ -542,7 +542,6 @@ public class JDFDuration implements Comparable<JDFDuration>
 	 * the duration in seconds
 	 *
 	 * @return duration in seconds; '0' default
-	 *
 	 */
 	public long getDuration()
 	{
@@ -553,7 +552,6 @@ public class JDFDuration implements Comparable<JDFDuration>
 	 * the duration in milliseconds
 	 *
 	 * @return duration in seconds; '0' default
-	 *
 	 */
 	public long getDurationMillis()
 	{
@@ -597,11 +595,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 		{
 			return true;
 		}
-		if (other == null)
-		{
-			return false;
-		}
-		if (!(other instanceof JDFDuration))
+		if ((other == null) || !(other instanceof JDFDuration))
 		{
 			return false;
 		}
@@ -619,7 +613,6 @@ public class JDFDuration implements Comparable<JDFDuration>
 	}
 
 	/**
-	 *
 	 * @param arg0
 	 * @return
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)

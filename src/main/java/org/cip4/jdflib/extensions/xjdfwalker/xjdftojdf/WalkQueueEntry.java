@@ -117,7 +117,7 @@ public class WalkQueueEntry extends WalkXElement
 	{
 		final KElement parent = e == null ? null : e.getParentNode_KElement();
 		final String typ = parent == null ? null : parent.getAttribute(AttributeName.TYPE);
-		if (typ != null && EnumFamily.Response.getName().equals(parent.getLocalName()) && !EnumType.SubmitQueueEntry.getName().equals(typ)
+		if (typ != null && EnumFamily.Response.name().equals(parent.getLocalName()) && !EnumType.SubmitQueueEntry.name().equals(typ)
 				&& ElementName.QUEUEENTRY.equals(StringUtil.rightStr(typ, 10)))
 		{
 			return null;

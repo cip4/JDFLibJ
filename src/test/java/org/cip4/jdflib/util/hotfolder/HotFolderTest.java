@@ -111,7 +111,9 @@ class HotFolderTest extends JDFTestCaseBase
 		{
 			boolean zapp = false;
 			if (bZapp)
+			{
 				zapp = hotFile.delete();
+			}
 			n++;
 			ThreadUtil.sleep(sleep);
 			return zapp;
@@ -303,7 +305,9 @@ class HotFolderTest extends JDFTestCaseBase
 				hf.restart();
 			}
 			if (n0 < Thread.activeCount())
+			{
 				n0 = Thread.activeCount();
+			}
 			for (int i = 0; i < 3; i++)
 			{
 				Thread.sleep(20);
@@ -416,7 +420,9 @@ class HotFolderTest extends JDFTestCaseBase
 			{
 				ThreadUtil.sleep(100);
 				if (!file.exists() && !file3.exists())
+				{
 					break;
+				}
 			}
 			assertFalse(file.exists());
 			assertFalse(file3.exists());
@@ -428,7 +434,9 @@ class HotFolderTest extends JDFTestCaseBase
 			{
 				ThreadUtil.sleep(20);
 				if (!file1.exists() && file2.exists() && file4.exists())
+				{
 					break;
+				}
 			}
 			assertFalse(file1.exists());
 			assertTrue(file2.exists());
@@ -439,7 +447,9 @@ class HotFolderTest extends JDFTestCaseBase
 			{
 				ThreadUtil.sleep(20);
 				if (!file2.exists() && !file4.exists())
+				{
 					break;
+				}
 			}
 			assertFalse(file2.exists());
 			assertFalse(file4.exists());
@@ -464,7 +474,9 @@ class HotFolderTest extends JDFTestCaseBase
 		{
 			ThreadUtil.sleep(100);
 			if (!file.exists())
+			{
 				break;
+			}
 		}
 		assertFalse(file.exists());
 
@@ -694,7 +706,9 @@ class HotFolderTest extends JDFTestCaseBase
 	public synchronized void tearDown() throws Exception
 	{
 		if (hf != null)
+		{
 			hf.stop();
+		}
 		super.tearDown();
 		sequential.unlock();
 

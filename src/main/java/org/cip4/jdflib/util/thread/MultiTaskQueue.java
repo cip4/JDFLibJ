@@ -99,10 +99,9 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	}
 
 	/**
-	 *
 	 * grab the queue
 	 *
-	 * @param name - must not be null
+	 * @param name        - must not be null
 	 * @param maxParallel ignored if <=0
 	 * @return the queue to fill with tasks
 	 */
@@ -126,7 +125,6 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	}
 
 	/**
-	 *
 	 * @param maxParallel
 	 */
 	public void setMaxParallel(final int maxParallel)
@@ -138,7 +136,9 @@ public class MultiTaskQueue extends OrderedTaskQueue
 		{
 			this.maxParallel = maxParallelTmp;
 			if (executor != null)
+			{
 				executor.shutdown();
+			}
 			executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(maxParallelTmp, new MyThreadFactory());
 		}
 	}
@@ -157,7 +157,6 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	}
 
 	/**
-	 *
 	 * get the number of currently running tasks
 	 *
 	 * @return
@@ -170,7 +169,6 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	/**
 	 * @param minAge minimum age to interrupt
 	 * @return true if we successfully interrupted or no entries were running
-	 *
 	 */
 	@Override
 	public boolean interruptCurrent(final int minAge)
@@ -192,7 +190,6 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	/**
 	 * @param theRunner runner to zapp
 	 * @return true if we successfully interrupted or no entries were running
-	 *
 	 */
 	public boolean interruptTask(final Runnable theRunner)
 	{
@@ -225,7 +222,9 @@ public class MultiTaskQueue extends OrderedTaskQueue
 			{
 				next.interrupt();
 				if (!ThreadUtil.sleep(++n) || n > 10)
+				{
 					break;
+				}
 
 			}
 		}
@@ -234,7 +233,6 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	/**
 	 * @param minAge minimum age to interrupt
 	 * @return true if we successfully interrupted or no entries were running
-	 *
 	 */
 	ArrayList<Runnable> getCurrent(final int minAge)
 	{
@@ -254,7 +252,6 @@ public class MultiTaskQueue extends OrderedTaskQueue
 
 	/**
 	 * @param name
-	 *
 	 */
 	MultiTaskQueue(final String name)
 	{
@@ -311,7 +308,9 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	{
 		super.shutDown();
 		if (executor != null)
+		{
 			executor.shutdown();
+		}
 		executor = null;
 	}
 

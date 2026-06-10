@@ -71,7 +71,6 @@
 package org.cip4.jdflib.auto;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoProcessRun.EnumEndStatus;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -80,6 +79,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.jmf.JDFQueueFilter;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoAbortQueueEntryParams : public JDFElement
@@ -93,7 +93,8 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ENDSTATUS, 0x2222211111l, AttributeInfo.EnumAttributeType.enumeration, EnumEndStatus.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ENDSTATUS, 0x2222211111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumEndStatus.class, 0), null);
 	}
 
 	@Override
@@ -120,7 +121,7 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAbortQueueEntryParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoAbortQueueEntryParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -132,7 +133,7 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAbortQueueEntryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoAbortQueueEntryParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -145,41 +146,28 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoAbortQueueEntryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoAbortQueueEntryParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * Enumeration strings for numEndStatus
 	 */
 
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute EndStatus
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute EndStatus
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 */
-	public void setNodeStatus(ENodeStatus enumVar)
+	public enum EnumEndStatus
 	{
-		setAttribute(AttributeName.ENDSTATUS, enumVar == null ? null : enumVar.name(), null);
-	}
+		Aborted, Completed;
 
-	/**
-	 * (9) get attribute EndStatus
-	 *
-	 * @return the value of the attribute
-	 */
-	public ENodeStatus getENodeStatus()
-	{
-		return ENodeStatus.getEnum(getAttribute(AttributeName.ENDSTATUS, null, null));
-	}
+		public static EnumEndStatus getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumEndStatus.class, val, null);
+		}
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
+		 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -190,21 +178,17 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 	 * (5) set attribute EndStatus
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetNodeStatus(ENodeStatus) based on java.lang.enum instead
 	 */
-	@Deprecated
-	public void setNodeStatus(EnumNodeStatus enumVar)
+	public void setNodeStatus(final EnumNodeStatus enumVar)
 	{
-		setAttribute(AttributeName.ENDSTATUS, enumVar == null ? null : enumVar.getName(), null);
+		setAttribute(AttributeName.ENDSTATUS, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
 	 * (9) get attribute EndStatus
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ENodeStatus GetENodeStatus() based on java.lang.enum instead
 	 */
-	@Deprecated
 	public EnumNodeStatus getNodeStatus()
 	{
 		return EnumNodeStatus.getEnum(getAttribute(AttributeName.ENDSTATUS, null, null));

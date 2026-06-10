@@ -78,16 +78,16 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 /**
  * @author Rainer Prosi
- * 
- * Test of the Status JMF
+ *         Test of the Status JMF
  */
 class JDFIDInfoTest extends JDFTestCaseBase
 {
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testCreateNull()
@@ -96,7 +96,7 @@ class JDFIDInfoTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testCreateNode()

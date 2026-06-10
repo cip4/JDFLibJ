@@ -50,6 +50,7 @@ import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumSides;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -118,6 +119,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFStitchingParams;
 import org.cip4.jdflib.resource.process.postpress.JDFThreadSewingParams;
 import org.cip4.jdflib.resource.process.press.JDFPrintCondition;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.ListMap;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -248,7 +250,7 @@ class PostXJDFWalker extends BaseElementWalker
 		public String getCoating(final String coating)
 		{
 			final eCoating c = eCoating.getEnum(coating);
-			return c == null ? null : c.name();
+			return JavaEnumUtil.getName(c);
 		}
 
 		/**
@@ -307,7 +309,7 @@ class PostXJDFWalker extends BaseElementWalker
 			{
 				if (nmTokenStrings.contains(e.getKey()) && !StringUtil.isNMTOKEN(e.getValue()))
 				{
-					final String newVal = StringUtil.replaceString(StringUtil.normalize(e.getValue()), JDFConstants.BLANK, JDFConstants.UNDERSCORE);
+					final String newVal = StringUtil.replaceString(StringUtil.normalize(e.getValue()), JDFCoreConstants.BLANK, JDFCoreConstants.UNDERSCORE);
 					log.info("updating NMTOKEN " + xjdf.getNodeName() + "/@" + e.getKey() + " from: '" + e.getValue() + "' to '" + newVal + "'");
 					xjdf.setAttribute(e.getKey(), newVal);
 				}
@@ -958,9 +960,9 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	private static StringArray noPrint = new StringArray(
-			new String[] { EnumType.ImageSetting.getName(), EnumType.Imposition.getName(), EnumType.Interpreting.getName(), EnumType.Rendering.getName() });
+			new String[] { EnumType.ImageSetting.name(), EnumType.Imposition.name(), EnumType.Interpreting.name(), EnumType.Rendering.name() });
 
-	private static StringArray print = new StringArray(new String[] { EnumType.ConventionalPrinting.getName(), EnumType.DigitalPrinting.getName() });
+	private static StringArray print = new StringArray(new String[] { EnumType.ConventionalPrinting.name(), EnumType.DigitalPrinting.name() });
 
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -2782,7 +2784,7 @@ class PostXJDFWalker extends BaseElementWalker
 			return super.walk(xjdf, dummy);
 		}
 
-		void moveEvents(KElement xjdf)
+		void moveEvents(final KElement xjdf)
 		{
 			final List<JDFNotification> nots = xjdf.getChildArrayByClass(JDFNotification.class, false, 0);
 			for (final JDFNotification not : nots)
@@ -3005,7 +3007,7 @@ class PostXJDFWalker extends BaseElementWalker
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
 			moveToSender(xjdf);
-			final VElement v = xjdf.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.ID, JDFConstants.STAR), false, true, 0);
+			final VElement v = xjdf.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.ID, JDFCoreConstants.STAR), false, true, 0);
 			if (v != null)
 			{
 				for (final KElement e : v)
@@ -3377,7 +3379,8 @@ class PostXJDFWalker extends BaseElementWalker
 			{
 				bs.moveAttribute(AttributeName.INNERMOSTSHINGLING, strippingParams);
 				bs.moveAttribute(AttributeName.OUTERMOSTSHINGLING, strippingParams);
-				final EnumWorkStyle ws = strippingParams.getWorkStyle();
+				final org.cip4.jdflib.auto.JDFAutoStrippingParams.EnumWorkStyle strippingWorkStyle = strippingParams.getWorkStyle();
+				final EnumWorkStyle ws = strippingWorkStyle == null ? null : EnumWorkStyle.getEnum(strippingWorkStyle.name());
 				if (EnumWorkStyle.Simplex.equals(ws))
 				{
 					bs.getCreateSignatureCell(0);
@@ -3386,7 +3389,7 @@ class PostXJDFWalker extends BaseElementWalker
 					{
 						if (!sc.hasNonEmpty(AttributeName.SIDES))
 						{
-							sc.setAttribute(AttributeName.SIDES, EnumSides.OneSided.getName());
+							sc.setAttribute(AttributeName.SIDES, EnumSides.OneSided.name());
 						}
 					}
 				}

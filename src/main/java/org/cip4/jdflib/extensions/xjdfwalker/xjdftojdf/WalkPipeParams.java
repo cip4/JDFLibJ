@@ -88,7 +88,7 @@ public class WalkPipeParams extends WalkXElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void updateAttributes(KElement elem)
+	protected void updateAttributes(final KElement elem)
 	{
 		elem.removeAttribute(AttributeName.OPERATION);
 		super.updateAttributes(elem);

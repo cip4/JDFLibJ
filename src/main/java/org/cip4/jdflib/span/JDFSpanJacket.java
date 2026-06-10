@@ -9,12 +9,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanJacket extends JDFEnumerationSpan
@@ -23,39 +19,39 @@ public class JDFSpanJacket extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanJacket
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanJacket(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanJacket(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanJacket
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanJacket(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanJacket(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanJacket
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanJacket(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanJacket(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -63,44 +59,14 @@ public class JDFSpanJacket extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanJacket
 	 */
-	public static class EnumSpanJacket extends ValuedEnum
+	public enum EnumSpanJacket
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		None, Loose, Glue;
 
-		private EnumSpanJacket(String name)
+		public static EnumSpanJacket getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanJacket.class, val, null);
 		}
-
-		public static EnumSpanJacket getEnum(String enumName)
-		{
-			return (EnumSpanJacket) getEnum(EnumSpanJacket.class, enumName);
-		}
-
-		public static EnumSpanJacket getEnum(int enumValue)
-		{
-			return (EnumSpanJacket) getEnum(EnumSpanJacket.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanJacket.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanJacket.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanJacket.class);
-		}
-
-		public static final EnumSpanJacket None = new EnumSpanJacket("None");
-		public static final EnumSpanJacket Loose = new EnumSpanJacket("Loose");
-		public static final EnumSpanJacket Glue = new EnumSpanJacket("Glue");
 
 	}
 
@@ -109,18 +75,18 @@ public class JDFSpanJacket extends JDFEnumerationSpan
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanJacket.getEnum(0);
+		return EnumSpanJacket.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

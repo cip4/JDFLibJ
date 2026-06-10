@@ -81,7 +81,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 class NetPollTest extends JDFTestCaseBase
 {
@@ -91,16 +91,15 @@ class NetPollTest extends JDFTestCaseBase
 		int n = 0;
 
 		/**
-		 *
 		 * @see org.cip4.jdflib.util.net.IPollHandler#handlePoll(org.cip4.jdflib.util.net.IPollDetails, java.lang.String)
 		 */
 		@Override
-		public PollResult handlePoll(IPollDetails result, String url)
+		public PollResult handlePoll(final IPollDetails result, final String url)
 		{
 			n++;
 			Assertions.assertNotNull(result, "cannot access url: " + url);
 			Assertions.assertEquals(result.getResponseCode(), 200, 0);
-			InputStream responseStream = result.getResponseStream();
+			final InputStream responseStream = result.getResponseStream();
 			Assertions.assertNotNull(responseStream);
 			System.out.println(result);
 			Assertions.assertEquals(StringUtil.token(result.getContentType(), 0, ";"), UrlUtil.TEXT_HTML);
@@ -114,9 +113,9 @@ class NetPollTest extends JDFTestCaseBase
 	@Test
 	void testMulti()
 	{
-		VString v = new VString("http://www.google.de", null);
+		final VString v = new VString("http://www.google.de", null);
 		v.add("http://www.example.com");
-		NetPoll p = new NetPoll(v, new WebPoller());
+		final NetPoll p = new NetPoll(v, new WebPoller());
 		p.start();
 		ThreadUtil.sleep(3333);
 		p.stop();
@@ -129,7 +128,7 @@ class NetPollTest extends JDFTestCaseBase
 	@Test
 	void testGoogle()
 	{
-		NetPoll p = new NetPoll("http://www.google.de", new WebPoller());
+		final NetPoll p = new NetPoll("http://www.google.de", new WebPoller());
 		p.start();
 		ThreadUtil.sleep(3333);
 		p.stop();

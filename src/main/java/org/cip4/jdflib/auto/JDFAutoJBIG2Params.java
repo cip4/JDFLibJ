@@ -103,7 +103,7 @@ public abstract class JDFAutoJBIG2Params extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoJBIG2Params(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoJBIG2Params(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -115,7 +115,7 @@ public abstract class JDFAutoJBIG2Params extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoJBIG2Params(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoJBIG2Params(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -128,7 +128,7 @@ public abstract class JDFAutoJBIG2Params extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoJBIG2Params(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoJBIG2Params(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -149,7 +149,7 @@ public abstract class JDFAutoJBIG2Params extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJBIG2Lossless(boolean value)
+	public void setJBIG2Lossless(final boolean value)
 	{
 		setAttribute(AttributeName.JBIG2LOSSLESS, value, null);
 	}

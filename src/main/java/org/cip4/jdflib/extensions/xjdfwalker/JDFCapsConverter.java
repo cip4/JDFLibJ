@@ -67,7 +67,7 @@
  *
  */
 /**
- * 
+ *
  */
 package org.cip4.jdflib.extensions.xjdfwalker;
 
@@ -78,13 +78,12 @@ import org.cip4.jdflib.jmf.JDFJMF;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- * 
  */
 public class JDFCapsConverter
 {
 	/**
 	 *
-	 * 
+	 *
 	 */
 	public JDFCapsConverter()
 	{
@@ -92,14 +91,14 @@ public class JDFCapsConverter
 	}
 
 	/**
-	 *  @param devcapRoot 
-	 * @param i the index
+	 * @param devcapRoot
+	 * @param i          the index
 	 * @return the converted jdf
 	 */
-	public KElement convert(JDFElement devcapRoot, int i)
+	public KElement convert(final JDFElement devcapRoot, final int i)
 	{
-		XJDF20 converter = new XJDF20();
-		KElement newJMF = converter.makeNewJMF((JDFJMF) devcapRoot);
+		final XJDF20 converter = new XJDF20();
+		final KElement newJMF = converter.makeNewJMF((JDFJMF) devcapRoot);
 		return newJMF;
 	}
 }

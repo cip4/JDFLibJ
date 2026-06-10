@@ -45,18 +45,17 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.commons.lang.enums.EnumUtils;
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public abstract class JDFEnumerationSpan extends JDFSpanBase
 {
@@ -79,7 +78,6 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 *
 	 */
 	public JDFEnumerationSpan(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
@@ -93,7 +91,6 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
-	 *
 	 */
 	public JDFEnumerationSpan(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
@@ -105,10 +102,10 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	{
 		final AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 		{
-			atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUAL, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, getEnumType(), null);
-			atrInfoTable[1] = new AtrInfoTable(AttributeName.PREFERRED, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, getEnumType(), null);
-			atrInfoTable[2] = new AtrInfoTable(AttributeName.RANGE, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, getEnumType(), null);
-			atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE, 0x33333111, AttributeInfo.EnumAttributeType.enumerations, getEnumType(), null);
+			atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUAL, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, null, null);
+			atrInfoTable[1] = new AtrInfoTable(AttributeName.PREFERRED, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, null, null);
+			atrInfoTable[2] = new AtrInfoTable(AttributeName.RANGE, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, null, null);
+			atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE, 0x33333111, AttributeInfo.EnumAttributeType.enumerations, null, null);
 		}
 
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -119,15 +116,28 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
-	public abstract ValuedEnum getEnumType();
+	public abstract Class<? extends Enum<?>> getEnumClass();
+
+	@SuppressWarnings("unchecked")
+	private <T extends Enum<T>> Class<T> getTypedEnumClass()
+	{
+		return (Class<T>) getEnumClass();
+	}
 
 	/**
 	 * @param value
 	 * @return
 	 */
-	public ValuedEnum getEnum(final String value)
+	public Enum<?> getEnum(final String value)
 	{
-		return (ValuedEnum) EnumUtils.getEnum(getEnumType().getClass(), value);
+		final Class<? extends Enum<?>> enumClass = getEnumClass();
+		if (enumClass == null)
+		{
+			return null;
+		}
+		@SuppressWarnings({ "rawtypes", "unchecked" })
+		final Enum<?> e = JavaEnumUtil.getEnumIgnoreCase((Class) enumClass, value);
+		return e;
 	}
 
 	/**
@@ -135,9 +145,9 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	 *
 	 * @param value - the value to set
 	 */
-	public void setActual(final ValuedEnum value)
+	public void setActual(final Enum<?> value)
 	{
-		setAttribute(AttributeName.ACTUAL, value, null);
+		setAttribute(AttributeName.ACTUAL, JavaEnumUtil.getName(value), null);
 	}
 
 	/**
@@ -145,7 +155,7 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	 *
 	 * @return int - the enumeration equivalent of the attribute
 	 */
-	public ValuedEnum getActual()
+	public Enum<?> getActual()
 	{
 		return getEnum(getAttribute(AttributeName.ACTUAL, null, null));
 	}
@@ -155,9 +165,9 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	 *
 	 * @param value - the enumeration equivalent of value to set
 	 */
-	public void setPreferred(final ValuedEnum value)
+	public void setPreferred(final Enum<?> value)
 	{
-		setAttribute(AttributeName.PREFERRED, value, null);
+		setAttribute(AttributeName.PREFERRED, JavaEnumUtil.getName(value), null);
 	}
 
 	/**
@@ -165,7 +175,7 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	 *
 	 * @return int - the enumeration equivalent of the attribute
 	 */
-	public ValuedEnum getPreferred()
+	public Enum<?> getPreferred()
 	{
 		return getEnum(getAttribute(AttributeName.PREFERRED, null, null));
 	}
@@ -175,9 +185,9 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	 *
 	 * @return Vector - the enumerations equivalent of attribute Range value
 	 */
-	public Vector<? extends ValuedEnum> getRange()
+	public List<? extends Enum<?>> getRange()
 	{
-		return getEnumerationsAttribute(AttributeName.RANGE, null, getEnumType(), false);
+		return getTypedEnumerationsAttribute(AttributeName.RANGE);
 	}
 
 	/**
@@ -185,9 +195,9 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	 *
 	 * @param value - the enumerations equivalent of value to set
 	 */
-	public void setRange(final Vector<? extends ValuedEnum> value)
+	public void setRange(final List<? extends Enum<?>> value)
 	{
-		setEnumerationsAttribute(AttributeName.RANGE, value, null);
+		setTypedEnumerationsAttribute(AttributeName.RANGE, value);
 	}
 
 	/**
@@ -196,9 +206,9 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	 * @return Vector - the enumerations equivalent of attribute Range value
 	 */
 
-	public Vector<? extends ValuedEnum> getOfferRange()
+	public List<? extends Enum<?>> getOfferRange()
 	{
-		return getEnumerationsAttribute(AttributeName.OFFERRANGE, null, getEnumType(), false);
+		return getTypedEnumerationsAttribute(AttributeName.OFFERRANGE);
 	}
 
 	/**
@@ -206,9 +216,31 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	 *
 	 * @param value - the enumerations equivalent of value to set
 	 */
-	public void setOfferRange(final Vector<? extends ValuedEnum> value)
+	public void setOfferRange(final List<? extends Enum<?>> value)
 	{
-		setEnumerationsAttribute(AttributeName.OFFERRANGE, value, null);
+		setTypedEnumerationsAttribute(AttributeName.OFFERRANGE, value);
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private <T extends Enum<T>> List<T> getTypedEnumerationsAttribute(final String key)
+	{
+		return getEnumerationsAttribute(key, null, (Class) getEnumClass());
+	}
+
+	@SuppressWarnings("unchecked")
+	private <T extends Enum<T>> void setTypedEnumerationsAttribute(final String key, final List<? extends Enum<?>> value)
+	{
+		if (value == null)
+		{
+			setAttribute(key, (String) null, null);
+			return;
+		}
+		final List<T> typed = new ArrayList<>(value.size());
+		for (final Enum<?> e : value)
+		{
+			typed.add((T) e);
+		}
+		setEnumsAttribute(key, typed, null);
 	}
 
 	/**

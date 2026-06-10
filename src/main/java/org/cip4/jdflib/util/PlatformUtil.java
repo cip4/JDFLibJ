@@ -86,7 +86,7 @@ public class PlatformUtil
 	 *
 	 * @return the value or def
 	 */
-	public static String getProperty(final String key, String def)
+	public static String getProperty(final String key, final String def)
 	{
 		final String ret = getProperty(key);
 		return StringUtil.isEmpty(ret) ? def : ret;
@@ -97,7 +97,7 @@ public class PlatformUtil
 		return getProperty("java.version");
 	}
 
-	public static JDFAttributeMap listProperties(boolean java, boolean env)
+	public static JDFAttributeMap listProperties(final boolean java, final boolean env)
 	{
 		final JDFAttributeMap map = new JDFAttributeMap();
 		if (java)

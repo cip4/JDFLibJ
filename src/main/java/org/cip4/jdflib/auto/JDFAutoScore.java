@@ -103,7 +103,7 @@ public abstract class JDFAutoScore extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoScore(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoScore(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -115,7 +115,7 @@ public abstract class JDFAutoScore extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoScore(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoScore(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -128,7 +128,7 @@ public abstract class JDFAutoScore extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoScore(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoScore(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -149,7 +149,7 @@ public abstract class JDFAutoScore extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOffset(double value)
+	public void setOffset(final double value)
 	{
 		setAttribute(AttributeName.OFFSET, value, null);
 	}

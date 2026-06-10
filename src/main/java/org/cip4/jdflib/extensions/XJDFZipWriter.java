@@ -156,8 +156,7 @@ public class XJDFZipWriter implements IStreamWriter
 	}
 
 	/**
-	 *
-	 * @param path the local path where we want the stream copy in the zip file
+	 * @param path     the local path where we want the stream copy in the zip file
 	 * @param inStream the stream...
 	 */
 	public void addAux(final String path, final InputStream inStream)
@@ -186,7 +185,6 @@ public class XJDFZipWriter implements IStreamWriter
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
 	public int numAux()
@@ -195,9 +193,7 @@ public class XJDFZipWriter implements IStreamWriter
 	}
 
 	/**
-	 *
 	 * @param zos
-	 *
 	 */
 	void writeXJMF(final ZipOutputStream zos)
 	{
@@ -217,7 +213,6 @@ public class XJDFZipWriter implements IStreamWriter
 	}
 
 	/**
-	 *
 	 * @param zos
 	 * @param h
 	 * @param i
@@ -238,7 +233,6 @@ public class XJDFZipWriter implements IStreamWriter
 	}
 
 	/**
-	 *
 	 * @param zos
 	 * @param path
 	 */
@@ -258,7 +252,6 @@ public class XJDFZipWriter implements IStreamWriter
 	}
 
 	/**
-	 *
 	 * @param zos
 	 */
 	void writeXJDFs(final ZipOutputStream zos)
@@ -355,14 +348,16 @@ public class XJDFZipWriter implements IStreamWriter
 	}
 
 	/**
-	 * 
 	 * @param commandType
 	 * @throws IllegalArgumentException if commandType is invalid
 	 */
 	public void setCommandType(final EnumType commandType)
 	{
-		if (!EnumType.SubmitQueueEntry.equals(commandType) && !EnumType.ResubmitQueueEntry.equals(commandType) && !EnumType.ReturnQueueEntry.equals(commandType))
+		if (!EnumType.SubmitQueueEntry.equals(commandType) && !EnumType.ResubmitQueueEntry.equals(commandType)
+				&& !EnumType.ReturnQueueEntry.equals(commandType))
+		{
 			throw new IllegalArgumentException("Invalid command type " + commandType);
+		}
 		this.commandType = commandType;
 	}
 

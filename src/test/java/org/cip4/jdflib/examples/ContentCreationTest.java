@@ -44,7 +44,7 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumEncoding;
 import org.cip4.jdflib.auto.JDFAutoLayoutElement.EnumElementType;
-import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchor;
+import org.cip4.jdflib.auto.JDFAutoPositionObj.EnumAnchor;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFDoc;

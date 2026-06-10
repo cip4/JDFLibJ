@@ -49,7 +49,6 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
  * @date Dec 19, 2012
  */
@@ -59,7 +58,6 @@ class OrderedTaskQueueTest extends JDFTestCaseBase
 	class WaitRunner implements Runnable
 	{
 		/**
-		 *
 		 * @param i
 		 */
 		WaitRunner(final int i)
@@ -118,13 +116,17 @@ class OrderedTaskQueueTest extends JDFTestCaseBase
 		for (int i = 0; i < 333; i++)
 		{
 			if (q.getCurrentRunning() < 3)
+			{
 				ThreadUtil.sleep(3);
+			}
 		}
 		q.interruptTask(task);
 		for (int i = 0; i < 333; i++)
 		{
 			if (q.getCurrentRunning() > 2)
+			{
 				ThreadUtil.sleep(3);
+			}
 		}
 		assertEquals(q.getCurrentRunning(), 2);
 		ThreadUtil.sleep(33);
@@ -134,7 +136,9 @@ class OrderedTaskQueueTest extends JDFTestCaseBase
 		for (int i = 0; i < 342; i++)
 		{
 			if (q.getCurrentRunning() > 0 || q.size() > 0)
+			{
 				ThreadUtil.sleep(3);
+			}
 		}
 		assertEquals(0, q.getCurrentRunning());
 		assertEquals(0, q.size());
@@ -153,10 +157,14 @@ class OrderedTaskQueueTest extends JDFTestCaseBase
 		assertTrue(q.queue(new WaitRunner(2, 2)));
 		assertTrue(q.queue(new WaitRunner(3, 2)));
 		while (q.getAvRun() == 0)
+		{
 			ThreadUtil.sleep(5);
+		}
 		assertTrue(q.queue(new WaitRunner(4, 2)));
 		while (q.getAvRun() == 0)
+		{
 			ThreadUtil.sleep(5);
+		}
 		assertTrue(q.getAvRun() > 0);
 		assertTrue(q.getAvQueue() > 0);
 
@@ -175,7 +183,9 @@ class OrderedTaskQueueTest extends JDFTestCaseBase
 		for (int i = 0; i < 100; i++)
 		{
 			if (!q.isLive())
+			{
 				break;
+			}
 			ThreadUtil.sleep(2);
 		}
 		assertFalse(q.queue(new WaitRunner(2)), String.format("Adding job to shutdown queue (%s) should fail", q));
@@ -232,7 +242,9 @@ class OrderedTaskQueueTest extends JDFTestCaseBase
 		for (int i = 0; i < 100; i++)
 		{
 			if (!q.isLive())
+			{
 				break;
+			}
 			ThreadUtil.sleep(12);
 		}
 		assertFalse(q.queue(new WaitRunner(2)), String.format("Adding job to shutdown queue (%s) should fail", q));
@@ -251,7 +263,9 @@ class OrderedTaskQueueTest extends JDFTestCaseBase
 		for (int i = 0; i < 2000; i++)
 		{
 			if (!q.isLive())
+			{
 				break;
+			}
 			ThreadUtil.sleep(12);
 			OrderedTaskQueue.shutDownAll();
 		}
@@ -280,7 +294,9 @@ class OrderedTaskQueueTest extends JDFTestCaseBase
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test42");
 		assertNotNull(q.toString());
 		for (int i = 0; i < 100; i++)
+		{
 			q.queue(new WaitRunner(i, i));
+		}
 		final String shortString = q.shortString();
 		assertNotNull(shortString);
 	}

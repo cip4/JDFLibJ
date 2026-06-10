@@ -85,7 +85,6 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
  * @date Dec 3, 2010
  */
@@ -94,7 +93,6 @@ class UrlPartTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testToString() throws IOException
@@ -108,7 +106,6 @@ class UrlPartTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testRespString() throws IOException
@@ -120,7 +117,6 @@ class UrlPartTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testgetHeaders() throws IOException
@@ -131,13 +127,12 @@ class UrlPartTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testgetHeadersConnect() throws IOException
 	{
 		final HttpURLConnection c = mock(HttpURLConnection.class);
-		final ListMap<String, String> map = new ListMap<String, String>();
+		final ListMap<String, String> map = new ListMap<>();
 		map.setUnique(false);
 		when(c.getHeaderFields()).thenReturn(map);
 		final UrlPart p = new UrlPart(c);
@@ -151,13 +146,12 @@ class UrlPartTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testgetAuthentication() throws IOException
 	{
 		final HttpURLConnection c = mock(HttpURLConnection.class);
-		final ListMap<String, String> map = new ListMap<String, String>();
+		final ListMap<String, String> map = new ListMap<>();
 		map.setUnique(false);
 		when(c.getHeaderFields()).thenReturn(map);
 		final UrlPart p = new UrlPart(c);
@@ -171,13 +165,12 @@ class UrlPartTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testgetAuthenticationBad() throws IOException
 	{
 		final HttpURLConnection c = mock(HttpURLConnection.class);
-		final ListMap<String, String> map = new ListMap<String, String>();
+		final ListMap<String, String> map = new ListMap<>();
 		map.setUnique(false);
 		when(c.getHeaderFields()).thenReturn(map);
 		final UrlPart p = new UrlPart(c);
@@ -196,7 +189,9 @@ class UrlPartTest extends JDFTestCaseBase
 	void testGetXMLDoc()
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		final UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
 		assertNotNull(writeToURL);
 		assertNull(writeToURL.getXMLDoc());
@@ -209,7 +204,9 @@ class UrlPartTest extends JDFTestCaseBase
 	void testBuffer()
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		final UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
 		assertNotNull(writeToURL);
 		writeToURL.buffer();
@@ -224,7 +221,9 @@ class UrlPartTest extends JDFTestCaseBase
 	void testWriteStream()
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		final UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
 		assertNotNull(writeToURL);
 		final File file = new File(sm_dirTestDataTemp + "s1.html");
@@ -234,7 +233,6 @@ class UrlPartTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testFile() throws Exception
@@ -245,7 +243,6 @@ class UrlPartTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testRCOK() throws Exception
@@ -253,7 +250,9 @@ class UrlPartTest extends JDFTestCaseBase
 		assertFalse(UrlPart.isReturnCodeOK(null));
 		assertFalse(UrlPart.isReturnCodeOK(new UrlPart(new File("certainly not there"))));
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		final UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
 		assertTrue(UrlPart.isReturnCodeOK(writeToURL));
 	}

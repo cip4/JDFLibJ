@@ -60,7 +60,8 @@ import org.cip4.jdflib.jmf.JDFQueueEntryDef;
 public class WalkModifyQueueEntry extends WalkMessage
 {
 	private static final StringArray QUEUE_CONTROL = new StringArray(
-			"AbortQueueEntry,HoldQueueEntry,RemoveQueueEntry,ResumeQueueEntry,SetGangQueueEntry,SetQueueEntryPosition,SetQueueEntryPriority,SuspendQueueEntry", ",");
+			"AbortQueueEntry,HoldQueueEntry,RemoveQueueEntry,ResumeQueueEntry,SetGangQueueEntry,SetQueueEntryPosition,SetQueueEntryPriority,SuspendQueueEntry",
+			",");
 
 	/**
 	 *
@@ -71,7 +72,6 @@ public class WalkModifyQueueEntry extends WalkMessage
 	}
 
 	/**
-	 *
 	 * @return
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkMessage#makeTypesafe(org.cip4.jdflib.jmf.JDFMessage)
 	 */
@@ -99,13 +99,13 @@ public class WalkModifyQueueEntry extends WalkMessage
 		final JDFModifyQueueEntryParams modifyParams = (JDFModifyQueueEntryParams) m.getCreateElement(XJDFConstants.ModifyQueueEntryParams, null, 0);
 		modifyParams.setOperation(operation);
 		final String oldParams;
-		if (EnumType.SetQueueEntryPriority.getName().equals(originalType))
+		if (EnumType.SetQueueEntryPriority.name().equals(originalType))
 		{
 			oldParams = ElementName.QUEUEENTRYPRIPARAMS;
 			final KElement op = m.getElement(oldParams);
 			modifyParams.setAttributes(op);
 		}
-		else if (EnumType.SetQueueEntryPosition.getName().equals(originalType))
+		else if (EnumType.SetQueueEntryPosition.name().equals(originalType))
 		{
 			oldParams = ElementName.QUEUEENTRYPOSPARAMS;
 			final KElement op = m.getElement(oldParams);
@@ -139,7 +139,7 @@ public class WalkModifyQueueEntry extends WalkMessage
 			if (eOperation.Abort.equals(operation))
 			{
 				final String endstate = op.getNonEmpty(AttributeName.ENDSTATUS);
-				if (EnumNodeStatus.Completed.getName().equals(endstate))
+				if (EnumNodeStatus.Completed.name().equals(endstate))
 				{
 					modifyParams.setOperation(eOperation.Complete);
 				}
@@ -150,7 +150,6 @@ public class WalkModifyQueueEntry extends WalkMessage
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.XJDF20.WalkMessage#getMessageType(org.cip4.jdflib.jmf.JDFMessage)
 	 */
 	@Override
@@ -169,7 +168,6 @@ public class WalkModifyQueueEntry extends WalkMessage
 	}
 
 	/**
-	 *
 	 * @param type
 	 * @return
 	 */
@@ -179,7 +177,6 @@ public class WalkModifyQueueEntry extends WalkMessage
 	}
 
 	/**
-	 *
 	 * @param type
 	 * @return
 	 */

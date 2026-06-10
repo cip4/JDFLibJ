@@ -52,7 +52,6 @@ import org.cip4.jdflib.auto.JDFAutoComment;
  * this is the class for all text elements, obviously including <Comment> but also others, e.g ExtendedAddress
  *
  * @author prosirai
- *
  */
 public class JDFComment extends JDFAutoComment
 {
@@ -127,7 +126,7 @@ public class JDFComment extends JDFAutoComment
 	public boolean init()
 	{
 		final EnumVersion v = getVersion(true);
-		if (v != null && v.getValue() >= EnumVersion.Version_1_3.getValue() && getLocalName().equals(ElementName.COMMENT))
+		if (v != null && v.ordinal() >= EnumVersion.Version_1_3.ordinal() && getLocalName().equals(ElementName.COMMENT))
 		{
 			appendAnchor(null);
 			setAgentName(JDFAudit.getStaticAgentName());
@@ -137,7 +136,6 @@ public class JDFComment extends JDFAutoComment
 	}
 
 	/**
-	 *
 	 * @param bTrimWhite trims whitespace of text, ignored in commente
 	 * @return int the number of removed nodes
 	 */
@@ -149,7 +147,7 @@ public class JDFComment extends JDFAutoComment
 
 	/**
 	 * XJDF only setType is similar to setName
-	 * 
+	 *
 	 * @param string
 	 */
 	public void setType(final String typ)

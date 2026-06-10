@@ -43,9 +43,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkSeparationList extends WalkJDFSubElement
 {

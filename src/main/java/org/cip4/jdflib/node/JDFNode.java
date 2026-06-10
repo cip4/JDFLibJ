@@ -67,11 +67,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,6 +83,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFCustomerMessage;
 import org.cip4.jdflib.core.JDFDoc;
@@ -132,11 +131,11 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.resource.process.JDFNotificationFilter;
 import org.cip4.jdflib.util.ContainerUtil;
-import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.JDFSpawn;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StatusCounter;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -164,7 +163,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	static
 	{
 		atrInfoTable_abstract[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration,
-				EnumActivation.getEnum(0), null);
+				JavaEnumUtil.getEnum(JDFNode.EnumActivation.class, 0), null);
 		atrInfoTable_abstract[1] = new AtrInfoTable(AttributeName.CATEGORY, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable_abstract[2] = new AtrInfoTable(AttributeName.ICSVERSIONS, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable_abstract[3] = new AtrInfoTable(AttributeName.ID, 0x22222222, AttributeInfo.EnumAttributeType.ID, null, null);
@@ -176,22 +175,21 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		atrInfoTable_abstract[9] = new AtrInfoTable(AttributeName.RELATEDJOBID, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_abstract[10] = new AtrInfoTable(AttributeName.RELATEDJOBPARTID, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_abstract[11] = new AtrInfoTable(AttributeName.SPAWNID, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable_abstract[12] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0),
-				null);
+		atrInfoTable_abstract[12] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(JDFElement.EnumNodeStatus.class, 0), null);
 		atrInfoTable_abstract[13] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_abstract[14] = new AtrInfoTable(AttributeName.TEMPLATE, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable_abstract[15] = new AtrInfoTable(AttributeName.TEMPLATEID, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_abstract[16] = new AtrInfoTable(AttributeName.TEMPLATEVERSION, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_abstract[17] = new AtrInfoTable(AttributeName.TYPE, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable_abstract[18] = new AtrInfoTable(AttributeName.VERSION, 0x33333333, AttributeInfo.EnumAttributeType.JDFJMFVersion, EnumVersion.getEnum(0),
-				null);
-		atrInfoTable_abstract[19] = new AtrInfoTable(AttributeName.XMLNS, 0x33333331, AttributeInfo.EnumAttributeType.URI, EnumVersion.getEnum(0), null);
-		atrInfoTable_abstract[20] = new AtrInfoTable(AttributeName.XSITYPE, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, EnumVersion.getEnum(0), null);
+		atrInfoTable_abstract[18] = new AtrInfoTable(AttributeName.VERSION, 0x33333333, AttributeInfo.EnumAttributeType.JDFJMFVersion, null, null);
+		atrInfoTable_abstract[19] = new AtrInfoTable(AttributeName.XMLNS, 0x33333331, AttributeInfo.EnumAttributeType.URI, null, null);
+		atrInfoTable_abstract[20] = new AtrInfoTable(AttributeName.XSITYPE, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 	private static AtrInfoTable[] atrInfoTable_root = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable_root[0] = new AtrInfoTable(AttributeName.VERSION, 0x22222222, AttributeInfo.EnumAttributeType.JDFJMFVersion, EnumVersion.getEnum(0), null);
+		atrInfoTable_root[0] = new AtrInfoTable(AttributeName.VERSION, 0x22222222, AttributeInfo.EnumAttributeType.JDFJMFVersion, null, null);
 		atrInfoTable_root[1] = new AtrInfoTable(AttributeName.XMLNS, 0x33333331, AttributeInfo.EnumAttributeType.URI, null, null);
 	}
 
@@ -321,92 +319,23 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * Enumeration for the policy of cleaning up the Spawn and Merge audits
 	 */
-	@SuppressWarnings("unchecked")
-	public static final class EnumCleanUpMerge extends ValuedEnum
+	public enum EnumCleanUpMerge
 	{
-		private static final long serialVersionUID = 1L;
+		None, RemoveRRefs, RemoveAll;
 
-		private static int m_startValue = 0;
-
-		/**
-		 * @see org.apache.commons.lang.enums.ValuedEnum#toString()
-		 */
-		@Override
-		public String toString()
+		public static EnumCleanUpMerge getEnum(final String val)
 		{
-			return getName();
+			return JavaEnumUtil.getEnumIgnoreCase(EnumCleanUpMerge.class, val, null);
 		}
-
-		protected EnumCleanUpMerge(final String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName
-		 * @return
-		 */
-		public static EnumCleanUpMerge getEnum(final String enumName)
-		{
-			return (EnumCleanUpMerge) getEnum(EnumCleanUpMerge.class, enumName);
-		}
-
-		/**
-		 * @param enumValue
-		 * @return
-		 */
-		public static EnumCleanUpMerge getEnum(final int enumValue)
-		{
-			return (EnumCleanUpMerge) getEnum(EnumCleanUpMerge.class, enumValue);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumCleanUpMerge.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static List<EnumCleanUpMerge> getEnumList()
-		{
-			return getEnumList(EnumCleanUpMerge.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumCleanUpMerge.class);
-		}
-
-		/**
-		 * Constants EnumActivation
-		 */
-		public static final EnumCleanUpMerge None = new EnumCleanUpMerge(JDFConstants.CLEANUPMERGE_NONE);
-		/**
-		 *
-		 */
-		public static final EnumCleanUpMerge RemoveRRefs = new EnumCleanUpMerge(JDFConstants.CLEANUPMERGE_REMOVERREFS);
-		/**
-		 */
-		public static final EnumCleanUpMerge RemoveAll = new EnumCleanUpMerge(JDFConstants.CLEANUPMERGE_REMOVEALL);
-
 	}
 
 	/**
 	 * inner class EnumActivation:<br>
 	 * Enumeration for attribute Activation
 	 */
-	public static final class EnumActivation extends ValuedEnum
+	public enum EnumActivation
 	{
-		private static final long serialVersionUID = 1L;
-
-		private static int m_startValue = 0;
+		Inactive, Informative, Held, TestRun, TestRunAndGo, Active;
 
 		/**
 		 * return true if a allows us to actively process now
@@ -419,82 +348,19 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			return a == null || EnumActivation.Active.equals(a) || EnumActivation.TestRunAndGo.equals(a);
 		}
 
-		protected EnumActivation(final String name)
-		{
-			super(name, m_startValue++);
-		}
-
 		/**
 		 * @param enumName
 		 * @return
 		 */
 		public static EnumActivation getEnum(final String enumName)
 		{
-			return (EnumActivation) getEnum(EnumActivation.class, enumName);
-		}
-
-		/**
-		 * @param enumValue
-		 * @return
-		 */
-		public static EnumActivation getEnum(final int enumValue)
-		{
-			return (EnumActivation) getEnum(EnumActivation.class, enumValue);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumActivation.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumActivation.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumActivation.class);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumActivation.class, enumName, null);
 		}
 
 		/**
 		 *
 		 */
 		public static final EnumActivation Unknown = null;
-
-		/**
-		 *
-		 */
-		public static final EnumActivation Inactive = new EnumActivation(JDFConstants.ACTIVATION_INACTIVE);
-		/**
-		 *
-		 */
-		public static final EnumActivation Informative = new EnumActivation(JDFConstants.ACTIVATION_INFORMATIVE);
-		/**
-		 *
-		 */
-		public static final EnumActivation Held = new EnumActivation(JDFConstants.ACTIVATION_HELD);
-		/**
-		 *
-		 */
-		public static final EnumActivation TestRun = new EnumActivation(JDFConstants.ACTIVATION_TESTRUN);
-		/**
-		 *
-		 */
-		public static final EnumActivation TestRunAndGo = new EnumActivation(JDFConstants.ACTIVATION_TESTRUNANDGO);
-		/**
-		 *
-		 */
-		public static final EnumActivation Active = new EnumActivation(JDFConstants.ACTIVATION_ACTIVE);
 	}
 
 	/**
@@ -506,7 +372,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 		public static EActivation getEnum(final String name)
 		{
-			return EnumUtil.getJavaEnumIgnoreCase(EActivation.class, name);
+			return JavaEnumUtil.getEnumIgnoreCase(EActivation.class, name, null);
 		}
 
 		public static boolean isActive(final EActivation a)
@@ -545,337 +411,24 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 		public static EType getEnum(final String name)
 		{
-			return EnumUtil.getJavaEnumIgnoreCase(EType.class, name);
+			return JavaEnumUtil.getEnumIgnoreCase(EType.class, name, null);
 		}
 	}
 
 	/**
 	 * inner class EnumType: Enumeration for accessing typesafe node types
 	 */
-	public static final class EnumType extends ValuedEnum
+	public enum EnumType
 	{
-		private static final long serialVersionUID = 1L;
+		ProcessGroup, Combined, Product, Approval, Buffer, Combine, Delivery, ManualLabor, Ordering, Packing, QualityControl, ResourceDefinition, Split, Verification, AssetListCreation, Bending, ColorCorrection, ColorSpaceConversion, ContactCopying, ContoneCalibration, CylinderLayoutPreparation, DBDocTemplateLayout, DBTemplateMerging, DieDesign, DieLayoutProduction, DigitalDelivery, FilmToPlateCopying, FormatConversion, ImageEnhancement, ImageReplacement, ImageSetting, Imposition, InkZoneCalculation, Interpreting, LayoutElementProduction, LayoutPreparation, LayoutShifting, PageAssigning, PDFToPSConversion, PDLCreation, Preflight, PreviewGeneration, Proofing, PSToPDFConversion, RasterReading, Rendering, RIPing, Scanning, Screening, Separation, SoftProofing, Stripping, Tiling, Trapping, ConventionalPrinting, DigitalPrinting, IDPrinting, Varnishing, AdhesiveBinding, BlockPreparation, BoxPacking, BoxFolding, Bundling, CaseMaking, CasingIn, ChannelBinding, CoilBinding, Collecting, CoverApplication, Creasing, Cutting, DieMaking, Dividing, Embossing, EndSheetGluing, Feeding, Folding, Gathering, Gluing, HeadBandApplication, HoleMaking, Inserting, Jacketing, Labeling, Laminating, LongitudinalRibbonOperations, Numbering, Palletizing, Perforating, PlasticCombBinding, PrintRolling, RingBinding, SaddleStitching, ShapeCutting, ShapeDefProduction, SheetOptimizing, Shrinking, SideSewing, SpinePreparation, SpineTaping, Stacking, StaticBlocking, Stitching, Strapping, StripBinding, ThreadSealing, ThreadSewing, Trimming, WebInlineFinishing, Winding, WireCombBinding, Wrapping, PlateSetting, PlateMaking, ProofAndPlateMaking, ImpositionPreparation, ImpositionProofing, PageProofing, PageSoftProofing, PrePressPreparation, ProofImaging;
 
-		private static int m_startValue = 0;
-
-		protected EnumType(final String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName
-		 * @return
-		 */
 		public static EnumType getEnum(final String enumName)
 		{
-			return (EnumType) getEnum(EnumType.class, enumName);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumType.class, enumName, null);
 		}
 
-		/**
-		 * @param enumValue
-		 * @return
-		 */
-		public static EnumType getEnum(final int enumValue)
-		{
-			return (EnumType) getEnum(EnumType.class, enumValue);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumType.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumType.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumType.class);
-		}
-
-		// generic
-		/**
-		 *
-		 */
-		public static final EnumType ProcessGroup = new EnumType(JDFConstants.TYPE_PROCESSGROUP);
-		/**
-		 *
-		 */
-		public static final EnumType Combined = new EnumType(JDFConstants.TYPE_COMBINED);
-		/**
-		 *
-		 */
-		public static final EnumType Product = new EnumType(JDFConstants.TYPE_PRODUCT);
-		/**
-		 *
-		 */
-		public static final EnumType Approval = new EnumType(JDFConstants.TYPE_APPROVAL);
-		/**
-		 *
-		 */
-		public static final EnumType Buffer = new EnumType(JDFConstants.TYPE_BUFFER);
-		/**
-		 *
-		 */
-		public static final EnumType Combine = new EnumType(JDFConstants.TYPE_COMBINE);
-		/**
-		 *
-		 */
-		public static final EnumType Delivery = new EnumType(JDFConstants.TYPE_DELIVERY);
-		/**
-		 *
-		 */
-		public static final EnumType ManualLabor = new EnumType(JDFConstants.TYPE_MANUALLABOR);
-		/**
-		 *
-		 */
-		public static final EnumType Ordering = new EnumType(JDFConstants.TYPE_ORDERING);
-		/**
-		 *
-		 */
-		public static final EnumType Packing = new EnumType(JDFConstants.TYPE_PACKING);
-		/** * */
-		public static final EnumType QualityControl = new EnumType(JDFConstants.TYPE_QUALITYCONTROL);
-		/** * */
-		public static final EnumType ResourceDefinition = new EnumType(JDFConstants.TYPE_RESOURCEDEFINITION);
-		/** * */
-		public static final EnumType Split = new EnumType(JDFConstants.TYPE_SPLIT);
-		/** * */
-		public static final EnumType Verification = new EnumType(JDFConstants.TYPE_VERIFICATION);
-
-		// prepress
-		/** * */
-		public static final EnumType AssetListCreation = new EnumType(JDFConstants.TYPE_ASSETLISTCREATION);
-		/** * */
-		public static final EnumType Bending = new EnumType(JDFConstants.TYPE_BENDING);
-		/** * */
-		public static final EnumType ColorCorrection = new EnumType(JDFConstants.TYPE_COLORCORRECTION);
-		/** * */
-		public static final EnumType ColorSpaceConversion = new EnumType(JDFConstants.TYPE_COLORSPACECONVERSION);
-		/** * */
-		public static final EnumType ContactCopying = new EnumType(JDFConstants.TYPE_CONTACTCOPYING);
-		/** * */
-		public static final EnumType ContoneCalibration = new EnumType(JDFConstants.TYPE_CONTONECALIBRATION);
-		/** * */
-		public static final EnumType CylinderLayoutPreparation = new EnumType(JDFConstants.TYPE_CYLINDERLAYOUTPREPARATION);
-		/** * */
-		public static final EnumType DBDocTemplateLayout = new EnumType(JDFConstants.TYPE_DBDOCTEMPLATELAYOUT);
-		/** * */
-		public static final EnumType DBTemplateMerging = new EnumType(JDFConstants.TYPE_DBTEMPLATEMERGING);
-		/** * */
-		public static final EnumType DieDesign = new EnumType("DieDesign");
-		/** * */
-		public static final EnumType DieLayoutProduction = new EnumType("DieLayoutProduction");
-		/** * */
-		public static final EnumType DigitalDelivery = new EnumType(JDFConstants.TYPE_DIGITALDELIVERY);
-		/** * */
-		public static final EnumType FilmToPlateCopying = new EnumType(JDFConstants.TYPE_FILMTOPLATECOPYING);
-		/** * */
-		public static final EnumType FormatConversion = new EnumType(JDFConstants.TYPE_FORMATCONVERSION);
-		/** * */
-		public static final EnumType ImageEnhancement = new EnumType("ImageEnhancement");
-		/** * */
-		public static final EnumType ImageReplacement = new EnumType(JDFConstants.TYPE_IMAGEREPLACEMENT);
-		/** * */
-		public static final EnumType ImageSetting = new EnumType(JDFConstants.TYPE_IMAGESETTING);
-		/** * */
-		public static final EnumType Imposition = new EnumType(JDFConstants.TYPE_IMPOSITION);
-		/** * */
-		public static final EnumType InkZoneCalculation = new EnumType(JDFConstants.TYPE_INKZONECALCULATION);
-		/** * */
-		public static final EnumType Interpreting = new EnumType(JDFConstants.TYPE_INTERPRETING);
-		/** * */
-		public static final EnumType LayoutElementProduction = new EnumType(JDFConstants.TYPE_LAYOUTELEMENTPRODUCTION);
-		/** * */
-		public static final EnumType LayoutPreparation = new EnumType(JDFConstants.TYPE_LAYOUTPREPARATION);
-		/** * */
-		public static final EnumType LayoutShifting = new EnumType("LayoutShifting");
-		/** * */
-		public static final EnumType PageAssigning = new EnumType("PageAssigning");
-		/** * */
-		public static final EnumType PDFToPSConversion = new EnumType(JDFConstants.TYPE_PDFTOPSCONVERSION);
-		/** * */
-		public static final EnumType PDLCreation = new EnumType(JDFConstants.TYPE_PDLCREATION);
-		/** * */
-		public static final EnumType Preflight = new EnumType(JDFConstants.TYPE_PREFLIGHT);
-		/** * */
-		public static final EnumType PreviewGeneration = new EnumType(JDFConstants.TYPE_PREVIEWGENERATION);
-		/** * */
-		public static final EnumType Proofing = new EnumType(JDFConstants.TYPE_PROOFING);
-		/** * */
-		public static final EnumType PSToPDFConversion = new EnumType(JDFConstants.TYPE_PSTOPDFCONVERSION);
-		/** * */
-		public static final EnumType RasterReading = new EnumType(JDFConstants.TYPE_RASTERREADING);
-		/** * */
-		public static final EnumType Rendering = new EnumType(JDFConstants.TYPE_RENDERING);
-		/** * */
-		public static final EnumType RIPing = new EnumType("RIPing");
-		/** * */
-		public static final EnumType Scanning = new EnumType(JDFConstants.TYPE_SCANNING);
-		/** * */
-		public static final EnumType Screening = new EnumType(JDFConstants.TYPE_SCREENING);
-		/** * */
-		public static final EnumType Separation = new EnumType(JDFConstants.TYPE_SEPARATION);
-		/** * */
-		public static final EnumType SoftProofing = new EnumType(JDFConstants.TYPE_SOFTPROOFING);
-		/** * */
-		public static final EnumType Stripping = new EnumType(JDFConstants.TYPE_STRIPPING);
-		/** * */
-		public static final EnumType Tiling = new EnumType(JDFConstants.TYPE_TILING);
-		/** * */
-		public static final EnumType Trapping = new EnumType(JDFConstants.TYPE_TRAPPING);
-
-		// press
-		/** * */
-		public static final EnumType ConventionalPrinting = new EnumType(JDFConstants.TYPE_CONVENTIONALPRINTING);
-		/** * */
-		public static final EnumType DigitalPrinting = new EnumType(JDFConstants.TYPE_DIGITALPRINTING);
-		/** * */
-		public static final EnumType IDPrinting = new EnumType(JDFConstants.TYPE_IDPRINTING);
-		/** * */
-		public static final EnumType Varnishing = new EnumType("Varnishing");
-
-		// postpress
-		/** * */
-		public static final EnumType AdhesiveBinding = new EnumType(JDFConstants.TYPE_ADHESIVEBINDING);
-		/** * */
-		public static final EnumType BlockPreparation = new EnumType(JDFConstants.TYPE_BLOCKPREPARATION);
-		/** * */
-		public static final EnumType BoxPacking = new EnumType(JDFConstants.TYPE_BOXPACKING);
-		/** * */
-		public static final EnumType BoxFolding = new EnumType(JDFConstants.TYPE_BOXFOLDING);
-		/** * */
-		public static final EnumType Bundling = new EnumType(JDFConstants.TYPE_BUNDLING);
-		/** * */
-		public static final EnumType CaseMaking = new EnumType(JDFConstants.TYPE_CASEMAKING);
-		/** * */
-		public static final EnumType CasingIn = new EnumType(JDFConstants.TYPE_CASINGIN);
-		/** * */
-		public static final EnumType ChannelBinding = new EnumType(JDFConstants.TYPE_CHANNELBINDING);
-		/** * */
-		public static final EnumType CoilBinding = new EnumType(JDFConstants.TYPE_COILBINDING);
-		/** * */
-		public static final EnumType Collecting = new EnumType(JDFConstants.TYPE_COLLECTING);
-		/** * */
-		public static final EnumType CoverApplication = new EnumType(JDFConstants.TYPE_COVERAPPLICATION);
-		/** * */
-		public static final EnumType Creasing = new EnumType(JDFConstants.TYPE_CREASING);
-		/** * */
-		public static final EnumType Cutting = new EnumType(JDFConstants.TYPE_CUTTING);
-		/** * */
-		public static final EnumType DieMaking = new EnumType("DieMaking");
-		/** * */
-		public static final EnumType Dividing = new EnumType(JDFConstants.TYPE_DIVIDING);
-		/** * */
-		public static final EnumType Embossing = new EnumType(JDFConstants.TYPE_EMBOSSING);
-		/** * */
-		public static final EnumType EndSheetGluing = new EnumType(JDFConstants.TYPE_ENDSHEETGLUING);
-		/** * */
-		public static final EnumType Feeding = new EnumType(JDFConstants.TYPE_FEEDING);
-		/** * */
-		public static final EnumType Folding = new EnumType(JDFConstants.TYPE_FOLDING);
-		/** * */
-		public static final EnumType Gathering = new EnumType(JDFConstants.TYPE_GATHERING);
-		/** * */
-		public static final EnumType Gluing = new EnumType(JDFConstants.TYPE_GLUING);
-		/** * */
-		public static final EnumType HeadBandApplication = new EnumType(JDFConstants.TYPE_HEADBANDAPPLICATION);
-		/** * */
-		public static final EnumType HoleMaking = new EnumType(JDFConstants.TYPE_HOLEMAKING);
-		/** * */
-		public static final EnumType Inserting = new EnumType(JDFConstants.TYPE_INSERTING);
-		/** * */
-		public static final EnumType Jacketing = new EnumType(JDFConstants.TYPE_JACKETING);
-		/** * */
-		public static final EnumType Labeling = new EnumType(JDFConstants.TYPE_LABELING);
-		/** * */
-		public static final EnumType Laminating = new EnumType(JDFConstants.TYPE_LAMINATING);
-		/** * */
-		public static final EnumType LongitudinalRibbonOperations = new EnumType(JDFConstants.TYPE_LONGITUDINALRIBBONOPERATIONS);
-		/** * */
-		public static final EnumType Numbering = new EnumType(JDFConstants.TYPE_NUMBERING);
-		/** * */
-		public static final EnumType Palletizing = new EnumType(JDFConstants.TYPE_PALLETIZING);
-		/** * */
-		public static final EnumType Perforating = new EnumType(JDFConstants.TYPE_PERFORATING);
-		/** * */
-		public static final EnumType PlasticCombBinding = new EnumType(JDFConstants.TYPE_PLASTICCOMBBINDING);
-		/** * */
-		public static final EnumType PrintRolling = new EnumType(JDFConstants.TYPE_PRINTROLLING);
-		/** * */
-		public static final EnumType RingBinding = new EnumType(JDFConstants.TYPE_RINGBINDING);
-		/** * */
-		public static final EnumType SaddleStitching = new EnumType(JDFConstants.TYPE_SADDLESTITCHING);
-		/** * */
-		public static final EnumType ShapeCutting = new EnumType(JDFConstants.TYPE_SHAPECUTTING);
-		/** * */
-		public static final EnumType ShapeDefProduction = new EnumType("ShapeDefProduction");
-		/** * */
-		public static final EnumType SheetOptimizing = new EnumType("SheetOptimizing");
-		/** * */
-		public static final EnumType Shrinking = new EnumType(JDFConstants.TYPE_SHRINKING);
-		/** * */
-		public static final EnumType SideSewing = new EnumType(JDFConstants.TYPE_SIDESEWING);
-		/** * */
-		public static final EnumType SpinePreparation = new EnumType(JDFConstants.TYPE_SPINEPREPARATION);
-		/** * */
-		public static final EnumType SpineTaping = new EnumType(JDFConstants.TYPE_SPINETAPING);
-		/** * */
-		public static final EnumType Stacking = new EnumType(JDFConstants.TYPE_STACKING);
-		/** * */
-		public static final EnumType StaticBlocking = new EnumType("StaticBlocking");
-		/** * */
-		public static final EnumType Stitching = new EnumType(JDFConstants.TYPE_STITCHING);
-		/** * */
-		public static final EnumType Strapping = new EnumType(JDFConstants.TYPE_STRAPPING);
-		/** * */
-		public static final EnumType StripBinding = new EnumType(JDFConstants.TYPE_STRIPBINDING);
-		/** * */
-		public static final EnumType ThreadSealing = new EnumType(JDFConstants.TYPE_THREADSEALING);
-		/** * */
-		public static final EnumType ThreadSewing = new EnumType(JDFConstants.TYPE_THREADSEWING);
-		/** * */
-		public static final EnumType Trimming = new EnumType(JDFConstants.TYPE_TRIMMING);
-		/** * */
-		public static final EnumType WebInlineFinishing = new EnumType(JDFConstants.TYPE_WEBINLINEFINISHING);
-		/** * */
-		public static final EnumType Winding = new EnumType("Winding");
-		/** * */
-		public static final EnumType WireCombBinding = new EnumType(JDFConstants.TYPE_WIRECOMBBINDING);
-		/** * */
-		public static final EnumType Wrapping = new EnumType(JDFConstants.TYPE_WRAPPING);
-
-		// prepress gray box types
-		/** * */
-		public static final EnumType PlateSetting = new EnumType("PlateSetting");
-		/** * */
-		public static final EnumType PlateMaking = new EnumType("PlateMaking");
-		/** * */
-		public static final EnumType ProofAndPlateMaking = new EnumType("ProofAndPlateMaking");
-		/** * */
-		public static final EnumType ImpositionPreparation = new EnumType("ImpositionPreparation");
-		/** * */
-		public static final EnumType ImpositionProofing = new EnumType("ImpositionProofing");
-		/** * */
-		public static final EnumType PageProofing = new EnumType("PageProofing");
-		/** * */
-		public static final EnumType PageSoftProofing = new EnumType("PageSoftProofing");
-		/** * */
-		public static final EnumType PrepressPreparation = new EnumType("PrePressPreparation");
-		/** * */
-		public static final EnumType ProofImaging = new EnumType("ProofImaging");
+		@Deprecated
+		public static final EnumType PrepressPreparation = PrePressPreparation;
 	}
 
 	/**
@@ -1521,7 +1074,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 				return setRootStatus(status, statusDetails);
 			}
 
-			if (getVersion(true).getValue() < JDFElement.EnumVersion.Version_1_3.getValue())
+			if (getVersion(true).compareTo(JDFElement.EnumVersion.Version_1_3) < 0)
 			{
 				setPoolStatus(mattr, status, statusDetails);
 			}
@@ -1656,7 +1209,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 				setStatusDetails(statusDetails);
 			}
 			removeChild(ElementName.STATUSPOOL, null, 0);
-			if (getVersion(true).getValue() >= JDFElement.EnumVersion.Version_1_3.getValue())
+			if (getVersion(true).compareTo(JDFElement.EnumVersion.Version_1_3) >= 0)
 			{
 				final JDFNodeInfo ni = getNodeInfo();
 				if (ni != null)
@@ -1727,11 +1280,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			{
 				return true;
 			}
-			if (obj == null)
-			{
-				return false;
-			}
-			if (getClass() != obj.getClass())
+			if ((obj == null) || (getClass() != obj.getClass()))
 			{
 				return false;
 			}
@@ -1784,18 +1333,32 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 					for (final Object vNode : vNodes)
 					{
 						final JDFNode kid = (JDFNode) vNode;
-						minStatus = (EnumNodeStatus) EnumUtil.min(minStatus, kid.getPartStatus(partMap, -1));
-						if (minStatus == null)
+						final EnumNodeStatus kidMin = kid.getPartStatus(partMap, -1);
+						if (kidMin == null)
 						{
 							ciao = true;
 							break;
 						}
-						maxStatus = (EnumNodeStatus) EnumUtil.max(maxStatus, kid.getPartStatus(partMap, 1));
+						if (kidMin.compareTo(minStatus) < 0)
+						{
+							minStatus = kidMin;
+						}
+						final EnumNodeStatus kidMax = kid.getPartStatus(partMap, 1);
+						if (kidMax == null)
+						{
+							ciao = true;
+							break;
+						}
+						if (kidMax.compareTo(maxStatus) > 0)
+						{
+							maxStatus = kidMax;
+						}
 					}
 					if (!ciao)
 					{
 						final EnumNodeStatus synchStatus = getSynchStatus(minStatus, maxStatus);
-						if ((synchStatus != null) && EnumUtil.aLessThanB(n.getPartStatus(partMap, 0), synchStatus))
+						final EnumNodeStatus nodeStatus = n.getPartStatus(partMap, 0);
+						if (synchStatus != null && (nodeStatus == null || nodeStatus.compareTo(synchStatus) < 0))
 						{
 							n.setPartStatus(partMap, synchStatus, null);
 						}
@@ -1816,9 +1379,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			{
 				synchStatus = minStatus;
 			}
-			else if (EnumUtil.aLessEqualsThanB(minStatus, EnumNodeStatus.Ready))
+			else if (minStatus.compareTo(EnumNodeStatus.Ready) <= 0)
 			{
-				if (EnumUtil.aLessEqualsThanB(EnumNodeStatus.InProgress, maxStatus))
+				if (EnumNodeStatus.InProgress.compareTo(maxStatus) <= 0)
 				{
 					synchStatus = EnumNodeStatus.InProgress;
 				}
@@ -1891,7 +1454,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 					for (int ti = 0; ti < linkInfo.size(); ti++)
 					{
-						if (linkInfo.matchesUsage(ti, usage) && (processUsage == null || processUsage.getName().equals(linkInfo.getProcessUsage(ti))))
+						if (linkInfo.matchesUsage(ti, usage) && (processUsage == null || processUsage.name().equals(linkInfo.getProcessUsage(ti))))
 						{
 							bMatchUsage = true;
 							bAddCPI = true;
@@ -1955,16 +1518,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * Enumeration for accessing typesafe nodes
 	 */
-	public static final class EnumProcessUsage extends ValuedEnum
+	public enum EnumProcessUsage
 	{
-		private static final long serialVersionUID = 1L;
-
-		private static int m_startValue = 0;
-
-		protected EnumProcessUsage(final String name)
-		{
-			super(name, m_startValue++);
-		}
+		AnyInput, AnyOutput, @Deprecated
+		Any, Rejected, Accepted, Application, Marks, Document, Surface, Waste, ThumbNail, Proof, Input, Plate, Cylinder, Good, Core, Cover, BookBlock, Box, CoverMaterial, SpineBoard, CoverBoard, Case, EndCustomer, FrontEndSheet, BackEndSheet, Child, Mother, Jacket, Book, Label, RingBinder, Ancestor, Paper;
 
 		/**
 		 * @param enumName
@@ -1972,122 +1529,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		 */
 		public static EnumProcessUsage getEnum(final String enumName)
 		{
-			return (EnumProcessUsage) getEnum(EnumProcessUsage.class, enumName);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumProcessUsage.class, enumName, null);
 		}
-
-		/**
-		 * @param enumValue
-		 * @return
-		 */
-		public static EnumProcessUsage getEnum(final int enumValue)
-		{
-			return (EnumProcessUsage) getEnum(EnumProcessUsage.class, enumValue);
-		}
-
-		/**
-		 * @return
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumProcessUsage.class);
-		}
-
-		/**
-		 * @return
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumProcessUsage.class);
-		}
-
-		/**
-		 * @return
-		 */
-		@SuppressWarnings("rawtypes")
-		public static Iterator iterator()
-		{
-			return iterator(EnumProcessUsage.class);
-		}
-
-		/**
-		 *
-		 */
-		public static final EnumProcessUsage AnyInput = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_ANYINPUT);
-		/**
-		 *
-		 */
-		public static final EnumProcessUsage AnyOutput = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_ANYOUTPUT);
-		/**
-		 * @deprecated use null instead
-		 */
-		@Deprecated
-		public static final EnumProcessUsage Any = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_ANY);
-		/** * */
-		public static final EnumProcessUsage Rejected = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_REJECTED);
-		/** * */
-		public static final EnumProcessUsage Accepted = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_ACCEPTED);
-		/** * */
-		public static final EnumProcessUsage Application = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_APPLICATION);
-		/** * */
-		public static final EnumProcessUsage Marks = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_MARKS);
-		/** * */
-		public static final EnumProcessUsage Document = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_DOCUMENT);
-		/** * */
-		public static final EnumProcessUsage Surface = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_SURFACE);
-		/** * */
-		public static final EnumProcessUsage Waste = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_WASTE);
-		/** * */
-		public static final EnumProcessUsage ThumbNail = new EnumProcessUsage("ThumbNail");
-		/** * */
-		public static final EnumProcessUsage Proof = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_PROOF);
-		/** * */
-		public static final EnumProcessUsage Input = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_INPUT);
-		/** * */
-		public static final EnumProcessUsage Plate = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_PLATE);
-		/** * */
-		public static final EnumProcessUsage Cylinder = new EnumProcessUsage("Cylinder");
-		/** * */
-		public static final EnumProcessUsage Good = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_GOOD);
-		/** * */
-		public static final EnumProcessUsage Core = new EnumProcessUsage("Core");
-		/** * */
-		public static final EnumProcessUsage Cover = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_COVER);
-		/** * */
-		public static final EnumProcessUsage BookBlock = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_BOOKBLOCK);
-		/** * */
-		public static final EnumProcessUsage Box = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_BOX);
-		/** * */
-		public static final EnumProcessUsage CoverMaterial = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_COVERMATERIAL);
-		/** * */
-		public static final EnumProcessUsage SpineBoard = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_SPINEBOARD);
-		/** * */
-		public static final EnumProcessUsage CoverBoard = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_COVERBOARD);
-		/** * */
-		public static final EnumProcessUsage Case = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_CASE);
-		/** * */
-		public static final EnumProcessUsage EndCustomer = new EnumProcessUsage("EndCustomer");
-		/** * */
-		public static final EnumProcessUsage FrontEndSheet = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_FRONTENDSHEET);
-		/** * */
-		public static final EnumProcessUsage BackEndSheet = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_BACKENDSHEET);
-		/** * */
-		public static final EnumProcessUsage Child = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_CHILD);
-		/** * */
-		public static final EnumProcessUsage Mother = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_MOTHER);
-		/** * */
-		public static final EnumProcessUsage Jacket = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_JACKET);
-		/** * */
-		public static final EnumProcessUsage Book = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_BOOK);
-		/** * */
-		public static final EnumProcessUsage Label = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_LABEL);
-		/** * */
-		public static final EnumProcessUsage RingBinder = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_RINGBINDER);
-		/** * */
-		public static final EnumProcessUsage Ancestor = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_ANCESTOR);
-		/**
-		 * added for MISPre ICS
-		 */
-		public static final EnumProcessUsage Paper = new EnumProcessUsage("Paper");
 	}
 
 	/**
@@ -2494,11 +1937,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 						}
 						else if (method < 0)
 						{
-							status = (EnumNodeStatus) EnumUtil.min(status, nodeStatus);
+							status = status.compareTo(nodeStatus) <= 0 ? status : nodeStatus;
 						}
 						else if (method > 0)
 						{
-							status = (EnumNodeStatus) EnumUtil.max(status, nodeStatus);
+							status = status.compareTo(nodeStatus) >= 0 ? status : nodeStatus;
 						}
 					}
 					final KElement parent = niCmp.getParentNode_KElement();
@@ -2738,10 +2181,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 				final EnumActivation a = EnumActivation.getEnum(p.getAttribute(AttributeName.ACTIVATION, null, null));
 				if (a != null)
 				{
-					final int value = a.getValue();
-					if ((value <= EnumActivation.TestRun.getValue()) || (res.getValue() < EnumActivation.Active.getValue()))
+					final int value = a.ordinal();
+					if ((value <= EnumActivation.TestRun.ordinal()) || (res.ordinal() < EnumActivation.Active.ordinal()))
 					{
-						res = (value < res.getValue()) ? a : res; // smaller enums are inherited to alldescendants
+						res = (value < res.ordinal()) ? a : res; // smaller enums are inherited to alldescendants
 					}
 					else
 					{ // special case for non-linear test run / test run and go
@@ -2783,7 +2226,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public void setActivation(final EActivation active)
 	{
-		setAttribute(AttributeName.ACTIVATION, active == null ? null : active.name(), null);
+		setAttribute(AttributeName.ACTIVATION, JavaEnumUtil.getName(active), null);
 	}
 
 	/**
@@ -2793,7 +2236,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public void setActivation(final EnumActivation bActive)
 	{
-		setAttribute(AttributeName.ACTIVATION, bActive == null ? null : bActive.getName(), null);
+		setAttribute(AttributeName.ACTIVATION, JavaEnumUtil.getName(bActive), null);
 	}
 
 	/**
@@ -2818,7 +2261,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public JDFResource getResource(final String strName, final EnumUsage usage, final EnumProcessUsage processUsage, final int i)
 	{
-		return getResource(strName, usage, processUsage == null ? null : processUsage.getName(), null, i);
+		return getResource(strName, usage, JavaEnumUtil.getName(processUsage), null, i);
 	}
 
 	/**
@@ -2886,7 +2329,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	@Deprecated
 	public JDFResource getResource(final String strName, final EnumUsage usage, final EnumProcessUsage processUsage, final int i, final String namespaceURI)
 	{
-		return getResource(strName, usage, processUsage == null ? null : processUsage.getName(), namespaceURI, i);
+		return getResource(strName, usage, JavaEnumUtil.getName(processUsage), namespaceURI, i);
 	}
 
 	/**
@@ -2934,7 +2377,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * @param namespaceURI if null and no prefix, assume JDF namespace, else correct lvl 2 handling
 	 * @return the matching resource, null if none matches
 	 */
-	public JDFResourceLink getLink(final String strName, final EnumUsage usage, final String processUsage, final String namespaceURI, int i)
+	public JDFResourceLink getLink(final String strName, final EnumUsage usage, final String processUsage, final String namespaceURI, final int i)
 	{
 
 		final JDFAttributeMap map = new JDFAttributeMap();
@@ -3201,7 +2644,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public JDFResourceLink ensureLink(final JDFResource jdfResource, final EnumUsage usage, final EnumProcessUsage processUsage)
 	{
-		final String puName = processUsage == null ? null : processUsage.getName();
+		final String puName = JavaEnumUtil.getName(processUsage);
 		return ensureLinkPU(jdfResource, usage, puName);
 	}
 
@@ -3301,7 +2744,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			parent = parent.getParentJDF();
 			if (parent == null)
 			{
-				throw new JDFException(res.getInheritedAttribute(AttributeName.JOBID, null, "unknown jobid") + " " + res.getLocalName() + JDFConstants.SLASH
+				throw new JDFException(res.getInheritedAttribute(AttributeName.JOBID, null, "unknown jobid") + " " + res.getLocalName() + JDFCoreConstants.SLASH
 						+ res.getID() + " is not correctly nested");
 			}
 
@@ -3558,11 +3001,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			return false;
 		}
 		final EnumNodeStatus status = getPartStatus(partMap, 0);
-		if ((status != EnumNodeStatus.Waiting) && (status != EnumNodeStatus.Ready))
-		{
-			return false;
-		}
-		if (!fitsActivation(EnumActivation.Active, true))
+		if (((status != EnumNodeStatus.Waiting) && (status != EnumNodeStatus.Ready)) || !fitsActivation(EnumActivation.Active, true))
 		{
 			return false;
 		}
@@ -3615,7 +3054,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 *
-	
+
 	 *
 	 */
 
@@ -3812,7 +3251,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	@Deprecated
 	public JDFNode addTask(final String task, final VString tasks)
 	{
-		if (JDFConstants.EMPTYSTRING.equals(task))
+		if (JDFCoreConstants.EMPTYSTRING.equals(task))
 		{
 			return this;
 		}
@@ -3854,7 +3293,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public void setType(final EnumType typ)
 	{
-		setType(typ == null ? null : typ.getName(), true);
+		setType(JavaEnumUtil.getName(typ), true);
 	}
 
 	/**
@@ -3896,7 +3335,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public String getType()
 	{
-		return getAttribute(AttributeName.TYPE, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.TYPE, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -3927,7 +3366,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		{
 			final String nam = (i > 0) ? ElementName.NODEINFO : ElementName.CUSTOMERINFO;
 			final String linkNam = nam + JDFConstants.LINK;
-			if (version.getValue() >= EnumVersion.Version_1_3.getValue())
+			if (version.compareTo(EnumVersion.Version_1_3) >= 0)
 			{
 				bRet = fixNiCiToResource(i, nam, linkNam);
 			}
@@ -4212,11 +3651,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 						minStatus = null;
 						break; // no consistent status, don't set
 					}
-					if (minStatus.getValue() > status.getValue())
+					if (minStatus.compareTo(status) > 0)
 					{
 						minStatus = status;
 					}
-					else if (maxStatus.getValue() < status.getValue())
+					else if (maxStatus.compareTo(status) < 0)
 					{
 						maxStatus = status;
 					}
@@ -4440,8 +3879,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			return new Vector();
 		}
 
-		final String s = getAttribute(AttributeName.TYPES, null, JDFConstants.EMPTYSTRING);
-		return StringUtil.tokenize(s, JDFConstants.BLANK, false);
+		final String s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
+		return StringUtil.tokenize(s, JDFCoreConstants.BLANK, false);
 	}
 
 	/**
@@ -5028,9 +4467,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	{
 		if (bInherit)
 		{
-			return getAncestorAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
+			return getAncestorAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 		}
-		return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.JOBID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -5056,9 +4495,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	{
 		if (bInherit)
 		{
-			return getAncestorAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
+			return getAncestorAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
 		}
-		return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.JOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -5116,7 +4555,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	{
 		if (bInherit)
 		{
-			return getAncestorAttribute(AttributeName.SPAWNID, null, JDFConstants.EMPTYSTRING);
+			return getAncestorAttribute(AttributeName.SPAWNID, null, JDFCoreConstants.EMPTYSTRING);
 		}
 		return getAttribute(AttributeName.SPAWNID);
 	}
@@ -5248,8 +4687,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	@Deprecated
 	public EnumProcessUsage getEnumProcessUsage(final String info, final int i)
 	{
-		final String iToken = StringUtil.token(info, i, JDFConstants.BLANK);
-		if (JDFConstants.EMPTYSTRING.equals(iToken))
+		final String iToken = StringUtil.token(info, i, JDFCoreConstants.BLANK);
+		if (JDFCoreConstants.EMPTYSTRING.equals(iToken))
 		{
 			return null;
 		}
@@ -5335,9 +4774,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	{
 		if (bInherit)
 		{
-			return getAncestorAttribute(JDFConstants.PROJECTID, null, JDFConstants.EMPTYSTRING);
+			return getAncestorAttribute(JDFConstants.PROJECTID, null, JDFCoreConstants.EMPTYSTRING);
 		}
-		return getAttribute(JDFConstants.PROJECTID, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(JDFConstants.PROJECTID, null, JDFCoreConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -5429,14 +4868,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	@Deprecated
 	public JDFResource getMatchingResource(final String resName, final int processUsage, final JDFAttributeMap partMap, final int pos)
 	{
-		final JDFResourceLink rl = getMatchingLink(resName, EnumProcessUsage.getEnum(processUsage), pos);
+		final JDFResourceLink rl = getMatchingLink(resName, (EnumProcessUsage) JavaEnumUtil.getEnum(EnumProcessUsage.class, processUsage), pos);
 
-		if (rl == null)
-		{
-			return null;
-		}
-
-		if (!partMap.isEmpty() && !rl.hasPartMap(partMap))
+		if ((rl == null) || (!partMap.isEmpty() && !rl.hasPartMap(partMap)))
 		{
 			return null;
 		}
@@ -5458,12 +4892,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	public JDFResource getMatchingResource(final String resName, final EnumProcessUsage processUsage, final JDFAttributeMap partMap, final int pos)
 	{
 		final JDFResourceLink rl = getMatchingLink(resName, processUsage, pos);
-		if (rl == null)
-		{
-			return null;
-		}
-
-		if (partMap != null && !partMap.isEmpty() && !rl.hasPartMap(partMap))
+		if ((rl == null) || (partMap != null && !partMap.isEmpty() && !rl.hasPartMap(partMap)))
 		{
 			return null;
 		}
@@ -5543,7 +4972,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	public boolean removeMatchingLink(final String resName, final int processUsage, final boolean bRemoveResource, final int pos)
 	{
 		JDFResourceLink l = null;
-		l = getMatchingLink(resName, EnumProcessUsage.getEnum(processUsage), pos);
+		l = getMatchingLink(resName, (EnumProcessUsage) JavaEnumUtil.getEnum(EnumProcessUsage.class, processUsage), pos);
 		if (l == null)
 		{
 			return false;
@@ -5736,7 +5165,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		final EnumVersion eVer = getVersion(true);
 
 		// if version>=1.0 or no direct element is there try the resource
-		if (eVer == null || eVer.getValue() >= EnumVersion.Version_1_3.getValue() || (nici == null))
+		if (eVer == null || eVer.compareTo(EnumVersion.Version_1_3) >= 0 || (nici == null))
 		{
 			final VElement v = getResourceLinks(elementName, new JDFAttributeMap(AttributeName.USAGE, "Input"), null);
 			JDFResourceLink retLink = null;
@@ -5892,7 +5321,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	{
 		KElement nici;
 		final EnumVersion eVer = getVersion(true);
-		if (eVer == null || eVer.getValue() >= EnumVersion.Version_1_3.getValue())
+		if (eVer == null || eVer.compareTo(EnumVersion.Version_1_3) >= 0)
 		{
 			nici = addResource(s, EnumUsage.Input);
 		}
@@ -6568,7 +5997,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		{
 			return -1;
 		}
-		return getCombinedProcessIndex(typ.getName(), start);
+		return getCombinedProcessIndex(typ.name(), start);
 	}
 
 	/**
@@ -6614,7 +6043,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		{
 			return;
 		}
-		appendAttribute(AttributeName.TYPES, typ.getName(), null, " ", unique);
+		appendAttribute(AttributeName.TYPES, typ.name(), null, " ", unique);
 	}
 
 	/**
@@ -6798,12 +6227,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 				}
 			}
 
-			types.insertElementAt(type.getName(), beforePos);
+			types.insertElementAt(type.name(), beforePos);
 		}
 		else
 		// append at end
 		{
-			types.add(type.getName());
+			types.add(type.name());
 		}
 
 		setTypes(types);
@@ -6870,7 +6299,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			return false;
 		}
 		final String id = vpa.elementAt(0);
-		if (JDFConstants.EMPTYSTRING.equals(id))
+		if (JDFCoreConstants.EMPTYSTRING.equals(id))
 		{
 			throw new JDFException("JDFNode.HasParent: no id???");
 		}
@@ -6932,7 +6361,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 					strID = strID.trim();
 					final int len = strID.length();
 
-					if (JDFConstants.EMPTYSTRING.equals(strID))
+					if (JDFCoreConstants.EMPTYSTRING.equals(strID))
 					{
 						continue;
 					}
@@ -6948,7 +6377,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 						strID = strID.substring(iPos);
 					}
 
-					if (JDFConstants.EMPTYSTRING.equals(strID))
+					if (JDFCoreConstants.EMPTYSTRING.equals(strID))
 					{
 						continue;
 					}
@@ -6986,7 +6415,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		{
 			final JDFNode e = (JDFNode) v.elementAt(i);
 			String s = e.getJobPartID(false);
-			if (JDFConstants.EMPTYSTRING.equals(s) || s.substring(0, prefixSize).equals(idPrefix.substring(0, prefixSize)))
+			if (JDFCoreConstants.EMPTYSTRING.equals(s) || s.substring(0, prefixSize).equals(idPrefix.substring(0, prefixSize)))
 			{
 				continue;
 			}
@@ -7004,7 +6433,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			{
 				s = s.substring(s.length() - pos, s.length());
 			}
-			if (JDFConstants.EMPTYSTRING.equals(s))
+			if (JDFCoreConstants.EMPTYSTRING.equals(s))
 			{
 				continue;
 			}
@@ -7032,7 +6461,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			throw new JDFException("JDFNode.addJDFNode adding JDF Node to invalid node type: Type = " + getType());
 		}
 		final JDFNode p = (JDFNode) appendElement(ElementName.JDF, null);
-		if (typ != null && !JDFConstants.EMPTYSTRING.equals(typ))
+		if (typ != null && !JDFCoreConstants.EMPTYSTRING.equals(typ))
 		{
 			p.setType(typ, false);
 		}
@@ -7083,7 +6512,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	public JDFNode addProcessGroup(final VString tasks)
 	{
 		final JDFNode p = addJDFNode(EnumType.ProcessGroup);
-		p.setType(EnumType.ProcessGroup.getName(), false);
+		p.setType(EnumType.ProcessGroup.name(), false);
 		if (!StringUtil.isEmpty(tasks))
 		{
 			p.setTypes(tasks);
@@ -7328,9 +6757,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			for (int j = 0; j < vInNameSpace.size(); j++)
 			{
 				// tokenize needs a blank
-				if (JDFConstants.BLANK.equals(vInNameSpace.elementAt(j)))
+				if (JDFCoreConstants.BLANK.equals(vInNameSpace.elementAt(j)))
 				{
-					vInNameSpace.setElementAt(JDFConstants.EMPTYSTRING, j);
+					vInNameSpace.setElementAt(JDFCoreConstants.EMPTYSTRING, j);
 				}
 			}
 		}
@@ -7392,7 +6821,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	{
 		if (bInherit)
 		{
-			return getAncestorAttribute(AttributeName.CATEGORY, null, JDFConstants.EMPTYSTRING);
+			return getAncestorAttribute(AttributeName.CATEGORY, null, JDFCoreConstants.EMPTYSTRING);
 		}
 		return getAttribute(AttributeName.CATEGORY);
 	}
@@ -7438,7 +6867,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	{
 		if (bInherit)
 		{
-			return new VString(getAncestorAttribute(AttributeName.ICSVERSIONS, null, JDFConstants.EMPTYSTRING), null);
+			return new VString(getAncestorAttribute(AttributeName.ICSVERSIONS, null, JDFCoreConstants.EMPTYSTRING), null);
 		}
 		return new VString(getAttribute(AttributeName.ICSVERSIONS), null);
 	}
@@ -7523,7 +6952,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	{
 		if (bInherit)
 		{
-			return getAncestorAttribute(AttributeName.RELATEDJOBID, null, JDFConstants.EMPTYSTRING);
+			return getAncestorAttribute(AttributeName.RELATEDJOBID, null, JDFCoreConstants.EMPTYSTRING);
 		}
 		return getAttribute(AttributeName.RELATEDJOBID);
 	}
@@ -7548,7 +6977,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	{
 		if (bInherit)
 		{
-			return getAncestorAttribute(AttributeName.RELATEDJOBPARTID, null, JDFConstants.EMPTYSTRING);
+			return getAncestorAttribute(AttributeName.RELATEDJOBPARTID, null, JDFCoreConstants.EMPTYSTRING);
 		}
 		return getAttribute(AttributeName.RELATEDJOBPARTID);
 	}
@@ -7583,7 +7012,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	{
 		if (bInherit)
 		{
-			return getAncestorAttribute(AttributeName.STATUSDETAILS, null, JDFConstants.EMPTYSTRING);
+			return getAncestorAttribute(AttributeName.STATUSDETAILS, null, JDFCoreConstants.EMPTYSTRING);
 		}
 		return getAttribute(AttributeName.STATUSDETAILS);
 	}
@@ -7628,7 +7057,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	{
 		if (bInherit)
 		{
-			return getAncestorAttribute(AttributeName.TEMPLATEID, null, JDFConstants.EMPTYSTRING);
+			return getAncestorAttribute(AttributeName.TEMPLATEID, null, JDFCoreConstants.EMPTYSTRING);
 		}
 		return getAttribute(AttributeName.TEMPLATEID);
 	}
@@ -7653,7 +7082,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	{
 		if (bInherit)
 		{
-			return getAncestorAttribute(AttributeName.TEMPLATEVERSION, null, JDFConstants.EMPTYSTRING);
+			return getAncestorAttribute(AttributeName.TEMPLATEVERSION, null, JDFCoreConstants.EMPTYSTRING);
 		}
 		return getAttribute(AttributeName.TEMPLATEVERSION);
 	}
@@ -7801,7 +7230,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
 		if (inheritedNodeInfo == null)
 		{
-			return JDFConstants.EMPTYSTRING;
+			return JDFCoreConstants.EMPTYSTRING;
 		}
 		return inheritedNodeInfo.getNaturalLang();
 	}
@@ -7816,7 +7245,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
 		if (inheritedNodeInfo == null)
 		{
-			return JDFConstants.EMPTYSTRING;
+			return JDFCoreConstants.EMPTYSTRING;
 		}
 		return inheritedNodeInfo.getRoute();
 	}
@@ -7847,7 +7276,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
 		if (inheritedNodeInfo == null)
 		{
-			return JDFConstants.EMPTYSTRING;
+			return JDFCoreConstants.EMPTYSTRING;
 		}
 		return inheritedNodeInfo.getTargetRoute();
 	}
@@ -7996,7 +7425,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		final JDFCustomerInfo inheritedCustomerInfo = getInheritedCustomerInfo();
 		if (inheritedCustomerInfo == null)
 		{
-			return JDFConstants.EMPTYSTRING;
+			return JDFCoreConstants.EMPTYSTRING;
 		}
 		return inheritedCustomerInfo.getBillingCode();
 	}
@@ -8011,7 +7440,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		final JDFCustomerInfo inheritedCustomerInfo = getInheritedCustomerInfo();
 		if (inheritedCustomerInfo == null)
 		{
-			return JDFConstants.EMPTYSTRING;
+			return JDFCoreConstants.EMPTYSTRING;
 		}
 		return inheritedCustomerInfo.getCustomerID();
 	}
@@ -8026,7 +7455,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		final JDFCustomerInfo inheritedCustomerInfo = getInheritedCustomerInfo();
 		if (inheritedCustomerInfo == null)
 		{
-			return JDFConstants.EMPTYSTRING;
+			return JDFCoreConstants.EMPTYSTRING;
 		}
 		return inheritedCustomerInfo.getCustomerJobName();
 	}
@@ -8041,7 +7470,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		final JDFCustomerInfo inheritedCustomerInfo = getInheritedCustomerInfo();
 		if (inheritedCustomerInfo == null)
 		{
-			return JDFConstants.EMPTYSTRING;
+			return JDFCoreConstants.EMPTYSTRING;
 		}
 		return inheritedCustomerInfo.getCustomerOrderID();
 	}
@@ -8056,7 +7485,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		final JDFCustomerInfo inheritedCustomerInfo = getInheritedCustomerInfo();
 		if (inheritedCustomerInfo == null)
 		{
-			return JDFConstants.EMPTYSTRING;
+			return JDFCoreConstants.EMPTYSTRING;
 		}
 		return inheritedCustomerInfo.getCustomerProjectID();
 	}
@@ -8990,7 +8419,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	{
 		super.setVersion(enumVer);
 		final EnumVersion maxVersion = getMaxVersion(true);
-		if (EnumUtil.aLessEqualsThanB(maxVersion, enumVer))
+		if (maxVersion == null || maxVersion.compareTo(enumVer) <= 0)
 		{
 			setMaxVersion(enumVer);
 		}

@@ -114,7 +114,7 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLayoutElementProductionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoLayoutElementProductionParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -126,7 +126,7 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoLayoutElementProductionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoLayoutElementProductionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -139,7 +139,7 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoLayoutElementProductionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoLayoutElementProductionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -150,7 +150,7 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -237,7 +237,7 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -268,7 +268,7 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFLayoutElementPart the element
 	 */
-	public JDFLayoutElementPart getCreateLayoutElementPart(int iSkip)
+	public JDFLayoutElementPart getCreateLayoutElementPart(final int iSkip)
 	{
 		return (JDFLayoutElementPart) getCreateElement_JDFElement(ElementName.LAYOUTELEMENTPART, null, iSkip);
 	}
@@ -280,7 +280,7 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 	 * @return JDFLayoutElementPart the element
 	 *         default is getLayoutElementPart(0)
 	 */
-	public JDFLayoutElementPart getLayoutElementPart(int iSkip)
+	public JDFLayoutElementPart getLayoutElementPart(final int iSkip)
 	{
 		return (JDFLayoutElementPart) getElement(ElementName.LAYOUTELEMENTPART, null, iSkip);
 	}
@@ -341,7 +341,7 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refShapeDef(JDFShapeDef refTarget)
+	public void refShapeDef(final JDFShapeDef refTarget)
 	{
 		refElement(refTarget);
 	}

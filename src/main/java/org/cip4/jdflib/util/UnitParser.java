@@ -78,7 +78,7 @@ import java.util.Set;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
@@ -462,10 +462,10 @@ public class UnitParser
 
 			if (factor > 0 && i > 0 && tmp == null && StringUtil.isNumber(keep.get(i - 1)))
 			{
-				if (i < 2 || !JDFConstants.QUOTE.equals(v.get(i - 2)))
+				if (i < 2 || !JDFCoreConstants.QUOTE.equals(v.get(i - 2)))
 				{
 					tmp = v.get(i - 1);
-					v.set(i - 1, JDFConstants.QUOTE);
+					v.set(i - 1, JDFCoreConstants.QUOTE);
 				}
 				else
 				{
@@ -500,7 +500,7 @@ public class UnitParser
 		}
 		if (oneGood)
 		{
-			val = StringUtil.setvString(v, JDFConstants.BLANK, null, null);
+			val = StringUtil.setvString(v, JDFCoreConstants.BLANK, null, null);
 			val = StringUtil.replaceString(val, "\" ", "");
 		}
 		return val;

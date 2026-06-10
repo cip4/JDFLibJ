@@ -71,14 +71,8 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoColor.EMappingSelection;
-import org.cip4.jdflib.auto.JDFAutoColor.EnumMappingSelection;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -116,9 +110,9 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.DENSITY, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.LAB, 0x3333333311l, AttributeInfo.EnumAttributeType.LabColor, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.MAPPINGSELECTION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumMappingSelection.getEnum(0), null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.MEDIASIDE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumMediaSide.getEnum(0),
-				"Both");
+				JavaEnumUtil.getEnum(EnumMappingSelection.class, 0), null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.MEDIASIDE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumMediaSide.class, 0), "Both");
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.NEUTRALDENSITY, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.PRINTCONDITIONNAME, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.SRGB, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
@@ -151,7 +145,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPrintConditionColor(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPrintConditionColor(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -163,7 +157,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPrintConditionColor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPrintConditionColor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -176,95 +170,42 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPrintConditionColor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPrintConditionColor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for MediaSide
+	 * Enumeration strings for numMappingSelection
 	 */
 
-	public enum EMediaSide
+	public enum EnumMappingSelection
 	{
-		Front, Back, Both;
+		UsePDLValues, UseLocalPrinterValues, UseProcessColorValues;
 
-		public static EMediaSide getEnum(String val)
+		public static EnumMappingSelection getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EMediaSide.class, val, EMediaSide.Both);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumMappingSelection.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for MediaSide
+	 * Enumeration strings for numMediaSide
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumMediaSide extends ValuedEnum
+	public enum EnumMediaSide
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Front, Back, Both;
 
-		protected EnumMediaSide(String name)
+		public static EnumMediaSide getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumMediaSide.class, val, EnumMediaSide.Both);
 		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumMediaSide getEnum(String enumName)
-		{
-			return (EnumMediaSide) getEnum(EnumMediaSide.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumMediaSide getEnum(int enumValue)
-		{
-			return (EnumMediaSide) getEnum(EnumMediaSide.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumMediaSide.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumMediaSide.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumMediaSide.class);
-		}
-
-		/**  */
-		public static final EnumMediaSide Front = new EnumMediaSide("Front");
-		/**  */
-		public static final EnumMediaSide Back = new EnumMediaSide("Back");
-		/**  */
-		public static final EnumMediaSide Both = new EnumMediaSide("Both");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -276,7 +217,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCMYK(JDFCMYKColor value)
+	public void setCMYK(final JDFCMYKColor value)
 	{
 		setAttribute(AttributeName.CMYK, value, null);
 	}
@@ -289,8 +230,8 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 */
 	public JDFCMYKColor getCMYK()
 	{
-		String strAttrName = getAttribute(AttributeName.CMYK, null, null);
-		JDFCMYKColor nPlaceHolder = JDFCMYKColor.createCMYKColor(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CMYK, null, null);
+		final JDFCMYKColor nPlaceHolder = JDFCMYKColor.createCMYKColor(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -304,7 +245,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setColorBook(String value)
+	public void setColorBook(final String value)
 	{
 		setAttribute(AttributeName.COLORBOOK, value, null);
 	}
@@ -329,7 +270,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setColorBookEntry(String value)
+	public void setColorBookEntry(final String value)
 	{
 		setAttribute(AttributeName.COLORBOOKENTRY, value, null);
 	}
@@ -354,7 +295,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setColorBookPrefix(String value)
+	public void setColorBookPrefix(final String value)
 	{
 		setAttribute(AttributeName.COLORBOOKPREFIX, value, null);
 	}
@@ -379,7 +320,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setColorBookSuffix(String value)
+	public void setColorBookSuffix(final String value)
 	{
 		setAttribute(AttributeName.COLORBOOKSUFFIX, value, null);
 	}
@@ -404,7 +345,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDensity(double value)
+	public void setDensity(final double value)
 	{
 		setAttribute(AttributeName.DENSITY, value, null);
 	}
@@ -429,7 +370,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLab(JDFLabColor value)
+	public void setLab(final JDFLabColor value)
 	{
 		setAttribute(AttributeName.LAB, value, null);
 	}
@@ -442,8 +383,8 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 */
 	public JDFLabColor getLab()
 	{
-		String strAttrName = getAttribute(AttributeName.LAB, null, null);
-		JDFLabColor nPlaceHolder = JDFLabColor.createLabColor(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.LAB, null, null);
+		final JDFLabColor nPlaceHolder = JDFLabColor.createLabColor(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -457,9 +398,9 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMappingSelection(EMappingSelection enumVar)
+	public void setMappingSelection(final EnumMappingSelection enumVar)
 	{
-		setAttribute(AttributeName.MAPPINGSELECTION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.MAPPINGSELECTION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -467,35 +408,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EMappingSelection getEMappingSelection()
-	{
-		return EMappingSelection.getEnum(getAttribute(AttributeName.MAPPINGSELECTION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute MappingSelection
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute MappingSelection
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetMappingSelection(EMappingSelection) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setMappingSelection(EnumMappingSelection enumVar)
-	{
-		setAttribute(AttributeName.MAPPINGSELECTION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute MappingSelection
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EMappingSelection GetEMappingSelection() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumMappingSelection getMappingSelection()
 	{
 		return EnumMappingSelection.getEnum(getAttribute(AttributeName.MAPPINGSELECTION, null, null));
@@ -511,9 +423,9 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMediaSide(EMediaSide enumVar)
+	public void setMediaSide(final EnumMediaSide enumVar)
 	{
-		setAttribute(AttributeName.MEDIASIDE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.MEDIASIDE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -521,35 +433,6 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EMediaSide getEMediaSide()
-	{
-		return EMediaSide.getEnum(getAttribute(AttributeName.MEDIASIDE, null, "Both"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute MediaSide
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute MediaSide
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetMediaSide(EMediaSide) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setMediaSide(EnumMediaSide enumVar)
-	{
-		setAttribute(AttributeName.MEDIASIDE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute MediaSide
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EMediaSide GetEMediaSide() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumMediaSide getMediaSide()
 	{
 		return EnumMediaSide.getEnum(getAttribute(AttributeName.MEDIASIDE, null, "Both"));
@@ -565,7 +448,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNeutralDensity(double value)
+	public void setNeutralDensity(final double value)
 	{
 		setAttribute(AttributeName.NEUTRALDENSITY, value, null);
 	}
@@ -590,7 +473,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPrintConditionName(String value)
+	public void setPrintConditionName(final String value)
 	{
 		setAttribute(AttributeName.PRINTCONDITIONNAME, value, null);
 	}
@@ -615,7 +498,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setsRGB(JDFRGBColor value)
+	public void setsRGB(final JDFRGBColor value)
 	{
 		setAttribute(AttributeName.SRGB, value, null);
 	}
@@ -628,8 +511,8 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 */
 	public JDFRGBColor getsRGB()
 	{
-		String strAttrName = getAttribute(AttributeName.SRGB, null, null);
-		JDFRGBColor nPlaceHolder = JDFRGBColor.createRGBColor(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SRGB, null, null);
+		final JDFRGBColor nPlaceHolder = JDFRGBColor.createRGBColor(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -665,7 +548,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
-	public JDFFileSpec getCreateFileSpec(int iSkip)
+	public JDFFileSpec getCreateFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -677,7 +560,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 * @return JDFFileSpec the element
 	 *         default is getFileSpec(0)
 	 */
-	public JDFFileSpec getFileSpec(int iSkip)
+	public JDFFileSpec getFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -707,7 +590,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -738,7 +621,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFDeviceNColor the element
 	 */
-	public JDFDeviceNColor getCreateDeviceNColor(int iSkip)
+	public JDFDeviceNColor getCreateDeviceNColor(final int iSkip)
 	{
 		return (JDFDeviceNColor) getCreateElement_JDFElement(ElementName.DEVICENCOLOR, null, iSkip);
 	}
@@ -750,7 +633,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 * @return JDFDeviceNColor the element
 	 *         default is getDeviceNColor(0)
 	 */
-	public JDFDeviceNColor getDeviceNColor(int iSkip)
+	public JDFDeviceNColor getDeviceNColor(final int iSkip)
 	{
 		return (JDFDeviceNColor) getElement(ElementName.DEVICENCOLOR, null, iSkip);
 	}
@@ -801,7 +684,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFMedia the element
 	 */
-	public JDFMedia getCreateMedia(int iSkip)
+	public JDFMedia getCreateMedia(final int iSkip)
 	{
 		return (JDFMedia) getCreateElement_JDFElement(ElementName.MEDIA, null, iSkip);
 	}
@@ -813,7 +696,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 * @return JDFMedia the element
 	 *         default is getMedia(0)
 	 */
-	public JDFMedia getMedia(int iSkip)
+	public JDFMedia getMedia(final int iSkip)
 	{
 		return (JDFMedia) getElement(ElementName.MEDIA, null, iSkip);
 	}
@@ -843,7 +726,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMedia(JDFMedia refTarget)
+	public void refMedia(final JDFMedia refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -874,7 +757,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFTransferCurve the element
 	 */
-	public JDFTransferCurve getCreateTransferCurve(int iSkip)
+	public JDFTransferCurve getCreateTransferCurve(final int iSkip)
 	{
 		return (JDFTransferCurve) getCreateElement_JDFElement(ElementName.TRANSFERCURVE, null, iSkip);
 	}
@@ -886,7 +769,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 * @return JDFTransferCurve the element
 	 *         default is getTransferCurve(0)
 	 */
-	public JDFTransferCurve getTransferCurve(int iSkip)
+	public JDFTransferCurve getTransferCurve(final int iSkip)
 	{
 		return (JDFTransferCurve) getElement(ElementName.TRANSFERCURVE, null, iSkip);
 	}
@@ -916,7 +799,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refTransferCurve(JDFTransferCurve refTarget)
+	public void refTransferCurve(final JDFTransferCurve refTarget)
 	{
 		refElement(refTarget);
 	}

@@ -17,7 +17,7 @@ import java.io.IOException;
 
 /**
  * Exception class used by the <tt>scan</tt> methods within ScanfReader when the input does not match the specified format.
- * 
+ *
  * @.author John E. Lloyd
  * @see ScanfReader
  * @deprecated
@@ -32,10 +32,11 @@ public class ScanfMatchException extends IOException
 
 	/**
 	 * Creates a new ScanfMatchException with the given message.
-	 * 
+	 *
 	 * @param msg Error message
 	 * @see ScanfReader
 	 */
+	@Deprecated
 	public ScanfMatchException(final String msg)
 	{
 		super(msg);

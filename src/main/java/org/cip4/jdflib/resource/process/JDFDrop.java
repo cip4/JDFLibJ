@@ -80,7 +80,6 @@ package org.cip4.jdflib.resource.process;
 import java.util.List;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoDeliveryParams.EnumTransfer;
 import org.cip4.jdflib.auto.JDFAutoDrop;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -102,7 +101,7 @@ public class JDFDrop extends JDFAutoDrop
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFDrop(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFDrop(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -113,7 +112,7 @@ public class JDFDrop extends JDFAutoDrop
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFDrop(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFDrop(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -125,7 +124,7 @@ public class JDFDrop extends JDFAutoDrop
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFDrop(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFDrop(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -147,7 +146,7 @@ public class JDFDrop extends JDFAutoDrop
 	/**
 	 * @param ad
 	 */
-	public void setFromArtDelivery(JDFArtDelivery ad)
+	public void setFromArtDelivery(final JDFArtDelivery ad)
 	{
 		if (ad == null)
 		{
@@ -157,7 +156,7 @@ public class JDFDrop extends JDFAutoDrop
 		JDFIntentResource.copyActualToProcess(ad, this, AttributeName.TRANSFER, null);
 		JDFIntentResource.copyActualToProcess(ad, this, ElementName.ARTDELIVERYDATE, AttributeName.REQUIRED);
 
-		JDFDropItem dropItem = appendDropItem();
+		final JDFDropItem dropItem = appendDropItem();
 		dropItem.setFromArtDelivery(ad);
 	}
 
@@ -166,14 +165,14 @@ public class JDFDrop extends JDFAutoDrop
 	 *
 	 * @param di
 	 */
-	public void setFromDropIntent(JDFDropIntent di)
+	public void setFromDropIntent(final JDFDropIntent di)
 	{
 		if (di != null)
 		{
-			List<JDFDropItemIntent> vdii = di.getChildArrayByClass(JDFDropItemIntent.class, false, 0);
-			for (JDFDropItemIntent dii : vdii)
+			final List<JDFDropItemIntent> vdii = di.getChildArrayByClass(JDFDropItemIntent.class, false, 0);
+			for (final JDFDropItemIntent dii : vdii)
 			{
-				JDFDropItem dropItem = appendDropItem();
+				final JDFDropItem dropItem = appendDropItem();
 				dropItem.setFromDropItemIntent(dii);
 			}
 			JDFIntentResource.copyActualToProcess(di, this, AttributeName.METHOD, null);
@@ -188,7 +187,7 @@ public class JDFDrop extends JDFAutoDrop
 	 */
 	public boolean isArtDeliveryIntent()
 	{
-		EnumTransfer transfer = getTransfer();
+		final EnumTransfer transfer = getTransfer();
 		return EnumTransfer.BuyerToPrinterDeliver.equals(transfer) || EnumTransfer.BuyerToPrinterPickup.equals(transfer);
 	}
 }

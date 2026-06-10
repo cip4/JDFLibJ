@@ -73,10 +73,8 @@ import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 
 /**
- *
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
- * Mar 17, 2010
+ *         Mar 17, 2010
  */
 public class WalkIntentResource extends WalkResource
 {
@@ -95,7 +93,7 @@ public class WalkIntentResource extends WalkResource
 	@Override
 	public KElement walk(final KElement e, final KElement trackElem)
 	{
-		KElement ret = super.walk(e, trackElem);
+		final KElement ret = super.walk(e, trackElem);
 		xjdfToJDFImpl.attributesToSpan(ret);
 		return ret;
 	}
@@ -104,7 +102,7 @@ public class WalkIntentResource extends WalkResource
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void updateAttributes(KElement elem)
+	protected void updateAttributes(final KElement elem)
 	{
 		elem.removeAttribute(XJDFConstants.ChildRefs);
 		super.updateAttributes(elem);

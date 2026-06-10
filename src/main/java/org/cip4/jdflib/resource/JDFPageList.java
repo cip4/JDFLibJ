@@ -93,8 +93,6 @@ import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
 /**
- * 
- * 
  * @author rainer prosi
  * @date way before Jan 9, 2012
  */
@@ -104,11 +102,10 @@ public class JDFPageList extends JDFAutoPageList
 
 	/**
 	 * Constructor for JDFPageList
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
-	 * 
 	 */
 	public JDFPageList(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
@@ -117,10 +114,9 @@ public class JDFPageList extends JDFAutoPageList
 
 	/**
 	 * Constructor for JDFPageList
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
-	 * 
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
@@ -131,22 +127,22 @@ public class JDFPageList extends JDFAutoPageList
 
 	/**
 	 * Constructor for JDFPageList
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
-	 * 
 	 */
-	public JDFPageList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFPageList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * gets the AssemblyID but alse inherits from the parent PageList
-	 * 
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoPageData#getAssemblyID()
 	 */
 	@Override
@@ -161,7 +157,7 @@ public class JDFPageList extends JDFAutoPageList
 
 	/**
 	 * gets the AssemblyID but alse inherits from the parent PageList
-	 * 
+	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoPageData#getAssemblyID()
 	 */
 	@Override
@@ -171,15 +167,16 @@ public class JDFPageList extends JDFAutoPageList
 		{
 			final VString ids = super.getAssemblyIDs();
 			if (!StringUtil.isEmpty(ids))
+			{
 				return ids.get(0);
+			}
 		}
 		return super.getAssemblyID();
 	}
 
 	/**
-	 * 
 	 * get the number of pages in this pagelist
-	 * 
+	 *
 	 * @return
 	 */
 	public int getNPage()
@@ -197,7 +194,9 @@ public class JDFPageList extends JDFAutoPageList
 					rl.normalize(true);
 					final int n = rl.getElement(-1);
 					if (n >= max)
+					{
 						max = n + 1;
+					}
 				}
 				return max;
 			}
@@ -213,18 +212,21 @@ public class JDFPageList extends JDFAutoPageList
 	}
 
 	/**
-	 * 
 	 * get pagedata by zero based page index
-	 * 
+	 *
 	 * @param index page index, if <0, count backwards (-1=last...)
 	 * @return
 	 */
 	public JDFPageData getPageDataByIndex(int index)
 	{
 		if (index < 0)
+		{
 			index += getNPage();
+		}
 		if (index < 0)
+		{
 			return null;
+		}
 
 		final Vector<JDFPageData> vPages = getChildrenByClass(JDFPageData.class, false, 0);
 		if (vPages.size() > 0)
@@ -255,7 +257,7 @@ public class JDFPageList extends JDFAutoPageList
 
 	/**
 	 * ensure a normalized pagelist where @PageIndex is a single Integer and all PageData are ordered by PageIndex
-	 * 
+	 *
 	 * @see org.cip4.jdflib.core.KElement#normalize()
 	 */
 	public void uniqueIndex()
@@ -339,7 +341,6 @@ public class JDFPageList extends JDFAutoPageList
 	}
 
 	/**
-	 * 
 	 * @return true if pageData are ordered and all pagedata elements have a single index
 	 */
 	public boolean isNormal()
@@ -357,7 +358,6 @@ public class JDFPageList extends JDFAutoPageList
 	}
 
 	/**
-	 * 
 	 * @return true if all pagedata element have an index
 	 */
 	public boolean isIndexed()

@@ -56,7 +56,6 @@ import org.cip4.jdflib.util.StringUtil;
  * class that generates a set of multiple JDF elements from the leaf nodes of a JDF
  *
  * @author rainer prosi
- *
  */
 class MultiJDFToXJDF
 {
@@ -69,7 +68,7 @@ class MultiJDFToXJDF
 	/**
 	 * @param fileName the filename of the zip file to save to
 	 * @param rootNode the root jdf to save
-	 * @param replace if true, overwrite existing files
+	 * @param replace  if true, overwrite existing files
 	 */
 	void saveZip(final String fileName, final JDFNode rootNode, final boolean replace)
 	{
@@ -112,7 +111,6 @@ class MultiJDFToXJDF
 
 	/**
 	 * @param jdfToXJDF TODO
-	 *
 	 */
 	MultiJDFToXJDF(final JDFToXJDF jdfToXJDF)
 	{
@@ -121,14 +119,15 @@ class MultiJDFToXJDF
 	}
 
 	/**
-	 *
 	 * @param root
 	 * @return
 	 */
 	List<XJDFHelper> getXJDFs(final JDFNode root, final boolean ordered)
 	{
 		if (root == null)
+		{
 			return null;
+		}
 		jdfToXJDF.setSingleNode(true);
 		final List<XJDFHelper> vRet = new ArrayList<>();
 		final VElement v = getProcessNodes(root);
@@ -157,7 +156,6 @@ class MultiJDFToXJDF
 	}
 
 	/**
-	 *
 	 * @param v
 	 */
 	void reorderNodes(final VElement v)
@@ -185,7 +183,6 @@ class MultiJDFToXJDF
 	}
 
 	/**
-	 *
 	 * @param n
 	 * @return
 	 */
@@ -194,13 +191,14 @@ class MultiJDFToXJDF
 		final KElement xjdf = this.jdfToXJDF.makeNewJDF((JDFNode) n, null);
 		final XJDFHelper xjdfHelper = new XJDFHelper(xjdf);
 		if (jdfToXJDF.isCleanup())
+		{
 			xjdfHelper.cleanUp();
+		}
 		jdfToXJDF.completedRefs.clear();
 		return xjdfHelper;
 	}
 
 	/**
-	 *
 	 * @param rootNode
 	 * @return
 	 */
@@ -219,13 +217,12 @@ class MultiJDFToXJDF
 				ensureJobPartID(i, n);
 			}
 		}
-		VElement v2 = new VElement();
+		final VElement v2 = new VElement();
 		v2.addAll(v);
 		return v2;
 	}
 
 	/**
-	 *
 	 * @param i
 	 * @param n
 	 */

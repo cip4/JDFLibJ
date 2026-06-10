@@ -80,9 +80,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkJDFSubElement extends WalkJDFElement
 {

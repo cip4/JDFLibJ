@@ -125,7 +125,7 @@ public abstract class JDFAutoNumberEvaluation extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNumberEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoNumberEvaluation(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -137,7 +137,7 @@ public abstract class JDFAutoNumberEvaluation extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNumberEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoNumberEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -150,7 +150,7 @@ public abstract class JDFAutoNumberEvaluation extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoNumberEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoNumberEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -161,7 +161,7 @@ public abstract class JDFAutoNumberEvaluation extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -182,7 +182,7 @@ public abstract class JDFAutoNumberEvaluation extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTolerance(JDFXYPair value)
+	public void setTolerance(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.TOLERANCE, value, null);
 	}
@@ -195,8 +195,8 @@ public abstract class JDFAutoNumberEvaluation extends JDFResource
 	 */
 	public JDFXYPair getTolerance()
 	{
-		String strAttrName = getAttribute(AttributeName.TOLERANCE, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TOLERANCE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -210,7 +210,7 @@ public abstract class JDFAutoNumberEvaluation extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setValueList(JDFNumberRangeList value)
+	public void setValueList(final JDFNumberRangeList value)
 	{
 		setAttribute(AttributeName.VALUELIST, value, null);
 	}
@@ -223,8 +223,8 @@ public abstract class JDFAutoNumberEvaluation extends JDFResource
 	 */
 	public JDFNumberRangeList getValueList()
 	{
-		String strAttrName = getAttribute(AttributeName.VALUELIST, null, null);
-		JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.VALUELIST, null, null);
+		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -238,7 +238,7 @@ public abstract class JDFAutoNumberEvaluation extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setValueMod(JDFXYPair value)
+	public void setValueMod(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.VALUEMOD, value, null);
 	}
@@ -251,8 +251,8 @@ public abstract class JDFAutoNumberEvaluation extends JDFResource
 	 */
 	public JDFXYPair getValueMod()
 	{
-		String strAttrName = getAttribute(AttributeName.VALUEMOD, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.VALUEMOD, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -288,7 +288,7 @@ public abstract class JDFAutoNumberEvaluation extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFBasicPreflightTest the element
 	 */
-	public JDFBasicPreflightTest getCreateBasicPreflightTest(int iSkip)
+	public JDFBasicPreflightTest getCreateBasicPreflightTest(final int iSkip)
 	{
 		return (JDFBasicPreflightTest) getCreateElement_JDFElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
 	}
@@ -300,7 +300,7 @@ public abstract class JDFAutoNumberEvaluation extends JDFResource
 	 * @return JDFBasicPreflightTest the element
 	 *         default is getBasicPreflightTest(0)
 	 */
-	public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
+	public JDFBasicPreflightTest getBasicPreflightTest(final int iSkip)
 	{
 		return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
 	}

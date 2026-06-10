@@ -71,14 +71,8 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoSignal.EChannelMode;
-import org.cip4.jdflib.auto.JDFAutoSignal.EnumChannelMode;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -104,15 +98,15 @@ public abstract class JDFAutoSubscription extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumChannelMode.getEnum(0),
-				null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumChannelMode.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.FORMAT, 0x4444433311l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.LANGUAGES, 0x4433111111l, AttributeInfo.EnumAttributeType.languages, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.MINDELAYTIME, 0x3333333111l, AttributeInfo.EnumAttributeType.duration, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.REPEATSTEP, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.REPEATTIME, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.RETRYPOLICY, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumRetryPolicy.getEnum(0),
-				null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.RETRYPOLICY, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumRetryPolicy.class, 0), null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.TEMPLATE, 0x4444433311l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.URL, 0x3333333333l, AttributeInfo.EnumAttributeType.URL, null, null);
 	}
@@ -141,7 +135,7 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSubscription(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoSubscription(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -153,7 +147,7 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSubscription(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoSubscription(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -166,93 +160,42 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoSubscription(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoSubscription(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for RetryPolicy
+	 * Enumeration strings for numChannelMode
 	 */
 
-	public enum ERetryPolicy
+	public enum EnumChannelMode
+	{
+		FireAndForget, Reliable;
+
+		public static EnumChannelMode getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumChannelMode.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for numRetryPolicy
+	 */
+
+	public enum EnumRetryPolicy
 	{
 		DiscardAtNextSignal, RetryForever;
 
-		public static ERetryPolicy getEnum(String val)
+		public static EnumRetryPolicy getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ERetryPolicy.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumRetryPolicy.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for RetryPolicy
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumRetryPolicy extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumRetryPolicy(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumRetryPolicy getEnum(String enumName)
-		{
-			return (EnumRetryPolicy) getEnum(EnumRetryPolicy.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumRetryPolicy getEnum(int enumValue)
-		{
-			return (EnumRetryPolicy) getEnum(EnumRetryPolicy.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumRetryPolicy.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumRetryPolicy.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumRetryPolicy.class);
-		}
-
-		/**  */
-		public static final EnumRetryPolicy DiscardAtNextSignal = new EnumRetryPolicy("DiscardAtNextSignal");
-		/**  */
-		public static final EnumRetryPolicy RetryForever = new EnumRetryPolicy("RetryForever");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -264,9 +207,9 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setChannelMode(EChannelMode enumVar)
+	public void setChannelMode(final EnumChannelMode enumVar)
 	{
-		setAttribute(AttributeName.CHANNELMODE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.CHANNELMODE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -274,35 +217,6 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EChannelMode getEChannelMode()
-	{
-		return EChannelMode.getEnum(getAttribute(AttributeName.CHANNELMODE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ChannelMode
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ChannelMode
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetChannelMode(EChannelMode) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setChannelMode(EnumChannelMode enumVar)
-	{
-		setAttribute(AttributeName.CHANNELMODE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ChannelMode
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EChannelMode GetEChannelMode() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumChannelMode getChannelMode()
 	{
 		return EnumChannelMode.getEnum(getAttribute(AttributeName.CHANNELMODE, null, null));
@@ -318,7 +232,7 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFormat(String value)
+	public void setFormat(final String value)
 	{
 		setAttribute(AttributeName.FORMAT, value, null);
 	}
@@ -343,7 +257,7 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLanguages(VString value)
+	public void setLanguages(final VString value)
 	{
 		setAttribute(AttributeName.LANGUAGES, value, null);
 	}
@@ -355,8 +269,8 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 */
 	public VString getLanguages()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -371,7 +285,7 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMinDelayTime(JDFDuration value)
+	public void setMinDelayTime(final JDFDuration value)
 	{
 		setAttribute(AttributeName.MINDELAYTIME, value, null);
 	}
@@ -384,8 +298,8 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 */
 	public JDFDuration getMinDelayTime()
 	{
-		String strAttrName = getAttribute(AttributeName.MINDELAYTIME, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.MINDELAYTIME, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -399,7 +313,7 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRepeatStep(int value)
+	public void setRepeatStep(final int value)
 	{
 		setAttribute(AttributeName.REPEATSTEP, value, null);
 	}
@@ -424,7 +338,7 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRepeatTime(double value)
+	public void setRepeatTime(final double value)
 	{
 		setAttribute(AttributeName.REPEATTIME, value, null);
 	}
@@ -449,9 +363,9 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setRetryPolicy(ERetryPolicy enumVar)
+	public void setRetryPolicy(final EnumRetryPolicy enumVar)
 	{
-		setAttribute(AttributeName.RETRYPOLICY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.RETRYPOLICY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -459,35 +373,6 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ERetryPolicy getERetryPolicy()
-	{
-		return ERetryPolicy.getEnum(getAttribute(AttributeName.RETRYPOLICY, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute RetryPolicy
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute RetryPolicy
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetRetryPolicy(ERetryPolicy) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setRetryPolicy(EnumRetryPolicy enumVar)
-	{
-		setAttribute(AttributeName.RETRYPOLICY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute RetryPolicy
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ERetryPolicy GetERetryPolicy() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumRetryPolicy getRetryPolicy()
 	{
 		return EnumRetryPolicy.getEnum(getAttribute(AttributeName.RETRYPOLICY, null, null));
@@ -503,7 +388,7 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTemplate(String value)
+	public void setTemplate(final String value)
 	{
 		setAttribute(AttributeName.TEMPLATE, value, null);
 	}
@@ -528,7 +413,7 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setURL(String value)
+	public void setURL(final String value)
 	{
 		setAttribute(AttributeName.URL, value, null);
 	}
@@ -575,7 +460,7 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFObservationTarget the element
 	 */
-	public JDFObservationTarget getCreateObservationTarget(int iSkip)
+	public JDFObservationTarget getCreateObservationTarget(final int iSkip)
 	{
 		return (JDFObservationTarget) getCreateElement_JDFElement(ElementName.OBSERVATIONTARGET, null, iSkip);
 	}
@@ -587,7 +472,7 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 * @return JDFObservationTarget the element
 	 *         default is getObservationTarget(0)
 	 */
-	public JDFObservationTarget getObservationTarget(int iSkip)
+	public JDFObservationTarget getObservationTarget(final int iSkip)
 	{
 		return (JDFObservationTarget) getElement(ElementName.OBSERVATIONTARGET, null, iSkip);
 	}

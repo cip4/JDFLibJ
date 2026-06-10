@@ -98,7 +98,7 @@ class ResourceHelperTest extends JDFTestCaseBase
 		final SetHelper sh = h.getCreateSet(ElementName.NODEINFO, null);
 		final JDFAttributeMap map = new JDFAttributeMap(AttributeName.SHEETNAME, "s1");
 		final ResourceHelper rh = sh.getCreatePartition(map, false);
-		ResourceHelper rh2 = rh.clonePartition();
+		final ResourceHelper rh2 = rh.clonePartition();
 		assertNotEquals(rh, rh2);
 		assertNotNull(rh2);
 	}

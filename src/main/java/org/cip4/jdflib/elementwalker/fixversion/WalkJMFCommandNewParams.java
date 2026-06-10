@@ -73,12 +73,10 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFQueueFilter;
-import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
- *
  */
 public class WalkJMFCommandNewParams extends WalkJMFCommandQueueFilter
 {
@@ -92,22 +90,21 @@ public class WalkJMFCommandNewParams extends WalkJMFCommandQueueFilter
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.elementwalker.fixversion.WalkJMFCommandQueueFilter#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public KElement walk(KElement e1, KElement trackElem)
+	public KElement walk(final KElement e1, final KElement trackElem)
 	{
 		if (fixVersion.version != null)
 		{
-			if (!EnumUtil.aLessThanB(fixVersion.version, EnumVersion.Version_1_5))
+			if (!JavaEnumUtil.aLessThanB(fixVersion.version, EnumVersion.Version_1_5))
 			{
 				e1.getCreateElement(getNewParamsName()).getCreateElement(ElementName.QUEUEFILTER).moveElement(((JDFMessage) e1).getQueueEntryDef(0), null);
 			}
 			else
 			{
-				KElement newParams = e1.getElement(getNewParamsName());
-				JDFQueueFilter qf = (JDFQueueFilter) (newParams == null ? null : newParams.getElement(ElementName.QUEUEFILTER));
+				final KElement newParams = e1.getElement(getNewParamsName());
+				final JDFQueueFilter qf = (JDFQueueFilter) (newParams == null ? null : newParams.getElement(ElementName.QUEUEFILTER));
 				if (qf != null)
 				{
 					e1.moveElement(qf.getElement(ElementName.QUEUEENTRYDEF), null);
@@ -119,8 +116,6 @@ public class WalkJMFCommandNewParams extends WalkJMFCommandQueueFilter
 	}
 
 	/**
-	 *
-	 *
 	 * @return
 	 */
 	protected String getNewParamsName()

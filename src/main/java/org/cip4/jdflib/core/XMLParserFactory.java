@@ -53,7 +53,6 @@ public class XMLParserFactory
 	private static XMLParserFactory theFactory = new XMLParserFactory();
 
 	/**
-	 *
 	 * @return
 	 */
 	public static XMLParserFactory getFactory()
@@ -71,7 +70,6 @@ public class XMLParserFactory
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public XMLParser get()
@@ -85,7 +83,6 @@ public class XMLParserFactory
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public void push(final XMLParser p)

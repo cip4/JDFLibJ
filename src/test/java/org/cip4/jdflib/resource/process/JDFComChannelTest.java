@@ -73,13 +73,13 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
  * @author prosirai
- *
  */
 class JDFComChannelTest extends JDFTestCaseBase
 {
@@ -117,7 +117,7 @@ class JDFComChannelTest extends JDFTestCaseBase
 	@Test
 	void testGetComChannel()
 	{
-		JDFPerson p = (JDFPerson) JDFElementColorParams.createRoot(ElementName.PERSON);
+		final JDFPerson p = (JDFPerson) JDFElement.createRoot(ElementName.PERSON);
 		JDFComChannel.appendChannel(p, EnumChannelType.Phone, "1234");
 		JDFComChannel.appendChannel(p, EnumChannelType.Mobile, "12345");
 		Assertions.assertEquals("12345", JDFComChannel.getChannelByType(p, EnumChannelType.Mobile).getLocator());
@@ -163,7 +163,7 @@ class JDFComChannelTest extends JDFTestCaseBase
 	void testMatchesComChannel()
 	{
 		cc.setPhoneNumber(" +49 431 123456 ", ".", EnumChannelType.Phone);
-		JDFComChannel ccNew = (JDFComChannel) cc.cloneNewDoc();
+		final JDFComChannel ccNew = (JDFComChannel) cc.cloneNewDoc();
 		Assertions.assertTrue(ccNew.matchesComChannel(cc));
 	}
 
@@ -174,7 +174,7 @@ class JDFComChannelTest extends JDFTestCaseBase
 	void testMatches()
 	{
 		cc.setPhoneNumber(" +49 431 123456 ", ".", EnumChannelType.Phone);
-		JDFComChannel ccNew = (JDFComChannel) cc.cloneNewDoc();
+		final JDFComChannel ccNew = (JDFComChannel) cc.cloneNewDoc();
 		Assertions.assertTrue(ccNew.matches(cc));
 		cc.setPhoneNumber("+49 431 123456");
 		Assertions.assertTrue(ccNew.matches(cc));
@@ -201,15 +201,13 @@ class JDFComChannelTest extends JDFTestCaseBase
 			cc.setPhoneNumber(" +49 431 123456 ");
 			Assertions.fail("illegal channel type");
 		}
-		catch (IllegalArgumentException x)
+		catch (final IllegalArgumentException x)
 		{
 			// nop
 		}
 	}
 
 	/**
-	 *
-	 *
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -217,7 +215,7 @@ class JDFComChannelTest extends JDFTestCaseBase
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		JDFDoc d = new JDFDoc(ElementName.COMCHANNEL);
+		final JDFDoc d = new JDFDoc(ElementName.COMCHANNEL);
 		cc = (JDFComChannel) d.getRoot();
 	}
 }

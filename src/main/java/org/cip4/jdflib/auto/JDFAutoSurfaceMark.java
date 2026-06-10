@@ -73,8 +73,6 @@ package org.cip4.jdflib.auto;
 import java.util.Collection;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoDefect.EFace;
-import org.cip4.jdflib.auto.JDFAutoDefect.EnumFace;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -86,6 +84,7 @@ import org.cip4.jdflib.resource.JDFScavengerArea;
 import org.cip4.jdflib.resource.process.JDFColorControlStrip;
 import org.cip4.jdflib.resource.process.JDFRegisterMark;
 import org.cip4.jdflib.resource.process.postpress.JDFCutMark;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoSurfaceMark : public JDFElement
@@ -99,7 +98,8 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SURFACE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumFace.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SURFACE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumFace.class, 0), null);
 	}
 
 	@Override
@@ -129,7 +129,7 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSurfaceMark(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoSurfaceMark(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -141,7 +141,7 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSurfaceMark(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoSurfaceMark(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -154,41 +154,28 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoSurfaceMark(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoSurfaceMark(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * Enumeration strings for numFace
 	 */
 
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Surface
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Surface
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 */
-	public void setSurface(EFace enumVar)
+	public enum EnumFace
 	{
-		setAttribute(AttributeName.SURFACE, enumVar == null ? null : enumVar.name(), null);
-	}
+		Top, Bottom, Left, Right, Front, Back;
 
-	/**
-	 * (9) get attribute Surface
-	 *
-	 * @return the value of the attribute
-	 */
-	public EFace getESurface()
-	{
-		return EFace.getEnum(getAttribute(AttributeName.SURFACE, null, null));
-	}
+		public static EnumFace getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumFace.class, val, null);
+		}
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
+		 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -199,21 +186,17 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 * (5) set attribute Surface
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetSurface(EFace) based on java.lang.enum instead
 	 */
-	@Deprecated
-	public void setSurface(EnumFace enumVar)
+	public void setSurface(final EnumFace enumVar)
 	{
-		setAttribute(AttributeName.SURFACE, enumVar == null ? null : enumVar.getName(), null);
+		setAttribute(AttributeName.SURFACE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
 	 * (9) get attribute Surface
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EFace GetESurface() based on java.lang.enum instead
 	 */
-	@Deprecated
 	public EnumFace getSurface()
 	{
 		return EnumFace.getEnum(getAttribute(AttributeName.SURFACE, null, null));
@@ -251,7 +234,7 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFColorControlStrip the element
 	 */
-	public JDFColorControlStrip getCreateColorControlStrip(int iSkip)
+	public JDFColorControlStrip getCreateColorControlStrip(final int iSkip)
 	{
 		return (JDFColorControlStrip) getCreateElement_JDFElement(ElementName.COLORCONTROLSTRIP, null, iSkip);
 	}
@@ -263,7 +246,7 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 * @return JDFColorControlStrip the element
 	 *         default is getColorControlStrip(0)
 	 */
-	public JDFColorControlStrip getColorControlStrip(int iSkip)
+	public JDFColorControlStrip getColorControlStrip(final int iSkip)
 	{
 		return (JDFColorControlStrip) getElement(ElementName.COLORCONTROLSTRIP, null, iSkip);
 	}
@@ -293,7 +276,7 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refColorControlStrip(JDFColorControlStrip refTarget)
+	public void refColorControlStrip(final JDFColorControlStrip refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -324,7 +307,7 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFCutMark the element
 	 */
-	public JDFCutMark getCreateCutMark(int iSkip)
+	public JDFCutMark getCreateCutMark(final int iSkip)
 	{
 		return (JDFCutMark) getCreateElement_JDFElement(ElementName.CUTMARK, null, iSkip);
 	}
@@ -336,7 +319,7 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 * @return JDFCutMark the element
 	 *         default is getCutMark(0)
 	 */
-	public JDFCutMark getCutMark(int iSkip)
+	public JDFCutMark getCutMark(final int iSkip)
 	{
 		return (JDFCutMark) getElement(ElementName.CUTMARK, null, iSkip);
 	}
@@ -366,7 +349,7 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refCutMark(JDFCutMark refTarget)
+	public void refCutMark(final JDFCutMark refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -397,7 +380,7 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFRegisterMark the element
 	 */
-	public JDFRegisterMark getCreateRegisterMark(int iSkip)
+	public JDFRegisterMark getCreateRegisterMark(final int iSkip)
 	{
 		return (JDFRegisterMark) getCreateElement_JDFElement(ElementName.REGISTERMARK, null, iSkip);
 	}
@@ -409,7 +392,7 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 * @return JDFRegisterMark the element
 	 *         default is getRegisterMark(0)
 	 */
-	public JDFRegisterMark getRegisterMark(int iSkip)
+	public JDFRegisterMark getRegisterMark(final int iSkip)
 	{
 		return (JDFRegisterMark) getElement(ElementName.REGISTERMARK, null, iSkip);
 	}
@@ -439,7 +422,7 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refRegisterMark(JDFRegisterMark refTarget)
+	public void refRegisterMark(final JDFRegisterMark refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -470,7 +453,7 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFScavengerArea the element
 	 */
-	public JDFScavengerArea getCreateScavengerArea(int iSkip)
+	public JDFScavengerArea getCreateScavengerArea(final int iSkip)
 	{
 		return (JDFScavengerArea) getCreateElement_JDFElement(ElementName.SCAVENGERAREA, null, iSkip);
 	}
@@ -482,7 +465,7 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 * @return JDFScavengerArea the element
 	 *         default is getScavengerArea(0)
 	 */
-	public JDFScavengerArea getScavengerArea(int iSkip)
+	public JDFScavengerArea getScavengerArea(final int iSkip)
 	{
 		return (JDFScavengerArea) getElement(ElementName.SCAVENGERAREA, null, iSkip);
 	}
@@ -512,7 +495,7 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refScavengerArea(JDFScavengerArea refTarget)
+	public void refScavengerArea(final JDFScavengerArea refTarget)
 	{
 		refElement(refTarget);
 	}

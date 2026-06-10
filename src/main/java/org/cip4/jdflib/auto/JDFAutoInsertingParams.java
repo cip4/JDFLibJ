@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -101,8 +97,9 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.INSERTLOCATION, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumInsertLocation.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.METHOD, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumMethod.getEnum(0), "BlowIn");
+				JavaEnumUtil.getEnum(EnumInsertLocation.class, 0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.METHOD, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumMethod.class, 0), "BlowIn");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHEETOFFSET, 0x4444444443l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.FINISHEDPAGE, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
@@ -131,7 +128,7 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoInsertingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoInsertingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -143,7 +140,7 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoInsertingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoInsertingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -156,7 +153,7 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoInsertingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoInsertingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -167,7 +164,7 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -182,172 +179,36 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for InsertLocation
+	 * Enumeration strings for numInsertLocation
 	 */
 
-	public enum EInsertLocation
+	public enum EnumInsertLocation
 	{
 		Front, Back, OverfoldLeft, OverfoldRight, Overfold, FinishedPage;
 
-		public static EInsertLocation getEnum(String val)
+		public static EnumInsertLocation getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EInsertLocation.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumInsertLocation.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for InsertLocation
+	 * Enumeration strings for numMethod
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumInsertLocation extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumInsertLocation(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumInsertLocation getEnum(String enumName)
-		{
-			return (EnumInsertLocation) getEnum(EnumInsertLocation.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumInsertLocation getEnum(int enumValue)
-		{
-			return (EnumInsertLocation) getEnum(EnumInsertLocation.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumInsertLocation.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumInsertLocation.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumInsertLocation.class);
-		}
-
-		/**  */
-		public static final EnumInsertLocation Front = new EnumInsertLocation("Front");
-		/**  */
-		public static final EnumInsertLocation Back = new EnumInsertLocation("Back");
-		/**  */
-		public static final EnumInsertLocation OverfoldLeft = new EnumInsertLocation("OverfoldLeft");
-		/**  */
-		public static final EnumInsertLocation OverfoldRight = new EnumInsertLocation("OverfoldRight");
-		/**  */
-		public static final EnumInsertLocation Overfold = new EnumInsertLocation("Overfold");
-		/**  */
-		public static final EnumInsertLocation FinishedPage = new EnumInsertLocation("FinishedPage");
-	}
-
-	/**
-	 * Enumeration strings for Method
-	 */
-
-	public enum EMethod
+	public enum EnumMethod
 	{
 		BlowIn, BindIn;
 
-		public static EMethod getEnum(String val)
+		public static EnumMethod getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EMethod.class, val, EMethod.BlowIn);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumMethod.class, val, EnumMethod.BlowIn);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Method
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumMethod extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumMethod(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumMethod getEnum(String enumName)
-		{
-			return (EnumMethod) getEnum(EnumMethod.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumMethod getEnum(int enumValue)
-		{
-			return (EnumMethod) getEnum(EnumMethod.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumMethod.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumMethod.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumMethod.class);
-		}
-
-		/**  */
-		public static final EnumMethod BlowIn = new EnumMethod("BlowIn");
-		/**  */
-		public static final EnumMethod BindIn = new EnumMethod("BindIn");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -359,9 +220,9 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setInsertLocation(EInsertLocation enumVar)
+	public void setInsertLocation(final EnumInsertLocation enumVar)
 	{
-		setAttribute(AttributeName.INSERTLOCATION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.INSERTLOCATION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -369,35 +230,6 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EInsertLocation getEInsertLocation()
-	{
-		return EInsertLocation.getEnum(getAttribute(AttributeName.INSERTLOCATION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute InsertLocation
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute InsertLocation
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetInsertLocation(EInsertLocation) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setInsertLocation(EnumInsertLocation enumVar)
-	{
-		setAttribute(AttributeName.INSERTLOCATION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute InsertLocation
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EInsertLocation GetEInsertLocation() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumInsertLocation getInsertLocation()
 	{
 		return EnumInsertLocation.getEnum(getAttribute(AttributeName.INSERTLOCATION, null, null));
@@ -413,9 +245,9 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMethod(EMethod enumVar)
+	public void setMethod(final EnumMethod enumVar)
 	{
-		setAttribute(AttributeName.METHOD, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.METHOD, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -423,35 +255,6 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EMethod getEMethod()
-	{
-		return EMethod.getEnum(getAttribute(AttributeName.METHOD, null, "BlowIn"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Method
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Method
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetMethod(EMethod) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setMethod(EnumMethod enumVar)
-	{
-		setAttribute(AttributeName.METHOD, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Method
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EMethod GetEMethod() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumMethod getMethod()
 	{
 		return EnumMethod.getEnum(getAttribute(AttributeName.METHOD, null, "BlowIn"));
@@ -467,7 +270,7 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSheetOffset(JDFXYPair value)
+	public void setSheetOffset(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.SHEETOFFSET, value, null);
 	}
@@ -480,8 +283,8 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	 */
 	public JDFXYPair getSheetOffset()
 	{
-		String strAttrName = getAttribute(AttributeName.SHEETOFFSET, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SHEETOFFSET, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -495,7 +298,7 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFinishedPage(int value)
+	public void setFinishedPage(final int value)
 	{
 		setAttribute(AttributeName.FINISHEDPAGE, value, null);
 	}
@@ -542,7 +345,7 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueLine the element
 	 */
-	public JDFGlueLine getCreateGlueLine(int iSkip)
+	public JDFGlueLine getCreateGlueLine(final int iSkip)
 	{
 		return (JDFGlueLine) getCreateElement_JDFElement(ElementName.GLUELINE, null, iSkip);
 	}
@@ -554,7 +357,7 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	 * @return JDFGlueLine the element
 	 *         default is getGlueLine(0)
 	 */
-	public JDFGlueLine getGlueLine(int iSkip)
+	public JDFGlueLine getGlueLine(final int iSkip)
 	{
 		return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
 	}

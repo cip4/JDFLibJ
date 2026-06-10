@@ -76,14 +76,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoPart.ESide;
-import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
-import org.cip4.jdflib.auto.JDFAutoRefAnchor.EAnchor;
-import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchor;
-import org.cip4.jdflib.auto.JDFAutoThreadSewingParams.ECastingMaterial;
 import org.cip4.jdflib.extensions.ProductHelper.eProductType;
-import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -93,10 +88,78 @@ import org.junit.jupiter.api.Test;
  */
 class EnumUtilTest extends JDFTestCaseBase
 {
+	@SuppressWarnings("serial")
+	static class EnumResStatus extends ValuedEnum
+	{
+		static final EnumResStatus Incomplete = new EnumResStatus("Incomplete", 0);
+		static final EnumResStatus Available = new EnumResStatus("Available", 1);
+
+		protected EnumResStatus(final String name, final int value)
+		{
+			super(name, value);
+		}
+	}
+
+	@SuppressWarnings("serial")
+	static class EnumSide extends ValuedEnum
+	{
+		static final EnumSide Front = new EnumSide("Front", 0);
+
+		protected EnumSide(final String name, final int value)
+		{
+			super(name, value);
+		}
+	}
+
+	static enum ESide
+	{
+		Front
+	}
+
+	@SuppressWarnings("serial")
+	static class EnumAnchor extends ValuedEnum
+	{
+		static final EnumAnchor BottomRight = new EnumAnchor("BottomRight", 0);
+		static final EnumAnchor BottomLeft = new EnumAnchor("BottomLeft", 1);
+		static final EnumAnchor TopLeft = new EnumAnchor("TopLeft", 2);
+		static final EnumAnchor TopRight = new EnumAnchor("TopRight", 3);
+		static final EnumAnchor Center = new EnumAnchor("Center", 4);
+		static final EnumAnchor Left = new EnumAnchor("Left", 5);
+		static final EnumAnchor Right = new EnumAnchor("Right", 6);
+		static final EnumAnchor Top = new EnumAnchor("Top", 7);
+		static final EnumAnchor Bottom = new EnumAnchor("Bottom", 8);
+
+		protected EnumAnchor(final String name, final int value)
+		{
+			super(name, value);
+		}
+	}
+
+	static enum EAnchor
+	{
+		BottomRight, BottomLeft
+	}
+
+	@SuppressWarnings("serial")
+	static class EnumCastingMaterial extends ValuedEnum
+	{
+		static final EnumCastingMaterial Thread = new EnumCastingMaterial("Thread", 0);
+
+		protected EnumCastingMaterial(final String name, final int value)
+		{
+			super(name, value);
+		}
+	}
+
+	static enum ECastingMaterial
+	{
+		Thread
+	}
+
 	static enum E
 	{
 		a, b, BOTTOMLEFT
-	};
+	}
 
 	/**
 	 *

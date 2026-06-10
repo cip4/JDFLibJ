@@ -61,7 +61,7 @@ public class JDFPageAssignParams extends JDFAutoPageAssignParams
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPageAssignParams(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFPageAssignParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -74,7 +74,7 @@ public class JDFPageAssignParams extends JDFAutoPageAssignParams
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPageAssignParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFPageAssignParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -88,7 +88,7 @@ public class JDFPageAssignParams extends JDFAutoPageAssignParams
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFPageAssignParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFPageAssignParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

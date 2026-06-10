@@ -45,11 +45,8 @@ import org.cip4.jdflib.core.StringArray;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         class to generate rolling backup files using a simple <FileName>.n naming algorithm.
- *
  *         The oldest file dies when the maximum number is reached
- *
  *         08.12.2008
  */
 public class RollingBackupFile extends File
@@ -79,7 +76,7 @@ public class RollingBackupFile extends File
 	}
 
 	/**
-	 * @param file the base file
+	 * @param file     the base file
 	 * @param nBackupp the number of backups to retain
 	 */
 	public RollingBackupFile(final File file, final int nBackupp)
@@ -97,7 +94,6 @@ public class RollingBackupFile extends File
 	}
 
 	/**
-	 *
 	 * get a new file for a given extension
 	 *
 	 * @param extension
@@ -115,12 +111,18 @@ public class RollingBackupFile extends File
 	public File getOldFile(final int i)
 	{
 		if (i == 0)
+		{
 			return this;
+		}
 		if (i < 0 || i >= nBackup)
+		{
 			return null;
+		}
 		final File[] oldFiles = FileUtil.listFilesWithExpression(getParentFile(), UrlUtil.newExtension(getName(), null) + "." + i + ".*");
 		if (oldFiles == null || oldFiles.length == 0)
+		{
 			return null;
+		}
 
 		return oldFiles[0];
 	}
@@ -185,7 +187,6 @@ public class RollingBackupFile extends File
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	private HashMap<Integer, File> getNameMap()

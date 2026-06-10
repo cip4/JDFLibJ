@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -94,13 +89,13 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.TRIMCOVER, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumTrimCover.getEnum(0),
-				"Both");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TRIMCOVER, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumTrimCover.class, 0), "Both");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.WIDTH, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.HEIGHT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.TRIMMINGOFFSET, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.TRIMMINGTYPE, 0x4444444431l, AttributeInfo.EnumAttributeType.enumeration, EnumTrimmingType.getEnum(0),
-				null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.TRIMMINGTYPE, 0x4444444431l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumTrimmingType.class, 0), null);
 	}
 
 	@Override
@@ -115,7 +110,7 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTrimmingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoTrimmingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -127,7 +122,7 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoTrimmingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoTrimmingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -140,7 +135,7 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoTrimmingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoTrimmingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -151,7 +146,7 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -166,168 +161,36 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for TrimCover
+	 * Enumeration strings for numTrimCover
 	 */
 
-	public enum ETrimCover
+	public enum EnumTrimCover
 	{
 		Front, Back, Both, Neither;
 
-		public static ETrimCover getEnum(String val)
+		public static EnumTrimCover getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ETrimCover.class, val, ETrimCover.Both);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumTrimCover.class, val, EnumTrimCover.Both);
 		}
 	}
 
 	/**
-	 * Enumeration strings for TrimCover
+	 * Enumeration strings for numTrimmingType
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumTrimCover extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumTrimCover(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumTrimCover getEnum(String enumName)
-		{
-			return (EnumTrimCover) getEnum(EnumTrimCover.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumTrimCover getEnum(int enumValue)
-		{
-			return (EnumTrimCover) getEnum(EnumTrimCover.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumTrimCover.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumTrimCover.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumTrimCover.class);
-		}
-
-		/**  */
-		public static final EnumTrimCover Front = new EnumTrimCover("Front");
-		/**  */
-		public static final EnumTrimCover Back = new EnumTrimCover("Back");
-		/**  */
-		public static final EnumTrimCover Both = new EnumTrimCover("Both");
-		/**  */
-		public static final EnumTrimCover Neither = new EnumTrimCover("Neither");
-	}
-
-	/**
-	 * Enumeration strings for TrimmingType
-	 */
-
-	public enum ETrimmingType
+	public enum EnumTrimmingType
 	{
 		Detailed, SystemSpecified;
 
-		public static ETrimmingType getEnum(String val)
+		public static EnumTrimmingType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ETrimmingType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumTrimmingType.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for TrimmingType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumTrimmingType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumTrimmingType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumTrimmingType getEnum(String enumName)
-		{
-			return (EnumTrimmingType) getEnum(EnumTrimmingType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumTrimmingType getEnum(int enumValue)
-		{
-			return (EnumTrimmingType) getEnum(EnumTrimmingType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumTrimmingType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumTrimmingType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumTrimmingType.class);
-		}
-
-		/**  */
-		public static final EnumTrimmingType Detailed = new EnumTrimmingType("Detailed");
-		/**  */
-		public static final EnumTrimmingType SystemSpecified = new EnumTrimmingType("SystemSpecified");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -339,9 +202,9 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setTrimCover(ETrimCover enumVar)
+	public void setTrimCover(final EnumTrimCover enumVar)
 	{
-		setAttribute(AttributeName.TRIMCOVER, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.TRIMCOVER, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -349,35 +212,6 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ETrimCover getETrimCover()
-	{
-		return ETrimCover.getEnum(getAttribute(AttributeName.TRIMCOVER, null, "Both"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute TrimCover
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute TrimCover
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetTrimCover(ETrimCover) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setTrimCover(EnumTrimCover enumVar)
-	{
-		setAttribute(AttributeName.TRIMCOVER, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute TrimCover
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ETrimCover GetETrimCover() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumTrimCover getTrimCover()
 	{
 		return EnumTrimCover.getEnum(getAttribute(AttributeName.TRIMCOVER, null, "Both"));
@@ -393,7 +227,7 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWidth(double value)
+	public void setWidth(final double value)
 	{
 		setAttribute(AttributeName.WIDTH, value, null);
 	}
@@ -418,7 +252,7 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setHeight(double value)
+	public void setHeight(final double value)
 	{
 		setAttribute(AttributeName.HEIGHT, value, null);
 	}
@@ -443,7 +277,7 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTrimmingOffset(double value)
+	public void setTrimmingOffset(final double value)
 	{
 		setAttribute(AttributeName.TRIMMINGOFFSET, value, null);
 	}
@@ -468,9 +302,9 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setTrimmingType(ETrimmingType enumVar)
+	public void setTrimmingType(final EnumTrimmingType enumVar)
 	{
-		setAttribute(AttributeName.TRIMMINGTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.TRIMMINGTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -478,35 +312,6 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ETrimmingType getETrimmingType()
-	{
-		return ETrimmingType.getEnum(getAttribute(AttributeName.TRIMMINGTYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute TrimmingType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute TrimmingType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetTrimmingType(ETrimmingType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setTrimmingType(EnumTrimmingType enumVar)
-	{
-		setAttribute(AttributeName.TRIMMINGTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute TrimmingType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ETrimmingType GetETrimmingType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumTrimmingType getTrimmingType()
 	{
 		return EnumTrimmingType.getEnum(getAttribute(AttributeName.TRIMMINGTYPE, null, null));

@@ -125,7 +125,7 @@ public abstract class JDFAutoPRGroup extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPRGroup(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPRGroup(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -137,7 +137,7 @@ public abstract class JDFAutoPRGroup extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPRGroup(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPRGroup(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -150,7 +150,7 @@ public abstract class JDFAutoPRGroup extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPRGroup(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPRGroup(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -171,7 +171,7 @@ public abstract class JDFAutoPRGroup extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOccurrences(int value)
+	public void setOccurrences(final int value)
 	{
 		setAttribute(AttributeName.OCCURRENCES, value, null);
 	}
@@ -196,7 +196,7 @@ public abstract class JDFAutoPRGroup extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPageSet(JDFIntegerRangeList value)
+	public void setPageSet(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.PAGESET, value, null);
 	}
@@ -209,8 +209,8 @@ public abstract class JDFAutoPRGroup extends JDFElement
 	 */
 	public JDFIntegerRangeList getPageSet()
 	{
-		String strAttrName = getAttribute(AttributeName.PAGESET, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PAGESET, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -246,7 +246,7 @@ public abstract class JDFAutoPRGroup extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPRGroupOccurrence the element
 	 */
-	public JDFPRGroupOccurrence getCreatePRGroupOccurrence(int iSkip)
+	public JDFPRGroupOccurrence getCreatePRGroupOccurrence(final int iSkip)
 	{
 		return (JDFPRGroupOccurrence) getCreateElement_JDFElement(ElementName.PRGROUPOCCURRENCE, null, iSkip);
 	}
@@ -258,7 +258,7 @@ public abstract class JDFAutoPRGroup extends JDFElement
 	 * @return JDFPRGroupOccurrence the element
 	 *         default is getPRGroupOccurrence(0)
 	 */
-	public JDFPRGroupOccurrence getPRGroupOccurrence(int iSkip)
+	public JDFPRGroupOccurrence getPRGroupOccurrence(final int iSkip)
 	{
 		return (JDFPRGroupOccurrence) getElement(ElementName.PRGROUPOCCURRENCE, null, iSkip);
 	}
@@ -309,7 +309,7 @@ public abstract class JDFAutoPRGroup extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPROccurrence the element
 	 */
-	public JDFPROccurrence getCreatePROccurrence(int iSkip)
+	public JDFPROccurrence getCreatePROccurrence(final int iSkip)
 	{
 		return (JDFPROccurrence) getCreateElement_JDFElement(ElementName.PROCCURRENCE, null, iSkip);
 	}
@@ -321,7 +321,7 @@ public abstract class JDFAutoPRGroup extends JDFElement
 	 * @return JDFPROccurrence the element
 	 *         default is getPROccurrence(0)
 	 */
-	public JDFPROccurrence getPROccurrence(int iSkip)
+	public JDFPROccurrence getPROccurrence(final int iSkip)
 	{
 		return (JDFPROccurrence) getElement(ElementName.PROCCURRENCE, null, iSkip);
 	}

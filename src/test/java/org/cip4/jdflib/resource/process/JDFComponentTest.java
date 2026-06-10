@@ -78,7 +78,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
-import org.cip4.jdflib.auto.JDFAutoDefect.EFace;
+import org.cip4.jdflib.auto.JDFAutoSurfaceMark.EnumFace;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -126,7 +126,7 @@ class JDFComponentTest extends JDFTestCaseBase
 	@Test
 	void testSetComponentTypeAuto()
 	{
-		c.setEComponentType(null);
+		c.setComponentType((EnumComponentType) null, null);
 		assertFalse(c.hasAttribute(AttributeName.COMPONENTTYPE));
 	}
 
@@ -136,10 +136,10 @@ class JDFComponentTest extends JDFTestCaseBase
 	@Test
 	void testGetCreateSurfaceMark()
 	{
-		assertNull(c.getSurfaceMark(EFace.Bottom));
-		final JDFSurfaceMark cr = c.getCreateSurfaceMark(EFace.Bottom);
+		assertNull(c.getSurfaceMark(EnumFace.Bottom));
+		final JDFSurfaceMark cr = c.getCreateSurfaceMark(EnumFace.Bottom);
 		assertNotNull(cr);
-		assertEquals(cr, c.getSurfaceMark(EFace.Bottom));
+		assertEquals(cr, c.getSurfaceMark(EnumFace.Bottom));
 	}
 
 	/**
@@ -165,7 +165,7 @@ class JDFComponentTest extends JDFTestCaseBase
 	@Test
 	void testGetMediaLayout()
 	{
-		c.setEComponentType(null);
+		c.setComponentType((EnumComponentType) null, null);
 		final JDFLayout lo = c.appendLayout();
 		final JDFMedia m = lo.appendMedia();
 		assertEquals(m, c.getMedia());

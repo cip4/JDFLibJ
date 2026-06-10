@@ -104,7 +104,7 @@ public abstract class JDFAutoDividingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDividingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDividingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -116,7 +116,7 @@ public abstract class JDFAutoDividingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDividingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDividingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -129,7 +129,7 @@ public abstract class JDFAutoDividingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDividingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDividingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -140,7 +140,7 @@ public abstract class JDFAutoDividingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -170,7 +170,7 @@ public abstract class JDFAutoDividingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDividePositions(JDFNumberList value)
+	public void setDividePositions(final JDFNumberList value)
 	{
 		setAttribute(AttributeName.DIVIDEPOSITIONS, value, null);
 	}
@@ -183,8 +183,8 @@ public abstract class JDFAutoDividingParams extends JDFResource
 	 */
 	public JDFNumberList getDividePositions()
 	{
-		String strAttrName = getAttribute(AttributeName.DIVIDEPOSITIONS, null, null);
-		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.DIVIDEPOSITIONS, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 

@@ -60,8 +60,8 @@ import org.apache.xerces.parsers.DOMParser;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.XMLDocUserData.EnumDirtyPolicy;
-import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.node.JDFNode;
@@ -458,8 +458,8 @@ class JDFDocTest extends JDFTestCaseBase
 		assertEquals(JDFElement.getDefaultJDFVersion(), JDFDoc.getVersionFromDocType("JDF"));
 		assertEquals(JDFElement.getDefaultJDFVersion(), JDFDoc.getVersionFromDocType("jdf:JMF"));
 		assertEquals(null, JDFDoc.getVersionFromDocType("Foo"));
-		assertEquals(XJDF20.getDefaultVersion(), JDFDoc.getVersionFromDocType("XJDF"));
-		assertEquals(XJDF20.getDefaultVersion(), JDFDoc.getVersionFromDocType("XJMF"));
+		assertEquals(JDFToXJDF.getDefaultVersion(), JDFDoc.getVersionFromDocType("XJDF"));
+		assertEquals(JDFToXJDF.getDefaultVersion(), JDFDoc.getVersionFromDocType("XJMF"));
 	}
 
 	/**

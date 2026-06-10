@@ -61,7 +61,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -125,7 +124,7 @@ public class UrlUtil
 
 	public static String getAuthorizationHeader(final String authHeader0)
 	{
-		String authHeader = StringUtil.removeToken(authHeader0, 0, JDFConstants.BLANK);
+		String authHeader = StringUtil.removeToken(authHeader0, 0, JDFCoreConstants.BLANK);
 		if (authHeader != null)
 		{
 			try
@@ -311,10 +310,10 @@ public class UrlUtil
 		/*** ftp */
 		ftp;
 
-		public static URLProtocol getEnum(String val)
+		public static URLProtocol getEnum(final String val)
 		{
-			final boolean hasColon = StringUtil.index(val, JDFConstants.COLON, 0) > 0;
-			final String token = hasColon ? StringUtil.token(val, 0, JDFConstants.COLON) : null;
+			final boolean hasColon = StringUtil.index(val, JDFCoreConstants.COLON, 0) > 0;
+			final String token = hasColon ? StringUtil.token(val, 0, JDFCoreConstants.COLON) : null;
 			return JavaEnumUtil.getEnumIgnoreCase(URLProtocol.class, token, StringUtil.isEmpty(val) ? null : local);
 		}
 	}
@@ -646,7 +645,7 @@ public class UrlUtil
 		String s = f.getAbsolutePath();
 		if (PlatformUtil.isWindows())
 		{
-			s = StringUtil.replaceChar(s, '\\', JDFConstants.SLASH, 0);
+			s = StringUtil.replaceChar(s, '\\', JDFCoreConstants.SLASH, 0);
 		}
 		s = UrlUtil.cleanDots(s);
 		s = escape(s, bEscape128, false);
@@ -975,7 +974,7 @@ public class UrlUtil
 		{
 			return null;
 		}
-		final String esc = escapeSlash ? m_URIEscape + JDFConstants.SLASH : m_URIEscape;
+		final String esc = escapeSlash ? m_URIEscape + JDFCoreConstants.SLASH : m_URIEscape;
 		if (bEscape128)
 		{
 			final byte[] utf8Bytes = StringUtil.getUTF8Bytes(toEscape);
@@ -1220,11 +1219,7 @@ public class UrlUtil
 		{
 			return false;
 		}
-		if (isNet(url))
-		{
-			return true;
-		}
-		if (isFile(url))
+		if (isNet(url) || isFile(url))
 		{
 			return true;
 		}
@@ -1636,7 +1631,7 @@ public class UrlUtil
 			throw new IllegalArgumentException("url must not contain .. " + url);
 		}
 
-		return StringUtil.addToken(baseURL, JDFConstants.SLASH, url);
+		return StringUtil.addToken(baseURL, JDFCoreConstants.SLASH, url);
 
 	}
 

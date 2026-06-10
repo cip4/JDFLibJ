@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,22 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFEvaluation.java
@@ -90,7 +90,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -105,8 +105,6 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * 
- * 
  * @author rainer prosi
  * @date Mar 17, 2013
  */
@@ -141,36 +139,36 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 
 	/**
 	 * constructor for JDFEvaluation
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFEvaluation(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFEvaluation
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFEvaluation
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -180,7 +178,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -191,21 +189,23 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 
 	/**
 	 * fitsMap - tests whether attribute map 'm' has a key specified by BasicPreflightTest/@Name. If this the case, it is checked whether its value fits the testlist.
-	 * 
+	 *
 	 * @param m key-value pair attribute map to take the value from
 	 * @return boolean - true, if 'm' has a key specified by BasicPreflightTest/@Name and fitsValue(value) returns true
 	 */
 	@Override
-	public final boolean fitsMap(JDFAttributeMap m)
+	public final boolean fitsMap(final JDFAttributeMap m)
 	{
 		final JDFBasicPreflightTest basicPreflightTest = getBasicPreflightTest();
 		if (basicPreflightTest == null)
+		{
 			return false;
-		String n = basicPreflightTest.getName();
+		}
+		final String n = basicPreflightTest.getName();
 
 		if (m.containsKey(n))
 		{
-			String val = m.get(n);
+			final String val = m.get(n);
 			return fitsValue(val);
 		}
 		return false; // __Lena__ ? false or smth else
@@ -213,20 +213,22 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 
 	/**
 	 * fitsJDF - tests whether JDFNode 'jdf' can be accepted by the Device. Tests if the value of resource attribute, decribed with this Evaluation, fits Evaluation/@ValueList
-	 * 
+	 *
 	 * @param jdf jdf node to test
 	 * @return boolean - true, if 'jdf' can be accepted by the Device
 	 */
 	@Override
-	public boolean fitsJDF(KElement jdf, KElement reportRoot)
+	public boolean fitsJDF(final KElement jdf, final KElement reportRoot)
 	{
 		KElement reportRootLocal = reportRoot;
 
 		if (reportRootLocal != null)
+		{
 			reportRootLocal = reportRootLocal.appendElement(getLocalName());
+		}
 
 		boolean b = false;
-		String xPath = getEvalXPath(jdf);
+		final String xPath = getEvalXPath(jdf);
 		if (xPath != null)
 		{
 			b = fitsPath(jdf, xPath, reportRootLocal);
@@ -243,33 +245,34 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	}
 
 	/**
-	 * 
 	 * @see org.cip4.jdflib.resource.devicecapability.JDFTerm#fitsContext(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public boolean fitsContext(KElement jdf)
+	public boolean fitsContext(final KElement jdf)
 	{
 		return getEvalXPath(jdf) != null;
 	}
 
-	private boolean fitsPath(KElement e, String xPath, KElement reportRoot)
+	private boolean fitsPath(final KElement e, final String xPath, final KElement reportRoot)
 	{
 		boolean b = false;
 		KElement attr = null;
 		String newPath = null;
 
 		final int posAt = xPath.lastIndexOf("@");
-		int posAtI = posAt > 0 ? xPath.lastIndexOf("[@") : -1;
+		final int posAtI = posAt > 0 ? xPath.lastIndexOf("[@") : -1;
 		if (posAt < 0 || posAt == posAtI + 1) // element
 		{
-			KElement pathElement = e.getXPathElement(xPath);
+			final KElement pathElement = e.getXPathElement(xPath);
 			b = fitsValue(pathElement);
 			if (b)
 			{
 				if (reportRoot != null)
 				{
 					if (pathElement != null)
+					{
 						newPath = pathElement.buildXPath(null, 1);
+					}
 					attr = reportRoot.appendElement("TestedElement");
 					attr.setAttribute("Name", StringUtil.token(xPath, -1, "/"));
 				}
@@ -286,7 +289,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 			if (pathElement instanceof JDFResource)
 			{
 				JDFResource r = (JDFResource) pathElement;
-				JDFResource root = r.getResourceRoot();
+				final JDFResource root = r.getResourceRoot();
 				while (r != root)
 				{
 					if (!r.hasAttribute_KElement(attName, null, false))
@@ -303,7 +306,9 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 
 			}
 			if (newPath != null)
+			{
 				attrVal = e.getXPathAttribute(newPath, null);
+			}
 			b = fitsValue(attrVal);
 			if (reportRoot != null)
 			{
@@ -323,7 +328,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 
 	/**
 	 * fitsValue - checks whether the <code>value</code> matches the testlists specified for this Evaluation
-	 * 
+	 *
 	 * @param value value to test
 	 * @return boolean - true, if the value matches testlists or if testlists are not specified
 	 */
@@ -331,11 +336,11 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 
 	/**
 	 * fitsValue - checks whether <code>elem</code> matches the testlists specified for this Evaluation
-	 * 
+	 *
 	 * @param elem element to test
 	 * @return boolen - true, if the value matches testlists or if testlists are not specified
 	 */
-	public boolean fitsValue(KElement elem)
+	public boolean fitsValue(final KElement elem)
 	{
 		// TODO implement in subclasses for spans
 		return elem != null;
@@ -343,7 +348,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 
 	/**
 	 * gets the ListType from a corresponding State/BasicPreflightTest element
-	 * 
+	 *
 	 * @return JDFBasicPreflightTest::EnumListType - the value of ListType attribute
 	 */
 	public JDFBasicPreflightTest.EnumListType getListType()
@@ -359,15 +364,17 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 
 	/**
 	 * gets the XPath to the attributes of a given JDF node
-	 * 
+	 *
 	 * @param jdf JDF node to test
 	 * @return String - the XPath to the attributes
 	 */
-	protected String getEvalXPath(KElement jdf)
+	protected String getEvalXPath(final KElement jdf)
 	{
 		final ICapabilityElement stateDC = getRefTarget();
 		if (stateDC == null)
+		{
 			return null;
+		}
 
 		VString vPath = null;
 		boolean bElement = false;
@@ -376,11 +383,13 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 		if (stateDC instanceof JDFDevCap)
 		{
 			if (!(this instanceof JDFIsPresentEvaluation)) // only ispresent may
-															// reference a
-															// devcap, all
-															// others must
-															// reference a state
+			{
+				// reference a
+				// devcap, all
+				// others must
+				// reference a state
 				return null;
+			}
 			bElement = true;
 			final JDFDevCap dc = (JDFDevCap) stateDC;
 			vPath = dc.getNamePathVector(true);
@@ -390,8 +399,8 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 			{
 				for (int i = 0; i < vPath.size(); i++)
 				{
-					String path = vPath.get(i);
-					VString tokens = StringUtil.tokenize(path, "/", false);
+					final String path = vPath.get(i);
+					final VString tokens = StringUtil.tokenize(path, "/", false);
 					if (tokens.size() == 3 && tokens.get(1).equals(ElementName.RESOURCEPOOL))
 					{
 						tokens.set(1, ElementName.RESOURCELINKPOOL);
@@ -404,11 +413,13 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 		else if (stateDC instanceof JDFDevCaps)
 		{
 			if (!(this instanceof JDFIsPresentEvaluation)) // only ispresent may
-															// reference a
-															// devcap, all
-															// others must
-															// reference a state
+			{
+				// reference a
+				// devcap, all
+				// others must
+				// reference a state
 				return null;
+			}
 			bElement = true;
 			final JDFDevCaps dc = (JDFDevCaps) stateDC;
 			vPath = dc.getNamePathVector();
@@ -418,15 +429,17 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 			{
 				for (int i = 0; i < vPath.size(); i++)
 				{
-					String path = vPath.get(i);
-					VString tokens = StringUtil.tokenize(path, "/", false);
+					final String path = vPath.get(i);
+					final VString tokens = StringUtil.tokenize(path, "/", false);
 					if (tokens.size() == 3 && tokens.get(1).equals(ElementName.RESOURCEPOOL))
 					{
 						tokens.set(1, ElementName.RESOURCELINKPOOL);
 						String link = tokens.get(2) + "Link";
-						EnumUsage lu = dc.getLinkUsage();
+						final EnumUsage lu = dc.getLinkUsage();
 						if (lu != null)
-							link += "[@Usage=\"" + lu.getName() + "\"]";
+						{
+							link += "[@Usage=\"" + lu.name() + "\"]";
+						}
 						tokens.set(2, link);
 						vPath.set(i, StringUtil.setvString(tokens, "/", null, null));
 					}
@@ -463,14 +476,16 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 		{
 			for (int i = 0; i < vPath.size(); i++)
 			{
-				String xPath = vPath.get(i);
+				final String xPath = vPath.get(i);
 				int slash = xPath.length();
 				String finalS = null;
 				do
 				{
-					String xPath2 = xPath.substring(0, slash);
+					final String xPath2 = xPath.substring(0, slash);
 					if (jdf.matchesPath(xPath2, true))
+					{
 						finalS = "." + xPath.substring(slash);
+					}
 					slash = xPath2.lastIndexOf("/");
 				}
 				while (slash >= 0 && finalS == null);
@@ -480,7 +495,9 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 					finalS += "/@" + attName;
 				}
 				if (finalS != null)
+				{
 					return finalS;
+				}
 			}
 		}
 		return null;
@@ -488,12 +505,12 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 
 	/**
 	 * getRefTargetNamePath()
-	 * 
+	 *
 	 * @return String
 	 */
 	public String getRefTargetNamePath()
 	{
-		ICapabilityElement e = getRefTarget();
+		final ICapabilityElement e = getRefTarget();
 		if (e instanceof JDFAbstractState)
 		{
 			return ((JDFAbstractState) e).getNamePath();
@@ -511,12 +528,12 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 
 	/**
 	 * getRefTargetName()
-	 * 
+	 *
 	 * @return String
 	 */
 	public String getRefTargetName()
 	{
-		ICapabilityElement e = getRefTarget();
+		final ICapabilityElement e = getRefTarget();
 		if (e instanceof JDFAbstractState)
 		{
 			return ((JDFAbstractState) e).getName();
@@ -534,18 +551,21 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 
 	/**
 	 * setRefTarget() set the target referencened in @rRef
-	 * 
+	 *
 	 * @param e
-	 * 
 	 */
-	public void setRefTarget(JDFElement e)
+	public void setRefTarget(final JDFElement e)
 	{
-		JDFDeviceCap deviceCap = (JDFDeviceCap) getDeepParent(ElementName.DEVICECAP, 0);
+		final JDFDeviceCap deviceCap = (JDFDeviceCap) getDeepParent(ElementName.DEVICECAP, 0);
 		if (deviceCap == null)
+		{
 			throw new JDFException("setRefTarget, called in dangling evaluation");
+		}
 
 		if (!(e instanceof JDFAbstractState) && !(e instanceof JDFDevCap))
+		{
 			throw new JDFException("setRefTarget, called for illegal target type");
+		}
 
 		final String id = e.appendAnchor(null);
 		setrRef(id);
@@ -553,28 +573,32 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 
 	/**
 	 * getRefTarget() get the target referencened in @rRef
-	 * 
+	 *
 	 * @return ICapabilityElement the referenced element, either state or a devcap
 	 */
 	public ICapabilityElement getRefTarget()
 	{
-		IDeviceCapable deviceCap = getDeviceCapable();
+		final IDeviceCapable deviceCap = getDeviceCapable();
 		if (deviceCap == null)
+		{
 			return null;
+		}
 		return deviceCap.getTargetCap(getrRef());
 
 	}
 
 	/**
 	 * getState()
-	 * 
+	 *
 	 * @return JDFAbstractState
 	 */
 	public JDFAbstractState getState()
 	{
-		ICapabilityElement ic = getRefTarget();
+		final ICapabilityElement ic = getRefTarget();
 		if (ic instanceof JDFAbstractState)
+		{
 			return (JDFAbstractState) ic;
+		}
 		return null;
 	}
 
@@ -585,10 +609,10 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	/**
 	 * Sets String attribute <code>rRef</code><br>
 	 * Since rRef is independent of the data type of the State element, the setter is defined here
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setrRef(String value)
+	public void setrRef(final String value)
 	{
 		setAttribute(AttributeName.RREF, value);
 	}
@@ -596,7 +620,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	/**
 	 * Gets String attribute <code>rRef</code><br>
 	 * Since rRef is independent of the data type of the State element,the getter is defined here
-	 * 
+	 *
 	 * @return String: the attribute value
 	 */
 	public String getrRef()
@@ -607,17 +631,17 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	/**
 	 * Sets String attribute <code>rRef</code><br>
 	 * Since rRef is independent of the data type of the State element, the setter is defined here
-	 * 
+	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPath(String value)
+	public void setPath(final String value)
 	{
 		setAttribute(AttributeName.PATH, value);
 	}
 
 	/**
 	 * Gets String attribute <code>Path</code><br>
-	 * 
+	 *
 	 * @return String: the attribute value
 	 */
 	public String getPath()
@@ -633,7 +657,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	 * Get element <code>BasicPreflightTest</code>. Creates it if it doesn't exist
 	 * <p>
 	 * default: getCreateBasicPreflightTest(0
-	 * 
+	 *
 	 * @return JDFBasicPreflightTest: the matching element
 	 */
 	public JDFBasicPreflightTest getCreateBasicPreflightTest()
@@ -645,20 +669,20 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	 * Gets the iSkip-th element <code>BasicPreflightTest</code>. If doesn't exist, creates it
 	 * <p>
 	 * default getCreateBasicPreflightTest(0)
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFBasicPreflightTest: the matching element
 	 * @deprecated use getCreateBasicPreflightTest()
 	 */
 	@Deprecated
-	public JDFBasicPreflightTest getCreateBasicPreflightTest(int iSkip)
+	public JDFBasicPreflightTest getCreateBasicPreflightTest(final int iSkip)
 	{
-		return (JDFBasicPreflightTest) getCreateElement(ElementName.BASICPREFLIGHTTEST, JDFConstants.EMPTYSTRING, iSkip);
+		return (JDFBasicPreflightTest) getCreateElement(ElementName.BASICPREFLIGHTTEST, JDFCoreConstants.EMPTYSTRING, iSkip);
 	}
 
 	/**
 	 * Gets element <code>BasicPreflightTest</code>
-	 * 
+	 *
 	 * @return JDFBasicPreflightTest: the matching element or <code>null</code>
 	 */
 	public JDFBasicPreflightTest getBasicPreflightTest()
@@ -670,20 +694,20 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	 * Gets the iSkip'th element <code>BasicPreflightTest</code>
 	 * <p>
 	 * default: getBasicPreflightTest(0)
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFBasicPreflightTest: the matching element or null
 	 * @deprecated use getBasicPreflightTest()
 	 */
 	@Deprecated
-	public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
+	public JDFBasicPreflightTest getBasicPreflightTest(final int iSkip)
 	{
-		return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, JDFConstants.EMPTYSTRING, iSkip);
+		return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, JDFCoreConstants.EMPTYSTRING, iSkip);
 	}
 
 	/**
 	 * Appends element <code>BasicPreflightTest</code> to the end of <code>this</code>
-	 * 
+	 *
 	 * @return JDFBasicPreflightTest: newly created BasicPreflightTest element
 	 * @deprecated use appendBasicPreflightTest(name)
 	 */
@@ -695,23 +719,27 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 
 	/**
 	 * Appends element <code>BasicPreflightTest</code> to the end of <code>this</code> and sets @Name to name
-	 * 
+	 *
 	 * @param testName the new Name attribute of the BasicPreflightTest
 	 * @return JDFBasicPreflightTest: newly created BasicPreflightTest element
 	 */
-	public JDFBasicPreflightTest appendBasicPreflightTest(String testName)
+	public JDFBasicPreflightTest appendBasicPreflightTest(final String testName)
 	{
-		JDFBasicPreflightTest pft = (JDFBasicPreflightTest) appendElementN(ElementName.BASICPREFLIGHTTEST, 1, null);
+		final JDFBasicPreflightTest pft = (JDFBasicPreflightTest) appendElementN(ElementName.BASICPREFLIGHTTEST, 1, null);
 		if (pft == null)
+		{
 			return null;
+		}
 		if (testName != null)
+		{
 			pft.setName(testName);
+		}
 		return pft;
 	}
 
 	/**
 	 * tolerance is defined in all numeric evaluations - implement here!
-	 * 
+	 *
 	 * @return
 	 */
 	protected JDFXYPair getTolerance()
@@ -720,7 +748,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 		{
 			return new JDFXYPair(getAttribute(AttributeName.TOLERANCE, null, "0 0"));
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFEvaluation.getTolerance: Attribute Tolerance is not applicable to create JDFXYPair");
 		}

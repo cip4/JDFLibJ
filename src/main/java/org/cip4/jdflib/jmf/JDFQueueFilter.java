@@ -48,6 +48,7 @@
  */
 package org.cip4.jdflib.jmf;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -74,8 +75,8 @@ import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.util.ContainerUtil;
-import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.ListMap;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -119,12 +120,10 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 		/**
 		 * modifies queue to match this filter by removing all non-matching entries
-		 *
 		 * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
 		 *
 		 * @return
 		 * @deprecated use copyTo
-		 *
 		 */
 		@Deprecated
 		protected JDFQueue apply()
@@ -194,7 +193,6 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 		/**
 		 * modifies queueEntry to match this filter by removing all non-matching attributes and elements
-		 *
 		 * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
 		 *
 		 * @param qe
@@ -223,14 +221,15 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		 * copies queueEntry if it matches this filter and removes all non-matching attributes and elements
 		 *
 		 * @param newQueue the new parent queue
-		 *
-		 * @param qe the queue entry to copy
+		 * @param qe       the queue entry to copy
 		 * @return the copied element, null if this was not copied
 		 */
 		private JDFQueueEntry copyTo(final JDFQueue newQueue, JDFQueueEntry qe)
 		{
 			if (qe == null)
+			{
 				return null;
+			}
 
 			if (qeMatch.matches(qe))
 			{
@@ -250,7 +249,9 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 			// we don't match the filter, still we ain't removed - thanks Yu Chen
 			{
 				if (lastMap != null)
+				{
 					lastMap.remove(qe.getQueueEntryID());
+				}
 				qe = null;
 			}
 
@@ -268,11 +269,11 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 			{
 				qed = EnumQueueEntryDetails.Brief;
 			}
-			if (EnumUtil.aLessEqualsThanB(qed, EnumQueueEntryDetails.Brief))
+			if (qed.ordinal() <= EnumQueueEntryDetails.Brief.ordinal())
 			{
 				qe.removeChildren(ElementName.JOBPHASE, null, null);
 			}
-			if (EnumUtil.aLessEqualsThanB(qed, EnumQueueEntryDetails.JobPhase))
+			if (qed.ordinal() <= EnumQueueEntryDetails.JobPhase.ordinal())
 			{
 				final List<JDFJobPhase> v = qe.getChildArrayByClass(JDFJobPhase.class, false, -1);
 				if (v != null)
@@ -287,7 +288,6 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 		/**
 		 * @param qe the queue entry to apply the change only filter to
-		 *
 		 * @return true if this element has been removed because it is identical to a previous element (no change)
 		 */
 		private boolean noDifference(final JDFQueueEntry qe, final boolean clean)
@@ -352,7 +352,6 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		}
 
 		/**
-		 *
 		 * @param newQueue
 		 * @param s
 		 */
@@ -363,16 +362,19 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 			for (final String qeid : s)
 			{
 				if (n == maxEntries)
+				{
 					break;
+				}
 				final JDFQueueEntry qe = theQueue.getQueueEntry(qeid);
 				final JDFQueueEntry qeNew = copyTo(newQueue, qe);
 				if (qeNew != null)
+				{
 					n++;
+				}
 			}
 		}
 
 		/**
-		 *
 		 * @param newQueue
 		 */
 		private void copyAll(final JDFQueue newQueue)
@@ -384,7 +386,9 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 			{
 				final JDFQueueEntry qeNew = copyTo(newQueue, qe);
 				if (qeNew != null)
+				{
 					n++;
+				}
 				qe = qe.getNextQueueEntry();
 			}
 		}
@@ -394,7 +398,6 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	Set<String> queueEntrieDefs;
 
 	/**
-	 *
 	 * @param queueEntrieDefs
 	 */
 	public void setQueueEntrieDefs(final Set<String> queueEntrieDefs)
@@ -403,7 +406,6 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	}
 
 	/**
-	 *
 	 * @param queueEntrieDef
 	 */
 	public void setQueueEntrieDef(final String queueEntrieDef)
@@ -485,7 +487,6 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * modifies queue to match this filter by removing all non-matching entries
-	 *
 	 * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
 	 *
 	 * @param theQueue the queue to modify
@@ -500,10 +501,8 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * @deprecated - use copyTo modifies queue to match this filter by removing all non-matching entries
-	 *
 	 *             make sure that this is a copy of any original queue as the incoming queue itself is not cloned
-	 *
-	 * @param theQueue the queue to modify
+	 * @param theQueue  the queue to modify
 	 * @param lastQueue the last queue to diff against, note that this must be the complete queue prior to the last call of match
 	 * @return
 	 */
@@ -527,13 +526,21 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	{
 		final String det = getAttribute(AttributeName.QUEUEENTRYDETAILS, null, "Brief");
 		if ("None".equals(det))
+		{
 			return EnumQueueEntryDetails.None;
+		}
 		if ("Brief".equals(det))
+		{
 			return EnumQueueEntryDetails.Brief;
+		}
 		if ("JobPhase".equals(det))
+		{
 			return EnumQueueEntryDetails.JobPhase;
+		}
 		if ("JDF".equals(det))
+		{
 			return EnumQueueEntryDetails.JDF;
+		}
 		return null;
 	}
 
@@ -575,7 +582,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 				statusList = new VString();
 				for (final EnumQueueEntryStatus e : vs)
 				{
-					statusList.add(e.getName());
+					statusList.add(e.name());
 				}
 			}
 
@@ -598,17 +605,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		 */
 		protected boolean matches(final JDFQueueEntry qe)
 		{
-			if (qe == null)
-			{
-				return false;
-			}
-
-			if (EnumQueueEntryDetails.None.equals(getQueueEntryDetails()))
-			{
-				return false;
-			}
-
-			if (qeDefs != null && !qeDefs.contains(qe.getQueueEntryID()))
+			if ((qe == null) || EnumQueueEntryDetails.None.equals(getQueueEntryDetails()) || (qeDefs != null && !qeDefs.contains(qe.getQueueEntryID())))
 			{
 				return false;
 			}
@@ -616,7 +613,9 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 			{
 				final EnumActivation qeActivation = qe.getActivation();
 				if (!activation.equals(qeActivation) || qeActivation == null && activation.equals(EnumActivation.Active))
+				{
 					return false;
+				}
 			}
 
 			if (devIDs != null && !devIDs.contains(qe.getDeviceID()))
@@ -685,7 +684,9 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 			{
 				final List<JDFGeneralID> qeGIDs = qeGeneralIDS.get(key);
 				if (qeGIDs == null) // we have no matching entry to filter in qe
+				{
 					return false;
+				}
 
 				final List<JDFGeneralID> filterGIDs = generalIDS.get(key);
 				boolean gotIt = false;
@@ -704,10 +705,14 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 						}
 					}
 					if (gotIt) // one match is enough
+					{
 						break;
+					}
 				}
 				if (!gotIt) // one mismatch for any key is enough for a mismatch
+				{
 					return false;
+				}
 			}
 			return true;
 		}
@@ -732,7 +737,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	@Override
 	public void setActivation(final EnumActivation enumVar)
 	{
-		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.getName(), null);
+		setAttribute(AttributeName.ACTIVATION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -755,7 +760,8 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	@Override
 	public Vector<EnumQueueEntryStatus> getStatusList()
 	{
-		return (Vector<EnumQueueEntryStatus>) getEnumerationsAttribute(AttributeName.STATUSLIST, null, EnumQueueEntryStatus.getEnum(0), false);
+		final Collection<? extends EnumQueueEntryStatus> values = getEnumerationsAttribute(AttributeName.STATUSLIST, null, EnumQueueEntryStatus.class);
+		return values == null || values.isEmpty() ? null : new Vector<>(values);
 	}
 
 	/**
@@ -801,7 +807,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		if (v != null)
 		{
 			siz = v.size();
-			set = siz == 0 ? null : new HashSet<String>();
+			set = siz == 0 ? null : new HashSet<>();
 			for (int i = 0; i < siz; i++)
 			{
 				final String qeid = ((JDFDevice) v.elementAt(i)).getDeviceID();
@@ -846,9 +852,9 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	/**
 	 * copy theQueue to newParent while applying the filter
 	 *
-	 * @param theQueue the queue to copy
+	 * @param theQueue  the queue to copy
 	 * @param lastQueue the previously created queue
-	 * @param resp the JDF response message, may be null
+	 * @param resp      the JDF response message, may be null
 	 * @return
 	 */
 	public JDFQueue copy(final JDFQueue theQueue, final JDFQueue lastQueue, final KElement resp)
@@ -898,7 +904,9 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		{
 			final EnumType t = ((JDFMessage) parent).getEnumType();
 			if (EnumType.QueueStatus.equals(t))
+			{
 				def = Integer.MAX_VALUE;
+			}
 		}
 		return getIntAttribute(AttributeName.MAXENTRIES, null, def);
 	}

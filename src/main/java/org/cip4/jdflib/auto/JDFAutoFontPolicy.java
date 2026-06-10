@@ -106,7 +106,7 @@ public abstract class JDFAutoFontPolicy extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFontPolicy(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoFontPolicy(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoFontPolicy extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFontPolicy(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoFontPolicy(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoFontPolicy extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoFontPolicy(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoFontPolicy(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -142,7 +142,7 @@ public abstract class JDFAutoFontPolicy extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -172,7 +172,7 @@ public abstract class JDFAutoFontPolicy extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPreferredFont(String value)
+	public void setPreferredFont(final String value)
 	{
 		setAttribute(AttributeName.PREFERREDFONT, value, null);
 	}
@@ -197,7 +197,7 @@ public abstract class JDFAutoFontPolicy extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setUseDefaultFont(boolean value)
+	public void setUseDefaultFont(final boolean value)
 	{
 		setAttribute(AttributeName.USEDEFAULTFONT, value, null);
 	}
@@ -222,7 +222,7 @@ public abstract class JDFAutoFontPolicy extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setUseFontEmulation(boolean value)
+	public void setUseFontEmulation(final boolean value)
 	{
 		setAttribute(AttributeName.USEFONTEMULATION, value, null);
 	}

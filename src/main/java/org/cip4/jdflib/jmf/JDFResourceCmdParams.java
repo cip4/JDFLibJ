@@ -85,7 +85,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFNodeInfo;
@@ -103,6 +103,7 @@ import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -155,7 +156,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 			}
 		}
 
-		boolean applyNode(final VElement vNodes, final int i, boolean create)
+		boolean applyNode(final VElement vNodes, final int i, final boolean create)
 		{
 			final JDFNode node = (JDFNode) vNodes.elementAt(i);
 			if (!matchesNode(node))
@@ -261,7 +262,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 		 * @param node
 		 * @return the target resource
 		 */
-		JDFResource getTargetResource(final JDFNode node, boolean checkID)
+		JDFResource getTargetResource(final JDFNode node, final boolean checkID)
 		{
 			if (node == null)
 			{
@@ -429,7 +430,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 			resName = StringUtil.isEmpty(resName) ? getResourceName() : resName;
 			if (!StringUtil.isEmpty(resName))
 			{
-				final KElement e = getCreateElement(resName, JDFConstants.EMPTYSTRING, 0);
+				final KElement e = getCreateElement(resName, JDFCoreConstants.EMPTYSTRING, 0);
 				if (!(e instanceof JDFResource))
 				{
 					throw new JDFException("JDFResourceCmdParams.getCreateResource tried to create a JDFElement instead of a JDFResource");
@@ -597,7 +598,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 	@Override
 	public void setUsage(final JDFResourceLink.EnumUsage enumVar)
 	{
-		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.getName(), null);
+		setAttribute(AttributeName.USAGE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**

@@ -65,7 +65,6 @@ import org.cip4.jdflib.util.thread.IPersistable;
  * Shared input / outputStream class write once, read many...
  *
  * @author rainer prosi
- *
  */
 public class ByteArrayIOFileStream extends ByteArrayIOStream
 {
@@ -81,7 +80,6 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	private static AtomicInteger n = new AtomicInteger();
 
 	/**
-	 *
 	 * get a completely buffered and resizable input stream
 	 *
 	 * @param is
@@ -90,20 +88,22 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	public static ByteArrayIOInputStream getBufferedInputStream(final InputStream is, final long maxLen)
 	{
 		if (is == null)
+		{
 			return null;
+		}
 		if (is instanceof ByteArrayIOInputStream)
+		{
 			return ((ByteArrayIOInputStream) is).getNewStream();
+		}
 		final ByteArrayIOStream byteArrayIOStream = new ByteArrayIOFileStream(is, maxLen);
 		final ByteArrayIOInputStream inputStream = byteArrayIOStream.getInputStream();
 		return inputStream;
 	}
 
 	/**
-	 *
 	 * bytearrayinputstream that allows duplication without copying
 	 *
 	 * @author rainer prosi
-	 *
 	 */
 	public class ByteArrayIOFileInputStream extends ByteArrayIOInputStream
 	{
@@ -114,7 +114,6 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		/**
 		 * @param buf
 		 * @param count
-		 *
 		 */
 		ByteArrayIOFileInputStream(final ByteArrayIOFileStream ios)
 		{
@@ -132,7 +131,6 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		}
 
 		/**
-		 *
 		 * get a new input stream that starts at current pos
 		 *
 		 * @return
@@ -156,7 +154,6 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		}
 
 		/**
-		 *
 		 * @return
 		 */
 		@Override
@@ -181,7 +178,9 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		public void seek(long pos)
 		{
 			if (pos < 0)
+			{
 				pos += getCount();
+			}
 
 			try
 			{
@@ -198,7 +197,6 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		}
 
 		/**
-		 *
 		 * @see org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream#tell()
 		 */
 		@Override
@@ -221,7 +219,9 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 				ios.os.seek(filePos);
 				final int read = ios.os.read();
 				if (read >= 0)
+				{
 					filePos++;
+				}
 				return read;
 			}
 			catch (final IOException e)
@@ -238,7 +238,9 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 				seek(filePos);
 				final int read = ios.os.read(b, off, len);
 				if (read > 0)
+				{
 					filePos += read;
+				}
 				return read;
 			}
 			catch (final IOException e)
@@ -290,7 +292,6 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		}
 
 		/**
-		 *
 		 * @throws IOException
 		 */
 		@Override
@@ -327,10 +328,9 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 
 	/**
 	 * creates an input output stream class from any stream
-	 *
 	 * if is already is a buffered inputstream, no copy is made
 	 *
-	 * @param is the inputstream to buffer
+	 * @param is        the inputstream to buffer
 	 * @param maxLength the maximum length in memory
 	 */
 	public ByteArrayIOFileStream(final InputStream is, final long maxLength)
@@ -343,10 +343,9 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	/**
 	 * create a ByteArrayIOStream from a file
 	 *
-	 * @param f the file
+	 * @param f         the file
 	 * @param maxLength the maximum length in memory
 	 * @param readOnly
-	 *
 	 * @throws IOException
 	 */
 	public ByteArrayIOFileStream(final File f, final long maxLength, final boolean readOnly)
@@ -419,7 +418,6 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	}
 
 	/**
-	 *
 	 * @param newSize
 	 */
 	private void ensureStream(final long newSize)
@@ -457,7 +455,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	/**
 	 * Writes <code>len</code> bytes from the specified byte array starting at offset <code>off</code> to this byte array output stream.
 	 *
-	 * @param b the data.
+	 * @param b   the data.
 	 * @param off the start offset in the data.
 	 * @param len the number of bytes to write.
 	 */
@@ -511,7 +509,6 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	}
 
 	/**
-	 *
 	 * @throws Throwable
 	 */
 	@Override
@@ -520,9 +517,13 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 		if (!isCopy)
 		{
 			if (hasCopy)
+			{
 				DelayedPersist.getDelayedPersist().queue(new CloseRunner(), 123456);
+			}
 			else
+			{
 				close();
+			}
 		}
 		super.finalize();
 	}
@@ -540,7 +541,6 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.util.ByteArrayIOStream#setStream(java.io.InputStream)
 	 */
 	@Override
@@ -579,7 +579,6 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Override
@@ -613,7 +612,7 @@ public class ByteArrayIOFileStream extends ByteArrayIOStream
 	@Override
 	public synchronized String toString()
 	{
-		return "ByteArrayIOFileStream [maxLength=" + maxLength + ", " + (file != null ? "file=" + file + ", " : "") + "isTmpFile=" + isTmpFile + ", isCopy=" + isCopy + ", id=" + id
-				+ "]";
+		return "ByteArrayIOFileStream [maxLength=" + maxLength + ", " + (file != null ? "file=" + file + ", " : "") + "isTmpFile=" + isTmpFile + ", isCopy="
+				+ isCopy + ", id=" + id + "]";
 	}
 }

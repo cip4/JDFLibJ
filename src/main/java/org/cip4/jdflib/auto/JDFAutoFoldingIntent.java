@@ -128,7 +128,7 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFoldingIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoFoldingIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -140,7 +140,7 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoFoldingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoFoldingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -153,7 +153,7 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoFoldingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoFoldingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -174,7 +174,7 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFolds(JDFXYPair value)
+	public void setFolds(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.FOLDS, value, null);
 	}
@@ -187,8 +187,8 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 	 */
 	public JDFXYPair getFolds()
 	{
-		String strAttrName = getAttribute(AttributeName.FOLDS, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.FOLDS, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -202,7 +202,7 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFoldingDetails(String value)
+	public void setFoldingDetails(final String value)
 	{
 		setAttribute(AttributeName.FOLDINGDETAILS, value, null);
 	}
@@ -280,7 +280,7 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFFold the element
 	 */
-	public JDFFold getCreateFold(int iSkip)
+	public JDFFold getCreateFold(final int iSkip)
 	{
 		return (JDFFold) getCreateElement_JDFElement(ElementName.FOLD, null, iSkip);
 	}
@@ -292,7 +292,7 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 	 * @return JDFFold the element
 	 *         default is getFold(0)
 	 */
-	public JDFFold getFold(int iSkip)
+	public JDFFold getFold(final int iSkip)
 	{
 		return (JDFFold) getElement(ElementName.FOLD, null, iSkip);
 	}

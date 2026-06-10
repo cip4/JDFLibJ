@@ -46,7 +46,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
-import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceCondition;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumDeviceOperationMode;
@@ -143,7 +142,7 @@ class JDFDeviceInfoTest extends JDFTestCaseBase
 	@Test
 	void testNullDeviceStatus()
 	{
-		di.setDeviceStatus((EDeviceStatus) null);
+		di.setDeviceStatus((EnumDeviceStatus) null);
 		assertNotNull(di, "got here!");
 	}
 
@@ -168,7 +167,7 @@ class JDFDeviceInfoTest extends JDFTestCaseBase
 	@Test
 	void testOffline()
 	{
-		di.setDeviceStatus((EDeviceStatus) null);
+		di.setDeviceStatus((EnumDeviceStatus) null);
 		di.setXJDFDeviceCondition(EnumDeviceCondition.OffLine);
 		assertEquals("Offline", di.getAttribute(AttributeName.DEVICECONDITION));
 		di.setXJDFDeviceCondition(EnumDeviceCondition.OK);

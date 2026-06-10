@@ -44,9 +44,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkFileSpec extends WalkResource
 {
@@ -131,7 +129,9 @@ public class WalkFileSpec extends WalkResource
 	private boolean isDeprecatedResUsage(final JDFFileSpec fs)
 	{
 		if (jdfToXJDF.isRetainAll())
+		{
 			return false;
+		}
 		return nastyRes.contains(fs.getResourceUsage());
 	}
 

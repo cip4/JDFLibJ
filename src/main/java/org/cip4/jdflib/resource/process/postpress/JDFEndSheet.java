@@ -1,21 +1,23 @@
 /**
- * ========================================================================== 
+ * ==========================================================================
  * class JDFEndSheet extends JDFResource
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author: sabjon@topmail.de    using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * @Author: sabjon@topmail.de    using a code generator
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  */
 
 package org.cip4.jdflib.resource.process.postpress;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoEndSheet;
+import org.cip4.jdflib.auto.JDFAutoPart;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFEndSheet extends JDFAutoEndSheet
@@ -24,39 +26,39 @@ public class JDFEndSheet extends JDFAutoEndSheet
 
 	/**
 	 * Constructor for JDFEndSheet
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFEndSheet(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFEndSheet(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFEndSheet
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFEndSheet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFEndSheet(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFEndSheet
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFEndSheet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFEndSheet(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -64,7 +66,8 @@ public class JDFEndSheet extends JDFAutoEndSheet
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SIDE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumSide.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SIDE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(JDFAutoPart.EnumSide.class, 0), null);
 	}
 
 	@Override
@@ -75,17 +78,17 @@ public class JDFEndSheet extends JDFAutoEndSheet
 
 	/**
 	 * set attribute Side
-	 * 
+	 *
 	 * @param EnumSide value: the value to set the attribute to
 	 */
-	public void setSide(EnumSide value)
+	public void setSide(final EnumSide value)
 	{
 		setAttribute(AttributeName.SIDE, value, null);
 	}
 
 	/**
 	 * get Enumeration attribute Side
-	 * 
+	 *
 	 * @return EnumSide - value of the attribute
 	 */
 	public EnumSide getSide()

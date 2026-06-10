@@ -79,7 +79,6 @@ public class WalkResLinkPool extends WalkJDFSubElement
 	}
 
 	/**
-	 *
 	 * @param resLinkPool
 	 * @return
 	 */
@@ -98,11 +97,15 @@ public class WalkResLinkPool extends WalkJDFSubElement
 	{
 		final KElement parent = resLinkPool.getParentNode_KElement();
 		if (!(parent instanceof JDFNode))
+		{
 			return;
+		}
 		final JDFNode n = (JDFNode) parent;
 		final JDFAncestorPool ap = n.getAncestorPool();
 		if (ap == null)
+		{
 			return;
+		}
 		final String[] v = { ElementName.NODEINFO, ElementName.CUSTOMERINFO };
 		for (final String s : v)
 		{

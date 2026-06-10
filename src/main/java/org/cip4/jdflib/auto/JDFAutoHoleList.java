@@ -108,7 +108,7 @@ public abstract class JDFAutoHoleList extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoHoleList(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoHoleList(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -120,7 +120,7 @@ public abstract class JDFAutoHoleList extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoHoleList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoHoleList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,7 +133,7 @@ public abstract class JDFAutoHoleList extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoHoleList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoHoleList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -144,7 +144,7 @@ public abstract class JDFAutoHoleList extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -190,7 +190,7 @@ public abstract class JDFAutoHoleList extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFHole the element
 	 */
-	public JDFHole getCreateHole(int iSkip)
+	public JDFHole getCreateHole(final int iSkip)
 	{
 		return (JDFHole) getCreateElement_JDFElement(ElementName.HOLE, null, iSkip);
 	}
@@ -202,7 +202,7 @@ public abstract class JDFAutoHoleList extends JDFResource
 	 * @return JDFHole the element
 	 *         default is getHole(0)
 	 */
-	public JDFHole getHole(int iSkip)
+	public JDFHole getHole(final int iSkip)
 	{
 		return (JDFHole) getElement(ElementName.HOLE, null, iSkip);
 	}
@@ -253,7 +253,7 @@ public abstract class JDFAutoHoleList extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFHoleLine the element
 	 */
-	public JDFHoleLine getCreateHoleLine(int iSkip)
+	public JDFHoleLine getCreateHoleLine(final int iSkip)
 	{
 		return (JDFHoleLine) getCreateElement_JDFElement(ElementName.HOLELINE, null, iSkip);
 	}
@@ -265,7 +265,7 @@ public abstract class JDFAutoHoleList extends JDFResource
 	 * @return JDFHoleLine the element
 	 *         default is getHoleLine(0)
 	 */
-	public JDFHoleLine getHoleLine(int iSkip)
+	public JDFHoleLine getHoleLine(final int iSkip)
 	{
 		return (JDFHoleLine) getElement(ElementName.HOLELINE, null, iSkip);
 	}

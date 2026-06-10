@@ -96,7 +96,7 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams i
 
 	/**
 	 * Constructor for JDFRequestQueueEntryParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -107,7 +107,7 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams i
 
 	/**
 	 * Constructor for JDFRequestQueueEntryParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -119,7 +119,7 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams i
 
 	/**
 	 * Constructor for JDFRequestQueueEntryParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -135,7 +135,7 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams i
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -146,7 +146,7 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams i
 
 	/**
 	 * get part map vector
-	 * 
+	 *
 	 * @return VJDFAttributeMap: vector of attribute maps, one for each part
 	 */
 	@Override
@@ -157,7 +157,7 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams i
 
 	/**
 	 * set all parts to those defined by vParts
-	 * 
+	 *
 	 * @param vParts vector of attribute maps for the parts
 	 */
 	@Override
@@ -168,7 +168,7 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams i
 
 	/**
 	 * set all parts to those defined by mPart
-	 * 
+	 *
 	 * @param mPart attribute map for the part to set
 	 */
 	@Override
@@ -179,7 +179,7 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams i
 
 	/**
 	 * remove the part defined by mPart
-	 * 
+	 *
 	 * @param mPart attribute map for the part to remove
 	 */
 	@Override
@@ -190,7 +190,7 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams i
 
 	/**
 	 * check whether the part defined by mPart is included
-	 * 
+	 *
 	 * @param mPart attribute map to look for
 	 * @return boolean - returns true if the part exists
 	 */
@@ -202,7 +202,7 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams i
 
 	/**
 	 * get the NodeIdentifier that can be used to grab a qe from a queue
-	 * 
+	 *
 	 * @return
 	 * @deprecated use getIdentifier
 	 */
@@ -214,9 +214,10 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams i
 
 	/**
 	 * gets the NodeIdetifier that matches this
-	 * 
+	 *
 	 * @return {@link NodeIdentifier} the matching nodeidentifier
 	 */
+	@Override
 	public NodeIdentifier getIdentifier()
 	{
 		final NodeIdentifier ni = new NodeIdentifier();
@@ -228,6 +229,7 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams i
 	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.JDFNode.NodeIdentifier)
 	 * @param ni
 	 */
+	@Override
 	public void setIdentifier(final NodeIdentifier ni)
 	{
 		NodeIdentifier niLocal = ni;

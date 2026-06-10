@@ -109,7 +109,7 @@ public abstract class JDFAutoNumberingParam extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNumberingParam(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoNumberingParam(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -121,7 +121,7 @@ public abstract class JDFAutoNumberingParam extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNumberingParam(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoNumberingParam(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -134,7 +134,7 @@ public abstract class JDFAutoNumberingParam extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoNumberingParam(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoNumberingParam(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -155,7 +155,7 @@ public abstract class JDFAutoNumberingParam extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStartValue(String value)
+	public void setStartValue(final String value)
 	{
 		setAttribute(AttributeName.STARTVALUE, value, null);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoNumberingParam extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setXPosition(double value)
+	public void setXPosition(final double value)
 	{
 		setAttribute(AttributeName.XPOSITION, value, null);
 	}
@@ -205,7 +205,7 @@ public abstract class JDFAutoNumberingParam extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setYPosition(JDFNumberList value)
+	public void setYPosition(final JDFNumberList value)
 	{
 		setAttribute(AttributeName.YPOSITION, value, null);
 	}
@@ -218,8 +218,8 @@ public abstract class JDFAutoNumberingParam extends JDFElement
 	 */
 	public JDFNumberList getYPosition()
 	{
-		String strAttrName = getAttribute(AttributeName.YPOSITION, null, null);
-		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.YPOSITION, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -233,7 +233,7 @@ public abstract class JDFAutoNumberingParam extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOrientation(double value)
+	public void setOrientation(final double value)
 	{
 		setAttribute(AttributeName.ORIENTATION, value, null);
 	}
@@ -258,7 +258,7 @@ public abstract class JDFAutoNumberingParam extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStep(int value)
+	public void setStep(final int value)
 	{
 		setAttribute(AttributeName.STEP, value, null);
 	}

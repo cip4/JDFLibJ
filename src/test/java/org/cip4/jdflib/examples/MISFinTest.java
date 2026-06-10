@@ -81,7 +81,7 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.auto.JDFAutoBoxFoldAction.EnumAction;
 import org.cip4.jdflib.auto.JDFAutoBoxFoldingParams.EnumBoxFoldingType;
 import org.cip4.jdflib.auto.JDFAutoBundle.EnumBundleType;
-import org.cip4.jdflib.auto.JDFAutoDefect.EFace;
+import org.cip4.jdflib.auto.JDFAutoSurfaceMark.EnumFace;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -279,7 +279,7 @@ class MISFinTest extends BaseGoldenTicketTest
 		final JDFComponent comp = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Input);
 		comp.setDimensions((JDFXYPair) new JDFXYPair(50, 40).scaleFromCM(1));
 
-		final JDFSurfaceMark sm = comp.getCreateSurfaceMark(EFace.Front);
+		final JDFSurfaceMark sm = comp.getCreateSurfaceMark(EnumFace.Front);
 
 		snippets.add("ResourceSet[@Name=\"CuttingParams\"]");
 		snippets.add("ResourceSet[@Name=\"Component\"]");

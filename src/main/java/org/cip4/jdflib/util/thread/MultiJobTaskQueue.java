@@ -49,8 +49,6 @@ import org.cip4.jdflib.util.MyPair;
  * class to run multiple tasks in parallel while ensuring that all tasks that belong to one job remain in order
  *
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
- *
  */
 public class MultiJobTaskQueue extends MultiTaskQueue
 {
@@ -92,10 +90,9 @@ public class MultiJobTaskQueue extends MultiTaskQueue
 	final AtomicReference<Set<Object>> setMutex = new AtomicReference<>(new HashSet<>());
 
 	/**
-	 *
 	 * grab the queue
 	 *
-	 * @param name - must not be null
+	 * @param name        - must not be null
 	 * @param maxParallel ignored if <=0
 	 * @return the queue to fill with tasks
 	 */
@@ -104,7 +101,7 @@ public class MultiJobTaskQueue extends MultiTaskQueue
 		name = getThreadName(name);
 		synchronized (theMap)
 		{
-			Map<String, OrderedTaskQueue> map = theMap.get();
+			final Map<String, OrderedTaskQueue> map = theMap.get();
 			OrderedTaskQueue orderedTaskQueue = map.get(name);
 			if (!(orderedTaskQueue instanceof MultiJobTaskQueue))
 			{
@@ -119,7 +116,6 @@ public class MultiJobTaskQueue extends MultiTaskQueue
 	}
 
 	/**
-	 *
 	 * @param name
 	 */
 	MultiJobTaskQueue(final String name)
@@ -147,7 +143,6 @@ public class MultiJobTaskQueue extends MultiTaskQueue
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	TaskRunner getNonRunning()
@@ -168,7 +163,6 @@ public class MultiJobTaskQueue extends MultiTaskQueue
 	}
 
 	/**
-	 *
 	 * @param firstTask
 	 */
 	void addTask(final TaskRunner firstTask)
@@ -177,7 +171,6 @@ public class MultiJobTaskQueue extends MultiTaskQueue
 	}
 
 	/**
-	 *
 	 * @param firstTask
 	 * @return
 	 */
@@ -187,7 +180,6 @@ public class MultiJobTaskQueue extends MultiTaskQueue
 	}
 
 	/**
-	 *
 	 * @param task
 	 * @param mutex all tasks wit the same mutex will be run in sequence
 	 * @return
@@ -197,9 +189,13 @@ public class MultiJobTaskQueue extends MultiTaskQueue
 		if (isUnique())
 		{
 			if (setQueueMutex.get().contains(mutex))
+			{
 				return false;
+			}
 			else
+			{
 				setQueueMutex.get().add(mutex);
+			}
 		}
 		final RunPair rp = new RunPair(task, mutex);
 		return super.queue(rp);
@@ -233,7 +229,9 @@ public class MultiJobTaskQueue extends MultiTaskQueue
 	void runTask(final TaskRunner r)
 	{
 		if (isUnique())
+		{
 			setQueueMutex.get().remove(getObject(r));
+		}
 		super.runTask(r);
 	}
 

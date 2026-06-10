@@ -131,7 +131,7 @@ public abstract class JDFAutoContact extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoContact(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoContact(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -143,7 +143,7 @@ public abstract class JDFAutoContact extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoContact(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoContact(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -156,7 +156,7 @@ public abstract class JDFAutoContact extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoContact(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoContact(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -167,7 +167,7 @@ public abstract class JDFAutoContact extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -197,7 +197,7 @@ public abstract class JDFAutoContact extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setContactTypes(VString value)
+	public void setContactTypes(final VString value)
 	{
 		setAttribute(AttributeName.CONTACTTYPES, value, null);
 	}
@@ -209,8 +209,8 @@ public abstract class JDFAutoContact extends JDFResource
 	 */
 	public VString getContactTypes()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.CONTACTTYPES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.CONTACTTYPES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -225,7 +225,7 @@ public abstract class JDFAutoContact extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setContactTypeDetails(String value)
+	public void setContactTypeDetails(final String value)
 	{
 		setAttribute(AttributeName.CONTACTTYPEDETAILS, value, null);
 	}
@@ -250,7 +250,7 @@ public abstract class JDFAutoContact extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setUserID(String value)
+	public void setUserID(final String value)
 	{
 		setAttribute(AttributeName.USERID, value, null);
 	}
@@ -307,7 +307,7 @@ public abstract class JDFAutoContact extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refAddress(JDFAddress refTarget)
+	public void refAddress(final JDFAddress refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -338,7 +338,7 @@ public abstract class JDFAutoContact extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFComChannel the element
 	 */
-	public JDFComChannel getCreateComChannel(int iSkip)
+	public JDFComChannel getCreateComChannel(final int iSkip)
 	{
 		return (JDFComChannel) getCreateElement_JDFElement(ElementName.COMCHANNEL, null, iSkip);
 	}
@@ -350,7 +350,7 @@ public abstract class JDFAutoContact extends JDFResource
 	 * @return JDFComChannel the element
 	 *         default is getComChannel(0)
 	 */
-	public JDFComChannel getComChannel(int iSkip)
+	public JDFComChannel getComChannel(final int iSkip)
 	{
 		return (JDFComChannel) getElement(ElementName.COMCHANNEL, null, iSkip);
 	}
@@ -380,7 +380,7 @@ public abstract class JDFAutoContact extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refComChannel(JDFComChannel refTarget)
+	public void refComChannel(final JDFComChannel refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -421,7 +421,7 @@ public abstract class JDFAutoContact extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refCompany(JDFCompany refTarget)
+	public void refCompany(final JDFCompany refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -462,7 +462,7 @@ public abstract class JDFAutoContact extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refPerson(JDFPerson refTarget)
+	public void refPerson(final JDFPerson refTarget)
 	{
 		refElement(refTarget);
 	}

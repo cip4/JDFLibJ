@@ -71,12 +71,8 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -111,15 +107,16 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMBINEDMETHOD, 0x3333333331l, AttributeInfo.EnumAttributeType.enumerations,
-				EnumCombinedMethod.getEnum(0), "None");
+				JavaEnumUtil.getEnum(EnumCombinedMethod.class, 0), "None");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.EXECUTIONPOLICY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumExecutionPolicy.getEnum(0), "AllFound");
+				JavaEnumUtil.getEnum(EnumExecutionPolicy.class, 0), "AllFound");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.GENERICATTRIBUTES, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.LANG, 0x3333333311l, AttributeInfo.EnumAttributeType.languages, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.OPTIONALCOMBINEDTYPES, 0x4444444431l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.TYPE, 0x4444444431l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.TYPEEXPRESSION, 0x3333333311l, AttributeInfo.EnumAttributeType.Any, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.TYPEORDER, 0x4444444431l, AttributeInfo.EnumAttributeType.enumeration, EnumTypeOrder.getEnum(0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.TYPEORDER, 0x4444444431l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumTypeOrder.class, 0), null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.TYPES, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 	}
 
@@ -155,7 +152,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDeviceCap(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDeviceCap(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -167,7 +164,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDeviceCap(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDeviceCap(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -180,257 +177,56 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDeviceCap(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDeviceCap(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for CombinedMethod
+	 * Enumeration strings for numCombinedMethod
 	 */
 
-	public enum ECombinedMethod
+	public enum EnumCombinedMethod
 	{
 		Combined, CombinedProcessGroup, GrayBox, ProcessGroup, None;
 
-		public static ECombinedMethod getEnum(String val)
+		public static EnumCombinedMethod getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ECombinedMethod.class, val, ECombinedMethod.None);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumCombinedMethod.class, val, EnumCombinedMethod.None);
 		}
 	}
 
 	/**
-	 * Enumeration strings for CombinedMethod
+	 * Enumeration strings for numExecutionPolicy
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumCombinedMethod extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumCombinedMethod(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumCombinedMethod getEnum(String enumName)
-		{
-			return (EnumCombinedMethod) getEnum(EnumCombinedMethod.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumCombinedMethod getEnum(int enumValue)
-		{
-			return (EnumCombinedMethod) getEnum(EnumCombinedMethod.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumCombinedMethod.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumCombinedMethod.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumCombinedMethod.class);
-		}
-
-		/**  */
-		public static final EnumCombinedMethod Combined = new EnumCombinedMethod("Combined");
-		/**  */
-		public static final EnumCombinedMethod CombinedProcessGroup = new EnumCombinedMethod("CombinedProcessGroup");
-		/**  */
-		public static final EnumCombinedMethod GrayBox = new EnumCombinedMethod("GrayBox");
-		/**  */
-		public static final EnumCombinedMethod ProcessGroup = new EnumCombinedMethod("ProcessGroup");
-		/**  */
-		public static final EnumCombinedMethod None = new EnumCombinedMethod("None");
-	}
-
-	/**
-	 * Enumeration strings for ExecutionPolicy
-	 */
-
-	public enum EExecutionPolicy
+	public enum EnumExecutionPolicy
 	{
 		RootNode, FirstFound, AllFound;
 
-		public static EExecutionPolicy getEnum(String val)
+		public static EnumExecutionPolicy getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EExecutionPolicy.class, val, EExecutionPolicy.AllFound);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumExecutionPolicy.class, val, EnumExecutionPolicy.AllFound);
 		}
 	}
 
 	/**
-	 * Enumeration strings for ExecutionPolicy
+	 * Enumeration strings for numTypeOrder
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumExecutionPolicy extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumExecutionPolicy(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumExecutionPolicy getEnum(String enumName)
-		{
-			return (EnumExecutionPolicy) getEnum(EnumExecutionPolicy.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumExecutionPolicy getEnum(int enumValue)
-		{
-			return (EnumExecutionPolicy) getEnum(EnumExecutionPolicy.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumExecutionPolicy.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumExecutionPolicy.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumExecutionPolicy.class);
-		}
-
-		/**  */
-		public static final EnumExecutionPolicy RootNode = new EnumExecutionPolicy("RootNode");
-		/**  */
-		public static final EnumExecutionPolicy FirstFound = new EnumExecutionPolicy("FirstFound");
-		/**  */
-		public static final EnumExecutionPolicy AllFound = new EnumExecutionPolicy("AllFound");
-	}
-
-	/**
-	 * Enumeration strings for TypeOrder
-	 */
-
-	public enum ETypeOrder
+	public enum EnumTypeOrder
 	{
 		Fixed, Unordered, Unrestricted;
 
-		public static ETypeOrder getEnum(String val)
+		public static EnumTypeOrder getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ETypeOrder.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumTypeOrder.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for TypeOrder
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumTypeOrder extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumTypeOrder(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumTypeOrder getEnum(String enumName)
-		{
-			return (EnumTypeOrder) getEnum(EnumTypeOrder.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumTypeOrder getEnum(int enumValue)
-		{
-			return (EnumTypeOrder) getEnum(EnumTypeOrder.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumTypeOrder.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumTypeOrder.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumTypeOrder.class);
-		}
-
-		/**  */
-		public static final EnumTypeOrder Fixed = new EnumTypeOrder("Fixed");
-		/**  */
-		public static final EnumTypeOrder Unordered = new EnumTypeOrder("Unordered");
-		/**  */
-		public static final EnumTypeOrder Unrestricted = new EnumTypeOrder("Unrestricted");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -442,7 +238,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 *
 	 * @param v List of the enumeration values
 	 */
-	public void setECombinedMethod(List<ECombinedMethod> v)
+	public void setCombinedMethod(final List<EnumCombinedMethod> v)
 	{
 		setEnumsAttribute(AttributeName.COMBINEDMETHOD, v, null);
 	}
@@ -452,38 +248,9 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public List<ECombinedMethod> getEnumsCombinedMethod()
+	public List<EnumCombinedMethod> getCombinedMethod()
 	{
-		return getEnumerationsAttribute(AttributeName.COMBINEDMETHOD, null, ECombinedMethod.class);
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute CombinedMethod
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5.2) set attribute CombinedMethod
-	 *
-	 * @param v List of the enumeration values
-	 * @deprecated use SetECombinedMethod(List<ECombinedMethod>) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setCombinedMethod(List<EnumCombinedMethod> v)
-	{
-		setEnumerationsAttribute(AttributeName.COMBINEDMETHOD, v, null);
-	}
-
-	/**
-	 * (9.2) get CombinedMethod attribute CombinedMethod
-	 *
-	 * @return Vector of the enumerations
-	 * @deprecated use List<ECombinedMethod > GetECombinedMethod() based on java.lang.enum instead
-	 */
-	@Deprecated
-	public Vector<EnumCombinedMethod> getCombinedMethod()
-	{
-		return getEnumerationsAttribute(AttributeName.COMBINEDMETHOD, null, EnumCombinedMethod.None, false);
+		return getEnumerationsAttribute(AttributeName.COMBINEDMETHOD, null, EnumCombinedMethod.class);
 	}
 
 	/*
@@ -496,9 +263,9 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setExecutionPolicy(EExecutionPolicy enumVar)
+	public void setExecutionPolicy(final EnumExecutionPolicy enumVar)
 	{
-		setAttribute(AttributeName.EXECUTIONPOLICY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.EXECUTIONPOLICY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -506,35 +273,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EExecutionPolicy getEExecutionPolicy()
-	{
-		return EExecutionPolicy.getEnum(getAttribute(AttributeName.EXECUTIONPOLICY, null, "AllFound"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ExecutionPolicy
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ExecutionPolicy
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetExecutionPolicy(EExecutionPolicy) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setExecutionPolicy(EnumExecutionPolicy enumVar)
-	{
-		setAttribute(AttributeName.EXECUTIONPOLICY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ExecutionPolicy
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EExecutionPolicy GetEExecutionPolicy() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumExecutionPolicy getExecutionPolicy()
 	{
 		return EnumExecutionPolicy.getEnum(getAttribute(AttributeName.EXECUTIONPOLICY, null, "AllFound"));
@@ -550,7 +288,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGenericAttributes(VString value)
+	public void setGenericAttributes(final VString value)
 	{
 		setAttribute(AttributeName.GENERICATTRIBUTES, value, null);
 	}
@@ -562,8 +300,8 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 */
 	public VString getGenericAttributes()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.GENERICATTRIBUTES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.GENERICATTRIBUTES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -578,7 +316,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLang(VString value)
+	public void setLang(final VString value)
 	{
 		setAttribute(AttributeName.LANG, value, null);
 	}
@@ -590,8 +328,8 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 */
 	public VString getLang()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.LANG, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.LANG, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -606,7 +344,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOptionalCombinedTypes(VString value)
+	public void setOptionalCombinedTypes(final VString value)
 	{
 		setAttribute(AttributeName.OPTIONALCOMBINEDTYPES, value, null);
 	}
@@ -618,8 +356,8 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 */
 	public VString getOptionalCombinedTypes()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.OPTIONALCOMBINEDTYPES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.OPTIONALCOMBINEDTYPES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -634,7 +372,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setType(String value)
+	public void setType(final String value)
 	{
 		setAttribute(AttributeName.TYPE, value, null);
 	}
@@ -659,7 +397,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTypeExpression(String value)
+	public void setTypeExpression(final String value)
 	{
 		setAttribute(AttributeName.TYPEEXPRESSION, value, null);
 	}
@@ -684,9 +422,9 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setTypeOrder(ETypeOrder enumVar)
+	public void setTypeOrder(final EnumTypeOrder enumVar)
 	{
-		setAttribute(AttributeName.TYPEORDER, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.TYPEORDER, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -694,35 +432,6 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ETypeOrder getETypeOrder()
-	{
-		return ETypeOrder.getEnum(getAttribute(AttributeName.TYPEORDER, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute TypeOrder
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute TypeOrder
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetTypeOrder(ETypeOrder) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setTypeOrder(EnumTypeOrder enumVar)
-	{
-		setAttribute(AttributeName.TYPEORDER, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute TypeOrder
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ETypeOrder GetETypeOrder() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumTypeOrder getTypeOrder()
 	{
 		return EnumTypeOrder.getEnum(getAttribute(AttributeName.TYPEORDER, null, null));
@@ -738,7 +447,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTypes(VString value)
+	public void setTypes(final VString value)
 	{
 		setAttribute(AttributeName.TYPES, value, null);
 	}
@@ -750,8 +459,8 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 */
 	public VString getTypes()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -850,7 +559,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevCaps the element
 	 */
-	public JDFDevCaps getCreateDevCaps(int iSkip)
+	public JDFDevCaps getCreateDevCaps(final int iSkip)
 	{
 		return (JDFDevCaps) getCreateElement_JDFElement(ElementName.DEVCAPS, null, iSkip);
 	}
@@ -862,7 +571,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 * @return JDFDevCaps the element
 	 *         default is getDevCaps(0)
 	 */
-	public JDFDevCaps getDevCaps(int iSkip)
+	public JDFDevCaps getDevCaps(final int iSkip)
 	{
 		return (JDFDevCaps) getElement(ElementName.DEVCAPS, null, iSkip);
 	}
@@ -1037,7 +746,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFPerformance the element
 	 */
-	public JDFPerformance getCreatePerformance(int iSkip)
+	public JDFPerformance getCreatePerformance(final int iSkip)
 	{
 		return (JDFPerformance) getCreateElement_JDFElement(ElementName.PERFORMANCE, null, iSkip);
 	}
@@ -1049,7 +758,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 * @return JDFPerformance the element
 	 *         default is getPerformance(0)
 	 */
-	public JDFPerformance getPerformance(int iSkip)
+	public JDFPerformance getPerformance(final int iSkip)
 	{
 		return (JDFPerformance) getElement(ElementName.PERFORMANCE, null, iSkip);
 	}

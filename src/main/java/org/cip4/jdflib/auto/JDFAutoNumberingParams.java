@@ -106,7 +106,7 @@ public abstract class JDFAutoNumberingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNumberingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoNumberingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoNumberingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoNumberingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoNumberingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoNumberingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoNumberingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoNumberingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -142,7 +142,7 @@ public abstract class JDFAutoNumberingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -188,7 +188,7 @@ public abstract class JDFAutoNumberingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFNumberingParam the element
 	 */
-	public JDFNumberingParam getCreateNumberingParam(int iSkip)
+	public JDFNumberingParam getCreateNumberingParam(final int iSkip)
 	{
 		return (JDFNumberingParam) getCreateElement_JDFElement(ElementName.NUMBERINGPARAM, null, iSkip);
 	}
@@ -200,7 +200,7 @@ public abstract class JDFAutoNumberingParams extends JDFResource
 	 * @return JDFNumberingParam the element
 	 *         default is getNumberingParam(0)
 	 */
-	public JDFNumberingParam getNumberingParam(int iSkip)
+	public JDFNumberingParam getNumberingParam(final int iSkip)
 	{
 		return (JDFNumberingParam) getElement(ElementName.NUMBERINGPARAM, null, iSkip);
 	}

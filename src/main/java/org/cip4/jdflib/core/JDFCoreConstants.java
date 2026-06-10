@@ -40,7 +40,6 @@
 package org.cip4.jdflib.core;
 
 /**
- *
  * list of Strings that are universal and independent of JDF
  *
  * @author rainerprosi

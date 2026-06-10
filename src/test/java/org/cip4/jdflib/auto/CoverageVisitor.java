@@ -114,7 +114,7 @@ class CoverageVisitor implements DirectoryVisitor
 						+ " getParentPool getModulePool getCreateParentPool"
 						+ " JDFIDPrintingParams JDFLayout.getCreateSignature JDFLayout.getCreateSurface JDFLayout.getCreateFrontSurface JDFLayout.getCreateBackSurface JDFLayout.getCreateSheet"
 						+ " getCreateModulePool getCreateDevCapPool getDevCapPool getParentPool getDevCapVector getDevCap getMinOccurs getMaxOccurs JDFNumberItem JDFPartAmount JDFPartStatus JDFStatusPool JDFResourceLink");
-		;
+
 		final StringArray skip2 = new StringArray(
 				"JDFNewJDFQuParams setFamily setIdentical setRefTarget JDFColorantControl.setSeparation setPhoneNumber setEMailLocator setQuery JDFPartAmount JDFLayout.refSurface JDFLayout.refSheet");
 		skip = new HashSet<>();
@@ -197,7 +197,7 @@ class CoverageVisitor implements DirectoryVisitor
 			kElem.removeAttribute(AttributeName.RREF);
 			coverGetters(kElem);
 		}
-		catch (Throwable x)
+		catch (final Throwable x)
 		{
 			log.error("Snafu for " + kElem.getLocalName(), x);
 			throw x;
@@ -256,14 +256,14 @@ class CoverageVisitor implements DirectoryVisitor
 	private void coverEnums(final KElement kElem) throws Exception
 	{
 		final Class<? extends KElement> c = kElem.getClass();
-		HashSet<String> ignoreclasses = new HashSet<String>();
+		final HashSet<String> ignoreclasses = new HashSet<>();
 		ignoreclasses.add(ElementName.SIGNATURE);
 		ignoreclasses.add(ElementName.SHEET);
 		if (ignoreclasses.contains(c.getSimpleName().substring(3)))
 		{
 			return;
 		}
-		ArrayList<Class<?>> classes = new ArrayList<Class<?>>();
+		final ArrayList<Class<?>> classes = new ArrayList<>();
 		Class<?> cs = c;
 		boolean auto = false;
 		while (cs.getPackageName().startsWith("org.cip4"))
@@ -280,7 +280,7 @@ class CoverageVisitor implements DirectoryVisitor
 			}
 			cs = cs.getSuperclass();
 		}
-		HashSet<String> ignore = new HashSet<String>();
+		final HashSet<String> ignore = new HashSet<>();
 		ignore.add(AttributeName.LEVEL);
 		ignore.add(AttributeName.ROTATEPOLICY);
 		ignore.add(AttributeName.TYPE);
@@ -294,8 +294,8 @@ class CoverageVisitor implements DirectoryVisitor
 			{
 				if (cl.isEnum())
 				{
-					Class<Enum<?>> cle = (Class<Enum<?>>) cl;
-					Enum<?>[] vals = (Enum<?>[]) cl.getEnumConstants();
+					final Class<Enum<?>> cle = (Class<Enum<?>>) cl;
+					final Enum<?>[] vals = (Enum<?>[]) cl.getEnumConstants();
 					if (enums.containsKey(cl.getSimpleName()))
 					{
 						log.warn("duplicate enum: " + kElem.getLocalName() + " " + cl.getSimpleName() + " / " + enums.get(cl.getSimpleName()));

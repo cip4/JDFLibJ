@@ -157,7 +157,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBindItem(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoBindItem(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -169,7 +169,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoBindItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoBindItem(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -182,7 +182,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoBindItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoBindItem(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -203,7 +203,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setChildFolio(JDFXYPair value)
+	public void setChildFolio(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.CHILDFOLIO, value, null);
 	}
@@ -216,8 +216,8 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 */
 	public JDFXYPair getChildFolio()
 	{
-		String strAttrName = getAttribute(AttributeName.CHILDFOLIO, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CHILDFOLIO, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -231,7 +231,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setParentFolio(JDFXYPair value)
+	public void setParentFolio(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.PARENTFOLIO, value, null);
 	}
@@ -244,8 +244,8 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 */
 	public JDFXYPair getParentFolio()
 	{
-		String strAttrName = getAttribute(AttributeName.PARENTFOLIO, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.PARENTFOLIO, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -259,7 +259,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTransformation(JDFMatrix value)
+	public void setTransformation(final JDFMatrix value)
 	{
 		setAttribute(AttributeName.TRANSFORMATION, value, null);
 	}
@@ -272,8 +272,8 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 */
 	public JDFMatrix getTransformation()
 	{
-		String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, null);
-		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -287,7 +287,7 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWrapPages(JDFIntegerRangeList value)
+	public void setWrapPages(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.WRAPPAGES, value, null);
 	}
@@ -300,8 +300,8 @@ public abstract class JDFAutoBindItem extends JDFElement
 	 */
 	public JDFIntegerRangeList getWrapPages()
 	{
-		String strAttrName = getAttribute(AttributeName.WRAPPAGES, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.WRAPPAGES, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 

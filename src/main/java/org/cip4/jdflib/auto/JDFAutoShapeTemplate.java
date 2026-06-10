@@ -125,7 +125,7 @@ public abstract class JDFAutoShapeTemplate extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoShapeTemplate(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoShapeTemplate(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -137,7 +137,7 @@ public abstract class JDFAutoShapeTemplate extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoShapeTemplate(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoShapeTemplate(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -150,7 +150,7 @@ public abstract class JDFAutoShapeTemplate extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoShapeTemplate(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoShapeTemplate(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -171,7 +171,7 @@ public abstract class JDFAutoShapeTemplate extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setInnerDimensions(JDFShape value)
+	public void setInnerDimensions(final JDFShape value)
 	{
 		setAttribute(AttributeName.INNERDIMENSIONS, value, null);
 	}
@@ -184,8 +184,8 @@ public abstract class JDFAutoShapeTemplate extends JDFElement
 	 */
 	public JDFShape getInnerDimensions()
 	{
-		String strAttrName = getAttribute(AttributeName.INNERDIMENSIONS, null, null);
-		JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.INNERDIMENSIONS, null, null);
+		final JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -199,7 +199,7 @@ public abstract class JDFAutoShapeTemplate extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setName(String value)
+	public void setName(final String value)
 	{
 		setAttribute(AttributeName.NAME, value, null);
 	}
@@ -224,7 +224,7 @@ public abstract class JDFAutoShapeTemplate extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStandard(String value)
+	public void setStandard(final String value)
 	{
 		setAttribute(AttributeName.STANDARD, value, null);
 	}
@@ -271,7 +271,7 @@ public abstract class JDFAutoShapeTemplate extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
-	public JDFFileSpec getCreateFileSpec(int iSkip)
+	public JDFFileSpec getCreateFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -283,7 +283,7 @@ public abstract class JDFAutoShapeTemplate extends JDFElement
 	 * @return JDFFileSpec the element
 	 *         default is getFileSpec(0)
 	 */
-	public JDFFileSpec getFileSpec(int iSkip)
+	public JDFFileSpec getFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -313,7 +313,7 @@ public abstract class JDFAutoShapeTemplate extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}

@@ -57,7 +57,6 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Layout elements
- *
  */
 public class WalkDeliveryParams extends WalkResource
 {
@@ -70,7 +69,6 @@ public class WalkDeliveryParams extends WalkResource
 	}
 
 	/**
-	 *
 	 * @param xjdfDeliveryParams
 	 * @param jdfDeliveryParams
 	 * @return
@@ -111,7 +109,9 @@ public class WalkDeliveryParams extends WalkResource
 			}
 		}
 		if (!foundSome)
+		{
 			drop.deleteNode();
+		}
 		return foundSome;
 	}
 
@@ -122,7 +122,9 @@ public class WalkDeliveryParams extends WalkResource
 		{
 			final JDFAttributeMap m = new JDFAttributeMap(XJDFConstants.ContactType, EnumContactType.Delivery);
 			if (!StringUtil.isEmpty(dropID))
+			{
 				m.put(AttributeName.DROPID, dropID);
+			}
 			final ResourceHelper rhc = shc.getPartition(m);
 			if (rhc != null)
 			{

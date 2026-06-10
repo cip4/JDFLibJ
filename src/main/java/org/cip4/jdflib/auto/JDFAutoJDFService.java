@@ -71,16 +71,13 @@
 package org.cip4.jdflib.auto;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoDeviceCap.ECombinedMethod;
-import org.cip4.jdflib.auto.JDFAutoDeviceCap.ETypeOrder;
-import org.cip4.jdflib.auto.JDFAutoDeviceCap.EnumCombinedMethod;
-import org.cip4.jdflib.auto.JDFAutoDeviceCap.EnumTypeOrder;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  ***************************************************************************** class JDFAutoJDFService : public JDFElement
@@ -95,9 +92,10 @@ public abstract class JDFAutoJDFService extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMBINEDMETHOD, 0x4444444431l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumCombinedMethod.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumCombinedMethod.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.TYPE, 0x4444444422l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TYPEORDER, 0x4444444431l, AttributeInfo.EnumAttributeType.enumeration, EnumTypeOrder.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TYPEORDER, 0x4444444431l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumTypeOrder.class, 0), null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.TYPES, 0x4444444433l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 	}
 
@@ -113,7 +111,7 @@ public abstract class JDFAutoJDFService extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoJDFService(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoJDFService(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -125,7 +123,7 @@ public abstract class JDFAutoJDFService extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoJDFService(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoJDFService(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -138,16 +136,42 @@ public abstract class JDFAutoJDFService extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoJDFService(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoJDFService(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
+	/**
+	 * Enumeration strings for numCombinedMethod
 	 */
+
+	public enum EnumCombinedMethod
+	{
+		Combined, CombinedProcessGroup, GrayBox, ProcessGroup, None;
+
+		public static EnumCombinedMethod getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumCombinedMethod.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for numTypeOrder
+	 */
+
+	public enum EnumTypeOrder
+	{
+		Fixed, Unordered, Unrestricted;
+
+		public static EnumTypeOrder getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EnumTypeOrder.class, val, null);
+		}
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
+		 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -159,9 +183,9 @@ public abstract class JDFAutoJDFService extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setCombinedMethod(ECombinedMethod enumVar)
+	public void setCombinedMethod(final EnumCombinedMethod enumVar)
 	{
-		setAttribute(AttributeName.COMBINEDMETHOD, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.COMBINEDMETHOD, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -169,35 +193,6 @@ public abstract class JDFAutoJDFService extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ECombinedMethod getECombinedMethod()
-	{
-		return ECombinedMethod.getEnum(getAttribute(AttributeName.COMBINEDMETHOD, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute CombinedMethod
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute CombinedMethod
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetCombinedMethod(ECombinedMethod) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setCombinedMethod(EnumCombinedMethod enumVar)
-	{
-		setAttribute(AttributeName.COMBINEDMETHOD, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute CombinedMethod
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ECombinedMethod GetECombinedMethod() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumCombinedMethod getCombinedMethod()
 	{
 		return EnumCombinedMethod.getEnum(getAttribute(AttributeName.COMBINEDMETHOD, null, null));
@@ -213,7 +208,7 @@ public abstract class JDFAutoJDFService extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setType(String value)
+	public void setType(final String value)
 	{
 		setAttribute(AttributeName.TYPE, value, null);
 	}
@@ -238,9 +233,9 @@ public abstract class JDFAutoJDFService extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setTypeOrder(ETypeOrder enumVar)
+	public void setTypeOrder(final EnumTypeOrder enumVar)
 	{
-		setAttribute(AttributeName.TYPEORDER, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.TYPEORDER, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -248,35 +243,6 @@ public abstract class JDFAutoJDFService extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ETypeOrder getETypeOrder()
-	{
-		return ETypeOrder.getEnum(getAttribute(AttributeName.TYPEORDER, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute TypeOrder
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute TypeOrder
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetTypeOrder(ETypeOrder) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setTypeOrder(EnumTypeOrder enumVar)
-	{
-		setAttribute(AttributeName.TYPEORDER, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute TypeOrder
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ETypeOrder GetETypeOrder() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumTypeOrder getTypeOrder()
 	{
 		return EnumTypeOrder.getEnum(getAttribute(AttributeName.TYPEORDER, null, null));
@@ -292,7 +258,7 @@ public abstract class JDFAutoJDFService extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTypes(VString value)
+	public void setTypes(final VString value)
 	{
 		setAttribute(AttributeName.TYPES, value, null);
 	}
@@ -304,8 +270,8 @@ public abstract class JDFAutoJDFService extends JDFElement
 	 */
 	public VString getTypes()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}

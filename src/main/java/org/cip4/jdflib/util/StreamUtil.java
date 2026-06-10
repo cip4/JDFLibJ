@@ -75,11 +75,7 @@ public class StreamUtil
 		{
 			return null;
 		}
-		if (is instanceof ByteArrayInputStream)
-		{
-			return is;
-		}
-		if (is instanceof BufferedInputStream)
+		if ((is instanceof ByteArrayInputStream) || (is instanceof BufferedInputStream))
 		{
 			return is;
 		}
@@ -123,11 +119,7 @@ public class StreamUtil
 		{
 			return null;
 		}
-		if (os instanceof ByteArrayOutputStream)
-		{
-			return os;
-		}
-		if (os instanceof BufferedOutputStream)
+		if ((os instanceof ByteArrayOutputStream) || (os instanceof BufferedOutputStream))
 		{
 			return os;
 		}

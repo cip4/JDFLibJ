@@ -60,7 +60,6 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         before May 14, 2009
  */
 public class JDFContentObject extends JDFAutoContentObject implements IPlacedObject
@@ -94,7 +93,6 @@ public class JDFContentObject extends JDFAutoContentObject implements IPlacedObj
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 *
 	 */
 	public JDFContentObject(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
@@ -108,7 +106,6 @@ public class JDFContentObject extends JDFAutoContentObject implements IPlacedObj
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
-	 *
 	 */
 	public JDFContentObject(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
@@ -176,12 +173,13 @@ public class JDFContentObject extends JDFAutoContentObject implements IPlacedObj
 		final JDFMatrix ctm = getTrimCTM();
 		final JDFXYPair trimSize = getTrimSize();
 		if (ctm == null || trimSize == null)
+		{
 			return null;
+		}
 		return ctm.transform(new JDFRectangle(trimSize));
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public JDFXYPair getCenter()
@@ -218,7 +216,6 @@ public class JDFContentObject extends JDFAutoContentObject implements IPlacedObj
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.ifaces.IPlacedObject#setClipPath(java.lang.String, int)
 	 */
 	@Override
@@ -231,7 +228,9 @@ public class JDFContentObject extends JDFAutoContentObject implements IPlacedObj
 			{
 				final String s = v.get(i);
 				if (StringUtil.isNumber(s))
+				{
 					v.set(i, StringUtil.formatDouble(StringUtil.parseDouble(s, 0), precision));
+				}
 			}
 		}
 		super.setClipPath(StringUtil.setvString(v));
@@ -240,11 +239,11 @@ public class JDFContentObject extends JDFAutoContentObject implements IPlacedObj
 	/**
 	 * calculates a "real" ord value in an automated layout
 	 *
-	 * @param ord the Value of Ord in the layout
-	 * @param nPages the total number of pages that are consumed by the Layout, if frontOffset!=0 the pages before frontOffset are NOT counted
-	 * @param loop which sheet loop are we on?
+	 * @param ord         the Value of Ord in the layout
+	 * @param nPages      the total number of pages that are consumed by the Layout, if frontOffset!=0 the pages before frontOffset are NOT counted
+	 * @param loop        which sheet loop are we on?
 	 * @param maxOrdFront number of pages consumed from the front of the list
-	 * @param maxOrdBack positive number of pages consumed from the back of the list
+	 * @param maxOrdBack  positive number of pages consumed from the back of the list
 	 * @param frontOffset page number of the first page to be placed on ord 0 in loop 0
 	 * @return the pge to assign in this Ord, -1 if no page fits
 	 */

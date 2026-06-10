@@ -73,9 +73,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkAuditPool extends WalkJDFSubElement
 {

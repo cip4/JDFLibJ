@@ -78,7 +78,6 @@ public class JDFRGBColor extends JDFNumList
 	 * constructs a RGB color with all values set via a Vector of Double objects
 	 *
 	 * @param v Vector of Double
-	 *
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 * @deprecated use typesafe constructors
 	 */
@@ -92,7 +91,6 @@ public class JDFRGBColor extends JDFNumList
 	 * constructs a RGB color with all values set via a String
 	 *
 	 * @param s the given String
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFRGBColor(final String s) throws DataFormatException
@@ -146,7 +144,6 @@ public class JDFRGBColor extends JDFNumList
 	 * constructs a RGB color with all values set via a JDFNumberList
 	 *
 	 * @param nl the given number list
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFRGBColor(final JDFRGBColor nl)
@@ -371,9 +368,13 @@ public class JDFRGBColor extends JDFNumList
 	{
 		double k0 = r;
 		if (b > k0)
+		{
 			k0 = b;
+		}
 		if (g > k0)
+		{
 			k0 = g;
+		}
 		final double[] ret = new double[4];
 		ret[3] = 1.0 - k0;
 		if (k0 > 0)

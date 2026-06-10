@@ -63,7 +63,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         before June 10, 2009
  */
 class JDFDateTest extends JDFTestCaseBase
@@ -72,7 +71,6 @@ class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testCreateDate() throws DataFormatException
@@ -85,7 +83,6 @@ class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testCreateDateEvil() throws DataFormatException
@@ -96,7 +93,6 @@ class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testCreateDateNormalize() throws DataFormatException
@@ -107,7 +103,6 @@ class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testCreateDateBadTimeZone() throws DataFormatException
@@ -122,7 +117,6 @@ class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testCreateDateBlank() throws DataFormatException
@@ -132,7 +126,6 @@ class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testCreateDateTZ30() throws DataFormatException
@@ -146,7 +139,6 @@ class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testCreateDateTZ30Neg() throws DataFormatException
@@ -160,7 +152,6 @@ class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testCreateDateTZ30N00() throws DataFormatException
@@ -174,7 +165,6 @@ class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testCreateDateSeconds() throws DataFormatException
@@ -185,7 +175,6 @@ class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testRoundDate() throws DataFormatException
@@ -238,7 +227,9 @@ class JDFDateTest extends JDFTestCaseBase
 	{
 		final JDFDate d = new JDFDate();
 		if (d.getDay() > 20)
+		{
 			d.addOffset(0, 0, 0, -5);
+		}
 		final JDFDate d1 = new JDFDate(d);
 		d1.setTime(0, 0, 0).addOffset(0, 0, 22, 3);
 		assertTrue(d1.getFormattedDateTime(JDFDate.DATETIMEISO).contains("T22:00:00"));
@@ -268,8 +259,6 @@ class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
-	 *
 	 */
 	@Test
 	void testCreateDateFromDuration() throws DataFormatException
@@ -284,7 +273,6 @@ class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testBadDate() throws DataFormatException
@@ -444,8 +432,6 @@ class JDFDateTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -685,7 +671,6 @@ class JDFDateTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * test the c++ regexp for date time
 	 */
 	@Test
@@ -1048,7 +1033,6 @@ class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testNoTimeZone() throws DataFormatException
@@ -1069,7 +1053,6 @@ class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testToString() throws DataFormatException
@@ -1080,7 +1063,6 @@ class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	@Disabled
@@ -1115,7 +1097,6 @@ class JDFDateTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testTimeZoneSwitch() throws DataFormatException

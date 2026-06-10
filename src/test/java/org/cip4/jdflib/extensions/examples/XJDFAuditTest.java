@@ -59,9 +59,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class XJDFAuditTest extends ExampleTest
 {
@@ -72,7 +70,7 @@ class XJDFAuditTest extends ExampleTest
 	void testResourceAudit()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("PaperAudit", null, null);
-		xjdfHelper.setTypes(EnumType.ConventionalPrinting.getName());
+		xjdfHelper.setTypes(EnumType.ConventionalPrinting.name());
 		final SetHelper shMedia = xjdfHelper.getCreateSet(ElementName.MEDIA, null);
 		final SetHelper shComp = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Input);
 
@@ -113,8 +111,8 @@ class XJDFAuditTest extends ExampleTest
 	public final void testQualityControl()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("QualityControlExample", null, null);
-		xjdfHelper.addType(EnumType.ConventionalPrinting.getName(), 0);
-		xjdfHelper.addType(EnumType.QualityControl.getName(), -1);
+		xjdfHelper.addType(EnumType.ConventionalPrinting.name(), 0);
+		xjdfHelper.addType(EnumType.QualityControl.name(), -1);
 
 		xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Output);
 		final SetHelper qqp = xjdfHelper.getCreateSet(ElementName.QUALITYCONTROLPARAMS, EnumUsage.Input);
@@ -159,6 +157,6 @@ class XJDFAuditTest extends ExampleTest
 		super.setUp();
 		KElement.setLongID(false);
 		JDFAudit.setStaticAgentName("Writer");
-		JDFAudit.setStaticAgentVersion("V_" + XJDFHelper.defaultVersion().getName());
+		JDFAudit.setStaticAgentVersion("V_" + XJDFHelper.defaultVersion().name());
 	}
 }

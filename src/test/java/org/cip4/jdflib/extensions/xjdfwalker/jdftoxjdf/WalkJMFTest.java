@@ -89,15 +89,15 @@ class WalkJMFTest extends JDFTestCaseBase
 	@Test
 	void testSenderID()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
 		jmf.setSenderID("s1");
-		JDFSignal sig = jmf.getSignal(0);
+		final JDFSignal sig = jmf.getSignal(0);
 		sig.appendResourceQuParams().setJobID("j1");
 		sig.appendResourceInfo();
 
-		KElement xjmf = new JDFToXJDF().convert(jmf);
+		final KElement xjmf = new JDFToXJDF().convert(jmf);
 
-		KElement sender = xjmf.getElement(XJDFConstants.Header);
+		final KElement sender = xjmf.getElement(XJDFConstants.Header);
 		Assertions.assertNull(sender.getNonEmpty(AttributeName.SENDERID));
 		Assertions.assertEquals(sender.getNonEmpty(AttributeName.DEVICEID), "s1");
 	}
@@ -108,13 +108,13 @@ class WalkJMFTest extends JDFTestCaseBase
 	@Test
 	void testXSI()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
 		jmf.setSenderID("s1");
-		JDFSignal sig = jmf.getSignal(0);
+		final JDFSignal sig = jmf.getSignal(0);
 		sig.appendResourceQuParams().setJobID("j1");
 		sig.appendResourceInfo();
 
-		KElement xjmf = new JDFToXJDF().convert(jmf);
+		final KElement xjmf = new JDFToXJDF().convert(jmf);
 
 		Assertions.assertNull(xjmf.getNonEmpty(AttributeName.XSITYPE));
 		Assertions.assertNull(xjmf.getNonEmpty(AttributeName.XMLNSXSI));

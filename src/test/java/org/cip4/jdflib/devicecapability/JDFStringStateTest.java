@@ -71,8 +71,8 @@
  * JDFStrinStateTest.java
  *
  * @author Rainer Prosi
- * 
- * Copyright (c) 2001-2004 The International Cooperation for the Integration 
+ *
+ * Copyright (c) 2001-2004 The International Cooperation for the Integration
  * of Processes in  Prepress, Press and Postpress (CIP4).  All rights reserved.
  */
 package org.cip4.jdflib.devicecapability;
@@ -84,6 +84,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFStringState;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 class JDFStringStateTest extends JDFTestCaseBase
 {
 
@@ -94,7 +95,7 @@ class JDFStringStateTest extends JDFTestCaseBase
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		JDFDoc doc = new JDFDoc("StringState");
+		final JDFDoc doc = new JDFDoc("StringState");
 		sState = (JDFStringState) doc.getRoot();
 
 	}

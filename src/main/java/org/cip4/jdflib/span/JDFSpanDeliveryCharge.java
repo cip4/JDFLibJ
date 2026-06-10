@@ -9,12 +9,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanDeliveryCharge extends JDFEnumerationSpan
@@ -23,39 +19,39 @@ public class JDFSpanDeliveryCharge extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanDeliveryCharge
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanDeliveryCharge(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanDeliveryCharge(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanDeliveryCharge
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanDeliveryCharge(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanDeliveryCharge(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanDeliveryCharge
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanDeliveryCharge(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanDeliveryCharge(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -64,50 +60,21 @@ public class JDFSpanDeliveryCharge extends JDFEnumerationSpan
 	 * Enumeration strings for EnumSpanDeliveryCharge
 	 */
 
-	public static class EnumSpanDeliveryCharge extends ValuedEnum
+	public enum EnumSpanDeliveryCharge
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		Printer, Buyer;
 
-		private EnumSpanDeliveryCharge(String name)
+		public static EnumSpanDeliveryCharge getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanDeliveryCharge.class, val, null);
 		}
-
-		public static EnumSpanDeliveryCharge getEnum(String enumName)
-		{
-			return (EnumSpanDeliveryCharge) getEnum(EnumSpanDeliveryCharge.class, enumName);
-		}
-
-		public static EnumSpanDeliveryCharge getEnum(int enumValue)
-		{
-			return (EnumSpanDeliveryCharge) getEnum(EnumSpanDeliveryCharge.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanDeliveryCharge.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanDeliveryCharge.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanDeliveryCharge.class);
-		}
-
-		public static final EnumSpanDeliveryCharge Printer = new EnumSpanDeliveryCharge("Printer");
-		public static final EnumSpanDeliveryCharge Buyer = new EnumSpanDeliveryCharge("Buyer");
 
 	}
 
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanDeliveryCharge.getEnum(0);
+		return EnumSpanDeliveryCharge.class;
 	}
 
 	// **************************************** Methods
@@ -115,7 +82,7 @@ public class JDFSpanDeliveryCharge extends JDFEnumerationSpan
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

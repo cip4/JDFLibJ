@@ -79,11 +79,11 @@
  */
 package org.cip4.jdflib.resource.process.prepress;
 
+import java.util.List;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoColorSpaceConversionOp;
-import org.cip4.jdflib.auto.JDFAutoObjectResolution.EnumSourceObjects;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
@@ -222,16 +222,15 @@ public class JDFColorSpaceConversionOp extends JDFAutoColorSpaceConversionOp
 	 */
 	public void addSourceObject(final EnumSourceObjects val)
 	{
-		@SuppressWarnings("unchecked")
-		final Vector<EnumSourceObjects> v = getSourceObjects();
+		final List<EnumSourceObjects> v = getSourceObjects();
 		if (val != null && v == null)
 		{
-			setAttribute(AttributeName.SOURCEOBJECTS, val.getName());
+			setAttribute(AttributeName.SOURCEOBJECTS, val.name());
 		}
 		else if (val != null && !v.contains(val))
 		{
 			v.add(val);
-			setSourceObjects(v);
+			setSourceObjects(new Vector<>(v));
 		}
 	}
 

@@ -50,14 +50,12 @@ package org.cip4.jdflib.datatypes;
 import java.util.ArrayList;
 import java.util.zip.DataFormatException;
 
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFDateTimeRangeList extends JDFRangeList
@@ -80,7 +78,6 @@ public class JDFDateTimeRangeList extends JDFRangeList
 	 * constructs a JDFDateTimeRangeList from a given string
 	 *
 	 * @param s the given string
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFDateTimeRangeList(final String s) throws DataFormatException
@@ -133,7 +130,6 @@ public class JDFDateTimeRangeList extends JDFRangeList
 	 * inRange - returns true if the given JDFDate value is in one of the ranges of the range list
 	 *
 	 * @param x the given JDFDate (duration) value to compare
-	 *
 	 * @return boolean - true if in range otherwise false
 	 */
 	public boolean inRange(final JDFDate x)
@@ -155,13 +151,14 @@ public class JDFDateTimeRangeList extends JDFRangeList
 	 * setString - parse the given string and set the duration range list
 	 *
 	 * @param s the given string
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public void setString(final String s) throws DataFormatException
 	{
-		if (s.indexOf(JDFConstants.TILDE) == 0 || s.lastIndexOf(JDFConstants.TILDE) == (s.length() - 1))
+		if (s.indexOf(JDFCoreConstants.TILDE) == 0 || s.lastIndexOf(JDFCoreConstants.TILDE) == (s.length() - 1))
+		{
 			throw new DataFormatException("JDFDateTimeRangeList::SetString: Illegal string " + s);
+		}
 		final String zappedWS = StringUtil.zappTokenWS(s, "~");
 		final StringArray vs = StringArray.getVString(zappedWS, " \t");
 		rangeList.clear();
@@ -183,7 +180,6 @@ public class JDFDateTimeRangeList extends JDFRangeList
 	 * isValid - validate the given String
 	 *
 	 * @param s the given string
-	 *
 	 * @return boolean - false if the String has not a valid format
 	 */
 	public boolean isValid(final String s)
@@ -242,7 +238,9 @@ public class JDFDateTimeRangeList extends JDFRangeList
 
 		final int n1 = al == null ? 0 : al.size() - 1;
 		if (n1 == 0)
+		{
 			return true; // single value
+		}
 
 		final JDFDate first = (al.get(0));
 		final JDFDate last = (al.get(n1));
@@ -252,9 +250,10 @@ public class JDFDateTimeRangeList extends JDFRangeList
 			final JDFDate value = (al.get(j));
 			final JDFDate nextvalue = (al.get(j + 1));
 
-			if (((first.equals(last) && value.equals(nextvalue)) || (first.isEarlier(last) && (value.isEarlier(nextvalue) || value.equals(nextvalue)))
-					|| (first.isLater(last) && (value.isLater(nextvalue) || value.equals(nextvalue)))) == false)
+			if (((!first.equals(last) || !value.equals(nextvalue)) && (!first.isEarlier(last) || (!value.isEarlier(nextvalue) && !value.equals(nextvalue))) && (!first.isLater(last) || (!value.isLater(nextvalue) && !value.equals(nextvalue)))))
+			{
 				return false;
+			}
 		}
 		return true;
 	}
@@ -263,7 +262,9 @@ public class JDFDateTimeRangeList extends JDFRangeList
 	{
 		final int siz = rangeList.size();
 		if (siz == 0)
+		{
 			return null; // attempt to operate on a null element
+		}
 
 		final ArrayList<JDFDate> al = new ArrayList<>(); // vector of ranges
 		for (int i = 0; i < siz; i++)
@@ -305,8 +306,10 @@ public class JDFDateTimeRangeList extends JDFRangeList
 			final JDFDate value = v.get(j);
 			final JDFDate nextvalue = v.get(j + 1);
 
-			if (((first.isEarlier(last) && value.isEarlier(nextvalue)) || (first.isLater(last) && value.isLater(nextvalue))) == false)
+			if (((!first.isEarlier(last) || !value.isEarlier(nextvalue)) && (!first.isLater(last) || !value.isLater(nextvalue))))
+			{
 				return false;
+			}
 		}
 		return true;
 	}

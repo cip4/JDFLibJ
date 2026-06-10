@@ -46,7 +46,6 @@ package org.cip4.jdflib.core;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         before August 20, 2009
  */
 public abstract class JDFConstants extends JDFCoreConstants

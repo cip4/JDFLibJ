@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -97,9 +92,9 @@ public abstract class JDFAutoDisposition extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.DISPOSITIONACTION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumDispositionAction.getEnum(0), "Delete");
+				JavaEnumUtil.getEnum(EnumDispositionAction.class, 0), "Delete");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.DISPOSITIONUSAGE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumDispositionUsage.getEnum(0), null);
+				JavaEnumUtil.getEnum(EnumDispositionUsage.class, 0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.EXTRADURATION, 0x3333333311l, AttributeInfo.EnumAttributeType.duration, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.MINDURATION, 0x3333333311l, AttributeInfo.EnumAttributeType.duration, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.PRIORITY, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, "0");
@@ -118,7 +113,7 @@ public abstract class JDFAutoDisposition extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDisposition(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDisposition(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -130,7 +125,7 @@ public abstract class JDFAutoDisposition extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDisposition(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDisposition(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -143,170 +138,42 @@ public abstract class JDFAutoDisposition extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDisposition(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDisposition(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for DispositionAction
+	 * Enumeration strings for numDispositionAction
 	 */
 
-	public enum EDispositionAction
+	public enum EnumDispositionAction
 	{
 		Delete, Archive;
 
-		public static EDispositionAction getEnum(String val)
+		public static EnumDispositionAction getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EDispositionAction.class, val, EDispositionAction.Delete);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumDispositionAction.class, val, EnumDispositionAction.Delete);
 		}
 	}
 
 	/**
-	 * Enumeration strings for DispositionAction
+	 * Enumeration strings for numDispositionUsage
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumDispositionAction extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumDispositionAction(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumDispositionAction getEnum(String enumName)
-		{
-			return (EnumDispositionAction) getEnum(EnumDispositionAction.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDispositionAction getEnum(int enumValue)
-		{
-			return (EnumDispositionAction) getEnum(EnumDispositionAction.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDispositionAction.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDispositionAction.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDispositionAction.class);
-		}
-
-		/**  */
-		public static final EnumDispositionAction Delete = new EnumDispositionAction("Delete");
-		/**  */
-		public static final EnumDispositionAction Archive = new EnumDispositionAction("Archive");
-	}
-
-	/**
-	 * Enumeration strings for DispositionUsage
-	 */
-
-	public enum EDispositionUsage
+	public enum EnumDispositionUsage
 	{
 		Input, Output;
 
-		public static EDispositionUsage getEnum(String val)
+		public static EnumDispositionUsage getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EDispositionUsage.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumDispositionUsage.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for DispositionUsage
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumDispositionUsage extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumDispositionUsage(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumDispositionUsage getEnum(String enumName)
-		{
-			return (EnumDispositionUsage) getEnum(EnumDispositionUsage.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDispositionUsage getEnum(int enumValue)
-		{
-			return (EnumDispositionUsage) getEnum(EnumDispositionUsage.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDispositionUsage.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDispositionUsage.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDispositionUsage.class);
-		}
-
-		/**  */
-		public static final EnumDispositionUsage Input = new EnumDispositionUsage("Input");
-		/**  */
-		public static final EnumDispositionUsage Output = new EnumDispositionUsage("Output");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -318,9 +185,9 @@ public abstract class JDFAutoDisposition extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDispositionAction(EDispositionAction enumVar)
+	public void setDispositionAction(final EnumDispositionAction enumVar)
 	{
-		setAttribute(AttributeName.DISPOSITIONACTION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DISPOSITIONACTION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -328,35 +195,6 @@ public abstract class JDFAutoDisposition extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EDispositionAction getEDispositionAction()
-	{
-		return EDispositionAction.getEnum(getAttribute(AttributeName.DISPOSITIONACTION, null, "Delete"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute DispositionAction
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute DispositionAction
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDispositionAction(EDispositionAction) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDispositionAction(EnumDispositionAction enumVar)
-	{
-		setAttribute(AttributeName.DISPOSITIONACTION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute DispositionAction
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EDispositionAction GetEDispositionAction() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumDispositionAction getDispositionAction()
 	{
 		return EnumDispositionAction.getEnum(getAttribute(AttributeName.DISPOSITIONACTION, null, "Delete"));
@@ -372,9 +210,9 @@ public abstract class JDFAutoDisposition extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDispositionUsage(EDispositionUsage enumVar)
+	public void setDispositionUsage(final EnumDispositionUsage enumVar)
 	{
-		setAttribute(AttributeName.DISPOSITIONUSAGE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DISPOSITIONUSAGE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -382,35 +220,6 @@ public abstract class JDFAutoDisposition extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EDispositionUsage getEDispositionUsage()
-	{
-		return EDispositionUsage.getEnum(getAttribute(AttributeName.DISPOSITIONUSAGE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute DispositionUsage
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute DispositionUsage
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDispositionUsage(EDispositionUsage) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDispositionUsage(EnumDispositionUsage enumVar)
-	{
-		setAttribute(AttributeName.DISPOSITIONUSAGE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute DispositionUsage
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EDispositionUsage GetEDispositionUsage() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumDispositionUsage getDispositionUsage()
 	{
 		return EnumDispositionUsage.getEnum(getAttribute(AttributeName.DISPOSITIONUSAGE, null, null));
@@ -426,7 +235,7 @@ public abstract class JDFAutoDisposition extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setExtraDuration(JDFDuration value)
+	public void setExtraDuration(final JDFDuration value)
 	{
 		setAttribute(AttributeName.EXTRADURATION, value, null);
 	}
@@ -439,8 +248,8 @@ public abstract class JDFAutoDisposition extends JDFElement
 	 */
 	public JDFDuration getExtraDuration()
 	{
-		String strAttrName = getAttribute(AttributeName.EXTRADURATION, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.EXTRADURATION, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -454,7 +263,7 @@ public abstract class JDFAutoDisposition extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMinDuration(JDFDuration value)
+	public void setMinDuration(final JDFDuration value)
 	{
 		setAttribute(AttributeName.MINDURATION, value, null);
 	}
@@ -467,8 +276,8 @@ public abstract class JDFAutoDisposition extends JDFElement
 	 */
 	public JDFDuration getMinDuration()
 	{
-		String strAttrName = getAttribute(AttributeName.MINDURATION, null, null);
-		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.MINDURATION, null, null);
+		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -482,7 +291,7 @@ public abstract class JDFAutoDisposition extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPriority(int value)
+	public void setPriority(final int value)
 	{
 		setAttribute(AttributeName.PRIORITY, value, null);
 	}
@@ -507,7 +316,7 @@ public abstract class JDFAutoDisposition extends JDFElement
 	 *
 	 * @param value the value to set the attribute to or null
 	 */
-	public void setUntil(JDFDate value)
+	public void setUntil(final JDFDate value)
 	{
 		JDFDate date = value;
 		if (date == null)
@@ -524,8 +333,8 @@ public abstract class JDFAutoDisposition extends JDFElement
 	 */
 	public JDFDate getUntil()
 	{
-		String str = getAttribute(AttributeName.UNTIL, null, null);
-		JDFDate ret = JDFDate.createDate(str);
+		final String str = getAttribute(AttributeName.UNTIL, null, null);
+		final JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 

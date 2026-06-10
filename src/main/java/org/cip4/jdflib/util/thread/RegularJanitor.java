@@ -58,9 +58,7 @@ public final class RegularJanitor
 	private int interval;
 
 	/**
-	 *
 	 * simple runnable maker
-	 *
 	 */
 	class SweepRunner implements Runnable
 	{
@@ -91,7 +89,6 @@ public final class RegularJanitor
 	}
 
 	/**
-	 *
 	 * set the interval between sweeps in seconds
 	 *
 	 * @param interval
@@ -107,7 +104,6 @@ public final class RegularJanitor
 	}
 
 	/**
-	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -117,8 +113,6 @@ public final class RegularJanitor
 	}
 
 	/**
-	 *
-	 *
 	 * @return
 	 */
 	public int numSweepers()
@@ -152,7 +146,6 @@ public final class RegularJanitor
 	}
 
 	/**
-	 *
 	 * @param sweeper
 	 * @return
 	 */
@@ -171,7 +164,9 @@ public final class RegularJanitor
 		}
 		final Class<?> newClass = getRunnerClass(sweeper);
 		if (newClass == null)
+		{
 			return null;
+		}
 
 		for (final Sweeper oldSweeper : v)
 		{
@@ -185,7 +180,6 @@ public final class RegularJanitor
 	}
 
 	/**
-	 *
 	 * @param sweeper
 	 */
 	private void checkDuplicates(final Sweeper sweeper)
@@ -199,8 +193,6 @@ public final class RegularJanitor
 	}
 
 	/**
-	 *
-	 *
 	 * @param oldSweeper
 	 * @return
 	 */
@@ -222,8 +214,6 @@ public final class RegularJanitor
 	}
 
 	/**
-	 *
-	 *
 	 * @author rainer prosi
 	 * @date Dec 9, 2011
 	 */
@@ -266,7 +256,9 @@ public final class RegularJanitor
 				{
 					sweep(sweeper);
 					if (theMutex == null)
+					{
 						break; // feierabend was called
+					}
 				}
 				if (!ThreadUtil.wait(theMutex, 1000 * interval))
 				{
@@ -302,20 +294,20 @@ public final class RegularJanitor
 		}
 
 		/**
-		 *
 		 * @param firstInterval the first interval prior to commencing in seconds
 		 */
 		void setFirstInterval(int firstInterval)
 		{
 			if (firstInterval < 0)
+			{
 				firstInterval = interval;
+			}
 			this.firstInterval = firstInterval;
 		}
 	}
 
 	/**
 	 * @param firstInterval the time in seconds to wait prior to the first sweep, if 0 then don't wait if<0 then use interval
-	 *
 	 */
 	public synchronized void startSweep(final int firstInterval)
 	{
@@ -323,7 +315,9 @@ public final class RegularJanitor
 		{
 			log.warn("Janitor already running - do nothing ");
 			if (theJanitor != null)
+			{
 				return;
+			}
 		}
 		else
 		{
@@ -370,7 +364,9 @@ public final class RegularJanitor
 	public static RegularJanitor getJanitor()
 	{
 		if (theJanitor == null)
+		{
 			theJanitor = new RegularJanitor();
+		}
 		return theJanitor;
 
 	}

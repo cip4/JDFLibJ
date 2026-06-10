@@ -47,7 +47,6 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
  * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super classes
  *
  * @author prosirai
- *
  */
 public class WalkKElement extends WalkAnyElement
 {
@@ -63,7 +62,7 @@ public class WalkKElement extends WalkAnyElement
 
 	/**
 	 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-	 * @param e1 - the element to track
+	 * @param e1        - the element to track
 	 * @param trackElem - always null
 	 * @return the element to continue walking
 	 */

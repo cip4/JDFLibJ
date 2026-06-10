@@ -127,13 +127,13 @@ public class JDFDeliveryIntent extends JDFAutoDeliveryIntent
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFDeliveryIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFDeliveryIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.auto.JDFAutoDeliveryIntent#toString()
 	 */
 	@Override
@@ -143,13 +143,14 @@ public class JDFDeliveryIntent extends JDFAutoDeliveryIntent
 	}
 
 	/**
-	 *
 	 * @param delParams
 	 */
 	public boolean setFromDeliveryParams(final JDFDeliveryParams delParams)
 	{
 		if (delParams == null)
+		{
 			return false;
+		}
 
 		boolean done = false;
 		final List<JDFDrop> v = delParams.getChildArrayByClass(JDFDrop.class, false, 0);
@@ -168,7 +169,7 @@ public class JDFDeliveryIntent extends JDFAutoDeliveryIntent
 
 	/**
 	 * get the dropItemIntent for a given component also checks partition
-	 * 
+	 *
 	 * @param c
 	 * @return
 	 */

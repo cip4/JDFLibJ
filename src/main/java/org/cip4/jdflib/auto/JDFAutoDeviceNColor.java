@@ -107,7 +107,7 @@ public abstract class JDFAutoDeviceNColor extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDeviceNColor(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDeviceNColor(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -119,7 +119,7 @@ public abstract class JDFAutoDeviceNColor extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDeviceNColor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDeviceNColor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -132,7 +132,7 @@ public abstract class JDFAutoDeviceNColor extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDeviceNColor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDeviceNColor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -153,7 +153,7 @@ public abstract class JDFAutoDeviceNColor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setColorList(JDFNumberList value)
+	public void setColorList(final JDFNumberList value)
 	{
 		setAttribute(AttributeName.COLORLIST, value, null);
 	}
@@ -166,8 +166,8 @@ public abstract class JDFAutoDeviceNColor extends JDFElement
 	 */
 	public JDFNumberList getColorList()
 	{
-		String strAttrName = getAttribute(AttributeName.COLORLIST, null, null);
-		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.COLORLIST, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -181,7 +181,7 @@ public abstract class JDFAutoDeviceNColor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setN(int value)
+	public void setN(final int value)
 	{
 		setAttribute(AttributeName.N, value, null);
 	}
@@ -206,7 +206,7 @@ public abstract class JDFAutoDeviceNColor extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setName(String value)
+	public void setName(final String value)
 	{
 		setAttribute(AttributeName.NAME, value, null);
 	}

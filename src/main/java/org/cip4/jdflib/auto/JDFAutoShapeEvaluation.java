@@ -128,7 +128,7 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoShapeEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoShapeEvaluation(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -140,7 +140,7 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoShapeEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoShapeEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -153,7 +153,7 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoShapeEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoShapeEvaluation(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -164,7 +164,7 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -185,7 +185,7 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTolerance(JDFXYPair value)
+	public void setTolerance(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.TOLERANCE, value, null);
 	}
@@ -198,8 +198,8 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	 */
 	public JDFXYPair getTolerance()
 	{
-		String strAttrName = getAttribute(AttributeName.TOLERANCE, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TOLERANCE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -213,7 +213,7 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setValueList(JDFShapeRangeList value)
+	public void setValueList(final JDFShapeRangeList value)
 	{
 		setAttribute(AttributeName.VALUELIST, value, null);
 	}
@@ -226,8 +226,8 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	 */
 	public JDFShapeRangeList getValueList()
 	{
-		String strAttrName = getAttribute(AttributeName.VALUELIST, null, null);
-		JDFShapeRangeList nPlaceHolder = JDFShapeRangeList.createShapeRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.VALUELIST, null, null);
+		final JDFShapeRangeList nPlaceHolder = JDFShapeRangeList.createShapeRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -241,7 +241,7 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setX(JDFNumberRangeList value)
+	public void setX(final JDFNumberRangeList value)
 	{
 		setAttribute(AttributeName.X, value, null);
 	}
@@ -254,8 +254,8 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	 */
 	public JDFNumberRangeList getX()
 	{
-		String strAttrName = getAttribute(AttributeName.X, null, null);
-		JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.X, null, null);
+		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -269,7 +269,7 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setY(JDFNumberRangeList value)
+	public void setY(final JDFNumberRangeList value)
 	{
 		setAttribute(AttributeName.Y, value, null);
 	}
@@ -282,8 +282,8 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	 */
 	public JDFNumberRangeList getY()
 	{
-		String strAttrName = getAttribute(AttributeName.Y, null, null);
-		JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.Y, null, null);
+		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -297,7 +297,7 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setZ(JDFNumberRangeList value)
+	public void setZ(final JDFNumberRangeList value)
 	{
 		setAttribute(AttributeName.Z, value, null);
 	}
@@ -310,8 +310,8 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	 */
 	public JDFNumberRangeList getZ()
 	{
-		String strAttrName = getAttribute(AttributeName.Z, null, null);
-		JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.Z, null, null);
+		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -347,7 +347,7 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFBasicPreflightTest the element
 	 */
-	public JDFBasicPreflightTest getCreateBasicPreflightTest(int iSkip)
+	public JDFBasicPreflightTest getCreateBasicPreflightTest(final int iSkip)
 	{
 		return (JDFBasicPreflightTest) getCreateElement_JDFElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
 	}
@@ -359,7 +359,7 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	 * @return JDFBasicPreflightTest the element
 	 *         default is getBasicPreflightTest(0)
 	 */
-	public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
+	public JDFBasicPreflightTest getBasicPreflightTest(final int iSkip)
 	{
 		return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
 	}

@@ -62,6 +62,7 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
+import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
@@ -72,15 +73,12 @@ import org.cip4.jdflib.util.JDFDate;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class ProcessXJDFSplitTest extends JDFTestCaseBase
 {
 	/**
 	 * @throws Throwable
-	 *
 	 */
 	@Test
 	void testSplitTypesCutting() throws Throwable
@@ -105,7 +103,6 @@ class ProcessXJDFSplitTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Throwable
-	 *
 	 */
 	@Test
 	void testSplitTypesCuttingParams() throws Throwable
@@ -131,7 +128,6 @@ class ProcessXJDFSplitTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Throwable
-	 *
 	 */
 	@Test
 	void testSplitTypesICS() throws Throwable
@@ -185,7 +181,6 @@ class ProcessXJDFSplitTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Throwable
-	 *
 	 */
 	@Test
 	void testSplitTypesCuttingProduct() throws Throwable
@@ -429,17 +424,17 @@ class ProcessXJDFSplitTest extends JDFTestCaseBase
 		xCon.setSplitter(splitter);
 		final XJDFHelper h = new XJDFHelper("j1", "root", null);
 		final KElement e = h.getRoot();
-		h.getCreateSet(XJDFConstants.Resource, ElementName.CUSTOMERINFO, EnumUsage.Input).getCreatePartition(0, true).getResource().setAttribute(AttributeName.CUSTOMERORDERID,
-				"cc");
+		h.getCreateSet(XJDFConstants.Resource, ElementName.CUSTOMERINFO, EnumUsage.Input).getCreatePartition(0, true).getResource()
+				.setAttribute(AttributeName.CUSTOMERORDERID, "cc");
 		final SetHelper sh = h.getCreateSet(XJDFConstants.Resource, ElementName.CONTACT, EnumUsage.Input);
 		final ResourceHelper ph = sh.getCreatePartition(0, true);
-		ph.setPartMap(new JDFAttributeMap(XJDFConstants.ContactType, EnumContactType.Customer.getName()));
+		ph.setPartMap(new JDFAttributeMap(XJDFConstants.ContactType, EnumContactType.Customer.name()));
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
 		final JDFCustomerInfo ci = d.getJDFRoot().getCustomerInfo();
 		assertNotNull(ci);
 		final JDFContact contact = (JDFContact) d.getJDFRoot().getResource(ElementName.CONTACT, null, 0);
-		assertEquals(EnumContactType.Customer.getName(), contact.getContactTypes().get(0));
+		assertEquals(EnumContactType.Customer.name(), contact.getContactTypes().get(0));
 	}
 
 	/**
@@ -518,7 +513,6 @@ class ProcessXJDFSplitTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testSplitNodeInfo() throws DataFormatException
@@ -542,7 +536,6 @@ class ProcessXJDFSplitTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testSplitDevice2() throws DataFormatException
@@ -566,7 +559,6 @@ class ProcessXJDFSplitTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testSplitDeviceNI() throws DataFormatException
@@ -618,7 +610,6 @@ class ProcessXJDFSplitTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testSplitDeviceNIMix() throws DataFormatException
@@ -743,7 +734,7 @@ class ProcessXJDFSplitTest extends JDFTestCaseBase
 		c.setSplitter(splitter);
 
 		final KElement root = XMLDoc.parseFile(sm_dirTestData + "29694232.ptk").getRoot();
-		final KElement xjdf = root.getChildByTagName(XJDF20.rootName, null, 0, null, false, true);
+		final KElement xjdf = root.getChildByTagName(JDFToXJDF.rootName, null, 0, null, false, true);
 		final JDFDoc d = c.convert(xjdf);
 		d.write2File(sm_dirTestDataTemp + "splitxjdfFile.jdf", 2, false);
 		// assertTrue(d.getJDFRoot().isValid(EnumValidationLevel.Incomplete));

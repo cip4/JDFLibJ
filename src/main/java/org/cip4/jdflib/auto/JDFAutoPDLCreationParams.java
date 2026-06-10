@@ -124,7 +124,7 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPDLCreationParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPDLCreationParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -136,7 +136,7 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPDLCreationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPDLCreationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -149,7 +149,7 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPDLCreationParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPDLCreationParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -160,7 +160,7 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -190,7 +190,7 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMimeType(String value)
+	public void setMimeType(final String value)
 	{
 		setAttribute(AttributeName.MIMETYPE, value, null);
 	}
@@ -247,7 +247,7 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFontParams(JDFFontParams refTarget)
+	public void refFontParams(final JDFFontParams refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -288,7 +288,7 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refPDFToPSConversionParams(JDFPDFToPSConversionParams refTarget)
+	public void refPDFToPSConversionParams(final JDFPDFToPSConversionParams refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -329,7 +329,7 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refPSToPDFConversionParams(JDFPSToPDFConversionParams refTarget)
+	public void refPSToPDFConversionParams(final JDFPSToPDFConversionParams refTarget)
 	{
 		refElement(refTarget);
 	}

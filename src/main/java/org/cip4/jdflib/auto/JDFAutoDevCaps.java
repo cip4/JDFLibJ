@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -106,14 +102,14 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.AVAILABILITY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
-				JDFDeviceCap.EnumAvailability.getEnum(0), "Installed");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CONTEXT, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumContext.getEnum(0),
-				"Resource");
+				JavaEnumUtil.getEnum(JDFDeviceCap.EnumAvailability.class, 0), "Installed");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CONTEXT, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumContext.class, 0), "Resource");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVCAPREF, 0x3333333111l, AttributeInfo.EnumAttributeType.IDREFS, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.DEVNS, 0x3333333331l, AttributeInfo.EnumAttributeType.URI, null, "http://www.CIP4.org/JDFSchema_1_1");
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.ID, 0x3333333311l, AttributeInfo.EnumAttributeType.ID, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.LINKUSAGE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
-				JDFResourceLink.EnumUsage.getEnum(0), null);
+				JavaEnumUtil.getEnum(JDFResourceLink.EnumUsage.class, 0), null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.MODULEREFS, 0x3333333111l, AttributeInfo.EnumAttributeType.IDREFS, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.NAME, 0x2222222221l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.PROCESSUSAGE, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
@@ -149,7 +145,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDevCaps(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDevCaps(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -161,7 +157,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDevCaps(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDevCaps(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -174,97 +170,28 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDevCaps(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDevCaps(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for Context
+	 * Enumeration strings for numContext
 	 */
 
-	public enum EContext
+	public enum EnumContext
 	{
 		Resource, Link, JMF, Element;
 
-		public static EContext getEnum(String val)
+		public static EnumContext getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EContext.class, val, EContext.Resource);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumContext.class, val, EnumContext.Resource);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Context
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumContext extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumContext(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumContext getEnum(String enumName)
-		{
-			return (EnumContext) getEnum(EnumContext.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumContext getEnum(int enumValue)
-		{
-			return (EnumContext) getEnum(EnumContext.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumContext.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumContext.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumContext.class);
-		}
-
-		/**  */
-		public static final EnumContext Resource = new EnumContext("Resource");
-		/**  */
-		public static final EnumContext Link = new EnumContext("Link");
-		/**  */
-		public static final EnumContext JMF = new EnumContext("JMF");
-		/**  */
-		public static final EnumContext Element = new EnumContext("Element");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -276,9 +203,9 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setAvailability(JDFDeviceCap.EAvailability enumVar)
+	public void setAvailability(final JDFDeviceCap.EnumAvailability enumVar)
 	{
-		setAttribute(AttributeName.AVAILABILITY, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.AVAILABILITY, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -286,35 +213,6 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public JDFDeviceCap.EAvailability getEAvailability()
-	{
-		return JDFDeviceCap.EAvailability.getEnum(getAttribute(AttributeName.AVAILABILITY, null, "Installed"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Availability
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Availability
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetAvailability(EeviceCap.EnumAvailability) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setAvailability(JDFDeviceCap.EnumAvailability enumVar)
-	{
-		setAttribute(AttributeName.AVAILABILITY, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Availability
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EeviceCap.EnumAvailability GetEAvailability() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public JDFDeviceCap.EnumAvailability getAvailability()
 	{
 		return JDFDeviceCap.EnumAvailability.getEnum(getAttribute(AttributeName.AVAILABILITY, null, "Installed"));
@@ -330,9 +228,9 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setContext(EContext enumVar)
+	public void setContext(final EnumContext enumVar)
 	{
-		setAttribute(AttributeName.CONTEXT, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.CONTEXT, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -340,35 +238,6 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EContext getEContext()
-	{
-		return EContext.getEnum(getAttribute(AttributeName.CONTEXT, null, "Resource"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Context
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Context
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetContext(EContext) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setContext(EnumContext enumVar)
-	{
-		setAttribute(AttributeName.CONTEXT, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Context
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EContext GetEContext() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumContext getContext()
 	{
 		return EnumContext.getEnum(getAttribute(AttributeName.CONTEXT, null, "Resource"));
@@ -384,7 +253,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDevCapRef(VString value)
+	public void setDevCapRef(final VString value)
 	{
 		setAttribute(AttributeName.DEVCAPREF, value, null);
 	}
@@ -396,8 +265,8 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 */
 	public VString getDevCapRef()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.DEVCAPREF, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.DEVCAPREF, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -412,7 +281,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDevNS(String value)
+	public void setDevNS(final String value)
 	{
 		setAttribute(AttributeName.DEVNS, value, null);
 	}
@@ -438,7 +307,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 * @param value the value to set the attribute to
 	 */
 	@Override
-	public void setID(String value)
+	public void setID(final String value)
 	{
 		setAttribute(AttributeName.ID, value, null);
 	}
@@ -464,9 +333,9 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setLinkUsage(JDFResourceLink.EUsage enumVar)
+	public void setLinkUsage(final JDFResourceLink.EnumUsage enumVar)
 	{
-		setAttribute(AttributeName.LINKUSAGE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.LINKUSAGE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -474,35 +343,6 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public JDFResourceLink.EUsage getELinkUsage()
-	{
-		return JDFResourceLink.EUsage.getEnum(getAttribute(AttributeName.LINKUSAGE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute LinkUsage
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute LinkUsage
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetLinkUsage(EesourceLink.EnumUsage) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setLinkUsage(JDFResourceLink.EnumUsage enumVar)
-	{
-		setAttribute(AttributeName.LINKUSAGE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute LinkUsage
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EesourceLink.EnumUsage GetELinkUsage() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public JDFResourceLink.EnumUsage getLinkUsage()
 	{
 		return JDFResourceLink.EnumUsage.getEnum(getAttribute(AttributeName.LINKUSAGE, null, null));
@@ -518,7 +358,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setModuleRefs(VString value)
+	public void setModuleRefs(final VString value)
 	{
 		setAttribute(AttributeName.MODULEREFS, value, null);
 	}
@@ -530,8 +370,8 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 */
 	public VString getModuleRefs()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.MODULEREFS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.MODULEREFS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -546,7 +386,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setName(String value)
+	public void setName(final String value)
 	{
 		setAttribute(AttributeName.NAME, value, null);
 	}
@@ -571,7 +411,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProcessUsage(String value)
+	public void setProcessUsage(final String value)
 	{
 		setAttribute(AttributeName.PROCESSUSAGE, value, null);
 	}
@@ -596,7 +436,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRequired(boolean value)
+	public void setRequired(final boolean value)
 	{
 		setAttribute(AttributeName.REQUIRED, value, null);
 	}
@@ -621,7 +461,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setResourceUpdate(VString value)
+	public void setResourceUpdate(final VString value)
 	{
 		setAttribute(AttributeName.RESOURCEUPDATE, value, null);
 	}
@@ -633,8 +473,8 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 */
 	public VString getResourceUpdate()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.RESOURCEUPDATE, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.RESOURCEUPDATE, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -649,7 +489,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setResourceUsage(String value)
+	public void setResourceUsage(final String value)
 	{
 		setAttribute(AttributeName.RESOURCEUSAGE, value, null);
 	}
@@ -674,7 +514,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTypeOccurrenceNum(JDFIntegerRangeList value)
+	public void setTypeOccurrenceNum(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.TYPEOCCURRENCENUM, value, null);
 	}
@@ -687,8 +527,8 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 */
 	public JDFIntegerRangeList getTypeOccurrenceNum()
 	{
-		String strAttrName = getAttribute(AttributeName.TYPEOCCURRENCENUM, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TYPEOCCURRENCENUM, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -702,7 +542,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTypes(VString value)
+	public void setTypes(final VString value)
 	{
 		setAttribute(AttributeName.TYPES, value, null);
 	}
@@ -714,8 +554,8 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 */
 	public VString getTypes()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -752,7 +592,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFDevCap the element
 	 */
-	public JDFDevCap getCreateDevCap(int iSkip)
+	public JDFDevCap getCreateDevCap(final int iSkip)
 	{
 		return (JDFDevCap) getCreateElement_JDFElement(ElementName.DEVCAP, null, iSkip);
 	}
@@ -764,7 +604,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 * @return JDFDevCap the element
 	 *         default is getDevCap(0)
 	 */
-	public JDFDevCap getDevCap(int iSkip)
+	public JDFDevCap getDevCap(final int iSkip)
 	{
 		return (JDFDevCap) getElement(ElementName.DEVCAP, null, iSkip);
 	}
@@ -815,7 +655,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFLoc the element
 	 */
-	public JDFLoc getCreateLoc(int iSkip)
+	public JDFLoc getCreateLoc(final int iSkip)
 	{
 		return (JDFLoc) getCreateElement_JDFElement(ElementName.LOC, null, iSkip);
 	}
@@ -827,7 +667,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 * @return JDFLoc the element
 	 *         default is getLoc(0)
 	 */
-	public JDFLoc getLoc(int iSkip)
+	public JDFLoc getLoc(final int iSkip)
 	{
 		return (JDFLoc) getElement(ElementName.LOC, null, iSkip);
 	}

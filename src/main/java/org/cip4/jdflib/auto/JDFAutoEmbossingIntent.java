@@ -106,7 +106,7 @@ public abstract class JDFAutoEmbossingIntent extends JDFIntentResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoEmbossingIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoEmbossingIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoEmbossingIntent extends JDFIntentResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoEmbossingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoEmbossingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoEmbossingIntent extends JDFIntentResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoEmbossingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoEmbossingIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoEmbossingIntent extends JDFIntentResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmbossingItem the element
 	 */
-	public JDFEmbossingItem getCreateEmbossingItem(int iSkip)
+	public JDFEmbossingItem getCreateEmbossingItem(final int iSkip)
 	{
 		return (JDFEmbossingItem) getCreateElement_JDFElement(ElementName.EMBOSSINGITEM, null, iSkip);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoEmbossingIntent extends JDFIntentResource
 	 * @return JDFEmbossingItem the element
 	 *         default is getEmbossingItem(0)
 	 */
-	public JDFEmbossingItem getEmbossingItem(int iSkip)
+	public JDFEmbossingItem getEmbossingItem(final int iSkip)
 	{
 		return (JDFEmbossingItem) getElement(ElementName.EMBOSSINGITEM, null, iSkip);
 	}

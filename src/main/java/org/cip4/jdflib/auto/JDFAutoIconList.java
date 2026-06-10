@@ -106,7 +106,7 @@ public abstract class JDFAutoIconList extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIconList(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoIconList(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoIconList extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIconList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoIconList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoIconList extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoIconList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoIconList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoIconList extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFIcon the element
 	 */
-	public JDFIcon getCreateIcon(int iSkip)
+	public JDFIcon getCreateIcon(final int iSkip)
 	{
 		return (JDFIcon) getCreateElement_JDFElement(ElementName.ICON, null, iSkip);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoIconList extends JDFElement
 	 * @return JDFIcon the element
 	 *         default is getIcon(0)
 	 */
-	public JDFIcon getIcon(int iSkip)
+	public JDFIcon getIcon(final int iSkip)
 	{
 		return (JDFIcon) getElement(ElementName.ICON, null, iSkip);
 	}

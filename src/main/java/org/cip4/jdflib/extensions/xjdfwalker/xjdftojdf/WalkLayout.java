@@ -71,7 +71,6 @@ public class WalkLayout extends WalkResource
 	 */
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
 	 */
 	@Override

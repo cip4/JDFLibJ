@@ -126,7 +126,6 @@ class DigitalFinishingTest extends ExampleTest
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -543,8 +542,6 @@ class DigitalFinishingTest extends ExampleTest
 
 	/**
 	 * @throws DataFormatException
-	 *
-	 *
 	 */
 	@Test
 	void testPipePushSheetMeta() throws DataFormatException
@@ -560,7 +557,9 @@ class DigitalFinishingTest extends ExampleTest
 			JDFPipeParams pp = createPipeParams(command);
 			Collection<JDFPartAmount> vpa = createPartAmount(pp, j, 0, 1, true);
 			for (final JDFPartAmount pa : vpa)
+			{
 				pa.getPart(0).setMetadata(0, j == 0 ? "Rich" : "Poor");
+			}
 
 			for (int i = 0; i < 1 + j; i++)
 			{
@@ -571,15 +570,15 @@ class DigitalFinishingTest extends ExampleTest
 				pp = createPipeParams(command);
 				vpa = createPartAmount(pp, j, i, 3 + j, false);
 				for (final JDFPartAmount pa : vpa)
+				{
 					pa.getPart(0).setMetadata(0, j == 0 ? "Rich" : "Poor");
+				}
 			}
 		}
 		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "PipePushSheetMeta.jmf", 2, false);
 	}
 
 	/**
-	 *
-	 *
 	 * @param command
 	 * @return
 	 */
@@ -593,7 +592,6 @@ class DigitalFinishingTest extends ExampleTest
 	}
 
 	/**
-	 *
 	 * @param pp
 	 * @param set
 	 * @param sheets
@@ -619,7 +617,6 @@ class DigitalFinishingTest extends ExampleTest
 	}
 
 	/**
-	 *
 	 * @param pp
 	 * @param set
 	 * @param sheets

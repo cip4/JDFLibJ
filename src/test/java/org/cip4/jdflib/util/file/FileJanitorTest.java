@@ -51,7 +51,6 @@ import org.cip4.jdflib.util.file.FileJanitor.AgeFilter;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
  * @date Dec 8, 2011
  */
@@ -59,8 +58,6 @@ class FileJanitorTest extends JDFTestCaseBase
 {
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	void testOld() throws Exception
@@ -87,8 +84,6 @@ class FileJanitorTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	void testOldKeep() throws Exception
@@ -121,8 +116,6 @@ class FileJanitorTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	void testOldKeepFlat() throws Exception
@@ -154,8 +147,6 @@ class FileJanitorTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	void testDelEmpty() throws Exception
@@ -183,8 +174,6 @@ class FileJanitorTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	void testSetDelEmpty() throws Exception
@@ -200,8 +189,6 @@ class FileJanitorTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	void testAgeTostring() throws Exception
@@ -214,8 +201,6 @@ class FileJanitorTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	void testTostring() throws Exception
@@ -228,8 +213,6 @@ class FileJanitorTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	void testSetLogSingl() throws Exception

@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,22 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFXYPairState.java
@@ -137,36 +137,36 @@ public class JDFXYPairState extends JDFAbstractState
 
 	/**
 	 * constructor for JDFXYPairState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFXYPairState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFXYPairState(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFXYPairState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFXYPairState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFXYPairState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFXYPairState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFXYPairState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFXYPairState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -176,7 +176,7 @@ public class JDFXYPairState extends JDFAbstractState
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -187,7 +187,7 @@ public class JDFXYPairState extends JDFAbstractState
 
 	// ////////////////////////////////////////////////////////////////////
 
-	public void setCurrentValue(JDFXYPair value)
+	public void setCurrentValue(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.CURRENTVALUE, value.toString(), null);
 	}
@@ -198,13 +198,13 @@ public class JDFXYPairState extends JDFAbstractState
 		{
 			return new JDFXYPair(getAttribute(AttributeName.CURRENTVALUE));
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFXYPairState.getCurrentValue: Attribute CURRENTVALUE is not capable to create JDFXYPair");
 		}
 	}
 
-	public void setDefaultValue(JDFXYPair value)
+	public void setDefaultValue(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.DEFAULTVALUE, value.toString(), null);
 	}
@@ -215,7 +215,7 @@ public class JDFXYPairState extends JDFAbstractState
 		{
 			return new JDFXYPair(getAttribute(AttributeName.DEFAULTVALUE));
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFXYPairState.getDefaultValue: Attribute DEFAULTVALUE is not capable to create JDFXYPair");
 		}
@@ -225,7 +225,7 @@ public class JDFXYPairState extends JDFAbstractState
 	 * // Attribute getter/ setter
 	 */
 
-	public void setAllowedValueList(JDFXYPairRangeList value)
+	public void setAllowedValueList(final JDFXYPairRangeList value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUELIST, value.toString(), null);
 	}
@@ -237,13 +237,13 @@ public class JDFXYPairState extends JDFAbstractState
 			final String attribute = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
 			return attribute == null ? null : new JDFXYPairRangeList(attribute);
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			throw new JDFException("JDFXYPairState.getAllowedValueList: Attribute ALLOWEDVALUELIST is not applicable to create JDFXYPairRangeList");
 		}
 	}
 
-	public void setPresentValueList(JDFXYPairRangeList value)
+	public void setPresentValueList(final JDFXYPairRangeList value)
 	{
 		setAttribute(AttributeName.PRESENTVALUELIST, value.toString(), null);
 	}
@@ -256,7 +256,7 @@ public class JDFXYPairState extends JDFAbstractState
 			{
 				return new JDFXYPairRangeList(getAttribute(AttributeName.PRESENTVALUELIST));
 			}
-			catch (DataFormatException dfe)
+			catch (final DataFormatException dfe)
 			{
 				throw new JDFException("JDFXYPairState.getPresentValueList: Attribute PRESENTVALUELIST is not applicable to create JDFXYPairRangeList");
 			}
@@ -264,7 +264,7 @@ public class JDFXYPairState extends JDFAbstractState
 		return getAllowedValueList();
 	}
 
-	public void setAllowedValueMax(JDFXYPair value)
+	public void setAllowedValueMax(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUEMAX, value.toString(), null);
 	}
@@ -275,13 +275,13 @@ public class JDFXYPairState extends JDFAbstractState
 		{
 			return new JDFXYPair(getAttribute(AttributeName.ALLOWEDVALUEMAX));
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			throw new JDFException("JDFXYPairState.getAllowedValueMax: Attribute ALLOWEDVALUEMAX is not applicable to create JDFXYPair");
 		}
 	}
 
-	public void setPresentValueMax(JDFXYPair value)
+	public void setPresentValueMax(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.PRESENTVALUEMAX, value.toString(), null);
 	}
@@ -294,7 +294,7 @@ public class JDFXYPairState extends JDFAbstractState
 			{
 				return new JDFXYPair(getAttribute(AttributeName.PRESENTVALUEMAX));
 			}
-			catch (DataFormatException dfe)
+			catch (final DataFormatException dfe)
 			{
 				throw new JDFException("JDFXYPairState.setAllowedValueMin: Attribute PRESENTVALUEMAX is not applicable to create JDFXYPair");
 			}
@@ -302,7 +302,7 @@ public class JDFXYPairState extends JDFAbstractState
 		return getAllowedValueMax();
 	}
 
-	public void setAllowedValueMin(JDFXYPair value)
+	public void setAllowedValueMin(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUEMIN, value.toString(), null);
 	}
@@ -313,13 +313,13 @@ public class JDFXYPairState extends JDFAbstractState
 		{
 			return new JDFXYPair(getAttribute(AttributeName.ALLOWEDVALUEMIN));
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFXYPairState.setAllowedValueMin: Attribute ALLOWEDVALUEMIN is not applicable to create JDFXYPair");
 		}
 	}
 
-	public void setPresentValueMin(JDFXYPair value)
+	public void setPresentValueMin(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.PRESENTVALUEMIN, value.toString(), null);
 	}
@@ -333,7 +333,7 @@ public class JDFXYPairState extends JDFAbstractState
 			{
 				return new JDFXYPair(getAttribute(AttributeName.PRESENTVALUEMIN));
 			}
-			catch (DataFormatException e)
+			catch (final DataFormatException e)
 			{
 				throw new JDFException("JDFXYPairState.getPresentValueMin: Attribute PRESENTVALUEMIN is not applicable to create JDFXYPair");
 			}
@@ -341,7 +341,7 @@ public class JDFXYPairState extends JDFAbstractState
 		return getAllowedValueMin();
 	}
 
-	public void setAllowedXYRelation(EnumXYRelation value)
+	public void setAllowedXYRelation(final EnumXYRelation value)
 	{
 		setAttribute(AttributeName.ALLOWEDXYRELATION, value.getName(), null);
 	}
@@ -351,7 +351,7 @@ public class JDFXYPairState extends JDFAbstractState
 		return EnumXYRelation.getEnum(getAttribute(AttributeName.ALLOWEDXYRELATION, null, null));
 	}
 
-	public void setPresentXYRelation(EnumXYRelation value)
+	public void setPresentXYRelation(final EnumXYRelation value)
 	{
 		setAttribute(AttributeName.PRESENTXYRELATION, value.getName(), null);
 	}
@@ -361,7 +361,7 @@ public class JDFXYPairState extends JDFAbstractState
 		// return EnumXYRelation.getEnum(getAttribute(
 		// AttributeName.ALLOWEDXYRELATION, null,
 		// EnumXYRelation.Unknown.getName()));
-		JDFElement.EnumXYRelation avail = JDFElement.EnumXYRelation.getEnum(getAttribute(AttributeName.PRESENTXYRELATION, null, null));
+		final JDFElement.EnumXYRelation avail = JDFElement.EnumXYRelation.getEnum(getAttribute(AttributeName.PRESENTXYRELATION, null, null));
 
 		if (avail == null)
 		{
@@ -376,7 +376,7 @@ public class JDFXYPairState extends JDFAbstractState
 		return getAttribute(AttributeName.UNITTYPE);
 	}
 
-	public void setUnitType(String value)
+	public void setUnitType(final String value)
 	{
 		setAttribute(AttributeName.UNITTYPE, value);
 	}
@@ -389,23 +389,25 @@ public class JDFXYPairState extends JDFAbstractState
 	 */
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java
 	 * .lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
 	 */
 	@Override
-	public void addValue(String value, EnumFitsValue testlists)
+	public void addValue(final String value, final EnumFitsValue testlists)
 	{
 		if (fitsValue(value, testlists))
+		{
 			return;
+		}
 
 		JDFXYPair rect;
 		try
 		{
 			rect = new JDFXYPair(value);
 		}
-		catch (DataFormatException x)
+		catch (final DataFormatException x)
 		{
 			return; // nop for bad values
 		}
@@ -413,7 +415,9 @@ public class JDFXYPairState extends JDFAbstractState
 		{
 			JDFXYPairRangeList list = getAllowedValueList();
 			if (list == null)
+			{
 				list = new JDFXYPairRangeList();
+			}
 			list.append(rect);
 			setAllowedValueList(list);
 		}
@@ -421,7 +425,9 @@ public class JDFXYPairState extends JDFAbstractState
 		{
 			JDFXYPairRangeList list = getPresentValueList();
 			if (list == null || !hasAttribute(AttributeName.PRESENTVALUELIST))
+			{
 				list = new JDFXYPairRangeList();
+			}
 			list.append(rect);
 			setPresentValueList(list);
 		}
@@ -431,44 +437,45 @@ public class JDFXYPairState extends JDFAbstractState
 	 * fitsValue - checks whether <code>value</code> matches the Allowed/Present
 	 * test lists specified for this State. In this State the test lists are
 	 * ValueList AND XYRelation.
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *                  value to test
 	 * @param valuelist
-	 *            the test lists the value has to match.<br>
-	 *            Choose one of two values: FitsValue_Allowed and
-	 *            FitsValue_Present. (Defaults to Allowed)
-	 * 
+	 *                  the test lists the value has to match.<br>
+	 *                  Choose one of two values: FitsValue_Allowed and
+	 *                  FitsValue_Present. (Defaults to Allowed)
 	 * @return boolean - true, if the value is in the valuelist or if
 	 *         AllowedValueList is not specified
 	 */
 	@Override
-	public boolean fitsValue(String value, EnumFitsValue testlists)
+	public boolean fitsValue(final String value, final EnumFitsValue testlists)
 	{
 		if (!fitsListType(value))
+		{
 			return false;
+		}
 
 		JDFXYPairRangeList rangelist = null;
 		try
 		{
 			rangelist = new JDFXYPairRangeList(value);
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
 			return false;
 		}
 
-		int siz = rangelist.size();
+		final int siz = rangelist.size();
 		for (int i = 0; i < siz; i++) // For every range, that rangelist
 										// consists of,
 		{ // we test both of range deliminators - right and left, if they fit
 			// XYRelation
 			// In this case test of deliminators is sufficient for evaluation of
 			// the whole range
-			JDFXYPairRange range = (JDFXYPairRange) rangelist.at(i);
+			final JDFXYPairRange range = (JDFXYPairRange) rangelist.at(i);
 
-			JDFXYPair left = range.getLeft();
-			JDFXYPair right = range.getRight();
+			final JDFXYPair left = range.getLeft();
+			final JDFXYPair right = range.getRight();
 
 			boolean bFitsXY;
 			if (left.equals(right))
@@ -480,7 +487,9 @@ public class JDFXYPairState extends JDFAbstractState
 				bFitsXY = fitsXYRelation(left, testlists) && fitsXYRelation(right, testlists);
 			}
 			if (!bFitsXY)
+			{
 				return false;
+			}
 		}
 
 		return fitsValueList(rangelist, testlists); // if we are here bFitsXY is
@@ -490,16 +499,15 @@ public class JDFXYPairState extends JDFAbstractState
 	/**
 	 * fitsValueList - checks whether <code>rangelist</code> matches the
 	 * AllowedValueList/PresentValueList specified for this State
-	 * 
+	 *
 	 * @param rangelist
-	 *            range list to test
+	 *                  range list to test
 	 * @param valuelist
-	 *            switches between AllowedValueList and PresentValueList.
-	 * 
+	 *                  switches between AllowedValueList and PresentValueList.
 	 * @return boolean - true, if <code>rangelist</code> matches the valuelist
 	 *         or if AllowedValueList is not specified
 	 */
-	private final boolean fitsValueList(JDFXYPairRangeList rangelist, EnumFitsValue valuelist)
+	private final boolean fitsValueList(final JDFXYPairRangeList rangelist, final EnumFitsValue valuelist)
 	{
 		JDFXYPairRangeList list;
 		if (valuelist.equals(EnumFitsValue.Allowed))
@@ -511,9 +519,11 @@ public class JDFXYPairState extends JDFAbstractState
 			list = getPresentValueList();
 		}
 		if (list == null)
+		{
 			return true;
+		}
 
-		EnumListType listType = getListType();
+		final EnumListType listType = getListType();
 		if (listType.equals(EnumListType.CompleteList))
 		{
 			return fitsCompleteList(rangelist, list);
@@ -527,13 +537,15 @@ public class JDFXYPairState extends JDFAbstractState
 			return fitsContainedList(rangelist, list);
 		}
 
-		int siz = rangelist.size();
+		final int siz = rangelist.size();
 		for (int i = 0; i < siz; i++)
 		{
-			JDFXYPairRange range = (JDFXYPairRange) rangelist.at(i);
+			final JDFXYPairRange range = (JDFXYPairRange) rangelist.at(i);
 
 			if (!list.isPartOfRange(range))
+			{
 				return false;
+			}
 		}
 		return true;
 	}
@@ -541,15 +553,15 @@ public class JDFXYPairState extends JDFAbstractState
 	/**
 	 * fitsXYRelation - checks whether <code>xypair</code> value matches the
 	 * AllowedXYRelation/PresentXYRelation specified for this State
-	 * 
+	 *
 	 * @param xypair
-	 *            xypair to test
+	 *                   xypair to test
 	 * @param xyrelation
-	 *            switches between AllowedXYRelation and PresentXYRelation.
+	 *                   switches between AllowedXYRelation and PresentXYRelation.
 	 * @return boolean - true, if the <code>xypair</code> matches xyrelation or
 	 *         if AllowedXYRelation is not specified
 	 */
-	private final boolean fitsXYRelation(JDFXYPair xypair, EnumFitsValue xyrelation)
+	private final boolean fitsXYRelation(final JDFXYPair xypair, final EnumFitsValue xyrelation)
 	{
 		EnumXYRelation relation;
 
@@ -563,10 +575,12 @@ public class JDFXYPairState extends JDFAbstractState
 		}
 
 		if (relation == null)
+		{
 			return true;
+		}
 
-		double x = xypair.getX();
-		double y = xypair.getY();
+		final double x = xypair.getX();
+		final double y = xypair.getY();
 
 		return relation.evaluateXY(x, y, EPSILON, EPSILON);
 	}
@@ -574,26 +588,24 @@ public class JDFXYPairState extends JDFAbstractState
 	/**
 	 * fitsCompleteList - tests whether <code>value</code> matches the given
 	 * testlist (ListType=fitsCompleteList)
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @param list
-	 *            testlist, either AllowedValueList or PresentValueList.
-	 * 
+	 *              testlist, either AllowedValueList or PresentValueList.
 	 * @return boolean - true, if <code>value</code> matches the testlist
 	 */
-	private final boolean fitsCompleteList(JDFXYPairRangeList value, JDFXYPairRangeList list)
+	private final boolean fitsCompleteList(final JDFXYPairRangeList value, final JDFXYPairRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
-		if (v_size != l_size)
+		if ((v_size != l_size) || !value.isUnique())
+		{
 			return false;
+		}
 
-		if (!value.isUnique())
-			return false;
-
-		JDFXYPairRangeList valueList = new JDFXYPairRangeList(value);
+		final JDFXYPairRangeList valueList = new JDFXYPairRangeList(value);
 
 		boolean bFound;
 		for (int i = l_size - 1; i >= 0; i--)
@@ -619,24 +631,22 @@ public class JDFXYPairState extends JDFAbstractState
 	/**
 	 * fitsCompleteOrderedList - tests whether <code>value</code> matches the
 	 * given testlist (ListType=CompleteOrderedList)
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @param list
-	 *            testlist, either AllowedValueList or PresentValueList.
-	 * 
+	 *              testlist, either AllowedValueList or PresentValueList.
 	 * @return boolean - true, if <code>value</code> matches the testlist
 	 */
-	private final boolean fitsCompleteOrderedList(JDFXYPairRangeList value, JDFXYPairRangeList list)
+	private final boolean fitsCompleteOrderedList(final JDFXYPairRangeList value, final JDFXYPairRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
-		if (v_size != l_size)
+		if ((v_size != l_size) || !value.isUnique())
+		{
 			return false;
-
-		if (!value.isUnique())
-			return false;
+		}
 
 		for (int i = 0; i < l_size; i++)
 		{
@@ -651,17 +661,17 @@ public class JDFXYPairState extends JDFAbstractState
 	/**
 	 * fitsContainedList - tests whether <code>value</code> matches the given
 	 * ValueList (ListType=ContainedList)
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @param list
-	 *            ValueList
+	 *              ValueList
 	 * @return boolean - true, if <code>value</code> matches the ValueList
 	 */
-	private final boolean fitsContainedList(JDFXYPairRangeList value, JDFXYPairRangeList list)
+	private final boolean fitsContainedList(final JDFXYPairRangeList value, final JDFXYPairRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
 		for (int i = 0; i < v_size; i++)
 		{
@@ -678,7 +688,7 @@ public class JDFXYPairState extends JDFAbstractState
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
 	 */
 	@Override

@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -115,10 +110,12 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.CUTWIDTHFOOT, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[13] = new AtrInfoTable(AttributeName.TRIMSIZE, 0x3333333311l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[14] = new AtrInfoTable(AttributeName.CREEP, 0x3333333311l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[15] = new AtrInfoTable(AttributeName.SIDES, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumSides.getEnum(0), null);
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.SIDES, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumSides.class, 0), null);
 		atrInfoTable[16] = new AtrInfoTable(AttributeName.MASKBLEED, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[17] = new AtrInfoTable(AttributeName.MASKSEPARATION, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[18] = new AtrInfoTable(AttributeName.MASK, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumMask.getEnum(0), null);
+		atrInfoTable[18] = new AtrInfoTable(AttributeName.MASK, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumMask.class, 0), null);
 	}
 
 	@Override
@@ -145,7 +142,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoStripCellParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoStripCellParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -157,7 +154,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoStripCellParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoStripCellParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -170,105 +167,42 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoStripCellParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoStripCellParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for Mask
+	 * Enumeration strings for numSides
 	 */
 
-	public enum EMask
+	public enum EnumSides
 	{
-		None, TrimBox, BleedBox, SourceTrimBox, SourceBleedBox, PDL, DieCut, DieBleed;
+		OneSided, OneSidedBack, TwoSidedHeadToHead, TwoSidedHeadToFoot, Unprinted;
 
-		public static EMask getEnum(String val)
+		public static EnumSides getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EMask.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSides.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for Mask
+	 * Enumeration strings for numMask
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumMask extends ValuedEnum
+	public enum EnumMask
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		None, TrimBox, BleedBox, SourceTrimBox, SourceBleedBox, PDL, DieCut, DieBleed;
 
-		protected EnumMask(String name)
+		public static EnumMask getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumMask.class, val, null);
 		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumMask getEnum(String enumName)
-		{
-			return (EnumMask) getEnum(EnumMask.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumMask getEnum(int enumValue)
-		{
-			return (EnumMask) getEnum(EnumMask.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumMask.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumMask.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumMask.class);
-		}
-
-		/**  */
-		public static final EnumMask None = new EnumMask("None");
-		/**  */
-		public static final EnumMask TrimBox = new EnumMask("TrimBox");
-		/**  */
-		public static final EnumMask BleedBox = new EnumMask("BleedBox");
-		/**  */
-		public static final EnumMask SourceTrimBox = new EnumMask("SourceTrimBox");
-		/**  */
-		public static final EnumMask SourceBleedBox = new EnumMask("SourceBleedBox");
-		/**  */
-		public static final EnumMask PDL = new EnumMask("PDL");
-		/**  */
-		public static final EnumMask DieCut = new EnumMask("DieCut");
-		/**  */
-		public static final EnumMask DieBleed = new EnumMask("DieBleed");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -280,7 +214,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBleedFace(double value)
+	public void setBleedFace(final double value)
 	{
 		setAttribute(AttributeName.BLEEDFACE, value, null);
 	}
@@ -305,7 +239,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBleedSpine(double value)
+	public void setBleedSpine(final double value)
 	{
 		setAttribute(AttributeName.BLEEDSPINE, value, null);
 	}
@@ -330,7 +264,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBleedHead(double value)
+	public void setBleedHead(final double value)
 	{
 		setAttribute(AttributeName.BLEEDHEAD, value, null);
 	}
@@ -355,7 +289,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBleedFoot(double value)
+	public void setBleedFoot(final double value)
 	{
 		setAttribute(AttributeName.BLEEDFOOT, value, null);
 	}
@@ -380,7 +314,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTrimFace(double value)
+	public void setTrimFace(final double value)
 	{
 		setAttribute(AttributeName.TRIMFACE, value, null);
 	}
@@ -405,7 +339,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSpine(double value)
+	public void setSpine(final double value)
 	{
 		setAttribute(AttributeName.SPINE, value, null);
 	}
@@ -430,7 +364,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTrimHead(double value)
+	public void setTrimHead(final double value)
 	{
 		setAttribute(AttributeName.TRIMHEAD, value, null);
 	}
@@ -455,7 +389,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTrimFoot(double value)
+	public void setTrimFoot(final double value)
 	{
 		setAttribute(AttributeName.TRIMFOOT, value, null);
 	}
@@ -480,7 +414,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFrontOverfold(double value)
+	public void setFrontOverfold(final double value)
 	{
 		setAttribute(AttributeName.FRONTOVERFOLD, value, null);
 	}
@@ -505,7 +439,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBackOverfold(double value)
+	public void setBackOverfold(final double value)
 	{
 		setAttribute(AttributeName.BACKOVERFOLD, value, null);
 	}
@@ -530,7 +464,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMillingDepth(double value)
+	public void setMillingDepth(final double value)
 	{
 		setAttribute(AttributeName.MILLINGDEPTH, value, null);
 	}
@@ -555,7 +489,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCutWidthHead(double value)
+	public void setCutWidthHead(final double value)
 	{
 		setAttribute(AttributeName.CUTWIDTHHEAD, value, null);
 	}
@@ -580,7 +514,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCutWidthFoot(double value)
+	public void setCutWidthFoot(final double value)
 	{
 		setAttribute(AttributeName.CUTWIDTHFOOT, value, null);
 	}
@@ -605,7 +539,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTrimSize(JDFXYPair value)
+	public void setTrimSize(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.TRIMSIZE, value, null);
 	}
@@ -618,8 +552,8 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 */
 	public JDFXYPair getTrimSize()
 	{
-		String strAttrName = getAttribute(AttributeName.TRIMSIZE, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TRIMSIZE, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -633,7 +567,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCreep(JDFXYPair value)
+	public void setCreep(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.CREEP, value, null);
 	}
@@ -646,8 +580,8 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 */
 	public JDFXYPair getCreep()
 	{
-		String strAttrName = getAttribute(AttributeName.CREEP, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CREEP, null, null);
+		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -661,9 +595,9 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSides(ESides enumVar)
+	public void setSides(final EnumSides enumVar)
 	{
-		setAttribute(AttributeName.SIDES, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SIDES, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -671,35 +605,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESides getESides()
-	{
-		return ESides.getEnum(getAttribute(AttributeName.SIDES, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Sides
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Sides
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetSides(ESides) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setSides(EnumSides enumVar)
-	{
-		setAttribute(AttributeName.SIDES, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Sides
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ESides GetESides() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumSides getSides()
 	{
 		return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, null));
@@ -715,7 +620,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaskBleed(double value)
+	public void setMaskBleed(final double value)
 	{
 		setAttribute(AttributeName.MASKBLEED, value, null);
 	}
@@ -740,7 +645,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMaskSeparation(String value)
+	public void setMaskSeparation(final String value)
 	{
 		setAttribute(AttributeName.MASKSEPARATION, value, null);
 	}
@@ -765,9 +670,9 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMask(EMask enumVar)
+	public void setMask(final EnumMask enumVar)
 	{
-		setAttribute(AttributeName.MASK, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.MASK, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -775,35 +680,6 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EMask getEMask()
-	{
-		return EMask.getEnum(getAttribute(AttributeName.MASK, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Mask
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Mask
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetMask(EMask) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setMask(EnumMask enumVar)
-	{
-		setAttribute(AttributeName.MASK, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Mask
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EMask GetEMask() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumMask getMask()
 	{
 		return EnumMask.getEnum(getAttribute(AttributeName.MASK, null, null));
@@ -827,7 +703,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 
 	/**
 	 * (25) getCreateFitPolicy
-	 *
+	 * 
 	 * @return JDFFitPolicy the element
 	 */
 	public JDFFitPolicy getCreateFitPolicy()

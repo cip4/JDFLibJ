@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -102,11 +97,11 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.AMOUNT, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, "1");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.BUNDLEDEPTH, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ORIENTATION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0),
-				null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ORIENTATION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumOrientation.class, 0), null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x3333333311l, AttributeInfo.EnumAttributeType.matrix, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.TRANSFORMATIONCONTEXT, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumTransformationContext.getEnum(0), "StackItem");
+				JavaEnumUtil.getEnum(EnumTransformationContext.class, 0), "StackItem");
 	}
 
 	@Override
@@ -134,7 +129,7 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCollatingItem(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoCollatingItem(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -146,7 +141,7 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCollatingItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoCollatingItem(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -159,95 +154,42 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoCollatingItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoCollatingItem(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for TransformationContext
+	 * Enumeration strings for numOrientation
 	 */
 
-	public enum ETransformationContext
+	public enum EnumOrientation
 	{
-		StackItem, Component, CollateItem;
+		Rotate0, Rotate90, Rotate180, Rotate270, Flip0, Flip90, Flip180, Flip270;
 
-		public static ETransformationContext getEnum(String val)
+		public static EnumOrientation getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(ETransformationContext.class, val, ETransformationContext.StackItem);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumOrientation.class, val, null);
 		}
 	}
 
 	/**
-	 * Enumeration strings for TransformationContext
+	 * Enumeration strings for numTransformationContext
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumTransformationContext extends ValuedEnum
+	public enum EnumTransformationContext
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		StackItem, Component, CollateItem;
 
-		protected EnumTransformationContext(String name)
+		public static EnumTransformationContext getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumTransformationContext.class, val, EnumTransformationContext.StackItem);
 		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumTransformationContext getEnum(String enumName)
-		{
-			return (EnumTransformationContext) getEnum(EnumTransformationContext.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumTransformationContext getEnum(int enumValue)
-		{
-			return (EnumTransformationContext) getEnum(EnumTransformationContext.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumTransformationContext.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumTransformationContext.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumTransformationContext.class);
-		}
-
-		/**  */
-		public static final EnumTransformationContext StackItem = new EnumTransformationContext("StackItem");
-		/**  */
-		public static final EnumTransformationContext Component = new EnumTransformationContext("Component");
-		/**  */
-		public static final EnumTransformationContext CollateItem = new EnumTransformationContext("CollateItem");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -259,7 +201,7 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setAmount(int value)
+	public void setAmount(final int value)
 	{
 		setAttribute(AttributeName.AMOUNT, value, null);
 	}
@@ -284,7 +226,7 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setBundleDepth(int value)
+	public void setBundleDepth(final int value)
 	{
 		setAttribute(AttributeName.BUNDLEDEPTH, value, null);
 	}
@@ -309,9 +251,9 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setOrientation(EOrientation enumVar)
+	public void setOrientation(final EnumOrientation enumVar)
 	{
-		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.ORIENTATION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -319,35 +261,6 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EOrientation getEOrientation()
-	{
-		return EOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Orientation
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Orientation
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetOrientation(EOrientation) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setOrientation(EnumOrientation enumVar)
-	{
-		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Orientation
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EOrientation GetEOrientation() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumOrientation getOrientation()
 	{
 		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
@@ -363,7 +276,7 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTransformation(JDFMatrix value)
+	public void setTransformation(final JDFMatrix value)
 	{
 		setAttribute(AttributeName.TRANSFORMATION, value, null);
 	}
@@ -376,8 +289,8 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 */
 	public JDFMatrix getTransformation()
 	{
-		String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, null);
-		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, null);
+		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -391,9 +304,9 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setTransformationContext(ETransformationContext enumVar)
+	public void setTransformationContext(final EnumTransformationContext enumVar)
 	{
-		setAttribute(AttributeName.TRANSFORMATIONCONTEXT, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.TRANSFORMATIONCONTEXT, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -401,35 +314,6 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public ETransformationContext getETransformationContext()
-	{
-		return ETransformationContext.getEnum(getAttribute(AttributeName.TRANSFORMATIONCONTEXT, null, "StackItem"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute TransformationContext
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute TransformationContext
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetTransformationContext(ETransformationContext) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setTransformationContext(EnumTransformationContext enumVar)
-	{
-		setAttribute(AttributeName.TRANSFORMATIONCONTEXT, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute TransformationContext
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use ETransformationContext GetETransformationContext() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumTransformationContext getTransformationContext()
 	{
 		return EnumTransformationContext.getEnum(getAttribute(AttributeName.TRANSFORMATIONCONTEXT, null, "StackItem"));
@@ -477,7 +361,7 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refComponent(JDFComponent refTarget)
+	public void refComponent(final JDFComponent refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -518,7 +402,7 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refMedia(JDFMedia refTarget)
+	public void refMedia(final JDFMedia refTarget)
 	{
 		refElement(refTarget);
 	}

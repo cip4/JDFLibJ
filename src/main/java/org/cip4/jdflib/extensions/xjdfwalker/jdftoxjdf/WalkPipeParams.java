@@ -103,7 +103,7 @@ public class WalkPipeParams extends WalkJDFSubElement
 		final KElement eNew = super.walk(pp, xjdf);
 
 		final VElement vr = pp.getChildElementVector(null, null);
-		for (KElement e : vr)
+		for (final KElement e : vr)
 		{
 			if (e instanceof JDFResource)
 			{
@@ -131,7 +131,7 @@ public class WalkPipeParams extends WalkJDFSubElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFSubElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
 	 */
 	@Override
-	protected void updateAttributes(JDFAttributeMap map)
+	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		super.updateAttributes(map);
 	}
@@ -140,7 +140,7 @@ public class WalkPipeParams extends WalkJDFSubElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#makeRefElements(org.cip4.jdflib.core.JDFElement)
 	 */
 	@Override
-	void makeRefElements(JDFElement je)
+	void makeRefElements(final JDFElement je)
 	{
 		// nop
 	}

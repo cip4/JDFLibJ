@@ -106,7 +106,7 @@ public abstract class JDFAutoCreasingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCreasingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoCreasingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoCreasingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCreasingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoCreasingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoCreasingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoCreasingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoCreasingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -142,7 +142,7 @@ public abstract class JDFAutoCreasingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -188,7 +188,7 @@ public abstract class JDFAutoCreasingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFCrease the element
 	 */
-	public JDFCrease getCreateCrease(int iSkip)
+	public JDFCrease getCreateCrease(final int iSkip)
 	{
 		return (JDFCrease) getCreateElement_JDFElement(ElementName.CREASE, null, iSkip);
 	}
@@ -200,7 +200,7 @@ public abstract class JDFAutoCreasingParams extends JDFResource
 	 * @return JDFCrease the element
 	 *         default is getCrease(0)
 	 */
-	public JDFCrease getCrease(int iSkip)
+	public JDFCrease getCrease(final int iSkip)
 	{
 		return (JDFCrease) getElement(ElementName.CREASE, null, iSkip);
 	}

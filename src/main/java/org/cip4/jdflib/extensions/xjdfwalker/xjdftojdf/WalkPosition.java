@@ -86,7 +86,9 @@ public class WalkPosition extends WalkXElement
 	{
 		final JDFStrippingParams stripParams = ensurePartition(e, trackElem);
 		if (stripParams == null)
+		{
 			return null;
+		}
 		doCells(e, stripParams);
 		final KElement walk = super.walk(e, stripParams);
 		moveBSRef(e, stripParams);
@@ -94,7 +96,6 @@ public class WalkPosition extends WalkXElement
 	}
 
 	/**
-	 *
 	 * @param e
 	 * @param trackElem
 	 * @return
@@ -114,7 +115,6 @@ public class WalkPosition extends WalkXElement
 	}
 
 	/**
-	 *
 	 * move BinderySig ref one down
 	 *
 	 * @param e
@@ -151,7 +151,6 @@ public class WalkPosition extends WalkXElement
 	}
 
 	/**
-	 *
 	 * split SignatureCells and StripCellParams appropriately
 	 *
 	 * @param e

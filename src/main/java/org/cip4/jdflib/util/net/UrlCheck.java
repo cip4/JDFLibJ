@@ -53,7 +53,6 @@ public class UrlCheck
 	private String method;
 
 	/**
-	 *
 	 * internal wait thread
 	 *
 	 * @author rainer prosi
@@ -63,7 +62,6 @@ public class UrlCheck
 	{
 
 		/**
-		 *
 		 * @param millis
 		 */
 		UrlWait(final int millis)
@@ -80,7 +78,9 @@ public class UrlCheck
 		{
 			final UrlPart p = UrlUtil.writeToURL(url, stream, method, null, det);
 			if (p != null && buffer)
+			{
 				p.buffer();
+			}
 			return p;
 		}
 
@@ -117,7 +117,6 @@ public class UrlCheck
 	}
 
 	/**
-	 *
 	 * @param url
 	 */
 	public UrlCheck(final String url)
@@ -126,7 +125,6 @@ public class UrlCheck
 	}
 
 	/**
-	 *
 	 * @param url
 	 * @param method
 	 */
@@ -140,7 +138,6 @@ public class UrlCheck
 	}
 
 	/**
-	 *
 	 * check if a url is accessible, return null if no connection within waitMillis millisecons
 	 *
 	 * @param waitMillis
@@ -165,11 +162,9 @@ public class UrlCheck
 	}
 
 	/**
-	 *
 	 * start pinging - multiple pings may run simultaneously
 	 *
 	 * @param waitMillis time to wait (in total)
-	 *
 	 */
 	public void startPing(final int waitMillis)
 	{
@@ -177,7 +172,6 @@ public class UrlCheck
 	}
 
 	/**
-	 *
 	 * get the rc
 	 *
 	 * @param waitMillis
@@ -190,7 +184,6 @@ public class UrlCheck
 	}
 
 	/**
-	 *
 	 * get the rc
 	 *
 	 * @return
@@ -210,11 +203,12 @@ public class UrlCheck
 	{
 		this.stream = stream;
 		if (stream != null)
+		{
 			method = UrlUtil.POST;
+		}
 	}
 
 	/**
-	 *
 	 * @param buffer
 	 */
 	public void setBuffer(final boolean buffer)
@@ -223,7 +217,6 @@ public class UrlCheck
 	}
 
 	/**
-	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -95,7 +90,8 @@ public abstract class JDFAutoGeneralID extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DATATYPE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumDataType.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DATATYPE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumDataType.class, 0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.IDUSAGE, 0x2222222111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.IDVALUE, 0x2222222111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
@@ -112,7 +108,7 @@ public abstract class JDFAutoGeneralID extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGeneralID(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoGeneralID(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -124,7 +120,7 @@ public abstract class JDFAutoGeneralID extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoGeneralID(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoGeneralID(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -137,105 +133,28 @@ public abstract class JDFAutoGeneralID extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoGeneralID(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoGeneralID(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * Enumeration strings for DataType
+	 * Enumeration strings for numDataType
 	 */
 
-	public enum EDataType
+	public enum EnumDataType
 	{
 		string, integer, double_, NMTOKEN, boolean_, dateTime, duration, NamedFeature;
 
-		public static EDataType getEnum(String val)
+		public static EnumDataType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EDataType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumDataType.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for DataType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumDataType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumDataType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumDataType getEnum(String enumName)
-		{
-			return (EnumDataType) getEnum(EnumDataType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDataType getEnum(int enumValue)
-		{
-			return (EnumDataType) getEnum(EnumDataType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDataType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDataType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDataType.class);
-		}
-
-		/**  */
-		public static final EnumDataType string = new EnumDataType("string");
-		/**  */
-		public static final EnumDataType integer = new EnumDataType("integer");
-		/**  */
-		public static final EnumDataType double_ = new EnumDataType("double");
-		/**  */
-		public static final EnumDataType NMTOKEN = new EnumDataType("NMTOKEN");
-		/**  */
-		public static final EnumDataType boolean_ = new EnumDataType("boolean");
-		/**  */
-		public static final EnumDataType dateTime = new EnumDataType("dateTime");
-		/**  */
-		public static final EnumDataType duration = new EnumDataType("duration");
-		/**  */
-		public static final EnumDataType NamedFeature = new EnumDataType("NamedFeature");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -247,9 +166,9 @@ public abstract class JDFAutoGeneralID extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setDataType(EDataType enumVar)
+	public void setDataType(final EnumDataType enumVar)
 	{
-		setAttribute(AttributeName.DATATYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.DATATYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -257,35 +176,6 @@ public abstract class JDFAutoGeneralID extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EDataType getEDataType()
-	{
-		return EDataType.getEnum(getAttribute(AttributeName.DATATYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute DataType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute DataType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDataType(EDataType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setDataType(EnumDataType enumVar)
-	{
-		setAttribute(AttributeName.DATATYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute DataType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EDataType GetEDataType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumDataType getDataType()
 	{
 		return EnumDataType.getEnum(getAttribute(AttributeName.DATATYPE, null, null));
@@ -301,7 +191,7 @@ public abstract class JDFAutoGeneralID extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIDUsage(String value)
+	public void setIDUsage(final String value)
 	{
 		setAttribute(AttributeName.IDUSAGE, value, null);
 	}
@@ -326,7 +216,7 @@ public abstract class JDFAutoGeneralID extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setIDValue(String value)
+	public void setIDValue(final String value)
 	{
 		setAttribute(AttributeName.IDVALUE, value, null);
 	}

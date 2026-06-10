@@ -46,9 +46,7 @@ import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkLayoutElementPart extends WalkJDFSubElement
 {
@@ -72,7 +70,6 @@ public class WalkLayoutElementPart extends WalkJDFSubElement
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkRefElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
@@ -84,7 +81,9 @@ public class WalkLayoutElementPart extends WalkJDFSubElement
 		final KElement contentBase = contentHelper.getRoot();
 		jdf.renameElement(XJDFConstants.Content, null);
 		if (jdf.hasNonEmpty(AttributeName.ID))
+		{
 			contentBase.moveAttribute(AttributeName.ID, jdf);
+		}
 
 		xjdf.appendAttribute("ContentRefs", contentBase.getID(), null, null, true);
 		return super.walk(jdf, contentBase);

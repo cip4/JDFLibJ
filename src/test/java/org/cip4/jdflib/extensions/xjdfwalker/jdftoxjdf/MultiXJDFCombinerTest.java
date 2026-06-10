@@ -65,9 +65,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class MultiXJDFCombinerTest extends JDFTestCaseBase
 {
@@ -102,10 +100,14 @@ class MultiXJDFCombinerTest extends JDFTestCaseBase
 		{
 			e.removeAttribute(AttributeName.DESCRIPTIVENAME);
 			if ((e instanceof JDFResourceLink) && !"StrippingParamsLink".equals(e.getNodeName()))
+			{
 				e.deleteNode();
+			}
 
 			if ("AuditPool".equals(e.getNodeName()) || "Comment".equals(e.getNodeName()))
+			{
 				e.deleteNode();
+			}
 		}
 		final List<XJDFHelper> v = conv.getXJDFs(root);
 		final XJDFHelper hc = new MultiXJDFCombiner(v).getCombinedHelper();
@@ -125,7 +127,9 @@ class MultiXJDFCombinerTest extends JDFTestCaseBase
 		final JDFNode root = JDFNode.parseFile(sm_dirTestData + "sammel18.jdf");
 		final VElement v0 = root.getChildrenByTagName(null, null, null, false, true, 0);
 		for (final KElement e : v0)
+		{
 			e.removeAttribute(AttributeName.DESCRIPTIVENAME);
+		}
 		final List<XJDFHelper> v = conv.getXJDFs(root);
 		assertEquals(3, v.size());
 		final XJDFHelper hc = new MultiXJDFCombiner(v).getCombinedHelper();
@@ -185,7 +189,9 @@ class MultiXJDFCombinerTest extends JDFTestCaseBase
 			// e.deleteNode();
 
 			if ("AuditPool".equals(e.getNodeName()) || "Comment".equals(e.getNodeName()))
+			{
 				e.deleteNode();
+			}
 		}
 
 		final KElement e = conv.convert(root);

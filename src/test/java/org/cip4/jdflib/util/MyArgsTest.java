@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,17 +56,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /*
  * Created on Aug 12, 2005
@@ -78,11 +78,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
-class MyArgsTest {
+class MyArgsTest
+{
 
 	final String[] _testArray = { "/Users/clabu/Documents/workarea/Elk/testarea/jakarta-tomcat-5.0.30/temp/VAHNSC6a7ag5ecAn9379.jdf", "-qc", "-v",
 			"-d /Users/clabu/Documents/workarea/Elk/testarea/jakarta-tomcat-5.0.30/temp/tENgU4Gh3huO2iVH9380.xml",
@@ -95,14 +94,13 @@ class MyArgsTest {
 	MyArgs _myArgs;
 
 	/**
-	 * 
 	 * @see junit.framework.TestCase#setUp()
 	 * @throws Exception
 	 */
 	@BeforeEach
-    public void setUp() throws Exception
+	public void setUp() throws Exception
 	{
-        _myArgs = new MyArgs(_testArray, "?cqvVntP", "dlLuhpx", null);
+		_myArgs = new MyArgs(_testArray, "?cqvVntP", "dlLuhpx", null);
 
 	}
 
@@ -112,11 +110,11 @@ class MyArgsTest {
 	@Test
 	void testMyArgsStringArrayStringString()
 	{
-		MyArgs args = new MyArgs(_testArray, "?cqvVntP", "dlLuhpx", null);
+		final MyArgs args = new MyArgs(_testArray, "?cqvVntP", "dlLuhpx", null);
 		System.out.println("Without quotes:");
 		System.out.println(args);
 
-		MyArgs args2 = new MyArgs(_testArrayWithQuotes, "?cqvVntP", "dlLuhpx", null);
+		final MyArgs args2 = new MyArgs(_testArrayWithQuotes, "?cqvVntP", "dlLuhpx", null);
 		System.out.println("With quotes:");
 		System.out.println(args2);
 	}
@@ -163,7 +161,7 @@ class MyArgsTest {
 	@Test
 	void testParameterString()
 	{
-		String d = _myArgs.parameter("d");
+		final String d = _myArgs.parameter("d");
 		Assertions.assertEquals(d, " /Users/clabu/Documents/workarea/Elk/testarea/jakarta-tomcat-5.0.30/temp/tENgU4Gh3huO2iVH9380.xml");
 	}
 
@@ -200,8 +198,8 @@ class MyArgsTest {
 	@Test
 	void testNargs()
 	{
-		String[] s = { "-abc", "foo" };
-		MyArgs args = new MyArgs(s, "ab", "c", null);
+		final String[] s = { "-abc", "foo" };
+		final MyArgs args = new MyArgs(s, "ab", "c", null);
 		Assertions.assertEquals(args.nargs(), 0);
 
 	}
@@ -212,8 +210,8 @@ class MyArgsTest {
 	@Test
 	void testSetFlag()
 	{
-		String[] s = { "-abc", "foo" };
-		MyArgs args = new MyArgs(s, "ab", "c", null);
+		final String[] s = { "-abc", "foo" };
+		final MyArgs args = new MyArgs(s, "ab", "c", null);
 		Assertions.assertTrue(args.boolParameter('a'));
 		args.setFlag('a', false);
 		Assertions.assertFalse(args.boolParameter('a'));
@@ -228,8 +226,8 @@ class MyArgsTest {
 	@Test
 	void testSetParameter()
 	{
-		String[] s = { "-abc", "foo" };
-		MyArgs args = new MyArgs(s, "ab", "c", null);
+		final String[] s = { "-abc", "foo" };
+		final MyArgs args = new MyArgs(s, "ab", "c", null);
 		Assertions.assertEquals(args.parameter('c'), "foo");
 		args.setParam('c', null);
 		Assertions.assertNull(args.parameter('c'));
@@ -245,8 +243,8 @@ class MyArgsTest {
 	 */
 	void hasParam()
 	{
-		String[] s = { "-abc", "foo" };
-		MyArgs args = new MyArgs(s, "ab", "c", null);
+		final String[] s = { "-abc", "foo" };
+		final MyArgs args = new MyArgs(s, "ab", "c", null);
 		Assertions.assertTrue(args.hasParameter('a'));
 		Assertions.assertTrue(args.hasParameter('b'));
 		Assertions.assertTrue(args.hasParameter('c'));
@@ -260,8 +258,8 @@ class MyArgsTest {
 	@Test
 	void testArgument()
 	{
-		String[] s = { "-abc", "foo", "bar" };
-		MyArgs args = new MyArgs(s, "ab", "c", null);
+		final String[] s = { "-abc", "foo", "bar" };
+		final MyArgs args = new MyArgs(s, "ab", "c", null);
 		Assertions.assertEquals(args.nargs(), 1);
 		Assertions.assertEquals(args.argument(0), "bar");
 	}

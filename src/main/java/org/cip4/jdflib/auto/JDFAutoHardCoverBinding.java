@@ -135,7 +135,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoHardCoverBinding(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoHardCoverBinding(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -147,7 +147,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoHardCoverBinding(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoHardCoverBinding(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -160,7 +160,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoHardCoverBinding(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoHardCoverBinding(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -352,7 +352,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFStringSpan the element
 	 */
-	public JDFStringSpan getCreateHeadBandColorDetails(int iSkip)
+	public JDFStringSpan getCreateHeadBandColorDetails(final int iSkip)
 	{
 		return (JDFStringSpan) getCreateElement_JDFElement(ElementName.HEADBANDCOLORDETAILS, null, iSkip);
 	}
@@ -364,7 +364,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 * @return JDFStringSpan the element
 	 *         default is getHeadBandColorDetails(0)
 	 */
-	public JDFStringSpan getHeadBandColorDetails(int iSkip)
+	public JDFStringSpan getHeadBandColorDetails(final int iSkip)
 	{
 		return (JDFStringSpan) getElement(ElementName.HEADBANDCOLORDETAILS, null, iSkip);
 	}
@@ -849,7 +849,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFRegisterRibbon the element
 	 */
-	public JDFRegisterRibbon getCreateRegisterRibbon(int iSkip)
+	public JDFRegisterRibbon getCreateRegisterRibbon(final int iSkip)
 	{
 		return (JDFRegisterRibbon) getCreateElement_JDFElement(ElementName.REGISTERRIBBON, null, iSkip);
 	}
@@ -861,7 +861,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 * @return JDFRegisterRibbon the element
 	 *         default is getRegisterRibbon(0)
 	 */
-	public JDFRegisterRibbon getRegisterRibbon(int iSkip)
+	public JDFRegisterRibbon getRegisterRibbon(final int iSkip)
 	{
 		return (JDFRegisterRibbon) getElement(ElementName.REGISTERRIBBON, null, iSkip);
 	}
@@ -891,7 +891,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refRegisterRibbon(JDFRegisterRibbon refTarget)
+	public void refRegisterRibbon(final JDFRegisterRibbon refTarget)
 	{
 		refElement(refTarget);
 	}

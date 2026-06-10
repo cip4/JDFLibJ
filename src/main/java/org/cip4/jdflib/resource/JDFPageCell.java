@@ -90,44 +90,41 @@ public class JDFPageCell extends JDFAutoPageCell
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPageCell(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFPageCell(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
-	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPageCell(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFPageCell(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
-	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFPageCell(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFPageCell(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -145,7 +142,7 @@ public class JDFPageCell extends JDFAutoPageCell
 		JDFRectangle clipBox = super.getClipBox();
 		if (clipBox == null)
 		{
-			JDFXYPair trimSize = super.getTrimSize();
+			final JDFXYPair trimSize = super.getTrimSize();
 			if (trimSize != null)
 			{
 				clipBox = new JDFRectangle(trimSize);
@@ -163,7 +160,7 @@ public class JDFPageCell extends JDFAutoPageCell
 		JDFXYPair trimSize = super.getTrimSize();
 		if (trimSize == null)
 		{
-			JDFRectangle r = super.getClipBox();
+			final JDFRectangle r = super.getClipBox();
 			if (r != null)
 			{
 				trimSize = r.getSize();

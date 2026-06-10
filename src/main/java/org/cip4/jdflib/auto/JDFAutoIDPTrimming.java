@@ -106,7 +106,7 @@ public abstract class JDFAutoIDPTrimming extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIDPTrimming(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoIDPTrimming(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoIDPTrimming extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIDPTrimming(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoIDPTrimming(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoIDPTrimming extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoIDPTrimming(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoIDPTrimming(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,7 +168,7 @@ public abstract class JDFAutoIDPTrimming extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFTrimmingParams the element
 	 */
-	public JDFTrimmingParams getCreateTrimmingParams(int iSkip)
+	public JDFTrimmingParams getCreateTrimmingParams(final int iSkip)
 	{
 		return (JDFTrimmingParams) getCreateElement_JDFElement(ElementName.TRIMMINGPARAMS, null, iSkip);
 	}
@@ -180,7 +180,7 @@ public abstract class JDFAutoIDPTrimming extends JDFElement
 	 * @return JDFTrimmingParams the element
 	 *         default is getTrimmingParams(0)
 	 */
-	public JDFTrimmingParams getTrimmingParams(int iSkip)
+	public JDFTrimmingParams getTrimmingParams(final int iSkip)
 	{
 		return (JDFTrimmingParams) getElement(ElementName.TRIMMINGPARAMS, null, iSkip);
 	}
@@ -210,7 +210,7 @@ public abstract class JDFAutoIDPTrimming extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refTrimmingParams(JDFTrimmingParams refTarget)
+	public void refTrimmingParams(final JDFTrimmingParams refTarget)
 	{
 		refElement(refTarget);
 	}

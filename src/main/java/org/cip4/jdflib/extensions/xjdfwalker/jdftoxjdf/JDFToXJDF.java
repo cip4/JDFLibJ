@@ -62,6 +62,7 @@ import org.cip4.jdflib.elementwalker.FixVersion;
 import org.cip4.jdflib.elementwalker.IWalker;
 import org.cip4.jdflib.elementwalker.PackageElementWalker;
 import org.cip4.jdflib.elementwalker.RemoveEmpty;
+import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.XJMFHelper;
@@ -71,8 +72,8 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.MyPair;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -88,12 +89,12 @@ public class JDFToXJDF extends PackageElementWalker
 
 	public static void setDefaultVersion(final EnumVersion v)
 	{
-		XJDFHelper.setDefaultVersion(v);
+		BaseXJDFHelper.setDefaultVersion(v);
 	}
 
 	public static EnumVersion getDefaultVersion()
 	{
-		return XJDFHelper.getDefaultVersion();
+		return BaseXJDFHelper.getDefaultVersion();
 	}
 
 	/**
@@ -608,7 +609,7 @@ public class JDFToXJDF extends PackageElementWalker
 		newDoc.setInitOnCreate(false);
 		newRoot = newDoc.getRoot();
 		newRoot.setNamespaceURI(getSchemaURL(newVersion));
-		if (EnumUtil.aLessThanB(EnumVersion.Version_2_0, newVersion))
+		if (JavaEnumUtil.aLessThanB(EnumVersion.Version_2_0, newVersion))
 		{
 			newRoot.setAttribute(AttributeName.VERSION, newVersion.getName());
 		}

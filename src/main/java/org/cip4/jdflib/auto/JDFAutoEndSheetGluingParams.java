@@ -106,7 +106,7 @@ public abstract class JDFAutoEndSheetGluingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoEndSheetGluingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoEndSheetGluingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoEndSheetGluingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoEndSheetGluingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoEndSheetGluingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoEndSheetGluingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoEndSheetGluingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoEndSheetGluingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -142,7 +142,7 @@ public abstract class JDFAutoEndSheetGluingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -188,7 +188,7 @@ public abstract class JDFAutoEndSheetGluingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFEndSheet the element
 	 */
-	public JDFEndSheet getCreateEndSheet(int iSkip)
+	public JDFEndSheet getCreateEndSheet(final int iSkip)
 	{
 		return (JDFEndSheet) getCreateElement_JDFElement(ElementName.ENDSHEET, null, iSkip);
 	}
@@ -200,7 +200,7 @@ public abstract class JDFAutoEndSheetGluingParams extends JDFResource
 	 * @return JDFEndSheet the element
 	 *         default is getEndSheet(0)
 	 */
-	public JDFEndSheet getEndSheet(int iSkip)
+	public JDFEndSheet getEndSheet(final int iSkip)
 	{
 		return (JDFEndSheet) getElement(ElementName.ENDSHEET, null, iSkip);
 	}

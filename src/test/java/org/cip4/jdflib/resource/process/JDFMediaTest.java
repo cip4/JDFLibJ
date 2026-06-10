@@ -45,6 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Arrays;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -68,7 +69,6 @@ import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 class JDFMediaTest extends JDFTestCaseBase
@@ -178,15 +178,16 @@ class JDFMediaTest extends JDFTestCaseBase
 		m.setMediaType(EnumMediaType.Plate);
 		assertFalse(m.isComponentMedia());
 		int n = 0;
-		for (final Object o : EnumMediaType.getEnumList())
+		for (final EnumMediaType mt : Arrays.asList(EnumMediaType.values()))
 		{
-			final EnumMediaType mt = (EnumMediaType) o;
 			m.setMediaType(mt);
 			if (m.isComponentMedia())
+			{
 				n++;
+			}
 		}
 		assertEquals(7, n);
-		assertEquals(16, EnumMediaType.getEnumList().size() - n);
+		assertEquals(16, Arrays.asList(EnumMediaType.values()).size() - n);
 	}
 
 	/**
@@ -246,7 +247,9 @@ class JDFMediaTest extends JDFTestCaseBase
 		for (int i = 2; i <= 5; i++) // grade=1 has a known matte / gloss swap
 		{
 			for (final eCoating c : eCoating.values())
+			{
 				assertEquals(i, JDFMedia.getGradeFromIsoPaper(JDFMedia.getIsoPaperFromGrade(i, c), c));
+			}
 		}
 		assertNull(JDFMedia.getIsoPaperFromGrade(-2, null));
 		assertNull(JDFMedia.getIsoPaperFromGrade(42, null));
@@ -266,7 +269,7 @@ class JDFMediaTest extends JDFTestCaseBase
 		final JDFMedia m = (JDFMedia) new JDFDoc(ElementName.MEDIA).getRoot();
 		m.setMediaType(EnumMediaType.Vinyl);
 		assertEquals(m.getMediaType(), EnumMediaType.Vinyl);
-		assertEquals(m.getMediaType().getName(), "Vinyl");
+		assertEquals(m.getMediaType().name(), "Vinyl");
 	}
 
 	/**
@@ -287,17 +290,17 @@ class JDFMediaTest extends JDFTestCaseBase
 		final Vector<EnumHoleType> v = new Vector<>();
 		v.addElement(EnumHoleType.None);
 		v.addElement(EnumHoleType.C9_5m_round_0t);
-		assertEquals(EnumHoleType.C9_5m_round_0t.getName(), "C9.5m-round-0t");
+		assertEquals(EnumHoleType.C9_5m_round_0t.name(), "C9_5m_round_0t");
 
 		media.setHoleType(v);
 		assertEquals(media.getHoleType(), v);
-		assertEquals(((EnumHoleType) media.getHoleType().elementAt(1)).getName(), v.elementAt(1).getName());
-		assertEquals(((EnumHoleType) media.getHoleType().elementAt(1)).getName(), "C9.5m-round-0t");
+		assertEquals(media.getHoleType().get(1).name(), v.elementAt(1).name());
+		assertEquals(media.getHoleType().get(1).name(), "C9_5m_round_0t");
 
 		// overwrite HoleType low level to check if conversion of DOT and HYPHEN
 		// to UNDERSCORE was successful
 		media.setAttribute(AttributeName.HOLETYPE, "C9.5m-round-0t");
-		assertEquals((media.getHoleType().elementAt(0)), EnumHoleType.C9_5m_round_0t);
+		assertEquals((media.getHoleType().get(0)), EnumHoleType.C9_5m_round_0t);
 
 		// now check the same with JDFHoleMakingParams
 		kElem = resPool.appendResource(ElementName.HOLEMAKINGPARAMS, EnumResourceClass.Consumable, null);
@@ -306,8 +309,8 @@ class JDFMediaTest extends JDFTestCaseBase
 
 		holeMakingParams.setHoleType(v);
 		assertEquals(holeMakingParams.getHoleType(), v);
-		assertEquals(((EnumHoleType) holeMakingParams.getHoleType().elementAt(1)).getName(), v.elementAt(1).getName());
-		assertEquals(((EnumHoleType) holeMakingParams.getHoleType().elementAt(1)).getName(), "C9.5m-round-0t");
+		assertEquals(holeMakingParams.getHoleType().get(1).name(), v.elementAt(1).name());
+		assertEquals(holeMakingParams.getHoleType().get(1).name(), "C9_5m_round_0t");
 	}
 
 	/**

@@ -83,7 +83,6 @@ public class WalkCutBlock extends WalkJDFSubElement
 	}
 
 	/**
-	 *
 	 * @param cutBlock
 	 */
 	private void copyToBox(final JDFCutBlock cutBlock)

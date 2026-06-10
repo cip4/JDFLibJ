@@ -125,7 +125,7 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCustomerMessage(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoCustomerMessage(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -137,7 +137,7 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoCustomerMessage(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoCustomerMessage(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -150,7 +150,7 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoCustomerMessage(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoCustomerMessage(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -171,7 +171,7 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLanguage(String value)
+	public void setLanguage(final String value)
 	{
 		setAttribute(AttributeName.LANGUAGE, value, null);
 	}
@@ -196,7 +196,7 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMessageEvents(VString value)
+	public void setMessageEvents(final VString value)
 	{
 		setAttribute(AttributeName.MESSAGEEVENTS, value, null);
 	}
@@ -208,8 +208,8 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 	 */
 	public VString getMessageEvents()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.MESSAGEEVENTS, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.MESSAGEEVENTS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -224,7 +224,7 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setShowList(VString value)
+	public void setShowList(final VString value)
 	{
 		setAttribute(AttributeName.SHOWLIST, value, null);
 	}
@@ -236,8 +236,8 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 	 */
 	public VString getShowList()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.SHOWLIST, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.SHOWLIST, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -274,7 +274,7 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFComChannel the element
 	 */
-	public JDFComChannel getCreateComChannel(int iSkip)
+	public JDFComChannel getCreateComChannel(final int iSkip)
 	{
 		return (JDFComChannel) getCreateElement_JDFElement(ElementName.COMCHANNEL, null, iSkip);
 	}
@@ -286,7 +286,7 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 	 * @return JDFComChannel the element
 	 *         default is getComChannel(0)
 	 */
-	public JDFComChannel getComChannel(int iSkip)
+	public JDFComChannel getComChannel(final int iSkip)
 	{
 		return (JDFComChannel) getElement(ElementName.COMCHANNEL, null, iSkip);
 	}
@@ -316,7 +316,7 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refComChannel(JDFComChannel refTarget)
+	public void refComChannel(final JDFComChannel refTarget)
 	{
 		refElement(refTarget);
 	}

@@ -57,7 +57,6 @@ public class FileSorter
 	private final File[] list;
 
 	/**
-	 *
 	 * @param dir
 	 */
 	public FileSorter(final File dir)
@@ -66,7 +65,6 @@ public class FileSorter
 	}
 
 	/**
-	 *
 	 * @param list
 	 */
 	public FileSorter(final File[] list)
@@ -87,7 +85,9 @@ public class FileSorter
 			try
 			{
 				if (list != null)
+				{
 					Arrays.sort(list, new LastModifiedComparator(bNewFirst));
+				}
 				return list;
 			}
 			catch (final Exception x)

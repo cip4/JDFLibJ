@@ -56,7 +56,6 @@ import org.w3c.dom.DOMException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         before July 6, 2009
  */
 public class JDFPerson extends JDFAutoPerson implements IMatches
@@ -82,7 +81,6 @@ public class JDFPerson extends JDFAutoPerson implements IMatches
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
-	 *
 	 */
 	public JDFPerson(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
@@ -97,9 +95,9 @@ public class JDFPerson extends JDFAutoPerson implements IMatches
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
-	 *
 	 */
-	public JDFPerson(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFPerson(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -228,16 +226,14 @@ public class JDFPerson extends JDFAutoPerson implements IMatches
 		else if (subset instanceof JDFPerson)
 		{
 			final JDFPerson other = (JDFPerson) subset;
-			if (StringUtil.getDistance(getFamilyName(), other.getFamilyName(), true, true, false) > 0)
+			if ((StringUtil.getDistance(getFamilyName(), other.getFamilyName(), true, true, false) > 0) || (StringUtil.getDistance(getFirstName(), other.getFirstName(), true, true, true) > 1) || (StringUtil.getDistance(getAdditionalNames(), other.getAdditionalNames(), true, true, true) > 1) || (StringUtil.getDistance(getNameSuffix(), other.getNameSuffix(), true, true, true) > 1))
+			{
 				return false;
-			if (StringUtil.getDistance(getFirstName(), other.getFirstName(), true, true, true) > 1)
-				return false;
-			if (StringUtil.getDistance(getAdditionalNames(), other.getAdditionalNames(), true, true, true) > 1)
-				return false;
-			if (StringUtil.getDistance(getNameSuffix(), other.getNameSuffix(), true, true, true) > 1)
-				return false;
+			}
 			if (StringUtil.getDistance(getNamePrefix(), other.getNamePrefix(), true, true, true) > 1)
+			{
 				return false;
+			}
 			matches = ContainerUtil.matchesExisting(getAddress(), other.getAddress());
 		}
 		return matches;

@@ -92,23 +92,23 @@ public class JDFNewJDFCmdParams extends JDFAutoNewJDFCmdParams
 
 	/**
 	 * Constructor for JDFNewJDFCmdParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFNewJDFCmdParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFNewJDFCmdParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFNewJDFCmdParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFNewJDFCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFNewJDFCmdParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -119,7 +119,7 @@ public class JDFNewJDFCmdParams extends JDFAutoNewJDFCmdParams
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFNewJDFCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFNewJDFCmdParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -128,7 +128,7 @@ public class JDFNewJDFCmdParams extends JDFAutoNewJDFCmdParams
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

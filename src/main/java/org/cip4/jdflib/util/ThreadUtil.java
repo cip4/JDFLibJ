@@ -72,13 +72,10 @@ package org.cip4.jdflib.util;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class ThreadUtil
 {
 	/**
-	 *
-	 *
 	 * @author rainer prosi
 	 * @date Nov 14, 2012
 	 * @deprecated use org.cip4.jdflib.util.thread.MyMutex
@@ -90,6 +87,7 @@ public class ThreadUtil
 		/**
 		 *
 		 */
+		@Deprecated
 		public MyMutex()
 		{
 			super();
@@ -99,9 +97,9 @@ public class ThreadUtil
 
 	/**
 	 * abstract class to run uninteruptable stuff in an interruptable thread
-	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
 	 *
-	 * 11.12.2008
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 *         11.12.2008
 	 * @param <a> the returned object data type
 	 * @deprecated use the local class
 	 */
@@ -109,6 +107,7 @@ public class ThreadUtil
 	public static abstract class WaitTimeout<a> extends org.cip4.jdflib.util.thread.WaitTimeout<a>
 	{
 
+		@Deprecated
 		public WaitTimeout(final int millis)
 		{
 			super(millis);
@@ -141,6 +140,7 @@ public class ThreadUtil
 
 	/**
 	 * simple join wrapper that catches its exception
+	 *
 	 * @param thread the thread to join
 	 * @param millis
 	 * @return true if normal exit, false if interupted
@@ -172,7 +172,7 @@ public class ThreadUtil
 	/**
 	 * simple wait wrapper that synchronizes catches its exception
 	 *
-	 * @param mutex the object that will wait, if null we assume we need not wait
+	 * @param mutex  the object that will wait, if null we assume we need not wait
 	 * @param millis milliseconds to wait, 0 or lower: indefinite wait
 	 * @return true if normal exit, false if interupted or mutex is null
 	 */
@@ -202,6 +202,7 @@ public class ThreadUtil
 
 	/**
 	 * simple notify that catches any and all exceptions
+	 *
 	 * @param mutex the mutex to notify
 	 */
 	public static void notifyAll(final Object mutex)
@@ -217,6 +218,7 @@ public class ThreadUtil
 
 	/**
 	 * simple notify that catches any and all exceptions
+	 *
 	 * @param mutex the mutex to notify
 	 */
 	public static void notify(final Object mutex)

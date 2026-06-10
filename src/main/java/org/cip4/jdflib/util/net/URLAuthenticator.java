@@ -46,7 +46,7 @@ class URLAuthenticator extends Authenticator
 	 * @param user
 	 * @param password
 	 */
-	protected URLAuthenticator(String user, String password)
+	protected URLAuthenticator(final String user, final String password)
 	{
 		super();
 		this.user = user;

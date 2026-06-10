@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -97,7 +92,8 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.COUNTERID, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.SCOPE, 0x2222222111l, AttributeInfo.EnumAttributeType.enumeration, EnumScope.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SCOPE, 0x2222222111l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumScope.class, 0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.COUNTERTYPES, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 	}
 
@@ -113,7 +109,7 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoUsageCounter(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoUsageCounter(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -125,7 +121,7 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoUsageCounter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoUsageCounter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -138,7 +134,7 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoUsageCounter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoUsageCounter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -149,7 +145,7 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Consumable);
 		return bRet;
 	}
@@ -164,89 +160,22 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for Scope
+	 * Enumeration strings for numScope
 	 */
 
-	public enum EScope
+	public enum EnumScope
 	{
 		Lifetime, PowerOn, Job;
 
-		public static EScope getEnum(String val)
+		public static EnumScope getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EScope.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumScope.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Scope
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumScope extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumScope(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumScope getEnum(String enumName)
-		{
-			return (EnumScope) getEnum(EnumScope.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumScope getEnum(int enumValue)
-		{
-			return (EnumScope) getEnum(EnumScope.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumScope.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumScope.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumScope.class);
-		}
-
-		/**  */
-		public static final EnumScope Lifetime = new EnumScope("Lifetime");
-		/**  */
-		public static final EnumScope PowerOn = new EnumScope("PowerOn");
-		/**  */
-		public static final EnumScope Job = new EnumScope("Job");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -258,7 +187,7 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCounterID(String value)
+	public void setCounterID(final String value)
 	{
 		setAttribute(AttributeName.COUNTERID, value, null);
 	}
@@ -283,9 +212,9 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setScope(EScope enumVar)
+	public void setScope(final EnumScope enumVar)
 	{
-		setAttribute(AttributeName.SCOPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.SCOPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -293,35 +222,6 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EScope getEScope()
-	{
-		return EScope.getEnum(getAttribute(AttributeName.SCOPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Scope
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Scope
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetScope(EScope) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setScope(EnumScope enumVar)
-	{
-		setAttribute(AttributeName.SCOPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Scope
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EScope GetEScope() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumScope getScope()
 	{
 		return EnumScope.getEnum(getAttribute(AttributeName.SCOPE, null, null));
@@ -337,7 +237,7 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCounterTypes(VString value)
+	public void setCounterTypes(final VString value)
 	{
 		setAttribute(AttributeName.COUNTERTYPES, value, null);
 	}
@@ -349,8 +249,8 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	 */
 	public VString getCounterTypes()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.COUNTERTYPES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.COUNTERTYPES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}

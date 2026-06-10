@@ -117,7 +117,7 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoVariableIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoVariableIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -129,7 +129,7 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoVariableIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoVariableIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -142,7 +142,7 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoVariableIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoVariableIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -241,7 +241,7 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFIntegerSpan the element
 	 */
-	public JDFIntegerSpan getCreatemaxPages(int iSkip)
+	public JDFIntegerSpan getCreatemaxPages(final int iSkip)
 	{
 		return (JDFIntegerSpan) getCreateElement_JDFElement(ElementName.MAXPAGES, null, iSkip);
 	}
@@ -253,7 +253,7 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 	 * @return JDFIntegerSpan the element
 	 *         default is getmaxPages(0)
 	 */
-	public JDFIntegerSpan getmaxPages(int iSkip)
+	public JDFIntegerSpan getmaxPages(final int iSkip)
 	{
 		return (JDFIntegerSpan) getElement(ElementName.MAXPAGES, null, iSkip);
 	}

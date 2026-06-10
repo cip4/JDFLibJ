@@ -5,12 +5,8 @@
  */
 package org.cip4.jdflib.span;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFSpanShape extends JDFEnumerationSpan
@@ -19,39 +15,39 @@ public class JDFSpanShape extends JDFEnumerationSpan
 
 	/**
 	 * Constructor for JDFSpanShape
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanShape(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFSpanShape(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanShape
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSpanShape(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSpanShape(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFSpanShape
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSpanShape(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFSpanShape(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -59,43 +55,14 @@ public class JDFSpanShape extends JDFEnumerationSpan
 	/**
 	 * Enumeration strings for EnumSpanShape
 	 */
-	public static class EnumSpanShape extends ValuedEnum
+	public enum EnumSpanShape
 	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+		RoundedBack, SquareBack;
 
-		private EnumSpanShape(String name)
+		public static EnumSpanShape getEnum(final String val)
 		{
-			super(name, m_startValue++);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumSpanShape.class, val, null);
 		}
-
-		public static EnumSpanShape getEnum(String enumName)
-		{
-			return (EnumSpanShape) getEnum(EnumSpanShape.class, enumName);
-		}
-
-		public static EnumSpanShape getEnum(int enumValue)
-		{
-			return (EnumSpanShape) getEnum(EnumSpanShape.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSpanShape.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSpanShape.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumSpanShape.class);
-		}
-
-		public static final EnumSpanShape RoundedBack = new EnumSpanShape("RoundedBack");
-		public static final EnumSpanShape SquareBack = new EnumSpanShape("SquareBack");
 
 	}
 
@@ -104,18 +71,18 @@ public class JDFSpanShape extends JDFEnumerationSpan
 
 	/**
 	 * AllowedValues - vector of allowed values for this EnumerationSpan
-	 * 
+	 *
 	 * @return Vector - vector representation of the allowed values
 	 */
 	@Override
-	public ValuedEnum getEnumType()
+	public Class<? extends Enum<?>> getEnumClass()
 	{
-		return EnumSpanShape.getEnum(0);
+		return EnumSpanShape.class;
 	}
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override

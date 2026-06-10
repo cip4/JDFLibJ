@@ -87,13 +87,13 @@ class CapabilitiesCreatorTest extends JDFTestCaseBase
 	@Test
 	void testSimple()
 	{
-		WideFormatGoldenTicket theTicket = new WideFormatGoldenTicket(1);
+		final WideFormatGoldenTicket theTicket = new WideFormatGoldenTicket(1);
 		theTicket.assign(null);
-		JDFNode n = theTicket.getNode();
-		JDFToXJDF c = new JDFToXJDF();
-		KElement xjdf = c.convert(n);
-		CapabilitiesCreator cc = new CapabilitiesCreator();
-		KElement dc = cc.createCaps(xjdf);
+		final JDFNode n = theTicket.getNode();
+		final JDFToXJDF c = new JDFToXJDF();
+		final KElement xjdf = c.convert(n);
+		final CapabilitiesCreator cc = new CapabilitiesCreator();
+		final KElement dc = cc.createCaps(xjdf);
 		Assertions.assertNotNull(dc);
 	}
 

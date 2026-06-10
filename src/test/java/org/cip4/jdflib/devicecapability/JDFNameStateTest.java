@@ -71,8 +71,8 @@
  * JDFStateBaseTest.java
  *
  * @author Elena Skobchenko
- * 
- * Copyright (c) 2001-2004 The International Cooperation for the Integration 
+ *
+ * Copyright (c) 2001-2004 The International Cooperation for the Integration
  * of Processes in  Prepress, Press and Postpress (CIP4).  All rights reserved.
  */
 package org.cip4.jdflib.devicecapability;
@@ -88,6 +88,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFNameState;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 class JDFNameStateTest extends JDFTestCaseBase
 {
 
@@ -98,7 +99,7 @@ class JDFNameStateTest extends JDFTestCaseBase
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		JDFDoc doc = new JDFDoc("NameState");
+		final JDFDoc doc = new JDFDoc("NameState");
 		theState = (JDFNameState) doc.getRoot();
 		theState.setAllowedValueList(new VString("a b c d", null));
 
@@ -109,19 +110,18 @@ class JDFNameStateTest extends JDFTestCaseBase
 	@Test
 	public final void testFitsValue()
 	{
-		JDFParser p = new JDFParser();
-		String strNode = "<NameState Name=\"BitDepth\" DefaultValue=\"1\" AllowedValueList=\"a b c d\"/>";
+		final JDFParser p = new JDFParser();
+		final String strNode = "<NameState Name=\"BitDepth\" DefaultValue=\"1\" AllowedValueList=\"a b c d\"/>";
 
-		JDFDoc jdfDoc = p.parseString(strNode);
-		JDFNameState state = (JDFNameState) jdfDoc.getRoot();
+		final JDFDoc jdfDoc = p.parseString(strNode);
+		final JDFNameState state = (JDFNameState) jdfDoc.getRoot();
 
-		VString list = new VString("a b c", null);
+		final VString list = new VString("a b c", null);
 
 		state.setListType(EnumListType.RangeList);
-		Assertions.assertFalse(state.fitsValue(list.toString(),
-				JDFBaseDataTypes.EnumFitsValue.Allowed), "ListType=RangeList");
+		Assertions.assertFalse(state.fitsValue(list.toString(), JDFBaseDataTypes.EnumFitsValue.Allowed), "ListType=RangeList");
 
-		VString list2 = new VString();
+		final VString list2 = new VString();
 		list2.add("d"); // 1~-2
 
 	}
@@ -132,15 +132,11 @@ class JDFNameStateTest extends JDFTestCaseBase
 	public final void testFitsValue_ListType()
 	{
 		theState.setListType(EnumListType.Range);
-		Assertions.assertTrue(theState.fitsValue("a",
-				JDFBaseDataTypes.EnumFitsValue.Allowed), "single values a re ranges too");
-		Assertions.assertFalse(theState.fitsValue("a b",
-				JDFBaseDataTypes.EnumFitsValue.Allowed));
+		Assertions.assertTrue(theState.fitsValue("a", JDFBaseDataTypes.EnumFitsValue.Allowed), "single values a re ranges too");
+		Assertions.assertFalse(theState.fitsValue("a b", JDFBaseDataTypes.EnumFitsValue.Allowed));
 		theState.setAllowedValueList(null);
-		Assertions.assertTrue(theState.fitsValue("a ~ b",
-				JDFBaseDataTypes.EnumFitsValue.Allowed));
-		Assertions.assertFalse(theState.fitsValue("a  b",
-				JDFBaseDataTypes.EnumFitsValue.Allowed));
+		Assertions.assertTrue(theState.fitsValue("a ~ b", JDFBaseDataTypes.EnumFitsValue.Allowed));
+		Assertions.assertFalse(theState.fitsValue("a  b", JDFBaseDataTypes.EnumFitsValue.Allowed));
 	}
 
 	// //////////////////////////////////////////////////////////

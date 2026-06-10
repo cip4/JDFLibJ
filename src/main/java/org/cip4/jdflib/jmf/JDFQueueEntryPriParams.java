@@ -22,43 +22,43 @@ public class JDFQueueEntryPriParams extends JDFAutoQueueEntryPriParams
 
 	/**
 	 * Constructor for JDFQueueEntryPriParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFQueueEntryPriParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFQueueEntryPriParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFQueueEntryPriParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFQueueEntryPriParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFQueueEntryPriParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFQueueEntryPriParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFQueueEntryPriParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFQueueEntryPriParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * toString()
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -69,22 +69,22 @@ public class JDFQueueEntryPriParams extends JDFAutoQueueEntryPriParams
 
 	/**
 	 * Method setQueueEntryID.
-	 * 
+	 *
 	 * @param strID the ID to set
 	 */
 	@Override
-	public void setQueueEntryID(String strID)
+	public void setQueueEntryID(final String strID)
 	{
 		setAttribute(AttributeName.QUEUEENTRYID, strID);
 	}
 
 	/**
 	 * Method setPriority.
-	 * 
+	 *
 	 * @param nPrio the priority to set
 	 */
 	@Override
-	public void setPriority(int nPrio)
+	public void setPriority(final int nPrio)
 	{
 		setAttribute(AttributeName.PRIORITY, nPrio, null);
 	}

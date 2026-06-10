@@ -179,7 +179,7 @@ public class JDFModuleStatus extends JDFAutoModuleStatus
 	}
 
 	@Override
-	public void setPartMapArray(JDFAttributeMapArray partArray)
+	public void setPartMapArray(final JDFAttributeMapArray partArray)
 	{
 		super.setPartMapArray(partArray);
 	}

@@ -90,7 +90,7 @@ public class JDFAcknowledge extends JDFAutoAcknowledge
 
 	/**
 	 * Constructor for JDFAcknowledge
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -101,7 +101,7 @@ public class JDFAcknowledge extends JDFAutoAcknowledge
 
 	/**
 	 * Constructor for JDFAcknowledge
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -113,7 +113,7 @@ public class JDFAcknowledge extends JDFAutoAcknowledge
 
 	/**
 	 * Constructor for JDFAcknowledge
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -128,7 +128,7 @@ public class JDFAcknowledge extends JDFAutoAcknowledge
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -139,9 +139,9 @@ public class JDFAcknowledge extends JDFAutoAcknowledge
 
 	/**
 	 * converts a response to an Acknowledge that can be sent asynchronously
-	 * 
+	 *
 	 * @param response the response to convert - should not be null
-	 * @param q the query that should be merged into the signal - may be null
+	 * @param q        the query that should be merged into the signal - may be null
 	 * @return true if successful
 	 */
 	public boolean convertResponse(final JDFResponse response, final JDFQuery q)

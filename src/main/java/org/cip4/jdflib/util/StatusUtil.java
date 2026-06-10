@@ -114,9 +114,11 @@ import org.cip4.jdflib.resource.JDFResourceAudit;
 public class StatusUtil
 {
 
+	@Deprecated
 	JDFNode m_Node;
 	private JDFDoc docJMFPhaseTime;
 	private JDFDoc docJMFResource;
+	@Deprecated
 	protected VJDFAttributeMap m_vPartMap;
 	private String m_deviceID = null;
 	private LinkAmount[] vLinkAmount = null;
@@ -124,11 +126,12 @@ public class StatusUtil
 	/**
 	 * construct a StatusUtil for a node n
 	 *
-	 * @param node the JDFNode that is being processed
-	 * @param vPartMap the map of Parts that is being processed excluding the waste partition
+	 * @param node      the JDFNode that is being processed
+	 * @param vPartMap  the map of Parts that is being processed excluding the waste partition
 	 * @param vResLinks the reslinks that are tracked for amount handling
 	 */
-	public StatusUtil(JDFNode node, VJDFAttributeMap vPartMap, VElement vResLinks)
+	@Deprecated
+	public StatusUtil(final JDFNode node, final VJDFAttributeMap vPartMap, final VElement vResLinks)
 	{
 		m_Node = node;
 		m_vPartMap = vPartMap;
@@ -143,16 +146,17 @@ public class StatusUtil
 	 * get the matching AmountBag out of an array
 	 *
 	 * @param refID the refID of the bag - this MUST match the refID of a ResourceLink
-	 * @param bags the array of bags to search in
+	 * @param bags  the array of bags to search in
 	 * @return the AmountBag with matching refID, null if none found or bags is null
 	 */
-	public static AmountBag getBag(String refID, AmountBag[] bags)
+	@Deprecated
+	public static AmountBag getBag(final String refID, final AmountBag[] bags)
 	{
 		if (bags == null || refID == null)
 		{
 			return null;
 		}
-		for (AmountBag bag : bags)
+		for (final AmountBag bag : bags)
 		{
 			if (bag.refID.equals(refID))
 			{
@@ -168,13 +172,14 @@ public class StatusUtil
 	 * @param refID the refID of the bag - this MUST match the refID of a ResourceLink
 	 * @return the LinkAmount with matching refID, null if none found or bags is null
 	 */
-	public LinkAmount getLinkAmount(String refID)
+	@Deprecated
+	public LinkAmount getLinkAmount(final String refID)
 	{
 		if (vLinkAmount == null || refID == null)
 		{
 			return null;
 		}
-		for (LinkAmount element : vLinkAmount)
+		for (final LinkAmount element : vLinkAmount)
 		{
 			if (element.rl.getrRef().equals(refID))
 			{
@@ -189,6 +194,7 @@ public class StatusUtil
 	 *
 	 * @return the rRef of the prime resource link
 	 */
+	@Deprecated
 	public String getFirstRefID()
 	{
 		if (vLinkAmount == null || vLinkAmount.length == 0)
@@ -202,7 +208,7 @@ public class StatusUtil
 	/**
 	 * @param resLinks
 	 */
-	private void setUpResLinks(VElement resLinks)
+	private void setUpResLinks(final VElement resLinks)
 	{
 		if (resLinks == null || resLinks.size() == 0)
 		{
@@ -220,36 +226,36 @@ public class StatusUtil
 	 * Set the Status and StatusDetails of this node update the PhaseTime audit or append a new phasetime as appropriate
 	 * also prepare a status JMF
 	 *
-	 * @param nodeStatus the new status of the node
-	 * @param nodeStatusDetails the new statusDetails of the node
-	 * @param deviceStatus the new status of the device
+	 * @param nodeStatus          the new status of the node
+	 * @param nodeStatusDetails   the new statusDetails of the node
+	 * @param deviceStatus        the new status of the device
 	 * @param deviceStatusDetails the new statusDetails of the device
 	 * @param amounts
-	 *
 	 */
-	public void setPhase(EnumNodeStatus nodeStatus, String nodeStatusDetails, EnumDeviceStatus deviceStatus, String deviceStatusDetails, AmountBag[] amounts)
+	@Deprecated
+	public void setPhase(final EnumNodeStatus nodeStatus, final String nodeStatusDetails, final EnumDeviceStatus deviceStatus, final String deviceStatusDetails, final AmountBag[] amounts)
 	{
 		docJMFPhaseTime = new JDFDoc(ElementName.JMF);
-		JDFJMF jmf = docJMFPhaseTime.getJMFRoot();
+		final JDFJMF jmf = docJMFPhaseTime.getJMFRoot();
 		docJMFResource = new JDFDoc(ElementName.JMF);
-		JDFJMF jmfRes = docJMFResource.getJMFRoot();
+		final JDFJMF jmfRes = docJMFResource.getJMFRoot();
 
 		final AmountBag ab = getBag(getFirstRefID(), amounts);
 		final LinkAmount la = getLinkAmount(getFirstRefID());
 		final AmountBag lastAb = la == null ? null : la.lastBag;
 
-		JDFAuditPool ap = m_Node.getCreateAuditPool();
+		final JDFAuditPool ap = m_Node.getCreateAuditPool();
 		// TODO rethink when to send 2 phases
-		JDFPhaseTime pt1 = ap.getLastPhase(m_vPartMap, null);
+		final JDFPhaseTime pt1 = ap.getLastPhase(m_vPartMap, null);
 		JDFPhaseTime pt2 = pt1;
-		boolean bEnd = nodeStatus.equals(EnumNodeStatus.Completed) || nodeStatus.equals(EnumNodeStatus.Aborted);
+		final boolean bEnd = nodeStatus.equals(EnumNodeStatus.Completed) || nodeStatus.equals(EnumNodeStatus.Aborted);
 
 		pt2 = ap.setPhase(nodeStatus, nodeStatusDetails, m_vPartMap, null);
 		if (bEnd)
 		{
-			JDFProcessRun pr = (JDFProcessRun) ap.addAudit(EnumAuditType.ProcessRun, null);
+			final JDFProcessRun pr = (JDFProcessRun) ap.addAudit(EnumAuditType.ProcessRun, null);
 			pr.setPartMapVector(m_vPartMap);
-			VElement audits = ap.getAudits(EnumAuditType.PhaseTime, null, m_vPartMap);
+			final VElement audits = ap.getAudits(EnumAuditType.PhaseTime, null, m_vPartMap);
 			for (int i = 0; i < audits.size(); i++)
 			{
 				pr.addPhase((JDFPhaseTime) audits.elementAt(i));
@@ -262,10 +268,10 @@ public class StatusUtil
 		// JMF for the original jobPhase
 		{
 
-			JDFSignal s = (JDFSignal) jmf.appendMessageElement(JDFMessage.EnumFamily.Signal, JDFMessage.EnumType.Status);
-			JDFDeviceInfo deviceInfo = s.appendDeviceInfo();
+			final JDFSignal s = (JDFSignal) jmf.appendMessageElement(JDFMessage.EnumFamily.Signal, JDFMessage.EnumType.Status);
+			final JDFDeviceInfo deviceInfo = s.appendDeviceInfo();
 
-			JDFJobPhase jp = deviceInfo.createJobPhaseFromPhaseTime(pt1);
+			final JDFJobPhase jp = deviceInfo.createJobPhaseFromPhaseTime(pt1);
 			jp.setJobID(m_Node.getJobID(true));
 			jp.setJobPartID(m_Node.getJobPartID(false));
 			setJobPhaseAmounts(lastAb, jp);
@@ -278,11 +284,11 @@ public class StatusUtil
 
 		if (pt2 != null)
 		{
-			JDFSignal s = (JDFSignal) jmf.appendMessageElement(JDFMessage.EnumFamily.Signal, JDFMessage.EnumType.Status);
-			JDFDeviceInfo deviceInfo = s.appendDeviceInfo();
+			final JDFSignal s = (JDFSignal) jmf.appendMessageElement(JDFMessage.EnumFamily.Signal, JDFMessage.EnumType.Status);
+			final JDFDeviceInfo deviceInfo = s.appendDeviceInfo();
 			if (!bEnd) // don't write a jobphase for an idle device
 			{
-				JDFJobPhase jp = deviceInfo.createJobPhaseFromPhaseTime(pt2);
+				final JDFJobPhase jp = deviceInfo.createJobPhaseFromPhaseTime(pt2);
 				setJobPhaseAmounts(ab, jp);
 			}
 
@@ -310,8 +316,8 @@ public class StatusUtil
 		{
 			for (int i = 0; i < vLinkAmount.length; i++)
 			{
-				String refID = vLinkAmount[i].rl.getrRef();
-				AmountBag bag = getBag(refID, amounts);
+				final String refID = vLinkAmount[i].rl.getrRef();
+				final AmountBag bag = getBag(refID, amounts);
 				vLinkAmount[i].lastBag = new AmountBag(bag);
 			}
 		}
@@ -322,24 +328,24 @@ public class StatusUtil
 	 * @param amounts
 	 * @param jmfRes
 	 */
-	private void generateResourceSignal(AmountBag[] amounts, JDFJMF jmfRes)
+	private void generateResourceSignal(final AmountBag[] amounts, final JDFJMF jmfRes)
 	{
 		if (amounts != null)
 		{
-			VElement vResResourceInfo = getVResLink(amounts, 3);
+			final VElement vResResourceInfo = getVResLink(amounts, 3);
 
-			JDFSignal sig = jmfRes.appendSignal(EnumType.Resource);
-			JDFResourceQuParams rqp = sig.appendResourceQuParams();
+			final JDFSignal sig = jmfRes.appendSignal(EnumType.Resource);
+			final JDFResourceQuParams rqp = sig.appendResourceQuParams();
 			rqp.setJDF(m_Node);
 			rqp.setExact(false);
 			boolean bAllExact = true;
 
 			for (int i = 0; i < vResResourceInfo.size(); i++)
 			{
-				JDFResourceInfo ri = sig.appendResourceInfo();
+				final JDFResourceInfo ri = sig.appendResourceInfo();
 				final JDFResourceLink rl = (JDFResourceLink) vResResourceInfo.elementAt(i);
-				LinkAmount la = getLinkAmount(rl.getrRef());
-				boolean bExact = la.bCopyResInfo;
+				final LinkAmount la = getLinkAmount(rl.getrRef());
+				final boolean bExact = la.bCopyResInfo;
 				bAllExact = bAllExact && bExact;
 				rqp.setExact(bExact);
 				ri.setLink(rl, rqp);
@@ -352,14 +358,14 @@ public class StatusUtil
 	 * @param lastAb
 	 * @param jp
 	 */
-	private void setJobPhaseAmounts(final AmountBag lastAb, JDFJobPhase jp)
+	private void setJobPhaseAmounts(final AmountBag lastAb, final JDFJobPhase jp)
 	{
 		if (lastAb == null)
 		{
 			return;
 		}
 
-		LinkAmount la = getLinkAmount(lastAb.refID);
+		final LinkAmount la = getLinkAmount(lastAb.refID);
 		if (la == null)
 		{
 			return;
@@ -411,7 +417,7 @@ public class StatusUtil
 	 * @param n
 	 * @return
 	 */
-	private VElement getVResLink(AmountBag[] amounts, int n)
+	private VElement getVResLink(final AmountBag[] amounts, final int n)
 	{
 		if (amounts == null && vLinkAmount == null)
 		{
@@ -421,8 +427,8 @@ public class StatusUtil
 		{
 			throw new JDFException("incoherent resLink sizes");
 		}
-		VElement vRet = new VElement();
-		for (LinkAmount la : vLinkAmount)
+		final VElement vRet = new VElement();
+		for (final LinkAmount la : vLinkAmount)
 		{
 			if (n == 1)
 			{
@@ -443,6 +449,7 @@ public class StatusUtil
 	/**
 	 * @return the docJMFPhaseTime
 	 */
+	@Deprecated
 	public JDFDoc getDocJMFPhaseTime()
 	{
 		return docJMFPhaseTime;
@@ -451,6 +458,7 @@ public class StatusUtil
 	/**
 	 * @return the docJMFResource
 	 */
+	@Deprecated
 	public JDFDoc getDocJMFResource()
 	{
 		return docJMFResource;
@@ -460,6 +468,7 @@ public class StatusUtil
 	/**
 	 * container class to set amounts and waste in phaseTime
 	 */
+	@Deprecated
 	public class AmountBag
 	{
 		/**
@@ -486,27 +495,26 @@ public class StatusUtil
 		/**
 		 * @see java.lang.Object#toString()
 		 * @return
-		*/
+		 */
 		@Override
 		public String toString()
 		{
-			return "[AmountBag refID=" + refID + " totalAmount=" + totalAmount + " phaseAmount=" + phaseAmount + " totalWaste=" + totalWaste + " phaseWaste=" + phaseWaste + " ]";
+			return "[AmountBag refID=" + refID + " totalAmount=" + totalAmount + " phaseAmount=" + phaseAmount + " totalWaste=" + totalWaste + " phaseWaste="
+					+ phaseWaste + " ]";
 		}
 
 		/**
-		 *
 		 * @param rl resourceLink to the resource that is being counted
 		 */
-		public AmountBag(JDFResourceLink rl)
+		public AmountBag(final JDFResourceLink rl)
 		{
 			this(rl.getrRef());
 		}
 
 		/**
-		 *
 		 * @param _refID refID of the resource that is being counted
 		 */
-		public AmountBag(String _refID)
+		public AmountBag(final String _refID)
 		{
 			refID = _refID;
 			reset();
@@ -528,7 +536,7 @@ public class StatusUtil
 		 *
 		 * @param bag
 		 */
-		public AmountBag(AmountBag bag)
+		public AmountBag(final AmountBag bag)
 		{
 			refID = bag.refID;
 			totalAmount = bag.totalAmount;
@@ -542,7 +550,7 @@ public class StatusUtil
 		 * @param waste
 		 * @param bNewPhase
 		 */
-		public void addPhase(double amount, double waste, boolean bNewPhase)
+		public void addPhase(final double amount, final double waste, final boolean bNewPhase)
 		{
 			totalAmount += amount;
 			totalWaste += waste;
@@ -570,9 +578,9 @@ public class StatusUtil
 		public boolean bTrackWaste = false;
 		public boolean bCopyResInfo = false;
 
-		LinkAmount(JDFResourceLink _rl)
+		LinkAmount(final JDFResourceLink _rl)
 		{
-			JDFNode dump = new JDFDoc("JDF").getJDFRoot();
+			final JDFNode dump = new JDFDoc("JDF").getJDFRoot();
 			dump.appendResourceLinkPool().copyElement(_rl, null);
 			dump.appendResourcePool().copyElement(_rl.getTarget(), null);
 			rl = (JDFResourceLink) dump.getResourceLinkPool().getElement(_rl.getNodeName(), null, 0);
@@ -600,12 +608,12 @@ public class StatusUtil
 		 * @param bag
 		 * @return
 		 */
-		public JDFResourceLink updateNodeLink(AmountBag bag)
+		public JDFResourceLink updateNodeLink(final AmountBag bag)
 		{
 			final JDFResourceLink nodeLink = m_Node.getLink(0, null, new JDFAttributeMap(AttributeName.RREF, rl.getrRef()), null);
 			if (bag != null)
 			{
-				VJDFAttributeMap vMap = new VJDFAttributeMap(m_vPartMap);
+				final VJDFAttributeMap vMap = new VJDFAttributeMap(m_vPartMap);
 				if (vMap.size() == 0)
 				{
 					vMap.add(new JDFAttributeMap());
@@ -632,12 +640,12 @@ public class StatusUtil
 		 * @param bag
 		 * @return
 		 */
-		public JDFResourceLink getPhaseTimeLink(AmountBag bag)
+		public JDFResourceLink getPhaseTimeLink(final AmountBag bag)
 		{
 			cleanAmounts();
 			if (bag != null)
 			{
-				VJDFAttributeMap vMap = new VJDFAttributeMap(m_vPartMap);
+				final VJDFAttributeMap vMap = new VJDFAttributeMap(m_vPartMap);
 				if (vMap.size() == 0)
 				{
 					vMap.add(new JDFAttributeMap());
@@ -682,7 +690,7 @@ public class StatusUtil
 		 * @param bag
 		 * @return
 		 */
-		public JDFResourceLink getResourceAuditLink(AmountBag bag)
+		public JDFResourceLink getResourceAuditLink(final AmountBag bag)
 		{
 			return getResourceInfoLink(bag);
 		}
@@ -691,12 +699,12 @@ public class StatusUtil
 		 * @param bag
 		 * @return
 		 */
-		public JDFResourceLink getResourceInfoLink(AmountBag bag)
+		public JDFResourceLink getResourceInfoLink(final AmountBag bag)
 		{
 			cleanAmounts();
 			if (bag != null)
 			{
-				VJDFAttributeMap vMap = new VJDFAttributeMap(m_vPartMap);
+				final VJDFAttributeMap vMap = new VJDFAttributeMap(m_vPartMap);
 				if (vMap.size() == 0)
 				{
 					vMap.add(new JDFAttributeMap());
@@ -752,6 +760,7 @@ public class StatusUtil
 	/**
 	 * @return the m_deviceID
 	 */
+	@Deprecated
 	public String getDeviceID()
 	{
 		return m_deviceID;
@@ -760,7 +769,8 @@ public class StatusUtil
 	/**
 	 * @param deviceid the deviceID to set
 	 */
-	public void setDeviceID(String deviceid)
+	@Deprecated
+	public void setDeviceID(final String deviceid)
 	{
 		m_deviceID = deviceid;
 	}
@@ -769,11 +779,12 @@ public class StatusUtil
 	 * set waste tracking on or off for the resourcelink rl
 	 *
 	 * @param rl the resourcelink to the resource to track
-	 * @param b tracking on or off
+	 * @param b  tracking on or off
 	 */
-	public void setTrackWaste(JDFResourceLink rl, boolean b)
+	@Deprecated
+	public void setTrackWaste(final JDFResourceLink rl, final boolean b)
 	{
-		LinkAmount la = getLinkAmount(rl.getrRef());
+		final LinkAmount la = getLinkAmount(rl.getrRef());
 		if (la != null)
 		{
 			la.bTrackWaste = b;
@@ -784,11 +795,12 @@ public class StatusUtil
 	 * set copying the resource into resourceInfo on or off for the resourcelink rl
 	 *
 	 * @param rl the resourcelink to the resource to copy
-	 * @param b tracking on or off
+	 * @param b  tracking on or off
 	 */
-	public void setCopyResInResInfo(JDFResourceLink rl, boolean b)
+	@Deprecated
+	public void setCopyResInResInfo(final JDFResourceLink rl, final boolean b)
 	{
-		LinkAmount la = getLinkAmount(rl.getrRef());
+		final LinkAmount la = getLinkAmount(rl.getrRef());
 		if (la != null)
 		{
 			la.bCopyResInfo = b;
@@ -800,11 +812,12 @@ public class StatusUtil
 	 * @param reason
 	 * @return JDFResourceAudit the generated audit
 	 */
-	public JDFResourceAudit setResourceAudit(AmountBag bag, EnumReason reason)
+	@Deprecated
+	public JDFResourceAudit setResourceAudit(final AmountBag bag, final EnumReason reason)
 	{
-		JDFAuditPool ap = m_Node.getCreateAuditPool();
+		final JDFAuditPool ap = m_Node.getCreateAuditPool();
 
-		JDFResourceAudit ra = ap.addResourceAudit(null);
+		final JDFResourceAudit ra = ap.addResourceAudit(null);
 		ra.setContentsModified(false);
 		ra.setReason(reason);
 
@@ -818,13 +831,13 @@ public class StatusUtil
 	/**
 	 * @param endStatus
 	 * @return
-	 *
 	 */
-	public JDFProcessRun setProcessResult(EnumNodeStatus endStatus)
+	@Deprecated
+	public JDFProcessRun setProcessResult(final EnumNodeStatus endStatus)
 	{
-		JDFAuditPool ap = m_Node.getCreateAuditPool();
+		final JDFAuditPool ap = m_Node.getCreateAuditPool();
 
-		JDFProcessRun pr = ap.addProcessRun(endStatus, null, m_vPartMap);
+		final JDFProcessRun pr = ap.addProcessRun(endStatus, null, m_vPartMap);
 		return pr;
 
 	}

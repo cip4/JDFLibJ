@@ -29,9 +29,9 @@
  *
  * This software consists of voluntary contributions made by many individuals on behalf of the The International Cooperation for the Integration of Processes in Prepress, Press and Postpress and was
  * originally based on software copyright (c) 1999-2001, Heidelberger Druckmaschinen AG copyright (c) 1999-2001, Agfa-Gevaert N.V.
- * 
+ *
  * For more information on The International Cooperation for the Integration of Processes in Prepress, Press and Postpress , please see <http://www.cip4.org/>.
- * 
+ *
  *
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
@@ -44,9 +44,7 @@ import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkHoleMakingParams extends WalkResource
 {

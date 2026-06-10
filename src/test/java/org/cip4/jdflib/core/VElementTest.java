@@ -50,7 +50,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         05.12.2008
  */
 class VElementTest extends JDFTestCaseBase
@@ -83,7 +82,9 @@ class VElementTest extends JDFTestCaseBase
 		final KElement e = KElement.createRoot("doc", null);
 		final VElement v = new VElement();
 		for (int i = 0; i < 4; i++)
+		{
 			v.appendUnique(e.appendElement("a"));
+		}
 		Assertions.assertEquals(v.size(), 4, " identical but different elements are appended!");
 
 	}

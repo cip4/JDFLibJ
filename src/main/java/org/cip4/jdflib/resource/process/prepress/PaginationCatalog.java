@@ -81,9 +81,13 @@ public class PaginationCatalog
 				for (final int p : row)
 				{
 					if (p % 2 == 0)
+					{
 						il.add(p + 1);
+					}
 					else
+					{
 						il.add(p - 1);
+					}
 				}
 			}
 			return il;
@@ -228,7 +232,6 @@ public class PaginationCatalog
 	}
 
 	/**
-	 *
 	 * @param fc
 	 * @return
 	 */
@@ -239,7 +242,6 @@ public class PaginationCatalog
 	}
 
 	/**
-	 *
 	 * @param fc
 	 * @return
 	 */
@@ -250,7 +252,6 @@ public class PaginationCatalog
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public Collection<String> getKeys()
@@ -267,7 +268,9 @@ public class PaginationCatalog
 	CatalogEntry getEntry(final String fc)
 	{
 		if (fc == null)
+		{
 			return null;
+		}
 		return theMap.get(fc.toLowerCase());
 	}
 }

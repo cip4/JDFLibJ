@@ -80,7 +80,7 @@ import org.cip4.jdflib.auto.JDFAutoStitchingParams.EnumStitchType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumSides;
@@ -143,7 +143,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class DigiPrintTest extends ExampleTest
 {
@@ -158,15 +157,16 @@ class DigiPrintTest extends ExampleTest
 
 	/**
 	 * test amount handling
-	 * 
-	 * @throws Exception
 	 *
+	 * @throws Exception
 	 */
 	@Test
 	void testModules() throws Exception
 	{
 		final JDFAuditPool ap = n.getCreateAuditPool();
-		ap.appendXMLComment("JDF 1.3 compatible auditing of module phases - note that modulephase start and end times are set outside of the phasetime start and end times", null);
+		ap.appendXMLComment(
+				"JDF 1.3 compatible auditing of module phases - note that modulephase start and end times are set outside of the phasetime start and end times",
+				null);
 		final JDFPhaseTime pt = ap.addPhaseTime(EnumNodeStatus.Setup, null, null);
 		final JDFPhaseTime pt2 = ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);
 		final JDFDate date = new JDFDate();
@@ -200,9 +200,8 @@ class DigiPrintTest extends ExampleTest
 
 	/**
 	 * test amount handling
-	 * 
-	 * @throws Exception
 	 *
+	 * @throws Exception
 	 */
 	@Test
 	void testPDFVTStream() throws Exception
@@ -238,7 +237,7 @@ class DigiPrintTest extends ExampleTest
 				if (strm == 1)
 				{
 					final JDFFileSpec fs = layoutElement.appendFileSpec();
-					fs.setMimeType(JDFConstants.MIME_PDF);
+					fs.setMimeType(JDFCoreConstants.MIME_PDF);
 					fs.setFileFormat("cid:streamFile%i.pdf");
 					fs.setFileTemplate("i");
 					fs.appendContainer().refElement(fsContainer);
@@ -328,7 +327,9 @@ class DigiPrintTest extends ExampleTest
 				for (int i = 0; i < 3 + j; i++)
 				{
 					if (i > 0 && cb.equals("Cover"))
+					{
 						break;
+					}
 					for (final String fb : frontback)
 					{
 						for (final String sep : cmyk)
@@ -400,9 +401,8 @@ class DigiPrintTest extends ExampleTest
 
 	/**
 	 * test amount handling
-	 * 
-	 * @throws Exception
 	 *
+	 * @throws Exception
 	 */
 	@Test
 	void testModules14() throws Exception
@@ -416,7 +416,8 @@ class DigiPrintTest extends ExampleTest
 			ap.appendXMLComment("JDF 1.3 incompatible auditing of module phases the REQUIRED time attributes are not set in the ModulePhase elements\n"
 					+ "- note that phases may now arbitrarily overlap\n"
 					+ "The modulePhase elements now only specify which modules are involved, times are all defined by the phasetime proper", null);
-			ap.appendXMLComment("The following phaseTime is executed by one module - the RIP,which executes two process steps (Interpreting and Rendering)", null);
+			ap.appendXMLComment("The following phaseTime is executed by one module - the RIP,which executes two process steps (Interpreting and Rendering)",
+					null);
 			final JDFPhaseTime ptRIP = ap.addPhaseTime(EnumNodeStatus.Setup, null, null);
 			final JDFDate date = new JDFDate();
 			ptRIP.setStart(date);
@@ -543,9 +544,8 @@ class DigiPrintTest extends ExampleTest
 
 	/**
 	 * test devcaps for usagecounters
-	 * 
-	 * @throws Exception
 	 *
+	 * @throws Exception
 	 */
 	@Test
 	void testUsageCounterDevCaps() throws Exception
@@ -565,7 +565,6 @@ class DigiPrintTest extends ExampleTest
 
 	/**
 	 * test amount handling
-	 *
 	 */
 	@Test
 	void testDirectProof()
@@ -620,9 +619,8 @@ class DigiPrintTest extends ExampleTest
 
 	/**
 	 * test amount handling
-	 * 
-	 * @throws Exception
 	 *
+	 * @throws Exception
 	 */
 	@SuppressWarnings("deprecation")
 	@Test
@@ -722,9 +720,8 @@ class DigiPrintTest extends ExampleTest
 
 	/**
 	 * test amount handling
-	 * 
-	 * @throws Exception
 	 *
+	 * @throws Exception
 	 */
 	@Test
 	void testMixAmount() throws Exception
@@ -812,8 +809,6 @@ class DigiPrintTest extends ExampleTest
 	}
 
 	/**
-	 *
-	 *
 	 * @param command
 	 * @return
 	 */
@@ -844,7 +839,9 @@ class DigiPrintTest extends ExampleTest
 				for (int i = 0; i < 2 + j; i++)
 				{
 					if (i > 0 && cb.equals("Cover"))
+					{
 						break;
+					}
 					for (final String fb : frontback)
 					{
 						for (final String sep : cmyk)
@@ -900,7 +897,9 @@ class DigiPrintTest extends ExampleTest
 				for (int i = 0; i < 2 + j; i++)
 				{
 					if (i > 0 && cb.equals("Cover"))
+					{
 						break;
+					}
 					for (final String fb : frontback)
 					{
 						for (final String sep : cmyk)
@@ -949,7 +948,7 @@ class DigiPrintTest extends ExampleTest
 		ruli.refPageList(pl);
 		comp.refPageList(pl);
 		int pageCount = 0;
-		digiParams.setSides(EnumSides.TwoSidedFlipY);
+		digiParams.setSides(org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumSides.getEnum(EnumSides.TwoSidedFlipY.name()));
 		digiParams.setXMLComment("the sides attribute may be overridden by explicitly or implicitly missing runlist input elements", true);
 
 		final VString vRun = new VString("Letter BrochureMale BrochureFemale", null);

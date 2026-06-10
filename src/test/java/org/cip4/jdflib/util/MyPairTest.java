@@ -43,16 +43,13 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
  * @date Dec 21, 2012
  */
 class MyPairTest extends JDFTestCaseBase
 {
 	/**
-	 *
 	 * @author rainer prosi
-	 *
 	 */
 	private class TestPair extends MyPair<String, String>
 	{

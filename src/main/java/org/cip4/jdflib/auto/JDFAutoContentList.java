@@ -106,7 +106,7 @@ public abstract class JDFAutoContentList extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoContentList(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoContentList(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public abstract class JDFAutoContentList extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoContentList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoContentList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,7 +131,7 @@ public abstract class JDFAutoContentList extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoContentList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoContentList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -142,7 +142,7 @@ public abstract class JDFAutoContentList extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -188,7 +188,7 @@ public abstract class JDFAutoContentList extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFContentData the element
 	 */
-	public JDFContentData getCreateContentData(int iSkip)
+	public JDFContentData getCreateContentData(final int iSkip)
 	{
 		return (JDFContentData) getCreateElement_JDFElement(ElementName.CONTENTDATA, null, iSkip);
 	}
@@ -200,7 +200,7 @@ public abstract class JDFAutoContentList extends JDFResource
 	 * @return JDFContentData the element
 	 *         default is getContentData(0)
 	 */
-	public JDFContentData getContentData(int iSkip)
+	public JDFContentData getContentData(final int iSkip)
 	{
 		return (JDFContentData) getElement(ElementName.CONTENTDATA, null, iSkip);
 	}

@@ -53,11 +53,11 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.HashUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -698,11 +698,7 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 		{
 			return true;
 		}
-		if (other == null)
-		{
-			return false;
-		}
-		if (!(other instanceof JDFAttributeMapArray))
+		if ((other == null) || !(other instanceof JDFAttributeMapArray))
 		{
 			return false;
 		}
@@ -771,9 +767,9 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 		{
 			s1 = (String) key;
 		}
-		else if (key instanceof ValuedEnum)
+		else if (key instanceof Enum<?>)
 		{
-			s1 = ((ValuedEnum) key).getName();
+			s1 = JavaEnumUtil.getName((Enum<?>) key);
 		}
 		else
 		{
@@ -785,9 +781,9 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 		{
 			s2 = (String) value;
 		}
-		else if (value instanceof ValuedEnum)
+		else if (value instanceof Enum<?>)
 		{
-			s2 = ((ValuedEnum) value).getName();
+			s2 = JavaEnumUtil.getName((Enum<?>) value);
 		}
 		else
 		{

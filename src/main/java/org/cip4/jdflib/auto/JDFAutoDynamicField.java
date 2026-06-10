@@ -125,7 +125,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDynamicField(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDynamicField(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -137,7 +137,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDynamicField(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDynamicField(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -150,7 +150,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDynamicField(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDynamicField(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -171,7 +171,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFormat(String value)
+	public void setFormat(final String value)
 	{
 		setAttribute(AttributeName.FORMAT, value, null);
 	}
@@ -196,7 +196,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setInputField(String value)
+	public void setInputField(final String value)
 	{
 		setAttribute(AttributeName.INPUTFIELD, value, null);
 	}
@@ -221,7 +221,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOrd(int value)
+	public void setOrd(final int value)
 	{
 		setAttribute(AttributeName.ORD, value, null);
 	}
@@ -246,7 +246,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setOrdExpression(String value)
+	public void setOrdExpression(final String value)
 	{
 		setAttribute(AttributeName.ORDEXPRESSION, value, null);
 	}
@@ -271,7 +271,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setReplaceField(String value)
+	public void setReplaceField(final String value)
 	{
 		setAttribute(AttributeName.REPLACEFIELD, value, null);
 	}
@@ -296,7 +296,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTemplate(String value)
+	public void setTemplate(final String value)
 	{
 		setAttribute(AttributeName.TEMPLATE, value, null);
 	}

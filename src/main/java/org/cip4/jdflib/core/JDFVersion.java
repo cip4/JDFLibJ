@@ -81,7 +81,6 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * This class provides all version and build details of the library. Attention - this only works in case the library is built with maven
- *
  */
 public class JDFVersion
 {
@@ -134,7 +133,7 @@ public class JDFVersion
 
 	/**
 	 * Read and returns a build property by key.
-	 * 
+	 *
 	 * @param key The key of the build property.
 	 * @return The value of the build property by key.
 	 */
@@ -163,13 +162,15 @@ public class JDFVersion
 
 	/**
 	 * Generates and returns the major version number from the maven version number.
-	 * 
+	 *
 	 * @return The major version number as String.
 	 */
 	private static String getMajorVersion(final String mvnVersion)
 	{
 		if (mvnVersion == null)
+		{
 			return null;
+		}
 		// extract pure version
 		final String version = StringUtils.substringBefore(mvnVersion, "-");
 
@@ -180,13 +181,15 @@ public class JDFVersion
 
 	/**
 	 * Generates and returns the minor version number from the maven version number.
-	 * 
+	 *
 	 * @return The major version number as String.
 	 */
 	private static String getMinorVersion(final String mvnVersion)
 	{
 		if (mvnVersion == null)
+		{
 			return null;
+		}
 
 		// extract pure version
 		final String version = StringUtils.substringBefore(mvnVersion, "-");

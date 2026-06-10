@@ -129,7 +129,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIDInfo(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoIDInfo(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -141,7 +141,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoIDInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoIDInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -154,7 +154,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoIDInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoIDInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -175,7 +175,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCategory(String value)
+	public void setCategory(final String value)
 	{
 		setAttribute(AttributeName.CATEGORY, value, null);
 	}
@@ -200,7 +200,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJDFURL(String value)
+	public void setJDFURL(final String value)
 	{
 		setAttribute(AttributeName.JDFURL, value, null);
 	}
@@ -225,7 +225,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -250,7 +250,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobPartID(String value)
+	public void setJobPartID(final String value)
 	{
 		setAttribute(AttributeName.JOBPARTID, value, null);
 	}
@@ -275,7 +275,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setParentJobID(String value)
+	public void setParentJobID(final String value)
 	{
 		setAttribute(AttributeName.PARENTJOBID, value, null);
 	}
@@ -300,7 +300,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setParentJobPartID(String value)
+	public void setParentJobPartID(final String value)
 	{
 		setAttribute(AttributeName.PARENTJOBPARTID, value, null);
 	}
@@ -325,7 +325,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setProjectID(String value)
+	public void setProjectID(final String value)
 	{
 		setAttribute(AttributeName.PROJECTID, value, null);
 	}
@@ -350,7 +350,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setType(String value)
+	public void setType(final String value)
 	{
 		setAttribute(AttributeName.TYPE, value, null);
 	}
@@ -375,7 +375,7 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTypes(VString value)
+	public void setTypes(final VString value)
 	{
 		setAttribute(AttributeName.TYPES, value, null);
 	}
@@ -387,8 +387,8 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	 */
 	public VString getTypes()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}

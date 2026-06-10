@@ -100,9 +100,9 @@ public class WalkDigitalPrintingParams extends WalkResource
 	void updateCollate(final JDFAttributeMap map)
 	{
 		final String collate = map.get(AttributeName.COLLATE);
-		if (collate != null && (EnumCollate.SheetAndSet.getName().equals(collate) || EnumCollate.SheetSetAndJob.getName().equals(collate)))
+		if (collate != null && (EnumCollate.SheetAndSet.name().equals(collate) || EnumCollate.SheetSetAndJob.name().equals(collate)))
 		{
-			map.put(AttributeName.COLLATE, EnumCollate.Sheet.getName());
+			map.put(AttributeName.COLLATE, EnumCollate.Sheet.name());
 		}
 
 	}
@@ -112,13 +112,13 @@ public class WalkDigitalPrintingParams extends WalkResource
 		final String sides = map.get(AttributeName.SIDES);
 		if (sides != null)
 		{
-			if (EnumSides.TwoSidedFlipX.getName().equals(sides) || EnumSides.TwoSidedFlipY.getName().equals(sides))
+			if (EnumSides.TwoSidedFlipX.name().equals(sides) || EnumSides.TwoSidedFlipY.name().equals(sides))
 			{
-				map.put(AttributeName.SIDES, EnumSides.TwoSided.getName());
+				map.put(AttributeName.SIDES, EnumSides.TwoSided.name());
 			}
-			else if (EnumSides.OneSidedBackFlipX.getName().equals(sides) || EnumSides.OneSidedBackFlipY.getName().equals(sides))
+			else if (EnumSides.OneSidedBackFlipX.name().equals(sides) || EnumSides.OneSidedBackFlipY.name().equals(sides))
 			{
-				map.put(AttributeName.SIDES, EnumSides.OneSidedBack.getName());
+				map.put(AttributeName.SIDES, EnumSides.OneSidedBack.name());
 			}
 		}
 

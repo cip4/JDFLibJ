@@ -118,7 +118,8 @@ public class JDFInspection extends JDFAutoInspection
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFInspection(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFInspection(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

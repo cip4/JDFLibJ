@@ -67,7 +67,7 @@
  *
  */
 /**
- * 
+ *
  */
 package org.cip4.jdflib.elementwalker;
 
@@ -81,20 +81,19 @@ import org.cip4.jdflib.resource.JDFResource;
 
 /**
  * @author Dr. Rainer Prosi
- * 
- *  finds unlinked resources - example usage of the walker classes
+ *         finds unlinked resources - example usage of the walker classes
  */
 public class ResourceIDFinder extends BaseElementWalker
 {
 	protected HashMap<String, JDFResource> map;
 
 	/**
-	 * 
+	 *
 	 */
 	public ResourceIDFinder()
 	{
 		super(new BaseWalkerFactory());
-		map = new HashMap<String, JDFResource>();
+		map = new HashMap<>();
 		new BaseWalker(getFactory()); // need a default walker
 	}
 
@@ -102,7 +101,7 @@ public class ResourceIDFinder extends BaseElementWalker
 	 * @param n
 	 * @return
 	 */
-	public Map<String, JDFResource> getMap(JDFNode n)
+	public Map<String, JDFResource> getMap(final JDFNode n)
 	{
 		walkTree(n, null);
 		return map;
@@ -110,9 +109,8 @@ public class ResourceIDFinder extends BaseElementWalker
 
 	/**
 	 * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super classes
-	 * 
+	 *
 	 * @author prosirai
-	 * 
 	 */
 	public class WalkRes extends WalkStop
 	{
@@ -154,9 +152,8 @@ public class ResourceIDFinder extends BaseElementWalker
 
 	/**
 	 * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super classes
-	 * 
+	 *
 	 * @author prosirai
-	 * 
 	 */
 	public class WalkContinue extends WalkStop
 	{
@@ -195,9 +192,8 @@ public class ResourceIDFinder extends BaseElementWalker
 
 	/**
 	 * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super classes
-	 * 
+	 *
 	 * @author prosirai
-	 * 
 	 */
 	public class WalkStop extends BaseWalker
 	{

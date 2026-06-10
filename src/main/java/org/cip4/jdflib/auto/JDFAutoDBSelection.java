@@ -107,7 +107,7 @@ public abstract class JDFAutoDBSelection extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDBSelection(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoDBSelection(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -119,7 +119,7 @@ public abstract class JDFAutoDBSelection extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoDBSelection(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoDBSelection(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -132,7 +132,7 @@ public abstract class JDFAutoDBSelection extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoDBSelection(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoDBSelection(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -143,7 +143,7 @@ public abstract class JDFAutoDBSelection extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -173,7 +173,7 @@ public abstract class JDFAutoDBSelection extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDataBase(String value)
+	public void setDataBase(final String value)
 	{
 		setAttribute(AttributeName.DATABASE, value, null);
 	}
@@ -198,7 +198,7 @@ public abstract class JDFAutoDBSelection extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRecords(JDFIntegerRangeList value)
+	public void setRecords(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.RECORDS, value, null);
 	}
@@ -211,8 +211,8 @@ public abstract class JDFAutoDBSelection extends JDFResource
 	 */
 	public JDFIntegerRangeList getRecords()
 	{
-		String strAttrName = getAttribute(AttributeName.RECORDS, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.RECORDS, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -226,7 +226,7 @@ public abstract class JDFAutoDBSelection extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSelect(String value)
+	public void setSelect(final String value)
 	{
 		setAttribute(AttributeName.SELECT, value, null);
 	}

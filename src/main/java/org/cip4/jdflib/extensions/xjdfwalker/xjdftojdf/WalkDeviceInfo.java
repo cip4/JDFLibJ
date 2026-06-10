@@ -142,7 +142,6 @@ public class WalkDeviceInfo extends WalkXElement
 	}
 
 	/**
-	 *
 	 * @param val
 	 * @return
 	 */

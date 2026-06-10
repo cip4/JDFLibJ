@@ -96,7 +96,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi
- *
  *         Test of the Status JMF
  */
 class JDFJobPhaseTest extends JDFTestCaseBase
@@ -152,7 +151,7 @@ class JDFJobPhaseTest extends JDFTestCaseBase
 		assertNull(jp.getJobID());
 		jp.applyNode(n);
 		assertEquals(jp.getJobID(), "j1");
-		assertEquals(jp.getActivation().getName(), n.getActivation(true).getName());
+		assertEquals(jp.getActivation().name(), n.getActivation(true).name());
 
 	}
 

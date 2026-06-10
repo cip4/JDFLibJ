@@ -49,7 +49,6 @@ import org.cip4.jdflib.jmf.JDFSignal;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen <br/>
- *
  */
 public class WalkSignalResource extends WalkSignal
 {
@@ -110,7 +109,9 @@ public class WalkSignalResource extends WalkSignal
 				ri.removeAttribute(AttributeName.AMOUNT);
 				ri.renameAttribute(AttributeName.ACTUALAMOUNT, AttributeName.AMOUNT);
 				if (!ri.hasNonEmpty(AttributeName.SCOPE))
+				{
 					ri.setAttribute(AttributeName.SCOPE, "Job");
+				}
 
 			}
 		}
@@ -120,7 +121,6 @@ public class WalkSignalResource extends WalkSignal
 	final static private String[] moveAtts = new String[] { AttributeName.JOBID, AttributeName.JOBPARTID, AttributeName.QUEUEENTRYID, AttributeName.SCOPE };
 
 	/**
-	 *
 	 * @param jdf
 	 */
 	void moveFromQuParams(final KElement jdf)

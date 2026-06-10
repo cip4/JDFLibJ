@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.cip4.jdflib.util.net;
 
@@ -17,17 +17,16 @@ class URLProxySelector extends ProxySelector
 {
 
 	/**
-	 * @param p a proxy to add 
-	 * 
+	 * @param p a proxy to add
 	 */
-	protected URLProxySelector(Proxy p)
+	protected URLProxySelector(final Proxy p)
 	{
 		super();
-		myproxies = new Vector<Proxy>();
+		myproxies = new Vector<>();
 		if (p != null)
 		{
 			myproxies.add(p);
-			noproxies = new Vector<Proxy>();
+			noproxies = new Vector<>();
 			noproxies.add(Proxy.NO_PROXY);
 		}
 		else
@@ -45,38 +44,42 @@ class URLProxySelector extends ProxySelector
 	 * @param uri
 	 * @param sa
 	 * @param ioe
-	*/
+	 */
 	@Override
-	public void connectFailed(URI uri, SocketAddress sa, IOException ioe)
+	public void connectFailed(final URI uri, final SocketAddress sa, final IOException ioe)
 	{
-		//nop			
+		// nop
 	}
 
 	/**
 	 * @see java.net.ProxySelector#select(java.net.URI)
 	 * @param uri
 	 * @return
-	*/
+	 */
 	@Override
-	public List<Proxy> select(URI uri)
+	public List<Proxy> select(final URI uri)
 	{
 		String host = uri == null ? null : uri.getHost();
 		if (host != null)
+		{
 			host = host.toLowerCase();
+		}
 
 		boolean bLocal = false;
 		try
 		{
-			InetAddress a = InetAddress.getByName(host);
+			final InetAddress a = InetAddress.getByName(host);
 			bLocal = a.isSiteLocalAddress();
 		}
-		catch (UnknownHostException x)
+		catch (final UnknownHostException x)
 		{
 			// nop
 		}
 
 		if (host == null || bLocal || "localhost".equals(host) || "127.0.0.1".equals(host))
+		{
 			return noproxies;
+		}
 
 		return myproxies;
 	}

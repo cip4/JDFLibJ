@@ -1,8 +1,8 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -18,17 +18,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -54,17 +54,17 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.goldenticket;
 
@@ -95,8 +95,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * Sep 23, 2009
+ *         Sep 23, 2009
  */
 public class NarrowWebGoldenTicket extends MISGoldenTicket
 {
@@ -166,24 +165,25 @@ public class NarrowWebGoldenTicket extends MISGoldenTicket
 
 	/**
 	 * get the correct Types from category
+	 *
 	 * @return
 	 */
 	@Override
 	public VString getTypes()
 	{
 		final VString v = new VString();
-		v.add(EnumType.ConventionalPrinting.getName());
+		v.add(EnumType.ConventionalPrinting.name());
 		if (bEmboss)
 		{
-			v.add(EnumType.Embossing.getName());
+			v.add(EnumType.Embossing.name());
 		}
 		if (bLaminate)
 		{
-			v.add(EnumType.Laminating.getName());
+			v.add(EnumType.Laminating.name());
 		}
 		if (bShapeCut)
 		{
-			v.add(EnumType.ShapeCutting.getName());
+			v.add(EnumType.ShapeCutting.name());
 		}
 		return v;
 	}
@@ -222,7 +222,7 @@ public class NarrowWebGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void initConventionalPrinting()
 	{
@@ -253,12 +253,12 @@ public class NarrowWebGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void initShapeCutting()
 	{
 		final JDFShapeCuttingParams sp = (JDFShapeCuttingParams) theNode.addResource(ElementName.SHAPECUTTINGPARAMS, EnumUsage.Input);
-		//		final JDFResourceLink rl = theNode.getLink(sp, null);
+		// final JDFResourceLink rl = theNode.getLink(sp, null);
 		sp.setAttribute(AttributeName.MODULEINDEX, 8, null);
 		sp.setDescriptiveName("Modulzuordnung Stanzen");
 		final JDFTool tool = (JDFTool) theNode.addResource(ElementName.TOOL, EnumUsage.Input);
@@ -270,12 +270,12 @@ public class NarrowWebGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void initEmbossing()
 	{
 		final JDFEmbossingParams ep = (JDFEmbossingParams) theNode.addResource(ElementName.EMBOSSINGPARAMS, EnumUsage.Input);
-		//		final JDFResourceLink rl = theNode.getLink(ep, null);
+		// final JDFResourceLink rl = theNode.getLink(ep, null);
 		ep.setAttribute(AttributeName.MODULEINDEX, 7, null);
 		ep.setDescriptiveName("Modulzuordnung Prägen");
 		final JDFTool tool = (JDFTool) theNode.addResource(ElementName.TOOL, EnumUsage.Input);
@@ -287,14 +287,14 @@ public class NarrowWebGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void initLaminating()
 	{
 		final JDFLaminatingParams lp = (JDFLaminatingParams) theNode.addResource(ElementName.LAMINATINGPARAMS, EnumUsage.Input);
 		lp.setAttribute(AttributeName.MODULEINDEX, 6, null);
 		lp.setDescriptiveName("Modulzuordnung Laminieren");
-		//		final JDFResourceLink rl = theNode.getLink(lp, null);
+		// final JDFResourceLink rl = theNode.getLink(lp, null);
 		final JDFMedia foil = (JDFMedia) theNode.addResource(ElementName.MEDIA, EnumUsage.Input);
 		foil.setMediaType(EnumMediaType.LaminatingFoil);
 	}

@@ -74,10 +74,8 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.XJDFConstants;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
-  */
+ */
 public class WalkProcessRunAudit extends WalkAudit
 {
 	/**
@@ -93,11 +91,13 @@ public class WalkProcessRunAudit extends WalkAudit
 	 * @return true if must continue
 	 */
 	@Override
-	public KElement walk(KElement xjdf, final KElement jdf)
+	public KElement walk(final KElement xjdf, final KElement jdf)
 	{
-		KElement procRun = xjdf.getElement(ElementName.PROCESSRUN);
+		final KElement procRun = xjdf.getElement(ElementName.PROCESSRUN);
 		if (procRun == null)
+		{
 			return null;
+		}
 		moveFromSender(xjdf, xjdf.getElement(XJDFConstants.Header));
 		procRun.setAttributes(xjdf);
 		// we explicitly do not call super.walk, so that the original AuditNotification is ignored

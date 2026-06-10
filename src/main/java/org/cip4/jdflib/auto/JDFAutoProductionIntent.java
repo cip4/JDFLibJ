@@ -112,7 +112,7 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoProductionIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoProductionIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -124,7 +124,7 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoProductionIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoProductionIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -137,7 +137,7 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoProductionIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoProductionIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -174,7 +174,7 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFCertification the element
 	 */
-	public JDFCertification getCreateCertification(int iSkip)
+	public JDFCertification getCreateCertification(final int iSkip)
 	{
 		return (JDFCertification) getCreateElement_JDFElement(ElementName.CERTIFICATION, null, iSkip);
 	}
@@ -186,7 +186,7 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 	 * @return JDFCertification the element
 	 *         default is getCertification(0)
 	 */
-	public JDFCertification getCertification(int iSkip)
+	public JDFCertification getCertification(final int iSkip)
 	{
 		return (JDFCertification) getElement(ElementName.CERTIFICATION, null, iSkip);
 	}
@@ -299,7 +299,7 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFResource the element
 	 */
-	public JDFResource getCreateResource(int iSkip)
+	public JDFResource getCreateResource(final int iSkip)
 	{
 		return (JDFResource) getCreateElement_JDFElement(ElementName.RESOURCE, null, iSkip);
 	}
@@ -311,7 +311,7 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 	 * @return JDFResource the element
 	 *         default is getResource(0)
 	 */
-	public JDFResource getResource(int iSkip)
+	public JDFResource getResource(final int iSkip)
 	{
 		return (JDFResource) getElement(ElementName.RESOURCE, null, iSkip);
 	}
@@ -341,7 +341,7 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refResource(JDFResource refTarget)
+	public void refResource(final JDFResource refTarget)
 	{
 		refElement(refTarget);
 	}

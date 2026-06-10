@@ -125,7 +125,7 @@ public abstract class JDFAutoEmployee extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoEmployee(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoEmployee(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -137,7 +137,7 @@ public abstract class JDFAutoEmployee extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoEmployee(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoEmployee(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -150,7 +150,7 @@ public abstract class JDFAutoEmployee extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoEmployee(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoEmployee(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -161,7 +161,7 @@ public abstract class JDFAutoEmployee extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Implementation);
 		return bRet;
 	}
@@ -191,7 +191,7 @@ public abstract class JDFAutoEmployee extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPersonalID(String value)
+	public void setPersonalID(final String value)
 	{
 		setAttribute(AttributeName.PERSONALID, value, null);
 	}
@@ -216,7 +216,7 @@ public abstract class JDFAutoEmployee extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRoles(VString value)
+	public void setRoles(final VString value)
 	{
 		setAttribute(AttributeName.ROLES, value, null);
 	}
@@ -228,8 +228,8 @@ public abstract class JDFAutoEmployee extends JDFResource
 	 */
 	public VString getRoles()
 	{
-		VString vStrAttrib = new VString();
-		String s = getAttribute(AttributeName.ROLES, null, JDFCoreConstants.EMPTYSTRING);
+		final VString vStrAttrib = new VString();
+		final String s = getAttribute(AttributeName.ROLES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
@@ -244,7 +244,7 @@ public abstract class JDFAutoEmployee extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setShift(String value)
+	public void setShift(final String value)
 	{
 		setAttribute(AttributeName.SHIFT, value, null);
 	}
@@ -332,7 +332,7 @@ public abstract class JDFAutoEmployee extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refPerson(JDFPerson refTarget)
+	public void refPerson(final JDFPerson refTarget)
 	{
 		refElement(refTarget);
 	}

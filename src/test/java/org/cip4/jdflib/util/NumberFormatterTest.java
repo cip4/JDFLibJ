@@ -74,7 +74,6 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
  * @date Jan 4, 2011
  */

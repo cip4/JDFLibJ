@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,22 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 
 /**
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * 
+ *
  * @author Elena Skobchenko
  *
  * JDFIntegerState.java
@@ -139,36 +139,36 @@ public class JDFIntegerState extends JDFAbstractState
 
 	/**
 	 * constructor for JDFIntegerState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFIntegerState(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFIntegerState(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFIntegerState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFIntegerState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFIntegerState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * constructor for JDFIntegerState
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFIntegerState(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFIntegerState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -178,7 +178,7 @@ public class JDFIntegerState extends JDFAbstractState
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -191,17 +191,17 @@ public class JDFIntegerState extends JDFAbstractState
 	 * // Attribute getter/ setter
 	 */
 
-	public void setDefaultValue(int value)
+	public void setDefaultValue(final int value)
 	{
 		setAttribute(AttributeName.DEFAULTVALUE, value, null);
 	}
 
-	public void setDefaultValue(JDFIntegerList value)
+	public void setDefaultValue(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.DEFAULTVALUE, value, null);
 	}
 
-	public void setCurrentValue(JDFIntegerList value)
+	public void setCurrentValue(final JDFIntegerList value)
 	{
 		setAttribute(AttributeName.CURRENTVALUE, value, null);
 	}
@@ -211,7 +211,7 @@ public class JDFIntegerState extends JDFAbstractState
 		return getIntegerList(AttributeName.DEFAULTVALUE);
 	}
 
-	public void setCurrentValue(int value)
+	public void setCurrentValue(final int value)
 	{
 		setAttribute(AttributeName.CURRENTVALUE, value, null);
 	}
@@ -221,14 +221,14 @@ public class JDFIntegerState extends JDFAbstractState
 		return getIntegerList(AttributeName.CURRENTVALUE);
 	}
 
-	public void setAllowedValueList(JDFIntegerRangeList value)
+	public void setAllowedValueList(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUELIST, value.toString(), null);
 	}
 
 	/**
 	 * get the allowedValueList
-	 * 
+	 *
 	 * @return the allowedValuelist, <code>null</code> if no list exists
 	 */
 	public JDFIntegerRangeList getAllowedValueList()
@@ -236,14 +236,14 @@ public class JDFIntegerState extends JDFAbstractState
 		return getIntegerRangeList(AttributeName.ALLOWEDVALUELIST);
 	}
 
-	public void setPresentValueList(JDFIntegerRangeList value)
+	public void setPresentValueList(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.PRESENTVALUELIST, value.toString(), null);
 	}
 
 	public JDFIntegerRangeList getPresentValueList()
 	{
-		JDFIntegerRangeList il = getIntegerRangeList(AttributeName.PRESENTVALUELIST);
+		final JDFIntegerRangeList il = getIntegerRangeList(AttributeName.PRESENTVALUELIST);
 		return (il == null) ? getAllowedValueList() : il;
 	}
 
@@ -257,10 +257,12 @@ public class JDFIntegerState extends JDFAbstractState
 		{
 			final String attribute = getAttribute(listName, null, null);
 			if (attribute == null)
+			{
 				return null;
+			}
 			return new JDFIntegerRangeList(attribute);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFIntegerState.getIntegerRangeList, Unable to create JDFIntegerRangeList from Attribute value: " + listName);
 		}
@@ -276,16 +278,18 @@ public class JDFIntegerState extends JDFAbstractState
 		{
 			final String attribute = getAttribute(listName, null, null);
 			if (attribute == null)
+			{
 				return null;
+			}
 			return new JDFIntegerList(attribute);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFIntegerState.getIntegerList, Unable to create JDFIntegerRangeList from Attribute value: " + listName);
 		}
 	}
 
-	public void setAllowedValueMax(int value)
+	public void setAllowedValueMax(final int value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUEMAX, value, null);
 	}
@@ -295,7 +299,7 @@ public class JDFIntegerState extends JDFAbstractState
 		return getIntAttribute(AttributeName.ALLOWEDVALUEMAX, null, 0);
 	}
 
-	public void setPresentValueMax(int value)
+	public void setPresentValueMax(final int value)
 	{
 		setAttribute(AttributeName.PRESENTVALUEMAX, value, null);
 	}
@@ -309,7 +313,7 @@ public class JDFIntegerState extends JDFAbstractState
 		return getAllowedValueMax();
 	}
 
-	public void setAllowedValueMin(int value)
+	public void setAllowedValueMin(final int value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUEMIN, value, null);
 	}
@@ -319,7 +323,7 @@ public class JDFIntegerState extends JDFAbstractState
 		return getIntAttribute(AttributeName.ALLOWEDVALUEMIN, null, 0);
 	}
 
-	public void setPresentValueMin(int value)
+	public void setPresentValueMin(final int value)
 	{
 		setAttribute(AttributeName.PRESENTVALUEMIN, value, null);
 	}
@@ -333,7 +337,7 @@ public class JDFIntegerState extends JDFAbstractState
 		return getAllowedValueMin();
 	}
 
-	public void setAllowedValueMod(JDFXYPair value)
+	public void setAllowedValueMod(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.ALLOWEDVALUEMOD, value.toString());
 	}
@@ -344,13 +348,13 @@ public class JDFIntegerState extends JDFAbstractState
 		{
 			return new JDFXYPair(getAttribute(AttributeName.ALLOWEDVALUEMOD));
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("JDFIntegerState.getAllowedValueMod: The XYPair value is invalid!");
 		}
 	}
 
-	public void setPresentValueMod(JDFXYPair value)
+	public void setPresentValueMod(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.PRESENTVALUEMOD, value.toString());
 	}
@@ -365,7 +369,7 @@ public class JDFIntegerState extends JDFAbstractState
 			}
 			return getAllowedValueMod();
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			throw new JDFException("The XYPair value is invalid!");
 		}
@@ -377,7 +381,7 @@ public class JDFIntegerState extends JDFAbstractState
 		return getAttribute(AttributeName.UNITTYPE);
 	}
 
-	public void setUnitType(String value)
+	public void setUnitType(final String value)
 	{
 		setAttribute(AttributeName.UNITTYPE, value);
 	}
@@ -388,26 +392,27 @@ public class JDFIntegerState extends JDFAbstractState
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java
 	 * .lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
 	 */
 	@Override
-	public void addValue(String value, EnumFitsValue testlists)
+	public void addValue(final String value, final EnumFitsValue testlists)
 	{
-		if (fitsValue(value, testlists))
+		if (fitsValue(value, testlists) || !StringUtil.isInteger(value))
+		{
 			return;
-
-		if (!StringUtil.isInteger(value))
-			return;
-		int i = StringUtil.parseInt(value, 0);
+		}
+		final int i = StringUtil.parseInt(value, 0);
 
 		if (testlists == null || EnumFitsValue.Allowed.equals(testlists))
 		{
 			JDFIntegerRangeList list = getAllowedValueList();
 			if (list == null)
+			{
 				list = new JDFIntegerRangeList();
+			}
 			list.append(i);
 			list.normalize(true);
 			setAllowedValueList(list);
@@ -417,7 +422,9 @@ public class JDFIntegerState extends JDFAbstractState
 		{
 			JDFIntegerRangeList list = getPresentValueList();
 			if (list == null || !hasAttribute(AttributeName.PRESENTVALUELIST))
+			{
 				list = new JDFIntegerRangeList();
+			}
 			list.append(i);
 			list.normalize(true);
 			setPresentValueList(list);
@@ -427,25 +434,26 @@ public class JDFIntegerState extends JDFAbstractState
 	/**
 	 * fitsValue - checks whether <code>value</code> matches the given test
 	 * lists
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *                  value to test
 	 * @param testlists
-	 *            test lists the value has to match. In this State the test
-	 *            lists are ValueList AND ValueMod.<br>
-	 *            Choose one of two values: FitsValue_Allowed or
-	 *            FitsValue_Present. Defaults to Allowed.
-	 * 
+	 *                  test lists the value has to match. In this State the test
+	 *                  lists are ValueList AND ValueMod.<br>
+	 *                  Choose one of two values: FitsValue_Allowed or
+	 *                  FitsValue_Present. Defaults to Allowed.
 	 * @return boolean - true, if <code>value</code> matches the testlists or if
 	 *         AllowedValueList and AllowedValueMod are not specified
 	 */
 	@Override
-	public boolean fitsValue(String value, EnumFitsValue testlists)
+	public boolean fitsValue(final String value, final EnumFitsValue testlists)
 	{
 		boolean testResult = true;
 
 		if (!fitsListType(value))
+		{
 			testResult = false;
+		}
 		else
 		{
 			JDFIntegerRangeList rangelist = null;
@@ -453,12 +461,14 @@ public class JDFIntegerState extends JDFAbstractState
 			{
 				rangelist = new JDFIntegerRangeList(value);
 			}
-			catch (DataFormatException dfe)
+			catch (final DataFormatException dfe)
 			{
 				testResult = false;
 			}
 			if (testResult)
+			{
 				testResult = (fitsValueList(rangelist, testlists) && fitsValueMod(rangelist, testlists));
+			}
 		}
 		return testResult;
 	}
@@ -466,16 +476,15 @@ public class JDFIntegerState extends JDFAbstractState
 	/**
 	 * fitsValueList - checks whether <code>rangelist</code> matches the
 	 * AllowedValueList/PresentValueList, specified for this State
-	 * 
+	 *
 	 * @param rangelist
-	 *            range list to test
+	 *                  range list to test
 	 * @param valuelist
-	 *            switches between AllowedValueList and PresentValueList
-	 * 
+	 *                  switches between AllowedValueList and PresentValueList
 	 * @return boolean - true, if <code>rangelist</code> matches the valuelist
 	 *         or if AllowedValueList is not specified
 	 */
-	private final boolean fitsValueList(JDFIntegerRangeList rangelist, EnumFitsValue valuelist)
+	private final boolean fitsValueList(final JDFIntegerRangeList rangelist, final EnumFitsValue valuelist)
 	{
 		JDFIntegerRangeList list = null;
 		if (valuelist.equals(EnumFitsValue.Allowed))
@@ -487,9 +496,11 @@ public class JDFIntegerState extends JDFAbstractState
 			list = getPresentValueList();
 		}
 		if (list == null)
+		{
 			return true;
+		}
 
-		EnumListType listType = getListType();
+		final EnumListType listType = getListType();
 		if (listType.equals(EnumListType.CompleteList))
 		{
 			return fitsCompleteList(rangelist, list);
@@ -503,22 +514,25 @@ public class JDFIntegerState extends JDFAbstractState
 			return fitsContainedList(rangelist, list);
 		}
 
-		int siz = rangelist.size();
+		final int siz = rangelist.size();
 		for (int i = 0; i < siz; i++)
 		{
-			JDFIntegerRange range = (JDFIntegerRange) rangelist.at(i);
+			final JDFIntegerRange range = (JDFIntegerRange) rangelist.at(i);
 
 			// if range looks like"0~-1" but no xdef, then we assume that
 			// xdef=lastIntegerInList
-			int lastInList = ((JDFIntegerRange) list.at(list.size() - 1)).getRight();
-			int leftInRange = range.getLeft();
-			int rightInRange = range.getRight();
-			if (lastInList > 0 && ((rightInRange < 0 && java.lang.Math.abs(rightInRange) < lastInList) || (leftInRange < 0 && java.lang.Math.abs(leftInRange) < lastInList)))
+			final int lastInList = ((JDFIntegerRange) list.at(list.size() - 1)).getRight();
+			final int leftInRange = range.getLeft();
+			final int rightInRange = range.getRight();
+			if (lastInList > 0 && ((rightInRange < 0 && java.lang.Math.abs(rightInRange) < lastInList)
+					|| (leftInRange < 0 && java.lang.Math.abs(leftInRange) < lastInList)))
 			{
 				range.setDef(lastInList);
 			}
 			if (!list.isPartOfRange(range))
+			{
 				return false;
+			}
 		}
 		return true;
 	}
@@ -526,26 +540,29 @@ public class JDFIntegerState extends JDFAbstractState
 	/**
 	 * fitsValueMod - checks whether <code>rangelist</code> matches
 	 * AllowedValueMod/PresentValueMod, specified for this State
-	 * 
+	 *
 	 * @param rangelist
-	 *            range list to test
+	 *                  range list to test
 	 * @param valuemod
-	 *            switches between AllowedValueMod and PresentValueMod.
-	 * 
+	 *                  switches between AllowedValueMod and PresentValueMod.
 	 * @return boolean - true, if <code>rangelist</code> matches the
 	 *         <code>valuemod</code> or if AllowedValueMod is not specified
 	 */
-	private final boolean fitsValueMod(JDFIntegerRangeList rangelist, EnumFitsValue valuemod)
+	private final boolean fitsValueMod(final JDFIntegerRangeList rangelist, final EnumFitsValue valuemod)
 	{
 		if (valuemod.equals(EnumFitsValue.Allowed))
 		{
 			if (!hasAttribute(AttributeName.ALLOWEDVALUEMOD))
+			{
 				return true;
+			}
 		}
 		else
 		{
 			if (!hasAttribute(AttributeName.ALLOWEDVALUEMOD) && !hasAttribute(AttributeName.PRESENTVALUEMOD))
+			{
 				return true;
+			}
 		}
 
 		JDFXYPair mod;
@@ -558,20 +575,24 @@ public class JDFIntegerState extends JDFAbstractState
 			mod = getPresentValueMod();
 		}
 
-		int divi = (int) (mod.getX() + 0.5); // X - the Modulo
-		int shift = (int) (mod.getY() + 0.5); // Y - offset of the
+		final int divi = (int) (mod.getX() + 0.5); // X - the Modulo
+		final int shift = (int) (mod.getY() + 0.5); // Y - offset of the
 												// allowed/present value
 
 		if (divi == 0) // ValueMod can't be "0 x"
+		{
 			return false;
+		}
 
-		JDFIntegerList v = rangelist.getIntegerList();
-		int[] vi = v.getIntArray();
-		int siz = vi.length;
+		final JDFIntegerList v = rangelist.getIntegerList();
+		final int[] vi = v.getIntArray();
+		final int siz = vi.length;
 		for (int i = 0; i < siz; i++)
 		{
 			if ((((vi[i] % divi) - shift) % divi) != 0)
+			{
 				return false;
+			}
 		}
 		return true;
 	}
@@ -579,26 +600,24 @@ public class JDFIntegerState extends JDFAbstractState
 	/**
 	 * fitsCompleteList - tests whether <code>value</code> matches the given
 	 * testlist (ListType=CompleteList)
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @param list
-	 *            testlist, either AllowedValueList or PresentValueList.
-	 * 
+	 *              testlist, either AllowedValueList or PresentValueList.
 	 * @return boolean - true, if <code>value</code> matches the testlist
 	 */
-	private final boolean fitsCompleteList(JDFIntegerRangeList value, JDFIntegerRangeList list)
+	private final boolean fitsCompleteList(final JDFIntegerRangeList value, final JDFIntegerRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
-		if (v_size != l_size)
+		if ((v_size != l_size) || !value.isUnique())
+		{
 			return false;
+		}
 
-		if (!value.isUnique())
-			return false;
-
-		JDFIntegerRangeList valueList = new JDFIntegerRangeList(value);
+		final JDFIntegerRangeList valueList = new JDFIntegerRangeList(value);
 
 		boolean bFound;
 		for (int i = l_size - 1; i >= 0; i--)
@@ -624,24 +643,22 @@ public class JDFIntegerState extends JDFAbstractState
 	/**
 	 * fitsCompleteOrderedList - tests whether <code>value</code> matches the
 	 * given testlist (ListType=CompleteOrderedList)
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @param list
-	 *            testlist, either AllowedValueList or PresentValueList.
-	 * 
+	 *              testlist, either AllowedValueList or PresentValueList.
 	 * @return boolean - true, if <code>value</code> matches the testlist
 	 */
-	private final boolean fitsCompleteOrderedList(JDFIntegerRangeList value, JDFIntegerRangeList list)
+	private final boolean fitsCompleteOrderedList(final JDFIntegerRangeList value, final JDFIntegerRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
-		if (v_size != l_size)
+		if ((v_size != l_size) || !value.isUnique())
+		{
 			return false;
-
-		if (!value.isUnique())
-			return false;
+		}
 
 		for (int i = 0; i < l_size; i++)
 		{
@@ -656,18 +673,17 @@ public class JDFIntegerState extends JDFAbstractState
 	/**
 	 * fitsContainedList - tests whether <code>value</code> matches the given
 	 * testlist (ListType=ContainedList)
-	 * 
+	 *
 	 * @param value
-	 *            value to test
+	 *              value to test
 	 * @param list
-	 *            testlist, either AllowedValueList or PresentValueList.
-	 * 
+	 *              testlist, either AllowedValueList or PresentValueList.
 	 * @return boolean - true, if <code>value</code> matches the testlist
 	 */
-	private final boolean fitsContainedList(JDFIntegerRangeList value, JDFIntegerRangeList list)
+	private final boolean fitsContainedList(final JDFIntegerRangeList value, final JDFIntegerRangeList list)
 	{
-		int v_size = value.size();
-		int l_size = list.size();
+		final int v_size = value.size();
+		final int l_size = list.size();
 
 		for (int i = 0; i < v_size; i++)
 		{
@@ -683,14 +699,14 @@ public class JDFIntegerState extends JDFAbstractState
 	}
 
 	@Override
-	public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
+	public VString getInvalidAttributes(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
 	{
 		return getInvalidAttributesImpl(level, bIgnorePrivate, nMax);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
 	 */
 	@Override

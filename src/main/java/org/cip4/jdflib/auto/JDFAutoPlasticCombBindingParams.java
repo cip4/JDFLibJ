@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -104,7 +99,8 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.COLORDETAILS, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.DIAMETER, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.THICKNESS, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.TYPE, 0x4444444433l, AttributeInfo.EnumAttributeType.enumeration, EnumType.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.TYPE, 0x4444444433l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumType.class, 0), null);
 	}
 
 	@Override
@@ -131,7 +127,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPlasticCombBindingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoPlasticCombBindingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -143,7 +139,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoPlasticCombBindingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoPlasticCombBindingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -156,7 +152,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoPlasticCombBindingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoPlasticCombBindingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -167,7 +163,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -182,151 +178,22 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for Type
+	 * Enumeration strings for numType
 	 */
 
-	public enum EType
+	public enum EnumType
 	{
 		Explicit, R2_generic, S1_generic, S_generic, R2m_DIN, R2m_ISO, R2m_MIB, R2i_US_a, R2i_US_b, R3_generic, R3i_US, R4_generic, R4m_DIN_A4, R4m_DIN_A5, R4m_swedish, R4i_US, R5_generic, R5i_US_a, R5i_US_b, R5i_US_c, R6_generic, R6m_4h2s, R6m_DIN_A5, R7_generic, R7i_US_a, R7i_US_b, R7i_US_c, R11m_7h4s, P16_9i_rect_0t, P12m_rect_0t, W2_1i_round_0t, W2_1i_square_0t, W3_1i_square_0t, C9_5m_round_0t;
 
-		public static EType getEnum(String val)
+		public static EnumType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumType.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for Type
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumType getEnum(String enumName)
-		{
-			return (EnumType) getEnum(EnumType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumType getEnum(int enumValue)
-		{
-			return (EnumType) getEnum(EnumType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumType.class);
-		}
-
-		/**  */
-		public static final EnumType Explicit = new EnumType("Explicit");
-		/**  */
-		public static final EnumType R2_generic = new EnumType("R2-generic");
-		/**  */
-		public static final EnumType S1_generic = new EnumType("S1-generic");
-		/**  */
-		public static final EnumType S_generic = new EnumType("S-generic");
-		/**  */
-		public static final EnumType R2m_DIN = new EnumType("R2m-DIN");
-		/**  */
-		public static final EnumType R2m_ISO = new EnumType("R2m-ISO");
-		/**  */
-		public static final EnumType R2m_MIB = new EnumType("R2m-MIB");
-		/**  */
-		public static final EnumType R2i_US_a = new EnumType("R2i-US-a");
-		/**  */
-		public static final EnumType R2i_US_b = new EnumType("R2i-US-b");
-		/**  */
-		public static final EnumType R3_generic = new EnumType("R3-generic");
-		/**  */
-		public static final EnumType R3i_US = new EnumType("R3i-US");
-		/**  */
-		public static final EnumType R4_generic = new EnumType("R4-generic");
-		/**  */
-		public static final EnumType R4m_DIN_A4 = new EnumType("R4m-DIN-A4");
-		/**  */
-		public static final EnumType R4m_DIN_A5 = new EnumType("R4m-DIN-A5");
-		/**  */
-		public static final EnumType R4m_swedish = new EnumType("R4m-swedish");
-		/**  */
-		public static final EnumType R4i_US = new EnumType("R4i-US");
-		/**  */
-		public static final EnumType R5_generic = new EnumType("R5-generic");
-		/**  */
-		public static final EnumType R5i_US_a = new EnumType("R5i-US-a");
-		/**  */
-		public static final EnumType R5i_US_b = new EnumType("R5i-US-b");
-		/**  */
-		public static final EnumType R5i_US_c = new EnumType("R5i-US-c");
-		/**  */
-		public static final EnumType R6_generic = new EnumType("R6-generic");
-		/**  */
-		public static final EnumType R6m_4h2s = new EnumType("R6m-4h2s");
-		/**  */
-		public static final EnumType R6m_DIN_A5 = new EnumType("R6m-DIN-A5");
-		/**  */
-		public static final EnumType R7_generic = new EnumType("R7-generic");
-		/**  */
-		public static final EnumType R7i_US_a = new EnumType("R7i-US-a");
-		/**  */
-		public static final EnumType R7i_US_b = new EnumType("R7i-US-b");
-		/**  */
-		public static final EnumType R7i_US_c = new EnumType("R7i-US-c");
-		/**  */
-		public static final EnumType R11m_7h4s = new EnumType("R11m-7h4s");
-		/**  */
-		public static final EnumType P16_9i_rect_0t = new EnumType("P16_9i-rect-0t");
-		/**  */
-		public static final EnumType P12m_rect_0t = new EnumType("P12m-rect-0t");
-		/**  */
-		public static final EnumType W2_1i_round_0t = new EnumType("W2_1i-round-0t");
-		/**  */
-		public static final EnumType W2_1i_square_0t = new EnumType("W2_1i-square-0t");
-		/**  */
-		public static final EnumType W3_1i_square_0t = new EnumType("W3_1i-square-0t");
-		/**  */
-		public static final EnumType C9_5m_round_0t = new EnumType("C9.5m-round-0t");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -339,7 +206,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	 * @param value the value to set the attribute to
 	 */
 	@Override
-	public void setBrand(String value)
+	public void setBrand(final String value)
 	{
 		setAttribute(AttributeName.BRAND, value, null);
 	}
@@ -365,7 +232,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setColor(EnumNamedColor value)
+	public void setColor(final EnumNamedColor value)
 	{
 		setAttribute(AttributeName.COLOR, value == null ? null : value.getName(), null);
 	}
@@ -394,7 +261,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setColorDetails(String value)
+	public void setColorDetails(final String value)
 	{
 		setAttribute(AttributeName.COLORDETAILS, value, null);
 	}
@@ -419,7 +286,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDiameter(double value)
+	public void setDiameter(final double value)
 	{
 		setAttribute(AttributeName.DIAMETER, value, null);
 	}
@@ -444,7 +311,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setThickness(double value)
+	public void setThickness(final double value)
 	{
 		setAttribute(AttributeName.THICKNESS, value, null);
 	}
@@ -469,9 +336,9 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setType(EType enumVar)
+	public void setType(final EnumType enumVar)
 	{
-		setAttribute(AttributeName.TYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.TYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -479,35 +346,6 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EType getEType()
-	{
-		return EType.getEnum(getAttribute(AttributeName.TYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Type
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Type
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetType(EType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setType(EnumType enumVar)
-	{
-		setAttribute(AttributeName.TYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Type
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EType GetEType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumType getType()
 	{
 		return EnumType.getEnum(getAttribute(AttributeName.TYPE, null, null));
@@ -555,7 +393,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refHoleMakingParams(JDFHoleMakingParams refTarget)
+	public void refHoleMakingParams(final JDFHoleMakingParams refTarget)
 	{
 		refElement(refTarget);
 	}

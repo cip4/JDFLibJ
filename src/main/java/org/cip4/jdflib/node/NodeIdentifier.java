@@ -79,7 +79,6 @@ import org.cip4.jdflib.util.ContainerUtil;
 /**
  * class to identify nodes even after parsing, e.g in hashmaps <br/>
  * uses JobID, JobPartID and the partMapVector as identifier
- * 
  */
 public final class NodeIdentifier implements IMatches, INodeIdentifiable
 {
@@ -110,7 +109,7 @@ public final class NodeIdentifier implements IMatches, INodeIdentifiable
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public NodeIdentifier()
 	{
@@ -120,7 +119,7 @@ public final class NodeIdentifier implements IMatches, INodeIdentifiable
 
 	/**
 	 * sets a NodeIdentifier to a given JDF node identifier uses the AncestorPool or NodeInfo or output resource in that sequence to determine the partmap
-	 * 
+	 *
 	 * @param n
 	 */
 	@Override
@@ -138,7 +137,7 @@ public final class NodeIdentifier implements IMatches, INodeIdentifiable
 
 	/**
 	 * sets a NodeIdentifier to a given JDF node
-	 * 
+	 *
 	 * @param qe
 	 */
 	public void setTo(final INodeIdentifiable qe)
@@ -155,7 +154,7 @@ public final class NodeIdentifier implements IMatches, INodeIdentifiable
 
 	/**
 	 * creates a NodeIdentifier from a given QueueEntry
-	 * 
+	 *
 	 * @param ni the INodeIdentifiable to set this to
 	 */
 	public NodeIdentifier(final INodeIdentifiable ni)
@@ -165,7 +164,6 @@ public final class NodeIdentifier implements IMatches, INodeIdentifiable
 	}
 
 	/**
-	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -184,11 +182,10 @@ public final class NodeIdentifier implements IMatches, INodeIdentifiable
 
 	/**
 	 * return true if the nodeIdentifier matches this, i.e. if all parameters match or o has matching wildcards, or o==null
-	 * 
+	 *
 	 * @see IMatches
 	 * @param o the nodeidentifier that this should match<br/>
-	 *        if o is a String, check for match with jobID
-	 * 
+	 *          if o is a String, check for match with jobID
 	 * @return true, if this matches o
 	 */
 	@Override
@@ -220,7 +217,8 @@ public final class NodeIdentifier implements IMatches, INodeIdentifiable
 	@Override
 	public int hashCode()
 	{
-		return (_jobID == null ? 0 : _jobID.hashCode()) + (_jobPartID == null ? 0 : _jobPartID.hashCode()) + (_partMapVector == null ? 0 : _partMapVector.hashCode());
+		return (_jobID == null ? 0 : _jobID.hashCode()) + (_jobPartID == null ? 0 : _jobPartID.hashCode())
+				+ (_partMapVector == null ? 0 : _partMapVector.hashCode());
 	}
 
 	/**
@@ -258,7 +256,7 @@ public final class NodeIdentifier implements IMatches, INodeIdentifiable
 
 	/**
 	 * formalism so zhat we can use this as a {@link INodeIdentifiable}
-	 * 
+	 *
 	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#getIdentifier()
 	 */
 	@Override

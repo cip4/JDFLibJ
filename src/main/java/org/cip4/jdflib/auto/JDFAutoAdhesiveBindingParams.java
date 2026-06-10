@@ -128,7 +128,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAdhesiveBindingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoAdhesiveBindingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -140,7 +140,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoAdhesiveBindingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoAdhesiveBindingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -153,7 +153,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoAdhesiveBindingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoAdhesiveBindingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -164,7 +164,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -194,7 +194,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPullOutValue(double value)
+	public void setPullOutValue(final double value)
 	{
 		setAttribute(AttributeName.PULLOUTVALUE, value, null);
 	}
@@ -219,7 +219,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setFlexValue(double value)
+	public void setFlexValue(final double value)
 	{
 		setAttribute(AttributeName.FLEXVALUE, value, null);
 	}
@@ -266,7 +266,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFSpinePreparationParams the element
 	 */
-	public JDFSpinePreparationParams getCreateSpinePreparationParams(int iSkip)
+	public JDFSpinePreparationParams getCreateSpinePreparationParams(final int iSkip)
 	{
 		return (JDFSpinePreparationParams) getCreateElement_JDFElement(ElementName.SPINEPREPARATIONPARAMS, null, iSkip);
 	}
@@ -278,7 +278,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	 * @return JDFSpinePreparationParams the element
 	 *         default is getSpinePreparationParams(0)
 	 */
-	public JDFSpinePreparationParams getSpinePreparationParams(int iSkip)
+	public JDFSpinePreparationParams getSpinePreparationParams(final int iSkip)
 	{
 		return (JDFSpinePreparationParams) getElement(ElementName.SPINEPREPARATIONPARAMS, null, iSkip);
 	}
@@ -329,7 +329,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFGlueApplication the element
 	 */
-	public JDFGlueApplication getCreateGlueApplication(int iSkip)
+	public JDFGlueApplication getCreateGlueApplication(final int iSkip)
 	{
 		return (JDFGlueApplication) getCreateElement_JDFElement(ElementName.GLUEAPPLICATION, null, iSkip);
 	}
@@ -341,7 +341,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	 * @return JDFGlueApplication the element
 	 *         default is getGlueApplication(0)
 	 */
-	public JDFGlueApplication getGlueApplication(int iSkip)
+	public JDFGlueApplication getGlueApplication(final int iSkip)
 	{
 		return (JDFGlueApplication) getElement(ElementName.GLUEAPPLICATION, null, iSkip);
 	}
@@ -392,7 +392,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFSpineTapingParams the element
 	 */
-	public JDFSpineTapingParams getCreateSpineTapingParams(int iSkip)
+	public JDFSpineTapingParams getCreateSpineTapingParams(final int iSkip)
 	{
 		return (JDFSpineTapingParams) getCreateElement_JDFElement(ElementName.SPINETAPINGPARAMS, null, iSkip);
 	}
@@ -404,7 +404,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	 * @return JDFSpineTapingParams the element
 	 *         default is getSpineTapingParams(0)
 	 */
-	public JDFSpineTapingParams getSpineTapingParams(int iSkip)
+	public JDFSpineTapingParams getSpineTapingParams(final int iSkip)
 	{
 		return (JDFSpineTapingParams) getElement(ElementName.SPINETAPINGPARAMS, null, iSkip);
 	}
@@ -455,7 +455,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFCoverApplicationParams the element
 	 */
-	public JDFCoverApplicationParams getCreateCoverApplicationParams(int iSkip)
+	public JDFCoverApplicationParams getCreateCoverApplicationParams(final int iSkip)
 	{
 		return (JDFCoverApplicationParams) getCreateElement_JDFElement(ElementName.COVERAPPLICATIONPARAMS, null, iSkip);
 	}
@@ -467,7 +467,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	 * @return JDFCoverApplicationParams the element
 	 *         default is getCoverApplicationParams(0)
 	 */
-	public JDFCoverApplicationParams getCoverApplicationParams(int iSkip)
+	public JDFCoverApplicationParams getCoverApplicationParams(final int iSkip)
 	{
 		return (JDFCoverApplicationParams) getElement(ElementName.COVERAPPLICATIONPARAMS, null, iSkip);
 	}

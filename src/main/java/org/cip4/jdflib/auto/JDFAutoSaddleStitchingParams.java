@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -98,8 +93,8 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.NUMBEROFSTITCHES, 0x4444444442l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.STITCHPOSITIONS, 0x4444444443l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.STAPLESHAPE, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumStapleShape.getEnum(0),
-				null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.STAPLESHAPE, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumStapleShape.class, 0), null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.STITCHWIDTH, 0x4444444443l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.WIREGAUGE, 0x4444444443l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.WIREBRAND, 0x4444444443l, AttributeInfo.EnumAttributeType.string, null, null);
@@ -117,7 +112,7 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSaddleStitchingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoSaddleStitchingParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -129,7 +124,7 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoSaddleStitchingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoSaddleStitchingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -142,7 +137,7 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoSaddleStitchingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoSaddleStitchingParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -153,7 +148,7 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -168,93 +163,22 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for StapleShape
+	 * Enumeration strings for numStapleShape
 	 */
 
-	public enum EStapleShape
+	public enum EnumStapleShape
 	{
 		Crown, Overlap, Butted, ClinchOut, Eyelet;
 
-		public static EStapleShape getEnum(String val)
+		public static EnumStapleShape getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EStapleShape.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumStapleShape.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for StapleShape
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumStapleShape extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumStapleShape(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumStapleShape getEnum(String enumName)
-		{
-			return (EnumStapleShape) getEnum(EnumStapleShape.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumStapleShape getEnum(int enumValue)
-		{
-			return (EnumStapleShape) getEnum(EnumStapleShape.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumStapleShape.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumStapleShape.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumStapleShape.class);
-		}
-
-		/**  */
-		public static final EnumStapleShape Crown = new EnumStapleShape("Crown");
-		/**  */
-		public static final EnumStapleShape Overlap = new EnumStapleShape("Overlap");
-		/**  */
-		public static final EnumStapleShape Butted = new EnumStapleShape("Butted");
-		/**  */
-		public static final EnumStapleShape ClinchOut = new EnumStapleShape("ClinchOut");
-		/**  */
-		public static final EnumStapleShape Eyelet = new EnumStapleShape("Eyelet");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -266,7 +190,7 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNumberOfStitches(int value)
+	public void setNumberOfStitches(final int value)
 	{
 		setAttribute(AttributeName.NUMBEROFSTITCHES, value, null);
 	}
@@ -291,7 +215,7 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStitchPositions(JDFNumberList value)
+	public void setStitchPositions(final JDFNumberList value)
 	{
 		setAttribute(AttributeName.STITCHPOSITIONS, value, null);
 	}
@@ -304,8 +228,8 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	 */
 	public JDFNumberList getStitchPositions()
 	{
-		String strAttrName = getAttribute(AttributeName.STITCHPOSITIONS, null, null);
-		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.STITCHPOSITIONS, null, null);
+		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -319,9 +243,9 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setStapleShape(EStapleShape enumVar)
+	public void setStapleShape(final EnumStapleShape enumVar)
 	{
-		setAttribute(AttributeName.STAPLESHAPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.STAPLESHAPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -329,35 +253,6 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EStapleShape getEStapleShape()
-	{
-		return EStapleShape.getEnum(getAttribute(AttributeName.STAPLESHAPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute StapleShape
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute StapleShape
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetStapleShape(EStapleShape) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setStapleShape(EnumStapleShape enumVar)
-	{
-		setAttribute(AttributeName.STAPLESHAPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute StapleShape
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EStapleShape GetEStapleShape() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumStapleShape getStapleShape()
 	{
 		return EnumStapleShape.getEnum(getAttribute(AttributeName.STAPLESHAPE, null, null));
@@ -373,7 +268,7 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setStitchWidth(double value)
+	public void setStitchWidth(final double value)
 	{
 		setAttribute(AttributeName.STITCHWIDTH, value, null);
 	}
@@ -398,7 +293,7 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWireGauge(double value)
+	public void setWireGauge(final double value)
 	{
 		setAttribute(AttributeName.WIREGAUGE, value, null);
 	}
@@ -423,7 +318,7 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setWireBrand(String value)
+	public void setWireBrand(final String value)
 	{
 		setAttribute(AttributeName.WIREBRAND, value, null);
 	}

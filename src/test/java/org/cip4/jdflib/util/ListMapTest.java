@@ -138,8 +138,8 @@ class ListMapTest extends JDFTestCaseBase
 	@Test
 	void testFillInvertedMap()
 	{
-		final ListMap<String, Integer> vm = new ListMap<String, Integer>();
-		final Map<Integer, String> mis = new HashMap<Integer, String>();
+		final ListMap<String, Integer> vm = new ListMap<>();
+		final Map<Integer, String> mis = new HashMap<>();
 		for (int i = 0; i < 100; i++)
 		{
 			mis.put(Integer.valueOf(i), "" + (i % 10));
@@ -158,8 +158,8 @@ class ListMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	* test for getInverted
-	*/
+	 * test for getInverted
+	 */
 	@Test
 	void testGetInverted()
 	{
@@ -181,9 +181,13 @@ class ListMapTest extends JDFTestCaseBase
 		Assertions.assertEquals(m.getOne("a", 0), "b");
 		m.setUnique(false);
 		for (int i = 0; i < 7; i++)
+		{
 			m.putOne("cc", "d");
+		}
 		for (int i = 0; i < 7; i++)
+		{
 			Assertions.assertEquals(m.getOne("cc", i), "d");
+		}
 	}
 
 	/**
@@ -193,7 +197,7 @@ class ListMapTest extends JDFTestCaseBase
 	void testAppendUniqueKey()
 	{
 		Assertions.assertEquals(m.size("a"), 2);
-		final Vector<String> v2 = new Vector<String>();
+		final Vector<String> v2 = new Vector<>();
 		v2.add("v1");
 		v2.add("v2");
 		m.appendUnique("a", v2);
@@ -259,7 +263,7 @@ class ListMapTest extends JDFTestCaseBase
 	@Test
 	void testSetOneInt()
 	{
-		m = new ListMap<String, String>();
+		m = new ListMap<>();
 		m.setOne("a", "b1", 3);
 		Assertions.assertEquals(m.getOne("a", 3), "b1");
 		Assertions.assertNull(m.getOne("a", 2));
@@ -282,8 +286,6 @@ class ListMapTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 *
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -291,7 +293,7 @@ class ListMapTest extends JDFTestCaseBase
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		m = new ListMap<String, String>();
+		m = new ListMap<>();
 		m.putOne("a", "b");
 		m.putOne("a", "c");
 		m.putOne("a2", "c");

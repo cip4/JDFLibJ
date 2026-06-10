@@ -71,11 +71,7 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -109,7 +105,7 @@ public abstract class JDFAutoColor extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.MAPPINGSELECTION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
-				EnumMappingSelection.getEnum(0), "UsePDLValues");
+				JavaEnumUtil.getEnum(EnumMappingSelection.class, 0), "UsePDLValues");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.NAME, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.ACTUALCOLORNAME, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.CMYK, 0x3333333333l, AttributeInfo.EnumAttributeType.CMYKColor, null, null);
@@ -119,8 +115,8 @@ public abstract class JDFAutoColor extends JDFResource
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.COLORBOOKSUFFIX, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.COLORDETAILS, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.COLORNAME, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.COLORTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumColorType.getEnum(0),
-				null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.COLORTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JavaEnumUtil.getEnum(EnumColorType.class, 0), null);
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.COLORTYPEDETAILS, 0x3333311111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.DENSITY, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[13] = new AtrInfoTable(AttributeName.GRAY, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
@@ -162,7 +158,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoColor(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoColor(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -174,7 +170,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoColor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoColor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -187,7 +183,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoColor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoColor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -198,7 +194,7 @@ public abstract class JDFAutoColor extends JDFResource
 	@Override
 	public boolean init()
 	{
-		boolean bRet = super.init();
+		final boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -213,174 +209,36 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for MappingSelection
+	 * Enumeration strings for numMappingSelection
 	 */
 
-	public enum EMappingSelection
+	public enum EnumMappingSelection
 	{
 		UsePDLValues, UseLocalPrinterValues, UseProcessColorValues;
 
-		public static EMappingSelection getEnum(String val)
+		public static EnumMappingSelection getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EMappingSelection.class, val, EMappingSelection.UsePDLValues);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumMappingSelection.class, val, EnumMappingSelection.UsePDLValues);
 		}
 	}
 
 	/**
-	 * Enumeration strings for MappingSelection
+	 * Enumeration strings for numColorType
 	 */
 
-	@SuppressWarnings("rawtypes")
-	public static class EnumMappingSelection extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumMappingSelection(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumMappingSelection getEnum(String enumName)
-		{
-			return (EnumMappingSelection) getEnum(EnumMappingSelection.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumMappingSelection getEnum(int enumValue)
-		{
-			return (EnumMappingSelection) getEnum(EnumMappingSelection.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumMappingSelection.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumMappingSelection.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumMappingSelection.class);
-		}
-
-		/**  */
-		public static final EnumMappingSelection UsePDLValues = new EnumMappingSelection("UsePDLValues");
-		/**  */
-		public static final EnumMappingSelection UseLocalPrinterValues = new EnumMappingSelection("UseLocalPrinterValues");
-		/**  */
-		public static final EnumMappingSelection UseProcessColorValues = new EnumMappingSelection("UseProcessColorValues");
-	}
-
-	/**
-	 * Enumeration strings for ColorType
-	 */
-
-	public enum EColorType
+	public enum EnumColorType
 	{
 		DieLine, Normal, Opaque, OpaqueIgnore, Primer, Transparent;
 
-		public static EColorType getEnum(String val)
+		public static EnumColorType getEnum(final String val)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EColorType.class, val, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EnumColorType.class, val, null);
 		}
-	}
-
-	/**
-	 * Enumeration strings for ColorType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumColorType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumColorType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
+	}/*
+		 * ************************************************************************
+		 * Attribute getter / setter
+		 * ************************************************************************
 		 */
-		public static EnumColorType getEnum(String enumName)
-		{
-			return (EnumColorType) getEnum(EnumColorType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumColorType getEnum(int enumValue)
-		{
-			return (EnumColorType) getEnum(EnumColorType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumColorType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumColorType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumColorType.class);
-		}
-
-		/**  */
-		public static final EnumColorType DieLine = new EnumColorType("DieLine");
-		/**  */
-		public static final EnumColorType Normal = new EnumColorType("Normal");
-		/**  */
-		public static final EnumColorType Opaque = new EnumColorType("Opaque");
-		/**  */
-		public static final EnumColorType OpaqueIgnore = new EnumColorType("OpaqueIgnore");
-		/**  */
-		public static final EnumColorType Primer = new EnumColorType("Primer");
-		/**  */
-		public static final EnumColorType Transparent = new EnumColorType("Transparent");
-	}
-
-	/*
-	 * ************************************************************************
-	 * Attribute getter / setter
-	 * ************************************************************************
-	 */
 
 	/*
 	 * ---------------------------------------------------------------------
@@ -392,9 +250,9 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMappingSelection(EMappingSelection enumVar)
+	public void setMappingSelection(final EnumMappingSelection enumVar)
 	{
-		setAttribute(AttributeName.MAPPINGSELECTION, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.MAPPINGSELECTION, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -402,35 +260,6 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EMappingSelection getEMappingSelection()
-	{
-		return EMappingSelection.getEnum(getAttribute(AttributeName.MAPPINGSELECTION, null, "UsePDLValues"));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute MappingSelection
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute MappingSelection
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetMappingSelection(EMappingSelection) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setMappingSelection(EnumMappingSelection enumVar)
-	{
-		setAttribute(AttributeName.MAPPINGSELECTION, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute MappingSelection
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EMappingSelection GetEMappingSelection() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumMappingSelection getMappingSelection()
 	{
 		return EnumMappingSelection.getEnum(getAttribute(AttributeName.MAPPINGSELECTION, null, "UsePDLValues"));
@@ -446,7 +275,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setName(String value)
+	public void setName(final String value)
 	{
 		setAttribute(AttributeName.NAME, value, null);
 	}
@@ -471,7 +300,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setActualColorName(String value)
+	public void setActualColorName(final String value)
 	{
 		setAttribute(AttributeName.ACTUALCOLORNAME, value, null);
 	}
@@ -496,7 +325,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setCMYK(JDFCMYKColor value)
+	public void setCMYK(final JDFCMYKColor value)
 	{
 		setAttribute(AttributeName.CMYK, value, null);
 	}
@@ -509,8 +338,8 @@ public abstract class JDFAutoColor extends JDFResource
 	 */
 	public JDFCMYKColor getCMYK()
 	{
-		String strAttrName = getAttribute(AttributeName.CMYK, null, null);
-		JDFCMYKColor nPlaceHolder = JDFCMYKColor.createCMYKColor(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.CMYK, null, null);
+		final JDFCMYKColor nPlaceHolder = JDFCMYKColor.createCMYKColor(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -524,7 +353,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setColorBook(String value)
+	public void setColorBook(final String value)
 	{
 		setAttribute(AttributeName.COLORBOOK, value, null);
 	}
@@ -549,7 +378,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setColorBookEntry(String value)
+	public void setColorBookEntry(final String value)
 	{
 		setAttribute(AttributeName.COLORBOOKENTRY, value, null);
 	}
@@ -574,7 +403,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setColorBookPrefix(String value)
+	public void setColorBookPrefix(final String value)
 	{
 		setAttribute(AttributeName.COLORBOOKPREFIX, value, null);
 	}
@@ -599,7 +428,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setColorBookSuffix(String value)
+	public void setColorBookSuffix(final String value)
 	{
 		setAttribute(AttributeName.COLORBOOKSUFFIX, value, null);
 	}
@@ -624,7 +453,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setColorDetails(String value)
+	public void setColorDetails(final String value)
 	{
 		setAttribute(AttributeName.COLORDETAILS, value, null);
 	}
@@ -649,7 +478,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setColorName(EnumNamedColor value)
+	public void setColorName(final EnumNamedColor value)
 	{
 		setAttribute(AttributeName.COLORNAME, value == null ? null : value.getName(), null);
 	}
@@ -678,9 +507,9 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setColorType(EColorType enumVar)
+	public void setColorType(final EnumColorType enumVar)
 	{
-		setAttribute(AttributeName.COLORTYPE, enumVar == null ? null : enumVar.name(), null);
+		setAttribute(AttributeName.COLORTYPE, JavaEnumUtil.getName(enumVar), null);
 	}
 
 	/**
@@ -688,35 +517,6 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EColorType getEColorType()
-	{
-		return EColorType.getEnum(getAttribute(AttributeName.COLORTYPE, null, null));
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ColorType
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute ColorType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetColorType(EColorType) based on java.lang.enum instead
-	 */
-	@Deprecated
-	public void setColorType(EnumColorType enumVar)
-	{
-		setAttribute(AttributeName.COLORTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute ColorType
-	 *
-	 * @return the value of the attribute
-	 * @deprecated use EColorType GetEColorType() based on java.lang.enum instead
-	 */
-	@Deprecated
 	public EnumColorType getColorType()
 	{
 		return EnumColorType.getEnum(getAttribute(AttributeName.COLORTYPE, null, null));
@@ -732,7 +532,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setColorTypeDetails(String value)
+	public void setColorTypeDetails(final String value)
 	{
 		setAttribute(AttributeName.COLORTYPEDETAILS, value, null);
 	}
@@ -757,7 +557,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setDensity(double value)
+	public void setDensity(final double value)
 	{
 		setAttribute(AttributeName.DENSITY, value, null);
 	}
@@ -782,7 +582,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setGray(double value)
+	public void setGray(final double value)
 	{
 		setAttribute(AttributeName.GRAY, value, null);
 	}
@@ -807,7 +607,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setLab(JDFLabColor value)
+	public void setLab(final JDFLabColor value)
 	{
 		setAttribute(AttributeName.LAB, value, null);
 	}
@@ -820,8 +620,8 @@ public abstract class JDFAutoColor extends JDFResource
 	 */
 	public JDFLabColor getLab()
 	{
-		String strAttrName = getAttribute(AttributeName.LAB, null, null);
-		JDFLabColor nPlaceHolder = JDFLabColor.createLabColor(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.LAB, null, null);
+		final JDFLabColor nPlaceHolder = JDFLabColor.createLabColor(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -835,7 +635,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setMediaType(String value)
+	public void setMediaType(final String value)
 	{
 		setAttribute(AttributeName.MEDIATYPE, value, null);
 	}
@@ -860,7 +660,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setNeutralDensity(double value)
+	public void setNeutralDensity(final double value)
 	{
 		setAttribute(AttributeName.NEUTRALDENSITY, value, null);
 	}
@@ -885,7 +685,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setPrintingTechnology(String value)
+	public void setPrintingTechnology(final String value)
 	{
 		setAttribute(AttributeName.PRINTINGTECHNOLOGY, value, null);
 	}
@@ -910,7 +710,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setRawName(String value)
+	public void setRawName(final String value)
 	{
 		setAttribute(AttributeName.RAWNAME, value, null);
 	}
@@ -935,7 +735,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setSpectrum(JDFTransferFunction value)
+	public void setSpectrum(final JDFTransferFunction value)
 	{
 		setAttribute(AttributeName.SPECTRUM, value, null);
 	}
@@ -948,8 +748,8 @@ public abstract class JDFAutoColor extends JDFResource
 	 */
 	public JDFTransferFunction getSpectrum()
 	{
-		String strAttrName = getAttribute(AttributeName.SPECTRUM, null, null);
-		JDFTransferFunction nPlaceHolder = JDFTransferFunction.createTransferFunction(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SPECTRUM, null, null);
+		final JDFTransferFunction nPlaceHolder = JDFTransferFunction.createTransferFunction(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -963,7 +763,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setsRGB(JDFRGBColor value)
+	public void setsRGB(final JDFRGBColor value)
 	{
 		setAttribute(AttributeName.SRGB, value, null);
 	}
@@ -976,8 +776,8 @@ public abstract class JDFAutoColor extends JDFResource
 	 */
 	public JDFRGBColor getsRGB()
 	{
-		String strAttrName = getAttribute(AttributeName.SRGB, null, null);
-		JDFRGBColor nPlaceHolder = JDFRGBColor.createRGBColor(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.SRGB, null, null);
+		final JDFRGBColor nPlaceHolder = JDFRGBColor.createRGBColor(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -991,7 +791,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setUsePDLAlternateCS(boolean value)
+	public void setUsePDLAlternateCS(final boolean value)
 	{
 		setAttribute(AttributeName.USEPDLALTERNATECS, value, null);
 	}
@@ -1048,7 +848,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refColorMeasurementConditions(JDFColorMeasurementConditions refTarget)
+	public void refColorMeasurementConditions(final JDFColorMeasurementConditions refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1079,7 +879,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFFileSpec the element
 	 */
-	public JDFFileSpec getCreateFileSpec(int iSkip)
+	public JDFFileSpec getCreateFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getCreateElement_JDFElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -1091,7 +891,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 * @return JDFFileSpec the element
 	 *         default is getFileSpec(0)
 	 */
-	public JDFFileSpec getFileSpec(int iSkip)
+	public JDFFileSpec getFileSpec(final int iSkip)
 	{
 		return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
 	}
@@ -1121,7 +921,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refFileSpec(JDFFileSpec refTarget)
+	public void refFileSpec(final JDFFileSpec refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -1152,7 +952,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFDeviceNColor the element
 	 */
-	public JDFDeviceNColor getCreateDeviceNColor(int iSkip)
+	public JDFDeviceNColor getCreateDeviceNColor(final int iSkip)
 	{
 		return (JDFDeviceNColor) getCreateElement_JDFElement(ElementName.DEVICENCOLOR, null, iSkip);
 	}
@@ -1164,7 +964,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 * @return JDFDeviceNColor the element
 	 *         default is getDeviceNColor(0)
 	 */
-	public JDFDeviceNColor getDeviceNColor(int iSkip)
+	public JDFDeviceNColor getDeviceNColor(final int iSkip)
 	{
 		return (JDFDeviceNColor) getElement(ElementName.DEVICENCOLOR, null, iSkip);
 	}
@@ -1215,7 +1015,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFPrintConditionColor the element
 	 */
-	public JDFPrintConditionColor getCreatePrintConditionColor(int iSkip)
+	public JDFPrintConditionColor getCreatePrintConditionColor(final int iSkip)
 	{
 		return (JDFPrintConditionColor) getCreateElement_JDFElement(ElementName.PRINTCONDITIONCOLOR, null, iSkip);
 	}
@@ -1227,7 +1027,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 * @return JDFPrintConditionColor the element
 	 *         default is getPrintConditionColor(0)
 	 */
-	public JDFPrintConditionColor getPrintConditionColor(int iSkip)
+	public JDFPrintConditionColor getPrintConditionColor(final int iSkip)
 	{
 		return (JDFPrintConditionColor) getElement(ElementName.PRINTCONDITIONCOLOR, null, iSkip);
 	}
@@ -1278,7 +1078,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 * @param iSkip number of elements to skip
 	 * @return JDFTransferCurve the element
 	 */
-	public JDFTransferCurve getCreateTransferCurve(int iSkip)
+	public JDFTransferCurve getCreateTransferCurve(final int iSkip)
 	{
 		return (JDFTransferCurve) getCreateElement_JDFElement(ElementName.TRANSFERCURVE, null, iSkip);
 	}
@@ -1290,7 +1090,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 * @return JDFTransferCurve the element
 	 *         default is getTransferCurve(0)
 	 */
-	public JDFTransferCurve getTransferCurve(int iSkip)
+	public JDFTransferCurve getTransferCurve(final int iSkip)
 	{
 		return (JDFTransferCurve) getElement(ElementName.TRANSFERCURVE, null, iSkip);
 	}
@@ -1320,7 +1120,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refTransferCurve(JDFTransferCurve refTarget)
+	public void refTransferCurve(final JDFTransferCurve refTarget)
 	{
 		refElement(refTarget);
 	}

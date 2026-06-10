@@ -129,7 +129,7 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoContentMetadata(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoContentMetadata(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -141,7 +141,7 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoContentMetadata(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoContentMetadata(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -154,7 +154,7 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoContentMetadata(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoContentMetadata(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -175,7 +175,7 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setISBN(String value)
+	public void setISBN(final String value)
 	{
 		setAttribute(AttributeName.ISBN, value, null);
 	}
@@ -200,7 +200,7 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setISBN10(String value)
+	public void setISBN10(final String value)
 	{
 		setAttribute(AttributeName.ISBN10, value, null);
 	}
@@ -225,7 +225,7 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setISBN13(String value)
+	public void setISBN13(final String value)
 	{
 		setAttribute(AttributeName.ISBN13, value, null);
 	}
@@ -250,7 +250,7 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 	 *
 	 * @param value the value to set the attribute to
 	 */
-	public void setTitle(String value)
+	public void setTitle(final String value)
 	{
 		setAttribute(AttributeName.TITLE, value, null);
 	}
@@ -297,7 +297,7 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 	 * @param iSkip number of elements to skip
 	 * @return JDFContact the element
 	 */
-	public JDFContact getCreateContact(int iSkip)
+	public JDFContact getCreateContact(final int iSkip)
 	{
 		return (JDFContact) getCreateElement_JDFElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -309,7 +309,7 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 	 * @return JDFContact the element
 	 *         default is getContact(0)
 	 */
-	public JDFContact getContact(int iSkip)
+	public JDFContact getContact(final int iSkip)
 	{
 		return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
 	}
@@ -339,7 +339,7 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refContact(JDFContact refTarget)
+	public void refContact(final JDFContact refTarget)
 	{
 		refElement(refTarget);
 	}
@@ -380,7 +380,7 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 	 *
 	 * @param refTarget the element that is referenced
 	 */
-	public void refEmployee(JDFEmployee refTarget)
+	public void refEmployee(final JDFEmployee refTarget)
 	{
 		refElement(refTarget);
 	}

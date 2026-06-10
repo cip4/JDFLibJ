@@ -63,7 +63,6 @@ import org.cip4.jdflib.util.ThreadUtil;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
  * @date Feb 1, 2012
  */
@@ -90,7 +89,6 @@ class ZipReaderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws IOException
 	 */
 	@Test
@@ -111,7 +109,6 @@ class ZipReaderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws IOException
 	 */
 	@Test
@@ -130,7 +127,6 @@ class ZipReaderTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @throws IOException
 	 */
 	@Test
@@ -254,8 +250,6 @@ class ZipReaderTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
-	 *
 	 */
 	@Test
 	void testGetStream() throws IOException
@@ -292,8 +286,6 @@ class ZipReaderTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
-	 *
 	 */
 	@Test
 	void testGetStreamFile() throws IOException
@@ -330,7 +322,6 @@ class ZipReaderTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException write 3 zipfiles with some chunks of crap added in and see if we can unpack them
-	 *
 	 */
 	@Test
 	void testGetStreams() throws IOException
@@ -409,7 +400,6 @@ class ZipReaderTest extends JDFTestCaseBase
 
 	/**
 	 * check that entries with backslash are correctly handled
-	 *
 	 */
 	@Test
 	void testunpackBackslash()
@@ -426,7 +416,6 @@ class ZipReaderTest extends JDFTestCaseBase
 
 	/**
 	 * check that entries with backslash are correctly handled
-	 *
 	 */
 	@Test
 	void testgetEntryBackslash()
@@ -443,7 +432,6 @@ class ZipReaderTest extends JDFTestCaseBase
 
 	/**
 	 * check that entries with backslash are correctly handled
-	 *
 	 */
 	@Test
 	void testgetMatchingEntryBackslash()
@@ -457,7 +445,6 @@ class ZipReaderTest extends JDFTestCaseBase
 
 	/**
 	 * check that entries with backslash are correctly handled
-	 *
 	 */
 	@Test
 	void testgetNextMatchingEntryBackslash()
@@ -564,7 +551,9 @@ class ZipReaderTest extends JDFTestCaseBase
 			log.info(i + " " + ms.getSummary());
 		}
 		for (final ZipReader r : l)
+		{
 			r.close();
+		}
 	}
 
 	/**
@@ -585,7 +574,9 @@ class ZipReaderTest extends JDFTestCaseBase
 			log.info(i + " " + ms.getSummary());
 		}
 		for (final ZipReader r : l)
+		{
 			r.close();
+		}
 	}
 
 	/**
@@ -605,8 +596,6 @@ class ZipReaderTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
-	 *
 	 */
 	@Test
 	void testGetBigEntryStream() throws IOException
@@ -624,7 +613,9 @@ class ZipReaderTest extends JDFTestCaseBase
 			final int i = inputStream.read(b);
 			n += i;
 			if (i < 0)
+			{
 				break;
+			}
 		}
 		assertTrue(n > 35000000);
 		bos.close();
@@ -633,8 +624,6 @@ class ZipReaderTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
-	 *
 	 */
 	@Test
 	void testGetBigEntryStreamGone() throws IOException
@@ -660,7 +649,9 @@ class ZipReaderTest extends JDFTestCaseBase
 			final int i = inputStream.read(b);
 			n += i;
 			if (i < 0)
+			{
 				break;
+			}
 			if (nn++ % 100 == 0)
 			{
 				final byte[] bbb = new byte[10000];

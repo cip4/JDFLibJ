@@ -81,9 +81,7 @@ import org.cip4.jdflib.util.ListMap;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * 
  * the old implementattion was obsolete this implementation extracts more data from the xml schema that can be injected into the json schema
- * 
  */
 public class XJDFSchemaWalker extends BaseElementWalker
 {
@@ -99,7 +97,7 @@ public class XJDFSchemaWalker extends BaseElementWalker
 	private final ListMap<String, String> enumMap;
 
 	/**
-	 * 
+	 *
 	 */
 	public XJDFSchemaWalker()
 	{
@@ -109,9 +107,7 @@ public class XJDFSchemaWalker extends BaseElementWalker
 	}
 
 	/**
-	 * 
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 * 
 	 */
 	protected class WalkElement extends BaseWalker
 	{
@@ -134,9 +130,8 @@ public class XJDFSchemaWalker extends BaseElementWalker
 
 	/**
 	 * any matching class will be removed with extreme prejudice...
-	 * 
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 * 
 	 */
 	protected class WalkAttribute extends WalkElement
 	{
@@ -175,9 +170,8 @@ public class XJDFSchemaWalker extends BaseElementWalker
 
 	/**
 	 * any matching class will be removed with extreme prejudice...
-	 * 
+	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 * 
 	 */
 	protected class WalkEnum extends WalkElement
 	{
@@ -208,9 +202,9 @@ public class XJDFSchemaWalker extends BaseElementWalker
 		/**
 		 * searches for the first attribute occurrence in this element or any ancestors
 		 *
-		 * @param attrib the attribute name
+		 * @param attrib       the attribute name
 		 * @param nameSpaceURI the XML-namespace
-		 * @param def the default if it does not exist
+		 * @param def          the default if it does not exist
 		 * @return String value of attribute found, value of def if not available
 		 * @default getInheritedAttribute_KElement(attrib, null, JDFCoreConstants.EMPTYSTRING)
 		 */
@@ -267,6 +261,7 @@ public class XJDFSchemaWalker extends BaseElementWalker
 	{
 		final String typ = typeMap.get(path);
 		if (typ != null)
+		{
 			switch (typ)
 			{
 			case XY_PAIR:
@@ -282,6 +277,7 @@ public class XJDFSchemaWalker extends BaseElementWalker
 				return 6;
 			default:
 			}
+		}
 		return 0;
 
 	}
@@ -290,6 +286,7 @@ public class XJDFSchemaWalker extends BaseElementWalker
 	{
 		final String typ = typeMap.get(path);
 		if (typ != null)
+		{
 			switch (typ)
 			{
 			case SHAPE:
@@ -298,6 +295,7 @@ public class XJDFSchemaWalker extends BaseElementWalker
 				return 0;
 			default:
 			}
+		}
 		return null;
 
 	}
@@ -306,6 +304,7 @@ public class XJDFSchemaWalker extends BaseElementWalker
 	{
 		final String typ = typeMap.get(path);
 		if (typ != null)
+		{
 			switch (typ)
 			{
 			case SRGB_COLOR:
@@ -313,6 +312,7 @@ public class XJDFSchemaWalker extends BaseElementWalker
 				return 1;
 			default:
 			}
+		}
 		return null;
 
 	}
@@ -327,15 +327,25 @@ public class XJDFSchemaWalker extends BaseElementWalker
 	public String getKey(final String name)
 	{
 		if (enumMap.containsKey(name))
+		{
 			return name;
+		}
 		else if (name.startsWith(ENUM) && enumMap.containsKey(name.substring(4)))
+		{
 			return name.substring(4);
+		}
 		else if (enumMap.containsKey(ENUM + name))
+		{
 			return ENUM + name;
+		}
 		else if (name.indexOf('/') > 0)
+		{
 			return getKey(StringUtil.removeToken(name, 0, "/"));
+		}
 		else
+		{
 			return null;
+		}
 
 	}
 
