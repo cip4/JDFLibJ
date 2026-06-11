@@ -50,13 +50,17 @@ package org.cip4.jdflib.util;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.regex.PatternSyntaxException;
@@ -102,130 +106,61 @@ public class StringUtil
 		// hide constructor to avoid accidental instantiation
 	}
 
-	/**
-	 * returns a random string <br/>
-	 * really important routine - written on a friday afternoon ;-) <br/>
-	 * please add more at your leisure.... <br/>
-	 * parts (c) Monty Python, Star Trek, Douglas Adams, Black Adder, Goethe, Firefly, Capt. Jack Sparrow
-	 */
-	private static String[] strings = { "Randomly inserted error", "Me. I'm dishonest! And a dishonest man you can always trust to be dishonest... honestly!",
-			"fooBar", "Snafu", "The problem is not the problem. The problem is your attitude about the problem.",
-			"If you were waiting for the opportune moment, that was it.",
-			"Soon TM is a registered trademark of CIP4 and does not imply, either implicitly or explicitly, any action will take place in any given time, if ever.",
-			"Programming today is a race between software engineers striving to build bigger and better programs, and the Universe trying to produce bigger and better idiots. So far, the Universe is winning.",
-			"Nichtsnutz geht über Eigennutz!", "Dumb people are always blissfully unaware of how dumb they really are…",
-			"Well, it’s no secret that the best thing about a secret is secretly telling someone your secret, thereby adding another secret to their secret collection of secrets, secretly.",
-			"Bad Karma", "This is either madness, or brilliance. It’s remarkable how often those two traits coincide.",
-			"Ihr Instrumente freilich spottet mein, Mit Rad und Kämmen, Walz und Bügel: Ich stand am Tor, ihr solltet Schlüssel sein; Zwar euer Bart ist kraus, doch hebt ihr nicht die Riegel.",
-			"What do you expect from a simulator", "Paper Jam", "Strawberry jam", "Elderberry jam",
-			"Your mother was a hamster and your father smelt of elderberries!", "I'm French! Why do think I have this outrageous accent, you silly king-a?!",
-			"It's just a flesh wound.", "All right, we'll call it a draw.",
-			"Oh, oh, I see! Running away, eh? You yellow bastards! Come back here and take what's coming to you! I'll bite your legs off!",
-			"You don't frighten us, English pig-dogs!", "Go and boil your bottom, sons of a silly person.",
-			"I blow my nose at you, so-called Arthur King, you and all your silly English k-nnnnniggets. Thpppppt! Thppt! Thppt!",
-			"I don't wanna talk to you no more, you empty headed animal food trough wiper!", "I fart in your general direction!",
-			"Listen, strange women lyin' in ponds distributin' swords is no basis for a system of government. Supreme executive power derives from a mandate from the masses, not from some farcical aquatic ceremony",
-			"C'est un lapin, lapin de bois.",
-			"Quoi? Un cadeau. What? A present. Oh, un cadeau. Oui, oui. Hurry. What? Let's go. Oh. On y va. Bon magne. Over here...",
-			"Oh. Oh, I see. Running away, eh? You yellow bastards! Come back here and take what's coming to you. I'll bite your legs off!",
-			"You're using coconuts!",
-			"The swallow may fly south with the sun or the house martin or the plover may seek warmer climes in winter, yet these are not strangers to our land?",
-			"Are you suggesting coconuts migrate?", "Assumption is the mother of all fuckups",
-			"It's not a question of where he grips it! It's a simple question of weight ratios! A five ounce bird could not carry a one pound coconut.",
-			"Listen. In order to maintain air-speed velocity, a swallow needs to beat its wings forty-three times every second, right?",
-			"Oh, King, eh, very nice. And how d'you get that, eh? By exploiting the workers! By 'anging on to outdated imperialist dogma which perpetuates the economic and social differences in our society. If there's ever going to be any progress with the--",
-			"Oh! Come and see the violence inherent in the system! Help! Help! I'm being repressed!",
-			"Here I am, brain the size of a planet, and they ask me to take you to the bridge. Call that job satisfaction, 'cause I don't.",
-			"Ghastly, isn't it? All the doors on this spaceship have been programmed to have a cheery and sunny disposition.", "whazzap?",
-			"Explain again how sheep's bladders may be employed to prevent earthquakes.",
-			"Pardon me for breathing, which I never do anyway so I don't know why I even bothered to say it. Oh god, I'm so depressed.",
-			"I've got this pain in all the diodes down my left side",
-			"I would like to say that it is a very great pleasure, honour and privilege for me to open this bridge, but I can't because my lying circuits are all out of commission",
-			"Do you want me to sit in the corner and rust, or just fall apart where I'm standing?",
-			"You may think you've read Hamlet before, but you can't really appreciate it until you've read it in the original Klingon.",
-			"What's this, then? \"Romanes eunt domus\"? People called Romanes, they go, the house?",
-			"Life's a piece of shit when you look at it. Life's a laugh and death's a joke; it's true.",
-			"Excuse me. Are you the Judean People's Front? Fuck off! We're the People's Front of Judea",
-			"How many Romans? - Aaaaagh ! Plural, plural, er, \"ite\" ! - \"Domus\"? Nominative? \"Go home\" is motion towards, isn't it? - Dative ! -  Aaagh ! Not the dative, not the dative ! Er, er, accusative, \"Domum\" ! - But \"Domus\" takes the locative, which is...? Er, \"Domum\" ! ",
-			"Making it worse? How can it be worse? Jehovah! Jehovah! Jehovah! ",
-			"No, I'm only joking. I'm not really Brian. No, I'm not Brian. I was only - It was a joke. I'm only pulling your leg! It's a joke! I'm not him! I'm just having you on! Put me back! Bloody Romans! Can't take a joke! ",
-			"Er, well, um, if you're dropping by again, do pop in. Heh. And thanks a lot for the gold and frankincense, er, but don't worry too much about the myrrh next time. All right? Heh. Thank you. Good-bye.",
-			"Under the terms of the Roman occupancy, we're entitled to be crucified in a purely Jewish area.",
-			"Amongst our weaponry are such diverse elements as: fear, surprise, ruthless efficiency, an almost fanatical devotion to the Pope, and nice red uniforms - Oh damn!",
-			"*Nobody* expects the Spanish Inquisition! Our chief weapon is surprise, surprise and fear, fear and surprise. Our *two* weapons are fear and surprise, and ruthless efficiency. Our *three* weapons are fear and surprise and ruthless efficiency and an almost fanatical dedication to the pope. Our *four*... No... Amongst our weapons... Amongst our weaponry are such elements as fear, sur- I'll come in again. ",
-			"NOBODY expects the Spanish Inquisition!", "Hm! She is made of harder stuff! Cardinal Fang! Fetch...THE COMFY CHAIR!",
-			"So you think you are strong because you can survive the soft cushions. Well, we shall see. Biggles! Put her in the Comfy Chair!",
-			"Tungsten carbide drills? What the bloody hell's tungsten carbide drills? - It's something they use in coal mining, father.' Your bloody fancy talk since you left London.",
-			"I'll tell you what's wrong with it, my lad. It's dead, that's what's wrong with it!",
-			"All right then, if it's restin', I'll wake him up! (shouts into cage) Hello Polly! I've got a nice cuttlefish for you when you wake up, Polly Parrot!",
-			"Look, I took the liberty of examining that parrot, and I discovered the only reason that it had been sitting on its perch in the first place was that it had been nailed there.",
-			"Look matey (picks up the parrot) this parrot wouldn't voom if you put four thousand volts through it! It's bleedin' demised!",
-			"It's not pining, it's passed on. This parrot is no more! It has ceased to be. It's expired and gone to meet its maker.This is a late parrot. It's a stiff. Bereft of life, it rests in peace. If you hadn't nailed it to the perch it would be pushing up the daisies. It's rung down the curtain and joined the choir invisible. This is an ex-parrot.",
-			"Pining for the fjords, what kind of talk is that? Look, why did it fall flat on its back the moment I got it home?",
-			"Whatever it was, I'm sure it was better than my plan to get out of this by pretending to be mad. I mean, who would have noticed another madman round here?",
-			"C: Big, blue wobbly thing that mermaids live in.",
-			"Baldrick, you wouldn't recognize a subtle plan if it painted itself purple and danced naked on a harpsicord singing 'subtle plans are here again'.",
-			"To you it's a potato, to me it's a potato. But to Sir Walter Bloody Raleigh it's country estates, fine carriages, and as many girls as his tongue can cope with. He's making a fortune out of the things; people are smoking them, building houses out of them... They'll be eating them next.",
-			"E: Look, there's no need to panic. Someone in the crew will know how to steer this thing.\nR: The crew, milord?\nE: Yes, the crew.\nR: What crew?\nE: I was under the impression that it was common maritime practice for a ship to have a crew.\nR: Opinion is divided on the subject.\n",
-			"If we do happen to step on a mine, Sir, what do we do ?\nNormal procedure, Lieutenant, is to jump 200 feet in the air and scatter oneself over a wide area.",
-			"Gentlemen, you can't fight in here, this is the War Room!", "I love it when a plan comes together", "Das also war des Pudels Kern!",
-			"I feel that if a person can't communicate the very least he can do is to shut up",
-			"Always carry a flagon of whiskey in case of snakebite and furthermore always carry a small snake.",
-			"Anyone who hates children and animals can't be all bad.", "Ein Teil von jener Kraft, Die stets das Böse will und stets das Gute schafft.",
-			"Von allen Geistern, die verneinen, ist mir der Schalk am wenigsten zur Last.",
-			"And the Lord spake, saying, 'First shalt thou take out the Holy Pin. Then, shalt thou count to three, no more, no less. Three shalt be the number thou shalt count, and the number of the counting shall be three. Four shalt thou not count, nor either count thou two, excepting that thou then proceed to three. Five is right out. Once the number three, being the third number, be reached, then lobbest thou thy Holy Hand Grenade of Antioch towards thy foe, who, being naughty in my sight, shall snuff it.",
-			"The slightest thought hadn't even begun to speculate about the merest possibility of crossing my mind.",
-			"Right, Baldrick, let's try again, shall we? This is called adding. If I have two beans, and then I add two more beans, what do I have?\nSome beans.\nYes...and no. Let's try again, shall we? I have two beans, then I add two more beans. What does that make?\nA very small casserole.\nBaldrick, the ape creatures of the Indus have mastered this. Now try again. One, two, three, four. So how many are there?\nThree\nWhat?\nAnd that one.\nThree and that one. So if I add that one to the three what will I have?\nOh! Some beans.\nYes. To you Baldrick, the Renaissance was just something that happened to other people wasn't it?",
-			"It's got a cop motor, a 440 cubic inch plant, it's got cop tires, cop suspensions, cop shocks. It's a model made before catalytic converters so it'll run good on regular gas. What do you say, is it the new Bluesmobile or what?",
-			"Yes. The plans were on display in the bottom of a locked filing cabinet, stuck in a disused lavatory with a sign on the door saying 'Beware of the Leopard'",
-			"It's 106 miles to Chicago, we got a full tank of gas, half a pack of cigarettes, it's dark, and we're wearing sunglasses. ",
-			"Ich bin der Geist, der stets verneint! Und das mit Recht; denn alles, was entsteht,  Ist wert, daß es zugrunde geht;  Drum besser wär's, daß nichts entstünde.  So ist denn alles, was ihr Sünde,  Zerstörung, kurz das Böse nennt,  Mein eigentliches Element.",
-			"Als Gregor Samsa eines Morgens aus unruhigen Träumen erwachte, fand er sich in seinem Bett zu einem ungeheueren Ungeziefer verwandelt.",
-			"Du hast wohl recht; ich finde nicht die Spur\nvon einem Geist, und alles ist Dressur.",
-			"'I got very bored and depressed, so I went and plugged myself in to its external computer feed. I talked to the computer at great length and explained my view of the Universe to it', said Marvin. 'And what happened?' pressed Ford. 'It committed suicide.'",
-			"Wie nur dem Kopf nicht alle Hoffnung schwindet,\nDer immerfort an schalem Zeuge klebt,\nMit gier'ger Hand nach Schätzen gräbt,\nUnd froh ist, wenn er Regenwürmer findet!",
-			"Der Dadaist ist ein Künstler, bei dem das Produkt als solches nebensächlich ist. Er ist ein Geistesreisender, der immer neue Erfahrungen macht. Ein Zeichen dafür, dass Dadaismus doch produktiv im herkömmlichen Sinne der bildenden Kunst ist, zeigt der groteske Humor, der sich in den Gedichten und Bildern wieder findet. Auch die Ironie, die die Künstler in ihre Werke einfließen lassen, spricht für modale Präsenz von „Sinn im Unsinn“, der immer dort ist, wo er nicht zu sein scheint.",
-			"Half a bee, philosophically, must, ipso facto, half not be. But half the bee has got to be, vis a vis its entity - do you see? But can a bee be said to be or not to be an entire bee when half the bee is not a bee due to some ancient injury?",
-			"Mein schönes Fräulein, darf ich wagen, Meinen Arm und Geleit Ihr anzutragen? Bin weder Fräulein, weder schön, Kann ungeleitet nach Hause gehn.",
-			"And I'm thinking you weren't burdened with an overabundance of schooling. So why don't we just ignore each other 'til we go away.",
-			"Im übrigen will ich keines Menschen Urteil, ich will nur Kenntnisse verbreiten, ich berichte nur, auch Ihnen, hohe Herren von der Akademie, habe ich nur berichtet.",
-			"I'm afraid not. The guns have stopped because we are about to attack. Not even our generals are mad enough to shell their own men. They feel it's more sporting to let the Germans do it.",
-			"If they take the ship they will rape us to death, eat our flesh, and sew our skins in to their clothing, and if we're very, very lucky, they’ll do it in that order.",
-			"Hier konnte niemand sonst Einlaß erhalten, denn dieser Eingang war nur für dich bestimmt. Ich gehe jetzt und schließe ihn.",
-			"Hohe Herren von der Akademie! Sie erweisen mir die Ehre, mich aufzufordern, der Akademie einen Bericht über mein äffisches Vorleben einzureichen.",
-			"Not only is this incomprehensible, but the ink is ugly and the paper is from the wrong kind of tree.",
-			"If the code and the comments disagree, then both are probably wrong.", "A radioactive cat has eighteen half-lives.", "Silence! I kill you!",
-			"Although golf was originally restricted to wealthy, overweight Protestants, today it's open to anybody who owns hideous clothing.",
-			"Base eight is just like base ten really - if you're missing two fingers",
-			"Biology is the only science in which multiplication means the same thing as division.",
-			"My dog's not eating, he no longer barks; He hit the propeller and turned into sparks",
-			"One leg is missing; the other is gone; The third leg is scattered all over the lawn; No need explaining the one leg remaining is spinning on the carport floor",
-			"\"Once the rockets are up, who cares where they come down? That's not my department,\" says Wernher von Braun.",
-			"Knock, knock … Who’s there? … *very long pause* … Java.",
-			"Programming made the impossible possible. You can have a null object and a constant variable.", "Voodoo Programming",
-			"It’s not a bug — it’s an undocumented feature.", "Linux is only free if your time has no value.",
-			"A system administrator has two problems: 1. Dumb users. 2. Smart users.", "When we had no computers, we had no programming problems either.",
-			"I’ve reached that age where my brain goes from 'You probably shouldn't say that' to 'What the hell, let's see what happens.'",
-			"An apple a day keeps anyone away if you throw it hard enough.",
-			"When someone says 'Expect the unexpected', slap them and say 'You didn't expect that, did you?'",
-			"Remember if you can't say something nice…make it funny.", "Be careful when you follow the masses. Sometimes the M is silent.",
-			"When in doubt, remember FISH: F-ck it, sh-t happens.",
-			"Theorien wie Stringtheorien und Paralleluniversen sind mindestens genauso gewagt wie die Vorstellung, dass hier pausenlos irgendwelche Außerirdischen landen.",
-			"Wenn alle nur lauschen, wird es logischerweise zu keiner interplanetaren Kommunikation kommen.",
-			"Wir können das Universum nicht erklären, sondern nur beschreiben; und wir wissen nicht, ob unsere Theorien wahr sind, wir wissen nur, dass sie nicht falsch sind.",
-			"The good thing about science is that it's true whether or not you believe in it.",
-			"We are all connected; To each other, biologically. To the earth, chemically. To the rest of the universe atomically.",
-			"Curious that we spend more time congratulating people who have succeeded than encouraging people who have not.", "Last quote" };
+	private static final String FORTUNE_STRINGS_RESOURCE = "/org/cip4/jdflib/util/fortune-strings.properties";
+
+	private static final class FortuneStringsHolder
+	{
+		private static final List<String> STRINGS = loadStrings();
+	}
+
+	private static List<String> loadStrings()
+	{
+		final Properties properties = new Properties();
+		try (InputStream is = StringUtil.class.getResourceAsStream(FORTUNE_STRINGS_RESOURCE))
+		{
+			if (is == null)
+			{
+				return Collections.singletonList("Randomly inserted error");
+			}
+			try (InputStreamReader reader = new InputStreamReader(is, StandardCharsets.UTF_8))
+			{
+				properties.load(reader);
+			}
+			final List<String> values = new ArrayList<>();
+			for (int i = 0; ; i++)
+			{
+				final String value = properties.getProperty("string." + i);
+				if (value == null)
+				{
+					break;
+				}
+				values.add(value);
+			}
+			if (values.isEmpty())
+			{
+				return Collections.singletonList("Randomly inserted error");
+			}
+			return Collections.unmodifiableList(values);
+		}
+		catch (final IOException x)
+		{
+			return Collections.singletonList("Randomly inserted error");
+		}
+	}
 
 	/**
 	 * returns a random string for testing fun stuff - similar to unix fortune but biased towards monty python or the hitchhikers guide to the galaxy
 	 *
+	 * really important routine - written on a friday afternoon ;-) <br/>
+	 * please add more at your leisure.... <br/>
+	 * parts (c) Monty Python, Star Trek, Douglas Adams, Black Adder, Goethe, Firefly, Capt. Jack Sparrow
 	 * @return a random string
 	 */
 	public static String getRandomString()
 	{
-		final int pos = (int) (strings.length * Math.random() * 0.99999);
-		return strings[pos];
+		final List<String> s = FortuneStringsHolder.STRINGS;
+		final int pos = (int) (s.size() * Math.random() * 0.99999);
+		return s.get(pos);
 	}
 
 	/**
