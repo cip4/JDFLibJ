@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
@@ -46,6 +47,7 @@ import org.cip4.jdflib.util.ContainerUtil;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  */
+@JDFWalker
 public class WalkColorantControl extends WalkResource
 {
 	/**

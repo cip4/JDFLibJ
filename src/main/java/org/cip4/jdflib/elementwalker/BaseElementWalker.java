@@ -41,11 +41,10 @@ import java.lang.reflect.Constructor;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.cip4.jdflib.util.StringUtil;
 
 /**
- * elementwalker class that allows you to traverse a dom tree starting at a given root also handles the construction of the walker classes by name, just make sure that your walker
- * subclasses match the naming convention $Walk<name>, e.g. if your class is called FixVersion, the subclasses must be called WalkFoo, WalkBar etc.
+ * elementwalker class that allows you to traverse a dom tree starting at a given root also handles the construction of the walker classes by marker annotation, just make sure that your
+ * walker subclasses are annotated with @JDFWalker.
  *
  * @author rainer prosi
  */
@@ -59,27 +58,22 @@ public class BaseElementWalker extends ElementWalker
 	public BaseElementWalker(final BaseWalkerFactory _theFactory)
 	{
 		super(_theFactory);
-		constructWalkers("$Walk");
+		constructWalkers();
 	}
 
 	/**
-	 * construct all walkers confirming to the naming convention public <classname>$Walk<xxx>
-	 *
-	 * @param classPrefix
+	 * construct all walkers annotated with @JDFWalker
 	 */
-	private void constructWalkers(final String classPrefix)
+	private void constructWalkers()
 	{
 		Class<?> parent = getClass();
 
 		while (parent != null)
 		{
-			final String name = parent.getSimpleName();
 			final Class<?>[] cs = parent.getDeclaredClasses();
 			for (final Class<?> theClass : cs)
 			{
-				String className = theClass.getName();
-				className = StringUtil.token(className, -1, ".");
-				if (className.startsWith(name + classPrefix))
+				if (theClass.isAnnotationPresent(JDFWalker.class))
 				{
 					try
 					{

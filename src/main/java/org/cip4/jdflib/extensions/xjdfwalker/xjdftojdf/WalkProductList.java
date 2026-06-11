@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.KElement;
@@ -79,6 +80,7 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
  */
+@JDFWalker
 public class WalkProductList extends WalkXElement
 {
 	/**

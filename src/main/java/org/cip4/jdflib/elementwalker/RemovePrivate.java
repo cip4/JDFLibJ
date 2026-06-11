@@ -91,6 +91,7 @@ public class RemovePrivate extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkElement extends BaseWalker
 	{
 
@@ -203,6 +204,7 @@ public class RemovePrivate extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkPrivate extends WalkElement
 	{
 
@@ -259,6 +261,7 @@ public class RemovePrivate extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkGeneralID extends WalkElement
 	{
 

@@ -39,6 +39,7 @@ package org.cip4.jdflib.elementwalker.fixversion;
 import java.util.Collection;
 import java.util.List;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -48,6 +49,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
  *
  * @author prosirai
  */
+@JDFWalker
 public class WalkKElement extends WalkAnyElement
 {
 

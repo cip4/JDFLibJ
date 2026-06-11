@@ -149,6 +149,7 @@ public class RemoveEmpty extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkElement extends BaseWalker
 	{
 
@@ -254,6 +255,7 @@ public class RemoveEmpty extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkGeneralID extends WalkElement
 	{
 
@@ -306,6 +308,7 @@ public class RemoveEmpty extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkComment extends WalkElement
 	{
 		/**
@@ -355,6 +358,7 @@ public class RemoveEmpty extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkSpan extends WalkElement
 	{
 		/**
@@ -405,6 +409,7 @@ public class RemoveEmpty extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkResourceAudit extends WalkElement
 	{
 		/**
@@ -441,6 +446,7 @@ public class RemoveEmpty extends BaseElementWalker
 	/**
 	 * never zapp me
 	 */
+	@JDFWalker
 	public class WalkIgnore extends WalkElement
 	{
 		public WalkIgnore()
@@ -479,6 +485,7 @@ public class RemoveEmpty extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkResource extends WalkElement
 	{
 		/**
@@ -649,6 +656,7 @@ public class RemoveEmpty extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkComChannel extends WalkResource
 	{
 		/**
@@ -689,6 +697,7 @@ public class RemoveEmpty extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkMessage extends WalkElement
 	{
 

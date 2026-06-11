@@ -69,11 +69,13 @@
 package org.cip4.jdflib.elementwalker.packagewalker;
 
 import org.cip4.jdflib.elementwalker.BaseWalker;
+import org.cip4.jdflib.elementwalker.JDFWalker;
 
 /**
  * @author rainer prosi
  * @date May 10, 2014
  */
+@JDFWalker
 public class WalkFoo extends BaseWalker
 {
 

@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.elementwalker.fixversion;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
@@ -50,6 +51,7 @@ import org.cip4.jdflib.util.StringUtil;
  *
  * @author prosirai
  */
+@JDFWalker
 public class WalkAnyElement extends BaseWalker
 {
 

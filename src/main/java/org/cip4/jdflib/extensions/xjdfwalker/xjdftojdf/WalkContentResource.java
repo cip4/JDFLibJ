@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
@@ -87,6 +88,7 @@ import org.cip4.jdflib.resource.process.JDFPageData;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *         walker for the colorSet - this gets translated back to a colorpool
  */
+@JDFWalker
 public class WalkContentResource extends WalkXJDFResource
 {
 	/**

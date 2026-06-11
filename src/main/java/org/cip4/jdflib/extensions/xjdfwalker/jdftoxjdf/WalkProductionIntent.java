@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.List;
 
 import org.cip4.jdflib.core.ElementName;
@@ -47,6 +48,7 @@ import org.cip4.jdflib.resource.intent.JDFProductionIntent;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  */
+@JDFWalker
 public class WalkProductionIntent extends WalkIntentResource
 {
 	/**

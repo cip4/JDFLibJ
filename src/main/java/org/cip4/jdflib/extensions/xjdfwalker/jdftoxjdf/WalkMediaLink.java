@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.List;
 
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
@@ -53,6 +54,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  */
+@JDFWalker
 public class WalkMediaLink extends WalkResLink
 {
 	/**

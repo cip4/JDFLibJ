@@ -90,6 +90,7 @@ class ExtendedRemoveEmpty extends RemoveEmpty
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	class WalkFoo extends WalkElement
 	{
 

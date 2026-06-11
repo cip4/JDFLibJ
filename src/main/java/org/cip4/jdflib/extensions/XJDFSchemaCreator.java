@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -140,6 +141,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkIgnore extends WalkElement
 	{
 
@@ -185,6 +187,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkElement extends BaseWalker
 	{
 
@@ -956,6 +959,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkRoot extends WalkElement
 	{
 
@@ -1043,6 +1047,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkDeviceCap extends WalkElement
 	{
 		public WalkDeviceCap()
@@ -1086,6 +1091,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkResourceElement extends WalkElement
 	{
 		EnumResourceClass c = null;
@@ -1174,6 +1180,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkResSet extends WalkElement
 	{
 
@@ -1206,6 +1213,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkProductList extends WalkElement
 	{
 		public WalkProductList()
@@ -1235,6 +1243,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkProduct extends WalkElement
 	{
 		public WalkProduct()
@@ -1267,6 +1276,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkResource extends WalkElement
 	{
 
@@ -1326,6 +1336,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkNode extends WalkElement
 	{
 
@@ -1383,6 +1394,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkEnumerationType extends WalkElement
 	{
 		public WalkEnumerationType()
@@ -1435,6 +1447,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkChildProduct extends WalkElement
 	{
 		public WalkChildProduct()
@@ -1486,6 +1499,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkTextElement extends WalkElement
 	{
 		public WalkTextElement()
@@ -1514,6 +1528,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkState extends WalkElement
 	{
 		public WalkState()
@@ -1576,6 +1591,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkEvaluation extends WalkTerm
 	{
 		public WalkEvaluation()
@@ -1628,6 +1644,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkTerm extends WalkElement
 	{
 		public WalkTerm()
@@ -1704,6 +1721,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkTest extends WalkTerm
 	{
 		public WalkTest()
@@ -1734,6 +1752,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkJobPhase extends WalkElement
 	{
 		public WalkJobPhase()
@@ -1761,6 +1780,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkResourcePhysical extends WalkResource
 	{
 
@@ -1791,6 +1811,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkDependent extends WalkElement
 	{
 		public WalkDependent()
@@ -1819,6 +1840,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkNiCi extends WalkResourceElement
 	{
 		public WalkNiCi()

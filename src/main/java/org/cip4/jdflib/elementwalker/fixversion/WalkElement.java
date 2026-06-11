@@ -40,6 +40,7 @@ import java.util.List;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang3.StringUtils;
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.AttributeName;
@@ -63,6 +64,7 @@ import org.cip4.jdflib.util.StringUtil;
  *
  * @author prosirai
  */
+@JDFWalker
 public class WalkElement extends WalkAnyElement
 {
 

@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
@@ -82,6 +83,7 @@ import org.cip4.jdflib.util.StringUtil;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *         walker for PhaseAmount
  */
+@JDFWalker
 public class WalkXJDFAuditAmount extends WalkXElement
 {
 	/**

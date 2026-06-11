@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.Collection;
 
 import org.cip4.jdflib.core.ElementName;
@@ -79,6 +80,7 @@ import org.cip4.jdflib.pool.JDFAmountPool;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  */
+@JDFWalker
 public class WalkAmountPool extends WalkJDFSubElement
 {
 	/**

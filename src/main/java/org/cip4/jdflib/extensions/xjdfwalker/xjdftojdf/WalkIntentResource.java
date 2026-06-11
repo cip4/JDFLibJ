@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
@@ -76,6 +77,7 @@ import org.cip4.jdflib.extensions.XJDFConstants;
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *         Mar 17, 2010
  */
+@JDFWalker
 public class WalkIntentResource extends WalkResource
 {
 	/**

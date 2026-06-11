@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -75,6 +76,7 @@ import org.cip4.jdflib.extensions.xjdfwalker.XJMFTypeMap;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.util.StringUtil;
 
+@JDFWalker
 public class WalkModifyQueueEntry extends WalkTypesafeMessage
 {
 

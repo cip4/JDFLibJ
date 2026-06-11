@@ -112,6 +112,7 @@ public class ResourceIDFinder extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkRes extends WalkStop
 	{
 
@@ -155,6 +156,7 @@ public class ResourceIDFinder extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkContinue extends WalkStop
 	{
 
@@ -195,6 +197,7 @@ public class ResourceIDFinder extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkStop extends BaseWalker
 	{
 

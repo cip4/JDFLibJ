@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.ResourceHelper;
@@ -46,6 +47,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *         walker for the colorSet - this gets translated back to a colorpool
  */
+@JDFWalker
 public class WalkXJDFContactResource extends WalkXJDFResource
 {
 	/**

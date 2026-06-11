@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.Vector;
 
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
@@ -79,6 +80,7 @@ import org.cip4.jdflib.resource.process.JDFComponent;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
+@JDFWalker
 public class WalkComponent extends WalkResource
 {
 	/**

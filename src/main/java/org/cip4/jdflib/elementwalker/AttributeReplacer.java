@@ -129,6 +129,7 @@ public class AttributeReplacer extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkAttributeReplacer extends WalkDefault
 	{
 
@@ -170,6 +171,7 @@ public class AttributeReplacer extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkDefault extends BaseWalker
 	{
 		/**

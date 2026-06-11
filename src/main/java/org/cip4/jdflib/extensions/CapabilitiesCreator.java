@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.auto.JDFAutoValue.EnumValueUsage;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -100,6 +101,7 @@ public class CapabilitiesCreator extends BaseElementWalker
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
 	@Deprecated
+	@JDFWalker
 	public class WalkElement extends BaseWalker
 	{
 

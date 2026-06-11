@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.XJDFConstants;
@@ -76,6 +77,7 @@ import org.cip4.jdflib.resource.process.JDFUsageCounter;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
+@JDFWalker
 public class WalkUsageCounter extends WalkResource
 {
 	/**

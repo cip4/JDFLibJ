@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.Collection;
 
 import org.cip4.jdflib.core.AttributeName;
@@ -54,6 +55,7 @@ import org.cip4.jdflib.resource.JDFPhaseTime;
  *         at this point only a dummy since we have a specific WalkResourceAudit child
  *         TODO how should resource consumption be tracked?
  */
+@JDFWalker
 public class WalkPhaseTimeAudit extends WalkAudit
 {
 	/**

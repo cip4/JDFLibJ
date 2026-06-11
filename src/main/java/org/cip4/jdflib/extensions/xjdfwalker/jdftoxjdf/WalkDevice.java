@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
@@ -47,6 +48,7 @@ import org.cip4.jdflib.resource.JDFDevice;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  */
+@JDFWalker
 public class WalkDevice extends WalkResource
 {
 	/**

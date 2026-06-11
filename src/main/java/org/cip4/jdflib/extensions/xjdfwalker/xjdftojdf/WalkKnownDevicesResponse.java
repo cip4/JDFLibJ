@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.Vector;
 
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
@@ -48,6 +49,7 @@ import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFDeviceList;
 
+@JDFWalker
 public class WalkKnownDevicesResponse extends WalkTypesafeMessage
 {
 

@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.elementwalker.fixversion;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
@@ -81,6 +82,7 @@ import org.cip4.jdflib.resource.intent.JDFColorIntent;
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *         June 7, 2009
  */
+@JDFWalker
 public class WalkColorIntent extends WalkResource
 {
 	/**

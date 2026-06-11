@@ -73,6 +73,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.elementwalker.RemoveEmpty;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.util.ContainerUtil;
@@ -101,6 +102,7 @@ public class RemoveEmptyXJDF extends RemoveEmpty
 	 *
 	 * @author rainer prosi
 	 */
+	@JDFWalker
 	public class WalkResourceSet extends WalkElement
 	{
 
@@ -133,6 +135,7 @@ public class RemoveEmptyXJDF extends RemoveEmpty
 	/**
 	 *
 	 */
+	@JDFWalker
 	public class WalkAuditResource extends WalkElement
 	{
 
@@ -159,6 +162,7 @@ public class RemoveEmptyXJDF extends RemoveEmpty
 	/**
 	 *
 	 */
+	@JDFWalker
 	public class WalkResourceXJDF extends WalkElement
 	{
 

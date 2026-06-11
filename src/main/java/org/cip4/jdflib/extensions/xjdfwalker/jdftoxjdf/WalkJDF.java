@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.HashSet;
 
 import org.cip4.jdflib.auto.JDFAutoGeneralID.EnumDataType;
@@ -59,6 +60,7 @@ import org.cip4.jdflib.util.StringUtil;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
  */
+@JDFWalker
 public class WalkJDF extends WalkJDFElement
 {
 	private final HashSet<String> deprecatedTypes;

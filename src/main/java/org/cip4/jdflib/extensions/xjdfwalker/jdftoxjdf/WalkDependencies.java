@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.List;
 
 import org.cip4.jdflib.core.AttributeName;
@@ -45,6 +46,7 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.JDFDependencies;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
 
+@JDFWalker
 public class WalkDependencies extends WalkJDFSubElement
 {
 	/**

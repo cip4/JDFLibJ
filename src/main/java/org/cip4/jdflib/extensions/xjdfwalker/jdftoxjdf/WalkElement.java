@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.List;
 import java.util.Set;
 
@@ -56,6 +57,7 @@ import org.w3c.dom.Node;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  */
+@JDFWalker
 public class WalkElement extends BaseWalker
 {
 	/**

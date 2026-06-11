@@ -68,12 +68,14 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.VString;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
+@JDFWalker
 public class WalkRepeatDesc extends WalkXElement
 {
 	/**

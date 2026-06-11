@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.elementwalker.fixversion;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.auto.JDFAutoColor.EnumMappingSelection;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -79,6 +80,7 @@ import org.cip4.jdflib.resource.process.JDFColor;
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *         June 7, 2009
  */
+@JDFWalker
 public class WalkColor extends WalkResource
 {
 	/**

@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoJobPhase.EnumDeadLine;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumDeviceOperationMode;
@@ -81,6 +82,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 		return ret;
 	}
 
+	@JDFWalker
 	public class WalkElement extends BaseWalker
 	{
 		public WalkElement()
@@ -98,6 +100,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkRoot extends WalkElement
 	{
 		@Override
@@ -114,6 +117,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkSimpleType extends WalkElement
 	{
 
@@ -125,6 +129,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkSequence extends WalkElement
 	{
 
@@ -156,6 +161,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkVersion extends WalkSimpleType
 	{
 
@@ -174,6 +180,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 		}
 	}
 
+	@JDFWalker
 	public class WalkNodeStatus extends WalkSimpleType
 	{
 
@@ -192,6 +199,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 		}
 	}
 
+	@JDFWalker
 	public class WalkDeviceStatus extends WalkSimpleType
 	{
 
@@ -210,6 +218,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 		}
 	}
 
+	@JDFWalker
 	public class WalkCostCenterID extends WalkXSAttribute
 	{
 
@@ -238,6 +247,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 		}
 	}
 
+	@JDFWalker
 	public class WalkDeviceInfo extends WalkSequence
 	{
 
@@ -262,6 +272,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 		}
 	}
 
+	@JDFWalker
 	public class WalkNotificationSeq extends WalkSequence
 	{
 
@@ -300,6 +311,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 		}
 	}
 
+	@JDFWalker
 	public class WalkSignalStatusSeq extends WalkSequence
 	{
 
@@ -356,6 +368,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 		}
 	}
 
+	@JDFWalker
 	public class WalkComplexType extends WalkElement
 	{
 
@@ -375,6 +388,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 		}
 	}
 
+	@JDFWalker
 	public class WalkExtension extends WalkElement
 	{
 
@@ -386,6 +400,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkDeviceExtension extends WalkExtension
 	{
 
@@ -407,6 +422,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkAbstractMessageExtension extends WalkExtension
 	{
 
@@ -427,6 +443,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkMessageExtension extends WalkExtension
 	{
 
@@ -458,6 +475,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkMessage extends WalkComplexType
 	{
 
@@ -489,6 +507,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkXSElement extends WalkElement
 	{
 
@@ -500,6 +519,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkXSAttribute extends WalkElement
 	{
 
@@ -511,6 +531,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkSheetName extends WalkXSAttribute
 	{
 
@@ -535,6 +556,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 	private static final StringArray stringList = new StringArray(
 			new String[] { AttributeName.JOBID, AttributeName.JOBPARTID, AttributeName.SENDERID, AttributeName.EVENTID });
 
+	@JDFWalker
 	public class WalkStringType extends WalkXSAttribute
 	{
 		@Override
@@ -554,6 +576,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkAbstractMessageElement extends WalkXSElement
 	{
 
@@ -571,6 +594,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkAbstractMessageType extends WalkComplexType
 	{
 
@@ -588,6 +612,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkHeader extends WalkXSElement
 	{
 
@@ -606,6 +631,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkXJMFElement extends WalkXSElement
 	{
 
@@ -625,6 +651,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkXJMFComplex extends WalkComplexType
 	{
 
@@ -654,6 +681,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkMessageElement extends WalkXSElement
 	{
 
@@ -678,6 +706,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkModuleInfoElem extends WalkXSElement
 	{
 
@@ -697,6 +726,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkModuleInfoType extends WalkComplexType
 	{
 
@@ -721,6 +751,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkDeviceeInfoType extends WalkComplexType
 	{
 
@@ -742,6 +773,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkJobPhaseType extends WalkComplexType
 	{
 
@@ -773,6 +805,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkMISDetails extends WalkComplexType
 	{
 
@@ -793,6 +826,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkNotification extends WalkComplexType
 	{
 
@@ -810,6 +844,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkEmployeeInfoType extends WalkComplexType
 	{
 
@@ -830,6 +865,7 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkModuleInfoRef extends WalkXSElement
 	{
 

@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.resource.JDFBindItem;
 import org.cip4.jdflib.resource.JDFEdgeGluing;
@@ -96,6 +97,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFThreadSewing;
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *         Mar 17, 2010
  */
+@JDFWalker
 public class WalkIntentElement extends WalkXElement
 {
 	/**

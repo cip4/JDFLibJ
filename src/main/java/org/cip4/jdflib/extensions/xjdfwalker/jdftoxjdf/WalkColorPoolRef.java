@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.List;
 
 import org.cip4.jdflib.core.JDFElement;
@@ -50,6 +51,7 @@ import org.cip4.jdflib.resource.JDFResource;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  */
+@JDFWalker
 public class WalkColorPoolRef extends WalkRefElement
 {
 	/**

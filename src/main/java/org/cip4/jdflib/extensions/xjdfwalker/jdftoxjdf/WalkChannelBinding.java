@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
@@ -79,6 +80,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFChannelBinding;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
+@JDFWalker
 public class WalkChannelBinding extends WalkJDFSubElement
 {
 	/**

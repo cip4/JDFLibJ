@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -53,6 +54,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for non partitioned intent elements
  */
+@JDFWalker
 public class WalkIntent extends WalkXElement
 {
 	/**

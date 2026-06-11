@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.HashSet;
 
 import org.cip4.jdflib.core.AttributeName;
@@ -50,6 +51,7 @@ import org.cip4.jdflib.util.StringUtil;
  * @author Rainer Prosi, Heidelberger Druckmaschinen <br/>
  *         walker for JMF mesaages
  */
+@JDFWalker
 public class WalkMessage extends WalkJDFElement
 {
 	private final static HashSet<EnumType> badtypes = fillBadTypes();

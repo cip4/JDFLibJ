@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -48,6 +49,7 @@ import org.cip4.jdflib.core.VString;
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  */
+@JDFWalker
 public class WalkIgnore extends WalkElement
 {
 	private static Set<String> allwaysIgnore = null;

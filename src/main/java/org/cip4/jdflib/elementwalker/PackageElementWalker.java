@@ -54,8 +54,8 @@ import org.cip4.jdflib.util.zip.ZipReader;
 
 /**
  * this class is similar to BaseElementWalker but searches it package rather than the local walker classes elementwalker class that allows you to traverse a dom tree starting at a
- * given root also handles the construction of the walker classes by name, just make sure that your walker subclasses match the naming convention Walk<name> and reside in one of
- * the declared packages, e.g. if your class is called FixVersion, the classes in the same package must be called WalkFoo, WalkBar etc.
+ * given root also handles the construction of the walker classes by marker annotation. Walker classes in the scanned packages are discovered from class files and selected only
+ * when they are annotated with @JDFWalker.
  *
  * @author rainer prosi
  */
@@ -66,7 +66,7 @@ public class PackageElementWalker extends ElementWalker
 	/**
 	 *
 	 */
-	private static final String WALK_CLASS = "Walk*.class";
+	private static final String CLASS_GLOB = "*.class";
 
 	static ListMap<Class<?>, String> classes = null;
 
@@ -146,7 +146,7 @@ public class PackageElementWalker extends ElementWalker
 			{
 				final String packageName = currentClass.getPackage().getName();
 				final String packagePath = StringUtil.replaceChar(packageName, '.', "/", 0);
-				final String classExpr = packagePath + "/" + WALK_CLASS;
+				final String classExpr = packagePath + "/" + CLASS_GLOB;
 				zr.buffer();
 				while (true)
 				{
@@ -170,7 +170,7 @@ public class PackageElementWalker extends ElementWalker
 		if (packagePath.equals(zipPackageName))
 		{
 			final String name = packageName + "." + UrlUtil.newExtension(className, null);
-			if (name.indexOf('$') < 0)
+			if (name.indexOf('$') < 0 && isWalker(name))
 			{
 				constructWalker(name);
 				classes.putOne(baseClass, name);
@@ -190,7 +190,7 @@ public class PackageElementWalker extends ElementWalker
 			final String packageName = currentClass.getPackage().getName();
 			String packagePath = StringUtil.replaceChar(packageName, '.', File.separator, 0);
 			packagePath = dir.getAbsolutePath() + File.separator + packagePath;
-			final File[] classFiles = FileUtil.listFilesWithExpression(new File(packagePath), WALK_CLASS);
+			final File[] classFiles = FileUtil.listFilesWithExpression(new File(packagePath), CLASS_GLOB);
 			if (classFiles != null)
 			{
 				for (final File f : classFiles)
@@ -202,6 +202,10 @@ public class PackageElementWalker extends ElementWalker
 						continue;
 					}
 					name = packageName + "." + name;
+					if (!isWalker(name))
+					{
+						continue;
+					}
 					final BaseWalker w = constructWalker(name);
 					if (w == null)
 					{
@@ -231,6 +235,23 @@ public class PackageElementWalker extends ElementWalker
 			currentClass = null;
 		}
 		return currentClass;
+	}
+
+	private boolean isWalker(final String className)
+	{
+		try
+		{
+			final Class<?> c = Class.forName(className, false, getClass().getClassLoader());
+			return c.isAnnotationPresent(JDFWalker.class);
+		}
+		catch (final Throwable t)
+		{
+			if (slog.isDebugEnabled())
+			{
+				slog.debug("Cannot inspect class for @JDFWalker: " + className, t);
+			}
+			return false;
+		}
 	}
 
 	/**

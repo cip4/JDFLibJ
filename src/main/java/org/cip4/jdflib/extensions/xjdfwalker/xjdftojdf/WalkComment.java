@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.KElement;
@@ -77,6 +78,7 @@ import org.cip4.jdflib.extensions.XJDFConstants;
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *         walker for the JMF or XJMF root
  */
+@JDFWalker
 public class WalkComment extends WalkXElement
 {
 	/**

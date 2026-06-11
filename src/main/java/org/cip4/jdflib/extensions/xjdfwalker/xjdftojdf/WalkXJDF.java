@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
@@ -50,6 +51,7 @@ import org.cip4.jdflib.util.StringUtil;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the xjdf root
  */
+@JDFWalker
 public class WalkXJDF extends WalkXElement
 {
 	/**

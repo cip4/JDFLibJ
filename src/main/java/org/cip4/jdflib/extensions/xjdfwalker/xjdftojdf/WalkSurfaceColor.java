@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.Vector;
 
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
@@ -85,6 +86,7 @@ import org.cip4.jdflib.util.ContainerUtil;
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
+@JDFWalker
 public class WalkSurfaceColor extends WalkXElement
 {
 

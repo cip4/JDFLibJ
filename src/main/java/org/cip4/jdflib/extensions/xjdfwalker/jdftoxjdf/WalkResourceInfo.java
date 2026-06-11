@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.Collection;
 import java.util.List;
 
@@ -60,6 +61,7 @@ import org.cip4.jdflib.resource.JDFResource;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
  */
+@JDFWalker
 public class WalkResourceInfo extends WalkJDFSubElement
 {
 

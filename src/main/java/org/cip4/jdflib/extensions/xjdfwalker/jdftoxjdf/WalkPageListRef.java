@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.resource.JDFPageList;
@@ -44,6 +45,7 @@ import org.cip4.jdflib.resource.JDFResource;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  */
+@JDFWalker
 public class WalkPageListRef extends WalkRefElement
 {
 

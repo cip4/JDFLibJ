@@ -56,6 +56,7 @@ public class URLMapper extends BaseElementWalker implements IElementConverter
 	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	public class WalkElement extends BaseWalker
 	{
 		/**
@@ -116,6 +117,7 @@ public class URLMapper extends BaseElementWalker implements IElementConverter
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkURL extends WalkElement
 	{
 

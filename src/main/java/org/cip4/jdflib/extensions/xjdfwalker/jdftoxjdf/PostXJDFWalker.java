@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -238,6 +239,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkElement extends BaseWalker
 	{
 
@@ -338,6 +340,7 @@ class PostXJDFWalker extends BaseElementWalker
 	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkPart extends WalkElement
 	{
 		/**
@@ -512,6 +515,7 @@ class PostXJDFWalker extends BaseElementWalker
 	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkPartAmount extends WalkElement
 	{
 		/**
@@ -628,6 +632,7 @@ class PostXJDFWalker extends BaseElementWalker
 	 *
 	 *
 	 */
+	@JDFWalker
 	public class WalkPlacedObject extends WalkElement
 	{
 		/**
@@ -709,6 +714,7 @@ class PostXJDFWalker extends BaseElementWalker
 	 *
 	 *
 	 */
+	@JDFWalker
 	public class WalkModuleInfo extends WalkElement
 	{
 		/**
@@ -763,6 +769,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkMediaIntent extends WalkIntent
 	{
 		/**
@@ -819,6 +826,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkStripCellParams extends WalkElement
 	{
 		/**
@@ -879,6 +887,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkSurfaceColor extends WalkElement
 	{
 		/**
@@ -913,6 +922,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkStrippingSet extends WalkResourceSet
 	{
 		/**
@@ -967,6 +977,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkMediaSet extends WalkResourceSet
 	{
 		/**
@@ -1017,6 +1028,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkRunListSet extends WalkResourceSet
 	{
 		/**
@@ -1126,6 +1138,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
+	@JDFWalker
 	public class WalkArtDeliveryIntentSet extends WalkIntentSet
 	{
 		/**
@@ -1190,6 +1203,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
+	@JDFWalker
 	public class WalkDeliveryParamsSet extends WalkResourceSet
 	{
 		/**
@@ -1289,6 +1303,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
+	@JDFWalker
 	public class WalkStation extends WalkElement
 	{
 		/**
@@ -1341,6 +1356,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkIntentSet extends WalkElement
 	{
 		/**
@@ -1389,6 +1405,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkResourceElement extends WalkElement
 	{
 		/**
@@ -1447,6 +1464,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkResource extends WalkElement
 	{
 		/**
@@ -1520,6 +1538,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkResourceSet extends WalkElement
 	{
 		/**
@@ -1577,6 +1596,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkIntent extends WalkElement
 	{
 		/**
@@ -1652,6 +1672,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkXJDF extends WalkElement
 	{
 		/**
@@ -1753,6 +1774,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
+	@JDFWalker
 	public class WalkProductList extends WalkElement
 	{
 		/**
@@ -1809,6 +1831,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
+	@JDFWalker
 	public class WalkProduct extends WalkElement
 	{
 		/**
@@ -1879,6 +1902,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
+	@JDFWalker
 	public class WalkIdentical extends WalkElement
 	{
 		/**
@@ -1930,6 +1954,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author rainer prosi
 	 */
+	@JDFWalker
 	public class WalkHeadBandApplicationParams extends WalkResourceElement
 	{
 		/**
@@ -2011,6 +2036,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author rainer prosi
 	 */
+	@JDFWalker
 	public class WalkThreadSewingParams extends WalkResourceElement
 	{
 		/**
@@ -2065,6 +2091,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author rainer prosi
 	 */
+	@JDFWalker
 	public class WalkLaminatingParams extends WalkResourceElement
 	{
 		/**
@@ -2126,6 +2153,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author rainer prosi
 	 */
+	@JDFWalker
 	public class WalkNodeInfo extends WalkResourceElement
 	{
 		/**
@@ -2187,6 +2215,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author rainer prosi
 	 */
+	@JDFWalker
 	public class WalkAssembly extends WalkResourceElement
 	{
 		/**
@@ -2253,6 +2282,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author rainer prosi
 	 */
+	@JDFWalker
 	public class WalkStitchingParams extends WalkResourceElement
 	{
 		/**
@@ -2308,6 +2338,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author rainer prosi
 	 */
+	@JDFWalker
 	public class WalkDigitalPrintingParams extends WalkResourceElement
 	{
 		/**
@@ -2403,6 +2434,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author rainer prosi
 	 */
+	@JDFWalker
 	public class WalkInterpretingParams extends WalkResourceElement
 	{
 		/**
@@ -2464,6 +2496,7 @@ class PostXJDFWalker extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	public class WalkCustomerInfo extends WalkResourceElement
 	{
 
@@ -2534,6 +2567,7 @@ class PostXJDFWalker extends BaseElementWalker
 	 *
 	 *
 	 */
+	@JDFWalker
 	public class WalkLooseBindindingParams extends WalkResourceElement
 	{
 
@@ -2611,6 +2645,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
+	@JDFWalker
 	public class WalkProcessList extends WalkElement
 	{
 		/**
@@ -2659,6 +2694,7 @@ class PostXJDFWalker extends BaseElementWalker
 	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkXJMF extends WalkElement
 	{
 		/**
@@ -2693,6 +2729,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkMessage extends WalkElement
 	{
 
@@ -2729,6 +2766,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkSignal extends WalkMessage
 	{
 
@@ -2754,6 +2792,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkStatusSignal extends WalkSignal
 	{
 
@@ -2805,6 +2844,7 @@ class PostXJDFWalker extends BaseElementWalker
 	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkResourceMessage extends WalkMessage
 	{
 
@@ -2890,6 +2930,7 @@ class PostXJDFWalker extends BaseElementWalker
 	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkKnownMessageResponse extends WalkMessage
 	{
 
@@ -2989,6 +3030,7 @@ class PostXJDFWalker extends BaseElementWalker
 	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkAudit extends WalkElement
 	{
 
@@ -3036,6 +3078,7 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkStrippingParams extends WalkResourceElement
 	{
 		/**

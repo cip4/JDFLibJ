@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -98,6 +99,7 @@ class XJDFPrepWalker extends BaseElementWalker
 	/**
 	 * @author rainer prosi
 	 */
+	@JDFWalker
 	public class WalkPrintCondition extends WalkElement
 	{
 		/**
@@ -145,6 +147,7 @@ class XJDFPrepWalker extends BaseElementWalker
 
 	}
 
+	@JDFWalker
 	protected class WalkContact extends WalkElement
 	{
 		/**
@@ -198,6 +201,7 @@ class XJDFPrepWalker extends BaseElementWalker
 		}
 	}
 
+	@JDFWalker
 	protected class WalkRoot extends WalkElement
 	{
 		/**
@@ -239,6 +243,7 @@ class XJDFPrepWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkElement extends BaseWalker
 	{
 
@@ -263,6 +268,7 @@ class XJDFPrepWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkResourceInfo extends WalkElement
 	{
 
@@ -308,6 +314,7 @@ class XJDFPrepWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkStripMark extends WalkElement
 	{
 
@@ -367,6 +374,7 @@ class XJDFPrepWalker extends BaseElementWalker
 	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkKnownMessageResponse extends WalkElement
 	{
 
@@ -434,6 +442,7 @@ class XJDFPrepWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkLayoutSet extends WalkElement
 	{
 
@@ -503,6 +512,7 @@ class XJDFPrepWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkPrintConditionSet extends WalkElement
 	{
 
@@ -539,6 +549,7 @@ class XJDFPrepWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkNoIdenticalSet extends WalkElement
 	{
 

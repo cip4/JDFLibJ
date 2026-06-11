@@ -270,6 +270,7 @@ public class UnLinkFinder extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkRes extends BaseWalker
 	{
 
@@ -328,6 +329,7 @@ public class UnLinkFinder extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkRef extends BaseWalker
 	{
 		/**

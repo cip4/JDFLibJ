@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.KElement;
@@ -79,6 +80,7 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
  * @author Rainer Prosi, Heidelberger Druckmaschinen <br/>
  *         walker for JMF roots
  */
+@JDFWalker
 public class WalkJMF extends WalkJDFElement
 {
 	/**

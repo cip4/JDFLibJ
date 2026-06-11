@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.elementwalker.fixversion;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -78,6 +79,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *         June 7, 2009
  */
+@JDFWalker
 public class WalkResLink extends WalkElement
 {
 

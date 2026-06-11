@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.elementwalker.fixversion;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.resource.JDFPageList;
 
@@ -75,6 +76,7 @@ import org.cip4.jdflib.resource.JDFPageList;
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *         June 7, 2009
  */
+@JDFWalker
 public class WalkPageList extends WalkResource
 {
 	/**

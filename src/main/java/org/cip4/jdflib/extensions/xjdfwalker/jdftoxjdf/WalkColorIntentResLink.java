@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.List;
 
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
@@ -52,6 +53,7 @@ import org.cip4.jdflib.resource.JDFResource;
  * @author rainer prosi
  * @date Feb 26, 2013
  */
+@JDFWalker
 public class WalkColorIntentResLink extends WalkResLink
 {
 

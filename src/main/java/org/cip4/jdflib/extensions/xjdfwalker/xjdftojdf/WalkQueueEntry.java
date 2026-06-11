@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
@@ -79,6 +80,7 @@ import org.cip4.jdflib.util.StringUtil;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for QueueEntry elements
  */
+@JDFWalker
 public class WalkQueueEntry extends WalkXElement
 {
 	/**

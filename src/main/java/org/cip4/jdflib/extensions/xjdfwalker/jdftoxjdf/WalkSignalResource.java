@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.List;
 
 import org.cip4.jdflib.core.AttributeName;
@@ -50,6 +51,7 @@ import org.cip4.jdflib.jmf.JDFSignal;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen <br/>
  */
+@JDFWalker
 public class WalkSignalResource extends WalkSignal
 {
 	/**

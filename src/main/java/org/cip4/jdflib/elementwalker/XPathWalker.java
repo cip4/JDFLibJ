@@ -222,6 +222,7 @@ public class XPathWalker extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkAll extends BaseWalker
 	{
 		/**

@@ -105,6 +105,7 @@ public class RemoveCompare extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkElement extends BaseWalker
 	{
 

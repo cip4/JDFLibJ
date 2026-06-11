@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.Collection;
 
 import org.cip4.jdflib.core.AttributeName;
@@ -57,6 +58,7 @@ import org.cip4.jdflib.jmf.JDFQueueEntryDef;
  * @author Rainer Prosi, Heidelberger Druckmaschinen <br/>
  *         walker for JMF mesaages
  */
+@JDFWalker
 public class WalkModifyQueueEntry extends WalkMessage
 {
 	private static final StringArray QUEUE_CONTROL = new StringArray(

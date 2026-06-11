@@ -86,6 +86,7 @@ public class LinkRefFinder extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkRef extends BaseWalker
 	{
 		/**

@@ -69,6 +69,7 @@
 
 package org.cip4.jdflib.extensions.xjdfwalker;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -102,6 +103,7 @@ public class IDRemover extends BaseElementWalker
 		new BaseWalker(getFactory()); // need a default walker
 	}
 
+	@JDFWalker
 	public class WalkIgnore extends BaseWalker
 	{
 		public WalkIgnore()
@@ -136,6 +138,7 @@ public class IDRemover extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkResource extends BaseWalker
 	{
 		/**

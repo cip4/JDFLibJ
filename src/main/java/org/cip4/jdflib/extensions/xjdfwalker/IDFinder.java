@@ -39,6 +39,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -161,6 +162,7 @@ public class IDFinder extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkResource extends BaseWalker
 	{
 		/**
@@ -233,6 +235,7 @@ public class IDFinder extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkSet extends BaseWalker
 	{
 		/**

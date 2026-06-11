@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -109,6 +110,7 @@ public class XJDFSchemaWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkElement extends BaseWalker
 	{
 		public WalkElement()
@@ -133,6 +135,7 @@ public class XJDFSchemaWalker extends BaseElementWalker
 	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkAttribute extends WalkElement
 	{
 
@@ -173,6 +176,7 @@ public class XJDFSchemaWalker extends BaseElementWalker
 	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
+	@JDFWalker
 	protected class WalkEnum extends WalkElement
 	{
 

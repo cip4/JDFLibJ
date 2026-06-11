@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.elementwalker.fixversion;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.auto.JDFAutoApprovalDetails.EnumApprovalState;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -81,6 +82,7 @@ import org.cip4.jdflib.resource.process.JDFApprovalSuccess;
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG * fixes an ApprovalSuccess by moving the appropriate elements in and out of ApprovalDetails
  *         elements June 7, 2009
  */
+@JDFWalker
 public class WalkApprovalSuccess extends WalkResource
 {
 	/**

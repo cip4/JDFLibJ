@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import java.util.Iterator;
 
 import org.cip4.jdflib.core.ElementName;
@@ -81,6 +82,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
+@JDFWalker
 public class WalkRunList extends WalkResource
 {
 	/**

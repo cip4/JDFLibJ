@@ -124,6 +124,7 @@ public class XMLCompareWalker extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkAll extends BaseWalker
 	{
 		/**

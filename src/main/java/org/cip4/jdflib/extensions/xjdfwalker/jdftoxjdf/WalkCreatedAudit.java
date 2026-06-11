@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
@@ -82,6 +83,7 @@ import org.cip4.jdflib.util.JDFDate;
  *         at this point only a dummy since we have a specific WalkResourceAudit child
  *         TODO how should resource consumption be tracked?
  */
+@JDFWalker
 public class WalkCreatedAudit extends WalkAudit
 {
 	/**

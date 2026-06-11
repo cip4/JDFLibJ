@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
@@ -77,6 +78,7 @@ import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFModifyQueueEntryParams;
 import org.cip4.jdflib.jmf.JDFModifyQueueEntryParams.eOperation;
 
+@JDFWalker
 public class WalkModifyQueueEntryParams extends WalkXElement
 {
 

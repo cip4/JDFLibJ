@@ -36,12 +36,14 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.resource.process.JDFLayout;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Layout elements TODO unmerge stripping and binderysignature and signaturecell see WalkRunList
  */
+@JDFWalker
 public class WalkLayout extends WalkResource
 {
 	/**

@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.elementwalker.fixversion;
 
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -85,6 +86,7 @@ import org.cip4.jdflib.util.StringUtil;
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *         June 7, 2009
  */
+@JDFWalker
 public class WalkDigitalPrintingParams extends WalkResource
 {
 

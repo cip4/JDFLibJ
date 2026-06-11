@@ -60,6 +60,7 @@ public class SizeWalker extends BaseElementWalker
 	 *
 	 * @author prosirai
 	 */
+	@JDFWalker
 	public class WalkElement extends BaseWalker
 	{
 		/**
