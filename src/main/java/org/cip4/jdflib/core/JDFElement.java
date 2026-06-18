@@ -6480,7 +6480,12 @@ public class JDFElement extends KElement
 	 */
 	public JDFComment getComment(final String _name, final int index)
 	{
-		return (JDFComment) getChildWithAttribute(ElementName.COMMENT, AttributeName.NAME, null, _name, index, true);
+		KElement c0 = getChildWithAttribute(ElementName.COMMENT, AttributeName.NAME, null, _name, index, true);
+		if (c0 == null && isXJDF())
+		{
+			c0 = getChildWithAttribute(ElementName.COMMENT, AttributeName.TYPE, null, _name, index, true);
+		}
+		return (JDFComment) c0;
 	}
 
 	/**

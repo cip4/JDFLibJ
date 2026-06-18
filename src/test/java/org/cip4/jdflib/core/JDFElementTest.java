@@ -777,6 +777,28 @@ class JDFElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testChildElementVector.
+	 */
+	@Test
+	void testGetComment()
+	{
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		assertNull(n.getComment(0));
+		assertNull(n.getComment(1));
+		final JDFComment c1 = n.appendComment();
+		c1.setText("c1");
+		assertEquals("c1", n.getComment(0).getText());
+		c1.setName("n");
+		assertEquals("c1", n.getComment("n", 0).getText());
+
+		final XJDFHelper h = new XJDFHelper("a", "b");
+		final JDFComment cx = (JDFComment) h.appendElement(ElementName.COMMENT);
+		cx.setText("c2");
+		cx.setType("t");
+		assertEquals("c2", ((JDFElement) h.getRoot()).getComment("t", 0).getText());
+	}
+
+	/**
+	 * Method testChildElementVector.
 	 *
 	 * @throws Exception
 	 */
