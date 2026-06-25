@@ -90,6 +90,8 @@ import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFConventionalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFPreview;
+import org.cip4.jdflib.resource.process.JDFPreview.EnumPreviewFileType;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.UnitParser.eParserUnit;
 
@@ -99,7 +101,19 @@ import org.cip4.jdflib.util.UnitParser.eParserUnit;
 public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 {
 
-	boolean perfecting;
+	private boolean perfecting;
+	private boolean previewGeneration;
+
+	boolean isPreviewGeneration()
+	{
+		return previewGeneration;
+	}
+
+	void setPreviewGeneration(boolean previewGeneration)
+	{
+		this.previewGeneration = previewGeneration;
+	}
+
 	private ResourceHelper paperHelper;
 	private ResourceHelper plateHelper;
 	private int amount;
@@ -144,12 +158,18 @@ public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 	{
 		super(pIcsLevel, jdfVersion, parts);
 		setPerfecting(true);
+		setPreviewGeneration(false);
 	}
 
 	@Override
 	public VString getTypes()
 	{
-		return new VString(EnumType.ConventionalPrinting.name());
+		final VString types = new VString(EnumType.ConventionalPrinting.name());
+		if (previewGeneration)
+		{
+			types.insertElementAt(EnumType.PreviewGeneration.name(), 0);
+		}
+		return types;
 	}
 
 	@Override
@@ -182,6 +202,7 @@ public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 		createColorSet();
 		createColorantControl();
 		createCPPSet();
+		createDevice();
 		plateHelper = createPlateMedia();
 		createPlates();
 
@@ -189,9 +210,10 @@ public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 
 		final SetHelper csi = createComponent(EnumUsage.Input);
 		final SetHelper cso = createComponent(EnumUsage.Output);
+		createPreviewSet();
 	}
 
-	public SetHelper createComponent(final EnumUsage usage)
+	SetHelper createComponent(final EnumUsage usage)
 	{
 		final SetHelper createSet = helper.getCreateSet(ElementName.COMPONENT, usage);
 		final VJDFAttributeMap workstepKeys = super.getWorkstepParts();
@@ -227,7 +249,7 @@ public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 
 	}
 
-	public SetHelper createPlates()
+	SetHelper createPlates()
 	{
 		final SetHelper plateSet = helper.getCreateSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
 		final VJDFAttributeMap parts = getParts();
@@ -240,7 +262,7 @@ public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 		return plateSet;
 	}
 
-	public ResourceHelper createPlateMedia()
+	ResourceHelper createPlateMedia()
 	{
 		final SetHelper plh = helper.appendSet(ElementName.MEDIA, EnumUsage.Input);
 		final ResourceHelper plateHelper = plh.getCreateResource();
@@ -250,7 +272,7 @@ public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 		return plateHelper;
 	}
 
-	public ResourceHelper createPaper()
+	ResourceHelper createPaper()
 	{
 		final SetHelper pph = helper.appendSet(ElementName.MEDIA, null);
 		final ResourceHelper ppr = pph.getCreateResource();
@@ -309,6 +331,25 @@ public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 		return cppSet;
 	}
 
+	SetHelper createPreviewSet()
+	{
+		if (previewGeneration)
+		{
+			final SetHelper previewSet = helper.getCreateSet(ElementName.PREVIEW, EnumUsage.Input);
+			final VJDFAttributeMap parts = getParts();
+			for (final JDFAttributeMap part : parts)
+			{
+				final JDFPreview preview = (JDFPreview) previewSet.getCreateResource(part, true).getResource();
+				preview.setPreviewFileType(EnumPreviewFileType.PNG);
+				preview.setFileSpecURL("https://previewserver/previews/" + getJobID() + "/" + part.get(AttributeName.SIDE) + "."
+						+ part.get(AttributeName.SEPARATION) + ".png");
+			}
+			return previewSet;
+		}
+		return null;
+
+	}
+
 	SetHelper createColorSet()
 	{
 		final SetHelper set = helper.getCreateSet(ElementName.COLOR, EnumUsage.Input);
@@ -319,6 +360,16 @@ public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 			c.setCMYK(c.getCMYK());
 		}
 		return set;
+	}
+
+	String getJobID()
+	{
+		return jobID;
+	}
+
+	void setJobID(String jobID)
+	{
+		this.jobID = jobID;
 	}
 
 }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -69,14 +69,19 @@
 package org.cip4.jdflib.extensions.xjdfgoldenticket;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFNodeInfo;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.AuditHelper.eAudit;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.util.ContainerUtil;
 
 /**
@@ -120,12 +125,13 @@ public class XJDFBaseGoldenTicket
 		this.theVersion = jdfVersion;
 		this.icsLevel = baseICSLevel;
 		this.vParts = (VJDFAttributeMap) ContainerUtil.addAll(new VJDFAttributeMap(), vParts);
+		jobID = "GoldenTicket" + KElement.uniqueID(0);
 		refresh();
 	}
 
 	public void refresh()
 	{
-		helper = new XJDFHelper(null, null, getWorkstepParts());
+		helper = new XJDFHelper(jobID, null, getWorkstepParts());
 
 		helper.setTypes(getTypes());
 		helper.getRoot().setAttribute(AttributeName.ICSVERSIONS, getICSVersions(icsLevel), null);
@@ -152,6 +158,7 @@ public class XJDFBaseGoldenTicket
 	}
 
 	XJDFHelper helper;
+	protected String jobID;
 
 	/**
 	 * @return
@@ -159,6 +166,16 @@ public class XJDFBaseGoldenTicket
 	public XJDFHelper getXJDFHelper()
 	{
 		return helper;
+	}
+
+	ResourceHelper createDevice()
+	{
+		final SetHelper devSet = helper.appendSet(ElementName.DEVICE, EnumUsage.Input);
+		final ResourceHelper devRes = devSet.getCreateResource();
+		devRes.setExternalID("DeviceID");
+		final JDFDevice dev = (JDFDevice) devRes.getResource();
+		dev.setDeviceID(devRes.getExternalID());
+		return devRes;
 	}
 
 	void addSets()

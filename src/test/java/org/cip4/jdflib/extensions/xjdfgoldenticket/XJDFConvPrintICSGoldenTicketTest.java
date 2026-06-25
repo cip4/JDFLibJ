@@ -112,6 +112,20 @@ class XJDFConvPrintICSGoldenTicketTest extends JDFTestCaseBase
 		writeRoundTripX(xjdfHelper, "XJDF_ICS_CP1", EnumValidationLevel.Complete);
 	}
 
+	@Test
+	void testRoundTripPreview()
+	{
+		final XJDFConvPrintICSGoldenTicket gt = new XJDFConvPrintICSGoldenTicket(1, EnumVersion.Version_2_2, getPartMaps());
+		gt.setPerfecting(true);
+		gt.setPreviewGeneration(true);
+		gt.setAmount(1000);
+		gt.refresh();
+
+		final XJDFHelper xjdfHelper = gt.getXJDFHelper();
+
+		writeRoundTripX(xjdfHelper, "XJDF_ICS_CP1_PV", EnumValidationLevel.Complete);
+	}
+
 	VJDFAttributeMap getPartMaps()
 	{
 		final VJDFAttributeMap maps = new VJDFAttributeMap();
