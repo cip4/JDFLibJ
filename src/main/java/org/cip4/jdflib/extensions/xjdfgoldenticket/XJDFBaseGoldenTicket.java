@@ -126,7 +126,6 @@ public class XJDFBaseGoldenTicket
 		this.icsLevel = baseICSLevel;
 		this.vParts = (VJDFAttributeMap) ContainerUtil.addAll(new VJDFAttributeMap(), vParts);
 		jobID = "GoldenTicket" + KElement.uniqueID(0);
-		refresh();
 	}
 
 	public void refresh()

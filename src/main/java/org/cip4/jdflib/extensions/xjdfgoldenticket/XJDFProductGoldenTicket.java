@@ -85,6 +85,7 @@ public class XJDFProductGoldenTicket extends XJDFBaseGoldenTicket
 	public XJDFProductGoldenTicket(final int pIcsLevel, final EnumVersion jdfVersion)
 	{
 		super(pIcsLevel, jdfVersion, null);
+		refresh();
 	}
 
 	@Override

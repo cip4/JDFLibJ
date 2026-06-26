@@ -72,6 +72,8 @@ import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumSheetLay;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
+import org.cip4.jdflib.auto.JDFAutoVarnishingParams.EnumVarnishArea;
+import org.cip4.jdflib.auto.JDFAutoVarnishingParams.EnumVarnishMethod;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -84,6 +86,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFVarnishingParams;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFComponent;
@@ -103,6 +106,7 @@ public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 
 	private boolean perfecting;
 	private boolean previewGeneration;
+	private final VString varnishes;
 
 	boolean isPreviewGeneration()
 	{
@@ -127,6 +131,11 @@ public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 	void setAmount(final int amount)
 	{
 		this.amount = amount;
+	}
+
+	void addVarnish(final String varnish)
+	{
+		varnishes.appendUnique(varnish);
 	}
 
 	int getWaste()
@@ -159,6 +168,8 @@ public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 		super(pIcsLevel, jdfVersion, parts);
 		setPerfecting(true);
 		setPreviewGeneration(false);
+		varnishes = new VString();
+		refresh();
 	}
 
 	@Override
@@ -205,6 +216,7 @@ public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 		createDevice();
 		plateHelper = createPlateMedia();
 		createPlates();
+		createVarnishes();
 
 		paperHelper = createPaper();
 
@@ -260,6 +272,26 @@ public class XJDFConvPrintICSGoldenTicket extends XJDFBaseGoldenTicket
 		}
 
 		return plateSet;
+	}
+
+	SetHelper createVarnishes()
+	{
+		if (!varnishes.isEmpty())
+		{
+			final SetHelper vpSet = helper.getCreateSet(ElementName.VARNISHINGPARAMS, EnumUsage.Input);
+			final VJDFAttributeMap parts = getParts();
+			for (final JDFAttributeMap part : parts)
+			{
+				if (varnishes.contains(part.get(AttributeName.SEPARATION)))
+				{
+					final JDFVarnishingParams vp = (JDFVarnishingParams) vpSet.getCreateResource(part, true).getResource();
+					vp.setVarnishArea(EnumVarnishArea.Full);
+					vp.setVarnishMethod(EnumVarnishMethod.Plate);
+				}
+			}
+			return vpSet;
+		}
+		return null;
 	}
 
 	ResourceHelper createPlateMedia()
