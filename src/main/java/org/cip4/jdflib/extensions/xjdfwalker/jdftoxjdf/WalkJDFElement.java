@@ -299,6 +299,10 @@ public class WalkJDFElement extends WalkElement
 			{
 				jpID = cid.get(0);
 			}
+			else if (ContainerUtil.isEmpty(c.getPartIDKeys()))
+			{
+				jpID = c.getID();
+			}
 		}
 		final String id = StringUtil.isEmpty(jpID) ? node.getID() : jpID;
 		return IDP + id;

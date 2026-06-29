@@ -36,7 +36,6 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -47,6 +46,7 @@ import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.elementwalker.JDFWalker;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.node.JDFNode;
@@ -160,14 +160,20 @@ public class WalkProduct extends WalkJDF
 		{
 			return false;
 		}
-		final int amount = (int) cOutLink.getAmountPoolSumDouble(AttributeName.AMOUNT, null);
-		if (amount > 0)
+		if (new ProductHelper(prod).getAmount() < 0)
 		{
-			prod.setAttribute(AttributeName.AMOUNT, amount, null);
+			final int amount = (int) cOutLink.getAmountPoolSumDouble(AttributeName.AMOUNT, null);
+			if (amount > 0)
+			{
+				prod.setAttribute(AttributeName.AMOUNT, amount, null);
+			}
+			prod.renameAttribute("AmountGood", "Amount", null, null);
+			prod.removeAttribute("AmountWaste");
 		}
-		prod.renameAttribute("AmountGood", "Amount", null, null);
-		prod.removeAttribute("AmountWaste");
-
+		else
+		{
+			log.warn("Ignoring duplicate product " + node.getJobID(true) + "/" + node.getJobPartID(true));
+		}
 		final JDFComponent component = (JDFComponent) cOutLink.getTarget();
 		if (component != null)
 		{
@@ -177,6 +183,8 @@ public class WalkProduct extends WalkJDF
 			map.renameKey(AttributeName.PRODUCTID, XJDFConstants.ExternalID);
 			map.reduceMap(copyKeep);
 			map.removeKeys(prod.getAttributeArray_KElement());
+			final JDFAttributeMap mapKeep = prod.getAttributeMap();
+			map.putAll(mapKeep);
 			prod.setAttributes(map);
 			if (component.isComponentType(EnumComponentType.FinalProduct))
 			{
