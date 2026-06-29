@@ -292,7 +292,7 @@ public class WalkJDFElement extends WalkElement
 	{
 		final JDFComponent c = (JDFComponent) node.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
 		String jpID = node.getJobPartID(false);
-		if (c != null)
+		if (c != null && !jdfToXJDF.isRetainAll())
 		{
 			final VString cid = c.getAssemblyIDs();
 			if (ContainerUtil.size(cid) == 1)
