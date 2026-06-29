@@ -144,8 +144,8 @@ public class WalkProduct extends WalkJDF
 		}
 	}
 
-	final private static StringArray copyKeep = new StringArray(
-			new String[] { XJDFConstants.ExternalID, AttributeName.PRODUCTTYPE, AttributeName.PARTVERSION, AttributeName.PRODUCTTYPEDETAILS, AttributeName.DESCRIPTIVENAME });
+	final private static StringArray copyKeep = new StringArray(new String[] { XJDFConstants.ExternalID, AttributeName.PRODUCTTYPE, AttributeName.PARTVERSION,
+			AttributeName.PRODUCTTYPEDETAILS, AttributeName.DESCRIPTIVENAME });
 
 	/**
 	 * @param node
@@ -155,15 +155,23 @@ public class WalkProduct extends WalkJDF
 	{
 		final JDFResourceLink cOutLink = node.getLink(0, ElementName.COMPONENT, new JDFAttributeMap(AttributeName.USAGE, EnumUsage.Output), null);
 		if (cOutLink == null)
-			return false;
-		final int amount = (int) cOutLink.getAmountPoolSumDouble(AttributeName.AMOUNT, null);
-		if (amount > 0)
 		{
-			prod.setAttribute(AttributeName.AMOUNT, amount, null);
+			return false;
 		}
-		prod.renameAttribute("AmountGood", "Amount", null, null);
-		prod.removeAttribute("AmountWaste");
-
+		if (new ProductHelper(prod).getAmount() < 0)
+		{
+			final int amount = (int) cOutLink.getAmountPoolSumDouble(AttributeName.AMOUNT, null);
+			if (amount > 0)
+			{
+				prod.setAttribute(AttributeName.AMOUNT, amount, null);
+			}
+			prod.renameAttribute("AmountGood", "Amount", null, null);
+			prod.removeAttribute("AmountWaste");
+		}
+		else
+		{
+			log.warn("Ignoring duplicate product " + node.getJobID(true) + "/" + node.getJobPartID(true));
+		}
 		final JDFComponent component = (JDFComponent) cOutLink.getTarget();
 		if (component != null)
 		{
@@ -173,6 +181,8 @@ public class WalkProduct extends WalkJDF
 			map.renameKey(AttributeName.PRODUCTID, XJDFConstants.ExternalID);
 			map.reduceMap(copyKeep);
 			map.removeKeys(prod.getAttributeArray_KElement());
+			final JDFAttributeMap mapKeep = prod.getAttributeMap();
+			map.putAll(mapKeep);
 			prod.setAttributes(map);
 			if (component.isComponentType(EnumComponentType.FinalProduct))
 			{

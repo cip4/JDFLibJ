@@ -231,6 +231,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFComponent jdfComponent = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		jdfComponent.setProductType("foo");
 		jdfComponent.setComponentType(EnumComponentType.PartialProduct, null);
+		n.getLink(jdfComponent, EnumUsage.Output).setAmount(42);
 		return n;
 	}
 
@@ -250,6 +251,24 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement x = conv.convert(n);
 		final XJDFHelper h = XJDFHelper.getHelper(x);
 		assertNotNull(h.getSet(ElementName.CONTACT, null));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testDoubleProduct()
+	{
+		final JDFToXJDF conv = new JDFToXJDF();
+		final JDFNode n = createBaseProductNode();
+		final JDFNode n2 = n.addProduct();
+		final JDFResourceLink l = n2.linkResource(n.getResource(ElementName.COMPONENT), EnumUsage.Output, null);
+		l.setAmount(666);
+		final KElement x = conv.convert(n);
+		final XJDFHelper h = XJDFHelper.getHelper(x);
+		assertEquals(42, h.getProduct(0).getAmount());
+		assertNull(h.getProduct(1));
 	}
 
 	/**
@@ -1406,23 +1425,30 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.Product);
 		n.setJobPartID("book");
-		final JDFComponent c = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		final JDFComponent c = (JDFComponent) n.addResource(ElementName.COMPONENT, null);
+		c.setID("book_component");
+		n.linkResource(c, EnumUsage.Output, null);
 		c.setDescriptiveName("desc");
 		c.setProductID("prodID");
+
 		c.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
 		n.setStatus(EnumNodeStatus.Cleanup);
 		final JDFNode n2 = n.addProduct();
 		n2.setJobPartID("Cover");
-		final JDFComponent c2 = (JDFComponent) n2.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		final JDFComponent c2 = (JDFComponent) n.addResource(ElementName.COMPONENT, null);
+		c2.setID("Cover_component");
+		n2.linkResource(c2, EnumUsage.Output, null);
 		c2.setDescriptiveName("cover");
-		c2.setProductID("prodID");
+		c2.setProductID("prodIDc");
 		c2.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
 		n.linkResource(c2, EnumUsage.Input, null);
 		final JDFNode n3 = n.addProduct();
 		n3.setJobPartID("Body");
-		final JDFComponent c3 = (JDFComponent) n3.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		final JDFComponent c3 = (JDFComponent) n.addResource(ElementName.COMPONENT, null);
+		c3.setID("Body_component");
+		n3.linkResource(c3, EnumUsage.Output, null);
 		c3.setDescriptiveName("body");
-		c3.setProductID("prodID");
+		c3.setProductID("prodIDb");
 		c3.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
 		n.linkResource(c3, EnumUsage.Input, null);
 
@@ -1436,9 +1462,9 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final KElement xjdf = conv.convert(n);
 		assertEquals(xjdf.getXPathAttribute("ProductList/Product/@ExternalID", null), "prodID");
-		assertEquals(xjdf.getXPathAttribute("ProductList/Product/@ID", null), "IDP_book");
-		assertEquals(xjdf.getXPathAttribute("ProductList/Product[2]/@ID", null), "IDP_Cover");
-		assertEquals(xjdf.getXPathAttribute("ProductList/Product[3]/@ID", null), "IDP_Body");
+		assertEquals(xjdf.getXPathAttribute("ProductList/Product/@ID", null), "IDP_book_component");
+		assertEquals(xjdf.getXPathAttribute("ProductList/Product[2]/@ID", null), "IDP_Cover_component");
+		assertEquals(xjdf.getXPathAttribute("ProductList/Product[3]/@ID", null), "IDP_Body_component");
 
 		writeRoundTrip(n, "pidcb");
 	}
