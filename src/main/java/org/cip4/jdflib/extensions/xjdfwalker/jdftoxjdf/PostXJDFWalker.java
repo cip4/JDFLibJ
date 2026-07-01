@@ -38,6 +38,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
@@ -1837,16 +1838,46 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
-			fixChildRefs(xjdf);
+			final ProductHelper ph = new ProductHelper(xjdf);
+			fixChildRefs(ph);
+			mergeDuplicates(ph);
 			return super.walk(xjdf, dummy);
+		}
+
+		void mergeDuplicates(ProductHelper ph)
+		{
+			final HashMap<String, IntentHelper> map = new HashMap<>();
+			for (final IntentHelper ih : ph.getIntents())
+			{
+				final String name = ih.getName();
+				if (map.containsKey(name))
+				{
+					final IntentHelper ihFirst = map.get(name);
+					mergeDuplicate(ih, ihFirst);
+					ih.deleteNode();
+				}
+				else
+				{
+					map.put(name, ih);
+				}
+			}
+
+		}
+
+		void mergeDuplicate(IntentHelper ih, IntentHelper ihFirst)
+		{
+			final JDFAttributeMap mNew = ih.getRoot().getXPathValueMap(true);
+			final JDFAttributeMap mFirst = ihFirst.getRoot().getXPathValueMap(true);
+			mNew.removeKeys(mFirst.keySet());
+			ihFirst.getRoot().setXPathValues(mNew);
+
 		}
 
 		/**
 		 * @param xjdf
 		 */
-		private void fixChildRefs(final KElement xjdf)
+		private void fixChildRefs(final ProductHelper ph)
 		{
-			final ProductHelper ph = new ProductHelper(xjdf);
 			final IntentHelper bind = ph.getIntent(ElementName.BINDINGINTENT);
 			if (bind != null)
 			{
