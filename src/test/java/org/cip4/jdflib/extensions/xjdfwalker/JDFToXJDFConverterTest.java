@@ -67,6 +67,7 @@ import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumCostType;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumDeviceOperationMode;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumFluteDirection;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumGrainDirection;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumISOPaperSubstrate;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.auto.JDFAutoUsageCounter.EnumScope;
@@ -97,6 +98,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.extensions.IntentHelper;
+import org.cip4.jdflib.extensions.IntentHelper.EIntentType;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
@@ -262,6 +264,54 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement x = conv.convert(n);
 		final XJDFHelper h = XJDFHelper.getHelper(x);
 		assertEquals(42, h.getProduct(0).getAmount());
+		assertNull(h.getProduct(1));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testDoubleProductIntent()
+	{
+		final JDFToXJDF conv = new JDFToXJDF();
+		final JDFNode n = createBaseProductNode();
+		final JDFMediaIntent mi = (JDFMediaIntent) n.addResource(ElementName.MEDIAINTENT, EnumUsage.Input);
+		mi.appendWeight().setActual(42);
+		final JDFNode n2 = n.addProduct();
+		n2.linkResource(mi, EnumUsage.Input, null);
+		final JDFResourceLink l = n2.linkResource(n.getResource(ElementName.COMPONENT), EnumUsage.Output, null);
+		l.setAmount(666);
+		final KElement x = conv.convert(n);
+		final XJDFHelper h = XJDFHelper.getHelper(x);
+		final ProductHelper p0 = h.getProduct(0);
+		assertEquals(1, p0.getIntents().size());
+		assertNull(h.getProduct(1));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testDoubleProductIntent2()
+	{
+		final JDFToXJDF conv = new JDFToXJDF();
+		final JDFNode n = createBaseProductNode();
+		final JDFMediaIntent mi = (JDFMediaIntent) n.addResource(ElementName.MEDIAINTENT, EnumUsage.Input);
+		mi.appendWeight().setActual(42);
+		final JDFNode n2 = n.addProduct();
+		final JDFMediaIntent mi2 = (JDFMediaIntent) n2.addResource(ElementName.MEDIAINTENT, EnumUsage.Input);
+		mi2.appendWeight().setActual(66);
+		mi2.appendISOPaperSubstrate().setActual(EnumISOPaperSubstrate.PS1);
+		final JDFResourceLink l = n2.linkResource(n.getResource(ElementName.COMPONENT), EnumUsage.Output, null);
+		l.setAmount(666);
+		final KElement x = conv.convert(n);
+		final XJDFHelper h = XJDFHelper.getHelper(x);
+		final ProductHelper p0 = h.getProduct(0);
+		assertEquals(1, p0.getIntents().size());
+		assertEquals("42", p0.getIntent(EIntentType.MediaIntent).getResource().getAttribute(AttributeName.WEIGHT));
+		assertEquals("PS1", p0.getIntent(EIntentType.MediaIntent).getResource().getAttribute(AttributeName.ISOPAPERSUBSTRATE));
 		assertNull(h.getProduct(1));
 	}
 
