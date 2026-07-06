@@ -237,6 +237,34 @@ class PostConverter
 			{
 				cleanLinkAmount(e);
 			}
+			cleanParts(rl);
+		}
+
+		void cleanParts(JDFResourceLink rl)
+		{
+			final VJDFAttributeMap vm = rl.getPartMapVector();
+			if (!VJDFAttributeMap.isEmpty(vm))
+			{
+				final JDFResource r = rl.getLinkRoot();
+				final VString pik = r.getPartIDKeys();
+				final VElement targets = rl.getLeafVector();
+				final int targetSize = ContainerUtil.size(targets);
+				final JDFResourceLink rl2 = (JDFResourceLink) rl.getParentNode_KElement().copyElement(rl, rl);
+				while (!pik.isEmpty())
+				{
+					pik.remove(-1);
+					final VJDFAttributeMap vm2 = new VJDFAttributeMap(vm);
+					vm2.reduceMap(pik);
+					rl2.setPartMapVector(vm2);
+					final VElement targets2 = rl2.getLeafVector();
+					if (ContainerUtil.size(targets2) == targetSize)
+					{
+						rl.setPartMapVector(vm2);
+					}
+				}
+				rl2.deleteNode();
+			}
+
 		}
 
 		void cleanBinderySignatureLink(final KElement e, final JDFResourceLink rl)
