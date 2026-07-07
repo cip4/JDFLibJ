@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -63,7 +63,6 @@ import org.cip4.jdflib.resource.process.JDFContact;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
  * @date Oct 11, 2012
  */
@@ -80,6 +79,7 @@ class RemoveEmptyTest extends JDFTestCaseBase
 		final RemoveEmpty emp = new RemoveEmpty();
 		emp.removEmpty(n);
 		n.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "job4.jdf", 2, false);
+		assertNotNull(emp.toString());
 	}
 
 	/**
@@ -139,6 +139,23 @@ class RemoveEmptyTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testRemoveResourceKeepPart()
+	{
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
+		n.addResource(ElementName.LAYOUT, EnumUsage.Input).addPartition(EnumPartIDKey.SignatureName, "s1").addPartition(EnumPartIDKey.SheetName, "s1")
+				.addPartition(EnumPartIDKey.Side, "Front");
+		final RemoveEmpty emp = new RemoveEmpty();
+		emp.setZappPartitions(false);
+		emp.removEmpty(n);
+		assertTrue(n.toXML().contains(ElementName.LAYOUT));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
 	void testRemoveSpan()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -179,7 +196,8 @@ class RemoveEmptyTest extends JDFTestCaseBase
 		final JDFNode n = d.getJDFRoot();
 		final JDFResource m = n.addResource(ElementName.MEDIA, EnumUsage.Input);
 		final JDFResource xm = n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
-		xm.addPartition(EnumPartIDKey.SignatureName, "s1").addPartition(EnumPartIDKey.SheetName, "s1").addPartition(EnumPartIDKey.Side, "Front").setProductID("p");
+		xm.addPartition(EnumPartIDKey.SignatureName, "s1").addPartition(EnumPartIDKey.SheetName, "s1").addPartition(EnumPartIDKey.Side, "Front")
+				.setProductID("p");
 		xm.refElement(m);
 		final RemoveEmpty emp = new RemoveEmpty();
 		emp.removEmpty(n);

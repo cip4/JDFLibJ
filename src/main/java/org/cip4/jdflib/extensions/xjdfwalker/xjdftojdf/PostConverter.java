@@ -136,7 +136,7 @@ class PostConverter
 		fixNS.walk(root);
 
 		final RemoveEmpty re = new RemoveEmpty();
-		re.addIgnoreElement(ElementName.BINDINGINTENT);
+		re.setZappPartitions(false);
 		re.removEmpty(root);
 	}
 
@@ -250,7 +250,7 @@ class PostConverter
 				final VElement targets = rl.getLeafVector();
 				final int targetSize = ContainerUtil.size(targets);
 				final JDFResourceLink rl2 = (JDFResourceLink) rl.getParentNode_KElement().copyElement(rl, rl);
-				while (!pik.isEmpty())
+				while (!pik.isEmpty() && targetSize > 1)
 				{
 					pik.remove(-1);
 					final VJDFAttributeMap vm2 = new VJDFAttributeMap(vm);

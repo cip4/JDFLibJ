@@ -138,6 +138,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 import org.cip4.jdflib.resource.process.press.JDFPrintCondition;
 import org.cip4.jdflib.resource.process.press.JDFPrintCondition.ePrintQuality;
 import org.cip4.jdflib.span.JDFSpanBindingType.EnumSpanBindingType;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.junit.jupiter.api.Test;
@@ -521,7 +522,7 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFNode n = docjdf.getJDFRoot();
 
 		final JDFColorPool ccNew = (JDFColorPool) n.getResource(ElementName.COLORPOOL, EnumUsage.Input, null, 0);
-		assertNull(ccNew);
+		assertNotNull(ccNew);
 	}
 
 	/**
@@ -1555,7 +1556,7 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final JDFDoc d = xCon.convert(xjdf);
 		final JDFLayout partition = (JDFLayout) d.getJDFRoot().getResource(ElementName.LAYOUT, EnumUsage.Input, 0)
-				.getPartition(new JDFAttributeMap(EnumPartIDKey.SheetName, "s1"), null);
+				.getPartition(new JDFAttributeMap(EnumPartIDKey.SheetName, "s1"), null).getLeaf(0);
 		final JDFContentObject contentObject = partition.getContentObject(0);
 		assertEquals(contentObject.getOrd(), 1);
 		assertNull(contentObject.getNonEmpty(AttributeName.TYPE));
@@ -2335,7 +2336,7 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFConventionalPrintingParams cp = (JDFConventionalPrintingParams) jdfRoot.getResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input,
 				0);
 		assertEquals(2, cp.getLeaves(false).size());
-		assertEquals(2, jdfRoot.getLink(cp, null).getPartMapVector().size());
+		assertEquals(0, ContainerUtil.size(jdfRoot.getLink(cp, null).getPartMapVector()));
 	}
 
 	/**

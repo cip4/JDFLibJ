@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -69,14 +69,30 @@ import org.cip4.jdflib.util.StringUtil;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG<br/>
  *         removes any empty or unlinked resources
- *
  */
 public class RemoveEmpty extends BaseElementWalker
 {
-	boolean zappElements;
+	private boolean zappElements;
+	private boolean zappPartitions;
+
+	public boolean isZappPartitions()
+	{
+		return zappPartitions;
+	}
+
+	public void setZappPartitions(boolean zappPartitions)
+	{
+		this.zappPartitions = zappPartitions;
+	}
+
+	boolean isZappElements()
+	{
+		return zappElements;
+	}
+
 	final JDFPart part;
 	final Collection<String> ignoreElements;
-	LinkRefFinder rf;
+	private LinkRefFinder rf;
 
 	/**
 	 *
@@ -87,6 +103,7 @@ public class RemoveEmpty extends BaseElementWalker
 		ignoreElements = new HashSet<>();
 		addIgnoreElement(ElementName.POSITION);
 		zappElements = true;
+		zappPartitions = true;
 		part = (JDFPart) new JDFDoc(ElementName.PART).getRoot();
 		part.appendElement("foo");
 		new BaseWalker(getFactory()); // need a default walker
@@ -99,7 +116,6 @@ public class RemoveEmpty extends BaseElementWalker
 	}
 
 	/**
-	 *
 	 * remove all unlinked crap and empty string attributes
 	 *
 	 * @param n
@@ -116,14 +132,16 @@ public class RemoveEmpty extends BaseElementWalker
 
 		int last = removEmptyElement(n);
 		if (last > 0)
+		{
 			last = unLinkFinder.eraseUnlinked(n);
+		}
 		if (last > 0)
+		{
 			removEmptyElement(n);
+		}
 	}
 
 	/**
-	 *
-	 *
 	 * @param e
 	 */
 	public int removEmptyElement(final KElement e)
@@ -132,7 +150,6 @@ public class RemoveEmpty extends BaseElementWalker
 	}
 
 	/**
-	 *
 	 * remove all empty string attributes
 	 *
 	 * @param e
@@ -149,7 +166,6 @@ public class RemoveEmpty extends BaseElementWalker
 	 * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super classes
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkElement extends BaseWalker
 	{
@@ -164,7 +180,7 @@ public class RemoveEmpty extends BaseElementWalker
 
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param e1 - the element to track
+		 * @param e1        - the element to track
 		 * @param trackElem - always null
 		 * @return the element to continue walking
 		 */
@@ -186,7 +202,6 @@ public class RemoveEmpty extends BaseElementWalker
 		}
 
 		/**
-		 *
 		 * @param e1
 		 * @return
 		 */
@@ -205,7 +220,6 @@ public class RemoveEmpty extends BaseElementWalker
 		}
 
 		/**
-		 *
 		 * @param e1
 		 * @return true if something good was inside
 		 */
@@ -230,7 +244,6 @@ public class RemoveEmpty extends BaseElementWalker
 		}
 
 		/**
-		 *
 		 * @return
 		 */
 		protected StringArray getDummyAttributes()
@@ -258,14 +271,13 @@ public class RemoveEmpty extends BaseElementWalker
 	 * zapp me
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkGeneralID extends WalkElement
 	{
 
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param e - the element to track
+		 * @param e         - the element to track
 		 * @param trackElem - always null
 		 * @return the element to continue walking
 		 */
@@ -311,13 +323,12 @@ public class RemoveEmpty extends BaseElementWalker
 	 * zapp me
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkComment extends WalkElement
 	{
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param e - the element to track
+		 * @param e         - the element to track
 		 * @param trackElem - always null
 		 * @return the element to continue walking
 		 */
@@ -361,13 +372,12 @@ public class RemoveEmpty extends BaseElementWalker
 	 * zapp me
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkSpan extends WalkElement
 	{
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param e1 - the element to track
+		 * @param e1        - the element to track
 		 * @param trackElem - always null
 		 * @return the element to continue walking
 		 */
@@ -412,13 +422,12 @@ public class RemoveEmpty extends BaseElementWalker
 	 * zapp me
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkResourceAudit extends WalkElement
 	{
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param e - the element to track
+		 * @param e         - the element to track
 		 * @param trackElem - always null
 		 * @return the element to continue walking
 		 */
@@ -449,9 +458,6 @@ public class RemoveEmpty extends BaseElementWalker
 
 	/**
 	 * never zapp me
-	 *
-	 *
-	 *
 	 */
 	public class WalkIgnore extends WalkElement
 	{
@@ -463,7 +469,7 @@ public class RemoveEmpty extends BaseElementWalker
 
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param e - the element to track
+		 * @param e         - the element to track
 		 * @param trackElem - always null
 		 * @return the element to continue walking
 		 */
@@ -490,7 +496,6 @@ public class RemoveEmpty extends BaseElementWalker
 	 * zapp me
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkResource extends WalkElement
 	{
@@ -501,17 +506,19 @@ public class RemoveEmpty extends BaseElementWalker
 		protected StringArray getDummyAttributes()
 		{
 			final StringArray v = super.getDummyAttributes();
-			v.add(AttributeName.CLASS);
-			v.add(AttributeName.STATUS);
-			v.add(AttributeName.PARTIDKEYS);
-			v.add(AttributeName.PARTUSAGE);
+			if (zappPartitions)
+			{
+				v.add(AttributeName.CLASS);
+				v.add(AttributeName.STATUS);
+				v.add(AttributeName.PARTIDKEYS);
+				v.add(AttributeName.PARTUSAGE);
 
-			final VString partAttribs = part.knownAttributes();
-			final JDFElement foo = (JDFElement) part.getElement("foo");
-			final VString fooAttribs = foo.knownAttributes();
-			partAttribs.removeStrings(fooAttribs, 0);
-
-			v.appendUnique(partAttribs);
+				final VString partAttribs = part.knownAttributes();
+				final JDFElement foo = (JDFElement) part.getElement("foo");
+				final VString fooAttribs = foo.knownAttributes();
+				partAttribs.removeStrings(fooAttribs, 0);
+				v.appendUnique(partAttribs);
+			}
 			return v;
 		}
 
@@ -527,7 +534,6 @@ public class RemoveEmpty extends BaseElementWalker
 		}
 
 		/**
-		 *
 		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 */
 		@Override
@@ -551,7 +557,6 @@ public class RemoveEmpty extends BaseElementWalker
 		}
 
 		/**
-		 *
 		 * @param r
 		 * @return
 		 */
@@ -615,7 +620,6 @@ public class RemoveEmpty extends BaseElementWalker
 		}
 
 		/**
-		 *
 		 * @param r
 		 * @return
 		 */
@@ -638,7 +642,6 @@ public class RemoveEmpty extends BaseElementWalker
 		}
 
 		/**
-		 *
 		 * @param r
 		 * @return
 		 */
@@ -665,7 +668,6 @@ public class RemoveEmpty extends BaseElementWalker
 	 * zapp me
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkComChannel extends WalkResource
 	{
@@ -706,7 +708,6 @@ public class RemoveEmpty extends BaseElementWalker
 	 * zapp me
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkMessage extends WalkElement
 	{
@@ -735,7 +736,6 @@ public class RemoveEmpty extends BaseElementWalker
 	}
 
 	/**
-	 *
 	 * if set to true, attributes with proprietary namespace prefixes are zapped, else kept
 	 *
 	 * @param zappElements if true, zapp 'em (the default) else keep 'em
@@ -743,6 +743,20 @@ public class RemoveEmpty extends BaseElementWalker
 	public void setZappElements(final boolean zappElements)
 	{
 		this.zappElements = zappElements;
+	}
+
+	@Override
+	public String toString()
+	{
+		final StringBuilder builder = new StringBuilder();
+		builder.append("RemoveEmpty [zappElements=");
+		builder.append(zappElements);
+		builder.append(", zappPartitions=");
+		builder.append(zappPartitions);
+		builder.append(", ignoreElements=");
+		builder.append(ignoreElements);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }
