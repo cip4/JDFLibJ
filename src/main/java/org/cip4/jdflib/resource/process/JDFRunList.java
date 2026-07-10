@@ -1348,6 +1348,16 @@ public class JDFRunList extends JDFAutoRunList
 	@Override
 	public int getNPage()
 	{
+		return getNPage(false);
+	}
+
+	/**
+	 * calculates nPage from the leaves if possible - else does the standard stuff
+	 *
+	 * @see org.cip4.jdflib.auto.JDFAutoRunList#getNPage()
+	 */
+	public int getNPage(boolean local)
+	{
 		int n = 0;
 
 		if (!getIsPage())
@@ -1380,7 +1390,7 @@ public class JDFRunList extends JDFAutoRunList
 			}
 		}
 
-		return n <= 0 ? super.getNPage() : n;
+		return n <= 0 && !local ? super.getNPage() : n;
 	}
 
 	/**
@@ -1664,6 +1674,28 @@ public class JDFRunList extends JDFAutoRunList
 		}
 		int nPage = getFileSpecNPage();
 		if (nPage == 0)
+		{
+			nPage = super.getNPage();
+		}
+		if (nPage > 0)
+		{
+			irl.setDef(nPage);
+		}
+		return irl;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoRunList#getPages()
+	 */
+	public JDFIntegerRangeList getPages(boolean local)
+	{
+		JDFIntegerRangeList irl = !local || hasAttribute_KElement(AttributeName.PAGES) ? super.getPages() : null;
+		if (irl == null)
+		{
+			irl = new JDFIntegerRangeList(new JDFIntegerRange(0, -1));
+		}
+		int nPage = getFileSpecNPage();
+		if (nPage == 0 && !local)
 		{
 			nPage = super.getNPage();
 		}

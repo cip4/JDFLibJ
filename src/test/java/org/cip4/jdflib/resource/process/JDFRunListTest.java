@@ -411,6 +411,23 @@ class JDFRunListTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
+	public final void testGetPagesLocal() throws Exception
+	{
+		final JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
+		rlp.setNPage(7);
+		final JDFIntegerRangeList pages = rlp.getPages();
+		assertEquals(pages.getDef(), 7);
+		assertEquals(pages.getElementCount(), 7);
+		final JDFRunList rlpo = (JDFRunList) rlp.addPartition(EnumPartIDKey.Option, "foo");
+		final JDFIntegerRangeList pageso = rlpo.getPages(true);
+		assertEquals(pageso.getDef(), 0);
+		assertEquals(pageso.getElementCount(), -1);
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
 	public final void testGetPagesLogicalPage() throws Exception
 	{
 		final JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
@@ -453,6 +470,31 @@ class JDFRunListTest extends JDFTestCaseBase
 		final JDFRunList rlp2 = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r2");
 		rlp2.setPages(new JDFIntegerRangeList("0 2 4 6"));
 		assertEquals(rlp2.getNPage(), 4);
+		rlp2.setNPage(3);
+		assertEquals(rlp2.getNPage(), 3);
+		assertEquals(rl.getNPage(), 6);
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public final void testGetNPageLocal() throws Exception
+	{
+		final JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
+		rlp.setPages(new JDFIntegerRangeList("1 3 5 7"));
+		assertEquals(rlp.getNPage(), 4);
+		rlp.setNPage(3);
+		final JDFRunList rlpo = (JDFRunList) rlp.addPartition(EnumPartIDKey.Option, "foo");
+		assertEquals(rlpo.getNPage(), 3);
+		assertEquals(rlpo.getNPage(true), 0);
+		assertEquals(rlp.getNPage(true), 3);
+		final JDFRunList rlp2 = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r2");
+		final JDFRunList rlpo2 = (JDFRunList) rlp2.addPartition(EnumPartIDKey.Option, "foo");
+		rlp2.setPages(new JDFIntegerRangeList("0 2 4 6"));
+		assertEquals(rlp2.getNPage(), 4);
+		assertEquals(rlpo2.getNPage(), 4);
+		assertEquals(rlpo2.getNPage(true), 0);
 		rlp2.setNPage(3);
 		assertEquals(rlp2.getNPage(), 3);
 		assertEquals(rl.getNPage(), 6);
