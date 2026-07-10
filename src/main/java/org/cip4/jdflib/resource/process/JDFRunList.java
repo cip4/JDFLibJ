@@ -1695,9 +1695,9 @@ public class JDFRunList extends JDFAutoRunList
 			irl = new JDFIntegerRangeList(new JDFIntegerRange(0, -1));
 		}
 		int nPage = getFileSpecNPage();
-		if (nPage == 0 && !local)
+		if (nPage == 0)
 		{
-			nPage = super.getNPage();
+			nPage = local ? StringUtil.parseInt(getAttribute_KElement(AttributeName.NPAGE), -1) : super.getNPage();
 		}
 		if (nPage > 0)
 		{

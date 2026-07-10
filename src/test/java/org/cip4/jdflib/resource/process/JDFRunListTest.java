@@ -428,6 +428,20 @@ class JDFRunListTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
+	public final void testGetPagesLocal2() throws Exception
+	{
+		final JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
+		rlp.setNPage(7);
+		rlp.setPages(new JDFIntegerRangeList("0 ~ -1"));
+		final JDFIntegerRangeList pages = rlp.getPages(true);
+		assertEquals(pages.getDef(), 7);
+		assertEquals(pages.getElementCount(), 7);
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
 	public final void testGetPagesLogicalPage() throws Exception
 	{
 		final JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
