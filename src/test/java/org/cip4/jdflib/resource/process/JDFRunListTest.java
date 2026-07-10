@@ -79,7 +79,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class JDFRunListTest extends JDFTestCaseBase
 {
@@ -172,7 +171,6 @@ class JDFRunListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	public final void testCollapseNPageNoNPageLeaf() throws DataFormatException
@@ -285,7 +283,9 @@ class JDFRunListTest extends JDFTestCaseBase
 			assertTrue(rl2.hasAttribute_KElement(AttributeName.NPAGE, null, false));
 			assertEquals(rl.getNPage(), 4 * i);
 			if (i % 50 == 0)
+			{
 				System.out.println(i + " " + ct.toString());
+			}
 		}
 	}
 
@@ -335,7 +335,6 @@ class JDFRunListTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	public final void testSetPages() throws DataFormatException
@@ -412,6 +411,23 @@ class JDFRunListTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
+	public final void testGetPagesLocal() throws Exception
+	{
+		final JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
+		rlp.setNPage(7);
+		final JDFIntegerRangeList pages = rlp.getPages();
+		assertEquals(pages.getDef(), 7);
+		assertEquals(pages.getElementCount(), 7);
+		final JDFRunList rlpo = (JDFRunList) rlp.addPartition(EnumPartIDKey.Option, "foo");
+		final JDFIntegerRangeList pageso = rlpo.getPages(true);
+		assertEquals(pageso.getDef(), 0);
+		assertEquals(pageso.getElementCount(), -1);
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
 	public final void testGetPagesLogicalPage() throws Exception
 	{
 		final JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
@@ -454,6 +470,31 @@ class JDFRunListTest extends JDFTestCaseBase
 		final JDFRunList rlp2 = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r2");
 		rlp2.setPages(new JDFIntegerRangeList("0 2 4 6"));
 		assertEquals(rlp2.getNPage(), 4);
+		rlp2.setNPage(3);
+		assertEquals(rlp2.getNPage(), 3);
+		assertEquals(rl.getNPage(), 6);
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	public final void testGetNPageLocal() throws Exception
+	{
+		final JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
+		rlp.setPages(new JDFIntegerRangeList("1 3 5 7"));
+		assertEquals(rlp.getNPage(), 4);
+		rlp.setNPage(3);
+		final JDFRunList rlpo = (JDFRunList) rlp.addPartition(EnumPartIDKey.Option, "foo");
+		assertEquals(rlpo.getNPage(), 3);
+		assertEquals(rlpo.getNPage(true), 0);
+		assertEquals(rlp.getNPage(true), 3);
+		final JDFRunList rlp2 = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r2");
+		final JDFRunList rlpo2 = (JDFRunList) rlp2.addPartition(EnumPartIDKey.Option, "foo");
+		rlp2.setPages(new JDFIntegerRangeList("0 2 4 6"));
+		assertEquals(rlp2.getNPage(), 4);
+		assertEquals(rlpo2.getNPage(), 4);
+		assertEquals(rlpo2.getNPage(true), 0);
 		rlp2.setNPage(3);
 		assertEquals(rlp2.getNPage(), 3);
 		assertEquals(rl.getNPage(), 6);
@@ -811,8 +852,10 @@ class JDFRunListTest extends JDFTestCaseBase
 		lo.setXMLComment("Layout for versioned product", true);
 
 		final KElement metaMap = rl.appendElement(METADATA_MAP);
-		metaMap.setXMLComment("The MetadataMap element maps arbitrary tags in the document to a structural RunTag partition key\n" + "Note that any partition key may be mapped.\n"
-				+ "Note also that although an XPath syntax is used, this may be mapped to any hierarchical structure including but not limited to XML.\n", true);
+		metaMap.setXMLComment("The MetadataMap element maps arbitrary tags in the document to a structural RunTag partition key\n"
+				+ "Note that any partition key may be mapped.\n"
+				+ "Note also that although an XPath syntax is used, this may be mapped to any hierarchical structure including but not limited to XML.\n",
+				true);
 
 		metaMap.setAttribute("Name", "RunTags");
 		metaMap.setAttribute(AttributeName.DATATYPE, "PartIDKey");
@@ -820,8 +863,8 @@ class JDFRunListTest extends JDFTestCaseBase
 		metaMap.setAttribute(AttributeName.VALUETEMPLATE, "sex,section");
 
 		KElement expr = metaMap.appendElement(EXPR);
-		expr.setXMLComment("This expression maps the value of /Dokument/Rezipient/@Sex to a variable \"sex\"\n" + "The Mapping is unconditional, therefore no Term is required",
-				true);
+		expr.setXMLComment("This expression maps the value of /Dokument/Rezipient/@Sex to a variable \"sex\"\n"
+				+ "The Mapping is unconditional, therefore no Term is required", true);
 		expr.setAttribute("Name", "sex");
 		expr.setAttribute("Path", "/Dokument/Rezipient/@Sex");
 
@@ -886,8 +929,6 @@ class JDFRunListTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 *
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@Override
