@@ -243,9 +243,9 @@ class PostConverter
 		void cleanParts(JDFResourceLink rl)
 		{
 			final VJDFAttributeMap vm = rl.getPartMapVector();
-			if (!VJDFAttributeMap.isEmpty(vm))
+			final JDFResource r = VJDFAttributeMap.isEmpty(vm) ? null : rl.getLinkRoot();
+			if (r != null)
 			{
-				final JDFResource r = rl.getLinkRoot();
 				final VString pik = r.getPartIDKeys();
 				final VElement targets = rl.getLeafVector();
 				final int targetSize = ContainerUtil.size(targets);
