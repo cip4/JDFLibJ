@@ -90,7 +90,8 @@ import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *implementation of the link validation routines
+ * implementation of the link validation routines
+ *
  * @author rainer prosi
  * @date May 27, 2014
  */
@@ -142,9 +143,8 @@ public class LinkValidator
 	 * typesafe validator utility
 	 *
 	 * @param level validation level
-	 * @param nMax max. size of the returned vector
+	 * @param nMax  max. size of the returned vector
 	 * @return vector of invalid Link names
-	 *
 	 * @default getInvalidLinks (ValidationLevel_Complete, Integer.MAX_VALUE)
 	 */
 	VString getInvalidLinks(final EnumValidationLevel level, final int nMax)
@@ -165,7 +165,7 @@ public class LinkValidator
 			}
 		}
 
-		if (EnumValidationLevel.isRequired(level))
+		if (EnumValidationLevel.isRequired(level) && !EnumValidationLevel.isNoWarn(level))
 		{
 			vElem.appendUnique(getMissingLinkVector(nMax));
 		}
@@ -191,13 +191,10 @@ public class LinkValidator
 			for (int j = 0; j < li.size(); j++)
 			{
 				final EnumProcessUsage pu = li.getEnumProcessUsage(j);
-				if (li.isSingle(j))
+				// 110602 added
+				if (li.isSingle(j) && (getMatchingLink(resName, pu, 0) != null))
 				{
-					// 110602 added
-					if (getMatchingLink(resName, pu, 0) != null)
-					{
-						continue; // skip existing links with maxOccurs=1
-					}
+					continue; // skip existing links with maxOccurs=1
 				}
 
 				String s = resName + "Link";
@@ -253,7 +250,7 @@ public class LinkValidator
 	 * isValidLink check whether an index is legal for this class
 	 *
 	 * @param level the checking level
-	 * @param rl the JDFResourceLink to check
+	 * @param rl    the JDFResourceLink to check
 	 * @return true if valid
 	 */
 	boolean isValidLink(final EnumValidationLevel level, final JDFResourceLink rl)
@@ -278,8 +275,8 @@ public class LinkValidator
 	 * get the links that match the typesafe resource name if the Resource type is not defined for the process represented by this node see chapter 6 JDFSpec,
 	 * then the links are ignored
 	 *
-	 * @param resName of the resource to remove
-	 * @param bLink if false, returns the linked resources, else if true, returns the ResourceLink elements
+	 * @param resName      of the resource to remove
+	 * @param bLink        if false, returns the linked resources, else if true, returns the ResourceLink elements
 	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
 	 * @return vector of resourcelink elements
 	 */
@@ -301,7 +298,9 @@ public class LinkValidator
 
 		final LinkInfo li = map.getStar(resName);
 		if (li == null)
+		{
 			return null;
+		}
 
 		if (processUsage != null && processUsage.getValue() > EnumProcessUsage.AnyOutput.getValue())
 		{
@@ -338,7 +337,7 @@ public class LinkValidator
 					while (vEIterator.hasNext())
 					{
 						final JDFResourceLink rl = (JDFResourceLink) vEIterator.next();
-						if (rl.getPipeProtocol().equals(JDFConstants.INTERNAL))
+						if (JDFConstants.INTERNAL.equals(rl.getPipeProtocol()))
 						{
 							vEIterator.remove();
 						}
@@ -423,11 +422,10 @@ public class LinkValidator
 	/**
 	 * Append a resource that matches the typesafe link described by resource name
 	 *
-	 * @param resource the resource to link
+	 * @param resource     the resource to link
 	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
-	 * @param partMap the Attribute map of parts
+	 * @param partMap      the Attribute map of parts
 	 * @return the new link, null if failure
-	 *
 	 * @default linkMatchingResource(resource, processUsage, null)
 	 */
 	JDFResourceLink linkMatchingResource(final JDFResource resource, final EnumProcessUsage processUsage, final JDFAttributeMap partMap)
@@ -449,29 +447,35 @@ public class LinkValidator
 		else if (rl != null)
 		{
 			if (partMap != null)
+			{
 				rl.setPartMap(partMap);
+			}
 			if (sProcessUsage != null)
+			{
 				rl.setProcessUsage(sProcessUsage);
+			}
 		}
 		return rl;
 	}
 
 	/**
-	 *
 	 * @param processUsage
 	 * @return
 	 */
 	private String extractProcessUsage(final EnumProcessUsage processUsage)
 	{
 		if (processUsage == null)
+		{
 			return null;
+		}
 		if (EnumProcessUsage.AnyInput.equals(processUsage) || EnumProcessUsage.AnyOutput.equals(processUsage))
+		{
 			return null;
+		}
 		return processUsage.getName();
 	}
 
 	/**
-	 *
 	 * @param name
 	 * @param processUsage
 	 * @return
@@ -479,9 +483,13 @@ public class LinkValidator
 	private EnumUsage extractUsage(final String name, final EnumProcessUsage processUsage)
 	{
 		if (EnumProcessUsage.AnyInput.equals(processUsage))
+		{
 			return EnumUsage.Input;
+		}
 		if (EnumProcessUsage.AnyOutput.equals(processUsage))
+		{
 			return EnumUsage.Output;
+		}
 
 		for (int i = 0; i < 2; i++)
 		{
@@ -510,18 +518,19 @@ public class LinkValidator
 	{
 		final LinkInfoMap map = getLinkInfoMap();
 		if (map == null)
+		{
 			return null;
+		}
 		return checkStar ? map.getStar(name) : map.get(name);
 	}
 
 	/**
 	 * get the number of links that match the typesafe link resource name
 	 *
-	 * @param resName name of the resources to match
-	 * @param bLink if false: returns the linked resources, if true: returns the ResourceLink elements
+	 * @param resName      name of the resources to match
+	 * @param bLink        if false: returns the linked resources, if true: returns the ResourceLink elements
 	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
 	 * @return int - the number of resourcelink elements
-	 *
 	 * @default numMatchingLinks(resName, true, ProcessUsage_Any.getValue())
 	 */
 	int numMatchingLinks(final String resName, final boolean bLink, final EnumProcessUsage processUsage)
@@ -539,9 +548,9 @@ public class LinkValidator
 	 * get the link that matches the typesafe resource name<br>
 	 * if the Resource type is not defined for the process represented by this node, the link is ignored (see JDF Spec Chapter 6)
 	 *
-	 * @param resName name of the resource to remove
+	 * @param resName      name of the resource to remove
 	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
-	 * @param pos the position of the link (if multiple matching links exist)
+	 * @param pos          the position of the link (if multiple matching links exist)
 	 * @return JDFResourceLink - the resourcelink
 	 */
 	JDFResourceLink getMatchingLink(final String resName, final EnumProcessUsage processUsage, final int pos)
@@ -554,18 +563,19 @@ public class LinkValidator
 	 * Method AppendMatchingResource. Appends a resource and link it to this if it is listed in the list of valid nodes for for a JDF with the given type also
 	 * creates the matching resource link in this
 	 *
-	 * @param resName the name of the resource to add
-	 * @param processUsage the processUsage of the resourcelink of the resource to add: <li>null EnumProcessUsage.AnyOutput - for input but no processUsage</li>
-	 * <li>EnumProcessUsage.AnyOutput - for output but no processUsage</li>
-	 *
+	 * @param resName      the name of the resource to add
+	 * @param processUsage the processUsage of the resourcelink of the resource to add:
+	 *                     <li>null EnumProcessUsage.AnyOutput - for input but no processUsage</li>
+	 *                     <li>EnumProcessUsage.AnyOutput - for output but no processUsage</li>
 	 * @param resourceRoot the root JDF node, that is the parent of the resourcepool where the resource should be added. If null, this node is assumed.
-	 *
 	 * @return JDFResource the newly created resource
 	 */
 	JDFResource appendMatchingResource(final String resName, final EnumProcessUsage processUsage, JDFNode resourceRoot)
 	{
 		if (resourceRoot == null)
+		{
 			resourceRoot = node;
+		}
 		JDFResource r = resourceRoot.addResource(resName, null);
 		final JDFResourceLink rl = linkMatchingResource(r, processUsage, null);
 		if (rl == null)
@@ -596,7 +606,6 @@ public class LinkValidator
 	}
 
 	/**
-	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -606,7 +615,6 @@ public class LinkValidator
 	}
 
 	/**
-	 *
 	 * @param resName
 	 * @param usage
 	 * @param processUsage
