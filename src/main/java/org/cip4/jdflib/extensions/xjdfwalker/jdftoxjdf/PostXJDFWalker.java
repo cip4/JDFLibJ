@@ -73,6 +73,7 @@ import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.IWalker;
 import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.extensions.IntentHelper;
+import org.cip4.jdflib.extensions.MessageHelper;
 import org.cip4.jdflib.extensions.MessageHelper.EFamily;
 import org.cip4.jdflib.extensions.MessageHelper.EHeader;
 import org.cip4.jdflib.extensions.MessageHelper.EType;
@@ -760,6 +761,51 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
+	 *
+	 *
+	 */
+	public class WalkDeviceeInfo extends WalkElement
+	{
+		/**
+		 *
+		 */
+		public WalkDeviceeInfo()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkRefElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(final KElement xjdf, final KElement dummy)
+		{
+			moveToHeader((JDFDeviceInfo) xjdf);
+			return super.walk(xjdf, dummy);
+		}
+
+		void moveToHeader(JDFDeviceInfo di)
+		{
+			final String id = di.getDeviceID();
+			if (id != null)
+			{
+				final MessageHelper mh = MessageHelper.getMessageHelper(di);
+				mh.setHeader(EHeader.DeviceID, id);
+				di.removeAttribute(AttributeName.DEVICEID);
+			}
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString(new String[] { ElementName.DEVICEINFO });
+		}
+	}
+
+	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
 	protected class WalkMediaIntent extends WalkIntent
@@ -952,10 +998,9 @@ class PostXJDFWalker extends BaseElementWalker
 			{
 				return super.walk(xjdf, dummy);
 			}
-		}
-		/**
-		 * @author Rainer Prosi, Heidelberger Druckmaschinen
-		 */
+		}/**
+			 * @author Rainer Prosi, Heidelberger Druckmaschinen
+			 */
 	}
 
 	private static StringArray noPrint = new StringArray(

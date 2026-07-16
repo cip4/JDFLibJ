@@ -82,7 +82,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author rainer prosi
- *
  */
 class XJMFToJMFConverterTest extends JDFTestCaseBase
 {

@@ -320,6 +320,19 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testDeviceInfo()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
+		final JDFDeviceInfo di = jmf.getSignal(0).appendDeviceInfo();
+		di.setDeviceID("d1");
+		di.setDeviceStatus(EnumDeviceStatus.Idle);
+		writeRoundTrip(jmf, "devInfo");
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testDeviceInfoEmployee()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);

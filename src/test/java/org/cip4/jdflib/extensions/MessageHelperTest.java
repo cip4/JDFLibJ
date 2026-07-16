@@ -46,6 +46,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.MessageHelper.EFamily;
@@ -252,6 +253,21 @@ class MessageHelperTest extends JDFTestCaseBase
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
 		assertTrue(MessageHelper.isMessage(mh.getRoot()));
+		assertFalse(MessageHelper.isMessage(null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testGetMessage()
+	{
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		final MessageHelper mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
+		assertNotNull(MessageHelper.getMessageHelper(mh.getRoot()));
+		assertNull(MessageHelper.getMessageHelper(null));
+		final KElement root = new XJDFHelper("a", "b").getCreateSet(ElementName.NODEINFO, EnumUsage.Input).getRoot();
+		assertNull(MessageHelper.getMessageHelper(root));
 	}
 
 	/**

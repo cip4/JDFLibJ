@@ -137,8 +137,7 @@ public class MessageHelper extends BaseXJDFHelper
 	 */
 	String getMessageType(final KElement e, final String messageName, final String family)
 	{
-		final String type = StringUtil.rightStr(messageName, -family.length());
-		return type;
+		return StringUtil.rightStr(messageName, -family.length());
 	}
 
 	/**
@@ -329,6 +328,22 @@ public class MessageHelper extends BaseXJDFHelper
 			return false;
 		}
 		return new MessageHelper(element).getEFamily() != null;
+	}
+
+	/**
+	 * @return
+	 */
+	public static MessageHelper getMessageHelper(KElement element)
+	{
+		while (element != null)
+		{
+			if (isMessage(element))
+			{
+				return new MessageHelper(element);
+			}
+			element = element.getParentNode_KElement();
+		}
+		return null;
 	}
 
 	/**
