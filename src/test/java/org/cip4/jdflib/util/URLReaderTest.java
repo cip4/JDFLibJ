@@ -82,7 +82,7 @@ import java.net.UnknownHostException;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.XMLDoc;
-import org.cip4.jdflib.util.URLReader.EPackage;
+import org.cip4.jdflib.util.URLValidator.EPackage;
 import org.cip4.jdflib.util.zip.ZipReader;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -116,12 +116,44 @@ class URLReaderTest extends JDFTestCaseBase
 	void testGetUrlInputStreamLocalOnly()
 	{
 		URLReader.clearHosts();
-		URLReader.addHost("localhost");
+		URLReader.addLocal();
 		final URLReader reader = new URLReader("job.jdf");
 		reader.addLocalRoot(new File(sm_dirTestData));
 		final InputStream is = reader.getURLInputStream();
 		assertNotNull(is);
 		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
+
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testGetUrlInputStreamLocalOnlyBad()
+	{
+		URLReader.clearHosts();
+		URLReader.addLocal();
+		final URLReader reader = new URLReader("job.jdf");
+		reader.addLocalRoot(new File("/foo"));
+		final InputStream is = reader.getURLInputStream();
+		assertNull(is);
+
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testGetUrlInputStreamAbsoluteBad()
+	{
+		URLReader.clearHosts();
+		URLReader.addLocal();
+		final URLReader reader = new URLReader(UrlUtil.fileToUrl(new File(sm_dirTestData + "job.jdf"), false));
+		reader.addLocalRoot(new File("/foo"));
+		final InputStream is = reader.getURLInputStream();
+		assertNull(is);
 
 	}
 
@@ -195,7 +227,7 @@ class URLReaderTest extends JDFTestCaseBase
 	{
 		URLReader.setPackMethod(EPackage.NONE);
 		assertEquals(EPackage.NONE, URLReader.getPackMethod());
-		final URLReader u = new URLReader("foo");
+		final URLValidator u = new URLReader("foo");
 		assertEquals(EPackage.NONE, u.getCurrentPackMethod());
 		u.setLocalPackMethod(EPackage.MIME);
 		assertEquals(EPackage.MIME, u.getLocalPackMethod());
@@ -225,9 +257,69 @@ class URLReaderTest extends JDFTestCaseBase
 	@Test
 	void testGetFileLocal()
 	{
-		final URLReader reader = new URLReader("job.jdf");
+		final URLValidator reader = new URLReader("job.jdf");
 		reader.addLocalRoot(new File(sm_dirTestData));
 		assertEquals(UrlUtil.urlToFile(sm_dirTestData + "job.jdf"), reader.getFile());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testGetFileLocalOnly()
+	{
+		final URLValidator reader = new URLReader("job.jdf");
+		reader.addLocalRoot(new File(sm_dirTestData));
+		URLValidator.clearHosts();
+		assertNull(reader.getFile());
+		URLValidator.addHost("localhost");
+		assertEquals(UrlUtil.urlToFile(sm_dirTestData + "job.jdf"), reader.getFile());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testGetFileLocaldot()
+	{
+		final URLValidator reader = new URLReader("../job.jdf");
+		reader.addLocalRoot(new File(sm_dirTestData));
+		URLValidator.clearHosts();
+		assertNull(reader.getFile());
+		URLValidator.addLocal();
+		assertNull(reader.getFile());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testGetFileLocaldotABS()
+	{
+		final URLValidator reader = new URLReader(sm_dirTestDataTemp + "../job.jdf");
+		reader.addLocalRoot(new File(sm_dirTestData));
+		URLValidator.clearHosts();
+		assertNull(reader.getFile());
+		URLValidator.addLocal();
+		assertNotNull(reader.getFile());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testGetFileLocaldotABS2()
+	{
+		final URLValidator reader = new URLReader(sm_dirTestDataTemp + "../job.jdf");
+		reader.addLocalRoot(new File(sm_dirTestDataTemp));
+		URLValidator.clearHosts();
+		assertNull(reader.getFile());
+		URLValidator.addLocal();
+		assertNull(reader.getFile());
 	}
 
 	/**
@@ -239,7 +331,7 @@ class URLReaderTest extends JDFTestCaseBase
 	{
 		final String filePath = sm_dirTestData + "job.jdf";
 		final File file = new File(filePath);
-		final URLReader reader = new URLReader(UrlUtil.fileToUrl(file, false));
+		final URLValidator reader = new URLReader(UrlUtil.fileToUrl(file, false));
 		assertEquals(file, reader.getFile());
 	}
 

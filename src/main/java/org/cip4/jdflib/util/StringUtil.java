@@ -3459,4 +3459,14 @@ public class StringUtil
 		return value == null ? null : value.intern();
 	}
 
+	public static String toLowerCase(String str)
+	{
+		return (str == null) ? null : str.toLowerCase();
+	}
+
+	public static String toUpperCase(String str)
+	{
+		return (str == null) ? null : str.toUpperCase();
+	}
+
 }

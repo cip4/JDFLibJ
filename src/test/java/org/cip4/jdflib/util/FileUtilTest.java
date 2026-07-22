@@ -66,7 +66,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class FileUtilTest extends JDFTestCaseBase
 {
@@ -132,8 +131,23 @@ class FileUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws IOException
 	 *
+	 */
+	@Test
+	void testIsParent()
+	{
+		final File npe = new File(sm_dirTestDataTemp + "npe.txt");
+		final File npe2 = new File(sm_dirTestDataTemp + "npe2.txt");
+		FileUtil.dumpException(npe, new NullPointerException("foo"));
+		assertFalse(FileUtil.isParentFile(new File(sm_dirTestDataTemp), npe));
+		assertFalse(FileUtil.isParentFile(npe, npe2));
+		assertTrue(FileUtil.isParentFile(new File(sm_dirTestDataTemp), new File(sm_dirTestDataTemp)));
+		assertTrue(FileUtil.isParentFile(npe, new File(sm_dirTestDataTemp)));
+		assertTrue(FileUtil.isParentFile(npe, npe));
+	}
+
+	/**
+	 * @throws IOException
 	 */
 	@Test
 	void testisLocked() throws IOException
@@ -199,7 +213,6 @@ class FileUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testGetBufferedOutputStream() throws IOException
@@ -214,7 +227,6 @@ class FileUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testGetBufferedInputStream() throws IOException
@@ -233,7 +245,6 @@ class FileUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testGetBufferedInputStreamDir() throws IOException
@@ -418,7 +429,9 @@ class FileUtilTest extends JDFTestCaseBase
 		final File root = new File(sm_dirTestData + File.separator + "dir1");
 		final Vector<File> list = FileUtil.listFilesInTree(root, new FileUtil.DirectoryFileFilter());
 		for (final File f : list)
+		{
 			assertTrue(f.isDirectory());
+		}
 		assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2a"))));
 		assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2b"))));
 	}
@@ -573,7 +586,6 @@ class FileUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testForceDelete() throws Exception
@@ -726,7 +738,9 @@ class FileUtilTest extends JDFTestCaseBase
 		}
 		final OutputStream os = FileUtil.getBufferedOutputStream(fNew);
 		for (int i = 0; i < 5000; i++)
+		{
 			os.write(b);
+		}
 
 		os.flush();
 		os.close();
@@ -805,7 +819,9 @@ class FileUtilTest extends JDFTestCaseBase
 		}
 		final OutputStream os = FileUtil.getBufferedOutputStream(fNew);
 		for (int i = 0; i < 5000; i++)
+		{
 			os.write(b);
+		}
 
 		os.flush();
 		os.close();

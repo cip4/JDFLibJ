@@ -70,21 +70,11 @@ package org.cip4.jdflib.util;
 
 import java.io.File;
 import java.io.InputStream;
-import java.net.InetAddress;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
 import java.util.zip.ZipEntry;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.util.zip.ZipReader;
 
@@ -95,177 +85,18 @@ import jakarta.mail.Multipart;
  * @author rainerprosi
  * @date Feb 1, 2012
  */
-public class URLReader
+public class URLReader extends URLValidator
 {
-	private final String urlString;
 	private BodyPart bodypart;
 	private ZipReader zip;
-	private final List<File> localRoots;
-	private final static Log log = LogFactory.getLog(URLReader.class);
-	private File notRelative;
-	private final static HashSet<String> validhosts = new HashSet<>();
-	private static EPackage packMethod = EPackage.PACKAGE;
-	private EPackage localPackMethod;
-
-	/**
-	 * override for the static default
-	 *
-	 * @return
-	 */
-	public EPackage getLocalPackMethod()
-	{
-		return localPackMethod;
-	}
-
-	/**
-	 * override for the static default
-	 *
-	 * @return
-	 */
-	public EPackage getCurrentPackMethod()
-	{
-		return localPackMethod == null ? getPackMethod() : localPackMethod;
-	}
-
-	/**
-	 * override for the static default
-	 *
-	 * @param localPackMethod
-	 */
-	public void setLocalPackMethod(EPackage localPackMethod)
-	{
-		this.localPackMethod = localPackMethod;
-	}
-
-	static
-	{
-		initFilters();
-	}
-
-	public enum EPackage
-	{
-		MIME, ZIP, PACKAGE, NONE;
-
-		public static EPackage getEnum(String s)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPackage.class, s, EPackage.PACKAGE);
-		}
-	}
-
-	/**
-	 * add a trusted host
-	 *
-	 * @param host the hostname to add
-	 * @return the current list of valid hosts
-	 */
-	public static Collection<String> addHost(String host)
-	{
-		return ContainerUtil.appendUnique(validhosts, StringUtil.getNonEmpty(host));
-	}
-
-	public static boolean removeHost(Object o)
-	{
-		return validhosts.remove(o);
-	}
-
-	public static void clearHosts()
-	{
-		validhosts.clear();
-	}
-
-	public static class InvalidHostException extends RuntimeException
-	{
-
-		public InvalidHostException(String message)
-		{
-			super(message);
-		}
-
-		/**
-		 *
-		 */
-		private static final long serialVersionUID = 1L;
-
-	}
+	final static Log log = LogFactory.getLog(URLReader.class);
 
 	/**
 	 * @param urlString
 	 */
 	public URLReader(final String urlString) throws InvalidHostException
 	{
-
-		this.urlString = urlString;
-		localRoots = new ArrayList<>();
-		notRelative = null;
-		localPackMethod = null;
-	}
-
-	boolean checkHost(String urlStr)
-	{
-		if (validhosts.contains(JDFConstants.STAR))
-		{
-			return true;
-		}
-		else if (validhosts.isEmpty())
-		{
-			return false;
-		}
-		try
-		{
-			final StringArray hosts = new StringArray();
-			try
-			{
-				if (UrlUtil.isRelativeURL(urlStr))
-				{
-					hosts.add(InetAddress.getLocalHost().getHostName());
-					hosts.add("localhost");
-				}
-				else
-				{
-					hosts.add(new URL(urlStr).getHost());
-				}
-				for (final String validHost : validhosts)
-				{
-					for (final String host : hosts)
-					{
-						if (StringUtil.matchesIgnoreCase(host, validHost, true))
-						{
-							return true;
-						}
-					}
-				}
-				for (final String host : new StringArray(hosts))
-				{
-					final InetAddress[] allByName = InetAddress.getAllByName(host);
-					for (final InetAddress a : allByName)
-					{
-						hosts.add(a.getHostAddress());
-						hosts.add(a.getHostName());
-						hosts.add(a.getCanonicalHostName());
-					}
-				}
-			}
-			catch (final UnknownHostException e)
-			{
-				// nop
-			}
-			hosts.unify();
-			for (final String validHost : validhosts)
-			{
-				for (final String host : hosts)
-				{
-					if (StringUtil.matchesIgnoreCase(host, validHost, true))
-					{
-						return true;
-					}
-				}
-			}
-		}
-		catch (final MalformedURLException e)
-		{
-			// nop
-		}
-		return false;
+		super(urlString);
 	}
 
 	boolean checkPack(EPackage pack)
@@ -301,23 +132,6 @@ public class URLReader
 	public void setBodyPart(final BodyPart bodyPart)
 	{
 		this.bodypart = bodyPart;
-	}
-
-	/**
-	 * add a root for local files
-	 *
-	 * @param root
-	 */
-	public void addLocalRoot(final File root)
-	{
-		if (root == null)
-		{
-			log.error("cannot add null root");
-		}
-		else if (checkHost("."))
-		{
-			ContainerUtil.appendUnique(localRoots, root);
-		}
 	}
 
 	/**
@@ -385,16 +199,6 @@ public class URLReader
 		return retStream;
 	}
 
-	public File getFile()
-	{
-		File file = getAbsoluteFile();
-		if (file == null)
-		{
-			file = getRelativeFile();
-		}
-		return file;
-	}
-
 	/**
 	 * @return
 	 */
@@ -438,49 +242,12 @@ public class URLReader
 	 */
 	InputStream getNetInputStream()
 	{
-		if (UrlUtil.isNet(urlString) && checkHost(urlString))
+		if (UrlUtil.isNet(urlString) && checkHost())
 		{
 			final UrlPart part = UrlUtil.writeToURL(urlString, null, UrlUtil.GET, null, null);
 			if (UrlUtil.isReturnCodeOK(part))
 			{
 				return part.getResponseStream();
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * @return
-	 */
-	File getAbsoluteFile()
-	{
-		if (checkHost(urlString))
-		{
-			final File f = !UrlUtil.isNet(urlString) && !UrlUtil.isCID(urlString) ? UrlUtil.urlToFile(urlString) : null;
-			if ((f != null) && f.canRead())
-			{
-				return f;
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * @return
-	 */
-	File getRelativeFile()
-	{
-		if (UrlUtil.isRelativeURL(urlString) && checkHost(urlString))
-		{
-			final File fLocal = UrlUtil.urlToFile(urlString);
-			for (final File root : localRoots)
-			{
-				final File f = FileUtil.getFileInDirectory(root, fLocal);
-				if ((f != null) && f.canRead())
-				{
-					notRelative = f;
-					return notRelative;
-				}
 			}
 		}
 		return null;
@@ -493,28 +260,5 @@ public class URLReader
 	public String toString()
 	{
 		return "URLReader: " + urlString + "\n" + localRoots + (zip != null ? " zip " : "") + (bodypart != null ? " mime " : "");
-	}
-
-	/**
-	 * the default is to allow all
-	 */
-	public static void initFilters()
-	{
-		clearHosts();
-		validhosts.add(JDFConstants.STAR);
-		packMethod = EPackage.PACKAGE;
-	}
-
-	public static EPackage getPackMethod()
-	{
-		return packMethod;
-	}
-
-	public static void setPackMethod(EPackage packMethod)
-	{
-		if (packMethod != null)
-		{
-			URLReader.packMethod = packMethod;
-		}
 	}
 }

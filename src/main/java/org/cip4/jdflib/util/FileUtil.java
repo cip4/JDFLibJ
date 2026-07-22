@@ -95,7 +95,9 @@ public class FileUtil
 	{
 
 		if (!exists(file))
+		{
 			return false;
+		}
 		boolean locked = false;
 		FileLock lock = null;
 		FileChannel channel = null;
@@ -119,7 +121,9 @@ public class FileUtil
 			try
 			{
 				if (lock != null)
+				{
 					lock.release();
+				}
 			}
 			catch (final Exception e)
 			{
@@ -128,7 +132,9 @@ public class FileUtil
 			try
 			{
 				if (channel != null)
+				{
 					channel.close();
+				}
 			}
 			catch (final Exception e)
 			{
@@ -137,7 +143,9 @@ public class FileUtil
 			try
 			{
 				if (randomAccessFile != null)
+				{
 					randomAccessFile.close();
+				}
 			}
 			catch (final Exception e)
 			{
@@ -168,7 +176,9 @@ public class FileUtil
 		final String name = hotFile == null ? null : hotFile.getName();
 		final String base = UrlUtil.newExtension(name, null);
 		if (StringUtil.isEmpty(base))
+		{
 			return null;
+		}
 		final File parentDir = hotFile.getParentFile();
 		File auxFile = getFileInDirectory(parentDir, new File(base));
 		if (!auxFile.isDirectory())
@@ -195,7 +205,7 @@ public class FileUtil
 	/**
 	 * list all files with a given extension (directories are skipped
 	 *
-	 * @param dir the directory to search
+	 * @param dir       the directory to search
 	 * @param extension comma separated list of extensions to check for (null = list all)
 	 * @return Files[] the matching files, null if none are found
 	 */
@@ -209,7 +219,9 @@ public class FileUtil
 		{
 			Stream<Path> stream2 = stream.filter(new ExtensionFileFilter(extension));
 			if (max > 0)
+			{
 				stream2 = stream2.limit(max);
+			}
 
 			return streamToArray(stream2);
 		}
@@ -244,7 +256,7 @@ public class FileUtil
 	/**
 	 * list all files matching given regexp
 	 *
-	 * @param dir the directory to search
+	 * @param dir        the directory to search
 	 * @param expression regular expression - uses the simplified syntax
 	 * @return Files[] the matching files, null if none are found
 	 */
@@ -256,7 +268,7 @@ public class FileUtil
 	/**
 	 * list all files matching given regexp
 	 *
-	 * @param dir the directory to search
+	 * @param dir        the directory to search
 	 * @param expression regular expression - uses the simplified syntax
 	 * @return Files[] the matching files, null if none are found
 	 */
@@ -269,10 +281,14 @@ public class FileUtil
 		try (Stream<Path> stream = Files.list(dir.toPath()))
 		{
 			if (stream == null)
+			{
 				return null;
+			}
 			Stream<Path> stream2 = stream.filter(new ExpressionFileFilter(expression));
 			if (max > 0)
+			{
 				stream2 = stream2.limit(max);
+			}
 
 			return streamToArray(stream2);
 		}
@@ -286,7 +302,7 @@ public class FileUtil
 	/**
 	 * number of files - at most max
 	 *
-	 * @param dir the directory to search
+	 * @param dir        the directory to search
 	 * @param expression regular expression - uses the simplified syntax
 	 * @return Files[] the matching files, null if none are found
 	 */
@@ -316,7 +332,7 @@ public class FileUtil
 	/**
 	 * list all files matching given regexp
 	 *
-	 * @param dir the directory to search
+	 * @param dir    the directory to search
 	 * @param filter the filter to apply to files
 	 * @return Vector<File> the matching files, null if none are found
 	 */
@@ -344,7 +360,7 @@ public class FileUtil
 	/**
 	 * list all files matching given regexp
 	 *
-	 * @param dir the directory to search
+	 * @param dir        the directory to search
 	 * @param expression comma separated list of regular expression of a tree with slashes separating directories
 	 * @return Files[] the matching files, null if none are found
 	 */
@@ -394,23 +410,20 @@ public class FileUtil
 				v = null;
 			}
 
-			if (posSlash + 1 != expression.length()) // last token ends with /
+			if ((posSlash + 1 != expression.length()) && (v != null))
 			{
-				if (v != null)
+				final Vector<File> ret = new Vector<>();
+				final String next = expression.substring(posSlash + 1);
+				for (int i = 0; i < v.size(); i++)
 				{
-					final Vector<File> ret = new Vector<>();
-					final String next = expression.substring(posSlash + 1);
-					for (int i = 0; i < v.size(); i++)
+					final Vector<File> v2 = listFilesInTree(v.get(i), next);
+					if (v2 != null)
 					{
-						final Vector<File> v2 = listFilesInTree(v.get(i), next);
-						if (v2 != null)
-						{
-							ret.addAll(v2);
-						}
+						ret.addAll(v2);
 					}
-
-					v = ret.size() == 0 ? null : ret;
 				}
+
+				v = ret.size() == 0 ? null : ret;
 			}
 		}
 		return v;
@@ -454,9 +467,7 @@ public class FileUtil
 	// //////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
 	 * @author prosirai
-	 *
 	 */
 	public static class ExtensionFileFilter implements Predicate<Path>
 	{
@@ -471,9 +482,9 @@ public class FileUtil
 			{
 				final VString list = StringUtil.tokenize(fileExtension, ",", false);
 				m_extension = new HashSet<>();
-				for (int i = 0; i < list.size(); i++)
+				for (final String o : list)
 				{
-					String st = list.get(i);
+					String st = o;
 					if (st.startsWith("."))
 					{
 						st = st.substring(1);
@@ -547,8 +558,6 @@ public class FileUtil
 	protected static class DirectoryFileFilter implements FileFilter
 	{
 		/**
-		 *
-		 *
 		 * @see java.io.FileFilter#accept(java.io.File)
 		 */
 		@Override
@@ -621,7 +630,7 @@ public class FileUtil
 	/**
 	 * dump a stream to a newly created file
 	 *
-	 * @param fis the inputstream to read
+	 * @param fis      the inputstream to read
 	 * @param fileName the file to stream to
 	 * @return the file created by the stream, null if snafu
 	 */
@@ -643,21 +652,24 @@ public class FileUtil
 	 * write to a file
 	 *
 	 * @param file the file to write
-	 * @param w the writer to write to
-	 *
+	 * @param w    the writer to write to
 	 * @return the file that was created, null if snafu
 	 */
 	public static File writeFile(final IStreamWriter w, final File file)
 	{
 		final boolean b = FileUtil.createNewFile(file);
 		if (!b)
+		{
 			return null;
+		}
 
 		try
 		{
 			final OutputStream fos = FileUtil.getBufferedOutputStream(file);
 			if (fos == null)
+			{
 				return null;
+			}
 
 			w.writeStream(fos);
 			fos.flush();
@@ -678,7 +690,7 @@ public class FileUtil
 	 * create a File object with a new extension
 	 *
 	 * @see UrlUtil#newExtension(String, String) for details of handling null etc.
-	 * @param f the file, if null always returns null
+	 * @param f      the file, if null always returns null
 	 * @param newExt the new extension
 	 * @return the file with the new extension
 	 */
@@ -699,7 +711,9 @@ public class FileUtil
 	public static File streamToFile(final InputStream fis, final File fil)
 	{
 		if (fis == null || fil == null)
+		{
 			return null;
+		}
 		final boolean ok = createNewFile(fil);
 		if (!ok)
 		{
@@ -709,7 +723,9 @@ public class FileUtil
 		{
 			final OutputStream fos = getBufferedOutputStream(fil);
 			if (fos == null)
+			{
 				return null;
+			}
 			IOUtils.copyLarge(fis, fos);
 			fos.flush();
 			fos.close();
@@ -724,14 +740,16 @@ public class FileUtil
 	}
 
 	/**
-	 * @param s the String to read - if null nothing happens
+	 * @param s   the String to read - if null nothing happens
 	 * @param fil the file to stream to
 	 * @return the file created by the stream, null if snafu
 	 */
 	public static File stringToFile(final String s, final File fil)
 	{
 		if (s == null || fil == null)
+		{
 			return null;
+		}
 		return streamToFile(new ByteArrayInputStream(s.getBytes()), fil);
 	}
 
@@ -746,7 +764,9 @@ public class FileUtil
 	{
 		final BufferedInputStream bufferedInputStream = getBufferedInputStream(f);
 		if (bufferedInputStream == null || !f.canRead())
+		{
 			return null;
+		}
 
 		if (maxSize <= 0 || f.length() <= maxSize * 2l)
 		{
@@ -776,7 +796,9 @@ public class FileUtil
 					md5.update(b, 0, read);
 					tmp += read;
 					if (read == 0)
+					{
 						break;
+					}
 				}
 				long toSkip = f.length() - 2l * maxSize;
 				long skipped = 42;
@@ -792,7 +814,9 @@ public class FileUtil
 					md5.update(b, 0, read);
 					tmp += read;
 					if (read == 0)
+					{
 						break;
+					}
 				}
 				bufferedInputStream.close();
 				return md5.digest();
@@ -815,7 +839,9 @@ public class FileUtil
 	public static MyPair<File, byte[]> streamToMD5File(final InputStream fis, final File fil)
 	{
 		if (fis == null)
+		{
 			return null;
+		}
 
 		MessageDigest md5;
 		try
@@ -844,7 +870,9 @@ public class FileUtil
 	{
 		final byte[] a = fileToByteArray(file);
 		if (s == null)
+		{
 			s = Charset.defaultCharset();
+		}
 		return a == null ? null : new String(a, s);
 	}
 
@@ -898,7 +926,7 @@ public class FileUtil
 	 * moves a File to directory by trying to rename, if this fails, a copy with subsequent delete is performed. if toFile exists, it is brutally overwritten
 	 *
 	 * @param fromFile the File to move
-	 * @param toDir the Directory to move to
+	 * @param toDir    the Directory to move to
 	 * @return File the moved File if success, else null, i.e. toFile exists with the contents of fromFile
 	 */
 	public static File moveFileToDir(final File fromFile, final File toDir)
@@ -920,7 +948,7 @@ public class FileUtil
 	 * moves a File by trying to rename, if this fails, a copy with subsequent delete is performed. if toFile exists, it is brutally overwritten
 	 *
 	 * @param fromFile the File to move
-	 * @param toFile the File to create
+	 * @param toFile   the File to create
 	 * @return boolean true if success, i.e. toFile exists with the contents of fromFile
 	 */
 	public static boolean moveFile(final File fromFile, final File toFile)
@@ -949,7 +977,7 @@ public class FileUtil
 	/**
 	 * copy a buffer to the end of a file, creating it if necessary
 	 *
-	 * @param buf the source buffer
+	 * @param buf    the source buffer
 	 * @param toFile the destination File
 	 * @return true if success
 	 */
@@ -985,7 +1013,9 @@ public class FileUtil
 			try
 			{
 				if (fileOutputStream != null)
+				{
 					fileOutputStream.close();
+				}
 			}
 			catch (final IOException e)
 			{
@@ -999,7 +1029,7 @@ public class FileUtil
 	 * copy a file, unless fromFile and toFile are equal
 	 *
 	 * @param fromFile the source File
-	 * @param toFile the destination File
+	 * @param toFile   the destination File
 	 * @return true if success
 	 */
 	public static boolean copyFile(final File fromFile, final File toFile)
@@ -1025,7 +1055,7 @@ public class FileUtil
 	 * copies a File to directory if and only if toFile does not exist
 	 *
 	 * @param fromFile the File to move
-	 * @param toDir the Directory to move to
+	 * @param toDir    the Directory to move to
 	 * @return File the destination File if success,
 	 */
 	public static File ensureFileInDir(final File fromFile, final File toDir)
@@ -1041,7 +1071,9 @@ public class FileUtil
 		final File newFile = getFileInDirectory(toDir, new File(fromFile.getName()));
 		boolean b = newFile.canRead();
 		if (!b)
+		{
 			b = copyFile(fromFile, newFile);
+		}
 		return b ? newFile : null;
 	}
 
@@ -1075,7 +1107,7 @@ public class FileUtil
 	 * copies a File to directory if toFile exists, it is brutally overwritten unless fromFile equals toFile
 	 *
 	 * @param fromFile the File to move
-	 * @param toDir the Directory to move to
+	 * @param toDir    the Directory to move to
 	 * @return File the moved File if success, else null, i.e. toFile exists with the contents of fromFile
 	 */
 	public static File copyFileToDir(final File fromFile, final File toDir)
@@ -1093,7 +1125,7 @@ public class FileUtil
 	/**
 	 * returns a File object corresponding to an instance of localFile placed in dir - No OS calls are made and File is NOT created
 	 *
-	 * @param dir the File Object representing the directory
+	 * @param dir       the File Object representing the directory
 	 * @param localFile the local file to place in dir, note that only the path is copied - this does copy trees
 	 * @return File the File object that represents localFile in Dir
 	 */
@@ -1113,7 +1145,7 @@ public class FileUtil
 
 	/**
 	 * securely add a subdirectory
-	 * 
+	 *
 	 * @param baseFile
 	 * @param file
 	 * @return
@@ -1128,8 +1160,7 @@ public class FileUtil
 
 	/**
 	 * secure check of a file name
-	 * 
-	 * 
+	 *
 	 * @param file
 	 * @return
 	 * @throws IllegalArgumentException
@@ -1142,8 +1173,7 @@ public class FileUtil
 
 	/**
 	 * secure check of a file name
-	 * 
-	 * 
+	 *
 	 * @param file
 	 * @return
 	 * @throws IllegalArgumentException
@@ -1162,7 +1192,7 @@ public class FileUtil
 
 	/**
 	 * secure check of a file path
-	 * 
+	 *
 	 * @param baseFile
 	 * @param file
 	 * @return
@@ -1171,9 +1201,13 @@ public class FileUtil
 	public static String getSecurePath(final File file, final boolean allowAbsolute) throws IllegalArgumentException
 	{
 		if (file == null || !allowAbsolute && isAbsoluteFile(file))
+		{
 			throw new IllegalArgumentException("file must be relative " + file);
+		}
 		if (StringUtil.hasToken(file.getPath(), "..", "/\\", 0))
+		{
 			throw new IllegalArgumentException("file must not contain .. " + file);
+		}
 		return file.getPath();
 	}
 
@@ -1192,7 +1226,7 @@ public class FileUtil
 	 * forces deletion of a file
 	 *
 	 * @param file the file to delete
-	 * @param # of 42 msec * loop loops to wait
+	 * @param #    of 42 msec * loop loops to wait
 	 * @return true if the file no longer exists
 	 */
 	public static boolean forceDelete(final File file, final int loops)
@@ -1203,9 +1237,9 @@ public class FileUtil
 	/**
 	 * forces deletion of a file
 	 *
-	 * @param file the file to delete
+	 * @param file    the file to delete
 	 * @param recurse TODO
-	 * @param # of 42 msec * loop loops to wait
+	 * @param #       of 42 msec * loop loops to wait
 	 * @return true if the file no longer exists
 	 */
 	private static boolean forceDelete(final File file, final int loops, final boolean recurse)
@@ -1280,9 +1314,13 @@ public class FileUtil
 	public static boolean isDirectory(final File f)
 	{
 		if (!exists(f))
+		{
 			return false;
+		}
 		if (f.isDirectory())
+		{
 			return true;
+		}
 
 		try
 		{
@@ -1474,7 +1512,9 @@ public class FileUtil
 	public static BufferedOutputStream getBufferedOutputStream(final File file, final boolean append)
 	{
 		if (file == null)
+		{
 			return null;
+		}
 
 		for (int i = 1; i < 3; i++)
 		{
@@ -1493,7 +1533,6 @@ public class FileUtil
 	}
 
 	/**
-	 *
 	 * @return true if we are on a windows file system
 	 * @deprecated use {@link PlatformUtil}
 	 */
@@ -1536,6 +1575,19 @@ public class FileUtil
 
 		}
 
+	}
+
+	public static boolean isParentFile(File f, File root)
+	{
+		if (f == null || root == null)
+		{
+			return false;
+		}
+		if (f.equals(root))
+		{
+			return true;
+		}
+		return isParentFile(f.getParentFile(), root);
 	}
 
 }
