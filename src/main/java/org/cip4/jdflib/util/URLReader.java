@@ -119,10 +119,7 @@ public class URLReader extends URLValidator
 		{
 			final File f = new File(orig);
 			final File parent = f.getParentFile();
-			if (parent != null && !localRoots.isEmpty())
-			{
-				addLocalRoot(parent);
-			}
+			base = parent;
 		}
 	}
 

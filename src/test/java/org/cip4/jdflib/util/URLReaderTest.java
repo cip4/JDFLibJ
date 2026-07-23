@@ -101,7 +101,7 @@ class URLReaderTest extends JDFTestCaseBase
 	void testGetUrlInputStreamLocal()
 	{
 		final URLReader reader = new URLReader("job.jdf");
-		reader.addLocalRoot(new File(sm_dirTestData));
+		reader.setBase(new File(sm_dirTestData));
 		final InputStream is = reader.getURLInputStream();
 		assertNotNull(is);
 		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
@@ -118,7 +118,7 @@ class URLReaderTest extends JDFTestCaseBase
 		URLReader.clearHosts();
 		URLReader.addLocal();
 		final URLReader reader = new URLReader("job.jdf");
-		reader.addLocalRoot(new File(sm_dirTestData));
+		reader.setBase(new File(sm_dirTestData));
 		final InputStream is = reader.getURLInputStream();
 		assertNotNull(is);
 		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
@@ -167,7 +167,7 @@ class URLReaderTest extends JDFTestCaseBase
 		URLReader.clearHosts();
 		URLReader.addHost("127.0.0.1");
 		final URLReader reader = new URLReader("job.jdf");
-		reader.addLocalRoot(new File(sm_dirTestData));
+		reader.setBase(new File(sm_dirTestData));
 		final InputStream is = reader.getURLInputStream();
 		assertNotNull(is);
 		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
@@ -183,7 +183,7 @@ class URLReaderTest extends JDFTestCaseBase
 		URLReader.clearHosts();
 		URLReader.addHost(InetAddress.getLocalHost().getCanonicalHostName());
 		final URLReader reader = new URLReader("job.jdf");
-		reader.addLocalRoot(new File(sm_dirTestData));
+		reader.setBase(new File(sm_dirTestData));
 		final InputStream is = reader.getURLInputStream();
 		assertNotNull(is);
 		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
@@ -199,7 +199,7 @@ class URLReaderTest extends JDFTestCaseBase
 		URLReader.clearHosts();
 		URLReader.addHost(InetAddress.getLocalHost().getHostName());
 		final URLReader reader = new URLReader("job.jdf");
-		reader.addLocalRoot(new File(sm_dirTestData));
+		reader.setBase(new File(sm_dirTestData));
 		final InputStream is = reader.getURLInputStream();
 		assertNotNull(is);
 		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
@@ -258,7 +258,7 @@ class URLReaderTest extends JDFTestCaseBase
 	void testGetFileLocal()
 	{
 		final URLValidator reader = new URLReader("job.jdf");
-		reader.addLocalRoot(new File(sm_dirTestData));
+		reader.setBase(new File(sm_dirTestData));
 		assertEquals(UrlUtil.urlToFile(sm_dirTestData + "job.jdf"), reader.getFile(false));
 	}
 
@@ -270,7 +270,7 @@ class URLReaderTest extends JDFTestCaseBase
 	void testGetFileLocalOnly()
 	{
 		final URLValidator reader = new URLReader("job.jdf");
-		reader.addLocalRoot(new File(sm_dirTestData));
+		reader.setBase(new File(sm_dirTestData));
 		URLValidator.clearHosts();
 		assertNull(reader.getFile(false));
 		URLValidator.addHost("localhost");
@@ -343,7 +343,7 @@ class URLReaderTest extends JDFTestCaseBase
 	void testGetXMLDocLocal()
 	{
 		final URLReader reader = new URLReader("job.jdf");
-		reader.addLocalRoot(new File(sm_dirTestData));
+		reader.setBase(new File(sm_dirTestData));
 		final XMLDoc xmlDoc = reader.getXMLDoc();
 		assertNotNull(xmlDoc);
 		assertEquals(StringUtil.token(xmlDoc.getOriginalFileName(), -1, File.separator), "job.jdf");

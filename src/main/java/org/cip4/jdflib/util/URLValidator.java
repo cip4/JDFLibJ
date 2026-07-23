@@ -95,6 +95,7 @@ public class URLValidator
 	protected final String urlString;
 	protected final List<File> localRoots;
 	protected File notRelative;
+	protected File base;
 
 	protected EPackage localPackMethod;
 
@@ -107,6 +108,7 @@ public class URLValidator
 		notRelative = null;
 		localPackMethod = null;
 		lastException = null;
+		base = null;
 	}
 
 	/**
@@ -299,18 +301,16 @@ public class URLValidator
 			try
 			{
 				final File fLocal = UrlUtil.urlToFile(UrlUtil.getSecurePath(urlString, false));
-				if (!rw)
+				if (!rw && base != null)
 				{
-					for (final File root : localRoots)
+					final File f = FileUtil.getFileInDirectory(base, fLocal);
+					if (f != null && f.canRead())
 					{
-						final File f = FileUtil.getFileInDirectory(root, fLocal);
-						if (f != null && f.canRead())
-						{
-							notRelative = f;
-							return notRelative;
-						}
+						notRelative = f;
+						return notRelative;
 					}
 				}
+
 				if (fLocal != null)
 				{
 					return getAbsoluteFile(rw);
@@ -425,5 +425,15 @@ public class URLValidator
 		{
 			return JavaEnumUtil.getEnumIgnoreCase(EPackage.class, s, EPackage.PACKAGE);
 		}
+	}
+
+	File getBase()
+	{
+		return base;
+	}
+
+	void setBase(File base)
+	{
+		this.base = base;
 	}
 }
