@@ -97,6 +97,19 @@ class URLWriterTest extends JDFTestCaseBase
 	 * @throws MalformedURLException
 	 */
 	@Test
+	void testWriteToURLFileRelative()
+	{
+		final URLWriter urlWriter = new URLWriter(null, UrlUtil.stringToURL("data/foobar.txt"), null, null, null);
+		urlWriter.addLocalRoot(new File(sm_dirTestDataTemp));
+		assertNull(urlWriter.writeToURL());
+		final URLWriter urlWriter2 = new URLWriter(null, UrlUtil.stringToURL("data(temp/foobar.txt"), null, null, null);
+		assertNotNull(urlWriter2.writeToURL());
+	}
+
+	/**
+	 * @throws MalformedURLException
+	 */
+	@Test
 	void testRun() throws MalformedURLException
 	{
 		final URLWriter urlWriter0 = new URLWriter(null, UrlUtil.fileToUrl(new File(sm_dirTestDataTemp + "dummy.txt"), false), UrlUtil.POST, UrlUtil.TEXT_PLAIN,

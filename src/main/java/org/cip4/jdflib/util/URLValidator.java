@@ -292,21 +292,28 @@ public class URLValidator
 	/**
 	 * @return
 	 */
-	File getRelativeFile()
+	File getRelativeFile(boolean rw)
 	{
 		if (UrlUtil.isRelativeURL(urlString) && checkHost())
 		{
 			try
 			{
 				final File fLocal = UrlUtil.urlToFile(UrlUtil.getSecurePath(urlString, false));
-				for (final File root : localRoots)
+				if (!rw)
 				{
-					final File f = FileUtil.getFileInDirectory(root, fLocal);
-					if (f != null && f.canRead())
+					for (final File root : localRoots)
 					{
-						notRelative = f;
-						return notRelative;
+						final File f = FileUtil.getFileInDirectory(root, fLocal);
+						if (f != null && f.canRead())
+						{
+							notRelative = f;
+							return notRelative;
+						}
 					}
+				}
+				if (fLocal != null)
+				{
+					return getAbsoluteFile(rw);
 				}
 			}
 			catch (final IllegalArgumentException e)
@@ -353,27 +360,28 @@ public class URLValidator
 		this.localPackMethod = localPackMethod;
 	}
 
-	public File getFile()
+	public File getFile(boolean rw)
 	{
-		File file = getAbsoluteFile();
+		File file = getAbsoluteFile(rw);
 		if (file == null)
 		{
-			file = getRelativeFile();
+			file = getRelativeFile(rw);
 		}
 		return file;
 	}
 
 	/**
+	 * @param rw
 	 * @return
 	 */
-	File getAbsoluteFile()
+	File getAbsoluteFile(boolean rw)
 	{
 		if (checkHost())
 		{
 			try
 			{
 				final File f = !UrlUtil.isNet(urlString) && !UrlUtil.isCID(urlString) ? UrlUtil.urlToFile(UrlUtil.getSecurePath(urlString, true)) : null;
-				if ((f != null) && f.canRead())
+				if (f != null && (rw || f.canRead()))
 				{
 					if (localRoots.isEmpty())
 					{

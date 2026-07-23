@@ -188,7 +188,7 @@ public class URLReader extends URLValidator
 				retStream = getZipInputStream();
 				if (retStream == null)
 				{
-					final File file = getFile();
+					final File file = getFile(false);
 					if (file != null)
 					{
 						retStream = FileUtil.getBufferedInputStream(file);

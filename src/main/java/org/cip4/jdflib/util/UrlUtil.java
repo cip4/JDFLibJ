@@ -1940,7 +1940,7 @@ public class UrlUtil
 		}
 
 		final URLReader urlReader = new URLReader(url, d);
-		final File oldFile = deleteFile ? urlReader.getFile() : null;
+		final File oldFile = deleteFile ? urlReader.getFile(false) : null;
 		boolean needCopy = !deleteFile;
 		if (oldFile != null)
 		{

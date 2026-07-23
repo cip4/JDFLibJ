@@ -49,6 +49,7 @@ import java.net.ProxySelector;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -252,7 +253,11 @@ public class URLWriter extends URLValidator implements Runnable
 
 	List<Proxy> getProxies(final URI uri)
 	{
-		if (addDirect)
+		if (uri == null)
+		{
+			return new ArrayList<>();
+		}
+		else if (addDirect)
 		{
 			return ProxyUtil.getProxiesWithLocal(uri);
 		}
@@ -269,7 +274,7 @@ public class URLWriter extends URLValidator implements Runnable
 	 */
 	UrlPart writeFile()
 	{
-		File f = getFile();
+		File f = getFile(true);
 		if (f != null)
 		{
 			if (writer != null)

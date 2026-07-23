@@ -259,7 +259,7 @@ class URLReaderTest extends JDFTestCaseBase
 	{
 		final URLValidator reader = new URLReader("job.jdf");
 		reader.addLocalRoot(new File(sm_dirTestData));
-		assertEquals(UrlUtil.urlToFile(sm_dirTestData + "job.jdf"), reader.getFile());
+		assertEquals(UrlUtil.urlToFile(sm_dirTestData + "job.jdf"), reader.getFile(false));
 	}
 
 	/**
@@ -272,9 +272,9 @@ class URLReaderTest extends JDFTestCaseBase
 		final URLValidator reader = new URLReader("job.jdf");
 		reader.addLocalRoot(new File(sm_dirTestData));
 		URLValidator.clearHosts();
-		assertNull(reader.getFile());
+		assertNull(reader.getFile(false));
 		URLValidator.addHost("localhost");
-		assertEquals(UrlUtil.urlToFile(sm_dirTestData + "job.jdf"), reader.getFile());
+		assertEquals(UrlUtil.urlToFile(sm_dirTestData + "job.jdf"), reader.getFile(false));
 	}
 
 	/**
@@ -287,9 +287,9 @@ class URLReaderTest extends JDFTestCaseBase
 		final URLValidator reader = new URLReader("../job.jdf");
 		reader.addLocalRoot(new File(sm_dirTestData));
 		URLValidator.clearHosts();
-		assertNull(reader.getFile());
+		assertNull(reader.getFile(false));
 		URLValidator.addLocal();
-		assertNull(reader.getFile());
+		assertNull(reader.getFile(false));
 	}
 
 	/**
@@ -302,9 +302,9 @@ class URLReaderTest extends JDFTestCaseBase
 		final URLValidator reader = new URLReader(sm_dirTestDataTemp + "../job.jdf");
 		reader.addLocalRoot(new File(sm_dirTestData));
 		URLValidator.clearHosts();
-		assertNull(reader.getFile());
+		assertNull(reader.getFile(false));
 		URLValidator.addLocal();
-		assertNotNull(reader.getFile());
+		assertNotNull(reader.getFile(false));
 	}
 
 	/**
@@ -317,9 +317,9 @@ class URLReaderTest extends JDFTestCaseBase
 		final URLValidator reader = new URLReader(sm_dirTestDataTemp + "../job.jdf");
 		reader.addLocalRoot(new File(sm_dirTestDataTemp));
 		URLValidator.clearHosts();
-		assertNull(reader.getFile());
+		assertNull(reader.getFile(false));
 		URLValidator.addLocal();
-		assertNull(reader.getFile());
+		assertNull(reader.getFile(false));
 	}
 
 	/**
@@ -332,7 +332,7 @@ class URLReaderTest extends JDFTestCaseBase
 		final String filePath = sm_dirTestData + "job.jdf";
 		final File file = new File(filePath);
 		final URLValidator reader = new URLReader(UrlUtil.fileToUrl(file, false));
-		assertEquals(file, reader.getFile());
+		assertEquals(file, reader.getFile(false));
 	}
 
 	/**
