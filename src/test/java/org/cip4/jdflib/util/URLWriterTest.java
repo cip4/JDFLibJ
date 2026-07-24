@@ -48,6 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -91,6 +92,22 @@ class URLWriterTest extends JDFTestCaseBase
 		assertNull(urlWriter.writeToURL());
 		final URLWriter urlWriter2 = new URLWriter(null, UrlUtil.stringToURL(sm_dirTestDataTemp + "foobar.txt"), null, null, null);
 		assertNotNull(urlWriter2.writeToURL());
+	}
+
+	/**
+	 * @throws MalformedURLException
+	 */
+	@Test
+	void testWriteToURLFileEscape()
+	{
+		final URLWriter urlWriter = new URLWriter(null, UrlUtil.stringToURL(sm_dirTestData + "foo bar.txt"), null, null, null);
+		urlWriter.addLocalRoot(new File(sm_dirTestDataTemp));
+		assertNull(urlWriter.writeToURL());
+		final URLWriter urlWriter2 = new URLWriter(new ByteArrayInputStream("aaa".getBytes()), UrlUtil.stringToURL(sm_dirTestDataTemp + "foo bar.txt"), null,
+				null, null);
+		assertNotNull(urlWriter2.writeToURL());
+		assertFalse(new File(sm_dirTestDataTemp + "foo%20bar.txt").exists());
+		assertTrue(new File(sm_dirTestDataTemp + "foo bar.txt").exists());
 	}
 
 	/**

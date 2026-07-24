@@ -105,7 +105,36 @@ class URLReaderTest extends JDFTestCaseBase
 		final InputStream is = reader.getURLInputStream();
 		assertNotNull(is);
 		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
+	}
 
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testGetUrlInputStreampercent()
+	{
+		final File f = new File(sm_dirTestDataTemp + "job%20a.jdf");
+		FileUtil.stringToFile("abc", f);
+		final URLReader reader = new URLReader(sm_dirTestDataTemp + "job%2520a.jdf");
+		final InputStream is = reader.getURLInputStream();
+		assertNotNull(is);
+		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 2);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testGetUrlInputStreampercent2()
+	{
+		final File f = new File(sm_dirTestDataTemp + "job a.jdf");
+		FileUtil.stringToFile("abc", f);
+		final URLReader reader = new URLReader(sm_dirTestDataTemp + "job a.jdf");
+		final InputStream is = reader.getURLInputStream();
+		assertNotNull(is);
+		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 2);
 	}
 
 	/**
@@ -259,7 +288,7 @@ class URLReaderTest extends JDFTestCaseBase
 	{
 		final URLValidator reader = new URLReader("job.jdf");
 		reader.setBase(new File(sm_dirTestData));
-		assertEquals(UrlUtil.urlToFile(sm_dirTestData + "job.jdf"), reader.getFile(false));
+		assertEquals(UrlUtil.urlToFile(sm_dirTestData + "job.jdf"), reader.getFile());
 	}
 
 	/**

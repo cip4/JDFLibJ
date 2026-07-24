@@ -867,7 +867,7 @@ public class UrlUtil
 		{
 			throw new IllegalArgumentException("URL must not contain .. " + url);
 		}
-		return cleanDots(url);
+		return escape(cleanDots(url), false);
 	}
 
 	/**

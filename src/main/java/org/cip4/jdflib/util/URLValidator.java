@@ -360,6 +360,18 @@ public class URLValidator
 		this.localPackMethod = localPackMethod;
 	}
 
+	/**
+	 * @return
+	 */
+	public File getFile()
+	{
+		return getFile(false);
+	}
+
+	/**
+	 * @param rw
+	 * @return
+	 */
 	public File getFile(boolean rw)
 	{
 		File file = getAbsoluteFile(rw);
