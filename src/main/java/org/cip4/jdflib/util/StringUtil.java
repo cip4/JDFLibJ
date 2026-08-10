@@ -3469,4 +3469,9 @@ public class StringUtil
 		return (str == null) ? null : str.toUpperCase();
 	}
 
+	public static boolean endsWith(String unEscape, String c)
+	{
+		return unEscape != null && unEscape.endsWith(c);
+	}
+
 }

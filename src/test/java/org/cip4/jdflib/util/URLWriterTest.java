@@ -43,6 +43,7 @@
  */
 package org.cip4.jdflib.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -79,6 +80,16 @@ class URLWriterTest extends JDFTestCaseBase
 		}
 		assertNotNull(new URLWriter(null, new URL("http://www.example.com"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null).writeToURL());
 		new URLWriter(null, new URL("http://www.example.com"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null).run();
+	}
+
+	/**
+	 * @throws MalformedURLException
+	 */
+	@Test
+	void testWriteToURLSlash() throws MalformedURLException
+	{
+		final URLWriter urlWriter = new URLWriter(null, new URL("http://www.example.com/"), UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
+		assertEquals("http://www.example.com/", urlWriter.getUrl().toExternalForm());
 	}
 
 	/**

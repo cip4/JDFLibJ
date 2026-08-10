@@ -1767,7 +1767,7 @@ public class UrlUtil
 				}
 			}
 		}
-		return prefix + (vs.isEmpty() ? "." : StringUtil.setvString(vs, "/", null, null));
+		return prefix + (vs.isEmpty() ? "." : StringUtil.setvString(vs, "/", null, url.endsWith(JDFConstants.SLASH) ? JDFConstants.SLASH : null));
 	}
 
 	/**

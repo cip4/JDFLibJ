@@ -344,7 +344,12 @@ public class ZipReader
 	{
 		String fileName = ze == null ? null : ze.getName();
 		fileName = StringUtil.replaceString(fileName, JDFConstants.BACK_SLASH, JDFConstants.SLASH);
-		return UrlUtil.unEscape(UrlUtil.getSecurePath(fileName, false));
+		String unEscape = UrlUtil.unEscape(UrlUtil.getSecurePath(fileName, false));
+		if (StringUtil.endsWith(unEscape, JDFConstants.SLASH))
+		{
+			unEscape = StringUtil.leftStr(unEscape, -1);
+		}
+		return unEscape;
 	}
 
 	/**
@@ -485,7 +490,7 @@ public class ZipReader
 					}
 				}
 			}
-			if (!matches && !name.equals(StringUtil.token(name, -1, "/")))
+			if (!matches && name != null && !name.equals(StringUtil.token(name, -1, "/")))
 			{
 				name = StringUtil.token(name, -1, "/");
 				if (name != null && name.length() > 0)
@@ -639,7 +644,7 @@ public class ZipReader
 					}
 				}
 			}
-			if (!matches && !name.equals(StringUtil.token(name, -1, JDFConstants.SLASH)))
+			if (!matches && name != null && !name.equals(StringUtil.token(name, -1, JDFConstants.SLASH)))
 			{
 				name = StringUtil.token(name, -1, "/");
 				if (name != null && name.length() > 0)
