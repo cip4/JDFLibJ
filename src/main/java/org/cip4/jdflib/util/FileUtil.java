@@ -1301,7 +1301,11 @@ public class FileUtil
 	 */
 	public static File cleanURL(final File f)
 	{
-		final String s = UrlUtil.fileToUrl(f, false);
+		String s = UrlUtil.fileToUrl(f, false);
+		if (StringUtil.endsWith(s, JDFConstants.SLASH))
+		{
+			s = StringUtil.leftStr(s, -1);
+		}
 		return UrlUtil.urlToFile(s);
 	}
 
