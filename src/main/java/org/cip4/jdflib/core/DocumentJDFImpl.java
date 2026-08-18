@@ -530,7 +530,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 
 	protected String getSurfaceClass(final String strParentNodeClass)
 	{
-		if ("org.cip4.jdflib.resource.process.JDFLayout".equals(strParentNodeClass))
+		if ("org.cip4.jdflib.resource.process.JDFLayout".equals(strParentNodeClass) || "org.cip4.jdflib.core.JDFRefElement".equals(strParentNodeClass))
 		{
 			return "org.cip4.jdflib.resource.process.JDFLayout";
 		}
