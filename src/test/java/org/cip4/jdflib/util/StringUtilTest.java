@@ -1481,8 +1481,6 @@ class StringUtilTest extends JDFTestCaseBase
 		assertEquals(s, "a.ZIP");
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
-
 	/**
 	 *
 	 */
@@ -1494,6 +1492,33 @@ class StringUtilTest extends JDFTestCaseBase
 		assertTrue(StringUtil.equals("", ""));
 		assertFalse(StringUtil.equals("a", ""));
 		assertFalse(StringUtil.equals("a", null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testStartsWith()
+	{
+		assertTrue(StringUtil.startsWith("", null));
+		assertTrue(StringUtil.startsWith(null, null));
+		assertTrue(StringUtil.startsWith("", ""));
+		assertFalse(StringUtil.startsWith("a", "b"));
+		assertFalse(StringUtil.startsWith("a", null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testEndsWith()
+	{
+		assertTrue(StringUtil.endsWith("", null));
+		assertTrue(StringUtil.endsWith(null, null));
+		assertTrue(StringUtil.endsWith("", ""));
+		assertFalse(StringUtil.endsWith("a", "b"));
+		assertFalse(StringUtil.endsWith("a", null));
+		assertFalse(StringUtil.endsWith(null, "a"));
 	}
 
 	/**

@@ -2357,8 +2357,8 @@ public class StringUtil
 	public static String escape(final String strToEscape, final String strCharSet, final String strEscapeChar, final int iRadix, final int iEscapeLen,
 			final int iEscapeBelow, final int iEscapeAbove)
 	{
-		final byte[] a_toEscape = getUTF8Bytes(strToEscape);
-		return getUTF8String(escape(a_toEscape, strCharSet, strEscapeChar, iRadix, iEscapeLen, iEscapeBelow, iEscapeAbove));
+		final byte[] toEscape = getUTF8Bytes(strToEscape);
+		return getUTF8String(escape(toEscape, strCharSet, strEscapeChar, iRadix, iEscapeLen, iEscapeBelow, iEscapeAbove));
 	}
 
 	/**
@@ -2371,6 +2371,18 @@ public class StringUtil
 	public static boolean equals(final String a, final String b)
 	{
 		return ContainerUtil.equals(getNonEmpty(a), getNonEmpty(b));
+	}
+
+	/**
+	 * return true if a starts with b, false if a is null or does not start with b
+	 *
+	 * @param a String to compare
+	 * @param b String to compare
+	 * @return boolean true if a starts with b, false if a is null or does not start with b
+	 */
+	public static boolean startsWith(final String a, final String b)
+	{
+		return equals(a, b) || a != null && b != null && a.startsWith(b);
 	}
 
 	/**
@@ -3469,9 +3481,9 @@ public class StringUtil
 		return (str == null) ? null : str.toUpperCase();
 	}
 
-	public static boolean endsWith(String unEscape, String c)
+	public static boolean endsWith(String a, String b)
 	{
-		return unEscape != null && unEscape.endsWith(c);
+		return equals(a, b) || a != null && b != null && a.endsWith(b);
 	}
 
 }

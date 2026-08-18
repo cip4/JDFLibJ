@@ -448,8 +448,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		else
 		{
 			strClassPath = data.sm_PackageNames.get(qualifiedName);
-			if (strClassPath == null && (null == strNameSpaceURI || (strNameSpaceURI != null && strNameSpaceURI.startsWith(jdfNSURIPrefix))
-					|| JDFConstants.EMPTYSTRING.equals(strNameSpaceURI)))
+			if (strClassPath == null && (StringUtil.isEmpty(strNameSpaceURI) || StringUtil.startsWith(strNameSpaceURI, jdfNSURIPrefix)))
 			{ // the maps only contain local names for jdf - recheck in case of prefix
 				strClassPath = data.sm_PackageNames.get(localPart);
 			}
