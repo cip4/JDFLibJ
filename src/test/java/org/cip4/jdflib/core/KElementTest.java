@@ -148,6 +148,20 @@ class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void TestUpdateInteger()
+	{
+		final KElement e1 = KElement.createRoot("a", null);
+		assertNull(e1.updateInteger("foo"));
+		e1.setAttribute("val", 1, null);
+		assertEquals("1", e1.updateInteger("val"));
+		e1.setAttribute("val2", 1.3, null);
+		assertEquals("1", e1.updateInteger("val2"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testIsEqualStatic()
 	{
 		final KElement e1 = KElement.createRoot("a", null);

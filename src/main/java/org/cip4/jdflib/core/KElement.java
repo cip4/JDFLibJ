@@ -6918,6 +6918,18 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		}
 	}
 
+	public String updateInteger(String attName)
+	{
+		final String val = getNonEmpty(attName);
+		if (StringUtil.isNumber(val))
+		{
+			final int ret = StringUtil.parseInt(val, 0);
+			setAttribute(attName, ret, null);
+			return String.valueOf(ret);
+		}
+		return val;
+	}
+
 	public JDFAttributeMap fillNSMap(KElement src)
 	{
 		final JDFAttributeMap nsMap = new JDFAttributeMap();
