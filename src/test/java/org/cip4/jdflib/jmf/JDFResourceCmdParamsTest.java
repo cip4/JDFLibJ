@@ -75,6 +75,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import org.cip4.jdflib.auto.JDFAutoResourceCmdParams.EUpdateMethod;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement.ENodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
@@ -135,6 +136,65 @@ class JDFResourceCmdParamsTest
 		final JDFNodeInfo nodeInfo = n.getNodeInfo();
 		assertEquals(offset, nodeInfo.getEnd());
 		assertEquals(EnumNodeStatus.InProgress, nodeInfo.getStatus());
+		assertEquals(EnumNodeStatus.InProgress, n.getPartStatus(null, 0));
+	}
+
+	@Test
+	void testApplyStatusMixed()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		n.setJobID("j1");
+		n.setJobPartID("p1");
+		n.setStatus(EnumNodeStatus.InProgress);
+		final JDFNodeInfo ni0 = n.getCreateNodeInfo();
+		final JDFNodeInfo ni = (JDFNodeInfo) ni0.addPartition(EnumPartIDKey.SheetName, "S1");
+		ni.setEnd(new JDFDate());
+		final JDFNodeInfo ni2 = (JDFNodeInfo) ni0.addPartition(EnumPartIDKey.SheetName, "S2");
+		ni2.setEnd(new JDFDate());
+		ni2.setNodeStatus(ENodeStatus.Completed);
+
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Command, EnumType.Resource);
+		final JDFResourceCmdParams rcp = jmf.getCreateCommand().getCreateResourceCmdParams(0);
+		rcp.setIdentifier(n.getIdentifier());
+		rcp.setResourceName(ElementName.NODEINFO);
+		rcp.setResourceID(ni.getID());
+		rcp.setPartMap(ni.getLeaf(0).getPartMap());
+		rcp.setUpdateMethod(EUpdateMethod.Incremental);
+		final JDFNodeInfo nir = (JDFNodeInfo) rcp.getCreateResource();
+		final JDFDate offset = new JDFDate().addOffset(0, 0, 0, 42);
+		nir.setEnd(offset);
+		rcp.applyResourceCommand(n);
+		final JDFNodeInfo nodeInfo = n.getNodeInfo();
+		assertEquals(EnumNodeStatus.InProgress, nodeInfo.getStatus());
+		assertEquals(EnumNodeStatus.InProgress, n.getPartStatus(null, -1));
+		assertEquals(EnumNodeStatus.InProgress, n.getPartStatus(null, 0));
+		assertEquals(EnumNodeStatus.Completed, n.getPartStatus(null, 1));
+	}
+
+	@Test
+	void testApplyStatusRoot()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		n.setJobID("j1");
+		n.setJobPartID("p1");
+		n.setStatus(EnumNodeStatus.InProgress);
+		final JDFNodeInfo ni = n.getCreateNodeInfo();
+		ni.setEnd(new JDFDate());
+
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Command, EnumType.Resource);
+		final JDFResourceCmdParams rcp = jmf.getCreateCommand().getCreateResourceCmdParams(0);
+		rcp.setIdentifier(n.getIdentifier());
+		rcp.setResourceName(ElementName.NODEINFO);
+		rcp.setResourceID(ni.getID());
+		rcp.setUpdateMethod(EUpdateMethod.Incremental);
+		final JDFNodeInfo ni2 = (JDFNodeInfo) rcp.getCreateResource();
+		final JDFDate offset = new JDFDate().addOffset(0, 0, 0, 42);
+		ni2.setEnd(offset);
+		rcp.applyResourceCommand(n);
+		final JDFNodeInfo nodeInfo = n.getNodeInfo();
+		assertEquals(offset, nodeInfo.getEnd());
+		assertEquals(EnumNodeStatus.InProgress, nodeInfo.getStatus());
+		assertEquals(EnumNodeStatus.InProgress, n.getPartStatus(null, 0));
 	}
 
 	@Test

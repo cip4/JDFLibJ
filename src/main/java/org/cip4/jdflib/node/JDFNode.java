@@ -2451,7 +2451,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 				return null;
 			}
 			JDFAttributeMap identicalSrcMap = null;
-			if (attMap != null && !attMap.overlapMap(ni.getPartMap()))
+			final JDFAttributeMap partMap = ni.getPartMap();
+			if (attMap != null && !attMap.overlapMap(partMap))
 			{
 				final PartitionGetter partitionGetter = new PartitionGetter(niBase);
 				partitionGetter.setFollowIdentical(false);
@@ -2462,7 +2463,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 				}
 			}
 			status = null;
-
+			EnumNodeStatus rootStatus = null;
+			if (method == 0 && (ContainerUtil.equals(partMap, attMap) || ContainerUtil.isEmpty(attMap) == ContainerUtil.isEmpty(partMap)))
+			{
+				rootStatus = ni.getNodeStatus();
+			}
 			final List<JDFResource> vLeaves = ni.getLeafArray(false);
 			final int size = vLeaves.size();
 
@@ -2490,7 +2495,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 						}
 						else if (nodeStatus == null || method == 0)
 						{
-							return null;
+							return rootStatus;
 						}
 						else if (method < 0)
 						{

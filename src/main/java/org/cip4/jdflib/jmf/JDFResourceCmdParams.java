@@ -345,7 +345,9 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 			if (!EnumNodeStatus.Part.equals(nodeStatus) && !EnumNodeStatus.Pool.equals(nodeStatus))
 			{
 				node.setStatus(EnumNodeStatus.Part);
-				ni.getResourceRoot().setStatus(nodeStatus);
+				final JDFResource resourceRoot = ni.getResourceRoot();
+				resourceRoot.setStatus(nodeStatus);
+				resourceRoot.setPartUsage(EnumPartUsage.Implicit);
 				if (!ni.hasAttribute_KElement(AttributeName.NODESTATUS))
 				{
 					ni.setNodeStatus(nodeStatus);

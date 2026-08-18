@@ -2110,7 +2110,7 @@ class JDFNodeTest extends JDFTestCaseBase
 		createPartition.setNodeStatus(EnumNodeStatus.Waiting);
 		createPartition2.setNodeStatus(EnumNodeStatus.Waiting);
 		EnumNodeStatus partStatus = createJDF.getPartStatus(null, 0);
-		assertNull(partStatus, "If parent is different from single leaf: null ");
+		assertEquals(EnumNodeStatus.Completed, partStatus, "If parent is different from single leaf: null ");
 		partStatus = createJDF.getPartStatus(null, -1);
 		assertEquals(EnumNodeStatus.Waiting, partStatus, "If parent is different from single leaf: null ");
 		partStatus = createJDF.getPartStatus(null, 1);
@@ -2273,7 +2273,7 @@ class JDFNodeTest extends JDFTestCaseBase
 		final JDFAttributeMap m = new JDFAttributeMap("SignatureName", "Sig1");
 		node.setPartStatus(m, EnumNodeStatus.Completed, null);
 		assertTrue(node.getPartStatus(m, 0) == EnumNodeStatus.Completed, "ni sig1 completed");
-		assertNull(node.getPartStatus(null, 0), "ni root mixed");
+		assertEquals(EnumNodeStatus.Waiting, node.getPartStatus(null, 0), "ni root mixed");
 		final JDFAttributeMap m3 = new JDFAttributeMap("SignatureName", "Sig2");
 		assertTrue(node.getPartStatus(m3, 0) == EnumNodeStatus.Waiting, "ni sig2 waiting");
 
@@ -2284,7 +2284,7 @@ class JDFNodeTest extends JDFTestCaseBase
 		assertTrue(node.getPartStatus(m, 0) == EnumNodeStatus.Waiting, "ni sig1 waiting");
 
 		final JDFAttributeMap m2 = new JDFAttributeMap("SignatureName", "Sig1");
-		assertNull(node.getPartStatus(m2, 0), "ni sig1 mixed");
+		assertEquals(EnumNodeStatus.Completed, node.getPartStatus(m2, 0), "ni sig1 mixed");
 
 		final JDFAttributeMap m4 = new JDFAttributeMap("SignatureName", "Sig3");
 		m4.put("SheetName", "S1");
@@ -2295,7 +2295,7 @@ class JDFNodeTest extends JDFTestCaseBase
 		assertNotNull(ni.getPartition(m4, EnumPartUsage.Explicit), "explicit m4");
 
 		final JDFAttributeMap m5 = new JDFAttributeMap("Side", "Back");
-		assertNull(node.getPartStatus(m5, 0), "ni side back  mixed");
+		assertEquals(null, node.getPartStatus(m5, 0), "ni side back  mixed");
 	}
 
 	/**
@@ -3309,7 +3309,7 @@ class JDFNodeTest extends JDFTestCaseBase
 			}
 			root.updatePartStatus(vMap, true, true, 0);
 			assertEquals(root.getPartStatus(map1, 0), EnumNodeStatus.Completed);
-			assertNull(root.getPartStatus(null, 0));
+			assertEquals(root.getPartStatus(null, 0), EnumNodeStatus.Waiting);
 			if (loop == 0)
 			{
 				assertEquals(root.getPartStatus(map21, 0), EnumNodeStatus.InProgress);
@@ -3321,8 +3321,6 @@ class JDFNodeTest extends JDFTestCaseBase
 
 		}
 	}
-
-	// ////////////////////////////////////////////////////////////
 
 	/**
 	 *
