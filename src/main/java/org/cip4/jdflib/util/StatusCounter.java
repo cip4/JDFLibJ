@@ -1162,7 +1162,7 @@ public class StatusCounter
 	/**
 	 * container class to set amounts and waste in phaseTime
 	 */
-	private class LinkAmount
+	class LinkAmount
 	{
 		private class AmountBag
 		{
@@ -1176,7 +1176,7 @@ public class StatusCounter
 				}
 			}
 
-			protected long lastCall = 0;
+			protected long lastCall = -1;
 			private final EnumMap<EAmountType, Double> theMap;
 
 			/**
@@ -1477,14 +1477,19 @@ public class StatusCounter
 		}
 
 		/**
-		 * update the speed based on new amounts
+		 * update the speed based on new amounts needed like this for testing purposes, but in real life the speed is updated by the updateSpeed(long) method which is called from setPhase
 		 */
 		void updateSpeed()
 		{
 			final long t = System.currentTimeMillis();
+			updateSpeed(t);
+		}
+
+		void updateSpeed(final long t)
+		{
 			final AmountBag ab = getBag(null);
 
-			if (ab.lastCall == 0)
+			if (ab.lastCall < 0)
 			{
 				ab.set(EAmountType.Speed, 0);
 				ab.lastCall = t;
@@ -1492,14 +1497,14 @@ public class StatusCounter
 			}
 			else
 			{
-				double dt = t - ab.lastCall;
-				if (dt > 30000)
+				final double dt0 = t - ab.lastCall;
+				if (dt0 > 30000)
 				{
-					dt /= 3600000.;
+					final double dt = dt0 / 3600000.;
 					final double currentN = ab.get(EAmountType.TotalAmount) + ab.get(EAmountType.TotalWaste);
 					final double deltaN = currentN - ab.get(EAmountType.Last);
 					ab.set(EAmountType.Speed, deltaN / dt);
-					ab.set(EAmountType.Last, deltaN);
+					ab.set(EAmountType.Last, currentN);
 					ab.lastCall = t;
 				}
 			}

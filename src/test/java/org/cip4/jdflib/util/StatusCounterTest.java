@@ -77,6 +77,8 @@ import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.util.StatusCounter.EAmountType;
+import org.cip4.jdflib.util.StatusCounter.LinkAmount;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -167,6 +169,32 @@ public class StatusCounterTest extends JDFTestCaseBase
 	void testWasteAmount()
 	{
 		new SingleStatusCounterTest().testWasteAmount();
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testSpeed()
+	{
+		final JDFNode n = creatXMDoc().getJDFRoot();
+		final StatusCounter sc = new StatusCounter(n, null, null);
+		final LinkAmount la = sc.getLinkAmount(0);
+		la.updateSpeed(0);
+		la.setAmount(EAmountType.TotalAmount, 90, null);
+		la.setAmount(EAmountType.TotalWaste, 10, null);
+		la.updateSpeed(20000);
+		assertEquals(0, la.getAmount(EAmountType.Speed), 0.1);
+		la.updateSpeed(100000);
+		assertEquals(3600, la.getAmount(EAmountType.Speed), 0.1);
+		la.setAmount(EAmountType.TotalAmount, 180, null);
+		la.setAmount(EAmountType.TotalWaste, 20, null);
+		la.updateSpeed(200000);
+		assertEquals(3600, la.getAmount(EAmountType.Speed), 0.1);
+		la.setAmount(EAmountType.TotalAmount, 270, null);
+		la.setAmount(EAmountType.TotalWaste, 30, null);
+		la.updateSpeed(300000);
+		assertEquals(3600, la.getAmount(EAmountType.Speed), 0.1);
 	}
 
 	private class SingleStatusCounterTest
