@@ -82,6 +82,7 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.util.JDFDate;
 import org.junit.jupiter.api.Test;
 
@@ -135,8 +136,9 @@ class JDFResourceCmdParamsTest
 		rcp.applyResourceCommand(n);
 		final JDFNodeInfo nodeInfo = n.getNodeInfo();
 		assertEquals(offset, nodeInfo.getEnd());
-		assertEquals(EnumNodeStatus.InProgress, nodeInfo.getStatus());
-		assertEquals(EnumNodeStatus.InProgress, n.getPartStatus(null, 0));
+		assertEquals(EnumNodeStatus.InProgress, nodeInfo.getNodeStatus());
+		assertEquals(EnumResStatus.Available, nodeInfo.getResStatus(false));
+		assertEquals(EnumNodeStatus.Part, n.getStatus());
 	}
 
 	@Test
@@ -165,10 +167,11 @@ class JDFResourceCmdParamsTest
 		nir.setEnd(offset);
 		rcp.applyResourceCommand(n);
 		final JDFNodeInfo nodeInfo = n.getNodeInfo();
-		assertEquals(EnumNodeStatus.InProgress, nodeInfo.getStatus());
+		assertEquals(EnumNodeStatus.InProgress, nodeInfo.getNodeStatus());
 		assertEquals(EnumNodeStatus.InProgress, n.getPartStatus(null, -1));
 		assertEquals(EnumNodeStatus.InProgress, n.getPartStatus(null, 0));
 		assertEquals(EnumNodeStatus.Completed, n.getPartStatus(null, 1));
+		assertEquals(EnumResStatus.Available, nodeInfo.getResStatus(false));
 	}
 
 	@Test
