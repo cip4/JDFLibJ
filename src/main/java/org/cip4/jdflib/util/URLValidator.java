@@ -413,7 +413,7 @@ public class URLValidator
 			}
 			catch (final IllegalArgumentException e)
 			{
-				log.error("illegal absolute url " + urlString);
+				log.error(getClass().getSimpleName() + " illegal absolute url " + urlString, e);
 			}
 		}
 		return null;

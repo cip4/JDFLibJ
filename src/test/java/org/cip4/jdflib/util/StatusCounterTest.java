@@ -180,7 +180,9 @@ public class StatusCounterTest extends JDFTestCaseBase
 		final JDFNode n = creatXMDoc().getJDFRoot();
 		final StatusCounter sc = new StatusCounter(n, null, null);
 		final LinkAmount la = sc.getLinkAmount(0);
+		assertEquals(0, la.getAmount(EAmountType.Speed), 0.1);
 		la.updateSpeed(0);
+		assertEquals(0, la.getAmount(EAmountType.Speed), 0.1);
 		la.setAmount(EAmountType.TotalAmount, 90, null);
 		la.setAmount(EAmountType.TotalWaste, 10, null);
 		la.updateSpeed(20000);
