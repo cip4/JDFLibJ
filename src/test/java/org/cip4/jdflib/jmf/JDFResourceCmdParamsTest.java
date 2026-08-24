@@ -196,8 +196,9 @@ class JDFResourceCmdParamsTest
 		rcp.applyResourceCommand(n);
 		final JDFNodeInfo nodeInfo = n.getNodeInfo();
 		assertEquals(offset, nodeInfo.getEnd());
-		assertEquals(EnumNodeStatus.InProgress, nodeInfo.getStatus());
+		assertEquals(EnumNodeStatus.InProgress, nodeInfo.getNodeStatus());
 		assertEquals(EnumNodeStatus.InProgress, n.getPartStatus(null, 0));
+		assertEquals(EnumResStatus.Available, nodeInfo.getResStatus(false));
 	}
 
 	@Test
