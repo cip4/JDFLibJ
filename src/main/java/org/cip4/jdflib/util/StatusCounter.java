@@ -144,12 +144,12 @@ public class StatusCounter
 		return totalCounter;
 	}
 
-	boolean isSplitJobPhase()
+	public boolean isSplitJobPhase()
 	{
 		return splitJobPhase;
 	}
 
-	void setSplitJobPhase(boolean splitJobPhase)
+	public void setSplitJobPhase(boolean splitJobPhase)
 	{
 		this.splitJobPhase = splitJobPhase;
 	}
