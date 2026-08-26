@@ -120,8 +120,8 @@ class JDFJMFTest extends JDFTestCaseBase
 		assertEquals(jmf, splitMessages1.get(0));
 		final JDFSignal signal = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.Status);
 		final List<JDFJMF> splitMessages = jmf.splitMessages();
-		assertNotEquals(this, splitMessages.get(0));
-		assertNotEquals(this, splitMessages.get(1));
+		assertNotEquals(jmf, splitMessages.get(0));
+		assertNotEquals(jmf, splitMessages.get(1));
 		assertNotEquals(splitMessages.get(0), splitMessages.get(1));
 		assertTrue(splitMessages.get(0).getMessage(0).isEqual(command));
 		assertTrue(splitMessages.get(1).getMessage(0).isEqual(signal));
