@@ -112,7 +112,6 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 	 * @param _jmfLevel
 	 * @param _misLevel
 	 * @param vPartMap
-	 *
 	 */
 	public MISFinGoldenTicket(final int _icsLevel, final EnumVersion jdfVersion, final int _jmfLevel, final int _misLevel, final VJDFAttributeMap vPartMap)
 	{
@@ -152,7 +151,6 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 
 	/**
 	 * initializes this node to a given ICS version
-	 *
 	 */
 	@Override
 	public void init()
@@ -221,7 +219,6 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 
 	/**
 	 * @return
-	 *
 	 */
 	private JDFCollectingParams initCollecting()
 	{
@@ -327,6 +324,11 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 		else
 		{
 			outComp.setDescriptiveName("MIS-Fin output Component");
+			if (MISFIN_HARDCOVERFIN.equals(category) || MISFIN_SOFTCOVERFIN.equals(category) || MISFIN_STITCHFIN.equals(category))
+			{
+				setActivePart(null, false);
+				rl.setAmount(good, new JDFAttributeMap(AttributeName.CONDITION, "Good"));
+			}
 		}
 
 		// outComp.getCreateLayout();
@@ -342,7 +344,6 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 
 	/**
 	 * @return
-	 *
 	 */
 	protected JDFComponent initInputComponent()
 	{

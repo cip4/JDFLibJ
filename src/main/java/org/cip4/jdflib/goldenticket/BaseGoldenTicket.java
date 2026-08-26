@@ -92,10 +92,8 @@ import org.cip4.jdflib.util.UrlUtil;
 
 /**
  * @author rainer prosi class that generates golden tickets based on ICS levels etc basegolden ticket should generally be the last in the cascade domain - mis - jmf - base
- *
  *         To generate a new golden ticket, follow these steps 1.) construct the appropriate domain subclass, e.g. MISCPGoldenTicket for mis to conventional print 2.) call
  *         .assign(null) (or your favorite hand-coded jdf node) 3.) retrieve the updated copy with .getNode()
- *
  */
 public class BaseGoldenTicket
 {
@@ -133,7 +131,6 @@ public class BaseGoldenTicket
 	public VString cols = getCols();
 
 	/**
-	 *
 	 * @return
 	 */
 	protected VString getCols()
@@ -155,8 +152,6 @@ public class BaseGoldenTicket
 	public int[] nCols = { 0, 0 };
 
 	/**
-	 *
-	 *
 	 * @param n
 	 * @return
 	 */
@@ -233,7 +228,7 @@ public class BaseGoldenTicket
 	/**
 	 * create a BaseGoldenTicket
 	 *
-	 * @param pIcsLevel the level to init to (1,2 or 3)
+	 * @param pIcsLevel  the level to init to (1,2 or 3)
 	 * @param jdfVersion the version to generate a golden ticket for
 	 */
 	public BaseGoldenTicket(final int pIcsLevel, final EnumVersion jdfVersion)
@@ -251,7 +246,6 @@ public class BaseGoldenTicket
 	 * create a BaseGoldenTicket
 	 *
 	 * @param parent
-	 *
 	 */
 	public BaseGoldenTicket(final BaseGoldenTicket parent)
 	{
@@ -283,7 +277,6 @@ public class BaseGoldenTicket
 
 	/**
 	 * @return
-	 *
 	 */
 	protected JDFNodeInfo initNodeInfo()
 	{
@@ -363,7 +356,6 @@ public class BaseGoldenTicket
 
 	/**
 	 * makeready for all kids
-	 *
 	 */
 
 	public void makeReadyAll()
@@ -441,7 +433,6 @@ public class BaseGoldenTicket
 	 * execute for all kids
 	 *
 	 * @param parts
-	 *
 	 */
 	public void executeAll(final VJDFAttributeMap parts)
 	{
@@ -475,9 +466,9 @@ public class BaseGoldenTicket
 		for (int i = 0; i < vvMap.size(); i++)
 		{
 			setActivePart(vvMap.get(i), i % partsForAvailable == 0);
-			for (int j = 0; j < vKids.size(); j++)
+			for (final BaseGoldenTicket vKid : vKids)
 			{
-				vKids.get(j).execute(vvMap.get(i), i % partsForAvailable == (partsForAvailable - 1), i % partsForAvailable == 0);
+				vKid.execute(vvMap.get(i), i % partsForAvailable == (partsForAvailable - 1), i % partsForAvailable == 0);
 			}
 		}
 	}
@@ -586,7 +577,6 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 *
 	 * @param bProduct
 	 */
 	public void setParent(final boolean bProduct)
@@ -596,7 +586,6 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 *
 	 * @param bProduct
 	 */
 	public void setParent(final ProductGoldenTicket parent)
@@ -606,7 +595,6 @@ public class BaseGoldenTicket
 
 	/**
 	 * initializes this node to a given ICS version
-	 *
 	 */
 	public void init()
 	{
@@ -618,7 +606,6 @@ public class BaseGoldenTicket
 	/**
 	 * @param previousNode
 	 * @return
-	 *
 	 */
 	protected JDFDevice initDevice(final JDFNode previousNode)
 	{
@@ -648,7 +635,6 @@ public class BaseGoldenTicket
 
 	/**
 	 * @param node
-	 *
 	 */
 	public void initAuditPool(final JDFNode node)
 	{
@@ -761,7 +747,6 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -794,6 +779,10 @@ public class BaseGoldenTicket
 	 */
 	public StatusCounter getStatusCounter()
 	{
+		if (theStatusCounter.getFirstRefID() == null)
+		{
+			theStatusCounter.setActiveNode(theExpandedNode, null, getNodeLinks());
+		}
 		return theStatusCounter;
 	}
 
@@ -837,7 +826,9 @@ public class BaseGoldenTicket
 	public void addSheet(final String sheetName)
 	{
 		if (vParts == null)
+		{
 			vParts = new VJDFAttributeMap();
+		}
 		JDFAttributeMap map = new JDFAttributeMap(AttributeName.SIGNATURENAME, "Sig1");
 		map.put(AttributeName.SHEETNAME, sheetName);
 		map.put("Side", "Front");
@@ -879,7 +870,8 @@ public class BaseGoldenTicket
 			ccLink = theNode.linkResource(theParentNode.getResource(ElementName.COLORANTCONTROL, EnumUsage.Input, 0), EnumUsage.Input, null);
 		}
 
-		final JDFColorantControl cc = (JDFColorantControl) (ccLink == null ? (JDFColorantControl) theNode.getCreateResource(ElementName.COLORANTCONTROL, EnumUsage.Input, 0)
+		final JDFColorantControl cc = (JDFColorantControl) (ccLink == null
+				? (JDFColorantControl) theNode.getCreateResource(ElementName.COLORANTCONTROL, EnumUsage.Input, 0)
 				: ccLink.getTarget());
 		cc.setResStatus(EnumResStatus.Available, false);
 
@@ -913,7 +905,6 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	protected JDFColorPool initColorPool()
@@ -970,7 +961,6 @@ public class BaseGoldenTicket
 
 	/**
 	 * @return
-	 *
 	 */
 	protected JDFMedia initPaperMedia()
 	{
@@ -1076,7 +1066,6 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 *
 	 * @param usage
 	 */
 	protected void initPlateXM(final EnumUsage usage)
@@ -1213,7 +1202,6 @@ public class BaseGoldenTicket
 
 	/**
 	 * @return
-	 *
 	 */
 	protected JDFRunList initDocumentRunList()
 	{
@@ -1233,7 +1221,6 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	protected JDFComponent initOutputComponent()
@@ -1282,11 +1269,13 @@ public class BaseGoldenTicket
 		}
 		else
 		{
-			outComp.setDescriptiveName("MIS-CP or IDP output Component");
-			final JDFAttributeMap newMap = new JDFAttributeMap(AttributeName.CONDITION, "Good");
-			rl.setAmount(good, newMap);
+			outComp.setDescriptiveName("MIS-CP, MIS-Fin or IDP output Component");
 		}
-		// outComp.getCreateLayout();
+		final JDFAttributeMap newMap = new JDFAttributeMap(AttributeName.CONDITION, "Good");
+		rl.setAmount(good, newMap);
+
+		theStatusCounter.setFirstRefID(rl.getrRef());
+
 		final JDFMedia inMedia = (JDFMedia) theNode.getResource(ElementName.MEDIA, EnumUsage.Input, 0);
 		if (inMedia != null)
 		{

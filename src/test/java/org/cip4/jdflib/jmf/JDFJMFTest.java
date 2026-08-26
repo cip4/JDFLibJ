@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -40,11 +40,13 @@ package org.cip4.jdflib.jmf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
@@ -67,7 +69,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class JDFJMFTest extends JDFTestCaseBase
 {
@@ -89,7 +90,42 @@ class JDFJMFTest extends JDFTestCaseBase
 		assertEquals(jmf.getMessageVector(null, EnumType.Status).size(), 2);
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
+	/**
+	 *
+	 */
+	@Test
+	void testGetMessageList()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
+		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.Status);
+		assertEquals(jmf.getMessageList(null, EnumType.Status).get(0), command);
+		assertEquals(1, jmf.getMessageList(null, EnumType.Status).size());
+		final JDFSignal signal = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.Status);
+		assertEquals(jmf.getMessageList(null, EnumType.Status).get(0), command);
+		assertEquals(jmf.getMessageList(null, EnumType.Status).get(1), signal);
+		assertEquals(2, jmf.getMessageList(null, EnumType.Status).size());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testSplitMessageList()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
+		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.Status);
+		final List<JDFJMF> splitMessages1 = jmf.splitMessages();
+		assertEquals(jmf, splitMessages1.get(0));
+		final JDFSignal signal = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.Status);
+		final List<JDFJMF> splitMessages = jmf.splitMessages();
+		assertNotEquals(this, splitMessages.get(0));
+		assertNotEquals(this, splitMessages.get(1));
+		assertNotEquals(splitMessages.get(0), splitMessages.get(1));
+		assertTrue(splitMessages.get(0).getMessage(0).isEqual(command));
+		assertTrue(splitMessages.get(1).getMessage(0).isEqual(signal));
+	}
 
 	/**
 	 *
@@ -196,7 +232,6 @@ class JDFJMFTest extends JDFTestCaseBase
 
 	/**
 	 * @throws CloneNotSupportedException
-	 *
 	 */
 	@Test
 	void testCloneNewDocInit() throws CloneNotSupportedException
@@ -206,7 +241,9 @@ class JDFJMFTest extends JDFTestCaseBase
 		jmf.appendCommand(EnumType.AbortQueueEntry);
 		JDFJMF jmf2 = (JDFJMF) jmf.cloneNewDoc();
 		for (int i = 0; i < 10; i++)
+		{
 			jmf2 = (JDFJMF) jmf2.cloneNewDoc();
+		}
 		assertTrue(StringUtil.numSubstrings(jmf2.toXML(), "<--") < 2);
 
 	}

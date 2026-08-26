@@ -80,22 +80,23 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.JDFElement.ENodeStatus;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.extensions.ProductHelper.eProductType;
+import org.cip4.jdflib.resource.JDFResource.EResStatus;
 import org.junit.jupiter.api.Test;
 
 /**
  * general utilities for containers and objects
  *
  * @author prosirai
- *
  */
 class JavaEnumUtilTest extends JDFTestCaseBase
 {
-	static enum E
+	enum E
 	{
 		a, b, BOTTOMLEFT
-	};
+	}
 
 	/**
 	 *
@@ -228,6 +229,19 @@ class JavaEnumUtilTest extends JDFTestCaseBase
 		final Collection<E> roundtrip = JavaEnumUtil.getEnumList(E.class, "a b", true);
 		assertEquals(2, roundtrip.size());
 
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testMatches()
+	{
+		assertFalse(JavaEnumUtil.matches(EResStatus.Incomplete, EResStatus.Available));
+		assertFalse(JavaEnumUtil.matches(EResStatus.Incomplete, ENodeStatus.Aborted));
+		assertFalse(JavaEnumUtil.matches(EResStatus.Incomplete, null));
+		assertTrue(JavaEnumUtil.matches(null, null));
+		assertTrue(JavaEnumUtil.matches(null, EResStatus.Available));
 	}
 
 }

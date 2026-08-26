@@ -126,6 +126,16 @@ public class JavaEnumUtil
 	}
 
 	/**
+	 * @param filter
+	 * @param other
+	 * @return
+	 */
+	public static boolean matches(final Enum<?> filter, final Enum<?> other)
+	{
+		return (filter == null) || filter.equals(other);
+	}
+
+	/**
 	 * null safe convenience name getter
 	 *
 	 * @param en the enum to get the name of the class
@@ -262,7 +272,7 @@ public class JavaEnumUtil
 	 */
 	public static <T extends Enum<T>> List<T> getEnumList(final Class<T> c, final Collection<String> strings, final boolean unique)
 	{
-		final ArrayList<T> ret = new ArrayList<T>();
+		final ArrayList<T> ret = new ArrayList<>();
 		if (!StringUtil.isEmpty(strings))
 		{
 			for (final String s : strings)

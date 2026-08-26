@@ -82,6 +82,7 @@ import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.auto.JDFAutoRefAnchor.EAnchor;
 import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchor;
 import org.cip4.jdflib.auto.JDFAutoThreadSewingParams.ECastingMaterial;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.extensions.ProductHelper.eProductType;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.junit.jupiter.api.Test;
@@ -93,10 +94,10 @@ import org.junit.jupiter.api.Test;
  */
 class EnumUtilTest extends JDFTestCaseBase
 {
-	static enum E
+	enum E
 	{
 		a, b, BOTTOMLEFT
-	};
+	}
 
 	/**
 	 *
@@ -114,6 +115,19 @@ class EnumUtilTest extends JDFTestCaseBase
 	void testMax()
 	{
 		assertEquals(EnumUtil.max(EnumResStatus.Incomplete, EnumResStatus.Available), EnumResStatus.Available);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testMatches()
+	{
+		assertFalse(EnumUtil.matches(EnumResStatus.Incomplete, EnumResStatus.Available));
+		assertFalse(EnumUtil.matches(EnumResStatus.Incomplete, EnumNodeStatus.Aborted));
+		assertFalse(EnumUtil.matches(EnumResStatus.Incomplete, null));
+		assertTrue(EnumUtil.matches(null, null));
+		assertTrue(EnumUtil.matches(null, EnumResStatus.Available));
 	}
 
 	/**

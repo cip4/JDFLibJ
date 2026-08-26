@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -51,6 +51,7 @@
 package org.cip4.jdflib.jmf;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -72,7 +73,9 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * The wrapper for JMF messages, i.e. the root of a JMF document
@@ -189,7 +192,6 @@ public class JDFJMF extends JDFAutoJMF
 	 * get attribute MaxVersion, defaults to version if not set
 	 *
 	 * @return EnumVersion - attribute value
-	 *
 	 *         default - getMaxVersion(false)
 	 */
 	@Override
@@ -232,7 +234,6 @@ public class JDFJMF extends JDFAutoJMF
 
 	/**
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
-	 *
 	 *         Appendix D (JDF 1.3) - Supported Error Codes in JMF and Notification elements Jun 7, 2009
 	 */
 	public static class EnumJMFReturnCode extends ValuedEnum
@@ -329,7 +330,8 @@ public class JDFJMF extends JDFAutoJMF
 		/**
 		 *
 		 */
-		public static final EnumJMFReturnCode DEVICE_NOT_AVAILABLE = new EnumJMFReturnCode(8, "Device not available (controller exists but not the device or queue)");
+		public static final EnumJMFReturnCode DEVICE_NOT_AVAILABLE = new EnumJMFReturnCode(8,
+				"Device not available (controller exists but not the device or queue)");
 
 		/**
 		 *
@@ -374,12 +376,14 @@ public class JDFJMF extends JDFAutoJMF
 		/**
 		 *
 		 */
-		public static final EnumJMFReturnCode QUEUE_ENRTY_ALREADY_EXECUTED = new EnumJMFReturnCode(106, "Queue request failed because queue entry is already executing");
+		public static final EnumJMFReturnCode QUEUE_ENRTY_ALREADY_EXECUTED = new EnumJMFReturnCode(106,
+				"Queue request failed because queue entry is already executing");
 
 		/**
 		 *
 		 */
-		public static final EnumJMFReturnCode NO_CHANGE_EXECUTING_QUEUE_ENRTY = new EnumJMFReturnCode(107, "Queue entry is already executing. Late change is not accepted");
+		public static final EnumJMFReturnCode NO_CHANGE_EXECUTING_QUEUE_ENRTY = new EnumJMFReturnCode(107,
+				"Queue entry is already executing. Late change is not accepted");
 
 		/**
 		 *
@@ -406,7 +410,8 @@ public class JDFJMF extends JDFAutoJMF
 		/**
 		 *
 		 */
-		public static final EnumJMFReturnCode QUEUE_CLOSED = new EnumJMFReturnCode(112, "Queue request failed because the Queue is closed and does not accept new entries");
+		public static final EnumJMFReturnCode QUEUE_CLOSED = new EnumJMFReturnCode(112,
+				"Queue request failed because the Queue is closed and does not accept new entries");
 
 		/**
 		 *
@@ -507,9 +512,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * GetMessage - get the ith message, regardless of type
 	 *
 	 * @param i message index
-	 *
 	 * @return JDFMessage - the ith message
-	 *
 	 */
 	public JDFMessage getMessage(final int i)
 	{
@@ -517,7 +520,6 @@ public class JDFJMF extends JDFAutoJMF
 	}
 
 	/**
-	 *
 	 * @param i
 	 * @param bCreate
 	 * @return
@@ -534,7 +536,6 @@ public class JDFJMF extends JDFAutoJMF
 	}
 
 	/**
-	 *
 	 * @param i
 	 * @param bCreate
 	 * @return
@@ -570,7 +571,6 @@ public class JDFJMF extends JDFAutoJMF
 	}
 
 	/**
-	 *
 	 * @param i
 	 * @param bCreate
 	 * @return
@@ -590,8 +590,8 @@ public class JDFJMF extends JDFAutoJMF
 	 * get an existing message element, create it if it doesn't exist
 	 *
 	 * @param family the Message family - Query, Acknowledge, Command, Response, Registration or Signal
-	 * @param typ the message type
-	 * @param i get the ith element
+	 * @param typ    the message type
+	 * @param i      get the ith element
 	 * @return the newly created message
 	 */
 	public JDFMessage getCreateMessageElement(final JDFMessage.EnumFamily family, final JDFMessage.EnumType typ, final int i)
@@ -615,7 +615,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * get an existing message element, create it if it doesn't exist
 	 *
 	 * @param family the Message family - Query, Acknowledge, Command, Response, Registration or Signal
-	 * @param i get the ith element
+	 * @param i      get the ith element
 	 * @return the newly created message
 	 * @deprecated use getCreateMessageElement(family, null, i);
 	 */
@@ -642,7 +642,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * create a new JMF with one Message Element of family <code>family</code> and type <code>typ</code>
 	 *
 	 * @param family the Message family - Query, Acknowledge, Command, Response, Registration or Signal
-	 * @param typ the messages @Type value, null if unknown
+	 * @param typ    the messages @Type value, null if unknown
 	 * @return the newly created message
 	 */
 	public static JDFJMF createJMF(final JDFMessage.EnumFamily family, final JDFMessage.EnumType typ)
@@ -661,7 +661,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * append a message element to <code>this</code>
 	 *
 	 * @param family the Message family - Query, Acknowledge, Command, Response, Registration or Signal
-	 * @param typ the messages @Type value, null if unknown
+	 * @param typ    the messages @Type value, null if unknown
 	 * @return the newly created message
 	 */
 	public JDFMessage appendMessageElement(final JDFMessage.EnumFamily family, final JDFMessage.EnumType typ)
@@ -699,8 +699,8 @@ public class JDFJMF extends JDFAutoJMF
 	 * get the ith message element of family type family
 	 *
 	 * @param family the Message family - Query, Acknowledge, Command, Response, Registration or Signal
-	 * @param typ the messages @Type value, null if unknown
-	 * @param i the i'th message element to get, if i<0, get from back
+	 * @param typ    the messages @Type value, null if unknown
+	 * @param i      the i'th message element to get, if i<0, get from back
 	 * @return the matching message, null if none are found
 	 */
 	public JDFMessage getMessageElement(final JDFMessage.EnumFamily family, final JDFMessage.EnumType typ, int i)
@@ -727,16 +727,9 @@ public class JDFJMF extends JDFAutoJMF
 
 		while (e != null)
 		{
-			if (e instanceof JDFMessage)
+			if ((e instanceof final JDFMessage m) && ((typString == null || typString.equals(m.getType())) && (n++ >= i)))
 			{
-				final JDFMessage m = (JDFMessage) e;
-				if (typString == null || typString.equals(m.getType()))
-				{
-					if (n++ >= i)
-					{
-						return m;
-					}
-				}
+				return m;
 			}
 			e = e.getNextSiblingElement(familyString, null);
 		}
@@ -772,11 +765,10 @@ public class JDFJMF extends JDFAutoJMF
 	/**
 	 * get a vector of all messages in a JMF from a JDFDoc
 	 *
-	 * @param doc the JDFDoc to search - only valid for root JMF
+	 * @param doc    the JDFDoc to search - only valid for root JMF
 	 * @param family requested message family
-	 * @param typ requested message type
+	 * @param typ    requested message type
 	 * @return VElement all message elements, null if no match found
-	 *
 	 */
 	public static VElement getMessageVector(final JDFDoc doc, final JDFMessage.EnumFamily family, final JDFMessage.EnumType typ)
 	{
@@ -798,9 +790,8 @@ public class JDFJMF extends JDFAutoJMF
 	 * get a vector of all messages in this JMF
 	 *
 	 * @param family requested message family
-	 * @param typ requested message type
+	 * @param typ    requested message type
 	 * @return VElement all message elements
-	 *
 	 */
 	public VElement getMessageVector(final JDFMessage.EnumFamily family, final JDFMessage.EnumType typ)
 	{
@@ -823,7 +814,60 @@ public class JDFJMF extends JDFAutoJMF
 	}
 
 	/**
+	 * get a vector of all messages in this JMF
 	 *
+	 * @param family requested message family
+	 * @param typ    requested message type
+	 * @return VElement all message elements
+	 */
+	public List<JDFMessage> getMessageList(final JDFMessage.EnumFamily family, final JDFMessage.EnumType typ)
+	{
+		final List<JDFMessage> vM = getChildArrayByClass(JDFMessage.class, false, 0);
+
+		if (family != null || typ != null)
+		{
+			// do reverse iteration because erase invalidates
+			for (int i = vM.size() - 1; i >= 0; i--)
+			{
+				final JDFMessage jdfMessage = vM.get(i);
+				if (!EnumUtil.matches(family, jdfMessage.getFamily()) || !EnumUtil.matches(typ, jdfMessage.getEnumType()))
+				{
+					vM.remove(i);
+				}
+			}
+		}
+		return vM;
+	}
+
+	/**
+	 * split this JMF into a list of JMFs, each containing one message element
+	 *
+	 * @return VElement all message elements
+	 */
+	public List<JDFJMF> splitMessages()
+	{
+		final List<JDFMessage> vM = getChildArrayByClass(JDFMessage.class, false, 0);
+		if (vM.size() <= 1)
+		{
+			return (List<JDFJMF>) ContainerUtil.add(new ArrayList<>(), this);
+		}
+		else
+		{
+			final List<JDFJMF> vJMF = new ArrayList<>();
+			for (final JDFMessage m : vM)
+			{
+				final JDFJMF jmf = new JDFDoc(ElementName.JMF).getJMFRoot();
+				final String id = jmf.getID();
+				jmf.setAttributes(this);
+				jmf.setID(id);
+				jmf.copyElement(m, null);
+				vJMF.add(jmf);
+			}
+			return vJMF;
+		}
+	}
+
+	/**
 	 * @param i
 	 * @param bCreate
 	 * @return
@@ -980,17 +1024,16 @@ public class JDFJMF extends JDFAutoJMF
 	 * convert all responses that match the query q to signals
 	 *
 	 * @param q the query to convert
-	 *
 	 */
 	public void convertResponses(final JDFQuery q)
 	{
 		final EnumType t = q == null ? null : q.getEnumType();
 		final VElement v = getMessageVector(EnumFamily.Response, t);
 		final String queryID = q == null ? null : q.getID();
-		for (int i = 0; i < v.size(); i++)
+		for (final KElement e : v)
 		{
-			final JDFResponse r = (JDFResponse) v.elementAt(i);
-			if (queryID == null || queryID.equals(r.getrefID()))
+			final JDFResponse r = (JDFResponse) e;
+			if (StringUtil.isEmpty(queryID) || StringUtil.isEmpty(r.getrefID()) || queryID.equals(r.getrefID()))
 			{
 				final JDFSignal s = appendSignal();
 				moveElement(s, r); // retain ordering
@@ -1034,7 +1077,6 @@ public class JDFJMF extends JDFAutoJMF
 	 *
 	 * @param refID refID of the response
 	 * @return JDFResponse the element
-	 *
 	 */
 	public JDFAcknowledge getAcknowledge(final String refID)
 	{
@@ -1046,7 +1088,6 @@ public class JDFJMF extends JDFAutoJMF
 	 *
 	 * @param refID refID of the response
 	 * @return JDFResponse the element
-	 *
 	 */
 	public JDFResponse getResponse(final String refID)
 	{

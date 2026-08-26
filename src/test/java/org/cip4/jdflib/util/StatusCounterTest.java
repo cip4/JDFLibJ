@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -46,6 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -59,11 +60,13 @@ import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.goldenticket.MISCPGoldenTicket;
+import org.cip4.jdflib.goldenticket.MISFinGoldenTicket;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFJobPhase;
@@ -197,6 +200,36 @@ public class StatusCounterTest extends JDFTestCaseBase
 		la.setAmount(EAmountType.TotalWaste, 30, null);
 		la.updateSpeed(300000);
 		assertEquals(3600, la.getAmount(EAmountType.Speed), 0.1);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testStitchGB2()
+	{
+		final MISFinGoldenTicket gt = new MISFinGoldenTicket(1, defaultVersion, 1, 1, null);
+		gt.addSheet("Sheet1");
+		gt.addSheet("Sheet2");
+		gt.setCategory(MISFinGoldenTicket.MISFIN_STITCHFIN);
+
+		gt.setGrayBox(false);
+		gt.assign(null);
+		final JDFNode n = gt.getNode();
+		assertEquals(1000, n.getLink(ElementName.COMPONENT, EnumUsage.Output, null).getAmount(null));
+		gt.makeReady();
+		final StatusCounter sc = gt.getStatusCounter();
+		sc.setTotalCounter(12345);
+		sc.setDeviceID("MyDeviceID");
+		sc.setPhase(null, null, EnumDeviceStatus.Idle, null);
+
+		sc.addPhase(null, 100, 0, true);
+		sc.setPhase(EnumNodeStatus.InProgress, "good", EnumDeviceStatus.Running, "good");
+		final JDFJMF jmf = sc.getDocJMFPhaseTime().getJMFRoot();
+		sc.addPhase(null, 100, 0, true);
+		sc.setPhase(EnumNodeStatus.InProgress, "good", EnumDeviceStatus.Running, "good");
+		final JDFJMF jmf2 = sc.getDocJMFPhaseTime().getJMFRoot();
+
 	}
 
 	private class SingleStatusCounterTest
@@ -398,6 +431,21 @@ public class StatusCounterTest extends JDFTestCaseBase
 			assertTrue(jp.hasAttribute(AttributeName.PHASEAMOUNT));
 			// get the second Signal (the new phase)
 			sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 1);
+			jp = sig.getDeviceInfo(0).getJobPhase(0);
+			assertEquals(jp.getPhaseAmount(), 0.0, 0.0);
+			assertEquals(jp.getMISDetails().getWorkType(), EnumWorkType.Alteration);
+
+			sc.setSplitJobPhase(true);
+			final List<JDFJMF> l = sc.getJMFStatusList();
+			assertEquals(2, l.size());
+
+			sig = (JDFResponse) l.get(0).getMessageElement(EnumFamily.Response, EnumType.Status, 0);
+			jp = sig.getDeviceInfo(0).getJobPhase(0);
+			assertEquals(jp.getAmount(), 200, 0);
+			assertEquals(jp.getWaste(), 400, 0);
+			assertTrue(jp.hasAttribute(AttributeName.PHASEAMOUNT));
+
+			sig = (JDFResponse) l.get(1).getMessageElement(EnumFamily.Response, EnumType.Status, 0);
 			jp = sig.getDeviceInfo(0).getJobPhase(0);
 			assertEquals(jp.getPhaseAmount(), 0.0, 0.0);
 			assertEquals(jp.getMISDetails().getWorkType(), EnumWorkType.Alteration);

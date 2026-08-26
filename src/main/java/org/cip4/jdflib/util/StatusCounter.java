@@ -134,6 +134,7 @@ public class StatusCounter
 	private double totalCounter = -1;
 	private VString icsVersions = null;
 	private boolean addPhaseTimeAmounts;
+	private boolean splitJobPhase;
 
 	/**
 	 * @return the total counter value
@@ -141,6 +142,16 @@ public class StatusCounter
 	public double getTotalCounter()
 	{
 		return totalCounter;
+	}
+
+	boolean isSplitJobPhase()
+	{
+		return splitJobPhase;
+	}
+
+	void setSplitJobPhase(boolean splitJobPhase)
+	{
+		this.splitJobPhase = splitJobPhase;
 	}
 
 	/**
@@ -260,6 +271,7 @@ public class StatusCounter
 		vLinkAmount = new ArrayList<>();
 		addPhaseTimeAmounts = true;
 		events = new ArrayList<>();
+		splitJobPhase = false;
 		setActiveNode(node, vPartMap, vResLinks);
 	}
 
@@ -280,17 +292,10 @@ public class StatusCounter
 	 */
 	public void setActiveNode(final JDFNode node, final VJDFAttributeMap vPartMap, VElement vResLinks)
 	{
-
-		if (node == null)
-		{
-			setTrackWaste.clear();
-		}
-
 		bCompleted = false;
 		m_Node = node;
 		m_vPartMap = vPartMap;
 		vLinkAmount.clear();
-		firstRefID = null;
 		docJMFPhaseTime = null;
 		startDate = new JDFDate();
 		nodeID = null;
@@ -298,38 +303,47 @@ public class StatusCounter
 
 		if (node == null)
 		{
+			firstRefID = null;
+			setTrackWaste.clear();
 			setPhase(null, null, EnumDeviceStatus.Idle, EnumDeviceStatus.Idle.getName());
 		}
-
-		if (m_vPartMap == null && m_Node != null)
+		else
 		{
-			m_vPartMap = m_Node.getNodeInfoPartMapVector();
-		}
-
-		nodeID = node != null ? node.getIdentifier() : null;
-		if (m_vPartMap != null && nodeID != null && node != null)
-		{
-			nodeID.setTo(node.getJobID(true), node.getJobPartID(false), m_vPartMap);
-		}
-
-		if (ContainerUtil.isEmpty(vResLinks) && m_Node != null)
-		{
-			vResLinks = m_Node.getResourceLinks(null);
-			if (vResLinks != null)
+			final KElement old = node.getChildWithAttribute(null, AttributeName.ID, null, firstRefID, 0, false);
+			if (firstRefID != null && !(old instanceof JDFResource))
 			{
-				final int siz = vResLinks.size();
-				for (int i = siz - 1; i >= 0; i--)
+				firstRefID = null;
+			}
+			if (m_vPartMap == null)
+			{
+				m_vPartMap = m_Node.getNodeInfoPartMapVector();
+			}
+
+			nodeID = node.getIdentifier();
+			if (m_vPartMap != null && nodeID != null)
+			{
+				nodeID.setTo(node.getJobID(true), node.getJobPartID(false), m_vPartMap);
+			}
+
+			if (ContainerUtil.isEmpty(vResLinks))
+			{
+				vResLinks = m_Node.getResourceLinks(null);
+				if (vResLinks != null)
 				{
-					final JDFResourceLink rl = (JDFResourceLink) vResLinks.elementAt(i);
-					if (!rl.isPhysical())
+					final int siz = vResLinks.size();
+					for (int i = siz - 1; i >= 0; i--)
 					{
-						vResLinks.remove(i);
+						final JDFResourceLink rl = (JDFResourceLink) vResLinks.elementAt(i);
+						if (!rl.isPhysical())
+						{
+							vResLinks.remove(i);
+						}
 					}
 				}
 			}
-		}
 
-		setUpResLinks(vResLinks);
+			setUpResLinks(vResLinks);
+		}
 	}
 
 	/**
@@ -1129,6 +1143,23 @@ public class StatusCounter
 			setIdlePhase(status, statusDetails);
 		}
 		return docJMFPhaseTime == null ? null : docJMFPhaseTime.clone();
+	}
+
+	/**
+	 * @return
+	 */
+	public synchronized List<JDFJMF> getJMFStatusList()
+	{
+		final JDFDoc doc = getDocJMFPhaseTime();
+		final JDFJMF jmf = doc == null ? null : doc.getJMFRoot();
+		if (jmf != null && isSplitJobPhase())
+		{
+			return jmf.splitMessages();
+		}
+		else
+		{
+			return (List<JDFJMF>) ContainerUtil.add(new ArrayList<>(), jmf);
+		}
 	}
 
 	/**

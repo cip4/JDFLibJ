@@ -75,6 +75,8 @@
  */
 package org.cip4.jdflib.examples;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.File;
 import java.util.zip.DataFormatException;
 
@@ -82,6 +84,7 @@ import org.cip4.jdflib.auto.JDFAutoBoxFoldAction.EnumAction;
 import org.cip4.jdflib.auto.JDFAutoBoxFoldingParams.EnumBoxFoldingType;
 import org.cip4.jdflib.auto.JDFAutoBundle.EnumBundleType;
 import org.cip4.jdflib.auto.JDFAutoDefect.EFace;
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -106,6 +109,7 @@ import org.cip4.jdflib.resource.process.JDFBoxFoldAction;
 import org.cip4.jdflib.resource.process.JDFBoxFoldingParams;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFCutBlock;
+import org.cip4.jdflib.util.StatusCounter;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -222,6 +226,29 @@ class MISFinTest extends BaseGoldenTicketTest
 		fgt.assign(null);
 		fgt.bExpandGrayBox = false;
 		write9GTFiles(fgt, "GBStitching", null);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testStitchGB2()
+	{
+		final StatusCounter sc = new StatusCounter(null, null, null);
+		sc.setDeviceID("MyDeviceID");
+		sc.setPhase(null, null, EnumDeviceStatus.Idle, null);
+		sc.setTotalCounter(12345);
+
+		final MISFinGoldenTicket gt = new MISFinGoldenTicket(1, defaultVersion, 1, 1, null);
+		gt.addSheet("Sheet1");
+		gt.addSheet("Sheet2");
+		gt.setCategory(MISFinGoldenTicket.MISFIN_STITCHFIN);
+
+		gt.setGrayBox(false);
+		gt.assign(null);
+		final JDFNode n = gt.getNode();
+		assertEquals(1000, n.getLink(ElementName.COMPONENT, EnumUsage.Output, null).getAmount(null));
+
 	}
 
 	/**
