@@ -303,6 +303,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 		sc.setActiveNode(n, null, new VElement(outComp));
 		final String id = outComp.getID();
 		sc.setFirstRefID(id);
+		sc.setTrackWaste("*", true);
 
 		sc.setPhase(EnumNodeStatus.Setup, "setup", EnumDeviceStatus.Setup, "setup");
 		sc.addPhase(null, 0, 0, true);

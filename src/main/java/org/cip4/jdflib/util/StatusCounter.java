@@ -304,8 +304,6 @@ public class StatusCounter
 
 		if (node == null)
 		{
-			firstRefID = null;
-			setTrackWaste.clear();
 			setPhase(null, null, EnumDeviceStatus.Idle, EnumDeviceStatus.Idle.getName());
 		}
 		else
