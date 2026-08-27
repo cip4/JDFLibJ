@@ -46,12 +46,17 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.File;
 import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumWorkType;
+import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
+import org.cip4.jdflib.auto.JDFAutoResourceInfo.EnumScope;
+import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -70,16 +75,24 @@ import org.cip4.jdflib.goldenticket.MISFinGoldenTicket;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFJobPhase;
+import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.jmf.JDFResponse;
+import org.cip4.jdflib.jmf.JDFSignal;
+import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.resource.JDFEvent;
 import org.cip4.jdflib.resource.JDFNotification;
+import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.prepress.JDFInk;
 import org.cip4.jdflib.util.StatusCounter.EAmountType;
 import org.cip4.jdflib.util.StatusCounter.LinkAmount;
 import org.junit.jupiter.api.BeforeEach;
@@ -200,6 +213,231 @@ public class StatusCounterTest extends JDFTestCaseBase
 		la.setAmount(EAmountType.TotalWaste, 30, null);
 		la.updateSpeed(300000);
 		assertEquals(3600, la.getAmount(EAmountType.Speed), 0.1);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testSpeed2()
+	{
+		final JDFNode n = creatXMDoc().getJDFRoot();
+		final StatusCounter sc = new StatusCounter(n, null, null);
+		assertEquals(0, sc.getSpeed(), 0.1);
+		sc.setSpeed(123);
+		assertEquals(123, sc.getSpeed(), 0.1);
+		sc.setSpeed(42);
+		assertEquals(42, sc.getSpeed(), 0.1);
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testJMFCartridgeChange()
+	{
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildResourceSignal(true, null);
+		jmf.setSenderID("CDM");
+		final JDFSignal resource = jmf.getSignal(0);
+		resource.setSenderID("JoeThePrimeFire");
+		final JDFResourceInfo ri = resource.getCreateResourceInfo(0);
+		ri.setScope(EnumScope.Present);
+		ri.setProductID("SAPID");
+		final JDFPart p = ri.appendPart();
+		p.setSeparation("Green");
+		p.setAttribute(AttributeName.LOTID, "Batch42");
+		final JDFInk ink = (JDFInk) ri.appendResource(ElementName.INK);
+		ink.setProductID("SapID");
+		ink.setGeneralID("ContainerID", "BibID");
+
+		final JDFNotification not = resource.appendNotification();
+		not.setClass(EnumClass.Event);
+		final JDFEvent ev = not.appendEvent();
+		ev.setEventID("4711");
+		ev.setDescriptiveName("Cartridge change");
+		ev.setEventValue("Cartridge Code - IL");
+
+		jmf.write2File(sm_dirTestDataTemp + "cartridge.jmf");
+		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+
+		ink.setAttribute("ExpirationDate", new JDFDate().setTime(0, 0, 0).addOffset(0, 0, 0, 444).getDateTimeISO());
+
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public void testJMFStatus()
+	{
+		FileUtil.forceDelete(new File(sm_dirTestDataTemp + "examplejmf"));
+		KElement.setLongID(false);
+		final JDFJMF jmfq = JMFBuilderFactory.getJMFBuilder(null).buildStatus(EnumDeviceDetails.Full, EnumJobDetails.MIS);
+
+		final StatusCounter sc = new StatusCounter(null, null, null);
+
+		sc.setDeviceID("MyDeviceID");
+		sc.setPhase(null, null, EnumDeviceStatus.Idle, null);
+		sc.setTotalCounter(10000);
+		sc.setCurrentCounter(0);
+		sc.setSplitJobPhase(true);
+
+		List<JDFJMF> jmfs = getSignals(sc, jmfq);
+		int i = 0;
+		for (final JDFJMF jmf : jmfs)
+		{
+			jmf.write2File(sm_dirTestDataTemp + "examplejmf/" + i + ".idle.jmf");
+			i++;
+		}
+
+		final MISFinGoldenTicket gt = new MISFinGoldenTicket(1, defaultVersion, 1, 1, null);
+		gt.addSheet("Sheet1");
+		gt.addSheet("Sheet2");
+		gt.setCategory(MISFinGoldenTicket.MISFIN_STITCHFIN);
+
+		gt.assign(null);
+		gt.setGrayBox(false);
+		final JDFNode n = gt.getNode();
+		n.getLink(ElementName.COMPONENT, EnumUsage.Output, null).setAmount(1000);
+		final JDFResource outComp = n.getResource(ElementName.COMPONENT, EnumUsage.Output);
+		sc.setActiveNode(n, null, new VElement(outComp));
+		final String id = outComp.getID();
+		sc.setFirstRefID(id);
+
+		sc.setPhase(EnumNodeStatus.Setup, "setup", EnumDeviceStatus.Setup, "setup");
+		sc.addPhase(null, 0, 0, true);
+		jmfs = getSignals(sc, jmfq);
+		for (final JDFJMF jmf2 : jmfs)
+		{
+			updateJMF(jmf2, 0, 0, 1, 0, true);
+			jmf2.write2File(sm_dirTestDataTemp + "examplejmf/" + i + ".setupstart.jmf");
+			i++;
+		}
+		assertEquals(10000, jmfs.get(0).getSignal().getDeviceInfo(0).getTotalProductionCounter(), 0.1);
+
+		sc.setPhase(EnumNodeStatus.Setup, "setup", EnumDeviceStatus.Setup, "waste");
+		sc.setSpeed(100);
+		sc.addPhase(null, 0, 10, true);
+		jmfs = getSignals(sc, jmfq);
+		assertEquals(10010, jmfs.get(0).getSignal().getDeviceInfo(0).getTotalProductionCounter(), 0.1);
+		assertEquals(100, jmfs.get(0).getSignal().getDeviceInfo(0).getSpeed(), 0.1);
+		for (final JDFJMF jmf2 : jmfs)
+		{
+			updateJMF(jmf2, 0, 0, 2, 0, true);
+			jmf2.write2File(sm_dirTestDataTemp + "examplejmf/" + i + ".setupstart.jmf");
+			i++;
+		}
+		sc.setPhase(EnumNodeStatus.InProgress, "good", EnumDeviceStatus.Running, "good");
+		sc.setSpeed(500);
+		jmfs = getSignals(sc, jmfq);
+		for (final JDFJMF jmf3 : jmfs)
+		{
+			updateJMF(jmf3, 5, 0, 2, 0, true);
+			updateJMF(jmf3, 5, 0, 0, 0, false);
+			jmf3.write2File(sm_dirTestDataTemp + "examplejmf/" + i + ".runstart.jmf");
+			i++;
+		}
+		assertEquals(10010, jmfs.get(0).getSignal().getDeviceInfo(0).getTotalProductionCounter(), 0.1);
+		assertEquals(100, jmfs.get(0).getSignal().getDeviceInfo(0).getSpeed(), 0.1);
+		assertEquals(500, jmfs.get(1).getSignal().getDeviceInfo(0).getSpeed(), 0.1);
+		for (int j = 0; j < 10; j++)
+		{
+			sc.addPhase(null, 100, 0, true);
+			sc.setPhase(EnumNodeStatus.InProgress, "good", EnumDeviceStatus.Running, "good");
+			jmfs = getSignals(sc, jmfq);
+			assertEquals(10110 + j * 100, jmfs.get(0).getSignal().getDeviceInfo(0).getTotalProductionCounter(), 0.1);
+			assertEquals(500, jmfs.get(0).getSignal().getDeviceInfo(0).getSpeed(), 0.1);
+			for (final JDFJMF jmfr : jmfs)
+			{
+				updateJMF(jmfr, 5, 0, 1, 0, true);
+				updateJMF(jmfr, 0, j, 0, 0, false);
+				jmfr.write2File(sm_dirTestDataTemp + "examplejmf/" + i + ".runheartbeat.jmf");
+				i++;
+			}
+		}
+		sc.setPhase(EnumNodeStatus.Completed, "good", EnumDeviceStatus.Running, "good");
+		jmfs = getSignals(sc, jmfq);
+		assertEquals(11010, jmfs.get(0).getSignal().getDeviceInfo(0).getTotalProductionCounter(), 0.1);
+		assertEquals(1010, jmfs.get(0).getSignal().getDeviceInfo(0).getProductionCounter(), 0.1);
+		assertEquals(500, jmfs.get(0).getSignal().getDeviceInfo(0).getSpeed(), 0.1);
+		for (final JDFJMF jmfc : jmfs)
+		{
+			updateJMF(jmfc, 5, 0, 1, 0, true);
+			updateJMF(jmfc, 0, 10, 0, 0, false);
+			jmfc.write2File(sm_dirTestDataTemp + "examplejmf/" + i + ".completed.jmf");
+			i++;
+		}
+		sc.setSpeed(0);
+		sc.setActiveNode(null, null, null);
+		sc.setPhase(null, null, EnumDeviceStatus.Idle, null);
+		jmfs = getSignals(sc, jmfq);
+		for (final JDFJMF jmfc : jmfs)
+		{
+			updateJMF(jmfc, 5, 10, 1, 0, true);
+			jmfc.write2File(sm_dirTestDataTemp + "examplejmf/" + i + ".idle.jmf");
+		}
+		assertEquals(0, jmfs.get(0).getSignal().getDeviceInfo(0).getSpeed(), 0.1);
+
+	}
+
+	private List<JDFJMF> getSignals(StatusCounter sc, final JDFJMF jmfq)
+	{
+		final List<JDFJMF> jmfs = sc.getJMFStatusList();
+		for (final JDFJMF jmf : jmfs)
+		{
+			for (final JDFResponse r : jmf.getAllResponse())
+			{
+				r.setQuery(jmfq.getQuery());
+			}
+			jmf.convertResponses(jmfq.getQuery());
+		}
+		return jmfs;
+	}
+
+	void updateJMF(JDFJMF jmf, int seconds, int minutes, int hours, int days, boolean withstart)
+	{
+		jmf.setTimeStamp(jmf.getTimeStamp().addOffset(seconds, minutes, hours, days));
+		jmf.setID(KElement.uniqueID(0));
+		for (final KElement e : jmf.getMessageVector(null, null))
+		{
+			updateTime(e, AttributeName.TIME, seconds, minutes, hours, days);
+			final JDFMessage m = (JDFMessage) e;
+			m.setID(KElement.uniqueID(0));
+			if (EnumType.Status.equals(m.getEnumType()))
+			{
+				for (int idi = 0; true; idi++)
+				{
+					final JDFDeviceInfo di = m.getDeviceInfo(idi);
+					if (di == null)
+					{
+						break;
+					}
+					if (withstart)
+					{
+						updateTime(di, AttributeName.IDLESTARTTIME, seconds, minutes, hours, days);
+					}
+					updateTime(di, AttributeName.ENDTIME, seconds, minutes, hours, days);
+					for (final JDFJobPhase jp : di.getAllJobPhase())
+					{
+						if (withstart)
+						{
+							updateTime(jp, AttributeName.STARTTIME, seconds, minutes, hours, days);
+						}
+					}
+				}
+			}
+		}
+
+	}
+
+	private void updateTime(KElement e, String key, int seconds, int minutes, int hours, int days)
+	{
+		final JDFDate time = JDFDate.createDate(e.getAttribute(key));
+		if (time != null)
+		{
+			final JDFDate offset = time.addOffset(seconds, minutes, hours, days);
+			e.setAttribute(key, offset, null);
+		}
 	}
 
 	/**
