@@ -858,16 +858,20 @@ public class UrlUtil
 	 */
 	public static String getSecurePath(String url, final boolean allowAbsolute) throws IllegalArgumentException
 	{
-		url = unEscape(url);
-		if (url == null || !allowAbsolute && !isRelativeURL(url))
+		url = cleanDots(unEscape(url));
+
+		if (!StringUtil.isEmpty(url))
 		{
-			throw new IllegalArgumentException("URL must be relative " + url);
+			if (!allowAbsolute && !isRelativeURL(url))
+			{
+				throw new IllegalArgumentException("URL must be relative " + url);
+			}
+			if (StringUtil.hasToken(url, "..", "/\\", 0))
+			{
+				throw new IllegalArgumentException("URL must not contain .. " + url);
+			}
 		}
-		if (StringUtil.hasToken(url, "..", "/\\", 0))
-		{
-			throw new IllegalArgumentException("URL must not contain .. " + url);
-		}
-		return escape(cleanDots(url), false);
+		return escape(url, false);
 	}
 
 	/**

@@ -305,10 +305,14 @@ class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	void testGetSecurePath()
 	{
-		assertThrows(IllegalArgumentException.class, () -> UrlUtil.getSecurePath("A/../B", true));
-		assertThrows(IllegalArgumentException.class, () -> UrlUtil.getSecurePath("A/../B", false));
-		assertThrows(IllegalArgumentException.class, () -> UrlUtil.getSecurePath("A/%2E%2E/B", false));
+		assertThrows(IllegalArgumentException.class, () -> UrlUtil.getSecurePath("A/../../B", true));
+		assertThrows(IllegalArgumentException.class, () -> UrlUtil.getSecurePath("A/../../B", false));
+		assertThrows(IllegalArgumentException.class, () -> UrlUtil.getSecurePath("A/%2E%2E/../B", false));
 		UrlUtil.getSecurePath("A/./B", false);
+		assertEquals("B", UrlUtil.getSecurePath("A/../B", false));
+		UrlUtil.getSecurePath("A/c..c/B", false);
+		UrlUtil.getSecurePath(null, true);
+		UrlUtil.getSecurePath("", false);
 	}
 
 	/**
