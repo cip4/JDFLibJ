@@ -51,11 +51,13 @@ import java.util.List;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.auto.JDFAutoResourceQuParams.EnumScope;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFParser;
@@ -115,16 +117,26 @@ class JDFJMFTest extends JDFTestCaseBase
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
-		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.Status);
+		final JDFQuery query = (JDFQuery) jmf.appendMessageElement(EnumFamily.Query, EnumType.Resource);
+		final JDFResourceQuParams rcp = query.appendResourceQuParams();
+		rcp.setResourceName("ExposedMedia");
+		rcp.setScope(EnumScope.Job);
 		final List<JDFJMF> splitMessages1 = jmf.splitMessages();
 		assertEquals(jmf, splitMessages1.get(0));
 		final JDFSignal signal = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.Status);
+		final JDFDeviceInfo deviceInfo = signal.getCreateDeviceInfo(0);
+		deviceInfo.setDeviceStatus(EnumDeviceStatus.Running);
+		final JDFJobPhase jobPhase = deviceInfo.getCreateJobPhase(0);
+		jobPhase.setJobID("j1");
+		jobPhase.setStatus(EnumNodeStatus.InProgress);
 		final List<JDFJMF> splitMessages = jmf.splitMessages();
 		assertNotEquals(jmf, splitMessages.get(0));
 		assertNotEquals(jmf, splitMessages.get(1));
 		assertNotEquals(splitMessages.get(0), splitMessages.get(1));
-		assertTrue(splitMessages.get(0).getMessage(0).isEqual(command));
+		assertTrue(splitMessages.get(0).getMessage(0).isEqual(query));
 		assertTrue(splitMessages.get(1).getMessage(0).isEqual(signal));
+		writeRoundTrip(splitMessages.get(0), "split1", getDefaultXJDFVersion(), EnumValidationLevel.NoWarnComplete);
+		writeRoundTrip(splitMessages.get(1), "split2", getDefaultXJDFVersion(), EnumValidationLevel.NoWarnComplete);
 	}
 
 	/**

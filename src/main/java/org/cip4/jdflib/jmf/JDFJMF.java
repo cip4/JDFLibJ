@@ -857,9 +857,7 @@ public class JDFJMF extends JDFAutoJMF
 			for (final JDFMessage m : vM)
 			{
 				final JDFJMF jmf = new JDFDoc(ElementName.JMF).getJMFRoot();
-				final String id = jmf.getID();
 				jmf.setAttributes(this);
-				jmf.setID(id);
 				jmf.copyElement(m, null);
 				vJMF.add(jmf);
 			}

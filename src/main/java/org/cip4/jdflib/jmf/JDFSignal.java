@@ -147,7 +147,7 @@ public class JDFSignal extends JDFAutoSignal
 	 * converts a response to a signal that can be sent individually
 	 *
 	 * @param response the response to convert - should not be null
-	 * @param q the query that should be merged into the signal - may be null
+	 * @param q        the query that should be merged into the signal - may be null
 	 * @return true if successful
 	 */
 	public boolean convertResponse(final JDFResponse response, final JDFQuery q)
@@ -168,6 +168,8 @@ public class JDFSignal extends JDFAutoSignal
 	private void setResponseDetails(final JDFResponse response)
 	{
 		setAttributes(response);
+		removeAttribute(AttributeName.RETURNCODE);
+		removeAttribute(AttributeName.XSITYPE);
 		final VElement elements = response.getChildElementVector(null, null, null, true, 0, true);
 		for (int i = 0; i < elements.size(); i++)
 		{
@@ -189,6 +191,7 @@ public class JDFSignal extends JDFAutoSignal
 		final JDFResponse response = jmf.getResponse();
 
 		response.mergeElement(this, false);
+		response.removeAttribute(AttributeName.XSITYPE);
 		for (final KElement e : response.getChildArray(null, null))
 		{
 			if (!response.isValidMessageElement(e.getLocalName(), 0))

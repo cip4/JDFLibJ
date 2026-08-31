@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -46,13 +46,14 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class JDFSignalTest extends JDFTestCaseBase
 {
@@ -66,11 +67,40 @@ class JDFSignalTest extends JDFTestCaseBase
 		final JDFJMF queries = JDFJMF.createJMF(EnumFamily.Query, EnumType.Status);
 		final JDFQuery q = queries.getQuery();
 		final JDFSignal s = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full).getSignal();
-
-		final JDFResponse r = s.createResponse().getResponse();
+		final JDFJobPhase jobPhase = s.getDeviceInfo(0).getJobPhase();
+		jobPhase.setJobID("j1");
+		jobPhase.setStatus(EnumNodeStatus.InProgress);
+		final JDFJMF response = s.createResponse();
+		final JDFResponse r = response.getResponse();
 		assertTrue(r.getDeviceInfo(0).isEqual(s.getDeviceInfo(0)));
 		assertNull(r.getElement(ElementName.STATUSQUPARAMS));
 		assertEquals(r.getrefID(), s.getrefID());
+		writeRoundTrip(response, "response.jmf", getDefaultXJDFVersion(), EnumValidationLevel.NoWarnComplete);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testConvertResponse()
+	{
+		final JDFJMF queries = JDFJMF.createJMF(EnumFamily.Query, EnumType.Status);
+		final JDFQuery q = queries.getQuery();
+		final JDFSignal s = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full).getSignal();
+		final JDFJobPhase jobPhase = s.getDeviceInfo(0).getJobPhase();
+		jobPhase.setJobID("j1");
+		jobPhase.setStatus(EnumNodeStatus.InProgress);
+		final JDFJMF response = s.createResponse();
+		final JDFResponse r = response.getResponse();
+
+		final JDFSignal s2 = new JMFBuilder().createJMF(EnumFamily.Signal, EnumType.Status).getSignal();
+
+		s2.convertResponse(r, null);
+
+		assertTrue(s2.getDeviceInfo(0).isEqual(s.getDeviceInfo(0)));
+		assertNull(s2.getElement(ElementName.STATUSQUPARAMS));
+		assertEquals(s2.getrefID(), s.getrefID());
+		writeRoundTrip(s2.getJMFRoot(), "signal.jmf", getDefaultXJDFVersion(), EnumValidationLevel.NoWarnComplete);
 	}
 
 	@Override

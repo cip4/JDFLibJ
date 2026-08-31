@@ -398,7 +398,6 @@ public class StatusCounterTest extends JDFTestCaseBase
 	void updateJMF(JDFJMF jmf, int seconds, int minutes, int hours, int days, boolean withstart)
 	{
 		jmf.setTimeStamp(jmf.getTimeStamp().addOffset(seconds, minutes, hours, days));
-		jmf.setID(KElement.uniqueID(0));
 		for (final KElement e : jmf.getMessageVector(null, null))
 		{
 			updateTime(e, AttributeName.TIME, seconds, minutes, hours, days);
@@ -428,7 +427,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 				}
 			}
 		}
-
+		writeRoundTrip(jmf, System.nanoTime() + ".jmf", getDefaultXJDFVersion(), EnumValidationLevel.NoWarnComplete);
 	}
 
 	private void updateTime(KElement e, String key, int seconds, int minutes, int hours, int days)
