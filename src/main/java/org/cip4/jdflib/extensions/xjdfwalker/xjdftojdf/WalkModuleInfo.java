@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,7 +72,11 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMapArray;
 import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.jmf.JDFModuleInfo;
+import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.util.ContainerUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
@@ -109,6 +113,7 @@ public class WalkModuleInfo extends WalkXElement
 		elem.removeAttribute(AttributeName.PRODUCTIONCOUNTER);
 		elem.removeAttribute(AttributeName.TOTALPRODUCTIONCOUNTER);
 		elem.removeAttribute(XJDFConstants.ModuleCondition);
+
 		super.updateAttributes(elem);
 	}
 
@@ -116,5 +121,18 @@ public class WalkModuleInfo extends WalkXElement
 	String getJDFName(final KElement e)
 	{
 		return ElementName.MODULESTATUS;
+	}
+
+	@Override
+	public KElement walk(KElement e, KElement trackElem)
+	{
+		final KElement walk = super.walk(e, trackElem);
+		final JDFAttributeMapArray pm = ((JDFModuleInfo) e).getPartMapArray();
+		if (ContainerUtil.size(pm) > 0)
+		{
+			e.removeChildrenByClass(JDFPart.class);
+			((JDFModuleInfo) trackElem).setDescriptiveName(pm.get(0).showKeys(null));
+		}
+		return walk;
 	}
 }

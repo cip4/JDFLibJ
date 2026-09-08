@@ -135,14 +135,13 @@ public class WalkDeviceInfo extends WalkXElement
 			{
 				final JDFModuleStatus mp = (JDFModuleStatus) elem.appendElement(ElementName.MODULESTATUS);
 				mp.setModuleID(module);
-				mp.copyAttribute(AttributeName.DEVICESTATUS, elem);
-				mp.setModuleType("Unknown");
+				final String newStatus = updateDeviceStatus(elem.getNonEmpty(AttributeName.DEVICESTATUS));
+				mp.setAttribute(AttributeName.DEVICESTATUS, newStatus);
 			}
 		}
 	}
 
 	/**
-	 *
 	 * @param val
 	 * @return
 	 */
