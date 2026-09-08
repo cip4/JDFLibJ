@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -45,33 +45,33 @@ public class XSDConstants
 		super();
 	}
 
-	static final String NAME = "name";
-	static final String REF = "ref";
-	static final String TARGET_NAMESPACE = "targetNamespace";
-	static final String XMLNS = "xmlns";
-	static final String TYPE = "type";
-	static final String BASE = "base";
-	static final String USE = "use";
-	static final String VALUE = "value";
-	static final String MIN_OCCURS = "minOccurs";
-	static final String MAX_OCCURS = "maxOccurs";
+	public static final String NAME = "name";
+	public static final String REF = "ref";
+	public static final String TARGET_NAMESPACE = "targetNamespace";
+	public static final String XMLNS = "xmlns";
+	public static final String TYPE = "type";
+	public static final String BASE = "base";
+	public static final String USE = "use";
+	public static final String VALUE = "value";
+	public static final String MIN_OCCURS = "minOccurs";
+	public static final String MAX_OCCURS = "maxOccurs";
 
-	static final String ITEM_TYPE = "itemType";
-	static final String SUBSTITUTION_GROUP = "substitutionGroup";
+	public static final String ITEM_TYPE = "itemType";
+	public static final String SUBSTITUTION_GROUP = "substitutionGroup";
 
-	static final String XS_ATTRIBUTE = "xs:attribute";
-	static final String XS_ELEMENT = "xs:element";
-	static final String XS_EXTENSION = "xs:extension";
-	static final String XS_COMPLEX_CONTENT = "xs:complexContent";
-	static final String XS_COMPLEX_TYPE = "xs:complexType";
-	static final String XS_GROUP = "xs:group";
-	static final String XS_LIST = "xs:list";
-	static final String XS_RESTRICTION = "xs:restriction";
-	static final String XS_SIMPLE_TYPE = "xs:simpleType";
-	static final String XS_SCHEMA = "xs:schema";
-	static final String XS_ANY = "xs:any";
-	static final String XS_ANY_ATTRIBUTE = "xs:anyAttribute";
-	static final String XS_SEQUENCE = "xs:sequence";
+	public static final String XS_ATTRIBUTE = "xs:attribute";
+	public static final String XS_ELEMENT = "xs:element";
+	public static final String XS_EXTENSION = "xs:extension";
+	public static final String XS_COMPLEX_CONTENT = "xs:complexContent";
+	public static final String XS_COMPLEX_TYPE = "xs:complexType";
+	public static final String XS_GROUP = "xs:group";
+	public static final String XS_LIST = "xs:list";
+	public static final String XS_RESTRICTION = "xs:restriction";
+	public static final String XS_SIMPLE_TYPE = "xs:simpleType";
+	public static final String XS_SCHEMA = "xs:schema";
+	public static final String XS_ANY = "xs:any";
+	public static final String XS_ANY_ATTRIBUTE = "xs:anyAttribute";
+	public static final String XS_SEQUENCE = "xs:sequence";
 	public static final String XS_STRING = "xs:string";
 	public static final String XS_DURATION = "xs:duration";
 	public static final String XS_ENUMERATION = "xs:enumeration";

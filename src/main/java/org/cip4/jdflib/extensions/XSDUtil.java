@@ -46,6 +46,8 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.XSDConstants.eAttributeUse;
 import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.UrlPart;
+import org.cip4.jdflib.util.UrlUtil;
 
 public class XSDUtil
 {
@@ -55,18 +57,43 @@ public class XSDUtil
 	}
 
 	private static final String SCHEMA = "/schema/Version_2_";
-	private static final String XJDF_XSD = "/xjdf.xsd";
+	private static final String XJDF_SCHEMA_Base = "http://schema.cip4.org/jdfschema_2_";
+	private static final String XJDF_SCHEMA_XSD = "/xjdf.xsd";
 
 	public static XMLDoc getLocalXJDFSchemaDoc(EnumVersion v)
 	{
+		final int minorVersion = getMinorXJDFVersion(v);
+		final String path = SCHEMA + minorVersion + XJDF_SCHEMA_XSD;
+		return XMLDoc.parseStream(XSDUtil.class.getResourceAsStream(path));
+	}
+
+	static int getMinorXJDFVersion(EnumVersion v)
+	{
 		if (v == null)
 		{
-			v = XJDFHelper.getDefaultVersion();
+			v = BaseXJDFHelper.getDefaultVersion();
 		}
 		v = (EnumVersion) EnumUtil.max(v, EnumVersion.Version_2_0);
 		v = (EnumVersion) EnumUtil.min(v, EnumVersion.Version_2_3);
-		final String path = SCHEMA + v.getMinorVersion() + XJDF_XSD;
-		return XMLDoc.parseStream(XSDUtil.class.getResourceAsStream(path));
+		return v.getMinorVersion();
+	}
+
+	public static XMLDoc getXJDFSchema(EnumVersion version)
+	{
+		final String schemaURL = getSchemaURL(version);
+		final UrlPart part = UrlUtil.writerToURL(schemaURL, null, UrlUtil.GET, null, null);
+		final XMLDoc schema = UrlPart.isReturnCodeOK(part) ? part.getXMLDoc() : null;
+		if (schema == null)
+		{
+			return getLocalXJDFSchemaDoc(version);
+		}
+		return schema;
+	}
+
+	public static String getSchemaURL(final EnumVersion version)
+	{
+		final int minorVersion = getMinorXJDFVersion(version);
+		return XJDF_SCHEMA_Base + minorVersion + XJDF_SCHEMA_XSD;
 	}
 
 	/**
