@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -66,80 +66,60 @@
  *
  *
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
-import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.cip4.jdflib.resource.process.JDFExposedMedia;
-import org.cip4.jdflib.resource.process.JDFMedia;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.util.StringUtil;
 
-class WalkImageSetterParamsTest extends JDFTestCaseBase
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ */
+public class WalkLaminatingParams extends WalkResource
 {
-	@Test
-	void testGetElementNames()
+	/**
+	 *
+	 */
+	public WalkLaminatingParams()
 	{
-		final WalkImageSetterParams walker = new WalkImageSetterParams();
-		Assertions.assertTrue(walker.getElementNames().contains(ElementName.IMAGESETTERPARAMS));
+		super();
 	}
 
-	@Test
-	void testWalk()
+	/**
+	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+	 */
+	@Override
+	public VString getElementNames()
 	{
-		final KElement imageSetterParams = new JDFDoc(ElementName.IMAGESETTERPARAMS).getRoot();
-		imageSetterParams.setAttribute(AttributeName.NONPRINTABLEMARGINBOTTOM, "1");
-		imageSetterParams.setAttribute(AttributeName.RESOLUTION, "2540 2540");
-		imageSetterParams.appendElement(ElementName.FITPOLICY);
-
-		final WalkImageSetterParams walker = new WalkImageSetterParams();
-		walker.setParent(new JDFToXJDF());
-		Assertions.assertTrue(walker.matches(imageSetterParams));
-
-		final KElement target = new JDFDoc(ElementName.RESOURCE).getRoot();
-		final KElement converted = walker.walk(imageSetterParams, target);
-		Assertions.assertNotNull(converted);
-		Assertions.assertNull(converted.getNonEmpty(AttributeName.NONPRINTABLEMARGINBOTTOM));
-		Assertions.assertNull(converted.getElement(ElementName.FITPOLICY, null, 0));
+		return VString.getVString(ElementName.LAMINATINGPARAMS + " " + ElementName.EMBOSSINGPARAMS, null);
 	}
 
-	@Test
-	void testRoundTrip()
+	/**
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	protected void updateAttributes(final KElement xjdf)
 	{
-		final JDFElement root = runRoundTrip("walkimagesetterparamsj3");
-		Assertions.assertNotNull(root);
-		Assertions.assertTrue(root.isValid(EnumValidationLevel.Incomplete));
+		final String id = xjdf.getNonEmpty(AttributeName.MODULEID);
+		if (id != null)
+		{
+			for (int j = 0; j < id.length(); j++)
+			{
+				if (Character.isDigit(id.charAt(j)))
+				{
+					final int index = StringUtil.parseInt(id.substring(j), -1);
+					if (index >= 0)
+					{
+						xjdf.setAttribute(AttributeName.MODULEINDEX, index, null);
+						break;
+					}
+				}
+			}
+		}
+		xjdf.removeAttribute(AttributeName.MODULEID);
+		super.updateAttributes(xjdf);
 	}
 
-	private JDFElement runRoundTrip(final String fileBase)
-	{
-		final JDFNode root = createImageSettingNodeWithImageSetterParams();
-		return writeRoundTrip(root, fileBase, getDefaultXJDFVersion(), EnumValidationLevel.Incomplete).b;
-	}
-
-	private JDFNode createImageSettingNodeWithImageSetterParams()
-	{
-		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
-		node.setType(EnumType.ImageSetting);
-		node.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyInput, null);
-		final JDFMedia media = (JDFMedia) node.appendMatchingResource(ElementName.MEDIA, EnumProcessUsage.AnyInput, null);
-		media.setAttribute(AttributeName.MEDIATYPE, "Plate");
-		final JDFExposedMedia exposedMedia = (JDFExposedMedia) node.appendMatchingResource(ElementName.EXPOSEDMEDIA, EnumProcessUsage.AnyOutput, null);
-		exposedMedia.refMedia(media);
-
-		final JDFElement imageSetterParams = node.addResource(ElementName.IMAGESETTERPARAMS, EnumUsage.Input);
-		imageSetterParams.setAttribute(AttributeName.NONPRINTABLEMARGINBOTTOM, "1");
-		imageSetterParams.setAttribute(AttributeName.RESOLUTION, "2540 2540");
-		imageSetterParams.appendElement(ElementName.FITPOLICY);
-		return node;
-	}
 }

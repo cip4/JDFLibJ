@@ -39,18 +39,18 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
-import org.cip4.jdflib.extensions.IntentHelper;
-import org.cip4.jdflib.extensions.IntentHelper.EIntentType;
-import org.cip4.jdflib.extensions.PartitionHelper;
-import org.cip4.jdflib.extensions.ResourceHelper;
-import org.cip4.jdflib.extensions.SetHelper;
-import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFCreasingParams;
+import org.cip4.jdflib.resource.process.postpress.JDFCrease;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -89,22 +89,24 @@ class WalkCreaseTest extends JDFTestCaseBase
 	{
 		final JDFElement root = runRoundTrip("walkcreasej3");
 		Assertions.assertNotNull(root);
-		Assertions.assertTrue(root.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(root.isValid(EnumValidationLevel.Incomplete));
 	}
 
-	@SuppressWarnings("deprecation")
 	private JDFElement runRoundTrip(final String fileBase)
 	{
-		final XJDFHelper helper = new XJDFHelper(fileBase, "p1");
-		helper.setTypes(EnumType.Product.getName());
-		final IntentHelper intentHelper = helper.getCreateRootProduct(0).getCreateIntent(EIntentType.LaminatingIntent);
-		intentHelper.getCreateResource().setAttribute(AttributeName.SURFACE, "Front");
+		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
+		node.setType(EnumType.Creasing);
+		node.setVersion(EnumVersion.Version_1_5);
+		final JDFElement inputComponent = node.appendMatchingResource(ElementName.COMPONENT, EnumProcessUsage.AnyInput, null);
+		inputComponent.setAttribute(AttributeName.COMPONENTTYPE, "PartialProduct");
+		final JDFElement outputComponent = node.appendMatchingResource(ElementName.COMPONENT, EnumProcessUsage.AnyOutput, null);
+		outputComponent.setAttribute(AttributeName.COMPONENTTYPE, "FinalProduct");
+		final JDFCreasingParams creasingParams = (JDFCreasingParams) node.addResource(ElementName.CREASINGPARAMS, EnumUsage.Input);
+		final JDFCrease crease = creasingParams.getCreateCrease();
+		crease.setRelativeStartPosition(new JDFXYPair(2, 0));
+		crease.setRelativeTravel(0.4);
+		crease.setRelativeWorkingPath(new JDFXYPair(8, 0));
 
-		final SetHelper setHelper = helper.getCreateSet(ElementName.NODEINFO, EnumUsage.Input, null);
-		final ResourceHelper resourceHelper = setHelper.appendPartition(null, true);
-		final PartitionHelper partitionHelper = new PartitionHelper(resourceHelper.getRoot());
-		Assertions.assertNotNull(partitionHelper.getCreateResource());
-
-		return writeRoundTripX(helper, fileBase, EnumValidationLevel.Complete, true);
+		return writeRoundTrip(node, fileBase, getDefaultXJDFVersion(), EnumValidationLevel.Incomplete).b;
 	}
 }

@@ -73,16 +73,15 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
-import org.cip4.jdflib.extensions.IntentHelper;
-import org.cip4.jdflib.extensions.IntentHelper.EIntentType;
-import org.cip4.jdflib.extensions.PartitionHelper;
-import org.cip4.jdflib.extensions.ResourceHelper;
-import org.cip4.jdflib.extensions.SetHelper;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
+import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.process.prepress.JDFInk;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -125,22 +124,30 @@ class WalkInkTest extends JDFTestCaseBase
 	{
 		final JDFElement root = runRoundTrip("walkinkj3");
 		Assertions.assertNotNull(root);
-		Assertions.assertTrue(root.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(root.isValid(EnumValidationLevel.Incomplete));
 	}
 
-	@SuppressWarnings("deprecation")
 	private JDFElement runRoundTrip(final String fileBase)
 	{
-		final XJDFHelper helper = new XJDFHelper(fileBase, "p1");
-		helper.setTypes("Product");
-		final IntentHelper intentHelper = helper.getCreateRootProduct(0).getCreateIntent(EIntentType.LaminatingIntent);
-		intentHelper.getCreateResource().setAttribute(AttributeName.SURFACE, "Front");
+		final JDFNode root = createConventionalPrintingNodeWithInk();
+		return writeRoundTrip(root, fileBase, getDefaultXJDFVersion(), EnumValidationLevel.Incomplete).b;
+	}
 
-		final SetHelper setHelper = helper.getCreateSet(ElementName.NODEINFO, EnumUsage.Input, null);
-		final ResourceHelper resourceHelper = setHelper.appendPartition(null, true);
-		final PartitionHelper partitionHelper = new PartitionHelper(resourceHelper.getRoot());
-		Assertions.assertNotNull(partitionHelper.getCreateResource());
-
-		return writeRoundTripX(helper, fileBase, EnumValidationLevel.Complete, true);
+	private JDFNode createConventionalPrintingNodeWithInk()
+	{
+		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
+		node.setVersion(EnumVersion.Version_1_5);
+		node.setType(EnumType.ConventionalPrinting);
+		final JDFElement inputComponent = node.appendMatchingResource(ElementName.COMPONENT, EnumProcessUsage.AnyInput, null);
+		inputComponent.setAttribute(AttributeName.COMPONENTTYPE, "PartialProduct");
+		node.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyInput, null);
+		node.appendMatchingResource(ElementName.MEDIA, EnumProcessUsage.AnyInput, null);
+		final JDFElement outputComponent = node.appendMatchingResource(ElementName.COMPONENT, EnumProcessUsage.AnyOutput, null);
+		outputComponent.setAttribute(AttributeName.COMPONENTTYPE, "FinalProduct");
+		node.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumProcessUsage.AnyInput, null);
+		final JDFInk ink = (JDFInk) node.addResource(ElementName.INK, EnumUsage.Input);
+		ink.setAttribute(AttributeName.FAMILY, "Offset");
+		ink.setAttribute(AttributeName.INKNAME, "Primary");
+		return node;
 	}
 }

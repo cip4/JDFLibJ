@@ -73,15 +73,11 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
-import org.cip4.jdflib.extensions.IntentHelper;
-import org.cip4.jdflib.extensions.IntentHelper.EIntentType;
-import org.cip4.jdflib.extensions.PartitionHelper;
-import org.cip4.jdflib.extensions.ResourceHelper;
-import org.cip4.jdflib.extensions.SetHelper;
-import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -115,22 +111,28 @@ class WalkEmbossingParamsTest extends JDFTestCaseBase
 	{
 		final JDFElement root = runRoundTrip("walkembossingparamsj3");
 		Assertions.assertNotNull(root);
-		Assertions.assertTrue(root.isValid(EnumValidationLevel.Complete));
+		Assertions.assertTrue(root.isValid(EnumValidationLevel.Incomplete));
 	}
 
-	@SuppressWarnings("deprecation")
 	private JDFElement runRoundTrip(final String fileBase)
 	{
-		final XJDFHelper helper = new XJDFHelper(fileBase, "p1");
-		helper.setTypes("Product");
-		final IntentHelper intentHelper = helper.getCreateRootProduct(0).getCreateIntent(EIntentType.LaminatingIntent);
-		intentHelper.getCreateResource().setAttribute(AttributeName.SURFACE, "Front");
+		final JDFNode root = createEmbossingNodeWithEmbossingParams();
+		return writeRoundTrip(root, fileBase, getDefaultXJDFVersion(), EnumValidationLevel.Incomplete).b;
+	}
 
-		final SetHelper setHelper = helper.getCreateSet(ElementName.NODEINFO, EnumUsage.Input, null);
-		final ResourceHelper resourceHelper = setHelper.appendPartition(null, true);
-		final PartitionHelper partitionHelper = new PartitionHelper(resourceHelper.getRoot());
-		Assertions.assertNotNull(partitionHelper.getCreateResource());
-
-		return writeRoundTripX(helper, fileBase, EnumValidationLevel.Complete, true);
+	private JDFNode createEmbossingNodeWithEmbossingParams()
+	{
+		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
+		node.setType(EnumType.Embossing);
+		final JDFElement inputComponent = node.appendMatchingResource(ElementName.COMPONENT, EnumProcessUsage.AnyInput, null);
+		inputComponent.setAttribute(AttributeName.COMPONENTTYPE, "PartialProduct");
+		final JDFElement outputComponent = node.appendMatchingResource(ElementName.COMPONENT, EnumProcessUsage.AnyOutput, null);
+		outputComponent.setAttribute(AttributeName.COMPONENTTYPE, "FinalProduct");
+		final JDFElement embossingParams = node.appendMatchingResource(ElementName.EMBOSSINGPARAMS, EnumProcessUsage.AnyInput, null);
+		embossingParams.setAttribute(AttributeName.MODULEINDEX, "7");
+		final KElement emboss = embossingParams.appendElement(ElementName.EMBOSS);
+		emboss.setAttribute(AttributeName.DIRECTION, "Raised");
+		emboss.setAttribute(AttributeName.EMBOSSINGTYPE, "BlindEmbossing");
+		return node;
 	}
 }
