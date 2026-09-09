@@ -80,6 +80,7 @@ import org.cip4.jdflib.datatypes.JDFRGBColor;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.AuditPoolHelper;
 import org.cip4.jdflib.extensions.IntentHelper;
+import org.cip4.jdflib.extensions.IntentHelper.EIntentType;
 import org.cip4.jdflib.extensions.MessageHelper;
 import org.cip4.jdflib.extensions.ProcessXJDFSplit;
 import org.cip4.jdflib.extensions.ProductHelper;
@@ -1131,6 +1132,42 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertNotNull(d);
 		final JDFNode n = d.getJDFRoot();
 		assertNull(n.getResource(ElementName.COMPONENT, EnumUsage.Output, 1));
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	void testLaminatingIntent()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		h.setTypes(JDFConstants.PRODUCT);
+		final ProductHelper p = h.getCreateRootProduct(0);
+		final IntentHelper li = p.appendIntent(EIntentType.LaminatingIntent);
+		li.setSpan(AttributeName.SURFACE, "Front");
+		final JDFDoc d = xCon.convert(h);
+		assertNotNull(d);
+		writeRoundTripX(h, "laminatingintent", EnumValidationLevel.Incomplete, true);
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	void testLaminatingIntentBoth()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		h.setTypes(JDFConstants.PRODUCT);
+		final ProductHelper p = h.getCreateRootProduct(0);
+		final IntentHelper li = p.appendIntent(EIntentType.LaminatingIntent);
+		li.setSpan(AttributeName.SURFACE, "Front Back");
+		final JDFDoc d = xCon.convert(h);
+		assertNotNull(d);
+		writeRoundTripX(h, "laminatingintent", EnumValidationLevel.Incomplete, true);
 	}
 
 	/**
