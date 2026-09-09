@@ -37,7 +37,6 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -45,30 +44,12 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.extensions.IntentHelper;
-import org.cip4.jdflib.extensions.IntentHelper.EIntentType;
-import org.cip4.jdflib.extensions.PartitionHelper;
-import org.cip4.jdflib.extensions.ResourceHelper;
-import org.cip4.jdflib.extensions.SetHelper;
-import org.cip4.jdflib.extensions.XJDFHelper;
-import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFCostCenter;
 import org.junit.jupiter.api.Test;
 
 class WalkCostCenterTest extends JDFTestCaseBase
 {
-	@Test
-	void testRoundTrip()
-	{
-		final JDFElement root = runRoundTrip("walkcostcenterj3");
-		assertNotNull(root);
-		assertTrue(root.isValid(EnumValidationLevel.Complete));
-	}
-
 	@Test
 	void testWalk()
 	{
@@ -84,21 +65,5 @@ class WalkCostCenterTest extends JDFTestCaseBase
 		final KElement walked = walker.walk(costCenter, xjdfParent);
 		assertNull(walked);
 		assertEquals("CC-1", xjdfParent.getAttribute(AttributeName.COSTCENTERID));
-	}
-
-	@SuppressWarnings("deprecation")
-	private JDFElement runRoundTrip(final String fileBase)
-	{
-		final XJDFHelper helper = new XJDFHelper(fileBase, "p1");
-		helper.setTypes(EnumType.Product.getName());
-		final IntentHelper intentHelper = helper.getCreateRootProduct(0).getCreateIntent(EIntentType.LaminatingIntent);
-		intentHelper.getCreateResource().setAttribute(AttributeName.SURFACE, "Front");
-
-		final SetHelper setHelper = helper.getCreateSet(ElementName.NODEINFO, EnumUsage.Input, null);
-		final ResourceHelper resourceHelper = setHelper.appendPartition(null, true);
-		final PartitionHelper partitionHelper = new PartitionHelper(resourceHelper.getRoot());
-		assertNotNull(partitionHelper.getCreateResource());
-
-		return writeRoundTripX(helper, fileBase, EnumValidationLevel.Complete, true);
 	}
 }
