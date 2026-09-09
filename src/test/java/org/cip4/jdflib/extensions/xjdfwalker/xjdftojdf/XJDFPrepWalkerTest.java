@@ -37,6 +37,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -148,6 +149,50 @@ class XJDFPrepWalkerTest extends JDFTestCaseBase
 		w.convert();
 		assertEquals(EnumVersion.Version_2_0, h.getVersion());
 
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testStripMarkMovedToPlacedObjectWhenSideIsPartitioned()
+	{
+		final XJDFHelper helper = new XJDFHelper("j1", "p1", null);
+		helper.setTypes("Stripping");
+		final SetHelper strippingSet = helper.getCreateSet(ElementName.STRIPPINGPARAMS, EnumUsage.Input, null);
+		final ResourceHelper strippingPartition = strippingSet.appendPartition(AttributeName.SIDE, "Front", true);
+		final org.cip4.jdflib.resource.JDFStrippingParams strippingParams = (org.cip4.jdflib.resource.JDFStrippingParams) strippingPartition.getResource();
+		final org.cip4.jdflib.resource.process.JDFStripMark stripMark = strippingParams.appendStripMark();
+		stripMark.setAttribute(AttributeName.CLASS, "Parameter");
+		stripMark.appendElement(ElementName.JOBFIELD).setAttribute(AttributeName.VALUE, "job-42");
+
+		new XJDFPrepWalker(helper).convert();
+
+		assertNull(strippingParams.getElement(ElementName.STRIPMARK));
+		assertNotNull(strippingParams.getElement(XJDFConstants.PlacedObject));
+		assertNotNull(strippingParams.getXPathElement("PlacedObject/MarkObject/JobField"));
+		assertEquals("job-42", strippingParams.getXPathAttribute("PlacedObject/MarkObject/JobField/@Value", null));
+		assertEquals("Parameter", strippingParams.getXPathAttribute("PlacedObject/MarkObject/DeviceMark/@Class", null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testStripMarkIsKeptWhenNoRecognizedChildElementExists()
+	{
+		final XJDFHelper helper = new XJDFHelper("j1", "p1", null);
+		helper.setTypes("Stripping");
+		final SetHelper strippingSet = helper.getCreateSet(ElementName.STRIPPINGPARAMS, EnumUsage.Input, null);
+		final ResourceHelper strippingPartition = strippingSet.appendPartition(AttributeName.SIDE, "Front", true);
+		final org.cip4.jdflib.resource.JDFStrippingParams strippingParams = (org.cip4.jdflib.resource.JDFStrippingParams) strippingPartition.getResource();
+		final org.cip4.jdflib.resource.process.JDFStripMark stripMark = strippingParams.appendStripMark();
+		stripMark.appendElement(ElementName.REGISTERMARK).setAttribute(AttributeName.SIZE, "20 20");
+
+		new XJDFPrepWalker(helper).convert();
+
+		assertNotNull(strippingParams.getElement(ElementName.STRIPMARK));
+		assertNull(strippingParams.getXPathElement("PlacedObject/MarkObject/RegisterMark"));
 	}
 
 }

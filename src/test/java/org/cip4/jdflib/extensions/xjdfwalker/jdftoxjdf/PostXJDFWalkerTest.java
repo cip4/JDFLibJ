@@ -60,6 +60,9 @@ import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.XJMFHelper;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFResource;
 import org.junit.jupiter.api.Test;
 
 class PostXJDFWalkerTest extends JDFTestCaseBase
@@ -163,8 +166,8 @@ class PostXJDFWalkerTest extends JDFTestCaseBase
 				.setAttribute(AttributeName.STRIPMATERIAL, "b1");
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertEquals(h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "BackStrip").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails),
-				"b1");
+		assertEquals("b1",
+				h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "BackStrip").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails));
 	}
 
 	/**
@@ -179,9 +182,9 @@ class PostXJDFWalkerTest extends JDFTestCaseBase
 		band.setAttribute(AttributeName.TOPBRAND, "b1");
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertEquals(h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "HeadBand").getPartition(0).getResource().getAttribute(AttributeName.COLOR),
-				"Black");
-		assertEquals(h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "HeadBand").getPartition(0).getBrand(), "b1");
+		assertEquals("Black",
+				h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "HeadBand").getPartition(0).getResource().getAttribute(AttributeName.COLOR));
+		assertEquals("b1", h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "HeadBand").getPartition(0).getBrand());
 	}
 
 	/**
@@ -440,5 +443,133 @@ class PostXJDFWalkerTest extends JDFTestCaseBase
 		w.setRetainAll(true);
 		w.walkTree(h.getRoot(), null);
 		assertEquals("P1 P2", h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getPartMapVector().get(0).get(AttributeName.PARTVERSION));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testProcessListSingleDeletedAndMultipleKept()
+	{
+		final XJDFHelper oneProcessHelper = new XJDFHelper("a", "p", null);
+		final KElement oneProcessList = oneProcessHelper.getRoot().appendElement(XJDFConstants.ProcessList);
+		oneProcessList.appendElement(XJDFConstants.Process).setAttribute(AttributeName.JOBPARTID, "p1");
+
+		final PostXJDFWalker walker = new PostXJDFWalker((JDFElement) oneProcessHelper.getRoot());
+		walker.walkTree(oneProcessHelper.getRoot(), null);
+		assertNull(oneProcessHelper.getRoot().getElement(XJDFConstants.ProcessList));
+
+		final XJDFHelper twoProcessHelper = new XJDFHelper("a", "p", null);
+		final KElement twoProcessList = twoProcessHelper.getRoot().appendElement(XJDFConstants.ProcessList);
+		twoProcessList.appendElement(XJDFConstants.Process).setAttribute(AttributeName.JOBPARTID, "p1");
+		twoProcessList.appendElement(XJDFConstants.Process).setAttribute(AttributeName.JOBPARTID, "p2");
+
+		new PostXJDFWalker((JDFElement) twoProcessHelper.getRoot()).walkTree(twoProcessHelper.getRoot(), null);
+		assertNotNull(twoProcessHelper.getRoot().getElement(XJDFConstants.ProcessList));
+		assertEquals(2, twoProcessHelper.getRoot().getXPathElement("ProcessList").numChildElements(XJDFConstants.Process, null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testPartAmountMovesResourceAttributesAndRemovesRedundantParts()
+	{
+		final XJDFHelper h = new XJDFHelper("a", "p", null);
+		final SetHelper componentSet = h.appendResourceSet(ElementName.COMPONENT, EnumUsage.Output);
+		final ResourceHelper componentPartition = componentSet.appendPartition(AttributeName.SHEETNAME, "S1", true);
+		final KElement component = componentPartition.getResource();
+		component.appendElement(ElementName.PART).setAttribute(AttributeName.SHEETNAME, "S1");
+
+		final KElement amountPool = component.getCreateElement(ElementName.AMOUNTPOOL, null, 0);
+		final KElement partAmount = amountPool.appendElement(ElementName.PARTAMOUNT);
+		partAmount.setAttribute(AttributeName.TRANSFORMATION, "1 0 0 1 5 6");
+		partAmount.setAttribute(AttributeName.ORIENTATION, "Rotate0");
+		final KElement part = partAmount.appendElement(ElementName.PART);
+		part.setAttribute(AttributeName.SHEETNAME, "S1");
+		part.setAttribute(AttributeName.SEPARATION, "Cyan");
+
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		w.walkTree(h.getRoot(), null);
+
+		assertEquals("1 0 0 1 5 6", h.getRoot().getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/@Transformation", null));
+		assertEquals("Rotate0", h.getRoot().getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/@Orientation", null));
+		assertNull(h.getRoot().getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/@Transformation", null));
+		assertNull(h.getRoot().getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/@Orientation", null));
+		assertNull(h.getRoot().getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/Part/@SheetName", null));
+		assertNull(h.getRoot().getXPathAttribute("ResourceSet[@Name=\"Component\"]/Resource/AmountPool/PartAmount/Part/@Condition", null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testPlacedObjectCopiesCommonAttributesAndMovesStripMarkChildren()
+	{
+		final XJDFHelper h = new XJDFHelper("a", "p", null);
+		final SetHelper layoutSet = h.appendResourceSet(ElementName.LAYOUT, EnumUsage.Input);
+		final KElement layout = layoutSet.appendPartition(AttributeName.SHEETNAME, "S1", true).getResource();
+		final KElement markObject = layout.appendElement(ElementName.MARKOBJECT);
+		markObject.setAttribute(AttributeName.ORD, "2");
+		markObject.appendElement(ElementName.JOBFIELD).setAttribute(AttributeName.VALUE, "JobFieldValue");
+
+		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
+		w.walkTree(h.getRoot(), null);
+
+		assertEquals("2", h.getRoot().getXPathAttribute("ResourceSet[@Name=\"Layout\"]/Resource/Layout/PlacedObject/@Ord", null));
+		assertNull(h.getRoot().getXPathAttribute("ResourceSet[@Name=\"Layout\"]/Resource/Layout/PlacedObject/MarkObject/@Ord", null));
+		assertNotNull(h.getRoot().getXPathElement("ResourceSet[@Name=\"Layout\"]/Resource/Layout/PlacedObject/MarkObject"));
+		assertEquals("JobFieldValue",
+				h.getRoot().getXPathAttribute("ResourceSet[@Name=\"Layout\"]/Resource/Layout/StripMark/JobField/@Value", null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testWalkResLinkCreatesProcessListWhenRequested()
+	{
+		final JDFNode root = new JDFDoc(ElementName.JDF).getJDFRoot();
+		root.setType(EnumType.ProcessGroup);
+		root.setJobPartID("P0");
+		final JDFNode child = root.addJDFNode(EnumType.ConventionalPrinting);
+		child.setJobPartID("P0.1");
+		final JDFResource media = child.addResource(ElementName.MEDIA, EnumUsage.Input);
+		child.ensureLink(media, EnumUsage.Input, null);
+
+		final JDFNode child2 = root.addJDFNode(EnumType.Cutting);
+		child2.setJobPartID("P0.2");
+		final JDFResource component = child2.addResource(ElementName.COMPONENT, EnumUsage.Input);
+		child2.ensureLink(component, EnumUsage.Input, null);
+
+		final JDFToXJDF converter = new JDFToXJDF();
+		converter.setProcessPart(JDFToXJDF.EnumProcessPartition.processList);
+		final KElement xjdf = converter.convert(root);
+
+		assertEquals(2, xjdf.getXPathElement("ProcessList").numChildElements(XJDFConstants.Process, null));
+		assertNotNull(xjdf.getXPathElement("ProcessList/Process"));
+		assertEquals("P0.1", xjdf.getXPathAttribute("ProcessList/Process/@JobPartID", null));
+		assertNotNull(xjdf.getXPathAttribute("ProcessList/Process/@Types", null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testWalkResLinkAddsProductPartWhenPartitioningByJobPartID()
+	{
+		final JDFNode root = new JDFDoc(ElementName.JDF).getJDFRoot();
+		root.setType(EnumType.ProcessGroup);
+		root.setJobPartID("P0");
+		final JDFNode child = root.addJDFNode(EnumType.ConventionalPrinting);
+		child.setJobPartID("P0.1");
+		final JDFResource media = child.addResource(ElementName.MEDIA, EnumUsage.Input);
+		child.ensureLink(media, EnumUsage.Input, null);
+
+		final JDFToXJDF converter = new JDFToXJDF();
+		converter.setProcessPart(JDFToXJDF.EnumProcessPartition.jobPartID);
+		final KElement xjdf = converter.convert(root);
+
+		assertEquals("P0.1", xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/Part/@ProductPart", null));
 	}
 }

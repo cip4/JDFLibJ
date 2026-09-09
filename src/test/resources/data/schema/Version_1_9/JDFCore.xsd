@@ -1786,6 +1786,7 @@
     <xs:annotation>
       <xs:appinfo>
         <Version Path="@ICSVersions" First="1.2" />
+        <Version Path="@Category" First="1.2" />
         <Version Path="@MaxVersion" First="1.2" />
         <Version Path="@RelatedJobID" First="1.2" />
         <Version Path="@RelatedJobPartID" First="1.2" />
@@ -1809,6 +1810,7 @@
           <xs:element name="NodeInfo" type="jdf:NodeInfo_" minOccurs="0" />
         </xs:sequence>
         <xs:attribute name="Activation" type="jdftyp:eActivation_" use="optional" />
+        <xs:attribute name="Category" type="jdftyp:NMTOKEN" use="optional" />
         <xs:attribute name="FileName" type="jdftyp:URL" use="optional" />
         <xs:attribute name="ICSVersions" type="jdftyp:NMTOKENS" use="optional" />
         <xs:attribute name="JobID" type="jdftyp:shortString" use="optional" />

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,94 +74,56 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.jmf.JDFJMF;
-import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
-import org.cip4.jdflib.jmf.JDFMessage.EnumType;
-import org.cip4.jdflib.jmf.JDFResourceInfo;
-import org.cip4.jdflib.jmf.JDFSignal;
-import org.cip4.jdflib.jmf.JMFBuilderFactory;
+import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.resource.process.JDFShapeTemplate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class WalkJMFTest extends JDFTestCaseBase
+class WalkShapeTemplateTest extends JDFTestCaseBase
 {
-
-	/**
-	 *
-	 */
 	@Test
-	void testSenderID()
+	void testGetElementNames()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
-		jmf.setSenderID("s1");
-		JDFSignal sig = jmf.getSignal(0);
-		sig.appendResourceQuParams().setJobID("j1");
-		sig.appendResourceInfo();
-
-		KElement xjmf = new JDFToXJDF().convert(jmf);
-
-		KElement sender = xjmf.getElement(XJDFConstants.Header);
-		Assertions.assertNull(sender.getNonEmpty(AttributeName.SENDERID));
-		Assertions.assertEquals("s1", sender.getNonEmpty(AttributeName.DEVICEID));
-	}
-
-	/**
-	 *
-	 */
-	@Test
-	void testXSI()
-	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
-		jmf.setSenderID("s1");
-		JDFSignal sig = jmf.getSignal(0);
-		sig.appendResourceQuParams().setJobID("j1");
-		sig.appendResourceInfo();
-
-		KElement xjmf = new JDFToXJDF().convert(jmf);
-
-		Assertions.assertNull(xjmf.getNonEmpty(AttributeName.XSITYPE));
-		Assertions.assertNull(xjmf.getNonEmpty(AttributeName.XMLNSXSI));
+		final WalkShapeTemplate walker = new WalkShapeTemplate();
+		Assertions.assertTrue(walker.getElementNames().contains(ElementName.SHAPETEMPLATE));
 	}
 
 	@Test
-	void testDirectWalkMatchesAndGetElementNames()
+	void testWalk()
 	{
-		final JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
-		jmf.setID("JMF_1");
-		jmf.setSenderID("sender_1");
+		final JDFShapeTemplate shapeTemplate = (JDFShapeTemplate) JDFElement.createRoot(ElementName.SHAPETEMPLATE);
+		final KElement generalID = shapeTemplate.appendElement(ElementName.GENERALID);
+		generalID.setAttribute(AttributeName.IDUSAGE, "L");
+		generalID.setAttribute(AttributeName.IDVALUE, "12.3");
 
-		final WalkJMF walkJMF = new WalkJMF();
-		walkJMF.setParent(new JDFToXJDF());
+		final WalkShapeTemplate walker = new WalkShapeTemplate();
+		walker.setParent(new JDFToXJDF());
+		Assertions.assertTrue(walker.matches(shapeTemplate));
 
-		Assertions.assertTrue(walkJMF.matches(jmf));
-		Assertions.assertNull(walkJMF.getElementNames());
-
-		final KElement xjmfRoot = new JDFDoc("XJMF").getRoot();
-		final KElement first = walkJMF.walk(jmf, xjmfRoot);
-		Assertions.assertNotNull(first);
-		Assertions.assertEquals("sender_1", xjmfRoot.getAttribute(AttributeName.DEVICEID));
-
-		final KElement second = walkJMF.walk(jmf, xjmfRoot);
-		Assertions.assertNull(second);
+		final KElement target = new JDFDoc(ElementName.RESOURCE).getRoot();
+		final KElement converted = walker.walk(shapeTemplate, target);
+		Assertions.assertNotNull(converted);
+		Assertions.assertNull(converted.getElement(ElementName.GENERALID, null, 0));
 	}
 
 	@Test
-	void testRoundTripX()
+	void testRoundTrip()
 	{
-		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
-		jmf.setSenderID("s2");
-		final JDFSignal sig = jmf.getSignal(0);
-		sig.appendResourceQuParams().setJobID("j2");
-		final JDFResourceInfo resourceInfo = sig.appendResourceInfo();
-		resourceInfo.setResourceName(ElementName.MEDIA);
+		final XJDFHelper helper = new XJDFHelper("WalkShapeTemplate", "Part1", null);
+		helper.setTypes("ShapeDefProduction");
+		final SetHelper set = helper.getCreateSet(ElementName.SHAPEDEFPRODUCTIONPARAMS, EnumUsage.Input);
+		final PartitionHelper partitionHelper = new PartitionHelper(set.appendPartition(null, true).getRoot());
+		final KElement shapeTemplate = partitionHelper.getResource().appendElement(ElementName.SHAPETEMPLATE);
+		final KElement shapeDimension = shapeTemplate.appendElement(XJDFConstants.ShapeDimension);
+		shapeDimension.setAttribute(AttributeName.USAGE, "L");
+		shapeDimension.setAttribute(AttributeName.VALUE, "12.3");
 
-		final KElement xjmf = new JDFToXJDF().convert(jmf);
-		final KElement xResourceInfo = xjmf.getXPathElement("SignalResource/ResourceInfo");
-		Assertions.assertNotNull(xResourceInfo);
-		Assertions.assertEquals("j2", xResourceInfo.getAttribute(AttributeName.JOBID));
-		Assertions.assertDoesNotThrow(() -> writeRoundTripX(xjmf, "walkjmf", null));
+		final JDFElement root = writeRoundTripX(helper, "walkshapetemplate", EnumValidationLevel.Incomplete, true);
+		Assertions.assertNotNull(root);
 	}
-
 }

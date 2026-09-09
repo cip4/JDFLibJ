@@ -3185,6 +3185,12 @@
       <xs:enumeration value="Right" />
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name="eFeedSheetLay_">
+    <xs:restriction base="jdftyp:EnumerationBaseType">
+      <xs:enumeration value="Leading" />
+      <xs:enumeration value="Trailing" />
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name="eSheetSides_">
     <xs:restriction base="jdftyp:EnumerationBaseType">
       <xs:enumeration value="Front" />

@@ -73,8 +73,15 @@ import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.MessageHelper;
+import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.XJMFHelper;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -101,5 +108,49 @@ class WalkDeviceInfoTest extends JDFTestCaseBase
 		String status = di2.getNonEmpty(AttributeName.DEVICESTATUS);
 		Assertions.assertNull(di2.getNonEmpty(AttributeName.STATUS));
 		Assertions.assertEquals(status, EnumDeviceStatus.Running.getName());
+	}
+
+	@Test
+	void testGetElementNamesAndUpdateDeviceStatus()
+	{
+		final WalkDeviceInfo wdi = new WalkDeviceInfo();
+		Assertions.assertTrue(wdi.getElementNames().contains(ElementName.DEVICEINFO));
+		Assertions.assertEquals("Unknown", WalkDeviceInfo.updateDeviceStatus("Offline"));
+		Assertions.assertEquals("Running", WalkDeviceInfo.updateDeviceStatus("Production"));
+		Assertions.assertNull(WalkDeviceInfo.updateDeviceStatus(null));
+	}
+
+	@Test
+	void testWalkModuleIDs()
+	{
+		final JDFDeviceInfo source = (JDFDeviceInfo) new JDFDoc(ElementName.DEVICEINFO).getRoot();
+		source.setAttribute(AttributeName.STATUS, "Offline");
+		source.setAttribute(XJDFConstants.ModuleIDs, "M1 M2");
+
+		final WalkDeviceInfo walker = new WalkDeviceInfo();
+		walker.setParent(new XJDFToJDFImpl(null));
+		Assertions.assertTrue(walker.matches(source));
+
+		final KElement targetPool = new JDFDoc(ElementName.RESOURCEPOOL).getRoot();
+		final KElement walked = walker.walk(source, targetPool);
+		Assertions.assertNotNull(walked);
+		Assertions.assertEquals("Unknown", walked.getAttribute(AttributeName.DEVICESTATUS));
+		Assertions.assertNull(walked.getNonEmpty(AttributeName.STATUS));
+		Assertions.assertNull(walked.getNonEmpty(XJDFConstants.ModuleIDs));
+		Assertions.assertNotNull(walked.getXPathElement("ModuleStatus[@ModuleID=\"M1\"]"));
+		Assertions.assertNotNull(walked.getXPathElement("ModuleStatus[@ModuleID=\"M2\"]"));
+	}
+
+	@Test
+	void testRoundTripX()
+	{
+		final XJMFHelper xjmf = new XJMFHelper();
+		final MessageHelper messageHelper = xjmf.appendMessage(EnumFamily.Signal, EnumType.Status);
+		messageHelper.getRoot().setXPathAttribute("DeviceInfo/@Status", "Production");
+		messageHelper.getRoot().setXPathAttribute("DeviceInfo/@ModuleIDs", "Module_A Module_B");
+
+		final JDFElement jmfRoundTrip = writeRoundTripX(xjmf.getRoot(), "walkdeviceinfo_xjdf", EnumValidationLevel.Complete);
+		Assertions.assertNotNull(jmfRoundTrip);
+		Assertions.assertNotNull(jmfRoundTrip.getXPathElement("Signal/DeviceInfo/ModuleStatus"));
 	}
 }

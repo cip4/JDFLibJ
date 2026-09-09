@@ -159,7 +159,24 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-
+  <xs:complexType name="SurfaceMark_re" mixed="false">
+    <xs:complexContent mixed="false">
+       <xs:extension base="jdf:BaseElement_">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:group ref="jdf:GenericElements" minOccurs="0" />
+          <xs:element name="ColorControlStrip" type="jdf:ColorControlStrip_re" minOccurs="0" />
+          <xs:element ref="jdf:ColorControlStripRef" minOccurs="0" />
+          <xs:element name="CutMark" type="jdf:CutMark_re" minOccurs="0" />
+          <xs:element ref="jdf:CutMarkRef" minOccurs="0" />
+          <xs:element name="RegisterMark" type="jdf:RegisterMark_re" minOccurs="0" />
+          <xs:element ref="jdf:RegisterMarkRef" minOccurs="0" />
+          <xs:element name="ScavengerArea" type="jdf:ScavengerArea_re" minOccurs="0" />
+          <xs:element ref="jdf:ScavengerAreaRef" minOccurs="0" />
+        </xs:sequence>
+        <xs:attribute name="Surface" type="jdftyp:eFace_" use="required" />
+ 	   </xs:extension>
+   </xs:complexContent>
+  </xs:complexType>
   <xs:attributeGroup name="ColorSpaceConversionOpAttribs">
     <xs:attribute name="BlackPointCompensation" type="jdftyp:boolean" use="optional"/>
     <xs:attribute name="BlackPointCompensationDetails" type="jdftyp:NMTOKEN" use="optional"/>

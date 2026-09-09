@@ -2786,6 +2786,7 @@
         <Version Path="Media" First="1.4" />
         <Version Path="MediaRef" First="1.4" />
         <Version Path="PageList" First="1.3" />
+        <Version Path="SurfaceMark" First="1.9" />
         <Version Path="PageListRef" First="1.3" />
         <Constraint Path="Assembly" minOccurs="0" maxOccurs="1" />
         <Constraint Path="AssemblyRef" minOccurs="0" maxOccurs="1" />
@@ -2857,7 +2858,8 @@
           <xs:element ref="jdf:MediaRef" minOccurs="0" />
           <xs:element name="PageList" type="jdf:PageList_re" minOccurs="0" />
           <xs:element ref="jdf:PageListRef" minOccurs="0" />
-          <xs:element name="ComponentUpdate" type="jdf:Component_re" minOccurs="0" />
+          <xs:element name="SurfaceMark" type="jdf:SurfaceMark_re" minOccurs="0" />
+         <xs:element name="ComponentUpdate" type="jdf:Component_re" minOccurs="0" />
           <xs:element name="Component" type="jdf:Component_rp" minOccurs="0" />
         </xs:sequence>
         <xs:attributeGroup ref="jdf:ComponentAttribs_r" />
@@ -2884,6 +2886,7 @@
           <xs:element ref="jdf:MediaRef" minOccurs="0" />
           <xs:element name="PageList" type="jdf:PageList_re" minOccurs="0" />
           <xs:element ref="jdf:PageListRef" minOccurs="0" />
+          <xs:element name="SurfaceMark" type="jdf:SurfaceMark_re" minOccurs="0" />
         </xs:sequence>
         <xs:attributeGroup ref="jdf:ComponentAttribs_r" />
       </xs:extension>
@@ -2910,7 +2913,8 @@
             <xs:element ref="jdf:MediaRef" minOccurs="0" />
             <xs:element name="PageList" type="jdf:PageList_re" minOccurs="0" />
             <xs:element ref="jdf:PageListRef" minOccurs="0" />
-            <xs:element name="Component" type="jdf:Component_rp" minOccurs="0" />
+           <xs:element name="SurfaceMark" type="jdf:SurfaceMark_re" minOccurs="0" />
+             <xs:element name="Component" type="jdf:Component_rp" minOccurs="0" />
           </xs:sequence>
           <xs:element name="Identical" type="jdf:Identical" minOccurs="0" />
         </xs:choice>
@@ -3227,7 +3231,8 @@
   <xs:element name="ConventionalPrintingParams" type="jdf:ConventionalPrintingParams_r" substitutionGroup="jdf:Resource">
     <xs:annotation>
       <xs:appinfo>
-        <Version Path="@ModuleAvailableIndex" First="1.1" Last="1.3" />
+        <Version Path="@FeedSheetLay" First="1.9" />
+       <Version Path="@ModuleAvailableIndex" First="1.1" Last="1.3" />
         <Version Path="@ModuleIndex" Last="1.3" />
         <Version Path="@NonPrintableMarginLeft" First="1.3" />
         <Version Path="@NonPrintableMarginRight" First="1.3" />
@@ -3247,6 +3252,7 @@
   <xs:element name="ConventionalPrintingParamsLink" type="jdf:ResourceLink" substitutionGroup="jdf:ResourceLink" />
   <xs:attributeGroup name="ConventionalPrintingParamsAttribs_c">
     <xs:attribute name="Drying" type="jdftyp:eDrying_" use="optional" />
+    <xs:attribute name="FeedSheetLay" type="jdftyp:eFeedSheetLay_" use="optional" />
     <xs:attribute name="FirstSurface" type="jdftyp:eFirstSurface_" use="optional" />
     <xs:attribute name="FountainSolution" type="jdftyp:eFountainSolution_" use="optional" />
     <xs:attribute name="MediaLocation" type="jdftyp:string" use="optional" />
@@ -5050,7 +5056,7 @@
         <xs:attribute name="GutterY2" type="jdftyp:double" use="optional" />
         <xs:attribute name="LayoutStyle" type="jdftyp:NMTOKENS" use="optional" />
         <xs:attribute name="OrderQuantity" type="jdftyp:Integer" use="optional" />
-        <xs:attribute name="UseBleeds" type="jdftyp:boolean" use="optional" />
+        <xs:attribute name="UseBleed" type="jdftyp:boolean" use="optional" />
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -5198,6 +5204,7 @@
       <xs:appinfo>
         <Version Path="@Collate" First="1.1" />
         <Version Path="@DirectProofAmount" First="1.2" />
+		<Version Path="@FeedSheetLay" First="1.9" />
         <Version Path="@ManualFeed" First="1.1" />
         <Version Path="@NonPrintableMarginBottom" First="1.2" />
         <Version Path="@NonPrintableMarginLeft" First="1.2" />
@@ -5238,6 +5245,7 @@
   <xs:element name="DigitalPrintingParamsLink" type="jdf:ResourceLink" substitutionGroup="jdf:ResourceLink" />
   <xs:attributeGroup name="DigitalPrintingParamsAttribs_c">
     <xs:attribute name="Collate" type="jdftyp:eDigitalPrintingCollate_" use="optional" />
+    <xs:attribute name="FeedSheetLay" type="jdftyp:eFeedSheetLay_" use="optional" />
     <xs:attribute name="NonPrintableMarginBottom" type="jdftyp:double" use="optional" />
     <xs:attribute name="NonPrintableMarginLeft" type="jdftyp:double" use="optional" />
     <xs:attribute name="NonPrintableMarginRight" type="jdftyp:double" use="optional" />
@@ -5606,7 +5614,7 @@
           <xs:group ref="jdf:GenericResourceElements" minOccurs="0" />
           <xs:element name="CostCenter" type="jdf:CostCenter_re" minOccurs="0" />
           <xs:element name="Person" type="jdf:Person_re" minOccurs="0" />
-           <xs:element ref="jdf:PersonRef" minOccurs="0" />
+          <xs:element ref="jdf:PersonRef" minOccurs="0" />
           <xs:element name="EmployeeUpdate" type="jdf:Employee_re" minOccurs="0" />
           <xs:element name="Employee" type="jdf:Employee_rp" minOccurs="0" />
         </xs:sequence>
@@ -8411,6 +8419,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:element name="JacketingParams" type="jdf:JacketingParams_r" substitutionGroup="jdf:Resource">
     <xs:annotation>
       <xs:appinfo>
@@ -8421,14 +8430,16 @@
   </xs:element>
   <xs:element name="JacketingParamsRef" type="jdf:ResourceRef" substitutionGroup="jdf:ResourceRef" />
   <xs:element name="JacketingParamsLink" type="jdf:ResourceLink" substitutionGroup="jdf:ResourceLink" />
-  <xs:attributeGroup name="JacketingParamsAttribs_c" />
+  <xs:attributeGroup name="JacketingParamsAttribs_c" >
+    <xs:attribute name="FoldingDistance" type="jdftyp:double" use="optional" />
+    <xs:attribute name="FoldingWidth" type="jdftyp:double" use="optional" />
+ </xs:attributeGroup>
+  
   <xs:attributeGroup name="JacketingParamsAttribs_u">
     <xs:attributeGroup ref="jdf:JacketingParamsAttribs_c" />
-    <xs:attribute name="FoldingWidth" type="jdftyp:double" use="optional" />
-    <xs:attribute name="FoldingDistance" type="jdftyp:double" use="optional" />
   </xs:attributeGroup>
   <xs:attributeGroup name="JacketingParamsAttribs_r">
-    <xs:attributeGroup ref="jdf:JacketingParamsAttribs_c" />
+     <xs:attribute name="FoldingDistance" type="jdftyp:double" use="optional" />
     <xs:attribute name="FoldingWidth" type="jdftyp:double" use="required" />
   </xs:attributeGroup>
   <xs:complexType name="JacketingParams_r" mixed="false">
@@ -9696,12 +9707,13 @@
           <xs:group ref="jdf:GenericElements" minOccurs="0" />
           <xs:group ref="jdf:GenericResourceElements" minOccurs="0" />
           <xs:element name="Address" type="jdf:Address_re" minOccurs="0" />
-        </xs:sequence>
+          <xs:element ref="jdf:AddressRef" minOccurs="0" />
+       </xs:sequence>
         <xs:attributeGroup ref="jdf:LocationAttribs_r" />
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <!-- Exported as a top level element for resue by the Printtalk schema -->
+  <!-- Exported as a top level element for reuse by the Printtalk schema -->
   <xs:element name="Location" type="jdf:Location_re" />
 
   <xs:element name="LongitudinalRibbonOperationParams" type="jdf:LongitudinalRibbonOperationParams_r" substitutionGroup="jdf:Resource">
@@ -12487,6 +12499,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  
   <xs:element name="PreviewRef" type="jdf:ResourceRef" />
   <xs:element name="PreviewLink" type="jdf:ResourceLink" substitutionGroup="jdf:ResourceLink" />
   <xs:attributeGroup name="PreviewAttribs_c">
@@ -12495,6 +12508,8 @@
     <xs:attribute name="Directory" type="jdftyp:URL" use="optional" />
     <xs:attribute name="MimeTypeDetails" type="jdftyp:string" use="optional" />
     <xs:attribute name="PreviewType" type="jdftyp:ePreviewType_" use="optional" />
+    <xs:attribute name="Resolution" type="jdftyp:XYPair" use="optional" />
+    <xs:attribute name="Size" type="jdftyp:XYPair" use="optional" />
   </xs:attributeGroup>
   <xs:attributeGroup name="PreviewAttribs_u">
     <xs:attributeGroup ref="jdf:PreviewAttribs_c" />
@@ -15881,6 +15896,7 @@
         <Version Path="@GangElementID" First="1.5" />
         <Version Path="@InnermostShingling" First="1.4" />
         <Version Path="@OutermostShingling" First="1.4" />
+        <Version Path="@FeedSheetLay" First="1.9" />
         <Version Path="@SheetLay" First="1.7" />
         <Version Path="@SheetNameFormat" First="1.4" />
         <Version Path="@SheetNameTemplate" First="1.4" />
@@ -15930,6 +15946,7 @@
     <xs:attribute name="OutermostShingling" type="jdftyp:double" use="optional" />
     <xs:attribute name="SectionList" type="jdftyp:IntegerList" use="optional" />
     <xs:attribute name="SheetLay" type="jdftyp:eSheetLay_" use="optional" />
+    <xs:attribute name="FeedSheetLay" type="jdftyp:eFeedSheetLay_" use="optional" />
     <xs:attribute name="SheetNameFormat" type="jdftyp:string" use="optional" />
     <xs:attribute name="SheetNameTemplate" type="jdftyp:string" use="optional" />
     <xs:attribute name="StackDepth" type="jdftyp:Integer" use="optional" />

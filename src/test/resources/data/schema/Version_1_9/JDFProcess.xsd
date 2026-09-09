@@ -123,7 +123,9 @@
         <Constraint Path="ResourceLinkPool/PreflightReportLink" Usage="Input" minOccurs="0" maxOccurs="unbounded" />
         <Constraint Path="ResourceLinkPool/CustomerInfoLink" Usage="Input" minOccurs="0" maxOccurs="1" />
         <Constraint Path="ResourceLinkPool/NodeInfoLink" Usage="Input" minOccurs="0" maxOccurs="1" />
-      </xs:appinfo>
+        <Constraint Path="ResourceLinkPool/MiscConsumableLink" Usage="Input" minOccurs="0" maxOccurs="unbounded" />
+        <Constraint Path="ResourceLinkPool/UsageCounterLink" Usage="Input" minOccurs="0" maxOccurs="unbounded" />
+     </xs:appinfo>
     </xs:annotation>
     <xs:complexContent mixed="false">
       <xs:extension base="jdf:JDFAbstractNode">

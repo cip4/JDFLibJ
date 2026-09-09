@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2018 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,95 +73,74 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.extensions.IntentHelper;
+import org.cip4.jdflib.extensions.IntentHelper.EIntentType;
+import org.cip4.jdflib.extensions.PartitionHelper;
+import org.cip4.jdflib.extensions.ResourceHelper;
+import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.jmf.JDFJMF;
-import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
-import org.cip4.jdflib.jmf.JDFMessage.EnumType;
-import org.cip4.jdflib.jmf.JDFResourceInfo;
-import org.cip4.jdflib.jmf.JDFSignal;
-import org.cip4.jdflib.jmf.JMFBuilderFactory;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class WalkJMFTest extends JDFTestCaseBase
+class WalkInkTest extends JDFTestCaseBase
 {
-
-	/**
-	 *
-	 */
 	@Test
-	void testSenderID()
+	void testGetElementNames()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
-		jmf.setSenderID("s1");
-		JDFSignal sig = jmf.getSignal(0);
-		sig.appendResourceQuParams().setJobID("j1");
-		sig.appendResourceInfo();
-
-		KElement xjmf = new JDFToXJDF().convert(jmf);
-
-		KElement sender = xjmf.getElement(XJDFConstants.Header);
-		Assertions.assertNull(sender.getNonEmpty(AttributeName.SENDERID));
-		Assertions.assertEquals("s1", sender.getNonEmpty(AttributeName.DEVICEID));
-	}
-
-	/**
-	 *
-	 */
-	@Test
-	void testXSI()
-	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
-		jmf.setSenderID("s1");
-		JDFSignal sig = jmf.getSignal(0);
-		sig.appendResourceQuParams().setJobID("j1");
-		sig.appendResourceInfo();
-
-		KElement xjmf = new JDFToXJDF().convert(jmf);
-
-		Assertions.assertNull(xjmf.getNonEmpty(AttributeName.XSITYPE));
-		Assertions.assertNull(xjmf.getNonEmpty(AttributeName.XMLNSXSI));
+		final WalkInk walker = new WalkInk();
+		Assertions.assertTrue(walker.getElementNames().contains(ElementName.INK));
 	}
 
 	@Test
-	void testDirectWalkMatchesAndGetElementNames()
+	void testWalk()
 	{
-		final JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
-		jmf.setID("JMF_1");
-		jmf.setSenderID("sender_1");
+		final WalkInk walker = new WalkInk();
+		walker.setParent(new JDFToXJDF());
 
-		final WalkJMF walkJMF = new WalkJMF();
-		walkJMF.setParent(new JDFToXJDF());
+		final KElement plainInk = new JDFDoc(ElementName.INK).getRoot();
+		plainInk.setAttribute(AttributeName.FAMILY, "Offset");
+		plainInk.setAttribute(AttributeName.INKNAME, "Primary");
+		Assertions.assertTrue(walker.matches(plainInk));
+		final KElement convertedPlain = walker.walk(plainInk, new JDFDoc(ElementName.RESOURCE).getRoot());
+		Assertions.assertNotNull(convertedPlain);
+		Assertions.assertEquals("Offset", convertedPlain.getAttribute(XJDFConstants.InkType));
+		Assertions.assertNull(convertedPlain.getNonEmpty(AttributeName.INKNAME));
 
-		Assertions.assertTrue(walkJMF.matches(jmf));
-		Assertions.assertNull(walkJMF.getElementNames());
-
-		final KElement xjmfRoot = new JDFDoc("XJMF").getRoot();
-		final KElement first = walkJMF.walk(jmf, xjmfRoot);
-		Assertions.assertNotNull(first);
-		Assertions.assertEquals("sender_1", xjmfRoot.getAttribute(AttributeName.DEVICEID));
-
-		final KElement second = walkJMF.walk(jmf, xjmfRoot);
-		Assertions.assertNull(second);
+		final KElement specialInk = new JDFDoc(ElementName.INK).getRoot();
+		specialInk.setAttribute(AttributeName.SPECIALINK, "Metallic");
+		specialInk.setAttribute(AttributeName.FAMILY, "Spot");
+		final KElement convertedSpecial = walker.walk(specialInk, new JDFDoc(ElementName.RESOURCE).getRoot());
+		Assertions.assertNotNull(convertedSpecial);
+		final String inkType = convertedSpecial.getAttribute(XJDFConstants.InkType);
+		Assertions.assertTrue(inkType.contains("Metallic"));
+		Assertions.assertTrue(inkType.contains("Spot"));
 	}
 
 	@Test
-	void testRoundTripX()
+	void testRoundTrip()
 	{
-		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
-		jmf.setSenderID("s2");
-		final JDFSignal sig = jmf.getSignal(0);
-		sig.appendResourceQuParams().setJobID("j2");
-		final JDFResourceInfo resourceInfo = sig.appendResourceInfo();
-		resourceInfo.setResourceName(ElementName.MEDIA);
-
-		final KElement xjmf = new JDFToXJDF().convert(jmf);
-		final KElement xResourceInfo = xjmf.getXPathElement("SignalResource/ResourceInfo");
-		Assertions.assertNotNull(xResourceInfo);
-		Assertions.assertEquals("j2", xResourceInfo.getAttribute(AttributeName.JOBID));
-		Assertions.assertDoesNotThrow(() -> writeRoundTripX(xjmf, "walkjmf", null));
+		final JDFElement root = runRoundTrip("walkinkj3");
+		Assertions.assertNotNull(root);
+		Assertions.assertTrue(root.isValid(EnumValidationLevel.Complete));
 	}
 
+	@SuppressWarnings("deprecation")
+	private JDFElement runRoundTrip(final String fileBase)
+	{
+		final XJDFHelper helper = new XJDFHelper(fileBase, "p1");
+		helper.setTypes("Product");
+		final IntentHelper intentHelper = helper.getCreateRootProduct(0).getCreateIntent(EIntentType.LaminatingIntent);
+		intentHelper.getCreateResource().setAttribute(AttributeName.SURFACE, "Front");
+
+		final SetHelper setHelper = helper.getCreateSet(ElementName.NODEINFO, EnumUsage.Input, null);
+		final ResourceHelper resourceHelper = setHelper.appendPartition(null, true);
+		final PartitionHelper partitionHelper = new PartitionHelper(resourceHelper.getRoot());
+		Assertions.assertNotNull(partitionHelper.getCreateResource());
+
+		return writeRoundTripX(helper, fileBase, EnumValidationLevel.Complete, true);
+	}
 }
