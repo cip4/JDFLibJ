@@ -94,7 +94,7 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 	static
 	{
 		elemInfoTable[0] = new ElemInfoTable(ElementName.LAMINATED, 0x7777777776l);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.TEMPERATURE, 0x5555555555l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.TEMPERATURE, 0x6666666666l);
 		elemInfoTable[2] = new ElemInfoTable(ElementName.SURFACE, 0x6666666666l);
 		elemInfoTable[3] = new ElemInfoTable(ElementName.TEXTURE, 0x6666666111l);
 		elemInfoTable[4] = new ElemInfoTable(ElementName.THICKNESS, 0x6666666666l);
@@ -160,7 +160,7 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateLaminated
-	 * 
+	 *
 	 * @return JDFOptionSpan the element
 	 */
 	public JDFOptionSpan getCreateLaminated()
@@ -191,7 +191,7 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateTemperature
-	 * 
+	 *
 	 * @return JDFSpanTemperature the element
 	 */
 	public JDFSpanTemperature getCreateTemperature()
@@ -222,7 +222,7 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateSurface
-	 * 
+	 *
 	 * @return JDFSpanSurface the element
 	 */
 	public JDFSpanSurface getCreateSurface()
@@ -253,7 +253,7 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateTexture
-	 * 
+	 *
 	 * @return JDFNameSpan the element
 	 */
 	public JDFNameSpan getCreateTexture()
@@ -284,7 +284,7 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 
 	/**
 	 * (25) getCreateThickness
-	 * 
+	 *
 	 * @return JDFNumberSpan the element
 	 */
 	public JDFNumberSpan getCreateThickness()
