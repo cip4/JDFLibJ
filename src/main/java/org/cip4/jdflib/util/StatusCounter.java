@@ -60,6 +60,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -86,6 +87,7 @@ import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.process.JDFComponent;
@@ -974,6 +976,7 @@ public class StatusCounter
 		final JDFDeviceInfo deviceInfo = respStatus.getCreateDeviceInfo(0);
 		final JDFJobPhase jp = deviceInfo.createJobPhaseFromPhaseTime(pt2);
 		setJobPhaseAmounts(jp);
+		updateWorkstepID(jp);
 		jp.setQueueEntryID(queueEntryID);
 
 		fillDeviceInfo(deviceStatus, deviceStatusDetails, deviceInfo);
@@ -1007,6 +1010,7 @@ public class StatusCounter
 		jp.setJobID(m_Node.getJobID(true));
 		jp.setJobPartID(m_Node.getJobPartID(false));
 		jp.setQueueEntryID(queueEntryID);
+		updateWorkstepID(jp);
 		setJobPhaseAmounts(jp);
 		if (addPhaseTimeAmounts)
 		{
@@ -1019,6 +1023,18 @@ public class StatusCounter
 		}
 
 		return respStatus;
+	}
+
+	void updateWorkstepID(JDFJobPhase jp)
+	{
+		JDFNodeInfo ni = m_Node.getNodeInfo();
+		final VJDFAttributeMap v = m_Node.getPartMapVector();
+		final JDFAttributeMap map = v == null ? null : v.getCommonMap();
+		ni = ni == null ? null : (JDFNodeInfo) ni.getPartition(map, EnumPartUsage.Implicit).getLeaf(0);
+		if (ni != null)
+		{
+			jp.setWorkStepID(ni.getWorkStepID());
+		}
 	}
 
 	void appendProcessRun(final EnumNodeStatus nodeStatus, final JDFAuditPool ap)
