@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.ENodeStatus;
 import org.cip4.jdflib.core.JDFElement.ESides;
 import org.cip4.jdflib.core.JDFElement.EnumNamedColor;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
@@ -102,6 +103,7 @@ import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.datatypes.JDFTransferFunction;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.elementwalker.RemovePrivate;
 import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.IntentHelper.EIntentType;
@@ -195,6 +197,7 @@ import org.cip4.jdflib.span.JDFSpanBindingType.EnumSpanBindingType;
 import org.cip4.jdflib.span.JDFSpanScreeningType.EnumSpanScreeningType;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.MyPair;
 import org.junit.jupiter.api.Test;
 
@@ -234,6 +237,9 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		jdfComponent.setProductType("foo");
 		jdfComponent.setComponentType(EnumComponentType.PartialProduct, null);
 		n.getLink(jdfComponent, EnumUsage.Output).setAmount(42);
+
+		final JDFNodeInfo ni = n.getCreateNodeInfo();
+		ni.setNodeStatus(ENodeStatus.Waiting);
 		return n;
 	}
 
@@ -2117,11 +2123,10 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement xjdf = conv.makeNewJDF(n, null);
 		final SetHelper niSet = XJDFHelper.getHelper(xjdf).getNodeInfo();
 		final List<ResourceHelper> partitionList = niSet.getPartitionList();
-		assertEquals(2, partitionList.size());
+		assertEquals(1, partitionList.size());
 		for (final ResourceHelper rh : partitionList)
 		{
 			assertNotNull(rh.getRoot().getElement(ElementName.NODEINFO, null, 0));
-			assertNull(rh.getRoot().getElement(ElementName.NODEINFO, null, 1));
 		}
 	}
 
@@ -2243,6 +2248,24 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		r2.setFileURL("file:///fooout.pdf");
 		final XJDFHelper xh = (XJDFHelper) writeRoundTrip(n, "RunListPages").getA();
 		assertEquals(3, xh.getSet(ElementName.RUNLIST, 0).getResourceList().size());
+	}
+
+	/**
+	*
+	*/
+	@Test
+	void testSpawnedNode()
+	{
+		final JDFNode n0 = createBaseProductNode();
+		final JDFNode n = creatXMDoc(false).getJDFRoot();
+		new RemovePrivate().walkTree(n, null);
+		final JDFNode n1 = (JDFNode) n0.moveElement(n, null);
+
+		final JDFNode ns = new JDFSpawn(n1).spawn();
+		final XJDF20 xjdfConv = new XJDF20();
+		final KElement xjdfRoot = xjdfConv.convert(ns);
+		final XJDFHelper xh = new XJDFHelper(xjdfRoot);
+		assertEquals(1, xh.getSets(ElementName.NODEINFO, null).size());
 	}
 
 	/**

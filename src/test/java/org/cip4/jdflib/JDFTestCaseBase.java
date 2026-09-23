@@ -44,6 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 import java.net.URL;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -85,6 +86,7 @@ import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.MyPair;
 import org.cip4.jdflib.util.StringUtil;
@@ -95,6 +97,7 @@ import org.cip4.jdflib.util.net.UrlCheck;
 import org.cip4.jdflib.util.thread.RegularJanitor;
 import org.cip4.jdflib.validate.JDFValidator;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.w3c.dom.Comment;
 import org.w3c.dom.Node;
@@ -109,6 +112,21 @@ public abstract class JDFTestCaseBase
 
 	private static final String VALID = "Valid";
 	protected static Lock sequential = new ReentrantLock();
+	private static final AtomicBoolean tmpCleaned = new AtomicBoolean(false);
+
+	@BeforeAll
+	static void cleanTempDirOnce()
+	{
+		if (tmpCleaned.compareAndSet(false, true))
+		{
+			final File tempDir = new File(sm_dirTestDataTemp);
+			if (tempDir.exists() && System.currentTimeMillis() - tempDir.lastModified() > 3600l * 1000l)
+			{
+				FileUtil.deleteAll(tempDir);
+				tempDir.mkdirs();
+			}
+		}
+	}
 
 	/**
 	 * @param e
@@ -259,8 +277,7 @@ public abstract class JDFTestCaseBase
 			// legacy - pre maven file structure support
 			path = "test" + File.separator + "data";
 		}
-		path = FilenameUtils.normalize(path) + File.separator;
-		return path;
+		return FilenameUtils.normalize(path) + File.separator;
 	}
 
 	/**
@@ -279,12 +296,17 @@ public abstract class JDFTestCaseBase
 		assertTrue(((JDFElement) doc.getRoot()).isValid(level));
 	}
 
+	protected static JDFDoc creatXMDoc()
+	{
+		return creatXMDoc(true);
+	}
+
 	/**
 	 * create a doc with exposedmedia for tests
 	 *
 	 * @return
 	 */
-	protected static JDFDoc creatXMDoc()
+	protected static JDFDoc creatXMDoc(boolean sig2)
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
@@ -329,29 +351,32 @@ public abstract class JDFTestCaseBase
 		ni.getCreatePartition(mPart1, vs);
 		comp.getCreatePartition(mPart1, vs);
 
-		mPart1.put("SignatureName", "Sig2");
-		mPart1.put("SheetName", "S1");
-		mPart1.put("Side", "Front");
-		xm.getCreatePartition(mPart1, vs);
-		ni.getCreatePartition(mPart1, vs);
-		comp.getCreatePartition(mPart1, vs);
-		comp.appendElement("foo:bar", "www.foobar.com");
+		if (sig2)
+		{
+			mPart1.put("SignatureName", "Sig2");
+			mPart1.put("SheetName", "S1");
+			mPart1.put("Side", "Front");
+			xm.getCreatePartition(mPart1, vs);
+			ni.getCreatePartition(mPart1, vs);
+			comp.getCreatePartition(mPart1, vs);
+			comp.appendElement("foo:bar", "www.foobar.com");
 
-		mPart1.put("Side", "Back");
-		xm.getCreatePartition(mPart1, vs);
-		ni.getCreatePartition(mPart1, vs);
-		comp.getCreatePartition(mPart1, vs);
+			mPart1.put("Side", "Back");
+			xm.getCreatePartition(mPart1, vs);
+			ni.getCreatePartition(mPart1, vs);
+			comp.getCreatePartition(mPart1, vs);
 
-		mPart1.put("SheetName", "S2");
-		mPart1.put("Side", "Front");
-		xm.getCreatePartition(mPart1, vs);
-		ni.getCreatePartition(mPart1, vs);
-		comp.getCreatePartition(mPart1, vs);
+			mPart1.put("SheetName", "S2");
+			mPart1.put("Side", "Front");
+			xm.getCreatePartition(mPart1, vs);
+			ni.getCreatePartition(mPart1, vs);
+			comp.getCreatePartition(mPart1, vs);
 
-		mPart1.put("Side", "Back");
-		xm.getCreatePartition(mPart1, vs);
-		ni.getCreatePartition(mPart1, vs);
-		comp.getCreatePartition(mPart1, vs);
+			mPart1.put("Side", "Back");
+			xm.getCreatePartition(mPart1, vs);
+			ni.getCreatePartition(mPart1, vs);
+			comp.getCreatePartition(mPart1, vs);
+		}
 		return doc;
 	}
 
@@ -601,8 +626,7 @@ public abstract class JDFTestCaseBase
 		{
 			conv.setNewVersion(v.getXJDFVersion());
 		}
-		final KElement x = conv.convert(e);
-		return x;
+		return conv.convert(e);
 	}
 
 	protected MyPair<BaseXJDFHelper, JDFElement> writeRoundTrip(final JDFElement root, final String fileBase)

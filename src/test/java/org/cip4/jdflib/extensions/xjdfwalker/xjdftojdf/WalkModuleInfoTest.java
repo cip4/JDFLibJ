@@ -85,7 +85,7 @@ class WalkModuleInfoTest extends JDFTestCaseBase
 		Assertions.assertNull(walked.getNonEmpty(AttributeName.PRODUCTIONCOUNTER));
 		Assertions.assertNull(walked.getNonEmpty(AttributeName.TOTALPRODUCTIONCOUNTER));
 		Assertions.assertNull(walked.getNonEmpty(XJDFConstants.ModuleCondition));
-		Assertions.assertNull(source.getElement(ElementName.PART));
+		Assertions.assertNull(walked.getElement(ElementName.PART));
 		Assertions.assertNotNull(target.getNonEmpty(AttributeName.DESCRIPTIVENAME));
 	}
 

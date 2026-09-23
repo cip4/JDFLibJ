@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import org.cip4.jdflib.auto.JDFAutoMISDetails.EDeviceOperationMode;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
@@ -118,8 +119,11 @@ public class WalkDeviceInfo extends WalkXElement
 	{
 		final JDFDeviceInfo di = (JDFDeviceInfo) elem;
 		di.renameAttribute(AttributeName.STATUS, AttributeName.DEVICESTATUS);
-		final String newStatus = updateDeviceStatus(elem.getNonEmpty(AttributeName.DEVICESTATUS));
+		final String devStatus = elem.getNonEmpty(AttributeName.DEVICESTATUS);
+		final String newStatus = updateDeviceStatus(devStatus);
+		di.setDeviceOperationMode("NonProductive".equals(newStatus) ? EDeviceOperationMode.NonProductive : EDeviceOperationMode.Productive);
 		di.setAttribute(AttributeName.DEVICESTATUS, newStatus);
+		// needed for case fix
 		di.setDeviceCondition(di.getDeviceCondition());
 		updateModuleIDS(elem);
 		super.updateAttributes(elem);
@@ -149,7 +153,7 @@ public class WalkDeviceInfo extends WalkXElement
 	{
 		if (StringUtil.getNonEmpty(val) != null)
 		{
-			if ("Offline".equals(val))
+			if ("Offline".equals(val) || "NonProductive".equals(val))
 			{
 				val = "Unknown";
 			}

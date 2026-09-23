@@ -68,19 +68,23 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker;
 
+import java.util.Collection;
+
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.RemoveEmpty;
+import org.cip4.jdflib.extensions.ResourceHelper;
+import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.util.ContainerUtil;
 
 /**
- *
  * @author rainer prosi
- *
  */
 public class RemoveEmptyXJDF extends RemoveEmpty
 {
@@ -102,7 +106,6 @@ public class RemoveEmptyXJDF extends RemoveEmpty
 	 * zapp me
 	 *
 	 * @author rainer prosi
-	 *
 	 */
 	public class WalkResourceSet extends WalkElement
 	{
@@ -117,7 +120,6 @@ public class RemoveEmptyXJDF extends RemoveEmpty
 		}
 
 		/**
-		 *
 		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#getDummyAttributes()
 		 */
 		@Override
@@ -150,7 +152,6 @@ public class RemoveEmptyXJDF extends RemoveEmpty
 		}
 
 		/**
-		 *
 		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#hasRequiredChild(org.cip4.jdflib.core.KElement)
 		 */
 		@Override
@@ -178,17 +179,42 @@ public class RemoveEmptyXJDF extends RemoveEmpty
 
 		/**
 		 * part elements are ignored
-		 * 
+		 *
 		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#hasChild(org.cip4.jdflib.core.KElement)
 		 */
 		@Override
 		protected boolean hasChild(final KElement e1)
 		{
-			return ContainerUtil.getNonEmpty(e1.getChildrenIgnoreList(VString.getVString(ElementName.PART, null), true, null)) != null;
+			final VString ignore = VString.getVString(ElementName.PART, null);
+			final ResourceHelper rh = ResourceHelper.getHelper(e1);
+			final String name = rh.getName();
+			final boolean isNi = ElementName.NODEINFO.equals(name);
+			if (isNi)
+			{
+				ignore.add(name);
+			}
+			VElement childrenIgnoreList = e1.getChildrenIgnoreList(ignore, true, null);
+			if (isNi && childrenIgnoreList.isEmpty())
+			{
+				final SetHelper sh = SetHelper.getHelper(e1);
+				final Collection<VJDFAttributeMap> partMaps = sh.getPartMapVectors();
+				final VJDFAttributeMap partMap = rh.getPartMapVector();
+				partMaps.remove(partMap);
+				for (final VJDFAttributeMap pm : partMaps)
+				{
+					if (pm.subMap(partMap))
+					{
+						return false;
+					}
+				}
+				ignore.remove(name);
+				childrenIgnoreList = e1.getChildrenIgnoreList(ignore, true, null);
+			}
+
+			return ContainerUtil.getNonEmpty(childrenIgnoreList) != null;
 		}
 
 		/**
-		 *
 		 * @see org.cip4.jdflib.elementwalker.RemoveEmpty.WalkElement#getDummyAttributes()
 		 */
 		@Override
