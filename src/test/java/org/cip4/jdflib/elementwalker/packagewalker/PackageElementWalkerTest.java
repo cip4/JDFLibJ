@@ -66,7 +66,7 @@
  *
  *
  */
-package org.cip4.jdflib.elementwalker;
+package org.cip4.jdflib.elementwalker.packagewalker;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
@@ -76,7 +76,6 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.FixVersion;
-import org.cip4.jdflib.elementwalker.packagewalker.WalkFoo;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.node.JDFNode;
