@@ -38,6 +38,7 @@
 package org.cip4.jdflib.elementwalker;
 
 import java.io.File;
+import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.security.CodeSource;
@@ -58,7 +59,6 @@ import org.cip4.jdflib.util.zip.ZipReader;
  * the declared packages, e.g. if your class is called FixVersion, the classes in the same package must be called WalkFoo, WalkBar etc.
  *
  * @author rainer prosi
- *
  */
 public class PackageElementWalker extends ElementWalker
 {
@@ -78,7 +78,9 @@ public class PackageElementWalker extends ElementWalker
 	{
 		super(_theFactory);
 		if (classes == null)
+		{
 			classes = new ListMap<>();
+		}
 		constructWalkers();
 	}
 
@@ -87,7 +89,7 @@ public class PackageElementWalker extends ElementWalker
 	 *
 	 * @param classPrefix
 	 */
-	private void constructWalkers()
+	void constructWalkers()
 	{
 		// we don't want any nasty race conditions where we construct from incomplete class name vectors
 		synchronized (classes)
@@ -102,24 +104,109 @@ public class PackageElementWalker extends ElementWalker
 				final CodeSource codesrc = parent.getProtectionDomain().getCodeSource();
 				final URL packsrc = codesrc.getLocation();
 				slog.info("Constructing walkers for package URL: " + packsrc.toExternalForm());
-				final File f = UrlUtil.urlToFile(UrlUtil.urlToString(packsrc));
-				if (f.isDirectory())
+				final String packsrcString = UrlUtil.urlToString(packsrc);
+				if (packsrcString != null && packsrcString.indexOf("nested:") >= 0)
 				{
-					constructWorkersDir(f);
+					constructWorkersNestedJar(packsrcString);
 				}
 				else
 				{
-					constructWorkersJar(f);
+					final File f = UrlUtil.urlToFile(packsrcString);
+					if (f == null)
+					{
+						slog.error("Could not resolve package URL to file: " + packsrcString);
+					}
+					else if (f.isDirectory())
+					{
+						constructWorkersDir(f);
+					}
+					else
+					{
+						constructWorkersJar(f);
+					}
 				}
 			}
 		}
 	}
 
+	void constructWorkersNestedJar(final String packsrcString)
+	{
+		// Strip protocol prefix and walk each non-empty ! segment as nested jar path.
+		// strip everything up to and including the literal nested: protocol prefix
+		final int nestedPos = packsrcString.indexOf("nested:");
+		final String nestedPath = nestedPos < 0 ? null : packsrcString.substring(nestedPos + "nested:".length());
+		if (StringUtil.isEmpty(nestedPath))
+		{
+			slog.error("Could not parse nested package URL: " + packsrcString);
+			return;
+		}
+
+		final String[] nestedTokens = nestedPath.split("!");
+		if (nestedTokens.length == 0 || StringUtil.isEmpty(nestedTokens[0]))
+		{
+			slog.error("Could not resolve outer nested jar path from URL: " + packsrcString);
+			return;
+		}
+
+		final File outerJar = UrlUtil.urlToFile(nestedTokens[0]);
+		if (outerJar == null || !outerJar.isFile())
+		{
+			slog.error("Could not resolve outer nested jar file: " + nestedTokens[0]);
+			return;
+		}
+
+		final ZipReader zr = ZipReader.getZipReader(outerJar);
+		if (zr == null)
+		{
+			slog.error("Could not unpack zip file: " + outerJar);
+			return;
+		}
+
+		final ZipReader inner = getInnerZipReader(packsrcString, nestedTokens, zr);
+
+		constructWorkersJar(inner);
+	}
+
+	ZipReader getInnerZipReader(final String packsrcString, final String[] nestedTokens, ZipReader zr)
+	{
+		slog.info("constructing from nested jar: " + packsrcString);
+		for (int i = 1; i < nestedTokens.length; i++)
+		{
+			final String innerPath = nestedTokens[i];
+			if (StringUtil.isEmpty(innerPath))
+			{
+				continue;
+			}
+
+			final ZipEntry ze = zr.getEntry(innerPath);
+			if (ze == null)
+			{
+				slog.error("Could not resolve nested jar entry: " + innerPath);
+				return null;
+			}
+
+			final InputStream is = zr.getInputStream();
+			if (is == null)
+			{
+				slog.error("Could not open nested jar stream: " + innerPath);
+				return null;
+			}
+
+			final ZipReader innerReader = ZipReader.getZipReader(is);
+			if (innerReader == null)
+			{
+				slog.error("Could not open nested jar reader: " + innerPath);
+				return null;
+			}
+			zr = innerReader;
+		}
+		return zr;
+	}
+
 	/**
 	 * @param classVector
-	 *
 	 */
-	private void constructWorkersVClass(final List<String> classVector)
+	void constructWorkersVClass(final List<String> classVector)
 	{
 		for (final String classConst : classVector)
 		{
@@ -128,10 +215,9 @@ public class PackageElementWalker extends ElementWalker
 	}
 
 	/**
-	 *
 	 * @param jarFile
 	 */
-	private void constructWorkersJar(final File jarFile)
+	void constructWorkersJar(final File jarFile)
 	{
 		final ZipReader zr = ZipReader.getZipReader(jarFile);
 		if (zr == null)
@@ -140,24 +226,31 @@ public class PackageElementWalker extends ElementWalker
 		}
 		else
 		{
-			Class<? extends PackageElementWalker> currentClass = getClass();
-			final Class<? extends PackageElementWalker> baseClass = currentClass;
 			slog.info("constructing from jar: " + jarFile);
-			while (currentClass != null)
+			constructWorkersJar(zr);
+		}
+	}
+
+	void constructWorkersJar(final ZipReader zr)
+	{
+		Class<? extends PackageElementWalker> currentClass = getClass();
+		final Class<? extends PackageElementWalker> baseClass = currentClass;
+		while (currentClass != null)
+		{
+			final String packageName = currentClass.getPackage().getName();
+			final String packagePath = StringUtil.replaceChar(packageName, '.', "/", 0);
+			final String classExpr = packagePath + "/" + WALK_CLASS;
+			zr.buffer();
+			while (true)
 			{
-				final String packageName = currentClass.getPackage().getName();
-				final String packagePath = StringUtil.replaceChar(packageName, '.', "/", 0);
-				final String classExpr = packagePath + "/" + WALK_CLASS;
-				zr.buffer();
-				while (true)
+				final ZipEntry ze = zr.getNextMatchingEntry(classExpr);
+				if (ze == null)
 				{
-					final ZipEntry ze = zr.getNextMatchingEntry(classExpr);
-					if (ze == null)
-						break;
-					processSingleEntry(baseClass, packageName, packagePath, ze);
+					break;
 				}
-				currentClass = getParentClass(currentClass);
+				processSingleEntry(baseClass, packageName, packagePath, ze);
 			}
+			currentClass = getParentClass(currentClass);
 		}
 	}
 
@@ -178,7 +271,6 @@ public class PackageElementWalker extends ElementWalker
 	}
 
 	/**
-	 *
 	 * @param dir
 	 */
 	private void constructWorkersDir(final File dir)
@@ -198,7 +290,9 @@ public class PackageElementWalker extends ElementWalker
 					String name = f.getName();
 					name = UrlUtil.prefix(name);
 					if (name.indexOf('$') > 0)
+					{
 						continue;
+					}
 					name = packageName + "." + name;
 					final BaseWalker w = constructWalker(name);
 					if (w == null)
@@ -213,8 +307,6 @@ public class PackageElementWalker extends ElementWalker
 	}
 
 	/**
-	 *
-	 *
 	 * @param currentClass
 	 * @return
 	 */
@@ -223,15 +315,17 @@ public class PackageElementWalker extends ElementWalker
 	{
 		final Class<?> nextClass = currentClass.getSuperclass();
 		if (PackageElementWalker.class.isAssignableFrom(nextClass))
+		{
 			currentClass = (Class<? extends PackageElementWalker>) nextClass;
+		}
 		else
+		{
 			currentClass = null;
+		}
 		return currentClass;
 	}
 
 	/**
-	 *
-	 *
 	 * @param name
 	 * @return
 	 */

@@ -66,7 +66,7 @@
  *  
  * 
  */
-package org.cip4.jdflib.elementwalker.packagewalker;
+package org.cip4.jdflib.elementwalker;
 
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.PackageElementWalker;
