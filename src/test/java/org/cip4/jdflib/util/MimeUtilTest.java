@@ -285,8 +285,8 @@ public class MimeUtilTest extends JDFTestCaseBase
 	@Test
 	void testGetPartByCID() throws Exception
 	{
-		testBuildMimePackageDocJMF(0);
-		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "0/testMimePackageDoc.mjm");
+		testBuildMimePackageDocJMF(4);
+		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "4/testMimePackageDoc.mjm");
 		final BodyPart bp = MimeUtil.getPartByCID(mp, "TheJDF.jdf");
 		assertNotNull(bp);
 		assertNull(MimeUtil.getPartByCID(mp, "gipps.nicht"));
@@ -690,15 +690,15 @@ public class MimeUtilTest extends JDFTestCaseBase
 	@Test
 	void testWriteToFile() throws Exception
 	{
-		testBuildMimePackageDocJMF(4);
+		testBuildMimePackageDocJMF(5);
 
-		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "4/testMimePackageDoc.mjm");
-		MimeUtil.writeToFile(mp, sm_dirTestDataTemp + File.separator + "5/testMimePackageDoc2.mjm", null);
-		final File f1 = new File(sm_dirTestDataTemp + File.separator + "5/testMimePackageDoc2.mjm");
-		final File f2 = new File(sm_dirTestDataTemp + File.separator + "4/testMimePackageDoc.mjm");
+		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "5/testMimePackageDoc.mjm");
+		MimeUtil.writeToFile(mp, sm_dirTestDataTemp + File.separator + "51/testMimePackageDoc2.mjm", null);
+		final File f1 = new File(sm_dirTestDataTemp + File.separator + "51/testMimePackageDoc2.mjm");
+		final File f2 = new File(sm_dirTestDataTemp + File.separator + "5/testMimePackageDoc.mjm");
 		assertTrue(f1.exists());
 		assertEquals(f1.length(), f2.length(), 100);
-		final Multipart mp2 = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "5/testMimePackageDoc2.mjm");
+		final Multipart mp2 = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "51/testMimePackageDoc2.mjm");
 		assertNotNull(mp2);
 		assertEquals(mp.getCount(), mp2.getCount());
 
