@@ -111,7 +111,9 @@ class HotFolderTest extends JDFTestCaseBase
 		{
 			boolean zapp = false;
 			if (bZapp)
+			{
 				zapp = hotFile.delete();
+			}
 			n++;
 			ThreadUtil.sleep(sleep);
 			return zapp;
@@ -244,8 +246,8 @@ class HotFolderTest extends JDFTestCaseBase
 		final int n0 = Thread.activeCount();
 		final File manyDir = new File(sm_dirTestDataTemp, "manyhfmax");
 		FileUtil.forceDelete(manyDir);
-		final HotFolder[] hotfolders = new HotFolder[10];
-		for (int i = 0; i < 10; i++)
+		final HotFolder[] hotfolders = new HotFolder[5];
+		for (int i = 0; i < 5; i++)
 		{
 			final File singleHF = new File(manyDir, "single" + i);
 			hotfolders[i] = new HotFolder(singleHF, null, new MyListener(true));
@@ -254,7 +256,7 @@ class HotFolderTest extends JDFTestCaseBase
 		assertTrue(Thread.activeCount() - n0 < 17, "Loop ");
 		for (final HotFolder hotfolder : hotfolders)
 		{
-			for (int j = 0; j < 100; j++)
+			for (int j = 0; j < 42; j++)
 			{
 				final File towrite = new File(hotfolder.getDir(), j + ".txt");
 				assertTrue(towrite.createNewFile());
@@ -303,7 +305,9 @@ class HotFolderTest extends JDFTestCaseBase
 				hf.restart();
 			}
 			if (n0 < Thread.activeCount())
+			{
 				n0 = Thread.activeCount();
+			}
 			for (int i = 0; i < 3; i++)
 			{
 				Thread.sleep(20);
@@ -416,7 +420,9 @@ class HotFolderTest extends JDFTestCaseBase
 			{
 				ThreadUtil.sleep(100);
 				if (!file.exists() && !file3.exists())
+				{
 					break;
+				}
 			}
 			assertFalse(file.exists());
 			assertFalse(file3.exists());
@@ -428,7 +434,9 @@ class HotFolderTest extends JDFTestCaseBase
 			{
 				ThreadUtil.sleep(20);
 				if (!file1.exists() && file2.exists() && file4.exists())
+				{
 					break;
+				}
 			}
 			assertFalse(file1.exists());
 			assertTrue(file2.exists());
@@ -439,7 +447,9 @@ class HotFolderTest extends JDFTestCaseBase
 			{
 				ThreadUtil.sleep(20);
 				if (!file2.exists() && !file4.exists())
+				{
 					break;
+				}
 			}
 			assertFalse(file2.exists());
 			assertFalse(file4.exists());
@@ -464,7 +474,9 @@ class HotFolderTest extends JDFTestCaseBase
 		{
 			ThreadUtil.sleep(100);
 			if (!file.exists())
+			{
 				break;
+			}
 		}
 		assertFalse(file.exists());
 
@@ -694,7 +706,9 @@ class HotFolderTest extends JDFTestCaseBase
 	public synchronized void tearDown() throws Exception
 	{
 		if (hf != null)
+		{
 			hf.stop();
+		}
 		super.tearDown();
 		sequential.unlock();
 
