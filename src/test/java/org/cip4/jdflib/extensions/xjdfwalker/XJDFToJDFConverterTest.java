@@ -108,6 +108,7 @@ import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.PartitionGetter;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
+import org.cip4.jdflib.resource.intent.JDFDropIntent;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 import org.cip4.jdflib.resource.intent.JDFMediaIntent;
@@ -1515,6 +1516,26 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertNotNull(di);
 		assertEquals("DROP_0", di.getDropIntent(0).getDropID());
 		assertEquals(2, di.getDropIntent(0).getAllDropItemIntent().size());
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	void testRequired()
+	{
+		final KElement xjdf = new JDFToXJDFConverterTest()._testDeliveryIntent();
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(xjdf);
+		final JDFDeliveryParams dp = (JDFDeliveryParams) d.getJDFRoot().getResource(ElementName.DELIVERYPARAMS, EnumUsage.Input, 0);
+		assertNull(dp);
+		final JDFDeliveryIntent di = (JDFDeliveryIntent) d.getJDFRoot().getResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
+		assertNotNull(di);
+		final JDFDropIntent dropIntent = di.getDropIntent(0);
+		assertEquals("DROP_0", dropIntent.getDropID());
+		assertEquals(System.currentTimeMillis(), dropIntent.getRequired().getActual().getTimeInMillis(), 4000);
+		assertEquals(2, dropIntent.getAllDropItemIntent().size());
 	}
 
 	/**

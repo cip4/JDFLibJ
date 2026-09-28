@@ -119,8 +119,8 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	 */
 	public JDFDeliveryIntent getParentDeliveryIntent()
 	{
-		Node parentNode = getParentNode();
-		return (parentNode instanceof JDFDeliveryIntent) ? (JDFDeliveryIntent) parentNode : null;
+		final Node parentNode = getParentNode();
+		return (parentNode instanceof final JDFDeliveryIntent j) ? j : null;
 	}
 
 	/**
@@ -283,7 +283,9 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	public JDFDropItemIntent getCreateDropItemWithComponent(final JDFComponent c)
 	{
 		if (c == null)
+		{
 			return null;
+		}
 		JDFDropItemIntent di = getDropItemWithComponent(c);
 		if (di == null)
 		{
@@ -294,7 +296,6 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	}
 
 	/**
-	 *
 	 * @param dropIntent
 	 */
 	public void setFromDrop(final JDFDrop drop)
@@ -308,9 +309,9 @@ public class JDFDropIntent extends JDFAutoDropIntent
 				dropItemIntent.setFromDropItem(dropItem);
 			}
 
-			JDFIntentResource.copyProcessToActual(this, drop, null, AttributeName.METHOD);
-			JDFIntentResource.copyProcessToActual(this, drop, null, AttributeName.EARLIEST);
-			JDFIntentResource.copyProcessToActual(this, drop, null, AttributeName.REQUIRED);
+			JDFIntentResource.copyProcessToActual(drop, this, null, AttributeName.METHOD);
+			JDFIntentResource.copyProcessToActual(drop, this, null, AttributeName.EARLIEST);
+			JDFIntentResource.copyProcessToActual(drop, this, null, AttributeName.REQUIRED);
 			copyAttribute(AttributeName.DROPID, drop);
 			copyChildren(ElementName.CONTACT, drop);
 			copyChildren(ElementName.FILESPEC, drop);
