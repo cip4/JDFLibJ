@@ -121,7 +121,7 @@ public class WalkDeviceInfo extends WalkXElement
 		di.renameAttribute(AttributeName.STATUS, AttributeName.DEVICESTATUS);
 		final String devStatus = elem.getNonEmpty(AttributeName.DEVICESTATUS);
 		final String newStatus = updateDeviceStatus(devStatus);
-		di.setDeviceOperationMode("NonProductive".equals(newStatus) ? EDeviceOperationMode.NonProductive : EDeviceOperationMode.Productive);
+		di.setDeviceOperationMode("NonProductive".equals(devStatus) ? EDeviceOperationMode.NonProductive : EDeviceOperationMode.Productive);
 		di.setAttribute(AttributeName.DEVICESTATUS, newStatus);
 		// needed for case fix
 		di.setDeviceCondition(di.getDeviceCondition());
