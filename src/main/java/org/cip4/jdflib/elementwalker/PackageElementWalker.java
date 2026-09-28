@@ -163,11 +163,15 @@ public class PackageElementWalker extends ElementWalker
 		}
 
 		final ZipReader inner = getInnerZipReader(packsrcString, nestedTokens, zr);
-
-		constructWorkersJar(inner);
+		if (inner != null)
+		{
+			constructWorkersJar(inner);
+			inner.close();
+		}
+		zr.close();
 	}
 
-	ZipReader getInnerZipReader(final String packsrcString, final String[] nestedTokens, ZipReader zr)
+	ZipReader getInnerZipReader(final String packsrcString, final String[] nestedTokens, final ZipReader zr)
 	{
 		slog.info("constructing from nested jar: " + packsrcString);
 		for (int i = 1; i < nestedTokens.length; i++)
@@ -198,7 +202,7 @@ public class PackageElementWalker extends ElementWalker
 				slog.error("Could not open nested jar reader: " + innerPath);
 				return null;
 			}
-			zr = innerReader;
+			return innerReader;
 		}
 		return zr;
 	}
