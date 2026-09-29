@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -52,11 +52,9 @@ import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
  * XJDF splitter that splits based on the types list
  *
  * @author rainer prosi
- *
  */
 public class ProcessXJDFSplit extends AbstractXJDFSplit
 {
@@ -72,7 +70,8 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	public void setICSGroups()
 	{
 		groups.clear();
-		final VString mis_cp = new VString(new String[] { EnumType.InkZoneCalculation.getName(), EnumType.ConventionalPrinting.getName(), EnumType.Varnishing.getName() });
+		final VString mis_cp = new VString(
+				new String[] { EnumType.InkZoneCalculation.getName(), EnumType.ConventionalPrinting.getName(), EnumType.Varnishing.getName() });
 		groups.add(mis_cp);
 	}
 
@@ -94,7 +93,6 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.AbstractXJDFSplit#splitXJDF(org.cip4.jdflib.extensions.XJDFHelper)
 	 */
 	@Override
@@ -140,7 +138,6 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	}
 
 	/**
-	 *
 	 * @param h
 	 * @param types
 	 * @param allTypes
@@ -155,7 +152,6 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	}
 
 	/**
-	 *
 	 * @param h
 	 * @param types
 	 * @param allTypes
@@ -172,14 +168,14 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	{
 		String jobPartID = xjdf.getJobPartID();
 		if (jobPartID == null)
+		{
 			jobPartID = "Part_";
+		}
 		return jobPartID + StringUtil.setvString(types, "_", ".", null);
 	}
 
 	/**
-	 *
 	 * @param root
-	 *
 	 * @return the list of types to split into, null is a flag for no split
 	 */
 	protected Vector<VString> splitTypes(final XJDFHelper root)
@@ -237,8 +233,10 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 						continue resLoop; // java has goto!!!
 					}
 				}
-				for (int i = 0; i < il.length; i++)
+				for (final int element : il)
+				{
 					types.remove(0);
+				}
 				return found;
 			}
 		}
@@ -247,7 +245,6 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	}
 
 	/**
-	 *
 	 * @param types
 	 * @return
 	 */
@@ -292,7 +289,9 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 		}
 		VString types = root.getTypes();
 		if (types == null)
+		{
 			types = new VString(XJDFConstants.Product, null);
+		}
 		return types;
 	}
 
@@ -310,7 +309,6 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	}
 
 	/**
-	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
