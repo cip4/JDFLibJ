@@ -80,9 +80,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoResourcePullParams.ERepeatPolicy;
 import org.cip4.jdflib.core.JDFElement.ENodeStatus;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.extensions.ProductHelper.eProductType;
+import org.cip4.jdflib.node.JDFNode.EType;
 import org.cip4.jdflib.resource.JDFResource.EResStatus;
 import org.junit.jupiter.api.Test;
 
@@ -96,6 +98,20 @@ class JavaEnumUtilTest extends JDFTestCaseBase
 	enum E
 	{
 		a, b, BOTTOMLEFT
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testMapEnum()
+	{
+		for (final EType t : EType.values())
+		{
+			assertEquals(t, JavaEnumUtil.mapEnum(EType.class, t, EType.AdhesiveBinding));
+		}
+		assertEquals(EType.AdhesiveBinding, JavaEnumUtil.mapEnum(EType.class, ERepeatPolicy.Complete, EType.AdhesiveBinding));
+		assertEquals(EType.AdhesiveBinding, JavaEnumUtil.mapEnum(EType.class, null, EType.AdhesiveBinding));
 	}
 
 	/**

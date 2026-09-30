@@ -182,6 +182,17 @@ public class JavaEnumUtil
 	 * @param c
 	 * @return
 	 */
+	public static <T1 extends Enum<T1>, T2 extends Enum<T2>> T1 mapEnum(final Class<T1> c1, T2 t2, final T1 def)
+	{
+		return getEnumIgnoreCase(c1, getName(t2), def);
+	}
+
+	/**
+	 * @param <T>
+	 * @param val
+	 * @param c
+	 * @return
+	 */
 	public static <T extends Enum<T>> T getEnumIgnoreCase(final Class<T> c, final String val)
 	{
 		return getEnumIgnoreCase(c, val, null);
