@@ -258,12 +258,40 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final XJDFHelper h = new XJDFHelper("j1", "jp1");
 		h.setTypes(EnumType.ConventionalPrinting.getName());
-		final ResourceHelper lo = h.getCreateSet(ElementName.LAYOUT, EnumUsage.Input).getCreateResource();
-		lo.setDescriptiveName("d1");
-		lo.setPartMap(new JDFAttributeMap(AttributeName.SHEETNAME, "s1"));
+		final SetHelper los = h.getCreateSet(ElementName.LAYOUT, EnumUsage.Input);
+		final ResourceHelper lo = los.getCreateResource();
+		lo.setDescriptiveName("desc");
+		for (int i = 1; i <= 2; i++)
+		{
+			final ResourceHelper losh = los.appendResource(new JDFAttributeMap(AttributeName.SHEETNAME, "s" + i), true);
+			losh.setDescriptiveName("sh" + i);
+		}
 		final JDFDoc d = xCon.convert(h);
 		final JDFNode jdf = d.getJDFRoot();
-		assertEquals("d1", jdf.getResource(ElementName.LAYOUT).getDescriptiveName());
+		final JDFResource loJDF = jdf.getResource(ElementName.LAYOUT);
+		assertEquals("desc", loJDF.getDescriptiveName());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testLayoutDescNameSet()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j1", "jp1");
+		h.setTypes(EnumType.ConventionalPrinting.getName());
+		final SetHelper los = h.getCreateSet(ElementName.LAYOUT, EnumUsage.Input);
+		los.setDescriptiveName("desc");
+		for (int i = 1; i <= 2; i++)
+		{
+			final ResourceHelper losh = los.appendResource(new JDFAttributeMap(AttributeName.SHEETNAME, "s" + i), true);
+			losh.setDescriptiveName("sh" + i);
+		}
+		final JDFDoc d = xCon.convert(h);
+		final JDFNode jdf = d.getJDFRoot();
+		final JDFResource loJDF = jdf.getResource(ElementName.LAYOUT);
+		assertEquals("desc", loJDF.getDescriptiveName());
 	}
 
 	/**
