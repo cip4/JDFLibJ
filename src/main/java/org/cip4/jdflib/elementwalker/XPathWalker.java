@@ -62,7 +62,7 @@ public class XPathWalker extends BaseElementWalker
 	/**
 	 * the attribute names to set as [@att] rather than [n] if method=3
 	 */
-	final StringArray attNames = new StringArray("Name,ChannelType,ContactTypes,IDUsage", ",");
+	final StringArray attNames = new StringArray("Name,Usage,ChannelType,ContactTypes,IDUsage", ",");
 
 	/**
 	 * the method to create xpaths
@@ -87,7 +87,6 @@ public class XPathWalker extends BaseElementWalker
 		 * Gets the XPath full tree representation of 'this'
 		 *
 		 * @param relativeTo relative path to which to create an xpath
-		 *
 		 * @return String the XPath representation of 'this' e.g. <code>/root/parent/element</code><br>
 		 *         <code>null</code> if parent of this is null (e.g. called on rootnode)
 		 */
@@ -99,18 +98,27 @@ public class XPathWalker extends BaseElementWalker
 			boolean bAtt = false;
 			if (methCountSiblings > 0 && attributeNames != null)
 			{
-				final int size = attributeNames.size();
-				for (int i = 0; i < size; i++)
+				for (final String attName : attributeNames)
 				{
-					if (methCountSiblings == 3 && elem.hasAttribute_KElement(attributeNames.get(i), null, false))
+					if (methCountSiblings == 3 && elem.hasNonEmpty_KElement(attName))
 					{
-						path += "[@" + attributeNames.get(i) + "=\"" + elem.getAttribute(attributeNames.get(i)) + "\"]";
-						bAtt = true;
-						break;
+						if (!bAtt)
+						{
+							path += "[@" + attName + "=\"" + elem.getAttribute(attName) + "\"";
+							bAtt = true;
+						}
+						else
+						{
+							path += ",@" + attName + "=\"" + elem.getAttribute(attName) + "\"";
+						}
 					}
 				}
 			}
-			if (!bAtt)
+			if (bAtt)
+			{
+				path += "]";
+			}
+			else
 			{
 				KElement e = (parent != null) ? parent.getElement(path, null, 0) : null;
 				int i = 1;
@@ -118,7 +126,7 @@ public class XPathWalker extends BaseElementWalker
 				{
 					if (e.equals(elem))
 					{
-						if (methCountSiblings > 0)
+						if (methCountSiblings > 0 && (i > 1 || e.getNextSiblingElement(e.getNodeName(), null) != null))
 						{
 							path += "[" + Integer.toString(i) + "]";
 						}
@@ -139,18 +147,15 @@ public class XPathWalker extends BaseElementWalker
 				path = new XPathBuilder(parent, methCountSiblings, attributeNames).buildXPath(relativeTo) + path;
 			}
 
-			if (relativeTo != null)
+			if ((relativeTo != null) && path.startsWith(relativeTo))
 			{
-				if (path.startsWith(relativeTo))
+				path = "." + path.substring(relativeTo.length());
+				if (path.startsWith(".["))
 				{
-					path = "." + path.substring(relativeTo.length());
-					if (path.startsWith(".["))
+					final int iB = path.indexOf("]");
+					if (iB > 0)
 					{
-						final int iB = path.indexOf("]");
-						if (iB > 0)
-						{
-							path = "." + path.substring(iB + 1);
-						}
+						path = "." + path.substring(iB + 1);
 					}
 				}
 			}
@@ -222,7 +227,6 @@ public class XPathWalker extends BaseElementWalker
 	 * the link and ref walker
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkAll extends BaseWalker
 	{
@@ -259,21 +263,27 @@ public class XPathWalker extends BaseElementWalker
 				Collections.sort(vkeys);
 				for (final String key : vkeys)
 				{
-					final String path = s + "/@" + key;
-					if ((pathsFound == null || !pathsFound.contains(path)))
+					if (bElement || method != 3 || !attNames.contains(key))
 					{
-						writer.print(path);
-						final String attribute = e.getAttribute_KElement(key);
-						if (bAttributeValue)
-							writer.print(separator + attribute);
-						if (bDatatype && (e instanceof JDFElement))
+						final String path = s + "/@" + key;
+						if ((pathsFound == null || !pathsFound.contains(path)))
 						{
-							writeDatatype((JDFElement) e, key);
+							writer.print(path);
+							final String attribute = e.getAttribute_KElement(key);
+							if (bAttributeValue)
+							{
+								writer.print(separator + attribute);
+							}
+							if (bDatatype && (e instanceof JDFElement))
+							{
+								writeDatatype((JDFElement) e, key);
+							}
+							writer.println();
+							if (pathsFound != null)
+							{
+								pathsFound.add(path);
+							}
 						}
-						writer.println();
-						if (pathsFound != null)
-							pathsFound.add(path);
-
 					}
 				}
 			}
@@ -289,7 +299,9 @@ public class XPathWalker extends BaseElementWalker
 			EnumAttributeType type = e.getAtrType(key);
 			writer.print(separator);
 			if (type != null)
+			{
 				writer.print(type.getName());
+			}
 			else if (e.knownElements().contains(key))
 			{
 				final Element createdElement = e.getOwnerDocument_KElement().createElement(key);
@@ -297,7 +309,9 @@ public class XPathWalker extends BaseElementWalker
 				{
 					type = ((JDFElement) createdElement).getAtrType(AttributeName.ACTUAL);
 					if (type != null)
+					{
 						writer.print(type.getName());
+					}
 				}
 			}
 		}
@@ -360,4 +374,15 @@ public class XPathWalker extends BaseElementWalker
 	{
 		bElement = element;
 	}
+
+	public void setXJDF()
+	{
+		setSeparator("=");
+		setAttribute(true);
+		setAttributeValue(true);
+		setDatatype(false);
+		setMethod(3);
+		setBElement(false);
+	}
+
 }

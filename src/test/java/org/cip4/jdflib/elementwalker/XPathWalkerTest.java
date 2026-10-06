@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -51,6 +51,8 @@ import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.extensions.xjdfgoldenticket.XJDFConvPrintICSGoldenTicket;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.CPUTimer;
@@ -146,11 +148,30 @@ class XPathWalkerTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
+	void testXJDF() throws Exception
+	{
+		final XJDFHelper h = new XJDFConvPrintICSGoldenTicket(1, getDefaultXJDFVersion(), null).getXJDFHelper();
+		final ByteArrayIOStream ios = new ByteArrayIOStream();
+		final PrintWriter writer = new PrintWriter(ios);
+		final XPathWalker w = new XPathWalker(writer);
+		w.setXJDF();
+
+		w.walkAll(h.getRoot());
+		final String s = new String(ios.getBuf());
+		Assertions.assertTrue(s.indexOf("XJDF/AuditPool") > 0);
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
 	void testCSVUnique() throws Exception
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		for (int i = 0; i < 100; i++)
+		{
 			d.getJDFRoot().getCreateAuditPool().addModified(null, null);
+		}
 		final ByteArrayIOStream ios = new ByteArrayIOStream();
 		final PrintWriter writer = new PrintWriter(ios);
 		final XPathWalker w = new XPathWalker(writer);
@@ -189,7 +210,9 @@ class XPathWalkerTest extends JDFTestCaseBase
 				final int neq = s.indexOf("=");
 				final VString v = StringUtil.tokenize(s, "= ", false);
 				if (neq > 0 && v.size() == 1)
+				{
 					v.add("");
+				}
 				if (v.size() == 1)
 				{
 					n.getCreateXPathElement(v.get(0));
