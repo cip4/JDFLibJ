@@ -45,6 +45,8 @@ import java.util.Map.Entry;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
@@ -130,6 +132,7 @@ import org.cip4.jdflib.util.StringUtil;
  */
 class PostXJDFWalker extends BaseElementWalker
 {
+	private static Log log = LogFactory.getLog(BaseElementWalker.class);
 	/**
 	 * if true merge stripping and layout
 	 */
@@ -310,7 +313,10 @@ class PostXJDFWalker extends BaseElementWalker
 				if (nmTokenStrings.contains(e.getKey()) && !StringUtil.isNMTOKEN(e.getValue()))
 				{
 					final String newVal = StringUtil.replaceString(StringUtil.normalize(e.getValue()), JDFConstants.BLANK, JDFConstants.UNDERSCORE);
-					log.info("updating NMTOKEN " + xjdf.getNodeName() + "/@" + e.getKey() + " from: '" + e.getValue() + "' to '" + newVal + "'");
+					if (newVal != null)
+					{
+						log.info("updating NMTOKEN " + xjdf.getNodeName() + "/@" + e.getKey() + " from: '" + e.getValue() + "' to '" + newVal + "'");
+					}
 					xjdf.setAttribute(e.getKey(), newVal);
 				}
 			}
