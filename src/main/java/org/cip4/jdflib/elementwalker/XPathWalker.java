@@ -109,7 +109,7 @@ public class XPathWalker extends BaseElementWalker
 						}
 						else
 						{
-							path += ",@" + attName + "=\"" + elem.getAttribute(attName) + "\"";
+							path += "][@" + attName + "=\"" + elem.getAttribute(attName) + "\"";
 						}
 					}
 				}
@@ -375,6 +375,9 @@ public class XPathWalker extends BaseElementWalker
 		bElement = element;
 	}
 
+	/**
+	 * sets the default settings for xjdf output
+	 */
 	public void setXJDF()
 	{
 		setSeparator("=");
