@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -246,6 +246,11 @@ public class JDFColorantControl extends JDFAutoColorantControl
 		setSeparations(ElementName.COLORANTPARAMS, seps);
 	}
 
+	public void setColorantCovertProcessSeparations(List<String> seps)
+	{
+		setSeparations(ElementName.COLORANTCONVERTPROCESS, seps);
+	}
+
 	/**
 	 * get the list of separations that this colorantcontrol describes - adds the separations that are implied by ProcessColorModel uses colorantorder if it is specified, else
 	 * calls getSeparations()
@@ -256,6 +261,11 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	{
 		final StringArray tmp = getSeparations(ElementName.COLORANTORDER);
 		return tmp == null ? getSeparations() : new VString(tmp);
+	}
+
+	public List<String> getColorantConvertProcessSeparations()
+	{
+		return getSeparations(ElementName.COLORANTCONVERTPROCESS);
 	}
 
 	/**

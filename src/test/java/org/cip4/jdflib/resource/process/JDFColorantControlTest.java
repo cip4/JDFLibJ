@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -238,13 +238,16 @@ class JDFColorantControlTest extends JDFTestCaseBase
 		final VString seps3 = new VString("g h i");
 		cc.setColorantParamSeparations(seps3);
 		assertEquals(seps3, cc.getColorantParamSeparations());
+		final VString seps4 = new VString("j k l");
+		cc.setColorantCovertProcessSeparations(seps4);
+		assertEquals(seps4, cc.getColorantConvertProcessSeparations());
 	}
 
 	/**
 	 *
 	 */
 	@Test
-	public final void testGetProcessSeparations()
+	final void testGetProcessSeparations()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode root = doc.getJDFRoot();
@@ -260,7 +263,7 @@ class JDFColorantControlTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public final void testGetProcessSeparationsEnum()
+	final void testGetProcessSeparationsEnum()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode root = doc.getJDFRoot();
@@ -277,7 +280,7 @@ class JDFColorantControlTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public final void testRemoveProcessSeparations()
+	final void testRemoveProcessSeparations()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode root = doc.getJDFRoot();
