@@ -60,6 +60,7 @@ public class JDFColor extends JDFAutoColor
 {
 	private static final long serialVersionUID = 1L;
 	private static final StringArray CMYK = new StringArray("Cyan Magenta Yellow Black", null);
+	private static final StringArray CMYKOGV = new StringArray("Cyan Magenta Yellow Black Orange Green Violet", null);
 
 	/**
 	 * @return
@@ -67,6 +68,14 @@ public class JDFColor extends JDFAutoColor
 	public static List<String> getCMYKSeparations()
 	{
 		return new StringArray(CMYK);
+	}
+
+	/**
+	 * @return
+	 */
+	public static List<String> getCMYKOGVSeparations()
+	{
+		return new StringArray(CMYKOGV);
 	}
 
 	/**

@@ -46,7 +46,6 @@ package org.cip4.jdflib.core;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         before August 20, 2009
  */
 public abstract class JDFConstants extends JDFCoreConstants
@@ -1285,6 +1284,7 @@ public abstract class JDFConstants extends JDFCoreConstants
 	public static final String SEPARATION_BLUE = "Blue";
 	/** * */
 	public static final String SEPARATION_ORANGE = "Orange";
+	public static final String SEPARATION_VIOLET = "Violet";
 	/** * */
 	public static final String SEPARATION_SPOT = "Spot";
 	/** * */

@@ -191,6 +191,16 @@ class JDFColorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testCMYKOGV()
+	{
+		assertTrue(JDFColor.getCMYKOGVSeparations().containsAll(JDFColor.getCMYKSeparations()));
+		assertEquals(7, JDFColor.getCMYKOGVSeparations().size());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testDuplicateName()
 	{
 		final JDFColor c = cp.appendColorWithName("a", "a");
