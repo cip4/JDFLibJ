@@ -246,7 +246,7 @@ public class JDFColorantControl extends JDFAutoColorantControl
 		setSeparations(ElementName.COLORANTPARAMS, seps);
 	}
 
-	public void setColorantCovertProcessSeparations(List<String> seps)
+	public void setColorantConvertProcessSeparations(List<String> seps)
 	{
 		setSeparations(ElementName.COLORANTCONVERTPROCESS, seps);
 	}

@@ -239,7 +239,7 @@ class JDFColorantControlTest extends JDFTestCaseBase
 		cc.setColorantParamSeparations(seps3);
 		assertEquals(seps3, cc.getColorantParamSeparations());
 		final VString seps4 = new VString("j k l");
-		cc.setColorantCovertProcessSeparations(seps4);
+		cc.setColorantConvertProcessSeparations(seps4);
 		assertEquals(seps4, cc.getColorantConvertProcessSeparations());
 	}
 

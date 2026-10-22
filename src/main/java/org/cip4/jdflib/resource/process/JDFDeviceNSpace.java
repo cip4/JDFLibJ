@@ -187,5 +187,4 @@ public class JDFDeviceNSpace extends JDFAutoDeviceNSpace
 		return vName;
 	}
 
-} // class JDFDeviceNSpace
-	// ==========================================================================
+}
