@@ -2145,4 +2145,10 @@ public class UrlUtil
 
 	private static BiHashMap<String, String> mimeMap = null;
 
+	public static URI fileToUri(File rootDir, boolean b)
+	{
+		final String url = fileToUrl(rootDir, b);
+		return URI.create(url);
+	}
+
 }

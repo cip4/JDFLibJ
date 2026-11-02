@@ -36,12 +36,14 @@
  */
 package org.cip4.jdflib.util.xml;
 
+import java.io.File;
 import java.io.OutputStream;
 
 import javax.xml.XMLConstants;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMResult;
@@ -69,16 +71,13 @@ public class XSLTransformHelper implements IStreamWriter
 	private final KElement elem;
 	private final XMLDoc xsl;
 	final private static Log log = LogFactory.getLog(XSLTransformHelper.class);
-	static
-	{
-		setFactory();
-	}
+	private final static TransformerFactory factory = setFactory();
 
 	/**
 	 * @param e
 	 * @param xsl
 	 */
-	private static void setFactory()
+	private static TransformerFactory setFactory()
 	{
 		// use well-defined xslt
 		final String property = System.getProperty(JAVAX_XML_TRANSFORM_TRANSFORMER_FACTORY);
@@ -91,6 +90,19 @@ public class XSLTransformHelper implements IStreamWriter
 		{
 			log.info("using predefined " + JAVAX_XML_TRANSFORM_TRANSFORMER_FACTORY + ": " + System.getProperty(JAVAX_XML_TRANSFORM_TRANSFORMER_FACTORY));
 		}
+		final TransformerFactory factory = TransformerFactory.newInstance();
+		try
+		{
+			factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+			SecureURIResolver.addRoot(new File(".").getAbsoluteFile());
+			factory.setURIResolver(new SecureURIResolver());
+		}
+		catch (final TransformerConfigurationException e)
+		{
+			log.error("problems with secure configuration");
+		}
+		return factory;
+
 	}
 
 	/**
@@ -145,8 +157,6 @@ public class XSLTransformHelper implements IStreamWriter
 		final Source xslSrc = new DOMSource(xsl.getMemberDocument());
 		try
 		{
-			final TransformerFactory factory = TransformerFactory.newInstance();
-			factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
 			final Transformer theTransformer = factory.newTransformer(xslSrc);
 			theTransformer.transform(mySrc, transformedResult);
 		}
@@ -168,4 +178,5 @@ public class XSLTransformHelper implements IStreamWriter
 			getTransformedResult(transformedResult);
 		}
 	}
+
 }

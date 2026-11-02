@@ -91,13 +91,12 @@ import jakarta.mail.util.ByteArrayDataSource;
  * class to create and write mime files
  *
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         July 24, 2009
  */
 public class MimeWriter extends MimeHelper implements IStreamWriter
 {
 	private static final String THE_JDF = "TheJDF.jdf";
-	protected final static Log log = LogFactory.getLog(MimeReader.class);
+	private final static Log log = LogFactory.getLog(MimeReader.class);
 
 	public enum eMimeSubType
 	{
@@ -271,9 +270,16 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 
 	/**
 	 * @param mp
-	 *
 	 */
 	public MimeWriter(final Multipart mp)
+	{
+		this(mp, eMimeSubType.related);
+	}
+
+	/**
+	 * @param mp
+	 */
+	public MimeWriter(final Multipart mp, final eMimeSubType subtype)
 	{
 		super();
 		md = new MIMEDetails();
@@ -360,7 +366,10 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 		{
 			bph.setFileName(originalFileName);
 			bph.setContent(xmlDoc);
-			bph.setContentID(cid);
+			if (eMimeSubType.related.equals(subType))
+			{
+				bph.setContentID(cid);
+			}
 		}
 		catch (final Exception x)
 		{
@@ -495,9 +504,9 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	/**
 	 * build a MIME package that contains all references in all FileSpecs of a given JDFDoc the doc is modified so that all URLs are cids
 	 *
-	 * @param docJMF the JDFDoc representation of the JMF that references the jdf to package, if null only the jdf is packaged note that the URL of docJDF must already be specified
-	 *        as a CID
-	 * @param docJDF the JDFDoc representation of the JDF to package
+	 * @param docJMF           the JDFDoc representation of the JMF that references the jdf to package, if null only the jdf is packaged note that the URL of docJDF must already be specified
+	 *                         as a CID
+	 * @param docJDF           the JDFDoc representation of the JDF to package
 	 * @param extendReferenced if true, also package any further reeferenced files
 	 */
 	public void buildMimePackage(final JDFDoc docJMF, final XMLDoc docJDF, final boolean extendReferenced)
@@ -548,7 +557,7 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	 *
 	 * @param docJDF the JDF document
 	 * @param cid
-	 * @param cid the CID the JDF document should have in the multipart
+	 * @param cid    the CID the JDF document should have in the multipart
 	 * @return the number of files added to the multipart
 	 */
 	int extendMultipart(final XMLDoc docJDF, final String cid)
@@ -570,23 +579,19 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 		{
 			for (final KElement fs : fileSpecs)
 			{
-				if (fs instanceof IURLSetter)
+				if (fs instanceof final IURLSetter ius)
 				{
-					final IURLSetter ius = (IURLSetter) fs;
 					// Convert URL to CID and update FileSpec
 					String url = ius.getURL();
 					File f = UrlUtil.urlToFile(url);
 					if (f != null)
 					{
-						if (!f.isAbsolute())
+						// Resolve relative URLs
+						if (!f.isAbsolute() && (docJDF.getOriginalFileName() != null))
 						{
-							// Resolve relative URLs
-							if (docJDF.getOriginalFileName() != null)
-							{
-								final File jdfFile = new File(docJDF.getOriginalFileName());
-								f = new File(jdfFile.getParent(), f.getPath());
-								url = UrlUtil.fileToUrl(f, false);
-							}
+							final File jdfFile = new File(docJDF.getOriginalFileName());
+							f = new File(jdfFile.getParent(), f.getPath());
+							url = UrlUtil.fileToUrl(f, false);
 						}
 						final String id2 = done.get(f);
 						if (id2 == null)
@@ -656,9 +661,9 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	/**
 	 * submit a multipart file to a queue
 	 *
-	 * @param docJMF the jmf document containing the submitqueueentry or resubmitqueueentry
-	 * @param docJDF the jdf to submit
-	 * @param strUrl the url to submit to
+	 * @param docJMF    the jmf document containing the submitqueueentry or resubmitqueueentry
+	 * @param docJDF    the jdf to submit
+	 * @param strUrl    the url to submit to
 	 * @param extendRef TODO
 	 * @return
 	 * @throws IOException

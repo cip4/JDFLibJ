@@ -56,6 +56,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.net.URL;
 import java.util.Base64;
 
@@ -858,6 +859,32 @@ class UrlUtilTest extends JDFTestCaseBase
 		}
 		assertEquals("a,b.txt", UrlUtil.getFileName(UrlUtil.fileToUrl(new File("a,b.txt"), false), null));
 		final String hash = UrlUtil.fileToUrl(new File("a#b.txt"), false);
+		assertEquals("a%23b.txt", StringUtil.token(hash, -1, "/"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testFileToURI()
+	{
+		if (PlatformUtil.isWindows())
+		{ // on windows
+			final File f = new File("C:\\IO.SYS");
+			URI s = UrlUtil.fileToUri(f, false);
+			assertEquals("file:///C:/IO.SYS", s.toString());
+			assertEquals("file:///C:/IO.SYS", s.toASCIIString());
+			s = UrlUtil.fileToUri(new File("\\\\fooBar\\4€.txt"), false);
+			assertEquals("file://fooBar/4€.txt", s.toString());
+		}
+		else
+		{
+			final String s = UrlUtil.fileToUri(new File("/fooBar/4€.txt"), true).toString();
+			assertEquals("file:/fooBar/4%e2%82%ac.txt", s);
+			assertEquals("file:/a/4%25.txt", UrlUtil.fileToUri(new File("/a/4%.txt"), false).toString());
+		}
+		assertEquals("a,b.txt", UrlUtil.getFileName(UrlUtil.fileToUri(new File("a,b.txt"), false).toASCIIString(), null));
+		final String hash = UrlUtil.fileToUri(new File("a#b.txt"), false).toString();
 		assertEquals("a%23b.txt", StringUtil.token(hash, -1, "/"));
 	}
 
