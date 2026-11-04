@@ -310,4 +310,56 @@ class XSLTransformHelperTest extends JDFTestCaseBase
 		assertNotNull(jdfRoot.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0));
 		assertTrue(jdfRoot.getBoolAttribute("bar", "www.foobar.com", false));
 	}
+
+	@Test
+	void testGetTransformElementNullStylesheet()
+	{
+		final KElement a = new XMLDoc("a", null).getRoot();
+		assertNull(new XSLTransformHelper(a, null).getTransformElement());
+	}
+
+	@Test
+	void testGetTransformElementNoRootOutput()
+	{
+		final XMLDoc xsl = new XMLDoc("xsl:stylesheet", "http://www.w3.org/1999/XSL/Transform");
+		xsl.getRoot().appendElement("xsl:template").setAttribute("match", "/");
+		final KElement a = new XMLDoc("a", null).getRoot();
+		assertNull(new XSLTransformHelper(a, xsl).getTransformElement());
+	}
+
+	@Test
+	void testWriteStreamNoopBranches()
+	{
+		final XMLDoc xsl = new XMLDoc("xsl:stylesheet", "http://www.w3.org/1999/XSL/Transform");
+		final KElement template = xsl.getRoot().appendElement("xsl:template");
+		template.setAttribute("match", "*");
+		template.appendElement("html", "http://www.w3.org/1999/xhtml");
+		final KElement a = new XMLDoc("a", null).getRoot();
+
+		new XSLTransformHelper(a, xsl).writeStream(null);
+
+		final ByteArrayIOStream s = new ByteArrayIOStream();
+		new XSLTransformHelper(a, null).writeStream(s);
+		assertEquals(0, s.size());
+	}
+
+	@Test
+	void testGetTransformElementFailingStylesheet()
+	{
+		final XMLDoc badXsl = new XMLDoc("xsl:stylesheet", "urn:not-xsl");
+		badXsl.getRoot().appendElement("xsl:template").setAttribute("match", "*");
+		final KElement a = new XMLDoc("a", null).getRoot();
+		assertNull(new XSLTransformHelper(a, badXsl).getTransformElement());
+	}
+
+	@Test
+	void testGetTransformElementViaXMLDocCtor()
+	{
+		final XMLDoc xsl = new XMLDoc("xsl:stylesheet", "http://www.w3.org/1999/XSL/Transform");
+		final KElement template = xsl.getRoot().appendElement("xsl:template");
+		template.setAttribute("match", "*");
+		template.appendElement("html", "http://www.w3.org/1999/xhtml");
+		final XMLDoc source = new XMLDoc("a", null);
+		assertEquals("html", new XSLTransformHelper(source, xsl).getTransformElement().getRoot().getNodeName());
+	}
 }

@@ -70,12 +70,13 @@ public class XSLTransformHelper implements IStreamWriter
 	public static final String JAVAX_XML_TRANSFORM_TRANSFORMER_FACTORY = "javax.xml.transform.TransformerFactory";
 	private final KElement elem;
 	private final XMLDoc xsl;
-	final private static Log log = LogFactory.getLog(XSLTransformHelper.class);
-	private final static TransformerFactory factory = setFactory();
+	private static final Log log = LogFactory.getLog(XSLTransformHelper.class);
+	private static final TransformerFactory factory = setFactory();
 
 	/**
-	 * @param e
-	 * @param xsl
+	 * Creates and configures the shared secure TransformerFactory instance.
+	 *
+	 * @return the configured secure TransformerFactory used for XSL transforms
 	 */
 	private static TransformerFactory setFactory()
 	{
@@ -106,8 +107,8 @@ public class XSLTransformHelper implements IStreamWriter
 	}
 
 	/**
-	 * @param e
-	 * @param xsl
+	 * @param e the element to transform
+	 * @param xsl the XSL stylesheet document to apply
 	 */
 	public XSLTransformHelper(final KElement e, final XMLDoc xsl)
 	{
@@ -117,8 +118,8 @@ public class XSLTransformHelper implements IStreamWriter
 	}
 
 	/**
-	 * @param d   - the document to transform - must not be null
-	 * @param xsl
+	 * @param d the document whose root element is transformed; must not be null
+	 * @param xsl the XSL stylesheet document to apply
 	 */
 	public XSLTransformHelper(final XMLDoc d, final XMLDoc xsl)
 	{
@@ -126,7 +127,7 @@ public class XSLTransformHelper implements IStreamWriter
 	}
 
 	/**
-	 * @return
+	 * @return the transformed XMLDoc, or null if no stylesheet is set or if transformation yields no root node
 	 */
 	public XMLDoc getTransformElement()
 	{

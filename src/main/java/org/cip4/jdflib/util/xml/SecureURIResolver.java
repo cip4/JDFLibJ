@@ -52,6 +52,10 @@ import org.cip4.jdflib.util.UrlUtil;
 
 public class SecureURIResolver implements URIResolver
 {
+	/**
+	 * Returns a simple string representation of this resolver.
+	 * @return the resolver description
+	 */
 	@Override
 	public String toString()
 	{
@@ -60,23 +64,42 @@ public class SecureURIResolver implements URIResolver
 		return builder.toString();
 	}
 
+	/**
+	 * Allowed root directories used to resolve secure include targets.
+	 */
 	private static final AtomicReference<HashSet<File>> roots = new AtomicReference<>(new HashSet<>());
 
+	/**
+	 * Adds a root directory that may be used for URI resolution.
+	 * @param root the allowed root directory
+	 */
 	public static void addRoot(File root)
 	{
 		roots.get().add(root);
 	}
 
+	/**
+	 * Removes all configured root directories.
+	 */
 	public static void clear()
 	{
 		roots.get().clear();
 	}
 
+	/**
+	 * Creates a new secure URI resolver.
+	 */
 	public SecureURIResolver()
 	{
 		super();
 	}
 
+	/**
+	 * Resolves one href against a single allowed root.
+	 * @param href the href to resolve
+	 * @param root the allowed root directory
+	 * @return a stream source for the resolved file, or null if resolution is not allowed or fails
+	 */
 	public Source resolveSingle(String href, final File root)
 	{
 		final File resolvedFile = UrlUtil.isRelativeURL(href) ? new File(root, href) : UrlUtil.urlToFile(href);
@@ -92,6 +115,13 @@ public class SecureURIResolver implements URIResolver
 
 	}
 
+	/**
+	 * Resolves an href by checking all configured allowed roots.
+	 * @param href the href to resolve
+	 * @param base the base URI supplied by the transformer
+	 * @return a source for the resolved href
+	 * @throws TransformerException if the href is invalid or cannot be resolved under any allowed root
+	 */
 	@Override
 	public Source resolve(String href, final String base) throws TransformerException
 	{

@@ -96,7 +96,7 @@ import jakarta.mail.util.ByteArrayDataSource;
 public class MimeWriter extends MimeHelper implements IStreamWriter
 {
 	private static final String THE_JDF = "TheJDF.jdf";
-	private final static Log log = LogFactory.getLog(MimeReader.class);
+	private final static Log log = LogFactory.getLog(MimeWriter.class);
 
 	public enum eMimeSubType
 	{
@@ -273,7 +273,7 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 	 */
 	public MimeWriter(final Multipart mp)
 	{
-		this(mp, eMimeSubType.related);
+		this(mp, null);
 	}
 
 	/**
@@ -284,7 +284,8 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 		super();
 		md = new MIMEDetails();
 		theMultipart = mp;
-		subType = eMimeSubType.getEnum(mp.getContentType());
+		final eMimeSubType st = subtype == null ? eMimeSubType.getEnum(mp.getContentType()) : subtype;
+		subType = st == null ? eMimeSubType.related : st;
 	}
 
 	/**
