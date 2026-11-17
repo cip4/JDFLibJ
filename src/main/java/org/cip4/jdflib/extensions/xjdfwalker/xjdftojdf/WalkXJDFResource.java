@@ -94,7 +94,7 @@ public class WalkXJDFResource extends WalkXElement
 		{
 			final MyPair<JDFResource, Boolean> mp = getResourceRoot(theNode, xjdfRes);
 			res = mp.getA();
-			isNew = mp.getB().booleanValue();
+			isNew = mp.getB();
 		}
 		else if (parent instanceof JDFResourceInfo)
 		{
@@ -121,9 +121,8 @@ public class WalkXJDFResource extends WalkXElement
 		}
 		final JDFAttributeMap map = getResMap(xjdfRes);
 
-		if (newPartitionElement instanceof JDFResource)
+		if (newPartitionElement instanceof final JDFResource newPartition)
 		{
-			final JDFResource newPartition = (JDFResource) newPartitionElement;
 			JDFElement rl = null;
 			if (theNode != null)
 			{
@@ -147,7 +146,6 @@ public class WalkXJDFResource extends WalkXElement
 	}
 
 	/**
-	 *
 	 * @param res
 	 * @param vParts
 	 * @param rl
@@ -174,7 +172,9 @@ public class WalkXJDFResource extends WalkXElement
 					vParts.put(key, newVal);
 					vParts.unify();
 					if (res.hasAttribute(key))
+					{
 						res.setAttribute(key, resVals.getString());
+					}
 				}
 			}
 		}
@@ -182,12 +182,11 @@ public class WalkXJDFResource extends WalkXElement
 		handleIdentical(vParts, res.getResourceRoot());
 	}
 
-	private final static StringArray keepKeys = new StringArray("SignatureName SheetName Side Option PartVersion Separation BlockName Run DocIndex RunIndex SetIndex SheetIndex",
-			null);
+	private final static StringArray keepKeys = new StringArray(
+			"SignatureName SheetName Side Option PartVersion Separation BlockName Run DocIndex RunIndex SetIndex SheetIndex", null);
 	private final static StringArray indexKeys = new StringArray("RunIndex DocIndex SetIndex SheetIndex", null);
 
 	/**
-	 *
 	 * @param vParts
 	 * @param rl
 	 */
@@ -231,7 +230,7 @@ public class WalkXJDFResource extends WalkXElement
 
 	void updatePartMaps(final JDFElement rl, final VJDFAttributeMap clone)
 	{
-		VJDFAttributeMap oldParts = (rl instanceof JDFResourceLink) ? ((JDFResourceLink) rl).getPartMapVector() : ((JDFResourceInfo) rl).getPartMapVector();
+		VJDFAttributeMap oldParts = (rl instanceof final JDFResourceLink j) ? j.getPartMapVector() : ((JDFResourceInfo) rl).getPartMapVector();
 		if (oldParts != null)
 		{
 			oldParts.appendUnique(clone);
@@ -241,9 +240,13 @@ public class WalkXJDFResource extends WalkXElement
 			oldParts = clone;
 		}
 		if (rl instanceof JDFResourceLink)
+		{
 			((JDFResourceLink) rl).setPartMapVector(oldParts);
+		}
 		else
+		{
 			((JDFResourceInfo) rl).setPartMapVector(oldParts);
+		}
 	}
 
 	private void handleIdentical(final VJDFAttributeMap vParts, final JDFResource res)
@@ -265,7 +268,6 @@ public class WalkXJDFResource extends WalkXElement
 	}
 
 	/**
-	 *
 	 * @param rh
 	 * @return
 	 */
@@ -279,7 +281,9 @@ public class WalkXJDFResource extends WalkXElement
 			vMap.add(partMap);
 		}
 		if (vMap.isEmpty())
+		{
 			vMap.add(new JDFAttributeMap());
+		}
 		vMap.unify();
 		return vMap;
 	}
@@ -290,18 +294,15 @@ public class WalkXJDFResource extends WalkXElement
 	}
 
 	/**
-	 *
 	 * @param e
 	 * @return
 	 */
 	protected String getJDFResName(final SetHelper sh)
 	{
-		final String name = sh.getName();
-		return name;
+		return sh.getName();
 	}
 
 	/**
-	 *
 	 * @param theNode
 	 * @param xjdfRes
 	 * @return
@@ -353,18 +354,17 @@ public class WalkXJDFResource extends WalkXElement
 			}
 			// parameters and consumables are assumed to be available by default
 			final EnumResourceClass resClass = res.getResourceClass();
-			if (isNew && EnumUsage.Input.equals(inOut)
-					&& (EnumResourceClass.Parameter.equals(resClass) || EnumResourceClass.Consumable.equals(resClass) || EnumResourceClass.Intent.equals(resClass)))
+			if (isNew && EnumUsage.Input.equals(inOut) && (EnumResourceClass.Parameter.equals(resClass) || EnumResourceClass.Consumable.equals(resClass)
+					|| EnumResourceClass.Intent.equals(resClass)))
 			{
 				res.setResStatus(EnumResStatus.Available, false);
 			}
 
 		}
-		return new MyPair<>(res, Boolean.valueOf(isNew));
+		return new MyPair<>(res, isNew);
 	}
 
 	/**
-	 *
 	 * @param theNode
 	 * @param name
 	 * @param id
@@ -386,9 +386,9 @@ public class WalkXJDFResource extends WalkXElement
 		EnumUsage inOut = sh.getUsage();
 		if (inOut == null && xjdfToJDFImpl.isHeuristicLink())
 		{
-			if (!ElementName.CONTACT.equals(name) && !ElementName.LAYOUTELEMENT.equals(name) && !ElementName.RUNLIST.equals(name) && !ElementName.COMPONENT.equals(name)
-					&& !ElementName.COLORPOOL.equals(name) && !ElementName.MEDIA.equals(name) && !ElementName.EXPOSEDMEDIA.equals(name)
-					&& theNode.isValidLink(name, EnumUsage.Input, processUsage))
+			if (!ElementName.CONTACT.equals(name) && !ElementName.LAYOUTELEMENT.equals(name) && !ElementName.RUNLIST.equals(name)
+					&& !ElementName.COMPONENT.equals(name) && !ElementName.COLORPOOL.equals(name) && !ElementName.MEDIA.equals(name)
+					&& !ElementName.EXPOSEDMEDIA.equals(name) && theNode.isValidLink(name, EnumUsage.Input, processUsage))
 			{
 				inOut = EnumUsage.Input;
 			}
@@ -397,7 +397,6 @@ public class WalkXJDFResource extends WalkXElement
 	}
 
 	/**
-	 *
 	 * @param theNode
 	 * @param xjdfRes
 	 * @return
@@ -435,7 +434,6 @@ public class WalkXJDFResource extends WalkXElement
 	}
 
 	/**
-	 *
 	 * @param xjdfRes
 	 * @param partmap
 	 * @param map
@@ -471,10 +469,13 @@ public class WalkXJDFResource extends WalkXElement
 		{
 			xjdfToJDFImpl.moveAmountsToLink(partmap, map, (JDFResourceLink) rl);
 		}
+		else
+		{
+			xjdfRes.removeChildren(ElementName.PART, null);
+		}
 	}
 
 	/**
-	 *
 	 * @param partialProductNode
 	 * @param newPartition
 	 * @param rl
@@ -490,7 +491,6 @@ public class WalkXJDFResource extends WalkXElement
 	}
 
 	/**
-	 *
 	 * @param jdfRes
 	 * @param partMap
 	 * @param theNode
@@ -512,7 +512,6 @@ public class WalkXJDFResource extends WalkXElement
 	}
 
 	/**
-	 *
 	 * @param jdfRes
 	 * @param partMap
 	 * @param theNode

@@ -42,6 +42,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -61,6 +62,7 @@ import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDFDataCache;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkModifyQueueEntry;
 import org.cip4.jdflib.jmf.JDFMessageService;
+import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFInterpretingParams;
 import org.cip4.jdflib.resource.JDFStrippingParams;
@@ -301,6 +303,97 @@ class XJDFPrepWalker extends BaseElementWalker
 		public VString getElementNames()
 		{
 			return new VString(ElementName.RESOURCEINFO);
+		}
+
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 */
+	protected abstract class WalkMsgResource extends WalkElement
+	{
+
+		public WalkMsgResource()
+		{
+			super();
+		}
+
+		/**
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement xjdf, final KElement dummy)
+		{
+			final List<JDFResourceInfo> ris = xjdf.getChildArrayByClass(JDFResourceInfo.class, false, 0);
+
+			for (final JDFResourceInfo ri : ris)
+			{
+				splitResourceInfo(ri);
+			}
+			return super.walk(xjdf, dummy);
+		}
+
+		void splitResourceInfo(JDFResourceInfo ri)
+		{
+			final JDFElement params = getResParams(ri);
+			params.moveAttribute(AttributeName.JOBID, ri);
+			params.moveAttribute(AttributeName.JOBPARTID, ri);
+			params.moveAttribute(AttributeName.MODULEID, ri);
+		}
+
+		protected abstract JDFElement getResParams(JDFResourceInfo ri);
+
+		@Override
+		public VString getElementNames()
+		{
+			return new VString("SignalResource");
+		}
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 */
+	protected class WalkSignalResource extends WalkMsgResource
+	{
+
+		public WalkSignalResource()
+		{
+			super();
+		}
+
+		@Override
+		public VString getElementNames()
+		{
+			return new VString("SignalResource ResponseResource");
+		}
+
+		@Override
+		protected JDFElement getResParams(JDFResourceInfo ri)
+		{
+			return (JDFElement) ri.getParentNode_KElement().getCreateElement(ElementName.RESOURCEQUPARAMS);
+		}
+
+	}
+
+	protected class WalkCommandResource extends WalkMsgResource
+	{
+
+		public WalkCommandResource()
+		{
+			super();
+		}
+
+		@Override
+		public VString getElementNames()
+		{
+			return new VString("CommandResource");
+		}
+
+		@Override
+		protected JDFElement getResParams(JDFResourceInfo ri)
+		{
+			return (JDFElement) ri.getParentNode_KElement().getCreateElement(ElementName.RESOURCECMDPARAMS);
 		}
 
 	}
@@ -588,5 +681,4 @@ class XJDFPrepWalker extends BaseElementWalker
 		}
 
 	}
-
 }

@@ -50,6 +50,7 @@ import org.cip4.jdflib.auto.JDFAutoSignal.EnumChannelMode;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -76,6 +77,7 @@ import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.jmf.JDFResourceQuParams;
 import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.jmf.JDFResumeQueueEntryParams;
+import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.jupiter.api.Test;
@@ -85,6 +87,29 @@ import org.junit.jupiter.api.Test;
  */
 class XJMFToJMFConverterTest extends JDFTestCaseBase
 {
+
+	/**
+	 *
+	 */
+	@Test
+	void testResourceInfoInfoJobID()
+	{
+		final XJMFHelper h = new XJMFHelper();
+		final MessageHelper mh = h.appendMessage(EnumFamily.Signal, EnumType.Resource);
+		final JDFResourceInfo ri = (JDFResourceInfo) mh.appendElement(ElementName.RESOURCEINFO);
+		ri.setAttribute(AttributeName.JOBID, "j1");
+		final SetHelper inks = ri.appendResourceSet(ElementName.INK, false);
+		int i = 1;
+		for (final String sep : JDFColor.getCMYKSeparations())
+		{
+			final ResourceHelper rh = inks.appendResource(new JDFAttributeMap(AttributeName.SEPARATION, sep), true);
+			rh.setResourceAttribute(XJDFConstants.InkType, "Ink");
+			rh.setAmount(i++ * 42, null, false);
+		}
+
+		writeRoundTripX(h, "resinfo", EnumValidationLevel.Complete);
+
+	}
 
 	/**
 	 *
