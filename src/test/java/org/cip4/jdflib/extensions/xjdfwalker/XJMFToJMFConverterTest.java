@@ -104,7 +104,7 @@ class XJMFToJMFConverterTest extends JDFTestCaseBase
 		{
 			final ResourceHelper rh = inks.appendResource(new JDFAttributeMap(AttributeName.SEPARATION, sep), true);
 			rh.setResourceAttribute(XJDFConstants.InkType, "Ink");
-			rh.setAmount(i++ * 42, null, false);
+			rh.setAmount(i++ * 42, null, true);
 		}
 
 		writeRoundTripX(h, "resinfo", EnumValidationLevel.Complete);
