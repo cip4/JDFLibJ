@@ -5692,7 +5692,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			srcAttrib = attrib;
 		}
 
-		final String attribute = src.getNonEmpty(attrib);
+		final String attribute = src.getNonEmpty(srcAttrib);
 		if (attribute != null)
 		{
 			src.removeAttribute(srcAttrib);
