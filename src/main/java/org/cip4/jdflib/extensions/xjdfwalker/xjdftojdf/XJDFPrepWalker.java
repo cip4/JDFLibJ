@@ -339,9 +339,9 @@ class XJDFPrepWalker extends BaseElementWalker
 			final JDFElement params = getResParams(ri);
 			if (params != null)
 			{
-				params.moveAttribute(AttributeName.JOBID, ri);
-				params.moveAttribute(AttributeName.JOBPARTID, ri);
-				params.moveAttribute(AttributeName.MODULEID, ri);
+				params.moveNonEmpty(AttributeName.JOBID, ri, null);
+				params.moveNonEmpty(AttributeName.JOBPARTID, ri, null);
+				params.moveNonEmpty(AttributeName.MODULEID, ri, null);
 			}
 		}
 

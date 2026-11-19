@@ -1531,9 +1531,6 @@ class KElementTest extends JDFTestCaseBase
 		b.moveAttribute("att", a, null, null, null);
 		assertEquals(b.getAttribute("att"), "42");
 		assertNull(a.getAttribute("att", null, null));
-		b.moveAttribute("att", a, null, null, null);
-		assertEquals(b.getAttribute("att"), "42");
-		assertNull(a.getAttribute("att", null, null));
 
 		b.moveAttribute("noThere", a, null, null, null);
 		assertNull(b.getAttribute("noThere", null, null));
@@ -1553,6 +1550,29 @@ class KElementTest extends JDFTestCaseBase
 		b.moveAttribute("bar2", null, "bar", null, null);
 		assertEquals(b.getAttribute("bar2"), "a");
 		assertNull(b.getAttribute("bar", null, null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testMoveNonEmpty()
+	{
+		final XMLDoc doc = new XMLDoc("Test", "www.test.com");
+		final KElement root = doc.getRoot();
+		final KElement a = root.appendElement("a");
+		final KElement b = root.appendElement("b");
+		a.setAttribute("att", "42");
+		b.moveNonEmpty("att", a, null);
+		assertEquals(b.getAttribute("att"), "42");
+		assertNull(a.getAttribute("att", null, null));
+		b.moveNonEmpty("att", a, null);
+		assertEquals(b.getAttribute("att"), "42");
+		assertNull(a.getAttribute("att", null, null));
+
+		b.moveNonEmpty("noThere", a, null);
+		assertNull(b.getAttribute("noThere", null, null));
+		assertNull(a.getAttribute("noThere", null, null));
 	}
 
 	/**
