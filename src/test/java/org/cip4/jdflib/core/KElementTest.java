@@ -1531,6 +1531,10 @@ class KElementTest extends JDFTestCaseBase
 		b.moveAttribute("att", a, null, null, null);
 		assertEquals(b.getAttribute("att"), "42");
 		assertNull(a.getAttribute("att", null, null));
+		b.moveAttribute("att", a, null, null, null);
+		assertEquals(b.getAttribute("att"), "42");
+		assertNull(a.getAttribute("att", null, null));
+
 		b.moveAttribute("noThere", a, null, null, null);
 		assertNull(b.getAttribute("noThere", null, null));
 		assertNull(a.getAttribute("noThere", null, null));

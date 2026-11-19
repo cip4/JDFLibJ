@@ -310,7 +310,7 @@ class XJDFPrepWalker extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
-	protected abstract class WalkMsgResource extends WalkElement
+	protected class WalkMsgResource extends WalkElement
 	{
 
 		public WalkMsgResource()
@@ -337,17 +337,17 @@ class XJDFPrepWalker extends BaseElementWalker
 		void splitResourceInfo(JDFResourceInfo ri)
 		{
 			final JDFElement params = getResParams(ri);
-			params.moveAttribute(AttributeName.JOBID, ri);
-			params.moveAttribute(AttributeName.JOBPARTID, ri);
-			params.moveAttribute(AttributeName.MODULEID, ri);
+			if (params != null)
+			{
+				params.moveAttribute(AttributeName.JOBID, ri);
+				params.moveAttribute(AttributeName.JOBPARTID, ri);
+				params.moveAttribute(AttributeName.MODULEID, ri);
+			}
 		}
 
-		protected abstract JDFElement getResParams(JDFResourceInfo ri);
-
-		@Override
-		public VString getElementNames()
+		protected JDFElement getResParams(JDFResourceInfo ri)
 		{
-			return new VString("SignalResource");
+			return null;
 		}
 	}
 

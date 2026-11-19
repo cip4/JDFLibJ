@@ -5626,7 +5626,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
-	 * moves an attribute from src to this, the attribute will be removed from src and moved to this.
+	 * moves an attribute from src to this, the attribute will be removed from src and moved to this, if it exists
+	 * an empty or missing attribute will not delete an existing attribute in this
 	 * <p>
 	 * default: moveAttribute(attrib, src, null, null, null)
 	 *
@@ -5662,9 +5663,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		if (!StringUtil.isEmpty(attribute))
 		{
 			src.removeAttribute(strSrcAttrib, strNameSpace);
+			setAttribute(attrib, attribute, nameSpaceURI);
 		}
 
-		setAttribute(attrib, attribute, nameSpaceURI);
 	}
 
 	/**
