@@ -655,7 +655,7 @@ public abstract class JDFTestCaseBase
 		boolean valid = root.isValid(level);
 		if (!valid)
 		{
-			printValid(root.getOwnerDocument_JDFElement());
+			final XMLDoc vd = printValid(root.getOwnerDocument_JDFElement());
 		}
 		assertTrue(valid, tmpJDF);
 		final JDFParser jdfparser = getSchemaParser(version);
@@ -773,7 +773,7 @@ public abstract class JDFTestCaseBase
 			final boolean valid = jxRoot.isValid(level);
 			if (!valid)
 			{
-				printValid(converted);
+				final XMLDoc vd = printValid(converted);
 			}
 			assertTrue(valid, fileBase + ".xjdf.jdf");
 			final String sv = jxRoot.getInheritedAttribute(AttributeName.VERSION, null, null);

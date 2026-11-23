@@ -79,7 +79,6 @@ import org.cip4.jdflib.util.UnitParser;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class XJDFToJDFImpl extends PackageElementWalker
 {
@@ -114,7 +113,9 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	{
 		final WalkXElement constructWalker = (WalkXElement) super.constructWalker(name);
 		if (constructWalker != null)
+		{
 			constructWalker.setParent(this);
+		}
 		return constructWalker;
 	}
 
@@ -181,7 +182,6 @@ public class XJDFToJDFImpl extends PackageElementWalker
 
 	/**
 	 * @param template the jdfdoc to fill this into
-	 *
 	 */
 	public XJDFToJDFImpl(final JDFDoc template)
 	{
@@ -244,7 +244,6 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	}
 
 	/**
-	 *
 	 * @param theNode
 	 */
 	protected void postConvert(final JDFNode theNode)
@@ -263,17 +262,15 @@ public class XJDFToJDFImpl extends PackageElementWalker
 		walkTree(root, jdfDoc.getRoot());
 	}
 
-	protected XJDFHelper presplit(final KElement e)
+	protected BaseXJDFHelper presplit(final KElement e)
 	{
 		final KElement newXJDF = new JDFDoc(e.cloneNewDoc().getOwnerDocument()).getRoot();
-
-		final XJDFHelper h = new XJDFHelper(newXJDF);
+		final BaseXJDFHelper h = BaseXJDFHelper.getBaseHelper(newXJDF);
 		new XJDFPrepWalker(h).convert();
 		return h;
 	}
 
 	/**
-	 *
 	 * @param _xjdf
 	 * @return
 	 */
@@ -300,7 +297,6 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	}
 
 	/**
-	 *
 	 * @param xjdf
 	 * @return
 	 */
@@ -312,7 +308,9 @@ public class XJDFToJDFImpl extends PackageElementWalker
 			doc.setInitOnCreate(false);
 			KElement xjdf2 = doc.getRoot();
 			if (!xjdf2.getLocalName().equals(xjdf.getLocalName()))
+			{
 				xjdf2 = xjdf2.getChildByTagName(xjdf.getNodeName(), xjdf.getNamespaceURI(), 0, xjdf.getAttributeMap(), false, true);
+			}
 			int i = 0;
 			while (xjdf2 != null)
 			{
@@ -454,7 +452,8 @@ public class XJDFToJDFImpl extends PackageElementWalker
 			{
 				final String key = keyIt.next();
 				final String val = map.get(key);
-				if ((e2 instanceof JDFElement) && EnumAttributeType.isRange(((JDFElement) e2).getAttributeInfo().getAttributeType(key)) && val.indexOf(JDFConstants.TILDE) < 0)
+				if ((e2 instanceof JDFElement) && EnumAttributeType.isRange(((JDFElement) e2).getAttributeInfo().getAttributeType(key))
+						&& val.indexOf(JDFConstants.TILDE) < 0)
 				{
 					final StringArray v = new StringArray(val, null);
 					if (v.size() % 2 == 0)
@@ -485,9 +484,7 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	}
 
 	/**
-	 *
 	 * @param e
-	 *
 	 */
 	protected void attributesToSpan(final KElement e)
 	{
@@ -508,8 +505,6 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	}
 
 	/**
-	 *
-	 *
 	 * @param e
 	 * @param name
 	 * @return the new span element
@@ -605,7 +600,6 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public boolean isHeuristicLink()

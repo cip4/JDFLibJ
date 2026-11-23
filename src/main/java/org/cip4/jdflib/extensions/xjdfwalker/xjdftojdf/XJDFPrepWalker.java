@@ -313,6 +313,12 @@ class XJDFPrepWalker extends BaseElementWalker
 	protected class WalkMsgResource extends WalkElement
 	{
 
+		@Override
+		public boolean matches(KElement e)
+		{
+			return false;
+		}
+
 		public WalkMsgResource()
 		{
 			super();
@@ -341,7 +347,6 @@ class XJDFPrepWalker extends BaseElementWalker
 			{
 				params.moveNonEmpty(AttributeName.JOBID, ri, null);
 				params.moveNonEmpty(AttributeName.JOBPARTID, ri, null);
-				params.moveNonEmpty(AttributeName.MODULEID, ri, null);
 			}
 		}
 
@@ -356,6 +361,11 @@ class XJDFPrepWalker extends BaseElementWalker
 	 */
 	protected class WalkSignalResource extends WalkMsgResource
 	{
+		@Override
+		public boolean matches(KElement e)
+		{
+			return true;
+		}
 
 		public WalkSignalResource()
 		{
@@ -378,6 +388,12 @@ class XJDFPrepWalker extends BaseElementWalker
 
 	protected class WalkCommandResource extends WalkMsgResource
 	{
+
+		@Override
+		public boolean matches(KElement e)
+		{
+			return true;
+		}
 
 		public WalkCommandResource()
 		{

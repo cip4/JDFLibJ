@@ -98,7 +98,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         Jul 16, 2010
  */
 class JDFValidatorTest extends JDFTestCaseBase
@@ -283,6 +282,21 @@ class JDFValidatorTest extends JDFTestCaseBase
 	void testTypes()
 	{
 		final JDFValidator validator = getValidator();
+		validator.level = EnumValidationLevel.Complete;
+		final JDFNode empty = JDFNode.createRoot();
+		empty.setType(org.cip4.jdflib.node.JDFNode.EnumType.ConventionalPrinting);
+		final XMLDoc d = validator.processSingleDocument(empty.getOwnerDocument_JDFElement());
+		assertNotNull(d);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testPrintTypes()
+	{
+		final JDFValidator validator = getValidator();
+		validator.setPrint(true);
 		validator.level = EnumValidationLevel.Complete;
 		final JDFNode empty = JDFNode.createRoot();
 		empty.setType(org.cip4.jdflib.node.JDFNode.EnumType.ConventionalPrinting);

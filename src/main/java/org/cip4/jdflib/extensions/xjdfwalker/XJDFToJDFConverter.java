@@ -51,6 +51,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.XJDFToJDFImpl;
 import org.cip4.jdflib.ifaces.IXJDFSplit;
@@ -59,7 +60,6 @@ import org.cip4.jdflib.resource.process.JDFColor;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class XJDFToJDFConverter extends XJDFToJDFImpl
 {
@@ -73,8 +73,8 @@ public class XJDFToJDFConverter extends XJDFToJDFImpl
 	{
 		if (resLinkAttribs == null)
 		{
-			resLinkAttribs = new StringArray(new String[] { AttributeName.PROCESSUSAGE, AttributeName.AMOUNT, AttributeName.ACTUALAMOUNT, AttributeName.MAXAMOUNT,
-					AttributeName.MINAMOUNT, AttributeName.COMBINEDPROCESSINDEX });
+			resLinkAttribs = new StringArray(new String[] { AttributeName.PROCESSUSAGE, AttributeName.AMOUNT, AttributeName.ACTUALAMOUNT,
+					AttributeName.MAXAMOUNT, AttributeName.MINAMOUNT, AttributeName.COMBINEDPROCESSINDEX });
 
 		}
 		return resLinkAttribs;
@@ -82,7 +82,6 @@ public class XJDFToJDFConverter extends XJDFToJDFImpl
 
 	/**
 	 * @param template the jdfdoc to fill this into
-	 *
 	 */
 	public XJDFToJDFConverter(final JDFDoc template)
 	{
@@ -101,12 +100,11 @@ public class XJDFToJDFConverter extends XJDFToJDFImpl
 		JDFDoc d = null;
 		if (xjdf != null)
 		{
-			final XJDFHelper xjdfHelper = presplit(xjdf);
+			final BaseXJDFHelper baseHelper = presplit(xjdf);
 
-			if (needSplit(xjdfHelper.getRoot()))
+			if (needSplit(baseHelper.getRoot()))
 			{
-
-				final Collection<XJDFHelper> vSplit = splitter.splitXJDF(xjdfHelper);
+				final Collection<XJDFHelper> vSplit = splitter.splitXJDF((XJDFHelper) baseHelper);
 				if (vSplit == null || vSplit.size() == 0)
 				{
 					log.error("no xjdf elements returned by splitter");
@@ -122,7 +120,7 @@ public class XJDFToJDFConverter extends XJDFToJDFImpl
 			}
 			else
 			{
-				d = super.convert(xjdfHelper.getRoot());
+				d = super.convert(baseHelper.getRoot());
 			}
 			if (d != null)
 			{
@@ -190,7 +188,6 @@ public class XJDFToJDFConverter extends XJDFToJDFImpl
 	}
 
 	/**
-	 *
 	 * @param xjdf
 	 * @return
 	 */
@@ -200,7 +197,6 @@ public class XJDFToJDFConverter extends XJDFToJDFImpl
 	}
 
 	/**
-	 *
 	 * @param splitter
 	 */
 	public void setSplitter(final IXJDFSplit splitter)
