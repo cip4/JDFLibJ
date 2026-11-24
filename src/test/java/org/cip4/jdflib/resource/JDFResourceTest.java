@@ -2798,6 +2798,28 @@ class JDFResourceTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testReorderPartitionsNS()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		final JDFResource r = n.addResource("abc:def", null, EnumUsage.Input, null, null, "www.abc", null);
+		final JDFResource ab = r.addPartition(EnumPartIDKey.SheetName, "sh1").addPartition(EnumPartIDKey.PartVersion, "a b");
+		final JDFResource cd = r.addPartition(EnumPartIDKey.SheetName, "sh2").addPartition(EnumPartIDKey.PartVersion, "c d");
+		final JDFAttributeMap abs1 = ab.addPartition(EnumPartIDKey.Separation, "s1").getPartMap();
+		final JDFAttributeMap cds1 = cd.addPartition(EnumPartIDKey.Separation, "s1").getPartMap();
+		final JDFAttributeMap cds2 = cd.addPartition(EnumPartIDKey.Separation, "s2").getPartMap();
+
+		final PartitionGetter pg = new PartitionGetter(r);
+		pg.reorderPartitions(new StringArray("SheetName Separation PartVersion"));
+		assertNotNull(pg.getPartition(abs1, EnumPartUsage.Explicit));
+		assertNotNull(r.getPartition(abs1, EnumPartUsage.Explicit));
+		assertNotNull(pg.getPartition(cds1, EnumPartUsage.Explicit));
+		assertNotNull(r.getPartition(cds2, EnumPartUsage.Explicit));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testRemoveImplicitPartions()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
