@@ -106,6 +106,8 @@ import jakarta.mail.Multipart;
  */
 public class JDFValidator
 {
+	private static final String X_PATH = "XPath";
+	private static final String NODE_NAME = "NodeName";
 	private static final String ERROR_TYPE = "ErrorType";
 	private static final String IS_VALID = "IsValid";
 	private static final String MESSAGE = "Message";
@@ -514,8 +516,8 @@ public class JDFValidator
 					{
 						final KElement e = testElement.appendElement("TestElement");
 						setErrorType(e, "MissingElement", "Missing Element " + missEl, EnumSeverity.Warning);
-						e.setAttribute("XPath", jdfElement.buildXPath(null, 1) + "/" + missEl + "[1]");
-						e.setAttribute("NodeName", missEl);
+						e.setAttribute(X_PATH, jdfElement.buildXPath(null, 1) + "/" + missEl + "[1]");
+						e.setAttribute(NODE_NAME, missEl);
 					}
 				}
 				if (testElement != null && missingElements.size() > 0)
@@ -580,9 +582,9 @@ public class JDFValidator
 		{
 			final KElement e = testElement.appendElement("TestAttribute");
 			setErrorType(e, "MultipleID", "Multiply defined ID = " + id, indent, EnumSeverity.Error);
-			e.setAttribute("NodeName", "ID");
+			e.setAttribute(NODE_NAME, "ID");
 			e.setAttribute("Value", id);
-			e.setAttribute("XPath", jdfElement.buildXPath(null, 1) + "/@ID");
+			e.setAttribute(X_PATH, jdfElement.buildXPath(null, 1) + "/@ID");
 		}
 	}
 
@@ -749,8 +751,8 @@ public class JDFValidator
 		if (xmlParent != null)
 		{
 			testElement = xmlParent.appendElement("TestElement");
-			testElement.setAttribute("XPath", kElement.buildXPath(null, 1));
-			testElement.setAttribute("NodeName", kElement.getNodeName());
+			testElement.setAttribute(X_PATH, kElement.buildXPath(null, 1));
+			testElement.setAttribute(NODE_NAME, kElement.getNodeName());
 			final String strID = kElement.getAttribute(AttributeName.ID, null, null);
 			if (strID != null)
 			{
@@ -855,9 +857,9 @@ public class JDFValidator
 			// found bad url
 			final KElement e = testElement.appendElement("TestAttribute");
 			setErrorType(e, "DanglingURL", "Dangling URL points to Nirvana: " + url, indent, EnumSeverity.Warning);
-			e.setAttribute("NodeName", "URL");
+			e.setAttribute(NODE_NAME, "URL");
 			e.setAttribute("Value", url);
-			e.setAttribute("XPath", element.buildXPath(null, 1) + "/@URL");
+			e.setAttribute(X_PATH, element.buildXPath(null, 1) + "/@URL");
 		}
 	}
 
@@ -920,24 +922,24 @@ public class JDFValidator
 							{
 								final KElement e = testElement.appendElement("TestAttribute");
 								setErrorType(e, "MissingAttribute", "Missing Partition key: " + invalidAt, indent + 2, EnumSeverity.Error);
-								e.setAttribute("NodeName", invalidAt);
-								e.setAttribute("XPath", part.buildXPath(null, 1) + "/@" + invalidAt);
+								e.setAttribute(NODE_NAME, invalidAt);
+								e.setAttribute(X_PATH, part.buildXPath(null, 1) + "/@" + invalidAt);
 							}
 						}
 						else
 						{
 							final KElement e = testElement.appendElement("TestAttribute");
 							setErrorType(e, "InvalidAttribute", "Incorrectly placed Partition key: " + invalidAt, indent + 2, EnumSeverity.Error);
-							e.setAttribute("NodeName", invalidAt);
-							e.setAttribute("XPath", part.buildXPath(null, 1) + "/@" + invalidAt);
+							e.setAttribute(NODE_NAME, invalidAt);
+							e.setAttribute(X_PATH, part.buildXPath(null, 1) + "/@" + invalidAt);
 						}
 					}
 					else if (!part.hasAttribute(invalidAt, null, false) && printMissElms)
 					{
 						final KElement e = testElement.appendElement("TestAttribute");
 						setErrorType(e, "MissingAttribute", "Missing required attribute: " + invalidAt, indent + 2, EnumSeverity.Warning);
-						e.setAttribute("NodeName", invalidAt);
-						e.setAttribute("XPath", part.buildXPath(null, 1) + "/@" + invalidAt);
+						e.setAttribute(NODE_NAME, invalidAt);
+						e.setAttribute(X_PATH, part.buildXPath(null, 1) + "/@" + invalidAt);
 					}
 				}
 				else
@@ -966,8 +968,8 @@ public class JDFValidator
 					}
 
 					setErrorType(e, whatType + "Attribute", invalidAt + " " + message, sev);
-					e.setAttribute("NodeName", invalidAt);
-					e.setAttribute("XPath", part.buildXPath(null, 1) + "/@" + invalidAt);
+					e.setAttribute(NODE_NAME, invalidAt);
+					e.setAttribute(X_PATH, part.buildXPath(null, 1) + "/@" + invalidAt);
 					e.setAttribute("Value", part.getAttribute(invalidAt));
 
 				}
@@ -1166,9 +1168,9 @@ public class JDFValidator
 					e.setAttribute("NSPrefix", prefix);
 					e.setAttribute("NSURI", jdfElement.getNamespaceURIFromPrefix(prefix));
 					e.setAttribute(ERROR_TYPE, "PrivateAttribute");
-					e.setAttribute("NodeName", privateAttribute);
+					e.setAttribute(NODE_NAME, privateAttribute);
 					e.setAttribute("Value", jdfElement.getAttribute(privateAttribute));
-					e.setAttribute("XPath", jdfElement.buildXPath(null, 1) + "/@" + privateAttribute);
+					e.setAttribute(X_PATH, jdfElement.buildXPath(null, 1) + "/@" + privateAttribute);
 				}
 			}
 		}
@@ -1210,8 +1212,8 @@ public class JDFValidator
 				setErrorType(e, "MultipleID", "Multiply defined JobPartID = " + jobPartID, indent, EnumSeverity.Error);
 				e.setAttribute("Value", jobPartID);
 			}
-			e.setAttribute("NodeName", AttributeName.JOBPARTID);
-			e.setAttribute("XPath", jdfNode.buildXPath(null, 1) + "/@JobPartID");
+			e.setAttribute(NODE_NAME, AttributeName.JOBPARTID);
+			e.setAttribute(X_PATH, jdfNode.buildXPath(null, 1) + "/@JobPartID");
 		}
 		else
 		{
@@ -1232,7 +1234,7 @@ public class JDFValidator
 				{
 					final KElement pool = reportElement.appendElement("TestElement");
 					setErrorType(pool, "MissingElement", "Missing ResourceLinkPool", EnumSeverity.Warning);
-					pool.setAttribute("NodeName", "ResourceLinkPool");
+					pool.setAttribute(NODE_NAME, "ResourceLinkPool");
 				}
 				printResourceLinkPool(jdfNode.buildXPath(null, 1) + "/ResourceLinkPool[1]", reportElement, vMissingLinks, "Missing");
 			}
@@ -1269,8 +1271,8 @@ public class JDFValidator
 			{
 				final KElement e = testElement.appendElement("TestAttribute");
 				setErrorType(e, "ExtensionType", "Type is an extension type: " + typeString, indent + 2, EnumSeverity.Warning);
-				e.setAttribute("XPath", jdfNode.buildXPath(null, 1) + "/@Type");
-				e.setAttribute("NodeName", "Type");
+				e.setAttribute(X_PATH, jdfNode.buildXPath(null, 1) + "/@Type");
+				e.setAttribute(NODE_NAME, "Type");
 				e.setAttribute("Value", typeString);
 			}
 
@@ -1285,8 +1287,8 @@ public class JDFValidator
 					sysOut.println(indent(indent) + "Invalid Parent for JDF Product: Type= " + n.getType());
 
 					setErrorType(testElement, "InvalidParentForProduct", "Invalid Parent for JDF Product: Type = " + n.getType(), EnumSeverity.Error);
-					testElement.setAttribute("NodeName", "JDF");
-					testElement.setAttribute("XPath", n.buildXPath(null, 1));
+					testElement.setAttribute(NODE_NAME, "JDF");
+					testElement.setAttribute(X_PATH, n.buildXPath(null, 1));
 				}
 			}
 		}
@@ -1326,8 +1328,8 @@ public class JDFValidator
 			{
 				final KElement e = testElement.appendElement("TestAttribute");
 				setErrorType(e, "ExtensionType", "JDF/@Types contains extension types: " + msg, indent + 2, EnumSeverity.Warning);
-				e.setAttribute("XPath", jdfNode.buildXPath(null, 1) + "/@Types");
-				e.setAttribute("NodeName", "Types");
+				e.setAttribute(X_PATH, jdfNode.buildXPath(null, 1) + "/@Types");
+				e.setAttribute(NODE_NAME, "Types");
 				e.setAttribute("Value", msg);
 			}
 
@@ -1363,13 +1365,13 @@ public class JDFValidator
 					}
 
 					setErrorType(e, missBad + "ResourceLink", missBad + procUsage + " resourceLink ", EnumSeverity.Warning);
-					e.setAttribute("NodeName", name);
+					e.setAttribute(NODE_NAME, name);
 					if (!JDFConstants.EMPTYSTRING.equals(procUsage))
 					{
 						e.setAttribute("ProcessUsage", procUsage);
 					}
 
-					e.setAttribute("XPath", rlpXPath + "/" + name + "[1]");
+					e.setAttribute(X_PATH, rlpXPath + "/" + name + "[1]");
 				}
 
 				vLinks.removeElement(missResLink);
@@ -1778,7 +1780,7 @@ public class JDFValidator
 				if (execRoot != null)
 				{
 					final KElement exNode = execRoot.appendElement("ExecutableNode");
-					exNode.setAttribute("XPath", xPath);
+					exNode.setAttribute(X_PATH, xPath);
 					exNode.setAttribute("ID", id);
 					exNode.setAttribute("DescriptiveName", descrName);
 				}
@@ -2412,7 +2414,34 @@ public class JDFValidator
 
 		// measure the total time for this File
 		finalizeOutput();
+		printOut();
 		return pOut;
+	}
+
+	void printOut()
+	{
+		printOut(pOut.getRoot());
+
+	}
+
+	void printOut(KElement root)
+	{
+		String nn = root.getAttribute(X_PATH);
+		if (StringUtil.isEmpty(nn))
+		{
+			nn = root.getAttribute(NODE_NAME);
+		}
+		final String msg = root.getAttribute(MESSAGE);
+		if (!StringUtil.isEmpty(msg))
+		{
+			sysOut.println(nn + ": " + msg);
+		}
+
+		for (final KElement e : root.getChildArray(null, null))
+		{
+			printOut(e);
+		}
+
 	}
 
 	protected void processSingleDoc(final String url, final String xmlFile, final KElement testFileRoot)
@@ -2658,7 +2687,7 @@ public class JDFValidator
 				}
 				idRoot.setAttribute("ID", e.getAttribute("ID"));
 				final KElement idInst = idRoot.appendElement("IDInstance");
-				idInst.setAttribute("XPath", e.buildXPath(null, 2));
+				idInst.setAttribute(X_PATH, e.buildXPath(null, 2));
 				idInst.setAttribute("Name", e.getNodeName());
 			}
 		}

@@ -37,6 +37,7 @@
  */
 package org.cip4.jdflib.resource;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -1008,29 +1009,32 @@ public class PartitionGetter
 						rNew.copyInto(r, false);
 					}
 				}
-				final Set<JDFResource> done = new HashSet<>();
+				HashMap<JDFAttributeMap, JDFResource> p2m = p2.resourceRoot.getPartitionMap();
 				for (final JDFResource r : resourceRoot.getLeafArray(true))
 				{
 					if (!r.isLeaf())
 					{
 						final String text = r.getText();
-						final JDFResource rNew = p2.getPartition(r.getPartMap(), EnumPartUsage.Implicit);
-						if (!done.contains(rNew))
+						final JDFAttributeMap partMap = r.getPartMap();
+						for (JDFAttributeMap key : p2m.keySet())
 						{
-							if (!StringUtil.isEmpty(text))
+							if (JDFPart.subPartMap(key, partMap, strictPartVersion))
 							{
-								rNew.setText(text);
+								final JDFResource rNew = p2m.get(key);
+								if (!StringUtil.isEmpty(text))
+								{
+									rNew.setText(text);
+								}
+								final VElement v = r.getChildElementVector(null, null);
+								for (final KElement e : v)
+								{
+									rNew.copyElement(e, null);
+								}
 							}
-							final VElement v = r.getChildElementVector(null, null);
-							for (final KElement e : v)
-							{
-								rNew.copyElement(e, null);
-							}
-							done.add(rNew);
 						}
 					}
 				}
-				r2.collapse(false, true);
+
 				resourceRoot.cleanup();
 				resourceRoot.copyInto(r2, false);
 			}

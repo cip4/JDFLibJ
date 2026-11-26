@@ -308,6 +308,22 @@ class JDFValidatorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testPrintOut()
+	{
+		final JDFValidator validator = getValidator();
+		validator.setPrint(true);
+		validator.level = EnumValidationLevel.Complete;
+		final JDFNode empty = JDFNode.createRoot();
+		empty.setType(org.cip4.jdflib.node.JDFNode.EnumType.ConventionalPrinting);
+		final XMLDoc d = validator.processSingleDocument(empty.getOwnerDocument_JDFElement());
+		assertNotNull(d);
+		validator.printOut(d.getRoot());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testMultiID()
 	{
 		final JDFValidator validator = getValidator();
