@@ -347,6 +347,10 @@ class XJDFPrepWalker extends BaseElementWalker
 			{
 				params.moveNonEmpty(AttributeName.JOBID, ri, null);
 				params.moveNonEmpty(AttributeName.JOBPARTID, ri, null);
+				if (!params.hasNonEmpty(AttributeName.SCOPE))
+				{
+					params.copyAttribute(AttributeName.SCOPE, ri);
+				}
 			}
 		}
 
