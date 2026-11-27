@@ -38,7 +38,6 @@
 package org.cip4.jdflib.resource;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -1009,14 +1008,14 @@ public class PartitionGetter
 						rNew.copyInto(r, false);
 					}
 				}
-				HashMap<JDFAttributeMap, JDFResource> p2m = p2.resourceRoot.getPartitionMap();
+				final HashMap<JDFAttributeMap, JDFResource> p2m = p2.resourceRoot.getPartitionMap();
 				for (final JDFResource r : resourceRoot.getLeafArray(true))
 				{
 					if (!r.isLeaf())
 					{
 						final String text = r.getText();
 						final JDFAttributeMap partMap = r.getPartMap();
-						for (JDFAttributeMap key : p2m.keySet())
+						for (final JDFAttributeMap key : p2m.keySet())
 						{
 							if (JDFPart.subPartMap(key, partMap, strictPartVersion))
 							{
@@ -1025,10 +1024,13 @@ public class PartitionGetter
 								{
 									rNew.setText(text);
 								}
-								final VElement v = r.getChildElementVector(null, null);
+								final VElement v = r.getChildElementVector_KElement(null, null, null, true, 0);
 								for (final KElement e : v)
 								{
-									rNew.copyElement(e, null);
+									if (!e.getNodeName().equals(r.getNodeName()))
+									{
+										rNew.copyElement(e, null);
+									}
 								}
 							}
 						}
